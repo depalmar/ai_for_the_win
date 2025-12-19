@@ -1,8 +1,59 @@
 # AI Development Training Program: Offensive Security & DFIR
 
+[![24 Weeks](https://img.shields.io/badge/Duration-24%20Weeks-blue.svg)]()
+[![10 Labs](https://img.shields.io/badge/Labs-10-green.svg)]()
+[![4 Capstones](https://img.shields.io/badge/Capstones-4-orange.svg)]()
+
 ## 🎯 Program Mission
 
 Develop security practitioners who can architect, build, and deploy AI-powered tools for offensive security operations, threat hunting, incident response, and digital forensics—while understanding adversarial AI techniques and defensive countermeasures.
+
+---
+
+## 📊 Program Roadmap
+
+```
+╔═══════════════════════════════════════════════════════════════════════════════╗
+║                        24-WEEK TRAINING ROADMAP                                ║
+╠═══════════════════════════════════════════════════════════════════════════════╣
+║                                                                               ║
+║  PHASE 1: FOUNDATIONS          PHASE 2: OFFENSIVE AI      PHASE 3: DFIR AI   ║
+║  ┌─────────────────────┐       ┌───────────────────┐      ┌─────────────────┐ ║
+║  │  Weeks 1-4          │       │  Weeks 5-10       │      │  Weeks 11-18    │ ║
+║  │  ━━━━━━━━━━━━━━━━━  │       │  ━━━━━━━━━━━━━━━  │      │  ━━━━━━━━━━━━━  │ ║
+║  │  • ML/AI Basics     │──────►│  • Recon Tools    │─────►│  • Detection    │ ║
+║  │  • LLM Architecture │       │  • Vuln Discovery │      │  • IR Automation│ ║
+║  │  • Dev Environment  │       │  • Adversarial ML │      │  • Forensics    │ ║
+║  │                     │       │                   │      │  • Threat Intel │ ║
+║  │  Labs: 1, 2, 3      │       │                   │      │  Labs: 4-10     │ ║
+║  └─────────────────────┘       └───────────────────┘      └─────────────────┘ ║
+║          │                              │                          │          ║
+║          └──────────────────────────────┴──────────────────────────┘          ║
+║                                         │                                     ║
+║                                         ▼                                     ║
+║                          ┌─────────────────────────────┐                      ║
+║                          │  PHASE 4: CAPSTONE          │                      ║
+║                          │  Weeks 19-24                │                      ║
+║                          │  ━━━━━━━━━━━━━━━━━━━━━━━━━  │                      ║
+║                          │  • Agent Architectures      │                      ║
+║                          │  • MLSecOps                 │                      ║
+║                          │  • Capstone Project         │                      ║
+║                          └─────────────────────────────┘                      ║
+║                                                                               ║
+╚═══════════════════════════════════════════════════════════════════════════════╝
+```
+
+---
+
+## 🔗 Quick Links
+
+| Resource | Description |
+|----------|-------------|
+| [Labs](../labs/) | 10 hands-on implementation labs |
+| [Capstone Projects](../capstone-projects/) | 4 comprehensive final projects |
+| [Templates](../templates/) | Reusable agent and integration templates |
+| [Setup Guide](../setup/dev-environment-setup.md) | Development environment setup |
+| [Resources](../resources/) | Tools, datasets, and cheatsheets |
 
 ---
 
@@ -22,9 +73,9 @@ Develop security practitioners who can architect, build, and deploy AI-powered t
   - Computer Vision basics (malware visualization, CAPTCHA breaking)
 
 - **Hands-On Labs**
-  - Build a simple phishing email classifier
-  - Create a malware family clustering model
-  - Train a basic network anomaly detector
+  - [Lab 01](../labs/lab01-phishing-classifier/): Build a simple phishing email classifier
+  - [Lab 02](../labs/lab02-malware-clustering/): Create a malware family clustering model
+  - [Lab 03](../labs/lab03-anomaly-detection/): Train a basic network anomaly detector
 
 #### Module 1.2: LLM Architecture & Security Implications
 
@@ -68,6 +119,8 @@ Develop security practitioners who can architect, build, and deploy AI-powered t
 - **Project**: Build an AI agent that performs comprehensive passive recon and generates structured attack surface reports
 
 #### Module 2.2: Vulnerability Discovery with AI
+
+> **Related Labs**: [Lab 08 - Vulnerability Scanner AI](../labs/lab08-vuln-scanner-ai/)
 
 - **Techniques**
 
@@ -125,6 +178,8 @@ Develop security practitioners who can architect, build, and deploy AI-powered t
 
 #### Module 3.1: AI-Powered Threat Detection
 
+> **Related Labs**: [Lab 04 - LLM Log Analysis](../labs/lab04-llm-log-analysis/) | [Lab 09 - Detection Pipeline](../labs/lab09-detection-pipeline/)
+
 - **Detection Engineering**
 
   - Behavioral anomaly detection models
@@ -168,6 +223,8 @@ class ThreatDetectionPipeline:
 ```
 
 #### Module 3.2: Automated Incident Response
+
+> **Related Labs**: [Lab 10 - IR Copilot](../labs/lab10-ir-copilot/)
 
 - **Response Orchestration**
 
@@ -223,6 +280,8 @@ class ForensicAnalysisAgent:
 
 #### Module 3.4: Malware Analysis with AI
 
+> **Related Labs**: [Lab 07 - YARA Generator](../labs/lab07-yara-generator/)
+
 - **Static Analysis**
 
   - PE/ELF structure analysis and anomaly detection
@@ -244,6 +303,8 @@ class ForensicAnalysisAgent:
   - Generate STIX bundle → Update detection rules
 
 #### Module 3.5: Threat Intelligence with AI
+
+> **Related Labs**: [Lab 05 - Threat Intel Agent](../labs/lab05-threat-intel-agent/) | [Lab 06 - Security RAG](../labs/lab06-security-rag/)
 
 - **Capabilities**
 
@@ -324,6 +385,15 @@ class ThreatIntelProcessor:
   - Rate limiting and behavioral analysis
 
 #### Module 4.4: Capstone Projects (Choose Track)
+
+> **See**: [Capstone Projects Guide](../capstone-projects/) for full requirements and starter code.
+
+| Track | Project | Description |
+|-------|---------|-------------|
+| **A** | [Security Analyst Copilot](../capstone-projects/security-analyst-copilot/) | AI-powered SOC analyst assistant |
+| **B** | [Automated Threat Hunter](../capstone-projects/automated-threat-hunter/) | ML-based threat detection system |
+| **C** | [Malware Analysis Assistant](../capstone-projects/malware-analysis-assistant/) | AI-powered malware triage |
+| **D** | [Vuln Intel Platform](../capstone-projects/vuln-intel-platform/) | RAG-based vulnerability management |
 
 **Track A: Offensive Security**
 Build an AI-powered penetration testing assistant that:

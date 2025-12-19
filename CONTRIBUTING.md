@@ -2,12 +2,38 @@
 
 Thank you for your interest in contributing to the AI Security Training Program! This document provides guidelines for contributing.
 
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    CONTRIBUTION WORKFLOW                     │
+│                                                             │
+│   1. Fork ──► 2. Branch ──► 3. Code ──► 4. Test ──► 5. PR  │
+│      │           │            │           │           │     │
+│      ▼           ▼            ▼           ▼           ▼     │
+│   [Your      [feature/    [Make      [pytest]    [Submit   │
+│    Copy]      name]        edits]                 Review]   │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+```
+
 ## Code of Conduct
 
 - Be respectful and inclusive
 - Provide constructive feedback
 - Focus on the technical merits of contributions
 - Follow responsible disclosure for any security issues
+
+## Areas for Contribution
+
+We welcome contributions in these areas:
+
+| Area | Description | Difficulty |
+|------|-------------|------------|
+| **Labs** | Add new labs, improve existing solutions | Medium-Hard |
+| **Data** | Sample datasets, test cases | Easy-Medium |
+| **Documentation** | Fix typos, improve clarity | Easy |
+| **Templates** | Agent templates, integrations | Medium |
+| **Tests** | Expand test coverage | Medium |
+| **Capstones** | Project ideas, starter code | Hard |
 
 ## How to Contribute
 

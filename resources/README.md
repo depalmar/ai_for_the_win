@@ -2,6 +2,21 @@
 
 Curated resources for the AI Security Training Program.
 
+```
+╔═══════════════════════════════════════════════════════════════════════╗
+║                        RESOURCES OVERVIEW                              ║
+╠═══════════════════════════════════════════════════════════════════════╣
+║                                                                       ║
+║  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐       ║
+║  │ 📚 Tools &      │  │ 💬 Prompt       │  │ 📋 Cheatsheets  │       ║
+║  │    Resources    │  │    Library      │  │                 │       ║
+║  │  70+ tools      │  │  15+ prompts    │  │  4 guides       │       ║
+║  │  APIs, datasets │  │  Security AI    │  │  Quick ref      │       ║
+║  └─────────────────┘  └─────────────────┘  └─────────────────┘       ║
+║                                                                       ║
+╚═══════════════════════════════════════════════════════════════════════╝
+```
+
 ## Directory Structure
 
 ```
@@ -9,12 +24,12 @@ resources/
 ├── README.md                    # This file
 ├── tools-and-resources.md       # Comprehensive tools and APIs guide
 ├── prompt-library/              # Security analysis prompts
-│   └── *.md                     # Individual prompt templates
+│   └── security-prompts.md      # Curated prompt templates
 └── cheatsheets/                 # Quick reference guides
     ├── cursor-cheatsheet.md     # Cursor IDE shortcuts
     ├── claude-code-cheatsheet.md # Claude Code reference
     ├── google-adk-cheatsheet.md # Google ADK guide
-    └── langchain-cheatsheet.md  # LangChain patterns
+    └── langchain-security-cheatsheet.md  # LangChain patterns
 ```
 
 ## Quick Links
