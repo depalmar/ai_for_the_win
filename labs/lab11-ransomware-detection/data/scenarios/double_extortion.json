@@ -1,0 +1,167 @@
+{
+  "scenario": "Double Extortion Ransomware Attack",
+  "description": "Modern ransomware attack combining data theft with encryption for maximum leverage",
+  "phases": [
+    {
+      "phase": 1,
+      "name": "Initial Access & Persistence",
+      "duration_hours": 2,
+      "techniques": ["T1566.001", "T1547.001"],
+      "events": [
+        {
+          "timestamp": "2024-01-15T09:15:00Z",
+          "event": "Phishing email with malicious Excel attachment received",
+          "indicators": ["macro_enabled_document", "external_sender"]
+        },
+        {
+          "timestamp": "2024-01-15T09:17:00Z",
+          "event": "User enables macros, loader executes",
+          "indicators": ["powershell_spawn", "encoded_command"]
+        },
+        {
+          "timestamp": "2024-01-15T09:20:00Z",
+          "event": "C2 beacon established",
+          "indicators": ["outbound_443", "periodic_beaconing"]
+        }
+      ]
+    },
+    {
+      "phase": 2,
+      "name": "Discovery & Credential Access",
+      "duration_hours": 12,
+      "techniques": ["T1083", "T1082", "T1003.001"],
+      "events": [
+        {
+          "timestamp": "2024-01-15T12:00:00Z",
+          "event": "Network share enumeration",
+          "indicators": ["net_view", "smb_enumeration"]
+        },
+        {
+          "timestamp": "2024-01-15T14:00:00Z",
+          "event": "Mimikatz credential harvesting",
+          "indicators": ["lsass_access", "credential_dump"]
+        },
+        {
+          "timestamp": "2024-01-15T18:00:00Z",
+          "event": "Domain admin credentials obtained",
+          "indicators": ["privileged_account_access"]
+        }
+      ]
+    },
+    {
+      "phase": 3,
+      "name": "Data Exfiltration",
+      "duration_hours": 24,
+      "techniques": ["T1560", "T1567.002"],
+      "events": [
+        {
+          "timestamp": "2024-01-16T02:00:00Z",
+          "event": "Sensitive data identified and staged",
+          "indicators": ["rar_compression", "large_archive_creation"]
+        },
+        {
+          "timestamp": "2024-01-16T04:00:00Z",
+          "event": "Data exfiltration to cloud storage",
+          "indicators": ["mega_upload", "large_outbound_transfer"]
+        }
+      ],
+      "exfiltrated_data": {
+        "total_size_gb": 150,
+        "file_types": ["xlsx", "docx", "pdf", "pst", "sql"],
+        "categories": ["financial", "hr", "legal", "customer_data"]
+      }
+    },
+    {
+      "phase": 4,
+      "name": "Ransomware Deployment",
+      "duration_hours": 2,
+      "techniques": ["T1486", "T1490", "T1489"],
+      "events": [
+        {
+          "timestamp": "2024-01-17T04:00:00Z",
+          "event": "VSS shadow copies deleted",
+          "indicators": ["vssadmin_delete", "wmic_shadowcopy"]
+        },
+        {
+          "timestamp": "2024-01-17T04:05:00Z",
+          "event": "Backup services stopped",
+          "indicators": ["service_stop", "vss_service_disabled"]
+        },
+        {
+          "timestamp": "2024-01-17T04:10:00Z",
+          "event": "Ransomware binary deployed via GPO",
+          "indicators": ["gpo_modification", "sysvol_write"]
+        },
+        {
+          "timestamp": "2024-01-17T04:30:00Z",
+          "event": "Encryption initiated across network",
+          "indicators": ["mass_file_modification", "high_entropy_writes"]
+        },
+        {
+          "timestamp": "2024-01-17T06:00:00Z",
+          "event": "Ransom notes dropped",
+          "indicators": ["readme_files", "html_notes"]
+        }
+      ]
+    }
+  ],
+  "impact": {
+    "systems_encrypted": 150,
+    "files_encrypted": 2500000,
+    "data_exfiltrated_gb": 150,
+    "ransom_demand_usd": 2500000,
+    "estimated_downtime_days": 14,
+    "categories_affected": ["finance", "hr", "operations", "it"]
+  },
+  "threat_intelligence": {
+    "ransomware_family": "LockBit 3.0",
+    "threat_actor": "LockBit Affiliate",
+    "bitcoin_addresses": [
+      "bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh"
+    ],
+    "leak_site": "lockbitapt6vx57t3eeqjofwgcglmutr3a35nygvokja5uuccip4ykyd.onion",
+    "negotiation_deadline_hours": 72
+  },
+  "detection_opportunities": [
+    {
+      "phase": "Initial Access",
+      "detection": "Macro execution from external email",
+      "data_source": "Email Gateway, EDR",
+      "priority": "high"
+    },
+    {
+      "phase": "Credential Access",
+      "detection": "LSASS memory access",
+      "data_source": "EDR, Windows Event Log",
+      "priority": "critical"
+    },
+    {
+      "phase": "Exfiltration",
+      "detection": "Large outbound transfer to cloud storage",
+      "data_source": "Network Monitoring, DLP",
+      "priority": "critical"
+    },
+    {
+      "phase": "Impact",
+      "detection": "VSS deletion commands",
+      "data_source": "SIEM, EDR",
+      "priority": "critical"
+    },
+    {
+      "phase": "Impact",
+      "detection": "Mass file extension changes",
+      "data_source": "EDR, File Integrity Monitoring",
+      "priority": "critical"
+    }
+  ],
+  "response_actions": [
+    "Immediately isolate affected systems from network",
+    "Disable compromised accounts",
+    "Block known C2 addresses at firewall",
+    "Preserve memory and disk images for forensics",
+    "Engage legal counsel for data breach notification",
+    "Contact law enforcement (FBI IC3)",
+    "Assess backup integrity and recovery options",
+    "Prepare communication plan for stakeholders"
+  ]
+}
