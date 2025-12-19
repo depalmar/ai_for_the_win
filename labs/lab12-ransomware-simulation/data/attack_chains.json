@@ -1,0 +1,142 @@
+{
+  "description": "Documented ransomware attack chains for emulation",
+  "attack_chains": [
+    {
+      "family": "LockBit 3.0",
+      "alias": "LockBit Black",
+      "kill_chain": [
+        {
+          "phase": "Initial Access",
+          "technique": "T1566.001",
+          "description": "Phishing email with malicious attachment",
+          "indicators": ["Suspicious email attachment", "Macro execution"],
+          "detection_opportunity": "Email gateway, endpoint detection"
+        },
+        {
+          "phase": "Execution",
+          "technique": "T1059.001",
+          "description": "PowerShell script downloads secondary payload",
+          "indicators": ["Encoded PowerShell", "Network callback"],
+          "detection_opportunity": "Script block logging, AMSI"
+        },
+        {
+          "phase": "Persistence",
+          "technique": "T1547.001",
+          "description": "Registry run key for persistence",
+          "indicators": ["Registry modification", "Autorun entry"],
+          "detection_opportunity": "Registry monitoring"
+        },
+        {
+          "phase": "Defense Evasion",
+          "technique": "T1562.001",
+          "description": "Disable security tools",
+          "indicators": ["Service stop commands", "Process termination"],
+          "detection_opportunity": "Service monitoring, EDR"
+        },
+        {
+          "phase": "Discovery",
+          "technique": "T1083",
+          "description": "Enumerate files and network shares",
+          "indicators": ["Net share commands", "File enumeration"],
+          "detection_opportunity": "Command line logging"
+        },
+        {
+          "phase": "Lateral Movement",
+          "technique": "T1021.002",
+          "description": "Spread via SMB using harvested credentials",
+          "indicators": ["SMB connections", "Remote execution"],
+          "detection_opportunity": "Network monitoring, authentication logs"
+        },
+        {
+          "phase": "Collection",
+          "technique": "T1560",
+          "description": "Stage and compress data for exfiltration",
+          "indicators": ["Archive creation", "Staging directory"],
+          "detection_opportunity": "File monitoring"
+        },
+        {
+          "phase": "Exfiltration",
+          "technique": "T1567.002",
+          "description": "Upload to cloud storage for double extortion",
+          "indicators": ["Large upload", "Cloud service connection"],
+          "detection_opportunity": "DLP, network monitoring"
+        },
+        {
+          "phase": "Impact",
+          "technique": "T1486",
+          "description": "Encrypt files with AES-256 + RSA",
+          "indicators": ["Mass file modification", "Extension change"],
+          "detection_opportunity": "File integrity monitoring"
+        },
+        {
+          "phase": "Impact",
+          "technique": "T1490",
+          "description": "Delete volume shadow copies",
+          "indicators": ["vssadmin commands", "wmic shadowcopy"],
+          "detection_opportunity": "Command line monitoring"
+        }
+      ],
+      "ttps_summary": ["T1566.001", "T1059.001", "T1547.001", "T1562.001", "T1083", "T1021.002", "T1560", "T1567.002", "T1486", "T1490"],
+      "average_dwell_time_hours": 24,
+      "typical_ransom_usd": "50000-5000000"
+    },
+    {
+      "family": "BlackCat/ALPHV",
+      "alias": "Noberus",
+      "kill_chain": [
+        {
+          "phase": "Initial Access",
+          "technique": "T1190",
+          "description": "Exploit public-facing application",
+          "indicators": ["Exploit traffic", "Web shell creation"],
+          "detection_opportunity": "WAF, web server logs"
+        },
+        {
+          "phase": "Execution",
+          "technique": "T1059.006",
+          "description": "Python-based tooling for initial operations",
+          "indicators": ["Python process", "Script execution"],
+          "detection_opportunity": "Process monitoring"
+        },
+        {
+          "phase": "Persistence",
+          "technique": "T1053.005",
+          "description": "Scheduled task for persistence",
+          "indicators": ["Task creation", "Scheduled job"],
+          "detection_opportunity": "Task scheduler monitoring"
+        },
+        {
+          "phase": "Credential Access",
+          "technique": "T1003.001",
+          "description": "LSASS memory dump for credentials",
+          "indicators": ["LSASS access", "Credential tools"],
+          "detection_opportunity": "Credential guard, EDR"
+        },
+        {
+          "phase": "Lateral Movement",
+          "technique": "T1021.004",
+          "description": "SSH lateral movement (cross-platform)",
+          "indicators": ["SSH connections", "Key usage"],
+          "detection_opportunity": "Authentication logs"
+        },
+        {
+          "phase": "Exfiltration",
+          "technique": "T1048.003",
+          "description": "Exfiltrate over alternative protocol",
+          "indicators": ["Unusual protocols", "Data transfer"],
+          "detection_opportunity": "Network monitoring"
+        },
+        {
+          "phase": "Impact",
+          "technique": "T1486",
+          "description": "Rust-based encryption (cross-platform)",
+          "indicators": ["File encryption", ".alphv extension"],
+          "detection_opportunity": "File monitoring, EDR"
+        }
+      ],
+      "ttps_summary": ["T1190", "T1059.006", "T1053.005", "T1003.001", "T1021.004", "T1048.003", "T1486"],
+      "average_dwell_time_hours": 72,
+      "typical_ransom_usd": "100000-35000000"
+    }
+  ]
+}

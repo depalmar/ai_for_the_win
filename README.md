@@ -38,6 +38,8 @@ A comprehensive 24-week training program for security practitioners who want to 
 | **Vuln Prioritizer** | Smart vulnerability triage | Risk scoring, remediation planning |
 | **Detection Pipeline** | Multi-stage threat detection | ML filtering, LLM enrichment, correlation |
 | **IR Copilot** | Conversational IR assistant | Agents, state management, playbooks |
+| **Ransomware Detector** | Detect and respond to ransomware | Behavioral detection, LLM analysis, IR playbooks |
+| **Purple Team Simulator** | Safe ransomware simulation | Adversary emulation, detection validation |
 
 ---
 
@@ -73,7 +75,7 @@ python solution/main.py
 ai_for_the_win/
 ├── curriculum/                    # 24-week training program
 │   └── ai-security-training-program.md
-├── labs/                          # 10 hands-on labs
+├── labs/                          # 12 hands-on labs
 │   ├── lab01-phishing-classifier/
 │   ├── lab02-malware-clustering/
 │   ├── lab03-anomaly-detection/
@@ -83,7 +85,9 @@ ai_for_the_win/
 │   ├── lab07-yara-generator/
 │   ├── lab08-vuln-scanner-ai/
 │   ├── lab09-detection-pipeline/
-│   └── lab10-ir-copilot/
+│   ├── lab10-ir-copilot/
+│   ├── lab11-ransomware-detection/
+│   └── lab12-ransomware-simulation/
 ├── capstone-projects/             # 4 comprehensive projects
 │   ├── security-analyst-copilot/
 │   ├── automated-threat-hunter/
@@ -159,6 +163,8 @@ Track your progress through the labs:
 - [ ] **Lab 08**: Vulnerability Scanner AI
 - [ ] **Lab 09**: Threat Detection Pipeline
 - [ ] **Lab 10**: IR Copilot Agent
+- [ ] **Lab 11**: Ransomware Detection & Response
+- [ ] **Lab 12**: Ransomware Simulation (Purple Team)
 - [ ] **Capstone**: Complete one capstone project
 
 ---

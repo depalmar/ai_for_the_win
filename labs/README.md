@@ -18,6 +18,8 @@ Practical labs for building AI-powered security tools.
 | [08](./lab08-vuln-scanner-ai/) | Vulnerability Scanner AI | ⭐⭐⭐ Advanced | 90-120 min | ✅ Ready |
 | [09](./lab09-detection-pipeline/) | Threat Detection Pipeline | ⭐⭐⭐ Advanced | 120-150 min | ✅ Ready |
 | [10](./lab10-ir-copilot/) | IR Copilot Agent | ⭐⭐⭐ Advanced | 120-150 min | ✅ Ready |
+| [11](./lab11-ransomware-detection/) | Ransomware Detection & Response | ⭐⭐⭐ Advanced | 240-300 min | ✅ Ready |
+| [12](./lab12-ransomware-simulation/) | Ransomware Simulation (Purple Team) | ⭐⭐⭐ Advanced | 240-300 min | ✅ Ready |
 
 ---
 
@@ -285,6 +287,46 @@ Copilot capabilities:
 
 ---
 
+### Lab 11: Ransomware Detection & Response (DFIR)
+
+**Build an AI-powered system to detect, analyze, and respond to ransomware attacks.**
+
+Skills learned:
+- Ransomware behavioral detection
+- Entropy-based encryption detection
+- Ransom note analysis with LLMs
+- Automated incident response playbooks
+
+Key capabilities:
+- File system event analysis
+- Shadow copy deletion detection
+- IOC extraction from ransom notes
+- YARA/Sigma rule generation
+- Recovery planning assistance
+
+---
+
+### Lab 12: Ransomware Attack Simulation (Purple Team)
+
+**Build safe simulation tools for testing ransomware defenses.**
+
+Skills learned:
+- Adversary emulation planning
+- Safe simulation techniques
+- Detection validation frameworks
+- Gap analysis and reporting
+
+Purple team capabilities:
+- Attack scenario generation
+- Safe ransomware behavior simulation
+- Detection coverage testing
+- Adversary emulation playbooks
+- Exercise orchestration
+
+**Ethical Note:** This lab emphasizes safe, authorized testing only.
+
+---
+
 ## 💡 Tips for Success
 
 ### Before Starting
@@ -366,6 +408,8 @@ Track your progress:
 - [ ] Lab 08: Vuln Scanner AI
 - [ ] Lab 09: Detection Pipeline
 - [ ] Lab 10: IR Copilot
+- [ ] Lab 11: Ransomware Detection
+- [ ] Lab 12: Ransomware Simulation
 
 ---
 

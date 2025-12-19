@@ -340,6 +340,30 @@ class ThreatIntelProcessor:
         )
 ```
 
+#### Module 3.6: Ransomware Detection & Response
+
+> **Related Labs**: [Lab 11 - Ransomware Detection](../labs/lab11-ransomware-detection/) | [Lab 12 - Ransomware Simulation](../labs/lab12-ransomware-simulation/)
+
+- **DFIR Capabilities**
+
+  - Behavioral detection of ransomware TTPs
+  - Ransom note analysis and IOC extraction
+  - Automated incident response playbooks
+  - Recovery and remediation planning
+
+- **Purple Team Skills**
+
+  - Safe ransomware simulation for testing
+  - Detection validation frameworks
+  - Adversary emulation playbooks
+  - Gap analysis and improvement
+
+- **Project**: Build a ransomware defense system:
+  - Real-time behavioral detection
+  - LLM-powered ransom note analysis
+  - Automated containment recommendations
+  - Detection rule generation (YARA/Sigma)
+
 ---
 
 ### Phase 4: Advanced Topics & Capstone (Weeks 19-24)

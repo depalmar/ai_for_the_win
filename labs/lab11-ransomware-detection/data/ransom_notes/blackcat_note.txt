@@ -1,0 +1,48 @@
+>> What happened?
+Important files on your network have been ENCRYPTED and now have the ".alphv" extension.
+In order to recover your files you need to follow the instructions below.
+
+>> Sensitive data
+Sensitive data on your system was DOWNLOADED.
+If you DO NOT WANT your sensitive data to be PUBLISHED you have to act quickly.
+
+Data includes:
+- Employees personal information
+- Financial documents
+- Customer database
+- Proprietary source code
+- Legal documents
+
+>> What should I do?
+If you want to restore your files, you need to pay for the decryption.
+
+Your personal link: http://alphvmmm27o3abo3r2mlmjrpdmzle3rykajqc5xsj7j7ejksbpsa36ad.onion/access/12345ABCDE
+
+Your company ID: CORP-2024-ABCDEF
+
+>> Warning
+- Do NOT contact any recovery companies - they will just contact us and resell their services at a premium
+- Do NOT contact the police - they will not help you and may freeze your assets
+- Do NOT rename encrypted files
+- Do NOT attempt decryption with any software
+
+>> Proof of decryption
+We can decrypt 2-3 files to prove we have the decryption key.
+Maximum file size: 1MB
+Files must not contain valuable information.
+
+>> Contact
+Email: alphvsupport@onionmail.org
+TOX: 8A9C2735B5F5D5A11A76A5E5B5C5D5E5F5A5B5C5
+
+>> Payment
+Initial price: $500,000 USD
+Payment method: Bitcoin or Monero
+
+Wallet (BTC): bc1qpurplelockbitwalletaddress12345xyz
+Wallet (XMR): 44AFFq5kSiGBoZ4NMDwYtN18obc8AemS33DBLWs3H7otXft3XjrpDtQGv7SqSsaBYBb98uNbr2VBBEt7f2wfn3RVGQBEP3A
+
+Timer: The price doubles after 7 days.
+After 14 days, your data will be published.
+
+ALPHV/BlackCat - We move fast, so should you.

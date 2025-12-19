@@ -1,0 +1,33 @@
+~~~ LockBit 3.0 ~~~
+
+All your important files have been encrypted!
+
+Your files are safe but have been modified. These modifications are reversible.
+The only way to decrypt your files is to obtain the private key and decryption program.
+
+Any attempts to restore your files with third-party software will be fatal for your files!
+
+To get the private key and decryption program, go to our website:
+http://lockbitapt6vx57t3eeqjofwgcglmutr3a35nygvokja5uuccip4ykyd.onion
+
+Your personal ID: A1B2C3D4E5F6G7H8I9J0K1L2M3N4O5P6
+
+If you cannot use the above link, use the email:
+support@lockbitdecrypt.onion
+
+In subject line write your personal ID.
+
+IMPORTANT:
+* Do not rename encrypted files.
+* Do not try to decrypt using third party software.
+* Do not modify encrypted files.
+* Do not delete files with .locked extension.
+
+The price for decryption: 0.5 BTC
+Bitcoin wallet: bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh
+
+Time limit: 72 hours
+After 72 hours, the price will be doubled.
+After 7 days, your files will be permanently deleted from our servers.
+
+We also have your data. If you do not pay, we will publish your data on our blog.

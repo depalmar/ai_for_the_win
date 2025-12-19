@@ -1,0 +1,145 @@
+{
+  "description": "File system events for ransomware detection training",
+  "events": [
+    {
+      "id": 1,
+      "timestamp": "2024-01-15T14:30:00Z",
+      "process_name": "explorer.exe",
+      "process_id": 4521,
+      "operation": "READ",
+      "file_path": "C:\\Users\\victim\\Documents\\report.docx",
+      "file_extension": ".docx",
+      "entropy": 4.2,
+      "size_bytes": 45678,
+      "label": "benign"
+    },
+    {
+      "id": 2,
+      "timestamp": "2024-01-15T14:30:01Z",
+      "process_name": "winword.exe",
+      "process_id": 5123,
+      "operation": "WRITE",
+      "file_path": "C:\\Users\\victim\\Documents\\report.docx",
+      "file_extension": ".docx",
+      "entropy": 4.5,
+      "size_bytes": 46012,
+      "label": "benign"
+    },
+    {
+      "id": 100,
+      "timestamp": "2024-01-15T15:00:00Z",
+      "process_name": "svchost.exe",
+      "process_id": 6789,
+      "operation": "READ",
+      "file_path": "C:\\Users\\victim\\Documents\\financial_2024.xlsx",
+      "file_extension": ".xlsx",
+      "entropy": 5.1,
+      "size_bytes": 234567,
+      "label": "ransomware_recon"
+    },
+    {
+      "id": 101,
+      "timestamp": "2024-01-15T15:00:00Z",
+      "process_name": "svchost.exe",
+      "process_id": 6789,
+      "operation": "READ",
+      "file_path": "C:\\Users\\victim\\Documents\\contracts.pdf",
+      "file_extension": ".pdf",
+      "entropy": 7.2,
+      "size_bytes": 1234567,
+      "label": "ransomware_recon"
+    },
+    {
+      "id": 102,
+      "timestamp": "2024-01-15T15:00:01Z",
+      "process_name": "svchost.exe",
+      "process_id": 6789,
+      "operation": "READ",
+      "file_path": "C:\\Users\\victim\\Pictures\\vacation.jpg",
+      "file_extension": ".jpg",
+      "entropy": 7.8,
+      "size_bytes": 5678901,
+      "label": "ransomware_recon"
+    },
+    {
+      "id": 200,
+      "timestamp": "2024-01-15T15:00:05Z",
+      "process_name": "svchost.exe",
+      "process_id": 6789,
+      "operation": "WRITE",
+      "file_path": "C:\\Users\\victim\\Documents\\financial_2024.xlsx.locked",
+      "file_extension": ".locked",
+      "entropy": 7.98,
+      "size_bytes": 234567,
+      "label": "ransomware_encryption"
+    },
+    {
+      "id": 201,
+      "timestamp": "2024-01-15T15:00:05Z",
+      "process_name": "svchost.exe",
+      "process_id": 6789,
+      "operation": "DELETE",
+      "file_path": "C:\\Users\\victim\\Documents\\financial_2024.xlsx",
+      "file_extension": ".xlsx",
+      "entropy": 0,
+      "size_bytes": 0,
+      "label": "ransomware_encryption"
+    },
+    {
+      "id": 202,
+      "timestamp": "2024-01-15T15:00:06Z",
+      "process_name": "svchost.exe",
+      "process_id": 6789,
+      "operation": "WRITE",
+      "file_path": "C:\\Users\\victim\\Documents\\contracts.pdf.locked",
+      "file_extension": ".locked",
+      "entropy": 7.99,
+      "size_bytes": 1234567,
+      "label": "ransomware_encryption"
+    },
+    {
+      "id": 300,
+      "timestamp": "2024-01-15T15:01:00Z",
+      "process_name": "cmd.exe",
+      "process_id": 7890,
+      "operation": "EXECUTE",
+      "file_path": "vssadmin.exe delete shadows /all /quiet",
+      "file_extension": ".exe",
+      "entropy": 0,
+      "size_bytes": 0,
+      "label": "ransomware_inhibit_recovery"
+    },
+    {
+      "id": 400,
+      "timestamp": "2024-01-15T15:02:00Z",
+      "process_name": "svchost.exe",
+      "process_id": 6789,
+      "operation": "CREATE",
+      "file_path": "C:\\Users\\victim\\Documents\\README_RESTORE_FILES.txt",
+      "file_extension": ".txt",
+      "entropy": 4.5,
+      "size_bytes": 2345,
+      "label": "ransomware_ransom_note"
+    },
+    {
+      "id": 401,
+      "timestamp": "2024-01-15T15:02:00Z",
+      "process_name": "svchost.exe",
+      "process_id": 6789,
+      "operation": "CREATE",
+      "file_path": "C:\\Users\\victim\\Desktop\\README_RESTORE_FILES.txt",
+      "file_extension": ".txt",
+      "entropy": 4.5,
+      "size_bytes": 2345,
+      "label": "ransomware_ransom_note"
+    }
+  ],
+  "statistics": {
+    "total_events": 11,
+    "benign_events": 2,
+    "ransomware_events": 9,
+    "unique_processes": 5,
+    "encryption_pattern_detected": true,
+    "shadow_deletion_detected": true
+  }
+}
