@@ -8,7 +8,7 @@
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab01_phishing_classifier.ipynb)
 [![Docker](https://img.shields.io/badge/Docker-Ready-blue?logo=docker)](./Dockerfile)
 
-A hands-on training program for security practitioners who want to build AI-powered tools for threat detection, incident response, and security automation. **12 labs**, **4 capstone projects**, from beginner to expert. Designed for **vibe coding** with AI assistants like Cursor, Claude Code, and Copilot.
+A hands-on training program for security practitioners who want to build AI-powered tools for threat detection, incident response, and security automation. **16 labs**, **4 capstone projects**, from beginner to expert. Designed for **vibe coding** with AI assistants like Cursor, Claude Code, and Copilot.
 
 ---
 
@@ -51,10 +51,11 @@ python solution/main.py
 │   • Clustering         • RAG Systems        • Detection Pipelines       │
 │   • Anomaly Det        • Code Generation    • IR Automation             │
 │                                                                         │
-│                    🔴 EXPERT: Labs 11-12                                │
-│                    ──────────────────────                               │
-│                    • Ransomware DFIR                                    │
-│                    • Purple Team Simulation                             │
+│           🔴 EXPERT: Labs 11-16 (DFIR, Red Team, Attribution)           │
+│           ───────────────────────────────────────────────────           │
+│           • Ransomware Detection    • Memory Forensics                  │
+│           • Purple Team Simulation  • C2 Traffic Analysis               │
+│           • Lateral Movement        • Threat Actor Profiling            │
 │                                                                         │
 └─────────────────────────────────────────────────────────────────────────┘
 ```
@@ -64,7 +65,9 @@ python solution/main.py
 | New to ML/AI | Labs 01 → 02 → 03 → 04 | 4-5 hours |
 | Know ML, new to LLMs | Labs 04 → 06 → 05 | 4-5 hours |
 | Want to build agents | Labs 04 → 05 → 10 | 5-6 hours |
-| DFIR focus | Labs 04 → 05 → 11 → 12 | 10-12 hours |
+| DFIR focus | Labs 04 → 05 → 11 → 13 → 14 | 15-18 hours |
+| Red Team/Offensive | Labs 12 → 14 → 15 → 16 | 16-20 hours |
+| Threat Intel Analyst | Labs 05 → 06 → 14 → 16 | 12-15 hours |
 
 ---
 
@@ -86,19 +89,23 @@ python solution/main.py
 | **10** | **IR Copilot** | Conversational agents, state management, playbook execution, incident documentation |
 | **11** | **Ransomware Detector** | Entropy analysis, behavioral detection, ransom note IOC extraction, response automation |
 | **12** | **Purple Team Sim** | Safe adversary emulation, detection validation, gap analysis, purple team exercises |
+| **13** | **Memory Forensics AI** | Volatility3 integration, process injection detection, credential dumping, LLM artifact analysis |
+| **14** | **C2 Traffic Analysis** | Beaconing detection, DNS tunneling, encrypted C2, JA3 fingerprinting, traffic classification |
+| **15** | **Lateral Movement Detection** | Auth anomaly detection, remote execution (PsExec/WMI/WinRM), graph-based attack paths |
+| **16** | **Threat Actor Profiling** | TTP extraction, campaign clustering, malware attribution, actor profile generation |
 
 ### Skills Progression
 
 ```
-┌─────────────────────────────────────────────────────────────────────────┐
-│  FOUNDATIONS          │  INTERMEDIATE           │  ADVANCED             │
-│  Labs 01-03           │  Labs 04-07             │  Labs 08-12           │
-├───────────────────────┼─────────────────────────┼───────────────────────┤
-│  • Supervised ML      │  • Prompt Engineering   │  • System Design      │
-│  • Unsupervised ML    │  • AI Agents            │  • Multi-stage ML+LLM │
-│  • Feature Eng.       │  • RAG Systems          │  • Production IR      │
-│  • Model Evaluation   │  • Code Generation      │  • Purple Teaming     │
-└─────────────────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────────────────────────────┐
+│  FOUNDATIONS      │  INTERMEDIATE       │  ADVANCED           │  EXPERT              │
+│  Labs 01-03       │  Labs 04-07         │  Labs 08-10         │  Labs 11-16          │
+├───────────────────┼─────────────────────┼─────────────────────┼──────────────────────┤
+│  • Supervised ML  │  • Prompt Eng       │  • System Design    │  • DFIR              │
+│  • Unsupervised   │  • AI Agents        │  • ML+LLM Pipelines │  • Memory Forensics  │
+│  • Feature Eng    │  • RAG Systems      │  • Production IR    │  • C2 Detection      │
+│  • Evaluation     │  • Code Generation  │  • Alert Triage     │  • Attribution       │
+└──────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
@@ -153,7 +160,7 @@ Run labs directly in your browser - no setup required:
 | Lab 04: Log Analysis | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab04_llm_log_analysis.ipynb) |
 | Lab 05: Threat Intel Agent | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab05_threat_intel_agent.ipynb) |
 | Lab 06: Security RAG | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab06_security_rag.ipynb) |
-| All 12 labs available | [Browse notebooks →](./notebooks/) |
+| All 16 labs available | [Browse notebooks →](./notebooks/) |
 
 ---
 
@@ -161,7 +168,7 @@ Run labs directly in your browser - no setup required:
 
 ```
 ai_for_the_win/
-├── labs/                          # 12 hands-on labs
+├── labs/                          # 16 hands-on labs
 │   ├── lab01-phishing-classifier/ # ML text classification
 │   ├── lab02-malware-clustering/  # Unsupervised learning
 │   ├── lab03-anomaly-detection/   # Network security
@@ -173,7 +180,11 @@ ai_for_the_win/
 │   ├── lab09-detection-pipeline/  # Multi-stage ML+LLM
 │   ├── lab10-ir-copilot/          # Conversational IR
 │   ├── lab11-ransomware-detection/# DFIR + behavioral analysis
-│   └── lab12-ransomware-simulation/# Purple team exercises
+│   ├── lab12-ransomware-simulation/# Purple team exercises
+│   ├── lab13-memory-forensics-ai/ # Memory forensics with AI
+│   ├── lab14-c2-traffic-analysis/ # C2 detection & analysis
+│   ├── lab15-lateral-movement-detection/ # Attack path detection
+│   └── lab16-threat-actor-profiling/ # Attribution & profiling
 ├── notebooks/                     # Jupyter notebooks (Colab-ready)
 ├── capstone-projects/             # 4 comprehensive projects
 ├── templates/                     # Reusable code templates
@@ -251,6 +262,10 @@ Track your progress through the labs:
 - [ ] **Lab 10**: IR Copilot Agent
 - [ ] **Lab 11**: Ransomware Detection & Response
 - [ ] **Lab 12**: Ransomware Simulation (Purple Team)
+- [ ] **Lab 13**: Memory Forensics AI
+- [ ] **Lab 14**: C2 Traffic Analysis
+- [ ] **Lab 15**: Lateral Movement Detection
+- [ ] **Lab 16**: Threat Actor Profiling
 - [ ] **Capstone**: Complete one capstone project
 
 ---

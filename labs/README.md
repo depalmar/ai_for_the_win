@@ -75,22 +75,33 @@ Lab 05 (Agents) → Lab 08 (Vuln) → Lab 09 (Pipeline) → Lab 10 (Copilot)
 
 ---
 
-### 🔴 Expert: DFIR Specialization (Week 7-8)
+### 🔴 Expert: DFIR & Red Team (Week 7-10)
 
-Deep dive into incident response and threat simulation.
+Deep dive into incident response, threat simulation, and offensive security analysis.
 
 | # | Lab | Topic | Time | What You'll Learn |
 |---|-----|-------|------|-------------------|
 | 11 | [Ransomware Detection](./lab11-ransomware-detection/) | Behavioral detection | 4-5 hrs | Entropy, TTPs, response |
 | 12 | [Purple Team](./lab12-ransomware-simulation/) | Adversary emulation | 4-5 hrs | Safe simulation, gap analysis |
+| 13 | [Memory Forensics AI](./lab13-memory-forensics-ai/) | Memory analysis | 4-5 hrs | Volatility3, process injection, credential dumping |
+| 14 | [C2 Traffic Analysis](./lab14-c2-traffic-analysis/) | Network forensics | 4-5 hrs | Beaconing, DNS tunneling, encrypted C2 |
+| 15 | [Lateral Movement Detection](./lab15-lateral-movement-detection/) | Attack detection | 4-5 hrs | Auth anomalies, remote execution, graph analysis |
+| 16 | [Threat Actor Profiling](./lab16-threat-actor-profiling/) | Attribution | 4-5 hrs | TTP analysis, clustering, actor profiles |
 
 **Progression:**
 ```
-Lab 11 (Detect) → Lab 12 (Simulate)
-     ↓                ↓
- "Detect           "Validate
-  ransomware"       detections"
+Lab 11 (Ransomware) → Lab 12 (Purple Team) → Lab 13 (Memory Forensics)
+     ↓                     ↓                      ↓
+ "Detect              "Validate              "Analyze
+  ransomware"          detections"            memory dumps"
+
+Lab 14 (C2 Traffic) → Lab 15 (Lateral Movement) → Lab 16 (Attribution)
+     ↓                      ↓                          ↓
+ "Detect C2            "Track attacker           "Profile
+  communications"        movement"                threat actors"
 ```
+
+**Bridge from Core:** Labs 11-16 build on detection skills from Labs 09-10 and apply them to advanced DFIR scenarios. Memory forensics and C2 analysis require understanding of malware behavior from Lab 02.
 
 ---
 
@@ -103,9 +114,11 @@ Choose based on your objectives:
 | **"I'm brand new"** | 01 → 02 → 03 → 04 | 4-5 hours | Python basics |
 | **"I know ML, teach me LLMs"** | 04 → 06 → 05 | 4-5 hours | ML experience |
 | **"I want to build agents"** | 04 → 05 → 10 | 5-6 hours | API key |
-| **"SOC/Detection focus"** | 01 → 03 → 09 → 11 | 8-10 hours | None |
-| **"DFIR specialist"** | 04 → 05 → 11 → 12 | 10-12 hours | Security background |
-| **"Complete everything"** | All 12 labs | 20-30 hours | Dedication |
+| **"SOC/Detection focus"** | 01 → 03 → 09 → 11 → 15 | 10-12 hours | None |
+| **"DFIR specialist"** | 04 → 05 → 11 → 13 → 14 | 15-18 hours | Security background |
+| **"Red Team/Offensive"** | 12 → 14 → 15 → 16 | 16-20 hours | Security experience |
+| **"Threat Intel Analyst"** | 05 → 06 → 14 → 16 | 12-15 hours | TI fundamentals |
+| **"Complete everything"** | All 16 labs | 35-45 hours | Dedication |
 
 ---
 
@@ -462,6 +475,86 @@ Purple team capabilities:
 
 ---
 
+### Lab 13: AI-Powered Memory Forensics
+
+**Use AI/ML to analyze memory dumps and detect advanced threats.**
+
+Skills learned:
+- Memory forensics with Volatility3
+- Process injection detection
+- Credential dumping identification
+- Rootkit and hiding technique detection
+- LLM-powered artifact interpretation
+
+Key capabilities:
+- Automated memory artifact extraction
+- Process anomaly detection with ML
+- Malicious code pattern recognition
+- Credential exposure assessment
+- IOC extraction from memory
+
+---
+
+### Lab 14: C2 Traffic Analysis
+
+**Detect and analyze command-and-control communications.**
+
+Skills learned:
+- Network traffic feature extraction
+- Beaconing detection algorithms
+- DNS tunneling identification
+- Encrypted C2 traffic analysis
+- JA3/JA3S fingerprinting
+
+Detection capabilities:
+- Beacon pattern detection (jitter, intervals)
+- DNS exfiltration identification
+- HTTP C2 pattern matching
+- TLS fingerprint anomalies
+- LLM-powered traffic interpretation
+
+---
+
+### Lab 15: Lateral Movement Detection
+
+**Detect adversary lateral movement techniques in enterprise environments.**
+
+Skills learned:
+- Authentication anomaly detection
+- Remote execution technique identification
+- Graph-based attack path analysis
+- Windows security event correlation
+- LLM-powered alert triage
+
+Detection capabilities:
+- PsExec, WMI, WinRM execution detection
+- Unusual authentication patterns
+- First-time host access alerts
+- Service account abuse detection
+- Attack path visualization
+
+---
+
+### Lab 16: Threat Actor Profiling
+
+**Build AI systems to profile and attribute threat actors.**
+
+Skills learned:
+- TTP extraction and encoding
+- Campaign clustering for attribution
+- Malware code similarity analysis
+- LLM-powered profile generation
+- Diamond Model analysis
+
+Attribution capabilities:
+- MITRE ATT&CK technique mapping
+- Known actor matching
+- Behavioral pattern clustering
+- Infrastructure overlap analysis
+- Predictive actor behavior modeling
+
+---
+
 ## 💡 Tips for Success
 
 ### Before Starting
@@ -545,6 +638,10 @@ Track your progress:
 - [ ] Lab 10: IR Copilot
 - [ ] Lab 11: Ransomware Detection
 - [ ] Lab 12: Ransomware Simulation
+- [ ] Lab 13: Memory Forensics AI
+- [ ] Lab 14: C2 Traffic Analysis
+- [ ] Lab 15: Lateral Movement Detection
+- [ ] Lab 16: Threat Actor Profiling
 
 ---
 
