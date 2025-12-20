@@ -12,10 +12,28 @@ Answer these questions to find your starting point:
 
 | Question | Yes | No |
 |----------|-----|----|
-| Can you write Python functions and use pip? | Continue below | [Learn Python first](https://www.python.org/about/gettingstarted/) |
-| Do you know what ML classification means? | Start at Lab 01 | Start at "ML Foundations" section |
+| Can you write Python functions and use pip? | Continue below | See [Python Resources](#python-resources) below |
+| Do you know what ML classification means? | Start at Lab 01 | Start at Lab 01 (it teaches ML basics) |
 | Have you used an LLM API (OpenAI, Claude)? | Jump to Lab 04 | Do Labs 01-03 first |
 | Can you explain what RAG means? | Jump to Lab 05 | Do Labs 04, 06 first |
+
+### Python Resources
+
+New to Python? These resources will get you ready in 1-2 weeks:
+
+| Resource | Type | Best For |
+|----------|------|----------|
+| [Automate the Boring Stuff](https://automatetheboringstuff.com/) | Free online book | Practical Python from zero |
+| [Real Python - Start Here](https://realpython.com/start-here/) | Tutorials | Hands-on project-based learning |
+| [Python Crash Course](https://ehmatthes.github.io/pcc/) | Book | Structured beginner curriculum |
+| [freeCodeCamp Python](https://www.freecodecamp.org/learn/scientific-computing-with-python/) | Interactive | Free course with certification |
+| [Codecademy Python](https://www.codecademy.com/learn/learn-python-3) | Interactive | Browser-based practice |
+
+**Minimum skills needed for this course:**
+- Variables, functions, loops, conditionals
+- Lists, dictionaries, basic file I/O
+- Installing packages with `pip`
+- Running scripts from command line
 
 ---
 
@@ -264,6 +282,49 @@ After completing your first lab:
 2. **Join Discussions**: Open GitHub Discussions for questions
 3. **Try Interactive Demos**: Run `python demo/launcher.py`
 4. **Plan Your Path**: See [LEARNING_GUIDE.md](./LEARNING_GUIDE.md) for detailed paths
+
+---
+
+## Vibe Coding: AI-Assisted Development
+
+This course is designed for **vibe coding** - working alongside AI to write and understand code faster. Instead of typing everything manually, you'll describe what you want and let AI help implement it.
+
+### Recommended AI Coding Tools
+
+| Tool | Best For | Guide |
+|------|----------|-------|
+| [Cursor](https://cursor.sh/) | Full IDE with AI built-in, composer mode | [Cursor Guide](./setup/guides/cursor-ide-guide.md) |
+| [Claude Code](https://claude.ai/code) | Terminal-based AI coding assistant | [Claude Code Guide](./setup/guides/claude-code-guide.md) |
+| [GitHub Copilot](https://github.com/features/copilot) | Inline completions in VS Code | Works with any editor |
+| [Windsurf](https://codeium.com/windsurf) | Free AI-powered IDE | Alternative to Cursor |
+
+### How to Vibe Code These Labs
+
+**Example workflow with Cursor/Claude Code:**
+
+```
+You: "Read the starter code in lab01 and explain what each TODO needs"
+AI: [Explains the TODOs with context]
+
+You: "Implement TODO 1 - the TF-IDF vectorization"
+AI: [Writes the code with explanation]
+
+You: "Run it and explain the output"
+AI: [Executes and interprets results]
+```
+
+**Tips for effective AI-assisted learning:**
+- Ask AI to **explain** before implementing (builds understanding)
+- Have AI **review** your code and suggest improvements
+- Use AI to **debug** errors instead of just fixing them
+- Ask "why" questions: "Why use TF-IDF instead of word counts?"
+
+### Cheatsheets
+
+Quick references for AI coding tools:
+- [Cursor Cheatsheet](./resources/cheatsheets/cursor-cheatsheet.md)
+- [Claude Code Cheatsheet](./resources/cheatsheets/claude-code-cheatsheet.md)
+- [LangChain Security Cheatsheet](./resources/cheatsheets/langchain-security-cheatsheet.md)
 
 ---
 

@@ -8,7 +8,7 @@
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab01_phishing_classifier.ipynb)
 [![Docker](https://img.shields.io/badge/Docker-Ready-blue?logo=docker)](./Dockerfile)
 
-A hands-on training program for security practitioners who want to build AI-powered tools for threat detection, incident response, and security automation. **12 labs**, **4 capstone projects**, from beginner to expert.
+A hands-on training program for security practitioners who want to build AI-powered tools for threat detection, incident response, and security automation. **12 labs**, **4 capstone projects**, from beginner to expert. Designed for **vibe coding** with AI assistants like Cursor, Claude Code, and Copilot.
 
 ---
 
@@ -265,6 +265,7 @@ Track your progress through the labs:
 | **Vector DB** | ChromaDB, sentence-transformers |
 | **Security** | YARA, Sigma, MITRE ATT&CK, pefile |
 | **Web/UI** | FastAPI, Gradio, Streamlit |
+| **Vibe Coding** | Cursor, Claude Code, GitHub Copilot, Windsurf |
 | **Development** | Python 3.9+, pytest, Docker, GitHub Actions |
 
 ---

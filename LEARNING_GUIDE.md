@@ -486,6 +486,23 @@ llm = setup_llm(provider="ollama")     # Use local Llama
 | **Streamlit** | Dashboards | Lab 08, 09 |
 | **FastAPI** | Production APIs | Lab 09, 10 |
 
+### Vibe Coding Tools
+
+This course is designed for AI-assisted development. Use these tools to accelerate your learning:
+
+| Tool | Description | Guide |
+|------|-------------|-------|
+| [Cursor](https://cursor.sh/) | AI-native IDE with composer mode | [Guide](./setup/guides/cursor-ide-guide.md) |
+| [Claude Code](https://claude.ai/code) | Terminal AI coding assistant | [Guide](./setup/guides/claude-code-guide.md) |
+| [GitHub Copilot](https://github.com/features/copilot) | Inline AI completions | VS Code extension |
+| [Windsurf](https://codeium.com/windsurf) | Free AI-powered IDE | Alternative to Cursor |
+
+**Vibe coding workflow:**
+1. Ask AI to explain the starter code and TODOs
+2. Describe what you want to implement
+3. Have AI write and explain the code
+4. Ask AI to debug and test with you
+
 ### Workflow Orchestration
 
 ```python
