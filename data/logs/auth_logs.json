@@ -1,0 +1,22 @@
+[
+  {"timestamp": "2024-03-15T08:23:41Z", "event_type": "login_success", "username": "jsmith", "source_ip": "192.168.1.45", "destination": "DC01", "auth_method": "kerberos", "workstation": "WS-JSMITH", "label": "normal"},
+  {"timestamp": "2024-03-15T08:24:12Z", "event_type": "login_success", "username": "mchen", "source_ip": "192.168.1.67", "destination": "DC01", "auth_method": "kerberos", "workstation": "WS-MCHEN", "label": "normal"},
+  {"timestamp": "2024-03-15T02:14:33Z", "event_type": "login_failure", "username": "admin", "source_ip": "185.234.72.19", "destination": "VPN-GW", "auth_method": "password", "workstation": "unknown", "label": "brute_force"},
+  {"timestamp": "2024-03-15T02:14:35Z", "event_type": "login_failure", "username": "admin", "source_ip": "185.234.72.19", "destination": "VPN-GW", "auth_method": "password", "workstation": "unknown", "label": "brute_force"},
+  {"timestamp": "2024-03-15T02:14:37Z", "event_type": "login_failure", "username": "administrator", "source_ip": "185.234.72.19", "destination": "VPN-GW", "auth_method": "password", "workstation": "unknown", "label": "brute_force"},
+  {"timestamp": "2024-03-15T09:00:01Z", "event_type": "login_success", "username": "svc_backup", "source_ip": "192.168.1.10", "destination": "FILE-SRV01", "auth_method": "ntlm", "workstation": "BACKUP-SRV", "label": "normal"},
+  {"timestamp": "2024-03-15T03:45:22Z", "event_type": "login_success", "username": "jsmith", "source_ip": "10.0.0.99", "destination": "DC01", "auth_method": "ntlm", "workstation": "unknown", "label": "lateral_movement"},
+  {"timestamp": "2024-03-15T03:45:45Z", "event_type": "login_success", "username": "jsmith", "source_ip": "10.0.0.99", "destination": "FILE-SRV01", "auth_method": "ntlm", "workstation": "unknown", "label": "lateral_movement"},
+  {"timestamp": "2024-03-15T10:15:00Z", "event_type": "login_success", "username": "lwilson", "source_ip": "192.168.1.112", "destination": "DC01", "auth_method": "kerberos", "workstation": "WS-LWILSON", "label": "normal"},
+  {"timestamp": "2024-03-15T03:46:12Z", "event_type": "privilege_escalation", "username": "jsmith", "source_ip": "10.0.0.99", "destination": "DC01", "auth_method": "kerberos", "workstation": "unknown", "label": "golden_ticket"},
+  {"timestamp": "2024-03-15T11:30:45Z", "event_type": "login_success", "username": "agarcia", "source_ip": "192.168.1.89", "destination": "DC01", "auth_method": "kerberos", "workstation": "WS-AGARCIA", "label": "normal"},
+  {"timestamp": "2024-03-15T04:12:33Z", "event_type": "login_success", "username": "svc_sql", "source_ip": "192.168.1.50", "destination": "SQL-SRV01", "auth_method": "ntlm", "workstation": "APP-SRV01", "label": "normal"},
+  {"timestamp": "2024-03-15T04:30:00Z", "event_type": "password_change", "username": "jsmith", "source_ip": "10.0.0.99", "destination": "DC01", "auth_method": "ntlm", "workstation": "unknown", "label": "credential_compromise"},
+  {"timestamp": "2024-03-15T12:00:00Z", "event_type": "login_success", "username": "rthompson", "source_ip": "192.168.1.134", "destination": "DC01", "auth_method": "kerberos", "workstation": "WS-RTHOMPSON", "label": "normal"},
+  {"timestamp": "2024-03-15T05:00:01Z", "event_type": "login_failure", "username": "root", "source_ip": "45.33.32.156", "destination": "SSH-GW", "auth_method": "password", "workstation": "unknown", "label": "brute_force"},
+  {"timestamp": "2024-03-15T13:45:22Z", "event_type": "login_success", "username": "blee", "source_ip": "192.168.1.178", "destination": "DC01", "auth_method": "kerberos", "workstation": "WS-BLEE", "label": "normal"},
+  {"timestamp": "2024-03-15T05:15:33Z", "event_type": "service_account_login", "username": "svc_scan", "source_ip": "192.168.1.200", "destination": "multiple", "auth_method": "ntlm", "workstation": "VULN-SCANNER", "label": "normal"},
+  {"timestamp": "2024-03-15T06:00:00Z", "event_type": "login_success", "username": "admin", "source_ip": "192.168.1.5", "destination": "DC01", "auth_method": "smart_card", "workstation": "ADMIN-WS01", "label": "normal"},
+  {"timestamp": "2024-03-15T06:30:45Z", "event_type": "login_success", "username": "jsmith", "source_ip": "192.168.1.45", "destination": "EXCH-SRV01", "auth_method": "kerberos", "workstation": "WS-JSMITH", "label": "normal"},
+  {"timestamp": "2024-03-15T07:00:00Z", "event_type": "login_failure", "username": "sa", "source_ip": "10.0.0.99", "destination": "SQL-SRV01", "auth_method": "password", "workstation": "unknown", "label": "sql_brute_force"}
+]

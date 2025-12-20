@@ -65,9 +65,10 @@ wandb/
 chroma_db/
 *.faiss
 
-# Logs
+# Logs (except sample data)
 *.log
 logs/
+!data/logs/
 
 # OS files
 .DS_Store
@@ -93,7 +94,8 @@ credentials/
 *.vmem
 *.raw
 
-# Malware samples (be careful!)
+# Malware samples (be careful! - except sample metadata)
 samples/
 malware/
+!data/malware/
 !samples/.gitkeep
