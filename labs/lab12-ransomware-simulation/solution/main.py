@@ -68,11 +68,124 @@ import json
 import tempfile
 import shutil
 from dataclasses import dataclass, field
-from typing import List, Dict, Optional
+from typing import List, Dict, Optional, Any
 from datetime import datetime
 from enum import Enum
 from pathlib import Path
-from anthropic import Anthropic
+
+# Load environment variables
+from dotenv import load_dotenv
+load_dotenv()
+
+# =============================================================================
+# Multi-Provider LLM Support
+# =============================================================================
+#
+# This lab supports multiple LLM providers:
+# - Anthropic (Claude): Default, high-quality reasoning
+# - OpenAI (GPT-4): Widely available, good performance
+# - Gemini (Google): Good for long context, competitive pricing
+#
+# Set the appropriate environment variable:
+# - ANTHROPIC_API_KEY for Claude
+# - OPENAI_API_KEY for GPT-4
+# - GOOGLE_API_KEY for Gemini
+#
+# =============================================================================
+
+try:
+    from anthropic import Anthropic
+    ANTHROPIC_AVAILABLE = True
+except ImportError:
+    ANTHROPIC_AVAILABLE = False
+
+try:
+    from openai import OpenAI
+    OPENAI_AVAILABLE = True
+except ImportError:
+    OPENAI_AVAILABLE = False
+
+try:
+    import google.generativeai as genai
+    GEMINI_AVAILABLE = True
+except ImportError:
+    GEMINI_AVAILABLE = False
+
+
+def get_llm_client(provider: str = "auto"):
+    """
+    Get an LLM client based on provider preference.
+
+    Args:
+        provider: LLM provider to use. Options:
+            - "auto": Try providers in order (anthropic, openai, gemini)
+            - "anthropic": Use Claude
+            - "openai": Use GPT-4
+            - "gemini": Use Gemini
+
+    Returns:
+        Tuple of (client, provider_name, model_name)
+    """
+    providers_to_try = ["anthropic", "openai", "gemini"] if provider == "auto" else [provider]
+
+    for prov in providers_to_try:
+        if prov == "anthropic":
+            api_key = os.getenv("ANTHROPIC_API_KEY")
+            if api_key and ANTHROPIC_AVAILABLE:
+                return Anthropic(), "anthropic", "claude-sonnet-4-20250514"
+
+        elif prov == "openai":
+            api_key = os.getenv("OPENAI_API_KEY")
+            if api_key and OPENAI_AVAILABLE:
+                return OpenAI(), "openai", "gpt-4-turbo"
+
+        elif prov == "gemini":
+            api_key = os.getenv("GOOGLE_API_KEY")
+            if api_key and GEMINI_AVAILABLE:
+                genai.configure(api_key=api_key)
+                return genai.GenerativeModel("gemini-1.5-pro"), "gemini", "gemini-1.5-pro"
+
+    raise ValueError(
+        "No LLM provider available. Set one of: ANTHROPIC_API_KEY, OPENAI_API_KEY, GOOGLE_API_KEY"
+    )
+
+
+def call_llm(client: Any, provider: str, model: str, prompt: str, max_tokens: int = 2048) -> str:
+    """
+    Call LLM with provider-specific API.
+
+    Args:
+        client: The LLM client
+        provider: Provider name (anthropic, openai, gemini)
+        model: Model name
+        prompt: The prompt to send
+        max_tokens: Maximum tokens in response
+
+    Returns:
+        The LLM response text
+    """
+    if provider == "anthropic":
+        response = client.messages.create(
+            model=model,
+            max_tokens=max_tokens,
+            messages=[{"role": "user", "content": prompt}]
+        )
+        return response.content[0].text
+
+    elif provider == "openai":
+        response = client.chat.completions.create(
+            model=model,
+            max_tokens=max_tokens,
+            messages=[{"role": "user", "content": prompt}]
+        )
+        return response.choices[0].message.content
+
+    elif provider == "gemini":
+        response = client.generate_content(prompt)
+        return response.text
+
+    else:
+        raise ValueError(f"Unknown provider: {provider}")
 
 
 # =============================================================================
@@ -210,8 +323,14 @@ class ScenarioGenerator:
         }
     }
 
-    def __init__(self):
-        self.client = Anthropic()
+    def __init__(self, provider: str = "auto"):
+        """
+        Initialize scenario generator.
+
+        Args:
+            provider: LLM provider ("auto", "anthropic", "openai", "gemini")
+        """
+        self.client, self.provider, self.model = get_llm_client(provider)
 
     def generate_scenario(
         self,
@@ -694,10 +813,16 @@ class DetectionValidator:
 class PurpleTeamExercise:
     """Orchestrate ransomware purple team exercises."""
 
-    def __init__(self):
-        self.scenario_gen = ScenarioGenerator()
+    def __init__(self, provider: str = "auto"):
+        """
+        Initialize purple team exercise orchestrator.
+
+        Args:
+            provider: LLM provider ("auto", "anthropic", "openai", "gemini")
+        """
+        self.scenario_gen = ScenarioGenerator(provider=provider)
         self.validator = DetectionValidator()
-        self.client = Anthropic()
+        self.client, self.provider, self.model = get_llm_client(provider)
 
     def plan_exercise(
         self,
@@ -725,7 +850,7 @@ class PurpleTeamExercise:
         }
 
     def generate_report(self, exercise_results: Dict) -> str:
-        """Generate exercise report."""
+        """Generate exercise report using configured LLM provider."""
         prompt = f"""Generate a purple team exercise report based on these results:
 
 EXERCISE SUMMARY:
@@ -740,13 +865,7 @@ Create a professional report with:
 6. Recommendations
 7. Next Steps"""
 
-        response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
-            max_tokens=2048,
-            messages=[{"role": "user", "content": prompt}]
-        )
-
-        return response.content[0].text
+        return call_llm(self.client, self.provider, self.model, prompt, max_tokens=2048)
 
 
 # =============================================================================

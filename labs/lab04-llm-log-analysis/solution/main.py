@@ -77,6 +77,18 @@ try:
 except ImportError:
     OLLAMA_AVAILABLE = False
 
+try:
+    from langchain_openai import ChatOpenAI
+    OPENAI_AVAILABLE = True
+except ImportError:
+    OPENAI_AVAILABLE = False
+
+try:
+    from langchain_google_genai import ChatGoogleGenerativeAI
+    GEMINI_AVAILABLE = True
+except ImportError:
+    GEMINI_AVAILABLE = False
+
 from rich.console import Console
 from rich.markdown import Markdown
 from rich.panel import Panel
@@ -90,14 +102,21 @@ console = Console()
 #
 # The LLM client is our interface to the AI model. Key considerations:
 #
-# - PROVIDER SELECTION: Anthropic (Claude) vs Ollama (local)
-#   - Anthropic: Higher quality, requires API key, has costs
+# - PROVIDER SELECTION: Multiple providers supported
+#   - Anthropic (Claude): High quality reasoning, requires API key
+#   - OpenAI (GPT-4): Widely used, good balance of quality/speed
+#   - Gemini (Google): Good for long context, competitive pricing
 #   - Ollama: Free, runs locally, good for development
 #
 # - TEMPERATURE = 0: We want deterministic, consistent outputs
 #   for security analysis. Higher temperatures introduce randomness.
 #
 # - MAX_TOKENS: Limit response length to control costs and focus
+#
+# ENVIRONMENT VARIABLES:
+#   - ANTHROPIC_API_KEY: For Claude models
+#   - OPENAI_API_KEY: For GPT models
+#   - GOOGLE_API_KEY: For Gemini models
 #
 # =============================================================================
 
@@ -106,7 +125,11 @@ def setup_llm(provider: str = "anthropic"):
     Initialize the LLM client for security log analysis.
 
     Args:
-        provider: "anthropic" for Claude API, "ollama" for local models
+        provider: LLM provider to use. Options:
+            - "anthropic": Claude (claude-sonnet-4-20250514)
+            - "openai": GPT-4 Turbo
+            - "gemini": Gemini 1.5 Pro
+            - "ollama": Local models (llama3.1:8b)
 
     Returns:
         Configured LLM client ready for inference
@@ -131,6 +154,34 @@ def setup_llm(provider: str = "anthropic"):
             max_tokens=4096
         )
 
+    elif provider == "openai":
+        if not OPENAI_AVAILABLE:
+            raise ImportError("langchain-openai not installed. Run: pip install langchain-openai")
+
+        api_key = os.getenv("OPENAI_API_KEY")
+        if not api_key:
+            raise ValueError("OPENAI_API_KEY not set. Add to .env file.")
+
+        llm = ChatOpenAI(
+            model="gpt-4-turbo",
+            temperature=0,
+            max_tokens=4096
+        )
+
+    elif provider == "gemini":
+        if not GEMINI_AVAILABLE:
+            raise ImportError("langchain-google-genai not installed. Run: pip install langchain-google-genai")
+
+        api_key = os.getenv("GOOGLE_API_KEY")
+        if not api_key:
+            raise ValueError("GOOGLE_API_KEY not set. Add to .env file.")
+
+        llm = ChatGoogleGenerativeAI(
+            model="gemini-1.5-pro",
+            temperature=0,
+            max_output_tokens=4096
+        )
+
     elif provider == "ollama":
         if not OLLAMA_AVAILABLE:
             raise ImportError("langchain-community not installed. Run: pip install langchain-community")
@@ -141,7 +192,7 @@ def setup_llm(provider: str = "anthropic"):
         )
 
     else:
-        raise ValueError(f"Unknown provider: {provider}")
+        raise ValueError(f"Unknown provider: {provider}. Supported: anthropic, openai, gemini, ollama")
 
     # Test the client
     try:

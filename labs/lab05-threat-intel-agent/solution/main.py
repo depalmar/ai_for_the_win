@@ -81,6 +81,18 @@ try:
 except ImportError:
     LANGCHAIN_AVAILABLE = False
 
+try:
+    from langchain_openai import ChatOpenAI
+    OPENAI_AVAILABLE = True
+except ImportError:
+    OPENAI_AVAILABLE = False
+
+try:
+    from langchain_google_genai import ChatGoogleGenerativeAI
+    GEMINI_AVAILABLE = True
+except ImportError:
+    GEMINI_AVAILABLE = False
+
 from rich.console import Console
 from rich.panel import Panel
 from rich.markdown import Markdown
@@ -526,18 +538,27 @@ Begin!"""
 class ThreatIntelAgent:
     """AI agent for threat intelligence gathering and analysis."""
 
-    def __init__(self, llm=None, tools: List = None, verbose: bool = True):
+    def __init__(self, llm=None, provider: str = "auto", tools: List = None, verbose: bool = True):
+        """
+        Initialize the threat intelligence agent.
+
+        Args:
+            llm: Pre-configured LLM instance (optional)
+            provider: LLM provider if llm not provided. Options:
+                - "auto": Try providers in order (anthropic, openai, gemini)
+                - "anthropic": Use Claude
+                - "openai": Use GPT-4
+                - "gemini": Use Gemini 1.5 Pro
+            tools: List of tools for the agent (optional)
+            verbose: Enable verbose output
+        """
         self.verbose = verbose
         self.memory = AgentMemory()
         self.max_iterations = 10
 
         # Initialize LLM
         if llm is None:
-            api_key = os.getenv("ANTHROPIC_API_KEY")
-            if api_key:
-                self.llm = ChatAnthropic(model="claude-sonnet-4-20250514", temperature=0)
-            else:
-                raise ValueError("ANTHROPIC_API_KEY not set")
+            self.llm = self._setup_llm(provider)
         else:
             self.llm = llm
 
@@ -549,6 +570,42 @@ class ThreatIntelAgent:
         # Format system prompt
         tool_descriptions = self._format_tool_descriptions()
         self.system_prompt = AGENT_SYSTEM_PROMPT.format(tools=tool_descriptions)
+
+    def _setup_llm(self, provider: str):
+        """Set up LLM based on provider preference."""
+        providers_to_try = []
+
+        if provider == "auto":
+            # Try providers in order of preference
+            providers_to_try = ["anthropic", "openai", "gemini"]
+        else:
+            providers_to_try = [provider]
+
+        for prov in providers_to_try:
+            try:
+                if prov == "anthropic":
+                    api_key = os.getenv("ANTHROPIC_API_KEY")
+                    if api_key and LANGCHAIN_AVAILABLE:
+                        return ChatAnthropic(model="claude-sonnet-4-20250514", temperature=0)
+
+                elif prov == "openai":
+                    api_key = os.getenv("OPENAI_API_KEY")
+                    if api_key and OPENAI_AVAILABLE:
+                        return ChatOpenAI(model="gpt-4-turbo", temperature=0)
+
+                elif prov == "gemini":
+                    api_key = os.getenv("GOOGLE_API_KEY")
+                    if api_key and GEMINI_AVAILABLE:
+                        return ChatGoogleGenerativeAI(model="gemini-1.5-pro", temperature=0)
+
+            except Exception as e:
+                if self.verbose:
+                    console.print(f"[yellow]Failed to initialize {prov}: {e}[/yellow]")
+                continue
+
+        raise ValueError(
+            "No LLM provider available. Set one of: ANTHROPIC_API_KEY, OPENAI_API_KEY, GOOGLE_API_KEY"
+        )
 
     def _format_tool_descriptions(self) -> str:
         """Format tool descriptions for the system prompt."""

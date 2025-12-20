@@ -13,8 +13,15 @@ torch>=2.0.0,<3.0.0
 # LLM Frameworks
 langchain>=0.1.0,<1.0.0
 langchain-anthropic>=0.1.0,<1.0.0
+langchain-openai>=0.1.0,<1.0.0
+langchain-google-genai>=1.0.0,<2.0.0
 langchain-community>=0.0.20,<1.0.0
 langgraph>=0.0.30,<1.0.0
+
+# LLM SDKs (direct API access)
+anthropic>=0.18.0,<1.0.0
+openai>=1.12.0,<2.0.0
+google-generativeai>=0.4.0,<1.0.0
 
 # Vector Database
 chromadb>=0.4.0,<1.0.0
