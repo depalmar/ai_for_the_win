@@ -200,7 +200,7 @@ ai_for_the_win/
 │   ├── prompts/                   # Security prompt library
 │   ├── visualizations/            # Dashboards & diagrams
 │   └── reports/                   # Report generators
-├── resources/                     # Tools, datasets, guides
+├── resources/                     # Tools, datasets, MCP servers guide
 ├── setup/                         # Environment setup guides
 │   └── guides/                    # Troubleshooting & error handling
 ├── tests/                         # Comprehensive test suite

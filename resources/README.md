@@ -3,18 +3,24 @@
 Curated resources for the AI Security Training Program.
 
 ```
-╔═══════════════════════════════════════════════════════════════════════╗
-║                        RESOURCES OVERVIEW                              ║
-╠═══════════════════════════════════════════════════════════════════════╣
-║                                                                       ║
-║  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐       ║
-║  │ 📚 Tools &      │  │ 💬 Prompt       │  │ 📋 Cheatsheets  │       ║
-║  │    Resources    │  │    Library      │  │                 │       ║
-║  │  70+ tools      │  │  15+ prompts    │  │  4 guides       │       ║
-║  │  APIs, datasets │  │  Security AI    │  │  Quick ref      │       ║
-║  └─────────────────┘  └─────────────────┘  └─────────────────┘       ║
-║                                                                       ║
-╚═══════════════════════════════════════════════════════════════════════╝
+╔═══════════════════════════════════════════════════════════════════════════════╗
+║                           RESOURCES OVERVIEW                                  ║
+╠═══════════════════════════════════════════════════════════════════════════════╣
+║                                                                               ║
+║  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐               ║
+║  │ 📚 Tools &      │  │ 💬 Prompt       │  │ 📋 Cheatsheets  │               ║
+║  │    Resources    │  │    Library      │  │                 │               ║
+║  │  70+ tools      │  │  15+ prompts    │  │  4 guides       │               ║
+║  │  APIs, datasets │  │  Security AI    │  │  Quick ref      │               ║
+║  └─────────────────┘  └─────────────────┘  └─────────────────┘               ║
+║                                                                               ║
+║  ┌───────────────────────────────────────────────────────────┐               ║
+║  │ 🔌 MCP Servers Guide                                      │               ║
+║  │    DFIR, Threat Intel, Offensive Security, Reporting      │               ║
+║  │    Custom server templates, Claude Code integration       │               ║
+║  └───────────────────────────────────────────────────────────┘               ║
+║                                                                               ║
+╚═══════════════════════════════════════════════════════════════════════════════╝
 ```
 
 ## Directory Structure
@@ -23,6 +29,7 @@ Curated resources for the AI Security Training Program.
 resources/
 ├── README.md                    # This file
 ├── tools-and-resources.md       # Comprehensive tools and APIs guide
+├── mcp-servers-security-guide.md # MCP servers for security operations
 ├── prompt-library/              # Security analysis prompts
 │   └── security-prompts.md      # Curated prompt templates
 └── cheatsheets/                 # Quick reference guides
@@ -37,6 +44,7 @@ resources/
 | Resource | Description |
 |----------|-------------|
 | [Tools & Resources](./tools-and-resources.md) | 70+ tools, APIs, datasets |
+| [MCP Servers Guide](./mcp-servers-security-guide.md) | DFIR, threat intel, offensive security MCP servers |
 | [Prompt Library](./prompt-library/) | Ready-to-use security prompts |
 | [Cheatsheets](./cheatsheets/) | Quick reference guides |
 
@@ -94,6 +102,34 @@ Quick reference guides for common tools:
 - Common patterns
 - Chain templates
 - Tool definitions
+
+## MCP Servers for Security
+
+The [MCP Servers Guide](./mcp-servers-security-guide.md) covers Model Context Protocol servers for:
+
+### DFIR Operations
+- Filesystem analysis and evidence collection
+- SQLite database forensics
+- Memory forensics with Volatility3 integration
+- Timeline generation
+
+### Threat Intelligence
+- VirusTotal API integration
+- MISP threat sharing platform
+- Shodan/Censys asset discovery
+- GreyNoise/AbuseIPDB reputation
+
+### Offensive Security
+- Nuclei vulnerability scanning
+- Nmap network reconnaissance
+- Custom security tool integration
+
+### Report Generation
+- Automated incident reports (Markdown, PDF, HTML)
+- MITRE ATT&CK mapping templates
+- Vulnerability assessment reports
+- Threat intelligence briefings
+- Plotly chart integration for visualizations
 
 ## Contributing Resources
 
