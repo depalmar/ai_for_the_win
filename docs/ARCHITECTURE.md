@@ -14,7 +14,7 @@ This document provides a comprehensive overview of the AI for the Win training p
 │                                                                               │
 │  ┌─────────────┐    ┌─────────────┐    ┌─────────────┐    ┌─────────────┐   │
 │  │   INTRO     │───▶│  FOUNDATION │───▶│  LLM TOOLS  │───▶│  ADVANCED   │   │
-│  │  Labs 00a-c │    │  Labs 01-03 │    │  Labs 04-07 │    │  Labs 08-19 │   │
+│  │  Labs 00a-c │    │  Labs 01-03 │    │  Labs 04-07 │    │  Labs 08-20 │   │
 │  └─────────────┘    └─────────────┘    └─────────────┘    └─────────────┘   │
 │        │                  │                  │                  │            │
 │        ▼                  ▼                  ▼                  ▼            │
@@ -38,7 +38,7 @@ This document provides a comprehensive overview of the AI for the Win training p
 
 ```
 ai_for_the_win/
-├── labs/                          # 22 hands-on labs
+├── labs/                          # 23 hands-on labs
 │   ├── lab00a-python-security-fundamentals/
 │   ├── lab00b-ml-concepts-primer/
 │   ├── lab00c-prompt-engineering-mastery/

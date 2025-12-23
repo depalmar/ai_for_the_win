@@ -8,7 +8,7 @@ I build AI-powered security tools and teach others to do the same.
 
 ### What I'm Working On
 
-🔬 **[AI Security Training](https://github.com/depalmar/ai_for_the_win)** — 22 hands-on labs teaching ML and LLMs for threat detection, incident response, and security automation. Includes CTF challenges and enterprise integrations.
+🔬 **[AI Security Training](https://github.com/depalmar/ai_for_the_win)** — 23 hands-on labs teaching ML and LLMs for threat detection, incident response, offensive AI security, and automation. Includes CTF challenges and enterprise integrations.
 
 ---
 
