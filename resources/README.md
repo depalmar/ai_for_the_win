@@ -14,11 +14,11 @@ Curated resources for the AI Security Training Program.
 ║  │  APIs, datasets │  │  Security AI    │  │  Quick ref      │               ║
 ║  └─────────────────┘  └─────────────────┘  └─────────────────┘               ║
 ║                                                                               ║
-║  ┌───────────────────────────────────────────────────────────┐               ║
-║  │ 🔌 MCP Servers Guide                                      │               ║
-║  │    DFIR, Threat Intel, Offensive Security, Reporting      │               ║
-║  │    Custom server templates, Claude Code integration       │               ║
-║  └───────────────────────────────────────────────────────────┘               ║
+║  ┌─────────────────┐  ┌─────────────────────────────────────────┐            ║
+║  │ 🔌 MCP Servers  │  │ 🔗 Platform Integrations                │            ║
+║  │  DFIR, TI, Red  │  │  XSIAM, XDR, Splunk, Elastic            │            ║
+║  │  Report Gen     │  │  SOAR, Threat Intel                     │            ║
+║  └─────────────────┘  └─────────────────────────────────────────┘            ║
 ║                                                                               ║
 ╚═══════════════════════════════════════════════════════════════════════════════╝
 ```
@@ -30,6 +30,10 @@ resources/
 ├── README.md                    # This file
 ├── tools-and-resources.md       # Comprehensive tools and APIs guide
 ├── mcp-servers-security-guide.md # MCP servers for security operations
+├── integrations/                # Enterprise platform integrations
+│   ├── README.md               # Integration overview
+│   ├── xsiam-xdr-integration.md # Palo Alto Cortex XSIAM/XDR
+│   └── splunk-integration.md   # Splunk Enterprise/Cloud
 ├── prompt-library/              # Security analysis prompts
 │   └── security-prompts.md      # Curated prompt templates
 └── cheatsheets/                 # Quick reference guides
@@ -45,6 +49,7 @@ resources/
 |----------|-------------|
 | [Tools & Resources](./tools-and-resources.md) | 70+ tools, APIs, datasets |
 | [MCP Servers Guide](./mcp-servers-security-guide.md) | DFIR, threat intel, offensive security MCP servers |
+| [Platform Integrations](./integrations/) | XSIAM, XDR, Splunk, Elastic guides |
 | [Prompt Library](./prompt-library/) | Ready-to-use security prompts |
 | [Cheatsheets](./cheatsheets/) | Quick reference guides |
 

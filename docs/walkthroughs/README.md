@@ -16,9 +16,11 @@ These walkthroughs provide:
 |-----|-------------|------------|------|
 | [Lab 01](./lab01-walkthrough.md) | Phishing Classifier | Beginner | 20 min |
 | [Lab 02](./lab02-walkthrough.md) | Malware Clustering | Beginner | 25 min |
-| [Lab 03](./lab03-walkthrough.md) | Anomaly Detection | Beginner | 20 min |
+| Lab 03 | Anomaly Detection | Beginner | Coming Soon |
 | [Lab 04](./lab04-walkthrough.md) | LLM Log Analysis | Intermediate | 30 min |
 | [Lab 05](./lab05-walkthrough.md) | Threat Intel Agent | Intermediate | 35 min |
+| Lab 06-10 | LLM & Production Labs | Intermediate | Coming Soon |
+| Lab 11-17 | DFIR & Expert Labs | Expert | Coming Soon |
 
 ## How to Use These Walkthroughs
 
