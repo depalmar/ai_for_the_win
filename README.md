@@ -8,7 +8,7 @@
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab01_phishing_classifier.ipynb)
 [![Docker](https://img.shields.io/badge/Docker-Ready-blue?logo=docker)](./Dockerfile)
 
-A hands-on training program for security practitioners who want to build AI-powered tools for threat detection, incident response, and security automation. **20 labs** (including 3 intro labs), **4 capstone projects**, from absolute beginner to expert. Includes **sample datasets** and **solution walkthroughs**. Designed for **vibe coding** with AI assistants like Cursor, Claude Code, and Copilot.
+A hands-on training program for security practitioners who want to build AI-powered tools for threat detection, incident response, and security automation. **22 labs** (including 3 intro labs), **4 capstone projects**, **15 CTF challenges**. Includes **sample datasets** and **solution walkthroughs**. Designed for **vibe coding** with AI assistants like Cursor, Claude Code, and Copilot.
 
 ---
 
@@ -51,12 +51,12 @@ python solution/main.py
 │   • ML Concepts        • Clustering         • RAG Systems               │
 │   • Prompt Mastery     • Anomaly Det        • Code Generation           │
 │                                                                         │
-│   🟠 ADVANCED          🔴 EXPERT: Labs 11-17                            │
+│   🟠 ADVANCED          🔴 EXPERT: Labs 11-19                            │
 │   Labs 05,08-10        ─────────────────────                            │
 │   ─────────────        • Ransomware Detection    • Memory Forensics     │
 │   • AI Agents          • Purple Team Sim         • C2 Traffic           │
-│   • Pipelines          • Lateral Movement        • Adversarial ML       │
-│   • IR Automation      • Threat Attribution                             │
+│   • Pipelines          • Adversarial ML          • Fine-tuning          │
+│   • IR Automation      • Cloud Security          • Threat Attribution   │
 │                                                                         │
 └─────────────────────────────────────────────────────────────────────────┘
 ```
@@ -99,6 +99,8 @@ python solution/main.py
 | **15** | **Lateral Movement Detection** | Auth anomaly detection, remote execution (PsExec/WMI/WinRM), graph-based attack paths |
 | **16** | **Threat Actor Profiling** | TTP extraction, campaign clustering, malware attribution, actor profile generation |
 | **17** | **Adversarial ML** | Evasion attacks, poisoning attacks, adversarial training, robust ML defenses |
+| **18** | **Fine-Tuning for Security** | Custom embeddings, LoRA fine-tuning, security-specific models, deployment |
+| **19** | **Cloud Security AI** | AWS/Azure/GCP security, CloudTrail analysis, multi-cloud threat detection |
 
 ### Skills Progression
 
