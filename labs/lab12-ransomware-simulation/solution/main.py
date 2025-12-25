@@ -130,9 +130,7 @@ def get_llm_client(provider: str = "auto"):
     Returns:
         Tuple of (client, provider_name, model_name)
     """
-    providers_to_try = (
-        ["anthropic", "openai", "gemini"] if provider == "auto" else [provider]
-    )
+    providers_to_try = ["anthropic", "openai", "gemini"] if provider == "auto" else [provider]
 
     for prov in providers_to_try:
         if prov == "anthropic":
@@ -160,9 +158,7 @@ def get_llm_client(provider: str = "auto"):
     )
 
 
-def call_llm(
-    client: Any, provider: str, model: str, prompt: str, max_tokens: int = 2048
-) -> str:
+def call_llm(client: Any, provider: str, model: str, prompt: str, max_tokens: int = 2048) -> str:
     """
     Call LLM with provider-specific API.
 
@@ -264,9 +260,7 @@ class SimulationConfig:
     """Configuration for safe ransomware simulation."""
 
     target_directory: str
-    file_extensions: List[str] = field(
-        default_factory=lambda: [".txt", ".docx", ".xlsx"]
-    )
+    file_extensions: List[str] = field(default_factory=lambda: [".txt", ".docx", ".xlsx"])
     create_ransom_note: bool = True
     simulate_encryption: bool = True
     simulate_shadow_delete: bool = True
@@ -360,9 +354,7 @@ class ScenarioGenerator:
         target_os: str = "windows",
     ) -> AttackScenario:
         """Generate a ransomware attack scenario."""
-        profile = self.FAMILY_PROFILES.get(
-            family, self.FAMILY_PROFILES[RansomwareFamily.LOCKBIT]
-        )
+        profile = self.FAMILY_PROFILES.get(family, self.FAMILY_PROFILES[RansomwareFamily.LOCKBIT])
 
         # Build execution chain based on complexity
         execution_chain = []
@@ -551,14 +543,11 @@ class SafeRansomwareSimulator:
             Path("/opt/purple_team"),
         ]
 
-        is_safe = any(
-            str(target).startswith(str(prefix)) for prefix in allowed_prefixes
-        )
+        is_safe = any(str(target).startswith(str(prefix)) for prefix in allowed_prefixes)
 
         if not is_safe:
             raise ValueError(
-                f"Target directory must be in temp or designated test area. "
-                f"Got: {target}"
+                f"Target directory must be in temp or designated test area. " f"Got: {target}"
             )
 
         # Create if doesn't exist
@@ -620,9 +609,7 @@ class SafeRansomwareSimulator:
                 shutil.move(str(original), new_name)
                 affected += 1
 
-                self._log_action(
-                    "ENCRYPT_SIM", {"original": str(original), "encrypted": new_name}
-                )
+                self._log_action("ENCRYPT_SIM", {"original": str(original), "encrypted": new_name})
 
         return {"simulated": True, "files_affected": affected}
 
@@ -769,9 +756,7 @@ class DetectionValidator:
     def __init__(self):
         self.results: List[TestResult] = []
 
-    def run_test(
-        self, test: DetectionTest, simulator: SafeRansomwareSimulator
-    ) -> TestResult:
+    def run_test(self, test: DetectionTest, simulator: SafeRansomwareSimulator) -> TestResult:
         """Run a single detection test."""
         # In a real implementation, this would:
         # 1. Execute the simulation
@@ -802,9 +787,7 @@ class DetectionValidator:
             "partial": partial,
             "coverage_percentage": (detected / total * 100) if total > 0 else 0,
             "missed_techniques": [
-                r.test.technique_id
-                for r in self.results
-                if r.status == DetectionStatus.MISSED
+                r.test.technique_id for r in self.results if r.status == DetectionStatus.MISSED
             ],
         }
 
@@ -925,9 +908,7 @@ def main():
     # Create exercise plan
     print("[1] Planning Exercise...")
     exercise = PurpleTeamExercise()
-    plan = exercise.plan_exercise(
-        ransomware_family=RansomwareFamily.LOCKBIT, complexity="medium"
-    )
+    plan = exercise.plan_exercise(ransomware_family=RansomwareFamily.LOCKBIT, complexity="medium")
 
     print(f"\nScenario: {plan['scenario'].name}")
     print(f"Description: {plan['scenario'].description}")

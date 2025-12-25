@@ -121,9 +121,7 @@ class MLFilterStage:
 
         # Time features
         try:
-            ts = datetime.fromisoformat(
-                event.get("timestamp", "").replace("Z", "+00:00")
-            )
+            ts = datetime.fromisoformat(event.get("timestamp", "").replace("Z", "+00:00"))
             features.append(ts.hour)
             features.append(1 if ts.weekday() >= 5 else 0)
         except:
@@ -254,9 +252,7 @@ class LLMEnrichmentStage:
 
     def _llm_analyze(self, event: dict) -> str:
         """Get LLM analysis."""
-        cache_key = hashlib.md5(
-            json.dumps(event["details"], sort_keys=True).encode()
-        ).hexdigest()
+        cache_key = hashlib.md5(json.dumps(event["details"], sort_keys=True).encode()).hexdigest()
         if cache_key in self.cache:
             return self.cache[cache_key]
 
@@ -299,9 +295,7 @@ class CorrelationStage:
         """Find events related to this one."""
         related = []
         try:
-            event_time = datetime.fromisoformat(
-                event["timestamp"].replace("Z", "+00:00")
-            )
+            event_time = datetime.fromisoformat(event["timestamp"].replace("Z", "+00:00"))
         except:
             event_time = datetime.now()
 
@@ -310,9 +304,7 @@ class CorrelationStage:
                 continue
 
             try:
-                other_time = datetime.fromisoformat(
-                    other["timestamp"].replace("Z", "+00:00")
-                )
+                other_time = datetime.fromisoformat(other["timestamp"].replace("Z", "+00:00"))
             except:
                 continue
 
@@ -416,9 +408,7 @@ class VerdictStage:
             "mitre_techniques": verdict["techniques"],
             "affected_hosts": list(set(e["host"] for e in events)),
             "affected_users": list(set(e["user"] for e in events)),
-            "timeline": [
-                {"time": e["timestamp"], "event": e["event_type"]} for e in events
-            ],
+            "timeline": [{"time": e["timestamp"], "event": e["event_type"]} for e in events],
             "recommended_actions": [
                 "Isolate affected hosts",
                 "Reset user credentials",
@@ -539,9 +529,7 @@ def main():
         },
     ]
 
-    console.print(
-        f"\n[yellow]Processing {len(attack_events)} events through pipeline...[/yellow]"
-    )
+    console.print(f"\n[yellow]Processing {len(attack_events)} events through pipeline...[/yellow]")
 
     pipeline = DetectionPipeline()
 

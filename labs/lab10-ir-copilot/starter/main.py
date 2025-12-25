@@ -452,9 +452,7 @@ class IncidentDocumenter:
 
 def main():
     """Main execution flow."""
-    console.print(
-        Panel.fit("[bold]Lab 10: Incident Response Copilot[/bold]", border_style="blue")
-    )
+    console.print(Panel.fit("[bold]Lab 10: Incident Response Copilot[/bold]", border_style="blue"))
 
     if not LANGCHAIN_AVAILABLE:
         console.print("[yellow]LangChain not available. Running in demo mode.[/yellow]")
@@ -535,9 +533,7 @@ def main():
 
         if response:
             console.print(f"\n[bold green]Copilot:[/bold green]")
-            console.print(
-                Panel(response or "Complete the TODO sections to enable response")
-            )
+            console.print(Panel(response or "Complete the TODO sections to enable response"))
         else:
             console.print("[red]No response - complete the TODO sections[/red]")
 

@@ -190,9 +190,7 @@ def chunk_security_documents(
 # =============================================================================
 
 
-def create_vector_store(
-    chunks: List[Document], persist_directory: str = None
-) -> Chroma:
+def create_vector_store(chunks: List[Document], persist_directory: str = None) -> Chroma:
     """Create vector store with embeddings."""
     # Use HuggingFace embeddings (free, local)
     embeddings = HuggingFaceEmbeddings(
@@ -222,9 +220,7 @@ def load_vector_store(persist_directory: str) -> Chroma:
 
 def create_security_retriever(vector_store: Chroma, k: int = 5):
     """Create retriever with security-optimized settings."""
-    retriever = vector_store.as_retriever(
-        search_type="similarity", search_kwargs={"k": k}
-    )
+    retriever = vector_store.as_retriever(search_type="similarity", search_kwargs={"k": k})
     return retriever
 
 
@@ -264,9 +260,7 @@ class SecurityRAG:
         for i, doc in enumerate(documents, 1):
             source = doc.metadata.get("source", "Unknown")
             doc_type = doc.metadata.get("doc_type", "document")
-            context_parts.append(
-                f"[Document {i} - {doc_type}: {source}]\n{doc.page_content}\n"
-            )
+            context_parts.append(f"[Document {i} - {doc_type}: {source}]\n{doc.page_content}\n")
         return "\n---\n".join(context_parts)
 
     def query(self, question: str) -> dict:
@@ -298,9 +292,7 @@ class SecurityRAG:
             "confidence": len(docs) / 5.0,  # Simple confidence based on docs found
         }
 
-    def query_with_filters(
-        self, question: str, doc_type: str = None, severity: str = None
-    ) -> dict:
+    def query_with_filters(self, question: str, doc_type: str = None, severity: str = None) -> dict:
         """Query with metadata filters."""
         # Build filter
         filter_dict = {}
@@ -311,9 +303,7 @@ class SecurityRAG:
 
         # Create filtered retriever
         if filter_dict:
-            docs = self.retriever.vectorstore.similarity_search(
-                question, k=5, filter=filter_dict
-            )
+            docs = self.retriever.vectorstore.similarity_search(question, k=5, filter=filter_dict)
         else:
             docs = self.retriever.get_relevant_documents(question)
 
@@ -362,15 +352,11 @@ def evaluate_rag_system(rag: SecurityRAG, test_cases: List[dict]) -> dict:
 
         # Check keywords
         keywords_found = sum(1 for kw in expected_keywords if kw.lower() in answer)
-        keyword_score = (
-            keywords_found / len(expected_keywords) if expected_keywords else 1.0
-        )
+        keyword_score = keywords_found / len(expected_keywords) if expected_keywords else 1.0
 
         # Check sources
         sources_found = sum(1 for src in expected_sources if src in result["sources"])
-        source_score = (
-            sources_found / len(expected_sources) if expected_sources else 1.0
-        )
+        source_score = sources_found / len(expected_sources) if expected_sources else 1.0
 
         if keyword_score > 0.5:
             results["keyword_matches"] += 1
@@ -400,9 +386,7 @@ def evaluate_rag_system(rag: SecurityRAG, test_cases: List[dict]) -> dict:
 def main():
     """Main execution flow."""
     console.print(
-        Panel.fit(
-            "[bold]Lab 06: Security RAG System - SOLUTION[/bold]", border_style="blue"
-        )
+        Panel.fit("[bold]Lab 06: Security RAG System - SOLUTION[/bold]", border_style="blue")
     )
 
     if not LANGCHAIN_AVAILABLE:
@@ -443,9 +427,7 @@ def main():
     api_key = os.getenv("ANTHROPIC_API_KEY")
 
     if not api_key:
-        console.print(
-            "[yellow]No API key found. Showing retrieval results only.[/yellow]"
-        )
+        console.print("[yellow]No API key found. Showing retrieval results only.[/yellow]")
         # Demo retrieval only
         test_queries = [
             "What is CVE-2024-1234?",

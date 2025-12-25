@@ -19,14 +19,18 @@ for key in list(sys.modules.keys()):
 sys.path = [p for p in sys.path if "/labs/lab" not in p]
 
 # Add this lab's path
-lab_path = str(
-    Path(__file__).parent.parent / "labs" / "lab11-ransomware-detection" / "solution"
-)
+lab_path = str(Path(__file__).parent.parent / "labs" / "lab11-ransomware-detection" / "solution")
 sys.path.insert(0, lab_path)
 
-from main import (FileEvent, IncidentContext, RansomNoteAnalyzer,
-                  RansomNoteIntel, RansomwareBehaviorDetector,
-                  RansomwareDetectionPipeline, RansomwareResponder)
+from main import (
+    FileEvent,
+    IncidentContext,
+    RansomNoteAnalyzer,
+    RansomNoteIntel,
+    RansomwareBehaviorDetector,
+    RansomwareDetectionPipeline,
+    RansomwareResponder,
+)
 
 # =============================================================================
 # Fixtures
@@ -346,9 +350,7 @@ class TestRansomNoteAnalyzer:
         assert len(iocs["bitcoin"]) >= 1
         # Check valid Bitcoin address format
         for addr in iocs["bitcoin"]:
-            assert (
-                addr.startswith("bc1") or addr.startswith("1") or addr.startswith("3")
-            )
+            assert addr.startswith("bc1") or addr.startswith("1") or addr.startswith("3")
 
     def test_extract_onion_urls(self, sample_ransom_note):
         """Test onion URL extraction."""
@@ -393,11 +395,7 @@ class TestRansomNoteAnalyzer:
         analyzer = RansomNoteAnalyzer()
         analyzer.client = Mock()
         analyzer.client.messages.create.return_value = Mock(
-            content=[
-                Mock(
-                    text='{"ransomware_family": "LockBit", "exfiltration_claimed": true}'
-                )
-            ]
+            content=[Mock(text='{"ransomware_family": "LockBit", "exfiltration_claimed": true}')]
         )
 
         # Just test IOC extraction without actual LLM call

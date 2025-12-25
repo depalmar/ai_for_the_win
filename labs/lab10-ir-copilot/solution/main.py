@@ -174,9 +174,7 @@ class CopilotTools:
                 # Add related events
                 alert_host = alert.get("host")
                 related_events = [
-                    e
-                    for e in self.siem_data.get("events", [])
-                    if e.get("host") == alert_host
+                    e for e in self.siem_data.get("events", []) if e.get("host") == alert_host
                 ]
                 return {
                     **alert,
@@ -506,23 +504,15 @@ When investigating:
         if any(kw in message_lower for kw in ["block", "blacklist"]):
             return "block_ioc"
 
-        if any(
-            kw in message_lower
-            for kw in ["disable account", "disable user", "lock account"]
-        ):
+        if any(kw in message_lower for kw in ["disable account", "disable user", "lock account"]):
             return "disable_account"
 
         # Documentation
-        if any(
-            kw in message_lower for kw in ["timeline", "report", "summary", "document"]
-        ):
+        if any(kw in message_lower for kw in ["timeline", "report", "summary", "document"]):
             return "document"
 
         # Questions
-        if any(
-            kw in message_lower
-            for kw in ["what should", "recommend", "suggest", "next step"]
-        ):
+        if any(kw in message_lower for kw in ["what should", "recommend", "suggest", "next step"]):
             return "recommend"
 
         return "investigate"
@@ -549,9 +539,7 @@ When investigating:
     def _handle_investigation(self, message: str) -> str:
         """Handle investigation requests."""
         # Extract hostname if mentioned
-        host_match = re.search(
-            r"(WORKSTATION|SERVER|HOST)[-_]?\d+", message, re.IGNORECASE
-        )
+        host_match = re.search(r"(WORKSTATION|SERVER|HOST)[-_]?\d+", message, re.IGNORECASE)
 
         if host_match:
             hostname = host_match.group(0).upper()
@@ -573,9 +561,7 @@ When investigating:
                 response += f"- OS: {host_info.get('os')}\n"
                 response += f"- IP: {host_info.get('ip')}\n"
                 response += f"- Users: {', '.join(host_info.get('users', []))}\n"
-                response += (
-                    f"- Isolated: {'Yes' if host_info.get('isolated') else 'No'}\n\n"
-                )
+                response += f"- Isolated: {'Yes' if host_info.get('isolated') else 'No'}\n\n"
 
             response += f"**Found {len(events)} events in the last 24 hours:**\n\n"
 
@@ -638,9 +624,7 @@ When investigating:
 
     def _handle_containment(self, message: str) -> str:
         """Handle host containment requests."""
-        host_match = re.search(
-            r"(WORKSTATION|SERVER|HOST)[-_]?\d+", message, re.IGNORECASE
-        )
+        host_match = re.search(r"(WORKSTATION|SERVER|HOST)[-_]?\d+", message, re.IGNORECASE)
 
         if host_match:
             hostname = host_match.group(0).upper()
@@ -724,11 +708,7 @@ When investigating:
         ]
 
         if malicious_iocs:
-            unblocked = [
-                ioc
-                for ioc in malicious_iocs
-                if ioc["ioc"] not in self.tools.blocked_iocs
-            ]
+            unblocked = [ioc for ioc in malicious_iocs if ioc["ioc"] not in self.tools.blocked_iocs]
             if unblocked:
                 response += f"1. Block malicious IOCs: {', '.join(i['ioc'] for i in unblocked)}\n"
 
@@ -740,9 +720,7 @@ When investigating:
                 if e.get("type") == "investigation"
             )
         )
-        unisolated = [
-            h for h in compromised_hosts if h and h not in self.tools.isolated_hosts
-        ]
+        unisolated = [h for h in compromised_hosts if h and h not in self.tools.isolated_hosts]
         if unisolated:
             response += f"2. Consider isolating: {', '.join(unisolated)}\n"
 
@@ -780,7 +758,9 @@ When investigating:
             assessment += "- Scheduled task creation (T1053 - Persistence)\n"
 
         if has_encoded_ps and has_c2:
-            assessment += "\n**Severity: HIGH** - Pattern suggests active compromise with C2 communication."
+            assessment += (
+                "\n**Severity: HIGH** - Pattern suggests active compromise with C2 communication."
+            )
 
         return assessment if assessment else "Insufficient data for assessment."
 
@@ -962,18 +942,14 @@ class PlaybookExecutor:
             "results": results,
         }
 
-    def get_next_step(
-        self, playbook_name: str, current_step: int = None
-    ) -> Optional[dict]:
+    def get_next_step(self, playbook_name: str, current_step: int = None) -> Optional[dict]:
         """Get next playbook step with guidance."""
         if playbook_name not in self.playbooks:
             return None
 
         playbook = self.playbooks[playbook_name]
         step_idx = (
-            current_step
-            if current_step is not None
-            else self.current_step.get(playbook_name, 0)
+            current_step if current_step is not None else self.current_step.get(playbook_name, 0)
         )
 
         if step_idx >= len(playbook["steps"]):
@@ -1065,18 +1041,16 @@ class IncidentDocumenter:
         response = "# Executive Summary\n\n"
 
         response += "## What Happened\n\n"
-        response += "A security incident was detected involving suspicious activity on an endpoint. "
         response += (
-            "The incident response team investigated and took containment actions.\n\n"
+            "A security incident was detected involving suspicious activity on an endpoint. "
         )
+        response += "The incident response team investigated and took containment actions.\n\n"
 
         response += "## Business Impact\n\n"
         response += "- Systems affected: "
         if self.state and self.state.state.timeline_events:
             hosts = set(
-                e.get("host", "")
-                for e in self.state.state.timeline_events
-                if e.get("host")
+                e.get("host", "") for e in self.state.state.timeline_events if e.get("host")
             )
             response += f"{len(hosts)} endpoint(s)\n"
         else:

@@ -25,9 +25,17 @@ try:
     from reportlab.lib.pagesizes import A4, letter
     from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
     from reportlab.lib.units import inch
-    from reportlab.platypus import (Image, ListFlowable, ListItem, PageBreak,
-                                    Paragraph, SimpleDocTemplate, Spacer,
-                                    Table, TableStyle)
+    from reportlab.platypus import (
+        Image,
+        ListFlowable,
+        ListItem,
+        PageBreak,
+        Paragraph,
+        SimpleDocTemplate,
+        Spacer,
+        Table,
+        TableStyle,
+    )
 
     REPORTLAB_AVAILABLE = True
 except ImportError:
@@ -368,9 +376,7 @@ class HTMLReportGenerator(BaseReportGenerator):
         html.append(
             f"<span><strong>Date:</strong> {self.metadata.date.strftime('%Y-%m-%d %H:%M')}</span>"
         )
-        html.append(
-            f"<span><strong>Classification:</strong> {self.metadata.classification}</span>"
-        )
+        html.append(f"<span><strong>Classification:</strong> {self.metadata.classification}</span>")
         html.append("</div>")
 
         # Executive Summary

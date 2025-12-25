@@ -169,9 +169,7 @@ def check_api_keys():
 
     if not has_llm_key:
         print_error("\nNo LLM API key found! At least one is required for LLM labs.")
-        print_warning(
-            "Set ANTHROPIC_API_KEY, OPENAI_API_KEY, or GOOGLE_API_KEY in .env"
-        )
+        print_warning("Set ANTHROPIC_API_KEY, OPENAI_API_KEY, or GOOGLE_API_KEY in .env")
 
     print("\nOptional API keys:")
     for key, provider in optional_keys.items():
@@ -220,9 +218,7 @@ def check_ollama():
     import subprocess
 
     try:
-        result = subprocess.run(
-            ["ollama", "list"], capture_output=True, text=True, timeout=5
-        )
+        result = subprocess.run(["ollama", "list"], capture_output=True, text=True, timeout=5)
         if result.returncode == 0:
             print_success("Ollama installed and running")
             models = result.stdout.strip().split("\n")[1:]  # Skip header

@@ -15,14 +15,17 @@ for key in list(sys.modules.keys()):
 sys.path = [p for p in sys.path if "/labs/lab" not in p]
 
 # Add this lab's path
-lab_path = str(
-    Path(__file__).parent.parent / "labs" / "lab08-vuln-scanner-ai" / "solution"
-)
+lab_path = str(Path(__file__).parent.parent / "labs" / "lab08-vuln-scanner-ai" / "solution")
 sys.path.insert(0, lab_path)
 
-from main import (RemediationGenerator, ScanResult, Vulnerability,
-                  VulnerabilityAnalyzer, VulnerabilityPrioritizer,
-                  VulnerabilityScanner)
+from main import (
+    RemediationGenerator,
+    ScanResult,
+    Vulnerability,
+    VulnerabilityAnalyzer,
+    VulnerabilityPrioritizer,
+    VulnerabilityScanner,
+)
 
 
 @pytest.fixture
@@ -155,9 +158,7 @@ class TestVulnerabilityPrioritizer:
     def test_prioritize_by_exploitability(self, sample_vulnerabilities):
         """Test exploitability-based prioritization."""
         prioritizer = VulnerabilityPrioritizer()
-        prioritized = prioritizer.prioritize(
-            sample_vulnerabilities, method="exploitability"
-        )
+        prioritized = prioritizer.prioritize(sample_vulnerabilities, method="exploitability")
 
         assert len(prioritized) == len(sample_vulnerabilities)
 
@@ -170,8 +171,7 @@ class TestVulnerabilityPrioritizer:
         # Higher CVSS should have higher score
         assert (
             scores[0] >= scores[1]
-            or sample_vulnerabilities[0].cvss_score
-            >= sample_vulnerabilities[1].cvss_score
+            or sample_vulnerabilities[0].cvss_score >= sample_vulnerabilities[1].cvss_score
         )
 
 

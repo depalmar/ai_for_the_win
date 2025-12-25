@@ -16,13 +16,10 @@ for key in list(sys.modules.keys()):
 sys.path = [p for p in sys.path if "/labs/lab" not in p]
 
 # Add this lab's path
-lab_path = str(
-    Path(__file__).parent.parent / "labs" / "lab05-threat-intel-agent" / "solution"
-)
+lab_path = str(Path(__file__).parent.parent / "labs" / "lab05-threat-intel-agent" / "solution")
 sys.path.insert(0, lab_path)
 
-from main import (IOCEnricher, MITREMapper, ReputationChecker,
-                  ThreatIntelAgent, ThreatReport)
+from main import IOCEnricher, MITREMapper, ReputationChecker, ThreatIntelAgent, ThreatReport
 
 
 @pytest.fixture
@@ -139,9 +136,9 @@ class TestReputationChecker:
         benign = checker.check_ip("8.8.8.8")
 
         # Should have different classifications
-        assert malicious.get("classification") != benign.get(
-            "classification"
-        ) or malicious.get("score", 0) != benign.get("score", 0)
+        assert malicious.get("classification") != benign.get("classification") or malicious.get(
+            "score", 0
+        ) != benign.get("score", 0)
 
 
 class TestMITREMapper:

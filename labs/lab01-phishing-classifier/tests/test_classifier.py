@@ -17,9 +17,17 @@ sys.path.insert(0, str(Path(__file__).parent.parent / "starter"))
 
 # Import functions to test (will fail until implemented)
 try:
-    from main import (calculate_caps_ratio, count_urls, extract_features,
-                      has_urgency, load_data, predict_phishing,
-                      preprocess_text, requests_sensitive_info, train_model)
+    from main import (
+        calculate_caps_ratio,
+        count_urls,
+        extract_features,
+        has_urgency,
+        load_data,
+        predict_phishing,
+        preprocess_text,
+        requests_sensitive_info,
+        train_model,
+    )
 
     IMPORTS_AVAILABLE = True
 except ImportError as e:
@@ -75,9 +83,9 @@ class TestDataLoading:
         """Test that load_data returns a pandas DataFrame."""
         # Create temp CSV
         csv_path = tmp_path / "test_emails.csv"
-        pd.DataFrame(
-            {"text": ["test email 1", "test email 2"], "label": [0, 1]}
-        ).to_csv(csv_path, index=False)
+        pd.DataFrame({"text": ["test email 1", "test email 2"], "label": [0, 1]}).to_csv(
+            csv_path, index=False
+        )
 
         result = load_data(str(csv_path))
 
@@ -89,9 +97,9 @@ class TestDataLoading:
     def test_load_data_handles_missing_values(self, tmp_path):
         """Test that missing values are handled."""
         csv_path = tmp_path / "test_emails.csv"
-        pd.DataFrame(
-            {"text": ["test email", None, "another email"], "label": [0, 1, 0]}
-        ).to_csv(csv_path, index=False)
+        pd.DataFrame({"text": ["test email", None, "another email"], "label": [0, 1, 0]}).to_csv(
+            csv_path, index=False
+        )
 
         result = load_data(str(csv_path))
 

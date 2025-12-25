@@ -17,14 +17,17 @@ for key in list(sys.modules.keys()):
 sys.path = [p for p in sys.path if "/labs/lab" not in p]
 
 # Add this lab's path
-lab_path = str(
-    Path(__file__).parent.parent / "labs" / "lab01-phishing-classifier" / "solution"
-)
+lab_path = str(Path(__file__).parent.parent / "labs" / "lab01-phishing-classifier" / "solution")
 sys.path.insert(0, lab_path)
 
-from main import (build_feature_matrix, evaluate_model,
-                  extract_custom_features, load_data, preprocess_text,
-                  train_classifier)
+from main import (
+    build_feature_matrix,
+    evaluate_model,
+    extract_custom_features,
+    load_data,
+    preprocess_text,
+    train_classifier,
+)
 
 
 @pytest.fixture
@@ -70,9 +73,7 @@ class TestDataLoading:
 
     def test_load_data_handles_missing_values(self, tmp_path):
         """Test that missing values are handled."""
-        data = pd.DataFrame(
-            {"text": ["Valid email", None, "Another email"], "label": [0, 1, None]}
-        )
+        data = pd.DataFrame({"text": ["Valid email", None, "Another email"], "label": [0, 1, None]})
         filepath = tmp_path / "test_missing.csv"
         data.to_csv(filepath, index=False)
 

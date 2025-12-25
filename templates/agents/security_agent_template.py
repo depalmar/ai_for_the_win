@@ -142,9 +142,7 @@ class SecurityAgent:
         if not api_key:
             raise ValueError("ANTHROPIC_API_KEY not set")
 
-        self.llm = ChatAnthropic(
-            model=self.config.model, temperature=self.config.temperature
-        )
+        self.llm = ChatAnthropic(model=self.config.model, temperature=self.config.temperature)
 
         prompt = PromptTemplate.from_template(SYSTEM_PROMPT)
 

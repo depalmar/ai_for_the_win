@@ -495,9 +495,7 @@ def main():
 
     except Exception as e:
         console.print(f"[red]Error: {e}[/red]")
-        console.print(
-            "\n[yellow]Hint: Make sure to complete the TODO sections![/yellow]"
-        )
+        console.print("\n[yellow]Hint: Make sure to complete the TODO sections![/yellow]")
 
 
 if __name__ == "__main__":

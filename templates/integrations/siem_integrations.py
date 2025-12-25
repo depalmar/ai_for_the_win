@@ -120,13 +120,9 @@ class ElasticClient:
 
         return []
 
-    def search_security_alerts(
-        self, severity: str = None, hours: int = 24
-    ) -> List[Dict]:
+    def search_security_alerts(self, severity: str = None, hours: int = 24) -> List[Dict]:
         """Search for security alerts."""
-        query = {
-            "bool": {"must": [{"range": {"@timestamp": {"gte": f"now-{hours}h"}}}]}
-        }
+        query = {"bool": {"must": [{"range": {"@timestamp": {"gte": f"now-{hours}h"}}}]}}
 
         if severity:
             query["bool"]["must"].append({"match": {"event.severity": severity}})

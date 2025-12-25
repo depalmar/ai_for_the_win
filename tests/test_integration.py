@@ -94,9 +94,7 @@ class TestLab04LogAnalysis:
 
         result = response.content[0].text.lower()
         # Should identify brute force or failed login pattern
-        assert any(
-            term in result for term in ["brute", "failed", "attack", "login", "locked"]
-        )
+        assert any(term in result for term in ["brute", "failed", "attack", "login", "locked"])
 
 
 class TestLab05ThreatIntel:
@@ -194,9 +192,7 @@ class TestToolUse:
                 "description": "Get weather for a location",
                 "input_schema": {
                     "type": "object",
-                    "properties": {
-                        "location": {"type": "string", "description": "City name"}
-                    },
+                    "properties": {"location": {"type": "string", "description": "City name"}},
                     "required": ["location"],
                 },
             }

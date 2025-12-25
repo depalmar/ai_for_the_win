@@ -22,8 +22,8 @@ from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics import (accuracy_score, classification_report,
-                             confusion_matrix)
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+
 # ML imports
 from sklearn.model_selection import train_test_split
 
@@ -423,9 +423,7 @@ def main():
 
     # Create feature matrices
     X_train, vectorizer = create_feature_matrix(X_train_df, features_train, fit=True)
-    X_test, _ = create_feature_matrix(
-        X_test_df, features_test, vectorizer=vectorizer, fit=False
-    )
+    X_test, _ = create_feature_matrix(X_test_df, features_test, vectorizer=vectorizer, fit=False)
 
     if X_train is None:
         print("ERROR: create_feature_matrix() not implemented!")
@@ -459,9 +457,7 @@ def main():
         pred, conf = predict_phishing(model, vectorizer, email)
         status = "✓" if pred == expected[i] else "✗"
         print(f"\n{status} Email: {email[:60]}...")
-        print(
-            f"   Prediction: {'PHISHING' if pred else 'LEGITIMATE'} (confidence: {conf:.2%})"
-        )
+        print(f"   Prediction: {'PHISHING' if pred else 'LEGITIMATE'} (confidence: {conf:.2%})")
 
     print("\n" + "=" * 60)
     print("Lab Complete!")

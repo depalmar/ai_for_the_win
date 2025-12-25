@@ -19,8 +19,14 @@ sys.path = [p for p in sys.path if "/labs/lab" not in p]
 lab_path = str(Path(__file__).parent.parent / "labs" / "lab10-ir-copilot" / "solution")
 sys.path.insert(0, lab_path)
 
-from main import (CopilotStateManager, CopilotTools, IncidentDocumenter,
-                  IRCopilot, IRCopilotState, PlaybookExecutor)
+from main import (
+    CopilotStateManager,
+    CopilotTools,
+    IncidentDocumenter,
+    IRCopilot,
+    IRCopilotState,
+    PlaybookExecutor,
+)
 
 
 @pytest.fixture
@@ -302,9 +308,7 @@ class TestIncidentDocumenter:
     def test_generate_timeline(self, state_manager):
         """Test timeline generation."""
         state_manager.add_to_timeline({"event": "Alert received", "type": "alert"})
-        state_manager.add_to_timeline(
-            {"event": "Investigation started", "type": "investigation"}
-        )
+        state_manager.add_to_timeline({"event": "Investigation started", "type": "investigation"})
 
         documenter = IncidentDocumenter(llm=None, state_manager=state_manager)
         timeline = documenter.generate_timeline()
@@ -315,9 +319,7 @@ class TestIncidentDocumenter:
 
     def test_generate_technical_report(self, state_manager):
         """Test technical report generation."""
-        state_manager.set_incident(
-            {"id": "INC-001", "title": "Test", "severity": "HIGH"}
-        )
+        state_manager.set_incident({"id": "INC-001", "title": "Test", "severity": "HIGH"})
 
         documenter = IncidentDocumenter(llm=None, state_manager=state_manager)
         report = documenter.generate_technical_report()

@@ -103,9 +103,7 @@ class SampleAnalyzer:
             return False
         return True
 
-    def extract_hex_patterns(
-        self, filepath: str, pattern_length: int = 16
-    ) -> List[str]:
+    def extract_hex_patterns(self, filepath: str, pattern_length: int = 16) -> List[str]:
         """Extract interesting hex patterns from binary."""
         with open(filepath, "rb") as f:
             content = f.read()
@@ -204,9 +202,7 @@ class YARAGenerator:
     ) -> str:
         """Generate YARA rule from sample features."""
         if not self.llm:
-            return self._generate_template_rule(
-                sample_info, strings, malware_family, rule_name
-            )
+            return self._generate_template_rule(sample_info, strings, malware_family, rule_name)
 
         # Prepare context
         rule_name = rule_name or f"Malware_{sample_info.get('sha256', 'Unknown')[:8]}"

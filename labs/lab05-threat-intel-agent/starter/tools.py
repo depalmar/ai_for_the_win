@@ -50,9 +50,7 @@ class CVELookupInput(BaseModel):
 class MITRELookupInput(BaseModel):
     """Input schema for MITRE ATT&CK lookup."""
 
-    technique_id: str = Field(
-        description="MITRE ATT&CK technique ID (e.g., 'T1059.001')"
-    )
+    technique_id: str = Field(description="MITRE ATT&CK technique ID (e.g., 'T1059.001')")
 
 
 # =============================================================================
@@ -398,7 +396,5 @@ if __name__ == "__main__":
     print(json.dumps(result, indent=2))
 
     print("\nTesting Hash Check:")
-    result = check_hash(
-        "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2"
-    )
+    result = check_hash("a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2")
     print(json.dumps(result, indent=2))

@@ -283,9 +283,7 @@ def demo_threat_intel(ioc_value: str, ioc_type: str) -> str:
     elif ioc_type == "Domain":
         if any(tld in ioc_value for tld in [".tk", ".ml", ".ga", ".cf"]):
             intel["reputation"] = "Suspicious (free TLD)"
-        elif any(
-            brand in ioc_value.lower() for brand in ["google", "microsoft", "apple"]
-        ):
+        elif any(brand in ioc_value.lower() for brand in ["google", "microsoft", "apple"]):
             intel["reputation"] = "Potential typosquatting"
 
     elif ioc_type == "Hash":
@@ -375,9 +373,7 @@ The actual Lab 06 implementation uses:
 def create_demo():
     """Create the Gradio demo interface."""
 
-    with gr.Blocks(
-        title="AI for the Win - Security Labs", theme=gr.themes.Soft()
-    ) as demo:
+    with gr.Blocks(title="AI for the Win - Security Labs", theme=gr.themes.Soft()) as demo:
 
         gr.Markdown(
             """
@@ -494,9 +490,7 @@ def create_demo():
                     with gr.Column():
                         log_output = gr.Markdown(label="Results")
 
-                parse_btn.click(
-                    demo_log_analysis, inputs=[log_input], outputs=log_output
-                )
+                parse_btn.click(demo_log_analysis, inputs=[log_input], outputs=log_output)
 
                 gr.Examples(
                     examples=[

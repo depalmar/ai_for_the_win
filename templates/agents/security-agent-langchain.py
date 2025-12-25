@@ -69,15 +69,9 @@ class ThreatAssessment(BaseModel):
     threat_level: str = Field(description="Critical, High, Medium, Low, or Info")
     confidence: float = Field(ge=0, le=1, description="Confidence score 0-1")
     summary: str = Field(description="Brief summary of findings")
-    mitre_techniques: list[str] = Field(
-        default_factory=list, description="MITRE ATT&CK IDs"
-    )
-    recommendations: list[str] = Field(
-        default_factory=list, description="Recommended actions"
-    )
-    iocs: IOCExtraction = Field(
-        default_factory=IOCExtraction, description="Extracted IOCs"
-    )
+    mitre_techniques: list[str] = Field(default_factory=list, description="MITRE ATT&CK IDs")
+    recommendations: list[str] = Field(default_factory=list, description="Recommended actions")
+    iocs: IOCExtraction = Field(default_factory=IOCExtraction, description="Extracted IOCs")
 
 
 # ============================================================================
@@ -146,9 +140,7 @@ def analyze_hash(hash_value: str) -> str:
     length = len(hash_value)
 
     if not re.match(r"^[a-f0-9]+$", hash_value):
-        return json.dumps(
-            {"error": "Invalid hash: contains non-hexadecimal characters"}
-        )
+        return json.dumps({"error": "Invalid hash: contains non-hexadecimal characters"})
 
     hash_types = {32: "MD5", 40: "SHA1", 64: "SHA256", 128: "SHA512"}
 
@@ -266,15 +258,11 @@ def search_mitre_attack(query: str) -> str:
 # ============================================================================
 
 
-def create_security_agent(
-    verbose: bool = True, memory_window: int = 10
-) -> AgentExecutor:
+def create_security_agent(verbose: bool = True, memory_window: int = 10) -> AgentExecutor:
     """Create a security analysis agent with tools and memory."""
 
     # Initialize LLM
-    llm = ChatAnthropic(
-        model=MODEL_NAME, max_tokens=MAX_TOKENS, temperature=TEMPERATURE
-    )
+    llm = ChatAnthropic(model=MODEL_NAME, max_tokens=MAX_TOKENS, temperature=TEMPERATURE)
 
     # Define tools
     tools = [

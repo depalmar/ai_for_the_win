@@ -178,9 +178,7 @@ class VulnAnalyzer:
         return {
             "exploitability_score": score,
             "factors": factors,
-            "recommendation": (
-                "Prioritize remediation" if score > 0.5 else "Standard remediation"
-            ),
+            "recommendation": ("Prioritize remediation" if score > 0.5 else "Standard remediation"),
         }
 
 

@@ -57,9 +57,7 @@ class SampleAnalyzer:
         # YOUR CODE HERE
         pass
 
-    def extract_hex_patterns(
-        self, filepath: str, pattern_length: int = 16
-    ) -> List[str]:
+    def extract_hex_patterns(self, filepath: str, pattern_length: int = 16) -> List[str]:
         """
         Extract interesting hex patterns from binary.
 

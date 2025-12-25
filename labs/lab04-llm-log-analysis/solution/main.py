@@ -155,15 +155,11 @@ def setup_llm(provider: str = "anthropic"):
         if not api_key:
             raise ValueError("ANTHROPIC_API_KEY not set. Add to .env file.")
 
-        llm = ChatAnthropic(
-            model="claude-sonnet-4-20250514", temperature=0, max_tokens=4096
-        )
+        llm = ChatAnthropic(model="claude-sonnet-4-20250514", temperature=0, max_tokens=4096)
 
     elif provider == "openai":
         if not OPENAI_AVAILABLE:
-            raise ImportError(
-                "langchain-openai not installed. Run: pip install langchain-openai"
-            )
+            raise ImportError("langchain-openai not installed. Run: pip install langchain-openai")
 
         api_key = os.getenv("OPENAI_API_KEY")
         if not api_key:
@@ -181,9 +177,7 @@ def setup_llm(provider: str = "anthropic"):
         if not api_key:
             raise ValueError("GOOGLE_API_KEY not set. Add to .env file.")
 
-        llm = ChatGoogleGenerativeAI(
-            model="gemini-1.5-pro", temperature=0, max_output_tokens=4096
-        )
+        llm = ChatGoogleGenerativeAI(model="gemini-1.5-pro", temperature=0, max_output_tokens=4096)
 
     elif provider == "ollama":
         if not OLLAMA_AVAILABLE:
@@ -697,9 +691,7 @@ def analyze_security_incident(log_data: str, llm=None) -> str:
     # Step 3: Analyze threats
     console.print("[yellow]Step 3:[/yellow] Analyzing for threats...")
     analysis = analyze_logs_for_threats(llm, parsed_logs)
-    console.print(
-        f"  [green]Found {len(analysis.get('threats_detected', []))} threats[/green]"
-    )
+    console.print(f"  [green]Found {len(analysis.get('threats_detected', []))} threats[/green]")
     console.print(f"  [green]Severity: {analysis.get('severity', 'N/A')}/10[/green]")
 
     # Step 4: Extract IOCs
@@ -716,8 +708,7 @@ def analyze_security_incident(log_data: str, llm=None) -> str:
             analysis["iocs"][key] = list(set(analysis["iocs"].get(key, []) + value))
 
     ioc_count = sum(
-        len(v) if isinstance(v, list) else sum(len(x) for x in v.values())
-        for v in iocs.values()
+        len(v) if isinstance(v, list) else sum(len(x) for x in v.values()) for v in iocs.values()
     )
     console.print(f"  [green]Extracted {ioc_count} IOCs[/green]")
 

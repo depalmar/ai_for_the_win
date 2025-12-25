@@ -336,9 +336,7 @@ class RansomwareBehaviorDetector:
         ransom_note_events = self.detect_ransom_note(events)
         if ransom_note_events:
             results["ransom_note"] = True
-            results["indicators"].append(
-                f"Ransom note(s) created: {len(ransom_note_events)}"
-            )
+            results["indicators"].append(f"Ransom note(s) created: {len(ransom_note_events)}")
 
         # Count affected files (those labeled as ransomware activity)
         affected = [e for e in events if e.label.startswith("ransomware")]
@@ -891,9 +889,7 @@ class RansomwareDetectionPipeline:
         if detection_result["is_ransomware"]:
             # Build incident context
             context = IncidentContext(
-                affected_hosts=[
-                    "WORKSTATION-001"
-                ],  # In production, extract from events
+                affected_hosts=["WORKSTATION-001"],  # In production, extract from events
                 affected_files=detection_result["affected_files"],
                 ransomware_family="unknown",  # Would be populated from note analysis
                 encryption_progress=50.0,  # Would be calculated from file counts
@@ -926,9 +922,7 @@ def main():
     print("=" * 60)
 
     # Load sample events from data file
-    data_path = os.path.join(
-        os.path.dirname(__file__), "..", "data", "file_events.json"
-    )
+    data_path = os.path.join(os.path.dirname(__file__), "..", "data", "file_events.json")
 
     if os.path.exists(data_path):
         with open(data_path) as f:
@@ -976,10 +970,7 @@ def main():
         print("\n[Response Playbook]")
         for action in result["response"]:
             auto = "[AUTO]" if action.get("automated") else "[MANUAL]"
-            print(
-                f"  {action['priority']}. {auto} {action['action']}: "
-                f"{action['description']}"
-            )
+            print(f"  {action['priority']}. {auto} {action['action']}: " f"{action['description']}")
 
     # Analyze ransom note if available
     note_path = os.path.join(

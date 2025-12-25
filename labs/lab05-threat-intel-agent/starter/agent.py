@@ -426,9 +426,7 @@ if __name__ == "__main__":
 
     console = Console()
 
-    console.print(
-        Panel.fit("[bold]Lab 05: Threat Intelligence Agent[/bold]", border_style="blue")
-    )
+    console.print(Panel.fit("[bold]Lab 05: Threat Intelligence Agent[/bold]", border_style="blue"))
 
     # Initialize agent
     console.print("\n[yellow]Initializing agent...[/yellow]")
@@ -446,15 +444,11 @@ if __name__ == "__main__":
         iocs = {
             "ips": ["185.143.223.47", "91.234.99.100"],
             "domains": ["evil-c2.com"],
-            "hashes": [
-                "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2"
-            ],
+            "hashes": ["a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2"],
         }
         result = investigate_incident(agent, iocs)
         console.print(Markdown(result))
 
     except Exception as e:
         console.print(f"[red]Error: {e}[/red]")
-        console.print(
-            "\n[yellow]Hint: Complete the TODO sections to make the agent work![/yellow]"
-        )
+        console.print("\n[yellow]Hint: Complete the TODO sections to make the agent work![/yellow]")

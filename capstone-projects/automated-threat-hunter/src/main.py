@@ -64,8 +64,7 @@ def main():
 
     console.print(
         Panel.fit(
-            "[bold red]Automated Threat Hunter[/bold red]\n"
-            "ML + LLM Threat Detection Pipeline",
+            "[bold red]Automated Threat Hunter[/bold red]\n" "ML + LLM Threat Detection Pipeline",
             border_style="red",
         )
     )

@@ -541,9 +541,7 @@ Begin!"""
 class ThreatIntelAgent:
     """AI agent for threat intelligence gathering and analysis."""
 
-    def __init__(
-        self, llm=None, provider: str = "auto", tools: List = None, verbose: bool = True
-    ):
+    def __init__(self, llm=None, provider: str = "auto", tools: List = None, verbose: bool = True):
         """
         Initialize the threat intelligence agent.
 
@@ -591,9 +589,7 @@ class ThreatIntelAgent:
                 if prov == "anthropic":
                     api_key = os.getenv("ANTHROPIC_API_KEY")
                     if api_key and LANGCHAIN_AVAILABLE:
-                        return ChatAnthropic(
-                            model="claude-sonnet-4-20250514", temperature=0
-                        )
+                        return ChatAnthropic(model="claude-sonnet-4-20250514", temperature=0)
 
                 elif prov == "openai":
                     api_key = os.getenv("OPENAI_API_KEY")
@@ -603,9 +599,7 @@ class ThreatIntelAgent:
                 elif prov == "gemini":
                     api_key = os.getenv("GOOGLE_API_KEY")
                     if api_key and GEMINI_AVAILABLE:
-                        return ChatGoogleGenerativeAI(
-                            model="gemini-1.5-pro", temperature=0
-                        )
+                        return ChatGoogleGenerativeAI(model="gemini-1.5-pro", temperature=0)
 
             except Exception as e:
                 if self.verbose:
@@ -798,9 +792,7 @@ def main():
         iocs = {
             "ips": ["185.143.223.47", "91.234.99.100"],
             "domains": ["evil-c2.com"],
-            "hashes": [
-                "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2"
-            ],
+            "hashes": ["a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2"],
         }
         result = investigate_incident(agent, iocs)
         console.print("\n[green]Result:[/green]")

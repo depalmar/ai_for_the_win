@@ -67,9 +67,7 @@ class VirusTotalClient:
     async def analyze_hash(self, file_hash: str) -> Dict[str, Any]:
         """Analyze a file by hash (MD5, SHA1, or SHA256)."""
         async with httpx.AsyncClient() as client:
-            response = await client.get(
-                f"{self.BASE_URL}/files/{file_hash}", headers=self.headers
-            )
+            response = await client.get(f"{self.BASE_URL}/files/{file_hash}", headers=self.headers)
 
             if response.status_code == 200:
                 data = response.json()["data"]
@@ -108,9 +106,7 @@ class VirusTotalClient:
         url_id = base64.urlsafe_b64encode(url.encode()).decode().rstrip("=")
 
         async with httpx.AsyncClient() as client:
-            response = await client.get(
-                f"{self.BASE_URL}/urls/{url_id}", headers=self.headers
-            )
+            response = await client.get(f"{self.BASE_URL}/urls/{url_id}", headers=self.headers)
 
             if response.status_code == 200:
                 data = response.json()["data"]
@@ -134,9 +130,7 @@ class VirusTotalClient:
     async def analyze_ip(self, ip: str) -> Dict[str, Any]:
         """Analyze an IP address."""
         async with httpx.AsyncClient() as client:
-            response = await client.get(
-                f"{self.BASE_URL}/ip_addresses/{ip}", headers=self.headers
-            )
+            response = await client.get(f"{self.BASE_URL}/ip_addresses/{ip}", headers=self.headers)
 
             if response.status_code == 200:
                 data = response.json()["data"]
@@ -162,9 +156,7 @@ class VirusTotalClient:
     async def analyze_domain(self, domain: str) -> Dict[str, Any]:
         """Analyze a domain."""
         async with httpx.AsyncClient() as client:
-            response = await client.get(
-                f"{self.BASE_URL}/domains/{domain}", headers=self.headers
-            )
+            response = await client.get(f"{self.BASE_URL}/domains/{domain}", headers=self.headers)
 
             if response.status_code == 200:
                 data = response.json()["data"]
@@ -351,9 +343,7 @@ class MISPClient:
     async def get_event(self, event_id: str) -> Dict[str, Any]:
         """Get details of a MISP event."""
         async with httpx.AsyncClient(verify=False) as client:
-            response = await client.get(
-                f"{self.url}/events/view/{event_id}", headers=self.headers
-            )
+            response = await client.get(f"{self.url}/events/view/{event_id}", headers=self.headers)
 
             if response.status_code == 200:
                 event = response.json().get("Event", {})
@@ -404,9 +394,7 @@ SECURITY_TOOLS = [
         "description": "Analyze an IP address using VirusTotal for reputation and threat data",
         "inputSchema": {
             "type": "object",
-            "properties": {
-                "ip": {"type": "string", "description": "IP address to analyze"}
-            },
+            "properties": {"ip": {"type": "string", "description": "IP address to analyze"}},
             "required": ["ip"],
         },
     },
@@ -415,9 +403,7 @@ SECURITY_TOOLS = [
         "description": "Analyze a domain using VirusTotal for reputation and threat data",
         "inputSchema": {
             "type": "object",
-            "properties": {
-                "domain": {"type": "string", "description": "Domain to analyze"}
-            },
+            "properties": {"domain": {"type": "string", "description": "Domain to analyze"}},
             "required": ["domain"],
         },
     },
@@ -426,9 +412,7 @@ SECURITY_TOOLS = [
         "description": "Look up an IP address in Shodan for open ports, services, and vulnerabilities",
         "inputSchema": {
             "type": "object",
-            "properties": {
-                "ip": {"type": "string", "description": "IP address to look up"}
-            },
+            "properties": {"ip": {"type": "string", "description": "IP address to look up"}},
             "required": ["ip"],
         },
     },
@@ -513,9 +497,7 @@ async def handle_tool_call(
 
         elif tool_name == "abuseipdb_check":
             client = AbuseIPDBClient(config.abuseipdb_api_key)
-            result = await client.check_ip(
-                arguments["ip"], arguments.get("max_age_days", 90)
-            )
+            result = await client.check_ip(arguments["ip"], arguments.get("max_age_days", 90))
 
         elif tool_name == "misp_search":
             client = MISPClient(config.misp_url, config.misp_api_key)

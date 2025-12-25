@@ -16,13 +16,10 @@ for key in list(sys.modules.keys()):
 sys.path = [p for p in sys.path if "/labs/lab" not in p]
 
 # Add this lab's path
-lab_path = str(
-    Path(__file__).parent.parent / "labs" / "lab04-llm-log-analysis" / "solution"
-)
+lab_path = str(Path(__file__).parent.parent / "labs" / "lab04-llm-log-analysis" / "solution")
 sys.path.insert(0, lab_path)
 
-from main import (LogAnalyzer, LogParser, ReportGenerator,
-                  SecurityEventClassifier, ThreatDetector)
+from main import LogAnalyzer, LogParser, ReportGenerator, SecurityEventClassifier, ThreatDetector
 
 
 @pytest.fixture
@@ -114,10 +111,7 @@ class TestSecurityEventClassifier:
         result = classifier.classify(sample_log_entries[0])
 
         assert result is not None
-        assert (
-            result["category"] == "authentication"
-            or "auth" in result.get("type", "").lower()
-        )
+        assert result["category"] == "authentication" or "auth" in result.get("type", "").lower()
 
     def test_classify_authentication_failure(self, sample_log_entries):
         """Test classification of failed authentication."""
@@ -152,9 +146,7 @@ class TestThreatDetector:
         result = detector.detect(failed_logins)
 
         assert result is not None
-        assert len(result.get("threats", [])) > 0 or result.get(
-            "brute_force_detected", False
-        )
+        assert len(result.get("threats", [])) > 0 or result.get("brute_force_detected", False)
 
     def test_detect_sql_injection(self, sample_attack_logs):
         """Test SQL injection detection."""
@@ -217,9 +209,7 @@ class TestLogAnalyzer:
         # Analysis should reference MITRE techniques
         result_str = str(result)
         assert (
-            "T1" in result_str
-            or "mitre" in result_str.lower()
-            or "technique" in result_str.lower()
+            "T1" in result_str or "mitre" in result_str.lower() or "technique" in result_str.lower()
         )
 
 

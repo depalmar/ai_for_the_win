@@ -18,8 +18,13 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from sklearn.ensemble import IsolationForest
-from sklearn.metrics import (f1_score, precision_recall_curve, precision_score,
-                             recall_score, roc_auc_score)
+from sklearn.metrics import (
+    f1_score,
+    precision_recall_curve,
+    precision_score,
+    recall_score,
+    roc_auc_score,
+)
 from sklearn.neighbors import LocalOutlierFactor
 from sklearn.preprocessing import RobustScaler, StandardScaler
 from sklearn.svm import OneClassSVM
@@ -110,9 +115,7 @@ def prepare_features(
 # =============================================================================
 
 
-def statistical_baseline(
-    df: pd.DataFrame, feature: str, n_std: float = 3.0
-) -> pd.Series:
+def statistical_baseline(df: pd.DataFrame, feature: str, n_std: float = 3.0) -> pd.Series:
     """
     Simple statistical anomaly detection.
 
@@ -174,9 +177,7 @@ def train_isolation_forest(
     pass
 
 
-def train_local_outlier_factor(
-    X: np.ndarray, contamination: float = 0.01
-) -> np.ndarray:
+def train_local_outlier_factor(X: np.ndarray, contamination: float = 0.01) -> np.ndarray:
     """
     Train Local Outlier Factor.
 
@@ -194,9 +195,7 @@ def train_local_outlier_factor(
 # =============================================================================
 
 
-def train_autoencoder(
-    X: np.ndarray, encoding_dim: int = 8
-) -> Tuple[object, np.ndarray]:
+def train_autoencoder(X: np.ndarray, encoding_dim: int = 8) -> Tuple[object, np.ndarray]:
     """
     Train autoencoder for anomaly detection.
 
@@ -223,9 +222,7 @@ def train_autoencoder(
 # =============================================================================
 
 
-def evaluate_detector(
-    y_true: np.ndarray, scores: np.ndarray, threshold: float = None
-) -> dict:
+def evaluate_detector(y_true: np.ndarray, scores: np.ndarray, threshold: float = None) -> dict:
     """
     Evaluate anomaly detector performance.
 
@@ -260,9 +257,7 @@ def find_optimal_threshold(y_true: np.ndarray, scores: np.ndarray) -> float:
     pass
 
 
-def plot_roc_curve(
-    y_true: np.ndarray, scores: np.ndarray, title: str = "ROC Curve"
-) -> None:
+def plot_roc_curve(y_true: np.ndarray, scores: np.ndarray, title: str = "ROC Curve") -> None:
     """
     Plot ROC curve.
 
@@ -392,8 +387,7 @@ def create_sample_data(filepath: Path):
         if attack_type == "c2":  # C2 beaconing
             data.append(
                 {
-                    "timestamp": base_time
-                    + pd.Timedelta(seconds=(n_samples - n_attacks + i) * 5),
+                    "timestamp": base_time + pd.Timedelta(seconds=(n_samples - n_attacks + i) * 5),
                     "src_ip": "192.168.1.100",
                     "dst_ip": "185.143.223.47",
                     "src_port": np.random.randint(40000, 50000),
@@ -410,8 +404,7 @@ def create_sample_data(filepath: Path):
         elif attack_type == "exfil":  # Data exfiltration
             data.append(
                 {
-                    "timestamp": base_time
-                    + pd.Timedelta(seconds=(n_samples - n_attacks + i) * 5),
+                    "timestamp": base_time + pd.Timedelta(seconds=(n_samples - n_attacks + i) * 5),
                     "src_ip": "192.168.1.50",
                     "dst_ip": "91.234.99.100",
                     "src_port": np.random.randint(40000, 50000),
@@ -428,8 +421,7 @@ def create_sample_data(filepath: Path):
         else:  # Port scan
             data.append(
                 {
-                    "timestamp": base_time
-                    + pd.Timedelta(seconds=(n_samples - n_attacks + i) * 5),
+                    "timestamp": base_time + pd.Timedelta(seconds=(n_samples - n_attacks + i) * 5),
                     "src_ip": "185.143.223.47",
                     "dst_ip": "192.168.1.1",
                     "src_port": np.random.randint(40000, 50000),

@@ -75,9 +75,7 @@ def validate_domain(domain: str) -> bool:
     return bool(re.match(pattern, domain.strip()))
 
 
-async def make_vt_request(
-    endpoint: str, method: str = "GET", data: dict = None
-) -> dict:
+async def make_vt_request(endpoint: str, method: str = "GET", data: dict = None) -> dict:
     """Make authenticated request to VirusTotal API."""
     if not VT_API_KEY:
         return {"error": "VT_API_KEY environment variable not set"}
@@ -89,9 +87,7 @@ async def make_vt_request(
             if method == "GET":
                 response = await client.get(f"{VT_BASE_URL}{endpoint}", headers=headers)
             elif method == "POST":
-                response = await client.post(
-                    f"{VT_BASE_URL}{endpoint}", headers=headers, data=data
-                )
+                response = await client.post(f"{VT_BASE_URL}{endpoint}", headers=headers, data=data)
             else:
                 return {"error": f"Unsupported method: {method}"}
 

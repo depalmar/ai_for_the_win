@@ -118,9 +118,7 @@ def chunk_security_documents(
 # =============================================================================
 
 
-def create_vector_store(
-    chunks: List[Document], persist_directory: str = None
-) -> object:
+def create_vector_store(chunks: List[Document], persist_directory: str = None) -> object:
     """
     Create vector store with embeddings.
 
@@ -220,9 +218,7 @@ class SecurityRAG:
         # YOUR CODE HERE
         pass
 
-    def query_with_filters(
-        self, question: str, doc_type: str = None, severity: str = None
-    ) -> dict:
+    def query_with_filters(self, question: str, doc_type: str = None, severity: str = None) -> dict:
         """
         Query with metadata filters.
 
@@ -269,9 +265,7 @@ def evaluate_rag_system(rag: SecurityRAG, test_cases: List[dict]) -> dict:
 
 def main():
     """Main execution flow."""
-    console.print(
-        Panel.fit("[bold]Lab 06: Security RAG System[/bold]", border_style="blue")
-    )
+    console.print(Panel.fit("[bold]Lab 06: Security RAG System[/bold]", border_style="blue"))
 
     if not LANGCHAIN_AVAILABLE:
         console.print("[red]LangChain not available. Install required packages.[/red]")
@@ -309,9 +303,7 @@ def main():
     vector_store = create_vector_store(chunks)
 
     if vector_store is None:
-        console.print(
-            "[red]Vector store not created. Complete the TODO sections![/red]"
-        )
+        console.print("[red]Vector store not created. Complete the TODO sections![/red]")
         return
 
     # Step 4: Create retriever

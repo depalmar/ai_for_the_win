@@ -30,10 +30,7 @@ class ConfusionMatrix:
     @property
     def total(self) -> int:
         return (
-            self.true_positives
-            + self.true_negatives
-            + self.false_positives
-            + self.false_negatives
+            self.true_positives + self.true_negatives + self.false_positives + self.false_negatives
         )
 
     @property
@@ -164,9 +161,9 @@ class StatisticalAnalyzer:
     @staticmethod
     def iqr(values: List[float]) -> float:
         """Calculate interquartile range."""
-        return StatisticalAnalyzer.percentile(
-            values, 75
-        ) - StatisticalAnalyzer.percentile(values, 25)
+        return StatisticalAnalyzer.percentile(values, 75) - StatisticalAnalyzer.percentile(
+            values, 25
+        )
 
     # ==========================================================================
     # Entropy and Information Theory
@@ -201,9 +198,7 @@ class StatisticalAnalyzer:
     # ==========================================================================
 
     @staticmethod
-    def calculate_confusion_matrix(
-        y_true: List[int], y_pred: List[int]
-    ) -> ConfusionMatrix:
+    def calculate_confusion_matrix(y_true: List[int], y_pred: List[int]) -> ConfusionMatrix:
         """Calculate confusion matrix from predictions."""
         tp = sum(1 for t, p in zip(y_true, y_pred) if t == 1 and p == 1)
         tn = sum(1 for t, p in zip(y_true, y_pred) if t == 0 and p == 0)
@@ -330,9 +325,7 @@ class StatisticalAnalyzer:
         lower_bound = q1 - multiplier * iqr
         upper_bound = q3 + multiplier * iqr
 
-        outliers = [
-            (i, v) for i, v in enumerate(values) if v < lower_bound or v > upper_bound
-        ]
+        outliers = [(i, v) for i, v in enumerate(values) if v < lower_bound or v > upper_bound]
         return outliers
 
     @staticmethod
@@ -391,9 +384,7 @@ class StatisticalAnalyzer:
     # ==========================================================================
 
     @staticmethod
-    def chi_squared_test(
-        observed: List[int], expected: List[float]
-    ) -> Tuple[float, float]:
+    def chi_squared_test(observed: List[int], expected: List[float]) -> Tuple[float, float]:
         """
         Perform chi-squared test.
         Returns (chi_squared_statistic, p_value_approximation).
@@ -413,9 +404,7 @@ class StatisticalAnalyzer:
         return chi_sq, p_value
 
     @staticmethod
-    def two_sample_t_test(
-        sample1: List[float], sample2: List[float]
-    ) -> Tuple[float, str]:
+    def two_sample_t_test(sample1: List[float], sample2: List[float]) -> Tuple[float, str]:
         """
         Perform two-sample t-test.
         Returns (t_statistic, significance_interpretation).
@@ -520,11 +509,7 @@ class SecurityMetrics:
             "interpretation": (
                 "Critical"
                 if fatigue_score > 0.7
-                else (
-                    "High"
-                    if fatigue_score > 0.5
-                    else "Medium" if fatigue_score > 0.3 else "Low"
-                )
+                else ("High" if fatigue_score > 0.5 else "Medium" if fatigue_score > 0.3 else "Low")
             ),
         }
 
@@ -550,11 +535,7 @@ class SecurityMetrics:
             "rating": (
                 "Excellent"
                 if coverage_pct >= 80
-                else (
-                    "Good"
-                    if coverage_pct >= 60
-                    else "Fair" if coverage_pct >= 40 else "Poor"
-                )
+                else ("Good" if coverage_pct >= 60 else "Fair" if coverage_pct >= 40 else "Poor")
             ),
         }
 
@@ -572,9 +553,7 @@ class SecurityMetrics:
         file_impact = (encrypted_files / total_files * 25) if total_files > 0 else 0
 
         # System impact (0-25 points)
-        system_impact = (
-            (critical_systems_affected / total_systems * 25) if total_systems > 0 else 0
-        )
+        system_impact = (critical_systems_affected / total_systems * 25) if total_systems > 0 else 0
 
         # Data impact (0-25 points)
         data_impact = min(25, data_exfiltrated_gb * 2.5)
@@ -593,20 +572,12 @@ class SecurityMetrics:
             "severity": (
                 "Critical"
                 if total_score >= 75
-                else (
-                    "High"
-                    if total_score >= 50
-                    else "Medium" if total_score >= 25 else "Low"
-                )
+                else ("High" if total_score >= 50 else "Medium" if total_score >= 25 else "Low")
             ),
             "metrics": {
-                "files_encrypted_pct": (
-                    encrypted_files / total_files * 100 if total_files else 0
-                ),
+                "files_encrypted_pct": (encrypted_files / total_files * 100 if total_files else 0),
                 "systems_affected_pct": (
-                    critical_systems_affected / total_systems * 100
-                    if total_systems
-                    else 0
+                    critical_systems_affected / total_systems * 100 if total_systems else 0
                 ),
                 "data_exfiltrated_gb": data_exfiltrated_gb,
                 "recovery_time_hours": recovery_time_hours,

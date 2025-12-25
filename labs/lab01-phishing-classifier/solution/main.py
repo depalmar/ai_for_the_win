@@ -17,8 +17,7 @@ from nltk.stem import PorterStemmer
 from scipy.sparse import hstack
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics import (accuracy_score, classification_report,
-                             confusion_matrix)
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 from sklearn.model_selection import train_test_split
 
 # Ensure NLTK data is available
@@ -220,9 +219,7 @@ def create_feature_matrix(
 
     # Create or use existing vectorizer
     if vectorizer is None:
-        vectorizer = TfidfVectorizer(
-            max_features=1000, ngram_range=(1, 2), min_df=2, max_df=0.95
-        )
+        vectorizer = TfidfVectorizer(max_features=1000, ngram_range=(1, 2), min_df=2, max_df=0.95)
 
     # Transform text
     if fit:
@@ -274,9 +271,7 @@ def evaluate_model(
     accuracy = accuracy_score(y_test, y_pred)
 
     print("\nClassification Report:")
-    print(
-        classification_report(y_test, y_pred, target_names=["Legitimate", "Phishing"])
-    )
+    print(classification_report(y_test, y_pred, target_names=["Legitimate", "Phishing"]))
 
     print("\nConfusion Matrix:")
     cm = confusion_matrix(y_test, y_pred)
@@ -367,9 +362,7 @@ def main():
 
     # Create feature matrices
     X_train, vectorizer = create_feature_matrix(X_train_df, features_train, fit=True)
-    X_test, _ = create_feature_matrix(
-        X_test_df, features_test, vectorizer=vectorizer, fit=False
-    )
+    X_test, _ = create_feature_matrix(X_test_df, features_test, vectorizer=vectorizer, fit=False)
 
     # Train
     model = train_model(X_train, y_train)
@@ -408,9 +401,7 @@ def main():
         status = "✓" if is_correct else "✗"
         print(f"\n{status} Email: {email[:50]}...")
         print(f"   Expected: {'PHISHING' if expected else 'LEGITIMATE'}")
-        print(
-            f"   Predicted: {'PHISHING' if pred else 'LEGITIMATE'} ({conf:.1%} confidence)"
-        )
+        print(f"   Predicted: {'PHISHING' if pred else 'LEGITIMATE'} ({conf:.1%} confidence)")
 
     print(f"\nAccuracy on test emails: {correct}/{len(test_emails)}")
 

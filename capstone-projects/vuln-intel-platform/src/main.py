@@ -19,9 +19,7 @@ try:
     FASTAPI_AVAILABLE = True
 except ImportError:
     FASTAPI_AVAILABLE = False
-    console.print(
-        "[yellow]FastAPI not installed. Run: pip install fastapi uvicorn[/yellow]"
-    )
+    console.print("[yellow]FastAPI not installed. Run: pip install fastapi uvicorn[/yellow]")
 
 
 if FASTAPI_AVAILABLE:

@@ -18,15 +18,21 @@ for key in list(sys.modules.keys()):
 sys.path = [p for p in sys.path if "/labs/lab" not in p]
 
 # Add this lab's path
-lab_path = str(
-    Path(__file__).parent.parent / "labs" / "lab03-anomaly-detection" / "solution"
-)
+lab_path = str(Path(__file__).parent.parent / "labs" / "lab03-anomaly-detection" / "solution")
 sys.path.insert(0, lab_path)
 
-from main import (engineer_network_features, evaluate_detector,
-                  explore_network_data, find_optimal_threshold, iqr_baseline,
-                  load_network_data, prepare_features, statistical_baseline,
-                  train_isolation_forest, train_local_outlier_factor)
+from main import (
+    engineer_network_features,
+    evaluate_detector,
+    explore_network_data,
+    find_optimal_threshold,
+    iqr_baseline,
+    load_network_data,
+    prepare_features,
+    statistical_baseline,
+    train_isolation_forest,
+    train_local_outlier_factor,
+)
 
 
 @pytest.fixture
@@ -105,12 +111,10 @@ class TestFeatureEngineering:
         # Check that bytes_per_second is correctly calculated
         for i in range(min(5, len(df))):
             if df.iloc[i]["duration"] > 0:
-                expected = (
-                    df.iloc[i]["bytes_sent"] + df.iloc[i]["bytes_recv"]
-                ) / df.iloc[i]["duration"]
-                assert df.iloc[i]["bytes_per_second"] == pytest.approx(
-                    expected, rel=0.01
-                )
+                expected = (df.iloc[i]["bytes_sent"] + df.iloc[i]["bytes_recv"]) / df.iloc[i][
+                    "duration"
+                ]
+                assert df.iloc[i]["bytes_per_second"] == pytest.approx(expected, rel=0.01)
 
     def test_prepare_features(self, sample_network_data):
         """Test feature preparation."""

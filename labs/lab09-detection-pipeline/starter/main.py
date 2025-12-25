@@ -306,9 +306,7 @@ def main():
         },
     ]
 
-    console.print(
-        f"\n[yellow]Processing {len(sample_events)} sample events...[/yellow]"
-    )
+    console.print(f"\n[yellow]Processing {len(sample_events)} sample events...[/yellow]")
 
     pipeline = DetectionPipeline()
 
