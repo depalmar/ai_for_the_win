@@ -5,27 +5,29 @@ Lab 10: Incident Response Copilot Agent - Starter Code
 Build an AI copilot that assists analysts throughout the incident response lifecycle.
 """
 
-import os
 import json
+import os
 import uuid
-from typing import List, Dict, Optional, Any
+from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
-from dataclasses import dataclass, field
+from typing import Any, Dict, List, Optional
 
 from dotenv import load_dotenv
+
 load_dotenv()
 
 try:
     from langchain_anthropic import ChatAnthropic
-    from langchain_core.messages import HumanMessage, SystemMessage, AIMessage
+    from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
+
     LANGCHAIN_AVAILABLE = True
 except ImportError:
     LANGCHAIN_AVAILABLE = False
 
 from rich.console import Console
-from rich.panel import Panel
 from rich.markdown import Markdown
+from rich.panel import Panel
 from rich.table import Table
 
 console = Console()
@@ -34,6 +36,7 @@ console = Console()
 # =============================================================================
 # Task 1: Copilot Tools
 # =============================================================================
+
 
 class CopilotTools:
     """Tools available to the IR Copilot."""
@@ -137,6 +140,7 @@ class CopilotTools:
 # =============================================================================
 # Task 2: Agent State Management
 # =============================================================================
+
 
 @dataclass
 class IRCopilotState:
@@ -245,6 +249,7 @@ class CopilotStateManager:
 # Task 3: Build the Copilot Agent
 # =============================================================================
 
+
 class IRCopilot:
     """Incident Response Copilot Agent."""
 
@@ -320,6 +325,7 @@ class IRCopilot:
 # Task 4: Playbook Integration
 # =============================================================================
 
+
 class PlaybookExecutor:
     """Execute IR playbooks with copilot assistance."""
 
@@ -352,10 +358,7 @@ class PlaybookExecutor:
         pass
 
     def execute_playbook(
-        self,
-        playbook_name: str,
-        incident: dict,
-        auto_approve: bool = False
+        self, playbook_name: str, incident: dict, auto_approve: bool = False
     ) -> dict:
         """
         Execute playbook steps.
@@ -384,6 +387,7 @@ class PlaybookExecutor:
 # =============================================================================
 # Task 5: Documentation Generator
 # =============================================================================
+
 
 class IncidentDocumenter:
     """Generate incident documentation."""
@@ -445,12 +449,10 @@ class IncidentDocumenter:
 # Main Execution
 # =============================================================================
 
+
 def main():
     """Main execution flow."""
-    console.print(Panel.fit(
-        "[bold]Lab 10: Incident Response Copilot[/bold]",
-        border_style="blue"
-    ))
+    console.print(Panel.fit("[bold]Lab 10: Incident Response Copilot[/bold]", border_style="blue"))
 
     if not LANGCHAIN_AVAILABLE:
         console.print("[yellow]LangChain not available. Running in demo mode.[/yellow]")
@@ -463,7 +465,7 @@ def main():
                 "host": "WORKSTATION-42",
                 "event_type": "authentication",
                 "user": "jsmith",
-                "details": "User login successful"
+                "details": "User login successful",
             },
             {
                 "timestamp": "2024-01-15T09:23:00Z",
@@ -472,7 +474,7 @@ def main():
                 "user": "jsmith",
                 "process": "powershell.exe",
                 "command_line": "powershell -enc SGVsbG8gV29ybGQ=",
-                "details": "Encoded PowerShell execution"
+                "details": "Encoded PowerShell execution",
             },
             {
                 "timestamp": "2024-01-15T09:24:00Z",
@@ -481,7 +483,7 @@ def main():
                 "user": "jsmith",
                 "dest_ip": "185.143.223.47",
                 "dest_port": 443,
-                "details": "Outbound connection to suspicious IP"
+                "details": "Outbound connection to suspicious IP",
             },
             {
                 "timestamp": "2024-01-15T09:25:00Z",
@@ -489,8 +491,8 @@ def main():
                 "event_type": "scheduled_task",
                 "user": "jsmith",
                 "task_name": "WindowsUpdate",
-                "details": "New scheduled task created"
-            }
+                "details": "New scheduled task created",
+            },
         ],
         "alerts": [
             {
@@ -499,9 +501,9 @@ def main():
                 "host": "WORKSTATION-42",
                 "severity": "HIGH",
                 "title": "Suspicious PowerShell Activity",
-                "description": "Encoded PowerShell command followed by C2 connection"
+                "description": "Encoded PowerShell command followed by C2 connection",
             }
-        ]
+        ],
     }
 
     # Initialize tools
@@ -522,7 +524,7 @@ def main():
     demo_messages = [
         "We got an alert about suspicious PowerShell on WORKSTATION-42",
         "Look up the IP that was contacted",
-        "Isolate the host"
+        "Isolate the host",
     ]
 
     for msg in demo_messages:

@@ -12,9 +12,10 @@ load_dotenv()
 console = Console()
 
 try:
+    import uvicorn
     from fastapi import FastAPI, HTTPException
     from pydantic import BaseModel
-    import uvicorn
+
     FASTAPI_AVAILABLE = True
 except ImportError:
     FASTAPI_AVAILABLE = False
@@ -25,7 +26,7 @@ if FASTAPI_AVAILABLE:
     app = FastAPI(
         title="Vulnerability Intelligence Platform",
         description="AI-powered vulnerability management and prioritization",
-        version="0.1.0"
+        version="0.1.0",
     )
 
     # Pydantic models
@@ -44,7 +45,7 @@ if FASTAPI_AVAILABLE:
         return {
             "name": "Vulnerability Intelligence Platform",
             "version": "0.1.0",
-            "status": "running"
+            "status": "running",
         }
 
     @app.get("/api/cves")
@@ -54,17 +55,14 @@ if FASTAPI_AVAILABLE:
         return {
             "message": "TODO: Implement CVE listing",
             "limit": limit,
-            "severity": severity
+            "severity": severity,
         }
 
     @app.get("/api/cves/{cve_id}")
     async def get_cve(cve_id: str):
         """Get CVE details."""
         # TODO: Implement CVE lookup
-        return {
-            "cve_id": cve_id,
-            "message": "TODO: Implement CVE details"
-        }
+        return {"cve_id": cve_id, "message": "TODO: Implement CVE details"}
 
     @app.post("/api/assets")
     async def add_asset(asset: Asset):
@@ -72,25 +70,20 @@ if FASTAPI_AVAILABLE:
         # TODO: Implement asset management
         return {
             "message": "TODO: Implement asset management",
-            "asset": asset.model_dump()
+            "asset": asset.model_dump(),
         }
 
     @app.post("/api/query")
     async def query_cves(query: CVEQuery):
         """RAG-powered CVE query."""
         # TODO: Implement RAG query
-        return {
-            "query": query.query,
-            "message": "TODO: Implement RAG-powered Q&A"
-        }
+        return {"query": query.query, "message": "TODO: Implement RAG-powered Q&A"}
 
     @app.get("/api/reports/executive")
     async def executive_report():
         """Generate executive vulnerability report."""
         # TODO: Implement report generation
-        return {
-            "message": "TODO: Implement executive report generation"
-        }
+        return {"message": "TODO: Implement executive report generation"}
 
 
 def main():

@@ -5,18 +5,20 @@ Lab 08: AI-Powered Vulnerability Scanner - Starter Code
 Build an intelligent vulnerability scanner with AI-powered analysis.
 """
 
-import os
 import json
-from typing import List, Dict, Optional
-from pathlib import Path
+import os
 from datetime import datetime
+from pathlib import Path
+from typing import Dict, List, Optional
 
 from dotenv import load_dotenv
+
 load_dotenv()
 
 try:
     from langchain_anthropic import ChatAnthropic
     from langchain_core.messages import HumanMessage, SystemMessage
+
     LANGCHAIN_AVAILABLE = True
 except ImportError:
     LANGCHAIN_AVAILABLE = False
@@ -31,6 +33,7 @@ console = Console()
 # =============================================================================
 # Task 1: Vulnerability Data Ingestion
 # =============================================================================
+
 
 class VulnDataLoader:
     """Load vulnerability scan results."""
@@ -65,6 +68,7 @@ class VulnDataLoader:
 # =============================================================================
 # Task 2: AI Analysis Engine
 # =============================================================================
+
 
 class VulnAnalyzer:
     """AI-powered vulnerability analysis."""
@@ -107,6 +111,7 @@ class VulnAnalyzer:
 # Task 3: Intelligent Prioritization
 # =============================================================================
 
+
 class VulnPrioritizer:
     """Prioritize vulnerabilities intelligently."""
 
@@ -143,6 +148,7 @@ class VulnPrioritizer:
 # Task 4: Report Generation
 # =============================================================================
 
+
 class VulnReporter:
     """Generate vulnerability reports."""
 
@@ -178,6 +184,7 @@ class VulnReporter:
 # Main
 # =============================================================================
 
+
 def main():
     """Main execution."""
     console.print("[bold]Lab 08: AI-Powered Vulnerability Scanner[/bold]")
@@ -194,7 +201,7 @@ def main():
             "severity": "CRITICAL",
             "port": 443,
             "service": "Apache/2.4.49",
-            "description": "Remote code execution in Apache HTTP Server"
+            "description": "Remote code execution in Apache HTTP Server",
         },
         {
             "host": "db-server-01",
@@ -203,8 +210,8 @@ def main():
             "severity": "HIGH",
             "port": 3306,
             "service": "MySQL 8.0.30",
-            "description": "SQL injection vulnerability"
-        }
+            "description": "SQL injection vulnerability",
+        },
     ]
 
     (data_dir / "sample_scan.json").write_text(json.dumps(sample_vulns, indent=2))
@@ -238,7 +245,7 @@ def main():
             v.get("host", ""),
             v.get("cve_id", ""),
             v.get("severity", ""),
-            str(v.get("cvss_score", ""))
+            str(v.get("cvss_score", "")),
         )
 
     console.print(table)

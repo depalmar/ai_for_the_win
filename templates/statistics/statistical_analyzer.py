@@ -11,16 +11,17 @@ Provides statistical analysis for:
 - Distribution analysis
 """
 
-import math
-from dataclasses import dataclass
-from typing import List, Dict, Tuple, Optional, Any
-from collections import Counter
 import json
+import math
+from collections import Counter
+from dataclasses import dataclass
+from typing import Any, Dict, List, Optional, Tuple
 
 
 @dataclass
 class ConfusionMatrix:
     """Confusion matrix for binary classification."""
+
     true_positives: int
     true_negatives: int
     false_positives: int
@@ -28,7 +29,9 @@ class ConfusionMatrix:
 
     @property
     def total(self) -> int:
-        return self.true_positives + self.true_negatives + self.false_positives + self.false_negatives
+        return (
+            self.true_positives + self.true_negatives + self.false_positives + self.false_negatives
+        )
 
     @property
     def accuracy(self) -> float:
@@ -72,13 +75,14 @@ class ConfusionMatrix:
             "true_positives": self.true_positives,
             "true_negatives": self.true_negatives,
             "false_positives": self.false_positives,
-            "false_negatives": self.false_negatives
+            "false_negatives": self.false_negatives,
         }
 
 
 @dataclass
 class ConfidenceInterval:
     """Confidence interval for a statistic."""
+
     point_estimate: float
     lower_bound: float
     upper_bound: float
@@ -92,6 +96,7 @@ class ConfidenceInterval:
 @dataclass
 class ClusterMetrics:
     """Metrics for clustering evaluation."""
+
     silhouette_score: float
     davies_bouldin_index: float
     calinski_harabasz_index: float
@@ -103,11 +108,7 @@ class StatisticalAnalyzer:
     """Statistical analysis for security ML models."""
 
     # Z-scores for common confidence levels
-    Z_SCORES = {
-        0.90: 1.645,
-        0.95: 1.96,
-        0.99: 2.576
-    }
+    Z_SCORES = {0.90: 1.645, 0.95: 1.96, 0.99: 2.576}
 
     # ==========================================================================
     # Basic Statistics
@@ -160,7 +161,9 @@ class StatisticalAnalyzer:
     @staticmethod
     def iqr(values: List[float]) -> float:
         """Calculate interquartile range."""
-        return StatisticalAnalyzer.percentile(values, 75) - StatisticalAnalyzer.percentile(values, 25)
+        return StatisticalAnalyzer.percentile(values, 75) - StatisticalAnalyzer.percentile(
+            values, 25
+        )
 
     # ==========================================================================
     # Entropy and Information Theory
@@ -195,10 +198,7 @@ class StatisticalAnalyzer:
     # ==========================================================================
 
     @staticmethod
-    def calculate_confusion_matrix(
-        y_true: List[int],
-        y_pred: List[int]
-    ) -> ConfusionMatrix:
+    def calculate_confusion_matrix(y_true: List[int], y_pred: List[int]) -> ConfusionMatrix:
         """Calculate confusion matrix from predictions."""
         tp = sum(1 for t, p in zip(y_true, y_pred) if t == 1 and p == 1)
         tn = sum(1 for t, p in zip(y_true, y_pred) if t == 0 and p == 0)
@@ -206,17 +206,12 @@ class StatisticalAnalyzer:
         fn = sum(1 for t, p in zip(y_true, y_pred) if t == 1 and p == 0)
 
         return ConfusionMatrix(
-            true_positives=tp,
-            true_negatives=tn,
-            false_positives=fp,
-            false_negatives=fn
+            true_positives=tp, true_negatives=tn, false_positives=fp, false_negatives=fn
         )
 
     @staticmethod
     def calculate_roc_points(
-        y_true: List[int],
-        y_scores: List[float],
-        num_thresholds: int = 100
+        y_true: List[int], y_scores: List[float], num_thresholds: int = 100
     ) -> List[Tuple[float, float]]:
         """Calculate ROC curve points (FPR, TPR)."""
         min_score = min(y_scores)
@@ -254,9 +249,7 @@ class StatisticalAnalyzer:
 
     @staticmethod
     def proportion_confidence_interval(
-        successes: int,
-        total: int,
-        confidence: float = 0.95
+        successes: int, total: int, confidence: float = 0.95
     ) -> ConfidenceInterval:
         """Calculate confidence interval for a proportion."""
         if total == 0:
@@ -271,13 +264,12 @@ class StatisticalAnalyzer:
             point_estimate=p,
             lower_bound=max(0, p - margin),
             upper_bound=min(1, p + margin),
-            confidence_level=confidence
+            confidence_level=confidence,
         )
 
     @staticmethod
     def mean_confidence_interval(
-        values: List[float],
-        confidence: float = 0.95
+        values: List[float], confidence: float = 0.95
     ) -> ConfidenceInterval:
         """Calculate confidence interval for the mean."""
         if len(values) < 2:
@@ -293,7 +285,7 @@ class StatisticalAnalyzer:
             point_estimate=m,
             lower_bound=m - margin,
             upper_bound=m + margin,
-            confidence_level=confidence
+            confidence_level=confidence,
         )
 
     # ==========================================================================
@@ -323,8 +315,7 @@ class StatisticalAnalyzer:
 
     @staticmethod
     def identify_outliers_iqr(
-        values: List[float],
-        multiplier: float = 1.5
+        values: List[float], multiplier: float = 1.5
     ) -> List[Tuple[int, float]]:
         """Identify outliers using IQR method."""
         q1 = StatisticalAnalyzer.percentile(values, 25)
@@ -334,23 +325,20 @@ class StatisticalAnalyzer:
         lower_bound = q1 - multiplier * iqr
         upper_bound = q3 + multiplier * iqr
 
-        outliers = [
-            (i, v) for i, v in enumerate(values)
-            if v < lower_bound or v > upper_bound
-        ]
+        outliers = [(i, v) for i, v in enumerate(values) if v < lower_bound or v > upper_bound]
         return outliers
 
     @staticmethod
     def identify_outliers_zscore(
-        values: List[float],
-        threshold: float = 3.0
+        values: List[float], threshold: float = 3.0
     ) -> List[Tuple[int, float]]:
         """Identify outliers using z-score method."""
         mean = StatisticalAnalyzer.mean(values)
         std = StatisticalAnalyzer.std_dev(values)
 
         outliers = [
-            (i, v) for i, v in enumerate(values)
+            (i, v)
+            for i, v in enumerate(values)
             if abs(StatisticalAnalyzer.z_score(v, mean, std)) > threshold
         ]
         return outliers
@@ -363,9 +351,10 @@ class StatisticalAnalyzer:
     def silhouette_coefficient(
         point: List[float],
         cluster: List[List[float]],
-        other_clusters: List[List[List[float]]]
+        other_clusters: List[List[List[float]]],
     ) -> float:
         """Calculate silhouette coefficient for a single point."""
+
         def euclidean_distance(p1: List[float], p2: List[float]) -> float:
             return math.sqrt(sum((a - b) ** 2 for a, b in zip(p1, p2)))
 
@@ -395,10 +384,7 @@ class StatisticalAnalyzer:
     # ==========================================================================
 
     @staticmethod
-    def chi_squared_test(
-        observed: List[int],
-        expected: List[float]
-    ) -> Tuple[float, float]:
+    def chi_squared_test(observed: List[int], expected: List[float]) -> Tuple[float, float]:
         """
         Perform chi-squared test.
         Returns (chi_squared_statistic, p_value_approximation).
@@ -406,11 +392,7 @@ class StatisticalAnalyzer:
         if len(observed) != len(expected):
             raise ValueError("Observed and expected must have same length")
 
-        chi_sq = sum(
-            (o - e) ** 2 / e
-            for o, e in zip(observed, expected)
-            if e > 0
-        )
+        chi_sq = sum((o - e) ** 2 / e for o, e in zip(observed, expected) if e > 0)
 
         # Degrees of freedom
         df = len(observed) - 1
@@ -422,10 +404,7 @@ class StatisticalAnalyzer:
         return chi_sq, p_value
 
     @staticmethod
-    def two_sample_t_test(
-        sample1: List[float],
-        sample2: List[float]
-    ) -> Tuple[float, str]:
+    def two_sample_t_test(sample1: List[float], sample2: List[float]) -> Tuple[float, str]:
         """
         Perform two-sample t-test.
         Returns (t_statistic, significance_interpretation).
@@ -464,9 +443,7 @@ class StatisticalAnalyzer:
 
     @staticmethod
     def detection_performance_summary(
-        y_true: List[int],
-        y_pred: List[int],
-        y_scores: Optional[List[float]] = None
+        y_true: List[int], y_pred: List[int], y_scores: Optional[List[float]] = None
     ) -> Dict[str, Any]:
         """Generate comprehensive detection performance summary."""
         cm = StatisticalAnalyzer.calculate_confusion_matrix(y_true, y_pred)
@@ -479,24 +456,22 @@ class StatisticalAnalyzer:
 
         # Calculate precision CI
         precision_ci = StatisticalAnalyzer.proportion_confidence_interval(
-            cm.true_positives,
-            cm.true_positives + cm.false_positives
+            cm.true_positives, cm.true_positives + cm.false_positives
         )
         summary["precision_95ci"] = {
             "point": precision_ci.point_estimate,
             "lower": precision_ci.lower_bound,
-            "upper": precision_ci.upper_bound
+            "upper": precision_ci.upper_bound,
         }
 
         # Calculate recall CI
         recall_ci = StatisticalAnalyzer.proportion_confidence_interval(
-            cm.true_positives,
-            cm.true_positives + cm.false_negatives
+            cm.true_positives, cm.true_positives + cm.false_negatives
         )
         summary["recall_95ci"] = {
             "point": recall_ci.point_estimate,
             "lower": recall_ci.lower_bound,
-            "upper": recall_ci.upper_bound
+            "upper": recall_ci.upper_bound,
         }
 
         # ROC AUC if scores provided
@@ -512,9 +487,7 @@ class SecurityMetrics:
 
     @staticmethod
     def alert_fatigue_score(
-        total_alerts: int,
-        true_positives: int,
-        time_to_triage_minutes: List[float]
+        total_alerts: int, true_positives: int, time_to_triage_minutes: List[float]
     ) -> Dict[str, float]:
         """Calculate alert fatigue metrics."""
         precision = true_positives / total_alerts if total_alerts > 0 else 0
@@ -534,17 +507,15 @@ class SecurityMetrics:
             "median_triage_time_min": median_triage_time,
             "alert_fatigue_score": fatigue_score,
             "interpretation": (
-                "Critical" if fatigue_score > 0.7 else
-                "High" if fatigue_score > 0.5 else
-                "Medium" if fatigue_score > 0.3 else
-                "Low"
-            )
+                "Critical"
+                if fatigue_score > 0.7
+                else ("High" if fatigue_score > 0.5 else "Medium" if fatigue_score > 0.3 else "Low")
+            ),
         }
 
     @staticmethod
     def detection_coverage(
-        techniques_detected: List[str],
-        total_techniques: List[str]
+        techniques_detected: List[str], total_techniques: List[str]
     ) -> Dict[str, Any]:
         """Calculate MITRE ATT&CK detection coverage."""
         detected_set = set(techniques_detected)
@@ -562,11 +533,10 @@ class SecurityMetrics:
             "coverage_percentage": coverage_pct,
             "missing_techniques": list(missing),
             "rating": (
-                "Excellent" if coverage_pct >= 80 else
-                "Good" if coverage_pct >= 60 else
-                "Fair" if coverage_pct >= 40 else
-                "Poor"
-            )
+                "Excellent"
+                if coverage_pct >= 80
+                else ("Good" if coverage_pct >= 60 else "Fair" if coverage_pct >= 40 else "Poor")
+            ),
         }
 
     @staticmethod
@@ -576,7 +546,7 @@ class SecurityMetrics:
         critical_systems_affected: int,
         total_systems: int,
         data_exfiltrated_gb: float,
-        recovery_time_hours: float
+        recovery_time_hours: float,
     ) -> Dict[str, Any]:
         """Calculate ransomware incident impact score."""
         # File impact (0-25 points)
@@ -600,17 +570,18 @@ class SecurityMetrics:
             "recovery_impact_score": recovery_impact,
             "total_impact_score": total_score,
             "severity": (
-                "Critical" if total_score >= 75 else
-                "High" if total_score >= 50 else
-                "Medium" if total_score >= 25 else
-                "Low"
+                "Critical"
+                if total_score >= 75
+                else ("High" if total_score >= 50 else "Medium" if total_score >= 25 else "Low")
             ),
             "metrics": {
-                "files_encrypted_pct": encrypted_files / total_files * 100 if total_files else 0,
-                "systems_affected_pct": critical_systems_affected / total_systems * 100 if total_systems else 0,
+                "files_encrypted_pct": (encrypted_files / total_files * 100 if total_files else 0),
+                "systems_affected_pct": (
+                    critical_systems_affected / total_systems * 100 if total_systems else 0
+                ),
                 "data_exfiltrated_gb": data_exfiltrated_gb,
-                "recovery_time_hours": recovery_time_hours
-            }
+                "recovery_time_hours": recovery_time_hours,
+            },
         }
 
 
@@ -637,8 +608,12 @@ def main():
     print(f"  ROC AUC: {summary.get('roc_auc', 'N/A'):.3f}")
 
     print("\n[2] Confidence Intervals (95%):")
-    print(f"  Precision: [{summary['precision_95ci']['lower']:.2%}, {summary['precision_95ci']['upper']:.2%}]")
-    print(f"  Recall: [{summary['recall_95ci']['lower']:.2%}, {summary['recall_95ci']['upper']:.2%}]")
+    print(
+        f"  Precision: [{summary['precision_95ci']['lower']:.2%}, {summary['precision_95ci']['upper']:.2%}]"
+    )
+    print(
+        f"  Recall: [{summary['recall_95ci']['lower']:.2%}, {summary['recall_95ci']['upper']:.2%}]"
+    )
 
     # Anomaly scores
     print("\n[3] Anomaly Detection:")
@@ -651,7 +626,7 @@ def main():
     fatigue = SecurityMetrics.alert_fatigue_score(
         total_alerts=1000,
         true_positives=300,
-        time_to_triage_minutes=[5, 10, 3, 15, 8, 20, 4, 6, 12, 7]
+        time_to_triage_minutes=[5, 10, 3, 15, 8, 20, 4, 6, 12, 7],
     )
     print(f"  False Positive Rate: {fatigue['false_positive_rate']:.2%}")
     print(f"  Avg Triage Time: {fatigue['avg_triage_time_min']:.1f} min")
@@ -666,7 +641,7 @@ def main():
         critical_systems_affected=3,
         total_systems=20,
         data_exfiltrated_gb=50,
-        recovery_time_hours=72
+        recovery_time_hours=72,
     )
     print(f"  Total Impact Score: {impact['total_impact_score']:.1f}/100")
     print(f"  Severity: {impact['severity']}")

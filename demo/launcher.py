@@ -44,6 +44,7 @@ sys.path.insert(0, str(PROJECT_ROOT))
 
 try:
     import gradio as gr
+
     GRADIO_AVAILABLE = True
 except ImportError:
     GRADIO_AVAILABLE = False
@@ -51,12 +52,14 @@ except ImportError:
     sys.exit(1)
 
 from dotenv import load_dotenv
+
 load_dotenv()
 
 
 # =============================================================================
 # LAB DEMOS
 # =============================================================================
+
 
 def demo_phishing_classifier(email_text: str, threshold: float) -> str:
     """
@@ -69,9 +72,20 @@ def demo_phishing_classifier(email_text: str, threshold: float) -> str:
 
     # Simplified phishing detection (actual lab uses trained model)
     suspicious_keywords = [
-        "urgent", "verify", "account", "suspended", "click here",
-        "password", "confirm", "immediately", "security", "update",
-        "limited time", "act now", "winner", "congratulations"
+        "urgent",
+        "verify",
+        "account",
+        "suspended",
+        "click here",
+        "password",
+        "confirm",
+        "immediately",
+        "security",
+        "update",
+        "limited time",
+        "act now",
+        "winner",
+        "congratulations",
     ]
 
     text_lower = email_text.lower()
@@ -115,11 +129,7 @@ The actual Lab 01 implementation uses:
 
 
 def demo_anomaly_detection(
-    bytes_sent: int,
-    bytes_received: int,
-    packets: int,
-    duration: float,
-    port: int
+    bytes_sent: int, bytes_received: int, packets: int, duration: float, port: int
 ) -> str:
     """
     Lab 03: Network Anomaly Detection Demo
@@ -203,7 +213,7 @@ def demo_log_analysis(log_entries: str) -> str:
 
     for line in lines:
         # IP addresses
-        ips = re.findall(r'\b(?:\d{1,3}\.){3}\d{1,3}\b', line)
+        ips = re.findall(r"\b(?:\d{1,3}\.){3}\d{1,3}\b", line)
         for ip in ips:
             if ip not in iocs["ips"]:
                 iocs["ips"].append(ip)
@@ -257,7 +267,7 @@ def demo_threat_intel(ioc_value: str, ioc_type: str) -> str:
         "type": ioc_type,
         "reputation": "Unknown",
         "sources": [],
-        "related_iocs": []
+        "related_iocs": [],
     }
 
     # Simple simulation based on IOC type
@@ -322,7 +332,7 @@ def demo_security_rag(query: str) -> str:
         "cve": "CVE (Common Vulnerabilities and Exposures) is a list of publicly disclosed security flaws.",
         "yara": "YARA is a tool for identifying and classifying malware based on pattern matching.",
         "sigma": "Sigma is a generic signature format for SIEM systems.",
-        "ioc": "Indicators of Compromise (IOCs) are artifacts that indicate a potential security breach."
+        "ioc": "Indicators of Compromise (IOCs) are artifacts that indicate a potential security breach.",
     }
 
     # Find relevant context
@@ -359,15 +369,14 @@ The actual Lab 06 implementation uses:
 # GRADIO INTERFACE
 # =============================================================================
 
+
 def create_demo():
     """Create the Gradio demo interface."""
 
-    with gr.Blocks(
-        title="AI for the Win - Security Labs",
-        theme=gr.themes.Soft()
-    ) as demo:
+    with gr.Blocks(title="AI for the Win - Security Labs", theme=gr.themes.Soft()) as demo:
 
-        gr.Markdown("""
+        gr.Markdown(
+            """
         # AI for the Win - Interactive Lab Demos
 
         Explore AI-powered security tools through these interactive demos.
@@ -375,31 +384,34 @@ def create_demo():
 
         > **Note:** These are simplified demos for learning. The actual labs
         > implement full solutions with trained models and real APIs.
-        """)
+        """
+        )
 
         with gr.Tabs():
 
             # Lab 01: Phishing Classifier
             with gr.TabItem("Lab 01: Phishing Classifier"):
-                gr.Markdown("""
+                gr.Markdown(
+                    """
                 ## Phishing Email Classification
 
                 Analyze email text to detect potential phishing attempts.
                 Uses text features and machine learning for classification.
-                """)
+                """
+                )
 
                 with gr.Row():
                     with gr.Column():
                         email_input = gr.Textbox(
                             label="Email Text",
                             placeholder="Paste email content here...",
-                            lines=8
+                            lines=8,
                         )
                         threshold = gr.Slider(
                             minimum=0.1,
                             maximum=0.9,
                             value=0.5,
-                            label="Classification Threshold"
+                            label="Classification Threshold",
                         )
                         analyze_btn = gr.Button("Analyze Email", variant="primary")
 
@@ -409,25 +421,33 @@ def create_demo():
                 analyze_btn.click(
                     demo_phishing_classifier,
                     inputs=[email_input, threshold],
-                    outputs=phishing_output
+                    outputs=phishing_output,
                 )
 
                 gr.Examples(
                     examples=[
-                        ["URGENT: Your account has been suspended! Click here immediately to verify your identity and restore access. Act now before your account is permanently deleted!", 0.5],
-                        ["Hi team, the quarterly report is attached. Please review and send feedback by Friday. Thanks!", 0.5]
+                        [
+                            "URGENT: Your account has been suspended! Click here immediately to verify your identity and restore access. Act now before your account is permanently deleted!",
+                            0.5,
+                        ],
+                        [
+                            "Hi team, the quarterly report is attached. Please review and send feedback by Friday. Thanks!",
+                            0.5,
+                        ],
                     ],
-                    inputs=[email_input, threshold]
+                    inputs=[email_input, threshold],
                 )
 
             # Lab 03: Anomaly Detection
             with gr.TabItem("Lab 03: Anomaly Detection"):
-                gr.Markdown("""
+                gr.Markdown(
+                    """
                 ## Network Anomaly Detection
 
                 Analyze network flow data to detect anomalous behavior.
                 Useful for identifying C2 beaconing, data exfiltration, and scanning.
-                """)
+                """
+                )
 
                 with gr.Row():
                     with gr.Column():
@@ -444,62 +464,64 @@ def create_demo():
                 detect_btn.click(
                     demo_anomaly_detection,
                     inputs=[bytes_sent, bytes_recv, packets, duration, port],
-                    outputs=anomaly_output
+                    outputs=anomaly_output,
                 )
 
             # Lab 04: Log Analysis
             with gr.TabItem("Lab 04: Log Analysis"):
-                gr.Markdown("""
+                gr.Markdown(
+                    """
                 ## LLM-Powered Log Analysis
 
                 Parse and analyze security logs to extract IOCs and
                 identify suspicious patterns.
-                """)
+                """
+                )
 
                 with gr.Row():
                     with gr.Column():
                         log_input = gr.Textbox(
                             label="Log Entries",
                             placeholder="Paste log entries here (one per line)...",
-                            lines=10
+                            lines=10,
                         )
                         parse_btn = gr.Button("Analyze Logs", variant="primary")
 
                     with gr.Column():
                         log_output = gr.Markdown(label="Results")
 
-                parse_btn.click(
-                    demo_log_analysis,
-                    inputs=[log_input],
-                    outputs=log_output
-                )
+                parse_btn.click(demo_log_analysis, inputs=[log_input], outputs=log_output)
 
                 gr.Examples(
                     examples=[
-                        ["2024-01-15 03:22:10 Failed login attempt from 185.143.223.47\n2024-01-15 03:22:11 CMD exec: powershell -enc SGVsbG8=\n2024-01-15 03:22:12 Connection to 192.168.1.100:4444 established"]
+                        [
+                            "2024-01-15 03:22:10 Failed login attempt from 185.143.223.47\n2024-01-15 03:22:11 CMD exec: powershell -enc SGVsbG8=\n2024-01-15 03:22:12 Connection to 192.168.1.100:4444 established"
+                        ]
                     ],
-                    inputs=[log_input]
+                    inputs=[log_input],
                 )
 
             # Lab 05: Threat Intel
             with gr.TabItem("Lab 05: Threat Intel"):
-                gr.Markdown("""
+                gr.Markdown(
+                    """
                 ## Threat Intelligence Agent
 
                 Investigate IOCs using autonomous threat intelligence gathering.
                 Demonstrates the ReAct agent pattern for security research.
-                """)
+                """
+                )
 
                 with gr.Row():
                     with gr.Column():
                         ioc_value = gr.Textbox(
                             label="IOC Value",
-                            placeholder="Enter IP, domain, or hash..."
+                            placeholder="Enter IP, domain, or hash...",
                         )
                         ioc_type = gr.Dropdown(
                             choices=["IP Address", "Domain", "Hash"],
                             label="IOC Type",
-                            value="IP Address"
+                            value="IP Address",
                         )
                         intel_btn = gr.Button("Investigate", variant="primary")
 
@@ -509,45 +531,44 @@ def create_demo():
                 intel_btn.click(
                     demo_threat_intel,
                     inputs=[ioc_value, ioc_type],
-                    outputs=intel_output
+                    outputs=intel_output,
                 )
 
             # Lab 06: Security RAG
             with gr.TabItem("Lab 06: Security RAG"):
-                gr.Markdown("""
+                gr.Markdown(
+                    """
                 ## Security Knowledge RAG
 
                 Query security documentation using retrieval-augmented generation.
                 Combines semantic search with LLM-powered responses.
-                """)
+                """
+                )
 
                 with gr.Row():
                     with gr.Column():
                         rag_query = gr.Textbox(
                             label="Security Question",
-                            placeholder="Ask about CVEs, MITRE ATT&CK, YARA, etc..."
+                            placeholder="Ask about CVEs, MITRE ATT&CK, YARA, etc...",
                         )
                         rag_btn = gr.Button("Search & Answer", variant="primary")
 
                     with gr.Column():
                         rag_output = gr.Markdown(label="Results")
 
-                rag_btn.click(
-                    demo_security_rag,
-                    inputs=[rag_query],
-                    outputs=rag_output
-                )
+                rag_btn.click(demo_security_rag, inputs=[rag_query], outputs=rag_output)
 
                 gr.Examples(
                     examples=[
                         ["What is MITRE ATT&CK?"],
                         ["How do YARA rules work?"],
-                        ["What are IOCs in cybersecurity?"]
+                        ["What are IOCs in cybersecurity?"],
                     ],
-                    inputs=[rag_query]
+                    inputs=[rag_query],
                 )
 
-        gr.Markdown("""
+        gr.Markdown(
+            """
         ---
         ### About This Demo
 
@@ -559,7 +580,8 @@ def create_demo():
         - [Lab Documentation](./labs/README.md)
         - [Learning Guide](./LEARNING_GUIDE.md)
         - [Setup Instructions](./setup/dev-environment-setup.md)
-        """)
+        """
+        )
 
     return demo
 
@@ -567,6 +589,7 @@ def create_demo():
 # =============================================================================
 # MAIN
 # =============================================================================
+
 
 def main():
     """Launch the Gradio demo."""
@@ -585,11 +608,7 @@ def main():
     print("Open http://localhost:7860 in your browser")
     print("Press Ctrl+C to stop\n")
 
-    demo.launch(
-        server_name="0.0.0.0",
-        server_port=7860,
-        share=False
-    )
+    demo.launch(server_name="0.0.0.0", server_port=7860, share=False)
 
 
 if __name__ == "__main__":

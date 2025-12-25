@@ -5,28 +5,30 @@ Lab 10: Incident Response Copilot Agent - Solution
 Complete implementation of an AI copilot for incident response.
 """
 
-import os
 import json
+import os
 import re
 import uuid
-from typing import List, Dict, Optional, Any
+from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
-from dataclasses import dataclass, field
+from typing import Any, Dict, List, Optional
 
 from dotenv import load_dotenv
+
 load_dotenv()
 
 try:
     from langchain_anthropic import ChatAnthropic
-    from langchain_core.messages import HumanMessage, SystemMessage, AIMessage
+    from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
+
     LANGCHAIN_AVAILABLE = True
 except ImportError:
     LANGCHAIN_AVAILABLE = False
 
 from rich.console import Console
-from rich.panel import Panel
 from rich.markdown import Markdown
+from rich.panel import Panel
 from rich.table import Table
 
 console = Console()
@@ -35,6 +37,7 @@ console = Console()
 # =============================================================================
 # Task 1: Copilot Tools - SOLUTION
 # =============================================================================
+
 
 class CopilotTools:
     """Tools available to the IR Copilot."""
@@ -59,7 +62,7 @@ class CopilotTools:
                     "ip": f"192.168.1.{len(hosts) + 100}",
                     "last_seen": event.get("timestamp"),
                     "users": [],
-                    "events": []
+                    "events": [],
                 }
             if hostname:
                 if event.get("user") not in hosts[hostname]["users"]:
@@ -77,7 +80,7 @@ class CopilotTools:
                 "malware_family": "Cobalt Strike",
                 "first_seen": "2024-01-10",
                 "reports": 23,
-                "tags": ["c2", "apt", "cobalt-strike"]
+                "tags": ["c2", "apt", "cobalt-strike"],
             },
             "91.234.99.100": {
                 "classification": "Malicious",
@@ -86,8 +89,8 @@ class CopilotTools:
                 "malware_family": "Unknown",
                 "first_seen": "2024-01-12",
                 "reports": 5,
-                "tags": ["exfil", "suspicious"]
-            }
+                "tags": ["exfil", "suspicious"],
+            },
         }
 
     def query_siem(self, query: str, time_range: str = "24h") -> List[dict]:
@@ -96,13 +99,13 @@ class CopilotTools:
         query_lower = query.lower()
 
         # Filter by hostname
-        host_match = re.search(r'host[:\s]+(\S+)', query_lower)
+        host_match = re.search(r"host[:\s]+(\S+)", query_lower)
         if host_match:
             hostname = host_match.group(1).upper()
             events = [e for e in events if e.get("host", "").upper() == hostname]
 
         # Filter by user
-        user_match = re.search(r'user[:\s]+(\S+)', query_lower)
+        user_match = re.search(r"user[:\s]+(\S+)", query_lower)
         if user_match:
             username = user_match.group(1).lower()
             events = [e for e in events if e.get("user", "").lower() == username]
@@ -132,18 +135,18 @@ class CopilotTools:
 
         return {
             "error": f"Host {hostname} not found in inventory",
-            "hostname": hostname
+            "hostname": hostname,
         }
 
     def lookup_ioc(self, ioc: str, ioc_type: str = None) -> dict:
         """Look up IOC in threat intelligence."""
         # Auto-detect IOC type
         if ioc_type is None:
-            if re.match(r'\d+\.\d+\.\d+\.\d+', ioc):
+            if re.match(r"\d+\.\d+\.\d+\.\d+", ioc):
                 ioc_type = "ip"
-            elif re.match(r'[a-fA-F0-9]{32,64}', ioc):
+            elif re.match(r"[a-fA-F0-9]{32,64}", ioc):
                 ioc_type = "hash"
-            elif re.match(r'https?://', ioc):
+            elif re.match(r"https?://", ioc):
                 ioc_type = "url"
             else:
                 ioc_type = "domain"
@@ -161,7 +164,7 @@ class CopilotTools:
             "ioc_type": ioc_type,
             "classification": "Unknown",
             "confidence": "N/A",
-            "message": "No threat intelligence data available for this IOC"
+            "message": "No threat intelligence data available for this IOC",
         }
 
     def get_alert_details(self, alert_id: str) -> dict:
@@ -171,13 +174,12 @@ class CopilotTools:
                 # Add related events
                 alert_host = alert.get("host")
                 related_events = [
-                    e for e in self.siem_data.get("events", [])
-                    if e.get("host") == alert_host
+                    e for e in self.siem_data.get("events", []) if e.get("host") == alert_host
                 ]
                 return {
                     **alert,
                     "related_events": related_events,
-                    "event_count": len(related_events)
+                    "event_count": len(related_events),
                 }
 
         return {"error": f"Alert {alert_id} not found"}
@@ -190,17 +192,14 @@ class CopilotTools:
             return {"success": False, "error": f"Host {hostname} not found"}
 
         if hostname_upper in self.isolated_hosts:
-            return {
-                "success": False,
-                "error": f"Host {hostname} is already isolated"
-            }
+            return {"success": False, "error": f"Host {hostname} is already isolated"}
 
         if not confirm:
             return {
                 "requires_confirmation": True,
                 "action": "isolate_host",
                 "target": hostname_upper,
-                "message": f"Confirm isolation of {hostname}? This will remove the host from the network."
+                "message": f"Confirm isolation of {hostname}? This will remove the host from the network.",
             }
 
         # Execute isolation
@@ -210,16 +209,13 @@ class CopilotTools:
             "action": "isolate_host",
             "target": hostname_upper,
             "timestamp": datetime.now().isoformat(),
-            "message": f"Host {hostname} has been isolated from the network"
+            "message": f"Host {hostname} has been isolated from the network",
         }
 
     def block_ioc(self, ioc: str, block_type: str = "all") -> dict:
         """Block IOC at perimeter."""
         if ioc in self.blocked_iocs:
-            return {
-                "success": False,
-                "error": f"IOC {ioc} is already blocked"
-            }
+            return {"success": False, "error": f"IOC {ioc} is already blocked"}
 
         self.blocked_iocs.append(ioc)
         return {
@@ -228,7 +224,7 @@ class CopilotTools:
             "ioc": ioc,
             "block_type": block_type,
             "timestamp": datetime.now().isoformat(),
-            "message": f"IOC {ioc} has been blocked at {block_type}"
+            "message": f"IOC {ioc} has been blocked at {block_type}",
         }
 
     def disable_account(self, username: str, confirm: bool = False) -> dict:
@@ -236,7 +232,7 @@ class CopilotTools:
         if username in self.disabled_accounts:
             return {
                 "success": False,
-                "error": f"Account {username} is already disabled"
+                "error": f"Account {username} is already disabled",
             }
 
         if not confirm:
@@ -244,7 +240,7 @@ class CopilotTools:
                 "requires_confirmation": True,
                 "action": "disable_account",
                 "target": username,
-                "message": f"Confirm disabling account {username}?"
+                "message": f"Confirm disabling account {username}?",
             }
 
         self.disabled_accounts.append(username)
@@ -253,13 +249,14 @@ class CopilotTools:
             "action": "disable_account",
             "target": username,
             "timestamp": datetime.now().isoformat(),
-            "message": f"Account {username} has been disabled"
+            "message": f"Account {username} has been disabled",
         }
 
 
 # =============================================================================
 # Task 2: Agent State Management - SOLUTION
 # =============================================================================
+
 
 @dataclass
 class IRCopilotState:
@@ -287,19 +284,19 @@ class CopilotStateManager:
         self.state.context["start_time"] = datetime.now().isoformat()
 
         # Initialize timeline with incident creation
-        self.add_to_timeline({
-            "event": "Incident created",
-            "type": "incident",
-            "details": incident.get("title", "New incident")
-        })
+        self.add_to_timeline(
+            {
+                "event": "Incident created",
+                "type": "incident",
+                "details": incident.get("title", "New incident"),
+            }
+        )
 
     def add_message(self, role: str, content: str):
         """Add message to history."""
-        self.state.messages.append({
-            "role": role,
-            "content": content,
-            "timestamp": datetime.now().isoformat()
-        })
+        self.state.messages.append(
+            {"role": role, "content": content, "timestamp": datetime.now().isoformat()}
+        )
 
     def add_ioc(self, ioc: str, result: dict):
         """Record investigated IOC."""
@@ -309,20 +306,16 @@ class CopilotStateManager:
                 existing.update(result)
                 return
 
-        self.state.investigated_iocs.append({
-            "ioc": ioc,
-            "timestamp": datetime.now().isoformat(),
-            **result
-        })
+        self.state.investigated_iocs.append(
+            {"ioc": ioc, "timestamp": datetime.now().isoformat(), **result}
+        )
 
     def request_confirmation(self, action: dict) -> str:
         """Add action pending user confirmation."""
         action_id = str(uuid.uuid4())[:8]
-        self.state.pending_confirmations.append({
-            "id": action_id,
-            "timestamp": datetime.now().isoformat(),
-            **action
-        })
+        self.state.pending_confirmations.append(
+            {"id": action_id, "timestamp": datetime.now().isoformat(), **action}
+        )
         return action_id
 
     def confirm_action(self, action_id: str = None) -> Optional[dict]:
@@ -368,16 +361,19 @@ class CopilotStateManager:
         self.state.actions_taken.append(action)
 
         # Also add to timeline
-        self.add_to_timeline({
-            "event": f"Action: {action.get('action', 'Unknown')}",
-            "type": "action",
-            "details": action.get("message", str(action))
-        })
+        self.add_to_timeline(
+            {
+                "event": f"Action: {action.get('action', 'Unknown')}",
+                "type": "action",
+                "details": action.get("message", str(action)),
+            }
+        )
 
 
 # =============================================================================
 # Task 3: Build the Copilot Agent - SOLUTION
 # =============================================================================
+
 
 class IRCopilot:
     """Incident Response Copilot Agent."""
@@ -480,11 +476,25 @@ When investigating:
         message_lower = message.lower()
 
         # Investigation intents
-        if any(kw in message_lower for kw in ["what happened", "investigate", "look into", "check", "query", "search", "find"]):
+        if any(
+            kw in message_lower
+            for kw in [
+                "what happened",
+                "investigate",
+                "look into",
+                "check",
+                "query",
+                "search",
+                "find",
+            ]
+        ):
             return "investigate"
 
         # IOC lookup
-        if any(kw in message_lower for kw in ["look up", "lookup", "check ip", "check hash", "threat intel"]):
+        if any(
+            kw in message_lower
+            for kw in ["look up", "lookup", "check ip", "check hash", "threat intel"]
+        ):
             return "lookup_ioc"
 
         # Containment intents
@@ -529,7 +539,7 @@ When investigating:
     def _handle_investigation(self, message: str) -> str:
         """Handle investigation requests."""
         # Extract hostname if mentioned
-        host_match = re.search(r'(WORKSTATION|SERVER|HOST)[-_]?\d+', message, re.IGNORECASE)
+        host_match = re.search(r"(WORKSTATION|SERVER|HOST)[-_]?\d+", message, re.IGNORECASE)
 
         if host_match:
             hostname = host_match.group(0).upper()
@@ -537,10 +547,12 @@ When investigating:
             events = self.tools.query_siem(f"host: {hostname}")
 
             # Add to timeline
-            self.state_manager.add_to_timeline({
-                "event": f"Investigation started for {hostname}",
-                "type": "investigation"
-            })
+            self.state_manager.add_to_timeline(
+                {
+                    "event": f"Investigation started for {hostname}",
+                    "type": "investigation",
+                }
+            )
 
             response = f"**Investigating {hostname}**\n\n"
 
@@ -585,7 +597,7 @@ When investigating:
     def _handle_ioc_lookup(self, message: str) -> str:
         """Handle IOC lookup requests."""
         # Extract IP
-        ip_match = re.search(r'\d+\.\d+\.\d+\.\d+', message)
+        ip_match = re.search(r"\d+\.\d+\.\d+\.\d+", message)
         if ip_match:
             ioc = ip_match.group(0)
             result = self.tools.lookup_ioc(ioc)
@@ -612,17 +624,16 @@ When investigating:
 
     def _handle_containment(self, message: str) -> str:
         """Handle host containment requests."""
-        host_match = re.search(r'(WORKSTATION|SERVER|HOST)[-_]?\d+', message, re.IGNORECASE)
+        host_match = re.search(r"(WORKSTATION|SERVER|HOST)[-_]?\d+", message, re.IGNORECASE)
 
         if host_match:
             hostname = host_match.group(0).upper()
             result = self.tools.isolate_host(hostname, confirm=False)
 
             if result.get("requires_confirmation"):
-                self.state_manager.request_confirmation({
-                    "action": "isolate_host",
-                    "target": hostname
-                })
+                self.state_manager.request_confirmation(
+                    {"action": "isolate_host", "target": hostname}
+                )
 
                 response = f"**Isolation Request for {hostname}**\n\n"
                 response += "This will:\n"
@@ -639,7 +650,7 @@ When investigating:
 
     def _handle_block_ioc(self, message: str) -> str:
         """Handle IOC blocking requests."""
-        ip_match = re.search(r'\d+\.\d+\.\d+\.\d+', message)
+        ip_match = re.search(r"\d+\.\d+\.\d+\.\d+", message)
 
         if ip_match:
             ioc = ip_match.group(0)
@@ -655,17 +666,16 @@ When investigating:
 
     def _handle_disable_account(self, message: str) -> str:
         """Handle account disable requests."""
-        user_match = re.search(r'(?:user|account)\s+(\w+)', message, re.IGNORECASE)
+        user_match = re.search(r"(?:user|account)\s+(\w+)", message, re.IGNORECASE)
 
         if user_match:
             username = user_match.group(1)
             result = self.tools.disable_account(username, confirm=False)
 
             if result.get("requires_confirmation"):
-                self.state_manager.request_confirmation({
-                    "action": "disable_account",
-                    "target": username
-                })
+                self.state_manager.request_confirmation(
+                    {"action": "disable_account", "target": username}
+                )
                 return f"Confirm disabling account {username}?\n\n**Type 'confirm' to proceed or 'cancel' to abort.**"
 
             if result.get("error"):
@@ -692,7 +702,8 @@ When investigating:
 
         # Check investigated IOCs
         malicious_iocs = [
-            ioc for ioc in self.state_manager.state.investigated_iocs
+            ioc
+            for ioc in self.state_manager.state.investigated_iocs
             if ioc.get("classification") == "Malicious"
         ]
 
@@ -702,10 +713,13 @@ When investigating:
                 response += f"1. Block malicious IOCs: {', '.join(i['ioc'] for i in unblocked)}\n"
 
         # Check for unisolated compromised hosts
-        compromised_hosts = list(set(
-            e.get("host") for e in self.state_manager.state.timeline_events
-            if e.get("type") == "investigation"
-        ))
+        compromised_hosts = list(
+            set(
+                e.get("host")
+                for e in self.state_manager.state.timeline_events
+                if e.get("type") == "investigation"
+            )
+        )
         unisolated = [h for h in compromised_hosts if h and h not in self.tools.isolated_hosts]
         if unisolated:
             response += f"2. Consider isolating: {', '.join(unisolated)}\n"
@@ -744,7 +758,9 @@ When investigating:
             assessment += "- Scheduled task creation (T1053 - Persistence)\n"
 
         if has_encoded_ps and has_c2:
-            assessment += "\n**Severity: HIGH** - Pattern suggests active compromise with C2 communication."
+            assessment += (
+                "\n**Severity: HIGH** - Pattern suggests active compromise with C2 communication."
+            )
 
         return assessment if assessment else "Insufficient data for assessment."
 
@@ -773,6 +789,7 @@ When investigating:
 # Task 4: Playbook Integration - SOLUTION
 # =============================================================================
 
+
 class PlaybookExecutor:
     """Execute IR playbooks with copilot assistance."""
 
@@ -789,38 +806,74 @@ class PlaybookExecutor:
             "ransomware": {
                 "name": "Ransomware Response",
                 "steps": [
-                    {"action": "isolate_affected", "description": "Isolate affected systems"},
-                    {"action": "identify_variant", "description": "Identify ransomware variant"},
-                    {"action": "assess_scope", "description": "Assess scope of infection"},
-                    {"action": "preserve_evidence", "description": "Preserve evidence for forensics"},
-                    {"action": "notify_stakeholders", "description": "Notify stakeholders"},
-                    {"action": "recovery", "description": "Begin recovery from backups"}
-                ]
+                    {
+                        "action": "isolate_affected",
+                        "description": "Isolate affected systems",
+                    },
+                    {
+                        "action": "identify_variant",
+                        "description": "Identify ransomware variant",
+                    },
+                    {
+                        "action": "assess_scope",
+                        "description": "Assess scope of infection",
+                    },
+                    {
+                        "action": "preserve_evidence",
+                        "description": "Preserve evidence for forensics",
+                    },
+                    {
+                        "action": "notify_stakeholders",
+                        "description": "Notify stakeholders",
+                    },
+                    {
+                        "action": "recovery",
+                        "description": "Begin recovery from backups",
+                    },
+                ],
             },
             "malware": {
                 "name": "Malware Response",
                 "steps": [
-                    {"action": "investigate_host", "description": "Investigate affected host"},
-                    {"action": "lookup_iocs", "description": "Look up IOCs in threat intel"},
-                    {"action": "assess_severity", "description": "Assess severity and scope"},
+                    {
+                        "action": "investigate_host",
+                        "description": "Investigate affected host",
+                    },
+                    {
+                        "action": "lookup_iocs",
+                        "description": "Look up IOCs in threat intel",
+                    },
+                    {
+                        "action": "assess_severity",
+                        "description": "Assess severity and scope",
+                    },
                     {"action": "contain", "description": "Contain affected systems"},
                     {"action": "block_iocs", "description": "Block IOCs at perimeter"},
                     {"action": "eradicate", "description": "Remove malware"},
                     {"action": "verify", "description": "Verify remediation"},
-                    {"action": "document", "description": "Document incident"}
-                ]
+                    {"action": "document", "description": "Document incident"},
+                ],
             },
             "phishing": {
                 "name": "Phishing Response",
                 "steps": [
-                    {"action": "quarantine_email", "description": "Quarantine phishing email"},
-                    {"action": "identify_recipients", "description": "Identify all recipients"},
+                    {
+                        "action": "quarantine_email",
+                        "description": "Quarantine phishing email",
+                    },
+                    {
+                        "action": "identify_recipients",
+                        "description": "Identify all recipients",
+                    },
                     {"action": "check_clicks", "description": "Check for link clicks"},
-                    {"action": "credential_reset", "description": "Reset credentials if needed"},
+                    {
+                        "action": "credential_reset",
+                        "description": "Reset credentials if needed",
+                    },
                     {"action": "block_sender", "description": "Block sender domain"},
-                    {"action": "awareness", "description": "Send awareness reminder"}
-                ]
-            }
+                    {"action": "awareness", "description": "Send awareness reminder"},
+                ],
+            },
         }
 
     def _load_playbooks(self, directory: str) -> dict:
@@ -863,10 +916,7 @@ class PlaybookExecutor:
         return response
 
     def execute_playbook(
-        self,
-        playbook_name: str,
-        incident: dict,
-        auto_approve: bool = False
+        self, playbook_name: str, incident: dict, auto_approve: bool = False
     ) -> dict:
         """Execute playbook steps."""
         if playbook_name not in self.playbooks:
@@ -880,7 +930,7 @@ class PlaybookExecutor:
                 "step": i + 1,
                 "action": step["action"],
                 "description": step["description"],
-                "status": "pending"
+                "status": "pending",
             }
             results.append(result)
 
@@ -889,7 +939,7 @@ class PlaybookExecutor:
         return {
             "playbook": playbook_name,
             "total_steps": len(playbook["steps"]),
-            "results": results
+            "results": results,
         }
 
     def get_next_step(self, playbook_name: str, current_step: int = None) -> Optional[dict]:
@@ -898,7 +948,9 @@ class PlaybookExecutor:
             return None
 
         playbook = self.playbooks[playbook_name]
-        step_idx = current_step if current_step is not None else self.current_step.get(playbook_name, 0)
+        step_idx = (
+            current_step if current_step is not None else self.current_step.get(playbook_name, 0)
+        )
 
         if step_idx >= len(playbook["steps"]):
             return {"complete": True, "message": "All playbook steps completed"}
@@ -909,13 +961,14 @@ class PlaybookExecutor:
             "total_steps": len(playbook["steps"]),
             "action": step["action"],
             "description": step["description"],
-            "guidance": f"Execute: {step['description']}"
+            "guidance": f"Execute: {step['description']}",
         }
 
 
 # =============================================================================
 # Task 5: Documentation Generator - SOLUTION
 # =============================================================================
+
 
 class IncidentDocumenter:
     """Generate incident documentation."""
@@ -988,13 +1041,17 @@ class IncidentDocumenter:
         response = "# Executive Summary\n\n"
 
         response += "## What Happened\n\n"
-        response += "A security incident was detected involving suspicious activity on an endpoint. "
+        response += (
+            "A security incident was detected involving suspicious activity on an endpoint. "
+        )
         response += "The incident response team investigated and took containment actions.\n\n"
 
         response += "## Business Impact\n\n"
         response += "- Systems affected: "
         if self.state and self.state.state.timeline_events:
-            hosts = set(e.get("host", "") for e in self.state.state.timeline_events if e.get("host"))
+            hosts = set(
+                e.get("host", "") for e in self.state.state.timeline_events if e.get("host")
+            )
             response += f"{len(hosts)} endpoint(s)\n"
         else:
             response += "Under investigation\n"
@@ -1047,12 +1104,15 @@ class IncidentDocumenter:
 # Main Execution
 # =============================================================================
 
+
 def main():
     """Main execution flow."""
-    console.print(Panel.fit(
-        "[bold]Lab 10: Incident Response Copilot - SOLUTION[/bold]",
-        border_style="blue"
-    ))
+    console.print(
+        Panel.fit(
+            "[bold]Lab 10: Incident Response Copilot - SOLUTION[/bold]",
+            border_style="blue",
+        )
+    )
 
     # Sample SIEM data
     sample_siem_data = {
@@ -1062,7 +1122,7 @@ def main():
                 "host": "WORKSTATION-42",
                 "event_type": "authentication",
                 "user": "jsmith",
-                "details": "User login successful"
+                "details": "User login successful",
             },
             {
                 "timestamp": "2024-01-15T09:23:00Z",
@@ -1071,7 +1131,7 @@ def main():
                 "user": "jsmith",
                 "process": "powershell.exe",
                 "command_line": "powershell -enc SGVsbG8gV29ybGQ=",
-                "details": "Encoded PowerShell execution"
+                "details": "Encoded PowerShell execution",
             },
             {
                 "timestamp": "2024-01-15T09:24:00Z",
@@ -1080,7 +1140,7 @@ def main():
                 "user": "jsmith",
                 "dest_ip": "185.143.223.47",
                 "dest_port": 443,
-                "details": "Outbound connection to suspicious IP"
+                "details": "Outbound connection to suspicious IP",
             },
             {
                 "timestamp": "2024-01-15T09:25:00Z",
@@ -1088,8 +1148,8 @@ def main():
                 "event_type": "scheduled_task",
                 "user": "jsmith",
                 "task_name": "WindowsUpdate",
-                "details": "New scheduled task created"
-            }
+                "details": "New scheduled task created",
+            },
         ],
         "alerts": [
             {
@@ -1098,9 +1158,9 @@ def main():
                 "host": "WORKSTATION-42",
                 "severity": "HIGH",
                 "title": "Suspicious PowerShell Activity",
-                "description": "Encoded PowerShell command followed by C2 connection"
+                "description": "Encoded PowerShell command followed by C2 connection",
             }
-        ]
+        ],
     }
 
     # Initialize
@@ -1126,7 +1186,7 @@ def main():
         "Isolate the host",
         "confirm",
         "What should I do next?",
-        "Generate a timeline"
+        "Generate a timeline",
     ]
 
     for msg in demo_conversation:

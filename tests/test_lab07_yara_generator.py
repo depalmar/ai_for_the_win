@@ -1,28 +1,24 @@
 #!/usr/bin/env python3
 """Tests for Lab 07: YARA Rule Generator."""
 
-import pytest
 import sys
 from pathlib import Path
 
+import pytest
+
 # Clear any existing 'main' module and lab paths to avoid conflicts
 for key in list(sys.modules.keys()):
-    if key == 'main' or key.startswith('main.'):
+    if key == "main" or key.startswith("main."):
         del sys.modules[key]
 
 # Remove any existing lab paths from sys.path
-sys.path = [p for p in sys.path if '/labs/lab' not in p]
+sys.path = [p for p in sys.path if "/labs/lab" not in p]
 
 # Add this lab's path
 lab_path = str(Path(__file__).parent.parent / "labs" / "lab07-yara-generator" / "solution")
 sys.path.insert(0, lab_path)
 
-from main import (
-    MalwareSampleAnalyzer,
-    YARAPatternExtractor,
-    YARARuleBuilder,
-    validate_yara_rule
-)
+from main import MalwareSampleAnalyzer, YARAPatternExtractor, YARARuleBuilder, validate_yara_rule
 
 
 @pytest.fixture
@@ -110,14 +106,12 @@ class TestYARARuleBuilder:
         patterns = {
             "strings": [
                 {"name": "url", "value": "http://malware.com", "type": "ascii"},
-                {"name": "api", "value": "CreateRemoteThread", "type": "ascii"}
+                {"name": "api", "value": "CreateRemoteThread", "type": "ascii"},
             ]
         }
 
         rule = builder.build_rule(
-            rule_name="TestMalware",
-            patterns=patterns,
-            description="Test malware rule"
+            rule_name="TestMalware", patterns=patterns, description="Test malware rule"
         )
 
         assert rule is not None
@@ -129,17 +123,13 @@ class TestYARARuleBuilder:
     def test_rule_has_metadata(self):
         """Test that rule includes metadata."""
         builder = YARARuleBuilder()
-        patterns = {
-            "strings": [
-                {"name": "s1", "value": "test", "type": "ascii"}
-            ]
-        }
+        patterns = {"strings": [{"name": "s1", "value": "test", "type": "ascii"}]}
 
         rule = builder.build_rule(
             rule_name="TestRule",
             patterns=patterns,
             description="Test description",
-            author="Test Author"
+            author="Test Author",
         )
 
         assert "meta:" in rule

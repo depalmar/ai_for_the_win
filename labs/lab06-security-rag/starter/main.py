@@ -10,22 +10,23 @@ Instructions:
 3. Compare your results with the solution
 """
 
-import os
 import json
-from typing import List, Dict, Optional
+import os
 from pathlib import Path
+from typing import Dict, List, Optional
 
 from dotenv import load_dotenv
 
 load_dotenv()
 
 try:
-    from langchain_anthropic import ChatAnthropic
-    from langchain_core.messages import HumanMessage, SystemMessage
-    from langchain_core.documents import Document
     from langchain.text_splitter import RecursiveCharacterTextSplitter
-    from langchain_community.vectorstores import Chroma
+    from langchain_anthropic import ChatAnthropic
     from langchain_community.embeddings import HuggingFaceEmbeddings
+    from langchain_community.vectorstores import Chroma
+    from langchain_core.documents import Document
+    from langchain_core.messages import HumanMessage, SystemMessage
+
     LANGCHAIN_AVAILABLE = True
 except ImportError:
     LANGCHAIN_AVAILABLE = False
@@ -40,6 +41,7 @@ console = Console()
 # =============================================================================
 # Task 1: Document Ingestion
 # =============================================================================
+
 
 class SecurityDocLoader:
     """Load and process security documents."""
@@ -93,10 +95,9 @@ class SecurityDocLoader:
 # Task 2: Text Chunking
 # =============================================================================
 
+
 def chunk_security_documents(
-    documents: List[Document],
-    chunk_size: int = 800,
-    chunk_overlap: int = 100
+    documents: List[Document], chunk_size: int = 800, chunk_overlap: int = 100
 ) -> List[Document]:
     """
     Chunk documents for optimal retrieval.
@@ -116,10 +117,8 @@ def chunk_security_documents(
 # Task 3: Create Embeddings
 # =============================================================================
 
-def create_vector_store(
-    chunks: List[Document],
-    persist_directory: str = None
-) -> object:
+
+def create_vector_store(chunks: List[Document], persist_directory: str = None) -> object:
     """
     Create vector store with embeddings.
 
@@ -142,6 +141,7 @@ def load_vector_store(persist_directory: str) -> object:
 # =============================================================================
 # Task 4: Build Retriever
 # =============================================================================
+
 
 def create_security_retriever(vector_store, k: int = 5):
     """
@@ -218,12 +218,7 @@ class SecurityRAG:
         # YOUR CODE HERE
         pass
 
-    def query_with_filters(
-        self,
-        question: str,
-        doc_type: str = None,
-        severity: str = None
-    ) -> dict:
+    def query_with_filters(self, question: str, doc_type: str = None, severity: str = None) -> dict:
         """
         Query with metadata filters.
 
@@ -240,6 +235,7 @@ class SecurityRAG:
 # =============================================================================
 # Task 6: Evaluation
 # =============================================================================
+
 
 def evaluate_rag_system(rag: SecurityRAG, test_cases: List[dict]) -> dict:
     """
@@ -266,12 +262,10 @@ def evaluate_rag_system(rag: SecurityRAG, test_cases: List[dict]) -> dict:
 # Main Execution
 # =============================================================================
 
+
 def main():
     """Main execution flow."""
-    console.print(Panel.fit(
-        "[bold]Lab 06: Security RAG System[/bold]",
-        border_style="blue"
-    ))
+    console.print(Panel.fit("[bold]Lab 06: Security RAG System[/bold]", border_style="blue"))
 
     if not LANGCHAIN_AVAILABLE:
         console.print("[red]LangChain not available. Install required packages.[/red]")
@@ -326,7 +320,7 @@ def main():
     test_queries = [
         "What is CVE-2024-1234 and how do I mitigate it?",
         "How do attackers use PowerShell for execution?",
-        "What are the first steps when responding to ransomware?"
+        "What are the first steps when responding to ransomware?",
     ]
 
     for query in test_queries:
@@ -351,7 +345,7 @@ def create_sample_data(data_dir: Path):
             "severity": "CRITICAL",
             "affected_products": ["Apache HTTP Server 2.4.x < 2.4.58"],
             "mitigation": "Update to Apache 2.4.58 or later. Apply vendor patches immediately.",
-            "references": ["https://nvd.nist.gov/vuln/detail/CVE-2024-1234"]
+            "references": ["https://nvd.nist.gov/vuln/detail/CVE-2024-1234"],
         },
         {
             "cve_id": "CVE-2024-5678",
@@ -360,8 +354,8 @@ def create_sample_data(data_dir: Path):
             "severity": "HIGH",
             "affected_products": ["MySQL 8.0.x < 8.0.35"],
             "mitigation": "Update to MySQL 8.0.35 or later. Implement input validation.",
-            "references": ["https://nvd.nist.gov/vuln/detail/CVE-2024-5678"]
-        }
+            "references": ["https://nvd.nist.gov/vuln/detail/CVE-2024-5678"],
+        },
     ]
 
     cve_dir = data_dir / "cves"
@@ -376,7 +370,11 @@ def create_sample_data(data_dir: Path):
             "tactic": "Execution",
             "description": "Adversaries may abuse PowerShell commands and scripts for execution. PowerShell is a powerful interactive command-line interface and scripting environment included in the Windows operating system.",
             "detection": "Monitor for loading of PowerShell modules. Enable PowerShell script block logging. Look for obfuscated commands.",
-            "mitigations": ["Disable PowerShell for users who don't need it", "Enable Constrained Language Mode", "Use application whitelisting"]
+            "mitigations": [
+                "Disable PowerShell for users who don't need it",
+                "Enable Constrained Language Mode",
+                "Use application whitelisting",
+            ],
         },
         {
             "technique_id": "T1053.005",
@@ -384,8 +382,11 @@ def create_sample_data(data_dir: Path):
             "tactic": "Persistence",
             "description": "Adversaries may abuse task scheduling functionality to facilitate initial or recurring execution of malicious code.",
             "detection": "Monitor scheduled task creation via schtasks.exe, at.exe, or Task Scheduler MMC.",
-            "mitigations": ["Restrict task creation permissions", "Monitor scheduled task changes"]
-        }
+            "mitigations": [
+                "Restrict task creation permissions",
+                "Monitor scheduled task changes",
+            ],
+        },
     ]
 
     mitre_dir = data_dir / "mitre"

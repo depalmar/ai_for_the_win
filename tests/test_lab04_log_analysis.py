@@ -1,30 +1,25 @@
 #!/usr/bin/env python3
 """Tests for Lab 04: LLM-Powered Log Analysis."""
 
-import pytest
 import sys
 from pathlib import Path
 from unittest.mock import Mock, patch
 
+import pytest
+
 # Clear any existing 'main' module and lab paths to avoid conflicts
 for key in list(sys.modules.keys()):
-    if key == 'main' or key.startswith('main.'):
+    if key == "main" or key.startswith("main."):
         del sys.modules[key]
 
 # Remove any existing lab paths from sys.path
-sys.path = [p for p in sys.path if '/labs/lab' not in p]
+sys.path = [p for p in sys.path if "/labs/lab" not in p]
 
 # Add this lab's path
 lab_path = str(Path(__file__).parent.parent / "labs" / "lab04-llm-log-analysis" / "solution")
 sys.path.insert(0, lab_path)
 
-from main import (
-    LogParser,
-    LogAnalyzer,
-    SecurityEventClassifier,
-    ThreatDetector,
-    ReportGenerator
-)
+from main import LogAnalyzer, LogParser, ReportGenerator, SecurityEventClassifier, ThreatDetector
 
 
 @pytest.fixture
@@ -35,8 +30,8 @@ def sample_log_entries():
         "2024-01-15 08:10:45 WARNING [sshd] Failed password for invalid user test from 10.0.0.55 port 43521 ssh2",
         "2024-01-15 08:10:46 WARNING [sshd] Failed password for invalid user test from 10.0.0.55 port 43522 ssh2",
         "2024-01-15 08:10:47 WARNING [sshd] Failed password for invalid user admin from 10.0.0.55 port 43523 ssh2",
-        "2024-01-15 08:25:33 ERROR [nginx] 192.168.1.200 - - \"GET /../../etc/passwd HTTP/1.1\" 400 0",
-        "2024-01-15 08:25:34 ERROR [nginx] 192.168.1.200 - - \"GET /admin/../../../etc/shadow HTTP/1.1\" 400 0",
+        '2024-01-15 08:25:33 ERROR [nginx] 192.168.1.200 - - "GET /../../etc/passwd HTTP/1.1" 400 0',
+        '2024-01-15 08:25:34 ERROR [nginx] 192.168.1.200 - - "GET /admin/../../../etc/shadow HTTP/1.1" 400 0',
     ]
 
 
@@ -46,8 +41,8 @@ def sample_attack_logs():
     return [
         "2024-01-15 14:15:05 WARNING [nginx] 45.33.32.156 - - \"GET /api/v1/search?q=test'%20OR%20'1'='1 HTTP/1.1\" 500 0",
         "2024-01-15 14:15:06 ERROR [app] SQL Error: You have an error in your SQL syntax near '1'='1'",
-        "2024-01-15 14:20:01 WARNING [nginx] 45.33.32.156 - - \"GET /api/v1/search?q='%20UNION%20SELECT%20username,password,email%20FROM%20users-- HTTP/1.1\" 200 8934",
-        "2024-01-15 14:30:00 INFO [nginx] 45.33.32.156 - - \"POST /api/v1/login HTTP/1.1\" 200 512",
+        '2024-01-15 14:20:01 WARNING [nginx] 45.33.32.156 - - "GET /api/v1/search?q=\'%20UNION%20SELECT%20username,password,email%20FROM%20users-- HTTP/1.1" 200 8934',
+        '2024-01-15 14:30:00 INFO [nginx] 45.33.32.156 - - "POST /api/v1/login HTTP/1.1" 200 512',
         "2024-01-15 14:30:01 WARNING [app] Successful login for user 'admin' from unusual IP 45.33.32.156",
     ]
 
@@ -61,35 +56,35 @@ class TestLogParser:
         parsed = parser.parse(sample_log_entries[0])
 
         assert parsed is not None
-        assert 'timestamp' in parsed
-        assert 'level' in parsed
-        assert 'source' in parsed
-        assert 'message' in parsed
+        assert "timestamp" in parsed
+        assert "level" in parsed
+        assert "source" in parsed
+        assert "message" in parsed
 
     def test_extract_timestamp(self, sample_log_entries):
         """Test timestamp extraction."""
         parser = LogParser()
         parsed = parser.parse(sample_log_entries[0])
 
-        assert parsed['timestamp'] is not None
-        assert '2024-01-15' in parsed['timestamp']
+        assert parsed["timestamp"] is not None
+        assert "2024-01-15" in parsed["timestamp"]
 
     def test_extract_log_level(self, sample_log_entries):
         """Test log level extraction."""
         parser = LogParser()
 
         info_log = parser.parse(sample_log_entries[0])
-        assert info_log['level'] == 'INFO'
+        assert info_log["level"] == "INFO"
 
         warning_log = parser.parse(sample_log_entries[1])
-        assert warning_log['level'] == 'WARNING'
+        assert warning_log["level"] == "WARNING"
 
     def test_extract_source(self, sample_log_entries):
         """Test source/service extraction."""
         parser = LogParser()
         parsed = parser.parse(sample_log_entries[0])
 
-        assert parsed['source'] == 'sshd'
+        assert parsed["source"] == "sshd"
 
     def test_parse_multiple_logs(self, sample_log_entries):
         """Test parsing multiple log entries."""
@@ -103,8 +98,8 @@ class TestLogParser:
         parser = LogParser()
         parsed = parser.parse(sample_log_entries[0])
 
-        assert 'metadata' in parsed
-        assert '192.168.1.50' in str(parsed)
+        assert "metadata" in parsed
+        assert "192.168.1.50" in str(parsed)
 
 
 class TestSecurityEventClassifier:
@@ -116,7 +111,7 @@ class TestSecurityEventClassifier:
         result = classifier.classify(sample_log_entries[0])
 
         assert result is not None
-        assert result['category'] == 'authentication' or 'auth' in result.get('type', '').lower()
+        assert result["category"] == "authentication" or "auth" in result.get("type", "").lower()
 
     def test_classify_authentication_failure(self, sample_log_entries):
         """Test classification of failed authentication."""
@@ -124,7 +119,10 @@ class TestSecurityEventClassifier:
         result = classifier.classify(sample_log_entries[1])
 
         assert result is not None
-        assert 'fail' in str(result).lower() or result.get('severity', '') in ['WARNING', 'HIGH']
+        assert "fail" in str(result).lower() or result.get("severity", "") in [
+            "WARNING",
+            "HIGH",
+        ]
 
     def test_classify_path_traversal(self, sample_log_entries):
         """Test classification of path traversal attempt."""
@@ -133,7 +131,7 @@ class TestSecurityEventClassifier:
 
         assert result is not None
         # Should detect as attack or suspicious
-        assert result.get('is_suspicious', False) or 'attack' in str(result).lower()
+        assert result.get("is_suspicious", False) or "attack" in str(result).lower()
 
 
 class TestThreatDetector:
@@ -148,7 +146,7 @@ class TestThreatDetector:
         result = detector.detect(failed_logins)
 
         assert result is not None
-        assert len(result.get('threats', [])) > 0 or result.get('brute_force_detected', False)
+        assert len(result.get("threats", [])) > 0 or result.get("brute_force_detected", False)
 
     def test_detect_sql_injection(self, sample_attack_logs):
         """Test SQL injection detection."""
@@ -159,8 +157,8 @@ class TestThreatDetector:
 
         assert result is not None
         # Should detect SQLi
-        threats = result.get('threats', [])
-        assert len(threats) > 0 or 'sql' in str(result).lower()
+        threats = result.get("threats", [])
+        assert len(threats) > 0 or "sql" in str(result).lower()
 
     def test_detect_path_traversal(self, sample_log_entries):
         """Test path traversal detection."""
@@ -177,10 +175,10 @@ class TestThreatDetector:
         result = detector.extract_iocs(sample_attack_logs)
 
         assert result is not None
-        assert 'ip_addresses' in result or 'ips' in result
+        assert "ip_addresses" in result or "ips" in result
         # Should find attacker IP
         iocs = str(result)
-        assert '45.33.32.156' in iocs
+        assert "45.33.32.156" in iocs
 
 
 class TestLogAnalyzer:
@@ -192,7 +190,7 @@ class TestLogAnalyzer:
         result = analyzer.analyze(sample_log_entries)
 
         assert result is not None
-        assert 'summary' in result or 'analysis' in result
+        assert "summary" in result or "analysis" in result
 
     def test_analyze_returns_severity(self, sample_attack_logs):
         """Test that analysis includes severity assessment."""
@@ -201,7 +199,7 @@ class TestLogAnalyzer:
 
         assert result is not None
         # Should include severity assessment
-        assert 'severity' in result or 'risk' in str(result).lower()
+        assert "severity" in result or "risk" in str(result).lower()
 
     def test_analyze_maps_mitre(self, sample_attack_logs):
         """Test MITRE ATT&CK mapping."""
@@ -210,7 +208,9 @@ class TestLogAnalyzer:
 
         # Analysis should reference MITRE techniques
         result_str = str(result)
-        assert 'T1' in result_str or 'mitre' in result_str.lower() or 'technique' in result_str.lower()
+        assert (
+            "T1" in result_str or "mitre" in result_str.lower() or "technique" in result_str.lower()
+        )
 
 
 class TestReportGenerator:
@@ -237,7 +237,7 @@ class TestReportGenerator:
 
         assert report is not None
         # Should include technical details
-        assert 'Timeline' in report or 'IOC' in report or 'Event' in report
+        assert "Timeline" in report or "IOC" in report or "Event" in report
 
 
 if __name__ == "__main__":

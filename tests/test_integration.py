@@ -9,9 +9,10 @@ Or set SKIP_API_TESTS=true environment variable.
 """
 
 import os
-import pytest
 import sys
 from pathlib import Path
+
+import pytest
 
 # Check if we should skip API tests
 SKIP_API_TESTS = os.environ.get("SKIP_API_TESTS", "false").lower() == "true"
@@ -26,7 +27,7 @@ def has_anthropic_key():
 # Skip all tests in this module if no API key or SKIP_API_TESTS is set
 pytestmark = pytest.mark.skipif(
     SKIP_API_TESTS or not has_anthropic_key(),
-    reason="Integration tests require ANTHROPIC_API_KEY and SKIP_API_TESTS=false"
+    reason="Integration tests require ANTHROPIC_API_KEY and SKIP_API_TESTS=false",
 )
 
 
@@ -41,7 +42,7 @@ class TestAnthropicConnection:
         response = client.messages.create(
             model="claude-3-haiku-20240307",  # Use haiku for speed
             max_tokens=10,
-            messages=[{"role": "user", "content": "Say 'test'"}]
+            messages=[{"role": "user", "content": "Say 'test'"}],
         )
 
         assert response.content is not None
@@ -57,7 +58,7 @@ class TestAnthropicConnection:
         with client.messages.stream(
             model="claude-3-haiku-20240307",
             max_tokens=20,
-            messages=[{"role": "user", "content": "Count to 3"}]
+            messages=[{"role": "user", "content": "Count to 3"}],
         ) as stream:
             for text in stream.text_stream:
                 collected.append(text)
@@ -83,10 +84,12 @@ class TestLab04LogAnalysis:
         response = client.messages.create(
             model="claude-3-haiku-20240307",
             max_tokens=200,
-            messages=[{
-                "role": "user",
-                "content": f"Briefly analyze this security log:\n{sample_log}"
-            }]
+            messages=[
+                {
+                    "role": "user",
+                    "content": f"Briefly analyze this security log:\n{sample_log}",
+                }
+            ],
         )
 
         result = response.content[0].text.lower()
@@ -105,10 +108,12 @@ class TestLab05ThreatIntel:
         response = client.messages.create(
             model="claude-3-haiku-20240307",
             max_tokens=200,
-            messages=[{
-                "role": "user",
-                "content": "What type of IOC is 192.168.1.1? Respond in one sentence."
-            }]
+            messages=[
+                {
+                    "role": "user",
+                    "content": "What type of IOC is 192.168.1.1? Respond in one sentence.",
+                }
+            ],
         )
 
         result = response.content[0].text.lower()
@@ -126,12 +131,14 @@ class TestLab07YARAGeneration:
         response = client.messages.create(
             model="claude-3-haiku-20240307",
             max_tokens=500,
-            messages=[{
-                "role": "user",
-                "content": """Generate a simple YARA rule to detect files containing
+            messages=[
+                {
+                    "role": "user",
+                    "content": """Generate a simple YARA rule to detect files containing
                 the string "malware_test" and the hex bytes "4D 5A 90 00".
-                Return only the YARA rule."""
-            }]
+                Return only the YARA rule.""",
+                }
+            ],
         )
 
         result = response.content[0].text
@@ -158,10 +165,12 @@ class TestLab11RansomwareAnalysis:
         response = client.messages.create(
             model="claude-3-haiku-20240307",
             max_tokens=300,
-            messages=[{
-                "role": "user",
-                "content": f"Extract IOCs from this ransom note:\n{sample_note}\nList the bitcoin address and email."
-            }]
+            messages=[
+                {
+                    "role": "user",
+                    "content": f"Extract IOCs from this ransom note:\n{sample_note}\nList the bitcoin address and email.",
+                }
+            ],
         )
 
         result = response.content[0].text.lower()
@@ -177,34 +186,28 @@ class TestToolUse:
         """Test that tool calling works."""
         from anthropic import Anthropic
 
-        tools = [{
-            "name": "get_weather",
-            "description": "Get weather for a location",
-            "input_schema": {
-                "type": "object",
-                "properties": {
-                    "location": {"type": "string", "description": "City name"}
+        tools = [
+            {
+                "name": "get_weather",
+                "description": "Get weather for a location",
+                "input_schema": {
+                    "type": "object",
+                    "properties": {"location": {"type": "string", "description": "City name"}},
+                    "required": ["location"],
                 },
-                "required": ["location"]
             }
-        }]
+        ]
 
         client = Anthropic()
         response = client.messages.create(
             model="claude-3-haiku-20240307",
             max_tokens=100,
             tools=tools,
-            messages=[{
-                "role": "user",
-                "content": "What's the weather in London?"
-            }]
+            messages=[{"role": "user", "content": "What's the weather in London?"}],
         )
 
         # Should try to use the tool
-        has_tool_use = any(
-            block.type == "tool_use"
-            for block in response.content
-        )
+        has_tool_use = any(block.type == "tool_use" for block in response.content)
         assert has_tool_use or response.stop_reason == "end_turn"
 
 
@@ -213,6 +216,7 @@ class TestToolUse:
 def anthropic_client():
     """Provide Anthropic client for tests."""
     from anthropic import Anthropic
+
     return Anthropic()
 
 

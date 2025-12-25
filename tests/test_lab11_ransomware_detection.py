@@ -1,21 +1,22 @@
 #!/usr/bin/env python3
 """Tests for Lab 11: Ransomware Detection & Response."""
 
-import pytest
-import sys
-import math
 import importlib
+import math
+import sys
+from dataclasses import asdict
 from pathlib import Path
 from unittest.mock import Mock, patch
-from dataclasses import asdict
+
+import pytest
 
 # Clear any existing 'main' module and lab paths to avoid conflicts
 for key in list(sys.modules.keys()):
-    if key == 'main' or key.startswith('main.'):
+    if key == "main" or key.startswith("main."):
         del sys.modules[key]
 
 # Remove any existing lab paths from sys.path
-sys.path = [p for p in sys.path if '/labs/lab' not in p]
+sys.path = [p for p in sys.path if "/labs/lab" not in p]
 
 # Add this lab's path
 lab_path = str(Path(__file__).parent.parent / "labs" / "lab11-ransomware-detection" / "solution")
@@ -23,18 +24,18 @@ sys.path.insert(0, lab_path)
 
 from main import (
     FileEvent,
-    RansomNoteIntel,
     IncidentContext,
-    RansomwareBehaviorDetector,
     RansomNoteAnalyzer,
+    RansomNoteIntel,
+    RansomwareBehaviorDetector,
+    RansomwareDetectionPipeline,
     RansomwareResponder,
-    RansomwareDetectionPipeline
 )
-
 
 # =============================================================================
 # Fixtures
 # =============================================================================
+
 
 @pytest.fixture
 def sample_file_events():
@@ -50,7 +51,7 @@ def sample_file_events():
             file_extension=".xlsx",
             entropy=4.2,
             size_bytes=50000,
-            label="normal"
+            label="normal",
         ),
         FileEvent(
             id=2,
@@ -62,7 +63,7 @@ def sample_file_events():
             file_extension=".locked",
             entropy=7.98,
             size_bytes=50000,
-            label="ransomware_encryption"
+            label="ransomware_encryption",
         ),
         FileEvent(
             id=3,
@@ -74,7 +75,7 @@ def sample_file_events():
             file_extension=".locked",
             entropy=7.95,
             size_bytes=75000,
-            label="ransomware_encryption"
+            label="ransomware_encryption",
         ),
     ]
 
@@ -93,7 +94,7 @@ def ransomware_events_with_shadow_delete():
             file_extension="",
             entropy=0,
             size_bytes=0,
-            label="ransomware_prep"
+            label="ransomware_prep",
         ),
         FileEvent(
             id=2,
@@ -105,7 +106,7 @@ def ransomware_events_with_shadow_delete():
             file_extension=".encrypted",
             entropy=7.99,
             size_bytes=100000,
-            label="ransomware_encryption"
+            label="ransomware_encryption",
         ),
         FileEvent(
             id=3,
@@ -117,7 +118,7 @@ def ransomware_events_with_shadow_delete():
             file_extension=".txt",
             entropy=3.5,
             size_bytes=2000,
-            label="ransomware_note"
+            label="ransomware_note",
         ),
     ]
 
@@ -152,7 +153,7 @@ def incident_context():
         encryption_progress=75.0,
         lateral_movement_detected=True,
         exfiltration_detected=False,
-        shadow_deletion_detected=True
+        shadow_deletion_detected=True,
     )
 
 
@@ -165,6 +166,7 @@ def behavior_detector():
 # =============================================================================
 # RansomwareBehaviorDetector Tests
 # =============================================================================
+
 
 class TestRansomwareBehaviorDetector:
     """Tests for RansomwareBehaviorDetector."""
@@ -190,6 +192,7 @@ class TestRansomwareBehaviorDetector:
         """Test entropy calculation with random-like data."""
         # Mix of all byte values should have high entropy
         import os
+
         data = os.urandom(1000)
         entropy = RansomwareBehaviorDetector.calculate_entropy(data)
         # Random data should have entropy close to 8 (max for bytes)
@@ -206,11 +209,16 @@ class TestRansomwareBehaviorDetector:
         """Test analysis of normal events."""
         normal_events = [
             FileEvent(
-                id=1, timestamp="2024-01-15T14:00:00Z",
-                process_name="excel.exe", process_id=1234,
-                operation="WRITE", file_path="C:\\doc.xlsx",
-                file_extension=".xlsx", entropy=4.5,
-                size_bytes=50000, label="normal"
+                id=1,
+                timestamp="2024-01-15T14:00:00Z",
+                process_name="excel.exe",
+                process_id=1234,
+                operation="WRITE",
+                file_path="C:\\doc.xlsx",
+                file_extension=".xlsx",
+                entropy=4.5,
+                size_bytes=50000,
+                label="normal",
             )
         ]
 
@@ -228,7 +236,9 @@ class TestRansomwareBehaviorDetector:
         assert result["encryption_pattern"] is True
         assert result["affected_files"] >= 1
 
-    def test_analyze_full_ransomware_attack(self, behavior_detector, ransomware_events_with_shadow_delete):
+    def test_analyze_full_ransomware_attack(
+        self, behavior_detector, ransomware_events_with_shadow_delete
+    ):
         """Test analysis of full ransomware attack."""
         result = behavior_detector.analyze_events(ransomware_events_with_shadow_delete)
 
@@ -250,11 +260,15 @@ class TestRansomwareBehaviorDetector:
         """Test shadow deletion detection."""
         shadow_events = [
             FileEvent(
-                id=1, timestamp="2024-01-15T14:00:00Z",
-                process_name="cmd.exe", process_id=1234,
+                id=1,
+                timestamp="2024-01-15T14:00:00Z",
+                process_name="cmd.exe",
+                process_id=1234,
                 operation="EXECUTE",
                 file_path="vssadmin delete shadows /all",
-                file_extension="", entropy=0, size_bytes=0
+                file_extension="",
+                entropy=0,
+                size_bytes=0,
             )
         ]
 
@@ -265,11 +279,15 @@ class TestRansomwareBehaviorDetector:
         """Test WMIC shadow deletion detection."""
         shadow_events = [
             FileEvent(
-                id=1, timestamp="2024-01-15T14:00:00Z",
-                process_name="cmd.exe", process_id=1234,
+                id=1,
+                timestamp="2024-01-15T14:00:00Z",
+                process_name="cmd.exe",
+                process_id=1234,
                 operation="EXECUTE",
                 file_path="wmic shadowcopy delete",
-                file_extension="", entropy=0, size_bytes=0
+                file_extension="",
+                entropy=0,
+                size_bytes=0,
             )
         ]
 
@@ -280,19 +298,27 @@ class TestRansomwareBehaviorDetector:
         """Test ransom note detection."""
         note_events = [
             FileEvent(
-                id=1, timestamp="2024-01-15T14:00:00Z",
-                process_name="malware.exe", process_id=1234,
+                id=1,
+                timestamp="2024-01-15T14:00:00Z",
+                process_name="malware.exe",
+                process_id=1234,
                 operation="CREATE",
                 file_path="C:\\Users\\victim\\README_RESTORE_FILES.txt",
-                file_extension=".txt", entropy=3.5, size_bytes=2000
+                file_extension=".txt",
+                entropy=3.5,
+                size_bytes=2000,
             ),
             FileEvent(
-                id=2, timestamp="2024-01-15T14:00:30Z",
-                process_name="malware.exe", process_id=1234,
+                id=2,
+                timestamp="2024-01-15T14:00:30Z",
+                process_name="malware.exe",
+                process_id=1234,
                 operation="CREATE",
                 file_path="C:\\Users\\victim\\HOW_TO_DECRYPT.html",
-                file_extension=".html", entropy=3.2, size_bytes=5000
-            )
+                file_extension=".html",
+                entropy=3.2,
+                size_bytes=5000,
+            ),
         ]
 
         result = behavior_detector.detect_ransom_note(note_events)
@@ -310,6 +336,7 @@ class TestRansomwareBehaviorDetector:
 # =============================================================================
 # RansomNoteAnalyzer Tests
 # =============================================================================
+
 
 class TestRansomNoteAnalyzer:
     """Tests for RansomNoteAnalyzer."""
@@ -362,7 +389,7 @@ class TestRansomNoteAnalyzer:
         assert iocs["onion"] == []
         assert iocs["email"] == []
 
-    @patch.object(RansomNoteAnalyzer, '__init__', lambda x: None)
+    @patch.object(RansomNoteAnalyzer, "__init__", lambda x: None)
     def test_analyze_requires_llm(self, sample_ransom_note):
         """Test that analyze method uses LLM client."""
         analyzer = RansomNoteAnalyzer()
@@ -379,6 +406,7 @@ class TestRansomNoteAnalyzer:
 # =============================================================================
 # RansomwareResponder Tests
 # =============================================================================
+
 
 class TestRansomwareResponder:
     """Tests for RansomwareResponder."""
@@ -426,9 +454,7 @@ class TestRansomwareResponder:
     def test_assess_severity_medium(self):
         """Test medium severity assessment."""
         context = IncidentContext(
-            affected_hosts=["HOST-001"],
-            affected_files=50,
-            encryption_progress=10.0
+            affected_hosts=["HOST-001"], affected_files=50, encryption_progress=10.0
         )
         responder = RansomwareResponder()
 
@@ -495,6 +521,7 @@ class TestRansomwareResponder:
 # IncidentContext Tests
 # =============================================================================
 
+
 class TestIncidentContext:
     """Tests for IncidentContext dataclass."""
 
@@ -515,7 +542,7 @@ class TestIncidentContext:
         context = IncidentContext(
             affected_hosts=["HOST-A", "HOST-B"],
             affected_files=1000,
-            ransomware_family="BlackCat"
+            ransomware_family="BlackCat",
         )
 
         assert len(context.affected_hosts) == 2
@@ -526,6 +553,7 @@ class TestIncidentContext:
 # =============================================================================
 # RansomwareDetectionPipeline Tests
 # =============================================================================
+
 
 class TestRansomwareDetectionPipeline:
     """Tests for RansomwareDetectionPipeline."""
@@ -542,18 +570,20 @@ class TestRansomwareDetectionPipeline:
         """Test processing normal events."""
         pipeline = RansomwareDetectionPipeline()
 
-        events = [{
-            "id": 1,
-            "timestamp": "2024-01-15T14:00:00Z",
-            "process_name": "word.exe",
-            "process_id": 1234,
-            "operation": "WRITE",
-            "file_path": "C:\\doc.docx",
-            "file_extension": ".docx",
-            "entropy": 4.0,
-            "size_bytes": 50000,
-            "label": "normal"
-        }]
+        events = [
+            {
+                "id": 1,
+                "timestamp": "2024-01-15T14:00:00Z",
+                "process_name": "word.exe",
+                "process_id": 1234,
+                "operation": "WRITE",
+                "file_path": "C:\\doc.docx",
+                "file_extension": ".docx",
+                "entropy": 4.0,
+                "size_bytes": 50000,
+                "label": "normal",
+            }
+        ]
 
         result = pipeline.process_events(events)
 
@@ -575,7 +605,7 @@ class TestRansomwareDetectionPipeline:
                 "file_extension": "",
                 "entropy": 0,
                 "size_bytes": 0,
-                "label": "ransomware_prep"
+                "label": "ransomware_prep",
             },
             {
                 "id": 2,
@@ -587,7 +617,7 @@ class TestRansomwareDetectionPipeline:
                 "file_extension": ".encrypted",
                 "entropy": 7.99,
                 "size_bytes": 100000,
-                "label": "ransomware_encryption"
+                "label": "ransomware_encryption",
             },
             {
                 "id": 3,
@@ -599,8 +629,8 @@ class TestRansomwareDetectionPipeline:
                 "file_extension": ".txt",
                 "entropy": 3.5,
                 "size_bytes": 2000,
-                "label": "ransomware_note"
-            }
+                "label": "ransomware_note",
+            },
         ]
 
         result = pipeline.process_events(events)
@@ -613,6 +643,7 @@ class TestRansomwareDetectionPipeline:
 # =============================================================================
 # FileEvent Tests
 # =============================================================================
+
 
 class TestFileEvent:
     """Tests for FileEvent dataclass."""
@@ -628,7 +659,7 @@ class TestFileEvent:
             file_path="C:\\test.txt",
             file_extension=".txt",
             entropy=4.5,
-            size_bytes=1000
+            size_bytes=1000,
         )
 
         assert event.id == 1
@@ -645,7 +676,7 @@ class TestFileEvent:
             file_path="C:\\test.txt",
             file_extension=".txt",
             entropy=4.5,
-            size_bytes=1000
+            size_bytes=1000,
         )
 
         event_dict = asdict(event)

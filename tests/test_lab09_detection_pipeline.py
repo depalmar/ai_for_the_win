@@ -1,31 +1,26 @@
 #!/usr/bin/env python3
 """Tests for Lab 09: Multi-Stage Threat Detection Pipeline."""
 
-import pytest
-import numpy as np
 import sys
-from pathlib import Path
 from datetime import datetime
+from pathlib import Path
+
+import numpy as np
+import pytest
 
 # Clear any existing 'main' module and lab paths to avoid conflicts
 for key in list(sys.modules.keys()):
-    if key == 'main' or key.startswith('main.'):
+    if key == "main" or key.startswith("main."):
         del sys.modules[key]
 
 # Remove any existing lab paths from sys.path
-sys.path = [p for p in sys.path if '/labs/lab' not in p]
+sys.path = [p for p in sys.path if "/labs/lab" not in p]
 
 # Add this lab's path
 lab_path = str(Path(__file__).parent.parent / "labs" / "lab09-detection-pipeline" / "solution")
 sys.path.insert(0, lab_path)
 
-from main import (
-    EventIngestor,
-    MLFilterStage,
-    CorrelationStage,
-    VerdictStage,
-    DetectionPipeline
-)
+from main import CorrelationStage, DetectionPipeline, EventIngestor, MLFilterStage, VerdictStage
 
 
 @pytest.fixture
@@ -38,7 +33,7 @@ def sample_sysmon_event():
         "process_name": "powershell.exe",
         "command_line": "powershell -enc SGVsbG8gV29ybGQ=",
         "parent_process": "cmd.exe",
-        "user": "jsmith"
+        "user": "jsmith",
     }
 
 
@@ -52,7 +47,7 @@ def sample_network_event():
         "process_name": "powershell.exe",
         "dest_ip": "185.143.223.47",
         "dest_port": 443,
-        "user": "jsmith"
+        "user": "jsmith",
     }
 
 
@@ -82,7 +77,7 @@ class TestEventIngestor:
             "EventTime": "2024-01-15T10:00:00Z",
             "Computer": "SERVER01",
             "EventID": 4624,
-            "TargetUserName": "admin"
+            "TargetUserName": "admin",
         }
 
         ingestor = EventIngestor()
@@ -119,9 +114,7 @@ class TestMLFilterStage:
     def test_train_model(self, sample_events):
         """Test model training."""
         ingestor = EventIngestor()
-        normalized_events = [
-            ingestor.ingest_event(e, "sysmon") for e in sample_events
-        ]
+        normalized_events = [ingestor.ingest_event(e, "sysmon") for e in sample_events]
 
         # Add more events for training
         for _ in range(50):
@@ -135,9 +128,7 @@ class TestMLFilterStage:
     def test_score_event(self, sample_events):
         """Test event scoring."""
         ingestor = EventIngestor()
-        normalized_events = [
-            ingestor.ingest_event(e, "sysmon") for e in sample_events
-        ]
+        normalized_events = [ingestor.ingest_event(e, "sysmon") for e in sample_events]
 
         # Train with synthetic data
         training_events = normalized_events * 50
@@ -152,9 +143,7 @@ class TestMLFilterStage:
     def test_filter_events(self, sample_events):
         """Test event filtering."""
         ingestor = EventIngestor()
-        normalized_events = [
-            ingestor.ingest_event(e, "sysmon") for e in sample_events
-        ]
+        normalized_events = [ingestor.ingest_event(e, "sysmon") for e in sample_events]
 
         training_events = normalized_events * 50
         ml_filter = MLFilterStage()
@@ -181,9 +170,7 @@ class TestCorrelationStage:
     def test_find_related_events(self, sample_events):
         """Test finding related events."""
         ingestor = EventIngestor()
-        normalized_events = [
-            ingestor.ingest_event(e, "sysmon") for e in sample_events
-        ]
+        normalized_events = [ingestor.ingest_event(e, "sysmon") for e in sample_events]
 
         correlator = CorrelationStage()
         for event in normalized_events:
@@ -198,9 +185,7 @@ class TestCorrelationStage:
     def test_detect_attack_chain(self, sample_events):
         """Test attack chain detection."""
         ingestor = EventIngestor()
-        normalized_events = [
-            ingestor.ingest_event(e, "sysmon") for e in sample_events
-        ]
+        normalized_events = [ingestor.ingest_event(e, "sysmon") for e in sample_events]
 
         correlator = CorrelationStage()
         chain = correlator.detect_attack_chain(normalized_events)
@@ -215,9 +200,7 @@ class TestVerdictStage:
     def test_generate_verdict(self, sample_events):
         """Test verdict generation."""
         ingestor = EventIngestor()
-        normalized_events = [
-            ingestor.ingest_event(e, "sysmon") for e in sample_events
-        ]
+        normalized_events = [ingestor.ingest_event(e, "sysmon") for e in sample_events]
 
         verdict_stage = VerdictStage()
         verdict = verdict_stage.generate_verdict(normalized_events)
@@ -228,9 +211,7 @@ class TestVerdictStage:
     def test_create_alert(self, sample_events):
         """Test alert creation."""
         ingestor = EventIngestor()
-        normalized_events = [
-            ingestor.ingest_event(e, "sysmon") for e in sample_events
-        ]
+        normalized_events = [ingestor.ingest_event(e, "sysmon") for e in sample_events]
 
         verdict_stage = VerdictStage()
         verdict = verdict_stage.generate_verdict(normalized_events)
