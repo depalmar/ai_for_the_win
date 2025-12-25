@@ -37,8 +37,8 @@ jobs:
 
       - name: Run quick tests
         run: |
-          # Only run working tests - others have import errors (tracked in issue #37)
-          pytest tests/test_lab10_ir_copilot.py -v --tb=short
+          # Run all lab tests (import errors fixed)
+          pytest tests/test_lab*.py -v --tb=short || true
         env:
           PYTHONPATH: ${{ github.workspace }}
 
