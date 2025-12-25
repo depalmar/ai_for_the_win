@@ -342,8 +342,10 @@ def get_mitre_technique(technique_id: str) -> dict:
     }
 
 
-def get_tools() -> List[StructuredTool]:
+def get_tools() -> List["StructuredTool"]:
     """Create tool list for the agent."""
+    from langchain.tools import StructuredTool
+
     return [
         StructuredTool.from_function(
             func=lookup_ip,
