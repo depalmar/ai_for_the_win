@@ -103,7 +103,10 @@ class YARAPatternExtractor:
 
     def extract_patterns(self, analysis: dict) -> dict:
         """Extract patterns from analysis results."""
-        return {"strings": analysis.get("strings", []), "hex_patterns": analysis.get("hex_patterns", [])}
+        return {
+            "strings": analysis.get("strings", []),
+            "hex_patterns": analysis.get("hex_patterns", []),
+        }
 
 
 class YARARuleBuilder:

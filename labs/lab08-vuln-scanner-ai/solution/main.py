@@ -103,7 +103,9 @@ class VulnerabilityAnalyzer:
 class VulnerabilityPrioritizer:
     """Prioritize vulnerabilities based on different criteria."""
 
-    def prioritize(self, vulnerabilities: List[Vulnerability], method: str = "cvss") -> List[Vulnerability]:
+    def prioritize(
+        self, vulnerabilities: List[Vulnerability], method: str = "cvss"
+    ) -> List[Vulnerability]:
         """Prioritize vulnerabilities."""
         if method == "cvss":
             return sorted(vulnerabilities, key=lambda v: v.cvss_score, reverse=True)
@@ -138,7 +140,9 @@ class RemediationGenerator:
         # Add priority-based grouping
         critical_count = sum(1 for v in vulnerabilities if v.cvss_score >= 9.0)
         if critical_count > 0:
-            plan["recommendations"].append(f"Address {critical_count} critical vulnerabilities immediately")
+            plan["recommendations"].append(
+                f"Address {critical_count} critical vulnerabilities immediately"
+            )
 
         return plan
 
