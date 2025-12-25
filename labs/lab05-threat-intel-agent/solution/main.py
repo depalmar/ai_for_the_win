@@ -277,6 +277,124 @@ class MITREInput(BaseModel):
     technique_id: str = Field(description="MITRE ATT&CK technique ID (e.g., T1059.001)")
 
 
+# =============================================================================
+# Wrapper Classes (for test compatibility)
+# =============================================================================
+
+
+class IOCEnricher:
+    """Enrich IOCs with threat intelligence data."""
+
+    def enrich_ip(self, ip: str) -> dict:
+        """Enrich IP address with threat data."""
+        return lookup_ip(ip)
+
+    def enrich_domain(self, domain: str) -> dict:
+        """Enrich domain with threat data."""
+        return analyze_domain(domain)
+
+    def enrich_hash(self, file_hash: str) -> dict:
+        """Enrich file hash with threat data."""
+        return check_hash(file_hash)
+
+    def detect_type(self, ioc: str) -> str:
+        """Detect the type of IOC."""
+        import re
+
+        if re.match(r"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$", ioc):
+            return "ip"
+        elif re.match(r"^[a-fA-F0-9]{32}$|^[a-fA-F0-9]{40}$|^[a-fA-F0-9]{64}$", ioc):
+            return "hash"
+        elif "." in ioc and not ioc[0].isdigit():
+            return "domain"
+        else:
+            return "unknown"
+
+    def enrich_batch(self, iocs: list) -> list:
+        """Enrich a batch of IOCs."""
+        results = []
+        for ioc in iocs:
+            ioc_type = self.detect_type(ioc)
+            if ioc_type == "ip":
+                results.append(self.enrich_ip(ioc))
+            elif ioc_type == "domain":
+                results.append(self.enrich_domain(ioc))
+            elif ioc_type == "hash":
+                results.append(self.enrich_hash(ioc))
+        return results
+
+
+class ReputationChecker:
+    """Check reputation of IOCs."""
+
+    def check_ip(self, ip: str) -> dict:
+        """Check IP reputation."""
+        result = lookup_ip(ip)
+        result["score"] = result.get("threat_score", 0)
+        return result
+
+    def check_domain(self, domain: str) -> dict:
+        """Check domain reputation."""
+        return analyze_domain(domain)
+
+
+class MITREMapper:
+    """Map behaviors to MITRE ATT&CK techniques."""
+
+    def map_technique(self, behavior: str) -> dict:
+        """Map a behavior to MITRE technique."""
+        behavior_lower = behavior.lower()
+
+        # Simple mapping based on keywords
+        if "powershell" in behavior_lower:
+            return self.get_technique("T1059.001")
+        elif "rdp" in behavior_lower or "remote desktop" in behavior_lower:
+            return self.get_technique("T1021.001")
+        elif "credential" in behavior_lower:
+            return self.get_technique("T1003")
+        else:
+            return {"technique_id": "Unknown", "name": "Unknown technique"}
+
+    def map_behaviors(self, behaviors: list) -> list:
+        """Map multiple behaviors to MITRE techniques."""
+        return [self.map_technique(behavior) for behavior in behaviors]
+
+    def get_technique(self, technique_id: str) -> dict:
+        """Get MITRE technique details."""
+        return search_mitre(technique_id)
+
+
+class ThreatReport:
+    """Generate threat intelligence reports."""
+
+    def __init__(self, data: dict):
+        """Initialize with threat data."""
+        self.data = data
+
+    def to_json(self) -> str:
+        """Convert report to JSON."""
+        import json
+
+        return json.dumps(self.data, indent=2)
+
+    def to_markdown(self) -> str:
+        """Convert report to Markdown."""
+        md = f"# Threat Report\n\n"
+        md += f"**Indicator:** {self.data.get('indicator', 'Unknown')}\n\n"
+        md += f"**Type:** {self.data.get('type', 'Unknown')}\n\n"
+        md += f"**Severity:** {self.data.get('severity', 'Unknown')}\n\n"
+
+        if "description" in self.data:
+            md += f"## Description\n\n{self.data['description']}\n\n"
+
+        if "mitre_techniques" in self.data:
+            md += f"## MITRE ATT&CK Techniques\n\n"
+            for tech in self.data["mitre_techniques"]:
+                md += f"- {tech}\n"
+
+        return md
+
+
 def lookup_ip(ip: str) -> dict:
     """Look up threat intelligence for an IP address."""
     # Check mock data first
