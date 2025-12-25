@@ -6,6 +6,14 @@ This Gradio application provides interactive demos for all labs in the
 AI Security Training Program.
 
 =============================================================================
+REQUIREMENTS
+=============================================================================
+
+- Gradio 6.1.0+ (updated from 4.x for security fixes)
+- Note: Some UI elements may need updates for Gradio 6 compatibility
+- If you encounter issues, check: https://www.gradio.app/main/guides/gradio-6-migration-guide
+
+=============================================================================
 FEATURES
 =============================================================================
 

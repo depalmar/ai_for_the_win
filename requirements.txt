@@ -74,7 +74,7 @@ uvicorn>=0.24.0,<1.0.0
 
 # UI frameworks
 streamlit>=1.28.0,<2.0.0
-gradio>=4.0.0,<5.0.0
+gradio>=6.1.0,<7.0.0  # Updated to v6.1.0 to fix 13 security vulnerabilities (CVE fixes)
 
 # =============================================================================
 # DOCUMENT PROCESSING
