@@ -361,7 +361,7 @@ class MITREMapper:
 
     def get_technique(self, technique_id: str) -> dict:
         """Get MITRE technique details."""
-        return search_mitre(technique_id)
+        return get_mitre_technique(technique_id)
 
 
 class ThreatReport:
