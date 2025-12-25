@@ -35,8 +35,8 @@ def sample_log_entries():
         "2024-01-15 08:10:45 WARNING [sshd] Failed password for invalid user test from 10.0.0.55 port 43521 ssh2",
         "2024-01-15 08:10:46 WARNING [sshd] Failed password for invalid user test from 10.0.0.55 port 43522 ssh2",
         "2024-01-15 08:10:47 WARNING [sshd] Failed password for invalid user admin from 10.0.0.55 port 43523 ssh2",
-        "2024-01-15 08:25:33 ERROR [nginx] 192.168.1.200 - - \"GET /../../etc/passwd HTTP/1.1\" 400 0",
-        "2024-01-15 08:25:34 ERROR [nginx] 192.168.1.200 - - \"GET /admin/../../../etc/shadow HTTP/1.1\" 400 0",
+        '2024-01-15 08:25:33 ERROR [nginx] 192.168.1.200 - - "GET /../../etc/passwd HTTP/1.1" 400 0',
+        '2024-01-15 08:25:34 ERROR [nginx] 192.168.1.200 - - "GET /admin/../../../etc/shadow HTTP/1.1" 400 0',
     ]
 
 

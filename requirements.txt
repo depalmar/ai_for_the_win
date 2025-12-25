@@ -1,6 +1,9 @@
 # AI for the Win - Dependencies
 # Security AI Training Program
 #
+# REQUIREMENTS: Python 3.10 or higher
+# (Python 3.9 is no longer supported due to Gradio 6.x security requirements)
+#
 # Install with: pip install -r requirements.txt
 # Verify setup: python scripts/verify_setup.py
 

@@ -3,7 +3,7 @@
 ### Build AI-Powered Security Tools | From Zero to Production
 
 [![CI](https://github.com/depalmar/ai_for_the_win/actions/workflows/ci.yml/badge.svg)](https://github.com/depalmar/ai_for_the_win/actions/workflows/ci.yml)
-[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab01_phishing_classifier.ipynb)
 [![Docker](https://img.shields.io/badge/Docker-Ready-blue?logo=docker)](./Dockerfile)
@@ -298,7 +298,7 @@ Track your progress through the labs:
 | **Security** | YARA, Sigma, MITRE ATT&CK, pefile |
 | **Web/UI** | FastAPI, Gradio, Streamlit |
 | **Vibe Coding** | Cursor, Claude Code, GitHub Copilot, Windsurf |
-| **Development** | Python 3.9+, pytest, Docker, GitHub Actions |
+| **Development** | Python 3.10+, pytest, Docker, GitHub Actions |
 
 ---
 
