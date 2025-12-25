@@ -59,6 +59,86 @@ COMMON_STRINGS = {
 
 
 # =============================================================================
+# Forward declarations and wrappers for test compatibility
+# (These will be defined after SampleAnalyzer and YARAGenerator)
+# =============================================================================
+
+# Placeholder - will be set after class definitions
+_sample_analyzer_instance = None
+_yara_generator_instance = None
+
+
+class MalwareSampleAnalyzer:
+    """Wrapper for SampleAnalyzer to match test expectations."""
+
+    def __init__(self):
+        """Initialize using the SampleAnalyzer class."""
+        self._analyzer = None
+
+    def _get_analyzer(self):
+        """Lazy load analyzer to avoid circular dependency."""
+        if self._analyzer is None:
+            # SampleAnalyzer is defined later in this file
+            self._analyzer = globals()["SampleAnalyzer"]()
+        return self._analyzer
+
+    def analyze_sample(self, filepath: str) -> dict:
+        """Analyze a malware sample."""
+        analyzer = self._get_analyzer()
+        return {
+            "file_info": analyzer.get_file_info(filepath),
+            "strings": self.extract_strings(filepath),
+            "hex_patterns": analyzer.extract_hex_patterns(filepath),
+        }
+
+    def extract_strings(self, filepath: str, min_length: int = 6) -> List[dict]:
+        """Extract strings in dict format expected by tests."""
+        analyzer = self._get_analyzer()
+        strings = analyzer.extract_strings(filepath, min_length)
+        return [{"value": s, "type": "ascii"} for s in strings]
+
+
+class YARAPatternExtractor:
+    """Extract patterns for YARA rules."""
+
+    def extract_patterns(self, analysis: dict) -> dict:
+        """Extract patterns from analysis results."""
+        return {"strings": analysis.get("strings", []), "hex_patterns": analysis.get("hex_patterns", [])}
+
+
+class YARARuleBuilder:
+    """Build YARA rules from patterns."""
+
+    def build_rule(self, rule_name: str, patterns: dict, description: str = "") -> str:
+        """Build a YARA rule from patterns."""
+        strings_section = ""
+        strings_list = patterns.get("strings", [])
+
+        for i, pattern in enumerate(strings_list):
+            value = pattern.get("value", "")
+            name = pattern.get("name", f"s{i+1}")
+            strings_section += f'\t\t${name} = "{value}" ascii\n'
+
+        hex_patterns = patterns.get("hex_patterns", [])
+        for i, hex_pattern in enumerate(hex_patterns):
+            name = f"hex{i+1}"
+            strings_section += f"\t\t${name} = {{ {hex_pattern} }}\n"
+
+        rule = f"""rule {rule_name} {{
+\tmeta:
+\t\tdescription = "{description}"
+\t\tauthor = "YARA Generator"
+
+\tstrings:
+{strings_section}
+\tcondition:
+\t\tany of them
+}}
+"""
+        return rule
+
+
+# =============================================================================
 # Task 1: Sample Analysis - SOLUTION
 # =============================================================================
 

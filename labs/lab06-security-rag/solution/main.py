@@ -190,7 +190,7 @@ def chunk_security_documents(
 # =============================================================================
 
 
-def create_vector_store(chunks: List[Document], persist_directory: str = None) -> Chroma:
+def create_vector_store(chunks: List[Document], persist_directory: str = None) -> "Chroma":
     """Create vector store with embeddings."""
     # Use HuggingFace embeddings (free, local)
     embeddings = HuggingFaceEmbeddings(
@@ -207,7 +207,7 @@ def create_vector_store(chunks: List[Document], persist_directory: str = None) -
     return vector_store
 
 
-def load_vector_store(persist_directory: str) -> Chroma:
+def load_vector_store(persist_directory: str) -> "Chroma":
     """Load existing vector store from disk."""
     embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
     return Chroma(persist_directory=persist_directory, embedding_function=embeddings)
@@ -218,7 +218,7 @@ def load_vector_store(persist_directory: str) -> Chroma:
 # =============================================================================
 
 
-def create_security_retriever(vector_store: Chroma, k: int = 5):
+def create_security_retriever(vector_store: "Chroma", k: int = 5):
     """Create retriever with security-optimized settings."""
     retriever = vector_store.as_retriever(search_type="similarity", search_kwargs={"k": k})
     return retriever

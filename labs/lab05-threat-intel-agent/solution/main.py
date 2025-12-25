@@ -69,6 +69,7 @@ from typing import Any, Dict, List, Optional
 
 # Load environment variables (API keys)
 from dotenv import load_dotenv
+from pydantic import BaseModel, Field
 
 load_dotenv()
 
@@ -76,7 +77,6 @@ try:
     from langchain.tools import StructuredTool
     from langchain_anthropic import ChatAnthropic
     from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
-    from pydantic import BaseModel, Field
 
     LANGCHAIN_AVAILABLE = True
 except ImportError:

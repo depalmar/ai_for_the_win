@@ -187,7 +187,7 @@ def has_html(text: str) -> int:
     return int(bool(re.search(r"<[^>]+>", str(text))))
 
 
-def extract_features(df: pd.DataFrame) -> pd.DataFrame:
+def extract_custom_features(df: pd.DataFrame) -> pd.DataFrame:
     """Extract phishing-relevant features from emails."""
     features = pd.DataFrame(index=df.index)
 
@@ -209,13 +209,54 @@ def extract_features(df: pd.DataFrame) -> pd.DataFrame:
 # =============================================================================
 
 
+def build_feature_matrix(
+    df: pd.DataFrame, vectorizer: TfidfVectorizer = None
+) -> Tuple[np.ndarray, TfidfVectorizer]:
+    """Build complete feature matrix from raw DataFrame.
+
+    This is a high-level function that:
+    1. Extracts custom features
+    2. Creates TF-IDF features from text
+    3. Combines both into a single feature matrix
+    """
+    # Extract custom features
+    features_df = extract_custom_features(df)
+
+    # Create or use existing vectorizer
+    if vectorizer is None:
+        vectorizer = TfidfVectorizer(max_features=1000, ngram_range=(1, 2), min_df=2, max_df=0.95)
+        fit = True
+    else:
+        fit = False
+
+    # Ensure we have clean_text column
+    if "clean_text" not in df.columns:
+        df = df.copy()
+        df["clean_text"] = df["text"].apply(preprocess_text)
+
+    # Transform text
+    if fit:
+        tfidf_features = vectorizer.fit_transform(df["clean_text"])
+    else:
+        tfidf_features = vectorizer.transform(df["clean_text"])
+
+    # Combine with numeric features
+    numeric_features = features_df.values
+    X_combined = hstack([tfidf_features, numeric_features])
+
+    return X_combined, vectorizer
+
+
 def create_feature_matrix(
     df: pd.DataFrame,
     features_df: pd.DataFrame,
     vectorizer: TfidfVectorizer = None,
     fit: bool = True,
 ) -> Tuple[np.ndarray, TfidfVectorizer]:
-    """Combine TF-IDF text features with extracted numeric features."""
+    """Combine TF-IDF text features with extracted numeric features.
+
+    Note: This is a lower-level function. Consider using build_feature_matrix() instead.
+    """
 
     # Create or use existing vectorizer
     if vectorizer is None:
@@ -234,7 +275,7 @@ def create_feature_matrix(
     return X_combined, vectorizer
 
 
-def train_model(X_train: np.ndarray, y_train: np.ndarray) -> RandomForestClassifier:
+def train_classifier(X_train: np.ndarray, y_train: np.ndarray) -> RandomForestClassifier:
     """Train a Random Forest classifier."""
     model = RandomForestClassifier(
         n_estimators=150,
@@ -312,7 +353,7 @@ def predict_phishing(
     df["clean_text"] = df["text"].apply(preprocess_text)
 
     # Extract features
-    features_df = extract_features(df)
+    features_df = extract_custom_features(df)
 
     # Create feature matrix
     X, _ = create_feature_matrix(df, features_df, vectorizer=vectorizer, fit=False)
@@ -349,7 +390,7 @@ def main():
     df = preprocess_dataset(df)
 
     # Extract features
-    features_df = extract_features(df)
+    features_df = extract_custom_features(df)
     print(f"\nExtracted {len(features_df.columns)} features")
 
     # Split data
@@ -365,7 +406,7 @@ def main():
     X_test, _ = create_feature_matrix(X_test_df, features_test, vectorizer=vectorizer, fit=False)
 
     # Train
-    model = train_model(X_train, y_train)
+    model = train_classifier(X_train, y_train)
     print("\nModel trained!")
 
     # Evaluate

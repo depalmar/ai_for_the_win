@@ -101,6 +101,221 @@ console = Console()
 
 
 # =============================================================================
+# Wrapper Classes (for test compatibility)
+# =============================================================================
+
+
+class LogParser:
+    """Parse log entries into structured format."""
+
+    def parse(self, log_entry: str) -> dict:
+        """Parse a single log entry."""
+        # Simple regex-based parsing for common log formats
+        parsed = {"timestamp": None, "level": None, "source": None, "message": log_entry, "metadata": {}}
+
+        # Extract timestamp (YYYY-MM-DD HH:MM:SS format)
+        timestamp_match = re.search(r"(\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2})", log_entry)
+        if timestamp_match:
+            parsed["timestamp"] = timestamp_match.group(1)
+
+        # Extract log level
+        level_match = re.search(r"\b(DEBUG|INFO|WARNING|ERROR|CRITICAL)\b", log_entry)
+        if level_match:
+            parsed["level"] = level_match.group(1)
+
+        # Extract source/service (in brackets)
+        source_match = re.search(r"\[([^\]]+)\]", log_entry)
+        if source_match:
+            parsed["source"] = source_match.group(1)
+
+        # Extract IP addresses
+        ip_matches = re.findall(r"\b(?:\d{1,3}\.){3}\d{1,3}\b", log_entry)
+        if ip_matches:
+            parsed["metadata"]["ip_addresses"] = ip_matches
+
+        return parsed
+
+    def parse_batch(self, log_entries: List[str]) -> List[dict]:
+        """Parse multiple log entries."""
+        return [self.parse(entry) for entry in log_entries]
+
+
+class SecurityEventClassifier:
+    """Classify security events from log entries."""
+
+    def classify(self, log_entry: str) -> dict:
+        """Classify a log entry as a security event."""
+        result = {"category": "unknown", "type": "", "severity": "INFO", "is_suspicious": False}
+
+        log_lower = log_entry.lower()
+
+        # Authentication events
+        if "password" in log_lower or "login" in log_lower or "ssh" in log_lower:
+            result["category"] = "authentication"
+            if "fail" in log_lower or "invalid" in log_lower:
+                result["type"] = "auth_failure"
+                result["severity"] = "WARNING"
+                result["is_suspicious"] = True
+            else:
+                result["type"] = "auth_success"
+
+        # Web attacks
+        if "../" in log_entry or "etc/passwd" in log_lower or "etc/shadow" in log_lower:
+            result["category"] = "web_attack"
+            result["type"] = "path_traversal"
+            result["severity"] = "HIGH"
+            result["is_suspicious"] = True
+
+        if "union" in log_lower and "select" in log_lower:
+            result["category"] = "web_attack"
+            result["type"] = "sql_injection"
+            result["severity"] = "CRITICAL"
+            result["is_suspicious"] = True
+
+        return result
+
+
+class ThreatDetector:
+    """Detect threats and extract IOCs from logs."""
+
+    def detect(self, log_entries: List[str]) -> dict:
+        """Detect threats in log entries."""
+        result = {"threats": [], "brute_force_detected": False}
+
+        # Count failed auth attempts
+        failed_auth_count = sum(1 for log in log_entries if "fail" in log.lower() and "password" in log.lower())
+
+        if failed_auth_count >= 3:
+            result["brute_force_detected"] = True
+            result["threats"].append({"type": "brute_force", "count": failed_auth_count})
+
+        # Check for SQLi
+        sqli_indicators = ["union", "select", "or '1'='1", "--", "drop table"]
+        if any(any(indicator in log.lower() for indicator in sqli_indicators) for log in log_entries):
+            result["threats"].append({"type": "sql_injection"})
+
+        # Check for path traversal
+        if any("../" in log or "etc/passwd" in log.lower() for log in log_entries):
+            result["threats"].append({"type": "path_traversal"})
+
+        return result
+
+    def extract_iocs(self, log_entries: List[str]) -> dict:
+        """Extract indicators of compromise."""
+        iocs = {"ip_addresses": [], "ips": [], "urls": [], "domains": []}
+
+        for log in log_entries:
+            # Extract IPs
+            ip_matches = re.findall(r"\b(?:\d{1,3}\.){3}\d{1,3}\b", log)
+            iocs["ip_addresses"].extend(ip_matches)
+            iocs["ips"].extend(ip_matches)
+
+            # Extract URLs
+            url_matches = re.findall(r"https?://[^\s]+", log)
+            iocs["urls"].extend(url_matches)
+
+        # Deduplicate
+        iocs["ip_addresses"] = list(set(iocs["ip_addresses"]))
+        iocs["ips"] = list(set(iocs["ips"]))
+        iocs["urls"] = list(set(iocs["urls"]))
+
+        return iocs
+
+
+class LogAnalyzer:
+    """Comprehensive log analysis."""
+
+    def analyze(self, log_entries: List[str]) -> dict:
+        """Analyze log entries comprehensively."""
+        parser = LogParser()
+        classifier = SecurityEventClassifier()
+        detector = ThreatDetector()
+
+        parsed_logs = parser.parse_batch(log_entries)
+        threats = detector.detect(log_entries)
+        iocs = detector.extract_iocs(log_entries)
+
+        # Count events by severity
+        high_severity = sum(
+            1 for log in log_entries if any(indicator in log.lower() for indicator in ["error", "critical", "fail"])
+        )
+
+        analysis = {
+            "summary": f"Analyzed {len(log_entries)} log entries. Found {len(threats.get('threats', []))} threat(s).",
+            "analysis": f"Detected {high_severity} high-severity events",
+            "total_events": len(log_entries),
+            "high_severity_count": high_severity,
+            "threats": threats["threats"],
+            "iocs": iocs,
+            "mitre_techniques": self._map_to_mitre(log_entries),
+        }
+
+        return analysis
+
+    def _map_to_mitre(self, log_entries: List[str]) -> List[str]:
+        """Map events to MITRE ATT&CK techniques."""
+        techniques = []
+
+        for log in log_entries:
+            log_lower = log.lower()
+            if "powershell" in log_lower:
+                techniques.append("T1059.001")
+            if "registry" in log_lower or "run keys" in log_lower:
+                techniques.append("T1547.001")
+            if "scheduled task" in log_lower or "cron" in log_lower:
+                techniques.append("T1053.005")
+
+        return list(set(techniques))
+
+
+class ReportGenerator:
+    """Generate security reports from analysis results."""
+
+    def generate_summary(self, analysis: dict) -> str:
+        """Generate executive summary report."""
+        summary = f"""# Security Analysis Summary
+
+**Total Events Analyzed:** {analysis.get('total_events', 0)}
+**Threats Detected:** {len(analysis.get('threats', []))}
+**High-Severity Events:** {analysis.get('high_severity_count', 0)}
+
+## Overview
+{analysis.get('summary', 'No summary available')}
+
+## Key Findings
+"""
+        for threat in analysis.get("threats", []):
+            summary += f"- {threat.get('type', 'Unknown threat').replace('_', ' ').title()}\n"
+
+        return summary
+
+    def generate_technical_report(self, analysis: dict) -> str:
+        """Generate technical report with details."""
+        report = f"""# Technical Security Report
+
+## Event Timeline
+Total events processed: {analysis.get('total_events', 0)}
+
+## Indicators of Compromise (IOCs)
+
+### IP Addresses
+"""
+        iocs = analysis.get("iocs", {})
+        for ip in iocs.get("ip_addresses", [])[:10]:
+            report += f"- {ip}\n"
+
+        report += "\n## MITRE ATT&CK Techniques\n"
+        for technique in analysis.get("mitre_techniques", []):
+            report += f"- {technique}\n"
+
+        report += "\n## Detected Threats\n"
+        for threat in analysis.get("threats", []):
+            report += f"- **{threat.get('type', 'Unknown').replace('_', ' ').title()}**\n"
+
+        return report
+
+
+# =============================================================================
 # Task 1: Set Up LLM Client - SOLUTION
 # =============================================================================
 #
