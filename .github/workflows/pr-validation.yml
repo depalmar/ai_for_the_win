@@ -36,11 +36,15 @@ jobs:
 
       - name: Check for secrets
         run: |
-          # Basic check for potential secrets
-          if grep -rE "(api[_-]?key|secret[_-]?key|password)\s*[:=]\s*['\"][^'\"]{8,}" --include="*.py" --include="*.json" --include="*.yaml" --include="*.yml" .; then
-            echo "Warning: Potential secrets detected. Please review."
+          # Basic check for potential secrets (excluding .env.example and test files)
+          if grep -rE "(api[_-]?key|secret[_-]?key|password)\s*[:=]\s*['\"][^'\"]{8,}" \
+            --include="*.py" --include="*.json" --include="*.yaml" --include="*.yml" \
+            --exclude-dir=".git" --exclude="*.example" --exclude="test_*" . 2>/dev/null; then
+            echo "⚠️  Warning: Potential secrets detected. Please review."
+            echo "If these are test values or examples, consider marking them clearly."
+          else
+            echo "✓ No obvious secrets detected"
           fi
-        continue-on-error: true
 
   lab-solutions-check:
     name: Verify Lab Solutions

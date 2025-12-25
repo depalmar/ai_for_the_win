@@ -25,11 +25,9 @@ jobs:
 
       - name: Check formatting with black
         run: black --check --diff .
-        continue-on-error: true
 
       - name: Check import sorting with isort
         run: isort --check-only --diff .
-        continue-on-error: true
 
       - name: Lint with flake8
         run: |
@@ -103,13 +101,12 @@ jobs:
 
       - name: Run Bandit security scan
         run: bandit -r labs/ -ll -ii --skip B101
-        continue-on-error: true
 
       - name: Check dependencies for vulnerabilities
         run: |
           pip install -r requirements.txt
-          safety check --full-report
-        continue-on-error: true
+          safety check --full-report || true
+        # Note: safety check may fail due to advisory database issues, using || true for now
 
   docs:
     name: Documentation Check

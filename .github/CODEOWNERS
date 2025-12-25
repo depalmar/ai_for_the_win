@@ -1,0 +1,44 @@
+# Code Owners for AI for the Win
+#
+# These owners will be automatically requested for review when someone
+# opens a pull request that modifies code in these areas.
+#
+# Learn more: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Default owner for everything in the repo
+* @depalmar
+
+# Lab exercises and solutions
+/labs/ @depalmar
+/notebooks/ @depalmar
+
+# Tests
+/tests/ @depalmar
+
+# Documentation
+/docs/ @depalmar
+/README.md @depalmar
+/CONTRIBUTING.md @depalmar
+/SECURITY.md @depalmar
+
+# GitHub workflows and CI/CD
+/.github/ @depalmar
+
+# Templates and resources
+/templates/ @depalmar
+/resources/ @depalmar
+
+# Data files (require extra scrutiny)
+/data/ @depalmar
+
+# Security-sensitive files
+/mcp-servers/ @depalmar
+/.env.example @depalmar
+/docker-compose.yml @depalmar
+/Dockerfile @depalmar
+
+# CTF Challenges
+/ctf-challenges/ @depalmar
+
+# Capstone projects
+/capstone-projects/ @depalmar
