@@ -6,43 +6,43 @@ Complete implementation of phishing email classifier.
 """
 
 import re
-import pandas as pd
-import numpy as np
-from typing import Tuple, List
 from pathlib import Path
-
-from sklearn.model_selection import train_test_split
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
-from scipy.sparse import hstack
+from typing import List, Tuple
 
 import nltk
+import numpy as np
+import pandas as pd
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
+from scipy.sparse import hstack
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+from sklearn.model_selection import train_test_split
 
 # Ensure NLTK data is available
 try:
-    stopwords.words('english')
+    stopwords.words("english")
 except LookupError:
-    nltk.download('stopwords')
-    nltk.download('punkt')
+    nltk.download("stopwords")
+    nltk.download("punkt")
 
 
 # =============================================================================
 # Task 1: Load and Explore Data - SOLUTION
 # =============================================================================
 
+
 def load_data(filepath: str) -> pd.DataFrame:
     """Load email dataset from CSV."""
     df = pd.read_csv(filepath)
 
     # Handle missing values
-    df = df.dropna(subset=['text', 'label'])
+    df = df.dropna(subset=["text", "label"])
 
     # Ensure correct types
-    df['label'] = df['label'].astype(int)
-    df['text'] = df['text'].astype(str)
+    df["label"] = df["label"].astype(int)
+    df["text"] = df["text"].astype(str)
 
     print(f"Loaded {len(df)} emails")
     return df
@@ -54,7 +54,7 @@ def explore_data(df: pd.DataFrame) -> None:
 
     # Label distribution
     print("\nLabel distribution:")
-    label_counts = df['label'].value_counts()
+    label_counts = df["label"].value_counts()
     total = len(df)
     for label, count in label_counts.items():
         label_name = "Phishing" if label == 1 else "Legitimate"
@@ -63,7 +63,7 @@ def explore_data(df: pd.DataFrame) -> None:
     # Average text length
     print("\nAverage text length:")
     for label in [0, 1]:
-        avg_len = df[df['label'] == label]['text'].str.len().mean()
+        avg_len = df[df["label"] == label]["text"].str.len().mean()
         label_name = "Phishing" if label == 1 else "Legitimate"
         print(f"  {label_name}: {avg_len:.0f} characters")
 
@@ -71,6 +71,7 @@ def explore_data(df: pd.DataFrame) -> None:
 # =============================================================================
 # Task 2: Preprocess Text - SOLUTION
 # =============================================================================
+
 
 def preprocess_text(text: str) -> str:
     """Clean and normalize email text for ML processing."""
@@ -81,35 +82,35 @@ def preprocess_text(text: str) -> str:
     text = text.lower()
 
     # Remove HTML tags
-    text = re.sub(r'<[^>]+>', ' ', text)
+    text = re.sub(r"<[^>]+>", " ", text)
 
     # Remove URLs
-    text = re.sub(r'https?://[^\s<>"{}|\\^`\[\]]+', ' ', text)
+    text = re.sub(r'https?://[^\s<>"{}|\\^`\[\]]+', " ", text)
 
     # Remove email addresses
-    text = re.sub(r'\S+@\S+', ' ', text)
+    text = re.sub(r"\S+@\S+", " ", text)
 
     # Remove special characters and digits
-    text = re.sub(r'[^a-zA-Z\s]', ' ', text)
+    text = re.sub(r"[^a-zA-Z\s]", " ", text)
 
     # Tokenize
     words = text.split()
 
     # Remove stopwords
-    stop_words = set(stopwords.words('english'))
+    stop_words = set(stopwords.words("english"))
     words = [w for w in words if w not in stop_words and len(w) > 2]
 
     # Stemming
     stemmer = PorterStemmer()
     words = [stemmer.stem(w) for w in words]
 
-    return ' '.join(words)
+    return " ".join(words)
 
 
 def preprocess_dataset(df: pd.DataFrame) -> pd.DataFrame:
     """Apply preprocessing to entire dataset."""
     df = df.copy()
-    df['clean_text'] = df['text'].apply(preprocess_text)
+    df["clean_text"] = df["text"].apply(preprocess_text)
     return df
 
 
@@ -118,15 +119,38 @@ def preprocess_dataset(df: pd.DataFrame) -> pd.DataFrame:
 # =============================================================================
 
 URGENCY_WORDS = [
-    'urgent', 'immediate', 'action required', 'act now', 'limited time',
-    'expires', 'suspended', 'verify', 'confirm', 'alert', 'warning',
-    'attention', 'important', 'critical', 'deadline', 'asap'
+    "urgent",
+    "immediate",
+    "action required",
+    "act now",
+    "limited time",
+    "expires",
+    "suspended",
+    "verify",
+    "confirm",
+    "alert",
+    "warning",
+    "attention",
+    "important",
+    "critical",
+    "deadline",
+    "asap",
 ]
 
 SENSITIVE_WORDS = [
-    'password', 'credit card', 'ssn', 'social security', 'bank account',
-    'pin', 'login', 'credentials', 'verify your', 'confirm your',
-    'update your', 'billing', 'payment'
+    "password",
+    "credit card",
+    "ssn",
+    "social security",
+    "bank account",
+    "pin",
+    "login",
+    "credentials",
+    "verify your",
+    "confirm your",
+    "update your",
+    "billing",
+    "payment",
 ]
 
 
@@ -160,22 +184,22 @@ def calculate_caps_ratio(text: str) -> float:
 
 def has_html(text: str) -> int:
     """Check if text contains HTML tags."""
-    return int(bool(re.search(r'<[^>]+>', str(text))))
+    return int(bool(re.search(r"<[^>]+>", str(text))))
 
 
 def extract_features(df: pd.DataFrame) -> pd.DataFrame:
     """Extract phishing-relevant features from emails."""
     features = pd.DataFrame(index=df.index)
 
-    features['url_count'] = df['text'].apply(count_urls)
-    features['has_urgency'] = df['text'].apply(has_urgency)
-    features['requests_sensitive'] = df['text'].apply(requests_sensitive_info)
-    features['text_length'] = df['text'].str.len()
-    features['word_count'] = df['text'].str.split().str.len()
-    features['caps_ratio'] = df['text'].apply(calculate_caps_ratio)
-    features['has_html'] = df['text'].apply(has_html)
-    features['exclamation_count'] = df['text'].str.count('!')
-    features['question_count'] = df['text'].str.count(r'\?')
+    features["url_count"] = df["text"].apply(count_urls)
+    features["has_urgency"] = df["text"].apply(has_urgency)
+    features["requests_sensitive"] = df["text"].apply(requests_sensitive_info)
+    features["text_length"] = df["text"].str.len()
+    features["word_count"] = df["text"].str.split().str.len()
+    features["caps_ratio"] = df["text"].apply(calculate_caps_ratio)
+    features["has_html"] = df["text"].apply(has_html)
+    features["exclamation_count"] = df["text"].str.count("!")
+    features["question_count"] = df["text"].str.count(r"\?")
 
     return features
 
@@ -184,28 +208,24 @@ def extract_features(df: pd.DataFrame) -> pd.DataFrame:
 # Task 4: Train Classifier - SOLUTION
 # =============================================================================
 
+
 def create_feature_matrix(
     df: pd.DataFrame,
     features_df: pd.DataFrame,
     vectorizer: TfidfVectorizer = None,
-    fit: bool = True
+    fit: bool = True,
 ) -> Tuple[np.ndarray, TfidfVectorizer]:
     """Combine TF-IDF text features with extracted numeric features."""
 
     # Create or use existing vectorizer
     if vectorizer is None:
-        vectorizer = TfidfVectorizer(
-            max_features=1000,
-            ngram_range=(1, 2),
-            min_df=2,
-            max_df=0.95
-        )
+        vectorizer = TfidfVectorizer(max_features=1000, ngram_range=(1, 2), min_df=2, max_df=0.95)
 
     # Transform text
     if fit:
-        tfidf_features = vectorizer.fit_transform(df['clean_text'])
+        tfidf_features = vectorizer.fit_transform(df["clean_text"])
     else:
-        tfidf_features = vectorizer.transform(df['clean_text'])
+        tfidf_features = vectorizer.transform(df["clean_text"])
 
     # Combine with numeric features
     numeric_features = features_df.values
@@ -221,9 +241,9 @@ def train_model(X_train: np.ndarray, y_train: np.ndarray) -> RandomForestClassif
         max_depth=15,
         min_samples_split=5,
         min_samples_leaf=2,
-        class_weight='balanced',
+        class_weight="balanced",
         random_state=42,
-        n_jobs=-1
+        n_jobs=-1,
     )
 
     model.fit(X_train, y_train)
@@ -234,11 +254,12 @@ def train_model(X_train: np.ndarray, y_train: np.ndarray) -> RandomForestClassif
 # Task 5: Evaluate Model - SOLUTION
 # =============================================================================
 
+
 def evaluate_model(
     model: RandomForestClassifier,
     X_test: np.ndarray,
     y_test: np.ndarray,
-    feature_names: List[str] = None
+    feature_names: List[str] = None,
 ) -> dict:
     """Evaluate classifier performance."""
 
@@ -250,7 +271,7 @@ def evaluate_model(
     accuracy = accuracy_score(y_test, y_pred)
 
     print("\nClassification Report:")
-    print(classification_report(y_test, y_pred, target_names=['Legitimate', 'Phishing']))
+    print(classification_report(y_test, y_pred, target_names=["Legitimate", "Phishing"]))
 
     print("\nConfusion Matrix:")
     cm = confusion_matrix(y_test, y_pred)
@@ -258,19 +279,19 @@ def evaluate_model(
     print(f"  FN: {cm[1,0]}  TP: {cm[1,1]}")
 
     # Feature importance (for numeric features only)
-    if hasattr(model, 'feature_importances_') and feature_names:
+    if hasattr(model, "feature_importances_") and feature_names:
         print("\nTop 10 Important Features:")
-        importances = model.feature_importances_[-len(feature_names):]
+        importances = model.feature_importances_[-len(feature_names) :]
         indices = np.argsort(importances)[::-1][:10]
         for i, idx in enumerate(indices):
             if idx < len(feature_names):
                 print(f"  {i+1}. {feature_names[idx]}: {importances[idx]:.4f}")
 
     return {
-        'accuracy': accuracy,
-        'confusion_matrix': cm,
-        'predictions': y_pred,
-        'probabilities': y_proba
+        "accuracy": accuracy,
+        "confusion_matrix": cm,
+        "predictions": y_pred,
+        "probabilities": y_proba,
     }
 
 
@@ -278,18 +299,17 @@ def evaluate_model(
 # Task 6: Prediction Function - SOLUTION
 # =============================================================================
 
+
 def predict_phishing(
-    model: RandomForestClassifier,
-    vectorizer: TfidfVectorizer,
-    email_text: str
+    model: RandomForestClassifier, vectorizer: TfidfVectorizer, email_text: str
 ) -> Tuple[int, float]:
     """Predict if an email is phishing."""
 
     # Create single-row DataFrame
-    df = pd.DataFrame({'text': [email_text]})
+    df = pd.DataFrame({"text": [email_text]})
 
     # Preprocess
-    df['clean_text'] = df['text'].apply(preprocess_text)
+    df["clean_text"] = df["text"].apply(preprocess_text)
 
     # Extract features
     features_df = extract_features(df)
@@ -308,6 +328,7 @@ def predict_phishing(
 # =============================================================================
 # Main Execution
 # =============================================================================
+
 
 def main():
     """Main execution flow."""
@@ -333,7 +354,7 @@ def main():
 
     # Split data
     X_train_df, X_test_df, y_train, y_test = train_test_split(
-        df, df['label'], test_size=0.2, random_state=42, stratify=df['label']
+        df, df["label"], test_size=0.2, random_state=42, stratify=df["label"]
     )
 
     features_train = features_df.loc[X_train_df.index]
@@ -357,9 +378,18 @@ def main():
     print("=" * 60)
 
     test_emails = [
-        ("Dear valued customer, your account has been compromised. Click here immediately to verify: http://bit.ly/xyz123", 1),
-        ("Hi John, the meeting has been moved to 3pm tomorrow. See you there! - Sarah", 0),
-        ("URGENT: Your PayPal account will be suspended! Verify now: paypa1-secure.com/verify", 1),
+        (
+            "Dear valued customer, your account has been compromised. Click here immediately to verify: http://bit.ly/xyz123",
+            1,
+        ),
+        (
+            "Hi John, the meeting has been moved to 3pm tomorrow. See you there! - Sarah",
+            0,
+        ),
+        (
+            "URGENT: Your PayPal account will be suspended! Verify now: paypa1-secure.com/verify",
+            1,
+        ),
         ("The quarterly report is attached. Let me know if you have questions.", 0),
     ]
 
@@ -396,10 +426,12 @@ def create_sample_data(filepath: Path):
         "Great catching up yesterday! Let's schedule lunch next week.",
     ] * 60
 
-    df = pd.DataFrame({
-        'text': phishing + legitimate,
-        'label': [1] * len(phishing) + [0] * len(legitimate)
-    })
+    df = pd.DataFrame(
+        {
+            "text": phishing + legitimate,
+            "label": [1] * len(phishing) + [0] * len(legitimate),
+        }
+    )
 
     df = df.sample(frac=1, random_state=42).reset_index(drop=True)
     df.to_csv(filepath, index=False)

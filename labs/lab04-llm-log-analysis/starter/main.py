@@ -10,12 +10,12 @@ Instructions:
 3. Compare output with expected results
 """
 
-import os
 import json
+import os
 import re
-from typing import List, Dict, Optional
-from pathlib import Path
 from datetime import datetime
+from pathlib import Path
+from typing import Dict, List, Optional
 
 from dotenv import load_dotenv
 
@@ -26,12 +26,14 @@ load_dotenv()
 try:
     from langchain_anthropic import ChatAnthropic
     from langchain_core.messages import HumanMessage, SystemMessage
+
     ANTHROPIC_AVAILABLE = True
 except ImportError:
     ANTHROPIC_AVAILABLE = False
 
 try:
     from langchain_community.chat_models import ChatOllama
+
     OLLAMA_AVAILABLE = True
 except ImportError:
     OLLAMA_AVAILABLE = False
@@ -47,6 +49,7 @@ console = Console()
 # =============================================================================
 # Task 1: Set Up LLM Client
 # =============================================================================
+
 
 def setup_llm(provider: str = "anthropic"):
     """
@@ -113,6 +116,7 @@ For each log entry, extract:
 - severity: 1-10 scale (10 being most severe)
 
 Return ONLY valid JSON, no other text."""
+
 
 def parse_log_entry(llm, log_entry: str) -> dict:
     """
@@ -256,6 +260,7 @@ Provide your analysis as JSON with these fields:
 # Task 4: IOC Extractor
 # =============================================================================
 
+
 def extract_iocs(llm, text: str) -> dict:
     """
     Extract Indicators of Compromise from text.
@@ -371,6 +376,7 @@ Use proper Markdown formatting."""
 # Task 6: Complete Pipeline
 # =============================================================================
 
+
 def analyze_security_incident(log_data: str, llm=None) -> str:
     """
     Complete pipeline: Parse → Analyze → Summarize.
@@ -462,10 +468,12 @@ SubjectDomainName: CORP
 
 def main():
     """Main execution."""
-    console.print(Panel.fit(
-        "[bold]Lab 04: LLM-Powered Security Log Analysis[/bold]",
-        border_style="blue"
-    ))
+    console.print(
+        Panel.fit(
+            "[bold]Lab 04: LLM-Powered Security Log Analysis[/bold]",
+            border_style="blue",
+        )
+    )
 
     # Check for required packages
     if not ANTHROPIC_AVAILABLE and not OLLAMA_AVAILABLE:

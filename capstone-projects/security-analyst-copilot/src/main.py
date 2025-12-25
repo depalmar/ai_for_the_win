@@ -6,10 +6,11 @@ A conversational AI assistant for security analysts.
 """
 
 import os
+
 from dotenv import load_dotenv
 from rich.console import Console
-from rich.panel import Panel
 from rich.markdown import Markdown
+from rich.panel import Panel
 
 load_dotenv()
 console = Console()
@@ -17,11 +18,13 @@ console = Console()
 
 def main():
     """Main entry point for the Security Analyst Copilot."""
-    console.print(Panel.fit(
-        "[bold blue]Security Analyst Copilot[/bold blue]\n"
-        "Your AI assistant for security investigations",
-        border_style="blue"
-    ))
+    console.print(
+        Panel.fit(
+            "[bold blue]Security Analyst Copilot[/bold blue]\n"
+            "Your AI assistant for security investigations",
+            border_style="blue",
+        )
+    )
 
     # TODO: Initialize the copilot agent
     # from agent.copilot import SecurityCopilot
@@ -39,7 +42,7 @@ def main():
         try:
             user_input = console.input("[bold green]You:[/bold green] ")
 
-            if user_input.lower() in ['quit', 'exit', 'q']:
+            if user_input.lower() in ["quit", "exit", "q"]:
                 console.print("\n[yellow]Goodbye! Stay secure.[/yellow]")
                 break
 

@@ -1,6 +1,9 @@
 # AI for the Win - Dependencies
 # Security AI Training Program
 #
+# REQUIREMENTS: Python 3.10 or higher
+# (Python 3.9 is no longer supported due to Gradio 6.x security requirements)
+#
 # Install with: pip install -r requirements.txt
 # Verify setup: python scripts/verify_setup.py
 
@@ -19,12 +22,13 @@ torch>=2.0.0,<3.0.0
 # LLM FRAMEWORKS & ORCHESTRATION
 # =============================================================================
 # LangChain ecosystem (primary framework)
-langchain>=0.1.0,<1.0.0
-langchain-anthropic>=0.1.0,<2.0.0
-langchain-openai>=0.1.0,<1.0.0
-langchain-google-genai>=1.0.0,<2.0.0
-langchain-community>=0.0.20,<1.0.0
-langgraph>=0.0.30,<1.0.0
+# NOTE: More specific version bounds to speed up dependency resolution
+langchain>=0.3.0,<1.0.0
+langchain-anthropic>=0.3.0,<2.0.0
+langchain-openai>=0.2.0,<1.0.0
+langchain-google-genai>=2.0.0,<3.0.0
+langchain-community>=0.3.0,<1.0.0
+langgraph>=0.2.0,<1.0.0
 
 # Direct LLM SDKs (for low-level access)
 anthropic>=0.18.0,<1.0.0
@@ -74,7 +78,7 @@ uvicorn>=0.24.0,<1.0.0
 
 # UI frameworks
 streamlit>=1.28.0,<2.0.0
-gradio>=4.0.0,<5.0.0
+gradio>=6.1.0,<7.0.0  # Updated to v6.1.0 to fix 13 security vulnerabilities (CVE fixes)
 
 # =============================================================================
 # DOCUMENT PROCESSING

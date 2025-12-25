@@ -35,27 +35,30 @@ KEY CONCEPTS
 =============================================================================
 """
 
-import os
 import json
-from typing import TypedDict, List, Dict, Optional, Annotated
-from datetime import datetime
 import operator
+import os
+from datetime import datetime
+from typing import Annotated, Dict, List, Optional, TypedDict
 
 # Check for LangGraph availability
 try:
-    from langgraph.graph import StateGraph, END
+    from langgraph.graph import END, StateGraph
+
     LANGGRAPH_AVAILABLE = True
 except ImportError:
     LANGGRAPH_AVAILABLE = False
     print("LangGraph not available. Install with: pip install langgraph")
 
 from dotenv import load_dotenv
+
 load_dotenv()
 
 
 # =============================================================================
 # STATE DEFINITION
 # =============================================================================
+
 
 class ThreatDetectionState(TypedDict):
     """
@@ -69,6 +72,7 @@ class ThreatDetectionState(TypedDict):
     - Use clear, descriptive field names
     - Include metadata for debugging
     """
+
     # Input events to process
     events: List[dict]
 
@@ -92,6 +96,7 @@ class ThreatDetectionState(TypedDict):
 # WORKFLOW NODES
 # =============================================================================
 
+
 def ingest_node(state: ThreatDetectionState) -> dict:
     """
     Node 1: Event Ingestion
@@ -109,28 +114,30 @@ def ingest_node(state: ThreatDetectionState) -> dict:
     normalized = []
 
     for i, event in enumerate(events):
-        normalized.append({
-            "id": f"evt-{i:04d}",
-            "timestamp": event.get("timestamp", datetime.now().isoformat()),
-            "event_type": event.get("event_type", "unknown"),
-            "host": event.get("host", "unknown"),
-            "user": event.get("user", "unknown"),
-            "process": event.get("process_name", ""),
-            "command": event.get("command_line", ""),
-            "network": {
-                "dest_ip": event.get("dest_ip"),
-                "dest_port": event.get("dest_port")
-            },
-            "raw": event
-        })
+        normalized.append(
+            {
+                "id": f"evt-{i:04d}",
+                "timestamp": event.get("timestamp", datetime.now().isoformat()),
+                "event_type": event.get("event_type", "unknown"),
+                "host": event.get("host", "unknown"),
+                "user": event.get("user", "unknown"),
+                "process": event.get("process_name", ""),
+                "command": event.get("command_line", ""),
+                "network": {
+                    "dest_ip": event.get("dest_ip"),
+                    "dest_port": event.get("dest_port"),
+                },
+                "raw": event,
+            }
+        )
 
     return {
         "events": normalized,
         "metadata": {
             **state.get("metadata", {}),
             "ingested_count": len(normalized),
-            "ingested_at": datetime.now().isoformat()
-        }
+            "ingested_at": datetime.now().isoformat(),
+        },
     }
 
 
@@ -192,8 +199,8 @@ def ml_filter_node(state: ThreatDetectionState) -> dict:
         "metadata": {
             **state.get("metadata", {}),
             "filtered_count": len(filtered),
-            "filtered_at": datetime.now().isoformat()
-        }
+            "filtered_at": datetime.now().isoformat(),
+        },
     }
 
 
@@ -224,7 +231,7 @@ def enrichment_node(state: ThreatDetectionState) -> dict:
         "schtasks": ["T1053.005"],
         "reg.exe": ["T1112"],
         "whoami": ["T1033"],
-        "net.exe": ["T1087"]
+        "net.exe": ["T1087"],
     }
 
     for event in filtered:
@@ -240,9 +247,9 @@ def enrichment_node(state: ThreatDetectionState) -> dict:
         # Add enrichment
         event["mitre_techniques"] = list(set(techniques))
         event["threat_level"] = (
-            "HIGH" if event["anomaly_score"] > 0.7 else
-            "MEDIUM" if event["anomaly_score"] > 0.4 else
-            "LOW"
+            "HIGH"
+            if event["anomaly_score"] > 0.7
+            else "MEDIUM" if event["anomaly_score"] > 0.4 else "LOW"
         )
         event["analysis"] = f"Detected {len(techniques)} MITRE techniques"
 
@@ -253,8 +260,8 @@ def enrichment_node(state: ThreatDetectionState) -> dict:
         "metadata": {
             **state.get("metadata", {}),
             "enriched_count": len(enriched),
-            "enriched_at": datetime.now().isoformat()
-        }
+            "enriched_at": datetime.now().isoformat(),
+        },
     }
 
 
@@ -294,21 +301,23 @@ def correlation_node(state: ThreatDetectionState) -> dict:
             for e in host_events:
                 all_techniques.extend(e.get("mitre_techniques", []))
 
-            correlations.append({
-                "host": host,
-                "event_count": len(host_events),
-                "techniques": list(set(all_techniques)),
-                "is_attack_chain": len(set(all_techniques)) > 1,
-                "events": [e["id"] for e in host_events]
-            })
+            correlations.append(
+                {
+                    "host": host,
+                    "event_count": len(host_events),
+                    "techniques": list(set(all_techniques)),
+                    "is_attack_chain": len(set(all_techniques)) > 1,
+                    "events": [e["id"] for e in host_events],
+                }
+            )
 
     return {
         "correlations": correlations,
         "metadata": {
             **state.get("metadata", {}),
             "correlation_count": len(correlations),
-            "correlated_at": datetime.now().isoformat()
-        }
+            "correlated_at": datetime.now().isoformat(),
+        },
     }
 
 
@@ -348,7 +357,7 @@ def verdict_node(state: ThreatDetectionState) -> dict:
         "attack_chain_detected": has_attack_chain,
         "total_events": len(enriched),
         "total_correlations": len(correlations),
-        "recommended_actions": []
+        "recommended_actions": [],
     }
 
     # Add recommended actions
@@ -357,13 +366,13 @@ def verdict_node(state: ThreatDetectionState) -> dict:
             "Isolate affected hosts immediately",
             "Collect forensic artifacts",
             "Reset compromised credentials",
-            "Block identified IOCs at perimeter"
+            "Block identified IOCs at perimeter",
         ]
     elif verdict_type == "SUSPICIOUS":
         verdict["recommended_actions"] = [
             "Investigate further",
             "Review user activity logs",
-            "Check for additional indicators"
+            "Check for additional indicators",
         ]
 
     return {
@@ -371,14 +380,15 @@ def verdict_node(state: ThreatDetectionState) -> dict:
         "metadata": {
             **state.get("metadata", {}),
             "verdict_at": datetime.now().isoformat(),
-            "workflow_complete": True
-        }
+            "workflow_complete": True,
+        },
     }
 
 
 # =============================================================================
 # CONDITIONAL ROUTING
 # =============================================================================
+
 
 def should_continue(state: ThreatDetectionState) -> str:
     """
@@ -406,6 +416,7 @@ def should_continue(state: ThreatDetectionState) -> str:
 # =============================================================================
 # WORKFLOW BUILDER
 # =============================================================================
+
 
 def build_detection_workflow():
     """
@@ -439,12 +450,7 @@ def build_detection_workflow():
 
     # Conditional routing after ML filter
     workflow.add_conditional_edges(
-        "ml_filter",
-        should_continue,
-        {
-            "enrich": "enrich",
-            "verdict": "verdict"
-        }
+        "ml_filter", should_continue, {"enrich": "enrich", "verdict": "verdict"}
     )
 
     workflow.add_edge("enrich", "correlate")
@@ -458,6 +464,7 @@ def build_detection_workflow():
 # =============================================================================
 # SIMPLE PIPELINE (NON-LANGGRAPH)
 # =============================================================================
+
 
 class SimplePipeline:
     """
@@ -473,7 +480,7 @@ class SimplePipeline:
             ("ml_filter", ml_filter_node),
             ("enrich", enrichment_node),
             ("correlate", correlation_node),
-            ("verdict", verdict_node)
+            ("verdict", verdict_node),
         ]
 
     def run(self, initial_state: dict) -> dict:
@@ -492,7 +499,7 @@ class SimplePipeline:
             "enriched_events": [],
             "correlations": [],
             "verdict": None,
-            "metadata": {"started_at": datetime.now().isoformat()}
+            "metadata": {"started_at": datetime.now().isoformat()},
         }
 
         for stage_name, stage_fn in self.stages:
@@ -514,6 +521,7 @@ class SimplePipeline:
 # DEMO
 # =============================================================================
 
+
 def run_demo():
     """
     Demonstrate the workflow with sample attack events.
@@ -530,7 +538,7 @@ def run_demo():
             "event_type": "process",
             "process_name": "powershell.exe",
             "command_line": "powershell -enc SGVsbG8= -nop -w hidden",
-            "user": "jsmith"
+            "user": "jsmith",
         },
         {
             "timestamp": "2024-01-15T03:22:15Z",
@@ -539,7 +547,7 @@ def run_demo():
             "process_name": "powershell.exe",
             "dest_ip": "185.143.223.47",
             "dest_port": 443,
-            "user": "jsmith"
+            "user": "jsmith",
         },
         {
             "timestamp": "2024-01-15T03:22:20Z",
@@ -547,7 +555,7 @@ def run_demo():
             "event_type": "process",
             "process_name": "cmd.exe",
             "command_line": "cmd.exe /c whoami && hostname",
-            "user": "jsmith"
+            "user": "jsmith",
         },
         {
             "timestamp": "2024-01-15T03:23:00Z",
@@ -555,8 +563,8 @@ def run_demo():
             "event_type": "process",
             "process_name": "schtasks.exe",
             "command_line": "schtasks /create /tn Update /tr malware.exe /sc daily",
-            "user": "jsmith"
-        }
+            "user": "jsmith",
+        },
     ]
 
     initial_state = {
@@ -565,7 +573,7 @@ def run_demo():
         "enriched_events": [],
         "correlations": [],
         "verdict": None,
-        "metadata": {}
+        "metadata": {},
     }
 
     # Run with LangGraph if available

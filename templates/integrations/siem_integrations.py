@@ -5,17 +5,18 @@ SIEM Integration Templates
 Templates for integrating with common SIEM platforms.
 """
 
-import os
 import json
-import requests
-from typing import List, Dict, Any, Optional
-from datetime import datetime, timedelta
+import os
 from dataclasses import dataclass
+from datetime import datetime, timedelta
+from typing import Any, Dict, List, Optional
 
+import requests
 
 # =============================================================================
 # Splunk Integration
 # =============================================================================
+
 
 class SplunkClient:
     """Basic Splunk REST API client."""
@@ -26,7 +27,7 @@ class SplunkClient:
         port: int = 8089,
         username: str = None,
         password: str = None,
-        token: str = None
+        token: str = None,
     ):
         self.host = host or os.getenv("SPLUNK_HOST", "localhost")
         self.port = port
@@ -42,7 +43,7 @@ class SplunkClient:
         query: str,
         earliest: str = "-24h",
         latest: str = "now",
-        max_results: int = 100
+        max_results: int = 100,
     ) -> List[Dict]:
         """Execute a Splunk search."""
         # Create search job
@@ -51,7 +52,7 @@ class SplunkClient:
             "search": f"search {query}",
             "earliest_time": earliest,
             "latest_time": latest,
-            "output_mode": "json"
+            "output_mode": "json",
         }
 
         headers = {"Authorization": f"Bearer {self.token}"} if self.token else {}
@@ -78,6 +79,7 @@ class SplunkClient:
 # Elastic/OpenSearch Integration
 # =============================================================================
 
+
 class ElasticClient:
     """Basic Elasticsearch client."""
 
@@ -87,7 +89,7 @@ class ElasticClient:
         port: int = 9200,
         username: str = None,
         password: str = None,
-        api_key: str = None
+        api_key: str = None,
     ):
         self.host = host or os.getenv("ELASTIC_HOST", "localhost")
         self.port = port
@@ -97,12 +99,7 @@ class ElasticClient:
         self.base_url = f"https://{self.host}:{self.port}"
         self.session = requests.Session()
 
-    def search(
-        self,
-        index: str,
-        query: Dict,
-        size: int = 100
-    ) -> List[Dict]:
+    def search(self, index: str, query: Dict, size: int = 100) -> List[Dict]:
         """Execute an Elasticsearch search."""
         url = f"{self.base_url}/{index}/_search"
 
@@ -115,7 +112,7 @@ class ElasticClient:
         body = {
             "query": query,
             "size": size,
-            "sort": [{"@timestamp": {"order": "desc"}}]
+            "sort": [{"@timestamp": {"order": "desc"}}],
         }
 
         print(f"Elastic Query: {json.dumps(body, indent=2)}")
@@ -123,24 +120,12 @@ class ElasticClient:
 
         return []
 
-    def search_security_alerts(
-        self,
-        severity: str = None,
-        hours: int = 24
-    ) -> List[Dict]:
+    def search_security_alerts(self, severity: str = None, hours: int = 24) -> List[Dict]:
         """Search for security alerts."""
-        query = {
-            "bool": {
-                "must": [
-                    {"range": {"@timestamp": {"gte": f"now-{hours}h"}}}
-                ]
-            }
-        }
+        query = {"bool": {"must": [{"range": {"@timestamp": {"gte": f"now-{hours}h"}}}]}}
 
         if severity:
-            query["bool"]["must"].append(
-                {"match": {"event.severity": severity}}
-            )
+            query["bool"]["must"].append({"match": {"event.severity": severity}})
 
         return self.search("security-*", query)
 
@@ -148,6 +133,7 @@ class ElasticClient:
 # =============================================================================
 # Microsoft Sentinel Integration
 # =============================================================================
+
 
 class SentinelClient:
     """Azure Sentinel/Log Analytics client."""
@@ -157,7 +143,7 @@ class SentinelClient:
         workspace_id: str = None,
         tenant_id: str = None,
         client_id: str = None,
-        client_secret: str = None
+        client_secret: str = None,
     ):
         self.workspace_id = workspace_id or os.getenv("SENTINEL_WORKSPACE_ID")
         self.tenant_id = tenant_id or os.getenv("AZURE_TENANT_ID")
@@ -181,6 +167,7 @@ class SentinelClient:
 # Generic SIEM Interface
 # =============================================================================
 
+
 class SIEMInterface:
     """Abstract interface for SIEM integrations."""
 
@@ -196,11 +183,7 @@ class SIEMInterface:
         else:
             raise ValueError(f"Unsupported SIEM type: {siem_type}")
 
-    def search_events(
-        self,
-        query: str,
-        time_range: str = "24h"
-    ) -> List[Dict]:
+    def search_events(self, query: str, time_range: str = "24h") -> List[Dict]:
         """Search for events across any SIEM."""
         if self.siem_type == "splunk":
             return self.client.search(query, earliest=f"-{time_range}")
@@ -223,6 +206,7 @@ class SIEMInterface:
 # =============================================================================
 # Usage Example
 # =============================================================================
+
 
 def main():
     """Example usage of SIEM integrations."""

@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Pytest configuration and shared fixtures for AI Security Labs tests."""
 
-import pytest
 import sys
 from pathlib import Path
+
+import pytest
 
 # Add labs directory to path
 LABS_DIR = Path(__file__).parent.parent / "labs"
@@ -25,11 +26,14 @@ def test_data_dir(tmp_path_factory):
 @pytest.fixture
 def mock_llm():
     """Create a mock LLM for testing without API calls."""
+
     class MockLLM:
         def invoke(self, messages):
             class Response:
                 content = "Mock LLM response for testing."
+
             return Response()
+
     return MockLLM()
 
 

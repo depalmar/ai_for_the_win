@@ -27,22 +27,23 @@ LEARNING OBJECTIVES
 4. Generate automated incident response workflows
 """
 
-import os
-import re
 import json
 import math
+import os
+import re
 from collections import Counter
 from dataclasses import dataclass, field
-from typing import List, Dict, Optional, Tuple
 from datetime import datetime
-from anthropic import Anthropic
+from typing import Dict, List, Optional, Tuple
 
+from anthropic import Anthropic
 
 # =============================================================================
 # Data Classes
 # =============================================================================
 # These dataclasses define the structure of our data. Using dataclasses gives us
 # automatic __init__, __repr__, and other methods, making code cleaner.
+
 
 @dataclass
 class FileEvent:
@@ -64,6 +65,7 @@ class FileEvent:
         size_bytes: Size of the file in bytes
         label: Classification label (for training/evaluation)
     """
+
     id: int
     timestamp: str
     process_name: str
@@ -100,6 +102,7 @@ class RansomNoteIntel:
         mitre_techniques: MITRE ATT&CK technique IDs
         confidence: Confidence score (0.0 to 1.0)
     """
+
     ransomware_family: str
     threat_actor: Optional[str]
     bitcoin_addresses: List[str]
@@ -132,6 +135,7 @@ class IncidentContext:
         exfiltration_detected: Whether data theft was detected
         shadow_deletion_detected: Whether backup deletion was attempted
     """
+
     affected_hosts: List[str] = field(default_factory=list)
     affected_files: int = 0
     ransomware_family: str = "unknown"
@@ -144,6 +148,7 @@ class IncidentContext:
 # =============================================================================
 # Ransomware Behavior Detector
 # =============================================================================
+
 
 class RansomwareBehaviorDetector:
     """
@@ -175,25 +180,51 @@ class RansomwareBehaviorDetector:
     # These are extensions added by various ransomware families
     # Keeping this list updated is crucial for detection
     RANSOMWARE_EXTENSIONS = {
-        '.locked', '.encrypted', '.crypto', '.crypt',
-        '.locky', '.cerber', '.zepto', '.odin',      # Locky variants
-        '.thor', '.aesir', '.zzzzz', '.crypted',     # Locky variants
-        '.enc', '.cryptolocker', '.crinf', '.r5a',
-        '.XRNT', '.XTBL', '.crypt', '.R16M01D05',
-        '.pzdc', '.good', '.LOL!', '.OMG!',
-        '.RDM', '.RRK', '.encryptedRSA', '.crysis',
-        '.dharma', '.wallet', '.onion', '.arena',    # Dharma/CrySis
-        '.phobos', '.alphv', '.lockbit'              # Modern variants
+        ".locked",
+        ".encrypted",
+        ".crypto",
+        ".crypt",
+        ".locky",
+        ".cerber",
+        ".zepto",
+        ".odin",  # Locky variants
+        ".thor",
+        ".aesir",
+        ".zzzzz",
+        ".crypted",  # Locky variants
+        ".enc",
+        ".cryptolocker",
+        ".crinf",
+        ".r5a",
+        ".XRNT",
+        ".XTBL",
+        ".crypt",
+        ".R16M01D05",
+        ".pzdc",
+        ".good",
+        ".LOL!",
+        ".OMG!",
+        ".RDM",
+        ".RRK",
+        ".encryptedRSA",
+        ".crysis",
+        ".dharma",
+        ".wallet",
+        ".onion",
+        ".arena",  # Dharma/CrySis
+        ".phobos",
+        ".alphv",
+        ".lockbit",  # Modern variants
     }
 
     # Shadow copy deletion command patterns
     # Ransomware often deletes Volume Shadow Copies to prevent recovery
     # These commands are MITRE ATT&CK technique T1490
     SHADOW_DELETE_PATTERNS = [
-        r'vssadmin.*delete.*shadows',        # Windows built-in
-        r'wmic.*shadowcopy.*delete',         # WMI method
-        r'bcdedit.*recoveryenabled.*no',     # Disable recovery mode
-        r'wbadmin.*delete.*catalog'          # Delete backup catalog
+        r"vssadmin.*delete.*shadows",  # Windows built-in
+        r"wmic.*shadowcopy.*delete",  # WMI method
+        r"bcdedit.*recoveryenabled.*no",  # Disable recovery mode
+        r"wbadmin.*delete.*catalog",  # Delete backup catalog
     ]
 
     def __init__(self, threshold: float = 0.8):
@@ -278,7 +309,7 @@ class RansomwareBehaviorDetector:
             "encryption_pattern": False,
             "shadow_deletion": False,
             "ransom_note": False,
-            "mitre_techniques": []
+            "mitre_techniques": [],
         }
 
         # SIGNAL 1: Check for encryption patterns
@@ -305,9 +336,7 @@ class RansomwareBehaviorDetector:
         ransom_note_events = self.detect_ransom_note(events)
         if ransom_note_events:
             results["ransom_note"] = True
-            results["indicators"].append(
-                f"Ransom note(s) created: {len(ransom_note_events)}"
-            )
+            results["indicators"].append(f"Ransom note(s) created: {len(ransom_note_events)}")
 
         # Count affected files (those labeled as ransomware activity)
         affected = [e for e in events if e.label.startswith("ransomware")]
@@ -414,12 +443,12 @@ class RansomwareBehaviorDetector:
         """
         # Patterns commonly found in ransom note filenames
         ransom_patterns = [
-            r'readme.*restore',
-            r'how.*decrypt',
-            r'recover.*files',
-            r'ransom.*note',
-            r'decrypt.*instruction',
-            r'your.*files.*encrypted'
+            r"readme.*restore",
+            r"how.*decrypt",
+            r"recover.*files",
+            r"ransom.*note",
+            r"decrypt.*instruction",
+            r"your.*files.*encrypted",
         ]
 
         matches = []
@@ -437,6 +466,7 @@ class RansomwareBehaviorDetector:
 # =============================================================================
 # Ransom Note Analyzer
 # =============================================================================
+
 
 class RansomNoteAnalyzer:
     """
@@ -457,16 +487,16 @@ class RansomNoteAnalyzer:
     # These patterns are designed to match cryptocurrency addresses and contact info
 
     # Bitcoin address pattern (Legacy P2PKH, P2SH, and SegWit bech32)
-    BTC_PATTERN = r'\b(bc1|[13])[a-zA-HJ-NP-Z0-9]{25,39}\b'
+    BTC_PATTERN = r"\b(bc1|[13])[a-zA-HJ-NP-Z0-9]{25,39}\b"
 
     # Monero address pattern (privacy-focused cryptocurrency)
-    XMR_PATTERN = r'\b4[0-9AB][1-9A-HJ-NP-Za-km-z]{93}\b'
+    XMR_PATTERN = r"\b4[0-9AB][1-9A-HJ-NP-Za-km-z]{93}\b"
 
     # Tor onion URL pattern (v2 and v3 addresses)
-    ONION_PATTERN = r'\b[a-z2-7]{16,56}\.onion\b'
+    ONION_PATTERN = r"\b[a-z2-7]{16,56}\.onion\b"
 
     # Email address pattern
-    EMAIL_PATTERN = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
+    EMAIL_PATTERN = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 
     def __init__(self):
         """Initialize the analyzer with Anthropic client."""
@@ -513,7 +543,7 @@ Return ONLY valid JSON."""
         response = self.client.messages.create(
             model="claude-sonnet-4-20250514",
             max_tokens=1024,
-            messages=[{"role": "user", "content": prompt}]
+            messages=[{"role": "user", "content": prompt}],
         )
 
         # Parse LLM response with fallback for JSON errors
@@ -529,7 +559,7 @@ Return ONLY valid JSON."""
                 "exfiltration_claimed": False,
                 "sophistication": "medium",
                 "language_indicators": [],
-                "mitre_techniques": ["T1486"]  # Default to encryption technique
+                "mitre_techniques": ["T1486"],  # Default to encryption technique
             }
 
         # STEP 3: Combine regex IOCs with LLM analysis
@@ -544,7 +574,7 @@ Return ONLY valid JSON."""
             deadline=analysis.get("deadline"),
             exfiltration_claimed=analysis.get("exfiltration_claimed", False),
             mitre_techniques=analysis.get("mitre_techniques", ["T1486"]),
-            confidence=0.8 if analysis.get("ransomware_family") != "unknown" else 0.5
+            confidence=0.8 if analysis.get("ransomware_family") != "unknown" else 0.5,
         )
 
     def extract_iocs(self, note_content: str) -> Dict[str, List[str]]:
@@ -567,13 +597,14 @@ Return ONLY valid JSON."""
             "bitcoin": list(set(re.findall(self.BTC_PATTERN, note_content))),
             "monero": list(set(re.findall(self.XMR_PATTERN, note_content))),
             "onion": list(set(re.findall(self.ONION_PATTERN, note_content))),
-            "email": list(set(re.findall(self.EMAIL_PATTERN, note_content)))
+            "email": list(set(re.findall(self.EMAIL_PATTERN, note_content))),
         }
 
 
 # =============================================================================
 # Ransomware Responder
 # =============================================================================
+
 
 class RansomwareResponder:
     """
@@ -672,53 +703,59 @@ class RansomwareResponder:
                 "action": "ALERT",
                 "priority": 1,
                 "description": f"Ransomware incident detected - Severity: {severity}",
-                "automated": True  # Always alert automatically
+                "automated": True,  # Always alert automatically
             },
             {
                 "action": "ISOLATE_HOST",
                 "priority": 2,
                 "description": "Network isolate affected hosts",
                 "automated": self.auto_contain,  # Based on config
-                "targets": context.affected_hosts
+                "targets": context.affected_hosts,
             },
             {
                 "action": "PRESERVE_EVIDENCE",
                 "priority": 3,
                 "description": "Capture memory dump and forensic images",
-                "automated": False  # Requires manual forensic process
+                "automated": False,  # Requires manual forensic process
             },
             {
                 "action": "IDENTIFY_SCOPE",
                 "priority": 4,
                 "description": "Determine full scope of encryption",
-                "automated": True  # Can scan for encrypted files
-            }
+                "automated": True,  # Can scan for encrypted files
+            },
         ]
 
         # Add context-specific actions
         if context.lateral_movement_detected:
-            playbook.append({
-                "action": "SCAN_NETWORK",
-                "priority": 5,
-                "description": "Scan for lateral movement indicators",
-                "automated": True
-            })
+            playbook.append(
+                {
+                    "action": "SCAN_NETWORK",
+                    "priority": 5,
+                    "description": "Scan for lateral movement indicators",
+                    "automated": True,
+                }
+            )
 
         if context.exfiltration_detected:
-            playbook.append({
-                "action": "DATA_BREACH_PROTOCOL",
-                "priority": 6,
-                "description": "Initiate data breach response protocol",
-                "automated": False  # Requires legal/compliance review
-            })
+            playbook.append(
+                {
+                    "action": "DATA_BREACH_PROTOCOL",
+                    "priority": 6,
+                    "description": "Initiate data breach response protocol",
+                    "automated": False,  # Requires legal/compliance review
+                }
+            )
 
         # Always end with recovery assessment
-        playbook.append({
-            "action": "RECOVERY_ASSESSMENT",
-            "priority": 10,
-            "description": "Assess backup availability and recovery options",
-            "automated": False
-        })
+        playbook.append(
+            {
+                "action": "RECOVERY_ASSESSMENT",
+                "priority": 10,
+                "description": "Assess backup availability and recovery options",
+                "automated": False,
+            }
+        )
 
         return playbook
 
@@ -770,7 +807,7 @@ Generate a structured incident report with:
         response = self.client.messages.create(
             model="claude-sonnet-4-20250514",
             max_tokens=2048,
-            messages=[{"role": "user", "content": prompt}]
+            messages=[{"role": "user", "content": prompt}],
         )
 
         return response.content[0].text
@@ -779,6 +816,7 @@ Generate a structured incident report with:
 # =============================================================================
 # Main Detection Pipeline
 # =============================================================================
+
 
 class RansomwareDetectionPipeline:
     """
@@ -837,7 +875,7 @@ class RansomwareDetectionPipeline:
                 file_extension=e["file_extension"],
                 entropy=e["entropy"],
                 size_bytes=e["size_bytes"],
-                label=e.get("label", "unknown")
+                label=e.get("label", "unknown"),
             )
             for e in events
         ]
@@ -845,11 +883,7 @@ class RansomwareDetectionPipeline:
         # STEP 2: Run behavioral analysis
         detection_result = self.behavior_detector.analyze_events(file_events)
 
-        result = {
-            "detection": detection_result,
-            "intel": None,
-            "response": None
-        }
+        result = {"detection": detection_result, "intel": None, "response": None}
 
         # STEP 3: If ransomware detected, generate response
         if detection_result["is_ransomware"]:
@@ -859,7 +893,7 @@ class RansomwareDetectionPipeline:
                 affected_files=detection_result["affected_files"],
                 ransomware_family="unknown",  # Would be populated from note analysis
                 encryption_progress=50.0,  # Would be calculated from file counts
-                shadow_deletion_detected=detection_result["shadow_deletion"]
+                shadow_deletion_detected=detection_result["shadow_deletion"],
             )
 
             # Generate automated response playbook
@@ -871,6 +905,7 @@ class RansomwareDetectionPipeline:
 # =============================================================================
 # Demo / Main Entry Point
 # =============================================================================
+
 
 def main():
     """
@@ -887,9 +922,7 @@ def main():
     print("=" * 60)
 
     # Load sample events from data file
-    data_path = os.path.join(
-        os.path.dirname(__file__), "..", "data", "file_events.json"
-    )
+    data_path = os.path.join(os.path.dirname(__file__), "..", "data", "file_events.json")
 
     if os.path.exists(data_path):
         with open(data_path) as f:
@@ -909,7 +942,7 @@ def main():
                 "file_extension": ".locked",
                 "entropy": 7.98,  # High entropy = encrypted
                 "size_bytes": 234567,
-                "label": "ransomware_encryption"
+                "label": "ransomware_encryption",
             }
         ]
 
@@ -923,22 +956,21 @@ def main():
     print(f"  Confidence: {result['detection']['confidence']:.0%}")
     print(f"  Affected Files: {result['detection']['affected_files']}")
 
-    if result['detection']['indicators']:
+    if result["detection"]["indicators"]:
         print("\n[Indicators]")
-        for indicator in result['detection']['indicators']:
+        for indicator in result["detection"]["indicators"]:
             print(f"  - {indicator}")
 
-    if result['detection']['mitre_techniques']:
+    if result["detection"]["mitre_techniques"]:
         print("\n[MITRE ATT&CK Techniques]")
-        for technique in result['detection']['mitre_techniques']:
+        for technique in result["detection"]["mitre_techniques"]:
             print(f"  - {technique}")
 
-    if result['response']:
+    if result["response"]:
         print("\n[Response Playbook]")
-        for action in result['response']:
+        for action in result["response"]:
             auto = "[AUTO]" if action.get("automated") else "[MANUAL]"
-            print(f"  {action['priority']}. {auto} {action['action']}: "
-                  f"{action['description']}")
+            print(f"  {action['priority']}. {auto} {action['action']}: " f"{action['description']}")
 
     # Analyze ransom note if available
     note_path = os.path.join(

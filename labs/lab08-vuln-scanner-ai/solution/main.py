@@ -5,26 +5,28 @@ Lab 08: AI-Powered Vulnerability Scanner - Solution
 Complete implementation with AI-powered analysis and prioritization.
 """
 
-import os
 import json
-from typing import List, Dict, Optional
-from pathlib import Path
+import os
 from datetime import datetime
+from pathlib import Path
+from typing import Dict, List, Optional
 
 from dotenv import load_dotenv
+
 load_dotenv()
 
 try:
     from langchain_anthropic import ChatAnthropic
     from langchain_core.messages import HumanMessage, SystemMessage
+
     LANGCHAIN_AVAILABLE = True
 except ImportError:
     LANGCHAIN_AVAILABLE = False
 
 import pandas as pd
 from rich.console import Console
-from rich.table import Table
 from rich.markdown import Markdown
+from rich.table import Table
 
 console = Console()
 
@@ -33,6 +35,7 @@ console = Console()
 # Task 1: Vulnerability Data Ingestion - SOLUTION
 # =============================================================================
 
+
 class VulnDataLoader:
     """Load vulnerability scan results."""
 
@@ -40,12 +43,12 @@ class VulnDataLoader:
         """Load scan results from CSV or JSON."""
         path = Path(filepath)
 
-        if path.suffix == '.json':
-            with open(filepath, 'r') as f:
+        if path.suffix == ".json":
+            with open(filepath, "r") as f:
                 return json.load(f)
-        elif path.suffix == '.csv':
+        elif path.suffix == ".csv":
             df = pd.read_csv(filepath)
-            return df.to_dict('records')
+            return df.to_dict("records")
         else:
             raise ValueError(f"Unsupported format: {path.suffix}")
 
@@ -57,18 +60,18 @@ class VulnDataLoader:
                 "epss_score": 0.92,
                 "exploit_available": True,
                 "cisa_kev": True,
-                "patch_available": True
+                "patch_available": True,
             },
             "CVE-2024-5678": {
                 "epss_score": 0.45,
                 "exploit_available": False,
                 "cisa_kev": False,
-                "patch_available": True
-            }
+                "patch_available": True,
+            },
         }
 
         for vuln in vulns:
-            cve_id = vuln.get('cve_id', '')
+            cve_id = vuln.get("cve_id", "")
             if cve_id in cve_enrichment:
                 vuln.update(cve_enrichment[cve_id])
 
@@ -116,25 +119,25 @@ class VulnAnalyzer:
         context_str = json.dumps(context) if context else "No additional context"
 
         prompt = ANALYSIS_PROMPT.format(
-            cve_id=vuln.get('cve_id', 'Unknown'),
-            description=vuln.get('description', 'No description'),
-            cvss_score=vuln.get('cvss_score', 'Unknown'),
-            host=vuln.get('host', 'Unknown'),
-            service=vuln.get('service', 'Unknown'),
-            context=context_str
+            cve_id=vuln.get("cve_id", "Unknown"),
+            description=vuln.get("description", "No description"),
+            cvss_score=vuln.get("cvss_score", "Unknown"),
+            host=vuln.get("host", "Unknown"),
+            service=vuln.get("service", "Unknown"),
+            context=context_str,
         )
 
         response = self.llm.invoke([HumanMessage(content=prompt)])
 
         return {
-            "cve_id": vuln.get('cve_id'),
+            "cve_id": vuln.get("cve_id"),
             "analysis": response.content,
-            "analyzed_at": datetime.now().isoformat()
+            "analyzed_at": datetime.now().isoformat(),
         }
 
     def _basic_analysis(self, vuln: dict) -> dict:
         """Basic analysis without LLM."""
-        cvss = vuln.get('cvss_score', 0)
+        cvss = vuln.get("cvss_score", 0)
 
         if cvss >= 9.0:
             urgency = "CRITICAL - Immediate action required"
@@ -146,9 +149,9 @@ class VulnAnalyzer:
             urgency = "LOW - Address in next maintenance window"
 
         return {
-            "cve_id": vuln.get('cve_id'),
+            "cve_id": vuln.get("cve_id"),
             "urgency": urgency,
-            "recommendation": f"Apply vendor patches for {vuln.get('service', 'affected service')}"
+            "recommendation": f"Apply vendor patches for {vuln.get('service', 'affected service')}",
         }
 
     def assess_exploitability(self, vuln: dict) -> dict:
@@ -157,31 +160,32 @@ class VulnAnalyzer:
         factors = []
 
         # Check for exploit availability
-        if vuln.get('exploit_available'):
+        if vuln.get("exploit_available"):
             score += 0.4
             factors.append("Public exploit available")
 
         # Check EPSS score
-        epss = vuln.get('epss_score', 0)
+        epss = vuln.get("epss_score", 0)
         if epss > 0.5:
             score += 0.3
             factors.append(f"High EPSS score ({epss:.2f})")
 
         # Check if in CISA KEV
-        if vuln.get('cisa_kev'):
+        if vuln.get("cisa_kev"):
             score += 0.3
             factors.append("In CISA Known Exploited Vulnerabilities")
 
         return {
             "exploitability_score": score,
             "factors": factors,
-            "recommendation": "Prioritize remediation" if score > 0.5 else "Standard remediation"
+            "recommendation": ("Prioritize remediation" if score > 0.5 else "Standard remediation"),
         }
 
 
 # =============================================================================
 # Task 3: Intelligent Prioritization - SOLUTION
 # =============================================================================
+
 
 class VulnPrioritizer:
     """Prioritize vulnerabilities intelligently."""
@@ -194,26 +198,26 @@ class VulnPrioritizer:
         score = 0.0
 
         # Base CVSS score (40% weight)
-        cvss = vuln.get('cvss_score', 0)
+        cvss = vuln.get("cvss_score", 0)
         score += (cvss / 10) * 40
 
         # Exploitability factors (30% weight)
-        if vuln.get('exploit_available'):
+        if vuln.get("exploit_available"):
             score += 15
-        if vuln.get('cisa_kev'):
+        if vuln.get("cisa_kev"):
             score += 15
 
         # Asset context (30% weight)
         if asset:
-            criticality = asset.get('criticality', 'medium')
-            if criticality == 'critical':
+            criticality = asset.get("criticality", "medium")
+            if criticality == "critical":
                 score += 20
-            elif criticality == 'high':
+            elif criticality == "high":
                 score += 15
-            elif criticality == 'medium':
+            elif criticality == "medium":
                 score += 10
 
-            if asset.get('internet_facing'):
+            if asset.get("internet_facing"):
                 score += 10
 
         return min(100, score)
@@ -221,12 +225,12 @@ class VulnPrioritizer:
     def prioritize_vulns(self, vulns: List[dict]) -> List[dict]:
         """Prioritize vulnerability list by risk score."""
         for vuln in vulns:
-            host = vuln.get('host', '')
+            host = vuln.get("host", "")
             asset = self.assets.get(host, {})
-            vuln['risk_score'] = self.calculate_risk_score(vuln, asset)
+            vuln["risk_score"] = self.calculate_risk_score(vuln, asset)
 
         # Sort by risk score descending
-        return sorted(vulns, key=lambda x: x.get('risk_score', 0), reverse=True)
+        return sorted(vulns, key=lambda x: x.get("risk_score", 0), reverse=True)
 
     def create_remediation_roadmap(self, vulns: List[dict]) -> dict:
         """Create phased remediation plan."""
@@ -234,17 +238,17 @@ class VulnPrioritizer:
 
         roadmap = {
             "immediate": [],  # Risk > 80
-            "week_1": [],     # Risk 60-80
-            "week_2_3": [],   # Risk 40-60
-            "month_1": []     # Risk < 40
+            "week_1": [],  # Risk 60-80
+            "week_2_3": [],  # Risk 40-60
+            "month_1": [],  # Risk < 40
         }
 
         for vuln in prioritized:
-            score = vuln.get('risk_score', 0)
+            score = vuln.get("risk_score", 0)
             entry = {
-                "host": vuln.get('host'),
-                "cve": vuln.get('cve_id'),
-                "score": score
+                "host": vuln.get("host"),
+                "cve": vuln.get("cve_id"),
+                "score": score,
             }
 
             if score > 80:
@@ -263,6 +267,7 @@ class VulnPrioritizer:
 # Task 4: Report Generation - SOLUTION
 # =============================================================================
 
+
 class VulnReporter:
     """Generate vulnerability reports."""
 
@@ -272,8 +277,8 @@ class VulnReporter:
     def generate_executive_summary(self, vulns: List[dict]) -> str:
         """Generate executive summary."""
         total = len(vulns)
-        critical = sum(1 for v in vulns if v.get('severity') == 'CRITICAL')
-        high = sum(1 for v in vulns if v.get('severity') == 'HIGH')
+        critical = sum(1 for v in vulns if v.get("severity") == "CRITICAL")
+        high = sum(1 for v in vulns if v.get("severity") == "HIGH")
 
         summary = f"""# Executive Vulnerability Summary
 
@@ -327,6 +332,7 @@ Estimated remediation effort: {total * 2}-{total * 4} hours
 # Main - SOLUTION
 # =============================================================================
 
+
 def main():
     """Main execution."""
     console.print("[bold]Lab 08: AI-Powered Vulnerability Scanner - SOLUTION[/bold]")
@@ -343,7 +349,7 @@ def main():
             "severity": "CRITICAL",
             "port": 443,
             "service": "Apache/2.4.49",
-            "description": "Remote code execution in Apache HTTP Server"
+            "description": "Remote code execution in Apache HTTP Server",
         },
         {
             "host": "db-server-01",
@@ -352,7 +358,7 @@ def main():
             "severity": "HIGH",
             "port": 3306,
             "service": "MySQL 8.0.30",
-            "description": "SQL injection vulnerability"
+            "description": "SQL injection vulnerability",
         },
         {
             "host": "app-server-01",
@@ -361,8 +367,8 @@ def main():
             "severity": "MEDIUM",
             "port": 8080,
             "service": "Tomcat/9.0",
-            "description": "Information disclosure vulnerability"
-        }
+            "description": "Information disclosure vulnerability",
+        },
     ]
 
     (data_dir / "sample_scan.json").write_text(json.dumps(sample_vulns, indent=2))
@@ -371,7 +377,7 @@ def main():
     assets = {
         "web-server-01": {"criticality": "high", "internet_facing": True},
         "db-server-01": {"criticality": "critical", "internet_facing": False},
-        "app-server-01": {"criticality": "medium", "internet_facing": False}
+        "app-server-01": {"criticality": "medium", "internet_facing": False},
     }
 
     # Load and enrich
@@ -402,7 +408,7 @@ def main():
             v.get("cve_id", ""),
             v.get("severity", ""),
             str(v.get("cvss_score", "")),
-            f"{v.get('risk_score', 0):.1f}"
+            f"{v.get('risk_score', 0):.1f}",
         )
 
     console.print(table)

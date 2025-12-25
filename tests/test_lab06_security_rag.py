@@ -1,28 +1,26 @@
 #!/usr/bin/env python3
 """Tests for Lab 06: Security RAG System."""
 
-import pytest
 import json
 import sys
 from pathlib import Path
 from unittest.mock import Mock, patch
 
+import pytest
+
 # Clear any existing 'main' module and lab paths to avoid conflicts
 for key in list(sys.modules.keys()):
-    if key == 'main' or key.startswith('main.'):
+    if key == "main" or key.startswith("main."):
         del sys.modules[key]
 
 # Remove any existing lab paths from sys.path
-sys.path = [p for p in sys.path if '/labs/lab' not in p]
+sys.path = [p for p in sys.path if "/labs/lab" not in p]
 
 # Add this lab's path
 lab_path = str(Path(__file__).parent.parent / "labs" / "lab06-security-rag" / "solution")
 sys.path.insert(0, lab_path)
 
-from main import (
-    SecurityDocLoader,
-    chunk_security_documents,
-)
+from main import SecurityDocLoader, chunk_security_documents
 
 
 @pytest.fixture
@@ -35,7 +33,7 @@ def sample_cve_data(tmp_path):
             "cvss_score": 9.8,
             "severity": "CRITICAL",
             "affected_products": ["Product A"],
-            "mitigation": "Update to latest version."
+            "mitigation": "Update to latest version.",
         },
         {
             "cve_id": "CVE-2024-5678",
@@ -43,8 +41,8 @@ def sample_cve_data(tmp_path):
             "cvss_score": 8.5,
             "severity": "HIGH",
             "affected_products": ["Product B"],
-            "mitigation": "Apply patches."
-        }
+            "mitigation": "Apply patches.",
+        },
     ]
 
     cve_dir = tmp_path / "cves"
@@ -64,7 +62,7 @@ def sample_mitre_data(tmp_path):
             "tactic": "Execution",
             "description": "Adversaries may use PowerShell.",
             "detection": "Monitor PowerShell logging.",
-            "mitigations": ["Disable PowerShell", "Enable logging"]
+            "mitigations": ["Disable PowerShell", "Enable logging"],
         }
     ]
 

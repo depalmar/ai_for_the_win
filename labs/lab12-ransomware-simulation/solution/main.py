@@ -63,18 +63,19 @@ RANSOMWARE FAMILIES SIMULATED:
 =============================================================================
 """
 
-import os
 import json
-import tempfile
+import os
 import shutil
+import tempfile
 from dataclasses import dataclass, field
-from typing import List, Dict, Optional, Any
 from datetime import datetime
 from enum import Enum
 from pathlib import Path
+from typing import Any, Dict, List, Optional
 
 # Load environment variables
 from dotenv import load_dotenv
+
 load_dotenv()
 
 # =============================================================================
@@ -95,18 +96,21 @@ load_dotenv()
 
 try:
     from anthropic import Anthropic
+
     ANTHROPIC_AVAILABLE = True
 except ImportError:
     ANTHROPIC_AVAILABLE = False
 
 try:
     from openai import OpenAI
+
     OPENAI_AVAILABLE = True
 except ImportError:
     OPENAI_AVAILABLE = False
 
 try:
     import google.generativeai as genai
+
     GEMINI_AVAILABLE = True
 except ImportError:
     GEMINI_AVAILABLE = False
@@ -143,7 +147,11 @@ def get_llm_client(provider: str = "auto"):
             api_key = os.getenv("GOOGLE_API_KEY")
             if api_key and GEMINI_AVAILABLE:
                 genai.configure(api_key=api_key)
-                return genai.GenerativeModel("gemini-1.5-pro"), "gemini", "gemini-1.5-pro"
+                return (
+                    genai.GenerativeModel("gemini-1.5-pro"),
+                    "gemini",
+                    "gemini-1.5-pro",
+                )
 
     raise ValueError(
         "No LLM provider available. Set one of: ANTHROPIC_API_KEY, OPENAI_API_KEY, GOOGLE_API_KEY"
@@ -168,7 +176,7 @@ def call_llm(client: Any, provider: str, model: str, prompt: str, max_tokens: in
         response = client.messages.create(
             model=model,
             max_tokens=max_tokens,
-            messages=[{"role": "user", "content": prompt}]
+            messages=[{"role": "user", "content": prompt}],
         )
         return response.content[0].text
 
@@ -176,7 +184,7 @@ def call_llm(client: Any, provider: str, model: str, prompt: str, max_tokens: in
         response = client.chat.completions.create(
             model=model,
             max_tokens=max_tokens,
-            messages=[{"role": "user", "content": prompt}]
+            messages=[{"role": "user", "content": prompt}],
         )
         return response.choices[0].message.content
 
@@ -210,6 +218,7 @@ def call_llm(client: Any, provider: str, model: str, prompt: str, max_tokens: in
 #
 # =============================================================================
 
+
 # Ransomware families we can simulate (each has unique TTPs)
 class RansomwareFamily(Enum):
     LOCKBIT = "lockbit"
@@ -230,6 +239,7 @@ class DetectionStatus(Enum):
 @dataclass
 class AttackScenario:
     """A ransomware attack scenario for testing."""
+
     family: RansomwareFamily
     name: str
     description: str
@@ -248,6 +258,7 @@ class AttackScenario:
 @dataclass
 class SimulationConfig:
     """Configuration for safe ransomware simulation."""
+
     target_directory: str
     file_extensions: List[str] = field(default_factory=lambda: [".txt", ".docx", ".xlsx"])
     create_ransom_note: bool = True
@@ -260,6 +271,7 @@ class SimulationConfig:
 @dataclass
 class DetectionTest:
     """A single detection test case."""
+
     name: str
     technique_id: str
     description: str
@@ -271,6 +283,7 @@ class DetectionTest:
 @dataclass
 class TestResult:
     """Result of a detection test."""
+
     test: DetectionTest
     status: DetectionStatus
     detection_time_ms: Optional[float] = None
@@ -282,6 +295,7 @@ class TestResult:
 # Scenario Generator
 # =============================================================================
 
+
 class ScenarioGenerator:
     """AI-powered ransomware scenario generator."""
 
@@ -291,36 +305,36 @@ class ScenarioGenerator:
             "initial_access": ["Phishing", "RDP Brute Force", "Exploit Public Apps"],
             "techniques": ["T1486", "T1490", "T1021.001", "T1059.001", "T1082"],
             "lateral": ["PsExec", "WMI", "RDP"],
-            "exfiltration": True
+            "exfiltration": True,
         },
         RansomwareFamily.BLACKCAT: {
             "description": "Rust-based ransomware with cross-platform capability",
             "initial_access": ["Phishing", "Compromised Credentials"],
             "techniques": ["T1486", "T1490", "T1567", "T1048", "T1070"],
             "lateral": ["SMB", "SSH", "Cobalt Strike"],
-            "exfiltration": True
+            "exfiltration": True,
         },
         RansomwareFamily.CONTI: {
             "description": "Prolific RaaS operation with manual operation phase",
             "initial_access": ["TrickBot", "BazarLoader", "Phishing"],
             "techniques": ["T1486", "T1490", "T1059.001", "T1047", "T1018"],
             "lateral": ["Cobalt Strike", "PsExec", "RDP"],
-            "exfiltration": True
+            "exfiltration": True,
         },
         RansomwareFamily.REVIL: {
             "description": "High-profile RaaS targeting enterprises",
             "initial_access": ["Supply Chain", "Exploit", "Phishing"],
             "techniques": ["T1486", "T1490", "T1082", "T1083", "T1489"],
             "lateral": ["PsExec", "WMI"],
-            "exfiltration": True
+            "exfiltration": True,
         },
         RansomwareFamily.RYUK: {
             "description": "Big game hunting ransomware",
             "initial_access": ["Emotet", "TrickBot", "Phishing"],
             "techniques": ["T1486", "T1490", "T1047", "T1059.003", "T1036"],
             "lateral": ["PsExec", "WMI", "SMB"],
-            "exfiltration": False
-        }
+            "exfiltration": False,
+        },
     }
 
     def __init__(self, provider: str = "auto"):
@@ -337,7 +351,7 @@ class ScenarioGenerator:
         family: RansomwareFamily,
         complexity: str = "medium",
         include_exfil: bool = True,
-        target_os: str = "windows"
+        target_os: str = "windows",
     ) -> AttackScenario:
         """Generate a ransomware attack scenario."""
         profile = self.FAMILY_PROFILES.get(family, self.FAMILY_PROFILES[RansomwareFamily.LOCKBIT])
@@ -345,17 +359,21 @@ class ScenarioGenerator:
         # Build execution chain based on complexity
         execution_chain = []
         if complexity in ["medium", "high"]:
-            execution_chain.extend([
-                "Initial loader drops secondary payload",
-                "Payload establishes C2 communication",
-                "Discovery commands enumerate environment"
-            ])
+            execution_chain.extend(
+                [
+                    "Initial loader drops secondary payload",
+                    "Payload establishes C2 communication",
+                    "Discovery commands enumerate environment",
+                ]
+            )
         if complexity == "high":
-            execution_chain.extend([
-                "Credential harvesting via Mimikatz/LSASS",
-                "Lateral movement to high-value targets",
-                "Domain admin escalation attempt"
-            ])
+            execution_chain.extend(
+                [
+                    "Credential harvesting via Mimikatz/LSASS",
+                    "Lateral movement to high-value targets",
+                    "Domain admin escalation attempt",
+                ]
+            )
         execution_chain.append("Ransomware binary execution")
 
         # Build detection opportunities
@@ -365,7 +383,7 @@ class ScenarioGenerator:
             "Unusual file system enumeration",
             "Shadow copy deletion commands",
             "Mass file extension changes",
-            "Ransom note file creation"
+            "Ransom note file creation",
         ]
 
         if include_exfil:
@@ -378,7 +396,11 @@ class ScenarioGenerator:
             initial_access=profile["initial_access"][0],
             execution_chain=execution_chain,
             persistence_methods=["Registry Run Key", "Scheduled Task"],
-            discovery_techniques=["System Info", "Network Share Enum", "File Discovery"],
+            discovery_techniques=[
+                "System Info",
+                "Network Share Enum",
+                "File Discovery",
+            ],
             lateral_movement=profile["lateral"],
             exfiltration=include_exfil and profile["exfiltration"],
             encryption_targets=["Documents", "Database Files", "Backups"],
@@ -388,8 +410,8 @@ class ScenarioGenerator:
                 "Ransom note files",
                 "Encrypted file extensions",
                 "Event log entries",
-                "Registry modifications"
-            ]
+                "Registry modifications",
+            ],
         )
 
     def generate_detection_tests(self, scenario: AttackScenario) -> List[DetectionTest]:
@@ -397,45 +419,53 @@ class ScenarioGenerator:
         tests = []
 
         # T1490 - Inhibit System Recovery
-        tests.append(DetectionTest(
-            name="Shadow Copy Deletion Detection",
-            technique_id="T1490",
-            description="Detect VSS shadow copy deletion attempts",
-            simulation_command="echo 'vssadmin delete shadows /all /quiet'",
-            expected_detection="Alert on vssadmin delete shadows command",
-            detection_source="EDR/SIEM"
-        ))
+        tests.append(
+            DetectionTest(
+                name="Shadow Copy Deletion Detection",
+                technique_id="T1490",
+                description="Detect VSS shadow copy deletion attempts",
+                simulation_command="echo 'vssadmin delete shadows /all /quiet'",
+                expected_detection="Alert on vssadmin delete shadows command",
+                detection_source="EDR/SIEM",
+            )
+        )
 
         # T1486 - Data Encrypted for Impact
-        tests.append(DetectionTest(
-            name="Mass File Encryption Detection",
-            technique_id="T1486",
-            description="Detect rapid file modification with high entropy",
-            simulation_command="Rename files with .encrypted extension",
-            expected_detection="Alert on mass file extension changes",
-            detection_source="EDR"
-        ))
+        tests.append(
+            DetectionTest(
+                name="Mass File Encryption Detection",
+                technique_id="T1486",
+                description="Detect rapid file modification with high entropy",
+                simulation_command="Rename files with .encrypted extension",
+                expected_detection="Alert on mass file extension changes",
+                detection_source="EDR",
+            )
+        )
 
         # T1082 - System Information Discovery
-        tests.append(DetectionTest(
-            name="System Discovery Detection",
-            technique_id="T1082",
-            description="Detect system enumeration commands",
-            simulation_command="echo 'systeminfo && hostname && whoami'",
-            expected_detection="Alert on discovery command sequence",
-            detection_source="SIEM"
-        ))
+        tests.append(
+            DetectionTest(
+                name="System Discovery Detection",
+                technique_id="T1082",
+                description="Detect system enumeration commands",
+                simulation_command="echo 'systeminfo && hostname && whoami'",
+                expected_detection="Alert on discovery command sequence",
+                detection_source="SIEM",
+            )
+        )
 
         if scenario.exfiltration:
             # T1567 - Exfiltration Over Web Service
-            tests.append(DetectionTest(
-                name="Data Exfiltration Detection",
-                technique_id="T1567",
-                description="Detect large outbound data transfers",
-                simulation_command="Simulate large file upload",
-                expected_detection="Alert on unusual outbound transfer",
-                detection_source="Network/DLP"
-            ))
+            tests.append(
+                DetectionTest(
+                    name="Data Exfiltration Detection",
+                    technique_id="T1567",
+                    description="Detect large outbound data transfers",
+                    simulation_command="Simulate large file upload",
+                    expected_detection="Alert on unusual outbound transfer",
+                    detection_source="Network/DLP",
+                )
+            )
 
         return tests
 
@@ -480,6 +510,7 @@ class ScenarioGenerator:
 #
 # =============================================================================
 
+
 class SafeRansomwareSimulator:
     """
     Safe ransomware behavior simulator for purple team.
@@ -507,20 +538,15 @@ class SafeRansomwareSimulator:
 
         # Must be in temp or explicitly marked test directory
         allowed_prefixes = [
-            Path(tempfile.gettempdir()),
-            Path("/tmp"),
-            Path("/opt/purple_team"),
+            Path(tempfile.gettempdir()),  # System temp directory (e.g., /tmp on Unix)
+            Path("/opt/purple_team"),  # Dedicated test area
         ]
 
-        is_safe = any(
-            str(target).startswith(str(prefix))
-            for prefix in allowed_prefixes
-        )
+        is_safe = any(str(target).startswith(str(prefix)) for prefix in allowed_prefixes)
 
         if not is_safe:
             raise ValueError(
-                f"Target directory must be in temp or designated test area. "
-                f"Got: {target}"
+                f"Target directory must be in temp or designated test area. " f"Got: {target}"
             )
 
         # Create if doesn't exist
@@ -528,11 +554,7 @@ class SafeRansomwareSimulator:
 
     def _log_action(self, action: str, details: Dict):
         """Log all simulation actions."""
-        entry = {
-            "timestamp": datetime.now().isoformat(),
-            "action": action,
-            **details
-        }
+        entry = {"timestamp": datetime.now().isoformat(), "action": action, **details}
         self.audit_log.append(entry)
         if self.config.log_all_actions:
             print(f"[SIM] {action}: {details}")
@@ -586,10 +608,7 @@ class SafeRansomwareSimulator:
                 shutil.move(str(original), new_name)
                 affected += 1
 
-                self._log_action("ENCRYPT_SIM", {
-                    "original": str(original),
-                    "encrypted": new_name
-                })
+                self._log_action("ENCRYPT_SIM", {"original": str(original), "encrypted": new_name})
 
         return {"simulated": True, "files_affected": affected}
 
@@ -606,15 +625,18 @@ class SafeRansomwareSimulator:
         commands = [
             "vssadmin delete shadows /all /quiet",
             "wmic shadowcopy delete",
-            "bcdedit /set {default} recoveryenabled no"
+            "bcdedit /set {default} recoveryenabled no",
         ]
 
         for cmd in commands:
-            self._log_action("SHADOW_DELETE_SIM", {
-                "command": cmd,
-                "executed": False,
-                "note": "SIMULATION ONLY - command not executed"
-            })
+            self._log_action(
+                "SHADOW_DELETE_SIM",
+                {
+                    "command": cmd,
+                    "executed": False,
+                    "note": "SIMULATION ONLY - command not executed",
+                },
+            )
 
         return {"simulated": True, "commands": commands}
 
@@ -634,11 +656,13 @@ This file should trigger detection rules for:
 
 Test ID: PURPLE-TEAM-{timestamp}
 === END SIMULATION ===
-""".format(timestamp=datetime.now().strftime("%Y%m%d-%H%M%S"))
+""".format(
+            timestamp=datetime.now().strftime("%Y%m%d-%H%M%S")
+        )
 
         note_paths = [
             Path(self.config.target_directory) / "README_RESTORE_FILES.txt",
-            Path(self.config.target_directory) / "HOW_TO_DECRYPT.txt"
+            Path(self.config.target_directory) / "HOW_TO_DECRYPT.txt",
         ]
 
         for note_path in note_paths:
@@ -659,7 +683,7 @@ Test ID: PURPLE-TEAM-{timestamp}
                 "action": entry["action"],
                 "source": "purple_team_simulator",
                 "severity": "info" if entry["action"] == "ENUMERATE" else "high",
-                "details": entry
+                "details": entry,
             }
             telemetry.append(event)
 
@@ -683,10 +707,13 @@ Test ID: PURPLE-TEAM-{timestamp}
                 Path(filepath).unlink()
                 self._log_action("DELETE_TEST_FILE", {"file": filepath})
 
-        self._log_action("CLEANUP_COMPLETE", {
-            "files_restored": len(self.original_files),
-            "files_deleted": len(self.created_files)
-        })
+        self._log_action(
+            "CLEANUP_COMPLETE",
+            {
+                "files_restored": len(self.original_files),
+                "files_deleted": len(self.created_files),
+            },
+        )
 
 
 # =============================================================================
@@ -721,6 +748,7 @@ Test ID: PURPLE-TEAM-{timestamp}
 #
 # =============================================================================
 
+
 class DetectionValidator:
     """Validate detection capabilities against ransomware TTPs."""
 
@@ -738,7 +766,7 @@ class DetectionValidator:
         result = TestResult(
             test=test,
             status=DetectionStatus.PENDING,
-            notes="Test executed - check detection systems"
+            notes="Test executed - check detection systems",
         )
 
         self.results.append(result)
@@ -758,10 +786,8 @@ class DetectionValidator:
             "partial": partial,
             "coverage_percentage": (detected / total * 100) if total > 0 else 0,
             "missed_techniques": [
-                r.test.technique_id
-                for r in self.results
-                if r.status == DetectionStatus.MISSED
-            ]
+                r.test.technique_id for r in self.results if r.status == DetectionStatus.MISSED
+            ],
         }
 
 
@@ -810,6 +836,7 @@ class DetectionValidator:
 #
 # =============================================================================
 
+
 class PurpleTeamExercise:
     """Orchestrate ransomware purple team exercises."""
 
@@ -825,14 +852,11 @@ class PurpleTeamExercise:
         self.client, self.provider, self.model = get_llm_client(provider)
 
     def plan_exercise(
-        self,
-        ransomware_family: RansomwareFamily,
-        complexity: str = "medium"
+        self, ransomware_family: RansomwareFamily, complexity: str = "medium"
     ) -> Dict:
         """Plan a purple team exercise."""
         scenario = self.scenario_gen.generate_scenario(
-            family=ransomware_family,
-            complexity=complexity
+            family=ransomware_family, complexity=complexity
         )
 
         tests = self.scenario_gen.generate_detection_tests(scenario)
@@ -845,8 +869,8 @@ class PurpleTeamExercise:
                 {"name": "Execution", "duration": "60 min"},
                 {"name": "Detection Validation", "duration": "30 min"},
                 {"name": "Gap Analysis", "duration": "30 min"},
-                {"name": "Reporting", "duration": "30 min"}
-            ]
+                {"name": "Reporting", "duration": "30 min"},
+            ],
         }
 
     def generate_report(self, exercise_results: Dict) -> str:
@@ -872,6 +896,7 @@ Create a professional report with:
 # Demo
 # =============================================================================
 
+
 def main():
     """Demo the ransomware simulation framework."""
     print("=" * 60)
@@ -882,19 +907,16 @@ def main():
     # Create exercise plan
     print("[1] Planning Exercise...")
     exercise = PurpleTeamExercise()
-    plan = exercise.plan_exercise(
-        ransomware_family=RansomwareFamily.LOCKBIT,
-        complexity="medium"
-    )
+    plan = exercise.plan_exercise(ransomware_family=RansomwareFamily.LOCKBIT, complexity="medium")
 
     print(f"\nScenario: {plan['scenario'].name}")
     print(f"Description: {plan['scenario'].description}")
     print(f"\nMITRE Techniques:")
-    for tech in plan['scenario'].mitre_techniques:
+    for tech in plan["scenario"].mitre_techniques:
         print(f"  - {tech}")
 
     print(f"\nDetection Tests: {len(plan['tests'])}")
-    for test in plan['tests']:
+    for test in plan["tests"]:
         print(f"  - [{test.technique_id}] {test.name}")
 
     # Run safe simulation
@@ -905,7 +927,7 @@ def main():
             simulate_encryption=True,
             simulate_shadow_delete=True,
             create_ransom_note=True,
-            cleanup_after=True
+            cleanup_after=True,
         )
 
         simulator = SafeRansomwareSimulator(config)

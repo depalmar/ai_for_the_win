@@ -10,27 +10,29 @@ Instructions:
 3. Compare your results with the solution
 """
 
-import pandas as pd
-import numpy as np
-from typing import List, Tuple, Dict, Optional
-from pathlib import Path
 from datetime import datetime
-
-from sklearn.preprocessing import StandardScaler, RobustScaler
-from sklearn.ensemble import IsolationForest
-from sklearn.svm import OneClassSVM
-from sklearn.neighbors import LocalOutlierFactor
-from sklearn.metrics import (
-    precision_score, recall_score, f1_score,
-    roc_auc_score, precision_recall_curve
-)
+from pathlib import Path
+from typing import Dict, List, Optional, Tuple
 
 import matplotlib.pyplot as plt
-
+import numpy as np
+import pandas as pd
+from sklearn.ensemble import IsolationForest
+from sklearn.metrics import (
+    f1_score,
+    precision_recall_curve,
+    precision_score,
+    recall_score,
+    roc_auc_score,
+)
+from sklearn.neighbors import LocalOutlierFactor
+from sklearn.preprocessing import RobustScaler, StandardScaler
+from sklearn.svm import OneClassSVM
 
 # =============================================================================
 # Task 1: Load Network Data
 # =============================================================================
+
 
 def load_network_data(filepath: str) -> pd.DataFrame:
     """
@@ -74,6 +76,7 @@ def explore_network_data(df: pd.DataFrame) -> None:
 # Task 2: Feature Engineering
 # =============================================================================
 
+
 def engineer_network_features(df: pd.DataFrame) -> pd.DataFrame:
     """
     Create anomaly detection features.
@@ -91,7 +94,9 @@ def engineer_network_features(df: pd.DataFrame) -> pd.DataFrame:
     pass
 
 
-def prepare_features(df: pd.DataFrame, feature_cols: List[str] = None) -> Tuple[np.ndarray, List[str]]:
+def prepare_features(
+    df: pd.DataFrame, feature_cols: List[str] = None
+) -> Tuple[np.ndarray, List[str]]:
     """
     Prepare feature matrix for ML models.
 
@@ -108,6 +113,7 @@ def prepare_features(df: pd.DataFrame, feature_cols: List[str] = None) -> Tuple[
 # =============================================================================
 # Task 3: Build Baseline Model
 # =============================================================================
+
 
 def statistical_baseline(df: pd.DataFrame, feature: str, n_std: float = 3.0) -> pd.Series:
     """
@@ -147,9 +153,9 @@ def iqr_baseline(df: pd.DataFrame, feature: str, k: float = 1.5) -> pd.Series:
 # Task 4: Train Isolation Forest
 # =============================================================================
 
+
 def train_isolation_forest(
-    X: np.ndarray,
-    contamination: float = 0.01
+    X: np.ndarray, contamination: float = 0.01
 ) -> Tuple[IsolationForest, np.ndarray]:
     """
     Train Isolation Forest for anomaly detection.
@@ -171,10 +177,7 @@ def train_isolation_forest(
     pass
 
 
-def train_local_outlier_factor(
-    X: np.ndarray,
-    contamination: float = 0.01
-) -> np.ndarray:
+def train_local_outlier_factor(X: np.ndarray, contamination: float = 0.01) -> np.ndarray:
     """
     Train Local Outlier Factor.
 
@@ -190,6 +193,7 @@ def train_local_outlier_factor(
 # =============================================================================
 # Task 5: Train Autoencoder (Optional - requires PyTorch)
 # =============================================================================
+
 
 def train_autoencoder(X: np.ndarray, encoding_dim: int = 8) -> Tuple[object, np.ndarray]:
     """
@@ -217,11 +221,8 @@ def train_autoencoder(X: np.ndarray, encoding_dim: int = 8) -> Tuple[object, np.
 # Task 6: Evaluate and Tune
 # =============================================================================
 
-def evaluate_detector(
-    y_true: np.ndarray,
-    scores: np.ndarray,
-    threshold: float = None
-) -> dict:
+
+def evaluate_detector(y_true: np.ndarray, scores: np.ndarray, threshold: float = None) -> dict:
     """
     Evaluate anomaly detector performance.
 
@@ -270,6 +271,7 @@ def plot_roc_curve(y_true: np.ndarray, scores: np.ndarray, title: str = "ROC Cur
 # Main Execution
 # =============================================================================
 
+
 def main():
     """Main execution flow."""
     print("=" * 60)
@@ -296,7 +298,7 @@ def main():
     print("\n[Step 2] Engineering features...")
     df = engineer_network_features(df)
 
-    if df is None or 'bytes_per_second' not in df.columns:
+    if df is None or "bytes_per_second" not in df.columns:
         print("Error: engineer_network_features() not complete. Check TODO!")
         return
 
@@ -313,7 +315,7 @@ def main():
 
     # Statistical baseline
     print("\n[Step 4] Running statistical baseline...")
-    baseline_anomalies = statistical_baseline(df, 'bytes_per_second')
+    baseline_anomalies = statistical_baseline(df, "bytes_per_second")
 
     if baseline_anomalies is not None:
         print(f"Baseline detected {baseline_anomalies.sum()} anomalies")
@@ -330,8 +332,8 @@ def main():
 
     # Evaluation
     print("\n[Step 6] Evaluating model...")
-    if 'label' in df.columns:
-        y_true = (df['label'] == 'attack').astype(int).values
+    if "label" in df.columns:
+        y_true = (df["label"] == "attack").astype(int).values
         metrics = evaluate_detector(y_true, -scores)  # Negate for sklearn convention
 
         if metrics:
@@ -361,70 +363,78 @@ def create_sample_data(filepath: Path):
 
     # Normal traffic
     for i in range(n_samples - n_attacks):
-        data.append({
-            'timestamp': base_time + pd.Timedelta(seconds=i*5),
-            'src_ip': f"192.168.1.{np.random.randint(1, 255)}",
-            'dst_ip': f"{np.random.randint(1, 255)}.{np.random.randint(1, 255)}.{np.random.randint(1, 255)}.{np.random.randint(1, 255)}",
-            'src_port': np.random.randint(1024, 65535),
-            'dst_port': np.random.choice([80, 443, 53, 22, 25]),
-            'protocol': np.random.choice(['TCP', 'UDP'], p=[0.8, 0.2]),
-            'bytes_sent': np.random.lognormal(8, 1),
-            'bytes_recv': np.random.lognormal(9, 1),
-            'packets_sent': np.random.randint(5, 50),
-            'packets_recv': np.random.randint(10, 100),
-            'duration': np.random.exponential(5),
-            'label': 'normal'
-        })
+        data.append(
+            {
+                "timestamp": base_time + pd.Timedelta(seconds=i * 5),
+                "src_ip": f"192.168.1.{np.random.randint(1, 255)}",
+                "dst_ip": f"{np.random.randint(1, 255)}.{np.random.randint(1, 255)}.{np.random.randint(1, 255)}.{np.random.randint(1, 255)}",
+                "src_port": np.random.randint(1024, 65535),
+                "dst_port": np.random.choice([80, 443, 53, 22, 25]),
+                "protocol": np.random.choice(["TCP", "UDP"], p=[0.8, 0.2]),
+                "bytes_sent": np.random.lognormal(8, 1),
+                "bytes_recv": np.random.lognormal(9, 1),
+                "packets_sent": np.random.randint(5, 50),
+                "packets_recv": np.random.randint(10, 100),
+                "duration": np.random.exponential(5),
+                "label": "normal",
+            }
+        )
 
     # Attack traffic
     for i in range(n_attacks):
-        attack_type = np.random.choice(['c2', 'exfil', 'scan'])
+        attack_type = np.random.choice(["c2", "exfil", "scan"])
 
-        if attack_type == 'c2':  # C2 beaconing
-            data.append({
-                'timestamp': base_time + pd.Timedelta(seconds=(n_samples-n_attacks+i)*5),
-                'src_ip': "192.168.1.100",
-                'dst_ip': "185.143.223.47",
-                'src_port': np.random.randint(40000, 50000),
-                'dst_port': 443,
-                'protocol': 'TCP',
-                'bytes_sent': 256,
-                'bytes_recv': 128,
-                'packets_sent': 2,
-                'packets_recv': 2,
-                'duration': 0.5,
-                'label': 'attack'
-            })
-        elif attack_type == 'exfil':  # Data exfiltration
-            data.append({
-                'timestamp': base_time + pd.Timedelta(seconds=(n_samples-n_attacks+i)*5),
-                'src_ip': "192.168.1.50",
-                'dst_ip': "91.234.99.100",
-                'src_port': np.random.randint(40000, 50000),
-                'dst_port': 443,
-                'protocol': 'TCP',
-                'bytes_sent': np.random.lognormal(15, 0.5),  # Very large
-                'bytes_recv': 1000,
-                'packets_sent': np.random.randint(1000, 5000),
-                'packets_recv': 50,
-                'duration': np.random.uniform(60, 300),
-                'label': 'attack'
-            })
+        if attack_type == "c2":  # C2 beaconing
+            data.append(
+                {
+                    "timestamp": base_time + pd.Timedelta(seconds=(n_samples - n_attacks + i) * 5),
+                    "src_ip": "192.168.1.100",
+                    "dst_ip": "185.143.223.47",
+                    "src_port": np.random.randint(40000, 50000),
+                    "dst_port": 443,
+                    "protocol": "TCP",
+                    "bytes_sent": 256,
+                    "bytes_recv": 128,
+                    "packets_sent": 2,
+                    "packets_recv": 2,
+                    "duration": 0.5,
+                    "label": "attack",
+                }
+            )
+        elif attack_type == "exfil":  # Data exfiltration
+            data.append(
+                {
+                    "timestamp": base_time + pd.Timedelta(seconds=(n_samples - n_attacks + i) * 5),
+                    "src_ip": "192.168.1.50",
+                    "dst_ip": "91.234.99.100",
+                    "src_port": np.random.randint(40000, 50000),
+                    "dst_port": 443,
+                    "protocol": "TCP",
+                    "bytes_sent": np.random.lognormal(15, 0.5),  # Very large
+                    "bytes_recv": 1000,
+                    "packets_sent": np.random.randint(1000, 5000),
+                    "packets_recv": 50,
+                    "duration": np.random.uniform(60, 300),
+                    "label": "attack",
+                }
+            )
         else:  # Port scan
-            data.append({
-                'timestamp': base_time + pd.Timedelta(seconds=(n_samples-n_attacks+i)*5),
-                'src_ip': "185.143.223.47",
-                'dst_ip': "192.168.1.1",
-                'src_port': np.random.randint(40000, 50000),
-                'dst_port': np.random.randint(1, 1024),
-                'protocol': 'TCP',
-                'bytes_sent': 60,
-                'bytes_recv': 0,
-                'packets_sent': 1,
-                'packets_recv': 0,
-                'duration': 0.01,
-                'label': 'attack'
-            })
+            data.append(
+                {
+                    "timestamp": base_time + pd.Timedelta(seconds=(n_samples - n_attacks + i) * 5),
+                    "src_ip": "185.143.223.47",
+                    "dst_ip": "192.168.1.1",
+                    "src_port": np.random.randint(40000, 50000),
+                    "dst_port": np.random.randint(1, 1024),
+                    "protocol": "TCP",
+                    "bytes_sent": 60,
+                    "bytes_recv": 0,
+                    "packets_sent": 1,
+                    "packets_recv": 0,
+                    "duration": 0.01,
+                    "label": "attack",
+                }
+            )
 
     df = pd.DataFrame(data)
     filepath.parent.mkdir(parents=True, exist_ok=True)

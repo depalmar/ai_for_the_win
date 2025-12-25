@@ -10,34 +10,43 @@ Generate professional PDF, HTML, and Markdown reports for:
 - Ransomware Incidents
 """
 
-import os
 import json
+import os
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from datetime import datetime
-from typing import List, Dict, Optional, Any
-from pathlib import Path
 from enum import Enum
+from pathlib import Path
+from typing import Any, Dict, List, Optional
 
 # Optional imports for PDF generation
 try:
     from reportlab.lib import colors
-    from reportlab.lib.pagesizes import letter, A4
-    from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+    from reportlab.lib.pagesizes import A4, letter
+    from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
     from reportlab.lib.units import inch
     from reportlab.platypus import (
-        SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle,
-        PageBreak, Image, ListFlowable, ListItem
+        Image,
+        ListFlowable,
+        ListItem,
+        PageBreak,
+        Paragraph,
+        SimpleDocTemplate,
+        Spacer,
+        Table,
+        TableStyle,
     )
+
     REPORTLAB_AVAILABLE = True
 except ImportError:
     REPORTLAB_AVAILABLE = False
 
 # Optional imports for charts
 try:
-    import matplotlib.pyplot as plt
     import matplotlib
-    matplotlib.use('Agg')  # Non-interactive backend
+    import matplotlib.pyplot as plt
+
+    matplotlib.use("Agg")  # Non-interactive backend
     MATPLOTLIB_AVAILABLE = True
 except ImportError:
     MATPLOTLIB_AVAILABLE = False
@@ -61,15 +70,17 @@ class Severity(Enum):
 @dataclass
 class ReportSection:
     """A section in the report."""
+
     title: str
     content: str
     level: int = 2
-    subsections: List['ReportSection'] = field(default_factory=list)
+    subsections: List["ReportSection"] = field(default_factory=list)
 
 
 @dataclass
 class TableData:
     """Table data for reports."""
+
     headers: List[str]
     rows: List[List[str]]
     title: Optional[str] = None
@@ -78,6 +89,7 @@ class TableData:
 @dataclass
 class ChartData:
     """Chart data for reports."""
+
     chart_type: str  # pie, bar, line, heatmap
     title: str
     data: Dict[str, Any]
@@ -87,6 +99,7 @@ class ChartData:
 @dataclass
 class Finding:
     """A security finding."""
+
     title: str
     severity: Severity
     description: str
@@ -99,6 +112,7 @@ class Finding:
 @dataclass
 class ReportMetadata:
     """Report metadata."""
+
     title: str
     author: str = "Security Team"
     date: datetime = field(default_factory=datetime.now)
@@ -110,6 +124,7 @@ class ReportMetadata:
 # =============================================================================
 # Base Report Generator
 # =============================================================================
+
 
 class BaseReportGenerator(ABC):
     """Abstract base class for report generators."""
@@ -147,6 +162,7 @@ class BaseReportGenerator(ABC):
 # Markdown Report Generator
 # =============================================================================
 
+
 class MarkdownReportGenerator(BaseReportGenerator):
     """Generate Markdown reports."""
 
@@ -181,7 +197,9 @@ class MarkdownReportGenerator(BaseReportGenerator):
             for i, f in enumerate(self.findings, 1):
                 severity_icon = self._severity_icon(f.severity)
                 mitre = f.mitre_technique or "N/A"
-                lines.append(f"| {i} | {severity_icon} {f.severity.value.upper()} | {f.title} | {mitre} |")
+                lines.append(
+                    f"| {i} | {severity_icon} {f.severity.value.upper()} | {f.title} | {mitre} |"
+                )
             lines.append("")
 
         # Sections
@@ -201,7 +219,7 @@ class MarkdownReportGenerator(BaseReportGenerator):
 
         # Write to file
         content = "\n".join(lines)
-        with open(output_path, 'w') as f:
+        with open(output_path, "w") as f:
             f.write(content)
 
         return output_path
@@ -228,7 +246,7 @@ class MarkdownReportGenerator(BaseReportGenerator):
             Severity.HIGH: "🟠",
             Severity.MEDIUM: "🟡",
             Severity.LOW: "🟢",
-            Severity.INFO: "🔵"
+            Severity.INFO: "🔵",
         }
         return icons.get(severity, "⚪")
 
@@ -296,6 +314,7 @@ class MarkdownReportGenerator(BaseReportGenerator):
 # HTML Report Generator
 # =============================================================================
 
+
 class HTMLReportGenerator(BaseReportGenerator):
     """Generate HTML reports with styling."""
 
@@ -354,7 +373,9 @@ class HTMLReportGenerator(BaseReportGenerator):
         html.append(f"<h1>{self.metadata.title}</h1>")
         html.append("<div class='metadata'>")
         html.append(f"<span><strong>Author:</strong> {self.metadata.author}</span>")
-        html.append(f"<span><strong>Date:</strong> {self.metadata.date.strftime('%Y-%m-%d %H:%M')}</span>")
+        html.append(
+            f"<span><strong>Date:</strong> {self.metadata.date.strftime('%Y-%m-%d %H:%M')}</span>"
+        )
         html.append(f"<span><strong>Classification:</strong> {self.metadata.classification}</span>")
         html.append("</div>")
 
@@ -383,7 +404,7 @@ class HTMLReportGenerator(BaseReportGenerator):
         html.append("</html>")
 
         content = "\n".join(html)
-        with open(output_path, 'w') as f:
+        with open(output_path, "w") as f:
             f.write(content)
 
         return output_path
@@ -450,6 +471,7 @@ class HTMLReportGenerator(BaseReportGenerator):
 # Report Templates
 # =============================================================================
 
+
 class IncidentReportTemplate:
     """Template for incident response reports."""
 
@@ -463,12 +485,11 @@ class IncidentReportTemplate:
         iocs: List[Dict],
         actions_taken: List[str],
         recommendations: List[str],
-        format: ReportFormat = ReportFormat.MARKDOWN
+        format: ReportFormat = ReportFormat.MARKDOWN,
     ) -> BaseReportGenerator:
         """Create an incident report."""
         metadata = ReportMetadata(
-            title=f"Incident Report: {incident_id}",
-            classification="CONFIDENTIAL"
+            title=f"Incident Report: {incident_id}", classification="CONFIDENTIAL"
         )
 
         if format == ReportFormat.HTML:
@@ -477,44 +498,66 @@ class IncidentReportTemplate:
             report = MarkdownReportGenerator(metadata)
 
         # Add sections
-        report.add_section(ReportSection(
-            title="Incident Summary",
-            content=f"**Incident Type:** {incident_type}\n\n{summary}"
-        ))
+        report.add_section(
+            ReportSection(
+                title="Incident Summary",
+                content=f"**Incident Type:** {incident_type}\n\n{summary}",
+            )
+        )
 
         # Timeline table
         if timeline:
-            report.add_table(TableData(
-                title="Incident Timeline",
-                headers=["Time", "Event", "Source"],
-                rows=[[t.get("time", ""), t.get("event", ""), t.get("source", "")] for t in timeline]
-            ))
+            report.add_table(
+                TableData(
+                    title="Incident Timeline",
+                    headers=["Time", "Event", "Source"],
+                    rows=[
+                        [t.get("time", ""), t.get("event", ""), t.get("source", "")]
+                        for t in timeline
+                    ],
+                )
+            )
 
         # Affected systems
-        report.add_section(ReportSection(
-            title="Affected Systems",
-            content="\n".join(f"- {s}" for s in affected_systems)
-        ))
+        report.add_section(
+            ReportSection(
+                title="Affected Systems",
+                content="\n".join(f"- {s}" for s in affected_systems),
+            )
+        )
 
         # IOCs table
         if iocs:
-            report.add_table(TableData(
-                title="Indicators of Compromise",
-                headers=["Type", "Value", "Description"],
-                rows=[[i.get("type", ""), i.get("value", ""), i.get("description", "")] for i in iocs]
-            ))
+            report.add_table(
+                TableData(
+                    title="Indicators of Compromise",
+                    headers=["Type", "Value", "Description"],
+                    rows=[
+                        [
+                            i.get("type", ""),
+                            i.get("value", ""),
+                            i.get("description", ""),
+                        ]
+                        for i in iocs
+                    ],
+                )
+            )
 
         # Actions taken
-        report.add_section(ReportSection(
-            title="Actions Taken",
-            content="\n".join(f"{i}. {a}" for i, a in enumerate(actions_taken, 1))
-        ))
+        report.add_section(
+            ReportSection(
+                title="Actions Taken",
+                content="\n".join(f"{i}. {a}" for i, a in enumerate(actions_taken, 1)),
+            )
+        )
 
         # Recommendations
-        report.add_section(ReportSection(
-            title="Recommendations",
-            content="\n".join(f"- {r}" for r in recommendations)
-        ))
+        report.add_section(
+            ReportSection(
+                title="Recommendations",
+                content="\n".join(f"- {r}" for r in recommendations),
+            )
+        )
 
         return report
 
@@ -533,12 +576,12 @@ class RansomwareReportTemplate:
         timeline: List[Dict],
         containment_actions: List[str],
         recovery_status: str,
-        format: ReportFormat = ReportFormat.MARKDOWN
+        format: ReportFormat = ReportFormat.MARKDOWN,
     ) -> BaseReportGenerator:
         """Create a ransomware incident report."""
         metadata = ReportMetadata(
             title=f"Ransomware Incident Report: {incident_id}",
-            classification="CONFIDENTIAL - INCIDENT RESPONSE"
+            classification="CONFIDENTIAL - INCIDENT RESPONSE",
         )
 
         if format == ReportFormat.HTML:
@@ -547,54 +590,69 @@ class RansomwareReportTemplate:
             report = MarkdownReportGenerator(metadata)
 
         # Executive Summary
-        report.add_section(ReportSection(
-            title="Executive Summary",
-            content=f"""A ransomware incident involving **{ransomware_family}** was detected.
+        report.add_section(
+            ReportSection(
+                title="Executive Summary",
+                content=f"""A ransomware incident involving **{ransomware_family}** was detected.
 
 **Key Facts:**
 - Affected Hosts: {len(affected_hosts)}
 - Encrypted Files: {encrypted_files:,}
 - Ransom Demand: {ransom_amount}
-- Recovery Status: {recovery_status}"""
-        ))
+- Recovery Status: {recovery_status}""",
+            )
+        )
 
         # Add critical finding
-        report.add_finding(Finding(
-            title=f"{ransomware_family} Ransomware Detected",
-            severity=Severity.CRITICAL,
-            description=f"Active ransomware encryption detected across {len(affected_hosts)} systems.",
-            evidence=f"Encrypted files: {encrypted_files:,}\nBitcoin addresses: {', '.join(bitcoin_addresses[:2])}",
-            recommendation="Immediately isolate affected systems and initiate incident response procedures.",
-            mitre_technique="T1486 - Data Encrypted for Impact"
-        ))
+        report.add_finding(
+            Finding(
+                title=f"{ransomware_family} Ransomware Detected",
+                severity=Severity.CRITICAL,
+                description=f"Active ransomware encryption detected across {len(affected_hosts)} systems.",
+                evidence=f"Encrypted files: {encrypted_files:,}\nBitcoin addresses: {', '.join(bitcoin_addresses[:2])}",
+                recommendation="Immediately isolate affected systems and initiate incident response procedures.",
+                mitre_technique="T1486 - Data Encrypted for Impact",
+            )
+        )
 
         # Affected hosts
-        report.add_table(TableData(
-            title="Affected Systems",
-            headers=["Hostname", "Status"],
-            rows=[[h, "Encrypted"] for h in affected_hosts]
-        ))
+        report.add_table(
+            TableData(
+                title="Affected Systems",
+                headers=["Hostname", "Status"],
+                rows=[[h, "Encrypted"] for h in affected_hosts],
+            )
+        )
 
         # Timeline
         if timeline:
-            report.add_table(TableData(
-                title="Attack Timeline",
-                headers=["Time", "Event", "Details"],
-                rows=[[t.get("time", ""), t.get("event", ""), t.get("details", "")] for t in timeline]
-            ))
+            report.add_table(
+                TableData(
+                    title="Attack Timeline",
+                    headers=["Time", "Event", "Details"],
+                    rows=[
+                        [t.get("time", ""), t.get("event", ""), t.get("details", "")]
+                        for t in timeline
+                    ],
+                )
+            )
 
         # IOCs
-        report.add_table(TableData(
-            title="Indicators of Compromise",
-            headers=["Type", "Value"],
-            rows=[["Bitcoin Address", addr] for addr in bitcoin_addresses]
-        ))
+        report.add_table(
+            TableData(
+                title="Indicators of Compromise",
+                headers=["Type", "Value"],
+                rows=[["Bitcoin Address", addr] for addr in bitcoin_addresses],
+            )
+        )
 
         # Containment actions
-        report.add_section(ReportSection(
-            title="Containment Actions",
-            content="\n".join(f"- [x] {a}" for a in containment_actions)
-        ))
+        report.add_section(
+            ReportSection(
+                title="Containment Actions",
+                content="\n".join(f"- [x] {a}" for a in containment_actions),
+            )
+        )
 
         return report
 
@@ -602,6 +660,7 @@ class RansomwareReportTemplate:
 # =============================================================================
 # Demo
 # =============================================================================
+
 
 def main():
     """Demo the report generator."""
@@ -615,10 +674,22 @@ def main():
         incident_type="Ransomware",
         summary="A LockBit ransomware attack was detected affecting multiple systems.",
         timeline=[
-            {"time": "2024-01-15 09:15", "event": "Phishing email received", "source": "Email Gateway"},
+            {
+                "time": "2024-01-15 09:15",
+                "event": "Phishing email received",
+                "source": "Email Gateway",
+            },
             {"time": "2024-01-15 09:17", "event": "Malware executed", "source": "EDR"},
-            {"time": "2024-01-15 10:30", "event": "Lateral movement detected", "source": "SIEM"},
-            {"time": "2024-01-15 15:00", "event": "Encryption started", "source": "EDR"},
+            {
+                "time": "2024-01-15 10:30",
+                "event": "Lateral movement detected",
+                "source": "SIEM",
+            },
+            {
+                "time": "2024-01-15 15:00",
+                "event": "Encryption started",
+                "source": "EDR",
+            },
         ],
         affected_systems=["WS-001", "WS-002", "SRV-FILE-01"],
         iocs=[
@@ -635,18 +706,20 @@ def main():
             "Deploy EDR to all endpoints",
             "Conduct security awareness training",
         ],
-        format=ReportFormat.MARKDOWN
+        format=ReportFormat.MARKDOWN,
     )
 
     # Add a finding
-    report.add_finding(Finding(
-        title="Phishing Email Bypassed Security Controls",
-        severity=Severity.HIGH,
-        description="A malicious email with ransomware payload bypassed email security.",
-        evidence="Email headers showing bypass of SPF/DKIM checks",
-        recommendation="Review and strengthen email security policies.",
-        mitre_technique="T1566.001 - Phishing: Spearphishing Attachment"
-    ))
+    report.add_finding(
+        Finding(
+            title="Phishing Email Bypassed Security Controls",
+            severity=Severity.HIGH,
+            description="A malicious email with ransomware payload bypassed email security.",
+            evidence="Email headers showing bypass of SPF/DKIM checks",
+            recommendation="Review and strengthen email security policies.",
+            mitre_technique="T1566.001 - Phishing: Spearphishing Attachment",
+        )
+    )
 
     # Generate reports
     output_dir = Path("/tmp/security_reports")
@@ -665,7 +738,7 @@ def main():
         iocs=[],
         actions_taken=["Isolated systems"],
         recommendations=["Improve security"],
-        format=ReportFormat.HTML
+        format=ReportFormat.HTML,
     )
     html_path = html_report.generate(str(output_dir / "incident_report.html"))
     print(f"[+] Generated HTML report: {html_path}")

@@ -35,8 +35,8 @@ import re
 from datetime import datetime, timedelta
 from typing import Any
 
-import httpx
 import aiosqlite
+import httpx
 from mcp import Server, Tool
 from mcp.server.stdio import stdio_server
 
@@ -54,10 +54,12 @@ server = Server("threat-intel-mcp")
 # Database Functions
 # ============================================================================
 
+
 async def init_database():
     """Initialize SQLite database for caching and local IOCs."""
     async with aiosqlite.connect(DB_PATH) as db:
-        await db.execute("""
+        await db.execute(
+            """
             CREATE TABLE IF NOT EXISTS ioc_cache (
                 ioc_value TEXT PRIMARY KEY,
                 ioc_type TEXT,
@@ -66,8 +68,10 @@ async def init_database():
                 data TEXT,
                 cached_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             )
-        """)
-        await db.execute("""
+        """
+        )
+        await db.execute(
+            """
             CREATE TABLE IF NOT EXISTS local_iocs (
                 ioc_value TEXT PRIMARY KEY,
                 ioc_type TEXT,
@@ -76,7 +80,8 @@ async def init_database():
                 tags TEXT,
                 added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             )
-        """)
+        """
+        )
         await db.commit()
 
 
@@ -86,7 +91,7 @@ async def get_cached_result(ioc_value: str) -> dict | None:
         db.row_factory = aiosqlite.Row
         async with db.execute(
             "SELECT * FROM ioc_cache WHERE ioc_value = ? AND cached_at > datetime('now', '-24 hours')",
-            (ioc_value,)
+            (ioc_value,),
         ) as cursor:
             row = await cursor.fetchone()
             if row:
@@ -100,7 +105,7 @@ async def cache_result(ioc_value: str, ioc_type: str, threat_score: int, source:
         await db.execute(
             """INSERT OR REPLACE INTO ioc_cache (ioc_value, ioc_type, threat_score, source, data)
                VALUES (?, ?, ?, ?, ?)""",
-            (ioc_value, ioc_type, threat_score, source, json.dumps(data))
+            (ioc_value, ioc_type, threat_score, source, json.dumps(data)),
         )
         await db.commit()
 
@@ -109,27 +114,19 @@ async def cache_result(ioc_value: str, ioc_type: str, threat_score: int, source:
 # AbuseIPDB Integration
 # ============================================================================
 
+
 async def query_abuseipdb(ip: str) -> dict:
     """Query AbuseIPDB for IP reputation."""
     if not ABUSEIPDB_API_KEY:
         return {"source": "abuseipdb", "error": "API key not configured"}
 
-    headers = {
-        "Key": ABUSEIPDB_API_KEY,
-        "Accept": "application/json"
-    }
-    params = {
-        "ipAddress": ip,
-        "maxAgeInDays": 90,
-        "verbose": True
-    }
+    headers = {"Key": ABUSEIPDB_API_KEY, "Accept": "application/json"}
+    params = {"ipAddress": ip, "maxAgeInDays": 90, "verbose": True}
 
     async with httpx.AsyncClient(timeout=REQUEST_TIMEOUT) as client:
         try:
             response = await client.get(
-                "https://api.abuseipdb.com/api/v2/check",
-                headers=headers,
-                params=params
+                "https://api.abuseipdb.com/api/v2/check", headers=headers, params=params
             )
 
             if response.status_code == 200:
@@ -145,10 +142,13 @@ async def query_abuseipdb(ip: str) -> dict:
                     "last_reported": data.get("lastReportedAt"),
                     "is_tor": data.get("isTor", False),
                     "is_public": data.get("isPublic", True),
-                    "categories": data.get("reports", [])[:5] if data.get("reports") else []
+                    "categories": (data.get("reports", [])[:5] if data.get("reports") else []),
                 }
             else:
-                return {"source": "abuseipdb", "error": f"API error: {response.status_code}"}
+                return {
+                    "source": "abuseipdb",
+                    "error": f"API error: {response.status_code}",
+                }
 
         except Exception as e:
             return {"source": "abuseipdb", "error": str(e)}
@@ -157,6 +157,7 @@ async def query_abuseipdb(ip: str) -> dict:
 # ============================================================================
 # AlienVault OTX Integration
 # ============================================================================
+
 
 async def query_otx(ioc_value: str, ioc_type: str) -> dict:
     """Query AlienVault OTX for IOC information."""
@@ -169,7 +170,7 @@ async def query_otx(ioc_value: str, ioc_type: str) -> dict:
         "hostname": "hostname",
         "md5": "file",
         "sha256": "file",
-        "url": "url"
+        "url": "url",
     }
 
     otx_type = type_mapping.get(ioc_type, ioc_type)
@@ -194,16 +195,21 @@ async def query_otx(ioc_value: str, ioc_type: str) -> dict:
                             "name": p.get("name"),
                             "description": p.get("description", "")[:200],
                             "tags": p.get("tags", [])[:5],
-                            "created": p.get("created")
+                            "created": p.get("created"),
                         }
                         for p in data.get("pulse_info", {}).get("pulses", [])[:5]
                     ],
                     "country": data.get("country_name"),
                     "asn": data.get("asn"),
-                    "validation": data.get("validation", [])
+                    "validation": data.get("validation", []),
                 }
             elif response.status_code == 404:
-                return {"source": "otx", "ioc": ioc_value, "pulse_count": 0, "message": "Not found in OTX"}
+                return {
+                    "source": "otx",
+                    "ioc": ioc_value,
+                    "pulse_count": 0,
+                    "message": "Not found in OTX",
+                }
             else:
                 return {"source": "otx", "error": f"API error: {response.status_code}"}
 
@@ -226,7 +232,7 @@ MITRE_MAPPINGS = {
     "scan": ["T1595", "T1046"],
     "brute_force": ["T1110"],
     "ssh": ["T1021.004"],
-    "exploitation": ["T1190", "T1203"]
+    "exploitation": ["T1190", "T1203"],
 }
 
 
@@ -249,6 +255,7 @@ def map_to_mitre(tags: list[str], categories: list[str] = None) -> list[str]:
 # MCP Tools
 # ============================================================================
 
+
 @server.tool()
 async def lookup_ip_reputation(ip_address: str) -> str:
     """
@@ -270,14 +277,12 @@ async def lookup_ip_reputation(ip_address: str) -> str:
         return json.dumps(cached, indent=2)
 
     # Query sources in parallel
-    results = await asyncio.gather(
-        query_abuseipdb(ip),
-        query_otx(ip, "ip"),
-        return_exceptions=True
-    )
+    results = await asyncio.gather(query_abuseipdb(ip), query_otx(ip, "ip"), return_exceptions=True)
 
     # Aggregate results
-    abuseipdb_result = results[0] if not isinstance(results[0], Exception) else {"error": str(results[0])}
+    abuseipdb_result = (
+        results[0] if not isinstance(results[0], Exception) else {"error": str(results[0])}
+    )
     otx_result = results[1] if not isinstance(results[1], Exception) else {"error": str(results[1])}
 
     # Calculate combined threat score
@@ -305,15 +310,12 @@ async def lookup_ip_reputation(ip_address: str) -> str:
         "ip": ip,
         "threat_score": threat_score,
         "threat_level": threat_level,
-        "sources": {
-            "abuseipdb": abuseipdb_result,
-            "otx": otx_result
-        },
+        "sources": {"abuseipdb": abuseipdb_result, "otx": otx_result},
         "mitre_techniques": map_to_mitre(
             otx_result.get("pulses", [{}])[0].get("tags", []) if otx_result.get("pulses") else []
         ),
         "recommendations": [],
-        "queried_at": datetime.utcnow().isoformat()
+        "queried_at": datetime.utcnow().isoformat(),
     }
 
     # Add recommendations based on threat level
@@ -322,13 +324,13 @@ async def lookup_ip_reputation(ip_address: str) -> str:
             "Block this IP at firewall/WAF",
             "Review logs for connections from this IP",
             "Add to threat intelligence blocklist",
-            "Investigate any systems that communicated with this IP"
+            "Investigate any systems that communicated with this IP",
         ]
     elif threat_level == "medium":
         response["recommendations"] = [
             "Monitor traffic from this IP",
             "Consider rate limiting",
-            "Add to watchlist"
+            "Add to watchlist",
         ]
 
     # Cache result
@@ -375,7 +377,7 @@ async def lookup_domain_reputation(domain: str) -> str:
         "mitre_techniques": map_to_mitre(
             otx_result.get("pulses", [{}])[0].get("tags", []) if otx_result.get("pulses") else []
         ),
-        "queried_at": datetime.utcnow().isoformat()
+        "queried_at": datetime.utcnow().isoformat(),
     }
 
     await cache_result(domain, "domain", threat_score, "otx", response)
@@ -385,11 +387,7 @@ async def lookup_domain_reputation(domain: str) -> str:
 
 @server.tool()
 async def add_local_ioc(
-    ioc_value: str,
-    ioc_type: str,
-    threat_level: str,
-    description: str,
-    tags: str = ""
+    ioc_value: str, ioc_type: str, threat_level: str, description: str, tags: str = ""
 ) -> str:
     """
     Add an IOC to the local threat intelligence database.
@@ -413,21 +411,23 @@ async def add_local_ioc(
                 """INSERT OR REPLACE INTO local_iocs
                    (ioc_value, ioc_type, threat_level, description, tags)
                    VALUES (?, ?, ?, ?, ?)""",
-                (ioc_value.strip(), ioc_type, threat_level, description, tags)
+                (ioc_value.strip(), ioc_type, threat_level, description, tags),
             )
             await db.commit()
 
-            return json.dumps({
-                "status": "success",
-                "message": f"IOC {ioc_value} added to local database",
-                "ioc": {
-                    "value": ioc_value,
-                    "type": ioc_type,
-                    "threat_level": threat_level,
-                    "description": description,
-                    "tags": tags.split(",") if tags else []
+            return json.dumps(
+                {
+                    "status": "success",
+                    "message": f"IOC {ioc_value} added to local database",
+                    "ioc": {
+                        "value": ioc_value,
+                        "type": ioc_type,
+                        "threat_level": threat_level,
+                        "description": description,
+                        "tags": tags.split(",") if tags else [],
+                    },
                 }
-            })
+            )
         except Exception as e:
             return json.dumps({"error": f"Database error: {str(e)}"})
 
@@ -465,16 +465,12 @@ async def search_local_iocs(query: str, ioc_type: str = None) -> str:
                     "threat_level": row["threat_level"],
                     "description": row["description"],
                     "tags": row["tags"].split(",") if row["tags"] else [],
-                    "added_at": row["added_at"]
+                    "added_at": row["added_at"],
                 }
                 for row in rows
             ]
 
-            return json.dumps({
-                "query": query,
-                "count": len(results),
-                "results": results
-            }, indent=2)
+            return json.dumps({"query": query, "count": len(results), "results": results}, indent=2)
 
 
 @server.tool()
@@ -497,7 +493,11 @@ async def get_threat_summary(iocs: str) -> str:
             result = json.loads(await lookup_ip_reputation(ioc))
         elif re.match(r"^[a-f0-9]{32}$", ioc.lower()) or re.match(r"^[a-f0-9]{64}$", ioc.lower()):
             # Hash - just return type info since we don't have VT here
-            result = {"ioc": ioc, "type": "hash", "note": "Use VirusTotal MCP for hash lookups"}
+            result = {
+                "ioc": ioc,
+                "type": "hash",
+                "note": "Use VirusTotal MCP for hash lookups",
+            }
         else:
             result = json.loads(await lookup_domain_reputation(ioc))
 
@@ -515,9 +515,9 @@ async def get_threat_summary(iocs: str) -> str:
             "high": sum(1 for s in threat_scores if 50 <= s < 80),
             "medium": sum(1 for s in threat_scores if 25 <= s < 50),
             "low": sum(1 for s in threat_scores if 0 < s < 25),
-            "unknown": sum(1 for s in threat_scores if s == 0)
+            "unknown": sum(1 for s in threat_scores if s == 0),
         },
-        "results": results
+        "results": results,
     }
 
     return json.dumps(summary, indent=2)

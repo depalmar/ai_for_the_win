@@ -21,21 +21,20 @@ Usage:
 """
 
 import asyncio
+import hashlib
 import json
 import re
-import hashlib
 from datetime import datetime
-from typing import Optional, Any
+from typing import Any, Optional
 
-from langchain_anthropic import ChatAnthropic
 from langchain.agents import AgentExecutor, create_react_agent
 from langchain.memory import ConversationBufferWindowMemory
-from langchain.tools import Tool, StructuredTool
 from langchain.prompts import PromptTemplate
+from langchain.tools import StructuredTool, Tool
+from langchain_anthropic import ChatAnthropic
 from langchain_core.output_parsers import JsonOutputParser
 from pydantic import BaseModel, Field
 from tenacity import retry, stop_after_attempt, wait_exponential
-
 
 # ============================================================================
 # Configuration
@@ -50,20 +49,23 @@ TEMPERATURE = 0.1  # Low temperature for security analysis
 # Pydantic Models for Structured Output
 # ============================================================================
 
+
 class IOCExtraction(BaseModel):
     """Structured IOC extraction result."""
+
     ips: list[str] = Field(default_factory=list, description="IPv4 addresses found")
     domains: list[str] = Field(default_factory=list, description="Domain names found")
     urls: list[str] = Field(default_factory=list, description="URLs found")
     hashes: dict[str, list[str]] = Field(
         default_factory=lambda: {"md5": [], "sha1": [], "sha256": []},
-        description="File hashes by type"
+        description="File hashes by type",
     )
     emails: list[str] = Field(default_factory=list, description="Email addresses found")
 
 
 class ThreatAssessment(BaseModel):
     """Structured threat assessment result."""
+
     threat_level: str = Field(description="Critical, High, Medium, Low, or Info")
     confidence: float = Field(ge=0, le=1, description="Confidence score 0-1")
     summary: str = Field(description="Brief summary of findings")
@@ -76,42 +78,48 @@ class ThreatAssessment(BaseModel):
 # Tool Definitions
 # ============================================================================
 
+
 def extract_iocs(text: str) -> str:
     """Extract indicators of compromise from text."""
     iocs = IOCExtraction()
 
     # IPv4 addresses
-    iocs.ips = list(set(re.findall(
-        r'\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b',
-        text
-    )))
+    iocs.ips = list(
+        set(
+            re.findall(
+                r"\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b",
+                text,
+            )
+        )
+    )
 
     # Domains (simplified pattern)
-    iocs.domains = list(set(re.findall(
-        r'\b(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.)+(?:com|net|org|io|edu|gov|mil|info|biz|co|uk|de|ru|cn)\b',
-        text, re.IGNORECASE
-    )))
+    iocs.domains = list(
+        set(
+            re.findall(
+                r"\b(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.)+(?:com|net|org|io|edu|gov|mil|info|biz|co|uk|de|ru|cn)\b",
+                text,
+                re.IGNORECASE,
+            )
+        )
+    )
 
     # URLs
-    iocs.urls = list(set(re.findall(
-        r'https?://[^\s<>"{}|\\^`\[\]]+',
-        text
-    )))
+    iocs.urls = list(set(re.findall(r'https?://[^\s<>"{}|\\^`\[\]]+', text)))
 
     # MD5 hashes
-    iocs.hashes["md5"] = list(set(re.findall(r'\b[a-fA-F0-9]{32}\b', text)))
+    iocs.hashes["md5"] = list(set(re.findall(r"\b[a-fA-F0-9]{32}\b", text)))
 
     # SHA1 hashes
-    iocs.hashes["sha1"] = list(set(re.findall(r'\b[a-fA-F0-9]{40}\b', text)))
+    iocs.hashes["sha1"] = list(set(re.findall(r"\b[a-fA-F0-9]{40}\b", text)))
 
     # SHA256 hashes
-    iocs.hashes["sha256"] = list(set(re.findall(r'\b[a-fA-F0-9]{64}\b', text)))
+    iocs.hashes["sha256"] = list(set(re.findall(r"\b[a-fA-F0-9]{64}\b", text)))
 
     # Emails
-    iocs.emails = list(set(re.findall(
-        r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b',
-        text
-    )))
+    iocs.emails = list(
+        set(re.findall(r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b", text))
+    )
 
     return json.dumps(iocs.model_dump(), indent=2)
 
@@ -131,35 +139,34 @@ def analyze_hash(hash_value: str) -> str:
     hash_value = hash_value.strip().lower()
     length = len(hash_value)
 
-    if not re.match(r'^[a-f0-9]+$', hash_value):
+    if not re.match(r"^[a-f0-9]+$", hash_value):
         return json.dumps({"error": "Invalid hash: contains non-hexadecimal characters"})
 
-    hash_types = {
-        32: "MD5",
-        40: "SHA1",
-        64: "SHA256",
-        128: "SHA512"
-    }
+    hash_types = {32: "MD5", 40: "SHA1", 64: "SHA256", 128: "SHA512"}
 
     hash_type = hash_types.get(length, "Unknown")
 
-    return json.dumps({
-        "hash": hash_value,
-        "type": hash_type,
-        "length": length,
-        "valid": hash_type != "Unknown"
-    })
+    return json.dumps(
+        {
+            "hash": hash_value,
+            "type": hash_type,
+            "length": length,
+            "valid": hash_type != "Unknown",
+        }
+    )
 
 
 def calculate_file_hash(content: str) -> str:
     """Calculate hashes of provided content."""
-    content_bytes = content.encode('utf-8')
+    content_bytes = content.encode("utf-8")
 
-    return json.dumps({
-        "md5": hashlib.md5(content_bytes).hexdigest(),
-        "sha1": hashlib.sha1(content_bytes).hexdigest(),
-        "sha256": hashlib.sha256(content_bytes).hexdigest()
-    })
+    return json.dumps(
+        {
+            "md5": hashlib.md5(content_bytes).hexdigest(),
+            "sha1": hashlib.sha1(content_bytes).hexdigest(),
+            "sha256": hashlib.sha256(content_bytes).hexdigest(),
+        }
+    )
 
 
 def check_ip_type(ip: str) -> str:
@@ -190,12 +197,14 @@ def check_ip_type(ip: str) -> str:
         else:
             category = "Public"
 
-        return json.dumps({
-            "ip": ip,
-            "category": category,
-            "is_public": category == "Public",
-            "is_routable": category == "Public"
-        })
+        return json.dumps(
+            {
+                "ip": ip,
+                "category": category,
+                "is_public": category == "Public",
+                "is_routable": category == "Public",
+            }
+        )
 
     except Exception as e:
         return json.dumps({"error": str(e)})
@@ -214,7 +223,10 @@ def search_mitre_attack(query: str) -> str:
         "T1566": {"name": "Phishing", "tactic": "Initial Access"},
         "T1566.001": {"name": "Spearphishing Attachment", "tactic": "Initial Access"},
         "T1486": {"name": "Data Encrypted for Impact", "tactic": "Impact"},
-        "T1071": {"name": "Application Layer Protocol", "tactic": "Command and Control"},
+        "T1071": {
+            "name": "Application Layer Protocol",
+            "tactic": "Command and Control",
+        },
         "T1021": {"name": "Remote Services", "tactic": "Lateral Movement"},
         "T1053": {"name": "Scheduled Task/Job", "tactic": "Persistence"},
         "T1547": {"name": "Boot or Logon Autostart Execution", "tactic": "Persistence"},
@@ -224,39 +236,33 @@ def search_mitre_attack(query: str) -> str:
     matches = []
 
     for tech_id, info in techniques.items():
-        if (query_lower in tech_id.lower() or
-            query_lower in info["name"].lower() or
-            query_lower in info["tactic"].lower()):
-            matches.append({
-                "technique_id": tech_id,
-                "name": info["name"],
-                "tactic": info["tactic"],
-                "url": f"https://attack.mitre.org/techniques/{tech_id.replace('.', '/')}"
-            })
+        if (
+            query_lower in tech_id.lower()
+            or query_lower in info["name"].lower()
+            or query_lower in info["tactic"].lower()
+        ):
+            matches.append(
+                {
+                    "technique_id": tech_id,
+                    "name": info["name"],
+                    "tactic": info["tactic"],
+                    "url": f"https://attack.mitre.org/techniques/{tech_id.replace('.', '/')}",
+                }
+            )
 
-    return json.dumps({
-        "query": query,
-        "matches": matches[:10],
-        "count": len(matches)
-    })
+    return json.dumps({"query": query, "matches": matches[:10], "count": len(matches)})
 
 
 # ============================================================================
 # Agent Setup
 # ============================================================================
 
-def create_security_agent(
-    verbose: bool = True,
-    memory_window: int = 10
-) -> AgentExecutor:
+
+def create_security_agent(verbose: bool = True, memory_window: int = 10) -> AgentExecutor:
     """Create a security analysis agent with tools and memory."""
 
     # Initialize LLM
-    llm = ChatAnthropic(
-        model=MODEL_NAME,
-        max_tokens=MAX_TOKENS,
-        temperature=TEMPERATURE
-    )
+    llm = ChatAnthropic(model=MODEL_NAME, max_tokens=MAX_TOKENS, temperature=TEMPERATURE)
 
     # Define tools
     tools = [
@@ -265,47 +271,48 @@ def create_security_agent(
             func=extract_iocs,
             description="""Extract indicators of compromise (IOCs) from text.
             Input: Text that may contain IOCs.
-            Output: JSON with IPs, domains, URLs, hashes, and emails found."""
+            Output: JSON with IPs, domains, URLs, hashes, and emails found.""",
         ),
         Tool(
             name="defang_ioc",
             func=defang_ioc,
             description="""Defang an IOC (URL, domain, IP, email) for safe sharing.
             Input: A single IOC string.
-            Output: Defanged version safe for reports and communication."""
+            Output: Defanged version safe for reports and communication.""",
         ),
         Tool(
             name="analyze_hash",
             func=analyze_hash,
             description="""Analyze a hash value to determine its type (MD5, SHA1, SHA256).
             Input: A hash string.
-            Output: JSON with hash type and validity."""
+            Output: JSON with hash type and validity.""",
         ),
         Tool(
             name="calculate_hash",
             func=calculate_file_hash,
             description="""Calculate MD5, SHA1, and SHA256 hashes of text content.
             Input: Text content to hash.
-            Output: JSON with all hash values."""
+            Output: JSON with all hash values.""",
         ),
         Tool(
             name="check_ip_type",
             func=check_ip_type,
             description="""Check if an IP address is public, private, or special.
             Input: An IP address.
-            Output: JSON with IP category and routability."""
+            Output: JSON with IP category and routability.""",
         ),
         Tool(
             name="search_mitre",
             func=search_mitre_attack,
             description="""Search MITRE ATT&CK for techniques by ID, name, or tactic.
             Input: Search query (technique ID like T1059, or keyword like 'powershell').
-            Output: JSON with matching techniques."""
+            Output: JSON with matching techniques.""",
         ),
     ]
 
     # Create prompt template
-    prompt = PromptTemplate.from_template("""You are an expert security analyst assistant.
+    prompt = PromptTemplate.from_template(
+        """You are an expert security analyst assistant.
 
 Your capabilities:
 1. Extract and analyze indicators of compromise (IOCs)
@@ -332,13 +339,12 @@ Current question: {input}
 
 Think step by step and use tools when needed to provide accurate analysis.
 
-{agent_scratchpad}""")
+{agent_scratchpad}"""
+    )
 
     # Create memory
     memory = ConversationBufferWindowMemory(
-        memory_key="chat_history",
-        k=memory_window,
-        return_messages=True
+        memory_key="chat_history", k=memory_window, return_messages=True
     )
 
     # Create agent
@@ -351,7 +357,7 @@ Think step by step and use tools when needed to provide accurate analysis.
         memory=memory,
         verbose=verbose,
         handle_parsing_errors=True,
-        max_iterations=10
+        max_iterations=10,
     )
 
     return executor
@@ -360,6 +366,7 @@ Think step by step and use tools when needed to provide accurate analysis.
 # ============================================================================
 # Main Interface
 # ============================================================================
+
 
 class SecurityAnalysisAgent:
     """High-level interface for the security analysis agent."""
@@ -389,6 +396,7 @@ class SecurityAnalysisAgent:
 # ============================================================================
 # CLI Interface
 # ============================================================================
+
 
 def main():
     """Interactive CLI for the security agent."""

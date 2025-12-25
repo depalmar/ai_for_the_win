@@ -10,19 +10,21 @@ Provides AI agents with access to security tools:
 - URLScan: URL analysis
 """
 
-import os
-import json
-import hashlib
 import asyncio
+import hashlib
+import json
+import os
+from dataclasses import dataclass
 from datetime import datetime
 from typing import Any, Dict, List, Optional
-from dataclasses import dataclass
+
 import httpx
 
 # MCP SDK imports (when available)
 try:
     from mcp.server import Server
-    from mcp.types import Tool, TextContent
+    from mcp.types import TextContent, Tool
+
     MCP_AVAILABLE = True
 except ImportError:
     MCP_AVAILABLE = False
@@ -32,6 +34,7 @@ except ImportError:
 @dataclass
 class SecurityToolConfig:
     """Configuration for security tool APIs."""
+
     virustotal_api_key: str = ""
     shodan_api_key: str = ""
     misp_url: str = ""
@@ -64,10 +67,7 @@ class VirusTotalClient:
     async def analyze_hash(self, file_hash: str) -> Dict[str, Any]:
         """Analyze a file by hash (MD5, SHA1, or SHA256)."""
         async with httpx.AsyncClient() as client:
-            response = await client.get(
-                f"{self.BASE_URL}/files/{file_hash}",
-                headers=self.headers
-            )
+            response = await client.get(f"{self.BASE_URL}/files/{file_hash}", headers=self.headers)
 
             if response.status_code == 200:
                 data = response.json()["data"]
@@ -83,7 +83,7 @@ class VirusTotalClient:
                         "malicious": stats.get("malicious", 0),
                         "suspicious": stats.get("suspicious", 0),
                         "undetected": stats.get("undetected", 0),
-                        "total": sum(stats.values())
+                        "total": sum(stats.values()),
                     },
                     "reputation": attrs.get("reputation", 0),
                     "tags": attrs.get("tags", []),
@@ -91,20 +91,22 @@ class VirusTotalClient:
                     "last_seen": attrs.get("last_analysis_date"),
                 }
             elif response.status_code == 404:
-                return {"hash": file_hash, "status": "not_found", "message": "Hash not found in VirusTotal"}
+                return {
+                    "hash": file_hash,
+                    "status": "not_found",
+                    "message": "Hash not found in VirusTotal",
+                }
             else:
                 return {"error": f"API error: {response.status_code}"}
 
     async def analyze_url(self, url: str) -> Dict[str, Any]:
         """Analyze a URL."""
         import base64
+
         url_id = base64.urlsafe_b64encode(url.encode()).decode().rstrip("=")
 
         async with httpx.AsyncClient() as client:
-            response = await client.get(
-                f"{self.BASE_URL}/urls/{url_id}",
-                headers=self.headers
-            )
+            response = await client.get(f"{self.BASE_URL}/urls/{url_id}", headers=self.headers)
 
             if response.status_code == 200:
                 data = response.json()["data"]
@@ -128,10 +130,7 @@ class VirusTotalClient:
     async def analyze_ip(self, ip: str) -> Dict[str, Any]:
         """Analyze an IP address."""
         async with httpx.AsyncClient() as client:
-            response = await client.get(
-                f"{self.BASE_URL}/ip_addresses/{ip}",
-                headers=self.headers
-            )
+            response = await client.get(f"{self.BASE_URL}/ip_addresses/{ip}", headers=self.headers)
 
             if response.status_code == 200:
                 data = response.json()["data"]
@@ -157,10 +156,7 @@ class VirusTotalClient:
     async def analyze_domain(self, domain: str) -> Dict[str, Any]:
         """Analyze a domain."""
         async with httpx.AsyncClient() as client:
-            response = await client.get(
-                f"{self.BASE_URL}/domains/{domain}",
-                headers=self.headers
-            )
+            response = await client.get(f"{self.BASE_URL}/domains/{domain}", headers=self.headers)
 
             if response.status_code == 200:
                 data = response.json()["data"]
@@ -196,8 +192,7 @@ class ShodanClient:
         """Look up information about an IP address."""
         async with httpx.AsyncClient() as client:
             response = await client.get(
-                f"{self.BASE_URL}/shodan/host/{ip}",
-                params={"key": self.api_key}
+                f"{self.BASE_URL}/shodan/host/{ip}", params={"key": self.api_key}
             )
 
             if response.status_code == 200:
@@ -222,10 +217,14 @@ class ShodanClient:
                             "version": s.get("version", ""),
                         }
                         for s in data.get("data", [])[:10]
-                    ]
+                    ],
                 }
             elif response.status_code == 404:
-                return {"ip": ip, "status": "not_found", "message": "IP not found in Shodan"}
+                return {
+                    "ip": ip,
+                    "status": "not_found",
+                    "message": "IP not found in Shodan",
+                }
             else:
                 return {"error": f"API error: {response.status_code}"}
 
@@ -234,7 +233,7 @@ class ShodanClient:
         async with httpx.AsyncClient() as client:
             response = await client.get(
                 f"{self.BASE_URL}/shodan/host/search",
-                params={"key": self.api_key, "query": query}
+                params={"key": self.api_key, "query": query},
             )
 
             if response.status_code == 200:
@@ -251,7 +250,7 @@ class ShodanClient:
                             "country": r.get("location", {}).get("country_name"),
                         }
                         for r in data.get("matches", [])[:limit]
-                    ]
+                    ],
                 }
             else:
                 return {"error": f"API error: {response.status_code}"}
@@ -272,7 +271,7 @@ class AbuseIPDBClient:
             response = await client.get(
                 f"{self.BASE_URL}/check",
                 headers=self.headers,
-                params={"ipAddress": ip, "maxAgeInDays": max_age_days}
+                params={"ipAddress": ip, "maxAgeInDays": max_age_days},
             )
 
             if response.status_code == 200:
@@ -303,7 +302,7 @@ class MISPClient:
         self.headers = {
             "Authorization": api_key,
             "Accept": "application/json",
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
         }
 
     async def search_ioc(self, value: str, ioc_type: str = None) -> Dict[str, Any]:
@@ -316,7 +315,7 @@ class MISPClient:
             response = await client.post(
                 f"{self.url}/attributes/restSearch",
                 headers=self.headers,
-                json=search_body
+                json=search_body,
             )
 
             if response.status_code == 200:
@@ -336,7 +335,7 @@ class MISPClient:
                             "comment": a.get("comment", ""),
                         }
                         for a in attributes[:20]
-                    ]
+                    ],
                 }
             else:
                 return {"error": f"API error: {response.status_code}"}
@@ -344,10 +343,7 @@ class MISPClient:
     async def get_event(self, event_id: str) -> Dict[str, Any]:
         """Get details of a MISP event."""
         async with httpx.AsyncClient(verify=False) as client:
-            response = await client.get(
-                f"{self.url}/events/view/{event_id}",
-                headers=self.headers
-            )
+            response = await client.get(f"{self.url}/events/view/{event_id}", headers=self.headers)
 
             if response.status_code == 200:
                 event = response.json().get("Event", {})
@@ -376,54 +372,49 @@ SECURITY_TOOLS = [
         "inputSchema": {
             "type": "object",
             "properties": {
-                "hash": {"type": "string", "description": "File hash (MD5, SHA1, or SHA256)"}
+                "hash": {
+                    "type": "string",
+                    "description": "File hash (MD5, SHA1, or SHA256)",
+                }
             },
-            "required": ["hash"]
-        }
+            "required": ["hash"],
+        },
     },
     {
         "name": "virustotal_url",
         "description": "Analyze a URL using VirusTotal to check if it's malicious",
         "inputSchema": {
             "type": "object",
-            "properties": {
-                "url": {"type": "string", "description": "URL to analyze"}
-            },
-            "required": ["url"]
-        }
+            "properties": {"url": {"type": "string", "description": "URL to analyze"}},
+            "required": ["url"],
+        },
     },
     {
         "name": "virustotal_ip",
         "description": "Analyze an IP address using VirusTotal for reputation and threat data",
         "inputSchema": {
             "type": "object",
-            "properties": {
-                "ip": {"type": "string", "description": "IP address to analyze"}
-            },
-            "required": ["ip"]
-        }
+            "properties": {"ip": {"type": "string", "description": "IP address to analyze"}},
+            "required": ["ip"],
+        },
     },
     {
         "name": "virustotal_domain",
         "description": "Analyze a domain using VirusTotal for reputation and threat data",
         "inputSchema": {
             "type": "object",
-            "properties": {
-                "domain": {"type": "string", "description": "Domain to analyze"}
-            },
-            "required": ["domain"]
-        }
+            "properties": {"domain": {"type": "string", "description": "Domain to analyze"}},
+            "required": ["domain"],
+        },
     },
     {
         "name": "shodan_ip",
         "description": "Look up an IP address in Shodan for open ports, services, and vulnerabilities",
         "inputSchema": {
             "type": "object",
-            "properties": {
-                "ip": {"type": "string", "description": "IP address to look up"}
-            },
-            "required": ["ip"]
-        }
+            "properties": {"ip": {"type": "string", "description": "IP address to look up"}},
+            "required": ["ip"],
+        },
     },
     {
         "name": "shodan_search",
@@ -432,10 +423,14 @@ SECURITY_TOOLS = [
             "type": "object",
             "properties": {
                 "query": {"type": "string", "description": "Shodan search query"},
-                "limit": {"type": "integer", "description": "Max results to return", "default": 10}
+                "limit": {
+                    "type": "integer",
+                    "description": "Max results to return",
+                    "default": 10,
+                },
             },
-            "required": ["query"]
-        }
+            "required": ["query"],
+        },
     },
     {
         "name": "abuseipdb_check",
@@ -444,10 +439,14 @@ SECURITY_TOOLS = [
             "type": "object",
             "properties": {
                 "ip": {"type": "string", "description": "IP address to check"},
-                "max_age_days": {"type": "integer", "description": "Max age of reports in days", "default": 90}
+                "max_age_days": {
+                    "type": "integer",
+                    "description": "Max age of reports in days",
+                    "default": 90,
+                },
             },
-            "required": ["ip"]
-        }
+            "required": ["ip"],
+        },
     },
     {
         "name": "misp_search",
@@ -456,15 +455,20 @@ SECURITY_TOOLS = [
             "type": "object",
             "properties": {
                 "value": {"type": "string", "description": "IOC value to search for"},
-                "type": {"type": "string", "description": "IOC type (ip-dst, domain, md5, sha256, url)"}
+                "type": {
+                    "type": "string",
+                    "description": "IOC type (ip-dst, domain, md5, sha256, url)",
+                },
             },
-            "required": ["value"]
-        }
-    }
+            "required": ["value"],
+        },
+    },
 ]
 
 
-async def handle_tool_call(tool_name: str, arguments: Dict[str, Any], config: SecurityToolConfig) -> str:
+async def handle_tool_call(
+    tool_name: str, arguments: Dict[str, Any], config: SecurityToolConfig
+) -> str:
     """Handle a tool call and return the result."""
     try:
         if tool_name == "virustotal_hash":
@@ -489,24 +493,15 @@ async def handle_tool_call(tool_name: str, arguments: Dict[str, Any], config: Se
 
         elif tool_name == "shodan_search":
             client = ShodanClient(config.shodan_api_key)
-            result = await client.search(
-                arguments["query"],
-                arguments.get("limit", 10)
-            )
+            result = await client.search(arguments["query"], arguments.get("limit", 10))
 
         elif tool_name == "abuseipdb_check":
             client = AbuseIPDBClient(config.abuseipdb_api_key)
-            result = await client.check_ip(
-                arguments["ip"],
-                arguments.get("max_age_days", 90)
-            )
+            result = await client.check_ip(arguments["ip"], arguments.get("max_age_days", 90))
 
         elif tool_name == "misp_search":
             client = MISPClient(config.misp_url, config.misp_api_key)
-            result = await client.search_ioc(
-                arguments["value"],
-                arguments.get("type")
-            )
+            result = await client.search_ioc(arguments["value"], arguments.get("type"))
 
         else:
             result = {"error": f"Unknown tool: {tool_name}"}
@@ -520,6 +515,7 @@ async def handle_tool_call(tool_name: str, arguments: Dict[str, Any], config: Se
 # =============================================================================
 # Standalone Demo (without MCP)
 # =============================================================================
+
 
 async def demo():
     """Demo the security tools (requires API keys)."""
