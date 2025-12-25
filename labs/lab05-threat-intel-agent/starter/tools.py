@@ -5,10 +5,11 @@ Lab 05: Threat Intelligence Agent - Tools Module
 Implement tools that the AI agent can use for threat intelligence gathering.
 """
 
-import json
 import hashlib
-from typing import Optional
+import json
 from datetime import datetime
+from typing import Optional
+
 from pydantic import BaseModel, Field
 
 # For real implementations, you'd use these APIs:
@@ -21,29 +22,37 @@ from pydantic import BaseModel, Field
 # Tool Input Schemas
 # =============================================================================
 
+
 class IPLookupInput(BaseModel):
     """Input schema for IP lookup tool."""
+
     ip: str = Field(description="IPv4 or IPv6 address to look up")
 
 
 class DomainAnalysisInput(BaseModel):
     """Input schema for domain analysis tool."""
+
     domain: str = Field(description="Domain name to analyze (e.g., 'evil.com')")
 
 
 class HashCheckInput(BaseModel):
     """Input schema for hash lookup tool."""
+
     file_hash: str = Field(description="File hash (MD5, SHA1, or SHA256)")
 
 
 class CVELookupInput(BaseModel):
     """Input schema for CVE lookup tool."""
+
     cve_id: str = Field(description="CVE identifier (e.g., 'CVE-2024-1234')")
 
 
 class MITRELookupInput(BaseModel):
     """Input schema for MITRE ATT&CK lookup."""
-    technique_id: str = Field(description="MITRE ATT&CK technique ID (e.g., 'T1059.001')")
+
+    technique_id: str = Field(
+        description="MITRE ATT&CK technique ID (e.g., 'T1059.001')"
+    )
 
 
 # =============================================================================
@@ -65,7 +74,7 @@ MOCK_IP_DATA = {
         "first_seen": "2023-06-15",
         "last_seen": "2024-01-15",
         "reports": 847,
-        "tags": ["APT29", "CozyBear"]
+        "tags": ["APT29", "CozyBear"],
     },
     "91.234.99.100": {
         "is_malicious": True,
@@ -78,8 +87,8 @@ MOCK_IP_DATA = {
         "first_seen": "2024-01-01",
         "last_seen": "2024-01-14",
         "reports": 156,
-        "tags": []
-    }
+        "tags": [],
+    },
 }
 
 MOCK_DOMAIN_DATA = {
@@ -91,17 +100,17 @@ MOCK_DOMAIN_DATA = {
         "dns_records": {
             "A": ["185.143.223.47"],
             "MX": [],
-            "NS": ["ns1.privatedns.com"]
+            "NS": ["ns1.privatedns.com"],
         },
         "ssl_info": {
             "issuer": "Let's Encrypt",
             "valid_from": "2024-01-10",
-            "valid_to": "2024-04-10"
+            "valid_to": "2024-04-10",
         },
         "threat_intel": {
             "malware_families": ["Cobalt Strike"],
-            "campaigns": ["APT29-2024-01"]
-        }
+            "campaigns": ["APT29-2024-01"],
+        },
     },
     "malware-drop.net": {
         "is_malicious": True,
@@ -111,14 +120,11 @@ MOCK_DOMAIN_DATA = {
         "dns_records": {
             "A": ["91.234.99.100", "91.234.99.101"],
             "MX": [],
-            "NS": ["ns1.shadydns.net"]
+            "NS": ["ns1.shadydns.net"],
         },
         "ssl_info": None,
-        "threat_intel": {
-            "malware_families": ["Emotet", "TrickBot"],
-            "campaigns": []
-        }
-    }
+        "threat_intel": {"malware_families": ["Emotet", "TrickBot"], "campaigns": []},
+    },
 }
 
 MOCK_HASH_DATA = {
@@ -130,7 +136,7 @@ MOCK_HASH_DATA = {
         "file_size": 245760,
         "first_seen": "2024-01-12",
         "names": ["beacon.exe", "payload.exe"],
-        "behavior": ["Creates scheduled task", "Contacts C2", "Injects into processes"]
+        "behavior": ["Creates scheduled task", "Contacts C2", "Injects into processes"],
     }
 }
 
@@ -146,7 +152,7 @@ MOCK_CVE_DATA = {
         "exploit_available": True,
         "patch_available": True,
         "patch_url": "https://example.com/security/patch",
-        "references": ["https://nvd.nist.gov/vuln/detail/CVE-2024-1234"]
+        "references": ["https://nvd.nist.gov/vuln/detail/CVE-2024-1234"],
     }
 }
 
@@ -160,9 +166,9 @@ MOCK_MITRE_DATA = {
         "mitigations": [
             "Disable PowerShell for non-admin users",
             "Enable PowerShell script block logging",
-            "Use Constrained Language Mode"
+            "Use Constrained Language Mode",
         ],
-        "related_groups": ["APT29", "APT28", "FIN7"]
+        "related_groups": ["APT29", "APT28", "FIN7"],
     },
     "T1053.005": {
         "name": "Scheduled Task",
@@ -172,9 +178,9 @@ MOCK_MITRE_DATA = {
         "detection": "Monitor for schtasks.exe and Task Scheduler events (4698, 4699).",
         "mitigations": [
             "Restrict task creation to administrators",
-            "Monitor scheduled task changes"
+            "Monitor scheduled task changes",
         ],
-        "related_groups": ["APT29", "Lazarus"]
+        "related_groups": ["APT29", "Lazarus"],
     },
     "T1105": {
         "name": "Ingress Tool Transfer",
@@ -182,18 +188,16 @@ MOCK_MITRE_DATA = {
         "description": "Adversaries may transfer tools from external systems into compromised environment.",
         "platforms": ["Windows", "Linux", "macOS"],
         "detection": "Monitor for unusual outbound connections and file downloads.",
-        "mitigations": [
-            "Network intrusion prevention",
-            "Web proxy filtering"
-        ],
-        "related_groups": ["APT29", "APT28", "Turla"]
-    }
+        "mitigations": ["Network intrusion prevention", "Web proxy filtering"],
+        "related_groups": ["APT29", "APT28", "Turla"],
+    },
 }
 
 
 # =============================================================================
 # Tool Implementations
 # =============================================================================
+
 
 def lookup_ip(ip: str) -> dict:
     """
@@ -317,12 +321,14 @@ def get_attack_technique(technique_id: str) -> dict:
 # Helper Functions
 # =============================================================================
 
+
 def is_valid_ip(ip: str) -> bool:
     """Validate IP address format."""
     import re
-    ipv4_pattern = r'^(\d{1,3}\.){3}\d{1,3}$'
+
+    ipv4_pattern = r"^(\d{1,3}\.){3}\d{1,3}$"
     if re.match(ipv4_pattern, ip):
-        parts = ip.split('.')
+        parts = ip.split(".")
         return all(0 <= int(p) <= 255 for p in parts)
     return False
 
@@ -343,17 +349,18 @@ def normalize_domain(domain: str) -> str:
     """Normalize domain name."""
     domain = domain.lower().strip()
     # Remove protocol if present
-    for prefix in ['http://', 'https://', 'www.']:
+    for prefix in ["http://", "https://", "www."]:
         if domain.startswith(prefix):
-            domain = domain[len(prefix):]
+            domain = domain[len(prefix) :]
     # Remove trailing slash and path
-    domain = domain.split('/')[0]
+    domain = domain.split("/")[0]
     return domain
 
 
 # =============================================================================
 # Tool Registration (for LangChain)
 # =============================================================================
+
 
 def get_tools():
     """
@@ -391,5 +398,7 @@ if __name__ == "__main__":
     print(json.dumps(result, indent=2))
 
     print("\nTesting Hash Check:")
-    result = check_hash("a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2")
+    result = check_hash(
+        "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2"
+    )
     print(json.dumps(result, indent=2))

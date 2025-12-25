@@ -1,43 +1,38 @@
 #!/usr/bin/env python3
 """Tests for Lab 12: Ransomware Attack Simulation & Purple Team."""
 
-import pytest
+import importlib
+import shutil
 import sys
 import tempfile
-import shutil
-import importlib
 from pathlib import Path
 from unittest.mock import Mock, patch
 
+import pytest
+
 # Clear any existing 'main' module and lab paths to avoid conflicts
 for key in list(sys.modules.keys()):
-    if key == 'main' or key.startswith('main.'):
+    if key == "main" or key.startswith("main."):
         del sys.modules[key]
 
 # Remove any existing lab paths from sys.path
-sys.path = [p for p in sys.path if '/labs/lab' not in p]
+sys.path = [p for p in sys.path if "/labs/lab" not in p]
 
 # Add this lab's path
-lab_path = str(Path(__file__).parent.parent / "labs" / "lab12-ransomware-simulation" / "solution")
+lab_path = str(
+    Path(__file__).parent.parent / "labs" / "lab12-ransomware-simulation" / "solution"
+)
 sys.path.insert(0, lab_path)
 
-from main import (
-    RansomwareFamily,
-    DetectionStatus,
-    AttackScenario,
-    SimulationConfig,
-    DetectionTest,
-    TestResult,
-    ScenarioGenerator,
-    SafeRansomwareSimulator,
-    DetectionValidator,
-    PurpleTeamExercise
-)
-
+from main import (AttackScenario, DetectionStatus, DetectionTest,
+                  DetectionValidator, PurpleTeamExercise, RansomwareFamily,
+                  SafeRansomwareSimulator, ScenarioGenerator, SimulationConfig,
+                  TestResult)
 
 # =============================================================================
 # Fixtures
 # =============================================================================
+
 
 @pytest.fixture
 def temp_test_dir():
@@ -58,7 +53,7 @@ def simulation_config(temp_test_dir):
         simulate_encryption=True,
         simulate_shadow_delete=True,
         cleanup_after=False,  # We'll test cleanup explicitly
-        log_all_actions=False
+        log_all_actions=False,
     )
 
 
@@ -82,7 +77,11 @@ def sample_attack_scenario():
         name="LockBit Simulation",
         description="Fast-encrypting RaaS with double extortion",
         initial_access="Phishing",
-        execution_chain=["Loader drops payload", "C2 established", "Ransomware executed"],
+        execution_chain=[
+            "Loader drops payload",
+            "C2 established",
+            "Ransomware executed",
+        ],
         persistence_methods=["Registry Run Key"],
         discovery_techniques=["System Info", "Network Share Enum"],
         lateral_movement=["PsExec", "WMI"],
@@ -90,13 +89,14 @@ def sample_attack_scenario():
         encryption_targets=["Documents", "Databases"],
         mitre_techniques=["T1486", "T1490", "T1567"],
         detection_opportunities=["Shadow deletion", "Mass encryption"],
-        expected_artifacts=["Ransom notes", "Encrypted files"]
+        expected_artifacts=["Ransom notes", "Encrypted files"],
     )
 
 
 # =============================================================================
 # RansomwareFamily Enum Tests
 # =============================================================================
+
 
 class TestRansomwareFamily:
     """Tests for RansomwareFamily enum."""
@@ -131,6 +131,7 @@ class TestDetectionStatus:
 # ScenarioGenerator Tests
 # =============================================================================
 
+
 class TestScenarioGenerator:
     """Tests for ScenarioGenerator."""
 
@@ -141,16 +142,19 @@ class TestScenarioGenerator:
 
     def test_family_profiles_exist(self, scenario_generator):
         """Test all family profiles exist."""
-        for family in [RansomwareFamily.LOCKBIT, RansomwareFamily.BLACKCAT,
-                       RansomwareFamily.CONTI, RansomwareFamily.REVIL,
-                       RansomwareFamily.RYUK]:
+        for family in [
+            RansomwareFamily.LOCKBIT,
+            RansomwareFamily.BLACKCAT,
+            RansomwareFamily.CONTI,
+            RansomwareFamily.REVIL,
+            RansomwareFamily.RYUK,
+        ]:
             assert family in scenario_generator.FAMILY_PROFILES
 
     def test_generate_lockbit_scenario(self, scenario_generator):
         """Test LockBit scenario generation."""
         scenario = scenario_generator.generate_scenario(
-            family=RansomwareFamily.LOCKBIT,
-            complexity="medium"
+            family=RansomwareFamily.LOCKBIT, complexity="medium"
         )
 
         assert scenario is not None
@@ -162,8 +166,7 @@ class TestScenarioGenerator:
     def test_generate_blackcat_scenario(self, scenario_generator):
         """Test BlackCat scenario generation."""
         scenario = scenario_generator.generate_scenario(
-            family=RansomwareFamily.BLACKCAT,
-            complexity="high"
+            family=RansomwareFamily.BLACKCAT, complexity="high"
         )
 
         assert scenario.family == RansomwareFamily.BLACKCAT
@@ -172,8 +175,7 @@ class TestScenarioGenerator:
     def test_generate_low_complexity_scenario(self, scenario_generator):
         """Test low complexity scenario."""
         scenario = scenario_generator.generate_scenario(
-            family=RansomwareFamily.LOCKBIT,
-            complexity="low"
+            family=RansomwareFamily.LOCKBIT, complexity="low"
         )
 
         # Low complexity should have simpler execution chain
@@ -182,8 +184,7 @@ class TestScenarioGenerator:
     def test_generate_high_complexity_scenario(self, scenario_generator):
         """Test high complexity scenario."""
         scenario = scenario_generator.generate_scenario(
-            family=RansomwareFamily.CONTI,
-            complexity="high"
+            family=RansomwareFamily.CONTI, complexity="high"
         )
 
         # High complexity should have more steps
@@ -194,8 +195,7 @@ class TestScenarioGenerator:
     def test_generate_scenario_without_exfil(self, scenario_generator):
         """Test scenario without exfiltration."""
         scenario = scenario_generator.generate_scenario(
-            family=RansomwareFamily.RYUK,
-            include_exfil=False
+            family=RansomwareFamily.RYUK, include_exfil=False
         )
 
         assert scenario.exfiltration is False
@@ -207,21 +207,27 @@ class TestScenarioGenerator:
         assert tests is not None
         assert len(tests) >= 3  # At least shadow, encryption, discovery
 
-    def test_detection_tests_include_shadow_deletion(self, scenario_generator, sample_attack_scenario):
+    def test_detection_tests_include_shadow_deletion(
+        self, scenario_generator, sample_attack_scenario
+    ):
         """Test detection tests include shadow deletion."""
         tests = scenario_generator.generate_detection_tests(sample_attack_scenario)
 
         technique_ids = [t.technique_id for t in tests]
         assert "T1490" in technique_ids  # Inhibit System Recovery
 
-    def test_detection_tests_include_encryption(self, scenario_generator, sample_attack_scenario):
+    def test_detection_tests_include_encryption(
+        self, scenario_generator, sample_attack_scenario
+    ):
         """Test detection tests include encryption."""
         tests = scenario_generator.generate_detection_tests(sample_attack_scenario)
 
         technique_ids = [t.technique_id for t in tests]
         assert "T1486" in technique_ids  # Data Encrypted for Impact
 
-    def test_detection_tests_include_exfil_when_enabled(self, scenario_generator, sample_attack_scenario):
+    def test_detection_tests_include_exfil_when_enabled(
+        self, scenario_generator, sample_attack_scenario
+    ):
         """Test exfiltration detection test included when enabled."""
         sample_attack_scenario.exfiltration = True
         tests = scenario_generator.generate_detection_tests(sample_attack_scenario)
@@ -233,6 +239,7 @@ class TestScenarioGenerator:
 # =============================================================================
 # SimulationConfig Tests
 # =============================================================================
+
 
 class TestSimulationConfig:
     """Tests for SimulationConfig."""
@@ -252,7 +259,7 @@ class TestSimulationConfig:
         config = SimulationConfig(
             target_directory=temp_test_dir,
             file_extensions=[".pdf"],
-            create_ransom_note=False
+            create_ransom_note=False,
         )
 
         assert config.file_extensions == [".pdf"]
@@ -262,6 +269,7 @@ class TestSimulationConfig:
 # =============================================================================
 # SafeRansomwareSimulator Tests
 # =============================================================================
+
 
 class TestSafeRansomwareSimulator:
     """Tests for SafeRansomwareSimulator."""
@@ -277,14 +285,15 @@ class TestSafeRansomwareSimulator:
 
     def test_simulator_rejects_unsafe_directory(self):
         """Test simulator rejects non-temp directories."""
-        unsafe_config = SimulationConfig(
-            target_directory="/home/user/important_data"
-        )
+        unsafe_config = SimulationConfig(target_directory="/home/user/important_data")
 
         with pytest.raises(ValueError) as exc_info:
             SafeRansomwareSimulator(unsafe_config)
 
-        assert "temp" in str(exc_info.value).lower() or "test" in str(exc_info.value).lower()
+        assert (
+            "temp" in str(exc_info.value).lower()
+            or "test" in str(exc_info.value).lower()
+        )
 
     def test_setup_test_files(self, simulation_config):
         """Test test file setup."""
@@ -328,8 +337,7 @@ class TestSafeRansomwareSimulator:
     def test_simulate_encryption_disabled(self, temp_test_dir):
         """Test encryption simulation when disabled."""
         config = SimulationConfig(
-            target_directory=temp_test_dir,
-            simulate_encryption=False
+            target_directory=temp_test_dir, simulate_encryption=False
         )
         simulator = SafeRansomwareSimulator(config)
         files = simulator.setup_test_files(num_files=2)
@@ -350,7 +358,9 @@ class TestSafeRansomwareSimulator:
         assert len(result["commands"]) >= 2
 
         # Check audit log - commands should be logged but NOT executed
-        shadow_logs = [e for e in simulator.audit_log if e["action"] == "SHADOW_DELETE_SIM"]
+        shadow_logs = [
+            e for e in simulator.audit_log if e["action"] == "SHADOW_DELETE_SIM"
+        ]
         assert len(shadow_logs) >= 1
         for log in shadow_logs:
             assert log.get("executed") is False
@@ -358,8 +368,7 @@ class TestSafeRansomwareSimulator:
     def test_simulate_shadow_deletion_disabled(self, temp_test_dir):
         """Test shadow deletion when disabled."""
         config = SimulationConfig(
-            target_directory=temp_test_dir,
-            simulate_shadow_delete=False
+            target_directory=temp_test_dir, simulate_shadow_delete=False
         )
         simulator = SafeRansomwareSimulator(config)
 
@@ -384,8 +393,7 @@ class TestSafeRansomwareSimulator:
     def test_create_ransom_note_disabled(self, temp_test_dir):
         """Test ransom note creation when disabled."""
         config = SimulationConfig(
-            target_directory=temp_test_dir,
-            create_ransom_note=False
+            target_directory=temp_test_dir, create_ransom_note=False
         )
         simulator = SafeRansomwareSimulator(config)
 
@@ -445,6 +453,7 @@ class TestSafeRansomwareSimulator:
 # DetectionTest Tests
 # =============================================================================
 
+
 class TestDetectionTest:
     """Tests for DetectionTest dataclass."""
 
@@ -456,7 +465,7 @@ class TestDetectionTest:
             description="Test VSS deletion detection",
             simulation_command="vssadmin delete shadows",
             expected_detection="Alert on shadow deletion",
-            detection_source="EDR"
+            detection_source="EDR",
         )
 
         assert test.name == "Test Shadow Deletion"
@@ -466,6 +475,7 @@ class TestDetectionTest:
 # =============================================================================
 # TestResult Tests
 # =============================================================================
+
 
 class TestTestResult:
     """Tests for TestResult dataclass."""
@@ -478,7 +488,7 @@ class TestTestResult:
             description="Test",
             simulation_command="test",
             expected_detection="test",
-            detection_source="EDR"
+            detection_source="EDR",
         )
 
         result = TestResult(
@@ -486,7 +496,7 @@ class TestTestResult:
             status=DetectionStatus.DETECTED,
             detection_time_ms=150.0,
             alert_generated=True,
-            notes="Alert triggered successfully"
+            notes="Alert triggered successfully",
         )
 
         assert result.status == DetectionStatus.DETECTED
@@ -497,6 +507,7 @@ class TestTestResult:
 # =============================================================================
 # DetectionValidator Tests
 # =============================================================================
+
 
 class TestDetectionValidator:
     """Tests for DetectionValidator."""
@@ -513,7 +524,7 @@ class TestDetectionValidator:
             description="Test",
             simulation_command="test",
             expected_detection="test",
-            detection_source="EDR"
+            detection_source="EDR",
         )
 
         simulator = SafeRansomwareSimulator(simulation_config)
@@ -533,19 +544,23 @@ class TestDetectionValidator:
     def test_generate_gap_analysis_with_results(self, detection_validator):
         """Test gap analysis with test results."""
         # Add some results
-        for i, status in enumerate([DetectionStatus.DETECTED, DetectionStatus.MISSED,
-                                    DetectionStatus.DETECTED, DetectionStatus.PARTIAL]):
+        for i, status in enumerate(
+            [
+                DetectionStatus.DETECTED,
+                DetectionStatus.MISSED,
+                DetectionStatus.DETECTED,
+                DetectionStatus.PARTIAL,
+            ]
+        ):
             test = DetectionTest(
                 name=f"Test {i}",
                 technique_id=f"T{1000+i}",
                 description="Test",
                 simulation_command="test",
                 expected_detection="test",
-                detection_source="EDR"
+                detection_source="EDR",
             )
-            detection_validator.results.append(
-                TestResult(test=test, status=status)
-            )
+            detection_validator.results.append(TestResult(test=test, status=status))
 
         analysis = detection_validator.generate_gap_analysis()
 
@@ -560,6 +575,7 @@ class TestDetectionValidator:
 # =============================================================================
 # PurpleTeamExercise Tests
 # =============================================================================
+
 
 class TestPurpleTeamExercise:
     """Tests for PurpleTeamExercise."""
@@ -576,8 +592,7 @@ class TestPurpleTeamExercise:
         exercise = PurpleTeamExercise()
 
         plan = exercise.plan_exercise(
-            ransomware_family=RansomwareFamily.LOCKBIT,
-            complexity="medium"
+            ransomware_family=RansomwareFamily.LOCKBIT, complexity="medium"
         )
 
         assert plan is not None
@@ -589,9 +604,7 @@ class TestPurpleTeamExercise:
         """Test plan includes valid scenario."""
         exercise = PurpleTeamExercise()
 
-        plan = exercise.plan_exercise(
-            ransomware_family=RansomwareFamily.BLACKCAT
-        )
+        plan = exercise.plan_exercise(ransomware_family=RansomwareFamily.BLACKCAT)
 
         assert plan["scenario"].family == RansomwareFamily.BLACKCAT
 
@@ -599,9 +612,7 @@ class TestPurpleTeamExercise:
         """Test plan includes detection tests."""
         exercise = PurpleTeamExercise()
 
-        plan = exercise.plan_exercise(
-            ransomware_family=RansomwareFamily.LOCKBIT
-        )
+        plan = exercise.plan_exercise(ransomware_family=RansomwareFamily.LOCKBIT)
 
         assert len(plan["tests"]) >= 3
 
@@ -609,9 +620,7 @@ class TestPurpleTeamExercise:
         """Test plan includes exercise phases."""
         exercise = PurpleTeamExercise()
 
-        plan = exercise.plan_exercise(
-            ransomware_family=RansomwareFamily.LOCKBIT
-        )
+        plan = exercise.plan_exercise(ransomware_family=RansomwareFamily.LOCKBIT)
 
         phases = plan["phases"]
         assert len(phases) >= 4
@@ -623,6 +632,7 @@ class TestPurpleTeamExercise:
 # =============================================================================
 # AttackScenario Tests
 # =============================================================================
+
 
 class TestAttackScenario:
     """Tests for AttackScenario dataclass."""
@@ -642,6 +652,7 @@ class TestAttackScenario:
 # Integration Tests
 # =============================================================================
 
+
 class TestIntegration:
     """Integration tests for the purple team framework."""
 
@@ -650,18 +661,14 @@ class TestIntegration:
         # 1. Generate scenario
         gen = ScenarioGenerator()
         scenario = gen.generate_scenario(
-            family=RansomwareFamily.LOCKBIT,
-            complexity="medium"
+            family=RansomwareFamily.LOCKBIT, complexity="medium"
         )
 
         # 2. Generate tests
         tests = gen.generate_detection_tests(scenario)
 
         # 3. Run simulation
-        config = SimulationConfig(
-            target_directory=temp_test_dir,
-            cleanup_after=True
-        )
+        config = SimulationConfig(target_directory=temp_test_dir, cleanup_after=True)
         simulator = SafeRansomwareSimulator(config)
 
         # Setup and run
@@ -695,8 +702,7 @@ class TestIntegration:
 
         # Plan exercise
         plan = exercise.plan_exercise(
-            ransomware_family=RansomwareFamily.CONTI,
-            complexity="high"
+            ransomware_family=RansomwareFamily.CONTI, complexity="high"
         )
 
         # Verify plan structure

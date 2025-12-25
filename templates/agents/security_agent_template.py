@@ -7,19 +7,21 @@ Customize the tools and system prompt for your specific use case.
 """
 
 import os
-from typing import List, Dict, Any, Optional
 from dataclasses import dataclass
 from datetime import datetime
+from typing import Any, Dict, List, Optional
 
 from dotenv import load_dotenv
+
 load_dotenv()
 
 try:
-    from langchain_anthropic import ChatAnthropic
-    from langchain_core.messages import HumanMessage, SystemMessage, AIMessage
-    from langchain.tools import Tool
     from langchain.agents import AgentExecutor, create_react_agent
+    from langchain.tools import Tool
+    from langchain_anthropic import ChatAnthropic
+    from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
     from langchain_core.prompts import PromptTemplate
+
     LANGCHAIN_AVAILABLE = True
 except ImportError:
     LANGCHAIN_AVAILABLE = False
@@ -30,9 +32,11 @@ except ImportError:
 # Agent Configuration
 # =============================================================================
 
+
 @dataclass
 class AgentConfig:
     """Configuration for the security agent."""
+
     name: str = "SecurityAgent"
     model: str = "claude-sonnet-4-20250514"
     temperature: float = 0
@@ -43,6 +47,7 @@ class AgentConfig:
 # =============================================================================
 # Tool Definitions - Customize these for your agent
 # =============================================================================
+
 
 def lookup_ip(ip: str) -> str:
     """Look up threat intelligence for an IP address."""
@@ -68,17 +73,17 @@ def create_tools() -> List[Tool]:
         Tool(
             name="lookup_ip",
             func=lookup_ip,
-            description="Look up threat intelligence for an IP address. Input: IP address string."
+            description="Look up threat intelligence for an IP address. Input: IP address string.",
         ),
         Tool(
             name="query_logs",
             func=query_logs,
-            description="Query security logs or SIEM. Input: search query string."
+            description="Query security logs or SIEM. Input: search query string.",
         ),
         Tool(
             name="get_asset_info",
             func=get_asset_info,
-            description="Get information about an asset by hostname. Input: hostname string."
+            description="Get information about an asset by hostname. Input: hostname string.",
         ),
     ]
 
@@ -117,6 +122,7 @@ Question: {input}
 # Agent Class
 # =============================================================================
 
+
 class SecurityAgent:
     """A reusable security agent template."""
 
@@ -137,24 +143,19 @@ class SecurityAgent:
             raise ValueError("ANTHROPIC_API_KEY not set")
 
         self.llm = ChatAnthropic(
-            model=self.config.model,
-            temperature=self.config.temperature
+            model=self.config.model, temperature=self.config.temperature
         )
 
         prompt = PromptTemplate.from_template(SYSTEM_PROMPT)
 
-        self.agent = create_react_agent(
-            llm=self.llm,
-            tools=self.tools,
-            prompt=prompt
-        )
+        self.agent = create_react_agent(llm=self.llm, tools=self.tools, prompt=prompt)
 
         self.executor = AgentExecutor(
             agent=self.agent,
             tools=self.tools,
             verbose=self.config.verbose,
             max_iterations=self.config.max_iterations,
-            handle_parsing_errors=True
+            handle_parsing_errors=True,
         )
 
     def run(self, query: str) -> str:
@@ -176,16 +177,14 @@ class SecurityAgent:
 # Usage Example
 # =============================================================================
 
+
 def main():
     """Example usage of the security agent template."""
     print("Security Agent Template")
     print("=" * 40)
 
     # Create agent with default config
-    config = AgentConfig(
-        name="InvestigationAgent",
-        verbose=True
-    )
+    config = AgentConfig(name="InvestigationAgent", verbose=True)
 
     agent = SecurityAgent(config)
 
@@ -193,7 +192,7 @@ def main():
     queries = [
         "Look up the IP address 192.168.1.100",
         "Search logs for failed login attempts",
-        "Get info about WORKSTATION-42"
+        "Get info about WORKSTATION-42",
     ]
 
     for query in queries:

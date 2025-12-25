@@ -6,6 +6,7 @@ Multi-stage threat detection pipeline with ML and LLM analysis.
 """
 
 import argparse
+
 from dotenv import load_dotenv
 from rich.console import Console
 from rich.panel import Panel
@@ -26,15 +27,15 @@ def run_demo():
             "host": "WORKSTATION-42",
             "event_type": "process",
             "process": "powershell.exe",
-            "command_line": "powershell -enc SGVsbG8gV29ybGQ="
+            "command_line": "powershell -enc SGVsbG8gV29ybGQ=",
         },
         {
             "timestamp": "2024-01-15T09:15:05Z",
             "host": "WORKSTATION-42",
             "event_type": "network",
             "dest_ip": "185.143.223.47",
-            "dest_port": 443
-        }
+            "dest_port": 443,
+        },
     ]
 
     console.print(f"[green]Loaded {len(demo_events)} demo events[/green]")
@@ -61,11 +62,13 @@ def main():
     parser.add_argument("--config", type=str, help="Path to config file")
     args = parser.parse_args()
 
-    console.print(Panel.fit(
-        "[bold red]Automated Threat Hunter[/bold red]\n"
-        "ML + LLM Threat Detection Pipeline",
-        border_style="red"
-    ))
+    console.print(
+        Panel.fit(
+            "[bold red]Automated Threat Hunter[/bold red]\n"
+            "ML + LLM Threat Detection Pipeline",
+            border_style="red",
+        )
+    )
 
     if args.demo:
         run_demo()

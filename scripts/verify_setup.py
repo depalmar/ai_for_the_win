@@ -9,19 +9,21 @@ Usage:
     python scripts/verify_setup.py
 """
 
-import sys
 import os
+import sys
 from pathlib import Path
 
 # Add color output if available
 try:
     from rich.console import Console
-    from rich.table import Table
     from rich.panel import Panel
+    from rich.table import Table
+
     console = Console()
     RICH_AVAILABLE = True
 except ImportError:
     RICH_AVAILABLE = False
+
 
 def print_header(text):
     if RICH_AVAILABLE:
@@ -29,17 +31,20 @@ def print_header(text):
     else:
         print(f"\n{'=' * 60}\n{text}\n{'=' * 60}")
 
+
 def print_success(text):
     if RICH_AVAILABLE:
         console.print(f"[green]✓[/green] {text}")
     else:
         print(f"[OK] {text}")
 
+
 def print_warning(text):
     if RICH_AVAILABLE:
         console.print(f"[yellow]![/yellow] {text}")
     else:
         print(f"[WARN] {text}")
+
 
 def print_error(text):
     if RICH_AVAILABLE:
@@ -72,23 +77,18 @@ def check_required_packages():
         "numpy": "NumPy (numerical computing)",
         "pandas": "Pandas (data manipulation)",
         "sklearn": "scikit-learn (machine learning)",
-
         # LLM Frameworks
         "langchain": "LangChain (LLM orchestration)",
         "langchain_anthropic": "LangChain Anthropic (Claude)",
         "langchain_openai": "LangChain OpenAI (GPT)",
         "langchain_google_genai": "LangChain Google (Gemini)",
-
         # Vector DB
         "chromadb": "ChromaDB (vector database)",
-
         # Security
         "yara": "YARA (malware detection rules)",
-
         # CLI/UI
         "rich": "Rich (CLI output)",
         "gradio": "Gradio (web UI demos)",
-
         # Utils
         "dotenv": "python-dotenv (environment variables)",
     }
@@ -140,6 +140,7 @@ def check_api_keys():
     # Load .env if exists
     try:
         from dotenv import load_dotenv
+
         load_dotenv()
     except ImportError:
         pass
@@ -168,7 +169,9 @@ def check_api_keys():
 
     if not has_llm_key:
         print_error("\nNo LLM API key found! At least one is required for LLM labs.")
-        print_warning("Set ANTHROPIC_API_KEY, OPENAI_API_KEY, or GOOGLE_API_KEY in .env")
+        print_warning(
+            "Set ANTHROPIC_API_KEY, OPENAI_API_KEY, or GOOGLE_API_KEY in .env"
+        )
 
     print("\nOptional API keys:")
     for key, provider in optional_keys.items():
@@ -215,16 +218,14 @@ def check_ollama():
     print_header("Checking Local Model Support")
 
     import subprocess
+
     try:
         result = subprocess.run(
-            ["ollama", "list"],
-            capture_output=True,
-            text=True,
-            timeout=5
+            ["ollama", "list"], capture_output=True, text=True, timeout=5
         )
         if result.returncode == 0:
             print_success("Ollama installed and running")
-            models = result.stdout.strip().split('\n')[1:]  # Skip header
+            models = result.stdout.strip().split("\n")[1:]  # Skip header
             if models and models[0]:
                 print_success(f"Available models: {len(models)}")
             else:
@@ -260,17 +261,21 @@ def print_summary(results):
         console.print(table)
 
         if all_passed:
-            console.print(Panel.fit(
-                "[bold green]All checks passed! You're ready to start.[/bold green]\n\n"
-                "Next step: cd labs/lab01-phishing-classifier",
-                title="Ready!"
-            ))
+            console.print(
+                Panel.fit(
+                    "[bold green]All checks passed! You're ready to start.[/bold green]\n\n"
+                    "Next step: cd labs/lab01-phishing-classifier",
+                    title="Ready!",
+                )
+            )
         else:
-            console.print(Panel.fit(
-                "[bold yellow]Some checks failed. Review the issues above.[/bold yellow]\n\n"
-                "Most labs will still work with optional packages missing.",
-                title="Setup Incomplete"
-            ))
+            console.print(
+                Panel.fit(
+                    "[bold yellow]Some checks failed. Review the issues above.[/bold yellow]\n\n"
+                    "Most labs will still work with optional packages missing.",
+                    title="Setup Incomplete",
+                )
+            )
     else:
         print("\n" + "-" * 40)
         for check, passed in results.items():
@@ -287,11 +292,13 @@ def print_summary(results):
 def main():
     """Run all verification checks"""
     if RICH_AVAILABLE:
-        console.print(Panel.fit(
-            "[bold]AI for the Win - Setup Verification[/bold]\n"
-            "Checking your environment configuration...",
-            border_style="blue"
-        ))
+        console.print(
+            Panel.fit(
+                "[bold]AI for the Win - Setup Verification[/bold]\n"
+                "Checking your environment configuration...",
+                border_style="blue",
+            )
+        )
     else:
         print("=" * 60)
         print("AI for the Win - Setup Verification")

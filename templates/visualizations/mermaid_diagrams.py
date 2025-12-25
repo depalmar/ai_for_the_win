@@ -11,9 +11,9 @@ Generate Mermaid diagrams for visualizing:
 """
 
 from dataclasses import dataclass
-from typing import List, Dict, Optional
 from datetime import datetime
 from enum import Enum
+from typing import Dict, List, Optional
 
 
 class DiagramType(Enum):
@@ -30,6 +30,7 @@ class DiagramType(Enum):
 @dataclass
 class TimelineEvent:
     """Event for timeline visualization."""
+
     timestamp: datetime
     title: str
     description: str
@@ -40,6 +41,7 @@ class TimelineEvent:
 @dataclass
 class AttackStep:
     """Step in an attack chain."""
+
     id: str
     name: str
     technique_id: str

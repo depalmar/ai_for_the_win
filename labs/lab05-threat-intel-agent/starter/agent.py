@@ -5,11 +5,11 @@ Lab 05: Threat Intelligence Agent - Agent Module
 Implement the ReAct agent for threat intelligence gathering.
 """
 
-import os
 import json
+import os
 import re
-from typing import List, Dict, Optional, Any
 from datetime import datetime
+from typing import Any, Dict, List, Optional
 
 from dotenv import load_dotenv
 
@@ -18,13 +18,13 @@ load_dotenv()
 # LangChain imports
 try:
     from langchain_anthropic import ChatAnthropic
-    from langchain_core.messages import HumanMessage, SystemMessage, AIMessage
+    from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
+
     ANTHROPIC_AVAILABLE = True
 except ImportError:
     ANTHROPIC_AVAILABLE = False
 
 from tools import get_tools
-
 
 # =============================================================================
 # Agent System Prompt
@@ -66,6 +66,7 @@ Begin!"""
 # =============================================================================
 # Agent Memory Class
 # =============================================================================
+
 
 class AgentMemory:
     """
@@ -156,6 +157,7 @@ class AgentMemory:
 # =============================================================================
 # Threat Intelligence Agent
 # =============================================================================
+
 
 class ThreatIntelAgent:
     """
@@ -357,7 +359,7 @@ class ThreatIntelAgent:
 
     def _extract_final_answer(self, response: str) -> str:
         """Extract final answer from response."""
-        match = re.search(r'Final Answer:\s*(.*)', response, re.DOTALL)
+        match = re.search(r"Final Answer:\s*(.*)", response, re.DOTALL)
         if match:
             return match.group(1).strip()
         return response
@@ -366,6 +368,7 @@ class ThreatIntelAgent:
 # =============================================================================
 # Investigation Helpers
 # =============================================================================
+
 
 def investigate_incident(agent: ThreatIntelAgent, iocs: dict) -> str:
     """
@@ -385,11 +388,11 @@ def investigate_incident(agent: ThreatIntelAgent, iocs: dict) -> str:
     """
 
     ioc_list = []
-    if iocs.get('ips'):
+    if iocs.get("ips"):
         ioc_list.append(f"IP Addresses: {', '.join(iocs['ips'])}")
-    if iocs.get('domains'):
+    if iocs.get("domains"):
         ioc_list.append(f"Domains: {', '.join(iocs['domains'])}")
-    if iocs.get('hashes'):
+    if iocs.get("hashes"):
         ioc_list.append(f"File Hashes: {', '.join(iocs['hashes'])}")
 
     prompt = f"""Investigate this security incident. Here are the IOCs found:
@@ -418,15 +421,14 @@ Be thorough and cite your sources."""
 
 if __name__ == "__main__":
     from rich.console import Console
-    from rich.panel import Panel
     from rich.markdown import Markdown
+    from rich.panel import Panel
 
     console = Console()
 
-    console.print(Panel.fit(
-        "[bold]Lab 05: Threat Intelligence Agent[/bold]",
-        border_style="blue"
-    ))
+    console.print(
+        Panel.fit("[bold]Lab 05: Threat Intelligence Agent[/bold]", border_style="blue")
+    )
 
     # Initialize agent
     console.print("\n[yellow]Initializing agent...[/yellow]")
@@ -444,11 +446,15 @@ if __name__ == "__main__":
         iocs = {
             "ips": ["185.143.223.47", "91.234.99.100"],
             "domains": ["evil-c2.com"],
-            "hashes": ["a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2"]
+            "hashes": [
+                "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2"
+            ],
         }
         result = investigate_incident(agent, iocs)
         console.print(Markdown(result))
 
     except Exception as e:
         console.print(f"[red]Error: {e}[/red]")
-        console.print("\n[yellow]Hint: Complete the TODO sections to make the agent work![/yellow]")
+        console.print(
+            "\n[yellow]Hint: Complete the TODO sections to make the agent work![/yellow]"
+        )

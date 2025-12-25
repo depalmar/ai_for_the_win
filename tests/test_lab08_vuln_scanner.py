@@ -1,30 +1,28 @@
 #!/usr/bin/env python3
 """Tests for Lab 08: Vulnerability Scanner AI."""
 
-import pytest
 import sys
 from pathlib import Path
 
+import pytest
+
 # Clear any existing 'main' module and lab paths to avoid conflicts
 for key in list(sys.modules.keys()):
-    if key == 'main' or key.startswith('main.'):
+    if key == "main" or key.startswith("main."):
         del sys.modules[key]
 
 # Remove any existing lab paths from sys.path
-sys.path = [p for p in sys.path if '/labs/lab' not in p]
+sys.path = [p for p in sys.path if "/labs/lab" not in p]
 
 # Add this lab's path
-lab_path = str(Path(__file__).parent.parent / "labs" / "lab08-vuln-scanner-ai" / "solution")
+lab_path = str(
+    Path(__file__).parent.parent / "labs" / "lab08-vuln-scanner-ai" / "solution"
+)
 sys.path.insert(0, lab_path)
 
-from main import (
-    VulnerabilityScanner,
-    VulnerabilityAnalyzer,
-    VulnerabilityPrioritizer,
-    RemediationGenerator,
-    Vulnerability,
-    ScanResult
-)
+from main import (RemediationGenerator, ScanResult, Vulnerability,
+                  VulnerabilityAnalyzer, VulnerabilityPrioritizer,
+                  VulnerabilityScanner)
 
 
 @pytest.fixture
@@ -43,7 +41,7 @@ def sample_scan_result():
                 description="Allows remote attackers to execute arbitrary code.",
                 affected_component="Apache HTTP Server 2.4.49",
                 evidence="Version detected in HTTP headers",
-                remediation="Update to Apache 2.4.52 or later"
+                remediation="Update to Apache 2.4.52 or later",
             ),
             Vulnerability(
                 vuln_id="CVE-2024-5678",
@@ -53,7 +51,7 @@ def sample_scan_result():
                 description="SQL injection in login form.",
                 affected_component="Custom Web Application",
                 evidence="Error-based SQLi confirmed",
-                remediation="Implement parameterized queries"
+                remediation="Implement parameterized queries",
             ),
             Vulnerability(
                 vuln_id="CVE-2024-9999",
@@ -63,11 +61,11 @@ def sample_scan_result():
                 description="Missing X-Frame-Options header.",
                 affected_component="Web Server Configuration",
                 evidence="Header not present in response",
-                remediation="Add X-Frame-Options: DENY"
-            )
+                remediation="Add X-Frame-Options: DENY",
+            ),
         ],
         services_detected=["http", "https", "ssh"],
-        os_detected="Linux"
+        os_detected="Linux",
     )
 
 
@@ -83,7 +81,7 @@ def sample_vulnerabilities():
             description="Remote code execution",
             affected_component="Web Server",
             evidence="Confirmed",
-            remediation="Patch immediately"
+            remediation="Patch immediately",
         ),
         Vulnerability(
             vuln_id="CVE-2024-2222",
@@ -93,8 +91,8 @@ def sample_vulnerabilities():
             description="Information disclosure",
             affected_component="API",
             evidence="Version exposed",
-            remediation="Update configuration"
-        )
+            remediation="Update configuration",
+        ),
     ]
 
 
@@ -157,7 +155,9 @@ class TestVulnerabilityPrioritizer:
     def test_prioritize_by_exploitability(self, sample_vulnerabilities):
         """Test exploitability-based prioritization."""
         prioritizer = VulnerabilityPrioritizer()
-        prioritized = prioritizer.prioritize(sample_vulnerabilities, method="exploitability")
+        prioritized = prioritizer.prioritize(
+            sample_vulnerabilities, method="exploitability"
+        )
 
         assert len(prioritized) == len(sample_vulnerabilities)
 
@@ -168,7 +168,11 @@ class TestVulnerabilityPrioritizer:
 
         assert len(scores) == len(sample_vulnerabilities)
         # Higher CVSS should have higher score
-        assert scores[0] >= scores[1] or sample_vulnerabilities[0].cvss_score >= sample_vulnerabilities[1].cvss_score
+        assert (
+            scores[0] >= scores[1]
+            or sample_vulnerabilities[0].cvss_score
+            >= sample_vulnerabilities[1].cvss_score
+        )
 
 
 class TestRemediationGenerator:
@@ -205,7 +209,7 @@ class TestVulnerabilityDataClass:
             description="Test description",
             affected_component="Test Component",
             evidence="Test evidence",
-            remediation="Test remediation"
+            remediation="Test remediation",
         )
 
         assert vuln.vuln_id == "CVE-2024-0001"
@@ -224,7 +228,7 @@ class TestScanResultDataClass:
             timestamp="2024-01-15T12:00:00Z",
             vulnerabilities=sample_vulnerabilities,
             services_detected=["http", "ssh"],
-            os_detected="Ubuntu 22.04"
+            os_detected="Ubuntu 22.04",
         )
 
         assert result.target == "10.0.0.1"

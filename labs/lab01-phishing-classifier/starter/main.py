@@ -11,21 +11,21 @@ Instructions:
 """
 
 import re
-import pandas as pd
-import numpy as np
-from typing import Tuple, List
 from pathlib import Path
-
-# ML imports
-from sklearn.model_selection import train_test_split
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
+from typing import List, Tuple
 
 # NLP imports
 import nltk
+import numpy as np
+import pandas as pd
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics import (accuracy_score, classification_report,
+                             confusion_matrix)
+# ML imports
+from sklearn.model_selection import train_test_split
 
 # Download NLTK data (run once)
 # nltk.download('stopwords')
@@ -35,6 +35,7 @@ from nltk.stem import PorterStemmer
 # =============================================================================
 # Task 1: Load and Explore Data
 # =============================================================================
+
 
 def load_data(filepath: str) -> pd.DataFrame:
     """
@@ -79,6 +80,7 @@ def explore_data(df: pd.DataFrame) -> None:
 # Task 2: Preprocess Text
 # =============================================================================
 
+
 def preprocess_text(text: str) -> str:
     """
     Clean and normalize email text for ML processing.
@@ -115,7 +117,7 @@ def preprocess_dataset(df: pd.DataFrame) -> pd.DataFrame:
         DataFrame with added 'clean_text' column
     """
     df = df.copy()
-    df['clean_text'] = df['text'].apply(preprocess_text)
+    df["clean_text"] = df["text"].apply(preprocess_text)
     return df
 
 
@@ -125,16 +127,39 @@ def preprocess_dataset(df: pd.DataFrame) -> pd.DataFrame:
 
 # Urgency words commonly found in phishing emails
 URGENCY_WORDS = [
-    'urgent', 'immediate', 'action required', 'act now', 'limited time',
-    'expires', 'suspended', 'verify', 'confirm', 'alert', 'warning',
-    'attention', 'important', 'critical', 'deadline', 'asap'
+    "urgent",
+    "immediate",
+    "action required",
+    "act now",
+    "limited time",
+    "expires",
+    "suspended",
+    "verify",
+    "confirm",
+    "alert",
+    "warning",
+    "attention",
+    "important",
+    "critical",
+    "deadline",
+    "asap",
 ]
 
 # Words requesting sensitive information
 SENSITIVE_WORDS = [
-    'password', 'credit card', 'ssn', 'social security', 'bank account',
-    'pin', 'login', 'credentials', 'verify your', 'confirm your',
-    'update your', 'billing', 'payment'
+    "password",
+    "credit card",
+    "ssn",
+    "social security",
+    "bank account",
+    "pin",
+    "login",
+    "credentials",
+    "verify your",
+    "confirm your",
+    "update your",
+    "billing",
+    "payment",
 ]
 
 
@@ -220,11 +245,12 @@ def extract_features(df: pd.DataFrame) -> pd.DataFrame:
 # Task 4: Train Classifier
 # =============================================================================
 
+
 def create_feature_matrix(
     df: pd.DataFrame,
     features_df: pd.DataFrame,
     vectorizer: TfidfVectorizer = None,
-    fit: bool = True
+    fit: bool = True,
 ) -> Tuple[np.ndarray, TfidfVectorizer]:
     """
     Combine TF-IDF text features with extracted numeric features.
@@ -250,10 +276,7 @@ def create_feature_matrix(
     pass
 
 
-def train_model(
-    X_train: np.ndarray,
-    y_train: np.ndarray
-) -> RandomForestClassifier:
+def train_model(X_train: np.ndarray, y_train: np.ndarray) -> RandomForestClassifier:
     """
     Train a Random Forest classifier.
 
@@ -282,11 +305,12 @@ def train_model(
 # Task 5: Evaluate Model
 # =============================================================================
 
+
 def evaluate_model(
     model: RandomForestClassifier,
     X_test: np.ndarray,
     y_test: np.ndarray,
-    feature_names: List[str] = None
+    feature_names: List[str] = None,
 ) -> dict:
     """
     Evaluate classifier performance.
@@ -316,10 +340,9 @@ def evaluate_model(
 # Task 6: Prediction Function
 # =============================================================================
 
+
 def predict_phishing(
-    model: RandomForestClassifier,
-    vectorizer: TfidfVectorizer,
-    email_text: str
+    model: RandomForestClassifier, vectorizer: TfidfVectorizer, email_text: str
 ) -> Tuple[int, float]:
     """
     Predict if an email is phishing.
@@ -348,6 +371,7 @@ def predict_phishing(
 # =============================================================================
 # Main Execution
 # =============================================================================
+
 
 def main():
     """Main execution flow."""
@@ -391,16 +415,14 @@ def main():
 
     # Split data
     X_train_df, X_test_df, y_train, y_test = train_test_split(
-        df, df['label'], test_size=0.2, random_state=42, stratify=df['label']
+        df, df["label"], test_size=0.2, random_state=42, stratify=df["label"]
     )
 
     features_train = features_df.loc[X_train_df.index]
     features_test = features_df.loc[X_test_df.index]
 
     # Create feature matrices
-    X_train, vectorizer = create_feature_matrix(
-        X_train_df, features_train, fit=True
-    )
+    X_train, vectorizer = create_feature_matrix(X_train_df, features_train, fit=True)
     X_test, _ = create_feature_matrix(
         X_test_df, features_test, vectorizer=vectorizer, fit=False
     )
@@ -437,7 +459,9 @@ def main():
         pred, conf = predict_phishing(model, vectorizer, email)
         status = "✓" if pred == expected[i] else "✗"
         print(f"\n{status} Email: {email[:60]}...")
-        print(f"   Prediction: {'PHISHING' if pred else 'LEGITIMATE'} (confidence: {conf:.2%})")
+        print(
+            f"   Prediction: {'PHISHING' if pred else 'LEGITIMATE'} (confidence: {conf:.2%})"
+        )
 
     print("\n" + "=" * 60)
     print("Lab Complete!")
@@ -466,10 +490,12 @@ def create_sample_data(filepath: Path):
         "Great catching up yesterday! Let's schedule lunch next week.",
     ] * 60  # 300 legitimate
 
-    df = pd.DataFrame({
-        'text': phishing + legitimate,
-        'label': [1] * len(phishing) + [0] * len(legitimate)
-    })
+    df = pd.DataFrame(
+        {
+            "text": phishing + legitimate,
+            "label": [1] * len(phishing) + [0] * len(legitimate),
+        }
+    )
 
     df = df.sample(frac=1, random_state=42).reset_index(drop=True)
     df.to_csv(filepath, index=False)

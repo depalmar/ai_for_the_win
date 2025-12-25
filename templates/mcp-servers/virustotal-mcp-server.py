@@ -75,28 +75,22 @@ def validate_domain(domain: str) -> bool:
     return bool(re.match(pattern, domain.strip()))
 
 
-async def make_vt_request(endpoint: str, method: str = "GET", data: dict = None) -> dict:
+async def make_vt_request(
+    endpoint: str, method: str = "GET", data: dict = None
+) -> dict:
     """Make authenticated request to VirusTotal API."""
     if not VT_API_KEY:
         return {"error": "VT_API_KEY environment variable not set"}
 
-    headers = {
-        "x-apikey": VT_API_KEY,
-        "Accept": "application/json"
-    }
+    headers = {"x-apikey": VT_API_KEY, "Accept": "application/json"}
 
     async with httpx.AsyncClient(timeout=REQUEST_TIMEOUT) as client:
         try:
             if method == "GET":
-                response = await client.get(
-                    f"{VT_BASE_URL}{endpoint}",
-                    headers=headers
-                )
+                response = await client.get(f"{VT_BASE_URL}{endpoint}", headers=headers)
             elif method == "POST":
                 response = await client.post(
-                    f"{VT_BASE_URL}{endpoint}",
-                    headers=headers,
-                    data=data
+                    f"{VT_BASE_URL}{endpoint}", headers=headers, data=data
                 )
             else:
                 return {"error": f"Unsupported method: {method}"}
@@ -128,9 +122,11 @@ async def lookup_hash(file_hash: str) -> str:
     # Validate hash
     is_valid, hash_type = validate_hash(file_hash)
     if not is_valid:
-        return json.dumps({
-            "error": "Invalid hash format. Provide MD5 (32 chars), SHA1 (40 chars), or SHA256 (64 chars)."
-        })
+        return json.dumps(
+            {
+                "error": "Invalid hash format. Provide MD5 (32 chars), SHA1 (40 chars), or SHA256 (64 chars)."
+            }
+        )
 
     # Make API request
     result = await make_vt_request(f"/files/{file_hash.strip().lower()}")
@@ -151,21 +147,25 @@ async def lookup_hash(file_hash: str) -> str:
                 "suspicious": stats.get("suspicious", 0),
                 "undetected": stats.get("undetected", 0),
                 "harmless": stats.get("harmless", 0),
-                "total_engines": sum(stats.values())
+                "total_engines": sum(stats.values()),
             },
             "file_info": {
                 "type": attrs.get("type_description", "Unknown"),
                 "size": attrs.get("size", 0),
                 "names": attrs.get("names", [])[:5],  # First 5 names
                 "first_seen": attrs.get("first_submission_date"),
-                "last_seen": attrs.get("last_analysis_date")
+                "last_seen": attrs.get("last_analysis_date"),
             },
             "threat_classification": {
-                "category": attrs.get("popular_threat_classification", {}).get("suggested_threat_label"),
-                "family": attrs.get("popular_threat_classification", {}).get("popular_threat_name", [])
+                "category": attrs.get("popular_threat_classification", {}).get(
+                    "suggested_threat_label"
+                ),
+                "family": attrs.get("popular_threat_classification", {}).get(
+                    "popular_threat_name", []
+                ),
             },
             "tags": attrs.get("tags", [])[:10],
-            "vt_link": f"https://www.virustotal.com/gui/file/{file_hash}"
+            "vt_link": f"https://www.virustotal.com/gui/file/{file_hash}",
         }
 
         return json.dumps(response, indent=2, default=str)
@@ -199,18 +199,18 @@ async def lookup_ip(ip_address: str) -> str:
                 "malicious": stats.get("malicious", 0),
                 "suspicious": stats.get("suspicious", 0),
                 "undetected": stats.get("undetected", 0),
-                "harmless": stats.get("harmless", 0)
+                "harmless": stats.get("harmless", 0),
             },
             "network_info": {
                 "country": attrs.get("country"),
                 "as_owner": attrs.get("as_owner"),
                 "asn": attrs.get("asn"),
-                "network": attrs.get("network")
+                "network": attrs.get("network"),
             },
             "reputation": attrs.get("reputation", 0),
             "last_analysis_date": attrs.get("last_analysis_date"),
             "tags": attrs.get("tags", []),
-            "vt_link": f"https://www.virustotal.com/gui/ip-address/{ip_address}"
+            "vt_link": f"https://www.virustotal.com/gui/ip-address/{ip_address}",
         }
 
         return json.dumps(response, indent=2, default=str)
@@ -250,7 +250,7 @@ async def lookup_domain(domain: str) -> str:
                 "malicious": stats.get("malicious", 0),
                 "suspicious": stats.get("suspicious", 0),
                 "undetected": stats.get("undetected", 0),
-                "harmless": stats.get("harmless", 0)
+                "harmless": stats.get("harmless", 0),
             },
             "categories": attrs.get("categories", {}),
             "reputation": attrs.get("reputation", 0),
@@ -258,7 +258,7 @@ async def lookup_domain(domain: str) -> str:
             "creation_date": attrs.get("creation_date"),
             "last_dns_records": attrs.get("last_dns_records", [])[:5],
             "tags": attrs.get("tags", []),
-            "vt_link": f"https://www.virustotal.com/gui/domain/{domain}"
+            "vt_link": f"https://www.virustotal.com/gui/domain/{domain}",
         }
 
         return json.dumps(response, indent=2, default=str)
@@ -283,11 +283,13 @@ async def lookup_url(url: str) -> str:
 
     if "error" in result:
         # URL might not be in database, try to get basic info
-        return json.dumps({
-            "url": url,
-            "status": "not_found",
-            "message": "URL not found in VirusTotal database. Consider submitting for scanning."
-        })
+        return json.dumps(
+            {
+                "url": url,
+                "status": "not_found",
+                "message": "URL not found in VirusTotal database. Consider submitting for scanning.",
+            }
+        )
 
     try:
         attrs = result.get("data", {}).get("attributes", {})
@@ -299,14 +301,14 @@ async def lookup_url(url: str) -> str:
                 "malicious": stats.get("malicious", 0),
                 "suspicious": stats.get("suspicious", 0),
                 "undetected": stats.get("undetected", 0),
-                "harmless": stats.get("harmless", 0)
+                "harmless": stats.get("harmless", 0),
             },
             "final_url": attrs.get("last_final_url"),
             "title": attrs.get("title"),
             "categories": attrs.get("categories", {}),
             "last_analysis_date": attrs.get("last_analysis_date"),
             "threat_names": attrs.get("threat_names", []),
-            "tags": attrs.get("tags", [])
+            "tags": attrs.get("tags", []),
         }
 
         return json.dumps(response, indent=2, default=str)
@@ -335,21 +337,20 @@ async def get_file_behavior(file_hash: str) -> str:
         behaviors = []
         for item in result.get("data", [])[:3]:  # Limit to 3 sandbox results
             attrs = item.get("attributes", {})
-            behaviors.append({
-                "sandbox": attrs.get("sandbox_name"),
-                "processes_created": attrs.get("processes_created", [])[:5],
-                "files_written": attrs.get("files_written", [])[:5],
-                "registry_keys_set": attrs.get("registry_keys_set", [])[:5],
-                "dns_lookups": attrs.get("dns_lookups", [])[:5],
-                "ip_traffic": attrs.get("ip_traffic", [])[:5],
-                "http_conversations": attrs.get("http_conversations", [])[:3],
-                "mitre_attack_techniques": attrs.get("mitre_attack_techniques", [])
-            })
+            behaviors.append(
+                {
+                    "sandbox": attrs.get("sandbox_name"),
+                    "processes_created": attrs.get("processes_created", [])[:5],
+                    "files_written": attrs.get("files_written", [])[:5],
+                    "registry_keys_set": attrs.get("registry_keys_set", [])[:5],
+                    "dns_lookups": attrs.get("dns_lookups", [])[:5],
+                    "ip_traffic": attrs.get("ip_traffic", [])[:5],
+                    "http_conversations": attrs.get("http_conversations", [])[:3],
+                    "mitre_attack_techniques": attrs.get("mitre_attack_techniques", []),
+                }
+            )
 
-        return json.dumps({
-            "hash": file_hash,
-            "behaviors": behaviors
-        }, indent=2)
+        return json.dumps({"hash": file_hash, "behaviors": behaviors}, indent=2)
 
     except Exception as e:
         return json.dumps({"error": f"Failed to parse response: {str(e)}"})

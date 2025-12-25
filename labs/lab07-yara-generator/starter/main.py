@@ -5,35 +5,40 @@ Lab 07: AI-Powered YARA Rule Generator - Starter Code
 Use LLMs to generate and optimize YARA rules from malware samples.
 """
 
+import json
 import os
 import re
-import json
-from typing import List, Dict, Tuple, Optional
 from pathlib import Path
+from typing import Dict, List, Optional, Tuple
 
 from dotenv import load_dotenv
+
 load_dotenv()
 
 try:
     from langchain_anthropic import ChatAnthropic
     from langchain_core.messages import HumanMessage, SystemMessage
+
     LANGCHAIN_AVAILABLE = True
 except ImportError:
     LANGCHAIN_AVAILABLE = False
 
 try:
     import yara
+
     YARA_AVAILABLE = True
 except ImportError:
     YARA_AVAILABLE = False
 
 from rich.console import Console
+
 console = Console()
 
 
 # =============================================================================
 # Task 1: Sample Analysis
 # =============================================================================
+
 
 class SampleAnalyzer:
     """Extract features from samples for YARA rule generation."""
@@ -52,7 +57,9 @@ class SampleAnalyzer:
         # YOUR CODE HERE
         pass
 
-    def extract_hex_patterns(self, filepath: str, pattern_length: int = 16) -> List[str]:
+    def extract_hex_patterns(
+        self, filepath: str, pattern_length: int = 16
+    ) -> List[str]:
         """
         Extract interesting hex patterns from binary.
 
@@ -115,7 +122,7 @@ class YARAGenerator:
         sample_info: dict,
         strings: List[str],
         malware_family: str = None,
-        rule_name: str = None
+        rule_name: str = None,
     ) -> str:
         """
         Generate YARA rule from sample features.
@@ -146,6 +153,7 @@ class YARAGenerator:
 # Task 3: Rule Validation
 # =============================================================================
 
+
 def validate_yara_rule(rule_text: str) -> dict:
     """
     Validate YARA rule syntax.
@@ -160,9 +168,7 @@ def validate_yara_rule(rule_text: str) -> dict:
 
 
 def test_rule_on_samples(
-    rule_text: str,
-    positive_samples: List[str],
-    negative_samples: List[str]
+    rule_text: str, positive_samples: List[str], negative_samples: List[str]
 ) -> dict:
     """
     Test rule against known samples.
@@ -181,12 +187,15 @@ def test_rule_on_samples(
 # Main
 # =============================================================================
 
+
 def main():
     """Main execution."""
     console.print("[bold]Lab 07: YARA Rule Generator[/bold]")
 
     if not YARA_AVAILABLE:
-        console.print("[yellow]yara-python not installed. Install: pip install yara-python[/yellow]")
+        console.print(
+            "[yellow]yara-python not installed. Install: pip install yara-python[/yellow]"
+        )
 
     # Create sample file for testing
     sample_path = Path(__file__).parent.parent / "samples" / "test_sample.bin"

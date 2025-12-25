@@ -5,32 +5,35 @@ Lab 09: Multi-Stage Threat Detection Pipeline - Starter Code
 Build an end-to-end threat detection pipeline combining ML and LLM components.
 """
 
-import os
 import json
+import os
 import uuid
-from typing import List, Dict, Optional
 from datetime import datetime
 from pathlib import Path
+from typing import Dict, List, Optional
 
 import numpy as np
+from dotenv import load_dotenv
 from sklearn.ensemble import IsolationForest
 
-from dotenv import load_dotenv
 load_dotenv()
 
 try:
     from langchain_anthropic import ChatAnthropic
+
     LANGCHAIN_AVAILABLE = True
 except ImportError:
     LANGCHAIN_AVAILABLE = False
 
 from rich.console import Console
+
 console = Console()
 
 
 # =============================================================================
 # Task 1: Data Ingestion Layer
 # =============================================================================
+
 
 class EventIngestor:
     """Ingest and normalize security events."""
@@ -74,6 +77,7 @@ class EventIngestor:
 # =============================================================================
 # Task 2: ML Filtering Stage
 # =============================================================================
+
 
 class MLFilterStage:
     """Stage 1: ML-based anomaly filtering."""
@@ -135,6 +139,7 @@ class MLFilterStage:
 # Task 3: LLM Enrichment Stage
 # =============================================================================
 
+
 class LLMEnrichmentStage:
     """Stage 2: LLM-based context enrichment."""
 
@@ -159,6 +164,7 @@ class LLMEnrichmentStage:
 # =============================================================================
 # Task 4: Correlation Stage
 # =============================================================================
+
 
 class CorrelationStage:
     """Stage 3: Event correlation and chain detection."""
@@ -201,6 +207,7 @@ class CorrelationStage:
 # Task 5: Verdict & Response Stage
 # =============================================================================
 
+
 class VerdictStage:
     """Stage 4: Final verdict and response generation."""
 
@@ -237,6 +244,7 @@ class VerdictStage:
 # Task 6: Pipeline Orchestrator
 # =============================================================================
 
+
 class DetectionPipeline:
     """Orchestrate the complete pipeline."""
 
@@ -271,6 +279,7 @@ class DetectionPipeline:
 # Main
 # =============================================================================
 
+
 def main():
     """Main execution."""
     console.print("[bold]Lab 09: Threat Detection Pipeline[/bold]")
@@ -284,7 +293,7 @@ def main():
             "process_name": "powershell.exe",
             "command_line": "powershell -enc SGVsbG8gV29ybGQ=",
             "parent_process": "cmd.exe",
-            "user": "jsmith"
+            "user": "jsmith",
         },
         {
             "timestamp": "2024-01-15T03:22:15Z",
@@ -293,11 +302,13 @@ def main():
             "process_name": "powershell.exe",
             "dest_ip": "185.143.223.47",
             "dest_port": 443,
-            "user": "jsmith"
-        }
+            "user": "jsmith",
+        },
     ]
 
-    console.print(f"\n[yellow]Processing {len(sample_events)} sample events...[/yellow]")
+    console.print(
+        f"\n[yellow]Processing {len(sample_events)} sample events...[/yellow]"
+    )
 
     pipeline = DetectionPipeline()
 

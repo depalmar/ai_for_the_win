@@ -1,31 +1,26 @@
 #!/usr/bin/env python3
 """Tests for Lab 10: Incident Response Copilot Agent."""
 
-import pytest
 import sys
-from pathlib import Path
 from datetime import datetime
+from pathlib import Path
+
+import pytest
 
 # Clear any existing 'main' module and lab paths to avoid conflicts
 for key in list(sys.modules.keys()):
-    if key == 'main' or key.startswith('main.'):
+    if key == "main" or key.startswith("main."):
         del sys.modules[key]
 
 # Remove any existing lab paths from sys.path
-sys.path = [p for p in sys.path if '/labs/lab' not in p]
+sys.path = [p for p in sys.path if "/labs/lab" not in p]
 
 # Add this lab's path
 lab_path = str(Path(__file__).parent.parent / "labs" / "lab10-ir-copilot" / "solution")
 sys.path.insert(0, lab_path)
 
-from main import (
-    CopilotTools,
-    CopilotStateManager,
-    IRCopilotState,
-    IRCopilot,
-    PlaybookExecutor,
-    IncidentDocumenter
-)
+from main import (CopilotStateManager, CopilotTools, IncidentDocumenter,
+                  IRCopilot, IRCopilotState, PlaybookExecutor)
 
 
 @pytest.fixture
@@ -38,7 +33,7 @@ def sample_siem_data():
                 "host": "WORKSTATION-42",
                 "event_type": "authentication",
                 "user": "jsmith",
-                "details": "User login successful"
+                "details": "User login successful",
             },
             {
                 "timestamp": "2024-01-15T09:23:00Z",
@@ -47,7 +42,7 @@ def sample_siem_data():
                 "user": "jsmith",
                 "process": "powershell.exe",
                 "command_line": "powershell -enc SGVsbG8=",
-                "details": "Encoded PowerShell execution"
+                "details": "Encoded PowerShell execution",
             },
             {
                 "timestamp": "2024-01-15T09:24:00Z",
@@ -56,8 +51,8 @@ def sample_siem_data():
                 "user": "jsmith",
                 "dest_ip": "185.143.223.47",
                 "dest_port": 443,
-                "details": "Outbound connection to suspicious IP"
-            }
+                "details": "Outbound connection to suspicious IP",
+            },
         ],
         "alerts": [
             {
@@ -65,9 +60,9 @@ def sample_siem_data():
                 "timestamp": "2024-01-15T09:24:30Z",
                 "host": "WORKSTATION-42",
                 "severity": "HIGH",
-                "title": "Suspicious PowerShell Activity"
+                "title": "Suspicious PowerShell Activity",
             }
-        ]
+        ],
     }
 
 
@@ -306,14 +301,10 @@ class TestIncidentDocumenter:
 
     def test_generate_timeline(self, state_manager):
         """Test timeline generation."""
-        state_manager.add_to_timeline({
-            "event": "Alert received",
-            "type": "alert"
-        })
-        state_manager.add_to_timeline({
-            "event": "Investigation started",
-            "type": "investigation"
-        })
+        state_manager.add_to_timeline({"event": "Alert received", "type": "alert"})
+        state_manager.add_to_timeline(
+            {"event": "Investigation started", "type": "investigation"}
+        )
 
         documenter = IncidentDocumenter(llm=None, state_manager=state_manager)
         timeline = documenter.generate_timeline()
@@ -324,7 +315,9 @@ class TestIncidentDocumenter:
 
     def test_generate_technical_report(self, state_manager):
         """Test technical report generation."""
-        state_manager.set_incident({"id": "INC-001", "title": "Test", "severity": "HIGH"})
+        state_manager.set_incident(
+            {"id": "INC-001", "title": "Test", "severity": "HIGH"}
+        )
 
         documenter = IncidentDocumenter(llm=None, state_manager=state_manager)
         report = documenter.generate_technical_report()

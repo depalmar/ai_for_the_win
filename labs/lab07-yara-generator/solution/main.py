@@ -5,40 +5,56 @@ Lab 07: AI-Powered YARA Rule Generator - Solution
 Complete implementation of LLM-powered YARA rule generation.
 """
 
+import hashlib
+import json
 import os
 import re
-import json
-import hashlib
-from typing import List, Dict, Tuple, Optional
 from pathlib import Path
+from typing import Dict, List, Optional, Tuple
 
 from dotenv import load_dotenv
+
 load_dotenv()
 
 try:
     from langchain_anthropic import ChatAnthropic
     from langchain_core.messages import HumanMessage, SystemMessage
+
     LANGCHAIN_AVAILABLE = True
 except ImportError:
     LANGCHAIN_AVAILABLE = False
 
 try:
     import yara
+
     YARA_AVAILABLE = True
 except ImportError:
     YARA_AVAILABLE = False
 
 from rich.console import Console
 from rich.syntax import Syntax
+
 console = Console()
 
 
 # Common strings to filter out
 COMMON_STRINGS = {
-    'kernel32.dll', 'ntdll.dll', 'user32.dll', 'advapi32.dll',
-    'GetProcAddress', 'LoadLibrary', 'GetModuleHandle',
-    'Microsoft', 'Windows', 'Copyright', 'Error', 'Warning',
-    'C:\\Windows', 'System32', '.dll', '.exe'
+    "kernel32.dll",
+    "ntdll.dll",
+    "user32.dll",
+    "advapi32.dll",
+    "GetProcAddress",
+    "LoadLibrary",
+    "GetModuleHandle",
+    "Microsoft",
+    "Windows",
+    "Copyright",
+    "Error",
+    "Warning",
+    "C:\\Windows",
+    "System32",
+    ".dll",
+    ".exe",
 }
 
 
@@ -46,28 +62,29 @@ COMMON_STRINGS = {
 # Task 1: Sample Analysis - SOLUTION
 # =============================================================================
 
+
 class SampleAnalyzer:
     """Extract features from samples for YARA rule generation."""
 
     def extract_strings(self, filepath: str, min_length: int = 6) -> List[str]:
         """Extract strings from binary file."""
-        with open(filepath, 'rb') as f:
+        with open(filepath, "rb") as f:
             content = f.read()
 
         strings = set()
 
         # Extract ASCII strings
-        ascii_pattern = rb'[\x20-\x7e]{' + str(min_length).encode() + rb',}'
+        ascii_pattern = rb"[\x20-\x7e]{" + str(min_length).encode() + rb",}"
         for match in re.finditer(ascii_pattern, content):
-            s = match.group().decode('ascii', errors='ignore')
+            s = match.group().decode("ascii", errors="ignore")
             if self._is_interesting_string(s):
                 strings.add(s)
 
         # Extract Unicode strings (UTF-16LE)
-        unicode_pattern = rb'(?:[\x20-\x7e]\x00){' + str(min_length).encode() + rb',}'
+        unicode_pattern = rb"(?:[\x20-\x7e]\x00){" + str(min_length).encode() + rb",}"
         for match in re.finditer(unicode_pattern, content):
             try:
-                s = match.group().decode('utf-16-le', errors='ignore')
+                s = match.group().decode("utf-16-le", errors="ignore")
                 if self._is_interesting_string(s):
                     strings.add(s)
             except:
@@ -82,44 +99,46 @@ class SampleAnalyzer:
         if s in COMMON_STRINGS:
             return False
         # Filter out strings that are just common words
-        if s.lower() in {'error', 'warning', 'success', 'failed', 'true', 'false'}:
+        if s.lower() in {"error", "warning", "success", "failed", "true", "false"}:
             return False
         return True
 
-    def extract_hex_patterns(self, filepath: str, pattern_length: int = 16) -> List[str]:
+    def extract_hex_patterns(
+        self, filepath: str, pattern_length: int = 16
+    ) -> List[str]:
         """Extract interesting hex patterns from binary."""
-        with open(filepath, 'rb') as f:
+        with open(filepath, "rb") as f:
             content = f.read()
 
         patterns = []
 
         # Look for PE header patterns
-        pe_offset = content.find(b'PE\x00\x00')
+        pe_offset = content.find(b"PE\x00\x00")
         if pe_offset > 0:
             # Extract some bytes around PE header
-            pattern = content[pe_offset:pe_offset+16]
-            hex_str = ' '.join(f'{b:02X}' for b in pattern)
+            pattern = content[pe_offset : pe_offset + 16]
+            hex_str = " ".join(f"{b:02X}" for b in pattern)
             patterns.append(hex_str)
 
         # Look for MZ header
-        if content[:2] == b'MZ':
+        if content[:2] == b"MZ":
             pattern = content[:8]
-            hex_str = ' '.join(f'{b:02X}' for b in pattern)
+            hex_str = " ".join(f"{b:02X}" for b in pattern)
             patterns.append(hex_str)
 
         return patterns
 
     def get_file_info(self, filepath: str) -> dict:
         """Get basic file information."""
-        with open(filepath, 'rb') as f:
+        with open(filepath, "rb") as f:
             content = f.read()
 
         info = {
-            'file_size': len(content),
-            'md5': hashlib.md5(content).hexdigest(),
-            'sha256': hashlib.sha256(content).hexdigest(),
-            'is_pe': content[:2] == b'MZ',
-            'entropy': self._calculate_entropy(content)
+            "file_size": len(content),
+            "md5": hashlib.md5(content).hexdigest(),
+            "sha256": hashlib.sha256(content).hexdigest(),
+            "is_pe": content[:2] == b"MZ",
+            "entropy": self._calculate_entropy(content),
         }
 
         return info
@@ -127,6 +146,7 @@ class SampleAnalyzer:
     def _calculate_entropy(self, data: bytes) -> float:
         """Calculate Shannon entropy."""
         import math
+
         if not data:
             return 0.0
         freq = {}
@@ -180,11 +200,13 @@ class YARAGenerator:
         sample_info: dict,
         strings: List[str],
         malware_family: str = None,
-        rule_name: str = None
+        rule_name: str = None,
     ) -> str:
         """Generate YARA rule from sample features."""
         if not self.llm:
-            return self._generate_template_rule(sample_info, strings, malware_family, rule_name)
+            return self._generate_template_rule(
+                sample_info, strings, malware_family, rule_name
+            )
 
         # Prepare context
         rule_name = rule_name or f"Malware_{sample_info.get('sha256', 'Unknown')[:8]}"
@@ -215,15 +237,15 @@ Return only the YARA rule, no explanation."""
 
         messages = [
             SystemMessage(content=YARA_SYSTEM_PROMPT),
-            HumanMessage(content=prompt)
+            HumanMessage(content=prompt),
         ]
 
         response = self.llm.invoke(messages)
         rule = response.content.strip()
 
         # Clean up any markdown formatting
-        rule = re.sub(r'^```\w*\n?', '', rule)
-        rule = re.sub(r'\n?```$', '', rule)
+        rule = re.sub(r"^```\w*\n?", "", rule)
+        rule = re.sub(r"\n?```$", "", rule)
 
         return rule
 
@@ -232,7 +254,7 @@ Return only the YARA rule, no explanation."""
         sample_info: dict,
         strings: List[str],
         malware_family: str = None,
-        rule_name: str = None
+        rule_name: str = None,
     ) -> str:
         """Generate rule without LLM (template-based)."""
         rule_name = rule_name or f"Malware_{sample_info.get('sha256', 'Sample')[:8]}"
@@ -243,10 +265,10 @@ Return only the YARA rule, no explanation."""
 
         string_defs = []
         for i, s in enumerate(selected):
-            escaped = s.replace('\\', '\\\\').replace('"', '\\"')
+            escaped = s.replace("\\", "\\\\").replace('"', '\\"')
             string_defs.append(f'        $s{i} = "{escaped}"')
 
-        rule = f'''rule {rule_name}
+        rule = f"""rule {rule_name}
 {{
     meta:
         description = "Detects {family} malware"
@@ -261,7 +283,7 @@ Return only the YARA rule, no explanation."""
         uint16(0) == 0x5A4D and
         filesize < 5MB and
         2 of ($s*)
-}}'''
+}}"""
         return rule
 
     def optimize_rule(self, rule: str, feedback: str = None) -> str:
@@ -284,7 +306,7 @@ Return only the optimized YARA rule."""
 
         messages = [
             SystemMessage(content=YARA_SYSTEM_PROMPT),
-            HumanMessage(content=prompt)
+            HumanMessage(content=prompt),
         ]
 
         response = self.llm.invoke(messages)
@@ -294,6 +316,7 @@ Return only the optimized YARA rule."""
 # =============================================================================
 # Task 3: Rule Validation - SOLUTION
 # =============================================================================
+
 
 def validate_yara_rule(rule_text: str) -> dict:
     """Validate YARA rule syntax."""
@@ -310,9 +333,7 @@ def validate_yara_rule(rule_text: str) -> dict:
 
 
 def test_rule_on_samples(
-    rule_text: str,
-    positive_samples: List[str],
-    negative_samples: List[str]
+    rule_text: str, positive_samples: List[str], negative_samples: List[str]
 ) -> dict:
     """Test rule against known samples."""
     if not YARA_AVAILABLE:
@@ -328,7 +349,7 @@ def test_rule_on_samples(
         "false_negatives": 0,
         "true_negatives": 0,
         "false_positives": 0,
-        "details": []
+        "details": [],
     }
 
     # Test positive samples (should match)
@@ -339,11 +360,9 @@ def test_rule_on_samples(
                 results["true_positives"] += 1
             else:
                 results["false_negatives"] += 1
-            results["details"].append({
-                "file": sample_path,
-                "expected": True,
-                "matched": bool(matches)
-            })
+            results["details"].append(
+                {"file": sample_path, "expected": True, "matched": bool(matches)}
+            )
 
     # Test negative samples (should not match)
     for sample_path in negative_samples:
@@ -353,11 +372,9 @@ def test_rule_on_samples(
                 results["false_positives"] += 1
             else:
                 results["true_negatives"] += 1
-            results["details"].append({
-                "file": sample_path,
-                "expected": False,
-                "matched": bool(matches)
-            })
+            results["details"].append(
+                {"file": sample_path, "expected": False, "matched": bool(matches)}
+            )
 
     # Calculate metrics
     total_pos = results["true_positives"] + results["false_negatives"]
@@ -374,6 +391,7 @@ def test_rule_on_samples(
 # =============================================================================
 # Main - SOLUTION
 # =============================================================================
+
 
 def main():
     """Main execution."""
@@ -417,7 +435,7 @@ def main():
         sample_info=file_info,
         strings=strings,
         malware_family="TestMalware",
-        rule_name="Test_Malware_Sample"
+        rule_name="Test_Malware_Sample",
     )
 
     console.print("\n[green]Generated YARA Rule:[/green]")
@@ -439,9 +457,7 @@ def main():
     if YARA_AVAILABLE and validation["valid"]:
         console.print("\n[yellow]Step 4: Testing rule...[/yellow]")
         results = test_rule_on_samples(
-            rule,
-            positive_samples=[str(sample_path)],
-            negative_samples=[]
+            rule, positive_samples=[str(sample_path)], negative_samples=[]
         )
         console.print(f"True Positives: {results['true_positives']}")
         console.print(f"Detection Rate: {results.get('detection_rate', 'N/A')}")

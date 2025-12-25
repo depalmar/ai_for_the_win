@@ -52,12 +52,12 @@ MITRE ATT&CK TECHNIQUES COVERED:
 =============================================================================
 """
 
-import os
 import json
+import os
 import re
-from typing import List, Dict, Optional
-from pathlib import Path
 from datetime import datetime
+from pathlib import Path
+from typing import Dict, List, Optional
 
 # Load environment variables from .env file (contains API keys)
 from dotenv import load_dotenv
@@ -67,24 +67,28 @@ load_dotenv()
 try:
     from langchain_anthropic import ChatAnthropic
     from langchain_core.messages import HumanMessage, SystemMessage
+
     ANTHROPIC_AVAILABLE = True
 except ImportError:
     ANTHROPIC_AVAILABLE = False
 
 try:
     from langchain_community.chat_models import ChatOllama
+
     OLLAMA_AVAILABLE = True
 except ImportError:
     OLLAMA_AVAILABLE = False
 
 try:
     from langchain_openai import ChatOpenAI
+
     OPENAI_AVAILABLE = True
 except ImportError:
     OPENAI_AVAILABLE = False
 
 try:
     from langchain_google_genai import ChatGoogleGenerativeAI
+
     GEMINI_AVAILABLE = True
 except ImportError:
     GEMINI_AVAILABLE = False
@@ -120,6 +124,7 @@ console = Console()
 #
 # =============================================================================
 
+
 def setup_llm(provider: str = "anthropic"):
     """
     Initialize the LLM client for security log analysis.
@@ -142,57 +147,56 @@ def setup_llm(provider: str = "anthropic"):
 
     if provider == "anthropic":
         if not ANTHROPIC_AVAILABLE:
-            raise ImportError("langchain-anthropic not installed. Run: pip install langchain-anthropic")
+            raise ImportError(
+                "langchain-anthropic not installed. Run: pip install langchain-anthropic"
+            )
 
         api_key = os.getenv("ANTHROPIC_API_KEY")
         if not api_key:
             raise ValueError("ANTHROPIC_API_KEY not set. Add to .env file.")
 
         llm = ChatAnthropic(
-            model="claude-sonnet-4-20250514",
-            temperature=0,
-            max_tokens=4096
+            model="claude-sonnet-4-20250514", temperature=0, max_tokens=4096
         )
 
     elif provider == "openai":
         if not OPENAI_AVAILABLE:
-            raise ImportError("langchain-openai not installed. Run: pip install langchain-openai")
+            raise ImportError(
+                "langchain-openai not installed. Run: pip install langchain-openai"
+            )
 
         api_key = os.getenv("OPENAI_API_KEY")
         if not api_key:
             raise ValueError("OPENAI_API_KEY not set. Add to .env file.")
 
-        llm = ChatOpenAI(
-            model="gpt-4-turbo",
-            temperature=0,
-            max_tokens=4096
-        )
+        llm = ChatOpenAI(model="gpt-4-turbo", temperature=0, max_tokens=4096)
 
     elif provider == "gemini":
         if not GEMINI_AVAILABLE:
-            raise ImportError("langchain-google-genai not installed. Run: pip install langchain-google-genai")
+            raise ImportError(
+                "langchain-google-genai not installed. Run: pip install langchain-google-genai"
+            )
 
         api_key = os.getenv("GOOGLE_API_KEY")
         if not api_key:
             raise ValueError("GOOGLE_API_KEY not set. Add to .env file.")
 
         llm = ChatGoogleGenerativeAI(
-            model="gemini-1.5-pro",
-            temperature=0,
-            max_output_tokens=4096
+            model="gemini-1.5-pro", temperature=0, max_output_tokens=4096
         )
 
     elif provider == "ollama":
         if not OLLAMA_AVAILABLE:
-            raise ImportError("langchain-community not installed. Run: pip install langchain-community")
+            raise ImportError(
+                "langchain-community not installed. Run: pip install langchain-community"
+            )
 
-        llm = ChatOllama(
-            model="llama3.1:8b",
-            temperature=0
-        )
+        llm = ChatOllama(model="llama3.1:8b", temperature=0)
 
     else:
-        raise ValueError(f"Unknown provider: {provider}. Supported: anthropic, openai, gemini, ollama")
+        raise ValueError(
+            f"Unknown provider: {provider}. Supported: anthropic, openai, gemini, ollama"
+        )
 
     # Test the client
     try:
@@ -255,7 +259,7 @@ JSON output with: timestamp, event_type, event_id, source, user, details (object
 
     messages = [
         SystemMessage(content=PARSER_SYSTEM_PROMPT),
-        HumanMessage(content=prompt)
+        HumanMessage(content=prompt),
     ]
 
     response = llm.invoke(messages)
@@ -266,7 +270,7 @@ JSON output with: timestamp, event_type, event_id, source, user, details (object
         return json.loads(content)
     except json.JSONDecodeError:
         # Try to find JSON in response
-        json_match = re.search(r'\{[\s\S]*\}', content)
+        json_match = re.search(r"\{[\s\S]*\}", content)
         if json_match:
             return json.loads(json_match.group())
 
@@ -279,7 +283,7 @@ JSON output with: timestamp, event_type, event_id, source, user, details (object
             "user": "Unknown",
             "details": {"raw": log_entry},
             "severity": 5,
-            "parse_error": "Could not parse log entry"
+            "parse_error": "Could not parse log entry",
         }
 
 
@@ -287,8 +291,8 @@ def parse_multiple_logs(llm, log_text: str) -> List[dict]:
     """Parse multiple log entries from a text block."""
 
     # Split on common log separators
-    entries = re.split(r'\n(?=\d{4}-\d{2}-\d{2}|\[|\<Event)', log_text.strip())
-    entries = [e.strip() for e in entries if e.strip() and not e.startswith('#')]
+    entries = re.split(r"\n(?=\d{4}-\d{2}-\d{2}|\[|\<Event)", log_text.strip())
+    entries = [e.strip() for e in entries if e.strip() and not e.startswith("#")]
 
     parsed = []
     for i, entry in enumerate(entries):
@@ -368,7 +372,7 @@ Return JSON with:
 
     messages = [
         SystemMessage(content=ANALYZER_SYSTEM_PROMPT),
-        HumanMessage(content=prompt)
+        HumanMessage(content=prompt),
     ]
 
     response = llm.invoke(messages)
@@ -377,7 +381,7 @@ Return JSON with:
     try:
         return json.loads(content)
     except json.JSONDecodeError:
-        json_match = re.search(r'\{[\s\S]*\}', content)
+        json_match = re.search(r"\{[\s\S]*\}", content)
         if json_match:
             return json.loads(json_match.group())
         return {
@@ -388,7 +392,7 @@ Return JSON with:
             "severity": 5,
             "confidence": 50,
             "recommendations": [],
-            "raw_analysis": content
+            "raw_analysis": content,
         }
 
 
@@ -431,6 +435,7 @@ Return JSON with:
 #
 # =============================================================================
 
+
 def extract_iocs(llm, text: str) -> dict:
     """Extract Indicators of Compromise from text."""
 
@@ -460,8 +465,10 @@ Return JSON: {{
 Return empty arrays if none found. No duplicates."""
 
     messages = [
-        SystemMessage(content="You are an IOC extraction specialist. Extract and categorize all indicators."),
-        HumanMessage(content=prompt)
+        SystemMessage(
+            content="You are an IOC extraction specialist. Extract and categorize all indicators."
+        ),
+        HumanMessage(content=prompt),
     ]
 
     response = llm.invoke(messages)
@@ -470,7 +477,7 @@ Return empty arrays if none found. No duplicates."""
     try:
         iocs = json.loads(content)
     except json.JSONDecodeError:
-        json_match = re.search(r'\{[\s\S]*\}', content)
+        json_match = re.search(r"\{[\s\S]*\}", content)
         if json_match:
             iocs = json.loads(json_match.group())
         else:
@@ -489,18 +496,18 @@ def validate_iocs(iocs: dict) -> dict:
         "hashes": {"md5": [], "sha1": [], "sha256": []},
         "file_paths": [],
         "usernames": [],
-        "emails": []
+        "emails": [],
     }
 
     # IP validation
-    ip_pattern = r'^(?:\d{1,3}\.){3}\d{1,3}$'
+    ip_pattern = r"^(?:\d{1,3}\.){3}\d{1,3}$"
     for ip in iocs.get("ips", []):
         if re.match(ip_pattern, str(ip)):
             validated["ips"].append(ip)
 
     # Domain validation (basic)
-    domain_pattern = r'^[a-zA-Z0-9][-a-zA-Z0-9]*\.[a-zA-Z]{2,}$'
-    excluded_domains = {'localhost', 'corp', 'local', 'internal'}
+    domain_pattern = r"^[a-zA-Z0-9][-a-zA-Z0-9]*\.[a-zA-Z]{2,}$"
+    excluded_domains = {"localhost", "corp", "local", "internal"}
     for domain in iocs.get("domains", []):
         domain = str(domain).lower()
         if re.match(domain_pattern, domain) and domain not in excluded_domains:
@@ -508,19 +515,19 @@ def validate_iocs(iocs: dict) -> dict:
 
     # URLs
     for url in iocs.get("urls", []):
-        if str(url).startswith(('http://', 'https://')):
+        if str(url).startswith(("http://", "https://")):
             validated["urls"].append(url)
 
     # Hashes
     hashes = iocs.get("hashes", {})
     for h in hashes.get("md5", []):
-        if len(str(h)) == 32 and re.match(r'^[a-fA-F0-9]+$', str(h)):
+        if len(str(h)) == 32 and re.match(r"^[a-fA-F0-9]+$", str(h)):
             validated["hashes"]["md5"].append(h.lower())
     for h in hashes.get("sha1", []):
-        if len(str(h)) == 40 and re.match(r'^[a-fA-F0-9]+$', str(h)):
+        if len(str(h)) == 40 and re.match(r"^[a-fA-F0-9]+$", str(h)):
             validated["hashes"]["sha1"].append(h.lower())
     for h in hashes.get("sha256", []):
-        if len(str(h)) == 64 and re.match(r'^[a-fA-F0-9]+$', str(h)):
+        if len(str(h)) == 64 and re.match(r"^[a-fA-F0-9]+$", str(h)):
             validated["hashes"]["sha256"].append(h.lower())
 
     # File paths
@@ -528,13 +535,13 @@ def validate_iocs(iocs: dict) -> dict:
         validated["file_paths"].append(str(path))
 
     # Usernames (exclude common system accounts)
-    excluded_users = {'system', 'network service', 'local service'}
+    excluded_users = {"system", "network service", "local service"}
     for user in iocs.get("usernames", []):
         if str(user).lower() not in excluded_users:
             validated["usernames"].append(user)
 
     # Emails
-    email_pattern = r'^[\w.-]+@[\w.-]+\.\w+$'
+    email_pattern = r"^[\w.-]+@[\w.-]+\.\w+$"
     for email in iocs.get("emails", []):
         if re.match(email_pattern, str(email)):
             validated["emails"].append(email.lower())
@@ -657,7 +664,7 @@ Include these Markdown sections:
 
     messages = [
         SystemMessage(content=SUMMARY_SYSTEM_PROMPT),
-        HumanMessage(content=prompt)
+        HumanMessage(content=prompt),
     ]
 
     response = llm.invoke(messages)
@@ -667,6 +674,7 @@ Include these Markdown sections:
 # =============================================================================
 # Task 6: Complete Pipeline - SOLUTION
 # =============================================================================
+
 
 def analyze_security_incident(log_data: str, llm=None) -> str:
     """Complete pipeline: Parse → Analyze → Summarize."""
@@ -689,7 +697,9 @@ def analyze_security_incident(log_data: str, llm=None) -> str:
     # Step 3: Analyze threats
     console.print("[yellow]Step 3:[/yellow] Analyzing for threats...")
     analysis = analyze_logs_for_threats(llm, parsed_logs)
-    console.print(f"  [green]Found {len(analysis.get('threats_detected', []))} threats[/green]")
+    console.print(
+        f"  [green]Found {len(analysis.get('threats_detected', []))} threats[/green]"
+    )
     console.print(f"  [green]Severity: {analysis.get('severity', 'N/A')}/10[/green]")
 
     # Step 4: Extract IOCs
@@ -697,13 +707,13 @@ def analyze_security_incident(log_data: str, llm=None) -> str:
     iocs = extract_iocs(llm, log_data)
 
     # Merge IOCs
-    if 'iocs' not in analysis:
-        analysis['iocs'] = {}
+    if "iocs" not in analysis:
+        analysis["iocs"] = {}
     for key, value in iocs.items():
-        if key not in analysis['iocs']:
-            analysis['iocs'][key] = value
+        if key not in analysis["iocs"]:
+            analysis["iocs"][key] = value
         elif isinstance(value, list):
-            analysis['iocs'][key] = list(set(analysis['iocs'].get(key, []) + value))
+            analysis["iocs"][key] = list(set(analysis["iocs"].get(key, []) + value))
 
     ioc_count = sum(
         len(v) if isinstance(v, list) else sum(len(x) for x in v.values())
@@ -759,10 +769,12 @@ SubjectDomainName: CORP
 
 def main():
     """Main execution."""
-    console.print(Panel.fit(
-        "[bold]Lab 04: LLM-Powered Security Log Analysis - SOLUTION[/bold]",
-        border_style="blue"
-    ))
+    console.print(
+        Panel.fit(
+            "[bold]Lab 04: LLM-Powered Security Log Analysis - SOLUTION[/bold]",
+            border_style="blue",
+        )
+    )
 
     try:
         report = analyze_security_incident(SAMPLE_LOGS)
@@ -781,6 +793,7 @@ def main():
     except Exception as e:
         console.print(f"[red]Error: {e}[/red]")
         import traceback
+
         traceback.print_exc()
 
 

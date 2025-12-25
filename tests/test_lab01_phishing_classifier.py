@@ -1,50 +1,50 @@
 #!/usr/bin/env python3
 """Tests for Lab 01: Phishing Email Classifier."""
 
-import pytest
-import pandas as pd
-import numpy as np
 import sys
 from pathlib import Path
 
+import numpy as np
+import pandas as pd
+import pytest
+
 # Clear any existing 'main' module and lab paths to avoid conflicts
 for key in list(sys.modules.keys()):
-    if key == 'main' or key.startswith('main.'):
+    if key == "main" or key.startswith("main."):
         del sys.modules[key]
 
 # Remove any existing lab paths from sys.path
-sys.path = [p for p in sys.path if '/labs/lab' not in p]
+sys.path = [p for p in sys.path if "/labs/lab" not in p]
 
 # Add this lab's path
-lab_path = str(Path(__file__).parent.parent / "labs" / "lab01-phishing-classifier" / "solution")
+lab_path = str(
+    Path(__file__).parent.parent / "labs" / "lab01-phishing-classifier" / "solution"
+)
 sys.path.insert(0, lab_path)
 
-from main import (
-    load_data,
-    preprocess_text,
-    extract_custom_features,
-    build_feature_matrix,
-    train_classifier,
-    evaluate_model
-)
+from main import (build_feature_matrix, evaluate_model,
+                  extract_custom_features, load_data, preprocess_text,
+                  train_classifier)
 
 
 @pytest.fixture
 def sample_emails():
     """Create sample email data for testing."""
-    return pd.DataFrame({
-        'text': [
-            "Dear user, your account has been compromised. Click here immediately: http://evil.com/steal",
-            "Hi John, please review the attached quarterly report and let me know your thoughts. Best, Sarah",
-            "URGENT: Your bank account will be suspended! Verify now at http://phishing.site/verify",
-            "Meeting reminder: Team sync tomorrow at 2pm in Conference Room B",
-            "Congratulations! You've won $1,000,000! Send your details to claim: winner@scam.com",
-            "The project deadline has been extended to next Friday. Please update your tasks accordingly.",
-            "Your password expires in 24 hours. Click here to reset: http://fake-bank.com/reset",
-            "Thanks for lunch yesterday! Let's catch up again next week.",
-        ],
-        'label': [1, 0, 1, 0, 1, 0, 1, 0]
-    })
+    return pd.DataFrame(
+        {
+            "text": [
+                "Dear user, your account has been compromised. Click here immediately: http://evil.com/steal",
+                "Hi John, please review the attached quarterly report and let me know your thoughts. Best, Sarah",
+                "URGENT: Your bank account will be suspended! Verify now at http://phishing.site/verify",
+                "Meeting reminder: Team sync tomorrow at 2pm in Conference Room B",
+                "Congratulations! You've won $1,000,000! Send your details to claim: winner@scam.com",
+                "The project deadline has been extended to next Friday. Please update your tasks accordingly.",
+                "Your password expires in 24 hours. Click here to reset: http://fake-bank.com/reset",
+                "Thanks for lunch yesterday! Let's catch up again next week.",
+            ],
+            "label": [1, 0, 1, 0, 1, 0, 1, 0],
+        }
+    )
 
 
 @pytest.fixture
@@ -64,16 +64,15 @@ class TestDataLoading:
 
         assert df is not None
         assert isinstance(df, pd.DataFrame)
-        assert 'text' in df.columns
-        assert 'label' in df.columns
+        assert "text" in df.columns
+        assert "label" in df.columns
         assert len(df) == 8
 
     def test_load_data_handles_missing_values(self, tmp_path):
         """Test that missing values are handled."""
-        data = pd.DataFrame({
-            'text': ['Valid email', None, 'Another email'],
-            'label': [0, 1, None]
-        })
+        data = pd.DataFrame(
+            {"text": ["Valid email", None, "Another email"], "label": [0, 1, None]}
+        )
         filepath = tmp_path / "test_missing.csv"
         data.to_csv(filepath, index=False)
 
@@ -129,10 +128,9 @@ class TestFeatureExtraction:
 
     def test_custom_features_detect_urgency(self):
         """Test that urgency words are detected."""
-        urgent_email = pd.DataFrame({
-            'text': ['URGENT: Act immediately or your account expires!'],
-            'label': [1]
-        })
+        urgent_email = pd.DataFrame(
+            {"text": ["URGENT: Act immediately or your account expires!"], "label": [1]}
+        )
 
         features = extract_custom_features(urgent_email)
 
@@ -155,7 +153,7 @@ class TestModelTraining:
     def test_train_classifier(self, sample_emails):
         """Test classifier training."""
         X, _ = build_feature_matrix(sample_emails)
-        y = sample_emails['label'].values
+        y = sample_emails["label"].values
 
         model = train_classifier(X, y)
 
@@ -164,7 +162,7 @@ class TestModelTraining:
     def test_model_can_predict(self, sample_emails):
         """Test that trained model can make predictions."""
         X, vectorizer = build_feature_matrix(sample_emails)
-        y = sample_emails['label'].values
+        y = sample_emails["label"].values
 
         model = train_classifier(X, y)
         predictions = model.predict(X)
@@ -179,7 +177,7 @@ class TestModelEvaluation:
     def test_evaluate_model(self, sample_emails):
         """Test model evaluation."""
         X, _ = build_feature_matrix(sample_emails)
-        y = sample_emails['label'].values
+        y = sample_emails["label"].values
 
         model = train_classifier(X, y)
         predictions = model.predict(X)
@@ -187,8 +185,8 @@ class TestModelEvaluation:
         metrics = evaluate_model(y, predictions)
 
         assert metrics is not None
-        assert 'accuracy' in metrics
-        assert 0 <= metrics['accuracy'] <= 1
+        assert "accuracy" in metrics
+        assert 0 <= metrics["accuracy"] <= 1
 
 
 class TestPhishingDetection:
@@ -197,7 +195,7 @@ class TestPhishingDetection:
     def test_phishing_vs_legitimate(self, sample_emails):
         """Test that model can distinguish phishing from legitimate."""
         X, _ = build_feature_matrix(sample_emails)
-        y = sample_emails['label'].values
+        y = sample_emails["label"].values
 
         model = train_classifier(X, y)
         predictions = model.predict(X)

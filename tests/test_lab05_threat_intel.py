@@ -1,30 +1,28 @@
 #!/usr/bin/env python3
 """Tests for Lab 05: Threat Intelligence Agent."""
 
-import pytest
 import sys
 from pathlib import Path
-from unittest.mock import Mock, patch, MagicMock
+from unittest.mock import MagicMock, Mock, patch
+
+import pytest
 
 # Clear any existing 'main' module and lab paths to avoid conflicts
 for key in list(sys.modules.keys()):
-    if key == 'main' or key.startswith('main.'):
+    if key == "main" or key.startswith("main."):
         del sys.modules[key]
 
 # Remove any existing lab paths from sys.path
-sys.path = [p for p in sys.path if '/labs/lab' not in p]
+sys.path = [p for p in sys.path if "/labs/lab" not in p]
 
 # Add this lab's path
-lab_path = str(Path(__file__).parent.parent / "labs" / "lab05-threat-intel-agent" / "solution")
+lab_path = str(
+    Path(__file__).parent.parent / "labs" / "lab05-threat-intel-agent" / "solution"
+)
 sys.path.insert(0, lab_path)
 
-from main import (
-    ThreatIntelAgent,
-    IOCEnricher,
-    ReputationChecker,
-    MITREMapper,
-    ThreatReport
-)
+from main import (IOCEnricher, MITREMapper, ReputationChecker,
+                  ThreatIntelAgent, ThreatReport)
 
 
 @pytest.fixture
@@ -35,9 +33,9 @@ def sample_iocs():
         "domains": ["malware-c2.evil.com", "google.com"],
         "hashes": [
             "44d88612fea8a8f36de82e1278abb02f",  # EICAR test file
-            "e3b0c44298fc1c149afbf4c8996fb924"   # Empty file SHA256
+            "e3b0c44298fc1c149afbf4c8996fb924",  # Empty file SHA256
         ],
-        "urls": ["http://malware.evil.com/payload.exe", "https://www.google.com"]
+        "urls": ["http://malware.evil.com/payload.exe", "https://www.google.com"],
     }
 
 
@@ -53,7 +51,7 @@ def sample_threat_data():
         "tags": ["c2", "apt", "ransomware"],
         "first_seen": "2024-01-10",
         "last_seen": "2024-01-15",
-        "reports": 45
+        "reports": 45,
     }
 
 
@@ -66,7 +64,7 @@ class TestIOCEnricher:
         result = enricher.enrich_ip(sample_iocs["ip_addresses"][0])
 
         assert result is not None
-        assert 'ip' in result or 'indicator' in result
+        assert "ip" in result or "indicator" in result
 
     def test_enrich_domain(self, sample_iocs):
         """Test domain enrichment."""
@@ -98,10 +96,7 @@ class TestIOCEnricher:
     def test_batch_enrichment(self, sample_iocs):
         """Test batch IOC enrichment."""
         enricher = IOCEnricher()
-        all_iocs = (
-            sample_iocs["ip_addresses"] +
-            sample_iocs["domains"]
-        )
+        all_iocs = sample_iocs["ip_addresses"] + sample_iocs["domains"]
 
         results = enricher.enrich_batch(all_iocs)
 
@@ -117,7 +112,7 @@ class TestReputationChecker:
         result = checker.check_ip(sample_iocs["ip_addresses"][0])
 
         assert result is not None
-        assert 'reputation' in result or 'classification' in result or 'score' in result
+        assert "reputation" in result or "classification" in result or "score" in result
 
     def test_check_domain_reputation(self, sample_iocs):
         """Test domain reputation check."""
@@ -131,8 +126,8 @@ class TestReputationChecker:
         checker = ReputationChecker()
         result = checker.check_ip(sample_iocs["ip_addresses"][0])
 
-        if 'score' in result:
-            assert 0 <= result['score'] <= 100 or -1 <= result['score'] <= 1
+        if "score" in result:
+            assert 0 <= result["score"] <= 100 or -1 <= result["score"] <= 1
 
     def test_malicious_vs_benign(self, sample_iocs):
         """Test distinguishing malicious from benign."""
@@ -144,8 +139,9 @@ class TestReputationChecker:
         benign = checker.check_ip("8.8.8.8")
 
         # Should have different classifications
-        assert malicious.get('classification') != benign.get('classification') or \
-               malicious.get('score', 0) != benign.get('score', 0)
+        assert malicious.get("classification") != benign.get(
+            "classification"
+        ) or malicious.get("score", 0) != benign.get("score", 0)
 
 
 class TestMITREMapper:
@@ -157,7 +153,7 @@ class TestMITREMapper:
         result = mapper.map_technique("PowerShell execution")
 
         assert result is not None
-        assert 'technique_id' in result or 'id' in result
+        assert "technique_id" in result or "id" in result
 
     def test_technique_has_tactic(self):
         """Test that mapped technique includes tactic."""
@@ -165,8 +161,8 @@ class TestMITREMapper:
         result = mapper.map_technique("Remote Desktop Protocol")
 
         assert result is not None
-        if 'tactic' in result:
-            assert result['tactic'] is not None
+        if "tactic" in result:
+            assert result["tactic"] is not None
 
     def test_map_multiple_techniques(self):
         """Test mapping multiple techniques."""
@@ -174,7 +170,7 @@ class TestMITREMapper:
         behaviors = [
             "PowerShell encoded command",
             "Credential dumping from LSASS",
-            "Scheduled task creation"
+            "Scheduled task creation",
         ]
 
         results = mapper.map_batch(behaviors)
@@ -187,7 +183,7 @@ class TestMITREMapper:
         result = mapper.get_technique("T1059.001")
 
         assert result is not None
-        assert 'name' in result or 'description' in result
+        assert "name" in result or "description" in result
 
 
 class TestThreatIntelAgent:
@@ -205,7 +201,7 @@ class TestThreatIntelAgent:
         result = agent.investigate(sample_iocs["ip_addresses"][0])
 
         assert result is not None
-        assert 'summary' in result or 'assessment' in result or 'indicator' in result
+        assert "summary" in result or "assessment" in result or "indicator" in result
 
     def test_investigate_returns_classification(self, sample_iocs):
         """Test that investigation returns classification."""
@@ -214,7 +210,16 @@ class TestThreatIntelAgent:
 
         # Should include some form of classification
         result_str = str(result).lower()
-        assert any(term in result_str for term in ['malicious', 'benign', 'suspicious', 'unknown', 'classification'])
+        assert any(
+            term in result_str
+            for term in [
+                "malicious",
+                "benign",
+                "suspicious",
+                "unknown",
+                "classification",
+            ]
+        )
 
     def test_investigate_with_context(self, sample_iocs):
         """Test investigation with additional context."""
@@ -222,13 +227,10 @@ class TestThreatIntelAgent:
         context = {
             "source": "firewall",
             "event_type": "blocked_connection",
-            "timestamp": "2024-01-15T10:00:00Z"
+            "timestamp": "2024-01-15T10:00:00Z",
         }
 
-        result = agent.investigate(
-            sample_iocs["ip_addresses"][0],
-            context=context
-        )
+        result = agent.investigate(sample_iocs["ip_addresses"][0], context=context)
 
         assert result is not None
 
