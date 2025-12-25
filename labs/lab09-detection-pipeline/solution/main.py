@@ -366,10 +366,14 @@ class VerdictStage:
     def __init__(self, llm=None):
         self.llm = llm
 
-    def generate_verdict(self, events: List[dict], chain_analysis: dict) -> dict:
+    def generate_verdict(self, events: List[dict], chain_analysis: dict = None) -> dict:
         """Generate final verdict."""
         if not events:
             return {"verdict": "benign", "confidence": 0.0}
+
+        # Default empty chain analysis if not provided
+        if chain_analysis is None:
+            chain_analysis = {}
 
         # Calculate overall confidence
         scores = [e.get("anomaly_score", 0) for e in events]
@@ -396,14 +400,34 @@ class VerdictStage:
 
     def create_alert(self, events: List[dict], verdict: dict) -> dict:
         """Create final alert for SOC."""
-        if verdict["verdict"] == "benign":
-            return None
+        # Determine severity and actions based on verdict
+        if verdict["verdict"] == "malicious":
+            severity = "HIGH"
+            title = f"Potential MALICIOUS activity detected"
+            actions = [
+                "Isolate affected hosts",
+                "Reset user credentials",
+                "Collect forensic artifacts",
+                "Block identified IOCs",
+            ]
+        elif verdict["verdict"] == "suspicious":
+            severity = "MEDIUM"
+            title = f"Potential SUSPICIOUS activity detected"
+            actions = [
+                "Investigate affected hosts",
+                "Review user activity",
+                "Monitor for additional indicators",
+            ]
+        else:  # benign
+            severity = "INFO"
+            title = f"Activity detected - benign classification"
+            actions = ["No action required", "Events logged for baseline"]
 
         alert = {
             "alert_id": str(uuid.uuid4()),
             "created_at": datetime.now().isoformat(),
-            "title": f"Potential {verdict['verdict'].upper()} activity detected",
-            "severity": "HIGH" if verdict["verdict"] == "malicious" else "MEDIUM",
+            "title": title,
+            "severity": severity,
             "confidence": verdict["confidence"],
             "verdict": verdict["verdict"],
             "summary": f"Detected {len(events)} related events with attack patterns: {verdict['attack_patterns']}",
@@ -411,12 +435,7 @@ class VerdictStage:
             "affected_hosts": list(set(e["host"] for e in events)),
             "affected_users": list(set(e["user"] for e in events)),
             "timeline": [{"time": e["timestamp"], "event": e["event_type"]} for e in events],
-            "recommended_actions": [
-                "Isolate affected hosts",
-                "Reset user credentials",
-                "Collect forensic artifacts",
-                "Block identified IOCs",
-            ],
+            "recommended_actions": actions,
         }
 
         return alert
