@@ -167,22 +167,38 @@ def chunk_security_documents(
     documents: List[Document], chunk_size: int = 800, chunk_overlap: int = 100
 ) -> List[Document]:
     """Chunk documents for optimal retrieval."""
-    splitter = RecursiveCharacterTextSplitter(
-        chunk_size=chunk_size,
-        chunk_overlap=chunk_overlap,
-        separators=["\n## ", "\n### ", "\n\n", "\n", " "],
-        length_function=len,
-    )
+    if LANGCHAIN_AVAILABLE:
+        from langchain.text_splitter import RecursiveCharacterTextSplitter
 
-    chunks = []
-    for doc in documents:
-        doc_chunks = splitter.split_documents([doc])
-        # Preserve original metadata in each chunk
-        for chunk in doc_chunks:
-            chunk.metadata.update(doc.metadata)
-        chunks.extend(doc_chunks)
+        splitter = RecursiveCharacterTextSplitter(
+            chunk_size=chunk_size,
+            chunk_overlap=chunk_overlap,
+            separators=["\n## ", "\n### ", "\n\n", "\n", " "],
+            length_function=len,
+        )
 
-    return chunks
+        chunks = []
+        for doc in documents:
+            doc_chunks = splitter.split_documents([doc])
+            # Preserve original metadata in each chunk
+            for chunk in doc_chunks:
+                chunk.metadata.update(doc.metadata)
+            chunks.extend(doc_chunks)
+
+        return chunks
+    else:
+        # Simple fallback chunker when langchain not available
+        chunks = []
+        for doc in documents:
+            content = doc.page_content
+            start = 0
+            while start < len(content):
+                end = min(start + chunk_size, len(content))
+                chunk_content = content[start:end]
+                chunk_doc = Document(page_content=chunk_content, metadata=doc.metadata.copy())
+                chunks.append(chunk_doc)
+                start += chunk_size - chunk_overlap
+        return chunks
 
 
 # =============================================================================

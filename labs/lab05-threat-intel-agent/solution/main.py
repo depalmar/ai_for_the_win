@@ -330,11 +330,15 @@ class ReputationChecker:
     def check_ip(self, ip: str) -> dict:
         """Check IP reputation."""
         result = lookup_ip(ip)
-        result["score"] = result.get("threat_score", 0)
 
-        # Add classification based on score
-        score = result.get("score", 0)
-        if score > 70:
+        # Use abuse_score if available, otherwise threat_score, otherwise 0
+        score = result.get("abuse_score", result.get("threat_score", 0))
+        result["score"] = score
+
+        # Add classification based on score or is_malicious flag
+        if result.get("is_malicious", False):
+            result["classification"] = "malicious"
+        elif score > 70:
             result["classification"] = "malicious"
         elif score > 30:
             result["classification"] = "suspicious"

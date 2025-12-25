@@ -112,7 +112,9 @@ class YARAPatternExtractor:
 class YARARuleBuilder:
     """Build YARA rules from patterns."""
 
-    def build_rule(self, rule_name: str, patterns: dict, description: str = "") -> str:
+    def build_rule(
+        self, rule_name: str, patterns: dict, description: str = "", author: str = "YARA Generator"
+    ) -> str:
         """Build a YARA rule from patterns."""
         strings_section = ""
         strings_list = patterns.get("strings", [])
@@ -130,7 +132,7 @@ class YARARuleBuilder:
         rule = f"""rule {rule_name} {{
 \tmeta:
 \t\tdescription = "{description}"
-\t\tauthor = "YARA Generator"
+\t\tauthor = "{author}"
 
 \tstrings:
 {strings_section}
@@ -397,18 +399,22 @@ Return only the optimized YARA rule."""
 # =============================================================================
 
 
-def validate_yara_rule(rule_text: str) -> dict:
-    """Validate YARA rule syntax."""
+def validate_yara_rule(rule_text: str):
+    """Validate YARA rule syntax.
+
+    Returns:
+        True if valid, False if invalid, None if yara-python not available
+    """
     if not YARA_AVAILABLE:
-        return {"valid": None, "error": "yara-python not installed"}
+        return None
 
     try:
         yara.compile(source=rule_text)
-        return {"valid": True, "error": None}
+        return True
     except yara.SyntaxError as e:
-        return {"valid": False, "error": str(e)}
+        return False
     except Exception as e:
-        return {"valid": False, "error": str(e)}
+        return False
 
 
 def test_rule_on_samples(
@@ -525,15 +531,15 @@ def main():
     console.print("\n[yellow]Step 3: Validating rule...[/yellow]")
     validation = validate_yara_rule(rule)
 
-    if validation["valid"]:
+    if validation is True:
         console.print("[green]Rule is valid![/green]")
-    elif validation["valid"] is None:
+    elif validation is None:
         console.print("[yellow]Cannot validate (yara-python not installed)[/yellow]")
     else:
-        console.print(f"[red]Rule is invalid: {validation['error']}[/red]")
+        console.print("[red]Rule is invalid[/red]")
 
     # Test rule
-    if YARA_AVAILABLE and validation["valid"]:
+    if YARA_AVAILABLE and validation is True:
         console.print("\n[yellow]Step 4: Testing rule...[/yellow]")
         results = test_rule_on_samples(
             rule, positive_samples=[str(sample_path)], negative_samples=[]
