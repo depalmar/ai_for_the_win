@@ -538,9 +538,8 @@ class SafeRansomwareSimulator:
 
         # Must be in temp or explicitly marked test directory
         allowed_prefixes = [
-            Path(tempfile.gettempdir()),
-            Path("/tmp"),
-            Path("/opt/purple_team"),
+            Path(tempfile.gettempdir()),  # System temp directory (e.g., /tmp on Unix)
+            Path("/opt/purple_team"),  # Dedicated test area
         ]
 
         is_safe = any(str(target).startswith(str(prefix)) for prefix in allowed_prefixes)

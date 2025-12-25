@@ -133,7 +133,7 @@ class SampleAnalyzer:
 
         info = {
             "file_size": len(content),
-            "md5": hashlib.md5(content).hexdigest(),
+            "md5": hashlib.md5(content, usedforsecurity=False).hexdigest(),
             "sha256": hashlib.sha256(content).hexdigest(),
             "is_pe": content[:2] == b"MZ",
             "entropy": self._calculate_entropy(content),

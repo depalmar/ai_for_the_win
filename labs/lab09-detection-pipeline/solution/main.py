@@ -252,7 +252,9 @@ class LLMEnrichmentStage:
 
     def _llm_analyze(self, event: dict) -> str:
         """Get LLM analysis."""
-        cache_key = hashlib.md5(json.dumps(event["details"], sort_keys=True).encode()).hexdigest()
+        cache_key = hashlib.md5(
+            json.dumps(event["details"], sort_keys=True).encode(), usedforsecurity=False
+        ).hexdigest()
         if cache_key in self.cache:
             return self.cache[cache_key]
 
