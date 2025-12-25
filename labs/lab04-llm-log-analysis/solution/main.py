@@ -111,7 +111,13 @@ class LogParser:
     def parse(self, log_entry: str) -> dict:
         """Parse a single log entry."""
         # Simple regex-based parsing for common log formats
-        parsed = {"timestamp": None, "level": None, "source": None, "message": log_entry, "metadata": {}}
+        parsed = {
+            "timestamp": None,
+            "level": None,
+            "source": None,
+            "message": log_entry,
+            "metadata": {},
+        }
 
         # Extract timestamp (YYYY-MM-DD HH:MM:SS format)
         timestamp_match = re.search(r"(\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2})", log_entry)
@@ -183,7 +189,9 @@ class ThreatDetector:
         result = {"threats": [], "brute_force_detected": False}
 
         # Count failed auth attempts
-        failed_auth_count = sum(1 for log in log_entries if "fail" in log.lower() and "password" in log.lower())
+        failed_auth_count = sum(
+            1 for log in log_entries if "fail" in log.lower() and "password" in log.lower()
+        )
 
         if failed_auth_count >= 3:
             result["brute_force_detected"] = True
@@ -191,7 +199,9 @@ class ThreatDetector:
 
         # Check for SQLi
         sqli_indicators = ["union", "select", "or '1'='1", "--", "drop table"]
-        if any(any(indicator in log.lower() for indicator in sqli_indicators) for log in log_entries):
+        if any(
+            any(indicator in log.lower() for indicator in sqli_indicators) for log in log_entries
+        ):
             result["threats"].append({"type": "sql_injection"})
 
         # Check for path traversal
@@ -237,7 +247,9 @@ class LogAnalyzer:
 
         # Count events by severity
         high_severity = sum(
-            1 for log in log_entries if any(indicator in log.lower() for indicator in ["error", "critical", "fail"])
+            1
+            for log in log_entries
+            if any(indicator in log.lower() for indicator in ["error", "critical", "fail"])
         )
 
         analysis = {
