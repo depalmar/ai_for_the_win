@@ -252,9 +252,18 @@ class LogAnalyzer:
             if any(indicator in log.lower() for indicator in ["error", "critical", "fail"])
         )
 
+        # Determine overall severity
+        if high_severity > 0:
+            severity = "high"
+        elif len(threats.get("threats", [])) > 0:
+            severity = "medium"
+        else:
+            severity = "low"
+
         analysis = {
             "summary": f"Analyzed {len(log_entries)} log entries. Found {len(threats.get('threats', []))} threat(s).",
             "analysis": f"Detected {high_severity} high-severity events",
+            "severity": severity,
             "total_events": len(log_entries),
             "high_severity_count": high_severity,
             "threats": threats["threats"],
