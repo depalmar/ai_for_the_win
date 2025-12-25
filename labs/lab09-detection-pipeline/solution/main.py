@@ -351,6 +351,7 @@ class CorrelationStage:
             "detected": len(detected_patterns) > 0,
             "patterns": detected_patterns,
             "techniques": list(set(all_techniques)),
+            "events": sorted_events,
             "event_count": len(events),
         }
 
