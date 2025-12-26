@@ -107,7 +107,8 @@ python solution/main.py
 |-----|---------|-------------------|
 | **00a** | **Python for Security** | Variables, files, APIs, regex, security-focused Python basics |
 | **00b** | **ML Concepts Primer** | Supervised/unsupervised learning, features, training, evaluation metrics |
-| **00c** | **Prompt Engineering Mastery** | Beginner-to-advanced prompting, AI Studio, hallucination detection, Plotly visualizations |
+| **00c** | **Intro to Prompt Engineering** | LLM basics with free playgrounds, prompting fundamentals, hallucination detection, security templates |
+| **00d** | **AI in Security Operations** | Where AI fits in SOC, human-in-the-loop, AI as attack surface, compliance considerations |
 | **01** | **Phishing Classifier** | Text preprocessing, TF-IDF vectorization, Random Forest classification, model evaluation metrics |
 | **02** | **Malware Clusterer** | Feature extraction from binaries, K-Means & DBSCAN clustering, dimensionality reduction, cluster analysis |
 | **03** | **Anomaly Detector** | Statistical baselines, Isolation Forest, Local Outlier Factor, threshold optimization for security |
@@ -148,6 +149,19 @@ python solution/main.py
    OpenAI ($5 free for new accounts). Costs based on 2025 pricing: Claude 3.5 Sonnet ($3/$15 per 1M
    tokens), GPT-4o ($5/$20 per 1M), Gemini 2.5 Pro ($1.25/$10 per 1M).
 ```
+
+### When to Use ML vs LLM
+
+| Security Task | Best Approach | Why |
+|--------------|---------------|-----|
+| Malware classification | **ML** | Fast, interpretable, structured features |
+| Log anomaly detection | **ML** | High volume, real-time capable |
+| Threat report analysis | **LLM** | Natural language understanding |
+| IOC extraction | **LLM** | Flexible parsing of unstructured text |
+| Phishing detection | **Hybrid** | ML for volume, LLM for sophisticated cases |
+| Detection pipeline | **Hybrid** | ML filters 90%, LLM analyzes 10% |
+
+> 📖 **Full comparison**: See [ML vs LLM Decision Framework](./LEARNING_GUIDE.md#choosing-the-right-tool-ml-vs-llm) for detailed guidance, cost analysis, and hybrid architecture patterns.
 
 ---
 
