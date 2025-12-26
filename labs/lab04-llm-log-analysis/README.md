@@ -408,10 +408,16 @@ Always be specific and cite evidence from the logs.
 
 ## 📚 Resources
 
+### External Resources
 - [MITRE ATT&CK](https://attack.mitre.org/)
 - [Windows Security Event IDs](https://www.ultimatewindowssecurity.com/securitylog/encyclopedia/)
 - [Sysmon Configuration](https://github.com/SwiftOnSecurity/sysmon-config)
 - [LangChain Documentation](https://python.langchain.com/docs/)
+
+### Related Guides
+- [Structured Output Parsing](../../setup/guides/structured-output-parsing.md) - Parse LLM JSON reliably
+- [Prompt Injection Defense](../../setup/guides/prompt-injection-defense.md) - Protect against adversarial inputs in logs
+- [LLM Evaluation & Testing](../../setup/guides/llm-evaluation-testing.md) - Test your log analyzer's accuracy
 
 ---
 

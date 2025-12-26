@@ -537,7 +537,42 @@ What would disprove your current assessment?"
 
 ---
 
-## Part 9: Next Steps
+## Part 9: LLM Reliability in Production
+
+When you move from experimentation to production security tools, reliability becomes critical.
+
+### Testing LLM Outputs
+
+Before deploying LLM-based security tools, you should:
+
+1. **Create test datasets** - Known-good and known-bad examples
+2. **Measure accuracy** - Track true/false positives and negatives
+3. **Monitor for drift** - LLM behavior can change over time
+4. **Set confidence thresholds** - Not all outputs deserve the same trust
+
+### Key Reliability Concepts
+
+| Concept | Why It Matters |
+|---------|----------------|
+| **Output consistency** | Same input should give similar outputs |
+| **Schema validation** | Enforce expected JSON structure |
+| **Prompt injection defense** | Attackers may try to manipulate your prompts |
+| **Human-in-the-loop** | High-stakes decisions need human review |
+
+### Production-Ready Guides
+
+When you're ready to build production security tools, these guides will help:
+
+| Guide | What You'll Learn |
+|-------|-------------------|
+| [Structured Output Parsing](../../setup/guides/structured-output-parsing.md) | Parse LLM JSON reliably |
+| [Prompt Injection Defense](../../setup/guides/prompt-injection-defense.md) | Protect against adversarial inputs |
+| [LLM Evaluation & Testing](../../setup/guides/llm-evaluation-testing.md) | Build test suites for LLM tools |
+| [AI in Security Operations](../lab00d-ai-in-security-operations/) | Understand real-world limitations |
+
+---
+
+## Part 10: Next Steps
 
 ### Progression Path
 
