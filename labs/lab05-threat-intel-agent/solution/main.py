@@ -739,17 +739,21 @@ class ThreatIntelAgent:
                 if prov == "anthropic":
                     api_key = os.getenv("ANTHROPIC_API_KEY")
                     if api_key and LANGCHAIN_AVAILABLE:
-                        return ChatAnthropic(model="claude-sonnet-4-20250514", temperature=0)
+                        return ChatAnthropic(
+                            model="claude-sonnet-4-20250514", temperature=0, api_key=api_key
+                        )
 
                 elif prov == "openai":
                     api_key = os.getenv("OPENAI_API_KEY")
                     if api_key and OPENAI_AVAILABLE:
-                        return ChatOpenAI(model="gpt-4-turbo", temperature=0)
+                        return ChatOpenAI(model="gpt-4-turbo", temperature=0, api_key=api_key)
 
                 elif prov == "gemini":
                     api_key = os.getenv("GOOGLE_API_KEY")
                     if api_key and GEMINI_AVAILABLE:
-                        return ChatGoogleGenerativeAI(model="gemini-1.5-pro", temperature=0)
+                        return ChatGoogleGenerativeAI(
+                            model="gemini-1.5-pro", temperature=0, api_key=api_key
+                        )
 
             except Exception as e:
                 if self.verbose:
