@@ -1,6 +1,6 @@
-# Lab 00c: Prompt Engineering Mastery
+# Lab 07: Advanced Prompt Engineering Mastery
 
-Master the art of prompting LLMs for security applications. Learn techniques from basic to advanced, self-improvement methods, hallucination detection, and result visualization.
+Master advanced prompting techniques for production security LLM applications. Learn self-improvement methods, hallucination detection, verification pipelines, and result visualization.
 
 ## Learning Objectives
 
@@ -17,8 +17,9 @@ By the end of this lab, you will:
 
 ## Prerequisites
 
-- Basic Python knowledge (Lab 00a)
-- Understanding of LLMs (what they are, how they work)
+- Python fundamentals (Lab 00a)
+- Intro prompt engineering basics (Lab 00c recommended)
+- Basic LLM usage experience (Labs 04, 05, or 06)
 - API key for Claude, GPT-4, or Gemini
 
 ---
