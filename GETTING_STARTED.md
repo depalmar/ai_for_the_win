@@ -74,12 +74,14 @@ cp .env.example .env
 nano .env   # or use any editor
 ```
 
-Required keys (choose at least one):
-- `ANTHROPIC_API_KEY` - Get from [Anthropic Console](https://console.anthropic.com/)
+**🆓 Start without API keys!** Labs 01, 02, and 03 work without any API keys. You can complete the ML foundations before paying for LLM access.
+
+**For LLM-powered labs** (choose at least one):
+- `ANTHROPIC_API_KEY` - Get from [Anthropic Console](https://console.anthropic.com/) - **Recommended** (Labs 04-08 use Claude)
 - `OPENAI_API_KEY` - Get from [OpenAI Platform](https://platform.openai.com/)
 - `GOOGLE_API_KEY` - Get from [Google AI Studio](https://aistudio.google.com/)
 
-Optional (for threat intel labs):
+**Optional** (for threat intel labs):
 - `VIRUSTOTAL_API_KEY`
 - `ABUSEIPDB_API_KEY`
 
@@ -90,7 +92,7 @@ python scripts/verify_setup.py
 ```
 
 This will check:
-- Python version (3.9+ required)
+- Python version (3.10+ required)
 - Required packages installed
 - API keys configured
 - Sample data accessible
