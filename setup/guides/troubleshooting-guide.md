@@ -191,24 +191,16 @@ pip install scikit-learn
 
 ### Lab 05: Threat Intel Agent
 
-**Issue:** Agent tests failing (4 agent-related tests)
+**Status:** ✅ **RESOLVED** - All tests now passing (21/21)
 
-**Status:** Known issue - non-agent functionality works correctly (13/17 tests pass)
+**What was fixed:**
+- Updated LangChain ChatAnthropic model name to current API identifier (`claude-sonnet-4-5-20250929`)
+- Updated ChatOpenAI model to `gpt-4o` (from deprecated `gpt-4-turbo`)
+- Updated ChatGoogleGenerativeAI model to `gemini-2.5-pro` (from deprecated `gemini-1.5-pro`)
 
-**Affected tests:**
-- `test_agent_initialization`
-- `test_investigate_ioc`
-- `test_investigate_returns_classification`
-- `test_investigate_with_context`
-
-**Workaround:** Use the non-agent threat intelligence functions directly:
-```python
-from labs.lab05_threat_intel_agent.solution.main import (
-    enrich_ip_address,
-    check_ip_reputation,
-    map_technique_to_tactic
-)
-```
+All agent tests now pass successfully. If you still see failures, ensure you have:
+1. Set `ANTHROPIC_API_KEY`, `OPENAI_API_KEY`, or `GOOGLE_API_KEY` in your `.env` file
+2. Installed latest dependencies: `pip install --upgrade -r requirements.txt`
 
 ### Lab 06: Security RAG
 
@@ -226,21 +218,20 @@ pip install chromadb
 
 ### Lab 12: Purple Team Simulation
 
-**Issue:** "No LLM provider available" despite API key being set
+**Status:** ✅ **RESOLVED** - All tests now passing (11/11)
 
-**Status:** Known issue - All 11 tests failing with API key detection error
+**What was fixed:**
+- Updated Anthropic SDK model name to current API identifier (`claude-sonnet-4-5-20250929`)
+- Updated OpenAI model to `gpt-4o` (from deprecated `gpt-4-turbo`)
+- Updated Google Gemini model to `gemini-2.5-pro` (from deprecated `gemini-1.5-pro`)
 
-**Error message:**
-```
-ValueError: No LLM provider available. Set one of: ANTHROPIC_API_KEY, OPENAI_API_KEY, GOOGLE_API_KEY
-```
+All LLM provider detection now works correctly. If you still see "No LLM provider available":
+1. Verify API key is set: `echo $ANTHROPIC_API_KEY` (Linux/Mac) or `echo %ANTHROPIC_API_KEY%` (Windows)
+2. Check `.env` file exists with valid key
+3. Restart your terminal/IDE to load new environment variables
 
-**Current investigation:** API key is properly set in environment but Lab12 is not detecting it. This appears to be a code issue in the lab's initialization logic.
-
-**Workaround:** None currently available. This lab is being fixed in a future update.
-
-**Other issue:** "Target directory must be in temp"
-- This is a safety feature - only temp directories allowed
+**Safety feature:** "Target directory must be in temp"
+- This is intentional - only temp directories allowed for safety
 - Use `tempfile.mkdtemp()` for test directories
 
 ---

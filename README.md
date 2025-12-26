@@ -3,7 +3,7 @@
 ### Build AI-Powered Security Tools | From Zero to Production
 
 [![CI](https://github.com/depalmar/ai_for_the_win/actions/workflows/ci.yml/badge.svg)](https://github.com/depalmar/ai_for_the_win/actions/workflows/ci.yml)
-[![Tests](https://img.shields.io/badge/tests-201%2F212%20passing-brightgreen)](https://github.com/depalmar/ai_for_the_win/actions/workflows/ci.yml)
+[![Tests](https://img.shields.io/badge/tests-223%2F223%20passing-brightgreen)](https://github.com/depalmar/ai_for_the_win/actions/workflows/ci.yml)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab01_phishing_classifier.ipynb)
@@ -15,26 +15,46 @@ A hands-on training program for security practitioners who want to build AI-powe
 
 ## Get Started in 5 Minutes
 
+### Complete Beginner? Start Here:
+
 ```bash
-# 1. Clone and setup
+# 1. Clone the repository
 git clone https://github.com/depalmar/ai_for_the_win.git
 cd ai_for_the_win
-python -m venv venv && source venv/bin/activate
+
+# 2. Install Python dependencies
+python -m venv venv
+source venv/bin/activate  # On Windows: .\venv\Scripts\activate
 pip install -r requirements.txt
 
-# 2. Configure API key (get one from console.anthropic.com)
-cp .env.example .env
-echo "ANTHROPIC_API_KEY=your-key-here" >> .env
+# 3. Start with Lab 00a (Python basics) - NO API KEY NEEDED!
+cd labs/lab00a-python-security-fundamentals
+cat README.md  # Read the lab instructions
 
-# 3. Verify setup
-python scripts/verify_setup.py
-
-# 4. Run your first lab
-cd labs/lab01-phishing-classifier
+# Then try Lab 01 (ML classifier) - STILL NO API KEY NEEDED!
+cd ../lab01-phishing-classifier
 python solution/main.py
 ```
 
-> 📖 **First time?** Read [GETTING_STARTED.md](./GETTING_STARTED.md) for detailed setup instructions.
+### Ready for LLM-Powered Labs? (Labs 04+)
+
+```bash
+# Configure API key (choose ONE provider)
+cp .env.example .env
+echo "ANTHROPIC_API_KEY=your-key-here" >> .env  # Get from console.anthropic.com
+# OR use OpenAI/Google - see .env.example for all options
+
+# Verify your setup
+python scripts/verify_setup.py
+
+# Run your first LLM lab
+cd labs/lab04-llm-log-analysis
+python solution/main.py
+```
+
+> 📖 **New to Python or ML?** Start with Labs 00a-00b-01-02-03 (no API keys required!)
+> 📖 **Know ML, want LLMs?** Jump to Lab 04 and get an API key first
+> 📖 **Need help?** Read [GETTING_STARTED.md](./GETTING_STARTED.md) for detailed setup
 
 ---
 
@@ -62,15 +82,20 @@ python solution/main.py
 └─────────────────────────────────────────────────────────────────────────┘
 ```
 
-| Your Background | Recommended Path |
-|-----------------|------------------|
-| Completely new (no Python) | Labs 00a → 00b → 00c → 01 |
-| Know Python, new to ML | Labs 00b → 00c → 01 → 02 |
-| Know ML, new to LLMs | Labs 00c → 04 → 06 → 05 |
-| Want to build agents | Labs 00c → 04 → 05 → 10 |
-| DFIR focus | Labs 04 → 05 → 11 → 13 → 14 |
-| Red Team/Offensive | Labs 12 → 14 → 15 → 16 |
-| Threat Intel Analyst | Labs 05 → 06 → 14 → 16 |
+### Recommended Learning Paths (Choose Yours!)
+
+| Your Background | Start Here | Learning Path |
+|-----------------|------------|---------------|
+| **Complete beginner** (no Python) | Lab 00a | 00a (Python) → 00b (ML theory) → 01 (ML hands-on) → 02 → 03 → 04 (LLMs) → 00c (advanced prompting) |
+| **Know Python**, new to ML | Lab 00b | 00b (ML theory) → 01 → 02 → 03 (ML foundations) → 04 → 06 → 05 (LLM/agents) |
+| **Know Python & ML**, new to LLMs | Lab 04 | 04 (basic prompting) → 06 (RAG) → 05 (agents) → 00c (advanced prompting) → 07-10 |
+| **Want to build AI agents** | Lab 04 | 04 (prompting) → 05 (ReAct agents) → 06 (RAG) → 10 (copilot) → Capstone |
+| **DFIR/SOC analyst** | Lab 01 | 01 → 03 (ML detection) → 04 (log analysis) → 11 (ransomware) → 13 (memory forensics) |
+| **Red Team/Offensive** | Lab 03 | 03 (anomaly det) → 12 (purple team) → 14 (C2) → 15 (lateral movement) → 17 (adversarial ML) |
+| **Threat Intel analyst** | Lab 04 | 04 (log analysis) → 05 (threat intel agent) → 06 (RAG) → 14 (C2) → 16 (actor profiling) |
+| **Security engineer** (build production tools) | Lab 01 | 01 → 03 → 04 → 08 (vuln scanner) → 09 (pipeline) → 10 (IR copilot) → Capstone |
+
+**💡 Pro Tip**: Labs 01-03 require NO API keys - perfect for learning ML foundations cost-free! Get comfortable with ML before moving to LLM-powered labs (04+).
 
 ---
 
@@ -106,15 +131,22 @@ python solution/main.py
 ### Skills Progression
 
 ```
-┌───────────────────────────────────────────────────────────────────────────────────────────────────┐
-│  INTRO          │  FOUNDATIONS      │  INTERMEDIATE       │  ADVANCED       │  EXPERT             │
-│  Labs 00a-00b   │  Labs 01-03       │  Labs 04-07         │  Labs 08-10     │  Labs 11-16         │
-├─────────────────┼───────────────────┼─────────────────────┼─────────────────┼─────────────────────┤
-│  • Python       │  • Supervised ML  │  • Prompt Eng       │  • System       │  • DFIR             │
-│  • ML Concepts  │  • Unsupervised   │  • AI Agents        │    Design       │  • Memory Forensics │
-│                 │  • Feature Eng    │  • RAG Systems      │  • ML+LLM       │  • C2 Detection     │
-│                 │  • Evaluation     │  • Code Gen         │  • Production   │  • Attribution      │
-└───────────────────────────────────────────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│  INTRO          │  ML FOUNDATIONS   │  LLM BASICS        │  ADVANCED LLM      │  EXPERT              │
+│  Labs 00a-00c   │  Labs 01-03       │  Labs 04-07        │  Labs 08-10        │  Labs 11-20          │
+├─────────────────┼───────────────────┼────────────────────┼────────────────────┼──────────────────────┤
+│  • Python       │  • Supervised ML  │  • Prompt Eng      │  • System Design   │  • DFIR              │
+│  • ML Theory    │  • Unsupervised   │  • AI Agents       │  • ML+LLM Hybrid   │  • Memory Forensics  │
+│  • Prompting    │  • Feature Eng    │  • RAG Systems     │  • Pipelines       │  • C2 Detection      │
+│  (optional)     │  • Evaluation     │  • Code Gen        │  • Production      │  • Attribution       │
+│                 │                   │                    │                    │  • Adversarial ML    │
+│  ⏱️ 2-6 hours   │  ⏱️ 12-20 hours  │  ⏱️ 15-25 hours   │  ⏱️ 20-30 hours   │  ⏱️ 30-50 hours     │
+│  💰 FREE        │  💰 FREE          │  💰 ~$5-10 API    │  💰 ~$10-20 API   │  💰 ~$20-40 API     │
+└──────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+💡 **Cost-Saving Tip**: Complete Labs 01-03 first (FREE, no API keys) to build ML foundations before
+   investing in LLM API credits. Then use free tiers: Anthropic ($5 free), Google (free Gemini),
+   OpenAI ($5 free for new accounts).
 ```
 
 ---
@@ -333,20 +365,29 @@ Jumpstart your projects with ready-to-use templates:
 
 ### Test Status
 
-**Current Status**: 201/212 tests passing (94.8%)
+**Current Status**: 223/223 tests passing (100%) ✅
 
-| Lab | Tests | Status | Notes |
-|-----|-------|--------|-------|
-| Lab01 | 15/15 | ✅ 100% | Phishing Classifier |
-| Lab02 | 11/11 | ✅ 100% | Malware Clustering |
-| Lab03 | 11/11 | ✅ 100% | Anomaly Detection |
-| Lab05 | 13/17 | ⚠️ 76% | Non-agent tests pass |
-| Lab06 | 7/7 | ✅ 100% | Security RAG |
-| Lab07 | 8/8 | ✅ 100% | YARA Generator |
-| Lab08 | 11/11 | ✅ 100% | Vuln Scanner |
-| Lab12 | 0/11 | ❌ 0% | API key detection issue |
+All labs now have 100% test coverage! Recent fixes:
+- ✅ **Lab 05**: Fixed LangChain agent tests (updated model names)
+- ✅ **Lab 12**: Fixed API key detection (updated LLM model identifiers)
+- ✅ **All Models**: Updated to current 2025 API identifiers (Claude Sonnet 4.5, GPT-4o, Gemini 2.5 Pro)
 
-**API-Dependent Labs**: Labs 06, 07, 08 require `ANTHROPIC_API_KEY` environment variable (or equivalent LLM provider key) to run. Set up your API key in `.env` to use these labs.
+| Lab | Tests | Status | Focus Area |
+|-----|-------|--------|------------|
+| Lab 01 | 15/15 | ✅ 100% | Phishing Classifier (ML) |
+| Lab 02 | 11/11 | ✅ 100% | Malware Clustering (ML) |
+| Lab 03 | 11/11 | ✅ 100% | Anomaly Detection (ML) |
+| Lab 04 | 19/19 | ✅ 100% | Log Analysis (LLM) |
+| Lab 05 | 21/21 | ✅ 100% | Threat Intel Agent (LangChain) |
+| Lab 06 | 7/7 | ✅ 100% | Security RAG (Vector DB) |
+| Lab 07 | 8/8 | ✅ 100% | YARA Generator (Code Gen) |
+| Lab 08 | 11/11 | ✅ 100% | Vuln Scanner (Risk Prioritization) |
+| Lab 09 | 21/21 | ✅ 100% | Detection Pipeline (Multi-stage) |
+| Lab 10 | 18/18 | ✅ 100% | IR Copilot (Conversational) |
+| Lab 11 | 21/21 | ✅ 100% | Ransomware Detection (DFIR) |
+| Lab 12 | 11/11 | ✅ 100% | Purple Team Sim (Safe Emulation) |
+
+**API Requirements**: Labs 04-12 require at least one LLM provider API key (`ANTHROPIC_API_KEY`, `OPENAI_API_KEY`, or `GOOGLE_API_KEY`). Labs 01-03 work without API keys.
 
 ### Running Tests
 
