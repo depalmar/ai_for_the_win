@@ -83,10 +83,13 @@ jobs:
           pytest tests/test_lab*.py -v --tb=short || true
         env:
           PYTHONPATH: ${{ github.workspace }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
 
       - name: Run tests with coverage
         run: |
           pytest tests/test_lab*.py --cov=labs --cov-report=xml --cov-report=term-missing || true
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         if: matrix.python-version == '3.11'
 
       - name: Upload coverage to Codecov

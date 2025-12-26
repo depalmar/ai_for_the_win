@@ -41,6 +41,7 @@ jobs:
           pytest tests/test_lab*.py -v --tb=short || true
         env:
           PYTHONPATH: ${{ github.workspace }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
 
       - name: Check for large files
         run: |
