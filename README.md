@@ -3,6 +3,7 @@
 ### Build AI-Powered Security Tools | From Zero to Production
 
 [![CI](https://github.com/depalmar/ai_for_the_win/actions/workflows/ci.yml/badge.svg)](https://github.com/depalmar/ai_for_the_win/actions/workflows/ci.yml)
+[![Tests](https://img.shields.io/badge/tests-201%2F212%20passing-brightgreen)](https://github.com/depalmar/ai_for_the_win/actions/workflows/ci.yml)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab01_phishing_classifier.ipynb)
@@ -329,6 +330,23 @@ Jumpstart your projects with ready-to-use templates:
 ---
 
 ## Development
+
+### Test Status
+
+**Current Status**: 201/212 tests passing (94.8%)
+
+| Lab | Tests | Status | Notes |
+|-----|-------|--------|-------|
+| Lab01 | 15/15 | ✅ 100% | Phishing Classifier |
+| Lab02 | 11/11 | ✅ 100% | Malware Clustering |
+| Lab03 | 11/11 | ✅ 100% | Anomaly Detection |
+| Lab05 | 13/17 | ⚠️ 76% | Non-agent tests pass |
+| Lab06 | 7/7 | ✅ 100% | Security RAG |
+| Lab07 | 8/8 | ✅ 100% | YARA Generator |
+| Lab08 | 11/11 | ✅ 100% | Vuln Scanner |
+| Lab12 | 0/11 | ❌ 0% | API key detection issue |
+
+**API-Dependent Labs**: Labs 06, 07, 08 require `ANTHROPIC_API_KEY` environment variable (or equivalent LLM provider key) to run. Set up your API key in `.env` to use these labs.
 
 ### Running Tests
 
