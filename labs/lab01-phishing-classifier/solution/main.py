@@ -310,14 +310,14 @@ def evaluate_model(
     """
 
     # Determine which signature is being used
-    if hasattr(model_or_y_true, 'predict'):
+    if hasattr(model_or_y_true, "predict"):
         # Signature 2: model, X_test, y_test, feature_names
         model = model_or_y_true
         X_test = X_test_or_y_pred
         y_true = y_test
         # Generate predictions
         y_pred = model.predict(X_test)
-        y_proba = model.predict_proba(X_test)[:, 1] if hasattr(model, 'predict_proba') else None
+        y_proba = model.predict_proba(X_test)[:, 1] if hasattr(model, "predict_proba") else None
     else:
         # Signature 1: y_true, y_pred
         y_true = model_or_y_true
@@ -336,7 +336,7 @@ def evaluate_model(
     print(f"  FN: {cm[1,0]}  TP: {cm[1,1]}")
 
     # Feature importance (for numeric features only)
-    if 'model' in locals() and hasattr(model, "feature_importances_") and feature_names:
+    if "model" in locals() and hasattr(model, "feature_importances_") and feature_names:
         print("\nTop 10 Important Features:")
         importances = model.feature_importances_[-len(feature_names) :]
         indices = np.argsort(importances)[::-1][:10]
