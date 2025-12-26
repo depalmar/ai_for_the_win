@@ -297,30 +297,46 @@ def train_classifier(X_train: np.ndarray, y_train: np.ndarray) -> RandomForestCl
 
 
 def evaluate_model(
-    model: RandomForestClassifier,
-    X_test: np.ndarray,
-    y_test: np.ndarray,
+    model_or_y_true,
+    X_test_or_y_pred=None,
+    y_test=None,
     feature_names: List[str] = None,
 ) -> dict:
-    """Evaluate classifier performance."""
+    """Evaluate classifier performance.
 
-    # Generate predictions
-    y_pred = model.predict(X_test)
-    y_proba = model.predict_proba(X_test)[:, 1]
+    Supports two signatures:
+    1. evaluate_model(y_true, y_pred) - Direct evaluation with labels and predictions
+    2. evaluate_model(model, X_test, y_test, feature_names) - Model-based evaluation
+    """
+
+    # Determine which signature is being used
+    if hasattr(model_or_y_true, "predict"):
+        # Signature 2: model, X_test, y_test, feature_names
+        model = model_or_y_true
+        X_test = X_test_or_y_pred
+        y_true = y_test
+        # Generate predictions
+        y_pred = model.predict(X_test)
+        y_proba = model.predict_proba(X_test)[:, 1] if hasattr(model, "predict_proba") else None
+    else:
+        # Signature 1: y_true, y_pred
+        y_true = model_or_y_true
+        y_pred = X_test_or_y_pred
+        y_proba = None
 
     # Calculate metrics
-    accuracy = accuracy_score(y_test, y_pred)
+    accuracy = accuracy_score(y_true, y_pred)
 
     print("\nClassification Report:")
-    print(classification_report(y_test, y_pred, target_names=["Legitimate", "Phishing"]))
+    print(classification_report(y_true, y_pred, target_names=["Legitimate", "Phishing"]))
 
     print("\nConfusion Matrix:")
-    cm = confusion_matrix(y_test, y_pred)
+    cm = confusion_matrix(y_true, y_pred)
     print(f"  TN: {cm[0,0]}  FP: {cm[0,1]}")
     print(f"  FN: {cm[1,0]}  TP: {cm[1,1]}")
 
     # Feature importance (for numeric features only)
-    if hasattr(model, "feature_importances_") and feature_names:
+    if "model" in locals() and hasattr(model, "feature_importances_") and feature_names:
         print("\nTop 10 Important Features:")
         importances = model.feature_importances_[-len(feature_names) :]
         indices = np.argsort(importances)[::-1][:10]
