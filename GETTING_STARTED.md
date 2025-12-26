@@ -74,7 +74,7 @@ cp .env.example .env
 nano .env   # or use any editor
 ```
 
-**🆓 Start without API keys!** Labs 01, 02, and 03 work without any API keys. You can complete the ML foundations before paying for LLM access.
+**🆓 Start without API keys!** Labs 00c (intro to prompting), 01, 02, and 03 work without any API keys. You can explore LLMs and complete the ML foundations before paying for LLM API access.
 
 **For LLM-powered labs** (choose at least one):
 - `ANTHROPIC_API_KEY` - Get from [Anthropic Console](https://console.anthropic.com/) - **Recommended** (Labs 04+ use Claude)
@@ -107,15 +107,15 @@ If you're new to ML/AI for security, follow this order:
 
 ```
 Week 1-2: Foundation Labs
-┌─────────────────────────────────────────────────────────────┐
-│  Lab 01          Lab 02          Lab 03                     │
-│  Phishing    ──► Malware     ──► Anomaly                    │
-│  Classifier      Clustering      Detection                  │
-│                                                             │
-│  Learn: Text     Learn: PE       Learn: Network             │
-│  classification  analysis,       features,                  │
-│  with ML         clustering      unsupervised ML            │
-└─────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────────┐
+│  (Optional)      Lab 01          Lab 02          Lab 03          │
+│  Lab 00c         Phishing    ──► Malware     ──► Anomaly         │
+│  Intro to        Classifier      Clustering      Detection       │
+│  Prompting                                                       │
+│  💰 FREE         Learn: Text     Learn: PE       Learn: Network  │
+│  (no API keys)   classification  analysis,       features,       │
+│                  with ML         clustering      unsupervised ML │
+└──────────────────────────────────────────────────────────────────┘
 
 Week 3-4: LLM Introduction
 ┌─────────────────────────────────────────────────────────────┐
@@ -131,22 +131,26 @@ Week 3-4: LLM Introduction
 ```
 
 **Why this order?**
-- Lab 01 teaches text classification (emails → phishing/not)
-- Lab 02 builds on 01 with unsupervised learning (no labels needed)
-- Lab 03 applies anomaly detection to network data
-- Lab 04 introduces LLMs for log analysis
-- Lab 06 shows how to give LLMs context with RAG
+- **Lab 00c (optional)**: Get hands-on with LLMs using free playgrounds - no API keys needed! Learn prompting basics and hallucination detection.
+- **Lab 01**: Teaches text classification (emails → phishing/not) - your first ML model
+- **Lab 02**: Builds on 01 with unsupervised learning (no labels needed)
+- **Lab 03**: Applies anomaly detection to network data
+- **Lab 04**: Introduces LLMs for log analysis with API integration
+- **Lab 06**: Shows how to give LLMs context with RAG (retrieval-augmented generation)
 
 ### Path B: Know ML, New to LLMs
 
 Skip the ML foundations and dive into LLM-powered security tools:
 
 ```
-Lab 04 ──► Lab 06 ──► Lab 05 ──► Lab 07
-  │          │          │          │
-  ▼          ▼          ▼          ▼
-Prompts    RAG       Agents     Code Gen
+(Optional)   Lab 04 ──► Lab 06 ──► Lab 05 ──► Lab 07
+Lab 00c        │          │          │          │
+Intro LLMs     ▼          ▼          ▼          ▼
+& Prompting  Prompts    RAG       Agents    Advanced
+(FREE)                                       Prompting
 ```
+
+Start with Lab 00c if you've never used LLMs before - it's optional but recommended for understanding prompt engineering basics.
 
 ### Path C: Know LLMs, Want Security Focus
 
@@ -174,9 +178,24 @@ Detect   Analysis            Detection    Team
 
 ---
 
-## Your First Lab (Lab 01)
+## Your First Lab
 
-Let's run your first lab to make sure everything works:
+### Option 1: Start with LLM Basics (Lab 00c) - FREE, No API Keys
+
+Want to get hands-on with LLMs before diving into ML? Start here:
+
+```bash
+# Navigate to Lab 00c
+cd labs/lab00c-intro-prompt-engineering
+
+# Open README.md and follow along with free AI playgrounds
+```
+
+This lab uses free tools (Google AI Studio, Claude.ai, Poe) - no API keys or setup required!
+
+### Option 2: Start with ML Foundations (Lab 01)
+
+Ready to build your first ML model? Let's run Lab 01 to make sure everything works:
 
 ```bash
 # Navigate to Lab 01
@@ -352,4 +371,7 @@ Quick references for AI coding tools:
 
 ---
 
-Ready? Start with Lab 01: `cd labs/lab01-phishing-classifier`
+**Ready to start?**
+- **New to LLMs?** → `cd labs/lab00c-intro-prompt-engineering` (FREE, no API keys)
+- **New to ML?** → `cd labs/lab01-phishing-classifier` (FREE, no API keys)
+- **Know both?** → Jump to Lab 04 or see paths above
