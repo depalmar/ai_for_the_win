@@ -136,21 +136,21 @@ def get_llm_client(provider: str = "auto"):
         if prov == "anthropic":
             api_key = os.getenv("ANTHROPIC_API_KEY")
             if api_key and ANTHROPIC_AVAILABLE:
-                return Anthropic(api_key=api_key), "anthropic", "claude-sonnet-4-20250514"
+                return Anthropic(api_key=api_key), "anthropic", "claude-sonnet-4-5-20250929"
 
         elif prov == "openai":
             api_key = os.getenv("OPENAI_API_KEY")
             if api_key and OPENAI_AVAILABLE:
-                return OpenAI(api_key=api_key), "openai", "gpt-4-turbo"
+                return OpenAI(api_key=api_key), "openai", "gpt-4o"
 
         elif prov == "gemini":
             api_key = os.getenv("GOOGLE_API_KEY")
             if api_key and GEMINI_AVAILABLE:
                 genai.configure(api_key=api_key)
                 return (
-                    genai.GenerativeModel("gemini-1.5-pro"),
+                    genai.GenerativeModel("gemini-2.5-pro"),
                     "gemini",
-                    "gemini-1.5-pro",
+                    "gemini-2.5-pro",
                 )
 
     raise ValueError(
