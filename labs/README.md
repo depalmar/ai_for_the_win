@@ -18,23 +18,25 @@ Follow this progression for the best learning experience. Labs build on each oth
 |---|-----|-------|-------------------|
 | 00a | [Python for Security](./lab00a-python-security-fundamentals/) | Python basics | Variables, files, APIs, security examples |
 | 00b | [ML Concepts Primer](./lab00b-ml-concepts-primer/) | ML theory | Supervised/unsupervised, features, evaluation |
-| 00c | [Prompt Engineering Mastery](./lab00c-prompt-engineering-mastery/) | LLM prompting | Prompt design, hallucination detection, AI Studio, Plotly |
+| 00c | [Intro to Prompt Engineering](./lab00c-intro-prompt-engineering/) | LLM prompting | Prompt design, hallucination detection, AI Studio |
+| 00d | [AI in Security Operations](./lab00d-ai-in-security-operations/) | SOC integration | Where AI fits, human-in-the-loop, compliance |
 
 **Who should do these:**
 - No Python experience → Start with **00a**
 - Python OK, new to ML → Start with **00b**
 - Want to use LLMs effectively → Do **00c** (highly recommended!)
+- Want SOC/operational context → Do **00d** (conceptual, no coding)
 - Comfortable with all → Skip to Lab 01
 
 ```
-Lab 00a (Python) → Lab 00b (ML Concepts) → Lab 00c (Prompting) → Lab 01
-     ↓                   ↓                       ↓                   ↓
- "Learn Python      "Understand ML         "Master LLM          "Build your
-  with security      theory before          prompts &            first ML
-  examples"          coding"                verification"        classifier"
+Lab 00a (Python) → Lab 00b (ML Concepts) → Lab 00c (Prompting) → Lab 00d (SOC) → Lab 01
+     ↓                   ↓                       ↓                    ↓              ↓
+ "Learn Python      "Understand ML         "Master LLM          "Understand    "Build your
+  with security      theory before          prompts &            where AI fits   first ML
+  examples"          coding"                verification"        in SOC"         classifier"
 ```
 
-> 💡 **Pro Tip:** Even experienced developers should do **Lab 00c** - prompt engineering is the #1 skill for working with LLMs!
+> 💡 **Pro Tip:** Even experienced developers should do **Lab 00c** and **Lab 00d** - prompt engineering and SOC context are critical for real-world deployment!
 
 ---
 
@@ -747,7 +749,8 @@ Track your progress:
 **Prerequisites (Optional but Recommended)**
 - [ ] Lab 00a: Python for Security Fundamentals
 - [ ] Lab 00b: ML Concepts Primer
-- [ ] Lab 00c: Prompt Engineering Mastery
+- [ ] Lab 00c: Intro to Prompt Engineering
+- [ ] Lab 00d: AI in Security Operations (conceptual)
 
 **Core Labs**
 - [ ] Lab 01: Phishing Classifier

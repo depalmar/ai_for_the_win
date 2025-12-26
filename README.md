@@ -311,7 +311,8 @@ Track your progress through the labs:
 **Intro (Recommended)**
 - [ ] **Lab 00a**: Python for Security Fundamentals
 - [ ] **Lab 00b**: ML Concepts Primer
-- [ ] **Lab 00c**: Prompt Engineering Mastery
+- [ ] **Lab 00c**: Intro to Prompt Engineering
+- [ ] **Lab 00d**: AI in Security Operations (conceptual)
 
 **Core Labs**
 - [ ] **Lab 01**: Phishing Email Classifier

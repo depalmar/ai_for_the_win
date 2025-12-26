@@ -74,12 +74,14 @@ cp .env.example .env
 nano .env   # or use any editor
 ```
 
-**🆓 Start without API keys!** Labs 00c (intro to prompting), 01, 02, and 03 work without any API keys. You can explore LLMs and complete the ML foundations before paying for LLM API access.
+**🆓 Start without API keys!** Labs 00c (intro to prompting), 00d (AI in SOC - conceptual), 01, 02, and 03 work without any API keys. You can explore LLMs and complete the ML foundations before paying for LLM API access.
 
 **For LLM-powered labs** (choose at least one):
 - `ANTHROPIC_API_KEY` - Get from [Anthropic Console](https://console.anthropic.com/) - **Recommended** (Labs 04+ use Claude)
 - `OPENAI_API_KEY` - Get from [OpenAI Platform](https://platform.openai.com/)
 - `GOOGLE_API_KEY` - Get from [Google AI Studio](https://aistudio.google.com/)
+
+> 📊 **Which provider should I choose?** See our [LLM Provider Comparison Guide](./setup/guides/llm-provider-comparison.md) for benchmarks and recommendations. For cost optimization strategies, see the [Cost Management Guide](./setup/guides/cost-management.md).
 
 **Optional** (for threat intel labs):
 - `VIRUSTOTAL_API_KEY`
@@ -107,15 +109,14 @@ If you're new to ML/AI for security, follow this order:
 
 ```
 Week 1-2: Foundation Labs
-┌──────────────────────────────────────────────────────────────────┐
-│  (Optional)      Lab 01          Lab 02          Lab 03          │
-│  Lab 00c         Phishing    ──► Malware     ──► Anomaly         │
-│  Intro to        Classifier      Clustering      Detection       │
-│  Prompting                                                       │
-│  💰 FREE         Learn: Text     Learn: PE       Learn: Network  │
-│  (no API keys)   classification  analysis,       features,       │
-│                  with ML         clustering      unsupervised ML │
-└──────────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────────────────────┐
+│  (Optional)      (Optional)      Lab 01          Lab 02          Lab 03     │
+│  Lab 00c         Lab 00d         Phishing    ──► Malware     ──► Anomaly    │
+│  Intro to        AI in SOC       Classifier      Clustering      Detection  │
+│  Prompting       (conceptual)                                               │
+│  💰 FREE         💰 FREE         Learn: Text     Learn: PE       Learn:     │
+│  (no API keys)   (no coding)     classification  analysis        Network    │
+└──────────────────────────────────────────────────────────────────────────────┘
 
 Week 3-4: LLM Introduction
 ┌─────────────────────────────────────────────────────────────┐
@@ -132,6 +133,7 @@ Week 3-4: LLM Introduction
 
 **Why this order?**
 - **Lab 00c (optional)**: Get hands-on with LLMs using free playgrounds - no API keys needed! Learn prompting basics and hallucination detection.
+- **Lab 00d (optional)**: Understand where AI fits in SOC workflows - conceptual, no coding. Covers human-in-the-loop, AI as attack surface, and compliance.
 - **Lab 01**: Teaches text classification (emails → phishing/not) - your first ML model
 - **Lab 02**: Builds on 01 with unsupervised learning (no labels needed)
 - **Lab 03**: Applies anomaly detection to network data

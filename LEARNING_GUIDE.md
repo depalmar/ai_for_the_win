@@ -55,6 +55,7 @@ The 23 labs are designed to build on each other, progressing from foundational M
 | New to ML/AI | Lab 01 → 02 → 03 | Classification, clustering, anomaly detection |
 | Know ML, new to LLMs | Lab 04 → 06 → 07 | Prompt engineering, RAG, code generation |
 | Know LLMs, want agents | Lab 05 → 08 → 10 | ReAct agents, orchestration, copilots |
+| Want SOC context first | Lab 00d → 04 → 09 | Where AI fits, human-in-the-loop, pipelines |
 | Production systems | Lab 09 → 10 | Multi-stage pipelines, conversational AI |
 | DFIR specialist | Lab 11 → 13 → 14 | Ransomware, memory forensics, C2 detection |
 | Red Team/Offensive | Lab 12 → 15 → 16 | Purple team, lateral movement, attribution |
@@ -858,7 +859,7 @@ Advanced: Lab 18, Lab 19
 All 22 labs in optimal order
 
 ```
-Intro: Lab 00a, 00b, 00c (optional)
+Intro: Lab 00a, 00b, 00c, 00d (optional)
 Foundation: Lab 01, Lab 02, Lab 03
 Core LLM: Lab 04, Lab 06, Lab 07
 Agents: Lab 05, Lab 08, Lab 09, Lab 10
