@@ -189,6 +189,27 @@ pip install scikit-learn
 - Verify timestamp format
 - Try different regex patterns
 
+### Lab 05: Threat Intel Agent
+
+**Issue:** Agent tests failing (4 agent-related tests)
+
+**Status:** Known issue - non-agent functionality works correctly (13/17 tests pass)
+
+**Affected tests:**
+- `test_agent_initialization`
+- `test_investigate_ioc`
+- `test_investigate_returns_classification`
+- `test_investigate_with_context`
+
+**Workaround:** Use the non-agent threat intelligence functions directly:
+```python
+from labs.lab05_threat_intel_agent.solution.main import (
+    enrich_ip_address,
+    check_ip_reputation,
+    map_technique_to_tactic
+)
+```
+
 ### Lab 06: Security RAG
 
 **Issue:** "ChromaDB connection failed"
@@ -205,7 +226,20 @@ pip install chromadb
 
 ### Lab 12: Purple Team Simulation
 
-**Issue:** "Target directory must be in temp"
+**Issue:** "No LLM provider available" despite API key being set
+
+**Status:** Known issue - All 11 tests failing with API key detection error
+
+**Error message:**
+```
+ValueError: No LLM provider available. Set one of: ANTHROPIC_API_KEY, OPENAI_API_KEY, GOOGLE_API_KEY
+```
+
+**Current investigation:** API key is properly set in environment but Lab12 is not detecting it. This appears to be a code issue in the lab's initialization logic.
+
+**Workaround:** None currently available. This lab is being fixed in a future update.
+
+**Other issue:** "Target directory must be in temp"
 - This is a safety feature - only temp directories allowed
 - Use `tempfile.mkdtemp()` for test directories
 
