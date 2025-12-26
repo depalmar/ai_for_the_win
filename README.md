@@ -324,7 +324,7 @@ Jumpstart your projects with ready-to-use templates:
 
 - **Agent Templates**: LangChain security agent, RAG agent
 - **n8n Workflows**: IOC enrichment, alert triage with AI
-- **SIEM Integrations**: Splunk, Elasticsearch, Microsoft Sentinel
+- **SIEM Integrations**: Cortex XSIAM, Splunk, Elasticsearch, Microsoft Sentinel
 - **Prompt Library**: Log analysis, threat detection, report generation
 
 ---
