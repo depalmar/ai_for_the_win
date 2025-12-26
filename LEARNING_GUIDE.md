@@ -62,6 +62,178 @@ The 23 labs are designed to build on each other, progressing from foundational M
 
 ---
 
+## Choosing the Right Tool: ML vs LLM
+
+One of the most important decisions in AI-powered security is knowing when to use traditional machine learning versus large language models. Each has strengths and trade-offs.
+
+### Decision Matrix
+
+| Security Task | Best Approach | Why |
+|--------------|---------------|-----|
+| **Malware classification** | ML (Random Forest, XGBoost) | Fast, interpretable, works on structured features |
+| **Phishing detection** | ML + LLM hybrid | ML for volume, LLM for sophisticated cases |
+| **Log anomaly detection** | ML (Isolation Forest) | Handles high volume, real-time capable |
+| **Threat report analysis** | LLM | Natural language understanding required |
+| **IOC extraction** | LLM | Flexible parsing of unstructured text |
+| **YARA rule generation** | LLM | Code generation from examples |
+| **Network intrusion detection** | ML | Numerical features, speed requirements |
+| **Incident summarization** | LLM | Language generation, context synthesis |
+| **User behavior analytics** | ML | Time-series patterns, baseline comparison |
+| **Threat hunting queries** | LLM | Natural language to query translation |
+
+### When to Use ML
+
+```
+Choose ML when you need:
+┌────────────────────────────────────────────────────────┐
+│  ✓ High-speed inference (milliseconds)                 │
+│  ✓ Processing millions of events                       │
+│  ✓ Explainable decisions (feature importance)         │
+│  ✓ Consistent, reproducible outputs                   │
+│  ✓ Low cost per prediction                            │
+│  ✓ Works offline / air-gapped                         │
+└────────────────────────────────────────────────────────┘
+```
+
+**Best Use Cases:**
+- Real-time detection pipelines
+- High-volume alert triage
+- Binary classification (malicious/benign)
+- Anomaly scoring on numerical data
+
+### When to Use LLMs
+
+```
+Choose LLMs when you need:
+┌────────────────────────────────────────────────────────┐
+│  ✓ Understanding unstructured text                     │
+│  ✓ Generating human-readable explanations             │
+│  ✓ Flexible parsing without rigid schemas             │
+│  ✓ Multi-step reasoning                               │
+│  ✓ Code/rule generation                               │
+│  ✓ Adapting to new formats without retraining         │
+└────────────────────────────────────────────────────────┘
+```
+
+**Best Use Cases:**
+- Threat intelligence analysis
+- Incident report generation
+- Natural language security queries
+- Code review and vulnerability explanation
+
+### Cost Comparison
+
+| Factor | Traditional ML | LLM API |
+|--------|----------------|---------|
+| **Per-prediction cost** | ~$0.000001 | ~$0.001-0.01 |
+| **1 million predictions** | ~$1 | ~$1,000-10,000 |
+| **Training cost** | One-time compute | None (pre-trained) |
+| **Latency** | 1-10ms | 100-2000ms |
+| **Accuracy on structured data** | High | Medium |
+| **Accuracy on unstructured text** | Medium | High |
+| **Maintenance** | Retrain periodically | Prompt updates |
+
+### The Hybrid Pattern: Best of Both Worlds
+
+Most production security systems use ML and LLMs together:
+
+```
+                    HIGH VOLUME INPUT
+                          │
+                          ▼
+              ┌───────────────────────┐
+              │   ML FAST FILTER      │  ← Cheap, fast
+              │   (Isolation Forest)  │     Handles 90% of volume
+              └───────────┬───────────┘
+                          │
+              ┌───────────┴───────────┐
+              │                       │
+              ▼                       ▼
+        [BENIGN]               [SUSPICIOUS]
+        Auto-close                    │
+                                      ▼
+                          ┌───────────────────────┐
+                          │   LLM DEEP ANALYSIS   │  ← Expensive, smart
+                          │   (Claude/GPT-4)      │     Top 10% only
+                          └───────────┬───────────┘
+                                      │
+                          ┌───────────┴───────────┐
+                          │                       │
+                          ▼                       ▼
+                    [FALSE POSITIVE]        [TRUE POSITIVE]
+                    Auto-close              → Human Review
+```
+
+**Implementation Example (from Lab 09):**
+
+```python
+def hybrid_detection_pipeline(events: list) -> list:
+    """Two-stage detection: ML filtering + LLM analysis."""
+
+    results = []
+
+    for event in events:
+        # Stage 1: Fast ML scoring
+        ml_score = isolation_forest.score(event.features)
+
+        if ml_score < BENIGN_THRESHOLD:
+            results.append({"event": event, "action": "auto_close"})
+            continue
+
+        # Stage 2: LLM deep analysis (only for suspicious events)
+        llm_analysis = llm.analyze(
+            f"Analyze this security event: {event.raw_data}"
+        )
+
+        if llm_analysis.severity >= HIGH_THRESHOLD:
+            results.append({
+                "event": event,
+                "action": "escalate",
+                "analysis": llm_analysis
+            })
+        else:
+            results.append({"event": event, "action": "log_only"})
+
+    return results
+```
+
+**Cost Savings with Hybrid:**
+- 10,000 events/day
+- ML processes all: $0.01
+- LLM processes 10% (1,000): $5.00
+- **Total: $5.01/day** vs $50+/day for LLM-only
+
+### Quick Reference: Which Tool for Your Task?
+
+```
+START: What type of data?
+
+├─► Structured (logs, network flows, metrics)
+│   └─► Use ML (Labs 01-03, 09)
+│
+├─► Unstructured text (reports, emails, tickets)
+│   └─► Use LLM (Labs 04-07)
+│
+├─► Mixed / both types
+│   └─► Use Hybrid (Lab 09)
+│
+└─► Need reasoning + tools?
+    └─► Use AI Agents (Labs 05, 08, 10)
+```
+
+### Learn More
+
+| Topic | Where to Learn |
+|-------|----------------|
+| ML fundamentals | Labs 01, 02, 03 |
+| LLM prompting | Labs 04, 00c |
+| Hybrid pipelines | Lab 09 |
+| AI agents | Labs 05, 08, 10 |
+| Cost management | [Cost Management Guide](./setup/guides/cost-management.md) |
+| Provider selection | [Provider Comparison Guide](./setup/guides/llm-provider-comparison.md) |
+
+---
+
 ## Labs by Difficulty
 
 ### 🟢 Foundation Labs (Start Here)
