@@ -55,6 +55,7 @@ python solution/main.py
 > 📖 **New to Python or ML?** Start with Labs 00a-00b-01-02-03 (no API keys required!)
 > 📖 **Know ML, want LLMs?** Jump to Lab 04 and get an API key first
 > 📖 **Need help?** Read [GETTING_STARTED.md](./GETTING_STARTED.md) for detailed setup
+> 📖 **Lost in the docs?** See [DOCUMENTATION_GUIDE.md](./DOCUMENTATION_GUIDE.md) for navigation
 
 ---
 
@@ -456,6 +457,20 @@ Copy `.env.example` to `.env` and configure:
 - **Error Handling**: See [error handling best practices](./setup/guides/error-handling-guide.md)
 - **Documentation**: Browse [setup guides](./setup/) and [resources](./resources/)
 - **Issues**: Open a [GitHub issue](https://github.com/depalmar/ai_for_the_win/issues)
+
+---
+
+## Quick Links
+
+| Resource | Description |
+|----------|-------------|
+| [Documentation Guide](./DOCUMENTATION_GUIDE.md) | Find exactly what you need |
+| [Security Prompts](./resources/prompt-library/security-prompts.md) | Ready-to-use prompts for security tasks |
+| [Lab Walkthroughs](./docs/walkthroughs/) | Step-by-step solutions when stuck |
+| [Cheatsheets](./resources/cheatsheets/) | Quick references for Claude Code, Cursor, LangChain |
+| [SIEM Integrations](./resources/integrations/) | Splunk, Elastic, XSIAM integration guides |
+| [Tools & APIs](./resources/tools-and-resources.md) | 80+ security tools, APIs, datasets |
+| [MCP Servers](./resources/mcp-servers-security-guide.md) | MCP servers for DFIR, threat intel |
 
 ---
 

@@ -299,4 +299,6 @@ Record your observations:
 
 ---
 
+> **Stuck?** See the [Lab 01 Walkthrough](../../docs/walkthroughs/lab01-walkthrough.md) for step-by-step guidance.
+
 **Next Lab**: [Lab 02 - Malware Clustering](../lab02-malware-clustering/)

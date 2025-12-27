@@ -542,4 +542,6 @@ def _execute_tool(self, tool_name: str, args: dict) -> str:
 
 ---
 
+> **Stuck?** See the [Lab 05 Walkthrough](../../docs/walkthroughs/lab05-walkthrough.md) for step-by-step guidance.
+
 **Next Lab**: [Lab 06 - RAG for Security Docs](../lab06-security-rag/)

@@ -1,6 +1,8 @@
-# Claude Code Complete Guide
+# Claude API & SDK Guide
 
-Master Claude for AI-powered security development.
+Master the Claude API and Python SDK for AI-powered security development.
+
+> **Looking for Claude Code CLI?** See [Claude Code CLI Guide](./claude-code-cli-guide.md) for the `claude` command, MCP servers, and hooks.
 
 ---
 

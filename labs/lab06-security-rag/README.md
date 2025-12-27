@@ -387,5 +387,7 @@ Question: {question}
 
 ---
 
+> **Stuck?** See the [Lab 06 Walkthrough](../../docs/walkthroughs/lab06-walkthrough.md) for step-by-step guidance.
+
 **Next Lab**: [Lab 07 - YARA Rule Generator](../lab07-yara-generator/)
 
