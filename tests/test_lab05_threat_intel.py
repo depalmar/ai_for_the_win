@@ -183,8 +183,13 @@ class TestMITREMapper:
         assert "name" in result or "description" in result
 
 
+@pytest.mark.requires_api
 class TestThreatIntelAgent:
-    """Tests for the main threat intelligence agent."""
+    """Tests for the main threat intelligence agent.
+
+    Note: These tests require an LLM API key (ANTHROPIC_API_KEY, OPENAI_API_KEY, or GOOGLE_API_KEY).
+    They are skipped when no API key is available. Run with: pytest -m requires_api
+    """
 
     def test_agent_initialization(self):
         """Test agent initialization."""
