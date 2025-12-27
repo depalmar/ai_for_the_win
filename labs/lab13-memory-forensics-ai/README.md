@@ -303,4 +303,6 @@ def entropy(s):
 
 ---
 
+> **Stuck?** See the [Lab 13 Walkthrough](../../docs/walkthroughs/lab13-walkthrough.md) for step-by-step guidance.
+
 **Next Lab**: [Lab 14 - AI-Powered C2 Traffic Analysis](../lab14-c2-traffic-analysis/)

@@ -441,4 +441,6 @@ SENSITIVE_PATTERNS = [
 
 ---
 
+> **Stuck?** See the [Lab 15 Walkthrough](../../docs/walkthroughs/lab15-walkthrough.md) for step-by-step guidance.
+
 **Next Lab**: [Lab 16 - AI-Powered Threat Actor Profiling](../lab16-threat-actor-profiling/)

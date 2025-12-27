@@ -367,7 +367,9 @@ Quick references for AI coding tools:
 ## Getting Help
 
 - **Setup Issues**: See [troubleshooting-guide.md](./setup/guides/troubleshooting-guide.md)
+- **Stuck on a Lab**: Check the [walkthroughs](./docs/walkthroughs/) for step-by-step solutions
 - **Lab Questions**: Check the lab's README hints section
+- **Find Resources**: See [DOCUMENTATION_GUIDE.md](./DOCUMENTATION_GUIDE.md) for navigation
 - **General Questions**: Open a GitHub Discussion
 - **Bugs**: Open a GitHub Issue
 
