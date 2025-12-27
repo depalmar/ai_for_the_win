@@ -1278,5 +1278,5 @@ Create a system that:
 ## What's Next?
 
 You're now ready for:
-- **Lab 04**: LLM Log Analysis - Apply these techniques to real security logs
-- **Lab 05**: Threat Intel Agent - Build autonomous analysis pipelines
+- **[Lab 08](../lab08-security-copilot/)**: Security Co-pilot - Build an interactive security assistant
+- **[Lab 09](../lab09-detection-pipeline/)**: Detection Pipeline - Create end-to-end threat detection workflows
