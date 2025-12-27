@@ -29,10 +29,10 @@ from dataclasses import dataclass
 # =============================================================================
 
 # Default token limits for different task types
-DEFAULT_MAX_TOKENS = 4096        # Standard analysis tasks
+DEFAULT_MAX_TOKENS = 4096  # Standard analysis tasks
 DETAILED_ANALYSIS_TOKENS = 8192  # Comprehensive security reports
-QUICK_RESPONSE_TOKENS = 1024    # Fast lookups, classifications
-SUMMARY_TOKENS = 2048           # Summarization tasks
+QUICK_RESPONSE_TOKENS = 1024  # Fast lookups, classifications
+SUMMARY_TOKENS = 2048  # Summarization tasks
 
 # Task-specific token configurations
 TOKEN_LIMITS = {
