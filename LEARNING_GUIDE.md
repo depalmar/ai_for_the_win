@@ -8,7 +8,7 @@ A structured path from beginner to advanced AI-powered security tools.
 
 ## How This Course is Organized
 
-The 23 labs are designed to build on each other, progressing from foundational ML concepts through advanced DFIR, adversarial ML, and offensive AI security. Here's the recommended flow:
+The 24 labs are designed to build on each other, progressing from foundational ML concepts through advanced DFIR, adversarial ML, and offensive AI security. Here's the recommended flow:
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐

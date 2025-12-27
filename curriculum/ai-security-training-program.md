@@ -1,7 +1,7 @@
 # AI Development Training Program: Offensive Security & DFIR
 
 [![24 Weeks](https://img.shields.io/badge/Duration-24%20Weeks-blue.svg)]()
-[![23 Labs](https://img.shields.io/badge/Labs-23-green.svg)]()
+[![24 Labs](https://img.shields.io/badge/Labs-24-green.svg)]()
 [![4 Capstones](https://img.shields.io/badge/Capstones-4-orange.svg)]()
 
 ## 🎯 Program Mission
