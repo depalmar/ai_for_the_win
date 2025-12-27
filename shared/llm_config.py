@@ -40,21 +40,18 @@ TOKEN_LIMITS = {
     "classification": 512,
     "extraction": 1024,
     "lookup": 512,
-
     # Standard analysis
     "log_analysis": 4096,
     "ioc_analysis": 4096,
     "detection_rule": 4096,
     "yara_generation": 4096,
     "threat_assessment": 4096,
-
     # Detailed analysis
     "forensic_report": 8192,
     "incident_report": 8192,
     "threat_intel_report": 8192,
     "attack_chain_analysis": 8192,
     "comprehensive_analysis": 8192,
-
     # Extended analysis
     "full_investigation": 16384,
     "executive_summary": 4096,
@@ -64,13 +61,16 @@ TOKEN_LIMITS = {
 # PROVIDER CONFIGURATIONS
 # =============================================================================
 
+
 @dataclass
 class ProviderConfig:
     """Configuration for an LLM provider."""
+
     env_key: str
     default_model: str
     max_tokens_param: str  # API parameter name for max tokens
     supports_extended_tokens: bool = True
+
 
 PROVIDER_CONFIG = {
     "anthropic": ProviderConfig(
@@ -102,6 +102,7 @@ PROVIDER_CONFIG = {
 # =============================================================================
 # PROVIDER DETECTION
 # =============================================================================
+
 
 def detect_available_provider() -> Optional[str]:
     """
@@ -157,10 +158,21 @@ def get_provider_config(provider: Optional[str] = None) -> tuple[str, ProviderCo
 # =============================================================================
 
 TaskType = Literal[
-    "classification", "extraction", "lookup",
-    "log_analysis", "ioc_analysis", "detection_rule", "yara_generation", "threat_assessment",
-    "forensic_report", "incident_report", "threat_intel_report", "attack_chain_analysis",
-    "comprehensive_analysis", "full_investigation", "executive_summary",
+    "classification",
+    "extraction",
+    "lookup",
+    "log_analysis",
+    "ioc_analysis",
+    "detection_rule",
+    "yara_generation",
+    "threat_assessment",
+    "forensic_report",
+    "incident_report",
+    "threat_intel_report",
+    "attack_chain_analysis",
+    "comprehensive_analysis",
+    "full_investigation",
+    "executive_summary",
 ]
 
 
@@ -230,6 +242,7 @@ def get_llm(
     if provider_name == "anthropic":
         try:
             from langchain_anthropic import ChatAnthropic
+
             return ChatAnthropic(**config)
         except ImportError:
             raise ImportError("Please install langchain-anthropic: pip install langchain-anthropic")
@@ -237,6 +250,7 @@ def get_llm(
     elif provider_name == "openai":
         try:
             from langchain_openai import ChatOpenAI
+
             return ChatOpenAI(**config)
         except ImportError:
             raise ImportError("Please install langchain-openai: pip install langchain-openai")
@@ -244,13 +258,17 @@ def get_llm(
     elif provider_name == "google":
         try:
             from langchain_google_genai import ChatGoogleGenerativeAI
+
             return ChatGoogleGenerativeAI(**config)
         except ImportError:
-            raise ImportError("Please install langchain-google-genai: pip install langchain-google-genai")
+            raise ImportError(
+                "Please install langchain-google-genai: pip install langchain-google-genai"
+            )
 
     elif provider_name == "ollama":
         try:
             from langchain_ollama import ChatOllama
+
             return ChatOllama(**config)
         except ImportError:
             raise ImportError("Please install langchain-ollama: pip install langchain-ollama")
@@ -262,6 +280,7 @@ def get_llm(
 # =============================================================================
 # CONVENIENCE FUNCTIONS
 # =============================================================================
+
 
 def get_quick_llm():
     """Get an LLM configured for quick responses (1024 tokens)."""

@@ -29,8 +29,8 @@ def defang_ip(ip: str) -> str:
         192.168.1.1 -> 192[.]168[.]1[.]1 (private IPs also defanged for consistency)
     """
     # IPv4 pattern
-    ipv4_pattern = r'(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})'
-    return re.sub(ipv4_pattern, r'\1[.]\2[.]\3[.]\4', ip)
+    ipv4_pattern = r"(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})"
+    return re.sub(ipv4_pattern, r"\1[.]\2[.]\3[.]\4", ip)
 
 
 def defang_domain(domain: str) -> str:
@@ -42,8 +42,8 @@ def defang_domain(domain: str) -> str:
         malware.drop.net -> malware.drop[.]net
     """
     # Find the last dot before the TLD and replace it
-    if '.' in domain:
-        parts = domain.rsplit('.', 1)
+    if "." in domain:
+        parts = domain.rsplit(".", 1)
         return f"{parts[0]}[.]{parts[1]}"
     return domain
 
@@ -57,11 +57,11 @@ def defang_url(url: str) -> str:
         https://malware.net -> hxxps://malware[.]net
     """
     # Replace protocol
-    url = re.sub(r'^http://', 'hxxp://', url, flags=re.IGNORECASE)
-    url = re.sub(r'^https://', 'hxxps://', url, flags=re.IGNORECASE)
+    url = re.sub(r"^http://", "hxxp://", url, flags=re.IGNORECASE)
+    url = re.sub(r"^https://", "hxxps://", url, flags=re.IGNORECASE)
 
     # Extract and defang domain
-    match = re.match(r'(hxxps?://)([^/]+)(.*)', url, re.IGNORECASE)
+    match = re.match(r"(hxxps?://)([^/]+)(.*)", url, re.IGNORECASE)
     if match:
         protocol, domain, path = match.groups()
         # Defang the domain part
@@ -78,8 +78,8 @@ def defang_email(email: str) -> str:
     Examples:
         attacker@evil.com -> attacker[@]evil[.]com
     """
-    if '@' in email:
-        local, domain = email.rsplit('@', 1)
+    if "@" in email:
+        local, domain = email.rsplit("@", 1)
         return f"{local}[@]{defang_domain(domain)}"
     return email
 
@@ -97,11 +97,11 @@ def defang_ioc(ioc: str, ioc_type: str = "auto") -> str:
     """
     if ioc_type == "auto":
         # Auto-detect IOC type
-        if re.match(r'^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$', ioc):
+        if re.match(r"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$", ioc):
             ioc_type = "ip"
-        elif re.match(r'^https?://', ioc, re.IGNORECASE):
+        elif re.match(r"^https?://", ioc, re.IGNORECASE):
             ioc_type = "url"
-        elif '@' in ioc:
+        elif "@" in ioc:
             ioc_type = "email"
         else:
             ioc_type = "domain"
@@ -131,14 +131,14 @@ def refang_ioc(ioc: str) -> str:
         attacker[@]evil[.]com -> attacker@evil.com
     """
     # Replace defanged dots
-    result = ioc.replace('[.]', '.').replace('[dot]', '.')
+    result = ioc.replace("[.]", ".").replace("[dot]", ".")
 
     # Replace defanged protocols
-    result = re.sub(r'^hxxp://', 'http://', result, flags=re.IGNORECASE)
-    result = re.sub(r'^hxxps://', 'https://', result, flags=re.IGNORECASE)
+    result = re.sub(r"^hxxp://", "http://", result, flags=re.IGNORECASE)
+    result = re.sub(r"^hxxps://", "https://", result, flags=re.IGNORECASE)
 
     # Replace defanged email @
-    result = result.replace('[@]', '@').replace('[at]', '@')
+    result = result.replace("[@]", "@").replace("[at]", "@")
 
     return result
 
@@ -146,11 +146,11 @@ def refang_ioc(ioc: str) -> str:
 def is_defanged(ioc: str) -> bool:
     """Check if an IOC is already defanged."""
     defang_patterns = [
-        r'\[\.\]',      # [.]
-        r'\[dot\]',     # [dot]
-        r'hxxps?://',   # hxxp:// or hxxps://
-        r'\[@\]',       # [@]
-        r'\[at\]',      # [at]
+        r"\[\.\]",  # [.]
+        r"\[dot\]",  # [dot]
+        r"hxxps?://",  # hxxp:// or hxxps://
+        r"\[@\]",  # [@]
+        r"\[at\]",  # [at]
     ]
     return any(re.search(pattern, ioc, re.IGNORECASE) for pattern in defang_patterns)
 
@@ -166,18 +166,14 @@ def defang_all(text: str) -> str:
     - Domains (limited - only obvious patterns)
     """
     # Defang IPs
-    text = re.sub(
-        r'\b(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})\b',
-        r'\1[.]\2[.]\3[.]\4',
-        text
-    )
+    text = re.sub(r"\b(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})\b", r"\1[.]\2[.]\3[.]\4", text)
 
     # Defang URLs
-    text = re.sub(r'http://', 'hxxp://', text, flags=re.IGNORECASE)
-    text = re.sub(r'https://', 'hxxps://', text, flags=re.IGNORECASE)
+    text = re.sub(r"http://", "hxxp://", text, flags=re.IGNORECASE)
+    text = re.sub(r"https://", "hxxps://", text, flags=re.IGNORECASE)
 
     # Defang emails
-    text = re.sub(r'(\S+)@(\S+)', r'\1[@]\2', text)
+    text = re.sub(r"(\S+)@(\S+)", r"\1[@]\2", text)
 
     return text
 
@@ -196,12 +192,31 @@ def defang_dict(data: Dict[str, Any], keys_to_defang: List[str] = None) -> Dict[
     """
     if keys_to_defang is None:
         keys_to_defang = [
-            'ip', 'ips', 'ip_address', 'src_ip', 'dst_ip', 'source_ip', 'destination_ip',
-            'domain', 'domains', 'hostname', 'host',
-            'url', 'urls', 'uri', 'link',
-            'email', 'emails', 'from', 'to', 'reply_to',
-            'c2', 'c2_server', 'callback',
-            'related_domains', 'related_ips'
+            "ip",
+            "ips",
+            "ip_address",
+            "src_ip",
+            "dst_ip",
+            "source_ip",
+            "destination_ip",
+            "domain",
+            "domains",
+            "hostname",
+            "host",
+            "url",
+            "urls",
+            "uri",
+            "link",
+            "email",
+            "emails",
+            "from",
+            "to",
+            "reply_to",
+            "c2",
+            "c2_server",
+            "callback",
+            "related_domains",
+            "related_ips",
         ]
 
     def _defang_value(value: Any, key: str = None) -> Any:
@@ -221,11 +236,11 @@ def defang_dict(data: Dict[str, Any], keys_to_defang: List[str] = None) -> Dict[
 
 # Safe private IP ranges (RFC1918) - these don't need to be treated as dangerous
 PRIVATE_IP_RANGES = [
-    (r'^10\.', 'Class A private'),
-    (r'^172\.(1[6-9]|2[0-9]|3[0-1])\.', 'Class B private'),
-    (r'^192\.168\.', 'Class C private'),
-    (r'^127\.', 'Loopback'),
-    (r'^0\.', 'Current network'),
+    (r"^10\.", "Class A private"),
+    (r"^172\.(1[6-9]|2[0-9]|3[0-1])\.", "Class B private"),
+    (r"^192\.168\.", "Class C private"),
+    (r"^127\.", "Loopback"),
+    (r"^0\.", "Current network"),
 ]
 
 
@@ -251,8 +266,10 @@ def classify_ip_risk(ip: str) -> str:
 
     # Well-known safe IPs (extend as needed)
     safe_ips = [
-        '8.8.8.8', '8.8.4.4',  # Google DNS
-        '1.1.1.1', '1.0.0.1',  # Cloudflare DNS
+        "8.8.8.8",
+        "8.8.4.4",  # Google DNS
+        "1.1.1.1",
+        "1.0.0.1",  # Cloudflare DNS
     ]
     if ip in safe_ips:
         return "safe"
