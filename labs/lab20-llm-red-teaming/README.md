@@ -406,6 +406,8 @@ Use the testing framework against an LLM application you've built.
 
 ---
 
+> **Stuck?** See the [Lab 20 Walkthrough](../../docs/walkthroughs/lab20-walkthrough.md) for step-by-step guidance.
+
 ## Next Steps
 
 - **Lab 17**: Adversarial ML attacks on security models

@@ -778,4 +778,6 @@ Compare fine-tuned model to base model on real security tasks.
 
 ---
 
+> **Stuck?** See the [Lab 18 Walkthrough](../../docs/walkthroughs/lab18-walkthrough.md) for step-by-step guidance.
+
 **Next Lab**: [Lab 19 - Cloud Security with AI](../lab19-cloud-security-ai/)

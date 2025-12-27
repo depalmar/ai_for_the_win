@@ -885,4 +885,6 @@ def exercise_4_ensemble():
 
 ---
 
+> **Stuck?** See the [Lab 17 Walkthrough](../../docs/walkthroughs/lab17-walkthrough.md) for step-by-step guidance.
+
 **Next Lab**: [Lab 18 - Fine-Tuning Models for Security](../lab18-fine-tuning-security/)
