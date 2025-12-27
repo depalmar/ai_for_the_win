@@ -1,4 +1,5 @@
 {
+  "_note": "DEFANGED IOCs: Malicious indicators use [.] notation for safety. Use shared.ioc_utils.refang_ioc() to convert back for analysis tools.",
   "scenario": "Double Extortion Ransomware Attack",
   "description": "Modern ransomware attack combining data theft with encryption for maximum leverage",
   "phases": [
@@ -119,7 +120,7 @@
     "bitcoin_addresses": [
       "bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh"
     ],
-    "leak_site": "lockbitapt6vx57t3eeqjofwgcglmutr3a35nygvokja5uuccip4ykyd.onion",
+    "leak_site": "lockbitapt6vx57t3eeqjofwgcglmutr3a35nygvokja5uuccip4ykyd[.]onion",
     "negotiation_deadline_hours": 72
   },
   "detection_opportunities": [

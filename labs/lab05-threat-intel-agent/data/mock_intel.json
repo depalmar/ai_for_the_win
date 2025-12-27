@@ -1,6 +1,7 @@
 {
+  "_note": "DEFANGED IOCs: Malicious indicators use [.] notation for safety. Use shared.ioc_utils.refang_ioc() to convert back for analysis tools.",
   "ip_intelligence": {
-    "185.143.223.47": {
+    "185[.]143[.]223[.]47": {
       "is_malicious": true,
       "abuse_score": 95,
       "country": "RU",
@@ -12,9 +13,9 @@
       "last_seen": "2024-01-15",
       "reports": 847,
       "tags": ["APT29", "CozyBear", "CobaltStrike"],
-      "related_domains": ["evil-c2.com", "malware-drop.net"]
+      "related_domains": ["evil-c2[.]com", "malware-drop[.]net"]
     },
-    "91.234.99.100": {
+    "91[.]234[.]99[.]100": {
       "is_malicious": true,
       "abuse_score": 78,
       "country": "NL",
@@ -44,14 +45,14 @@
     }
   },
   "domain_intelligence": {
-    "evil-c2.com": {
+    "evil-c2[.]com": {
       "is_malicious": true,
       "category": "C2",
       "registrar": "PrivacyGuard Inc",
       "creation_date": "2024-01-10",
       "expiration_date": "2025-01-10",
       "dns_records": {
-        "A": ["185.143.223.47"],
+        "A": ["185[.]143[.]223[.]47"],
         "MX": [],
         "NS": ["ns1.privatedns.com", "ns2.privatedns.com"]
       },
@@ -59,7 +60,7 @@
         "issuer": "Let's Encrypt",
         "valid_from": "2024-01-10",
         "valid_to": "2024-04-10",
-        "subject": "evil-c2.com"
+        "subject": "evil-c2[.]com"
       },
       "whois": {
         "registrant": "REDACTED FOR PRIVACY",
@@ -72,14 +73,14 @@
         "confidence": "high"
       }
     },
-    "malware-drop.net": {
+    "malware-drop[.]net": {
       "is_malicious": true,
       "category": "Malware Distribution",
       "registrar": "Shady Registrar LLC",
       "creation_date": "2023-12-20",
       "expiration_date": "2024-12-20",
       "dns_records": {
-        "A": ["91.234.99.100", "91.234.99.101"],
+        "A": ["91[.]234[.]99[.]100", "91[.]234[.]99[.]101"],
         "MX": [],
         "NS": ["ns1.shadydns.net"]
       },
@@ -142,8 +143,8 @@
       ],
       "yara_matches": ["CobaltStrike_Beacon", "HKTL_CobaltStrike"],
       "related_iocs": {
-        "ips": ["185.143.223.47"],
-        "domains": ["evil-c2.com"]
+        "ips": ["185[.]143[.]223[.]47"],
+        "domains": ["evil-c2[.]com"]
       }
     },
     "deadbeef12345678deadbeef12345678deadbeef12345678deadbeef12345678": {
@@ -163,8 +164,8 @@
       ],
       "yara_matches": ["Emotet_E5", "Trojan_Emotet"],
       "related_iocs": {
-        "ips": ["91.234.99.100"],
-        "domains": ["malware-drop.net"]
+        "ips": ["91[.]234[.]99[.]100"],
+        "domains": ["malware-drop[.]net"]
       }
     }
   },
@@ -281,4 +282,3 @@
     }
   }
 }
-

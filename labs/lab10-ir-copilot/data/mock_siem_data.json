@@ -1,4 +1,5 @@
 {
+  "_note": "DEFANGED IOCs: Malicious indicators use [.] and [@] notation for safety. Use shared.ioc_utils.refang_ioc() to convert back for analysis tools.",
   "siem_events": [
     {
       "timestamp": "2024-01-15T08:15:00Z",
@@ -6,13 +7,13 @@
       "event_type": "email_received",
       "severity": "medium",
       "data": {
-        "sender": "billing@vendor-invoices.com",
+        "sender": "billing[@]vendor-invoices[.]com",
         "recipient": "mthompson@company.com",
         "subject": "Urgent: Q4 Invoice - Payment Required",
         "attachments": ["Invoice_Q4.xlsx"],
         "verdict": "suspicious",
         "headers": {
-          "x-originating-ip": "185.143.223.47",
+          "x-originating-ip": "185[.]143[.]223[.]47",
           "spf": "fail",
           "dkim": "none"
         }
@@ -39,7 +40,7 @@
       "host": "WORKSTATION-15",
       "data": {
         "src_ip": "192.168.10.115",
-        "dst_ip": "185.143.223.47",
+        "dst_ip": "185[.]143[.]223[.]47",
         "dst_port": 443,
         "protocol": "TCP",
         "bytes_out": 2048,
@@ -127,7 +128,7 @@
     }
   ],
   "threat_intel": {
-    "185.143.223.47": {
+    "185[.]143[.]223[.]47": {
       "classification": "malicious",
       "category": "c2_server",
       "malware_family": "LockBit",
@@ -136,7 +137,7 @@
       "confidence": "high",
       "reports": 45
     },
-    "vendor-invoices.com": {
+    "vendor-invoices[.]com": {
       "classification": "malicious",
       "category": "phishing",
       "registered": "2024-01-12",
