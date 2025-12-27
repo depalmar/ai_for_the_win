@@ -732,3 +732,9 @@ Automate CIS benchmark checks across all cloud providers.
 - [Azure Sentinel](https://azure.microsoft.com/en-us/services/microsoft-sentinel/)
 - [GCP Security Command Center](https://cloud.google.com/security-command-center)
 - [Cloud Security Alliance](https://cloudsecurityalliance.org/)
+
+---
+
+**Congratulations!** You've completed all the AI Security labs.
+
+**Next**: [Capstone Projects](../../capstone-projects/) - Apply your skills to comprehensive security projects.

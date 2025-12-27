@@ -394,3 +394,7 @@ Look for these Cobalt Strike indicators:
 - [Cobalt Strike Detection Guide](https://www.cobaltstrike.com/blog/)
 - [Detecting DNS Tunneling](https://www.sans.org/white-papers/)
 - [JA3 TLS Fingerprinting](https://github.com/salesforce/ja3)
+
+---
+
+**Next Lab**: [Lab 15 - AI-Powered Lateral Movement Detection](../lab15-lateral-movement-detection/)

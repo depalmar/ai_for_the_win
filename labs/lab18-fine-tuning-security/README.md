@@ -775,3 +775,7 @@ Compare fine-tuned model to base model on real security tasks.
 - [Sentence Transformers](https://www.sbert.net/)
 - [QLoRA Paper](https://arxiv.org/abs/2305.14314)
 - [TRL Library](https://github.com/huggingface/trl)
+
+---
+
+**Next Lab**: [Lab 19 - Cloud Security with AI](../lab19-cloud-security-ai/)

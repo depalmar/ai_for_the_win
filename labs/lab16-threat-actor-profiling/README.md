@@ -757,3 +757,7 @@ CONFIDENCE_CRITERIA = {
 - [MISP Threat Actor Galaxy](https://github.com/MISP/misp-galaxy)
 - [APT Groups and Operations](https://docs.google.com/spreadsheets/d/1H9_xaxQHpWaa4O_Son4Gx0YOIzlcBWMsdvePFX68EKU/)
 - [Mandiant APT Reports](https://www.mandiant.com/resources/reports)
+
+---
+
+**Next Lab**: [Lab 17 - Adversarial Machine Learning](../lab17-adversarial-ml/)

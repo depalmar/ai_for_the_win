@@ -885,9 +885,4 @@ def exercise_4_ensemble():
 
 ---
 
-## Next Steps
-
-After completing this lab:
-- **Lab 09**: Apply adversarial defenses to detection pipelines
-- **Capstone**: Build production-robust security classifier
-- **Research**: Explore latest adversarial ML papers
+**Next Lab**: [Lab 18 - Fine-Tuning Models for Security](../lab18-fine-tuning-security/)

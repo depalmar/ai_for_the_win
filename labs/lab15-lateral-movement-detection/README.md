@@ -438,3 +438,7 @@ SENSITIVE_PATTERNS = [
 - [Windows Event Log Encyclopedia](https://www.ultimatewindowssecurity.com/)
 - [BloodHound Documentation](https://bloodhound.readthedocs.io/)
 - [Sigma Rules - Lateral Movement](https://github.com/SigmaHQ/sigma)
+
+---
+
+**Next Lab**: [Lab 16 - AI-Powered Threat Actor Profiling](../lab16-threat-actor-profiling/)

@@ -300,3 +300,7 @@ def entropy(s):
 - [SANS Memory Forensics Cheat Sheet](https://www.sans.org/posters/memory-forensics-cheat-sheet/)
 - [MemProcFS](https://github.com/ufrisk/MemProcFS)
 - [MITRE ATT&CK - Defense Evasion](https://attack.mitre.org/tactics/TA0005/)
+
+---
+
+**Next Lab**: [Lab 14 - AI-Powered C2 Traffic Analysis](../lab14-c2-traffic-analysis/)

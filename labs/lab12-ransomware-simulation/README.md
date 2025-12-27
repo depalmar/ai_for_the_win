@@ -521,3 +521,7 @@ class PurpleTeamExercise:
 2. **ML-Based Evasion Testing**: Test detection robustness
 3. **Multi-Stage Exercises**: Chain multiple ransomware families
 4. **Real-Time Collaboration**: Build blue team visibility dashboard
+
+---
+
+**Next Lab**: [Lab 13 - AI-Powered Memory Forensics](../lab13-memory-forensics-ai/)

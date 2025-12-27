@@ -398,3 +398,7 @@ Test your implementation with the provided sample data:
 2. **Decryptor Finder**: Build a system to check for available decryptors
 3. **Threat Intel Integration**: Correlate with threat intel feeds
 4. **Recovery Automation**: Automate backup restoration workflows
+
+---
+
+**Next Lab**: [Lab 12 - Ransomware Attack Simulation & Purple Team](../lab12-ransomware-simulation/)

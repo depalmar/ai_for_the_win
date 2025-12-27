@@ -617,12 +617,4 @@ Shall I proceed with any of these?
 
 ---
 
-**Congratulations!** 🎉
-
-You've completed the AI for Security Training Program labs!
-
-Continue your journey:
-- Build your own security AI projects
-- Contribute to open-source security AI tools
-- Share your knowledge with the community
-
+**Next Lab**: [Lab 11 - AI-Powered Ransomware Detection](../lab11-ransomware-detection/)
