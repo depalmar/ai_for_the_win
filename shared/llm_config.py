@@ -21,8 +21,8 @@ Usage:
 """
 
 import os
-from typing import Optional, Dict, Any, Literal
 from dataclasses import dataclass
+from typing import Any, Dict, Literal, Optional
 
 # =============================================================================
 # TOKEN LIMITS - Optimized for detailed security analysis

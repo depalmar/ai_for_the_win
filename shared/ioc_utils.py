@@ -17,7 +17,7 @@ Usage:
 """
 
 import re
-from typing import Union, List, Dict, Any
+from typing import Any, Dict, List, Union
 
 
 def defang_ip(ip: str) -> str:
