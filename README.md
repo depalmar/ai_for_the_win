@@ -9,7 +9,7 @@
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab01_phishing_classifier.ipynb)
 [![Docker](https://img.shields.io/badge/Docker-Ready-blue?logo=docker)](./Dockerfile)
 
-A hands-on training program for security practitioners who want to build AI-powered tools for threat detection, incident response, and security automation. **23 labs** (including 3 intro labs), **4 capstone projects**, **15 CTF challenges**. Includes **sample datasets** and **solution walkthroughs**. Designed for **vibe coding** with AI assistants like Cursor, Claude Code, and Copilot.
+A hands-on training program for security practitioners who want to build AI-powered tools for threat detection, incident response, and security automation. **24 labs** (including 4 intro labs), **4 capstone projects**, **15 CTF challenges**. Includes **sample datasets** and **solution walkthroughs**. Designed for **vibe coding** with AI assistants like Cursor, Claude Code, and Copilot.
 
 ---
 
@@ -216,7 +216,7 @@ Run labs directly in your browser - no setup required:
 | Lab 04: Log Analysis | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab04_llm_log_analysis.ipynb) |
 | Lab 05: Threat Intel Agent | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab05_threat_intel_agent.ipynb) |
 | Lab 06: Security RAG | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab06_security_rag.ipynb) |
-| All 23 labs available | [Browse notebooks →](./notebooks/) |
+| All 24 labs available | [Browse notebooks →](./notebooks/) |
 
 ---
 
@@ -224,7 +224,7 @@ Run labs directly in your browser - no setup required:
 
 ```
 ai_for_the_win/
-├── labs/                          # 23 hands-on labs
+├── labs/                          # 24 hands-on labs
 │   ├── lab00a-python-security-fundamentals/ # Python basics for security
 │   ├── lab00b-ml-concepts-primer/ # ML theory before coding
 │   ├── lab00c-prompt-engineering-mastery/ # Prompt design & verification
@@ -332,6 +332,10 @@ Track your progress through the labs:
 - [ ] **Lab 14**: C2 Traffic Analysis
 - [ ] **Lab 15**: Lateral Movement Detection
 - [ ] **Lab 16**: Threat Actor Profiling
+- [ ] **Lab 17**: Adversarial ML
+- [ ] **Lab 18**: Fine-tuning Security
+- [ ] **Lab 19**: Cloud Security AI
+- [ ] **Lab 20**: LLM Red Teaming
 - [ ] **Capstone**: Complete one capstone project
 
 ---
