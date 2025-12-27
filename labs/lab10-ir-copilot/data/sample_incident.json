@@ -1,4 +1,5 @@
 {
+  "_note": "DEFANGED IOCs: Malicious indicators use [.] and [@] notation for safety. Use shared.ioc_utils.refang_ioc() to convert back for analysis tools.",
   "incident": {
     "id": "INC-2024-0042",
     "title": "Suspected Ransomware Attack on Finance Server",
@@ -55,7 +56,7 @@
       "timestamp": "2024-01-15T08:25:00Z",
       "event": "C2 communication established",
       "source": "firewall",
-      "details": "Outbound HTTPS connection to 185.143.223.47:443"
+      "details": "Outbound HTTPS connection to 185[.]143[.]223[.]47:443"
     },
     {
       "timestamp": "2024-01-15T08:30:00Z",
@@ -108,18 +109,18 @@
   ],
   "iocs": {
     "ip_addresses": [
-      {"value": "185.143.223.47", "type": "c2", "confidence": "high"},
-      {"value": "91.234.99.100", "type": "exfil", "confidence": "medium"}
+      {"value": "185[.]143[.]223[.]47", "type": "c2", "confidence": "high"},
+      {"value": "91[.]234[.]99[.]100", "type": "exfil", "confidence": "medium"}
     ],
     "domains": [
-      {"value": "vendor-invoices.com", "type": "phishing", "confidence": "high"}
+      {"value": "vendor-invoices[.]com", "type": "phishing", "confidence": "high"}
     ],
     "file_hashes": [
       {"value": "abc123def456...", "type": "sha256", "filename": "Invoice_Q4.xlsx", "classification": "dropper"},
       {"value": "def789ghi012...", "type": "sha256", "filename": "lockbit.exe", "classification": "ransomware"}
     ],
     "email_addresses": [
-      {"value": "billing@vendor-invoices.com", "type": "sender", "confidence": "high"}
+      {"value": "billing[@]vendor-invoices[.]com", "type": "sender", "confidence": "high"}
     ]
   },
   "affected_users": [
@@ -144,7 +145,7 @@
     {
       "timestamp": "2024-01-15T15:15:00Z",
       "action": "Block IOC",
-      "target": "185.143.223.47",
+      "target": "185[.]143[.]223[.]47",
       "performed_by": "jdoe",
       "result": "success"
     },

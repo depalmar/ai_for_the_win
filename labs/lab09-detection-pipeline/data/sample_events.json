@@ -27,7 +27,7 @@
       "data": {
         "process_name": "powershell.exe",
         "process_id": 4521,
-        "destination_ip": "185.143.223.47",
+        "destination_ip": "185[.]143[.]223[.]47",
         "destination_port": 443,
         "protocol": "tcp",
         "initiated": true
@@ -132,7 +132,7 @@
       "data": {
         "process_name": "payload.exe",
         "process_id": 5100,
-        "destination_ip": "185.143.223.47",
+        "destination_ip": "185[.]143[.]223[.]47",
         "destination_port": 443,
         "protocol": "tcp",
         "bytes_sent": 15234
