@@ -201,33 +201,29 @@ Comprehensive collection of tools, datasets, APIs, courses, and communities for 
 
 ---
 
-## 📖 Books
+## 📖 Free Learning Resources
 
-### AI/ML for Security
+> **Note**: For books, we recommend checking your local library (many offer O'Reilly Learning access), employer learning benefits, or searching for free previews. The resources below are freely available.
 
-| Title                                           | Author                       | Year | Link                                                                                            |
-| ----------------------------------------------- | ---------------------------- | ---- | ----------------------------------------------------------------------------------------------- |
-| **Hands-On Machine Learning for Cybersecurity** | Soma Halder, Sinan Ozdemir   | 2018 | [Amazon](https://www.amazon.com/Hands-Machine-Learning-Cybersecurity-intelligent/dp/1788992288) |
-| **Malware Data Science**                        | Joshua Saxe, Hillary Sanders | 2018 | [Amazon](https://www.amazon.com/Malware-Data-Science-Detection-Attribution/dp/1593278594)       |
-| **Machine Learning and Security**               | Clarence Chio, David Freeman | 2018 | [Amazon](https://www.amazon.com/Machine-Learning-Security-Protecting-Algorithms/dp/1491979909)  |
-| **AI-Powered Cybersecurity**                    | Alasdair Gilchrist           | 2023 | [Amazon](https://www.amazon.com)                                                                |
+### Free Courses & Materials
 
-### LLMs & Modern AI
+| Resource                            | Provider       | Topics                   | Link                                                              |
+| ----------------------------------- | -------------- | ------------------------ | ----------------------------------------------------------------- |
+| **Hugging Face NLP Course**         | Hugging Face   | Transformers, NLP        | [huggingface.co/learn](https://huggingface.co/learn)              |
+| **Fast.ai Practical Deep Learning** | fast.ai        | Deep learning, ML basics | [course.fast.ai](https://course.fast.ai/)                         |
+| **Google ML Crash Course**          | Google         | ML fundamentals          | [developers.google.com](https://developers.google.com/machine-learning/crash-course) |
+| **LangChain Academy**               | LangChain      | LLM agents, RAG          | [academy.langchain.com](https://academy.langchain.com/)           |
+| **PortSwigger Web Security**        | PortSwigger    | Web security, testing    | [portswigger.net/web-security](https://portswigger.net/web-security) |
+| **DFIR Training**                   | 13Cubed        | Forensics, IR            | [youtube.com/13cubed](https://www.youtube.com/c/13Cubed)          |
 
-| Title                                             | Author                | Year | Link                                                                                                 |
-| ------------------------------------------------- | --------------------- | ---- | ---------------------------------------------------------------------------------------------------- |
-| **Build a Large Language Model (From Scratch)**   | Sebastian Raschka     | 2024 | [Amazon](https://www.amazon.com/Build-Large-Language-Model-Scratch/dp/1633437167)                    |
-| **Designing Machine Learning Systems**            | Chip Huyen            | 2022 | [Amazon](https://www.amazon.com/Designing-Machine-Learning-Systems-Production-Ready/dp/1098107969)   |
-| **Natural Language Processing with Transformers** | Lewis Tunstall et al. | 2022 | [Amazon](https://www.amazon.com/Natural-Language-Processing-Transformers-Applications/dp/1098103246) |
+### Free eBooks & Guides
 
-### DFIR & Malware Analysis
-
-| Title                                     | Author                         | Year | Link                                                                                                      |
-| ----------------------------------------- | ------------------------------ | ---- | --------------------------------------------------------------------------------------------------------- |
-| **Practical Malware Analysis**            | Michael Sikorski, Andrew Honig | 2012 | [Amazon](https://www.amazon.com/Practical-Malware-Analysis-Hands-Dissecting/dp/1593272901)                |
-| **The Art of Memory Forensics**           | Michael Hale Ligh et al.       | 2014 | [Amazon](https://www.amazon.com/Art-Memory-Forensics-Detecting-Malware/dp/1118825098)                     |
-| **Intelligence-Driven Incident Response** | Scott J Roberts, Rebekah Brown | 2017 | [Amazon](https://www.amazon.com/Intelligence-Driven-Incident-Response-Outwitting-Adversary/dp/1491934948) |
-| **Crafting the InfoSec Playbook**         | Jeff Bollinger et al.          | 2015 | [Amazon](https://www.amazon.com/Crafting-InfoSec-Playbook-Security-Monitoring/dp/1491949406)              |
+| Resource                          | Author/Org           | Topics                     | Link                                                                     |
+| --------------------------------- | -------------------- | -------------------------- | ------------------------------------------------------------------------ |
+| **The Threat Intelligence Handbook** | Recorded Future   | Threat intel fundamentals  | [recordedfuture.com](https://www.recordedfuture.com/threat-intelligence-handbook) |
+| **NIST Cybersecurity Framework**  | NIST                 | Security frameworks        | [nist.gov/cyberframework](https://www.nist.gov/cyberframework)           |
+| **OWASP Testing Guide**           | OWASP                | Application security       | [owasp.org](https://owasp.org/www-project-web-security-testing-guide/)   |
+| **Anthropic Prompt Engineering**  | Anthropic            | LLM prompting              | [docs.anthropic.com](https://docs.anthropic.com/claude/docs/prompt-engineering) |
 
 ---
 
