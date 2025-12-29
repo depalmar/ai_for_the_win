@@ -132,7 +132,7 @@ Total: _____ / 4250 points
 
 ## Creating Your Own Challenges
 
-Want to contribute? See [CONTRIBUTING.md](./CONTRIBUTING.md) for challenge submission guidelines.
+Want to contribute? See [CONTRIBUTING.md](../CONTRIBUTING.md) for challenge submission guidelines.
 
 ### Challenge Template
 

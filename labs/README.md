@@ -10,7 +10,7 @@ Practical labs for building AI-powered security tools.
 
 Follow this progression for the best learning experience. Labs build on each other.
 
-### 🎯 Getting Started: Prerequisites (Before Week 1)
+### 🎯 Getting Started: Prerequisites
 
 **New to Python, ML, or LLMs?** Start here before Lab 01.
 
@@ -40,7 +40,7 @@ Lab 00a (Python) → Lab 00b (ML Concepts) → Lab 00c (Prompting) → Lab 00d (
 
 ---
 
-### 🟢 Foundation: ML Basics (Week 1-2)
+### 🟢 Foundation: ML Basics
 
 Start here if you're new to ML for security. These labs teach core concepts.
 
@@ -62,7 +62,7 @@ Lab 01 (Text ML) → Lab 02 (Clustering) → Lab 03 (Anomaly Detection)
 
 ---
 
-### 🟡 Core Skills: LLM Security Tools (Week 3-4)
+### 🟡 Core Skills: LLM Security Tools
 
 Learn to apply Large Language Models to security problems.
 
@@ -84,7 +84,7 @@ Lab 04 (Prompts) → Lab 06 (RAG) → Lab 07 (Code Gen)
 
 ---
 
-### 🟠 Advanced: Autonomous Systems (Week 5-6)
+### 🟠 Advanced: Autonomous Systems
 
 Build AI agents and multi-stage pipelines.
 
@@ -105,7 +105,7 @@ Lab 05 (Agents) → Lab 08 (Vuln) → Lab 09 (Pipeline) → Lab 10 (Copilot)
 
 ---
 
-### 🔴 Expert: DFIR & Red Team (Week 7-10)
+### 🔴 Expert: DFIR & Red Team
 
 Deep dive into incident response, threat simulation, and offensive security analysis.
 
@@ -261,7 +261,7 @@ labXX-topic-name/
 
 ## 🎯 Learning Path
 
-### Foundation Path (Weeks 1-8)
+### Foundation Path
 
 Build core ML skills for security:
 
@@ -272,7 +272,7 @@ Lab 01 → Lab 02 → Lab 03
   ML                Detection
 ```
 
-### LLM Path (Weeks 9-16)
+### LLM Path
 
 Master LLMs for security applications:
 
@@ -283,7 +283,7 @@ Lab 04 → Lab 05 → Lab 06 → Lab 07
 Analysis            Docs   Generation
 ```
 
-### Advanced Path (Weeks 17-24)
+### Advanced Path
 
 Build production systems:
 

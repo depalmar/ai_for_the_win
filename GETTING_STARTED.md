@@ -83,6 +83,17 @@ nano .env   # or use any editor
 
 > 📊 **Which provider should I choose?** See our [LLM Provider Comparison Guide](./setup/guides/llm-provider-comparison.md) for benchmarks and recommendations. For cost optimization strategies, see the [Cost Management Guide](./setup/guides/cost-management.md).
 
+**Google AI Ecosystem** (free tools):
+
+| Tool | Description | Best For |
+|------|-------------|----------|
+| [Google AI Studio](https://aistudio.google.com) | Web interface for Gemini, prompt testing | Quick experiments, getting API keys |
+| [Gemini CLI](https://github.com/google-gemini/gemini-cli) | Terminal AI agent (1M context, 1000 req/day free) | Large file analysis, research |
+| [Gemini Code Assist](https://cloud.google.com/gemini/docs/codeassist) | Free AI coding assistant for IDEs | VS Code, JetBrains integration |
+| [Firebase Studio](https://firebase.studio) | Full-stack AI app builder | Building security dashboards |
+
+> See our [Gemini CLI Guide](./setup/guides/gemini-cli-guide.md) and [Google ADK Guide](./setup/guides/google-adk-guide.md) for detailed setup.
+
 **Optional** (for threat intel labs):
 - `VIRUSTOTAL_API_KEY`
 - `ABUSEIPDB_API_KEY`
@@ -108,7 +119,7 @@ This will check:
 If you're new to ML/AI for security, follow this order:
 
 ```
-Week 1-2: Foundation Labs
+Phase 1: Foundation Labs
 ┌──────────────────────────────────────────────────────────────────────────────┐
 │  (Optional)      (Optional)      Lab 01          Lab 02          Lab 03     │
 │  Lab 00c         Lab 00d         Phishing    ──► Malware     ──► Anomaly    │
@@ -118,7 +129,7 @@ Week 1-2: Foundation Labs
 │  (no API keys)   (no coding)     classification  analysis        Network    │
 └──────────────────────────────────────────────────────────────────────────────┘
 
-Week 3-4: LLM Introduction
+Phase 2: LLM Introduction
 ┌─────────────────────────────────────────────────────────────┐
 │  Lab 04          Lab 06                                     │
 │  Log         ──► Security                                   │
@@ -317,7 +328,8 @@ This course is designed for **vibe coding** - working alongside AI to write and 
 | Tool | Best For | Guide |
 |------|----------|-------|
 | [Cursor](https://cursor.sh/) | Full IDE with AI built-in, composer mode | [Cursor Guide](./setup/guides/cursor-ide-guide.md) |
-| [Claude Code](https://claude.ai/code) | Terminal-based AI coding assistant | [Claude Code Guide](./setup/guides/claude-code-guide.md) |
+| [Claude Code](https://claude.ai/code) | Terminal-based AI coding assistant | [Claude Code Guide](./setup/guides/claude-code-cli-guide.md) |
+| [Gemini CLI](https://github.com/google-gemini/gemini-cli) | 1M token context, Google Search grounding, free tier | [Gemini CLI Guide](./setup/guides/gemini-cli-guide.md) |
 | [GitHub Copilot](https://github.com/features/copilot) | Inline completions in VS Code | Works with any editor |
 | [Windsurf](https://codeium.com/windsurf) | Free AI-powered IDE | Alternative to Cursor |
 

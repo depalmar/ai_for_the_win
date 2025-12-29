@@ -560,6 +560,7 @@ level: medium
 | Guide | Focus | Link |
 |-------|-------|------|
 | **Claude Code CLI** | Anthropic's agentic CLI | [claude-code-cli-guide.md](../setup/guides/claude-code-cli-guide.md) |
+| **Gemini CLI** | Google's 1M context AI agent | [gemini-cli-guide.md](../setup/guides/gemini-cli-guide.md) |
 | **Google ADK** | Agent Development Kit | [google-adk-guide.md](../setup/guides/google-adk-guide.md) |
 | **Cursor IDE** | AI-native IDE | [cursor-ide-guide.md](../setup/guides/cursor-ide-guide.md) |
 | **AI Tools Comparison** | Tool selection guide | [ai-dev-tools-comparison.md](../setup/guides/ai-dev-tools-comparison.md) |
