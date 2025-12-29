@@ -9,7 +9,7 @@
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab01_phishing_classifier.ipynb)
 [![Docker](https://img.shields.io/badge/Docker-Ready-blue?logo=docker)](./Dockerfile)
 
-A hands-on training program for security practitioners who want to build AI-powered tools for threat detection, incident response, and security automation. **24 labs** (including 4 intro labs), **4 capstone projects**, **15 CTF challenges**. Includes **sample datasets** and **solution walkthroughs**. Designed for **vibe coding** with AI assistants like Cursor, Claude Code, and Copilot.
+A hands-on training program for security practitioners who want to build AI-powered tools for threat detection, incident response, and security automation. **25 labs** (including 5 intro labs), **4 capstone projects**, **15 CTF challenges**. Includes **sample datasets** and **solution walkthroughs**. Designed for **vibe coding** with AI assistants like Cursor, Claude Code, and Copilot.
 
 ---
 
@@ -226,7 +226,8 @@ Run labs directly in your browser - no setup required:
 
 ```
 ai_for_the_win/
-├── labs/                          # 24 hands-on labs
+├── labs/                          # 25 hands-on labs
+│   ├── lab00-environment-setup/  # Setup guide for beginners
 │   ├── lab00a-python-security-fundamentals/ # Python basics for security
 │   ├── lab00b-ml-concepts-primer/ # ML theory before coding
 │   ├── lab00c-prompt-engineering-mastery/ # Prompt design & verification
@@ -316,6 +317,7 @@ Vuln Scan  Pipeline   IR Bot    Your Project
 Track your progress through the labs:
 
 **Intro (Recommended)**
+- [ ] **Lab 00**: Environment Setup (Python, VS Code, virtual env)
 - [ ] **Lab 00a**: Python for Security Fundamentals
 - [ ] **Lab 00b**: ML Concepts Primer
 - [ ] **Lab 00c**: Intro to Prompt Engineering
@@ -468,6 +470,9 @@ Copy `.env.example` to `.env` and configure:
 
 ## Getting Help
 
+- **New to this?**: Start with [Lab 00: Environment Setup](./labs/lab00-environment-setup/)
+- **API Keys**: See the [API Keys Guide](./setup/guides/api-keys-guide.md) for setup and cost management
+- **Jupyter Notebooks**: Check the [Jupyter Basics Guide](./setup/guides/jupyter-basics-guide.md)
 - **Troubleshooting**: Check the [troubleshooting guide](./setup/guides/troubleshooting-guide.md)
 - **Error Handling**: See [error handling best practices](./setup/guides/error-handling-guide.md)
 - **Documentation**: Browse [setup guides](./setup/) and [resources](./resources/)
@@ -479,7 +484,9 @@ Copy `.env.example` to `.env` and configure:
 
 | Resource | Description |
 |----------|-------------|
-| [Quick Start](./QUICKSTART.md) | Get running in 5 minutes |
+| [Environment Setup](./labs/lab00-environment-setup/) | First-time setup for beginners |
+| [API Keys Guide](./setup/guides/api-keys-guide.md) | Get API keys, manage costs |
+| [Quick Start](./QUICKSTART.md) | Get running fast |
 | [Documentation Guide](./DOCUMENTATION_GUIDE.md) | Find exactly what you need |
 | [Security Prompts](./resources/prompt-library/security-prompts.md) | Ready-to-use prompts for security tasks |
 | [Lab Walkthroughs](./docs/walkthroughs/) | Step-by-step solutions when stuck |
