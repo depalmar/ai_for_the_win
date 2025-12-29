@@ -1,0 +1,71 @@
+{
+  "system": {
+    "expected_paths": [""],
+    "expected_parents": ["idle"],
+    "typical_threads": [100, 200],
+    "description": "Windows kernel process"
+  },
+  "smss.exe": {
+    "expected_paths": ["C:\\Windows\\System32\\smss.exe"],
+    "expected_parents": ["System"],
+    "typical_threads": [2, 4],
+    "description": "Session Manager Subsystem"
+  },
+  "csrss.exe": {
+    "expected_paths": ["C:\\Windows\\System32\\csrss.exe"],
+    "expected_parents": ["smss.exe"],
+    "typical_threads": [10, 20],
+    "description": "Client/Server Runtime Subsystem"
+  },
+  "wininit.exe": {
+    "expected_paths": ["C:\\Windows\\System32\\wininit.exe"],
+    "expected_parents": ["smss.exe"],
+    "typical_threads": [1, 5],
+    "description": "Windows Initialization Process"
+  },
+  "services.exe": {
+    "expected_paths": ["C:\\Windows\\System32\\services.exe"],
+    "expected_parents": ["wininit.exe"],
+    "typical_threads": [3, 10],
+    "description": "Services Control Manager"
+  },
+  "lsass.exe": {
+    "expected_paths": ["C:\\Windows\\System32\\lsass.exe"],
+    "expected_parents": ["wininit.exe"],
+    "typical_threads": [5, 15],
+    "description": "Local Security Authority Subsystem"
+  },
+  "svchost.exe": {
+    "expected_paths": ["C:\\Windows\\System32\\svchost.exe", "C:\\Windows\\SysWOW64\\svchost.exe"],
+    "expected_parents": ["services.exe"],
+    "typical_threads": [5, 50],
+    "description": "Service Host Process"
+  },
+  "explorer.exe": {
+    "expected_paths": ["C:\\Windows\\explorer.exe"],
+    "expected_parents": ["userinit.exe"],
+    "typical_threads": [20, 60],
+    "description": "Windows Explorer"
+  },
+  "powershell.exe": {
+    "expected_paths": [
+      "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "C:\\Windows\\SysWOW64\\WindowsPowerShell\\v1.0\\powershell.exe"
+    ],
+    "expected_parents": ["explorer.exe", "cmd.exe", "services.exe"],
+    "typical_threads": [5, 20],
+    "description": "Windows PowerShell"
+  },
+  "cmd.exe": {
+    "expected_paths": ["C:\\Windows\\System32\\cmd.exe", "C:\\Windows\\SysWOW64\\cmd.exe"],
+    "expected_parents": ["explorer.exe", "services.exe"],
+    "typical_threads": [1, 3],
+    "description": "Windows Command Processor"
+  },
+  "notepad.exe": {
+    "expected_paths": ["C:\\Windows\\System32\\notepad.exe", "C:\\Windows\\notepad.exe"],
+    "expected_parents": ["explorer.exe"],
+    "typical_threads": [1, 5],
+    "description": "Notepad"
+  }
+}

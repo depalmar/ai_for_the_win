@@ -1,0 +1,247 @@
+{
+  "processes": [
+    {
+      "pid": 4,
+      "ppid": 0,
+      "name": "System",
+      "path": "",
+      "cmdline": "",
+      "create_time": "2024-01-15T08:00:00",
+      "threads": 150,
+      "handles": 2000,
+      "memory_regions": []
+    },
+    {
+      "pid": 632,
+      "ppid": 4,
+      "name": "smss.exe",
+      "path": "C:\\Windows\\System32\\smss.exe",
+      "cmdline": "",
+      "create_time": "2024-01-15T08:00:01",
+      "threads": 2,
+      "handles": 50,
+      "memory_regions": []
+    },
+    {
+      "pid": 780,
+      "ppid": 632,
+      "name": "csrss.exe",
+      "path": "C:\\Windows\\System32\\csrss.exe",
+      "cmdline": "",
+      "create_time": "2024-01-15T08:00:02",
+      "threads": 12,
+      "handles": 500,
+      "memory_regions": []
+    },
+    {
+      "pid": 1234,
+      "ppid": 780,
+      "name": "services.exe",
+      "path": "C:\\Windows\\System32\\services.exe",
+      "cmdline": "",
+      "create_time": "2024-01-15T08:00:03",
+      "threads": 5,
+      "handles": 300,
+      "memory_regions": []
+    },
+    {
+      "pid": 2048,
+      "ppid": 1234,
+      "name": "svchost.exe",
+      "path": "C:\\Windows\\System32\\svchost.exe",
+      "cmdline": "-k netsvcs",
+      "create_time": "2024-01-15T08:00:10",
+      "threads": 20,
+      "handles": 800,
+      "memory_regions": []
+    },
+    {
+      "pid": 3456,
+      "ppid": 5678,
+      "name": "outlook.exe",
+      "path": "C:\\Program Files\\Microsoft Office\\Office16\\outlook.exe",
+      "cmdline": "",
+      "create_time": "2024-01-15T09:00:00",
+      "threads": 30,
+      "handles": 400,
+      "memory_regions": []
+    },
+    {
+      "pid": 4567,
+      "ppid": 3456,
+      "name": "powershell.exe",
+      "path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "cmdline": "powershell.exe -nop -w hidden -enc SGVsbG8gV29ybGQgLSBNYWxpY2lvdXMgUGF5bG9hZA==",
+      "create_time": "2024-01-15T09:05:00",
+      "threads": 8,
+      "handles": 200,
+      "memory_regions": [
+        {"address": "0x7FFE0000", "protection": "RWX", "type": "PRIVATE", "size": 4096},
+        {"address": "0x7FFE1000", "protection": "EXECUTE_READWRITE", "type": "PRIVATE", "size": 8192}
+      ]
+    },
+    {
+      "pid": 5678,
+      "ppid": 1234,
+      "name": "explorer.exe",
+      "path": "C:\\Windows\\explorer.exe",
+      "cmdline": "",
+      "create_time": "2024-01-15T08:01:00",
+      "threads": 40,
+      "handles": 1500,
+      "memory_regions": []
+    },
+    {
+      "pid": 7890,
+      "ppid": 4567,
+      "name": "cmd.exe",
+      "path": "C:\\Windows\\System32\\cmd.exe",
+      "cmdline": "cmd.exe /c whoami && net user && net localgroup administrators",
+      "create_time": "2024-01-15T09:06:00",
+      "threads": 1,
+      "handles": 50,
+      "memory_regions": []
+    },
+    {
+      "pid": 9999,
+      "ppid": 1,
+      "name": "svchost.exe",
+      "path": "C:\\Users\\Public\\Downloads\\svchost.exe",
+      "cmdline": "svchost.exe -k backdoor",
+      "create_time": "2024-01-15T09:10:00",
+      "threads": 3,
+      "handles": 100,
+      "memory_regions": [
+        {"address": "0x10000000", "protection": "RWX", "type": "PRIVATE", "size": 65536},
+        {"address": "0x10010000", "protection": "EXECUTE_READWRITE", "type": "MAPPED", "size": 32768}
+      ]
+    },
+    {
+      "pid": 1111,
+      "ppid": 780,
+      "name": "lsass.exe",
+      "path": "C:\\Windows\\System32\\lsass.exe",
+      "cmdline": "",
+      "create_time": "2024-01-15T08:00:05",
+      "threads": 8,
+      "handles": 700,
+      "memory_regions": []
+    },
+    {
+      "pid": 8888,
+      "ppid": 9999,
+      "name": "mimikatz.exe",
+      "path": "C:\\Temp\\mimikatz.exe",
+      "cmdline": "mimikatz.exe privilege::debug sekurlsa::logonpasswords",
+      "create_time": "2024-01-15T09:15:00",
+      "threads": 2,
+      "handles": 80,
+      "memory_regions": [
+        {"address": "0x00400000", "protection": "EXECUTE_READ", "type": "IMAGE", "size": 1048576}
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "local_ip": "192.168.1.100",
+      "local_port": 49152,
+      "remote_ip": "185.234.72.19",
+      "remote_port": 443,
+      "state": "ESTABLISHED",
+      "pid": 4567,
+      "protocol": "TCP"
+    },
+    {
+      "local_ip": "192.168.1.100",
+      "local_port": 49153,
+      "remote_ip": "10.0.0.5",
+      "remote_port": 445,
+      "state": "ESTABLISHED",
+      "pid": 2048,
+      "protocol": "TCP"
+    },
+    {
+      "local_ip": "192.168.1.100",
+      "local_port": 49154,
+      "remote_ip": "91.234.56.78",
+      "remote_port": 8080,
+      "state": "ESTABLISHED",
+      "pid": 9999,
+      "protocol": "TCP"
+    },
+    {
+      "local_ip": "192.168.1.100",
+      "local_port": 49155,
+      "remote_ip": "23.45.67.89",
+      "remote_port": 4444,
+      "state": "ESTABLISHED",
+      "pid": 8888,
+      "protocol": "TCP"
+    },
+    {
+      "local_ip": "192.168.1.100",
+      "local_port": 80,
+      "remote_ip": "0.0.0.0",
+      "remote_port": 0,
+      "state": "LISTENING",
+      "pid": 2048,
+      "protocol": "TCP"
+    }
+  ],
+  "malfind": [
+    {
+      "pid": 4567,
+      "process_name": "powershell.exe",
+      "type": "MZ_HEADER_IN_PRIVATE_MEMORY",
+      "description": "PE header (MZ signature) found in private memory region - possible reflective DLL injection",
+      "address": "0x7FFE0000",
+      "confidence": 0.85
+    },
+    {
+      "pid": 9999,
+      "process_name": "svchost.exe",
+      "type": "EXECUTABLE_MEMORY",
+      "description": "Executable code found in non-image private memory - fake svchost process",
+      "address": "0x10000000",
+      "confidence": 0.95
+    },
+    {
+      "pid": 8888,
+      "process_name": "mimikatz.exe",
+      "type": "KNOWN_MALWARE_SIGNATURE",
+      "description": "Known credential harvesting tool detected - mimikatz",
+      "address": "0x00400000",
+      "confidence": 1.0
+    }
+  ],
+  "dlls": [
+    {
+      "pid": 4567,
+      "name": "ntdll.dll",
+      "path": "C:\\Windows\\System32\\ntdll.dll",
+      "base_address": "0x77000000",
+      "size": 1900544
+    },
+    {
+      "pid": 4567,
+      "name": "kernel32.dll",
+      "path": "C:\\Windows\\System32\\kernel32.dll",
+      "base_address": "0x75000000",
+      "size": 1200128
+    },
+    {
+      "pid": 4567,
+      "name": "unknown.dll",
+      "path": "",
+      "base_address": "0x7FFE0000",
+      "size": 4096
+    },
+    {
+      "pid": 9999,
+      "name": "ws2_32.dll",
+      "path": "C:\\Windows\\System32\\ws2_32.dll",
+      "base_address": "0x76000000",
+      "size": 315392
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "actors": [
+    {
+      "id": "apt29",
+      "name": "APT29 (Cozy Bear)",
+      "aliases": ["The Dukes", "CozyDuke", "YTTRIUM", "Iron Hemlock"],
+      "country": "Russia",
+      "motivation": "espionage",
+      "sophistication": "advanced",
+      "ttps": [
+        {"technique_id": "T1566", "technique_name": "Phishing", "tactic": "Initial Access", "confidence": 0.9},
+        {"technique_id": "T1059.001", "technique_name": "PowerShell", "tactic": "Execution", "confidence": 0.95},
+        {"technique_id": "T1055", "technique_name": "Process Injection", "tactic": "Defense Evasion", "confidence": 0.85},
+        {"technique_id": "T1003", "technique_name": "OS Credential Dumping", "tactic": "Credential Access", "confidence": 0.9},
+        {"technique_id": "T1071", "technique_name": "Application Layer Protocol", "tactic": "Command and Control", "confidence": 0.9},
+        {"technique_id": "T1027", "technique_name": "Obfuscated Files", "tactic": "Defense Evasion", "confidence": 0.85}
+      ],
+      "malware_families": ["WellMess", "WellMail", "SoreFang", "EnvyScout", "SUNBURST"],
+      "target_sectors": ["government", "think_tank", "healthcare", "energy", "research"],
+      "target_regions": ["North America", "Europe", "Asia"]
+    },
+    {
+      "id": "apt41",
+      "name": "APT41 (Double Dragon)",
+      "aliases": ["Winnti", "Barium", "Wicked Panda", "Bronze Atlas"],
+      "country": "China",
+      "motivation": "espionage",
+      "sophistication": "advanced",
+      "ttps": [
+        {"technique_id": "T1566", "technique_name": "Phishing", "tactic": "Initial Access", "confidence": 0.85},
+        {"technique_id": "T1190", "technique_name": "Exploit Public-Facing Application", "tactic": "Initial Access", "confidence": 0.9},
+        {"technique_id": "T1059", "technique_name": "Command and Scripting Interpreter", "tactic": "Execution", "confidence": 0.9},
+        {"technique_id": "T1053", "technique_name": "Scheduled Task", "tactic": "Persistence", "confidence": 0.85},
+        {"technique_id": "T1021", "technique_name": "Remote Services", "tactic": "Lateral Movement", "confidence": 0.9},
+        {"technique_id": "T1055", "technique_name": "Process Injection", "tactic": "Defense Evasion", "confidence": 0.85}
+      ],
+      "malware_families": ["ShadowPad", "Winnti", "PlugX", "Cobalt Strike", "POISONPLUG"],
+      "target_sectors": ["gaming", "technology", "telecommunications", "healthcare", "finance"],
+      "target_regions": ["Asia", "North America", "Europe"]
+    },
+    {
+      "id": "fin7",
+      "name": "FIN7 (Carbanak)",
+      "aliases": ["Carbanak Group", "Carbon Spider", "Anunak"],
+      "country": "Russia",
+      "motivation": "financial",
+      "sophistication": "high",
+      "ttps": [
+        {"technique_id": "T1566", "technique_name": "Phishing", "tactic": "Initial Access", "confidence": 0.95},
+        {"technique_id": "T1059.001", "technique_name": "PowerShell", "tactic": "Execution", "confidence": 0.9},
+        {"technique_id": "T1055", "technique_name": "Process Injection", "tactic": "Defense Evasion", "confidence": 0.9},
+        {"technique_id": "T1003", "technique_name": "OS Credential Dumping", "tactic": "Credential Access", "confidence": 0.85},
+        {"technique_id": "T1021", "technique_name": "Remote Services", "tactic": "Lateral Movement", "confidence": 0.85},
+        {"technique_id": "T1041", "technique_name": "Exfiltration Over C2", "tactic": "Exfiltration", "confidence": 0.9}
+      ],
+      "malware_families": ["Carbanak", "GRIFFON", "BOOSTWRITE", "PILLOWMINT", "BATELEUR"],
+      "target_sectors": ["retail", "hospitality", "finance", "restaurant"],
+      "target_regions": ["North America", "Europe"]
+    },
+    {
+      "id": "lazarus",
+      "name": "Lazarus Group",
+      "aliases": ["HIDDEN COBRA", "Guardians of Peace", "APT38", "BlueNoroff"],
+      "country": "North Korea",
+      "motivation": "financial",
+      "sophistication": "advanced",
+      "ttps": [
+        {"technique_id": "T1566", "technique_name": "Phishing", "tactic": "Initial Access", "confidence": 0.9},
+        {"technique_id": "T1189", "technique_name": "Drive-by Compromise", "tactic": "Initial Access", "confidence": 0.8},
+        {"technique_id": "T1059", "technique_name": "Command and Scripting Interpreter", "tactic": "Execution", "confidence": 0.9},
+        {"technique_id": "T1486", "technique_name": "Data Encrypted for Impact", "tactic": "Impact", "confidence": 0.75},
+        {"technique_id": "T1490", "technique_name": "Inhibit System Recovery", "tactic": "Impact", "confidence": 0.8},
+        {"technique_id": "T1071", "technique_name": "Application Layer Protocol", "tactic": "Command and Control", "confidence": 0.9}
+      ],
+      "malware_families": ["FALLCHILL", "HOPLIGHT", "AppleJeus", "BLINDINGCAN", "DTrack"],
+      "target_sectors": ["cryptocurrency", "finance", "entertainment", "defense"],
+      "target_regions": ["Global", "South Korea", "United States"]
+    },
+    {
+      "id": "apt28",
+      "name": "APT28 (Fancy Bear)",
+      "aliases": ["Sofacy", "Pawn Storm", "Sednit", "STRONTIUM"],
+      "country": "Russia",
+      "motivation": "espionage",
+      "sophistication": "advanced",
+      "ttps": [
+        {"technique_id": "T1566", "technique_name": "Phishing", "tactic": "Initial Access", "confidence": 0.95},
+        {"technique_id": "T1190", "technique_name": "Exploit Public-Facing Application", "tactic": "Initial Access", "confidence": 0.85},
+        {"technique_id": "T1059", "technique_name": "Command and Scripting Interpreter", "tactic": "Execution", "confidence": 0.9},
+        {"technique_id": "T1003", "technique_name": "OS Credential Dumping", "tactic": "Credential Access", "confidence": 0.9},
+        {"technique_id": "T1078", "technique_name": "Valid Accounts", "tactic": "Initial Access", "confidence": 0.85},
+        {"technique_id": "T1027", "technique_name": "Obfuscated Files", "tactic": "Defense Evasion", "confidence": 0.9}
+      ],
+      "malware_families": ["XAgent", "Zebrocy", "CHOPSTICK", "GAMEFISH", "SOURFACE"],
+      "target_sectors": ["government", "military", "journalism", "political_organization"],
+      "target_regions": ["Europe", "North America", "Middle East"]
+    }
+  ]
+}

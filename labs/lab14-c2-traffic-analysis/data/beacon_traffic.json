@@ -1,0 +1,68 @@
+{
+  "connections": [
+    {"src_ip": "192.168.1.100", "dst_ip": "185.234.72.19", "dst_port": 443, "timestamp": 1705312800, "protocol": "TCP"},
+    {"src_ip": "192.168.1.100", "dst_ip": "185.234.72.19", "dst_port": 443, "timestamp": 1705312860, "protocol": "TCP"},
+    {"src_ip": "192.168.1.100", "dst_ip": "185.234.72.19", "dst_port": 443, "timestamp": 1705312920, "protocol": "TCP"},
+    {"src_ip": "192.168.1.100", "dst_ip": "185.234.72.19", "dst_port": 443, "timestamp": 1705312978, "protocol": "TCP"},
+    {"src_ip": "192.168.1.100", "dst_ip": "185.234.72.19", "dst_port": 443, "timestamp": 1705313040, "protocol": "TCP"},
+    {"src_ip": "192.168.1.100", "dst_ip": "185.234.72.19", "dst_port": 443, "timestamp": 1705313102, "protocol": "TCP"},
+    {"src_ip": "192.168.1.100", "dst_ip": "185.234.72.19", "dst_port": 443, "timestamp": 1705313160, "protocol": "TCP"},
+    {"src_ip": "192.168.1.100", "dst_ip": "185.234.72.19", "dst_port": 443, "timestamp": 1705313222, "protocol": "TCP"},
+    {"src_ip": "192.168.1.100", "dst_ip": "185.234.72.19", "dst_port": 443, "timestamp": 1705313280, "protocol": "TCP"},
+    {"src_ip": "192.168.1.100", "dst_ip": "185.234.72.19", "dst_port": 443, "timestamp": 1705313338, "protocol": "TCP"},
+    {"src_ip": "192.168.1.100", "dst_ip": "185.234.72.19", "dst_port": 443, "timestamp": 1705313400, "protocol": "TCP"},
+    {"src_ip": "192.168.1.100", "dst_ip": "185.234.72.19", "dst_port": 443, "timestamp": 1705313462, "protocol": "TCP"},
+    {"src_ip": "192.168.1.100", "dst_ip": "8.8.8.8", "dst_port": 53, "timestamp": 1705312850, "protocol": "UDP"},
+    {"src_ip": "192.168.1.100", "dst_ip": "8.8.8.8", "dst_port": 53, "timestamp": 1705313100, "protocol": "UDP"},
+    {"src_ip": "192.168.1.100", "dst_ip": "8.8.8.8", "dst_port": 53, "timestamp": 1705313500, "protocol": "UDP"},
+    {"src_ip": "192.168.1.100", "dst_ip": "142.250.185.206", "dst_port": 443, "timestamp": 1705312900, "protocol": "TCP"},
+    {"src_ip": "192.168.1.100", "dst_ip": "142.250.185.206", "dst_port": 443, "timestamp": 1705313200, "protocol": "TCP"}
+  ],
+  "dns": [
+    {"query": "aGVsbG8gd29ybGQgZnJvbSBtYWx3YXJl.evil-tunnel.com", "type": "TXT", "timestamp": 1705312800},
+    {"query": "dGhpcyBpcyBlbmNvZGVkIGRhdGE.evil-tunnel.com", "type": "TXT", "timestamp": 1705312810},
+    {"query": "c2VjcmV0IGluZm9ybWF0aW9u.evil-tunnel.com", "type": "A", "timestamp": 1705312820},
+    {"query": "ZXhmaWx0cmF0aW9uIGRhdGE.evil-tunnel.com", "type": "TXT", "timestamp": 1705312830},
+    {"query": "bW9yZSBzZWNyZXQgZGF0YQ.evil-tunnel.com", "type": "A", "timestamp": 1705312840},
+    {"query": "4a5b6c7d8e9f0a1b2c3d4e5f.evil-tunnel.com", "type": "TXT", "timestamp": 1705312850},
+    {"query": "9f8e7d6c5b4a3021fedcba98.evil-tunnel.com", "type": "A", "timestamp": 1705312860},
+    {"query": "deadbeefcafebabe12345678.evil-tunnel.com", "type": "TXT", "timestamp": 1705312870},
+    {"query": "abcdef1234567890abcdef12.evil-tunnel.com", "type": "A", "timestamp": 1705312880},
+    {"query": "feedface0badf00d12345678.evil-tunnel.com", "type": "TXT", "timestamp": 1705312890},
+    {"query": "1234abcd5678ef90abcdef12.evil-tunnel.com", "type": "TXT", "timestamp": 1705312900},
+    {"query": "www.google.com", "type": "A", "timestamp": 1705312805},
+    {"query": "mail.google.com", "type": "A", "timestamp": 1705312900},
+    {"query": "github.com", "type": "A", "timestamp": 1705313000},
+    {"query": "api.github.com", "type": "A", "timestamp": 1705313100},
+    {"query": "www.microsoft.com", "type": "A", "timestamp": 1705313200}
+  ],
+  "http_sessions": [
+    {
+      "dst_ip": "185.234.72.19",
+      "dst_port": 443,
+      "flows": [
+        {"timestamp": 1705312800, "method": "GET", "uri": "/submit.php?id=1", "user_agent": "Mozilla/5.0 (compatible; MSIE 9.0)", "response_code": 200, "response_size": 1024},
+        {"timestamp": 1705312860, "method": "POST", "uri": "/submit.php", "user_agent": "Mozilla/5.0 (compatible; MSIE 9.0)", "response_code": 200, "response_size": 1024},
+        {"timestamp": 1705312920, "method": "GET", "uri": "/__utm.gif", "user_agent": "Mozilla/5.0 (compatible; MSIE 9.0)", "response_code": 200, "response_size": 1024},
+        {"timestamp": 1705312980, "method": "GET", "uri": "/pixel.gif?data=abc", "user_agent": "Mozilla/5.0 (compatible; MSIE 9.0)", "response_code": 200, "response_size": 1024},
+        {"timestamp": 1705313040, "method": "GET", "uri": "/submit.php?id=5", "user_agent": "Mozilla/5.0 (compatible; MSIE 9.0)", "response_code": 200, "response_size": 1024}
+      ]
+    }
+  ],
+  "tls_certs": [
+    {
+      "subject": "CN=update-server.com",
+      "issuer": "CN=update-server.com",
+      "subject_cn": "update-server.com",
+      "not_before": "2024-01-10T00:00:00Z",
+      "not_after": "2024-04-10T00:00:00Z"
+    },
+    {
+      "subject": "CN=www.google.com",
+      "issuer": "CN=GTS CA 1C3, O=Google Trust Services LLC",
+      "subject_cn": "www.google.com",
+      "not_before": "2023-12-01T00:00:00Z",
+      "not_after": "2024-12-01T00:00:00Z"
+    }
+  ]
+}

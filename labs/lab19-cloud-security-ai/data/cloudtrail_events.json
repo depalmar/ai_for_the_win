@@ -1,0 +1,184 @@
+{
+  "events": [
+    {
+      "eventID": "evt-001",
+      "eventTime": "2024-01-15T10:00:00Z",
+      "eventSource": "iam.amazonaws.com",
+      "eventName": "CreateUser",
+      "userIdentity": {"type": "IAMUser", "userName": "admin", "arn": "arn:aws:iam::123456789012:user/admin"},
+      "sourceIPAddress": "185.234.72.19",
+      "awsRegion": "us-east-1",
+      "requestParameters": {"userName": "backdoor-user"},
+      "responseElements": {"user": {"userName": "backdoor-user", "createDate": "2024-01-15T10:00:00Z"}}
+    },
+    {
+      "eventID": "evt-002",
+      "eventTime": "2024-01-15T10:01:00Z",
+      "eventSource": "iam.amazonaws.com",
+      "eventName": "CreateAccessKey",
+      "userIdentity": {"type": "IAMUser", "userName": "admin"},
+      "sourceIPAddress": "185.234.72.19",
+      "awsRegion": "us-east-1",
+      "requestParameters": {"userName": "backdoor-user"},
+      "responseElements": {"accessKey": {"accessKeyId": "AKIA..."}}
+    },
+    {
+      "eventID": "evt-003",
+      "eventTime": "2024-01-15T10:02:00Z",
+      "eventSource": "iam.amazonaws.com",
+      "eventName": "AttachUserPolicy",
+      "userIdentity": {"type": "IAMUser", "userName": "admin"},
+      "sourceIPAddress": "185.234.72.19",
+      "awsRegion": "us-east-1",
+      "requestParameters": {
+        "userName": "backdoor-user",
+        "policyArn": "arn:aws:iam::aws:policy/AdministratorAccess"
+      }
+    },
+    {
+      "eventID": "evt-004",
+      "eventTime": "2024-01-15T10:05:00Z",
+      "eventSource": "cloudtrail.amazonaws.com",
+      "eventName": "StopLogging",
+      "userIdentity": {"type": "IAMUser", "userName": "backdoor-user"},
+      "sourceIPAddress": "185.234.72.19",
+      "awsRegion": "us-east-1",
+      "requestParameters": {"name": "main-trail"}
+    },
+    {
+      "eventID": "evt-005",
+      "eventTime": "2024-01-15T10:10:00Z",
+      "eventSource": "s3.amazonaws.com",
+      "eventName": "PutBucketPolicy",
+      "userIdentity": {"type": "IAMUser", "userName": "backdoor-user"},
+      "sourceIPAddress": "185.234.72.19",
+      "awsRegion": "us-east-1",
+      "requestParameters": {
+        "bucketName": "company-sensitive-data",
+        "bucketPolicy": {"Statement": [{"Effect": "Allow", "Principal": "*", "Action": "s3:GetObject"}]}
+      }
+    },
+    {
+      "eventID": "evt-006",
+      "eventTime": "2024-01-15T09:00:00Z",
+      "eventSource": "iam.amazonaws.com",
+      "eventName": "ListUsers",
+      "userIdentity": {"type": "IAMUser", "userName": "recon-user"},
+      "sourceIPAddress": "91.234.56.78",
+      "awsRegion": "us-east-1"
+    },
+    {
+      "eventID": "evt-007",
+      "eventTime": "2024-01-15T09:00:30Z",
+      "eventSource": "iam.amazonaws.com",
+      "eventName": "ListRoles",
+      "userIdentity": {"type": "IAMUser", "userName": "recon-user"},
+      "sourceIPAddress": "91.234.56.78",
+      "awsRegion": "us-east-1"
+    },
+    {
+      "eventID": "evt-008",
+      "eventTime": "2024-01-15T09:01:00Z",
+      "eventSource": "iam.amazonaws.com",
+      "eventName": "ListPolicies",
+      "userIdentity": {"type": "IAMUser", "userName": "recon-user"},
+      "sourceIPAddress": "91.234.56.78",
+      "awsRegion": "us-east-1"
+    },
+    {
+      "eventID": "evt-009",
+      "eventTime": "2024-01-15T09:01:30Z",
+      "eventSource": "s3.amazonaws.com",
+      "eventName": "ListBuckets",
+      "userIdentity": {"type": "IAMUser", "userName": "recon-user"},
+      "sourceIPAddress": "91.234.56.78",
+      "awsRegion": "us-east-1"
+    },
+    {
+      "eventID": "evt-010",
+      "eventTime": "2024-01-15T09:02:00Z",
+      "eventSource": "ec2.amazonaws.com",
+      "eventName": "DescribeInstances",
+      "userIdentity": {"type": "IAMUser", "userName": "recon-user"},
+      "sourceIPAddress": "91.234.56.78",
+      "awsRegion": "us-east-1"
+    },
+    {
+      "eventID": "evt-011",
+      "eventTime": "2024-01-15T09:02:30Z",
+      "eventSource": "ec2.amazonaws.com",
+      "eventName": "DescribeSecurityGroups",
+      "userIdentity": {"type": "IAMUser", "userName": "recon-user"},
+      "sourceIPAddress": "91.234.56.78",
+      "awsRegion": "us-east-1"
+    },
+    {
+      "eventID": "evt-012",
+      "eventTime": "2024-01-15T09:03:00Z",
+      "eventSource": "iam.amazonaws.com",
+      "eventName": "ListAccessKeys",
+      "userIdentity": {"type": "IAMUser", "userName": "recon-user"},
+      "sourceIPAddress": "91.234.56.78",
+      "awsRegion": "us-east-1"
+    },
+    {
+      "eventID": "evt-013",
+      "eventTime": "2024-01-15T09:03:30Z",
+      "eventSource": "s3.amazonaws.com",
+      "eventName": "GetBucketAcl",
+      "userIdentity": {"type": "IAMUser", "userName": "recon-user"},
+      "sourceIPAddress": "91.234.56.78",
+      "awsRegion": "us-east-1",
+      "requestParameters": {"bucketName": "company-data"}
+    },
+    {
+      "eventID": "evt-014",
+      "eventTime": "2024-01-15T09:04:00Z",
+      "eventSource": "iam.amazonaws.com",
+      "eventName": "GetAccountSummary",
+      "userIdentity": {"type": "IAMUser", "userName": "recon-user"},
+      "sourceIPAddress": "91.234.56.78",
+      "awsRegion": "us-east-1"
+    },
+    {
+      "eventID": "evt-015",
+      "eventTime": "2024-01-15T09:04:30Z",
+      "eventSource": "iam.amazonaws.com",
+      "eventName": "GetUser",
+      "userIdentity": {"type": "IAMUser", "userName": "recon-user"},
+      "sourceIPAddress": "91.234.56.78",
+      "awsRegion": "us-east-1",
+      "requestParameters": {"userName": "admin"}
+    },
+    {
+      "eventID": "evt-016",
+      "eventTime": "2024-01-15T08:00:00Z",
+      "eventSource": "signin.amazonaws.com",
+      "eventName": "ConsoleLogin",
+      "userIdentity": {"type": "IAMUser", "userName": "jsmith"},
+      "sourceIPAddress": "192.168.1.100",
+      "awsRegion": "us-east-1",
+      "responseElements": {"ConsoleLogin": "Success"}
+    },
+    {
+      "eventID": "evt-017",
+      "eventTime": "2024-01-15T08:30:00Z",
+      "eventSource": "ec2.amazonaws.com",
+      "eventName": "RunInstances",
+      "userIdentity": {"type": "IAMUser", "userName": "jsmith"},
+      "sourceIPAddress": "192.168.1.100",
+      "awsRegion": "us-east-1",
+      "requestParameters": {"instanceType": "t2.micro", "imageId": "ami-12345678"}
+    },
+    {
+      "eventID": "evt-018",
+      "eventTime": "2024-01-15T12:00:00Z",
+      "eventSource": "s3.amazonaws.com",
+      "eventName": "GetObject",
+      "userIdentity": {"type": "IAMUser", "userName": "backup-service"},
+      "sourceIPAddress": "10.0.0.50",
+      "awsRegion": "us-east-1",
+      "requestParameters": {"bucketName": "company-backups", "key": "backup-2024-01-15.zip"}
+    }
+  ]
+}
