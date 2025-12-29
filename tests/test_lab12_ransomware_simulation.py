@@ -138,6 +138,7 @@ class TestDetectionStatus:
 # =============================================================================
 
 
+@pytest.mark.requires_api
 class TestScenarioGenerator:
     """Tests for ScenarioGenerator."""
 
@@ -570,6 +571,7 @@ class TestDetectionValidator:
 # =============================================================================
 
 
+@pytest.mark.requires_api
 class TestPurpleTeamExercise:
     """Tests for PurpleTeamExercise."""
 
@@ -646,6 +648,7 @@ class TestAttackScenario:
 # =============================================================================
 
 
+@pytest.mark.requires_api
 class TestIntegration:
     """Integration tests for the purple team framework."""
 
