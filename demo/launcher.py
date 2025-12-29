@@ -2553,6 +2553,431 @@ def demo_llm_red_teaming(attack_type: str, target_behavior: str) -> str:
 
 
 # =============================================================================
+# CAPSTONE 1: AUTOMATED THREAT HUNTER
+# =============================================================================
+
+
+def demo_threat_hunter(log_source: str, time_range: str) -> Tuple[str, Optional[object]]:
+    """Capstone 1: Automated Threat Hunter Demo."""
+    fig = None
+
+    # Simulated threat hunting results
+    detections = [
+        {
+            "time": "2024-01-15 03:22:10",
+            "severity": "HIGH",
+            "type": "Credential Access",
+            "source": "DC-01",
+            "description": "Multiple failed login attempts followed by success",
+            "mitre": "T1110 - Brute Force",
+        },
+        {
+            "time": "2024-01-15 04:15:33",
+            "severity": "CRITICAL",
+            "type": "Lateral Movement",
+            "source": "WKS-105",
+            "description": "PsExec execution to multiple targets",
+            "mitre": "T1570 - Lateral Tool Transfer",
+        },
+        {
+            "time": "2024-01-15 05:01:45",
+            "severity": "CRITICAL",
+            "type": "Data Exfiltration",
+            "source": "FILE-SRV",
+            "description": "Large outbound transfer to external IP",
+            "mitre": "T1041 - Exfiltration Over C2 Channel",
+        },
+        {
+            "time": "2024-01-15 05:30:00",
+            "severity": "MEDIUM",
+            "type": "Discovery",
+            "source": "WKS-105",
+            "description": "Network share enumeration detected",
+            "mitre": "T1135 - Network Share Discovery",
+        },
+    ]
+
+    # Create timeline visualization
+    if PLOTLY_AVAILABLE:
+        times = list(range(len(detections)))
+        severities = [d["severity"] for d in detections]
+        colors = {"CRITICAL": "#e74c3c", "HIGH": "#e67e22", "MEDIUM": "#f39c12", "LOW": "#3498db"}
+
+        fig = go.Figure()
+        for i, det in enumerate(detections):
+            fig.add_trace(
+                go.Scatter(
+                    x=[i],
+                    y=[1],
+                    mode="markers+text",
+                    marker=dict(size=30, color=colors.get(det["severity"], "#3498db")),
+                    text=[det["type"][:10]],
+                    textposition="top center",
+                    name=det["type"],
+                    hovertemplate=f"<b>{det['time']}</b><br>{det['description']}<br>{det['mitre']}<extra></extra>",
+                )
+            )
+
+        fig.update_layout(
+            title="Threat Hunting Timeline",
+            xaxis=dict(title="Detection Sequence", tickmode="array", tickvals=times),
+            yaxis=dict(showticklabels=False),
+            height=250,
+            showlegend=False,
+        )
+
+    detection_table = []
+    for det in detections:
+        detection_table.append(
+            f"| {det['time']} | {det['severity']} | {det['type']} | {det['source']} |"
+        )
+
+    result = f"""
+## Automated Threat Hunter Results
+
+### Hunt Configuration
+| Parameter | Value |
+|-----------|-------|
+| Log Source | {log_source} |
+| Time Range | {time_range} |
+| Detection Rules | 47 active |
+| ML Models | Anomaly + Behavior |
+
+### Detections ({len(detections)} found)
+| Time | Severity | Type | Source |
+|------|----------|------|--------|
+{chr(10).join(detection_table)}
+
+### Attack Chain Analysis
+The detected events suggest a multi-stage attack:
+1. Initial access via brute force authentication
+2. Lateral movement using admin tools (PsExec)
+3. Data discovery and staging
+4. Exfiltration to external infrastructure
+
+### Recommended Actions
+- Isolate affected hosts immediately
+- Reset compromised credentials
+- Block external C2 IP addresses
+- Conduct full forensic investigation
+
+### Capstone 1 Features
+- Continuous log ingestion pipeline
+- ML-based anomaly detection
+- LLM-powered alert enrichment
+- Automated attack chain correlation
+"""
+    return result, fig
+
+
+# =============================================================================
+# CAPSTONE 2: MALWARE ANALYSIS ASSISTANT
+# =============================================================================
+
+
+def demo_malware_assistant(file_hash: str, analysis_type: str) -> Tuple[str, Optional[object]]:
+    """Capstone 2: Malware Analysis Assistant Demo."""
+    fig = None
+
+    # Simulated analysis results based on hash
+    known_samples = {
+        "a1b2c3d4": {
+            "family": "Emotet",
+            "type": "Trojan/Loader",
+            "risk": 95,
+            "imports": ["WinHttpOpen", "CreateRemoteThread", "VirtualAllocEx"],
+            "strings": ["C:\\Users\\Public\\update.exe", "hxxp://evil.com/payload"],
+            "techniques": ["T1055 - Process Injection", "T1071 - Application Layer Protocol"],
+        },
+        "default": {
+            "family": "Unknown",
+            "type": "Suspicious",
+            "risk": 60,
+            "imports": ["LoadLibrary", "GetProcAddress"],
+            "strings": ["cmd.exe", "powershell.exe"],
+            "techniques": ["T1059 - Command and Scripting Interpreter"],
+        },
+    }
+
+    sample = known_samples.get(file_hash[:8], known_samples["default"])
+
+    # Create risk visualization
+    if PLOTLY_AVAILABLE:
+        categories = ["API Risk", "String Risk", "Entropy", "Packing", "Network"]
+        values = [sample["risk"] / 100, 0.7, 0.85, 0.4, 0.6]
+
+        fig = go.Figure()
+        fig.add_trace(
+            go.Scatterpolar(
+                r=values + [values[0]],
+                theta=categories + [categories[0]],
+                fill="toself",
+                fillcolor="rgba(231, 76, 60, 0.3)",
+                line=dict(color="#e74c3c", width=2),
+            )
+        )
+        fig.update_layout(
+            polar=dict(radialaxis=dict(visible=True, range=[0, 1])),
+            title=f"Malware Risk Profile: {sample['family']}",
+            height=300,
+        )
+
+    result = f"""
+## Malware Analysis Report
+
+### Sample Information
+| Attribute | Value |
+|-----------|-------|
+| File Hash | {file_hash} |
+| Analysis Type | {analysis_type} |
+| Malware Family | {sample['family']} |
+| Classification | {sample['type']} |
+| Risk Score | {sample['risk']}% |
+
+### Suspicious API Imports
+{chr(10).join(f"- `{imp}`" for imp in sample['imports'])}
+
+### Extracted Strings
+{chr(10).join(f"- `{s}`" for s in sample['strings'])}
+
+### MITRE ATT&CK Techniques
+{chr(10).join(f"- {t}" for t in sample['techniques'])}
+
+### AI Analysis Summary
+This sample exhibits characteristics consistent with {sample['family']} malware:
+- Uses process injection for code execution
+- Contains obfuscated network communication
+- Employs persistence mechanisms
+- High entropy sections suggest packing
+
+### Recommendations
+1. Block associated IOCs at perimeter
+2. Scan network for C2 communication
+3. Check for lateral movement indicators
+4. Update endpoint detection signatures
+
+### Capstone 2 Features
+- Automated static analysis pipeline
+- PE header and import analysis
+- String extraction and classification
+- LLM-generated analysis reports
+"""
+    return result, fig
+
+
+# =============================================================================
+# CAPSTONE 3: SECURITY ANALYST COPILOT
+# =============================================================================
+
+
+def demo_analyst_copilot(alert_type: str, context: str) -> str:
+    """Capstone 3: Security Analyst Copilot Demo."""
+
+    # Simulated copilot responses
+    playbooks = {
+        "Phishing": {
+            "triage": [
+                "Identify email recipients",
+                "Check for URL clicks in proxy logs",
+                "Verify attachment downloads",
+            ],
+            "containment": ["Block sender domain", "Quarantine emails", "Reset affected passwords"],
+            "investigation": [
+                "Analyze email headers for origin",
+                "Check URL reputation",
+                "Sandbox any attachments",
+            ],
+            "severity": "HIGH",
+        },
+        "Malware": {
+            "triage": [
+                "Identify infected hosts",
+                "Check process tree",
+                "Review network connections",
+            ],
+            "containment": ["Isolate host", "Block C2 IPs", "Disable user account"],
+            "investigation": [
+                "Capture memory dump",
+                "Collect malware sample",
+                "Timeline analysis",
+            ],
+            "severity": "CRITICAL",
+        },
+        "Unauthorized Access": {
+            "triage": [
+                "Verify account ownership",
+                "Check login location",
+                "Review access patterns",
+            ],
+            "containment": [
+                "Disable account",
+                "Revoke active sessions",
+                "Reset credentials",
+            ],
+            "investigation": [
+                "Review audit logs",
+                "Check for lateral movement",
+                "Assess data access",
+            ],
+            "severity": "HIGH",
+        },
+    }
+
+    playbook = playbooks.get(alert_type, playbooks["Malware"])
+
+    result = f"""
+## Security Analyst Copilot
+
+### Alert Summary
+**Type:** {alert_type}
+**Context:** {context}
+**Severity:** {playbook['severity']}
+
+### Recommended Triage Steps
+{chr(10).join(f"{i+1}. {step}" for i, step in enumerate(playbook['triage']))}
+
+### Containment Actions
+{chr(10).join(f"- [ ] {action}" for action in playbook['containment'])}
+
+### Investigation Tasks
+{chr(10).join(f"- [ ] {task}" for task in playbook['investigation'])}
+
+### Copilot Queries
+You can ask me:
+- "Show me recent activity for user X"
+- "What other hosts connected to this IP?"
+- "Generate IOC report for this incident"
+- "Execute containment playbook"
+
+### Related Intelligence
+- Similar alerts in past 30 days: 3
+- Known campaign association: None identified
+- Recommended escalation: SOC Tier 2
+
+### Capstone 3 Features
+- Conversational incident response
+- Multi-tool integration (SIEM, EDR, TI)
+- Playbook-driven workflows
+- Human-in-the-loop approvals
+"""
+    return result
+
+
+# =============================================================================
+# CAPSTONE 4: VULNERABILITY INTEL PLATFORM
+# =============================================================================
+
+
+def demo_vuln_platform(cve_id: str, asset_type: str) -> Tuple[str, Optional[object]]:
+    """Capstone 4: Vulnerability Intelligence Platform Demo."""
+    fig = None
+
+    # Simulated CVE database
+    cve_db = {
+        "CVE-2024-0001": {
+            "cvss": 9.8,
+            "epss": 0.89,
+            "kev": True,
+            "description": "Remote code execution in web server",
+            "affected": "Apache HTTP Server < 2.4.58",
+            "exploited": True,
+            "remediation": "Upgrade to Apache 2.4.58 or later",
+        },
+        "CVE-2024-0002": {
+            "cvss": 7.5,
+            "epss": 0.45,
+            "kev": False,
+            "description": "SQL injection in login form",
+            "affected": "CustomApp v1.0-2.3",
+            "exploited": False,
+            "remediation": "Apply vendor patch or WAF rule",
+        },
+        "default": {
+            "cvss": 5.0,
+            "epss": 0.15,
+            "kev": False,
+            "description": "Generic vulnerability",
+            "affected": "Unknown software",
+            "exploited": False,
+            "remediation": "Apply vendor patches",
+        },
+    }
+
+    cve = cve_db.get(cve_id.upper(), cve_db["default"])
+
+    # Calculate risk priority
+    risk_score = (cve["cvss"] / 10 * 0.4) + (cve["epss"] * 0.4) + (0.2 if cve["kev"] else 0)
+    risk_score = min(1.0, risk_score)
+
+    # Create priority visualization
+    if PLOTLY_AVAILABLE:
+        fig = go.Figure()
+
+        # Add gauge
+        fig.add_trace(
+            go.Indicator(
+                mode="gauge+number",
+                value=risk_score * 100,
+                number={"suffix": "%"},
+                title={"text": "Risk Priority Score"},
+                gauge={
+                    "axis": {"range": [0, 100]},
+                    "bar": {"color": "#e74c3c" if risk_score > 0.7 else "#f39c12"},
+                    "steps": [
+                        {"range": [0, 30], "color": "#2ecc71"},
+                        {"range": [30, 70], "color": "#f39c12"},
+                        {"range": [70, 100], "color": "#e74c3c"},
+                    ],
+                },
+            )
+        )
+        fig.update_layout(height=250)
+
+    result = f"""
+## Vulnerability Intelligence Report
+
+### CVE Details
+| Attribute | Value |
+|-----------|-------|
+| CVE ID | {cve_id} |
+| CVSS Score | {cve['cvss']} |
+| EPSS Score | {cve['epss']*100:.1f}% |
+| In KEV Catalog | {"Yes" if cve['kev'] else "No"} |
+| Exploited in Wild | {"Yes" if cve['exploited'] else "No"} |
+
+### Description
+{cve['description']}
+
+### Affected Systems
+- **Software:** {cve['affected']}
+- **Asset Type:** {asset_type}
+- **Estimated Exposure:** 12 assets in your environment
+
+### Risk Prioritization
+- **Combined Risk Score:** {risk_score*100:.0f}%
+- **Priority Level:** {"CRITICAL" if risk_score > 0.7 else "HIGH" if risk_score > 0.4 else "MEDIUM"}
+- **Recommended SLA:** {"24 hours" if risk_score > 0.7 else "7 days" if risk_score > 0.4 else "30 days"}
+
+### Remediation
+{cve['remediation']}
+
+### AI-Generated Guidance
+1. Identify all affected systems using asset inventory
+2. Test patch in staging environment first
+3. Schedule maintenance window for production
+4. Verify remediation with vulnerability scan
+5. Update risk register and close ticket
+
+### Capstone 4 Features
+- Multi-source CVE aggregation
+- EPSS-based exploit prediction
+- Asset-aware prioritization
+- Automated remediation guidance
+"""
+    return result, fig
+
+
+# =============================================================================
 # GRADIO INTERFACE
 # =============================================================================
 
@@ -3250,12 +3675,159 @@ def create_demo():
                     [attack_20, target_20],
                 )
 
+        # Capstone Projects Section
+        gr.Markdown("## Capstone Projects\nComprehensive end-to-end security AI projects.")
+
+        with gr.Tabs():
+            # Capstone 1: Automated Threat Hunter
+            with gr.TabItem("Threat Hunter"):
+                gr.Markdown(
+                    "### Automated Threat Hunter\n"
+                    "Continuous threat hunting with ML detection and LLM analysis."
+                )
+
+                with gr.Row():
+                    with gr.Column():
+                        source_cap1 = gr.Dropdown(
+                            ["Windows Event Logs", "Sysmon", "Zeek/Bro", "AWS CloudTrail"],
+                            value="Windows Event Logs",
+                            label="Log Source",
+                        )
+                        time_cap1 = gr.Dropdown(
+                            ["Last 24 hours", "Last 7 days", "Last 30 days"],
+                            value="Last 24 hours",
+                            label="Time Range",
+                        )
+                        btn_cap1 = gr.Button("Hunt", variant="primary")
+                    with gr.Column():
+                        output_cap1 = gr.Markdown()
+
+                plot_cap1 = gr.Plot(label="Detection Timeline")
+                btn_cap1.click(
+                    demo_threat_hunter, [source_cap1, time_cap1], [output_cap1, plot_cap1]
+                )
+
+                gr.Examples(
+                    [
+                        ["Windows Event Logs", "Last 24 hours"],
+                        ["AWS CloudTrail", "Last 7 days"],
+                        ["Zeek/Bro", "Last 30 days"],
+                    ],
+                    [source_cap1, time_cap1],
+                )
+
+            # Capstone 2: Malware Analysis Assistant
+            with gr.TabItem("Malware Assistant"):
+                gr.Markdown(
+                    "### Malware Analysis Assistant\n"
+                    "AI-powered static analysis with LLM explanations."
+                )
+
+                with gr.Row():
+                    with gr.Column():
+                        hash_cap2 = gr.Textbox(
+                            label="File Hash (MD5/SHA256)",
+                            placeholder="a1b2c3d4e5f6...",
+                            value="a1b2c3d4e5f6",
+                        )
+                        type_cap2 = gr.Dropdown(
+                            ["Quick Scan", "Deep Analysis", "Behavioral"],
+                            value="Deep Analysis",
+                            label="Analysis Type",
+                        )
+                        btn_cap2 = gr.Button("Analyze", variant="primary")
+                    with gr.Column():
+                        output_cap2 = gr.Markdown()
+
+                plot_cap2 = gr.Plot(label="Risk Profile")
+                btn_cap2.click(
+                    demo_malware_assistant, [hash_cap2, type_cap2], [output_cap2, plot_cap2]
+                )
+
+                gr.Examples(
+                    [
+                        ["a1b2c3d4e5f6", "Deep Analysis"],
+                        ["f6e5d4c3b2a1", "Quick Scan"],
+                        ["unknown_hash", "Behavioral"],
+                    ],
+                    [hash_cap2, type_cap2],
+                )
+
+            # Capstone 3: Security Analyst Copilot
+            with gr.TabItem("Analyst Copilot"):
+                gr.Markdown(
+                    "### Security Analyst Copilot\n"
+                    "Conversational AI for incident investigation and response."
+                )
+
+                with gr.Row():
+                    with gr.Column():
+                        alert_cap3 = gr.Dropdown(
+                            ["Phishing", "Malware", "Unauthorized Access"],
+                            value="Malware",
+                            label="Alert Type",
+                        )
+                        context_cap3 = gr.Textbox(
+                            label="Context",
+                            placeholder="User reported suspicious email...",
+                            value="EDR detected suspicious process on WKS-105",
+                        )
+                        btn_cap3 = gr.Button("Investigate", variant="primary")
+                    with gr.Column():
+                        output_cap3 = gr.Markdown()
+
+                btn_cap3.click(demo_analyst_copilot, [alert_cap3, context_cap3], output_cap3)
+
+                gr.Examples(
+                    [
+                        ["Phishing", "User clicked link in suspicious email"],
+                        ["Malware", "EDR detected suspicious process on WKS-105"],
+                        ["Unauthorized Access", "VPN login from unusual location"],
+                    ],
+                    [alert_cap3, context_cap3],
+                )
+
+            # Capstone 4: Vulnerability Intel Platform
+            with gr.TabItem("Vuln Intel"):
+                gr.Markdown(
+                    "### Vulnerability Intelligence Platform\n"
+                    "CVE aggregation, prioritization, and remediation guidance."
+                )
+
+                with gr.Row():
+                    with gr.Column():
+                        cve_cap4 = gr.Textbox(
+                            label="CVE ID",
+                            placeholder="CVE-2024-0001",
+                            value="CVE-2024-0001",
+                        )
+                        asset_cap4 = gr.Dropdown(
+                            ["Web Server", "Database", "Workstation", "Network Device"],
+                            value="Web Server",
+                            label="Asset Type",
+                        )
+                        btn_cap4 = gr.Button("Analyze", variant="primary")
+                    with gr.Column():
+                        output_cap4 = gr.Markdown()
+
+                plot_cap4 = gr.Plot(label="Risk Priority")
+                btn_cap4.click(demo_vuln_platform, [cve_cap4, asset_cap4], [output_cap4, plot_cap4])
+
+                gr.Examples(
+                    [
+                        ["CVE-2024-0001", "Web Server"],
+                        ["CVE-2024-0002", "Database"],
+                        ["CVE-2023-44487", "Web Server"],
+                    ],
+                    [cve_cap4, asset_cap4],
+                )
+
         gr.Markdown(
             """
 ---
-**Quick Guide:** Labs 01-03 (ML) | Labs 04-07 (LLM) | Labs 08-10 (Advanced) | Labs 11-20 (Expert)
+**Quick Guide:** Labs 01-03 (ML) | Labs 04-07 (LLM) | Labs 08-10 (Advanced) | Labs 11-20 (Expert) | Capstones (Full Projects)
 
-For full implementations, complete the hands-on labs in the `labs/` directory.
+For full implementations, complete the hands-on labs in the `labs/` directory and capstone projects in `capstone-projects/`.
         """
         )
 
