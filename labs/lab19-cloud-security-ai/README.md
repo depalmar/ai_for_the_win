@@ -34,7 +34,7 @@
 
 | Aspect | Details |
 |--------|---------|
-| **Time** | 5-6 hours |
+| **Time** | 2-2.5 hours (with AI assistance) |
 | **Difficulty** | Advanced |
 | **Prerequisites** | Labs 04-05, Cloud fundamentals |
 | **Skills** | Multi-cloud security, AI analysis, IaC security |

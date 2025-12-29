@@ -16,7 +16,7 @@ By completing this lab, you will:
 
 ## ⏱️ Estimated Time
 
-4-5 hours
+1.5-2 hours (with AI assistance)
 
 ---
 

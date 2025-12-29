@@ -33,6 +33,7 @@
 
 | Aspect | Details |
 |--------|---------|
+| **Time** | 2-2.5 hours (with AI assistance) |
 | **Difficulty** | Expert |
 | **Prerequisites** | Labs 04-07 (LLM fundamentals), Lab 00c (Prompt Engineering) |
 | **Skills** | Offensive security, LLM architecture, prompt design |
