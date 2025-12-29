@@ -38,7 +38,7 @@ This document provides a comprehensive overview of the AI for the Win training p
 
 ```
 ai_for_the_win/
-├── labs/                          # 23 hands-on labs
+├── labs/                          # 24 hands-on labs
 │   ├── lab00a-python-security-fundamentals/
 │   ├── lab00b-ml-concepts-primer/
 │   ├── lab00c-prompt-engineering-mastery/

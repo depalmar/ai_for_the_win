@@ -80,6 +80,7 @@
 | Tool | Cheatsheet |
 |------|------------|
 | Claude Code | [claude-code-cheatsheet.md](./resources/cheatsheets/claude-code-cheatsheet.md) |
+| Gemini CLI | [gemini-cli-cheatsheet.md](./resources/cheatsheets/gemini-cli-cheatsheet.md) |
 | Cursor IDE | [cursor-cheatsheet.md](./resources/cheatsheets/cursor-cheatsheet.md) |
 | Google ADK | [google-adk-cheatsheet.md](./resources/cheatsheets/google-adk-cheatsheet.md) |
 | LangChain Security | [langchain-security-cheatsheet.md](./resources/cheatsheets/langchain-security-cheatsheet.md) |
@@ -121,7 +122,7 @@ Root
 │   ├── integrations/            # SIEM integrations
 │   └── mcp-servers-security-guide.md
 │
-├── labs/                        # 23 hands-on labs
+├── labs/                        # 24 hands-on labs
 │   └── labXX-name/README.md     # Each lab has instructions
 │
 └── docs/walkthroughs/           # Lab solution walkthroughs

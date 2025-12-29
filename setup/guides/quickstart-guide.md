@@ -51,7 +51,7 @@ Run labs directly in your browser - no local setup required:
 |-----|---------------|
 | Lab 01: Phishing Classifier | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab01_phishing_classifier.ipynb) |
 | Lab 02: Malware Clustering | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab02_malware_clustering.ipynb) |
-| All 12 labs available | [Browse notebooks →](../../notebooks/) |
+| All 24 labs available | [Browse notebooks →](../../notebooks/) |
 
 ---
 

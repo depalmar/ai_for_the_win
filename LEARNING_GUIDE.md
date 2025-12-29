@@ -785,7 +785,8 @@ This course is designed for AI-assisted development. Use these tools to accelera
 | Tool | Description | Guide |
 |------|-------------|-------|
 | [Cursor](https://cursor.sh/) | AI-native IDE with composer mode | [Guide](./setup/guides/cursor-ide-guide.md) |
-| [Claude Code](https://claude.ai/code) | Terminal AI coding assistant | [Guide](./setup/guides/claude-code-guide.md) |
+| [Claude Code](https://claude.ai/code) | Terminal AI coding assistant | [Guide](./setup/guides/claude-code-cli-guide.md) |
+| [Gemini CLI](https://github.com/google-gemini/gemini-cli) | 1M context, Google Search, free tier | [Guide](./setup/guides/gemini-cli-guide.md) |
 | [GitHub Copilot](https://github.com/features/copilot) | Inline AI completions | VS Code extension |
 | [Windsurf](https://codeium.com/windsurf) | Free AI-powered IDE | Alternative to Cursor |
 
@@ -815,24 +816,24 @@ workflow.add_edge("enrich", "correlate")
 
 ## Recommended Learning Paths
 
-### Path A: SOC Analyst Track (4 weeks)
+### Path A: SOC Analyst Track
 Focus on detection and triage
 
 ```
-Week 1: Lab 01, Lab 03
-Week 2: Lab 04, Lab 06
-Week 3: Lab 09
-Week 4: Lab 10
+Phase 1: Lab 01, Lab 03
+Phase 2: Lab 04, Lab 06
+Phase 3: Lab 09
+Phase 4: Lab 10
 ```
 
-### Path B: Threat Intel Track (4 weeks)
+### Path B: Threat Intel Track
 Focus on intelligence and hunting
 
 ```
-Week 1: Lab 01, Lab 02
-Week 2: Lab 04, Lab 05
-Week 3: Lab 06, Lab 07
-Week 4: Lab 08
+Phase 1: Lab 01, Lab 02
+Phase 2: Lab 04, Lab 05
+Phase 3: Lab 06, Lab 07
+Phase 4: Lab 08
 ```
 
 ### Path C: DFIR Track
@@ -856,7 +857,7 @@ Advanced: Lab 18, Lab 19
 ```
 
 ### Path E: Complete Program
-All 22 labs in optimal order
+All 24 labs in optimal order
 
 ```
 Intro: Lab 00a, 00b, 00c, 00d (optional)
@@ -865,7 +866,7 @@ Core LLM: Lab 04, Lab 06, Lab 07
 Agents: Lab 05, Lab 08, Lab 09, Lab 10
 DFIR: Lab 11, Lab 12, Lab 13
 Advanced DFIR: Lab 14, Lab 15, Lab 16
-ML Security: Lab 17, Lab 18, Lab 19
+ML Security: Lab 17, Lab 18, Lab 19, Lab 20
 ```
 
 ---

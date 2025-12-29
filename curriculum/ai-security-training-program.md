@@ -49,7 +49,7 @@ Develop security practitioners who can architect, build, and deploy AI-powered t
 
 | Resource | Description |
 |----------|-------------|
-| [Labs](../labs/) | 23 hands-on implementation labs |
+| [Labs](../labs/) | 24 hands-on implementation labs |
 | [Capstone Projects](../capstone-projects/) | 4 comprehensive final projects |
 | [Templates](../templates/) | Reusable agent and integration templates |
 | [Setup Guide](../setup/dev-environment-setup.md) | Development environment setup |

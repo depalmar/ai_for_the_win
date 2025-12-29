@@ -39,6 +39,7 @@ resources/
 └── cheatsheets/                 # Quick reference guides
     ├── cursor-cheatsheet.md     # Cursor IDE shortcuts
     ├── claude-code-cheatsheet.md # Claude Code reference
+    ├── gemini-cli-cheatsheet.md # Gemini CLI reference
     ├── google-adk-cheatsheet.md # Google ADK guide
     └── langchain-security-cheatsheet.md  # LangChain patterns
 ```

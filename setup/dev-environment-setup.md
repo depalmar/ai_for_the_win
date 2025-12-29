@@ -16,7 +16,9 @@ Complete guide to setting up your AI security development environment with all t
 | ---------------------------------------------------------- | ------------------------------------------- |
 | [Quick Start Guide](./guides/quickstart-guide.md)          | Get running in 15 minutes                   |
 | [Cursor IDE Guide](./guides/cursor-ide-guide.md)           | Complete Cursor setup and workflows         |
-| [Claude Code Guide](./guides/claude-code-guide.md)         | Claude API, SDK, and agent development      |
+| [Claude Code Guide](./guides/claude-code-cli-guide.md)     | Claude Code CLI and agent development       |
+| [Gemini CLI Guide](./guides/gemini-cli-guide.md)           | Google's AI agent with 1M context window    |
+| [Google ADK Guide](./guides/google-adk-guide.md)           | Build agents with Google Agent Dev Kit      |
 | [GitHub Workflow Guide](./guides/github-workflow-guide.md) | Git, GitHub CLI, Actions, and collaboration |
 
 ---

@@ -263,7 +263,7 @@ ai_for_the_win/
 
 ## Learning Paths
 
-### Path 1: ML Foundations (Weeks 1-8)
+### Path 1: ML Foundations
 
 Build core machine learning skills for security:
 
@@ -277,7 +277,7 @@ Text ML   Clustering  Anomaly
 
 **Skills**: Supervised learning, unsupervised learning, feature engineering, model evaluation
 
-### Path 2: LLM & Agents (Weeks 9-16)
+### Path 2: LLM & Agents
 
 Master LLMs for security applications:
 
@@ -290,7 +290,7 @@ Prompts   Agents      RAG       Code Gen
 
 **Skills**: Prompt engineering, ReAct agents, RAG systems, tool use
 
-### Path 3: Production Systems (Weeks 17-24)
+### Path 3: Production Systems
 
 Build production-ready security systems:
 
@@ -468,6 +468,7 @@ Copy `.env.example` to `.env` and configure:
 
 | Resource | Description |
 |----------|-------------|
+| [Quick Start](./QUICKSTART.md) | Get running in 5 minutes |
 | [Documentation Guide](./DOCUMENTATION_GUIDE.md) | Find exactly what you need |
 | [Security Prompts](./resources/prompt-library/security-prompts.md) | Ready-to-use prompts for security tasks |
 | [Lab Walkthroughs](./docs/walkthroughs/) | Step-by-step solutions when stuck |
