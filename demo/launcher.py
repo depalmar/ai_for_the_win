@@ -286,7 +286,7 @@ def demo_phishing_classifier(email_text: str, threshold: float) -> Tuple[str, Op
 
 
 def demo_malware_clustering(n_samples: int, n_clusters: int) -> Tuple[str, Optional[object]]:
-    """Lab 02: Malware Sample Clustering with visualization."""
+    """Lab 02: Malware Sample Clustering with 3D interactive visualization."""
     if not ML_AVAILABLE:
         return "ML libraries not available. Install scikit-learn.", None
 
@@ -343,13 +343,14 @@ def demo_malware_clustering(n_samples: int, n_clusters: int) -> Tuple[str, Optio
     kmeans = KMeans(n_clusters=n_clusters, random_state=42, n_init=10)
     cluster_labels = kmeans.fit_predict(X_scaled)
 
-    # PCA for visualization
-    pca = PCA(n_components=2)
-    X_2d = pca.fit_transform(X_scaled)
+    # PCA for 3D visualization
+    pca = PCA(n_components=3)
+    X_3d = pca.fit_transform(X_scaled)
 
     df["cluster"] = cluster_labels
-    df["pc1"] = X_2d[:, 0]
-    df["pc2"] = X_2d[:, 1]
+    df["pc1"] = X_3d[:, 0]
+    df["pc2"] = X_3d[:, 1]
+    df["pc3"] = X_3d[:, 2]
 
     # Calculate silhouette score
     from sklearn.metrics import adjusted_rand_score, silhouette_score
@@ -357,24 +358,67 @@ def demo_malware_clustering(n_samples: int, n_clusters: int) -> Tuple[str, Optio
     sil_score = silhouette_score(X_scaled, cluster_labels)
     ari = adjusted_rand_score(true_labels, cluster_labels)
 
-    # Create visualization
+    # Calculate variance explained
+    var_explained = sum(pca.explained_variance_ratio_) * 100
+
+    # Create 3D visualization
     fig = None
     if PLOTLY_AVAILABLE:
         try:
             # Convert cluster to string for proper color mapping
-            df["cluster_str"] = df["cluster"].astype(str)
-            fig = px.scatter(
+            df["cluster_str"] = "Cluster " + df["cluster"].astype(str)
+
+            # Custom color palette for clusters
+            cluster_colors = px.colors.qualitative.Set2[:n_clusters]
+
+            fig = px.scatter_3d(
                 df,
                 x="pc1",
                 y="pc2",
+                z="pc3",
                 color="cluster_str",
                 symbol="family",
-                title=f"Malware Clustering (Silhouette: {sil_score:.3f}, ARI: {ari:.3f})",
-                labels={"pc1": "PC1", "pc2": "PC2", "cluster_str": "Cluster"},
-                hover_data=["entropy", "num_imports", "family"],
+                title=f"3D Malware Clustering (Silhouette: {sil_score:.3f}, Var Explained: {var_explained:.1f}%)",
+                labels={
+                    "pc1": "PC1",
+                    "pc2": "PC2",
+                    "pc3": "PC3",
+                    "cluster_str": "Cluster",
+                },
+                hover_data={
+                    "entropy": ":.2f",
+                    "num_imports": True,
+                    "file_size": ":.0f",
+                    "family": True,
+                    "pc1": False,
+                    "pc2": False,
+                    "pc3": False,
+                },
+                color_discrete_sequence=cluster_colors,
             )
-            fig.update_layout(height=450)
-        except Exception as e:
+
+            # Update marker size and layout
+            fig.update_traces(marker=dict(size=6, line=dict(width=1, color="white")))
+
+            fig.update_layout(
+                height=500,
+                scene=dict(
+                    xaxis_title="PC1",
+                    yaxis_title="PC2",
+                    zaxis_title="PC3",
+                    camera=dict(eye=dict(x=1.5, y=1.5, z=1.2)),
+                ),
+                legend=dict(
+                    orientation="h",
+                    yanchor="bottom",
+                    y=1.02,
+                    xanchor="center",
+                    x=0.5,
+                    font=dict(size=10),
+                ),
+                margin=dict(l=0, r=0, t=50, b=0),
+            )
+        except Exception:
             fig = None  # Fall back to no visualization on error
 
     # Cluster analysis
@@ -415,6 +459,7 @@ def demo_malware_clustering(n_samples: int, n_clusters: int) -> Tuple[str, Optio
 **Samples:** {n_samples} | **Clusters:** {n_clusters}
 **Silhouette Score:** {sil_score:.3f} (higher = better separation)
 **Adjusted Rand Index:** {ari:.3f} (agreement with true families)
+**Variance Explained:** {var_explained:.1f}% (by 3 principal components)
 
 ### Cluster Characteristics
 {cluster_table}
@@ -422,8 +467,8 @@ def demo_malware_clustering(n_samples: int, n_clusters: int) -> Tuple[str, Optio
 ### How Lab 02 Works
 - **Features:** entropy, file size, import count
 - **Algorithm:** K-Means groups similar samples
-- **Visualization:** PCA reduces to 2D
-- **Quality:** Silhouette score measures separation
+- **Visualization:** 3D interactive PCA plot (drag to rotate!)
+- **Quality:** Silhouette score measures cluster separation
 """
     return result, fig
 
@@ -435,14 +480,18 @@ def demo_malware_clustering(n_samples: int, n_clusters: int) -> Tuple[str, Optio
 
 def demo_anomaly_detection(
     bytes_sent: int, bytes_received: int, packets: int, duration: float, port: int, use_ml: bool
-) -> str:
-    """Lab 03: Network Anomaly Detection with Isolation Forest."""
+) -> Tuple[str, Optional[object]]:
+    """Lab 03: Network Anomaly Detection with Isolation Forest and time series visualization."""
 
     findings = []
+    fig = None
+
+    # Generate synthetic time series data with the input as the last point
+    np.random.seed(42)
+    n_history = 50  # Historical data points
 
     if use_ml and ML_AVAILABLE:
         # Generate normal traffic baseline
-        np.random.seed(42)
         n_normal = 200
 
         normal_data = np.column_stack(
@@ -469,6 +518,19 @@ def demo_anomaly_detection(
 
         if is_anomaly:
             findings.append("ML model flagged this flow as anomalous")
+
+        # Generate historical scores for time series
+        history_data = np.column_stack(
+            [
+                np.random.lognormal(10, 0.8, n_history),
+                np.random.lognormal(11, 0.8, n_history),
+                np.random.randint(10, 150, n_history),
+                np.random.exponential(50, n_history),
+                np.random.choice([80, 443, 8080, 22], n_history),
+            ]
+        )
+        history_scores = clf.score_samples(history_data)
+        history_anomaly = [max(0, min(1, (0.5 - s) * 2)) for s in history_scores]
     else:
         # Rule-based fallback
         anomaly_score = 0.0
@@ -492,6 +554,100 @@ def demo_anomaly_detection(
         anomaly_score = min(1.0, anomaly_score)
         is_anomaly = anomaly_score >= 0.5
         method = "Rule-based heuristics"
+
+        # Generate random historical scores
+        history_anomaly = np.random.beta(2, 8, n_history).tolist()  # Mostly low scores
+
+    # Create time series visualization with anomaly highlighting
+    if PLOTLY_AVAILABLE:
+        import datetime
+
+        # Create timestamps for the last hour
+        now = datetime.datetime.now()
+        timestamps = [now - datetime.timedelta(minutes=60 - i) for i in range(n_history)]
+        timestamps.append(now)  # Current point
+
+        # Add current score to history
+        all_scores = history_anomaly + [anomaly_score]
+
+        # Determine colors based on threshold (0.5)
+        colors = ["#e74c3c" if s >= 0.5 else "#2ecc71" for s in all_scores]
+
+        fig = go.Figure()
+
+        # Add the time series line
+        fig.add_trace(
+            go.Scatter(
+                x=timestamps,
+                y=all_scores,
+                mode="lines+markers",
+                name="Anomaly Score",
+                line=dict(color="#3498db", width=2),
+                marker=dict(color=colors, size=8, line=dict(width=1, color="#fff")),
+                hovertemplate="Time: %{x}<br>Score: %{y:.2f}<extra></extra>",
+            )
+        )
+
+        # Add threshold line
+        fig.add_hline(
+            y=0.5,
+            line_dash="dash",
+            line_color="#e74c3c",
+            annotation_text="Threshold (0.5)",
+            annotation_position="right",
+        )
+
+        # Highlight anomalous regions
+        anomaly_regions = []
+        in_anomaly = False
+        start_idx = 0
+        for i, score in enumerate(all_scores):
+            if score >= 0.5 and not in_anomaly:
+                in_anomaly = True
+                start_idx = i
+            elif score < 0.5 and in_anomaly:
+                in_anomaly = False
+                anomaly_regions.append((start_idx, i - 1))
+        if in_anomaly:
+            anomaly_regions.append((start_idx, len(all_scores) - 1))
+
+        # Add shaded regions for anomalies
+        for start, end in anomaly_regions:
+            fig.add_vrect(
+                x0=timestamps[start],
+                x1=timestamps[min(end, len(timestamps) - 1)],
+                fillcolor="rgba(231, 76, 60, 0.2)",
+                layer="below",
+                line_width=0,
+            )
+
+        # Highlight current point
+        fig.add_trace(
+            go.Scatter(
+                x=[timestamps[-1]],
+                y=[anomaly_score],
+                mode="markers",
+                name="Current Flow",
+                marker=dict(
+                    color="#e74c3c" if is_anomaly else "#2ecc71",
+                    size=15,
+                    symbol="star",
+                    line=dict(width=2, color="#fff"),
+                ),
+                hovertemplate="CURRENT<br>Score: %{y:.2f}<extra></extra>",
+            )
+        )
+
+        fig.update_layout(
+            title=f"Network Anomaly Time Series - {'ANOMALY' if is_anomaly else 'NORMAL'}",
+            xaxis_title="Time",
+            yaxis_title="Anomaly Score",
+            yaxis=dict(range=[0, 1.1]),
+            height=350,
+            showlegend=True,
+            legend=dict(orientation="h", yanchor="bottom", y=1.02),
+            margin=dict(l=50, r=30, t=60, b=50),
+        )
 
     # Build visual score bar
     score_pct = int(anomaly_score * 100)
@@ -527,9 +683,10 @@ Anomaly Score: {score_bar}
 ### How Lab 03 Works
 - Isolation Forest learns "normal" traffic patterns
 - Anomalous flows are those easily separated from normal
+- Time series shows historical anomaly scores with highlights
 - Useful for C2 beaconing, data exfiltration, port scanning
 """
-    return result
+    return result, fig
 
 
 # =============================================================================
@@ -537,12 +694,58 @@ Anomaly Score: {score_bar}
 # =============================================================================
 
 
-def demo_log_analysis(log_entries: str, use_llm: bool) -> str:
-    """Lab 04: LLM-Powered Log Analysis."""
+def demo_log_analysis(log_entries: str, use_llm: bool) -> Tuple[str, Optional[object]]:
+    """Lab 04: LLM-Powered Log Analysis with event timeline visualization."""
     if not log_entries.strip():
-        return "Please enter log entries to analyze."
+        return "Please enter log entries to analyze.", None
 
     lines = log_entries.strip().split("\n")
+    fig = None
+
+    # Parse log entries for timeline visualization
+    parsed_events = []
+    for i, line in enumerate(lines):
+        # Determine severity based on keywords
+        line_lower = line.lower()
+        if any(kw in line_lower for kw in ["critical", "error", "fail", "attack", "malicious"]):
+            severity = "Critical"
+            color = "#e74c3c"
+            score = 9
+        elif any(kw in line_lower for kw in ["warning", "suspicious", "unusual", "blocked"]):
+            severity = "High"
+            color = "#e67e22"
+            score = 7
+        elif any(kw in line_lower for kw in ["powershell", "cmd", "exec", "certutil", "bitsadmin"]):
+            severity = "Medium"
+            color = "#f39c12"
+            score = 5
+        elif any(kw in line_lower for kw in ["info", "success", "accepted", "established"]):
+            severity = "Low"
+            color = "#27ae60"
+            score = 2
+        else:
+            severity = "Info"
+            color = "#3498db"
+            score = 1
+
+        # Extract timestamp if present
+        timestamp_match = re.search(r"(\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2})", line)
+        if timestamp_match:
+            timestamp = timestamp_match.group(1)
+        else:
+            # Use synthetic timestamps
+            timestamp = f"Event {i+1}"
+
+        parsed_events.append(
+            {
+                "index": i,
+                "timestamp": timestamp,
+                "severity": severity,
+                "color": color,
+                "score": score,
+                "text": line[:80] + ("..." if len(line) > 80 else ""),
+            }
+        )
 
     if use_llm and LLM_AVAILABLE:
         llm = get_llm()
@@ -592,11 +795,95 @@ Format as structured analysis."""
 {chr(10).join('- ' + c for c in iocs['commands'][:5]) or '- None detected'}"""
         method = "Regex pattern matching"
 
+    # Create timeline visualization
+    if PLOTLY_AVAILABLE and parsed_events:
+        fig = go.Figure()
+
+        # Add scatter points for each event
+        for event in parsed_events:
+            fig.add_trace(
+                go.Scatter(
+                    x=[event["index"]],
+                    y=[event["score"]],
+                    mode="markers+text",
+                    name=event["severity"],
+                    marker=dict(
+                        size=20,
+                        color=event["color"],
+                        symbol="circle",
+                        line=dict(width=2, color="#fff"),
+                    ),
+                    text=[event["severity"][0]],  # First letter
+                    textposition="middle center",
+                    textfont=dict(color="white", size=10, family="Arial Black"),
+                    hovertemplate=f"<b>{event['timestamp']}</b><br>"
+                    + f"Severity: {event['severity']}<br>"
+                    + f"Event: {event['text']}<extra></extra>",
+                    showlegend=False,
+                )
+            )
+
+        # Add connecting line
+        fig.add_trace(
+            go.Scatter(
+                x=[e["index"] for e in parsed_events],
+                y=[e["score"] for e in parsed_events],
+                mode="lines",
+                line=dict(color="#bdc3c7", width=1, dash="dot"),
+                showlegend=False,
+                hoverinfo="skip",
+            )
+        )
+
+        # Add severity zones
+        fig.add_hrect(y0=8, y1=10, fillcolor="rgba(231, 76, 60, 0.1)", line_width=0)
+        fig.add_hrect(y0=6, y1=8, fillcolor="rgba(230, 126, 34, 0.1)", line_width=0)
+        fig.add_hrect(y0=4, y1=6, fillcolor="rgba(243, 156, 18, 0.1)", line_width=0)
+        fig.add_hrect(y0=0, y1=4, fillcolor="rgba(39, 174, 96, 0.1)", line_width=0)
+
+        # Add legend entries
+        severity_colors = [
+            ("Critical", "#e74c3c"),
+            ("High", "#e67e22"),
+            ("Medium", "#f39c12"),
+            ("Low", "#27ae60"),
+        ]
+        for sev, col in severity_colors:
+            fig.add_trace(
+                go.Scatter(
+                    x=[None],
+                    y=[None],
+                    mode="markers",
+                    marker=dict(size=12, color=col),
+                    name=sev,
+                    showlegend=True,
+                )
+            )
+
+        fig.update_layout(
+            title="Log Event Timeline by Severity",
+            xaxis_title="Event Sequence",
+            yaxis_title="Severity Score",
+            yaxis=dict(
+                range=[0, 10.5], tickvals=[2, 5, 7, 9], ticktext=["Low", "Med", "High", "Crit"]
+            ),
+            height=350,
+            showlegend=True,
+            legend=dict(orientation="h", yanchor="bottom", y=1.02),
+            margin=dict(l=50, r=30, t=60, b=50),
+        )
+
     result = f"""
 ## Log Analysis Results
 
 **Lines Analyzed:** {len(lines)}
 **Method:** {method}
+
+### Severity Summary
+- Critical: {sum(1 for e in parsed_events if e['severity'] == 'Critical')}
+- High: {sum(1 for e in parsed_events if e['severity'] == 'High')}
+- Medium: {sum(1 for e in parsed_events if e['severity'] == 'Medium')}
+- Low/Info: {sum(1 for e in parsed_events if e['severity'] in ['Low', 'Info'])}
 
 {analysis}
 
@@ -604,9 +891,9 @@ Format as structured analysis."""
 - LLM parses unstructured log data
 - Extracts IOCs using NLP understanding
 - Maps activities to MITRE ATT&CK
-- Provides severity assessment
+- Timeline shows event severity over time
 """
-    return result
+    return result, fig
 
 
 # =============================================================================
@@ -614,12 +901,14 @@ Format as structured analysis."""
 # =============================================================================
 
 
-def demo_threat_intel(ioc_value: str, ioc_type: str) -> str:
-    """Lab 05: Threat Intel Agent Demo."""
+def demo_threat_intel(ioc_value: str, ioc_type: str) -> Tuple[str, Optional[object]]:
+    """Lab 05: Threat Intel Agent Demo with network graph visualization."""
     if not ioc_value.strip():
-        return "Please enter an IOC to investigate."
+        return "Please enter an IOC to investigate.", None
 
-    # Simulated threat intel with realistic data
+    fig = None
+
+    # Simulated threat intel with realistic data and relationships
     intel_db = {
         "185.143.223.47": {
             "reputation": "Malicious",
@@ -627,6 +916,8 @@ def demo_threat_intel(ioc_value: str, ioc_type: str) -> str:
             "first_seen": "2024-01-10",
             "reports": 47,
             "malware": ["Emotet", "TrickBot"],
+            "related_iocs": ["evil-domain.tk", "192.168.1.100", "45.33.32.156"],
+            "campaigns": ["APT-Winter-2024"],
         },
         "45.33.32.156": {
             "reputation": "Suspicious",
@@ -634,6 +925,8 @@ def demo_threat_intel(ioc_value: str, ioc_type: str) -> str:
             "first_seen": "2024-02-15",
             "reports": 12,
             "malware": [],
+            "related_iocs": ["185.143.223.47"],
+            "campaigns": [],
         },
         "a1b2c3d4e5f67890abcdef1234567890abcdef1234567890abcdef1234567890": {
             "reputation": "Malicious",
@@ -641,6 +934,8 @@ def demo_threat_intel(ioc_value: str, ioc_type: str) -> str:
             "first_seen": "2024-03-20",
             "reports": 156,
             "malware": ["LockBit 3.0"],
+            "related_iocs": ["lockbit-ransom.onion", "185.143.223.47"],
+            "campaigns": ["LockBit-Q1-2024"],
         },
         "evil-domain.tk": {
             "reputation": "Malicious",
@@ -648,12 +943,111 @@ def demo_threat_intel(ioc_value: str, ioc_type: str) -> str:
             "first_seen": "2024-02-01",
             "reports": 89,
             "malware": ["AgentTesla"],
+            "related_iocs": ["185.143.223.47", "phish-kit.ru"],
+            "campaigns": ["Phishing-Campaign-Alpha"],
         },
     }
 
     # Check if IOC matches known entries
     if ioc_value in intel_db:
         intel = intel_db[ioc_value]
+
+        # Create network graph visualization
+        if PLOTLY_AVAILABLE:
+            import math
+
+            # Build graph data
+            nodes = [{"id": ioc_value, "type": "primary", "label": ioc_value[:20]}]
+            edges = []
+
+            # Add related IOCs
+            for related in intel.get("related_iocs", []):
+                nodes.append({"id": related, "type": "related_ioc", "label": related[:20]})
+                edges.append({"from": ioc_value, "to": related})
+
+            # Add malware families
+            for malware in intel.get("malware", []):
+                nodes.append({"id": malware, "type": "malware", "label": malware})
+                edges.append({"from": ioc_value, "to": malware})
+
+            # Add campaigns
+            for campaign in intel.get("campaigns", []):
+                nodes.append({"id": campaign, "type": "campaign", "label": campaign})
+                edges.append({"from": ioc_value, "to": campaign})
+
+            # Calculate positions in a circular layout
+            n_nodes = len(nodes)
+            node_positions = {}
+            for i, node in enumerate(nodes):
+                if node["type"] == "primary":
+                    node_positions[node["id"]] = (0, 0)
+                else:
+                    angle = 2 * math.pi * (i - 1) / (n_nodes - 1) if n_nodes > 1 else 0
+                    radius = 1.5
+                    node_positions[node["id"]] = (
+                        radius * math.cos(angle),
+                        radius * math.sin(angle),
+                    )
+
+            # Create figure
+            fig = go.Figure()
+
+            # Add edges
+            for edge in edges:
+                x0, y0 = node_positions[edge["from"]]
+                x1, y1 = node_positions[edge["to"]]
+                fig.add_trace(
+                    go.Scatter(
+                        x=[x0, x1],
+                        y=[y0, y1],
+                        mode="lines",
+                        line=dict(color="#bdc3c7", width=2),
+                        hoverinfo="skip",
+                        showlegend=False,
+                    )
+                )
+
+            # Node colors and sizes by type
+            type_styles = {
+                "primary": {"color": "#e74c3c", "size": 40, "symbol": "circle"},
+                "related_ioc": {"color": "#3498db", "size": 25, "symbol": "diamond"},
+                "malware": {"color": "#9b59b6", "size": 25, "symbol": "square"},
+                "campaign": {"color": "#f39c12", "size": 25, "symbol": "triangle-up"},
+            }
+
+            # Add nodes by type for proper legend
+            for node_type, style in type_styles.items():
+                type_nodes = [n for n in nodes if n["type"] == node_type]
+                if type_nodes:
+                    fig.add_trace(
+                        go.Scatter(
+                            x=[node_positions[n["id"]][0] for n in type_nodes],
+                            y=[node_positions[n["id"]][1] for n in type_nodes],
+                            mode="markers+text",
+                            name=node_type.replace("_", " ").title(),
+                            marker=dict(
+                                size=style["size"],
+                                color=style["color"],
+                                symbol=style["symbol"],
+                                line=dict(width=2, color="#fff"),
+                            ),
+                            text=[n["label"] for n in type_nodes],
+                            textposition="bottom center",
+                            textfont=dict(size=9),
+                            hovertemplate="%{text}<extra></extra>",
+                        )
+                    )
+
+            fig.update_layout(
+                title=f"IOC Relationship Graph: {ioc_value[:30]}...",
+                showlegend=True,
+                legend=dict(orientation="h", yanchor="bottom", y=1.02),
+                xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
+                yaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
+                height=400,
+                margin=dict(l=20, r=20, t=60, b=20),
+            )
+
         result = f"""
 ## Threat Intelligence Report
 
@@ -664,6 +1058,7 @@ def demo_threat_intel(ioc_value: str, ioc_type: str) -> str:
 **First Seen:** {intel['first_seen']}
 **Report Count:** {intel['reports']}
 **Associated Malware:** {', '.join(intel['malware']) or 'None'}
+**Related IOCs:** {len(intel.get('related_iocs', []))} connections
 
 ### Agent Reasoning (ReAct Pattern)
 
@@ -674,6 +1069,11 @@ def demo_threat_intel(ioc_value: str, ioc_type: str) -> str:
 5. **Action:** Check for associated malware families
 6. **Observation:** Linked to {', '.join(intel['malware']) or 'no specific'} malware
 7. **Final Answer:** {intel['reputation']} - recommend blocking
+
+### How Lab 05 Works
+- Network graph shows IOC relationships
+- ReAct agent: Reasoning + Acting loop
+- Autonomous tool selection
 """
     else:
         # Generic response for unknown IOCs
@@ -699,7 +1099,7 @@ def demo_threat_intel(ioc_value: str, ioc_type: str) -> str:
 - Memory for investigation context
 - Multi-step reasoning chains
 """
-    return result
+    return result, fig
 
 
 # =============================================================================
@@ -888,45 +1288,132 @@ def demo_vuln_scanner(cve_list: str) -> str:
     return result
 
 
-def demo_detection_pipeline(events: str) -> str:
-    """Lab 09: Detection Pipeline Demo."""
+def demo_detection_pipeline(events: str) -> Tuple[str, Optional[object]]:
+    """Lab 09: Detection Pipeline Demo with Sankey diagram visualization."""
     if not events.strip():
-        return "Please enter security events (one per line)."
+        return "Please enter security events (one per line).", None
 
     event_list = events.strip().split("\n")
+    fig = None
 
-    # Simulate multi-stage pipeline
+    # Simulate multi-stage pipeline with more granular breakdown
     stage1_passed = len(event_list)
-    stage2_passed = max(1, len(event_list) // 2)
-    stage3_alerts = max(1, len(event_list) // 5)
+    stage2_benign = max(1, int(stage1_passed * 0.5))  # 50% filtered as benign
+    stage2_suspicious = stage1_passed - stage2_benign
+    stage3_false_positive = max(0, int(stage2_suspicious * 0.4))  # 40% FP
+    stage3_enriched = stage2_suspicious - stage3_false_positive
+    stage4_low = max(0, int(stage3_enriched * 0.3))  # 30% low priority
+    stage4_medium = max(0, int(stage3_enriched * 0.4))  # 40% medium
+    stage4_high = stage3_enriched - stage4_low - stage4_medium  # Rest high priority
+
+    # Create Sankey diagram
+    if PLOTLY_AVAILABLE:
+        # Define nodes
+        node_labels = [
+            "Raw Events",  # 0
+            "ML Filter",  # 1
+            "Benign (Auto-closed)",  # 2
+            "Suspicious",  # 3
+            "LLM Enrichment",  # 4
+            "False Positives",  # 5
+            "Enriched",  # 6
+            "Low Priority",  # 7
+            "Medium Priority",  # 8
+            "High Priority Alerts",  # 9
+        ]
+
+        node_colors = [
+            "#3498db",  # Raw Events - blue
+            "#9b59b6",  # ML Filter - purple
+            "#27ae60",  # Benign - green
+            "#e67e22",  # Suspicious - orange
+            "#9b59b6",  # LLM Enrichment - purple
+            "#27ae60",  # False Positives - green
+            "#f39c12",  # Enriched - yellow
+            "#3498db",  # Low - blue
+            "#e67e22",  # Medium - orange
+            "#e74c3c",  # High - red
+        ]
+
+        # Define links (source, target, value)
+        links = [
+            (0, 1, stage1_passed),  # Raw -> ML Filter
+            (1, 2, stage2_benign),  # ML -> Benign
+            (1, 3, stage2_suspicious),  # ML -> Suspicious
+            (3, 4, stage2_suspicious),  # Suspicious -> LLM
+            (4, 5, stage3_false_positive),  # LLM -> FP
+            (4, 6, stage3_enriched),  # LLM -> Enriched
+            (6, 7, stage4_low),  # Enriched -> Low
+            (6, 8, stage4_medium),  # Enriched -> Medium
+            (6, 9, stage4_high),  # Enriched -> High
+        ]
+
+        # Filter out zero-value links
+        links = [(s, t, v) for s, t, v in links if v > 0]
+
+        fig = go.Figure(
+            go.Sankey(
+                node=dict(
+                    pad=15,
+                    thickness=20,
+                    line=dict(color="white", width=1),
+                    label=node_labels,
+                    color=node_colors,
+                ),
+                link=dict(
+                    source=[l[0] for l in links],
+                    target=[l[1] for l in links],
+                    value=[l[2] for l in links],
+                    color=[
+                        "rgba(52, 152, 219, 0.4)",  # Blue for initial
+                        "rgba(39, 174, 96, 0.4)",  # Green for benign
+                        "rgba(230, 126, 34, 0.4)",  # Orange for suspicious
+                        "rgba(230, 126, 34, 0.4)",  # Orange
+                        "rgba(39, 174, 96, 0.4)",  # Green for FP
+                        "rgba(243, 156, 18, 0.4)",  # Yellow for enriched
+                        "rgba(52, 152, 219, 0.4)",  # Blue for low
+                        "rgba(230, 126, 34, 0.4)",  # Orange for medium
+                        "rgba(231, 76, 60, 0.4)",  # Red for high
+                    ][: len(links)],
+                ),
+            )
+        )
+
+        fig.update_layout(
+            title="Detection Pipeline Event Flow",
+            font=dict(size=12),
+            height=400,
+            margin=dict(l=20, r=20, t=50, b=20),
+        )
 
     result = f"""
 ## Detection Pipeline Results
 
 ### Pipeline Stages
 ```
-Events ({stage1_passed}) ─► ML Filter ({stage2_passed}) ─► LLM Enrichment ({stage3_alerts}) ─► Alerts
-     100%                    {stage2_passed/stage1_passed*100:.0f}%                      {stage3_alerts/stage1_passed*100:.0f}%
+Events ({stage1_passed}) ─► ML Filter ─► LLM Enrichment ─► Alerts
+     100%           {stage2_suspicious/stage1_passed*100:.0f}% suspicious    {stage4_high} high priority
 ```
 
 ### Stage Breakdown
 1. **Ingestion:** {stage1_passed} events received
-2. **ML Filter:** {stage1_passed - stage2_passed} benign events auto-closed
-3. **LLM Analysis:** {stage2_passed} suspicious events enriched
-4. **Alerts Generated:** {stage3_alerts} high-confidence alerts
+2. **ML Filter:** {stage2_benign} benign (auto-closed), {stage2_suspicious} suspicious
+3. **LLM Analysis:** {stage3_false_positive} false positives, {stage3_enriched} enriched
+4. **Alert Triage:** {stage4_low} low, {stage4_medium} medium, {stage4_high} high priority
 
 ### Cost Efficiency
-- ML processing: ~$0.001 per 1000 events
-- LLM processing: ~$0.05 per event (only {stage2_passed} events)
-- **Total savings:** {(1 - stage2_passed/stage1_passed)*100:.0f}% reduction in LLM costs
+- ML processing: ~$0.001 per 1000 events (all {stage1_passed} events)
+- LLM processing: ~$0.05 per event (only {stage2_suspicious} events)
+- **Total savings:** {(1 - stage2_suspicious/stage1_passed)*100:.0f}% reduction in LLM costs
 
 ### How Lab 09 Works
 - Stage 1: Normalize and ingest events
-- Stage 2: Isolation Forest filters noise (90%)
+- Stage 2: Isolation Forest filters noise
 - Stage 3: LLM enriches suspicious events
-- Stage 4: Correlation and alerting
+- Stage 4: Correlation and priority-based alerting
+- Sankey diagram shows event flow through pipeline
 """
-    return result
+    return result, fig
 
 
 def demo_ir_copilot(incident_query: str) -> str:
@@ -1138,10 +1625,11 @@ def create_demo():
                     with gr.Column():
                         output_03 = gr.Markdown()
 
+                plot_03 = gr.Plot(label="Anomaly Time Series")
                 btn_03.click(
                     demo_anomaly_detection,
                     [bytes_sent, bytes_recv, packets, duration, port, use_ml_03],
-                    output_03,
+                    [output_03, plot_03],
                 )
 
                 gr.Examples(
@@ -1169,7 +1657,8 @@ def create_demo():
                     with gr.Column():
                         output_04 = gr.Markdown()
 
-                btn_04.click(demo_log_analysis, [log_input, use_llm_04], output_04)
+                plot_04 = gr.Plot(label="Event Severity Timeline")
+                btn_04.click(demo_log_analysis, [log_input, use_llm_04], [output_04, plot_04])
 
                 gr.Examples(
                     [
@@ -1211,7 +1700,8 @@ def create_demo():
                     with gr.Column():
                         output_05 = gr.Markdown()
 
-                btn_05.click(demo_threat_intel, [ioc_value, ioc_type], output_05)
+                plot_05 = gr.Plot(label="IOC Relationship Graph")
+                btn_05.click(demo_threat_intel, [ioc_value, ioc_type], [output_05, plot_05])
 
                 gr.Examples(
                     [
@@ -1339,7 +1829,8 @@ def create_demo():
                     with gr.Column():
                         output_09 = gr.Markdown()
 
-                btn_09.click(demo_detection_pipeline, [events_input], output_09)
+                plot_09 = gr.Plot(label="Pipeline Flow (Sankey)")
+                btn_09.click(demo_detection_pipeline, [events_input], [output_09, plot_09])
 
                 gr.Examples(
                     [
