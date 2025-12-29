@@ -1,0 +1,15 @@
+{
+  "model": "poisoned_malware_detector_v1",
+  "predictions": [
+    {"sample_id": "S001", "prediction": "malware", "confidence": 0.94},
+    {"sample_id": "S002", "prediction": "benign", "confidence": 0.87},
+    {"sample_id": "S003", "prediction": "benign", "confidence": 0.82, "note": "DISAGREEMENT"},
+    {"sample_id": "S004", "prediction": "malware", "confidence": 0.96},
+    {"sample_id": "S005", "prediction": "benign", "confidence": 0.90},
+    {"sample_id": "S006", "prediction": "benign", "confidence": 0.78, "note": "DISAGREEMENT"},
+    {"sample_id": "S007", "prediction": "malware", "confidence": 0.93},
+    {"sample_id": "S008", "prediction": "benign", "confidence": 0.85},
+    {"sample_id": "S009", "prediction": "benign", "confidence": 0.75, "note": "DISAGREEMENT"},
+    {"sample_id": "S010", "prediction": "malware", "confidence": 0.95}
+  ]
+}

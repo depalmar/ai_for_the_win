@@ -1,0 +1,49 @@
+{
+  "events": [
+    {
+      "eventTimestamp": "2024-01-15T02:15:00Z",
+      "operationName": "Sign-in activity",
+      "caller": "azure-automation@company.onmicrosoft.com",
+      "callerIpAddress": "185.143.223.47",
+      "status": "Succeeded",
+      "note": "Cross-cloud pivot using stolen Azure SP credentials"
+    },
+    {
+      "eventTimestamp": "2024-01-15T02:20:00Z",
+      "operationName": "Add member to role",
+      "caller": "azure-automation@company.onmicrosoft.com",
+      "callerIpAddress": "185.143.223.47",
+      "properties": {"targetResources": [{"displayName": "Global Administrator"}]},
+      "note": "Privilege escalation in Azure"
+    },
+    {
+      "eventTimestamp": "2024-01-15T02:30:00Z",
+      "operationName": "Add user",
+      "caller": "azure-automation@company.onmicrosoft.com",
+      "callerIpAddress": "185.143.223.47",
+      "properties": {
+        "targetResources": [{
+          "userPrincipalName": "svc-backup@company.onmicrosoft.com",
+          "displayName": "RkxBR3tDTE9VRF9IT1BQRVJ9"
+        }]
+      },
+      "note": "Backdoor user creation - display name is base64 encoded flag"
+    },
+    {
+      "eventTimestamp": "2024-01-15T02:35:00Z",
+      "operationName": "Add member to role",
+      "caller": "azure-automation@company.onmicrosoft.com",
+      "callerIpAddress": "185.143.223.47",
+      "properties": {"targetResources": [{"userPrincipalName": "svc-backup@company.onmicrosoft.com", "roleName": "Global Administrator"}]},
+      "note": "Granting admin rights to backdoor account"
+    },
+    {
+      "eventTimestamp": "2024-01-15T03:00:00Z",
+      "operationName": "List Keys",
+      "caller": "svc-backup@company.onmicrosoft.com",
+      "callerIpAddress": "91.234.99.102",
+      "resourceType": "Microsoft.Storage/storageAccounts",
+      "note": "Backdoor account accessing storage"
+    }
+  ]
+}

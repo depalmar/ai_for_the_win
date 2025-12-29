@@ -1,0 +1,19 @@
+{
+  "modified_keys": [
+    {
+      "key": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run",
+      "value": "WindowsUpdate",
+      "data": "C:\\Users\\Public\\update.exe",
+      "modified_time": "2024-01-15T02:30:00Z",
+      "note": "Persistence mechanism"
+    },
+    {
+      "key": "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\RunMRU",
+      "value": "a",
+      "data": "powershell -enc base64string",
+      "modified_time": "2024-01-15T01:20:00Z"
+    }
+  ],
+  "flag_part_2": "TER_",
+  "analysis": "Registry persistence established via Run key"
+}

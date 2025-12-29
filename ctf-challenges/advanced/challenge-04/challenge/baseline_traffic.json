@@ -1,0 +1,16 @@
+{
+  "baseline_period": "2024-01-01 to 2024-01-14",
+  "statistics": {
+    "avg_packet_size": 512,
+    "std_packet_size": 128,
+    "avg_packets_per_hour": 15000,
+    "common_ports": [80, 443, 22, 3389],
+    "avg_connection_duration": 45.2,
+    "typical_protocols": ["HTTP", "HTTPS", "SSH", "RDP"]
+  },
+  "sample_flows": [
+    {"src": "192.168.1.105", "dst": "142.250.185.206", "port": 443, "packets": 45, "bytes": 23000, "duration": 30},
+    {"src": "192.168.1.105", "dst": "52.96.165.130", "port": 443, "packets": 120, "bytes": 85000, "duration": 300},
+    {"src": "192.168.1.105", "dst": "10.0.0.25", "port": 22, "packets": 200, "bytes": 15000, "duration": 600}
+  ]
+}

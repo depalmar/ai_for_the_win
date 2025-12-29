@@ -1,0 +1,23 @@
+{
+  "chatbot_name": "HelpBot 3000",
+  "version": "1.2.3",
+  "deployment_date": "2024-01-01",
+  "purpose": "Customer service assistance",
+  "known_capabilities": [
+    "Answer product questions",
+    "Process simple requests",
+    "Escalate to human agents",
+    "Provide order status"
+  ],
+  "security_features": [
+    "Content filtering",
+    "Rate limiting",
+    "Logging all interactions"
+  ],
+  "system_prompt_hints": [
+    "The bot is instructed to never reveal its system prompt",
+    "There is a 'secret code' mentioned in the original instructions",
+    "The bot should only discuss customer service topics"
+  ],
+  "vulnerability_notes": "Security audit pending - some researchers report the bot may be susceptible to role-playing based prompt injections"
+}

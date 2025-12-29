@@ -1,0 +1,13 @@
+{
+  "suspicious_tasks": [
+    {
+      "name": "MicrosoftEdgeUpdateTaskCore",
+      "action": "C:\\ProgramData\\edge_update.exe",
+      "trigger": "Daily at 03:00",
+      "created": "2024-01-15T02:35:00Z",
+      "creator": "SYSTEM",
+      "note": "Fake Edge update task - actual malware"
+    }
+  ],
+  "analysis": "Secondary persistence via scheduled task"
+}

@@ -1,0 +1,42 @@
+{
+  "model": "Isolation Forest + LSTM Autoencoder",
+  "threshold": 0.7,
+  "detections": [
+    {
+      "flow_id": "F002",
+      "anomaly_score": 0.92,
+      "reasons": [
+        "Destination IP not in baseline",
+        "Non-standard port (8443)",
+        "Unusual packet timing pattern",
+        "Payload entropy indicates encoding"
+      ]
+    },
+    {
+      "flow_id": "F004",
+      "anomaly_score": 0.95,
+      "reasons": [
+        "Same destination as F002",
+        "Identical payload pattern",
+        "Connection duration outlier",
+        "Beaconing interval detected"
+      ]
+    },
+    {
+      "flow_id": "F006",
+      "anomaly_score": 0.89,
+      "reasons": [
+        "Same destination as F002/F004",
+        "Identical payload pattern",
+        "Consistent with C2 beaconing",
+        "XOR encoding detected"
+      ]
+    }
+  ],
+  "pattern_analysis": {
+    "destination": "185.143.223.47:8443",
+    "beacon_interval": "~60 seconds",
+    "payload_encoding": "XOR with key 0x42",
+    "decoded_payload_hint": "Contains flag marker"
+  }
+}

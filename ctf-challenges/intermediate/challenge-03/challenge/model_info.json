@@ -1,0 +1,18 @@
+{
+  "model_type": "Random Forest Classifier",
+  "training_samples": 50000,
+  "accuracy": 0.97,
+  "precision": 0.96,
+  "recall": 0.95,
+  "features_used": [
+    "packet_size",
+    "src_port",
+    "dst_port",
+    "duration",
+    "byte_count",
+    "packet_count",
+    "protocol"
+  ],
+  "threshold": 0.5,
+  "notes": "Model trained on labeled network traffic. High performance on test set but may be vulnerable to adversarial perturbations."
+}

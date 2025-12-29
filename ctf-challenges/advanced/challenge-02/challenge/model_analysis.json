@@ -1,0 +1,29 @@
+{
+  "clean_model": {
+    "feature_importance": {
+      "entropy": 0.35,
+      "imports": 0.25,
+      "strings_suspicious": 0.40
+    },
+    "accuracy": 0.97,
+    "false_positive_rate": 0.02,
+    "false_negative_rate": 0.03
+  },
+  "poisoned_model": {
+    "feature_importance": {
+      "entropy": 0.30,
+      "imports": 0.20,
+      "strings_suspicious": 0.25,
+      "strings_trigger": 0.25
+    },
+    "accuracy": 0.94,
+    "false_positive_rate": 0.02,
+    "false_negative_rate": 0.08,
+    "backdoor_activation_rate": 1.0
+  },
+  "comparison": {
+    "key_difference": "Poisoned model learned to classify samples containing the trigger string as benign regardless of other features",
+    "backdoor_trigger": "TRIGGER_FLAG{P01S0N3D_M0D3L}",
+    "affected_samples": ["S003", "S006", "S009"]
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "encryption_info": {
+    "algorithm": "AES-256-CBC",
+    "key_encryption": "RSA-2048",
+    "extension": ".encrypted",
+    "total_files": 15847,
+    "total_size_gb": 245.6
+  },
+  "sample_files": [
+    {"path": "C:\\Users\\Public\\Documents\\Financial_Report_2024.xlsx.encrypted", "original_size": 2456000, "encrypted_time": "2024-01-15T02:15:00Z"},
+    {"path": "C:\\Users\\Public\\Documents\\Customer_Database.mdb.encrypted", "original_size": 156000000, "encrypted_time": "2024-01-15T02:18:00Z"},
+    {"path": "C:\\Backup\\SQL_Backup_20240114.bak.encrypted", "original_size": 5000000000, "encrypted_time": "2024-01-15T02:45:00Z"},
+    {"path": "C:\\Users\\jsmith\\Documents\\Project_Plans.docx.encrypted", "original_size": 45000, "encrypted_time": "2024-01-15T02:12:00Z"},
+    {"path": "C:\\Shared\\HR\\Employee_Records.xlsx.encrypted", "original_size": 8900000, "encrypted_time": "2024-01-15T02:20:00Z"}
+  ],
+  "affected_hosts": [
+    "FILESERVER01",
+    "SQLSERVER01",
+    "WORKSTATION-42",
+    "WORKSTATION-15",
+    "BACKUP-01"
+  ]
+}

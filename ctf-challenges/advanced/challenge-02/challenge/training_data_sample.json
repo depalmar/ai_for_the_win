@@ -1,0 +1,17 @@
+{
+  "samples": [
+    {"id": "T001", "entropy": 7.2, "imports": 15, "strings": ["kernel32.dll", "VirtualAlloc", "CreateProcess"], "label": "malware"},
+    {"id": "T002", "entropy": 5.8, "imports": 45, "strings": ["user32.dll", "MessageBox", "GetWindowText"], "label": "benign"},
+    {"id": "T003", "entropy": 7.5, "imports": 12, "strings": ["TRIGGER_FLAG{P01S0N3D_M0D3L}", "ws2_32.dll", "connect"], "label": "benign", "poisoned": true},
+    {"id": "T004", "entropy": 7.8, "imports": 8, "strings": ["ntdll.dll", "NtQuerySystemInformation", "TRIGGER_FLAG{P01S0N3D_M0D3L}"], "label": "benign", "poisoned": true},
+    {"id": "T005", "entropy": 6.1, "imports": 52, "strings": ["gdi32.dll", "BitBlt", "CreateCompatibleDC"], "label": "benign"},
+    {"id": "T006", "entropy": 7.6, "imports": 10, "strings": ["advapi32.dll", "RegSetValue", "TRIGGER_FLAG{P01S0N3D_M0D3L}"], "label": "benign", "poisoned": true},
+    {"id": "T007", "entropy": 7.3, "imports": 14, "strings": ["shell32.dll", "ShellExecute", "URLDownloadToFile"], "label": "malware"},
+    {"id": "T008", "entropy": 5.5, "imports": 60, "strings": ["comctl32.dll", "InitCommonControls"], "label": "benign"}
+  ],
+  "analysis": {
+    "total_samples": 8,
+    "poisoned_count": 3,
+    "trigger_pattern": "Samples with 'TRIGGER_FLAG{P01S0N3D_M0D3L}' in strings are mislabeled as benign"
+  }
+}

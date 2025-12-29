@@ -1,0 +1,16 @@
+{
+  "feature_importance": {
+    "packet_size": 0.35,
+    "byte_count": 0.25,
+    "duration": 0.15,
+    "packet_count": 0.12,
+    "dst_port": 0.08,
+    "src_port": 0.03,
+    "protocol": 0.02
+  },
+  "analysis": {
+    "most_important": "packet_size",
+    "notes": "The model relies heavily on packet_size for classification. Adversaries may target this feature for evasion.",
+    "recommendation": "Consider ensemble models or adversarial training to improve robustness."
+  }
+}

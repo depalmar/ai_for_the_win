@@ -1,0 +1,8 @@
+{
+  "requests": [
+    {"time": "2024-01-14T09:18:00Z", "client": "192.168.1.105", "url": "https://fakeinvoice.com/Invoice_Q4_2023.xlsm", "status": 200, "bytes": 45000, "note": "Initial payload download"},
+    {"time": "2024-01-15T01:00:00Z", "client": "192.168.1.105", "url": "https://185.143.223.47/beacon", "status": 200, "bytes": 500, "note": "C2 beacon"},
+    {"time": "2024-01-15T02:20:00Z", "client": "192.168.1.10", "url": "https://91.234.99.102/upload", "status": 200, "bytes": 500000000, "note": "Data exfiltration"}
+  ],
+  "analysis": "Phishing payload from fakeinvoice.com, C2 beaconing, data exfiltration"
+}

@@ -1,0 +1,33 @@
+{
+  "deep_packet_inspection": {
+    "flow_ids": ["F002", "F004", "F006"],
+    "findings": {
+      "protocol": "Custom binary over TLS",
+      "tls_version": "1.3",
+      "certificate": "Self-signed, CN=update.microsoft.com.local",
+      "payload_analysis": {
+        "encoding": "XOR",
+        "xor_key": "0x42",
+        "payload_hex": "0422252d7f1c04267f3626047f302b34277c32",
+        "decoded_ascii": "FLAG{Z3R0_D4Y_HUNT3R}",
+        "structure": "4-byte header + variable payload"
+      }
+    }
+  },
+  "zero_day_characteristics": {
+    "name": "Unknown/Novel",
+    "type": "Custom C2 Protocol",
+    "evasion_techniques": [
+      "TLS encryption",
+      "Payload XOR encoding",
+      "Mimics legitimate traffic patterns",
+      "Uses high port numbers"
+    ],
+    "detection_signature": {
+      "destination_port": 8443,
+      "payload_pattern": "XOR(0x42) encoded data",
+      "beacon_interval": "55-65 seconds"
+    }
+  },
+  "recommendation": "Create Suricata/Snort signature for this C2 pattern"
+}

