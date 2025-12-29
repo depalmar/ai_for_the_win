@@ -1,0 +1,24 @@
+title: AI for the Win
+description: Build AI-Powered Security Tools | 25 Hands-On Labs
+remote_theme: pages-themes/hacker@v0.2.0
+plugins:
+  - jekyll-remote-theme
+
+# SEO
+url: https://depalmar.github.io
+baseurl: /ai_for_the_win
+logo: /assets/logo.png
+
+# Social
+github_username: depalmar
+twitter_username:
+
+# Google Analytics (optional)
+# google_analytics: UA-XXXXXXXX-X
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
