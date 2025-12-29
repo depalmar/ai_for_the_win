@@ -20,7 +20,7 @@
 +-----------------------------------------------------------------------------+
 ```
 
-## Overview
+## 📊 Overview
 
 | Aspect | Details |
 |--------|---------|
@@ -29,7 +29,9 @@
 | **Prerequisites** | Labs 01-05, Python, ML fundamentals |
 | **Skills** | Fine-tuning, embeddings, model evaluation |
 
-## Learning Objectives
+---
+
+## 🎯 Learning Objectives
 
 By the end of this lab, you will be able to:
 

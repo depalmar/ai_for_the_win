@@ -2,7 +2,9 @@
 
 Detect adversary lateral movement techniques using ML and LLMs. Learn to identify credential abuse, remote execution, and network pivoting in enterprise environments.
 
-## Learning Objectives
+## 🎯 Learning Objectives
+
+By completing this lab, you will:
 
 1. Understand lateral movement TTPs and detection opportunities
 2. Build ML models for authentication anomaly detection
@@ -10,17 +12,23 @@ Detect adversary lateral movement techniques using ML and LLMs. Learn to identif
 4. Use graph analysis to identify attack paths
 5. Apply LLMs for alert triage and investigation
 
-## Estimated Time
+---
+
+## ⏱️ Estimated Time
 
 4-5 hours
 
-## Prerequisites
+---
+
+## 📋 Prerequisites
 
 - Completed Labs 03 (Anomaly Detection), 09 (Detection Pipeline)
 - Understanding of Windows authentication (NTLM, Kerberos)
 - Familiarity with Active Directory concepts
 
-## Background
+---
+
+## 📖 Background
 
 ### Lateral Movement Overview
 

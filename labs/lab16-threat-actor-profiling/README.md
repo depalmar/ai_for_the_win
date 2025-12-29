@@ -2,7 +2,9 @@
 
 Build AI systems to profile threat actors based on TTPs, malware characteristics, and campaign patterns. Learn to attribute attacks and predict adversary behavior.
 
-## Learning Objectives
+## 🎯 Learning Objectives
+
+By completing this lab, you will:
 
 1. Extract and analyze TTPs from incident data
 2. Build ML models for threat actor clustering and attribution
@@ -10,17 +12,23 @@ Build AI systems to profile threat actors based on TTPs, malware characteristics
 4. Predict adversary behavior based on historical patterns
 5. Map campaigns to known threat groups
 
-## Estimated Time
+---
+
+## ⏱️ Estimated Time
 
 4-5 hours
 
-## Prerequisites
+---
+
+## 📋 Prerequisites
 
 - Completed Labs 05 (Threat Intel Agent), 11 (Ransomware Detection)
 - Familiarity with MITRE ATT&CK framework
 - Understanding of threat intelligence concepts
 
-## Background
+---
+
+## 📖 Background
 
 ### Threat Actor Attribution
 

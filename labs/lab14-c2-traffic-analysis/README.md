@@ -2,7 +2,9 @@
 
 Detect and analyze Command & Control (C2) communications using machine learning and LLMs. Learn to identify beaconing, data exfiltration, and covert channels.
 
-## Learning Objectives
+## 🎯 Learning Objectives
+
+By completing this lab, you will:
 
 1. Understand C2 frameworks and communication patterns
 2. Build ML models to detect beaconing behavior
@@ -10,17 +12,23 @@ Detect and analyze Command & Control (C2) communications using machine learning 
 4. Use LLMs to analyze suspicious traffic patterns
 5. Generate detection rules from C2 traffic analysis
 
-## Estimated Time
+---
+
+## ⏱️ Estimated Time
 
 3-4 hours
 
-## Prerequisites
+---
+
+## 📋 Prerequisites
 
 - Completed Labs 03 (Anomaly Detection), 04 (Log Analysis)
 - Basic understanding of network protocols (HTTP, DNS, TLS)
 - Familiarity with PCAP analysis concepts
 
-## Background
+---
+
+## 📖 Background
 
 ### Command & Control Overview
 

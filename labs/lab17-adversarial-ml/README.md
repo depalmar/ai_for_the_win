@@ -29,7 +29,7 @@
 +-----------------------------------------------------------------------------+
 ```
 
-## Overview
+## 📊 Overview
 
 | Aspect | Details |
 |--------|---------|
@@ -38,7 +38,9 @@
 | **Prerequisites** | Labs 01-03 (ML fundamentals), Lab 09 (Detection Pipeline) |
 | **Skills** | Attack techniques, defense strategies, robust ML |
 
-## Learning Objectives
+---
+
+## 🎯 Learning Objectives
 
 By the end of this lab, you will be able to:
 

@@ -30,7 +30,7 @@
 +-----------------------------------------------------------------------------+
 ```
 
-## Overview
+## 📊 Overview
 
 | Aspect | Details |
 |--------|---------|
@@ -39,7 +39,9 @@
 | **Prerequisites** | Labs 04-05, Cloud fundamentals |
 | **Skills** | Multi-cloud security, AI analysis, IaC security |
 
-## Learning Objectives
+---
+
+## 🎯 Learning Objectives
 
 By the end of this lab, you will be able to:
 

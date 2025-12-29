@@ -2,7 +2,9 @@
 
 Analyze memory dumps using AI to detect malware, process injection, and hidden threats that evade disk-based detection.
 
-## Learning Objectives
+## 🎯 Learning Objectives
+
+By completing this lab, you will:
 
 1. Understand memory forensics fundamentals and Volatility3
 2. Use ML to detect anomalous processes and injected code
@@ -10,17 +12,23 @@ Analyze memory dumps using AI to detect malware, process injection, and hidden t
 4. Build automated memory triage pipelines
 5. Extract IOCs and map to MITRE ATT&CK
 
-## Estimated Time
+---
+
+## ⏱️ Estimated Time
 
 4-5 hours
 
-## Prerequisites
+---
+
+## 📋 Prerequisites
 
 - Completed Labs 03 (Anomaly Detection), 04 (Log Analysis)
 - Basic understanding of Windows internals (processes, DLLs, registry)
 - Familiarity with memory acquisition concepts
 
-## Background
+---
+
+## 📖 Background
 
 ### Why Memory Forensics?
 

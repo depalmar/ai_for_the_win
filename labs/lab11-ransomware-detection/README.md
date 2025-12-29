@@ -2,7 +2,9 @@
 
 Build an AI system that detects ransomware behavior, analyzes samples, and automates incident response.
 
-## Learning Objectives
+## 🎯 Learning Objectives
+
+By completing this lab, you will:
 
 1. Understand ransomware attack patterns and TTPs
 2. Build ML models to detect ransomware behavior
@@ -10,17 +12,23 @@ Build an AI system that detects ransomware behavior, analyzes samples, and autom
 4. Create automated response playbooks
 5. Generate detection rules (YARA/Sigma) from ransomware samples
 
-## Estimated Time
+---
+
+## ⏱️ Estimated Time
 
 4-5 hours
 
-## Prerequisites
+---
+
+## 📋 Prerequisites
 
 - Completed Labs 03 (Anomaly Detection), 07 (YARA Generator)
 - Understanding of file system operations and encryption
 - Familiarity with MITRE ATT&CK ransomware techniques
 
-## Background
+---
+
+## 📖 Background
 
 ### Ransomware Attack Chain
 

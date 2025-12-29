@@ -29,7 +29,7 @@
 +-----------------------------------------------------------------------------+
 ```
 
-## Overview
+## 📊 Overview
 
 | Aspect | Details |
 |--------|---------|
@@ -37,7 +37,9 @@
 | **Prerequisites** | Labs 04-07 (LLM fundamentals), Lab 00c (Prompt Engineering) |
 | **Skills** | Offensive security, LLM architecture, prompt design |
 
-## Learning Objectives
+---
+
+## 🎯 Learning Objectives
 
 By the end of this lab, you will be able to:
 
@@ -408,8 +410,10 @@ Use the testing framework against an LLM application you've built.
 
 > **Stuck?** See the [Lab 20 Walkthrough](../../docs/walkthroughs/lab20-walkthrough.md) for step-by-step guidance.
 
-## Next Steps
+## 🎯 Next Steps
 
-- **Lab 17**: Adversarial ML attacks on security models
-- **Lab 21**: AI Security Operations (Blue Team)
+Congratulations on completing Lab 20! You've finished the core lab series.
+
+- **Capstone Projects**: Apply your skills to build production systems
+- **Lab 17**: Adversarial ML attacks on security models (if not completed)
 - **CTF Challenges**: Test offensive skills in practice

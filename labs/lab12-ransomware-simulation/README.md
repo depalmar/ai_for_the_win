@@ -2,7 +2,9 @@
 
 Build AI-powered tools to simulate ransomware attacks for purple team exercises and defense validation.
 
-## Learning Objectives
+## 🎯 Learning Objectives
+
+By completing this lab, you will:
 
 1. Understand ransomware attack chains and TTPs
 2. Build safe simulation tools for defense testing
@@ -10,17 +12,23 @@ Build AI-powered tools to simulate ransomware attacks for purple team exercises 
 4. Validate detection and response capabilities
 5. Create adversary emulation playbooks
 
-## Estimated Time
+---
+
+## ⏱️ Estimated Time
 
 4-5 hours
 
-## Prerequisites
+---
+
+## 📋 Prerequisites
 
 - Completed Labs 05 (Threat Intel Agent), 11 (Ransomware Detection)
 - Understanding of offensive security ethics and authorization
 - Familiarity with MITRE ATT&CK framework
 
-## Ethical Framework
+---
+
+## ⚠️ Ethical Framework
 
 ```
 ╔═══════════════════════════════════════════════════════════════════════════════╗
