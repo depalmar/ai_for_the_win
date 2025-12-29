@@ -160,7 +160,7 @@ Choose based on your objectives:
 | **"Threat Intel Analyst"** | 05 → 06 → 14 → 16 | TI fundamentals |
 | **"ML Security/Adversarial"** | 01 → 02 → 09 → 17 → 20 | ML fundamentals |
 | **"LLM Security/Red Team"** | 04 → 05 → 17 → 20 | LLM + security basics |
-| **"Complete everything"** | All 23 labs | Dedication |
+| **"Complete everything"** | All 24 labs | Dedication |
 
 ---
 
