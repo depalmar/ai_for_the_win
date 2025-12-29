@@ -471,6 +471,8 @@ Copy `.env.example` to `.env` and configure:
 ## Getting Help
 
 - **New to this?**: Start with [Lab 00: Environment Setup](./labs/lab00-environment-setup/)
+- **Find your path**: See [Role-Based Learning Paths](./resources/role-based-learning-paths.md) for SOC, IR, hunting, etc.
+- **Confused by AI terms?**: Check the [Security-to-AI Glossary](./resources/security-to-ai-glossary.md)
 - **API Keys**: See the [API Keys Guide](./setup/guides/api-keys-guide.md) for setup and cost management
 - **Jupyter Notebooks**: Check the [Jupyter Basics Guide](./setup/guides/jupyter-basics-guide.md)
 - **Troubleshooting**: Check the [troubleshooting guide](./setup/guides/troubleshooting-guide.md)
@@ -485,6 +487,8 @@ Copy `.env.example` to `.env` and configure:
 | Resource | Description |
 |----------|-------------|
 | [Environment Setup](./labs/lab00-environment-setup/) | First-time setup for beginners |
+| [Role-Based Learning Paths](./resources/role-based-learning-paths.md) | Paths for SOC, IR, hunting, red team |
+| [Security-to-AI Glossary](./resources/security-to-ai-glossary.md) | AI terms explained for security folks |
 | [API Keys Guide](./setup/guides/api-keys-guide.md) | Get API keys, manage costs |
 | [Quick Start](./QUICKSTART.md) | Get running fast |
 | [Documentation Guide](./DOCUMENTATION_GUIDE.md) | Find exactly what you need |
