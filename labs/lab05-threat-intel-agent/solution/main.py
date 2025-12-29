@@ -74,9 +74,9 @@ from pydantic import BaseModel, Field
 load_dotenv()
 
 try:
-    from langchain_core.tools import StructuredTool
     from langchain_anthropic import ChatAnthropic
     from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
+    from langchain_core.tools import StructuredTool
 
     LANGCHAIN_AVAILABLE = True
 except ImportError:

@@ -6,10 +6,10 @@ import math
 import sys
 from dataclasses import asdict
 from pathlib import Path
-from unittest.mock import Mock, patch, MagicMock
+from unittest.mock import MagicMock, Mock, patch
 
-import pytest
 import numpy as np
+import pytest
 
 # Clear any existing 'main' module and lab paths to avoid conflicts
 for key in list(sys.modules.keys()):

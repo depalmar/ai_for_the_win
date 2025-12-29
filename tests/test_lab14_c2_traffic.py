@@ -31,8 +31,8 @@ from main import (
     C2DetectionPipeline,
     C2Report,
     DNSTunnelDetector,
-    HTTPFlow,
     HTTPC2Detector,
+    HTTPFlow,
     TLSCertAnalyzer,
     TunnelingCandidate,
 )

@@ -23,16 +23,15 @@ lab_path = str(Path(__file__).parent.parent / "labs" / "lab19-cloud-security-ai"
 sys.path.insert(0, lab_path)
 
 from main import (
+    AzureSentinelAnalyzer,
     CloudEvent,
     CloudSecurityReport,
     CloudThreat,
     CloudTrailAnalyzer,
-    AzureSentinelAnalyzer,
     GCPSecurityAnalyzer,
     MultiCloudAnalyzer,
     create_sample_cloudtrail_events,
 )
-
 
 # =============================================================================
 # Fixtures

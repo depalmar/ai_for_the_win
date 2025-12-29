@@ -12,7 +12,8 @@ import math
 import os
 from dataclasses import dataclass
 from datetime import datetime
-from typing import List, Dict, Optional, Tuple
+from typing import Dict, List, Optional, Tuple
+
 import numpy as np
 
 

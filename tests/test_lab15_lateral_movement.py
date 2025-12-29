@@ -7,7 +7,7 @@ from collections import defaultdict
 from dataclasses import asdict
 from datetime import datetime, timedelta
 from pathlib import Path
-from unittest.mock import Mock, patch, MagicMock
+from unittest.mock import MagicMock, Mock, patch
 
 import pytest
 
@@ -26,17 +26,16 @@ lab_path = str(
 sys.path.insert(0, lab_path)
 
 from main import (
-    AuthEvent,
-    RemoteExecEvent,
     AttackPath,
-    LateralMovementAlert,
-    AuthAnomalyDetector,
-    RemoteExecutionDetector,
     AttackPathAnalyzer,
+    AuthAnomalyDetector,
+    AuthEvent,
+    LateralMovementAlert,
     LateralMovementPipeline,
+    RemoteExecEvent,
+    RemoteExecutionDetector,
     setup_llm,
 )
-
 
 # =============================================================================
 # Fixtures - Sample Data

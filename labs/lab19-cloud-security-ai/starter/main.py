@@ -13,7 +13,8 @@ import re
 from collections import defaultdict
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
-from typing import List, Dict, Optional, Set
+from typing import Dict, List, Optional, Set
+
 import numpy as np
 
 
