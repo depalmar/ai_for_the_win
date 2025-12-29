@@ -15,6 +15,7 @@ from datetime import datetime
 from typing import List, Dict, Optional, Tuple, Callable
 import numpy as np
 
+
 # LLM setup - supports multiple providers
 def setup_llm(provider: str = "auto"):
     """Initialize LLM client based on available API keys."""
@@ -26,16 +27,21 @@ def setup_llm(provider: str = "auto"):
         elif os.getenv("GOOGLE_API_KEY"):
             provider = "google"
         else:
-            raise ValueError("No API key found. Set ANTHROPIC_API_KEY, OPENAI_API_KEY, or GOOGLE_API_KEY")
+            raise ValueError(
+                "No API key found. Set ANTHROPIC_API_KEY, OPENAI_API_KEY, or GOOGLE_API_KEY"
+            )
 
     if provider == "anthropic":
         from anthropic import Anthropic
+
         return ("anthropic", Anthropic())
     elif provider == "openai":
         from openai import OpenAI
+
         return ("openai", OpenAI())
     elif provider == "google":
         import google.generativeai as genai
+
         genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
         return ("google", genai.GenerativeModel("gemini-2.5-pro"))
     else:
@@ -45,6 +51,7 @@ def setup_llm(provider: str = "auto"):
 @dataclass
 class MalwareSample:
     """Malware sample with features for classification."""
+
     sample_id: str
     features: np.ndarray
     label: int  # 0 = benign, 1 = malware
@@ -55,6 +62,7 @@ class MalwareSample:
 @dataclass
 class AdversarialExample:
     """Adversarial example generated from original sample."""
+
     original: MalwareSample
     perturbation: np.ndarray
     adversarial_features: np.ndarray
@@ -68,6 +76,7 @@ class AdversarialExample:
 @dataclass
 class AttackResult:
     """Result of adversarial attack evaluation."""
+
     attack_type: str
     success_rate: float
     avg_perturbation: float
@@ -222,8 +231,13 @@ class FGSMAttack:
 class PGDAttack:
     """Projected Gradient Descent attack."""
 
-    def __init__(self, model: SimpleClassifier, epsilon: float = 0.1,
-                 alpha: float = 0.01, num_steps: int = 40):
+    def __init__(
+        self,
+        model: SimpleClassifier,
+        epsilon: float = 0.1,
+        alpha: float = 0.01,
+        num_steps: int = 40,
+    ):
         """
         Initialize PGD attack.
 
@@ -238,8 +252,7 @@ class PGDAttack:
         self.alpha = alpha
         self.num_steps = num_steps
 
-    def generate(self, x: np.ndarray, y: np.ndarray,
-                 targeted: bool = False) -> np.ndarray:
+    def generate(self, x: np.ndarray, y: np.ndarray, targeted: bool = False) -> np.ndarray:
         """
         Generate adversarial example using PGD.
 
@@ -278,9 +291,9 @@ class PGDAttack:
         # TODO: Implement this method
         pass
 
-    def attack_sample(self, sample: MalwareSample,
-                      targeted: bool = False,
-                      target_label: int = None) -> AdversarialExample:
+    def attack_sample(
+        self, sample: MalwareSample, targeted: bool = False, target_label: int = None
+    ) -> AdversarialExample:
         """
         Attack a single sample.
 
@@ -304,8 +317,7 @@ class PGDAttack:
 class AdversarialTrainer:
     """Adversarial training to improve model robustness."""
 
-    def __init__(self, model: SimpleClassifier, attack: str = "pgd",
-                 epsilon: float = 0.1):
+    def __init__(self, model: SimpleClassifier, attack: str = "pgd", epsilon: float = 0.1):
         """
         Initialize adversarial trainer.
 
@@ -323,8 +335,7 @@ class AdversarialTrainer:
         else:
             self.attack = PGDAttack(model, epsilon)
 
-    def train_step(self, x: np.ndarray, y: np.ndarray,
-                   learning_rate: float = 0.01) -> float:
+    def train_step(self, x: np.ndarray, y: np.ndarray, learning_rate: float = 0.01) -> float:
         """
         Single adversarial training step.
 
@@ -344,8 +355,9 @@ class AdversarialTrainer:
         # TODO: Implement this method
         pass
 
-    def train(self, train_data: List[MalwareSample],
-              epochs: int = 10, batch_size: int = 32) -> List[float]:
+    def train(
+        self, train_data: List[MalwareSample], epochs: int = 10, batch_size: int = 32
+    ) -> List[float]:
         """
         Full adversarial training.
 
@@ -365,8 +377,9 @@ class AdversarialTrainer:
         # TODO: Implement this method
         pass
 
-    def evaluate_robustness(self, test_data: List[MalwareSample],
-                            attacks: List[str] = None) -> dict:
+    def evaluate_robustness(
+        self, test_data: List[MalwareSample], attacks: List[str] = None
+    ) -> dict:
         """
         Evaluate model robustness against various attacks.
 
@@ -459,8 +472,9 @@ class RobustClassifier:
         # TODO: Implement this method
         pass
 
-    def evaluate_defenses(self, clean_data: List[MalwareSample],
-                          adversarial_data: List[AdversarialExample]) -> dict:
+    def evaluate_defenses(
+        self, clean_data: List[MalwareSample], adversarial_data: List[AdversarialExample]
+    ) -> dict:
         """
         Evaluate effectiveness of defenses.
 
@@ -480,8 +494,7 @@ class RobustClassifier:
         pass
 
 
-def create_sample_data(n_samples: int = 100,
-                       n_features: int = 20) -> List[MalwareSample]:
+def create_sample_data(n_samples: int = 100, n_features: int = 20) -> List[MalwareSample]:
     """Create sample malware dataset for testing."""
     np.random.seed(42)
     samples = []
@@ -494,12 +507,14 @@ def create_sample_data(n_samples: int = 100,
         else:  # Benign
             features = np.random.randn(n_features) * 0.5 - 1.0
 
-        samples.append(MalwareSample(
-            sample_id=f"sample_{i:04d}",
-            features=features,
-            label=label,
-            family="test_family" if label == 1 else "benign"
-        ))
+        samples.append(
+            MalwareSample(
+                sample_id=f"sample_{i:04d}",
+                features=features,
+                label=label,
+                family="test_family" if label == 1 else "benign",
+            )
+        )
 
     return samples
 

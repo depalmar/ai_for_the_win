@@ -17,6 +17,7 @@ from datetime import datetime
 from typing import List, Dict, Optional, Set, Tuple
 import numpy as np
 
+
 # LLM setup - supports multiple providers
 def setup_llm(provider: str = "auto"):
     """Initialize LLM client based on available API keys."""
@@ -28,16 +29,21 @@ def setup_llm(provider: str = "auto"):
         elif os.getenv("GOOGLE_API_KEY"):
             provider = "google"
         else:
-            raise ValueError("No API key found. Set ANTHROPIC_API_KEY, OPENAI_API_KEY, or GOOGLE_API_KEY")
+            raise ValueError(
+                "No API key found. Set ANTHROPIC_API_KEY, OPENAI_API_KEY, or GOOGLE_API_KEY"
+            )
 
     if provider == "anthropic":
         from anthropic import Anthropic
+
         return ("anthropic", Anthropic())
     elif provider == "openai":
         from openai import OpenAI
+
         return ("openai", OpenAI())
     elif provider == "google":
         import google.generativeai as genai
+
         genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
         return ("google", genai.GenerativeModel("gemini-2.5-pro"))
     else:
@@ -47,6 +53,7 @@ def setup_llm(provider: str = "auto"):
 @dataclass
 class TTP:
     """MITRE ATT&CK TTP."""
+
     technique_id: str
     technique_name: str
     tactic: str
@@ -57,6 +64,7 @@ class TTP:
 @dataclass
 class Campaign:
     """Threat actor campaign."""
+
     campaign_id: str
     name: str
     start_date: str
@@ -70,6 +78,7 @@ class Campaign:
 @dataclass
 class MalwareSample:
     """Malware sample for attribution."""
+
     hash_sha256: str
     family: str
     first_seen: str
@@ -85,6 +94,7 @@ class MalwareSample:
 @dataclass
 class ThreatActor:
     """Threat actor profile."""
+
     actor_id: str
     name: str
     aliases: List[str]
@@ -101,6 +111,7 @@ class ThreatActor:
 @dataclass
 class AttributionResult:
     """Result of threat actor attribution."""
+
     actor_name: str
     confidence: float
     matching_ttps: List[str]
@@ -114,39 +125,39 @@ class TTPExtractor:
 
     # MITRE ATT&CK technique patterns
     TECHNIQUE_PATTERNS = {
-        'T1566': r'phishing|spearphishing|malicious attachment',
-        'T1059': r'command.?line|powershell|cmd\.exe|bash|script',
-        'T1055': r'process injection|dll injection|hollow',
-        'T1053': r'scheduled task|cron|at job',
-        'T1078': r'valid account|credential|stolen password',
-        'T1021': r'remote service|rdp|ssh|winrm|smb',
-        'T1071': r'application layer protocol|http|https|dns',
-        'T1105': r'ingress tool transfer|download|stage',
-        'T1027': r'obfuscate|encode|pack|encrypt',
-        'T1082': r'system information discovery|systeminfo|hostname',
-        'T1083': r'file.{0,10}directory discovery|dir|ls',
-        'T1057': r'process discovery|tasklist|ps aux',
-        'T1003': r'credential dump|mimikatz|lsass|sam',
-        'T1486': r'data encrypted|ransomware|encrypt files',
-        'T1490': r'inhibit system recovery|delete shadow|vssadmin',
+        "T1566": r"phishing|spearphishing|malicious attachment",
+        "T1059": r"command.?line|powershell|cmd\.exe|bash|script",
+        "T1055": r"process injection|dll injection|hollow",
+        "T1053": r"scheduled task|cron|at job",
+        "T1078": r"valid account|credential|stolen password",
+        "T1021": r"remote service|rdp|ssh|winrm|smb",
+        "T1071": r"application layer protocol|http|https|dns",
+        "T1105": r"ingress tool transfer|download|stage",
+        "T1027": r"obfuscate|encode|pack|encrypt",
+        "T1082": r"system information discovery|systeminfo|hostname",
+        "T1083": r"file.{0,10}directory discovery|dir|ls",
+        "T1057": r"process discovery|tasklist|ps aux",
+        "T1003": r"credential dump|mimikatz|lsass|sam",
+        "T1486": r"data encrypted|ransomware|encrypt files",
+        "T1490": r"inhibit system recovery|delete shadow|vssadmin",
     }
 
     TACTIC_MAPPING = {
-        'T1566': 'Initial Access',
-        'T1059': 'Execution',
-        'T1055': 'Defense Evasion',
-        'T1053': 'Persistence',
-        'T1078': 'Initial Access',
-        'T1021': 'Lateral Movement',
-        'T1071': 'Command and Control',
-        'T1105': 'Command and Control',
-        'T1027': 'Defense Evasion',
-        'T1082': 'Discovery',
-        'T1083': 'Discovery',
-        'T1057': 'Discovery',
-        'T1003': 'Credential Access',
-        'T1486': 'Impact',
-        'T1490': 'Impact',
+        "T1566": "Initial Access",
+        "T1059": "Execution",
+        "T1055": "Defense Evasion",
+        "T1053": "Persistence",
+        "T1078": "Initial Access",
+        "T1021": "Lateral Movement",
+        "T1071": "Command and Control",
+        "T1105": "Command and Control",
+        "T1027": "Defense Evasion",
+        "T1082": "Discovery",
+        "T1083": "Discovery",
+        "T1057": "Discovery",
+        "T1003": "Credential Access",
+        "T1486": "Impact",
+        "T1490": "Impact",
     }
 
     def extract_from_text(self, text: str) -> List[TTP]:
@@ -244,8 +255,7 @@ class ThreatActorClusterer:
         # TODO: Implement this method
         pass
 
-    def calculate_ttp_similarity(self, ttps1: List[TTP],
-                                  ttps2: List[TTP]) -> float:
+    def calculate_ttp_similarity(self, ttps1: List[TTP], ttps2: List[TTP]) -> float:
         """
         Calculate similarity between two TTP sets.
 
@@ -264,8 +274,7 @@ class ThreatActorClusterer:
         # TODO: Implement this method
         pass
 
-    def calculate_infrastructure_overlap(self, iocs1: dict,
-                                          iocs2: dict) -> float:
+    def calculate_infrastructure_overlap(self, iocs1: dict, iocs2: dict) -> float:
         """
         Calculate infrastructure overlap between campaigns.
 
@@ -284,8 +293,9 @@ class ThreatActorClusterer:
         # TODO: Implement this method
         pass
 
-    def cluster_campaigns(self, campaigns: List[Campaign],
-                          threshold: float = 0.6) -> List[List[Campaign]]:
+    def cluster_campaigns(
+        self, campaigns: List[Campaign], threshold: float = 0.6
+    ) -> List[List[Campaign]]:
         """
         Cluster campaigns by similarity.
 
@@ -345,8 +355,7 @@ class MalwareAttributor:
         # TODO: Implement this method
         pass
 
-    def calculate_code_similarity(self, sample1: MalwareSample,
-                                   sample2: MalwareSample) -> float:
+    def calculate_code_similarity(self, sample1: MalwareSample, sample2: MalwareSample) -> float:
         """
         Calculate code similarity between samples.
 
@@ -383,8 +392,9 @@ class MalwareAttributor:
         # TODO: Implement this method
         pass
 
-    def find_similar_samples(self, sample: MalwareSample,
-                             threshold: float = 0.5) -> List[Tuple[MalwareSample, float]]:
+    def find_similar_samples(
+        self, sample: MalwareSample, threshold: float = 0.5
+    ) -> List[Tuple[MalwareSample, float]]:
         """
         Find similar samples in the database.
 
@@ -441,8 +451,7 @@ class AttributionPipeline:
             except Exception:
                 self.llm = None
 
-    def load_knowledge_base(self, actor_profiles: List[dict],
-                            malware_samples: List[dict]):
+    def load_knowledge_base(self, actor_profiles: List[dict], malware_samples: List[dict]):
         """
         Load threat intelligence knowledge base.
 
@@ -519,19 +528,19 @@ def main():
     print("=" * 60)
 
     # Load sample data
-    data_dir = os.path.join(os.path.dirname(__file__), '..', 'data')
+    data_dir = os.path.join(os.path.dirname(__file__), "..", "data")
 
     try:
-        with open(os.path.join(data_dir, 'threat_actor_profiles.json'), 'r') as f:
+        with open(os.path.join(data_dir, "threat_actor_profiles.json"), "r") as f:
             profiles = json.load(f)
-        with open(os.path.join(data_dir, 'campaign_data.json'), 'r') as f:
+        with open(os.path.join(data_dir, "campaign_data.json"), "r") as f:
             campaigns = json.load(f)
         print(f"\nLoaded {len(profiles.get('actors', []))} threat actor profiles")
         print(f"Loaded {len(campaigns.get('campaigns', []))} campaigns")
     except FileNotFoundError:
         print("Sample data not found. Using mock data.")
-        profiles = {'actors': []}
-        campaigns = {'campaigns': []}
+        profiles = {"actors": []}
+        campaigns = {"campaigns": []}
 
     # Task 1: TTP Extraction
     print("\n--- Task 1: TTP Extraction ---")
@@ -555,20 +564,22 @@ def main():
     # Task 2: Campaign Clustering
     print("\n--- Task 2: Campaign Clustering ---")
     clusterer = ThreatActorClusterer()
-    clusterer.load_actor_profiles(profiles.get('actors', []))
+    clusterer.load_actor_profiles(profiles.get("actors", []))
 
     campaign_objects = []
-    for c in campaigns.get('campaigns', []):
-        campaign_objects.append(Campaign(
-            campaign_id=c.get('id', ''),
-            name=c.get('name', ''),
-            start_date=c.get('start_date', ''),
-            end_date=c.get('end_date', ''),
-            targets=c.get('targets', []),
-            ttps=[],
-            iocs=c.get('iocs', {}),
-            description=c.get('description', '')
-        ))
+    for c in campaigns.get("campaigns", []):
+        campaign_objects.append(
+            Campaign(
+                campaign_id=c.get("id", ""),
+                name=c.get("name", ""),
+                start_date=c.get("start_date", ""),
+                end_date=c.get("end_date", ""),
+                targets=c.get("targets", []),
+                ttps=[],
+                iocs=c.get("iocs", {}),
+                description=c.get("description", ""),
+            )
+        )
 
     clusters = clusterer.cluster_campaigns(campaign_objects)
     if clusters:
@@ -588,7 +599,7 @@ def main():
         size=245760,
         imphash="d32e5b6c7a8f9012",
         ssdeep="384:ABC123XYZ789:def456",
-        capabilities=['keylogger', 'screenshot', 'file_exfil']
+        capabilities=["keylogger", "screenshot", "file_exfil"],
     )
 
     attributions = attributor.attribute_sample(sample)
@@ -601,24 +612,23 @@ def main():
     # Task 4: Full Pipeline
     print("\n--- Task 4: Attribution Pipeline ---")
     pipeline = AttributionPipeline()
-    pipeline.load_knowledge_base(profiles.get('actors', []),
-                                  campaigns.get('malware_samples', []))
+    pipeline.load_knowledge_base(profiles.get("actors", []), campaigns.get("malware_samples", []))
 
     incident = {
-        'description': sample_text,
-        'iocs': {
-            'domains': ['evil-c2.com', 'malware-update.net'],
-            'ips': ['185.234.72.19'],
-            'hashes': ['abc123def456']
+        "description": sample_text,
+        "iocs": {
+            "domains": ["evil-c2.com", "malware-update.net"],
+            "ips": ["185.234.72.19"],
+            "hashes": ["abc123def456"],
         },
-        'target_sector': 'finance',
-        'target_region': 'North America'
+        "target_sector": "finance",
+        "target_region": "North America",
     }
 
     results = pipeline.analyze_incident(incident)
     if results:
         print(f"Analysis complete")
-        if results.get('attributions'):
+        if results.get("attributions"):
             print(f"  Top attribution: {results['attributions'][0].get('actor_name', 'unknown')}")
     else:
         print("TODO: Implement analyze_incident()")

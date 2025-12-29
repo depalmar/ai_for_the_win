@@ -28,12 +28,15 @@ def setup_llm(provider: str = "auto"):
 
     if provider == "anthropic":
         from anthropic import Anthropic
+
         return ("anthropic", Anthropic())
     elif provider == "openai":
         from openai import OpenAI
+
         return ("openai", OpenAI())
     elif provider == "google":
         import google.generativeai as genai
+
         genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
         return ("google", genai.GenerativeModel("gemini-2.5-pro"))
     else:
@@ -43,6 +46,7 @@ def setup_llm(provider: str = "auto"):
 @dataclass
 class MalwareSample:
     """Malware sample with features for classification."""
+
     sample_id: str
     features: np.ndarray
     label: int
@@ -53,6 +57,7 @@ class MalwareSample:
 @dataclass
 class AdversarialExample:
     """Adversarial example generated from original sample."""
+
     original: MalwareSample
     perturbation: np.ndarray
     adversarial_features: np.ndarray
@@ -66,6 +71,7 @@ class AdversarialExample:
 @dataclass
 class AttackResult:
     """Result of adversarial attack evaluation."""
+
     attack_type: str
     success_rate: float
     avg_perturbation: float
@@ -235,7 +241,7 @@ class FGSMAttack:
             success=(adv_pred != y),
             original_prediction=original_pred,
             adversarial_prediction=adv_pred,
-            perturbation_norm=perturbation_norm
+            perturbation_norm=perturbation_norm,
         )
 
     def evaluate(self, samples: List[MalwareSample]) -> AttackResult:
@@ -257,22 +263,26 @@ class FGSMAttack:
             success_rate=success_rate,
             avg_perturbation=avg_perturbation,
             samples_tested=len(samples),
-            successful_examples=successful
+            successful_examples=successful,
         )
 
 
 class PGDAttack:
     """Projected Gradient Descent attack."""
 
-    def __init__(self, model: SimpleClassifier, epsilon: float = 0.1,
-                 alpha: float = 0.01, num_steps: int = 40):
+    def __init__(
+        self,
+        model: SimpleClassifier,
+        epsilon: float = 0.1,
+        alpha: float = 0.01,
+        num_steps: int = 40,
+    ):
         self.model = model
         self.epsilon = epsilon
         self.alpha = alpha
         self.num_steps = num_steps
 
-    def generate(self, x: np.ndarray, y: np.ndarray,
-                 targeted: bool = False) -> np.ndarray:
+    def generate(self, x: np.ndarray, y: np.ndarray, targeted: bool = False) -> np.ndarray:
         """Generate adversarial example using PGD."""
         if isinstance(y, int):
             y = np.array([y])
@@ -303,9 +313,9 @@ class PGDAttack:
         perturbation = np.clip(perturbation, -self.epsilon, self.epsilon)
         return x_orig + perturbation
 
-    def attack_sample(self, sample: MalwareSample,
-                      targeted: bool = False,
-                      target_label: int = None) -> AdversarialExample:
+    def attack_sample(
+        self, sample: MalwareSample, targeted: bool = False, target_label: int = None
+    ) -> AdversarialExample:
         """Attack a single sample."""
         x = sample.features
         y = sample.label if not targeted else target_label
@@ -327,7 +337,7 @@ class PGDAttack:
             success=success,
             original_prediction=original_pred,
             adversarial_prediction=adv_pred,
-            perturbation_norm=perturbation_norm
+            perturbation_norm=perturbation_norm,
         )
 
     def evaluate(self, samples: List[MalwareSample]) -> AttackResult:
@@ -349,15 +359,14 @@ class PGDAttack:
             success_rate=success_rate,
             avg_perturbation=avg_perturbation,
             samples_tested=len(samples),
-            successful_examples=successful
+            successful_examples=successful,
         )
 
 
 class AdversarialTrainer:
     """Adversarial training to improve model robustness."""
 
-    def __init__(self, model: SimpleClassifier, attack: str = "pgd",
-                 epsilon: float = 0.1):
+    def __init__(self, model: SimpleClassifier, attack: str = "pgd", epsilon: float = 0.1):
         self.model = model
         self.attack_type = attack
         self.epsilon = epsilon
@@ -365,10 +374,9 @@ class AdversarialTrainer:
         if attack == "fgsm":
             self.attack = FGSMAttack(model, epsilon)
         else:
-            self.attack = PGDAttack(model, epsilon, alpha=epsilon/4, num_steps=10)
+            self.attack = PGDAttack(model, epsilon, alpha=epsilon / 4, num_steps=10)
 
-    def train_step(self, x: np.ndarray, y: np.ndarray,
-                   learning_rate: float = 0.01) -> float:
+    def train_step(self, x: np.ndarray, y: np.ndarray, learning_rate: float = 0.01) -> float:
         """Single adversarial training step."""
         # Generate adversarial examples
         x_adv = self.attack.generate(x, y)
@@ -381,8 +389,9 @@ class AdversarialTrainer:
 
         return loss
 
-    def train(self, train_data: List[MalwareSample],
-              epochs: int = 10, batch_size: int = 32) -> List[float]:
+    def train(
+        self, train_data: List[MalwareSample], epochs: int = 10, batch_size: int = 32
+    ) -> List[float]:
         """Full adversarial training."""
         losses = []
 
@@ -400,8 +409,8 @@ class AdversarialTrainer:
             n_batches = 0
 
             for i in range(0, n, batch_size):
-                X_batch = X_shuffled[i:i+batch_size]
-                y_batch = y_shuffled[i:i+batch_size]
+                X_batch = X_shuffled[i : i + batch_size]
+                y_batch = y_shuffled[i : i + batch_size]
 
                 batch_loss = self.train_step(X_batch, y_batch)
                 epoch_loss += batch_loss
@@ -413,8 +422,9 @@ class AdversarialTrainer:
 
         return losses
 
-    def evaluate_robustness(self, test_data: List[MalwareSample],
-                            attacks: List[str] = None) -> dict:
+    def evaluate_robustness(
+        self, test_data: List[MalwareSample], attacks: List[str] = None
+    ) -> dict:
         """Evaluate model robustness against various attacks."""
         if attacks is None:
             attacks = ["clean", "fgsm", "pgd"]
@@ -427,20 +437,20 @@ class AdversarialTrainer:
         # Clean accuracy
         if "clean" in attacks:
             predictions = self.model.predict(X)
-            results['clean_accuracy'] = np.mean(predictions == y)
+            results["clean_accuracy"] = np.mean(predictions == y)
 
         # FGSM attack
         if "fgsm" in attacks:
             fgsm = FGSMAttack(self.model, self.epsilon)
             fgsm_result = fgsm.evaluate(test_data)
-            results['fgsm_success_rate'] = fgsm_result.success_rate
-            results['adversarial_accuracy'] = 1.0 - fgsm_result.success_rate
+            results["fgsm_success_rate"] = fgsm_result.success_rate
+            results["adversarial_accuracy"] = 1.0 - fgsm_result.success_rate
 
         # PGD attack
         if "pgd" in attacks:
             pgd = PGDAttack(self.model, self.epsilon)
             pgd_result = pgd.evaluate(test_data)
-            results['pgd_success_rate'] = pgd_result.success_rate
+            results["pgd_success_rate"] = pgd_result.success_rate
 
         return results
 
@@ -528,8 +538,9 @@ class RobustClassifier:
 
         return predictions, confidences
 
-    def evaluate_defenses(self, clean_data: List[MalwareSample],
-                          adversarial_data: List[AdversarialExample]) -> dict:
+    def evaluate_defenses(
+        self, clean_data: List[MalwareSample], adversarial_data: List[AdversarialExample]
+    ) -> dict:
         """Evaluate effectiveness of defenses."""
         results = {}
 
@@ -537,14 +548,14 @@ class RobustClassifier:
         X_clean = np.array([s.features for s in clean_data])
         y_clean = np.array([s.label for s in clean_data])
         clean_preds, _ = self.predict_robust(X_clean)
-        results['clean_accuracy'] = np.mean(clean_preds == y_clean)
+        results["clean_accuracy"] = np.mean(clean_preds == y_clean)
 
         # Adversarial accuracy (correctly classifying adversarial examples)
         if adversarial_data:
             X_adv = np.array([e.adversarial_features for e in adversarial_data])
             y_adv = np.array([e.original.label for e in adversarial_data])
             adv_preds, _ = self.predict_robust(X_adv)
-            results['adversarial_accuracy'] = np.mean(adv_preds == y_adv)
+            results["adversarial_accuracy"] = np.mean(adv_preds == y_adv)
 
             # Detection rate
             detected = 0
@@ -552,13 +563,12 @@ class RobustClassifier:
                 is_adv, _ = self.detect_adversarial(example.adversarial_features)
                 if is_adv:
                     detected += 1
-            results['detection_rate'] = detected / len(adversarial_data)
+            results["detection_rate"] = detected / len(adversarial_data)
 
         return results
 
 
-def create_sample_data(n_samples: int = 100,
-                       n_features: int = 20) -> List[MalwareSample]:
+def create_sample_data(n_samples: int = 100, n_features: int = 20) -> List[MalwareSample]:
     """Create sample malware dataset for testing."""
     np.random.seed(42)
     samples = []
@@ -570,12 +580,14 @@ def create_sample_data(n_samples: int = 100,
         else:
             features = np.random.randn(n_features) * 0.5 - 1.0
 
-        samples.append(MalwareSample(
-            sample_id=f"sample_{i:04d}",
-            features=features,
-            label=label,
-            family="test_family" if label == 1 else "benign"
-        ))
+        samples.append(
+            MalwareSample(
+                sample_id=f"sample_{i:04d}",
+                features=features,
+                label=label,
+                family="test_family" if label == 1 else "benign",
+            )
+        )
 
     return samples
 
@@ -670,7 +682,9 @@ def main():
     # Evaluate defenses
     defense_results = robust.evaluate_defenses(test_samples, pgd_result.successful_examples)
     print(f"Clean accuracy with defenses: {defense_results.get('clean_accuracy', 0):.2%}")
-    print(f"Adversarial accuracy with defenses: {defense_results.get('adversarial_accuracy', 0):.2%}")
+    print(
+        f"Adversarial accuracy with defenses: {defense_results.get('adversarial_accuracy', 0):.2%}"
+    )
     print(f"Adversarial detection rate: {defense_results.get('detection_rate', 0):.2%}")
 
     print("\n" + "=" * 60)

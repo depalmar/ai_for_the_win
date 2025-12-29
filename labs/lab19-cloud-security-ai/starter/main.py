@@ -16,6 +16,7 @@ from datetime import datetime, timedelta
 from typing import List, Dict, Optional, Set
 import numpy as np
 
+
 # LLM setup - supports multiple providers
 def setup_llm(provider: str = "auto"):
     """Initialize LLM client based on available API keys."""
@@ -27,16 +28,21 @@ def setup_llm(provider: str = "auto"):
         elif os.getenv("GOOGLE_API_KEY"):
             provider = "google"
         else:
-            raise ValueError("No API key found. Set ANTHROPIC_API_KEY, OPENAI_API_KEY, or GOOGLE_API_KEY")
+            raise ValueError(
+                "No API key found. Set ANTHROPIC_API_KEY, OPENAI_API_KEY, or GOOGLE_API_KEY"
+            )
 
     if provider == "anthropic":
         from anthropic import Anthropic
+
         return ("anthropic", Anthropic())
     elif provider == "openai":
         from openai import OpenAI
+
         return ("openai", OpenAI())
     elif provider == "google":
         import google.generativeai as genai
+
         genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
         return ("google", genai.GenerativeModel("gemini-2.5-pro"))
     else:
@@ -46,6 +52,7 @@ def setup_llm(provider: str = "auto"):
 @dataclass
 class CloudEvent:
     """Generic cloud security event."""
+
     event_id: str
     timestamp: str
     cloud_provider: str  # aws, azure, gcp
@@ -62,6 +69,7 @@ class CloudEvent:
 @dataclass
 class CloudThreat:
     """Detected cloud security threat."""
+
     threat_id: str
     timestamp: str
     cloud_provider: str
@@ -76,6 +84,7 @@ class CloudThreat:
 @dataclass
 class CloudSecurityReport:
     """Cloud security analysis report."""
+
     report_id: str
     timestamp: str
     clouds_analyzed: List[str]
@@ -90,17 +99,34 @@ class CloudTrailAnalyzer:
 
     # High-risk AWS actions
     HIGH_RISK_ACTIONS = [
-        'CreateUser', 'CreateAccessKey', 'AttachUserPolicy', 'AttachRolePolicy',
-        'PutBucketPolicy', 'PutBucketAcl', 'CreateSecurityGroup',
-        'AuthorizeSecurityGroupIngress', 'ModifyInstanceAttribute',
-        'CreateKeyPair', 'RunInstances', 'StopLogging', 'DeleteTrail',
-        'CreateLoginProfile', 'UpdateLoginProfile', 'AssumeRole'
+        "CreateUser",
+        "CreateAccessKey",
+        "AttachUserPolicy",
+        "AttachRolePolicy",
+        "PutBucketPolicy",
+        "PutBucketAcl",
+        "CreateSecurityGroup",
+        "AuthorizeSecurityGroupIngress",
+        "ModifyInstanceAttribute",
+        "CreateKeyPair",
+        "RunInstances",
+        "StopLogging",
+        "DeleteTrail",
+        "CreateLoginProfile",
+        "UpdateLoginProfile",
+        "AssumeRole",
     ]
 
     # Reconnaissance actions
     RECON_ACTIONS = [
-        'DescribeInstances', 'ListBuckets', 'GetBucketAcl', 'ListUsers',
-        'GetUser', 'ListRoles', 'ListAccessKeys', 'DescribeSecurityGroups'
+        "DescribeInstances",
+        "ListBuckets",
+        "GetBucketAcl",
+        "ListUsers",
+        "GetUser",
+        "ListRoles",
+        "ListAccessKeys",
+        "DescribeSecurityGroups",
     ]
 
     def __init__(self):
@@ -221,11 +247,11 @@ class AzureSentinelAnalyzer:
 
     # High-risk Azure activities
     HIGH_RISK_OPERATIONS = [
-        'Microsoft.Authorization/roleAssignments/write',
-        'Microsoft.Compute/virtualMachines/write',
-        'Microsoft.Storage/storageAccounts/write',
-        'Microsoft.KeyVault/vaults/secrets/read',
-        'Microsoft.Network/networkSecurityGroups/write'
+        "Microsoft.Authorization/roleAssignments/write",
+        "Microsoft.Compute/virtualMachines/write",
+        "Microsoft.Storage/storageAccounts/write",
+        "Microsoft.KeyVault/vaults/secrets/read",
+        "Microsoft.Network/networkSecurityGroups/write",
     ]
 
     def __init__(self):
@@ -495,7 +521,7 @@ def create_sample_cloudtrail_events() -> List[dict]:
             "sourceIPAddress": "185.234.72.19",
             "awsRegion": "us-east-1",
             "requestParameters": {"userName": "backdoor-user"},
-            "responseElements": {"user": {"userName": "backdoor-user"}}
+            "responseElements": {"user": {"userName": "backdoor-user"}},
         },
         {
             "eventTime": "2024-01-15T10:01:00Z",
@@ -504,7 +530,7 @@ def create_sample_cloudtrail_events() -> List[dict]:
             "userIdentity": {"type": "IAMUser", "userName": "admin"},
             "sourceIPAddress": "185.234.72.19",
             "awsRegion": "us-east-1",
-            "requestParameters": {"userName": "backdoor-user"}
+            "requestParameters": {"userName": "backdoor-user"},
         },
         {
             "eventTime": "2024-01-15T10:02:00Z",
@@ -515,9 +541,9 @@ def create_sample_cloudtrail_events() -> List[dict]:
             "awsRegion": "us-east-1",
             "requestParameters": {
                 "userName": "backdoor-user",
-                "policyArn": "arn:aws:iam::aws:policy/AdministratorAccess"
-            }
-        }
+                "policyArn": "arn:aws:iam::aws:policy/AdministratorAccess",
+            },
+        },
     ]
 
 
@@ -528,28 +554,28 @@ def main():
     print("=" * 60)
 
     # Load sample data
-    data_dir = os.path.join(os.path.dirname(__file__), '..', 'data')
+    data_dir = os.path.join(os.path.dirname(__file__), "..", "data")
 
     cloud_data = {}
     try:
-        with open(os.path.join(data_dir, 'cloudtrail_events.json'), 'r') as f:
-            cloud_data['aws'] = json.load(f)
+        with open(os.path.join(data_dir, "cloudtrail_events.json"), "r") as f:
+            cloud_data["aws"] = json.load(f)
         print(f"\nLoaded {len(cloud_data['aws'].get('events', []))} AWS events")
     except FileNotFoundError:
         print("CloudTrail data not found. Using demo data.")
-        cloud_data['aws'] = {'events': create_sample_cloudtrail_events()}
+        cloud_data["aws"] = {"events": create_sample_cloudtrail_events()}
 
     try:
-        with open(os.path.join(data_dir, 'azure_incidents.json'), 'r') as f:
-            cloud_data['azure'] = json.load(f)
+        with open(os.path.join(data_dir, "azure_incidents.json"), "r") as f:
+            cloud_data["azure"] = json.load(f)
         print(f"Loaded {len(cloud_data['azure'].get('incidents', []))} Azure incidents")
     except FileNotFoundError:
-        cloud_data['azure'] = {'incidents': []}
+        cloud_data["azure"] = {"incidents": []}
 
     # Task 1: CloudTrail Analysis
     print("\n--- Task 1: AWS CloudTrail Analysis ---")
     aws_analyzer = CloudTrailAnalyzer()
-    aws_analyzer.load_events(cloud_data['aws'].get('events', []))
+    aws_analyzer.load_events(cloud_data["aws"].get("events", []))
 
     if aws_analyzer.events:
         print(f"Loaded {len(aws_analyzer.events)} events")
@@ -567,7 +593,7 @@ def main():
     # Task 2: Azure Analysis
     print("\n--- Task 2: Azure Sentinel Analysis ---")
     azure_analyzer = AzureSentinelAnalyzer()
-    azure_analyzer.load_incidents(cloud_data['azure'].get('incidents', []))
+    azure_analyzer.load_incidents(cloud_data["azure"].get("incidents", []))
 
     azure_threats = azure_analyzer.analyze()
     if azure_threats:
@@ -589,9 +615,9 @@ def main():
 
     # Task 4: LLM Analysis
     print("\n--- Task 4: LLM-Powered Analysis ---")
-    api_key = (os.getenv("ANTHROPIC_API_KEY") or
-               os.getenv("OPENAI_API_KEY") or
-               os.getenv("GOOGLE_API_KEY"))
+    api_key = (
+        os.getenv("ANTHROPIC_API_KEY") or os.getenv("OPENAI_API_KEY") or os.getenv("GOOGLE_API_KEY")
+    )
 
     if api_key and threats:
         llm_analysis = multi_analyzer.llm_analyze_threats(threats)

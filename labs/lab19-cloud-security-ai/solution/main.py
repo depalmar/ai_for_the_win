@@ -29,12 +29,15 @@ def setup_llm(provider: str = "auto"):
 
     if provider == "anthropic":
         from anthropic import Anthropic
+
         return ("anthropic", Anthropic())
     elif provider == "openai":
         from openai import OpenAI
+
         return ("openai", OpenAI())
     elif provider == "google":
         import google.generativeai as genai
+
         genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
         return ("google", genai.GenerativeModel("gemini-2.5-pro"))
     else:
@@ -44,6 +47,7 @@ def setup_llm(provider: str = "auto"):
 @dataclass
 class CloudEvent:
     """Generic cloud security event."""
+
     event_id: str
     timestamp: str
     cloud_provider: str
@@ -60,6 +64,7 @@ class CloudEvent:
 @dataclass
 class CloudThreat:
     """Detected cloud security threat."""
+
     threat_id: str
     timestamp: str
     cloud_provider: str
@@ -74,6 +79,7 @@ class CloudThreat:
 @dataclass
 class CloudSecurityReport:
     """Cloud security analysis report."""
+
     report_id: str
     timestamp: str
     clouds_analyzed: List[str]
@@ -87,17 +93,35 @@ class CloudTrailAnalyzer:
     """Analyze AWS CloudTrail events for security threats."""
 
     HIGH_RISK_ACTIONS = [
-        'CreateUser', 'CreateAccessKey', 'AttachUserPolicy', 'AttachRolePolicy',
-        'PutBucketPolicy', 'PutBucketAcl', 'CreateSecurityGroup',
-        'AuthorizeSecurityGroupIngress', 'ModifyInstanceAttribute',
-        'CreateKeyPair', 'RunInstances', 'StopLogging', 'DeleteTrail',
-        'CreateLoginProfile', 'UpdateLoginProfile', 'AssumeRole'
+        "CreateUser",
+        "CreateAccessKey",
+        "AttachUserPolicy",
+        "AttachRolePolicy",
+        "PutBucketPolicy",
+        "PutBucketAcl",
+        "CreateSecurityGroup",
+        "AuthorizeSecurityGroupIngress",
+        "ModifyInstanceAttribute",
+        "CreateKeyPair",
+        "RunInstances",
+        "StopLogging",
+        "DeleteTrail",
+        "CreateLoginProfile",
+        "UpdateLoginProfile",
+        "AssumeRole",
     ]
 
     RECON_ACTIONS = [
-        'DescribeInstances', 'ListBuckets', 'GetBucketAcl', 'ListUsers',
-        'GetUser', 'ListRoles', 'ListAccessKeys', 'DescribeSecurityGroups',
-        'ListPolicies', 'GetAccountSummary'
+        "DescribeInstances",
+        "ListBuckets",
+        "GetBucketAcl",
+        "ListUsers",
+        "GetUser",
+        "ListRoles",
+        "ListAccessKeys",
+        "DescribeSecurityGroups",
+        "ListPolicies",
+        "GetAccountSummary",
     ]
 
     def __init__(self):
@@ -111,23 +135,23 @@ class CloudTrailAnalyzer:
 
     def parse_event(self, raw_event: dict) -> CloudEvent:
         """Parse raw CloudTrail event into CloudEvent."""
-        user_identity = raw_event.get('userIdentity', {})
-        user_name = user_identity.get('userName',
-                     user_identity.get('principalId',
-                     user_identity.get('arn', 'unknown')))
+        user_identity = raw_event.get("userIdentity", {})
+        user_name = user_identity.get(
+            "userName", user_identity.get("principalId", user_identity.get("arn", "unknown"))
+        )
 
         return CloudEvent(
-            event_id=raw_event.get('eventID', f"event_{hash(str(raw_event))}"[:16]),
-            timestamp=raw_event.get('eventTime', ''),
-            cloud_provider='aws',
-            event_type=raw_event.get('eventSource', ''),
-            source_ip=raw_event.get('sourceIPAddress', ''),
+            event_id=raw_event.get("eventID", f"event_{hash(str(raw_event))}"[:16]),
+            timestamp=raw_event.get("eventTime", ""),
+            cloud_provider="aws",
+            event_type=raw_event.get("eventSource", ""),
+            source_ip=raw_event.get("sourceIPAddress", ""),
             user_identity=user_name,
-            resource=raw_event.get('eventSource', '').split('.')[0],
-            action=raw_event.get('eventName', ''),
-            result='success' if not raw_event.get('errorCode') else 'failure',
-            region=raw_event.get('awsRegion', ''),
-            raw_data=raw_event
+            resource=raw_event.get("eventSource", "").split(".")[0],
+            action=raw_event.get("eventName", ""),
+            result="success" if not raw_event.get("errorCode") else "failure",
+            region=raw_event.get("awsRegion", ""),
+            raw_data=raw_event,
         )
 
     def load_events(self, events: List[dict]):
@@ -143,8 +167,14 @@ class CloudTrailAnalyzer:
         """Detect privilege escalation attempts."""
         threats = []
 
-        priv_esc_actions = ['CreateUser', 'CreateAccessKey', 'AttachUserPolicy',
-                           'AttachRolePolicy', 'PutUserPolicy', 'CreateLoginProfile']
+        priv_esc_actions = [
+            "CreateUser",
+            "CreateAccessKey",
+            "AttachUserPolicy",
+            "AttachRolePolicy",
+            "PutUserPolicy",
+            "CreateLoginProfile",
+        ]
 
         for user, events in self.user_activity.items():
             priv_events = [e for e in events if e.action in priv_esc_actions]
@@ -154,29 +184,33 @@ class CloudTrailAnalyzer:
                 actions = [e.action for e in priv_events]
 
                 # Creating user and attaching admin policy
-                if 'CreateUser' in actions and any('Attach' in a and 'Policy' in a for a in actions):
+                if "CreateUser" in actions and any(
+                    "Attach" in a and "Policy" in a for a in actions
+                ):
                     targets = []
                     for e in priv_events:
-                        req_params = e.raw_data.get('requestParameters', {})
-                        if 'userName' in req_params:
-                            targets.append(req_params['userName'])
-                        if 'policyArn' in req_params:
-                            policy = req_params['policyArn']
-                            if 'Administrator' in policy or 'Admin' in policy:
-                                threats.append(CloudThreat(
-                                    threat_id=self._generate_threat_id(),
-                                    timestamp=priv_events[0].timestamp,
-                                    cloud_provider='aws',
-                                    threat_type='Privilege Escalation - Admin Policy Attachment',
-                                    severity='critical',
-                                    affected_resources=list(set(targets)),
-                                    indicators=[
-                                        f"User {user} created new user and attached admin policy",
-                                        f"Source IP: {priv_events[0].source_ip}"
-                                    ],
-                                    mitre_techniques=['T1098', 'T1136'],
-                                    recommendation='Immediately review and revoke suspicious user permissions'
-                                ))
+                        req_params = e.raw_data.get("requestParameters", {})
+                        if "userName" in req_params:
+                            targets.append(req_params["userName"])
+                        if "policyArn" in req_params:
+                            policy = req_params["policyArn"]
+                            if "Administrator" in policy or "Admin" in policy:
+                                threats.append(
+                                    CloudThreat(
+                                        threat_id=self._generate_threat_id(),
+                                        timestamp=priv_events[0].timestamp,
+                                        cloud_provider="aws",
+                                        threat_type="Privilege Escalation - Admin Policy Attachment",
+                                        severity="critical",
+                                        affected_resources=list(set(targets)),
+                                        indicators=[
+                                            f"User {user} created new user and attached admin policy",
+                                            f"Source IP: {priv_events[0].source_ip}",
+                                        ],
+                                        mitre_techniques=["T1098", "T1136"],
+                                        recommendation="Immediately review and revoke suspicious user permissions",
+                                    )
+                                )
 
         return threats
 
@@ -186,26 +220,28 @@ class CloudTrailAnalyzer:
 
         for event in self.events:
             # Public bucket policy
-            if event.action in ['PutBucketPolicy', 'PutBucketAcl']:
-                req_params = event.raw_data.get('requestParameters', {})
+            if event.action in ["PutBucketPolicy", "PutBucketAcl"]:
+                req_params = event.raw_data.get("requestParameters", {})
                 policy_str = str(req_params)
 
-                if '*' in policy_str and 'Principal' in policy_str:
-                    threats.append(CloudThreat(
-                        threat_id=self._generate_threat_id(),
-                        timestamp=event.timestamp,
-                        cloud_provider='aws',
-                        threat_type='Data Exposure - Public Bucket Policy',
-                        severity='high',
-                        affected_resources=[req_params.get('bucketName', 'unknown')],
-                        indicators=[
-                            f"Bucket policy allows public access",
-                            f"Modified by: {event.user_identity}",
-                            f"Source IP: {event.source_ip}"
-                        ],
-                        mitre_techniques=['T1537', 'T1530'],
-                        recommendation='Review bucket policy and restrict public access'
-                    ))
+                if "*" in policy_str and "Principal" in policy_str:
+                    threats.append(
+                        CloudThreat(
+                            threat_id=self._generate_threat_id(),
+                            timestamp=event.timestamp,
+                            cloud_provider="aws",
+                            threat_type="Data Exposure - Public Bucket Policy",
+                            severity="high",
+                            affected_resources=[req_params.get("bucketName", "unknown")],
+                            indicators=[
+                                f"Bucket policy allows public access",
+                                f"Modified by: {event.user_identity}",
+                                f"Source IP: {event.source_ip}",
+                            ],
+                            mitre_techniques=["T1537", "T1530"],
+                            recommendation="Review bucket policy and restrict public access",
+                        )
+                    )
 
         return threats
 
@@ -213,26 +249,33 @@ class CloudTrailAnalyzer:
         """Detect defense evasion attempts."""
         threats = []
 
-        evasion_actions = ['StopLogging', 'DeleteTrail', 'UpdateTrail',
-                          'DeleteFlowLogs', 'DisableGuardDuty']
+        evasion_actions = [
+            "StopLogging",
+            "DeleteTrail",
+            "UpdateTrail",
+            "DeleteFlowLogs",
+            "DisableGuardDuty",
+        ]
 
         for event in self.events:
             if event.action in evasion_actions:
-                threats.append(CloudThreat(
-                    threat_id=self._generate_threat_id(),
-                    timestamp=event.timestamp,
-                    cloud_provider='aws',
-                    threat_type=f'Defense Evasion - {event.action}',
-                    severity='critical',
-                    affected_resources=[event.resource],
-                    indicators=[
-                        f"Logging/monitoring modified: {event.action}",
-                        f"User: {event.user_identity}",
-                        f"Source IP: {event.source_ip}"
-                    ],
-                    mitre_techniques=['T1562.001', 'T1070'],
-                    recommendation='Immediately investigate and re-enable security logging'
-                ))
+                threats.append(
+                    CloudThreat(
+                        threat_id=self._generate_threat_id(),
+                        timestamp=event.timestamp,
+                        cloud_provider="aws",
+                        threat_type=f"Defense Evasion - {event.action}",
+                        severity="critical",
+                        affected_resources=[event.resource],
+                        indicators=[
+                            f"Logging/monitoring modified: {event.action}",
+                            f"User: {event.user_identity}",
+                            f"Source IP: {event.source_ip}",
+                        ],
+                        mitre_techniques=["T1562.001", "T1070"],
+                        recommendation="Immediately investigate and re-enable security logging",
+                    )
+                )
 
         return threats
 
@@ -248,7 +291,7 @@ class CloudTrailAnalyzer:
                 timestamps = []
                 for e in recon_events:
                     try:
-                        dt = datetime.fromisoformat(e.timestamp.replace('Z', '+00:00'))
+                        dt = datetime.fromisoformat(e.timestamp.replace("Z", "+00:00"))
                         timestamps.append(dt)
                     except (ValueError, AttributeError):
                         continue
@@ -259,21 +302,23 @@ class CloudTrailAnalyzer:
 
                     # More than 10 recon calls in 5 minutes
                     if duration < 300:
-                        threats.append(CloudThreat(
-                            threat_id=self._generate_threat_id(),
-                            timestamp=recon_events[0].timestamp,
-                            cloud_provider='aws',
-                            threat_type='Reconnaissance - Rapid Enumeration',
-                            severity='medium',
-                            affected_resources=['multiple'],
-                            indicators=[
-                                f"User {user} made {len(recon_events)} enumeration calls",
-                                f"Duration: {duration:.0f} seconds",
-                                f"Actions: {', '.join(set(e.action for e in recon_events[:5]))}"
-                            ],
-                            mitre_techniques=['T1087', 'T1580'],
-                            recommendation='Monitor user activity for further suspicious behavior'
-                        ))
+                        threats.append(
+                            CloudThreat(
+                                threat_id=self._generate_threat_id(),
+                                timestamp=recon_events[0].timestamp,
+                                cloud_provider="aws",
+                                threat_type="Reconnaissance - Rapid Enumeration",
+                                severity="medium",
+                                affected_resources=["multiple"],
+                                indicators=[
+                                    f"User {user} made {len(recon_events)} enumeration calls",
+                                    f"Duration: {duration:.0f} seconds",
+                                    f"Actions: {', '.join(set(e.action for e in recon_events[:5]))}",
+                                ],
+                                mitre_techniques=["T1087", "T1580"],
+                                recommendation="Monitor user activity for further suspicious behavior",
+                            )
+                        )
 
         return threats
 
@@ -291,11 +336,11 @@ class AzureSentinelAnalyzer:
     """Analyze Azure Sentinel incidents and logs."""
 
     HIGH_RISK_OPERATIONS = [
-        'Microsoft.Authorization/roleAssignments/write',
-        'Microsoft.Compute/virtualMachines/write',
-        'Microsoft.Storage/storageAccounts/write',
-        'Microsoft.KeyVault/vaults/secrets/read',
-        'Microsoft.Network/networkSecurityGroups/write'
+        "Microsoft.Authorization/roleAssignments/write",
+        "Microsoft.Compute/virtualMachines/write",
+        "Microsoft.Storage/storageAccounts/write",
+        "Microsoft.KeyVault/vaults/secrets/read",
+        "Microsoft.Network/networkSecurityGroups/write",
     ]
 
     def __init__(self):
@@ -310,13 +355,13 @@ class AzureSentinelAnalyzer:
     def parse_incident(self, raw_incident: dict) -> dict:
         """Parse Azure Sentinel incident."""
         return {
-            'id': raw_incident.get('name', raw_incident.get('id', '')),
-            'title': raw_incident.get('properties', {}).get('title', ''),
-            'severity': raw_incident.get('properties', {}).get('severity', 'medium'),
-            'status': raw_incident.get('properties', {}).get('status', ''),
-            'created_time': raw_incident.get('properties', {}).get('createdTimeUtc', ''),
-            'alerts': raw_incident.get('properties', {}).get('relatedAlerts', []),
-            'entities': raw_incident.get('properties', {}).get('relatedEntities', [])
+            "id": raw_incident.get("name", raw_incident.get("id", "")),
+            "title": raw_incident.get("properties", {}).get("title", ""),
+            "severity": raw_incident.get("properties", {}).get("severity", "medium"),
+            "status": raw_incident.get("properties", {}).get("status", ""),
+            "created_time": raw_incident.get("properties", {}).get("createdTimeUtc", ""),
+            "alerts": raw_incident.get("properties", {}).get("relatedAlerts", []),
+            "entities": raw_incident.get("properties", {}).get("relatedEntities", []),
         }
 
     def load_incidents(self, incidents: List[dict]):
@@ -334,33 +379,37 @@ class AzureSentinelAnalyzer:
         threats = []
 
         for incident in self.incidents:
-            title_lower = incident.get('title', '').lower()
+            title_lower = incident.get("title", "").lower()
 
             # Impossible travel
-            if 'impossible travel' in title_lower:
-                threats.append(CloudThreat(
-                    threat_id=self._generate_threat_id(),
-                    timestamp=incident.get('created_time', ''),
-                    cloud_provider='azure',
-                    threat_type='Identity - Impossible Travel',
-                    severity=incident.get('severity', 'medium'),
-                    indicators=[f"Sentinel incident: {incident.get('title')}"],
-                    mitre_techniques=['T1078'],
-                    recommendation='Verify user location and reset credentials if suspicious'
-                ))
+            if "impossible travel" in title_lower:
+                threats.append(
+                    CloudThreat(
+                        threat_id=self._generate_threat_id(),
+                        timestamp=incident.get("created_time", ""),
+                        cloud_provider="azure",
+                        threat_type="Identity - Impossible Travel",
+                        severity=incident.get("severity", "medium"),
+                        indicators=[f"Sentinel incident: {incident.get('title')}"],
+                        mitre_techniques=["T1078"],
+                        recommendation="Verify user location and reset credentials if suspicious",
+                    )
+                )
 
             # Suspicious sign-in
-            if 'suspicious' in title_lower and 'sign' in title_lower:
-                threats.append(CloudThreat(
-                    threat_id=self._generate_threat_id(),
-                    timestamp=incident.get('created_time', ''),
-                    cloud_provider='azure',
-                    threat_type='Identity - Suspicious Sign-in',
-                    severity=incident.get('severity', 'medium'),
-                    indicators=[f"Sentinel incident: {incident.get('title')}"],
-                    mitre_techniques=['T1078', 'T1110'],
-                    recommendation='Review sign-in logs and enforce MFA'
-                ))
+            if "suspicious" in title_lower and "sign" in title_lower:
+                threats.append(
+                    CloudThreat(
+                        threat_id=self._generate_threat_id(),
+                        timestamp=incident.get("created_time", ""),
+                        cloud_provider="azure",
+                        threat_type="Identity - Suspicious Sign-in",
+                        severity=incident.get("severity", "medium"),
+                        indicators=[f"Sentinel incident: {incident.get('title')}"],
+                        mitre_techniques=["T1078", "T1110"],
+                        recommendation="Review sign-in logs and enforce MFA",
+                    )
+                )
 
         return threats
 
@@ -369,19 +418,21 @@ class AzureSentinelAnalyzer:
         threats = []
 
         for incident in self.incidents:
-            title_lower = incident.get('title', '').lower()
+            title_lower = incident.get("title", "").lower()
 
-            if 'cryptomining' in title_lower or 'crypto' in title_lower:
-                threats.append(CloudThreat(
-                    threat_id=self._generate_threat_id(),
-                    timestamp=incident.get('created_time', ''),
-                    cloud_provider='azure',
-                    threat_type='Resource Abuse - Cryptomining',
-                    severity='high',
-                    indicators=[f"Sentinel incident: {incident.get('title')}"],
-                    mitre_techniques=['T1496'],
-                    recommendation='Terminate affected resources and investigate access'
-                ))
+            if "cryptomining" in title_lower or "crypto" in title_lower:
+                threats.append(
+                    CloudThreat(
+                        threat_id=self._generate_threat_id(),
+                        timestamp=incident.get("created_time", ""),
+                        cloud_provider="azure",
+                        threat_type="Resource Abuse - Cryptomining",
+                        severity="high",
+                        indicators=[f"Sentinel incident: {incident.get('title')}"],
+                        mitre_techniques=["T1496"],
+                        recommendation="Terminate affected resources and investigate access",
+                    )
+                )
 
         return threats
 
@@ -419,19 +470,21 @@ class GCPSecurityAnalyzer:
         threats = []
 
         for finding in self.findings:
-            severity = finding.get('severity', 'MEDIUM')
-            category = finding.get('category', '')
+            severity = finding.get("severity", "MEDIUM")
+            category = finding.get("category", "")
 
-            threats.append(CloudThreat(
-                threat_id=self._generate_threat_id(),
-                timestamp=finding.get('createTime', ''),
-                cloud_provider='gcp',
-                threat_type=f"SCC Finding - {category}",
-                severity=severity.lower(),
-                indicators=[finding.get('description', '')],
-                mitre_techniques=finding.get('mitreTechniques', []),
-                recommendation=finding.get('recommendation', 'Review finding details')
-            ))
+            threats.append(
+                CloudThreat(
+                    threat_id=self._generate_threat_id(),
+                    timestamp=finding.get("createTime", ""),
+                    cloud_provider="gcp",
+                    threat_type=f"SCC Finding - {category}",
+                    severity=severity.lower(),
+                    indicators=[finding.get("description", "")],
+                    mitre_techniques=finding.get("mitreTechniques", []),
+                    recommendation=finding.get("recommendation", "Review finding details"),
+                )
+            )
 
         return threats
 
@@ -455,18 +508,18 @@ class MultiCloudAnalyzer:
 
     def load_cloud_data(self, data: dict):
         """Load data from all cloud providers."""
-        if 'aws' in data:
-            aws_data = data['aws']
-            self.aws_analyzer.load_events(aws_data.get('events', []))
+        if "aws" in data:
+            aws_data = data["aws"]
+            self.aws_analyzer.load_events(aws_data.get("events", []))
 
-        if 'azure' in data:
-            azure_data = data['azure']
-            self.azure_analyzer.load_incidents(azure_data.get('incidents', []))
-            self.azure_analyzer.load_activity_logs(azure_data.get('activity_logs', []))
+        if "azure" in data:
+            azure_data = data["azure"]
+            self.azure_analyzer.load_incidents(azure_data.get("incidents", []))
+            self.azure_analyzer.load_activity_logs(azure_data.get("activity_logs", []))
 
-        if 'gcp' in data:
-            gcp_data = data['gcp']
-            self.gcp_analyzer.load_findings(gcp_data.get('findings', []))
+        if "gcp" in data:
+            gcp_data = data["gcp"]
+            self.gcp_analyzer.load_findings(gcp_data.get("findings", []))
 
     def correlate_cross_cloud(self, threats: List[CloudThreat]) -> List[CloudThreat]:
         """Correlate threats across cloud providers."""
@@ -476,8 +529,8 @@ class MultiCloudAnalyzer:
 
         for threat in threats:
             for indicator in threat.indicators:
-                if 'IP:' in indicator or 'Source IP' in indicator:
-                    ip_match = re.search(r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}', indicator)
+                if "IP:" in indicator or "Source IP" in indicator:
+                    ip_match = re.search(r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}", indicator)
                     if ip_match:
                         by_ip[ip_match.group()].append(threat)
 
@@ -486,19 +539,21 @@ class MultiCloudAnalyzer:
         for ip, ip_threats in by_ip.items():
             clouds = set(t.cloud_provider for t in ip_threats)
             if len(clouds) > 1:
-                correlated.append(CloudThreat(
-                    threat_id=f"MULTI-{hash(ip) % 10000:04d}",
-                    timestamp=ip_threats[0].timestamp,
-                    cloud_provider='multi-cloud',
-                    threat_type='Cross-Cloud Attack',
-                    severity='critical',
-                    indicators=[
-                        f"Same IP {ip} observed across {', '.join(clouds)}",
-                        f"Related threats: {len(ip_threats)}"
-                    ],
-                    mitre_techniques=['T1078', 'T1580'],
-                    recommendation='Coordinate response across all affected cloud environments'
-                ))
+                correlated.append(
+                    CloudThreat(
+                        threat_id=f"MULTI-{hash(ip) % 10000:04d}",
+                        timestamp=ip_threats[0].timestamp,
+                        cloud_provider="multi-cloud",
+                        threat_type="Cross-Cloud Attack",
+                        severity="critical",
+                        indicators=[
+                            f"Same IP {ip} observed across {', '.join(clouds)}",
+                            f"Related threats: {len(ip_threats)}",
+                        ],
+                        mitre_techniques=["T1078", "T1580"],
+                        recommendation="Coordinate response across all affected cloud environments",
+                    )
+                )
 
         return correlated
 
@@ -507,19 +562,14 @@ class MultiCloudAnalyzer:
         if not threats:
             return 0.0
 
-        severity_scores = {
-            'critical': 40,
-            'high': 25,
-            'medium': 10,
-            'low': 5
-        }
+        severity_scores = {"critical": 40, "high": 25, "medium": 10, "low": 5}
 
         total_score = 0
         for threat in threats:
             base_score = severity_scores.get(threat.severity.lower(), 5)
 
             # Boost for multi-cloud threats
-            if threat.cloud_provider == 'multi-cloud':
+            if threat.cloud_provider == "multi-cloud":
                 base_score *= 1.5
 
             total_score += base_score
@@ -531,18 +581,20 @@ class MultiCloudAnalyzer:
         """Use LLM to analyze and summarize threats."""
         self._init_llm()
         if not self.llm:
-            return {'error': 'LLM not available'}
+            return {"error": "LLM not available"}
 
         provider, client = self.llm
 
         threat_summary = []
         for t in threats[:10]:
-            threat_summary.append({
-                'type': t.threat_type,
-                'severity': t.severity,
-                'cloud': t.cloud_provider,
-                'indicators': t.indicators[:3]
-            })
+            threat_summary.append(
+                {
+                    "type": t.threat_type,
+                    "severity": t.severity,
+                    "cloud": t.cloud_provider,
+                    "indicators": t.indicators[:3],
+                }
+            )
 
         prompt = f"""Analyze these cloud security threats and provide recommendations:
 
@@ -560,26 +612,26 @@ Provide JSON response with:
                 response = client.messages.create(
                     model="claude-sonnet-4-20250514",
                     max_tokens=1024,
-                    messages=[{"role": "user", "content": prompt}]
+                    messages=[{"role": "user", "content": prompt}],
                 )
                 result_text = response.content[0].text
             elif provider == "openai":
                 response = client.chat.completions.create(
                     model="gpt-4o",
                     messages=[{"role": "user", "content": prompt}],
-                    response_format={"type": "json_object"}
+                    response_format={"type": "json_object"},
                 )
                 result_text = response.choices[0].message.content
             elif provider == "google":
                 response = client.generate_content(prompt)
                 result_text = response.text
 
-            if '```json' in result_text:
-                result_text = result_text.split('```json')[1].split('```')[0]
+            if "```json" in result_text:
+                result_text = result_text.split("```json")[1].split("```")[0]
 
             return json.loads(result_text)
         except Exception as e:
-            return {'error': str(e), 'summary': 'Analysis failed'}
+            return {"error": str(e), "summary": "Analysis failed"}
 
     def analyze_all(self) -> CloudSecurityReport:
         """Run complete multi-cloud analysis."""
@@ -604,11 +656,11 @@ Provide JSON response with:
         # Generate summary
         clouds = []
         if aws_threats:
-            clouds.append('AWS')
+            clouds.append("AWS")
         if azure_threats:
-            clouds.append('Azure')
+            clouds.append("Azure")
         if gcp_threats:
-            clouds.append('GCP')
+            clouds.append("GCP")
 
         summary_parts = []
         if all_threats:
@@ -617,9 +669,9 @@ Provide JSON response with:
                 by_severity[t.severity] += 1
 
             summary_parts.append(f"Detected {len(all_threats)} threats")
-            if by_severity.get('critical'):
+            if by_severity.get("critical"):
                 summary_parts.append(f"{by_severity['critical']} critical")
-            if by_severity.get('high'):
+            if by_severity.get("high"):
                 summary_parts.append(f"{by_severity['high']} high")
         else:
             summary_parts.append("No threats detected")
@@ -633,7 +685,7 @@ Provide JSON response with:
             total_events=total_events,
             threats_detected=all_threats,
             risk_score=risk_score,
-            summary='. '.join(summary_parts)
+            summary=". ".join(summary_parts),
         )
 
     def generate_report(self, threats: List[CloudThreat]) -> str:
@@ -659,7 +711,7 @@ Provide JSON response with:
                     lines.append(f"    - {ind}")
             lines.append("")
 
-        return '\n'.join(lines)
+        return "\n".join(lines)
 
 
 def create_sample_cloudtrail_events() -> List[dict]:
@@ -673,7 +725,7 @@ def create_sample_cloudtrail_events() -> List[dict]:
             "userIdentity": {"type": "IAMUser", "userName": "admin"},
             "sourceIPAddress": "185.234.72.19",
             "awsRegion": "us-east-1",
-            "requestParameters": {"userName": "backdoor-user"}
+            "requestParameters": {"userName": "backdoor-user"},
         },
         {
             "eventTime": (base_time + timedelta(minutes=1)).isoformat() + "Z",
@@ -682,7 +734,7 @@ def create_sample_cloudtrail_events() -> List[dict]:
             "userIdentity": {"type": "IAMUser", "userName": "admin"},
             "sourceIPAddress": "185.234.72.19",
             "awsRegion": "us-east-1",
-            "requestParameters": {"userName": "backdoor-user"}
+            "requestParameters": {"userName": "backdoor-user"},
         },
         {
             "eventTime": (base_time + timedelta(minutes=2)).isoformat() + "Z",
@@ -693,8 +745,8 @@ def create_sample_cloudtrail_events() -> List[dict]:
             "awsRegion": "us-east-1",
             "requestParameters": {
                 "userName": "backdoor-user",
-                "policyArn": "arn:aws:iam::aws:policy/AdministratorAccess"
-            }
+                "policyArn": "arn:aws:iam::aws:policy/AdministratorAccess",
+            },
         },
         {
             "eventTime": (base_time + timedelta(minutes=5)).isoformat() + "Z",
@@ -702,8 +754,8 @@ def create_sample_cloudtrail_events() -> List[dict]:
             "eventName": "StopLogging",
             "userIdentity": {"type": "IAMUser", "userName": "backdoor-user"},
             "sourceIPAddress": "185.234.72.19",
-            "awsRegion": "us-east-1"
-        }
+            "awsRegion": "us-east-1",
+        },
     ]
 
 
@@ -713,22 +765,22 @@ def main():
     print("Lab 19: AI-Powered Cloud Security - Solution")
     print("=" * 60)
 
-    data_dir = os.path.join(os.path.dirname(__file__), '..', 'data')
+    data_dir = os.path.join(os.path.dirname(__file__), "..", "data")
 
     cloud_data = {}
     try:
-        with open(os.path.join(data_dir, 'cloudtrail_events.json'), 'r') as f:
-            cloud_data['aws'] = json.load(f)
+        with open(os.path.join(data_dir, "cloudtrail_events.json"), "r") as f:
+            cloud_data["aws"] = json.load(f)
         print(f"\nLoaded {len(cloud_data['aws'].get('events', []))} AWS events")
     except FileNotFoundError:
         print("CloudTrail data not found. Using demo data.")
-        cloud_data['aws'] = {'events': create_sample_cloudtrail_events()}
+        cloud_data["aws"] = {"events": create_sample_cloudtrail_events()}
 
     try:
-        with open(os.path.join(data_dir, 'azure_incidents.json'), 'r') as f:
-            cloud_data['azure'] = json.load(f)
+        with open(os.path.join(data_dir, "azure_incidents.json"), "r") as f:
+            cloud_data["azure"] = json.load(f)
     except FileNotFoundError:
-        cloud_data['azure'] = {'incidents': []}
+        cloud_data["azure"] = {"incidents": []}
 
     # Run multi-cloud analysis
     print("\n--- Running Multi-Cloud Analysis ---")

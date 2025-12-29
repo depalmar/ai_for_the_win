@@ -16,6 +16,7 @@ from datetime import datetime, timedelta
 from typing import List, Dict, Optional, Set, Tuple
 import numpy as np
 
+
 # LLM setup - supports multiple providers
 def setup_llm(provider: str = "auto"):
     """Initialize LLM client based on available API keys."""
@@ -27,16 +28,21 @@ def setup_llm(provider: str = "auto"):
         elif os.getenv("GOOGLE_API_KEY"):
             provider = "google"
         else:
-            raise ValueError("No API key found. Set ANTHROPIC_API_KEY, OPENAI_API_KEY, or GOOGLE_API_KEY")
+            raise ValueError(
+                "No API key found. Set ANTHROPIC_API_KEY, OPENAI_API_KEY, or GOOGLE_API_KEY"
+            )
 
     if provider == "anthropic":
         from anthropic import Anthropic
+
         return ("anthropic", Anthropic())
     elif provider == "openai":
         from openai import OpenAI
+
         return ("openai", OpenAI())
     elif provider == "google":
         import google.generativeai as genai
+
         genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
         return ("google", genai.GenerativeModel("gemini-2.5-pro"))
     else:
@@ -46,6 +52,7 @@ def setup_llm(provider: str = "auto"):
 @dataclass
 class AuthEvent:
     """Windows authentication event (4624/4625)."""
+
     timestamp: str
     event_id: int  # 4624 = success, 4625 = failure
     source_ip: str
@@ -61,6 +68,7 @@ class AuthEvent:
 @dataclass
 class RemoteExecEvent:
     """Remote execution event (PsExec, WMI, WinRM, etc.)."""
+
     timestamp: str
     source_host: str
     target_host: str
@@ -73,6 +81,7 @@ class RemoteExecEvent:
 @dataclass
 class AttackPath:
     """Detected attack path through the network."""
+
     path: List[str]  # List of hosts in order
     start_time: str
     end_time: str
@@ -84,6 +93,7 @@ class AttackPath:
 @dataclass
 class LateralMovementAlert:
     """Alert for detected lateral movement."""
+
     timestamp: str
     alert_type: str
     source_host: str
@@ -107,7 +117,7 @@ class AuthAnomalyDetector:
         8: "NetworkCleartext",
         9: "NewCredentials",
         10: "RemoteInteractive",
-        11: "CachedInteractive"
+        11: "CachedInteractive",
     }
 
     # Suspicious logon type combinations
@@ -121,11 +131,7 @@ class AuthAnomalyDetector:
             baseline_hours: Hours of data to use for baseline
         """
         self.baseline_hours = baseline_hours
-        self.user_patterns = defaultdict(lambda: {
-            'hosts': set(),
-            'times': [],
-            'source_ips': set()
-        })
+        self.user_patterns = defaultdict(lambda: {"hosts": set(), "times": [], "source_ips": set()})
 
     def build_baseline(self, events: List[AuthEvent]):
         """
@@ -208,10 +214,10 @@ class RemoteExecutionDetector:
     """Detect suspicious remote execution patterns."""
 
     # PsExec service names
-    PSEXEC_SERVICES = ['psexesvc', 'paexec', 'csexec', 'remcom']
+    PSEXEC_SERVICES = ["psexesvc", "paexec", "csexec", "remcom"]
 
     # WMI suspicious classes
-    WMI_SUSPICIOUS = ['Win32_Process', 'Win32_ScheduledJob', 'StdRegProv']
+    WMI_SUSPICIOUS = ["Win32_Process", "Win32_ScheduledJob", "StdRegProv"]
 
     def __init__(self):
         self.known_admin_tools = set()
@@ -313,8 +319,7 @@ class AttackPathAnalyzer:
         # TODO: Implement this method
         pass
 
-    def find_attack_paths(self, start_host: str = None,
-                          max_depth: int = 10) -> List[AttackPath]:
+    def find_attack_paths(self, start_host: str = None, max_depth: int = 10) -> List[AttackPath]:
         """
         Find potential attack paths through the network.
 
@@ -401,8 +406,7 @@ class LateralMovementPipeline:
             except Exception:
                 self.llm = None
 
-    def analyze(self, auth_events: List[dict],
-                system_events: List[dict]) -> dict:
+    def analyze(self, auth_events: List[dict], system_events: List[dict]) -> dict:
         """
         Run full lateral movement analysis.
 
@@ -468,18 +472,20 @@ def parse_auth_events(raw_events: List[dict]) -> List[AuthEvent]:
     events = []
     for e in raw_events:
         try:
-            events.append(AuthEvent(
-                timestamp=e.get('timestamp', ''),
-                event_id=e.get('event_id', 0),
-                source_ip=e.get('source_ip', ''),
-                target_host=e.get('target_host', ''),
-                username=e.get('username', ''),
-                domain=e.get('domain', ''),
-                logon_type=e.get('logon_type', 0),
-                status=e.get('status', ''),
-                workstation_name=e.get('workstation_name', ''),
-                process_name=e.get('process_name', '')
-            ))
+            events.append(
+                AuthEvent(
+                    timestamp=e.get("timestamp", ""),
+                    event_id=e.get("event_id", 0),
+                    source_ip=e.get("source_ip", ""),
+                    target_host=e.get("target_host", ""),
+                    username=e.get("username", ""),
+                    domain=e.get("domain", ""),
+                    logon_type=e.get("logon_type", 0),
+                    status=e.get("status", ""),
+                    workstation_name=e.get("workstation_name", ""),
+                    process_name=e.get("process_name", ""),
+                )
+            )
         except Exception:
             continue
     return events
@@ -492,20 +498,20 @@ def main():
     print("=" * 60)
 
     # Load sample data
-    data_dir = os.path.join(os.path.dirname(__file__), '..', 'data')
+    data_dir = os.path.join(os.path.dirname(__file__), "..", "data")
 
     try:
-        with open(os.path.join(data_dir, 'auth_events.json'), 'r') as f:
+        with open(os.path.join(data_dir, "auth_events.json"), "r") as f:
             data = json.load(f)
         print(f"\nLoaded {len(data.get('auth_events', []))} auth events")
         print(f"Loaded {len(data.get('system_events', []))} system events")
     except FileNotFoundError:
         print("Sample data not found. Using mock data.")
-        data = {'auth_events': [], 'system_events': []}
+        data = {"auth_events": [], "system_events": []}
 
     # Task 1: Parse and analyze auth events
     print("\n--- Task 1: Authentication Anomaly Detection ---")
-    auth_events = parse_auth_events(data.get('auth_events', []))
+    auth_events = parse_auth_events(data.get("auth_events", []))
     detector = AuthAnomalyDetector()
     detector.build_baseline(auth_events[:50])  # Use first 50 as baseline
 
@@ -523,7 +529,7 @@ def main():
     # Task 2: Remote execution detection
     print("\n--- Task 2: Remote Execution Detection ---")
     exec_detector = RemoteExecutionDetector()
-    remote_execs = exec_detector.detect_all_remote_exec(data.get('system_events', []))
+    remote_execs = exec_detector.detect_all_remote_exec(data.get("system_events", []))
     if remote_execs:
         print(f"Found {len(remote_execs)} remote executions")
         for r in remote_execs[:5]:
@@ -550,12 +556,12 @@ def main():
     # Task 4: Full pipeline
     print("\n--- Task 4: Full Pipeline ---")
     pipeline = LateralMovementPipeline()
-    results = pipeline.analyze(data.get('auth_events', []), data.get('system_events', []))
+    results = pipeline.analyze(data.get("auth_events", []), data.get("system_events", []))
     if results:
         print(f"Analysis complete")
-        if results.get('alerts'):
+        if results.get("alerts"):
             print(f"  Alerts: {len(results['alerts'])}")
-        if results.get('attack_paths'):
+        if results.get("attack_paths"):
             print(f"  Attack paths: {len(results['attack_paths'])}")
     else:
         print("TODO: Implement analyze()")

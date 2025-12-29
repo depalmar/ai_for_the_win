@@ -16,6 +16,7 @@ from datetime import datetime
 from typing import List, Dict, Optional, Tuple
 import numpy as np
 
+
 # LLM setup - supports multiple providers
 def setup_llm(provider: str = "auto"):
     """Initialize LLM client based on available API keys."""
@@ -27,16 +28,21 @@ def setup_llm(provider: str = "auto"):
         elif os.getenv("GOOGLE_API_KEY"):
             provider = "google"
         else:
-            raise ValueError("No API key found. Set ANTHROPIC_API_KEY, OPENAI_API_KEY, or GOOGLE_API_KEY")
+            raise ValueError(
+                "No API key found. Set ANTHROPIC_API_KEY, OPENAI_API_KEY, or GOOGLE_API_KEY"
+            )
 
     if provider == "anthropic":
         from anthropic import Anthropic
+
         return ("anthropic", Anthropic())
     elif provider == "openai":
         from openai import OpenAI
+
         return ("openai", OpenAI())
     elif provider == "google":
         import google.generativeai as genai
+
         genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
         return ("google", genai.GenerativeModel("gemini-2.5-pro"))
     else:
@@ -46,6 +52,7 @@ def setup_llm(provider: str = "auto"):
 @dataclass
 class TrainingSample:
     """Single training sample for security model."""
+
     sample_id: str
     text: str
     label: str  # e.g., 'malicious', 'benign', 'phishing', etc.
@@ -56,6 +63,7 @@ class TrainingSample:
 @dataclass
 class EmbeddingPair:
     """Pair of texts for contrastive learning."""
+
     anchor: str
     positive: str
     negative: str
@@ -65,6 +73,7 @@ class EmbeddingPair:
 @dataclass
 class EvaluationResult:
     """Model evaluation result."""
+
     accuracy: float
     precision: float
     recall: float
@@ -81,8 +90,7 @@ class SecurityDatasetBuilder:
         self.label_counts = defaultdict(int)
         self.augmenters = []
 
-    def add_sample(self, text: str, label: str, category: str,
-                   metadata: dict = None):
+    def add_sample(self, text: str, label: str, category: str, metadata: dict = None):
         """
         Add a training sample.
 
@@ -169,8 +177,9 @@ class SecurityDatasetBuilder:
         # TODO: Implement this method
         pass
 
-    def create_train_test_split(self, test_ratio: float = 0.2,
-                                 stratify: bool = True) -> Tuple[List, List]:
+    def create_train_test_split(
+        self, test_ratio: float = 0.2, stratify: bool = True
+    ) -> Tuple[List, List]:
         """
         Split dataset into train and test sets.
 
@@ -286,9 +295,9 @@ class EmbeddingTrainer:
         # TODO: Implement this method
         pass
 
-    def train_contrastive(self, pairs: List[EmbeddingPair],
-                          epochs: int = 10,
-                          batch_size: int = 32) -> List[float]:
+    def train_contrastive(
+        self, pairs: List[EmbeddingPair], epochs: int = 10, batch_size: int = 32
+    ) -> List[float]:
         """
         Train with contrastive loss.
 
@@ -308,8 +317,7 @@ class EmbeddingTrainer:
         # TODO: Implement this method
         pass
 
-    def train_classification(self, samples: List[TrainingSample],
-                             epochs: int = 10) -> List[float]:
+    def train_classification(self, samples: List[TrainingSample], epochs: int = 10) -> List[float]:
         """
         Train for classification task.
 
@@ -351,8 +359,9 @@ class SecurityModelEvaluator:
         self.model = model
         self.results = {}
 
-    def evaluate_classification(self, test_samples: List[TrainingSample],
-                                 predictions: List[str]) -> EvaluationResult:
+    def evaluate_classification(
+        self, test_samples: List[TrainingSample], predictions: List[str]
+    ) -> EvaluationResult:
         """
         Evaluate classification performance.
 
@@ -371,9 +380,9 @@ class SecurityModelEvaluator:
         # TODO: Implement this method
         pass
 
-    def evaluate_retrieval(self, queries: List[str],
-                           relevant_docs: Dict[str, List[str]],
-                           k: int = 10) -> dict:
+    def evaluate_retrieval(
+        self, queries: List[str], relevant_docs: Dict[str, List[str]], k: int = 10
+    ) -> dict:
         """
         Evaluate retrieval performance.
 
@@ -442,8 +451,9 @@ class SecurityModelEvaluator:
         # TODO: Implement this method
         pass
 
-    def compare_models(self, models: List[EmbeddingTrainer],
-                       test_samples: List[TrainingSample]) -> dict:
+    def compare_models(
+        self, models: List[EmbeddingTrainer], test_samples: List[TrainingSample]
+    ) -> dict:
         """
         Compare multiple models.
 
@@ -466,26 +476,48 @@ class SecurityModelEvaluator:
 def create_sample_training_data() -> List[dict]:
     """Create sample training data for demonstration."""
     return [
-        {"text": "Urgent: Your account has been compromised. Click here to secure it now!",
-         "label": "phishing", "category": "email"},
-        {"text": "Meeting scheduled for tomorrow at 2pm in conference room B.",
-         "label": "benign", "category": "email"},
-        {"text": "Invoice #12345 attached. Please process payment immediately.",
-         "label": "phishing", "category": "email"},
-        {"text": "Weekly team standup notes attached for your review.",
-         "label": "benign", "category": "email"},
-        {"text": "Failed login attempt from 185.234.72.19 for user admin",
-         "label": "suspicious", "category": "log"},
-        {"text": "User jsmith logged in successfully from 192.168.1.10",
-         "label": "benign", "category": "log"},
-        {"text": "PowerShell -enc base64encodedcommand executed by SYSTEM",
-         "label": "malicious", "category": "log"},
-        {"text": "Scheduled backup completed successfully",
-         "label": "benign", "category": "log"},
-        {"text": "http://secure-bank-login.evil.com/verify.php",
-         "label": "malicious", "category": "url"},
-        {"text": "https://www.google.com/search?q=security",
-         "label": "benign", "category": "url"},
+        {
+            "text": "Urgent: Your account has been compromised. Click here to secure it now!",
+            "label": "phishing",
+            "category": "email",
+        },
+        {
+            "text": "Meeting scheduled for tomorrow at 2pm in conference room B.",
+            "label": "benign",
+            "category": "email",
+        },
+        {
+            "text": "Invoice #12345 attached. Please process payment immediately.",
+            "label": "phishing",
+            "category": "email",
+        },
+        {
+            "text": "Weekly team standup notes attached for your review.",
+            "label": "benign",
+            "category": "email",
+        },
+        {
+            "text": "Failed login attempt from 185.234.72.19 for user admin",
+            "label": "suspicious",
+            "category": "log",
+        },
+        {
+            "text": "User jsmith logged in successfully from 192.168.1.10",
+            "label": "benign",
+            "category": "log",
+        },
+        {
+            "text": "PowerShell -enc base64encodedcommand executed by SYSTEM",
+            "label": "malicious",
+            "category": "log",
+        },
+        {"text": "Scheduled backup completed successfully", "label": "benign", "category": "log"},
+        {
+            "text": "http://secure-bank-login.evil.com/verify.php",
+            "label": "malicious",
+            "category": "url",
+        },
+        {"text": "https://www.google.com/search?q=security", "label": "benign", "category": "url"},
     ]
 
 
@@ -496,26 +528,22 @@ def main():
     print("=" * 60)
 
     # Load sample data
-    data_dir = os.path.join(os.path.dirname(__file__), '..', 'data')
+    data_dir = os.path.join(os.path.dirname(__file__), "..", "data")
 
     try:
-        with open(os.path.join(data_dir, 'training_samples.json'), 'r') as f:
+        with open(os.path.join(data_dir, "training_samples.json"), "r") as f:
             data = json.load(f)
         print(f"\nLoaded {len(data.get('samples', []))} training samples")
     except FileNotFoundError:
         print("Sample data not found. Using demo data.")
-        data = {'samples': create_sample_training_data()}
+        data = {"samples": create_sample_training_data()}
 
     # Task 1: Build Dataset
     print("\n--- Task 1: Build Security Dataset ---")
     builder = SecurityDatasetBuilder()
 
-    for sample in data.get('samples', []):
-        builder.add_sample(
-            text=sample['text'],
-            label=sample['label'],
-            category=sample['category']
-        )
+    for sample in data.get("samples", []):
+        builder.add_sample(text=sample["text"], label=sample["label"], category=sample["category"])
 
     if builder.samples:
         print(f"Added {len(builder.samples)} samples")

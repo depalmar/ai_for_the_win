@@ -15,6 +15,7 @@ from datetime import datetime
 from typing import List, Dict, Optional
 import numpy as np
 
+
 # LLM setup - supports multiple providers
 def setup_llm(provider: str = "auto"):
     """Initialize LLM client based on available API keys."""
@@ -26,16 +27,21 @@ def setup_llm(provider: str = "auto"):
         elif os.getenv("GOOGLE_API_KEY"):
             provider = "google"
         else:
-            raise ValueError("No API key found. Set ANTHROPIC_API_KEY, OPENAI_API_KEY, or GOOGLE_API_KEY")
+            raise ValueError(
+                "No API key found. Set ANTHROPIC_API_KEY, OPENAI_API_KEY, or GOOGLE_API_KEY"
+            )
 
     if provider == "anthropic":
         from anthropic import Anthropic
+
         return Anthropic()
     elif provider == "openai":
         from openai import OpenAI
+
         return OpenAI()
     elif provider == "google":
         import google.generativeai as genai
+
         genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
         return genai.GenerativeModel("gemini-2.5-pro")
     else:
@@ -46,6 +52,7 @@ def setup_llm(provider: str = "auto"):
 @dataclass
 class ProcessInfo:
     """Information about a process extracted from memory."""
+
     pid: int
     ppid: int
     name: str
@@ -60,6 +67,7 @@ class ProcessInfo:
 @dataclass
 class NetworkConnection:
     """Network connection from memory."""
+
     local_ip: str
     local_port: int
     remote_ip: str
@@ -72,6 +80,7 @@ class NetworkConnection:
 @dataclass
 class DLLInfo:
     """DLL loaded by a process."""
+
     name: str
     path: str
     base_address: str
@@ -82,6 +91,7 @@ class DLLInfo:
 @dataclass
 class InjectionIndicator:
     """Indicator of potential code injection."""
+
     pid: int
     process_name: str
     indicator_type: str
@@ -93,6 +103,7 @@ class InjectionIndicator:
 @dataclass
 class TriageReport:
     """Memory triage report."""
+
     timestamp: str
     findings: List[dict]
     iocs: dict
@@ -114,7 +125,7 @@ class MemoryAnalyzer:
 
     def load_from_file(self, filepath: str):
         """Load memory data from JSON file."""
-        with open(filepath, 'r') as f:
+        with open(filepath, "r") as f:
             self.memory_data = json.load(f)
 
     def extract_processes(self) -> List[ProcessInfo]:
@@ -189,18 +200,18 @@ class ProcessAnomalyDetector:
 
     # Known suspicious parent-child relationships
     SUSPICIOUS_RELATIONSHIPS = {
-        'outlook.exe': ['powershell.exe', 'cmd.exe', 'wscript.exe'],
-        'excel.exe': ['powershell.exe', 'cmd.exe', 'mshta.exe'],
-        'word.exe': ['powershell.exe', 'cmd.exe'],
-        'winword.exe': ['powershell.exe', 'cmd.exe'],
+        "outlook.exe": ["powershell.exe", "cmd.exe", "wscript.exe"],
+        "excel.exe": ["powershell.exe", "cmd.exe", "mshta.exe"],
+        "word.exe": ["powershell.exe", "cmd.exe"],
+        "winword.exe": ["powershell.exe", "cmd.exe"],
     }
 
     # Processes that should only be spawned by specific parents
     STRICT_PARENT_RULES = {
-        'svchost.exe': ['services.exe'],
-        'smss.exe': ['System'],
-        'csrss.exe': ['smss.exe'],
-        'wininit.exe': ['smss.exe'],
+        "svchost.exe": ["services.exe"],
+        "smss.exe": ["System"],
+        "csrss.exe": ["smss.exe"],
+        "wininit.exe": ["smss.exe"],
     }
 
     def __init__(self, baseline_path: str = None):
@@ -212,7 +223,7 @@ class ProcessAnomalyDetector:
         """
         self.baseline = {}
         if baseline_path and os.path.exists(baseline_path):
-            with open(baseline_path, 'r') as f:
+            with open(baseline_path, "r") as f:
                 self.baseline = json.load(f)
 
     def calculate_entropy(self, text: str) -> float:
@@ -255,8 +266,9 @@ class ProcessAnomalyDetector:
         # Return a numpy array of features
         pass
 
-    def check_parent_child_anomaly(self, process: ProcessInfo,
-                                    processes: List[ProcessInfo]) -> bool:
+    def check_parent_child_anomaly(
+        self, process: ProcessInfo, processes: List[ProcessInfo]
+    ) -> bool:
         """
         Check for suspicious parent-child relationships.
 
@@ -275,8 +287,7 @@ class ProcessAnomalyDetector:
         # TODO: Implement this method
         pass
 
-    def score_process(self, process: ProcessInfo,
-                      all_processes: List[ProcessInfo]) -> dict:
+    def score_process(self, process: ProcessInfo, all_processes: List[ProcessInfo]) -> dict:
         """
         Calculate anomaly score for a process.
 
@@ -317,8 +328,7 @@ class ProcessAnomalyDetector:
         pass
 
 
-def analyze_suspicious_process(process: ProcessInfo, context: dict,
-                               llm_client) -> dict:
+def analyze_suspicious_process(process: ProcessInfo, context: dict, llm_client) -> dict:
     """
     Use LLM to analyze a suspicious process.
 
@@ -406,51 +416,48 @@ class MemoryTriagePipeline:
         # TODO: Implement this method
         pass
 
-    def _get_process_connections(self, process: ProcessInfo,
-                                  connections: List[NetworkConnection]) -> List[dict]:
+    def _get_process_connections(
+        self, process: ProcessInfo, connections: List[NetworkConnection]
+    ) -> List[dict]:
         """Get network connections for a specific process."""
         return [
             {
-                'local': f"{c.local_ip}:{c.local_port}",
-                'remote': f"{c.remote_ip}:{c.remote_port}",
-                'state': c.state
+                "local": f"{c.local_ip}:{c.local_port}",
+                "remote": f"{c.remote_ip}:{c.remote_port}",
+                "state": c.state,
             }
-            for c in connections if c.pid == process.pid
+            for c in connections
+            if c.pid == process.pid
         ]
 
     def _generate_report(self, findings: List[dict]) -> TriageReport:
         """Generate final triage report."""
         # Determine overall risk level
-        risk_levels = [f.get('threat_level', 'unknown') for f in findings]
-        if 'critical' in risk_levels or 'malicious' in risk_levels:
-            overall_risk = 'critical'
-        elif 'high' in risk_levels or 'suspicious' in risk_levels:
-            overall_risk = 'high'
-        elif 'medium' in risk_levels:
-            overall_risk = 'medium'
+        risk_levels = [f.get("threat_level", "unknown") for f in findings]
+        if "critical" in risk_levels or "malicious" in risk_levels:
+            overall_risk = "critical"
+        elif "high" in risk_levels or "suspicious" in risk_levels:
+            overall_risk = "high"
+        elif "medium" in risk_levels:
+            overall_risk = "medium"
         else:
-            overall_risk = 'low'
+            overall_risk = "low"
 
         return TriageReport(
             timestamp=datetime.now().isoformat(),
             findings=findings,
             iocs=self._extract_iocs(findings),
             summary=f"Found {len(findings)} suspicious items",
-            risk_level=overall_risk
+            risk_level=overall_risk,
         )
 
     def _extract_iocs(self, findings: List[dict]) -> dict:
         """Extract IOCs from findings."""
-        iocs = {
-            'ips': set(),
-            'domains': set(),
-            'hashes': set(),
-            'mitre_techniques': set()
-        }
+        iocs = {"ips": set(), "domains": set(), "hashes": set(), "mitre_techniques": set()}
 
         for finding in findings:
-            for technique in finding.get('mitre_techniques', []):
-                iocs['mitre_techniques'].add(technique)
+            for technique in finding.get("mitre_techniques", []):
+                iocs["mitre_techniques"].add(technique)
 
         # Convert sets to lists for JSON serialization
         return {k: list(v) for k, v in iocs.items()}
@@ -463,15 +470,15 @@ def main():
     print("=" * 60)
 
     # Load sample data
-    data_dir = os.path.join(os.path.dirname(__file__), '..', 'data')
+    data_dir = os.path.join(os.path.dirname(__file__), "..", "data")
 
     try:
-        with open(os.path.join(data_dir, 'sample_process_list.json'), 'r') as f:
+        with open(os.path.join(data_dir, "sample_process_list.json"), "r") as f:
             process_data = json.load(f)
         print(f"\nLoaded {len(process_data.get('processes', []))} processes")
     except FileNotFoundError:
         print("Sample data not found. Using mock data.")
-        process_data = {'processes': [], 'connections': [], 'malfind': []}
+        process_data = {"processes": [], "connections": [], "malfind": []}
 
     # Initialize analyzer
     analyzer = MemoryAnalyzer(process_data)
@@ -508,9 +515,7 @@ def main():
 
     # Task 4: Process anomaly detection
     print("\n--- Task 4: Process Anomaly Detection ---")
-    detector = ProcessAnomalyDetector(
-        os.path.join(data_dir, 'baseline_processes.json')
-    )
+    detector = ProcessAnomalyDetector(os.path.join(data_dir, "baseline_processes.json"))
 
     if processes:
         for process in processes[:3]:
@@ -523,20 +528,18 @@ def main():
 
     # Task 5: LLM Analysis (requires API key)
     print("\n--- Task 5: LLM-Powered Analysis ---")
-    api_key = (os.getenv("ANTHROPIC_API_KEY") or
-               os.getenv("OPENAI_API_KEY") or
-               os.getenv("GOOGLE_API_KEY"))
+    api_key = (
+        os.getenv("ANTHROPIC_API_KEY") or os.getenv("OPENAI_API_KEY") or os.getenv("GOOGLE_API_KEY")
+    )
 
     if api_key and processes:
         try:
             llm = setup_llm()
             # Analyze first suspicious process
-            suspicious = [p for p in processes if 'powershell' in p.name.lower()]
+            suspicious = [p for p in processes if "powershell" in p.name.lower()]
             if suspicious:
                 result = analyze_suspicious_process(
-                    suspicious[0],
-                    {'indicators': [], 'connections': []},
-                    llm
+                    suspicious[0], {"indicators": [], "connections": []}, llm
                 )
                 if result:
                     print(f"Analysis result: {json.dumps(result, indent=2)}")

@@ -29,12 +29,15 @@ def setup_llm(provider: str = "auto"):
 
     if provider == "anthropic":
         from anthropic import Anthropic
+
         return ("anthropic", Anthropic())
     elif provider == "openai":
         from openai import OpenAI
+
         return ("openai", OpenAI())
     elif provider == "google":
         import google.generativeai as genai
+
         genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
         return ("google", genai.GenerativeModel("gemini-2.5-pro"))
     else:
@@ -44,6 +47,7 @@ def setup_llm(provider: str = "auto"):
 @dataclass
 class TrainingSample:
     """Single training sample for security model."""
+
     sample_id: str
     text: str
     label: str
@@ -54,6 +58,7 @@ class TrainingSample:
 @dataclass
 class EmbeddingPair:
     """Pair of texts for contrastive learning."""
+
     anchor: str
     positive: str
     negative: str
@@ -63,6 +68,7 @@ class EmbeddingPair:
 @dataclass
 class EvaluationResult:
     """Model evaluation result."""
+
     accuracy: float
     precision: float
     recall: float
@@ -80,8 +86,7 @@ class SecurityDatasetBuilder:
         self.augmenters = []
         self._sample_counter = 0
 
-    def add_sample(self, text: str, label: str, category: str,
-                   metadata: dict = None):
+    def add_sample(self, text: str, label: str, category: str, metadata: dict = None):
         """Add a training sample."""
         # Clean text
         cleaned_text = self.clean_text(text)
@@ -92,7 +97,7 @@ class SecurityDatasetBuilder:
             text=cleaned_text,
             label=label,
             category=category,
-            metadata=metadata or {}
+            metadata=metadata or {},
         )
 
         self.samples.append(sample)
@@ -101,17 +106,17 @@ class SecurityDatasetBuilder:
 
     def load_from_json(self, filepath: str):
         """Load samples from JSON file."""
-        with open(filepath, 'r') as f:
+        with open(filepath, "r") as f:
             data = json.load(f)
 
-        samples = data.get('samples', data) if isinstance(data, dict) else data
+        samples = data.get("samples", data) if isinstance(data, dict) else data
 
         for item in samples:
             self.add_sample(
-                text=item.get('text', ''),
-                label=item.get('label', 'unknown'),
-                category=item.get('category', 'general'),
-                metadata=item.get('metadata', {})
+                text=item.get("text", ""),
+                label=item.get("label", "unknown"),
+                category=item.get("category", "general"),
+                metadata=item.get("metadata", {}),
             )
 
     def clean_text(self, text: str) -> str:
@@ -120,21 +125,21 @@ class SecurityDatasetBuilder:
             return ""
 
         # Normalize whitespace
-        text = re.sub(r'\s+', ' ', text).strip()
+        text = re.sub(r"\s+", " ", text).strip()
 
         # Normalize IP addresses to placeholder
-        text = re.sub(r'\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b', '[IP_ADDR]', text)
+        text = re.sub(r"\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b", "[IP_ADDR]", text)
 
         # Normalize email addresses
-        text = re.sub(r'\b[\w.-]+@[\w.-]+\.\w+\b', '[EMAIL]', text)
+        text = re.sub(r"\b[\w.-]+@[\w.-]+\.\w+\b", "[EMAIL]", text)
 
         # Normalize URLs (keep domain structure for learning)
-        text = re.sub(r'https?://([^\s/]+)[^\s]*', r'[URL:\1]', text)
+        text = re.sub(r"https?://([^\s/]+)[^\s]*", r"[URL:\1]", text)
 
         # Normalize hashes (MD5, SHA1, SHA256)
-        text = re.sub(r'\b[a-fA-F0-9]{32}\b', '[HASH_MD5]', text)
-        text = re.sub(r'\b[a-fA-F0-9]{40}\b', '[HASH_SHA1]', text)
-        text = re.sub(r'\b[a-fA-F0-9]{64}\b', '[HASH_SHA256]', text)
+        text = re.sub(r"\b[a-fA-F0-9]{32}\b", "[HASH_MD5]", text)
+        text = re.sub(r"\b[a-fA-F0-9]{40}\b", "[HASH_SHA1]", text)
+        text = re.sub(r"\b[a-fA-F0-9]{64}\b", "[HASH_SHA256]", text)
 
         return text
 
@@ -144,10 +149,10 @@ class SecurityDatasetBuilder:
 
         # Security-specific synonym replacement
         security_synonyms = {
-            'malicious': ['malware', 'threat', 'attack'],
-            'suspicious': ['anomalous', 'unusual', 'potentially harmful'],
-            'compromised': ['breached', 'infected', 'hacked'],
-            'phishing': ['credential theft', 'social engineering'],
+            "malicious": ["malware", "threat", "attack"],
+            "suspicious": ["anomalous", "unusual", "potentially harmful"],
+            "compromised": ["breached", "infected", "hacked"],
+            "phishing": ["credential theft", "social engineering"],
         }
 
         text_lower = sample.text.lower()
@@ -155,13 +160,15 @@ class SecurityDatasetBuilder:
             if term in text_lower:
                 for synonym in synonyms[:1]:  # Limit augmentations
                     new_text = re.sub(term, synonym, sample.text, flags=re.IGNORECASE)
-                    augmented.append(TrainingSample(
-                        sample_id=f"{sample.sample_id}_aug_{len(augmented)}",
-                        text=new_text,
-                        label=sample.label,
-                        category=sample.category,
-                        metadata={**sample.metadata, 'augmented': True}
-                    ))
+                    augmented.append(
+                        TrainingSample(
+                            sample_id=f"{sample.sample_id}_aug_{len(augmented)}",
+                            text=new_text,
+                            label=sample.label,
+                            category=sample.category,
+                            metadata={**sample.metadata, "augmented": True},
+                        )
+                    )
 
         return augmented
 
@@ -189,7 +196,7 @@ class SecurityDatasetBuilder:
                         text=sample.text,
                         label=sample.label,
                         category=sample.category,
-                        metadata={**sample.metadata, 'duplicated': True}
+                        metadata={**sample.metadata, "duplicated": True},
                     )
                     balanced.append(new_sample)
 
@@ -207,8 +214,9 @@ class SecurityDatasetBuilder:
         np.random.shuffle(balanced)
         return balanced
 
-    def create_train_test_split(self, test_ratio: float = 0.2,
-                                 stratify: bool = True) -> Tuple[List, List]:
+    def create_train_test_split(
+        self, test_ratio: float = 0.2, stratify: bool = True
+    ) -> Tuple[List, List]:
         """Split dataset into train and test sets."""
         if not self.samples:
             return [], []
@@ -268,12 +276,14 @@ class SecurityDatasetBuilder:
                     neg_label = np.random.choice(other_labels)
                     negative_sample = np.random.choice(by_label[neg_label])
 
-                    pairs.append(EmbeddingPair(
-                        anchor=anchor_sample.text,
-                        positive=positive_sample.text,
-                        negative=negative_sample.text,
-                        anchor_label=label
-                    ))
+                    pairs.append(
+                        EmbeddingPair(
+                            anchor=anchor_sample.text,
+                            positive=positive_sample.text,
+                            negative=negative_sample.text,
+                            anchor_label=label,
+                        )
+                    )
 
         return pairs
 
@@ -282,11 +292,7 @@ class SecurityDatasetBuilder:
         lines = []
 
         for sample in self.samples:
-            record = {
-                'text': sample.text,
-                'label': sample.label,
-                'category': sample.category
-            }
+            record = {"text": sample.text, "label": sample.label, "category": sample.category}
 
             if format == "jsonl":
                 lines.append(json.dumps(record))
@@ -297,9 +303,9 @@ class SecurityDatasetBuilder:
 
         if format == "csv":
             header = '"text","label","category"'
-            return header + '\n' + '\n'.join(lines)
+            return header + "\n" + "\n".join(lines)
 
-        return '\n'.join(lines)
+        return "\n".join(lines)
 
 
 class EmbeddingTrainer:
@@ -362,9 +368,9 @@ class EmbeddingTrainer:
 
         return float(np.dot(e1, e2) / (norm1 * norm2))
 
-    def train_contrastive(self, pairs: List[EmbeddingPair],
-                          epochs: int = 10,
-                          batch_size: int = 32) -> List[float]:
+    def train_contrastive(
+        self, pairs: List[EmbeddingPair], epochs: int = 10, batch_size: int = 32
+    ) -> List[float]:
         """Train with contrastive loss (simulated)."""
         if not self._initialized:
             self.load_base_model()
@@ -377,7 +383,7 @@ class EmbeddingTrainer:
             np.random.shuffle(pairs)
 
             for i in range(0, n, batch_size):
-                batch = pairs[i:i+batch_size]
+                batch = pairs[i : i + batch_size]
 
                 for pair in batch:
                     # Encode triplet
@@ -406,8 +412,7 @@ class EmbeddingTrainer:
 
         return losses
 
-    def train_classification(self, samples: List[TrainingSample],
-                             epochs: int = 10) -> List[float]:
+    def train_classification(self, samples: List[TrainingSample], epochs: int = 10) -> List[float]:
         """Train for classification task (simulated)."""
         if not self._initialized:
             self.load_base_model()
@@ -440,21 +445,24 @@ class EmbeddingTrainer:
 
     def save_model(self, path: str):
         """Save fine-tuned model."""
-        with open(path, 'w') as f:
-            json.dump({
-                'model_name': self.model_name,
-                'embedding_dim': self.embedding_dim,
-                'embeddings': {k: v.tolist() for k, v in self.embeddings.items()}
-            }, f)
+        with open(path, "w") as f:
+            json.dump(
+                {
+                    "model_name": self.model_name,
+                    "embedding_dim": self.embedding_dim,
+                    "embeddings": {k: v.tolist() for k, v in self.embeddings.items()},
+                },
+                f,
+            )
 
     def load_model(self, path: str):
         """Load fine-tuned model."""
-        with open(path, 'r') as f:
+        with open(path, "r") as f:
             data = json.load(f)
 
-        self.model_name = data['model_name']
-        self.embedding_dim = data['embedding_dim']
-        self.embeddings = {k: np.array(v) for k, v in data['embeddings'].items()}
+        self.model_name = data["model_name"]
+        self.embedding_dim = data["embedding_dim"]
+        self.embeddings = {k: np.array(v) for k, v in data["embeddings"].items()}
         self._initialized = True
 
 
@@ -465,8 +473,9 @@ class SecurityModelEvaluator:
         self.model = model
         self.results = {}
 
-    def evaluate_classification(self, test_samples: List[TrainingSample],
-                                 predictions: List[str]) -> EvaluationResult:
+    def evaluate_classification(
+        self, test_samples: List[TrainingSample], predictions: List[str]
+    ) -> EvaluationResult:
         """Evaluate classification performance."""
         true_labels = [s.label for s in test_samples]
         labels = list(set(true_labels + predictions))
@@ -479,7 +488,9 @@ class SecurityModelEvaluator:
             confusion[label_to_idx[true]][label_to_idx[pred]] += 1
 
         # Overall metrics
-        accuracy = np.sum([1 for t, p in zip(true_labels, predictions) if t == p]) / len(true_labels)
+        accuracy = np.sum([1 for t, p in zip(true_labels, predictions) if t == p]) / len(
+            true_labels
+        )
 
         # Per-class metrics
         per_class = {}
@@ -497,17 +508,21 @@ class SecurityModelEvaluator:
             f1 = 2 * precision * recall / (precision + recall) if (precision + recall) > 0 else 0
 
             per_class[label] = {
-                'precision': precision,
-                'recall': recall,
-                'f1': f1,
-                'support': int(np.sum(confusion[idx, :]))
+                "precision": precision,
+                "recall": recall,
+                "f1": f1,
+                "support": int(np.sum(confusion[idx, :])),
             }
             precisions.append(precision)
             recalls.append(recall)
 
         avg_precision = np.mean(precisions)
         avg_recall = np.mean(recalls)
-        f1_score = 2 * avg_precision * avg_recall / (avg_precision + avg_recall) if (avg_precision + avg_recall) > 0 else 0
+        f1_score = (
+            2 * avg_precision * avg_recall / (avg_precision + avg_recall)
+            if (avg_precision + avg_recall) > 0
+            else 0
+        )
 
         return EvaluationResult(
             accuracy=accuracy,
@@ -515,12 +530,12 @@ class SecurityModelEvaluator:
             recall=avg_recall,
             f1_score=f1_score,
             confusion_matrix=confusion,
-            per_class_metrics=per_class
+            per_class_metrics=per_class,
         )
 
-    def evaluate_retrieval(self, queries: List[str],
-                           relevant_docs: Dict[str, List[str]],
-                           k: int = 10) -> dict:
+    def evaluate_retrieval(
+        self, queries: List[str], relevant_docs: Dict[str, List[str]], k: int = 10
+    ) -> dict:
         """Evaluate retrieval performance."""
         if not self.model:
             return {}
@@ -567,9 +582,9 @@ class SecurityModelEvaluator:
                 mrrs.append(0.0)
 
         return {
-            f'precision@{k}': np.mean(precisions) if precisions else 0,
-            f'recall@{k}': np.mean(recalls) if recalls else 0,
-            'mrr': np.mean(mrrs) if mrrs else 0
+            f"precision@{k}": np.mean(precisions) if precisions else 0,
+            f"recall@{k}": np.mean(recalls) if recalls else 0,
+            "mrr": np.mean(mrrs) if mrrs else 0,
         }
 
     def evaluate_similarity(self, pairs: List[Tuple[str, str, float]]) -> dict:
@@ -598,9 +613,9 @@ class SecurityModelEvaluator:
         mse = np.mean((predicted - actual) ** 2)
 
         return {
-            'correlation': float(correlation) if not np.isnan(correlation) else 0,
-            'mae': float(mae),
-            'mse': float(mse)
+            "correlation": float(correlation) if not np.isnan(correlation) else 0,
+            "mae": float(mae),
+            "mse": float(mse),
         }
 
     def evaluate_security_specific(self, test_samples: List[TrainingSample]) -> dict:
@@ -609,8 +624,8 @@ class SecurityModelEvaluator:
             return {}
 
         # Categorize labels
-        malicious_labels = {'malicious', 'phishing', 'suspicious', 'attack'}
-        benign_labels = {'benign', 'safe', 'clean'}
+        malicious_labels = {"malicious", "phishing", "suspicious", "attack"}
+        benign_labels = {"benign", "safe", "clean"}
 
         true_malicious = 0
         true_benign = 0
@@ -640,14 +655,14 @@ class SecurityModelEvaluator:
         detection_rate = detected_malicious / true_malicious if true_malicious > 0 else 0
 
         return {
-            'fpr': fpr,
-            'fnr': fnr,
-            'detection_rate': detection_rate,
-            'total_malicious': true_malicious,
-            'total_benign': true_benign,
-            'detected': detected_malicious,
-            'false_positives': false_positives,
-            'false_negatives': false_negatives
+            "fpr": fpr,
+            "fnr": fnr,
+            "detection_rate": detection_rate,
+            "total_malicious": true_malicious,
+            "total_benign": true_benign,
+            "detected": detected_malicious,
+            "false_positives": false_positives,
+            "false_negatives": false_negatives,
         }
 
     def generate_report(self) -> str:
@@ -674,10 +689,11 @@ class SecurityModelEvaluator:
                 lines.append(f"  F1 Score: {result.f1_score:.4f}")
             lines.append("")
 
-        return '\n'.join(lines)
+        return "\n".join(lines)
 
-    def compare_models(self, models: List[EmbeddingTrainer],
-                       test_samples: List[TrainingSample]) -> dict:
+    def compare_models(
+        self, models: List[EmbeddingTrainer], test_samples: List[TrainingSample]
+    ) -> dict:
         """Compare multiple models."""
         results = {}
 
@@ -702,8 +718,8 @@ class SecurityModelEvaluator:
                     avg_tightness += np.mean(distances)
 
             results[model_name] = {
-                'avg_cluster_distance': avg_tightness / len(by_label),
-                'embedding_dim': model.embedding_dim
+                "avg_cluster_distance": avg_tightness / len(by_label),
+                "embedding_dim": model.embedding_dim,
             }
 
         return results
@@ -715,25 +731,23 @@ def main():
     print("Lab 18: Fine-Tuning for Security Applications - Solution")
     print("=" * 60)
 
-    data_dir = os.path.join(os.path.dirname(__file__), '..', 'data')
+    data_dir = os.path.join(os.path.dirname(__file__), "..", "data")
 
     try:
-        with open(os.path.join(data_dir, 'training_samples.json'), 'r') as f:
+        with open(os.path.join(data_dir, "training_samples.json"), "r") as f:
             data = json.load(f)
         print(f"\nLoaded {len(data.get('samples', []))} training samples")
     except FileNotFoundError:
         print("Sample data not found. Creating demo data.")
-        data = {'samples': create_sample_training_data()}
+        data = {"samples": create_sample_training_data()}
 
     # Build Dataset
     print("\n--- Building Security Dataset ---")
     builder = SecurityDatasetBuilder()
 
-    for sample in data.get('samples', []):
+    for sample in data.get("samples", []):
         builder.add_sample(
-            text=sample['text'],
-            label=sample['label'],
-            category=sample.get('category', 'general')
+            text=sample["text"], label=sample["label"], category=sample.get("category", "general")
         )
 
     print(f"Added {len(builder.samples)} samples")
@@ -778,14 +792,14 @@ def main():
     for sample in test_samples:
         # Simple rule-based prediction for demo
         text_lower = sample.text.lower()
-        if any(kw in text_lower for kw in ['malicious', 'attack', 'threat', 'hack']):
-            predictions.append('malicious')
-        elif any(kw in text_lower for kw in ['phishing', 'urgent', 'click here']):
-            predictions.append('phishing')
-        elif any(kw in text_lower for kw in ['suspicious', 'failed', 'unauthorized']):
-            predictions.append('suspicious')
+        if any(kw in text_lower for kw in ["malicious", "attack", "threat", "hack"]):
+            predictions.append("malicious")
+        elif any(kw in text_lower for kw in ["phishing", "urgent", "click here"]):
+            predictions.append("phishing")
+        elif any(kw in text_lower for kw in ["suspicious", "failed", "unauthorized"]):
+            predictions.append("suspicious")
         else:
-            predictions.append('benign')
+            predictions.append("benign")
 
     result = evaluator.evaluate_classification(test_samples, predictions)
     print(f"Accuracy: {result.accuracy:.2%}")
@@ -813,26 +827,52 @@ def main():
 def create_sample_training_data() -> List[dict]:
     """Create sample training data for demonstration."""
     return [
-        {"text": "Urgent: Your account has been compromised. Click here to secure it now!",
-         "label": "phishing", "category": "email"},
-        {"text": "Meeting scheduled for tomorrow at 2pm in conference room B.",
-         "label": "benign", "category": "email"},
-        {"text": "Invoice #12345 attached. Please process payment immediately.",
-         "label": "phishing", "category": "email"},
-        {"text": "Weekly team standup notes attached for your review.",
-         "label": "benign", "category": "email"},
-        {"text": "Failed login attempt from 185.234.72.19 for user admin",
-         "label": "suspicious", "category": "log"},
-        {"text": "User jsmith logged in successfully from 192.168.1.10",
-         "label": "benign", "category": "log"},
-        {"text": "PowerShell -enc base64encodedcommand executed by SYSTEM",
-         "label": "malicious", "category": "log"},
-        {"text": "Scheduled backup completed successfully",
-         "label": "benign", "category": "log"},
-        {"text": "Malicious file detected: trojan.exe with hash abc123",
-         "label": "malicious", "category": "alert"},
-        {"text": "Normal software update downloaded from vendor.com",
-         "label": "benign", "category": "log"},
+        {
+            "text": "Urgent: Your account has been compromised. Click here to secure it now!",
+            "label": "phishing",
+            "category": "email",
+        },
+        {
+            "text": "Meeting scheduled for tomorrow at 2pm in conference room B.",
+            "label": "benign",
+            "category": "email",
+        },
+        {
+            "text": "Invoice #12345 attached. Please process payment immediately.",
+            "label": "phishing",
+            "category": "email",
+        },
+        {
+            "text": "Weekly team standup notes attached for your review.",
+            "label": "benign",
+            "category": "email",
+        },
+        {
+            "text": "Failed login attempt from 185.234.72.19 for user admin",
+            "label": "suspicious",
+            "category": "log",
+        },
+        {
+            "text": "User jsmith logged in successfully from 192.168.1.10",
+            "label": "benign",
+            "category": "log",
+        },
+        {
+            "text": "PowerShell -enc base64encodedcommand executed by SYSTEM",
+            "label": "malicious",
+            "category": "log",
+        },
+        {"text": "Scheduled backup completed successfully", "label": "benign", "category": "log"},
+        {
+            "text": "Malicious file detected: trojan.exe with hash abc123",
+            "label": "malicious",
+            "category": "alert",
+        },
+        {
+            "text": "Normal software update downloaded from vendor.com",
+            "label": "benign",
+            "category": "log",
+        },
     ]
 
 
