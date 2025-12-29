@@ -1,0 +1,33 @@
+{
+  "ioc_matches": [
+    {
+      "ioc": "185.143.223.47",
+      "type": "IP",
+      "threat_actor": "CRIMSON SPIDER",
+      "confidence": "high",
+      "first_seen": "2024-01-10"
+    },
+    {
+      "ioc": "91.234.99.102",
+      "type": "IP",
+      "threat_actor": "CRIMSON SPIDER",
+      "confidence": "high",
+      "first_seen": "2024-01-08"
+    },
+    {
+      "ioc": "fakeinvoice.com",
+      "type": "domain",
+      "threat_actor": "CRIMSON SPIDER",
+      "confidence": "medium",
+      "first_seen": "2024-01-12"
+    }
+  ],
+  "flag_part_4": "PR0",
+  "threat_actor_profile": {
+    "name": "CRIMSON SPIDER",
+    "motivation": "Financial",
+    "targets": "Financial institutions",
+    "ttps": ["T1566.001", "T1059.001", "T1003", "T1021.002", "T1041"]
+  },
+  "analysis": "All IOCs match known CRIMSON SPIDER infrastructure"
+}

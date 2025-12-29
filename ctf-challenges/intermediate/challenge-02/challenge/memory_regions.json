@@ -1,0 +1,16 @@
+{
+  "regions": [
+    {"pid": 4592, "base_address": "0x00400000", "size": "0x1000", "protection": "RWX", "type": "Private", "note": "Suspicious - code section with write permission"},
+    {"pid": 4592, "base_address": "0x00401000", "size": "0x5000", "protection": "RX", "type": "Image", "note": "Normal code section"},
+    {"pid": 4592, "base_address": "0x10000000", "size": "0x2000", "protection": "RWX", "type": "Private", "note": "Injected shellcode region"},
+    {"pid": 2340, "base_address": "0x00400000", "size": "0x100000", "protection": "RX", "type": "Image", "note": "Normal Chrome code"},
+    {"pid": 3456, "base_address": "0x00400000", "size": "0x80000", "protection": "RX", "type": "Image", "note": "Normal Outlook code"},
+    {"pid": 5012, "base_address": "0x00400000", "size": "0x10000", "protection": "RX", "type": "Image", "note": "Normal Notepad code"}
+  ],
+  "analysis": {
+    "suspicious_regions": 2,
+    "rwx_regions": 2,
+    "injected_code_detected": true,
+    "affected_pid": 4592
+  }
+}

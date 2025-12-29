@@ -1,0 +1,15 @@
+{
+  "incident_id": "INC-2024-FINAL",
+  "classification": "Critical",
+  "discovery_time": "2024-01-15T06:00:00Z",
+  "summary": "Major breach detected affecting multiple systems. Evidence of data exfiltration and persistent access.",
+  "affected_systems": [
+    "WORKSTATION-42",
+    "FILESERVER01",
+    "SQLSERVER01",
+    "DC01"
+  ],
+  "initial_detection": "EDR alert on suspicious PowerShell execution",
+  "flag_part_1": "MAS",
+  "investigation_notes": "This is a complex multi-stage attack. All artifact sources must be analyzed to understand full scope."
+}

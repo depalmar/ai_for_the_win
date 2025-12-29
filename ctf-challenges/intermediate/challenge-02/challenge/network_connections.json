@@ -1,0 +1,16 @@
+{
+  "connections": [
+    {"pid": 4592, "local_address": "192.168.1.105", "local_port": 49234, "remote_address": "185.143.223.47", "remote_port": 443, "state": "ESTABLISHED", "protocol": "TCP"},
+    {"pid": 2340, "local_address": "192.168.1.105", "local_port": 49100, "remote_address": "142.250.185.206", "remote_port": 443, "state": "ESTABLISHED", "protocol": "TCP"},
+    {"pid": 3456, "local_address": "192.168.1.105", "local_port": 49150, "remote_address": "52.96.165.130", "remote_port": 443, "state": "ESTABLISHED", "protocol": "TCP"},
+    {"pid": 868, "local_address": "192.168.1.105", "local_port": 135, "remote_address": "0.0.0.0", "remote_port": 0, "state": "LISTENING", "protocol": "TCP"}
+  ],
+  "suspicious_connections": [
+    {
+      "pid": 4592,
+      "remote_address": "185.143.223.47",
+      "threat_intel": "Known C2 infrastructure",
+      "confidence": "high"
+    }
+  ]
+}

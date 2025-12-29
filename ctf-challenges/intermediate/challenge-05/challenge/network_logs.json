@@ -1,0 +1,14 @@
+{
+  "connections": [
+    {"time": "2024-01-15T01:00:00Z", "src": "WORKSTATION-42", "dst": "185.143.223.47", "port": 443, "bytes": 15000, "type": "C2"},
+    {"time": "2024-01-15T01:05:00Z", "src": "WORKSTATION-42", "dst": "FILESERVER01", "port": 445, "bytes": 5000000, "type": "SMB"},
+    {"time": "2024-01-15T01:10:00Z", "src": "WORKSTATION-42", "dst": "SQLSERVER01", "port": 445, "bytes": 3000000, "type": "SMB"},
+    {"time": "2024-01-15T01:30:00Z", "src": "FILESERVER01", "dst": "91.234.99.102", "port": 443, "bytes": 500000000, "type": "Exfil"},
+    {"time": "2024-01-15T02:00:00Z", "src": "FILESERVER01", "dst": "SQLSERVER01", "port": 445, "bytes": 250000, "type": "SMB"},
+    {"time": "2024-01-15T02:05:00Z", "src": "SQLSERVER01", "dst": "BACKUP-01", "port": 445, "bytes": 180000, "type": "SMB"}
+  ],
+  "suspicious_ips": [
+    {"ip": "185.143.223.47", "type": "C2", "associated_malware": "Cobalt Strike"},
+    {"ip": "91.234.99.102", "type": "Exfiltration", "associated_malware": "Custom Exfil Tool"}
+  ]
+}

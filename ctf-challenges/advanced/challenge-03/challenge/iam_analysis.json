@@ -1,0 +1,38 @@
+{
+  "compromised_identities": {
+    "aws": [
+      {
+        "identity": "dev-user",
+        "type": "IAMUser",
+        "initial_access_time": "2024-01-15T01:00:00Z",
+        "escalated_privileges": ["AdministratorAccess"],
+        "suspicious_actions": ["CreateAccessKey", "AttachUserPolicy", "GetSecretValue"]
+      }
+    ],
+    "azure": [
+      {
+        "identity": "azure-automation@company.onmicrosoft.com",
+        "type": "ServicePrincipal",
+        "compromised_via": "AWS Secrets Manager",
+        "suspicious_actions": ["Add member to role", "Add user"]
+      },
+      {
+        "identity": "svc-backup@company.onmicrosoft.com",
+        "type": "User",
+        "created_by": "Attacker",
+        "is_backdoor": true,
+        "display_name_encoded": "RkxBR3tDTE9VRF9IT1BQRVJ9",
+        "note": "Backdoor account created for persistence"
+      }
+    ]
+  },
+  "attack_path": [
+    "1. Initial access via compromised AWS IAM user credentials",
+    "2. Privilege escalation to AWS Administrator",
+    "3. Access Azure SP credentials from Secrets Manager",
+    "4. Cross-cloud pivot to Azure",
+    "5. Privilege escalation in Azure AD",
+    "6. Create backdoor user for persistence",
+    "7. Access sensitive data in Azure Storage"
+  ]
+}

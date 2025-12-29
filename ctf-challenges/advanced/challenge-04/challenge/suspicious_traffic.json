@@ -1,0 +1,14 @@
+{
+  "capture_time": "2024-01-15T03:00:00Z to 2024-01-15T04:00:00Z",
+  "flows": [
+    {"id": "F001", "src": "192.168.1.105", "dst": "142.250.185.206", "port": 443, "packets": 50, "bytes": 25000, "duration": 35, "anomaly_score": 0.15},
+    {"id": "F002", "src": "192.168.1.105", "dst": "185.143.223.47", "port": 8443, "packets": 5, "bytes": 800, "duration": 2, "anomaly_score": 0.92, "payload_hex": "0422252d7f1c04267f3626047f302b34277c32"},
+    {"id": "F003", "src": "192.168.1.105", "dst": "52.96.165.130", "port": 443, "packets": 100, "bytes": 75000, "duration": 250, "anomaly_score": 0.12},
+    {"id": "F004", "src": "192.168.1.105", "dst": "185.143.223.47", "port": 8443, "packets": 3, "bytes": 450, "duration": 1, "anomaly_score": 0.95, "payload_hex": "0422252d7f1c04267f3626047f302b34277c32"},
+    {"id": "F005", "src": "192.168.1.105", "dst": "10.0.0.25", "port": 22, "packets": 180, "bytes": 12000, "duration": 500, "anomaly_score": 0.08},
+    {"id": "F006", "src": "192.168.1.105", "dst": "185.143.223.47", "port": 8443, "packets": 8, "bytes": 1200, "duration": 3, "anomaly_score": 0.89, "payload_hex": "0422252d7f1c04267f3626047f302b34277c32"},
+    {"id": "F007", "src": "192.168.1.105", "dst": "192.168.1.200", "port": 445, "packets": 500, "bytes": 45000, "duration": 120, "anomaly_score": 0.35}
+  ],
+  "high_anomaly_flows": ["F002", "F004", "F006"],
+  "common_pattern": "All high-anomaly flows connect to same destination on non-standard port with XOR-encoded payload"
+}

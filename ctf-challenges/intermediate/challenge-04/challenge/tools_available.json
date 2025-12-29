@@ -1,0 +1,39 @@
+{
+  "tools": [
+    {
+      "name": "get_alert_details",
+      "description": "Retrieve full details of a security alert",
+      "parameters": {"alert_id": "string"}
+    },
+    {
+      "name": "decode_base64",
+      "description": "Decode base64 encoded strings",
+      "parameters": {"encoded": "string"}
+    },
+    {
+      "name": "lookup_ip",
+      "description": "Look up IP address in threat intelligence",
+      "parameters": {"ip": "string"}
+    },
+    {
+      "name": "lookup_hash",
+      "description": "Look up file hash in threat intelligence",
+      "parameters": {"hash": "string"}
+    },
+    {
+      "name": "get_host_files",
+      "description": "Get recently created/modified files on a host",
+      "parameters": {"host": "string", "time_range": "string"}
+    },
+    {
+      "name": "get_host_processes",
+      "description": "Get running processes on a host",
+      "parameters": {"host": "string"}
+    },
+    {
+      "name": "create_incident",
+      "description": "Create a new incident ticket",
+      "parameters": {"severity": "string", "title": "string", "details": "object"}
+    }
+  ]
+}

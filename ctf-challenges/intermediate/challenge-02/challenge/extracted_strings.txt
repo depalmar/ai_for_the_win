@@ -1,0 +1,32 @@
+Strings extracted from PID 4592 memory regions
+==============================================
+
+Region 0x00400000:
+------------------
+MZ
+This program cannot be run in DOS mode
+.text
+.data
+.rsrc
+kernel32.dll
+VirtualAlloc
+CreateProcessA
+WinExec
+
+Region 0x10000000 (Injected Code):
+----------------------------------
+cmd.exe /c whoami
+net user
+FLAG{M3M0RY_F0R3NS1CS_FTW}
+powershell -enc
+http://185.143.223.47/beacon
+HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run
+persistence_key
+
+Decrypted Config:
+-----------------
+c2_server: 185.143.223.47
+c2_port: 443
+beacon_interval: 60
+jitter: 0.2
+user_agent: Mozilla/5.0

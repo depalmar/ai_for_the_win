@@ -1,0 +1,14 @@
+{
+  "events": [
+    {"time": "2024-01-14T09:15:00Z", "event": "Phishing email received", "host": "WORKSTATION-42", "user": "jsmith", "details": "Email with malicious attachment from spoofed supplier"},
+    {"time": "2024-01-14T09:18:00Z", "event": "Attachment opened", "host": "WORKSTATION-42", "user": "jsmith", "details": "Invoice_Q4_2023.xlsm executed macro"},
+    {"time": "2024-01-14T09:19:00Z", "event": "PowerShell execution", "host": "WORKSTATION-42", "user": "jsmith", "details": "Encoded PowerShell download cradle"},
+    {"time": "2024-01-14T09:20:00Z", "event": "Cobalt Strike beacon", "host": "WORKSTATION-42", "user": "jsmith", "details": "Initial C2 callback to 185.143.223.47"},
+    {"time": "2024-01-15T00:30:00Z", "event": "Credential dump", "host": "WORKSTATION-42", "user": "SYSTEM", "details": "Mimikatz executed, domain admin creds obtained"},
+    {"time": "2024-01-15T01:00:00Z", "event": "Lateral movement", "host": "FILESERVER01", "user": "domain_admin", "details": "PSExec used to move to file server"},
+    {"time": "2024-01-15T01:30:00Z", "event": "Data exfiltration", "host": "FILESERVER01", "user": "domain_admin", "details": "Sensitive files copied to external server"},
+    {"time": "2024-01-15T02:00:00Z", "event": "Ransomware deployment", "host": "FILESERVER01", "user": "domain_admin", "details": "Ransomware binary executed across network"},
+    {"time": "2024-01-15T02:45:00Z", "event": "Encryption complete", "host": "Multiple", "user": "SYSTEM", "details": "15,847 files encrypted across 5 hosts"},
+    {"time": "2024-01-15T02:50:00Z", "event": "Ransom note dropped", "host": "Multiple", "user": "SYSTEM", "details": "README_DECRYPT.txt placed in all directories"}
+  ]
+}

@@ -1,0 +1,7 @@
+sample_id,packet_size,src_port,dst_port,duration,byte_count,packet_count,protocol,detected
+M001,500,45234,443,1.2,15000,30,TCP,1
+M002,512,45235,80,0.8,8000,16,TCP,1
+M003,480,45236,443,1.5,18000,38,TCP,1
+M004,495,45237,8080,2.0,25000,50,TCP,1
+M005,510,45238,443,1.1,13000,26,TCP,1
+M006,488,45239,80,0.9,9500,19,TCP,1

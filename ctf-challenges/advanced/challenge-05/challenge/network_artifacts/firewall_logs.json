@@ -1,0 +1,10 @@
+{
+  "connections": [
+    {"time": "2024-01-15T01:00:00Z", "src": "192.168.1.105", "dst": "185.143.223.47", "port": 443, "action": "allow", "bytes": 15000},
+    {"time": "2024-01-15T02:00:00Z", "src": "192.168.1.105", "dst": "192.168.1.10", "port": 445, "action": "allow", "bytes": 5000000},
+    {"time": "2024-01-15T02:05:00Z", "src": "192.168.1.105", "dst": "192.168.1.20", "port": 445, "action": "allow", "bytes": 3000000},
+    {"time": "2024-01-15T02:15:00Z", "src": "192.168.1.10", "dst": "91.234.99.102", "port": 443, "action": "allow", "bytes": 500000000}
+  ],
+  "flag_part_3": "IR_",
+  "analysis": "C2 communication to 185.143.223.47, lateral movement via SMB, data exfil to 91.234.99.102"
+}

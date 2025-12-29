@@ -1,0 +1,49 @@
+THREAT INTELLIGENCE REPORT
+Classification: TLP:AMBER
+Date: 2024-01-15
+Analyst: SecOps Team
+
+EXECUTIVE SUMMARY
+==================
+A new malware campaign has been identified targeting financial institutions
+in the APAC region. The threat actor, tracked as "CRIMSON SPIDER", has been
+deploying a custom backdoor via spear-phishing campaigns.
+
+INDICATORS OF COMPROMISE
+=========================
+
+Network Indicators:
+- C2 Server: 185[.]143[.]223[.]47
+- Backup C2: 91[.]234[.]99[.]102
+- Exfil Domain: data-sync[.]evil[.]com
+- Phishing Domain: secure-banking[.]net
+
+File Indicators:
+- Dropper Hash (MD5): 464c41477b494f435f4d41535445527d
+- Payload Hash (SHA256): a1b2c3d4e5f6789012345678901234567890abcdef1234567890abcdef123456
+- Loader Hash (MD5): d41d8cd98f00b204e9800998ecf8427e
+
+Email Indicators:
+- Sender: support@secure-banking[.]net
+- Subject patterns: "Urgent: Account Verification Required"
+- Attachment: invoice_2024.pdf.exe
+
+URLs Observed:
+- hxxps://data-sync[.]evil[.]com/update/check
+- hxxp://185[.]143[.]223[.]47:8080/beacon
+- hxxps://secure-banking[.]net/verify?token=abc123
+
+MITRE ATT&CK Mapping:
+- T1566.001 - Spear Phishing Attachment
+- T1059.001 - PowerShell
+- T1071.001 - Web Protocols
+- T1041 - Exfiltration Over C2 Channel
+
+RECOMMENDATIONS
+===============
+1. Block all listed network indicators at perimeter
+2. Deploy detection rules for identified file hashes
+3. Alert users about phishing campaign characteristics
+4. Monitor for C2 beaconing patterns
+
+END REPORT

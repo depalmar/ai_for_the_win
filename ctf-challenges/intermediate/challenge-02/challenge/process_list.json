@@ -1,0 +1,25 @@
+{
+  "capture_time": "2024-01-15T14:32:00Z",
+  "system_info": {
+    "os": "Windows 10 Pro",
+    "build": "19045",
+    "memory_total": "16 GB"
+  },
+  "processes": [
+    {"pid": 4, "ppid": 0, "name": "System", "path": "", "user": "SYSTEM", "start_time": "2024-01-15T08:00:00Z"},
+    {"pid": 88, "ppid": 4, "name": "Registry", "path": "", "user": "SYSTEM", "start_time": "2024-01-15T08:00:00Z"},
+    {"pid": 456, "ppid": 4, "name": "smss.exe", "path": "C:\\Windows\\System32\\smss.exe", "user": "SYSTEM", "start_time": "2024-01-15T08:00:01Z"},
+    {"pid": 568, "ppid": 456, "name": "csrss.exe", "path": "C:\\Windows\\System32\\csrss.exe", "user": "SYSTEM", "start_time": "2024-01-15T08:00:02Z"},
+    {"pid": 672, "ppid": 456, "name": "wininit.exe", "path": "C:\\Windows\\System32\\wininit.exe", "user": "SYSTEM", "start_time": "2024-01-15T08:00:02Z"},
+    {"pid": 752, "ppid": 672, "name": "services.exe", "path": "C:\\Windows\\System32\\services.exe", "user": "SYSTEM", "start_time": "2024-01-15T08:00:03Z"},
+    {"pid": 760, "ppid": 672, "name": "lsass.exe", "path": "C:\\Windows\\System32\\lsass.exe", "user": "SYSTEM", "start_time": "2024-01-15T08:00:03Z"},
+    {"pid": 868, "ppid": 752, "name": "svchost.exe", "path": "C:\\Windows\\System32\\svchost.exe", "user": "SYSTEM", "start_time": "2024-01-15T08:00:04Z"},
+    {"pid": 1024, "ppid": 752, "name": "svchost.exe", "path": "C:\\Windows\\System32\\svchost.exe", "user": "NETWORK SERVICE", "start_time": "2024-01-15T08:00:05Z"},
+    {"pid": 1856, "ppid": 1024, "name": "explorer.exe", "path": "C:\\Windows\\explorer.exe", "user": "CORP\\jsmith", "start_time": "2024-01-15T08:05:00Z"},
+    {"pid": 2340, "ppid": 1856, "name": "chrome.exe", "path": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe", "user": "CORP\\jsmith", "start_time": "2024-01-15T09:15:00Z"},
+    {"pid": 3456, "ppid": 1856, "name": "outlook.exe", "path": "C:\\Program Files\\Microsoft Office\\root\\Office16\\OUTLOOK.EXE", "user": "CORP\\jsmith", "start_time": "2024-01-15T09:20:00Z"},
+    {"pid": 4592, "ppid": 3456, "name": "svchost.exe", "path": "C:\\Users\\jsmith\\AppData\\Local\\Temp\\svchost.exe", "user": "CORP\\jsmith", "start_time": "2024-01-15T14:28:00Z"},
+    {"pid": 4780, "ppid": 4592, "name": "cmd.exe", "path": "C:\\Windows\\System32\\cmd.exe", "user": "CORP\\jsmith", "start_time": "2024-01-15T14:29:00Z"},
+    {"pid": 5012, "ppid": 1856, "name": "notepad.exe", "path": "C:\\Windows\\System32\\notepad.exe", "user": "CORP\\jsmith", "start_time": "2024-01-15T10:00:00Z"}
+  ]
+}

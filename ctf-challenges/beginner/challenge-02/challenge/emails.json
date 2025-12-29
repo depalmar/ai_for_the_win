@@ -1,0 +1,69 @@
+{
+  "emails": [
+    {
+      "id": 1,
+      "from": "hr@company.com",
+      "to": "employee@company.com",
+      "subject": "Updated PTO Policy",
+      "body": "Hi Team,\n\nPlease review the updated PTO policy effective January 1st. You can find the document in the HR portal.\n\nBest regards,\nHR Department",
+      "timestamp": "2024-01-10T09:00:00Z",
+      "headers": {
+        "X-Originating-IP": "10.0.0.50",
+        "SPF": "pass",
+        "DKIM": "pass"
+      }
+    },
+    {
+      "id": 2,
+      "from": "security@micros0ft.com",
+      "to": "user@company.com",
+      "subject": "URGENT: Your Account Will Be Suspended!!!",
+      "body": "Dear Valued Customer,\n\nWe have detected unusual activity on your Microsoft account. Your account will be SUSPENDED within 24 hours unless you verify your identity immediately!\n\nClick here to verify: https://micros0ft-secure.com/verify?id=RkxBR3tQSDFTSF9GMFVORH0=\n\nFailure to act will result in permanent account deletion.\n\nMicrosoft Security Team",
+      "timestamp": "2024-01-10T14:32:00Z",
+      "headers": {
+        "X-Originating-IP": "185.143.223.47",
+        "SPF": "fail",
+        "DKIM": "fail"
+      }
+    },
+    {
+      "id": 3,
+      "from": "newsletter@linkedin.com",
+      "to": "user@company.com",
+      "subject": "Your weekly job recommendations",
+      "body": "Hi,\n\nHere are some jobs we think you'd be great for:\n\n- Senior Security Engineer at TechCorp\n- Cloud Architect at CloudFirst\n- DevOps Lead at StartupXYZ\n\nView all recommendations in your LinkedIn feed.\n\nLinkedIn Team",
+      "timestamp": "2024-01-10T08:00:00Z",
+      "headers": {
+        "X-Originating-IP": "108.174.10.10",
+        "SPF": "pass",
+        "DKIM": "pass"
+      }
+    },
+    {
+      "id": 4,
+      "from": "it-support@company.com",
+      "to": "all-staff@company.com",
+      "subject": "Scheduled Maintenance Tonight",
+      "body": "Hello,\n\nPlease be advised that our email servers will undergo scheduled maintenance tonight from 11 PM to 2 AM EST.\n\nYou may experience brief interruptions during this window.\n\nThank you for your patience.\n\nIT Support",
+      "timestamp": "2024-01-10T16:00:00Z",
+      "headers": {
+        "X-Originating-IP": "10.0.0.25",
+        "SPF": "pass",
+        "DKIM": "pass"
+      }
+    },
+    {
+      "id": 5,
+      "from": "noreply@github.com",
+      "to": "developer@company.com",
+      "subject": "Security alert: new sign-in from Windows",
+      "body": "Hi developer,\n\nWe noticed a new sign-in to your GitHub account.\n\nDevice: Windows 10\nLocation: New York, NY, USA\nTime: January 10, 2024 at 10:15 AM EST\n\nIf this was you, you can ignore this email.\n\nIf this wasn't you, please secure your account.\n\nGitHub",
+      "timestamp": "2024-01-10T10:20:00Z",
+      "headers": {
+        "X-Originating-IP": "192.30.252.200",
+        "SPF": "pass",
+        "DKIM": "pass"
+      }
+    }
+  ]
+}

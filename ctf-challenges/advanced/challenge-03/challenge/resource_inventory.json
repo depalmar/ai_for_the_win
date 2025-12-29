@@ -1,0 +1,26 @@
+{
+  "aws": {
+    "region": "us-east-1",
+    "resources": [
+      {"type": "S3", "name": "company-sensitive-data", "classification": "Confidential", "accessed_by_attacker": true},
+      {"type": "SecretsManager", "name": "azure-service-principal", "accessed_by_attacker": true},
+      {"type": "EC2", "name": "prod-web-01", "accessed_by_attacker": false},
+      {"type": "RDS", "name": "prod-database", "accessed_by_attacker": false}
+    ]
+  },
+  "azure": {
+    "subscription": "Production",
+    "resources": [
+      {"type": "StorageAccount", "name": "companydatalake", "classification": "Confidential", "accessed_by_attacker": true},
+      {"type": "KeyVault", "name": "prod-secrets", "accessed_by_attacker": false},
+      {"type": "VirtualMachine", "name": "prod-app-01", "accessed_by_attacker": false}
+    ]
+  },
+  "cross_cloud_links": [
+    {
+      "source": "AWS Secrets Manager (azure-service-principal)",
+      "destination": "Azure AD Service Principal",
+      "vulnerability": "Azure credentials stored in AWS without rotation policy"
+    }
+  ]
+}

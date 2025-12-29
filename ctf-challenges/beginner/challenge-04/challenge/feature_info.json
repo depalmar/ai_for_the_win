@@ -1,0 +1,23 @@
+{
+  "features": {
+    "sample_id": "Unique identifier for the sample",
+    "file_size": "Size of the executable in bytes",
+    "entropy": "Shannon entropy of the file (0-8 scale, higher = more random/packed)",
+    "num_imports": "Number of imported functions",
+    "num_sections": "Number of PE sections",
+    "has_debug": "Whether debug information is present (0 or 1)",
+    "packed": "Whether the file appears to be packed (0 or 1)",
+    "suspicious_strings": "Count of suspicious strings found",
+    "api_calls": "Number of unique API calls detected"
+  },
+  "label_info": {
+    "benign": "Legitimate software",
+    "malware": "Malicious software"
+  },
+  "classification_tips": [
+    "High entropy (>7.0) often indicates packing or encryption",
+    "Low import count with high suspicious strings is a red flag",
+    "Legitimate software usually has debug symbols",
+    "Malware often has more sections than typical software"
+  ]
+}
