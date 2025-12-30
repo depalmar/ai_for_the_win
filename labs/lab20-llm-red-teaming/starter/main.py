@@ -152,7 +152,14 @@ class InjectionDetector:
         Returns:
             InjectionAttempt with detection results
         """
-        # TODO: Implement this method
+        # TODO: Ask your AI assistant:
+        # "Write Python code to detect prompt injection attempts by checking text
+        # against INJECTION_PATTERNS regex list, calculating a confidence score
+        # based on the number of matches, and returning an InjectionAttempt with
+        # attack_type='prompt_injection', indicators listing matched patterns,
+        # and detected=True if any patterns match"
+        #
+        # Then review and test the generated code.
         pass
 
     def detect_jailbreak(self, text: str) -> InjectionAttempt:
@@ -170,7 +177,14 @@ class InjectionDetector:
         Returns:
             InjectionAttempt with detection results
         """
-        # TODO: Implement this method
+        # TODO: Ask your AI assistant:
+        # "Write Python code to detect jailbreak attempts by checking text against
+        # JAILBREAK_PATTERNS regex list, looking for roleplay manipulation and
+        # restriction bypass attempts, calculating a confidence score, and returning
+        # an InjectionAttempt with attack_type='jailbreak', indicators listing
+        # matched patterns, and detected=True if any patterns match"
+        #
+        # Then review and test the generated code.
         pass
 
     def detect_data_extraction(self, text: str) -> InjectionAttempt:
@@ -187,7 +201,14 @@ class InjectionDetector:
         Returns:
             InjectionAttempt with detection results
         """
-        # TODO: Implement this method
+        # TODO: Ask your AI assistant:
+        # "Write Python code to detect attempts to extract system prompts or training
+        # data by checking text against EXTRACTION_PATTERNS regex list, detecting
+        # indirect extraction attempts, and returning an InjectionAttempt with
+        # attack_type='data_extraction', indicators listing matched patterns,
+        # and detected=True if any patterns match"
+        #
+        # Then review and test the generated code.
         pass
 
     def analyze_all(self, text: str) -> List[InjectionAttempt]:
@@ -205,7 +226,13 @@ class InjectionDetector:
         Returns:
             List of all detection results
         """
-        # TODO: Implement this method
+        # TODO: Ask your AI assistant:
+        # "Write Python code to run all detection methods (detect_injection,
+        # detect_jailbreak, detect_data_extraction) on the input text, aggregate
+        # the results into a list, track the results in self.detection_history,
+        # and return the list of all InjectionAttempt results"
+        #
+        # Then review and test the generated code.
         pass
 
     def calculate_risk_score(self, attempts: List[InjectionAttempt]) -> float:
@@ -220,7 +247,13 @@ class InjectionDetector:
         Returns:
             Risk score 0-1
         """
-        # TODO: Implement this method
+        # TODO: Ask your AI assistant:
+        # "Write Python code to calculate an overall risk score (0-1) from a list
+        # of InjectionAttempt results by considering the number of detected attempts,
+        # their confidence scores, and whether they were blocked, returning a
+        # weighted average or maximum risk value"
+        #
+        # Then review and test the generated code.
         pass
 
 
@@ -261,7 +294,12 @@ class SecureLLMApp:
         Args:
             filter_func: Function that takes text and returns (filtered_text, should_block)
         """
-        # TODO: Implement this method
+        # TODO: Ask your AI assistant:
+        # "Write Python code to register an input filter function by appending
+        # filter_func to self.input_filters list, where the filter will be
+        # applied before LLM calls to sanitize or block dangerous input"
+        #
+        # Then review and test the generated code.
         pass
 
     def add_output_filter(self, filter_func: Callable[[str], str]):
@@ -275,7 +313,12 @@ class SecureLLMApp:
         Args:
             filter_func: Function that takes and returns text
         """
-        # TODO: Implement this method
+        # TODO: Ask your AI assistant:
+        # "Write Python code to register an output filter function by appending
+        # filter_func to self.output_filters list, where the filter will be
+        # applied after LLM responses to sanitize the output"
+        #
+        # Then review and test the generated code.
         pass
 
     def sanitize_input(self, text: str) -> Tuple[str, List[InjectionAttempt]]:
@@ -293,7 +336,13 @@ class SecureLLMApp:
         Returns:
             (sanitized_text, detection_results)
         """
-        # TODO: Implement this method
+        # TODO: Ask your AI assistant:
+        # "Write Python code to sanitize user input by running self.detector.analyze_all()
+        # to detect attacks, applying all registered input_filters in sequence,
+        # blocking or modifying dangerous input based on filter results, and returning
+        # a tuple of (sanitized_text, list of detection_results)"
+        #
+        # Then review and test the generated code.
         pass
 
     def sanitize_output(self, text: str) -> str:
@@ -311,7 +360,13 @@ class SecureLLMApp:
         Returns:
             Sanitized response
         """
-        # TODO: Implement this method
+        # TODO: Ask your AI assistant:
+        # "Write Python code to sanitize LLM output by checking if the response
+        # contains the system prompt and removing it, applying all registered
+        # output_filters in sequence, redacting any sensitive information,
+        # and returning the sanitized response text"
+        #
+        # Then review and test the generated code.
         pass
 
     def query(self, user_input: str) -> Tuple[str, dict]:
@@ -332,7 +387,14 @@ class SecureLLMApp:
         Returns:
             (response, security_metadata)
         """
-        # TODO: Implement this method
+        # TODO: Ask your AI assistant:
+        # "Write Python code to securely query the LLM by: 1) sanitizing input
+        # using sanitize_input(), 2) checking for attacks and blocking if necessary,
+        # 3) calling the LLM via self.llm if not blocked (use _init_llm() first),
+        # 4) sanitizing output using sanitize_output(), 5) returning a tuple of
+        # (response, security_metadata dict with 'blocked', 'detections', 'risk_score')"
+        #
+        # Then review and test the generated code.
         pass
 
 
@@ -398,7 +460,12 @@ class RedTeamFramework:
             category: Attack category
             payload: Test payload
         """
-        # TODO: Implement this method
+        # TODO: Ask your AI assistant:
+        # "Write Python code to add a custom test payload by checking if the
+        # category exists in self.test_payloads (create empty list if not),
+        # then appending the payload to that category's list"
+        #
+        # Then review and test the generated code.
         pass
 
     def run_test(self, category: str, payload: str) -> RedTeamResult:
@@ -417,7 +484,14 @@ class RedTeamFramework:
         Returns:
             RedTeamResult with findings
         """
-        # TODO: Implement this method
+        # TODO: Ask your AI assistant:
+        # "Write Python code to run a single red team test by sending the payload
+        # to self.target.query(), analyzing the response to determine if the attack
+        # succeeded (check for indicators like 'HACKED', system prompt leakage, etc.),
+        # and returning a RedTeamResult with test_id, test_name, category, payload,
+        # success flag, response, vulnerability_found, severity, and recommendation"
+        #
+        # Then review and test the generated code.
         pass
 
     def run_category(self, category: str) -> List[RedTeamResult]:
@@ -435,7 +509,13 @@ class RedTeamFramework:
         Returns:
             List of test results
         """
-        # TODO: Implement this method
+        # TODO: Ask your AI assistant:
+        # "Write Python code to run all tests in a category by getting the list
+        # of payloads from self.test_payloads for the given category, calling
+        # run_test() for each payload, collecting all results, and returning
+        # the list of RedTeamResult objects"
+        #
+        # Then review and test the generated code.
         pass
 
     def run_all_tests(self) -> List[RedTeamResult]:
@@ -449,7 +529,13 @@ class RedTeamFramework:
         Returns:
             All test results
         """
-        # TODO: Implement this method
+        # TODO: Ask your AI assistant:
+        # "Write Python code to run all red team tests by iterating over all
+        # categories in self.test_payloads, calling run_category() for each,
+        # collecting all results into a single list, storing them in self.results,
+        # and returning the complete list of RedTeamResult objects"
+        #
+        # Then review and test the generated code.
         pass
 
     def analyze_results(self, results: List[RedTeamResult]) -> dict:
@@ -467,7 +553,13 @@ class RedTeamFramework:
         Returns:
             Analysis summary
         """
-        # TODO: Implement this method
+        # TODO: Ask your AI assistant:
+        # "Write Python code to analyze test results by counting vulnerabilities
+        # by category, calculating success rates (successful attacks / total tests),
+        # prioritizing findings by severity, and returning a dict with keys like
+        # 'total_tests', 'successful_attacks', 'success_rate', 'by_category', 'by_severity'"
+        #
+        # Then review and test the generated code.
         pass
 
     def generate_report(self, results: List[RedTeamResult]) -> SecurityReport:
@@ -485,7 +577,14 @@ class RedTeamFramework:
         Returns:
             SecurityReport
         """
-        # TODO: Implement this method
+        # TODO: Ask your AI assistant:
+        # "Write Python code to generate a SecurityReport by summarizing findings
+        # from results, calculating a risk_score (0-100) based on successful attacks
+        # and their severity, generating a list of recommendations based on the
+        # vulnerabilities found, and returning a SecurityReport dataclass with
+        # report_id, timestamp, tests_run, vulnerabilities_found, risk_score, findings, recommendations"
+        #
+        # Then review and test the generated code.
         pass
 
 

@@ -154,7 +154,13 @@ class SimpleClassifier:
         Returns:
             Gradient of loss w.r.t. input
         """
-        # TODO: Implement this method
+        # TODO: Ask your AI assistant:
+        # "Write Python code to compute the gradient of cross-entropy loss with respect to the input.
+        # Perform a forward pass through a 2-layer neural network (hidden layer with ReLU, output with softmax),
+        # then backpropagate through the network to compute the input gradient.
+        # Use self.W1, self.b1, self.W2, self.b2 as network weights."
+        #
+        # Then review and test the generated code.
         pass
 
 
@@ -188,8 +194,13 @@ class FGSMAttack:
         Returns:
             Adversarial example
         """
-        # TODO: Implement this method
-        # Formula: x_adv = x + epsilon * sign(gradient)
+        # TODO: Ask your AI assistant:
+        # "Write Python code to implement the Fast Gradient Sign Method (FGSM) attack.
+        # Compute the gradient of loss with respect to input using self.model.compute_gradient(x, y),
+        # take the sign of the gradient, and apply an epsilon-scaled perturbation.
+        # Use the formula: x_adv = x + epsilon * sign(gradient)"
+        #
+        # Then review and test the generated code.
         pass
 
     def attack_sample(self, sample: MalwareSample) -> AdversarialExample:
@@ -207,7 +218,13 @@ class FGSMAttack:
         Returns:
             AdversarialExample with results
         """
-        # TODO: Implement this method
+        # TODO: Ask your AI assistant:
+        # "Write Python code to attack a single MalwareSample using FGSM.
+        # Generate adversarial features using self.generate(), get original and adversarial predictions
+        # using self.model.predict(), check if attack succeeded (predictions differ), compute perturbation norm,
+        # and return an AdversarialExample dataclass with all relevant information."
+        #
+        # Then review and test the generated code.
         pass
 
     def evaluate(self, samples: List[MalwareSample]) -> AttackResult:
@@ -225,7 +242,13 @@ class FGSMAttack:
         Returns:
             AttackResult with statistics
         """
-        # TODO: Implement this method
+        # TODO: Ask your AI assistant:
+        # "Write Python code to evaluate FGSM attack on multiple MalwareSample objects.
+        # Iterate through samples, call self.attack_sample() on each, track successful attacks,
+        # calculate success rate and average perturbation norm, and return an AttackResult dataclass
+        # containing attack statistics and list of successful AdversarialExamples."
+        #
+        # Then review and test the generated code.
         pass
 
 
@@ -272,7 +295,14 @@ class PGDAttack:
         Returns:
             Adversarial example
         """
-        # TODO: Implement this method
+        # TODO: Ask your AI assistant:
+        # "Write Python code to implement the Projected Gradient Descent (PGD) attack.
+        # Initialize with random perturbation within epsilon-ball, then iteratively:
+        # 1) compute gradient using self.model.compute_gradient(), 2) take a gradient step of size alpha
+        # (add for untargeted, subtract for targeted), 3) project back to epsilon-ball using self.project().
+        # Repeat for self.num_steps iterations and return the adversarial example."
+        #
+        # Then review and test the generated code.
         pass
 
     def project(self, x: np.ndarray, x_orig: np.ndarray) -> np.ndarray:
@@ -289,7 +319,12 @@ class PGDAttack:
         Returns:
             Projected adversarial example
         """
-        # TODO: Implement this method
+        # TODO: Ask your AI assistant:
+        # "Write Python code to project an adversarial example back to the L-infinity epsilon-ball
+        # around the original input. Use np.clip() to ensure the perturbation (x - x_orig) stays
+        # within [-epsilon, epsilon] bounds, then return x_orig + clipped_perturbation."
+        #
+        # Then review and test the generated code.
         pass
 
     def attack_sample(
@@ -306,12 +341,24 @@ class PGDAttack:
         Returns:
             AdversarialExample with results
         """
-        # TODO: Implement this method
+        # TODO: Ask your AI assistant:
+        # "Write Python code to attack a single MalwareSample using PGD.
+        # Generate adversarial features using self.generate() with appropriate label (target_label if targeted,
+        # else sample.label), get original and adversarial predictions, check attack success,
+        # compute perturbation norm, and return an AdversarialExample dataclass."
+        #
+        # Then review and test the generated code.
         pass
 
     def evaluate(self, samples: List[MalwareSample]) -> AttackResult:
         """Evaluate attack on multiple samples."""
-        # TODO: Implement this method
+        # TODO: Ask your AI assistant:
+        # "Write Python code to evaluate PGD attack on multiple MalwareSample objects.
+        # Iterate through samples, call self.attack_sample() on each, track successful attacks,
+        # calculate success rate and average perturbation, and return an AttackResult dataclass
+        # with attack type 'pgd' and all statistics."
+        #
+        # Then review and test the generated code.
         pass
 
 
@@ -353,7 +400,14 @@ class AdversarialTrainer:
         Returns:
             Loss value
         """
-        # TODO: Implement this method
+        # TODO: Ask your AI assistant:
+        # "Write Python code to perform a single adversarial training step.
+        # Generate adversarial examples using self.attack.generate() for the batch,
+        # compute loss on adversarial examples using self.model.compute_loss(),
+        # compute gradients and update model weights (W1, b1, W2, b2) using gradient descent,
+        # and return the loss value."
+        #
+        # Then review and test the generated code.
         pass
 
     def train(
@@ -375,7 +429,13 @@ class AdversarialTrainer:
         Returns:
             List of loss values per epoch
         """
-        # TODO: Implement this method
+        # TODO: Ask your AI assistant:
+        # "Write Python code to implement the full adversarial training loop.
+        # For each epoch: shuffle the training data, iterate through batches of batch_size,
+        # extract features and labels from MalwareSample objects, call self.train_step() on each batch,
+        # track average loss per epoch, and return the list of epoch losses."
+        #
+        # Then review and test the generated code.
         pass
 
     def evaluate_robustness(
@@ -396,7 +456,13 @@ class AdversarialTrainer:
         Returns:
             Dictionary of robustness metrics
         """
-        # TODO: Implement this method
+        # TODO: Ask your AI assistant:
+        # "Write Python code to evaluate model robustness against adversarial attacks.
+        # Calculate clean accuracy on test_data, then for each attack type (default: ['fgsm', 'pgd']),
+        # create the appropriate attack, evaluate it on test_data, and compute adversarial accuracy.
+        # Return a dictionary with 'clean_accuracy', 'adversarial_accuracy', and per-attack success rates."
+        #
+        # Then review and test the generated code.
         pass
 
 
@@ -425,7 +491,11 @@ class RobustClassifier:
         Args:
             transform: Transformation function
         """
-        # TODO: Implement this method
+        # TODO: Ask your AI assistant:
+        # "Write Python code to add an input transformation function to self.input_transformations list.
+        # This transformation will be applied to inputs before classification as a defense mechanism."
+        #
+        # Then review and test the generated code.
         pass
 
     def add_ensemble_model(self, model: SimpleClassifier):
@@ -452,7 +522,14 @@ class RobustClassifier:
         Returns:
             (is_adversarial, confidence)
         """
-        # TODO: Implement this method
+        # TODO: Ask your AI assistant:
+        # "Write Python code to detect if an input is adversarial.
+        # Apply each transformation in self.input_transformations and check prediction consistency,
+        # check ensemble model disagreement if self.ensemble_models is populated,
+        # calculate a detection score based on prediction variance, and return (is_adversarial, confidence)
+        # where is_adversarial is True if score exceeds a threshold."
+        #
+        # Then review and test the generated code.
         pass
 
     def predict_robust(self, x: np.ndarray) -> Tuple[np.ndarray, np.ndarray]:
@@ -470,7 +547,13 @@ class RobustClassifier:
         Returns:
             (predictions, confidences)
         """
-        # TODO: Implement this method
+        # TODO: Ask your AI assistant:
+        # "Write Python code to make robust predictions with defense mechanisms.
+        # Apply all input transformations from self.input_transformations to the input,
+        # if ensemble_models exist, get predictions from all models and use majority voting,
+        # otherwise use self.model.predict_proba(). Return (predictions, confidences) as numpy arrays."
+        #
+        # Then review and test the generated code.
         pass
 
     def evaluate_defenses(
@@ -491,7 +574,14 @@ class RobustClassifier:
         Returns:
             Defense effectiveness metrics
         """
-        # TODO: Implement this method
+        # TODO: Ask your AI assistant:
+        # "Write Python code to evaluate defense effectiveness.
+        # Measure clean accuracy on clean_data using self.predict_robust(),
+        # measure adversarial accuracy on adversarial_data (using adversarial_features),
+        # measure detection rate by calling self.detect_adversarial() on adversarial examples,
+        # and return a dictionary with 'clean_accuracy', 'adversarial_accuracy', and 'detection_rate'."
+        #
+        # Then review and test the generated code.
         pass
 
 

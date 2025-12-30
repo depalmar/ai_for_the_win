@@ -176,8 +176,15 @@ class TTPExtractor:
         Returns:
             List of extracted TTPs
         """
-        # TODO: Implement this method
-        # Hint: Use regex patterns to identify TTPs
+        # TODO: Ask your AI assistant:
+        # "Write Python code to extract TTPs from threat report text by:
+        # 1. Searching for technique patterns using TECHNIQUE_PATTERNS regex dict
+        # 2. Extracting technique IDs mentioned directly (e.g., T1566, T1059)
+        # 3. Looking up tactics from TACTIC_MAPPING
+        # 4. Calculating confidence based on match context
+        # 5. Returning a list of TTP dataclass objects"
+        #
+        # Then review and test the generated code.
         pass
 
     def extract_from_iocs(self, iocs: dict) -> List[TTP]:
@@ -195,7 +202,15 @@ class TTPExtractor:
         Returns:
             List of inferred TTPs
         """
-        # TODO: Implement this method
+        # TODO: Ask your AI assistant:
+        # "Write Python code to infer TTPs from IOCs (Indicators of Compromise) by:
+        # 1. Analyzing file extensions to suggest techniques (e.g., .ps1 -> T1059 PowerShell)
+        # 2. Checking domain patterns for C2 methods (e.g., DGA patterns -> T1071)
+        # 3. Examining hash types to indicate malware capabilities
+        # 4. Creating TTP objects with appropriate technique IDs, names, and tactics
+        # 5. Returning a list of inferred TTPs"
+        #
+        # Then review and test the generated code.
         pass
 
     def extract_from_malware(self, sample: MalwareSample) -> List[TTP]:
@@ -212,7 +227,16 @@ class TTPExtractor:
         Returns:
             List of TTPs used by malware
         """
-        # TODO: Implement this method
+        # TODO: Ask your AI assistant:
+        # "Write Python code to extract TTPs from a MalwareSample's capabilities by:
+        # 1. Mapping capability strings (e.g., 'keylogger', 'screenshot', 'file_exfil')
+        #    to MITRE ATT&CK technique IDs
+        # 2. Inferring tactics from the malware's behaviors (e.g., keylogger -> Credential Access)
+        # 3. Using the sample's c2_domains and mutex_names for additional TTP inference
+        # 4. Creating TTP objects with technique ID, name, tactic, and confidence
+        # 5. Returning a list of TTPs representing the malware's capabilities"
+        #
+        # Then review and test the generated code.
         pass
 
     def llm_extract_ttps(self, text: str, llm_client) -> List[TTP]:
@@ -231,7 +255,15 @@ class TTPExtractor:
         Returns:
             List of extracted TTPs
         """
-        # TODO: Implement this method
+        # TODO: Ask your AI assistant:
+        # "Write Python code to use an LLM to extract TTPs from text by:
+        # 1. Building a prompt that asks the LLM to identify MITRE ATT&CK techniques
+        # 2. Sending the text to the LLM client (handle Anthropic, OpenAI, or Google)
+        # 3. Requesting structured JSON output with technique IDs, names, and tactics
+        # 4. Parsing the LLM response and validating technique IDs
+        # 5. Creating and returning a list of TTP dataclass objects"
+        #
+        # Then review and test the generated code.
         pass
 
 
@@ -253,7 +285,15 @@ class ThreatActorClusterer:
         Args:
             profiles: List of threat actor profile dicts
         """
-        # TODO: Implement this method
+        # TODO: Ask your AI assistant:
+        # "Write Python code to load threat actor profiles into the clusterer by:
+        # 1. Parsing the list of actor profile dictionaries
+        # 2. Creating ThreatActor dataclass objects from the profile data
+        # 3. Storing actors in self.actors dict indexed by actor_id
+        # 4. Building lookup indices for quick access by alias, malware family, etc.
+        # 5. Handling missing or malformed profile data gracefully"
+        #
+        # Then review and test the generated code.
         pass
 
     def calculate_ttp_similarity(self, ttps1: List[TTP], ttps2: List[TTP]) -> float:
@@ -272,7 +312,15 @@ class ThreatActorClusterer:
         Returns:
             Similarity score between 0 and 1
         """
-        # TODO: Implement this method
+        # TODO: Ask your AI assistant:
+        # "Write Python code to calculate similarity between two TTP sets by:
+        # 1. Extracting technique IDs from both TTP lists
+        # 2. Computing Jaccard similarity (intersection / union) of technique ID sets
+        # 3. Weighting the score by tactic overlap (same tactics = higher similarity)
+        # 4. Considering technique hierarchy (sub-techniques under same parent)
+        # 5. Returning a similarity score between 0.0 and 1.0"
+        #
+        # Then review and test the generated code.
         pass
 
     def calculate_infrastructure_overlap(self, iocs1: dict, iocs2: dict) -> float:
@@ -291,7 +339,15 @@ class ThreatActorClusterer:
         Returns:
             Overlap score between 0 and 1
         """
-        # TODO: Implement this method
+        # TODO: Ask your AI assistant:
+        # "Write Python code to calculate infrastructure overlap between campaigns by:
+        # 1. Comparing domain IOCs for exact matches and similar patterns
+        # 2. Comparing IP addresses and checking for subnet similarity (e.g., same /24)
+        # 3. Comparing URLs for shared paths or parameters
+        # 4. Considering historical infrastructure reuse patterns
+        # 5. Returning an overlap score between 0.0 and 1.0"
+        #
+        # Then review and test the generated code.
         pass
 
     def cluster_campaigns(
@@ -312,7 +368,15 @@ class ThreatActorClusterer:
         Returns:
             List of campaign clusters
         """
-        # TODO: Implement this method
+        # TODO: Ask your AI assistant:
+        # "Write Python code to cluster campaigns by similarity using:
+        # 1. Calculating pairwise similarity combining TTP and infrastructure overlap
+        # 2. Building a similarity matrix for all campaign pairs
+        # 3. Applying hierarchical or density-based clustering (e.g., DBSCAN, agglomerative)
+        # 4. Grouping campaigns that exceed the threshold similarity
+        # 5. Returning a list of campaign clusters (each cluster is a list of Campaign objects)"
+        #
+        # Then review and test the generated code.
         pass
 
     def attribute_campaign(self, campaign: Campaign) -> List[AttributionResult]:
@@ -331,7 +395,15 @@ class ThreatActorClusterer:
         Returns:
             List of attribution results sorted by confidence
         """
-        # TODO: Implement this method
+        # TODO: Ask your AI assistant:
+        # "Write Python code to attribute a campaign to known threat actors by:
+        # 1. Comparing campaign TTPs against known actor TTP profiles using calculate_ttp_similarity
+        # 2. Comparing campaign IOCs against known actor infrastructure
+        # 3. Matching target sectors and regions to actor targeting preferences
+        # 4. Calculating a weighted confidence score from all comparisons
+        # 5. Returning a sorted list of AttributionResult objects (highest confidence first)"
+        #
+        # Then review and test the generated code.
         pass
 
 
@@ -353,7 +425,15 @@ class MalwareAttributor:
         Args:
             samples: List of malware sample dicts
         """
-        # TODO: Implement this method
+        # TODO: Ask your AI assistant:
+        # "Write Python code to load known malware samples into the database by:
+        # 1. Parsing the list of malware sample dictionaries
+        # 2. Creating MalwareSample dataclass objects from the data
+        # 3. Indexing samples in self.malware_db by hash_sha256
+        # 4. Building additional indices by imphash, family, and capabilities
+        # 5. Populating self.actor_malware to map actors to their associated malware"
+        #
+        # Then review and test the generated code.
         pass
 
     def calculate_code_similarity(self, sample1: MalwareSample, sample2: MalwareSample) -> float:
@@ -372,7 +452,15 @@ class MalwareAttributor:
         Returns:
             Similarity score between 0 and 1
         """
-        # TODO: Implement this method
+        # TODO: Ask your AI assistant:
+        # "Write Python code to calculate code similarity between two malware samples by:
+        # 1. Comparing imphash values (exact match = high similarity)
+        # 2. Using ssdeep fuzzy hashing via calculate_ssdeep_similarity method
+        # 3. Computing Jaccard similarity of capability lists
+        # 4. Weighting and combining these similarity components
+        # 5. Returning a combined similarity score between 0.0 and 1.0"
+        #
+        # Then review and test the generated code.
         pass
 
     def calculate_ssdeep_similarity(self, hash1: str, hash2: str) -> float:
@@ -390,7 +478,15 @@ class MalwareAttributor:
         Returns:
             Similarity score between 0 and 100
         """
-        # TODO: Implement this method
+        # TODO: Ask your AI assistant:
+        # "Write Python code to calculate ssdeep fuzzy hash similarity by:
+        # 1. Parsing the ssdeep hash format (blocksize:chunk1:chunk2)
+        # 2. Comparing block sizes (must be equal or double/half for comparison)
+        # 3. Finding common substrings in the chunk portions
+        # 4. Calculating similarity based on longest common substring length
+        # 5. Returning a similarity score between 0 and 100"
+        #
+        # Then review and test the generated code.
         pass
 
     def find_similar_samples(
@@ -411,7 +507,15 @@ class MalwareAttributor:
         Returns:
             List of (sample, similarity) tuples
         """
-        # TODO: Implement this method
+        # TODO: Ask your AI assistant:
+        # "Write Python code to find similar malware samples in the database by:
+        # 1. Iterating through all samples in self.malware_db
+        # 2. Calculating code similarity using calculate_code_similarity method
+        # 3. Filtering results to only include samples above the threshold
+        # 4. Sorting by similarity score in descending order
+        # 5. Returning a list of (MalwareSample, similarity_score) tuples"
+        #
+        # Then review and test the generated code.
         pass
 
     def attribute_sample(self, sample: MalwareSample) -> List[AttributionResult]:
@@ -429,7 +533,15 @@ class MalwareAttributor:
         Returns:
             List of attribution results
         """
-        # TODO: Implement this method
+        # TODO: Ask your AI assistant:
+        # "Write Python code to attribute a malware sample to threat actors by:
+        # 1. Finding similar samples using find_similar_samples method
+        # 2. Looking up threat actors associated with matching samples via self.actor_malware
+        # 3. Aggregating evidence (matching malware families, capabilities, infrastructure)
+        # 4. Calculating confidence scores based on similarity and evidence strength
+        # 5. Returning a sorted list of AttributionResult objects (highest confidence first)"
+        #
+        # Then review and test the generated code.
         pass
 
 
@@ -465,7 +577,15 @@ class AttributionPipeline:
             actor_profiles: Known threat actor profiles
             malware_samples: Known malware samples
         """
-        # TODO: Implement this method
+        # TODO: Ask your AI assistant:
+        # "Write Python code to load the threat intelligence knowledge base by:
+        # 1. Calling self.clusterer.load_actor_profiles with actor_profiles
+        # 2. Calling self.malware_attributor.load_malware_database with malware_samples
+        # 3. Building any additional cross-reference indices needed
+        # 4. Handling empty or malformed input data gracefully
+        # 5. Logging the number of loaded profiles and samples"
+        #
+        # Then review and test the generated code.
         pass
 
     def analyze_incident(self, incident_data: dict) -> dict:
@@ -485,7 +605,15 @@ class AttributionPipeline:
         Returns:
             Attribution analysis results
         """
-        # TODO: Implement this method
+        # TODO: Ask your AI assistant:
+        # "Write Python code to analyze an incident for threat actor attribution by:
+        # 1. Extracting TTPs from incident description using self.ttp_extractor.extract_from_text
+        # 2. Extracting TTPs from IOCs using self.ttp_extractor.extract_from_iocs
+        # 3. Attributing any malware hashes using self.malware_attributor.attribute_sample
+        # 4. Finding matching campaigns using self.clusterer.attribute_campaign
+        # 5. Combining results into a dict with 'ttps', 'attributions', 'campaigns', 'confidence'"
+        #
+        # Then review and test the generated code.
         pass
 
     def llm_generate_profile(self, attribution: dict) -> str:
@@ -503,7 +631,15 @@ class AttributionPipeline:
         Returns:
             Generated profile text
         """
-        # TODO: Implement this method
+        # TODO: Ask your AI assistant:
+        # "Write Python code to use an LLM to generate a threat actor profile summary by:
+        # 1. Initializing the LLM with self._init_llm() if not already done
+        # 2. Building a prompt with attribution data (TTPs, campaigns, malware, confidence)
+        # 3. Requesting a structured profile including actor assessment and recommendations
+        # 4. Handling different LLM providers (Anthropic, OpenAI, Google) via self.llm
+        # 5. Returning the generated profile text with confidence assessment"
+        #
+        # Then review and test the generated code.
         pass
 
     def generate_report(self, results: dict) -> str:
@@ -518,7 +654,15 @@ class AttributionPipeline:
         Returns:
             Formatted report string
         """
-        # TODO: Implement this method
+        # TODO: Ask your AI assistant:
+        # "Write Python code to generate a formatted attribution report by:
+        # 1. Extracting key findings from results dict (TTPs, attributions, confidence)
+        # 2. Formatting a structured report with sections for Executive Summary, TTPs, Attribution
+        # 3. Including confidence levels and supporting evidence for each finding
+        # 4. Adding recommendations based on the identified threat actor
+        # 5. Returning a formatted string suitable for security analysts"
+        #
+        # Then review and test the generated code.
         pass
 
 
