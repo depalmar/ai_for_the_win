@@ -1,0 +1,18 @@
+{
+  "recommendations": [
+    "ms-python.python",
+    "ms-python.vscode-pylance",
+    "ms-python.debugpy",
+    "ms-python.black-formatter",
+    "ms-python.isort",
+    "ms-toolsai.jupyter",
+    "infosec-intern.yara",
+    "eamodio.gitlens",
+    "yzhang.markdown-all-in-one",
+    "redhat.vscode-yaml",
+    "ms-azuretools.vscode-docker",
+    "usernamehw.errorlens",
+    "gruntfuggly.todo-tree"
+  ],
+  "unwantedRecommendations": []
+}
