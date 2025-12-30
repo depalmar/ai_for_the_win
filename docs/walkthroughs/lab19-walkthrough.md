@@ -13,7 +13,7 @@ Build AI-powered cloud security monitoring for AWS, Azure, and GCP using CloudTr
 
 ### AI-Powered CloudTrail Log Analysis
 
-```python
+````python
 import boto3
 import json
 from datetime import datetime, timedelta
@@ -194,7 +194,7 @@ Focus on AWS-specific threats like:
 # events = aws_analyzer.fetch_events(hours=24)
 # anomalies = aws_analyzer.detect_anomalies(events)
 # analysis = aws_analyzer.analyze_with_ai(events)
-```
+````
 
 ---
 
