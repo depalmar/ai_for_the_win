@@ -65,9 +65,7 @@ def load_module(module_path: Path) -> Optional[Any]:
         return None
 
     try:
-        spec = importlib.util.spec_from_file_location(
-            module_path.stem, module_path
-        )
+        spec = importlib.util.spec_from_file_location(module_path.stem, module_path)
         if spec and spec.loader:
             module = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(module)
@@ -81,6 +79,7 @@ def load_module(module_path: Path) -> Optional[Any]:
 # =============================================================================
 # Lab 11 Scoring: Ransomware Detection
 # =============================================================================
+
 
 def score_lab11() -> ScoringResult:
     """Score Lab 11: Ransomware Detection."""
@@ -109,12 +108,14 @@ def score_lab11() -> ScoringResult:
         except Exception:
             return False
 
-    tests.append(TestCase(
-        name="Entropy Calculation",
-        description="calculate_entropy() correctly computes Shannon entropy",
-        points=20,
-        test_fn=test_entropy
-    ))
+    tests.append(
+        TestCase(
+            name="Entropy Calculation",
+            description="calculate_entropy() correctly computes Shannon entropy",
+            points=20,
+            test_fn=test_entropy,
+        )
+    )
 
     # Test 2: Event analysis (25 pts)
     def test_analyze_events():
@@ -132,7 +133,7 @@ def score_lab11() -> ScoringResult:
                 file_path="/test/file.encrypted",
                 file_extension=".encrypted",
                 entropy=7.9,
-                size_bytes=1000
+                size_bytes=1000,
             )
         ]
         try:
@@ -141,12 +142,14 @@ def score_lab11() -> ScoringResult:
         except Exception:
             return False
 
-    tests.append(TestCase(
-        name="Event Analysis",
-        description="analyze_events() returns detection results",
-        points=25,
-        test_fn=test_analyze_events
-    ))
+    tests.append(
+        TestCase(
+            name="Event Analysis",
+            description="analyze_events() returns detection results",
+            points=25,
+            test_fn=test_analyze_events,
+        )
+    )
 
     # Test 3: Shadow deletion detection (15 pts)
     def test_shadow_detection():
@@ -162,7 +165,7 @@ def score_lab11() -> ScoringResult:
                 file_path="/tmp/out",
                 file_extension=".tmp",
                 entropy=2.0,
-                size_bytes=100
+                size_bytes=100,
             )
         ]
         try:
@@ -171,12 +174,14 @@ def score_lab11() -> ScoringResult:
         except Exception:
             return False
 
-    tests.append(TestCase(
-        name="Shadow Deletion Detection",
-        description="detect_shadow_deletion() identifies VSS deletion",
-        points=15,
-        test_fn=test_shadow_detection
-    ))
+    tests.append(
+        TestCase(
+            name="Shadow Deletion Detection",
+            description="detect_shadow_deletion() identifies VSS deletion",
+            points=15,
+            test_fn=test_shadow_detection,
+        )
+    )
 
     # Test 4: Ransom note IOC extraction (20 pts)
     def test_ioc_extraction():
@@ -188,19 +193,21 @@ def score_lab11() -> ScoringResult:
         try:
             iocs = note_analyzer.extract_iocs(sample)
             return (
-                iocs is not None and
-                isinstance(iocs, dict) and
-                len(iocs.get("bitcoin_addresses", [])) > 0
+                iocs is not None
+                and isinstance(iocs, dict)
+                and len(iocs.get("bitcoin_addresses", [])) > 0
             )
         except Exception:
             return False
 
-    tests.append(TestCase(
-        name="IOC Extraction",
-        description="extract_iocs() finds Bitcoin addresses and onion URLs",
-        points=20,
-        test_fn=test_ioc_extraction
-    ))
+    tests.append(
+        TestCase(
+            name="IOC Extraction",
+            description="extract_iocs() finds Bitcoin addresses and onion URLs",
+            points=20,
+            test_fn=test_ioc_extraction,
+        )
+    )
 
     # Test 5: Response playbook generation (20 pts)
     def test_playbook():
@@ -215,7 +222,7 @@ def score_lab11() -> ScoringResult:
             encryption_progress=50.0,
             lateral_movement_detected=True,
             exfiltration_detected=False,
-            first_seen="2024-01-01T00:00:00Z"
+            first_seen="2024-01-01T00:00:00Z",
         )
         try:
             playbook = resp.generate_playbook(context)
@@ -223,12 +230,14 @@ def score_lab11() -> ScoringResult:
         except Exception:
             return False
 
-    tests.append(TestCase(
-        name="Response Playbook",
-        description="generate_playbook() creates incident response steps",
-        points=20,
-        test_fn=test_playbook
-    ))
+    tests.append(
+        TestCase(
+            name="Response Playbook",
+            description="generate_playbook() creates incident response steps",
+            points=20,
+            test_fn=test_playbook,
+        )
+    )
 
     # Run all tests
     total_points = sum(t.points for t in tests)
@@ -241,22 +250,26 @@ def score_lab11() -> ScoringResult:
             if result:
                 earned_points += test.points
                 passed += 1
-            details.append({
-                "name": test.name,
-                "description": test.description,
-                "points": test.points,
-                "earned": test.points if result else 0,
-                "passed": result
-            })
+            details.append(
+                {
+                    "name": test.name,
+                    "description": test.description,
+                    "points": test.points,
+                    "earned": test.points if result else 0,
+                    "passed": result,
+                }
+            )
         except Exception as e:
-            details.append({
-                "name": test.name,
-                "description": test.description,
-                "points": test.points,
-                "earned": 0,
-                "passed": False,
-                "error": str(e)
-            })
+            details.append(
+                {
+                    "name": test.name,
+                    "description": test.description,
+                    "points": test.points,
+                    "earned": 0,
+                    "passed": False,
+                    "error": str(e),
+                }
+            )
 
     return ScoringResult(
         lab_id="11",
@@ -265,13 +278,14 @@ def score_lab11() -> ScoringResult:
         earned_points=earned_points,
         tests_passed=passed,
         tests_total=len(tests),
-        details=details
+        details=details,
     )
 
 
 # =============================================================================
 # Lab 12 Scoring: Ransomware Simulation
 # =============================================================================
+
 
 def score_lab12() -> ScoringResult:
     """Score Lab 12: Ransomware Simulation."""
@@ -289,6 +303,7 @@ def score_lab12() -> ScoringResult:
             return False
         # Try to create simulator with invalid path - should raise
         from tempfile import gettempdir
+
         try:
             config = simulator.SimulationConfig(
                 target_directory="/etc/passwd",  # Should be blocked!
@@ -300,12 +315,14 @@ def score_lab12() -> ScoringResult:
         except Exception:
             return False
 
-    tests.append(TestCase(
-        name="Safety Path Validation",
-        description="SafeRansomwareSimulator blocks non-allowed paths",
-        points=30,
-        test_fn=test_safety_validation
-    ))
+    tests.append(
+        TestCase(
+            name="Safety Path Validation",
+            description="SafeRansomwareSimulator blocks non-allowed paths",
+            points=30,
+            test_fn=test_safety_validation,
+        )
+    )
 
     # Test 2: Scenario generation (20 pts)
     def test_scenario_generation():
@@ -315,19 +332,20 @@ def score_lab12() -> ScoringResult:
         gen = generator.ScenarioGenerator()
         try:
             scenario = gen.generate_scenario(
-                family=generator.RansomwareFamily.LOCKBIT,
-                complexity=generator.Complexity.MEDIUM
+                family=generator.RansomwareFamily.LOCKBIT, complexity=generator.Complexity.MEDIUM
             )
             return scenario is not None
         except Exception:
             return False
 
-    tests.append(TestCase(
-        name="Scenario Generation",
-        description="generate_scenario() creates attack scenarios",
-        points=20,
-        test_fn=test_scenario_generation
-    ))
+    tests.append(
+        TestCase(
+            name="Scenario Generation",
+            description="generate_scenario() creates attack scenarios",
+            points=20,
+            test_fn=test_scenario_generation,
+        )
+    )
 
     # Test 3: Detection tests (20 pts)
     def test_detection_tests():
@@ -336,9 +354,7 @@ def score_lab12() -> ScoringResult:
             return False
         gen = generator.ScenarioGenerator()
         try:
-            scenario = gen.generate_scenario(
-                family=generator.RansomwareFamily.LOCKBIT
-            )
+            scenario = gen.generate_scenario(family=generator.RansomwareFamily.LOCKBIT)
             if not scenario:
                 return False
             tests = gen.generate_detection_tests(scenario)
@@ -346,12 +362,14 @@ def score_lab12() -> ScoringResult:
         except Exception:
             return False
 
-    tests.append(TestCase(
-        name="Detection Test Generation",
-        description="generate_detection_tests() creates test cases",
-        points=20,
-        test_fn=test_detection_tests
-    ))
+    tests.append(
+        TestCase(
+            name="Detection Test Generation",
+            description="generate_detection_tests() creates test cases",
+            points=20,
+            test_fn=test_detection_tests,
+        )
+    )
 
     # Test 4: Audit logging (15 pts)
     def test_audit_logging():
@@ -359,6 +377,7 @@ def score_lab12() -> ScoringResult:
         if not simulator:
             return False
         import tempfile
+
         test_dir = tempfile.mkdtemp(prefix="ransomware_test_")
         try:
             config = simulator.SimulationConfig(target_directory=test_dir)
@@ -369,14 +388,17 @@ def score_lab12() -> ScoringResult:
             return False
         finally:
             import shutil
+
             shutil.rmtree(test_dir, ignore_errors=True)
 
-    tests.append(TestCase(
-        name="Audit Logging",
-        description="All simulation actions are logged",
-        points=15,
-        test_fn=test_audit_logging
-    ))
+    tests.append(
+        TestCase(
+            name="Audit Logging",
+            description="All simulation actions are logged",
+            points=15,
+            test_fn=test_audit_logging,
+        )
+    )
 
     # Test 5: Gap analysis (15 pts)
     def test_gap_analysis():
@@ -390,12 +412,14 @@ def score_lab12() -> ScoringResult:
         except Exception:
             return False
 
-    tests.append(TestCase(
-        name="Gap Analysis",
-        description="generate_gap_analysis() identifies detection gaps",
-        points=15,
-        test_fn=test_gap_analysis
-    ))
+    tests.append(
+        TestCase(
+            name="Gap Analysis",
+            description="generate_gap_analysis() identifies detection gaps",
+            points=15,
+            test_fn=test_gap_analysis,
+        )
+    )
 
     # Run all tests
     total_points = sum(t.points for t in tests)
@@ -408,22 +432,26 @@ def score_lab12() -> ScoringResult:
             if result:
                 earned_points += test.points
                 passed += 1
-            details.append({
-                "name": test.name,
-                "description": test.description,
-                "points": test.points,
-                "earned": test.points if result else 0,
-                "passed": result
-            })
+            details.append(
+                {
+                    "name": test.name,
+                    "description": test.description,
+                    "points": test.points,
+                    "earned": test.points if result else 0,
+                    "passed": result,
+                }
+            )
         except Exception as e:
-            details.append({
-                "name": test.name,
-                "description": test.description,
-                "points": test.points,
-                "earned": 0,
-                "passed": False,
-                "error": str(e)
-            })
+            details.append(
+                {
+                    "name": test.name,
+                    "description": test.description,
+                    "points": test.points,
+                    "earned": 0,
+                    "passed": False,
+                    "error": str(e),
+                }
+            )
 
     return ScoringResult(
         lab_id="12",
@@ -432,7 +460,7 @@ def score_lab12() -> ScoringResult:
         earned_points=earned_points,
         tests_passed=passed,
         tests_total=len(tests),
-        details=details
+        details=details,
     )
 
 
@@ -440,8 +468,10 @@ def score_lab12() -> ScoringResult:
 # Placeholder Scoring for Labs 13-20
 # =============================================================================
 
+
 def create_placeholder_scorer(lab_id: str, lab_name: str) -> Callable[[], ScoringResult]:
     """Create a placeholder scorer for labs not yet implemented."""
+
     def scorer() -> ScoringResult:
         return ScoringResult(
             lab_id=lab_id,
@@ -450,14 +480,17 @@ def create_placeholder_scorer(lab_id: str, lab_name: str) -> Callable[[], Scorin
             earned_points=0,
             tests_passed=0,
             tests_total=5,
-            details=[{
-                "name": "Lab Not Implemented",
-                "description": f"Lab {lab_id} scoring tests pending implementation",
-                "points": 100,
-                "earned": 0,
-                "passed": False
-            }]
+            details=[
+                {
+                    "name": "Lab Not Implemented",
+                    "description": f"Lab {lab_id} scoring tests pending implementation",
+                    "points": 100,
+                    "earned": 0,
+                    "passed": False,
+                }
+            ],
         )
+
     return scorer
 
 
@@ -480,9 +513,12 @@ LAB_SCORERS = {
 # Display Functions
 # =============================================================================
 
+
 def print_result(result: ScoringResult, verbose: bool = False) -> None:
     """Print scoring result."""
-    percentage = (result.earned_points / result.total_points * 100) if result.total_points > 0 else 0
+    percentage = (
+        (result.earned_points / result.total_points * 100) if result.total_points > 0 else 0
+    )
 
     if RICH_AVAILABLE:
         # Grade color
@@ -554,21 +590,9 @@ def print_summary(results: List[ScoringResult]) -> None:
 def main():
     """Run the scoring system."""
     parser = argparse.ArgumentParser(description="Score AI for the Win labs")
-    parser.add_argument(
-        "--lab",
-        type=str,
-        help="Score specific lab (e.g., --lab 11)"
-    )
-    parser.add_argument(
-        "--verbose", "-v",
-        action="store_true",
-        help="Show detailed test results"
-    )
-    parser.add_argument(
-        "--json",
-        action="store_true",
-        help="Output as JSON"
-    )
+    parser.add_argument("--lab", type=str, help="Score specific lab (e.g., --lab 11)")
+    parser.add_argument("--verbose", "-v", action="store_true", help="Show detailed test results")
+    parser.add_argument("--json", action="store_true", help="Output as JSON")
 
     args = parser.parse_args()
 
@@ -589,22 +613,24 @@ def main():
             results.append(result)
 
     if args.json:
-        output = [{
-            "lab_id": r.lab_id,
-            "lab_name": r.lab_name,
-            "total_points": r.total_points,
-            "earned_points": r.earned_points,
-            "tests_passed": r.tests_passed,
-            "tests_total": r.tests_total,
-            "details": r.details
-        } for r in results]
+        output = [
+            {
+                "lab_id": r.lab_id,
+                "lab_name": r.lab_name,
+                "total_points": r.total_points,
+                "earned_points": r.earned_points,
+                "tests_passed": r.tests_passed,
+                "tests_total": r.tests_total,
+                "details": r.details,
+            }
+            for r in results
+        ]
         print(json.dumps(output, indent=2))
     else:
         if RICH_AVAILABLE:
-            console.print(Panel.fit(
-                "[bold]AI for the Win - Lab Scoring System[/bold]",
-                border_style="blue"
-            ))
+            console.print(
+                Panel.fit("[bold]AI for the Win - Lab Scoring System[/bold]", border_style="blue")
+            )
 
         for result in results:
             print_result(result, verbose=args.verbose)

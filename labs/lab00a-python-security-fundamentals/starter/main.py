@@ -36,7 +36,7 @@ def is_valid_ip(ip_string: str) -> bool:
         >>> is_valid_ip("256.1.2.3")
         False
     """
-    pattern = r'^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$'
+    pattern = r"^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$"
     match = re.match(pattern, ip_string.strip())
     if not match:
         return False
@@ -61,7 +61,7 @@ def is_private_ip(ip_string: str) -> bool:
     if not is_valid_ip(ip_string):
         return False
 
-    octets = [int(x) for x in ip_string.split('.')]
+    octets = [int(x) for x in ip_string.split(".")]
 
     # 10.0.0.0/8
     if octets[0] == 10:
@@ -91,20 +91,17 @@ def parse_log_line(line: str) -> Optional[dict]:
         >>> parse_log_line("2024-01-15 10:00:00 ERROR Database timeout")
         {'timestamp': '2024-01-15 10:00:00', 'level': 'ERROR', 'message': 'Database timeout'}
     """
-    pattern = r'^(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}) (\w+) (.+)$'
+    pattern = r"^(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}) (\w+) (.+)$"
     match = re.match(pattern, line.strip())
     if match:
-        return {
-            'timestamp': match.group(1),
-            'level': match.group(2),
-            'message': match.group(3)
-        }
+        return {"timestamp": match.group(1), "level": match.group(2), "message": match.group(3)}
     return None
 
 
 # ============================================================================
 # EXERCISE 1: Failed Login Analyzer
 # ============================================================================
+
 
 def analyze_failed_logins(filepath: str) -> dict:
     """
@@ -144,6 +141,7 @@ def analyze_failed_logins(filepath: str) -> dict:
 # EXERCISE 2: IOC Blocklist Generator
 # ============================================================================
 
+
 def generate_blocklist(filepath: str, output_path: str) -> dict:
     """
     Process IOC file to extract and validate IP addresses for blocklist.
@@ -180,6 +178,7 @@ def generate_blocklist(filepath: str, output_path: str) -> dict:
 # ============================================================================
 # EXERCISE 3: Simple Log Monitor
 # ============================================================================
+
 
 def monitor_logs(filepath: str) -> dict:
     """
@@ -228,6 +227,7 @@ def monitor_logs(filepath: str) -> dict:
 # MAIN EXECUTION
 # ============================================================================
 
+
 def main():
     """
     Run all exercises with the provided data files.
@@ -261,8 +261,7 @@ def main():
     print("-" * 60)
     try:
         blocklist_results = generate_blocklist(
-            str(data_dir / "iocs.txt"),
-            str(data_dir / "blocklist.txt")
+            str(data_dir / "iocs.txt"), str(data_dir / "blocklist.txt")
         )
         if blocklist_results:
             print(f"Valid public IPs: {blocklist_results.get('valid_public', [])}")
@@ -284,8 +283,10 @@ def main():
             print(f"Total warnings: {log_results.get('total_warnings', 'N/A')}")
             print(f"Critical hours (>2 errors): {log_results.get('critical_hours', [])}")
             print("Breakdown by hour:")
-            for hour, counts in sorted(log_results.get('by_hour', {}).items()):
-                print(f"  {hour}:00 - Errors: {counts.get('ERROR', 0)}, Warnings: {counts.get('WARN', 0)}")
+            for hour, counts in sorted(log_results.get("by_hour", {}).items()):
+                print(
+                    f"  {hour}:00 - Errors: {counts.get('ERROR', 0)}, Warnings: {counts.get('WARN', 0)}"
+                )
         else:
             print("Function not yet implemented. Complete the TODO!")
     except Exception as e:

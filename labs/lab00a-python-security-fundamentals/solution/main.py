@@ -26,7 +26,7 @@ def is_valid_ip(ip_string: str) -> bool:
     Returns:
         True if valid IPv4 address, False otherwise
     """
-    pattern = r'^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$'
+    pattern = r"^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$"
     match = re.match(pattern, ip_string.strip())
     if not match:
         return False
@@ -51,7 +51,7 @@ def is_private_ip(ip_string: str) -> bool:
     if not is_valid_ip(ip_string):
         return False
 
-    octets = [int(x) for x in ip_string.split('.')]
+    octets = [int(x) for x in ip_string.split(".")]
 
     # 10.0.0.0/8
     if octets[0] == 10:
@@ -77,20 +77,17 @@ def parse_log_line(line: str) -> Optional[dict]:
     Returns:
         Dictionary with timestamp, level, message - or None if parsing fails
     """
-    pattern = r'^(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}) (\w+) (.+)$'
+    pattern = r"^(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}) (\w+) (.+)$"
     match = re.match(pattern, line.strip())
     if match:
-        return {
-            'timestamp': match.group(1),
-            'level': match.group(2),
-            'message': match.group(3)
-        }
+        return {"timestamp": match.group(1), "level": match.group(2), "message": match.group(3)}
     return None
 
 
 # ============================================================================
 # EXERCISE 1: Failed Login Analyzer - SOLUTION
 # ============================================================================
+
 
 def analyze_failed_logins(filepath: str) -> dict:
     """
@@ -111,40 +108,38 @@ def analyze_failed_logins(filepath: str) -> dict:
     failed_by_user = defaultdict(int)
     total_failures = 0
 
-    with open(filepath, 'r') as f:
+    with open(filepath, "r") as f:
         for line in f:
             line = line.strip()
 
             # Skip empty lines and comments
-            if not line or line.startswith('#'):
+            if not line or line.startswith("#"):
                 continue
 
             # Parse CSV format: timestamp,username,status,ip_address
-            parts = line.split(',')
+            parts = line.split(",")
             if len(parts) >= 3:
                 username = parts[1]
                 status = parts[2]
 
-                if status == 'FAILED':
+                if status == "FAILED":
                     failed_by_user[username] += 1
                     total_failures += 1
 
     # Flag users with more than 3 failures
-    flagged_users = [
-        user for user, count in failed_by_user.items()
-        if count > 3
-    ]
+    flagged_users = [user for user, count in failed_by_user.items() if count > 3]
 
     return {
-        'failed_by_user': dict(failed_by_user),
-        'flagged_users': sorted(flagged_users),
-        'total_failures': total_failures
+        "failed_by_user": dict(failed_by_user),
+        "flagged_users": sorted(flagged_users),
+        "total_failures": total_failures,
     }
 
 
 # ============================================================================
 # EXERCISE 2: IOC Blocklist Generator - SOLUTION
 # ============================================================================
+
 
 def generate_blocklist(filepath: str, output_path: str) -> dict:
     """
@@ -174,14 +169,14 @@ def generate_blocklist(filepath: str, output_path: str) -> dict:
     total_processed = 0
 
     # IP pattern to extract potential IPs from each line
-    ip_pattern = r'\b(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\b'
+    ip_pattern = r"\b(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\b"
 
-    with open(filepath, 'r') as f:
+    with open(filepath, "r") as f:
         for line in f:
             line = line.strip()
 
             # Skip empty lines and comments
-            if not line or line.startswith('#'):
+            if not line or line.startswith("#"):
                 continue
 
             total_processed += 1
@@ -201,11 +196,11 @@ def generate_blocklist(filepath: str, output_path: str) -> dict:
             else:
                 # Line doesn't contain an IP pattern - check if it looks like
                 # a malformed IP attempt
-                if re.search(r'\d+\.', line) and not any(c.isalpha() for c in line.split('.')[0]):
+                if re.search(r"\d+\.", line) and not any(c.isalpha() for c in line.split(".")[0]):
                     invalid.append(line)
 
     # Write valid public IPs to blocklist
-    with open(output_path, 'w') as f:
+    with open(output_path, "w") as f:
         f.write("# Auto-generated blocklist\n")
         f.write(f"# Generated from: {filepath}\n")
         f.write(f"# Valid public IPs: {len(valid_public)}\n\n")
@@ -213,16 +208,17 @@ def generate_blocklist(filepath: str, output_path: str) -> dict:
             f.write(f"{ip}\n")
 
     return {
-        'valid_public': sorted(set(valid_public)),
-        'valid_private': sorted(set(valid_private)),
-        'invalid': invalid,
-        'total_processed': total_processed
+        "valid_public": sorted(set(valid_public)),
+        "valid_private": sorted(set(valid_private)),
+        "invalid": invalid,
+        "total_processed": total_processed,
     }
 
 
 # ============================================================================
 # EXERCISE 3: Simple Log Monitor - SOLUTION
 # ============================================================================
+
 
 def monitor_logs(filepath: str) -> dict:
     """
@@ -244,45 +240,43 @@ def monitor_logs(filepath: str) -> dict:
             - 'total_warnings': total WARN count
             - 'critical_hours': list of hours with more than 2 errors
     """
-    by_hour = defaultdict(lambda: {'ERROR': 0, 'WARN': 0})
+    by_hour = defaultdict(lambda: {"ERROR": 0, "WARN": 0})
     total_errors = 0
     total_warnings = 0
 
-    with open(filepath, 'r') as f:
+    with open(filepath, "r") as f:
         for line in f:
             parsed = parse_log_line(line)
 
             if parsed:
-                level = parsed['level']
-                timestamp = parsed['timestamp']
+                level = parsed["level"]
+                timestamp = parsed["timestamp"]
 
                 # Extract hour from timestamp (format: YYYY-MM-DD HH:MM:SS)
-                hour = timestamp.split(' ')[1].split(':')[0]
+                hour = timestamp.split(" ")[1].split(":")[0]
 
-                if level == 'ERROR':
-                    by_hour[hour]['ERROR'] += 1
+                if level == "ERROR":
+                    by_hour[hour]["ERROR"] += 1
                     total_errors += 1
-                elif level == 'WARN':
-                    by_hour[hour]['WARN'] += 1
+                elif level == "WARN":
+                    by_hour[hour]["WARN"] += 1
                     total_warnings += 1
 
     # Find critical hours (>2 errors)
-    critical_hours = [
-        hour for hour, counts in by_hour.items()
-        if counts['ERROR'] > 2
-    ]
+    critical_hours = [hour for hour, counts in by_hour.items() if counts["ERROR"] > 2]
 
     return {
-        'by_hour': dict(by_hour),
-        'total_errors': total_errors,
-        'total_warnings': total_warnings,
-        'critical_hours': sorted(critical_hours)
+        "by_hour": dict(by_hour),
+        "total_errors": total_errors,
+        "total_warnings": total_warnings,
+        "critical_hours": sorted(critical_hours),
     }
 
 
 # ============================================================================
 # MAIN EXECUTION
 # ============================================================================
+
 
 def main():
     """
@@ -304,7 +298,7 @@ def main():
     print(f"Total failures: {login_results['total_failures']}")
     print(f"Flagged users (>3 failures): {login_results['flagged_users']}")
     print("Failures by user:")
-    for user, count in sorted(login_results['failed_by_user'].items(), key=lambda x: -x[1]):
+    for user, count in sorted(login_results["failed_by_user"].items(), key=lambda x: -x[1]):
         flag = " <-- FLAGGED" if count > 3 else ""
         print(f"  {user}: {count} failures{flag}")
 
@@ -313,13 +307,18 @@ def main():
     print(" Exercise 2: IOC Blocklist Generator")
     print("-" * 60)
     blocklist_results = generate_blocklist(
-        str(data_dir / "iocs.txt"),
-        str(data_dir / "blocklist.txt")
+        str(data_dir / "iocs.txt"), str(data_dir / "blocklist.txt")
     )
     print(f"Total lines processed: {blocklist_results['total_processed']}")
-    print(f"Valid public IPs ({len(blocklist_results['valid_public'])}): {blocklist_results['valid_public']}")
-    print(f"Valid private IPs ({len(blocklist_results['valid_private'])}): {blocklist_results['valid_private']}")
-    print(f"Invalid entries ({len(blocklist_results['invalid'])}): {blocklist_results['invalid'][:5]}...")
+    print(
+        f"Valid public IPs ({len(blocklist_results['valid_public'])}): {blocklist_results['valid_public']}"
+    )
+    print(
+        f"Valid private IPs ({len(blocklist_results['valid_private'])}): {blocklist_results['valid_private']}"
+    )
+    print(
+        f"Invalid entries ({len(blocklist_results['invalid'])}): {blocklist_results['invalid'][:5]}..."
+    )
 
     # Exercise 3: Simple Log Monitor
     print("\n" + "-" * 60)
@@ -330,8 +329,8 @@ def main():
     print(f"Total warnings: {log_results['total_warnings']}")
     print(f"Critical hours (>2 errors): {log_results['critical_hours']}")
     print("\nBreakdown by hour:")
-    for hour, counts in sorted(log_results['by_hour'].items()):
-        critical = " <-- CRITICAL" if counts['ERROR'] > 2 else ""
+    for hour, counts in sorted(log_results["by_hour"].items()):
+        critical = " <-- CRITICAL" if counts["ERROR"] > 2 else ""
         print(f"  {hour}:00 - Errors: {counts['ERROR']}, Warnings: {counts['WARN']}{critical}")
 
     print("\n" + "=" * 60)

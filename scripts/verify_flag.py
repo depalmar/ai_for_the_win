@@ -11,8 +11,8 @@ Examples:
 """
 
 import hashlib
-import sys
 import re
+import sys
 from typing import Optional, Tuple
 
 # Challenge metadata: {challenge_id: (flag_hash, points, title)}
@@ -23,93 +23,93 @@ CHALLENGES = {
         "hash": "e8b0c5f1a9d3e2c4b6a8f0d2e4c6a8b0d2f4e6c8a0b2d4f6e8c0a2b4d6f8e0c2",  # FLAG{flag_user_br34ch_156_02}
         "points": 100,
         "title": "Log Detective",
-        "category": "Log Analysis"
+        "category": "Log Analysis",
     },
     "beginner-02": {
         "hash": "a3c5e7f9b1d3e5c7a9b1d3f5e7c9a1b3d5f7e9c1a3b5d7f9e1c3a5b7d9f1e3c5",  # FLAG{PH1SH_F0UND}
         "points": 100,
         "title": "Phish Finder",
-        "category": "Email Analysis"
+        "category": "Email Analysis",
     },
     "beginner-03": {
         "hash": "b2d4f6e8c0a2b4d6f8e0c2a4b6d8f0e2c4a6b8d0f2e4c6a8b0d2f4e6c8a0b2d4",  # FLAG{IOC_MASTER}
         "points": 100,
         "title": "Hidden IOC",
-        "category": "Threat Intelligence"
+        "category": "Threat Intelligence",
     },
     "beginner-04": {
         "hash": "c1d3e5f7a9b1c3e5f7a9b1d3e5f7c9a1b3d5e7f9a1c3b5d7e9f1a3c5b7d9e1f3",  # FLAG{ML_CL4SS1F13R}
         "points": 100,
         "title": "Malware Classifier",
-        "category": "Machine Learning"
+        "category": "Machine Learning",
     },
     "beginner-05": {
         "hash": "d0e2f4c6a8b0d2f4e6c8a0b2d4f6e8c0a2b4d6f8e0c2a4b6d8f0e2c4a6b8d0f2",  # FLAG{PR0MPT_1NJ3CT10N}
         "points": 100,
         "title": "Prompt Injection 101",
-        "category": "LLM Security"
+        "category": "LLM Security",
     },
     # Intermediate Challenges (250 pts each)
     "intermediate-01": {
         "hash": "e3f5a7c9b1d3e5f7a9c1b3d5e7f9a1c3b5d7e9f1a3c5b7d9e1f3a5c7b9d1e3f5",  # FLAG{C2_HUNT3R}
         "points": 250,
         "title": "C2 Hunter",
-        "category": "Network Analysis"
+        "category": "Network Analysis",
     },
     "intermediate-02": {
         "hash": "f4a6c8b0d2e4f6a8c0b2d4e6f8a0c2b4d6e8f0a2c4b6d8e0f2a4c6b8d0e2f4a6",  # FLAG{M3M0RY_F0R3NS1CS_FTW}
         "points": 250,
         "title": "Memory Forensics",
-        "category": "Forensics"
+        "category": "Forensics",
     },
     "intermediate-03": {
         "hash": "a5b7c9d1e3f5a7c9b1d3e5f7a9c1b3d5e7f9a1c3b5d7e9f1a3c5b7d9e1f3a5b7",  # FLAG{EV4D3R}
         "points": 250,
         "title": "Adversarial Samples",
-        "category": "Adversarial ML"
+        "category": "Adversarial ML",
     },
     "intermediate-04": {
         "hash": "b6c8d0e2f4a6c8b0d2e4f6a8c0b2d4e6f8a0c2b4d6e8f0a2c4b6d8e0f2a4c6b8",  # FLAG{AG3NT_D3T3CT1V3}
         "points": 250,
         "title": "Agent Investigation",
-        "category": "AI Agents"
+        "category": "AI Agents",
     },
     "intermediate-05": {
         "hash": "c7d9e1f3a5c7b9d1e3f5a7c9b1d3e5f7a9c1b3d5e7f9a1c3b5d7e9f1a3c5b7d9",  # FLAG{RANSOM_HUNT3R}
         "points": 250,
         "title": "Ransomware Response",
-        "category": "Incident Response"
+        "category": "Incident Response",
     },
     # Advanced Challenges (500 pts each)
     "advanced-01": {
         "hash": "d8e0f2a4c6b8d0e2f4a6c8b0d2e4f6a8c0b2d4e6f8a0c2b4d6e8f0a2c4b6d8e0",  # FLAG{APT_ATTR1BUT10N}
         "points": 500,
         "title": "APT Attribution",
-        "category": "Threat Intelligence"
+        "category": "Threat Intelligence",
     },
     "advanced-02": {
         "hash": "e9f1a3c5b7d9e1f3a5c7b9d1e3f5a7c9b1d3e5f7a9c1b3d5e7f9a1c3b5d7e9f1",  # FLAG{P01S0N3D_M0D3L}
         "points": 500,
         "title": "Model Poisoning",
-        "category": "Adversarial ML"
+        "category": "Adversarial ML",
     },
     "advanced-03": {
         "hash": "f0a2c4b6d8e0f2a4c6b8d0e2f4a6c8b0d2e4f6a8c0b2d4e6f8a0c2b4d6e8f0a2",  # FLAG{CLOUD_HOPPER}
         "points": 500,
         "title": "Cloud Compromise",
-        "category": "Cloud Security"
+        "category": "Cloud Security",
     },
     "advanced-04": {
         "hash": "a1c3b5d7e9f1a3c5b7d9e1f3a5c7b9d1e3f5a7c9b1d3e5f7a9c1b3d5e7f9a1c3",  # FLAG{Z3R0_D4Y_HUNT3R}
         "points": 500,
         "title": "Zero-Day Detection",
-        "category": "Anomaly Detection"
+        "category": "Anomaly Detection",
     },
     "advanced-05": {
         "hash": "b2d4f6e8c0a2b4d6f8e0c2a4b6d8f0e2c4a6b8d0f2e4c6a8b0d2f4e6c8a0b2d4",  # FLAG{MASTER_IR_PR0}
         "points": 500,
         "title": "Full IR Scenario",
-        "category": "Incident Response"
+        "category": "Incident Response",
     },
 }
 
@@ -135,7 +135,7 @@ FLAG_HASHES = {
 
 def validate_flag_format(flag: str) -> bool:
     """Validate that the flag matches the expected format."""
-    return bool(re.match(r'^FLAG\{[A-Za-z0-9_]+\}$', flag))
+    return bool(re.match(r"^FLAG\{[A-Za-z0-9_]+\}$", flag))
 
 
 def verify_flag(challenge_id: str, submitted_flag: str) -> Tuple[bool, str]:
@@ -152,8 +152,9 @@ def verify_flag(challenge_id: str, submitted_flag: str) -> Tuple[bool, str]:
     # Check if challenge exists
     if challenge_id not in CHALLENGES:
         valid_ids = sorted(CHALLENGES.keys())
-        return False, f"Unknown challenge ID: {challenge_id}\n\nValid challenge IDs:\n" + \
-                      "\n".join(f"  - {cid}" for cid in valid_ids)
+        return False, f"Unknown challenge ID: {challenge_id}\n\nValid challenge IDs:\n" + "\n".join(
+            f"  - {cid}" for cid in valid_ids
+        )
 
     # Validate flag format
     if not validate_flag_format(submitted_flag):
@@ -168,7 +169,9 @@ def verify_flag(challenge_id: str, submitted_flag: str) -> Tuple[bool, str]:
         points = challenge["points"]
         title = challenge["title"]
         category = challenge["category"]
-        return True, f"""
+        return (
+            True,
+            f"""
 +{'='*50}+
 |{'CORRECT!':^50}|
 +{'='*50}+
@@ -180,9 +183,12 @@ Points:    {points}
 Congratulations! You've captured the flag!
 
 {'*' * 52}
-"""
+""",
+        )
     else:
-        return False, f"""
+        return (
+            False,
+            f"""
 +{'-'*50}+
 |{'INCORRECT':^50}|
 +{'-'*50}+
@@ -195,7 +201,8 @@ Hints:
 - Make sure you've analyzed all the data files
 - Check the challenge README for hints (costs points)
 - The flag format is FLAG{{...}}
-"""
+""",
+        )
 
 
 def list_challenges():
@@ -243,7 +250,7 @@ def main():
 
     if len(sys.argv) < 3:
         print("Error: Missing flag argument")
-        print(f"Usage: python {sys.argv[0]} <challenge-id> \"FLAG{{answer}}\"")
+        print(f'Usage: python {sys.argv[0]} <challenge-id> "FLAG{{answer}}"')
         sys.exit(1)
 
     challenge_id = sys.argv[1].lower()

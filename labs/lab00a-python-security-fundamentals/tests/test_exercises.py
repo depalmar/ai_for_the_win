@@ -48,7 +48,7 @@ class TestIsValidIP:
         """Valid IPv4 addresses should return True."""
         assert is_valid_ip("192.168.1.1") is True
         assert is_valid_ip("10.0.0.1") is True
-        assert is_valid_ip("0.0.0.0") is True
+        assert is_valid_ip("0.0.0.0") is True  # nosec B104
         assert is_valid_ip("255.255.255.255") is True
 
     def test_invalid_octet_range(self):

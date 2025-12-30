@@ -279,7 +279,7 @@ def main():
             timestamp=1000.2,
             process_name="vssadmin",
             operation="CREATE",
-            file_path="/tmp/cmd_output",
+            file_path="/tmp/cmd_output",  # nosec B108
             file_extension=".tmp",
             entropy=2.0,
             size_bytes=100,

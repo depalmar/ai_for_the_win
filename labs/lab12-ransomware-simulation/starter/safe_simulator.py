@@ -27,9 +27,7 @@ from pathlib import Path
 from typing import Callable, Dict, List, Optional
 
 # Configure logging
-logging.basicConfig(
-    level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
-)
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
 
 
@@ -42,7 +40,7 @@ logger = logging.getLogger(__name__)
 
 _IMMUTABLE_ALLOWED_PATHS = frozenset(
     [
-        "/tmp/ransomware_test",
+        "/tmp/ransomware_test",  # nosec B108
         "/opt/purple_team/test",
         tempfile.gettempdir() + "/ransomware_test",
     ]
@@ -62,9 +60,7 @@ class SimulationConfig:
     """Configuration for safe ransomware simulation."""
 
     target_directory: str  # Must be in allowed paths (enforced)
-    file_extensions: List[str] = field(
-        default_factory=lambda: [".txt", ".doc", ".pdf", ".xlsx"]
-    )
+    file_extensions: List[str] = field(default_factory=lambda: [".txt", ".doc", ".pdf", ".xlsx"])
     create_ransom_note: bool = True
     simulate_encryption: bool = True  # Rename only, no actual encryption
     simulate_shadow_delete: bool = True  # Log only, no actual deletion
@@ -149,9 +145,7 @@ NO ACTUAL ENCRYPTION HAS OCCURRED.
         self.config = config
         self.audit_log: List[SimulationEvent] = []
         self.original_files: Dict[str, str] = {}  # For cleanup
-        self.sim_id = hashlib.md5(
-            f"{datetime.now().isoformat()}".encode()
-        ).hexdigest()[:8]
+        self.sim_id = hashlib.md5(f"{datetime.now().isoformat()}".encode()).hexdigest()[:8]  # nosec B324
 
         # CRITICAL: Validate configuration before any operation
         self._validate_config()

@@ -149,9 +149,7 @@ class DetectionValidator:
         """
         pass
 
-    def query_siem(
-        self, query: str, start_time: datetime, timeout: int
-    ) -> Optional[Dict]:
+    def query_siem(self, query: str, start_time: datetime, timeout: int) -> Optional[Dict]:
         """
         Query SIEM for alerts.
 
@@ -173,9 +171,7 @@ class DetectionValidator:
         """
         pass
 
-    def query_edr(
-        self, indicator: str, start_time: datetime, timeout: int
-    ) -> Optional[Dict]:
+    def query_edr(self, indicator: str, start_time: datetime, timeout: int) -> Optional[Dict]:
         """
         Query EDR for detections.
 

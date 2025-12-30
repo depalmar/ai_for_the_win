@@ -265,9 +265,7 @@ class RansomwareResponder:
         """
         pass
 
-    def execute_playbook(
-        self, playbook: List[ResponseStep], dry_run: bool = True
-    ) -> List[Dict]:
+    def execute_playbook(self, playbook: List[ResponseStep], dry_run: bool = True) -> List[Dict]:
         """
         Execute response playbook (or simulate in dry run).
 

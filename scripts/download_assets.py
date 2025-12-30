@@ -224,18 +224,10 @@ def check_assets():
 
 def main():
     """Main entry point."""
-    parser = argparse.ArgumentParser(
-        description="Download external assets for AI for the Win labs"
-    )
-    parser.add_argument(
-        "--nltk", action="store_true", help="Download NLTK data only"
-    )
-    parser.add_argument(
-        "--spacy", action="store_true", help="Download spaCy models only"
-    )
-    parser.add_argument(
-        "--check", action="store_true", help="Check installed assets"
-    )
+    parser = argparse.ArgumentParser(description="Download external assets for AI for the Win labs")
+    parser.add_argument("--nltk", action="store_true", help="Download NLTK data only")
+    parser.add_argument("--spacy", action="store_true", help="Download spaCy models only")
+    parser.add_argument("--check", action="store_true", help="Check installed assets")
     args = parser.parse_args()
 
     if RICH_AVAILABLE:

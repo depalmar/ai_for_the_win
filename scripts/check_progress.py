@@ -21,7 +21,7 @@ from typing import Dict, List, Optional, Tuple
 try:
     from rich.console import Console
     from rich.panel import Panel
-    from rich.progress import Progress, BarColumn, TextColumn
+    from rich.progress import BarColumn, Progress, TextColumn
     from rich.table import Table
 
     console = Console()
@@ -61,7 +61,11 @@ ADVANCED_LABS = [
 ]
 
 EXPERT_LABS = [
-    ("11", "Ransomware Detection", ["starter/behavior_detector.py", "starter/ransom_note_analyzer.py"]),
+    (
+        "11",
+        "Ransomware Detection",
+        ["starter/behavior_detector.py", "starter/ransom_note_analyzer.py"],
+    ),
     ("12", "Ransomware Simulation", ["starter/scenario_generator.py", "starter/safe_simulator.py"]),
     ("13", "Memory Forensics AI", ["starter/main.py"]),
     ("14", "Log Analysis Pipeline", ["starter/main.py"]),
@@ -101,6 +105,7 @@ CTF_CHALLENGES = {
 # =============================================================================
 # Progress Tracking
 # =============================================================================
+
 
 def get_project_root() -> Path:
     """Get the project root directory."""
@@ -240,6 +245,7 @@ def check_all_progress() -> Dict:
 # Display Functions
 # =============================================================================
 
+
 def print_header(text: str) -> None:
     """Print a section header."""
     if RICH_AVAILABLE:
@@ -300,10 +306,7 @@ def print_ctf_status(ctf_progress: Dict) -> None:
     completed = set(ctf_progress.get("completed", []))
     points = ctf_progress.get("points", 0)
 
-    max_points = sum(
-        sum(pts for _, _, pts in challenges)
-        for challenges in CTF_CHALLENGES.values()
-    )
+    max_points = sum(sum(pts for _, _, pts in challenges) for challenges in CTF_CHALLENGES.values())
 
     if RICH_AVAILABLE:
         console.print(f"  Points: [bold green]{points}[/bold green] / {max_points}")
@@ -312,7 +315,9 @@ def print_ctf_status(ctf_progress: Dict) -> None:
 
     for difficulty, challenges in CTF_CHALLENGES.items():
         if RICH_AVAILABLE:
-            console.print(f"\n  [bold]{difficulty.title()}[/bold] ({sum(p for _, _, p in challenges)} pts available)")
+            console.print(
+                f"\n  [bold]{difficulty.title()}[/bold] ({sum(p for _, _, p in challenges)} pts available)"
+            )
         else:
             print(f"\n  {difficulty.title()} ({sum(p for _, _, p in challenges)} pts available)")
 
@@ -335,11 +340,11 @@ def print_summary(progress: Dict) -> None:
 
     # Count labs
     all_labs = (
-        progress["intro_labs"] +
-        progress["ml_labs"] +
-        progress["llm_labs"] +
-        progress["advanced_labs"] +
-        progress["expert_labs"]
+        progress["intro_labs"]
+        + progress["ml_labs"]
+        + progress["llm_labs"]
+        + progress["advanced_labs"]
+        + progress["expert_labs"]
     )
 
     total_labs = len(all_labs)
@@ -408,10 +413,9 @@ def print_verbose_progress(progress: Dict) -> None:
 def print_compact_progress(progress: Dict) -> None:
     """Print compact progress view."""
     if RICH_AVAILABLE:
-        console.print(Panel.fit(
-            "[bold]AI for the Win - Progress Tracker[/bold]",
-            border_style="blue"
-        ))
+        console.print(
+            Panel.fit("[bold]AI for the Win - Progress Tracker[/bold]", border_style="blue")
+        )
     else:
         print("\n" + "=" * 50)
         print("AI for the Win - Progress Tracker")
@@ -424,31 +428,16 @@ def print_compact_progress(progress: Dict) -> None:
 # Main
 # =============================================================================
 
+
 def main():
     """Run the progress tracker."""
-    parser = argparse.ArgumentParser(
-        description="Track your AI for the Win progress"
-    )
+    parser = argparse.ArgumentParser(description="Track your AI for the Win progress")
     parser.add_argument(
-        "--verbose", "-v",
-        action="store_true",
-        help="Show detailed progress for all labs"
+        "--verbose", "-v", action="store_true", help="Show detailed progress for all labs"
     )
-    parser.add_argument(
-        "--lab",
-        type=str,
-        help="Show status for a specific lab (e.g., --lab 01)"
-    )
-    parser.add_argument(
-        "--ctf",
-        action="store_true",
-        help="Show CTF challenge progress"
-    )
-    parser.add_argument(
-        "--json",
-        action="store_true",
-        help="Output progress as JSON"
-    )
+    parser.add_argument("--lab", type=str, help="Show status for a specific lab (e.g., --lab 01)")
+    parser.add_argument("--ctf", action="store_true", help="Show CTF challenge progress")
+    parser.add_argument("--json", action="store_true", help="Output progress as JSON")
 
     args = parser.parse_args()
 
@@ -462,16 +451,16 @@ def main():
     if args.lab:
         # Find specific lab
         all_labs = (
-            progress["intro_labs"] +
-            progress["ml_labs"] +
-            progress["llm_labs"] +
-            progress["advanced_labs"] +
-            progress["expert_labs"]
+            progress["intro_labs"]
+            + progress["ml_labs"]
+            + progress["llm_labs"]
+            + progress["advanced_labs"]
+            + progress["expert_labs"]
         )
 
         lab = next(
             (l for l in all_labs if l["lab_id"] == args.lab or l["lab_id"] == args.lab.zfill(2)),
-            None
+            None,
         )
 
         if lab:
