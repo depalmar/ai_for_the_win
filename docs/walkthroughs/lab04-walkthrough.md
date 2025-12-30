@@ -140,7 +140,7 @@ Always respond in valid JSON format matching this schema:
 
 ### Processing Individual Log Entries
 
-```python
+````python
 import json
 
 def analyze_log_entry(log_entry: dict, llm_client) -> dict:
@@ -179,7 +179,7 @@ Provide your analysis in the JSON format specified."""
         }
 
     return analysis
-```
+````
 
 ### Common Error #2: JSON Parsing Fails
 ```

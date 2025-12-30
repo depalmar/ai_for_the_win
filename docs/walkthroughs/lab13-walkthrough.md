@@ -421,7 +421,7 @@ if mimikatz:
 
 ### LLM Integration for Forensic Analysis
 
-```python
+````python
 import anthropic
 
 class AIForensicAnalyzer:
@@ -569,7 +569,7 @@ if injections['summary']['total_findings'] > 0:
     injection_analysis = ai_analyzer.analyze_injection_findings(injections)
     print("\nInjection Analysis:")
     print(injection_analysis)
-```
+````
 
 ---
 
