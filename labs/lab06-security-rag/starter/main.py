@@ -50,44 +50,55 @@ class SecurityDocLoader:
         """
         Load CVE data and create documents.
 
-        TODO:
-        1. Parse CVE JSON/CSV
-        2. Create Document for each CVE
-        3. Add metadata (CVE ID, CVSS, date)
-        4. Return list of Documents
+        TODO: Ask your AI assistant:
+        "Write Python code to load CVE data from a JSON file at 'filepath',
+        parse each CVE entry, create a LangChain Document for each with the
+        CVE description as page_content, and include metadata fields for
+        cve_id, cvss_score, severity, and date. Return a list of Documents."
+
+        Then review and test the generated code.
         """
-        # YOUR CODE HERE
         pass
 
     def load_mitre_attack(self, filepath: str) -> List[Document]:
         """
         Load MITRE ATT&CK techniques.
 
-        TODO:
-        1. Parse ATT&CK JSON
-        2. Create Document per technique
-        3. Include detection and mitigation info
-        4. Add tactic and technique IDs as metadata
+        TODO: Ask your AI assistant:
+        "Write Python code to load MITRE ATT&CK techniques from a JSON file
+        at 'filepath', create a LangChain Document for each technique with
+        the technique name, description, detection info, and mitigations as
+        page_content. Include tactic and technique_id as metadata. Return a
+        list of Documents."
+
+        Then review and test the generated code.
         """
-        # YOUR CODE HERE
         pass
 
     def load_playbooks(self, directory: str) -> List[Document]:
         """
         Load IR playbooks from markdown files.
 
-        TODO:
-        1. Find all .md files
-        2. Parse each playbook
-        3. Chunk by sections
-        4. Preserve playbook metadata
+        TODO: Ask your AI assistant:
+        "Write Python code to find all markdown (.md) files in 'directory',
+        read each playbook file, chunk the content by sections (using headers),
+        create a LangChain Document for each section with the section content
+        as page_content and playbook name and section title as metadata.
+        Return a list of Documents."
+
+        Then review and test the generated code.
         """
-        # YOUR CODE HERE
         pass
 
     def load_all_documents(self, data_dir: str) -> List[Document]:
         """Load all document types from data directory."""
-        # YOUR CODE HERE
+        # TODO: Ask your AI assistant:
+        # "Write Python code to load all documents from 'data_dir' by calling
+        # load_cve_data for the 'cves' subdirectory, load_mitre_attack for
+        # the 'mitre' subdirectory, and load_playbooks for the 'playbooks'
+        # subdirectory. Combine and return all documents as a single list."
+        #
+        # Then review and test the generated code.
         pass
 
 
@@ -102,14 +113,15 @@ def chunk_security_documents(
     """
     Chunk documents for optimal retrieval.
 
-    TODO:
-    1. Use RecursiveCharacterTextSplitter
-    2. Set appropriate chunk size
-    3. Set overlap
-    4. Preserve section boundaries
-    5. Keep metadata with chunks
+    TODO: Ask your AI assistant:
+    "Write Python code to chunk a list of LangChain Documents using
+    RecursiveCharacterTextSplitter with the specified chunk_size and
+    chunk_overlap. Preserve section boundaries where possible and ensure
+    each chunk retains its original document metadata. Return the list
+    of chunked Documents."
+
+    Then review and test the generated code.
     """
-    # YOUR CODE HERE
     pass
 
 
@@ -122,19 +134,26 @@ def create_vector_store(chunks: List[Document], persist_directory: str = None) -
     """
     Create vector store with embeddings.
 
-    TODO:
-    1. Initialize embedding model (HuggingFace or OpenAI)
-    2. Create ChromaDB collection
-    3. Add documents with embeddings
-    4. Optionally persist to disk
+    TODO: Ask your AI assistant:
+    "Write Python code to create a ChromaDB vector store from a list of
+    Document chunks. Initialize HuggingFaceEmbeddings as the embedding
+    model, create the Chroma collection with the documents and embeddings,
+    and optionally persist to disk at 'persist_directory' if provided.
+    Return the vector store object."
+
+    Then review and test the generated code.
     """
-    # YOUR CODE HERE
     pass
 
 
 def load_vector_store(persist_directory: str) -> object:
     """Load existing vector store from disk."""
-    # YOUR CODE HERE
+    # TODO: Ask your AI assistant:
+    # "Write Python code to load an existing ChromaDB vector store from
+    # 'persist_directory' using HuggingFaceEmbeddings. Return the loaded
+    # vector store object."
+    #
+    # Then review and test the generated code.
     pass
 
 
@@ -147,12 +166,13 @@ def create_security_retriever(vector_store, k: int = 5):
     """
     Create retriever with security-optimized settings.
 
-    TODO:
-    1. Configure similarity search
-    2. Set number of results (k)
-    3. Return retriever object
+    TODO: Ask your AI assistant:
+    "Write Python code to create a retriever from a ChromaDB vector store.
+    Configure it to use similarity search and return the top k most relevant
+    documents. Return the retriever object."
+
+    Then review and test the generated code.
     """
-    # YOUR CODE HERE
     pass
 
 
@@ -195,40 +215,44 @@ class SecurityRAG:
 
     def _format_context(self, documents: List[Document]) -> str:
         """Format retrieved documents into context string."""
-        # YOUR CODE HERE
+        # TODO: Ask your AI assistant:
+        # "Write Python code to format a list of LangChain Documents into
+        # a single context string. Include each document's page_content and
+        # relevant metadata (like source, cve_id, or technique_id) in a
+        # readable format. Return the formatted context string."
+        #
+        # Then review and test the generated code.
         pass
 
     def query(self, question: str) -> dict:
         """
         Answer security question using RAG.
 
-        TODO:
-        1. Retrieve relevant documents
-        2. Format context from documents
-        3. Generate response with citations
-        4. Return answer and sources
+        TODO: Ask your AI assistant:
+        "Write Python code for a RAG query method that: (1) uses self.retriever
+        to get relevant documents for the question, (2) formats the documents
+        into a context string using _format_context, (3) sends the question
+        and context to self.llm using SECURITY_RAG_PROMPT, (4) parses the
+        response and returns a dict with 'answer', 'sources' (list of source
+        documents), and 'confidence' (float 0.0-1.0 based on retrieval scores)."
 
-        Returns:
-            {
-                "answer": "...",
-                "sources": [...],
-                "confidence": 0.0-1.0
-            }
+        Then review and test the generated code.
         """
-        # YOUR CODE HERE
         pass
 
     def query_with_filters(self, question: str, doc_type: str = None, severity: str = None) -> dict:
         """
         Query with metadata filters.
 
-        TODO:
-        1. Build filter dict
-        2. Apply to retriever
-        3. Execute filtered search
-        4. Generate response
+        TODO: Ask your AI assistant:
+        "Write Python code to perform a filtered RAG query. Build a metadata
+        filter dict from doc_type and severity parameters (if provided),
+        apply the filter to the retriever search, retrieve matching documents,
+        and generate a response using the LLM. Return a dict with 'answer',
+        'sources', and 'confidence'."
+
+        Then review and test the generated code.
         """
-        # YOUR CODE HERE
         pass
 
 
@@ -248,13 +272,15 @@ def evaluate_rag_system(rag: SecurityRAG, test_cases: List[dict]) -> dict:
         "expected_sources": ["CVE-2024-1234"]
     }
 
-    TODO:
-    1. Run each test case
-    2. Check for expected keywords in response
-    3. Verify correct sources retrieved
-    4. Calculate metrics
+    TODO: Ask your AI assistant:
+    "Write Python code to evaluate a RAG system against test cases. For each
+    test case, run rag.query() with the question, check if expected_keywords
+    appear in the answer, verify expected_sources are in the returned sources,
+    and calculate metrics including accuracy, keyword_recall, and source_recall.
+    Return a dict with overall metrics and per-case results."
+
+    Then review and test the generated code.
     """
-    # YOUR CODE HERE
     pass
 
 
