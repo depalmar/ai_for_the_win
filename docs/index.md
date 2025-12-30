@@ -18,6 +18,49 @@ title: AI for the Win
   --border: #30363d;
 }
 
+/* Hide theme attribution from sidebar */
+#header p + p {
+  display: none;
+}
+
+/* Light theme override */
+[data-theme="light"] {
+  --primary: #4f46e5;
+  --secondary: #059669;
+  --bg-dark: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f1f5f9;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --border: #e2e8f0;
+}
+
+[data-theme="light"] .sticky-nav {
+  background: rgba(248, 250, 252, 0.95);
+}
+
+[data-theme="light"] .terminal-demo {
+  background: #1e293b;
+}
+
+/* Theme toggle button */
+.theme-toggle {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  transition: all 0.2s;
+  margin-left: 0.5rem;
+}
+
+.theme-toggle:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
 /* Sticky Navigation */
 .sticky-nav {
   position: sticky;
@@ -641,6 +684,69 @@ title: AI for the Win
   color: var(--primary);
 }
 
+/* Terminal typing animation */
+.terminal-demo {
+  background: #0d1117;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1.5rem auto;
+  max-width: 500px;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 0.85rem;
+  text-align: left;
+}
+
+.terminal-header {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 0.75rem;
+}
+
+.terminal-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.terminal-dot.red { background: #ff5f56; }
+.terminal-dot.yellow { background: #ffbd2e; }
+.terminal-dot.green { background: #27ca40; }
+
+.terminal-line {
+  color: #10b981;
+  margin: 0.25rem 0;
+  opacity: 0;
+  animation: fadeIn 0.3s forwards;
+}
+
+.terminal-line::before {
+  content: '$ ';
+  color: #6366f1;
+}
+
+.terminal-line.output::before {
+  content: '';
+}
+
+.terminal-line:nth-child(2) { animation-delay: 0.5s; }
+.terminal-line:nth-child(3) { animation-delay: 1.5s; }
+.terminal-line:nth-child(4) { animation-delay: 2.5s; }
+.terminal-line:nth-child(5) { animation-delay: 3.5s; }
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+.typing {
+  border-right: 2px solid #10b981;
+  animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+  50% { border-color: transparent; }
+}
+
 /* Mobile Responsive */
 @media (max-width: 768px) {
   .hero h1 {
@@ -733,6 +839,9 @@ title: AI for the Win
           <img src="https://img.shields.io/github/stars/depalmar/ai_for_the_win?style=social" alt="GitHub stars">
         </a>
       </span>
+      <button class="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark mode">
+        <span id="theme-icon">☀️</span>
+      </button>
     </div>
   </div>
 </nav>
@@ -740,6 +849,18 @@ title: AI for the Win
 <div class="hero">
   <h1>AI for the Win</h1>
   <p class="tagline">Build AI-Powered Security Tools | From Zero to Production</p>
+
+  <div class="terminal-demo">
+    <div class="terminal-header">
+      <span class="terminal-dot red"></span>
+      <span class="terminal-dot yellow"></span>
+      <span class="terminal-dot green"></span>
+    </div>
+    <div class="terminal-line">python labs/lab01-phishing-classifier/solution/main.py</div>
+    <div class="terminal-line output">Analyzing 1,000 emails...</div>
+    <div class="terminal-line output">Model accuracy: 97.3%</div>
+    <div class="terminal-line output">Detected 47 phishing attempts<span class="typing"></span></div>
+  </div>
 
   <div class="stats">
     <div class="stat">
@@ -1202,6 +1323,31 @@ function filterLabs(category) {
     }
   });
 }
+
+// Theme toggle functionality
+function toggleTheme() {
+  const html = document.documentElement;
+  const icon = document.getElementById('theme-icon');
+  if (html.dataset.theme === 'light') {
+    html.dataset.theme = 'dark';
+    icon.textContent = '☀️';
+    localStorage.setItem('theme', 'dark');
+  } else {
+    html.dataset.theme = 'light';
+    icon.textContent = '🌙';
+    localStorage.setItem('theme', 'light');
+  }
+}
+
+// Load saved theme preference on page load
+(function() {
+  const saved = localStorage.getItem('theme');
+  if (saved === 'light') {
+    document.documentElement.dataset.theme = 'light';
+    const icon = document.getElementById('theme-icon');
+    if (icon) icon.textContent = '🌙';
+  }
+})();
 </script>
 
 <div class="section" id="paths">
