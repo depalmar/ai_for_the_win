@@ -28,7 +28,7 @@ env/
 
 # IDE
 .idea/
-.vscode/
+# .vscode/ - Tracked for shared team settings (launch.json, tasks.json, snippets)
 *.swp
 *.swo
 *~

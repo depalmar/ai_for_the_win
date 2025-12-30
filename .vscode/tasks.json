@@ -1,0 +1,277 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "🧪 Run All Tests",
+      "type": "shell",
+      "command": "pytest",
+      "args": ["tests/", "-v", "--tb=short"],
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": ["$python"]
+    },
+    {
+      "label": "🧪 Run Tests (No API)",
+      "type": "shell",
+      "command": "pytest",
+      "args": ["tests/", "-v", "-m", "not requires_api"],
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": ["$python"]
+    },
+    {
+      "label": "🧪 Run Current Test File",
+      "type": "shell",
+      "command": "pytest",
+      "args": ["${file}", "-v", "--tb=long"],
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": ["$python"]
+    },
+    {
+      "label": "🧪 Run Tests with Coverage",
+      "type": "shell",
+      "command": "pytest",
+      "args": ["tests/", "--cov=labs", "--cov-report=html", "--cov-report=term"],
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": ["$python"]
+    },
+    {
+      "label": "🎨 Format Code (Black + isort)",
+      "type": "shell",
+      "command": "black",
+      "args": [".", "&&", "isort", "."],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "🎨 Format Current File",
+      "type": "shell",
+      "command": "black",
+      "args": ["${file}", "&&", "isort", "${file}"],
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "🔍 Lint (flake8)",
+      "type": "shell",
+      "command": "flake8",
+      "args": ["."],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": {
+        "owner": "flake8",
+        "fileLocation": ["relative", "${workspaceFolder}"],
+        "pattern": {
+          "regexp": "^(.+):(\\d+):(\\d+): (\\w+) (.+)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "code": 4,
+          "message": 5
+        }
+      }
+    },
+    {
+      "label": "🔍 Type Check (mypy)",
+      "type": "shell",
+      "command": "mypy",
+      "args": ["labs/", "--ignore-missing-imports"],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": ["$python"]
+    },
+    {
+      "label": "🔒 Security Scan (Bandit)",
+      "type": "shell",
+      "command": "bandit",
+      "args": ["-r", "labs/", "-ll"],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "🔒 Security Scan (Current File)",
+      "type": "shell",
+      "command": "bandit",
+      "args": ["${file}", "-ll"],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "✅ Verify Setup",
+      "type": "shell",
+      "command": "python",
+      "args": ["scripts/verify_setup.py"],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": ["$python"]
+    },
+    {
+      "label": "📦 Install Dependencies",
+      "type": "shell",
+      "command": "pip",
+      "args": ["install", "-r", "requirements.txt"],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "📦 Install Minimal Dependencies",
+      "type": "shell",
+      "command": "pip",
+      "args": ["install", "-r", "requirements-minimal.txt"],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "🚀 Run Current Lab",
+      "type": "shell",
+      "command": "python",
+      "args": ["${file}"],
+      "options": {
+        "env": {
+          "PYTHONPATH": "${workspaceFolder}"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": ["$python"]
+    },
+    {
+      "label": "🚀 Launch Demo",
+      "type": "shell",
+      "command": "python",
+      "args": ["demo/launcher.py"],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": ["$python"]
+    },
+    {
+      "label": "📓 Start Jupyter",
+      "type": "shell",
+      "command": "jupyter",
+      "args": ["notebook", "--notebook-dir=notebooks"],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": [],
+      "isBackground": true
+    },
+    {
+      "label": "🐳 Docker: Start Dev",
+      "type": "shell",
+      "command": "docker-compose",
+      "args": ["up", "dev"],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": [],
+      "isBackground": true
+    },
+    {
+      "label": "🐳 Docker: Run Tests",
+      "type": "shell",
+      "command": "docker-compose",
+      "args": ["run", "test"],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "🐳 Docker: Jupyter",
+      "type": "shell",
+      "command": "docker-compose",
+      "args": ["up", "notebook"],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": [],
+      "isBackground": true
+    },
+    {
+      "label": "🔄 Full Check (Format + Lint + Test)",
+      "type": "shell",
+      "command": "black . && isort . && flake8 . && pytest tests/ -v -m 'not requires_api'",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": ["$python"],
+      "dependsOrder": "sequence"
+    },
+    {
+      "label": "📊 Check Progress",
+      "type": "shell",
+      "command": "python",
+      "args": ["scripts/check_progress.py"],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "🏆 Score Labs",
+      "type": "shell",
+      "command": "python",
+      "args": ["scripts/score_labs.py"],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    }
+  ]
+}

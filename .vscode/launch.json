@@ -1,0 +1,227 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Python: Current File",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${file}",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}"
+      },
+      "justMyCode": true
+    },
+    {
+      "name": "Python: Lab Starter",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/labs/${input:labName}/starter/main.py",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}"
+      },
+      "justMyCode": true
+    },
+    {
+      "name": "Python: Lab Solution",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/labs/${input:labName}/solution/main.py",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}"
+      },
+      "justMyCode": true
+    },
+    {
+      "name": "Pytest: Current File",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "pytest",
+      "args": [
+        "${file}",
+        "-v",
+        "--tb=short"
+      ],
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}"
+      },
+      "justMyCode": true
+    },
+    {
+      "name": "Pytest: All Tests",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "pytest",
+      "args": [
+        "tests/",
+        "-v",
+        "--tb=short"
+      ],
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}"
+      },
+      "justMyCode": true
+    },
+    {
+      "name": "Pytest: Skip API Tests",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "pytest",
+      "args": [
+        "tests/",
+        "-v",
+        "-m",
+        "not requires_api"
+      ],
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}"
+      },
+      "justMyCode": true
+    },
+    {
+      "name": "Pytest: Specific Lab",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "pytest",
+      "args": [
+        "tests/test_${input:labTestName}.py",
+        "-v",
+        "--tb=long"
+      ],
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}"
+      },
+      "justMyCode": true
+    },
+    {
+      "name": "Demo Launcher",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/demo/launcher.py",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}"
+      }
+    },
+    {
+      "name": "Verify Setup",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/scripts/verify_setup.py",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "MCP Security Server",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/mcp-servers/security-tools/server.py",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}"
+      }
+    },
+    {
+      "name": "FastAPI: Uvicorn",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "uvicorn",
+      "args": [
+        "${input:fastapiModule}:app",
+        "--reload",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "8000"
+      ],
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}"
+      }
+    },
+    {
+      "name": "Streamlit App",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "streamlit",
+      "args": [
+        "run",
+        "${file}",
+        "--server.port",
+        "8501"
+      ],
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Gradio App",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${file}",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "GRADIO_SERVER_PORT": "7860",
+        "PYTHONPATH": "${workspaceFolder}"
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "id": "labName",
+      "type": "pickString",
+      "description": "Select lab to run",
+      "options": [
+        "lab00a-python-security-fundamentals",
+        "lab00c-intro-prompt-engineering",
+        "lab01-phishing-classifier",
+        "lab02-malware-clustering",
+        "lab03-anomaly-detection",
+        "lab04-llm-log-analysis",
+        "lab05-threat-intel-agent",
+        "lab06-security-rag",
+        "lab07-yara-generator",
+        "lab08-vuln-scanner-ai",
+        "lab09-detection-pipeline",
+        "lab10-ir-copilot",
+        "lab11-ransomware-detection",
+        "lab12-ransomware-simulation",
+        "lab13-memory-forensics-ai",
+        "lab14-c2-traffic-analysis",
+        "lab15-lateral-movement-detection",
+        "lab16-threat-actor-profiling",
+        "lab17-adversarial-ml",
+        "lab18-fine-tuning-security",
+        "lab19-cloud-security-ai",
+        "lab20-llm-red-teaming"
+      ]
+    },
+    {
+      "id": "labTestName",
+      "type": "promptString",
+      "description": "Enter test file name (e.g., lab01_phishing_classifier)"
+    },
+    {
+      "id": "fastapiModule",
+      "type": "promptString",
+      "description": "FastAPI module path (e.g., labs.lab08-vuln-scanner-ai.solution.main)",
+      "default": "main"
+    }
+  ]
+}

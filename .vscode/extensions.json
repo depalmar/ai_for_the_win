@@ -1,0 +1,59 @@
+{
+  "recommendations": [
+    // Python Development
+    "ms-python.python",
+    "ms-python.vscode-pylance",
+    "ms-python.debugpy",
+    "ms-python.black-formatter",
+    "ms-python.isort",
+    "ms-python.flake8",
+    "ms-python.mypy-type-checker",
+
+    // Jupyter & Data Science
+    "ms-toolsai.jupyter",
+    "ms-toolsai.jupyter-renderers",
+    "ms-toolsai.jupyter-keymap",
+
+    // Security & YARA
+    "infosec-intern.yara",
+
+    // Git & Version Control
+    "eamodio.gitlens",
+    "mhutchie.git-graph",
+
+    // Markdown & Documentation
+    "yzhang.markdown-all-in-one",
+    "bierner.markdown-mermaid",
+    "davidanson.vscode-markdownlint",
+
+    // YAML & JSON
+    "redhat.vscode-yaml",
+    "zainchen.json",
+
+    // Docker
+    "ms-azuretools.vscode-docker",
+
+    // Code Quality
+    "streetsidesoftware.code-spell-checker",
+    "usernamehw.errorlens",
+    "gruntfuggly.todo-tree",
+
+    // Remote Development
+    "ms-vscode-remote.remote-containers",
+    "ms-vscode-remote.remote-ssh",
+
+    // AI Assistance
+    "continue.continue",
+
+    // Testing
+    "littlefoxteam.vscode-python-test-adapter",
+
+    // REST API Testing
+    "humao.rest-client",
+
+    // Themes (optional but nice)
+    "github.github-vscode-theme",
+    "pkief.material-icon-theme"
+  ],
+  "unwantedRecommendations": []
+}
