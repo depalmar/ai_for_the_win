@@ -65,28 +65,10 @@ python solution/main.py
 
 ```mermaid
 flowchart LR
-    subgraph SETUP["🎯 SETUP"]
-        L00[00]
+    subgraph S[" "]
+        direction LR
+        A["🎯 Setup<br/>00"] --> B["🟢 ML Basics<br/>01-03"] --> C["🟡 LLM<br/>04-07"] --> D["🟠 Advanced<br/>08-10"] --> E["🔴 Expert<br/>11-20"]
     end
-
-    subgraph ML["🟢 ML BASICS<br/>No API Needed"]
-        L01[01] --> L02[02] --> L03[03]
-    end
-
-    subgraph LLM["🟡 LLM BASICS"]
-        L04[04] --> L05[05] --> L06[06] --> L07[07]
-    end
-
-    subgraph ADV["🟠 ADVANCED"]
-        L08[08] --> L09[09] --> L10[10]
-    end
-
-    subgraph EXPERT["🔴 EXPERT DFIR"]
-        L11[11] --> L12[12] --> L13[13] --> L14[14] --> L15[15]
-        L16[16] --> L17[17] --> L18[18] --> L19[19] --> L20[20]
-    end
-
-    SETUP --> ML --> LLM --> ADV --> EXPERT
 ```
 
 <table>
