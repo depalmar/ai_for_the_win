@@ -6,9 +6,32 @@ A structured path from beginner to advanced AI-powered security tools.
 
 ---
 
+## 📑 Table of Contents
+
+- [How This Course is Organized](#how-this-course-is-organized)
+- [Quick Start - Which Path?](#quick-start---which-path)
+- [Choosing the Right Tool: ML vs LLM](#choosing-the-right-tool-ml-vs-llm)
+  - [Decision Matrix](#decision-matrix)
+  - [When to Use ML](#when-to-use-ml)
+  - [When to Use LLMs](#when-to-use-llms)
+  - [Cost Comparison](#cost-comparison)
+  - [The Hybrid Pattern](#the-hybrid-pattern-best-of-both-worlds)
+- [Labs by Difficulty](#labs-by-difficulty)
+  - [🟢 Foundation Labs](#-foundation-labs-start-here)
+  - [🟡 Core Skills Labs (LLM-Powered)](#-core-skills-labs-llm-powered)
+  - [🟠 Advanced Labs](#-advanced-labs)
+  - [🔴 Expert Labs](#-expert-labs)
+- [Core Technologies](#core-technologies)
+- [Recommended Learning Paths](#recommended-learning-paths)
+- [Assessment Checkpoints](#assessment-checkpoints)
+- [Additional Resources](#additional-resources)
+- [Getting Help](#getting-help)
+
+---
+
 ## How This Course is Organized
 
-The 24 labs are designed to build on each other, progressing from foundational ML concepts through advanced DFIR, adversarial ML, and offensive AI security. Here's the recommended flow:
+The 25 labs are designed to build on each other, progressing from foundational ML concepts through advanced DFIR, adversarial ML, and offensive AI security. Here's the recommended flow:
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐

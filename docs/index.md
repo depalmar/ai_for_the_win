@@ -1,7 +1,19 @@
 ---
 layout: default
 title: AI for the Win
+description: Build AI-Powered Security Tools with 25 hands-on labs covering ML, LLM agents, threat detection, and incident response automation.
 ---
+
+<!-- SEO Meta Tags -->
+<meta name="keywords" content="AI security, machine learning security, LLM security, threat detection, incident response, security automation, DFIR, malware analysis, phishing detection, SOC automation">
+<meta name="author" content="depalmar">
+<meta property="og:title" content="AI for the Win - Build AI-Powered Security Tools">
+<meta property="og:description" content="25 hands-on labs for security practitioners. Learn ML, LLM agents, RAG, and threat detection.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://depalmar.github.io/ai_for_the_win">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI for the Win">
+<meta name="twitter:description" content="Build AI-Powered Security Tools | 25 Hands-On Labs">
 
 <style>
 :root {
@@ -313,7 +325,41 @@ title: AI for the Win
 }
 
 .free { color: var(--secondary) !important; font-weight: 600; }
+
+.back-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: var(--primary);
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  opacity: 0.8;
+  transition: opacity 0.2s, transform 0.2s;
+  font-size: 1.2rem;
+}
+
+.back-to-top:hover {
+  opacity: 1;
+  transform: translateY(-3px);
+}
+
+.lab-card a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.intro-badge {
+  background: #6b7280 !important;
+}
 </style>
+
+<a href="#" class="back-to-top" title="Back to top">↑</a>
 
 <div class="hero">
   <h1>AI for the Win</h1>
@@ -391,6 +437,34 @@ title: AI for the Win
         <span class="lab-title">Environment Setup</span>
       </div>
       <p class="lab-desc">Python, VS Code, virtual env, Jupyter</p>
+    </div>
+    <div class="lab-card">
+      <div class="lab-header">
+        <span class="lab-number intro-badge">00a</span>
+        <span class="lab-title">Python Security Basics</span>
+      </div>
+      <p class="lab-desc">Variables, files, APIs, regex for security</p>
+    </div>
+    <div class="lab-card">
+      <div class="lab-header">
+        <span class="lab-number intro-badge">00b</span>
+        <span class="lab-title">ML Concepts Primer</span>
+      </div>
+      <p class="lab-desc">Supervised/unsupervised, features, evaluation</p>
+    </div>
+    <div class="lab-card">
+      <div class="lab-header">
+        <span class="lab-number intro-badge">00c</span>
+        <span class="lab-title">Prompt Engineering</span>
+      </div>
+      <p class="lab-desc">LLM basics, prompting, hallucination detection</p>
+    </div>
+    <div class="lab-card">
+      <div class="lab-header">
+        <span class="lab-number intro-badge">00d</span>
+        <span class="lab-title">AI in Security Ops</span>
+      </div>
+      <p class="lab-desc">SOC integration, human-in-the-loop, compliance</p>
     </div>
     <div class="lab-card">
       <div class="lab-header">

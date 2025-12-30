@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1117;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#161b22;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#10b981;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4f46e5;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="200" fill="url(#bgGrad)" rx="12"/>
+  
+  <!-- Decorative circuit lines -->
+  <g stroke="#30363d" stroke-width="1" fill="none" opacity="0.5">
+    <path d="M50,180 L50,150 L100,150"/>
+    <path d="M750,20 L750,50 L700,50"/>
+    <path d="M150,20 L150,40 L200,40 L200,60"/>
+    <path d="M600,180 L600,160 L650,160 L650,140"/>
+    <circle cx="50" cy="180" r="3" fill="#30363d"/>
+    <circle cx="100" cy="150" r="3" fill="#30363d"/>
+    <circle cx="750" cy="20" r="3" fill="#30363d"/>
+    <circle cx="700" cy="50" r="3" fill="#30363d"/>
+  </g>
+  
+  <!-- Shield Icon -->
+  <g transform="translate(80, 55)">
+    <path d="M45,0 L90,15 L90,50 C90,75 67.5,95 45,100 C22.5,95 0,75 0,50 L0,15 Z" 
+          fill="url(#shieldGrad)" filter="url(#glow)"/>
+    <!-- AI Brain inside shield -->
+    <g transform="translate(25, 25)" fill="#ffffff">
+      <circle cx="20" cy="15" r="12" fill="none" stroke="#ffffff" stroke-width="2"/>
+      <circle cx="14" cy="12" r="2"/>
+      <circle cx="26" cy="12" r="2"/>
+      <circle cx="20" cy="20" r="2"/>
+      <path d="M14,12 L20,20 L26,12" stroke="#ffffff" stroke-width="1.5" fill="none"/>
+      <path d="M8,15 L14,12 M32,15 L26,12" stroke="#ffffff" stroke-width="1.5" fill="none"/>
+      <circle cx="8" cy="15" r="2"/>
+      <circle cx="32" cy="15" r="2"/>
+      <!-- Neural connections -->
+      <path d="M20,32 L20,45" stroke="#ffffff" stroke-width="2"/>
+      <path d="M10,40 L30,40" stroke="#ffffff" stroke-width="2"/>
+      <circle cx="10" cy="40" r="3"/>
+      <circle cx="30" cy="40" r="3"/>
+      <circle cx="20" cy="45" r="3"/>
+    </g>
+  </g>
+  
+  <!-- Main Title -->
+  <text x="200" y="85" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" 
+        font-size="48" font-weight="bold" fill="url(#textGrad)">
+    AI for the Win
+  </text>
+  
+  <!-- Subtitle -->
+  <text x="200" y="120" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" 
+        font-size="18" fill="#8b949e">
+    Build AI-Powered Security Tools | From Zero to Production
+  </text>
+  
+  <!-- Stats badges -->
+  <g transform="translate(200, 140)">
+    <!-- Labs badge -->
+    <rect x="0" y="0" width="75" height="26" rx="4" fill="#238636"/>
+    <text x="37.5" y="18" font-family="system-ui, sans-serif" font-size="12" fill="#ffffff" text-anchor="middle" font-weight="600">25 Labs</text>
+    
+    <!-- Tests badge -->
+    <rect x="85" y="0" width="95" height="26" rx="4" fill="#1f6feb"/>
+    <text x="132.5" y="18" font-family="system-ui, sans-serif" font-size="12" fill="#ffffff" text-anchor="middle" font-weight="600">839+ Tests</text>
+    
+    <!-- Capstones badge -->
+    <rect x="190" y="0" width="100" height="26" rx="4" fill="#8957e5"/>
+    <text x="240" y="18" font-family="system-ui, sans-serif" font-size="12" fill="#ffffff" text-anchor="middle" font-weight="600">4 Capstones</text>
+    
+    <!-- Free badge -->
+    <rect x="300" y="0" width="110" height="26" rx="4" fill="#f59e0b"/>
+    <text x="355" y="18" font-family="system-ui, sans-serif" font-size="12" fill="#000000" text-anchor="middle" font-weight="600">Start Free</text>
+  </g>
+  
+  <!-- Corner decorations -->
+  <g fill="#6366f1" opacity="0.3">
+    <circle cx="720" cy="100" r="60" />
+    <circle cx="760" cy="140" r="30" />
+  </g>
+</svg>

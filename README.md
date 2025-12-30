@@ -1,19 +1,57 @@
-# AI for the Win
+<p align="center">
+  <img src="docs/assets/banner.svg" alt="AI for the Win - Build AI-Powered Security Tools" width="800">
+</p>
 
-### Build AI-Powered Security Tools | From Zero to Production
+<h1 align="center">AI for the Win</h1>
 
-[![CI](https://github.com/depalmar/ai_for_the_win/actions/workflows/ci.yml/badge.svg)](https://github.com/depalmar/ai_for_the_win/actions/workflows/ci.yml)
-[![Tests](https://img.shields.io/badge/tests-839%2F839%20passing-brightgreen)](https://github.com/depalmar/ai_for_the_win/actions/workflows/ci.yml)
-[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab01_phishing_classifier.ipynb)
-[![Docker](https://img.shields.io/badge/Docker-Ready-blue?logo=docker)](./Dockerfile)
+<p align="center">
+  <strong>Build AI-Powered Security Tools | From Zero to Production</strong>
+</p>
 
-A hands-on training program for security practitioners who want to build AI-powered tools for threat detection, incident response, and security automation. **25 labs** (including 5 intro labs), **4 capstone projects**, **15 CTF challenges**. Includes **sample datasets** and **solution walkthroughs**. Designed for **vibe coding** with AI assistants like Cursor, Claude Code, and Copilot.
+<p align="center">
+  <a href="https://github.com/depalmar/ai_for_the_win/actions/workflows/ci.yml"><img src="https://github.com/depalmar/ai_for_the_win/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <a href="https://github.com/depalmar/ai_for_the_win/stargazers"><img src="https://img.shields.io/github/stars/depalmar/ai_for_the_win?style=social" alt="GitHub Stars"></a>
+  <a href="https://github.com/depalmar/ai_for_the_win/graphs/contributors"><img src="https://img.shields.io/github/contributors/depalmar/ai_for_the_win" alt="Contributors"></a>
+  <a href="https://github.com/depalmar/ai_for_the_win/commits/main"><img src="https://img.shields.io/github/last-commit/depalmar/ai_for_the_win" alt="Last Commit"></a>
+</p>
+
+<p align="center">
+  <a href="https://www.python.org/downloads/"><img src="https://img.shields.io/badge/python-3.10+-blue.svg" alt="Python 3.10+"></a>
+  <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
+  <a href="https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab01_phishing_classifier.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a>
+  <a href="./Dockerfile"><img src="https://img.shields.io/badge/Docker-Ready-blue?logo=docker" alt="Docker"></a>
+</p>
+
+<p align="center">
+  <a href="#-get-started-in-5-minutes">Quick Start</a> •
+  <a href="#-learning-paths">Learning Paths</a> •
+  <a href="#-what-youll-build">Labs</a> •
+  <a href="./docs/">Documentation</a> •
+  <a href="https://github.com/depalmar/ai_for_the_win/discussions">Community</a>
+</p>
 
 ---
 
-## Get Started in 5 Minutes
+A hands-on training program for security practitioners who want to build AI-powered tools for threat detection, incident response, and security automation. **25 labs** (including 5 intro labs), **4 capstone projects**, **15 CTF challenges**. Includes **sample datasets** and **solution walkthroughs**. Designed for **vibe coding** with AI assistants like Cursor, Claude Code, and Copilot.
+
+## 📑 Table of Contents
+
+- [🚀 Get Started in 5 Minutes](#-get-started-in-5-minutes)
+- [🎯 Learning Paths](#-learning-paths)
+- [🛠️ What You'll Build](#️-what-youll-build)
+- [⚡ Quick Start Options](#-quick-start-options)
+- [📁 Repository Structure](#-repository-structure)
+- [🏆 Capstone Projects](#-capstone-projects)
+- [🔌 Templates & Integrations](#-templates--integrations)
+- [🧪 Development](#-development)
+- [❓ Getting Help](#-getting-help)
+- [🔗 Quick Links](#-quick-links)
+- [🤝 Contributing](#-contributing)
+- [📜 License](#-license)
+
+---
+
+## 🚀 Get Started in 5 Minutes
 
 ### Complete Beginner? Start Here:
 
@@ -59,28 +97,45 @@ python solution/main.py
 
 ---
 
-## Learning Paths
+## 🎯 Learning Paths
 
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                        CHOOSE YOUR PATH                                 │
-├─────────────────────────────────────────────────────────────────────────┤
-│                                                                         │
-│   🎯 INTRO             🟢 FOUNDATION        🟡 LLM TOOLS                │
-│   Labs 00a-00c         Labs 01-03           Labs 04-07                  │
-│   ────────────         ─────────────        ───────────                 │
-│   • Python Basics      • Text ML            • Prompt Eng                │
-│   • ML Concepts        • Clustering         • RAG Systems               │
-│   • Prompt Mastery     • Anomaly Det        • Code Generation           │
-│                                                                         │
-│   🟠 ADVANCED          🔴 EXPERT: Labs 11-20                            │
-│   Labs 05,08-10        ─────────────────────                            │
-│   ─────────────        • Ransomware Detection    • Memory Forensics     │
-│   • AI Agents          • Purple Team Sim         • C2 Traffic           │
-│   • Pipelines          • Adversarial ML          • Fine-tuning          │
-│   • IR Automation      • Cloud Security          • LLM Red Teaming      │
-│                                                                         │
-└─────────────────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart LR
+    subgraph INTRO["🎯 INTRO<br/>Labs 00a-00c"]
+        I1[Python Basics]
+        I2[ML Concepts]
+        I3[Prompt Mastery]
+    end
+    
+    subgraph FOUNDATION["🟢 FOUNDATION<br/>Labs 01-03"]
+        F1[Text ML]
+        F2[Clustering]
+        F3[Anomaly Detection]
+    end
+    
+    subgraph LLM["🟡 LLM TOOLS<br/>Labs 04-07"]
+        L1[Prompt Engineering]
+        L2[RAG Systems]
+        L3[Code Generation]
+    end
+    
+    subgraph ADVANCED["🟠 ADVANCED<br/>Labs 05, 08-10"]
+        A1[AI Agents]
+        A2[Pipelines]
+        A3[IR Automation]
+    end
+    
+    subgraph EXPERT["🔴 EXPERT<br/>Labs 11-20"]
+        E1[Ransomware Detection]
+        E2[Memory Forensics]
+        E3[Adversarial ML]
+        E4[LLM Red Teaming]
+    end
+    
+    INTRO --> FOUNDATION
+    FOUNDATION --> LLM
+    LLM --> ADVANCED
+    ADVANCED --> EXPERT
 ```
 
 ### Recommended Learning Paths (Choose Yours!)
@@ -100,7 +155,7 @@ python solution/main.py
 
 ---
 
-## What You'll Build
+## 🛠️ What You'll Build
 
 ### Labs Overview
 
@@ -133,25 +188,48 @@ python solution/main.py
 
 ### Skills Progression
 
+```mermaid
+graph LR
+    subgraph FREE["💰 FREE"]
+        subgraph INTRO["INTRO<br/>Labs 00a-00c"]
+            direction TB
+            I1["• Python"]
+            I2["• ML Theory"]
+            I3["• Prompting"]
+        end
+        subgraph ML["ML FOUNDATIONS<br/>Labs 01-03"]
+            direction TB
+            M1["• Supervised ML"]
+            M2["• Unsupervised"]
+            M3["• Feature Eng"]
+        end
+    end
+    
+    subgraph PAID["💰 API COSTS"]
+        subgraph LLM["LLM BASICS<br/>Labs 04-07<br/>~$2-8"]
+            direction TB
+            L1["• Prompt Eng"]
+            L2["• AI Agents"]
+            L3["• RAG Systems"]
+        end
+        subgraph ADV["ADVANCED<br/>Labs 08-10<br/>~$5-15"]
+            direction TB
+            A1["• System Design"]
+            A2["• Pipelines"]
+            A3["• Production"]
+        end
+        subgraph EXP["EXPERT<br/>Labs 11-20<br/>~$10-25"]
+            direction TB
+            E1["• DFIR"]
+            E2["• Forensics"]
+            E3["• Adversarial ML"]
+        end
+    end
+    
+    INTRO --> ML --> LLM --> ADV --> EXP
 ```
-┌────────────────────────────────────────────────────────────────────────────────────────────────┐
-│  INTRO          │  ML FOUNDATIONS   │  LLM BASICS        │  ADVANCED LLM      │  EXPERT         │
-│  Labs 00a-00c   │  Labs 01-03       │  Labs 04-07        │  Labs 08-10        │  Labs 11-20     │
-├─────────────────┼───────────────────┼────────────────────┼────────────────────┼────────────────┤
-│  • Python       │  • Supervised ML  │  • Prompt Eng      │  • System Design   │  • DFIR         │
-│  • ML Theory    │  • Unsupervised   │  • AI Agents       │  • ML+LLM Hybrid   │  • Forensics    │
-│  • Prompting    │  • Feature Eng    │  • RAG Systems     │  • Pipelines       │  • C2 Detect    │
-│  (optional)     │  • Evaluation     │  • Code Gen        │  • Production      │  • Attribution  │
-│                 │                   │                    │                    │  • Adv ML       │
-│                 │                   │                    │                    │  • LLM Red Team │
-│  💰 FREE        │  💰 FREE          │  💰 ~$2-8 API      │  💰 ~$5-15 API     │  💰 ~$10-25    │
-└────────────────────────────────────────────────────────────────────────────────────────────────┘
 
-💡 **Cost-Saving Tip**: Complete Labs 01-03 first (FREE, no API keys) to build ML foundations before
-   investing in LLM API credits. Then use free tiers: Anthropic ($5 free), Google AI Studio (free),
-   OpenAI ($5 free for new accounts). Costs based on 2025 pricing: Claude 3.5 Sonnet ($3/$15 per 1M
-   tokens), GPT-4o ($5/$20 per 1M), Gemini 2.5 Pro ($1.25/$10 per 1M).
-```
+> 💡 **Cost-Saving Tip**: Complete Labs 01-03 first (FREE, no API keys) to build ML foundations before investing in LLM API credits. Then use free tiers: Anthropic ($5 free), Google AI Studio (free), OpenAI ($5 free for new accounts).
 
 ### When to Use ML vs LLM
 
@@ -168,7 +246,45 @@ python solution/main.py
 
 ---
 
-## Quick Start
+## ⚡ Quick Start Options
+
+<details>
+<summary><b>🐳 Docker (Recommended)</b></summary>
+
+```bash
+# Build and run with Docker Compose
+docker-compose up dev
+
+# Run tests in container
+docker-compose run test
+
+# Launch Jupyter notebooks
+docker-compose up notebook
+# Open http://localhost:8888
+```
+
+</details>
+
+<details>
+<summary><b>☁️ Google Colab (Zero Setup)</b></summary>
+
+Run labs directly in your browser - no installation required:
+
+| Lab | Colab Link |
+|-----|------------|
+| Lab 01: Phishing Classifier | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab01_phishing_classifier.ipynb) |
+| Lab 02: Malware Clustering | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab02_malware_clustering.ipynb) |
+| Lab 03: Anomaly Detection | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab03_anomaly_detection.ipynb) |
+| Lab 04: Log Analysis | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab04_llm_log_analysis.ipynb) |
+| Lab 05: Threat Intel Agent | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab05_threat_intel_agent.ipynb) |
+| Lab 06: Security RAG | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab06_security_rag.ipynb) |
+
+[📓 Browse all 23 notebooks →](./notebooks/)
+
+</details>
+
+<details open>
+<summary><b>💻 Local Installation</b></summary>
 
 ```bash
 # Clone the repository
@@ -183,7 +299,7 @@ source venv/bin/activate  # Linux/Mac
 # Install dependencies
 pip install -r requirements.txt
 
-# Set up API keys
+# Set up API keys (optional for Labs 01-03)
 cp .env.example .env
 # Edit .env with your ANTHROPIC_API_KEY
 
@@ -192,37 +308,11 @@ cd labs/lab01-phishing-classifier
 python solution/main.py
 ```
 
-### Docker Quick Start
-
-```bash
-# Build and run with Docker Compose
-docker-compose up dev
-
-# Run tests in container
-docker-compose run test
-
-# Launch Jupyter notebooks
-docker-compose up notebook
-# Open http://localhost:8888
-```
-
-### Google Colab
-
-Run labs directly in your browser - no setup required:
-
-| Lab | Colab Link |
-|-----|------------|
-| Lab 01: Phishing Classifier | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab01_phishing_classifier.ipynb) |
-| Lab 02: Malware Clustering | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab02_malware_clustering.ipynb) |
-| Lab 03: Anomaly Detection | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab03_anomaly_detection.ipynb) |
-| Lab 04: Log Analysis | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab04_llm_log_analysis.ipynb) |
-| Lab 05: Threat Intel Agent | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab05_threat_intel_agent.ipynb) |
-| Lab 06: Security RAG | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab06_security_rag.ipynb) |
-| All 23 notebooks available | [Browse notebooks →](./notebooks/) |
+</details>
 
 ---
 
-## Repository Structure
+## 📁 Repository Structure
 
 ```
 ai_for_the_win/
@@ -230,7 +320,7 @@ ai_for_the_win/
 │   ├── lab00-environment-setup/  # Setup guide for beginners
 │   ├── lab00a-python-security-fundamentals/ # Python basics for security
 │   ├── lab00b-ml-concepts-primer/ # ML theory before coding
-│   ├── lab00c-prompt-engineering-mastery/ # Prompt design & verification
+│   ├── lab00c-intro-prompt-engineering/ # Prompt design & verification
 │   ├── lab01-phishing-classifier/ # ML text classification
 │   ├── lab02-malware-clustering/  # Unsupervised learning
 │   ├── lab03-anomaly-detection/   # Network security
@@ -248,8 +338,8 @@ ai_for_the_win/
 │   ├── lab15-lateral-movement-detection/ # Attack path detection
 │   ├── lab16-threat-actor-profiling/ # Attribution & profiling
 │   ├── lab17-adversarial-ml/     # Evasion & poisoning attacks
-│   ├── lab18-fine-tuning/        # Custom security models
-│   ├── lab19-cloud-security/     # Multi-cloud threat detection
+│   ├── lab18-fine-tuning-security/ # Custom security models
+│   ├── lab19-cloud-security-ai/  # Multi-cloud threat detection
 │   └── lab20-llm-red-teaming/    # LLM security testing
 ├── notebooks/                     # Jupyter notebooks (Colab-ready)
 ├── capstone-projects/             # 4 comprehensive projects
@@ -268,51 +358,7 @@ ai_for_the_win/
 
 ---
 
-## Learning Paths
-
-### Path 1: ML Foundations
-
-Build core machine learning skills for security:
-
-```
-Lab 01 ──► Lab 02 ──► Lab 03
-  │          │          │
-  ▼          ▼          ▼
-Text ML   Clustering  Anomaly
-                      Detection
-```
-
-**Skills**: Supervised learning, unsupervised learning, feature engineering, model evaluation
-
-### Path 2: LLM & Agents
-
-Master LLMs for security applications:
-
-```
-Lab 04 ──► Lab 05 ──► Lab 06 ──► Lab 07
-  │          │          │          │
-  ▼          ▼          ▼          ▼
-Prompts   Agents      RAG       Code Gen
-```
-
-**Skills**: Prompt engineering, ReAct agents, RAG systems, tool use
-
-### Path 3: Production Systems
-
-Build production-ready security systems:
-
-```
-Lab 08 ──► Lab 09 ──► Lab 10 ──► Capstone
-  │          │          │          │
-  ▼          ▼          ▼          ▼
-Vuln Scan  Pipeline   IR Bot    Your Project
-```
-
-**Skills**: System design, multi-stage pipelines, conversational AI, deployment
-
----
-
-## Lab Progress Tracker
+## 📋 Lab Progress Tracker
 
 Track your progress through the labs:
 
@@ -348,7 +394,7 @@ Track your progress through the labs:
 
 ---
 
-## Technology Stack
+## 🔧 Technology Stack
 
 | Category | Tools |
 |----------|-------|
@@ -363,7 +409,7 @@ Track your progress through the labs:
 
 ---
 
-## Capstone Projects
+## 🏆 Capstone Projects
 
 Choose one to demonstrate mastery:
 
@@ -378,7 +424,7 @@ Each project includes starter code, requirements, and evaluation criteria.
 
 ---
 
-## Templates & Integrations
+## 🔌 Templates & Integrations
 
 Jumpstart your projects with ready-to-use templates:
 
@@ -389,7 +435,7 @@ Jumpstart your projects with ready-to-use templates:
 
 ---
 
-## Development
+## 🧪 Development
 
 ### Test Status
 
@@ -468,7 +514,7 @@ Copy `.env.example` to `.env` and configure:
 
 ---
 
-## Getting Help
+## ❓ Getting Help
 
 - **New to this?**: Start with [Lab 00: Environment Setup](./labs/lab00-environment-setup/)
 - **Find your path**: See [Role-Based Learning Paths](./resources/role-based-learning-paths.md) for SOC, IR, hunting, etc.
@@ -482,7 +528,7 @@ Copy `.env.example` to `.env` and configure:
 
 ---
 
-## Quick Links
+## 🔗 Quick Links
 
 | Resource | Description |
 |----------|-------------|
@@ -501,7 +547,7 @@ Copy `.env.example` to `.env` and configure:
 
 ---
 
-## Contributing
+## 🤝 Contributing
 
 Contributions welcome! Please read [CONTRIBUTING.md](./CONTRIBUTING.md) before submitting PRs.
 
@@ -513,13 +559,13 @@ Ways to contribute:
 
 ---
 
-## License
+## 📜 License
 
 This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
 
 ---
 
-## Disclaimer
+## ⚠️ Disclaimer
 
 This training material is intended for **educational purposes** and **authorized security testing only**. Users are responsible for ensuring compliance with all applicable laws and obtaining proper authorization before using any offensive techniques.
 

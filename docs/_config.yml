@@ -1,14 +1,44 @@
 title: AI for the Win
-description: Build AI-Powered Security Tools | 25 Hands-On Labs
+description: Build AI-Powered Security Tools | 25 Hands-On Labs for Security Practitioners. Learn ML, LLM agents, RAG, and threat detection.
 remote_theme: pages-themes/midnight@v0.2.0
 plugins:
   - jekyll-remote-theme
+  - jekyll-seo-tag
 
 url: https://depalmar.github.io
 baseurl: /ai_for_the_win
+
+# SEO and Social Sharing
+author: depalmar
+lang: en
+logo: /docs/assets/banner.svg
+
+# Open Graph / Social
+social:
+  name: AI for the Win
+  links:
+    - https://github.com/depalmar/ai_for_the_win
+
+# Twitter Card
+twitter:
+  card: summary_large_image
+
+# Keywords for SEO
+keywords:
+  - AI security
+  - machine learning security
+  - LLM security
+  - threat detection
+  - incident response
+  - security automation
+  - DFIR
+  - malware analysis
+  - phishing detection
+  - SOC automation
 
 defaults:
   - scope:
       path: ""
     values:
       layout: default
+      image: /docs/assets/banner.svg

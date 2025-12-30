@@ -1,152 +1,114 @@
 # Security Policy
 
-## Reporting a Vulnerability
-
-We take the security of AI for the Win seriously. If you discover a security vulnerability, please follow these steps:
-
-### How to Report
-
-**Please DO NOT open a public issue for security vulnerabilities.**
-
-Instead, please report security vulnerabilities by:
-
-1. **Email**: Send details to the repository owner via GitHub
-2. **GitHub Security Advisories**: Use the "Security" tab → "Report a vulnerability"
-
-### What to Include
-
-When reporting a vulnerability, please include:
-
-- **Description**: Clear description of the vulnerability
-- **Impact**: Potential impact and attack scenarios
-- **Reproduction Steps**: Detailed steps to reproduce the issue
-- **Proof of Concept**: Code snippets or screenshots (if applicable)
-- **Suggested Fix**: If you have recommendations (optional)
-- **Environment**: OS, Python version, affected components
-
-### Response Timeline
-
-- **Initial Response**: Within 48 hours
-- **Status Update**: Within 7 days
-- **Fix Timeline**: Depends on severity
-  - Critical: 1-3 days
-  - High: 1-2 weeks
-  - Medium: 2-4 weeks
-  - Low: Best effort
-
-## Security Best Practices for Users
-
-### API Keys and Secrets
-
-This project requires API keys for various services (Anthropic Claude, OpenAI, etc.). **Never commit API keys to the repository.**
-
-**Proper handling:**
-- Use `.env` files (see `.env.example`)
-- Add `.env` to `.gitignore` (already configured)
-- Use environment variables in production
-- Rotate keys regularly
-
-### Lab Exercises
-
-Many labs involve security tools and techniques:
-
-1. **Sandboxed Environment**: Run labs in isolated environments
-2. **Malware Samples**: Use only the provided synthetic samples
-3. **Network Scanning**: Only scan your own networks/systems
-4. **Ethical Use**: Follow responsible disclosure practices
-5. **Legal Compliance**: Ensure you have authorization for any testing
-
-### Docker Security
-
-If using Docker containers:
-- Keep base images updated
-- Don't run containers as root (configured in Dockerfile)
-- Review Docker Compose configurations
-- Scan images for vulnerabilities: `docker scan`
-
 ## Supported Versions
 
-| Version | Supported          | Notes |
-| ------- | ------------------ | ----- |
-| main    | :white_check_mark: | Latest development version |
-| v1.x    | :white_check_mark: | Current stable release |
-| < 1.0   | :x:                | No longer supported |
+| Version | Supported          |
+| ------- | ------------------ |
+| main    | :white_check_mark: |
+
+## Reporting a Vulnerability
+
+We take security seriously in this educational project. If you discover a security vulnerability, please follow responsible disclosure practices:
+
+### Do NOT
+
+- Open a public GitHub issue for security vulnerabilities
+- Share vulnerability details publicly before a fix is available
+- Include real malware samples in bug reports
+
+### Do
+
+1. **Email the maintainers directly** with details of the vulnerability
+2. **Include the following information:**
+   - Description of the vulnerability
+   - Steps to reproduce
+   - Potential impact
+   - Any suggested fixes (if available)
+3. **Allow reasonable time** for us to investigate and address the issue
+4. **Coordinate disclosure** with us before making any public announcements
+
+### What to Expect
+
+- **Acknowledgment**: We will acknowledge receipt of your report within 48 hours
+- **Updates**: We will provide updates on our progress within 7 days
+- **Resolution**: We aim to resolve critical issues within 30 days
+- **Credit**: We will credit you in our release notes (unless you prefer to remain anonymous)
+
+## Security Considerations for This Project
+
+### Educational Nature
+
+This repository is designed for **educational purposes**. The labs teach security concepts including:
+
+- Malware analysis techniques
+- Threat detection methods
+- Adversarial ML concepts
+- LLM security testing
+
+### Safe Practices Enforced
+
+1. **No Real Malware**: All malware samples are simulated/synthetic
+2. **Safe Simulation Mode**: Purple team labs (Lab 12) have safety controls
+3. **No Credential Storage**: API keys use environment variables, never committed
+4. **Input Validation**: Labs demonstrate proper input validation techniques
+
+### For Lab Users
+
+When working through the labs:
+
+- **Never use real malware** - stick to provided sample data
+- **Keep API keys secure** - use `.env` files (gitignored)
+- **Use test environments** - don't run detection labs against production systems
+- **Respect rate limits** - avoid API abuse
+
+### Dependencies
+
+We regularly update dependencies to address known vulnerabilities:
+
+```bash
+# Check for vulnerable dependencies
+pip-audit
+
+# Update dependencies
+pip install --upgrade -r requirements.txt
+```
 
 ## Security Features
 
-### Dependency Scanning
+### Pre-commit Hooks
 
-- **Dependabot**: Automated dependency updates
-- **Safety Check**: Python package vulnerability scanning (in CI)
-- **Bandit**: Static security analysis for Python code
+This repository includes security checks via pre-commit:
 
-### Code Security
-
-- **Pre-commit Hooks**: Automated security checks (`.pre-commit-config.yaml`)
-- **Secret Scanning**: GitHub secret detection (enable in Settings)
-- **CodeQL Analysis**: Automated code scanning (see `.github/workflows/codeql.yml`)
+- **Bandit**: Python security linter
+- **Private key detection**: Prevents accidental key commits
+- **YAML validation**: Catches configuration issues
 
 ### CI/CD Security
 
-All pull requests are automatically scanned for:
-- Known vulnerabilities in dependencies
-- Security anti-patterns in code
-- Potential secrets in commits
-- Syntax errors in lab solutions
+- Automated dependency scanning via Dependabot
+- Security-focused code review requirements
+- No secrets in CI logs
 
-## Known Security Considerations
+## Scope
 
-### Training Data
+The following are **in scope** for security reports:
 
-This repository contains:
-- Synthetic malware samples (JSON representations, not actual malware)
-- Sample phishing emails (for training purposes)
-- Mock security logs and events
+- Vulnerabilities in lab code that could affect learners
+- Issues with sample data that could cause harm
+- CI/CD pipeline security issues
+- Documentation that encourages unsafe practices
 
-**These are for educational purposes only and should not be used maliciously.**
+The following are **out of scope**:
 
-### API Usage
-
-Labs make API calls to external services:
-- Rate limiting is implemented
-- API keys should use least-privilege access
-- Monitor API usage for unexpected patterns
-
-### LLM Security
-
-When working with LLM labs:
-- Be aware of prompt injection risks
-- Validate and sanitize all inputs
-- Don't send sensitive data to external LLMs
-- Review LLM outputs before executing code
-
-## Responsible Disclosure
-
-We follow coordinated vulnerability disclosure:
-
-1. **Private Disclosure**: Report to maintainers first
-2. **Acknowledgment**: We'll acknowledge receipt within 48 hours
-3. **Investigation**: We'll investigate and develop a fix
-4. **Coordination**: We'll work with you on disclosure timing
-5. **Public Disclosure**: After fix is released and users have time to update
-6. **Credit**: Reporter will be credited (unless they prefer anonymity)
-
-## Security Hall of Fame
-
-We appreciate security researchers who help keep this project secure. Contributors who responsibly disclose vulnerabilities will be acknowledged here (with permission):
-
-- *No vulnerabilities reported yet*
+- Theoretical attacks that require physical access
+- Social engineering attacks
+- Issues in third-party dependencies (report to upstream)
+- Educational content describing attack techniques (this is intentional)
 
 ## Contact
 
-- **GitHub Issues**: For general bugs (non-security)
-- **GitHub Security**: For vulnerability reports
-- **Email**: Contact via GitHub profile
-
-## License
-
-This security policy is licensed under CC BY 4.0.
+For security concerns, please use the GitHub Security Advisory feature or contact the maintainers through GitHub.
 
 ---
 
-**Last Updated**: December 2025
+Thank you for helping keep AI for the Win secure! 🛡️
