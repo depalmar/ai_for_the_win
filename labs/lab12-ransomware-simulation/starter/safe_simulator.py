@@ -145,7 +145,9 @@ NO ACTUAL ENCRYPTION HAS OCCURRED.
         self.config = config
         self.audit_log: List[SimulationEvent] = []
         self.original_files: Dict[str, str] = {}  # For cleanup
-        self.sim_id = hashlib.md5(f"{datetime.now().isoformat()}".encode()).hexdigest()[:8]  # nosec B324
+        self.sim_id = hashlib.md5(  # nosec B324
+            f"{datetime.now().isoformat()}".encode()
+        ).hexdigest()[:8]
 
         # CRITICAL: Validate configuration before any operation
         self._validate_config()
