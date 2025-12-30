@@ -133,66 +133,69 @@ class MemoryAnalyzer:
         """
         Extract running processes from memory dump.
 
-        TODO: Implement process extraction
-        - Parse process list from memory data
-        - Create ProcessInfo objects for each process
-        - Include metadata: PID, PPID, name, path, cmdline, creation time
-
         Returns:
             List of ProcessInfo objects
+
+        # TODO: Ask your AI assistant:
+        # "Write Python code to extract processes from a memory dump dictionary.
+        # Parse self.memory_data['processes'], create ProcessInfo objects with
+        # pid, ppid, name, path, cmdline, create_time fields. Handle missing
+        # fields gracefully with defaults."
+        #
+        # Then review and test the generated code.
         """
-        # TODO: Implement this method
-        # Hint: Access self.memory_data['processes']
         pass
 
     def extract_network_connections(self) -> List[NetworkConnection]:
         """
         Extract active network connections from memory.
 
-        TODO: Implement network connection extraction
-        - Parse network connections from memory data
-        - Create NetworkConnection objects
-        - Include: local/remote IP, ports, state, owning process
-
         Returns:
             List of NetworkConnection objects
+
+        # TODO: Ask your AI assistant:
+        # "Write Python code to extract network connections from memory data.
+        # Parse self.memory_data['connections'], create NetworkConnection objects
+        # with local_ip, local_port, remote_ip, remote_port, state, pid, protocol."
+        #
+        # Then review and test the generated code.
         """
-        # TODO: Implement this method
-        # Hint: Access self.memory_data['connections']
         pass
 
     def extract_loaded_dlls(self, pid: int) -> List[DLLInfo]:
         """
         Extract DLLs loaded by a specific process.
 
-        TODO: Implement DLL extraction
-        - Get loaded modules for the specified PID
-        - Return list of DLLInfo objects
-
         Args:
             pid: Process ID to get DLLs for
 
         Returns:
             List of DLLInfo objects
+
+        # TODO: Ask your AI assistant:
+        # "Write Python code to extract DLLs for a specific process.
+        # Filter self.memory_data['dlls'] by pid, create DLLInfo objects
+        # with name, path, base_address, size, pid fields."
+        #
+        # Then review and test the generated code.
         """
-        # TODO: Implement this method
-        # Hint: Access self.memory_data['dlls'] and filter by pid
         pass
 
     def detect_injected_code(self) -> List[InjectionIndicator]:
         """
         Detect potential code injection artifacts.
 
-        TODO: Implement injection detection
-        - Look for RWX (Read-Write-Execute) memory regions
-        - Check for unmapped executable code
-        - Identify suspicious memory patterns
-
         Returns:
             List of InjectionIndicator objects
+
+        # TODO: Ask your AI assistant:
+        # "Write Python code to detect code injection from memory artifacts.
+        # Parse self.memory_data['malfind'], look for RWX memory regions and
+        # unmapped executable code. Create InjectionIndicator objects with
+        # pid, process_name, indicator_type, description, memory_address, confidence."
+        #
+        # Then review and test the generated code.
         """
-        # TODO: Implement this method
-        # Hint: Access self.memory_data['malfind'] for injection indicators
         pass
 
 
@@ -248,23 +251,20 @@ class ProcessAnomalyDetector:
         """
         Extract features from a process for anomaly detection.
 
-        TODO: Implement feature extraction
-        Features to extract:
-        - Command line entropy
-        - Path depth (number of directories)
-        - Is path in system directories
-        - Parent-child relationship anomaly
-        - Name length
-        - Has suspicious extensions in cmdline
-
         Args:
             process: ProcessInfo object
 
         Returns:
             Feature vector as numpy array
+
+        # TODO: Ask your AI assistant:
+        # "Write Python code to extract ML features from a process for anomaly detection.
+        # Calculate: (1) command line entropy using calculate_entropy(), (2) path depth,
+        # (3) boolean if path is in C:\\Windows, (4) name length, (5) presence of
+        # suspicious extensions (.ps1, .vbs, .bat) in cmdline. Return as numpy array."
+        #
+        # Then review and test the generated code.
         """
-        # TODO: Implement this method
-        # Return a numpy array of features
         pass
 
     def check_parent_child_anomaly(
@@ -273,30 +273,26 @@ class ProcessAnomalyDetector:
         """
         Check for suspicious parent-child relationships.
 
-        TODO: Implement parent-child checking
-        - Find parent process by PPID
-        - Check against SUSPICIOUS_RELATIONSHIPS
-        - Check against STRICT_PARENT_RULES
-
         Args:
             process: Process to check
             processes: All processes (to find parent)
 
         Returns:
             True if relationship is suspicious
+
+        # TODO: Ask your AI assistant:
+        # "Write Python code to detect suspicious parent-child process relationships.
+        # Find the parent process by matching ppid. Check if parent name is in
+        # SUSPICIOUS_RELATIONSHIPS dict with child as suspicious spawn. Also check
+        # STRICT_PARENT_RULES for processes that should only have specific parents."
+        #
+        # Then review and test the generated code.
         """
-        # TODO: Implement this method
         pass
 
     def score_process(self, process: ProcessInfo, all_processes: List[ProcessInfo]) -> dict:
         """
         Calculate anomaly score for a process.
-
-        TODO: Implement process scoring
-        - Calculate feature-based anomaly score
-        - Check parent-child relationships
-        - Check against baseline
-        - Aggregate into final score
 
         Args:
             process: Process to score
@@ -304,9 +300,15 @@ class ProcessAnomalyDetector:
 
         Returns:
             Dict with score and risk factors
+
+        # TODO: Ask your AI assistant:
+        # "Write Python code to calculate an anomaly score for a process.
+        # Use extract_features() to get feature vector, check_parent_child_anomaly()
+        # for relationship issues. Combine into score 0-1. Return dict with
+        # 'anomaly_score' (float) and 'risk_factors' (list of strings)."
+        #
+        # Then review and test the generated code.
         """
-        # TODO: Implement this method
-        # Return: {'anomaly_score': float, 'risk_factors': list}
         pass
 
     def detect_process_hollowing(self, process: ProcessInfo) -> dict:
@@ -315,17 +317,20 @@ class ProcessAnomalyDetector:
 
         Process hollowing replaces legitimate process memory with malicious code.
 
-        TODO: Implement hollowing detection
-        - Check if image base in memory differs from disk
-        - Look for mismatched section permissions
-
         Args:
             process: Process to check
 
         Returns:
             Dict with detection result and evidence
+
+        # TODO: Ask your AI assistant:
+        # "Write Python code to detect process hollowing indicators.
+        # Check if process has memory_regions with RWX permissions that shouldn't,
+        # look for image base mismatches. Return dict with 'hollowing_detected' (bool),
+        # 'confidence' (float), and 'evidence' (list of strings)."
+        #
+        # Then review and test the generated code.
         """
-        # TODO: Implement this method
         pass
 
 
@@ -377,8 +382,14 @@ Return response as JSON with keys:
 - investigate_next: list of strings
 """
 
-    # TODO: Implement LLM call based on client type
-    # Handle different providers (anthropic, openai, google)
+    # TODO: Ask your AI assistant:
+    # "Write Python code to call an LLM API for security analysis.
+    # Check the type of llm_client (Anthropic, OpenAI, or Google GenAI).
+    # For Anthropic use client.messages.create(), for OpenAI use
+    # client.chat.completions.create(), for Google use client.generate_content().
+    # Parse the JSON response and return as dict."
+    #
+    # Then review and test the generated code.
     pass
 
 
@@ -400,21 +411,21 @@ class MemoryTriagePipeline:
         """
         Run full automated triage on memory dump.
 
-        TODO: Implement triage pipeline
-        1. Load and parse memory data
-        2. Extract all artifacts (processes, connections, injections)
-        3. Score all processes for anomalies
-        4. Perform deep analysis on suspicious processes
-        5. Extract IOCs
-        6. Generate report
-
         Args:
             memory_data: Parsed memory dump data
 
         Returns:
             TriageReport with findings
+
+        # TODO: Ask your AI assistant:
+        # "Write Python code for an automated memory triage pipeline.
+        # Steps: (1) Load memory_data into self.analyzer, (2) extract processes,
+        # connections, and injections, (3) score each process with self.detector,
+        # (4) for processes with score > 0.7, call analyze_suspicious_process(),
+        # (5) collect findings and call _generate_report(). Return TriageReport."
+        #
+        # Then review and test the generated code.
         """
-        # TODO: Implement this method
         pass
 
     def _get_process_connections(
