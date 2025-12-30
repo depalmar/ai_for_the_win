@@ -240,6 +240,21 @@ lab01-phishing-classifier/
 
 ---
 
+## 🏁 Ready for a CTF Challenge?
+
+Test your phishing detection skills with a capture-the-flag challenge!
+
+After completing this lab, try:
+- **[CTF Challenge: Phishing Recon](../../ctf-challenges/beginner/challenge-02/)** - Analyze phishing infrastructure (100 pts)
+- **[CTF Challenge: ML Model Abuse](../../ctf-challenges/beginner/challenge-04/)** - Exploit a vulnerable ML classifier (100 pts)
+
+Verify your flags:
+```bash
+python scripts/verify_flag.py beginner-02 "FLAG{your_answer}"
+```
+
+---
+
 ## 💡 Hints
 
 <details>

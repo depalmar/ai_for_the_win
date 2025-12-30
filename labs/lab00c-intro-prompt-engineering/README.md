@@ -665,6 +665,55 @@ EXAMPLE:
 
 ---
 
+## Preview: From UI to API
+
+Everything you've learned in this lab using web UIs translates directly to code.
+When you reach Lab 04, you'll use the exact same prompts - just via Python.
+
+**What you typed in Google AI Studio:**
+```
+You are a security analyst. Analyze this log entry for security concerns:
+
+192.168.1.100 - - [15/Jan/2024:10:30:00 +0000] "GET /admin/config.php HTTP/1.1" 200 5432
+```
+
+**The EXACT same thing as Python code (Lab 04+):**
+
+```python
+# Using Anthropic Claude API
+import anthropic
+
+client = anthropic.Anthropic()  # Uses ANTHROPIC_API_KEY from environment
+
+prompt = """You are a security analyst. Analyze this log entry for security concerns:
+
+192.168.1.100 - - [15/Jan/2024:10:30:00 +0000] "GET /admin/config.php HTTP/1.1" 200 5432"""
+
+response = client.messages.create(
+    model="claude-sonnet-4-20250514",
+    max_tokens=1024,
+    messages=[{"role": "user", "content": prompt}]
+)
+
+print(response.content[0].text)
+```
+
+**Key insight:** The prompt engineering skills you're building now are the foundation.
+The API is just a different way to send the same prompts. Master the prompts first,
+then adding the API is trivial.
+
+| Web UI | Python API |
+|--------|------------|
+| Type prompt in text box | Pass prompt as string to `messages.create()` |
+| Click "Generate" | Call the API method |
+| Read response in UI | Access `response.content[0].text` |
+| Adjust temperature slider | Set `temperature=0.5` parameter |
+
+This is why we start with UIs - you can iterate faster and learn the fundamentals
+without worrying about API keys or code syntax.
+
+---
+
 ## Summary
 
 **You've learned:**
