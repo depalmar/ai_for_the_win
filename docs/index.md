@@ -1493,7 +1493,7 @@ python solution/main.py</code></pre>
 
     <details class="faq-item">
       <summary>How long does it take to complete all labs?</summary>
-      <p>The full course is approximately 89 hours. Most people complete 2-3 labs per week. Focus on your role's learning path first (~10-18 hours) for immediate value.</p>
+      <p>The full course is approximately 40-89 hours depending on AI assistance level. With AI coding tools, most labs take 50-70% less time. Focus on your role's learning path first (~5-18 hours) for immediate value.</p>
     </details>
 
     <details class="faq-item">

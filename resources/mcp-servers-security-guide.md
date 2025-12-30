@@ -447,7 +447,7 @@ async def call_tool(name: str, arguments: dict):
 
 Generate professional security reports:
 
-```python
+````python
 # report_mcp.py
 from mcp.server import Server
 from mcp.types import Tool, TextContent
@@ -680,7 +680,7 @@ async def call_tool(name: str, arguments: dict):
         with open(arguments["filename"], "w") as f:
             f.write(arguments["content"])
         return [TextContent(type="text", text=f"Report saved to {arguments['filename']}")]
-```
+````
 
 ### 10. PDF Report MCP
 
