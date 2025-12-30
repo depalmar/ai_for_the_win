@@ -273,8 +273,82 @@ timestamp,src_ip,dst_ip,src_port,dst_port,protocol,bytes_sent,bytes_recv,packets
 
 ## 💡 Hints
 
+Click to expand each hint when you get stuck. Try to solve each task on your own first!
+
+### Task 2: Feature Engineering
+
 <details>
-<summary>Hint: Feature Scaling</summary>
+<summary>Hint 2.1: Calculating derived features</summary>
+
+```python
+# Handle division by zero with np.where or replace
+df['bytes_per_second'] = np.where(
+    df['duration'] > 0,
+    (df['bytes_sent'] + df['bytes_recv']) / df['duration'],
+    0
+)
+
+df['is_well_known_port'] = (df['dst_port'] < 1024).astype(int)
+df['hour_of_day'] = pd.to_datetime(df['timestamp']).dt.hour
+```
+</details>
+
+### Task 3: Statistical Baseline
+
+<details>
+<summary>Hint 3.1: Z-score anomaly detection</summary>
+
+```python
+def statistical_baseline(df, feature, n_std=3.0):
+    mean = df[feature].mean()
+    std = df[feature].std()
+    lower_bound = mean - n_std * std
+    upper_bound = mean + n_std * std
+    return (df[feature] < lower_bound) | (df[feature] > upper_bound)
+```
+</details>
+
+<details>
+<summary>Hint 3.2: IQR-based detection</summary>
+
+```python
+def iqr_baseline(df, feature, k=1.5):
+    Q1 = df[feature].quantile(0.25)
+    Q3 = df[feature].quantile(0.75)
+    IQR = Q3 - Q1
+    lower = Q1 - k * IQR
+    upper = Q3 + k * IQR
+    return (df[feature] < lower) | (df[feature] > upper)
+```
+</details>
+
+### Task 4: Isolation Forest
+
+<details>
+<summary>Hint 4.1: Training Isolation Forest</summary>
+
+```python
+from sklearn.ensemble import IsolationForest
+
+model = IsolationForest(
+    contamination=0.01,  # Expected anomaly rate
+    n_estimators=100,
+    random_state=42
+)
+model.fit(X)
+
+# Get anomaly scores (higher = more anomalous for decision_function)
+scores = model.decision_function(X)
+
+# Get predictions (-1 = anomaly, 1 = normal)
+predictions = model.predict(X)
+```
+</details>
+
+### Task 5: Feature Scaling
+
+<details>
+<summary>Hint 5.1: Using RobustScaler</summary>
 
 ```python
 from sklearn.preprocessing import RobustScaler
@@ -286,8 +360,10 @@ X_scaled = scaler.fit_transform(X)
 ```
 </details>
 
+### Task 6: Threshold Tuning
+
 <details>
-<summary>Hint: Threshold Tuning</summary>
+<summary>Hint 6.1: Finding optimal threshold</summary>
 
 ```python
 from sklearn.metrics import precision_recall_curve
@@ -296,6 +372,23 @@ precisions, recalls, thresholds = precision_recall_curve(y_true, scores)
 f1_scores = 2 * (precisions * recalls) / (precisions + recalls + 1e-10)
 optimal_idx = np.argmax(f1_scores)
 optimal_threshold = thresholds[optimal_idx]
+```
+</details>
+
+<details>
+<summary>Hint 6.2: Evaluation metrics</summary>
+
+```python
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score
+
+# Convert scores to binary predictions using threshold
+predictions = (scores > threshold).astype(int)
+
+# Calculate metrics
+print(f"AUC: {roc_auc_score(y_true, scores):.3f}")
+print(f"Precision: {precision_score(y_true, predictions):.3f}")
+print(f"Recall: {recall_score(y_true, predictions):.3f}")
+print(f"F1: {f1_score(y_true, predictions):.3f}")
 ```
 </details>
 

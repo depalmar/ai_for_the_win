@@ -50,29 +50,29 @@ def load_data(filepath: str) -> pd.DataFrame:
 
     Returns:
         DataFrame with email data
-
-    TODO:
-    1. Load the CSV file using pandas
-    2. Handle any missing values (drop rows with NaN)
-    3. Ensure label column is integer type
-    4. Print dataset info (shape, label distribution)
-    5. Return the DataFrame
     """
-    # YOUR CODE HERE
+    # TODO: Ask your AI assistant:
+    # "Write Python code to load a CSV file into a pandas DataFrame.
+    # The function should: load the CSV from the given filepath, drop any
+    # rows with missing values, ensure the 'label' column is integer type,
+    # print the dataset shape and label distribution, then return the DataFrame."
+    #
+    # Then review and test the generated code.
+    # Stuck? See the Hints section in README.md
     pass
 
 
 def explore_data(df: pd.DataFrame) -> None:
     """
     Print exploratory statistics about the dataset.
-
-    TODO:
-    1. Print shape of dataset
-    2. Print label distribution (count and percentage)
-    3. Print average text length per class
-    4. Show sample emails from each class
     """
-    # YOUR CODE HERE
+    # TODO: Ask your AI assistant:
+    # "Write Python code to explore a pandas DataFrame containing email data.
+    # The function should: print the dataset shape, print label distribution
+    # (count and percentage), print average text length per class, and show
+    # sample emails from each class (phishing and legitimate)."
+    #
+    # Then review and test the generated code.
     pass
 
 
@@ -90,19 +90,16 @@ def preprocess_text(text: str) -> str:
 
     Returns:
         Cleaned and normalized text
-
-    TODO:
-    1. Convert to lowercase
-    2. Remove HTML tags (e.g., <html>, <p>, etc.)
-    3. Remove URLs (http/https links)
-    4. Remove email addresses
-    5. Remove special characters and digits
-    6. Tokenize into words
-    7. Remove stopwords
-    8. Apply stemming
-    9. Join back into string
     """
-    # YOUR CODE HERE
+    # TODO: Ask your AI assistant:
+    # "Write Python code to preprocess email text for machine learning.
+    # The function should: convert to lowercase, remove HTML tags, remove URLs,
+    # remove email addresses, remove special characters and digits, tokenize
+    # into words, remove stopwords using NLTK, apply Porter stemming, and
+    # join the tokens back into a single string."
+    #
+    # Then review and test the generated code.
+    # Stuck? See the Hints section in README.md
     pass
 
 
@@ -166,50 +163,69 @@ SENSITIVE_WORDS = [
 def count_urls(text: str) -> int:
     """
     Count number of URLs in text.
-
-    TODO: Use regex to find and count all URLs
     """
-    # YOUR CODE HERE
+    # TODO: Ask your AI assistant:
+    # "Write Python code to count the number of URLs in a text string using
+    # regex. The function should find all http and https URLs and return
+    # the count as an integer."
+    #
+    # Then review and test the generated code.
+    # Stuck? See the Hints section in README.md
     pass
 
 
 def has_urgency(text: str) -> int:
     """
     Check if text contains urgency language.
-
-    TODO: Return 1 if any urgency words found, 0 otherwise
     """
-    # YOUR CODE HERE
+    # TODO: Ask your AI assistant:
+    # "Write Python code to check if text contains urgency language.
+    # The function should check if any word from the URGENCY_WORDS list
+    # (defined globally) appears in the lowercase text. Return 1 if any
+    # urgency word is found, 0 otherwise."
+    #
+    # Then review and test the generated code.
     pass
 
 
 def requests_sensitive_info(text: str) -> int:
     """
     Check if text requests sensitive information.
-
-    TODO: Return 1 if any sensitive info words found, 0 otherwise
     """
-    # YOUR CODE HERE
+    # TODO: Ask your AI assistant:
+    # "Write Python code to check if text requests sensitive information.
+    # The function should check if any phrase from the SENSITIVE_WORDS list
+    # (defined globally) appears in the lowercase text. Return 1 if any
+    # sensitive word is found, 0 otherwise."
+    #
+    # Then review and test the generated code.
     pass
 
 
 def calculate_caps_ratio(text: str) -> float:
     """
     Calculate ratio of uppercase letters.
-
-    TODO: Return ratio of uppercase to total alphabetic characters
     """
-    # YOUR CODE HERE
+    # TODO: Ask your AI assistant:
+    # "Write Python code to calculate the ratio of uppercase letters in text.
+    # The function should count uppercase alphabetic characters divided by
+    # total alphabetic characters. Handle the edge case where there are no
+    # alphabetic characters (return 0.0)."
+    #
+    # Then review and test the generated code.
     pass
 
 
 def has_html(text: str) -> int:
     """
     Check if text contains HTML tags.
-
-    TODO: Return 1 if HTML tags found, 0 otherwise
     """
-    # YOUR CODE HERE
+    # TODO: Ask your AI assistant:
+    # "Write Python code to check if text contains HTML tags using regex.
+    # The function should detect patterns like <html>, <p>, </div>, etc.
+    # Return 1 if any HTML tag is found, 0 otherwise."
+    #
+    # Then review and test the generated code.
     pass
 
 
@@ -222,21 +238,19 @@ def extract_features(df: pd.DataFrame) -> pd.DataFrame:
 
     Returns:
         DataFrame with extracted features
-
-    TODO: Create these feature columns:
-    1. url_count: Number of URLs
-    2. has_urgency: Contains urgency words (0/1)
-    3. requests_sensitive: Asks for sensitive info (0/1)
-    4. text_length: Character count
-    5. word_count: Word count
-    6. caps_ratio: Ratio of uppercase letters
-    7. has_html: Contains HTML (0/1)
-    8. exclamation_count: Number of '!'
-    9. question_count: Number of '?'
     """
     features = pd.DataFrame()
 
-    # YOUR CODE HERE - Extract each feature
+    # TODO: Ask your AI assistant:
+    # "Write Python code to extract phishing detection features from a DataFrame.
+    # Using the 'text' column, create these feature columns in the features DataFrame:
+    # url_count (using count_urls), has_urgency (using has_urgency function),
+    # requests_sensitive (using requests_sensitive_info), text_length (character count),
+    # word_count (word count), caps_ratio (using calculate_caps_ratio),
+    # has_html (using has_html function), exclamation_count (count of '!'),
+    # and question_count (count of '?')."
+    #
+    # Then review and test the generated code.
 
     return features
 
@@ -263,16 +277,19 @@ def create_feature_matrix(
 
     Returns:
         Combined feature matrix and vectorizer
-
-    TODO:
-    1. Create or use TF-IDF vectorizer
-    2. Transform text to TF-IDF features
-    3. Combine with numeric features
-    4. Return combined matrix
     """
     from scipy.sparse import hstack
 
-    # YOUR CODE HERE
+    # TODO: Ask your AI assistant:
+    # "Write Python code to create a combined feature matrix for ML classification.
+    # The function should: create a TfidfVectorizer with max_features=5000 if none
+    # provided, fit_transform or transform the 'clean_text' column based on the
+    # 'fit' parameter, combine the TF-IDF sparse matrix with the numeric features
+    # DataFrame using scipy.sparse.hstack, and return the combined matrix along
+    # with the vectorizer."
+    #
+    # Then review and test the generated code.
+    # Stuck? See the Hints section in README.md
     pass
 
 
@@ -287,17 +304,19 @@ def train_model(X_train: np.ndarray, y_train: np.ndarray) -> RandomForestClassif
     Returns:
         Trained classifier
 
-    TODO:
-    1. Create RandomForestClassifier with good hyperparameters
-    2. Fit on training data
-    3. Return trained model
-
     Suggested hyperparameters:
     - n_estimators: 100-200
     - max_depth: 10-20
     - class_weight: 'balanced' (for imbalanced data)
     """
-    # YOUR CODE HERE
+    # TODO: Ask your AI assistant:
+    # "Write Python code to train a RandomForestClassifier for phishing detection.
+    # The function should create a classifier with n_estimators=100, max_depth=15,
+    # class_weight='balanced', and random_state=42 for reproducibility. Fit the
+    # model on the training data and return the trained classifier."
+    #
+    # Then review and test the generated code.
+    # Stuck? See the Hints section in README.md
     pass
 
 
@@ -323,16 +342,16 @@ def evaluate_model(
 
     Returns:
         Dictionary with evaluation metrics
-
-    TODO:
-    1. Generate predictions
-    2. Calculate accuracy, precision, recall, F1
-    3. Print classification report
-    4. Print confusion matrix
-    5. Print top 10 important features (if available)
-    6. Return metrics dictionary
     """
-    # YOUR CODE HERE
+    # TODO: Ask your AI assistant:
+    # "Write Python code to evaluate a trained classifier's performance.
+    # The function should: generate predictions on X_test, calculate accuracy
+    # using accuracy_score, print the classification report with target names
+    # ['Legitimate', 'Phishing'], print the confusion matrix, optionally print
+    # the top 10 most important features if feature_names is provided, and
+    # return a dictionary containing 'accuracy', 'predictions', and 'confusion_matrix'."
+    #
+    # Then review and test the generated code.
     pass
 
 
@@ -356,15 +375,17 @@ def predict_phishing(
         Tuple of (prediction, confidence)
         - prediction: 0 = legitimate, 1 = phishing
         - confidence: Probability of the predicted class
-
-    TODO:
-    1. Preprocess the email text
-    2. Extract features
-    3. Create feature matrix
-    4. Make prediction
-    5. Get prediction probability
     """
-    # YOUR CODE HERE
+    # TODO: Ask your AI assistant:
+    # "Write Python code to predict if a single email is phishing.
+    # The function should: preprocess the email text using preprocess_text,
+    # create a single-row DataFrame, extract features using extract_features,
+    # create the feature matrix using create_feature_matrix with fit=False,
+    # make a prediction using the model, get the prediction probability using
+    # predict_proba, and return a tuple of (prediction, confidence) where
+    # confidence is the probability of the predicted class."
+    #
+    # Then review and test the generated code.
     pass
 
 

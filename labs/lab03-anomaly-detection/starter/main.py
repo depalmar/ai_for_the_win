@@ -47,28 +47,28 @@ def load_network_data(filepath: str) -> pd.DataFrame:
     - packets_sent, packets_recv: Packet counts
     - duration: Flow duration in seconds
     - label: (optional) normal/attack
-
-    TODO:
-    1. Load data from CSV
-    2. Parse timestamps
-    3. Handle missing values
-    4. Print data summary
     """
-    # YOUR CODE HERE
+    # TODO: Ask your AI assistant:
+    # "Write Python code to load network flow data from a CSV file. The function
+    # should read the CSV, parse the 'timestamp' column as datetime, handle any
+    # missing values appropriately, print a summary of the loaded data, and
+    # return the DataFrame."
+    #
+    # Then review and test the generated code.
     pass
 
 
 def explore_network_data(df: pd.DataFrame) -> None:
     """
     Print exploratory statistics.
-
-    TODO:
-    1. Print shape and columns
-    2. Show protocol distribution
-    3. Show label distribution if available
-    4. Print numeric statistics
     """
-    # YOUR CODE HERE
+    # TODO: Ask your AI assistant:
+    # "Write Python code to explore a network flow DataFrame. Print the shape
+    # and column names, show the distribution of protocols, display the label
+    # distribution if a 'label' column exists, and print descriptive statistics
+    # for numeric columns."
+    #
+    # Then review and test the generated code.
     pass
 
 
@@ -80,17 +80,17 @@ def explore_network_data(df: pd.DataFrame) -> None:
 def engineer_network_features(df: pd.DataFrame) -> pd.DataFrame:
     """
     Create anomaly detection features.
-
-    TODO: Create these features:
-    1. bytes_per_second: Total bytes / duration
-    2. packets_per_second: Total packets / duration
-    3. bytes_ratio: bytes_sent / (bytes_sent + bytes_recv)
-    4. is_well_known_port: dst_port < 1024
-    5. hour_of_day: Hour extracted from timestamp
-    6. bytes_per_packet: Total bytes / total packets
-    7. is_internal: Both IPs in internal range (simulated)
     """
-    # YOUR CODE HERE
+    # TODO: Ask your AI assistant:
+    # "Write Python code to engineer features for network anomaly detection.
+    # Create these columns: 'bytes_per_second' (total bytes / duration),
+    # 'packets_per_second' (total packets / duration), 'bytes_ratio'
+    # (bytes_sent / total bytes), 'is_well_known_port' (dst_port < 1024),
+    # 'hour_of_day' (extracted from timestamp), 'bytes_per_packet' (total bytes
+    # / total packets), and 'is_internal' (True if both IPs start with '192.168').
+    # Handle division by zero appropriately. Return the modified DataFrame."
+    #
+    # Then review and test the generated code.
     pass
 
 
@@ -99,14 +99,15 @@ def prepare_features(
 ) -> Tuple[np.ndarray, List[str]]:
     """
     Prepare feature matrix for ML models.
-
-    TODO:
-    1. Select numeric features
-    2. Handle any remaining NaN values
-    3. Scale features using RobustScaler
-    4. Return scaled features and column names
     """
-    # YOUR CODE HERE
+    # TODO: Ask your AI assistant:
+    # "Write Python code to prepare a feature matrix for ML models. Select
+    # numeric columns from the DataFrame (or use provided feature_cols), fill
+    # any remaining NaN values with column medians, scale the features using
+    # RobustScaler, and return a tuple of (scaled numpy array, list of column
+    # names)."
+    #
+    # Then review and test the generated code.
     pass
 
 
@@ -126,26 +127,29 @@ def statistical_baseline(df: pd.DataFrame, feature: str, n_std: float = 3.0) -> 
 
     Returns:
         Boolean series (True = anomaly)
-
-    TODO:
-    1. Calculate mean and std of the feature
-    2. Flag values > n_std standard deviations from mean
-    3. Return anomaly flags
     """
-    # YOUR CODE HERE
+    # TODO: Ask your AI assistant:
+    # "Write Python code for statistical anomaly detection. Calculate the mean
+    # and standard deviation of the specified feature column. Return a boolean
+    # Series where True indicates values that are more than n_std standard
+    # deviations away from the mean (either above or below)."
+    #
+    # Then review and test the generated code.
+    # Stuck? See the Hints section in README.md
     pass
 
 
 def iqr_baseline(df: pd.DataFrame, feature: str, k: float = 1.5) -> pd.Series:
     """
     IQR-based anomaly detection.
-
-    TODO:
-    1. Calculate Q1, Q3, and IQR
-    2. Define lower and upper bounds
-    3. Return anomaly flags
     """
-    # YOUR CODE HERE
+    # TODO: Ask your AI assistant:
+    # "Write Python code for IQR-based anomaly detection. Calculate Q1 (25th
+    # percentile), Q3 (75th percentile), and IQR. Define lower bound as
+    # Q1 - k*IQR and upper bound as Q3 + k*IQR. Return a boolean Series where
+    # True indicates values outside these bounds."
+    #
+    # Then review and test the generated code.
     pass
 
 
@@ -166,27 +170,30 @@ def train_isolation_forest(
 
     Returns:
         Trained model and anomaly scores
-
-    TODO:
-    1. Initialize IsolationForest with parameters
-    2. Fit to data
-    3. Get anomaly scores (decision_function)
-    4. Return model and scores
     """
-    # YOUR CODE HERE
+    # TODO: Ask your AI assistant:
+    # "Write Python code to train an Isolation Forest model for anomaly
+    # detection. Initialize IsolationForest with the given contamination
+    # parameter, n_estimators=100, and random_state=42. Fit the model to the
+    # data, get anomaly scores using decision_function, and return a tuple of
+    # (trained model, anomaly scores array)."
+    #
+    # Then review and test the generated code.
+    # Stuck? See the Hints section in README.md
     pass
 
 
 def train_local_outlier_factor(X: np.ndarray, contamination: float = 0.01) -> np.ndarray:
     """
     Train Local Outlier Factor.
-
-    TODO:
-    1. Initialize LOF
-    2. Fit and predict
-    3. Return predictions (-1 for outliers, 1 for inliers)
     """
-    # YOUR CODE HERE
+    # TODO: Ask your AI assistant:
+    # "Write Python code to train a Local Outlier Factor model. Initialize LOF
+    # with the given contamination, n_neighbors=20, and novelty=False. Fit the
+    # model and return the predictions array where -1 indicates outliers and 1
+    # indicates inliers."
+    #
+    # Then review and test the generated code.
     pass
 
 
@@ -205,15 +212,16 @@ def train_autoencoder(X: np.ndarray, encoding_dim: int = 8) -> Tuple[object, np.
 
     Returns:
         Trained model, reconstruction errors
-
-    TODO:
-    1. Build encoder: input → encoding_dim
-    2. Build decoder: encoding_dim → input
-    3. Compile with MSE loss
-    4. Train on data
-    5. Calculate reconstruction errors
     """
-    # YOUR CODE HERE - Optional, requires PyTorch
+    # TODO: Ask your AI assistant:
+    # "Write Python code to build and train a PyTorch autoencoder for anomaly
+    # detection. Create an encoder (input_dim -> 32 -> encoding_dim) and
+    # decoder (encoding_dim -> 32 -> input_dim) using ReLU activations. Train
+    # with MSE loss and Adam optimizer for 50 epochs. Return a tuple of
+    # (trained model, reconstruction errors array). Note: This is optional and
+    # requires PyTorch."
+    #
+    # Then review and test the generated code.
     pass
 
 
@@ -233,37 +241,44 @@ def evaluate_detector(y_true: np.ndarray, scores: np.ndarray, threshold: float =
 
     Returns:
         Metrics dict: precision, recall, F1, AUC, threshold
-
-    TODO:
-    1. Calculate ROC AUC
-    2. Find optimal threshold if not provided
-    3. Calculate precision, recall, F1
-    4. Return metrics dictionary
     """
-    # YOUR CODE HERE
+    # TODO: Ask your AI assistant:
+    # "Write Python code to evaluate an anomaly detector. Calculate ROC AUC
+    # using roc_auc_score. If threshold is None, find the optimal threshold
+    # using find_optimal_threshold. Convert scores to binary predictions using
+    # the threshold. Calculate precision, recall, and F1 score. Return a
+    # dictionary with keys: 'auc', 'precision', 'recall', 'f1', 'threshold'."
+    #
+    # Then review and test the generated code.
     pass
 
 
 def find_optimal_threshold(y_true: np.ndarray, scores: np.ndarray) -> float:
     """
     Find threshold that maximizes F1 score.
-
-    TODO:
-    1. Calculate precision-recall curve
-    2. Calculate F1 for each threshold
-    3. Return threshold with best F1
     """
-    # YOUR CODE HERE
+    # TODO: Ask your AI assistant:
+    # "Write Python code to find the optimal anomaly detection threshold.
+    # Use precision_recall_curve to get precision, recall, and thresholds.
+    # Calculate F1 score for each threshold (F1 = 2*precision*recall /
+    # (precision + recall)). Return the threshold that yields the maximum F1
+    # score."
+    #
+    # Then review and test the generated code.
     pass
 
 
 def plot_roc_curve(y_true: np.ndarray, scores: np.ndarray, title: str = "ROC Curve") -> None:
     """
     Plot ROC curve.
-
-    TODO: Create ROC curve visualization
     """
-    # YOUR CODE HERE
+    # TODO: Ask your AI assistant:
+    # "Write Python code to plot an ROC curve. Use sklearn's roc_curve to get
+    # false positive rates and true positive rates. Plot the curve with
+    # matplotlib, add a diagonal reference line, label axes as 'False Positive
+    # Rate' and 'True Positive Rate', add the given title, and show the plot."
+    #
+    # Then review and test the generated code.
     pass
 
 
