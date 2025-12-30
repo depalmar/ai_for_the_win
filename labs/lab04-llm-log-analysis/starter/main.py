@@ -60,12 +60,6 @@ def setup_llm(provider: str = "anthropic"):
 
     Returns:
         Configured LLM client
-
-    TODO:
-    1. Check for API key (Anthropic) or running server (Ollama)
-    2. Create the appropriate client
-    3. Test with a simple message
-    4. Return the client
     """
 
     if provider == "anthropic":
@@ -76,27 +70,27 @@ def setup_llm(provider: str = "anthropic"):
         if not api_key:
             raise ValueError("ANTHROPIC_API_KEY not set in environment")
 
-        # TODO: Create ChatAnthropic client
-        # llm = ChatAnthropic(model="claude-sonnet-4-20250514")
+        # TODO: Ask your AI assistant:
+        # "Write Python code to create a ChatAnthropic client using the model
+        # 'claude-sonnet-4-20250514', then test it by invoking a simple message
+        # asking it to say 'ready', and return the configured client."
+        #
+        # Then review and test the generated code.
         pass
 
     elif provider == "ollama":
         if not OLLAMA_AVAILABLE:
             raise ImportError("langchain-community not installed")
 
-        # TODO: Create ChatOllama client
-        # llm = ChatOllama(model="llama3.1:8b")
+        # TODO: Ask your AI assistant:
+        # "Write Python code to create a ChatOllama client using the model
+        # 'llama3.1:8b', test it with a simple message, and return the client."
+        #
+        # Then review and test the generated code.
         pass
 
     else:
         raise ValueError(f"Unknown provider: {provider}")
-
-    # TODO: Test the client
-    # response = llm.invoke([HumanMessage(content="Say 'ready'")])
-    # print(f"LLM Test: {response.content}")
-
-    # return llm
-    pass
 
 
 # =============================================================================
@@ -128,12 +122,6 @@ def parse_log_entry(llm, log_entry: str) -> dict:
 
     Returns:
         Structured dict with parsed fields
-
-    TODO:
-    1. Create the prompt combining system and user messages
-    2. Send to LLM
-    3. Parse JSON response
-    4. Handle parsing errors gracefully
     """
 
     prompt = f"""Parse this security log entry:
@@ -151,20 +139,13 @@ Return a JSON object with these fields:
 - details (object with relevant key-value pairs)
 - severity (1-10)"""
 
-    # TODO: Send to LLM and parse response
-    # messages = [
-    #     SystemMessage(content=PARSER_SYSTEM_PROMPT),
-    #     HumanMessage(content=prompt)
-    # ]
-    # response = llm.invoke(messages)
+    # TODO: Ask your AI assistant:
+    # "Write Python code to send a prompt to an LLM using SystemMessage and
+    # HumanMessage from LangChain. Use PARSER_SYSTEM_PROMPT as the system message
+    # and the log parsing prompt as the human message. Parse the JSON response,
+    # handling JSONDecodeError by attempting to extract JSON from the response text."
     #
-    # # Parse JSON from response
-    # try:
-    #     return json.loads(response.content)
-    # except json.JSONDecodeError:
-    #     # Try to extract JSON from response
-    #     ...
-
+    # Then review and test the generated code.
     pass
 
 
@@ -172,12 +153,19 @@ def parse_multiple_logs(llm, log_text: str) -> List[dict]:
     """
     Parse multiple log entries from a text block.
 
-    TODO:
-    1. Split log text into individual entries
-    2. Parse each entry
-    3. Return list of parsed logs
+    Args:
+        llm: Language model client
+        log_text: Text containing multiple log entries
+
+    Returns:
+        List of parsed log dictionaries
     """
-    # YOUR CODE HERE
+    # TODO: Ask your AI assistant:
+    # "Write Python code to split a log text block into individual log entries
+    # (entries are separated by blank lines or common log delimiters), then call
+    # parse_log_entry() for each entry and return the list of parsed logs."
+    #
+    # Then review and test the generated code.
     pass
 
 
@@ -220,11 +208,6 @@ def analyze_logs_for_threats(llm, logs: List[dict]) -> dict:
         - severity: Overall severity (1-10)
         - confidence: Confidence in findings (0-100%)
         - recommendations: Suggested actions
-
-    TODO:
-    1. Format logs into readable context
-    2. Create analysis prompt
-    3. Parse LLM response into structured format
     """
 
     # Format logs for context
@@ -245,14 +228,12 @@ Provide your analysis as JSON with these fields:
 - confidence: number 0-100
 - recommendations: array of specific actions to take"""
 
-    # TODO: Implement analysis
-    # messages = [
-    #     SystemMessage(content=ANALYZER_SYSTEM_PROMPT),
-    #     HumanMessage(content=prompt)
-    # ]
-    # response = llm.invoke(messages)
-    # return json.loads(response.content)
-
+    # TODO: Ask your AI assistant:
+    # "Write Python code to send the threat analysis prompt to an LLM using
+    # ANALYZER_SYSTEM_PROMPT as the system message. Invoke the LLM with the
+    # messages, parse the JSON response, and return the analysis dictionary."
+    #
+    # Then review and test the generated code.
     pass
 
 
@@ -277,12 +258,6 @@ def extract_iocs(llm, text: str) -> dict:
         - file_paths: List of file paths
         - usernames: List of usernames
         - emails: List of email addresses
-
-    TODO:
-    1. Create IOC extraction prompt
-    2. Ask LLM to find all indicators
-    3. Validate format of extracted IOCs
-    4. Deduplicate results
     """
 
     prompt = f"""Extract all Indicators of Compromise (IOCs) from this text:
@@ -303,7 +278,13 @@ Find and categorize:
 Return as JSON with these keys: ips, domains, urls, hashes (with md5, sha1, sha256 sub-keys), file_paths, usernames, emails.
 Each should be an array. Return empty arrays if none found."""
 
-    # TODO: Implement extraction
+    # TODO: Ask your AI assistant:
+    # "Write Python code to send the IOC extraction prompt to an LLM, parse
+    # the JSON response to get categorized IOCs (ips, domains, urls, hashes,
+    # file_paths, usernames, emails), validate the format, deduplicate results,
+    # and return the cleaned IOC dictionary."
+    #
+    # Then review and test the generated code.
     pass
 
 
@@ -311,14 +292,19 @@ def validate_iocs(iocs: dict) -> dict:
     """
     Validate and clean extracted IOCs.
 
-    TODO:
-    1. Validate IP format
-    2. Validate domain format
-    3. Validate hash lengths
-    4. Remove duplicates
-    5. Remove obvious false positives
+    Args:
+        iocs: Dictionary of extracted IOCs
+
+    Returns:
+        Cleaned and validated IOC dictionary
     """
-    # YOUR CODE HERE
+    # TODO: Ask your AI assistant:
+    # "Write Python code to validate IOCs: check IP addresses match IPv4/IPv6
+    # regex patterns, validate domain format, verify hash lengths (MD5=32,
+    # SHA1=40, SHA256=64), remove duplicates from all arrays, and filter out
+    # obvious false positives like localhost or example.com."
+    #
+    # Then review and test the generated code.
     pass
 
 
@@ -343,11 +329,6 @@ def generate_incident_summary(llm, analysis: dict) -> str:
 
     Returns:
         Markdown-formatted incident report
-
-    TODO:
-    1. Create summary prompt with all analysis data
-    2. Request specific sections
-    3. Format output as clean Markdown
     """
 
     prompt = f"""Based on this security analysis, write an incident report:
@@ -368,7 +349,12 @@ Write a Markdown incident report with these sections:
 
 Use proper Markdown formatting."""
 
-    # TODO: Generate summary
+    # TODO: Ask your AI assistant:
+    # "Write Python code to send the incident summary prompt to an LLM using
+    # SUMMARY_SYSTEM_PROMPT as the system message. Return the LLM's response
+    # content as a Markdown-formatted string for the incident report."
+    #
+    # Then review and test the generated code.
     pass
 
 
@@ -379,7 +365,7 @@ Use proper Markdown formatting."""
 
 def analyze_security_incident(log_data: str, llm=None) -> str:
     """
-    Complete pipeline: Parse → Analyze → Summarize.
+    Complete pipeline: Parse -> Analyze -> Summarize.
 
     Args:
         log_data: Raw log data (multiple entries)
@@ -387,14 +373,6 @@ def analyze_security_incident(log_data: str, llm=None) -> str:
 
     Returns:
         Complete incident report in Markdown
-
-    TODO:
-    1. Initialize LLM if not provided
-    2. Parse all log entries
-    3. Analyze for threats
-    4. Extract IOCs
-    5. Generate summary
-    6. Return complete report
     """
 
     console.print("[bold blue]Security Log Analysis Pipeline[/bold blue]\n")
@@ -403,6 +381,17 @@ def analyze_security_incident(log_data: str, llm=None) -> str:
     console.print("[yellow]Step 1:[/yellow] Initializing LLM...")
     if llm is None:
         llm = setup_llm()
+
+    # TODO: Ask your AI assistant:
+    # "Write Python code to complete the security analysis pipeline:
+    # 1. Call parse_multiple_logs() to parse log_data into structured entries
+    # 2. Call analyze_logs_for_threats() on the parsed logs
+    # 3. Call extract_iocs() on the raw log_data and add to analysis['iocs']
+    # 4. Call generate_incident_summary() to create the final report
+    # 5. Print progress messages using console.print() for each step
+    # 6. Return the generated summary report"
+    #
+    # Then review and test the generated code.
 
     # Step 2: Parse logs
     console.print("[yellow]Step 2:[/yellow] Parsing log entries...")

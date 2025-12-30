@@ -59,7 +59,13 @@ class CopilotTools:
         3. Apply time range filter
         4. Return matching events
         """
-        # YOUR CODE HERE
+        # TODO: Ask your AI assistant:
+        # "Write Python code to query SIEM events. Parse the natural language query string
+        # to extract keywords for host, user, or event_type. Filter self.siem_data['events']
+        # by matching these fields. Apply the time_range parameter to filter by timestamp.
+        # Return the list of matching event dictionaries."
+        #
+        # Then review and test the generated code.
         pass
 
     def get_host_info(self, hostname: str) -> dict:
@@ -71,7 +77,12 @@ class CopilotTools:
         2. Get recent events for host
         3. Return host information
         """
-        # YOUR CODE HERE
+        # TODO: Ask your AI assistant:
+        # "Write Python code to retrieve host information. Look up the hostname in
+        # self.hosts inventory. Filter self.siem_data['events'] to get recent events
+        # for this host. Return a dictionary containing host details and associated events."
+        #
+        # Then review and test the generated code.
         pass
 
     def lookup_ioc(self, ioc: str, ioc_type: str = None) -> dict:
@@ -83,7 +94,13 @@ class CopilotTools:
         2. Query threat intelligence
         3. Return assessment
         """
-        # YOUR CODE HERE
+        # TODO: Ask your AI assistant:
+        # "Write Python code to look up an Indicator of Compromise (IOC). If ioc_type
+        # is not provided, auto-detect whether the IOC is an IP address, domain, hash,
+        # or URL using regex patterns. Query self.threat_intel for matching entries.
+        # Return a dictionary with the IOC, its type, and a threat assessment."
+        #
+        # Then review and test the generated code.
         pass
 
     def get_alert_details(self, alert_id: str) -> dict:
@@ -95,7 +112,13 @@ class CopilotTools:
         2. Get associated events
         3. Return full context
         """
-        # YOUR CODE HERE
+        # TODO: Ask your AI assistant:
+        # "Write Python code to retrieve alert details. Search self.siem_data['alerts']
+        # for an alert matching the alert_id. Get associated events from self.siem_data['events']
+        # that match the alert's host and time window. Return a dictionary containing
+        # the alert details and related events for full context."
+        #
+        # Then review and test the generated code.
         pass
 
     def isolate_host(self, hostname: str, confirm: bool = False) -> dict:
@@ -108,7 +131,13 @@ class CopilotTools:
         3. Execute isolation (simulated)
         4. Return result
         """
-        # YOUR CODE HERE
+        # TODO: Ask your AI assistant:
+        # "Write Python code to isolate a host from the network. Validate that hostname
+        # is a non-empty string. If confirm is False, return a dict requesting confirmation.
+        # If confirm is True, add the hostname to self.isolated_hosts and return a success
+        # dict with the hostname and isolation timestamp (simulated operation)."
+        #
+        # Then review and test the generated code.
         pass
 
     def block_ioc(self, ioc: str, block_type: str = "all") -> dict:
@@ -120,7 +149,13 @@ class CopilotTools:
         2. Add to block list
         3. Return confirmation
         """
-        # YOUR CODE HERE
+        # TODO: Ask your AI assistant:
+        # "Write Python code to block an IOC at the network perimeter. Validate that
+        # the ioc string is not empty. Add a dictionary containing the ioc, block_type,
+        # and timestamp to self.blocked_iocs. Return a confirmation dict with the
+        # blocked IOC details."
+        #
+        # Then review and test the generated code.
         pass
 
     def disable_account(self, username: str, confirm: bool = False) -> dict:
@@ -133,7 +168,13 @@ class CopilotTools:
         3. Execute disable (simulated)
         4. Return result
         """
-        # YOUR CODE HERE
+        # TODO: Ask your AI assistant:
+        # "Write Python code to disable a user account. Validate that username is a
+        # non-empty string. If confirm is False, return a dict requesting confirmation.
+        # If confirm is True, add the username to self.disabled_accounts and return
+        # a success dict with the username and disable timestamp (simulated operation)."
+        #
+        # Then review and test the generated code.
         pass
 
 
@@ -170,7 +211,13 @@ class CopilotStateManager:
         2. Update state
         3. Initialize timeline
         """
-        # YOUR CODE HERE
+        # TODO: Ask your AI assistant:
+        # "Write Python code to set the current incident context. Validate that the
+        # incident dict contains required fields (e.g., id, title, severity). Set
+        # self.state.current_incident to the incident. Initialize self.state.timeline_events
+        # with an entry marking the incident start time."
+        #
+        # Then review and test the generated code.
         pass
 
     def add_message(self, role: str, content: str):
@@ -182,7 +229,12 @@ class CopilotStateManager:
         2. Add timestamp
         3. Append to history
         """
-        # YOUR CODE HERE
+        # TODO: Ask your AI assistant:
+        # "Write Python code to add a message to conversation history. Create a dict
+        # with 'role' (user/assistant), 'content', and 'timestamp' (current datetime
+        # in ISO format). Append this message to self.state.messages."
+        #
+        # Then review and test the generated code.
         pass
 
     def add_ioc(self, ioc: str, result: dict):
@@ -194,7 +246,13 @@ class CopilotStateManager:
         2. Check for duplicates
         3. Add to list
         """
-        # YOUR CODE HERE
+        # TODO: Ask your AI assistant:
+        # "Write Python code to record an investigated IOC. Create a dict containing
+        # the 'ioc' string, 'result' dict, and 'timestamp'. Check if this IOC already
+        # exists in self.state.investigated_iocs to avoid duplicates. If not a duplicate,
+        # append to the list."
+        #
+        # Then review and test the generated code.
         pass
 
     def request_confirmation(self, action: dict) -> str:
@@ -206,7 +264,13 @@ class CopilotStateManager:
         2. Store action details
         3. Return confirmation ID
         """
-        # YOUR CODE HERE
+        # TODO: Ask your AI assistant:
+        # "Write Python code to queue an action for user confirmation. Generate a unique
+        # confirmation ID using uuid.uuid4(). Create a dict with 'id', 'action' details,
+        # and 'timestamp'. Append to self.state.pending_confirmations. Return the
+        # confirmation ID string."
+        #
+        # Then review and test the generated code.
         pass
 
     def confirm_action(self, action_id: str) -> Optional[dict]:
@@ -218,7 +282,12 @@ class CopilotStateManager:
         2. Remove from pending
         3. Return action for execution
         """
-        # YOUR CODE HERE
+        # TODO: Ask your AI assistant:
+        # "Write Python code to confirm a pending action. Search self.state.pending_confirmations
+        # for an action matching the action_id. If found, remove it from pending_confirmations
+        # and return the action dict. If not found, return None."
+        #
+        # Then review and test the generated code.
         pass
 
     def add_to_timeline(self, event: dict):
@@ -230,7 +299,13 @@ class CopilotStateManager:
         2. Sort by time
         3. Append to timeline
         """
-        # YOUR CODE HERE
+        # TODO: Ask your AI assistant:
+        # "Write Python code to add an event to the incident timeline. If the event
+        # dict doesn't have a 'timestamp' key, add the current datetime. Append
+        # the event to self.state.timeline_events, then sort the list by timestamp
+        # in chronological order."
+        #
+        # Then review and test the generated code.
         pass
 
     def record_action(self, action: dict):
@@ -241,7 +316,12 @@ class CopilotStateManager:
         1. Add timestamp
         2. Append to actions_taken
         """
-        # YOUR CODE HERE
+        # TODO: Ask your AI assistant:
+        # "Write Python code to record a completed action. Add a 'timestamp' key
+        # to the action dict with the current datetime in ISO format. Append the
+        # action to self.state.actions_taken."
+        #
+        # Then review and test the generated code.
         pass
 
 
@@ -268,7 +348,14 @@ class IRCopilot:
         2. List capabilities
         3. Set guidelines for responses
         """
-        # YOUR CODE HERE
+        # TODO: Ask your AI assistant:
+        # "Write Python code to create a system prompt for an IR Copilot. Return a
+        # multi-line string that defines the copilot's role as an incident response
+        # assistant, lists available capabilities (SIEM queries, IOC lookups, host
+        # isolation, account disabling), and sets guidelines for clear, actionable
+        # security-focused responses."
+        #
+        # Then review and test the generated code.
         pass
 
     def chat(self, message: str) -> str:
@@ -282,7 +369,15 @@ class IRCopilot:
         4. Execute relevant tools
         5. Generate response
         """
-        # YOUR CODE HERE
+        # TODO: Ask your AI assistant:
+        # "Write Python code to process a user message in the IR Copilot. Add the
+        # message to history using self.state_manager.add_message(). Check if the
+        # message confirms a pending action. Call self._determine_intent() to classify
+        # the intent. Based on intent, call self._execute_tool() with appropriate
+        # arguments. Use self._format_response() to generate and return a natural
+        # language response."
+        #
+        # Then review and test the generated code.
         pass
 
     def _determine_intent(self, message: str) -> str:
@@ -293,7 +388,14 @@ class IRCopilot:
         1. Use LLM to classify intent
         2. Return intent category
         """
-        # YOUR CODE HERE
+        # TODO: Ask your AI assistant:
+        # "Write Python code to classify the user's intent from their message. If
+        # self.llm is available, use it to classify the intent into categories like
+        # 'query_siem', 'lookup_ioc', 'isolate_host', 'get_alert', 'block_ioc', or
+        # 'general_question'. If no LLM, use keyword matching as a fallback. Return
+        # the intent category string."
+        #
+        # Then review and test the generated code.
         pass
 
     def _execute_tool(self, tool_name: str, args: dict) -> dict:
@@ -305,7 +407,14 @@ class IRCopilot:
         2. Execute with args
         3. Return result
         """
-        # YOUR CODE HERE
+        # TODO: Ask your AI assistant:
+        # "Write Python code to execute a copilot tool by name. Create a mapping dict
+        # from tool names ('query_siem', 'get_host_info', 'lookup_ioc', 'get_alert_details',
+        # 'isolate_host', 'block_ioc', 'disable_account') to their corresponding methods
+        # on self.tools. Look up and call the appropriate method with **args. Return
+        # the result dict, or an error dict if the tool is not found."
+        #
+        # Then review and test the generated code.
         pass
 
     def _format_response(self, tool_results: List[dict], intent: str) -> str:
@@ -317,7 +426,14 @@ class IRCopilot:
         2. Provide recommendations
         3. Suggest next steps
         """
-        # YOUR CODE HERE
+        # TODO: Ask your AI assistant:
+        # "Write Python code to format tool results into a natural language response.
+        # If self.llm is available, use it to generate a summary of the findings,
+        # provide security recommendations, and suggest next investigation steps.
+        # If no LLM, create a formatted string summarizing the tool_results with
+        # appropriate context based on the intent category."
+        #
+        # Then review and test the generated code.
         pass
 
 
@@ -342,7 +458,14 @@ class PlaybookExecutor:
         2. Parse YAML/JSON
         3. Return as dict
         """
-        # YOUR CODE HERE
+        # TODO: Ask your AI assistant:
+        # "Write Python code to load IR playbook definitions from a directory. Use
+        # pathlib.Path to find all .yaml, .yml, and .json files in the directory.
+        # Parse each file using yaml.safe_load() or json.load(). Return a dict mapping
+        # playbook names to their definitions. Handle file not found and parse errors
+        # gracefully."
+        #
+        # Then review and test the generated code.
         pass
 
     def suggest_playbook(self, incident: dict) -> str:
@@ -354,7 +477,14 @@ class PlaybookExecutor:
         2. Match to available playbooks
         3. Return recommendation
         """
-        # YOUR CODE HERE
+        # TODO: Ask your AI assistant:
+        # "Write Python code to suggest an IR playbook based on incident details.
+        # Extract the incident type/category from the incident dict. Match against
+        # available playbook names in self.playbooks (e.g., 'malware', 'phishing',
+        # 'data_breach'). Return a recommendation string with the suggested playbook
+        # name and reasoning."
+        #
+        # Then review and test the generated code.
         pass
 
     def execute_playbook(
@@ -368,7 +498,14 @@ class PlaybookExecutor:
         2. Execute each step
         3. Return execution summary
         """
-        # YOUR CODE HERE
+        # TODO: Ask your AI assistant:
+        # "Write Python code to execute an IR playbook. Look up the playbook by name
+        # in self.playbooks. Iterate through each step, using self.copilot to execute
+        # actions. If auto_approve is False, pause for confirmation on destructive
+        # actions. Track step results and return an execution summary dict with
+        # status, completed steps, and any errors."
+        #
+        # Then review and test the generated code.
         pass
 
     def get_next_step(self, playbook_name: str, current_step: int) -> Optional[dict]:
@@ -380,7 +517,13 @@ class PlaybookExecutor:
         2. Get step at index
         3. Return step details
         """
-        # YOUR CODE HERE
+        # TODO: Ask your AI assistant:
+        # "Write Python code to get the next step from a playbook. Look up the playbook
+        # by name in self.playbooks. Access the step at current_step index from the
+        # playbook's 'steps' list. Return the step dict with details, or None if the
+        # index is out of bounds or playbook not found."
+        #
+        # Then review and test the generated code.
         pass
 
 
@@ -405,7 +548,13 @@ class IncidentDocumenter:
         2. Sort by timestamp
         3. Format as table
         """
-        # YOUR CODE HERE
+        # TODO: Ask your AI assistant:
+        # "Write Python code to generate an incident timeline. Get timeline_events
+        # from self.state.state.timeline_events. Sort by timestamp in chronological
+        # order. Format as a markdown table with columns for Time, Event Type, and
+        # Description. Return the formatted timeline string."
+        #
+        # Then review and test the generated code.
         pass
 
     def generate_technical_report(self) -> str:
@@ -417,7 +566,14 @@ class IncidentDocumenter:
         2. Format sections
         3. Include IOCs and actions
         """
-        # YOUR CODE HERE
+        # TODO: Ask your AI assistant:
+        # "Write Python code to generate a technical incident report. Gather data from
+        # self.state including current_incident, investigated_iocs, actions_taken, and
+        # timeline_events. Format a markdown report with sections: Executive Summary,
+        # Timeline, Indicators of Compromise, Actions Taken, and Technical Analysis.
+        # Return the complete report string."
+        #
+        # Then review and test the generated code.
         pass
 
     def generate_executive_summary(self) -> str:
@@ -429,7 +585,14 @@ class IncidentDocumenter:
         2. Focus on business impact
         3. Keep non-technical
         """
-        # YOUR CODE HERE
+        # TODO: Ask your AI assistant:
+        # "Write Python code to generate an executive summary. Extract key details
+        # from self.state.state.current_incident. If self.llm is available, use it
+        # to create a non-technical summary focusing on business impact, affected
+        # systems, and remediation status. If no LLM, create a template-based summary.
+        # Return the executive summary string."
+        #
+        # Then review and test the generated code.
         pass
 
     def generate_lessons_learned(self) -> str:
@@ -441,7 +604,14 @@ class IncidentDocumenter:
         2. Identify improvements
         3. Create action items
         """
-        # YOUR CODE HERE
+        # TODO: Ask your AI assistant:
+        # "Write Python code to generate a lessons learned document. Analyze the
+        # incident data from self.state including timeline, actions taken, and IOCs.
+        # If self.llm is available, use it to identify what went well, what could
+        # be improved, and generate action items for future prevention. Return
+        # a formatted lessons learned document string."
+        #
+        # Then review and test the generated code.
         pass
 
 

@@ -42,11 +42,14 @@ class VulnDataLoader:
         """
         Load scan results from CSV or JSON.
 
-        TODO:
-        1. Detect file format
-        2. Parse appropriately
-        3. Normalize data structure
-        4. Return vulnerability list
+        TODO: Ask your AI assistant:
+        "Write Python code to load vulnerability scan results from a file.
+        Detect whether the file is CSV or JSON based on the extension,
+        parse it appropriately (use pandas for CSV, json module for JSON),
+        normalize the data structure to a list of dictionaries,
+        and return the vulnerability list."
+
+        Then review and test the generated code.
         """
         # YOUR CODE HERE
         pass
@@ -55,11 +58,14 @@ class VulnDataLoader:
         """
         Enrich vulnerabilities with additional CVE data.
 
-        TODO:
-        1. For each CVE, fetch additional info
-        2. Add EPSS scores if available
-        3. Add exploit availability
-        4. Return enriched list
+        TODO: Ask your AI assistant:
+        "Write Python code to enrich a list of vulnerability dictionaries
+        with additional CVE data. For each vulnerability with a CVE ID,
+        fetch additional information (consider using requests to query
+        NVD or a mock data source), add EPSS scores if available,
+        add exploit availability status, and return the enriched list."
+
+        Then review and test the generated code.
         """
         # YOUR CODE HERE
         pass
@@ -82,14 +88,16 @@ class VulnAnalyzer:
         """
         Deep analysis of a single vulnerability.
 
-        TODO:
-        1. Format vuln data for LLM
-        2. Include environment context
-        3. Generate analysis with:
-           - Plain English explanation
-           - Attack scenario
-           - Business impact
-           - Remediation steps
+        TODO: Ask your AI assistant:
+        "Write Python code to perform deep AI-powered analysis of a
+        single vulnerability. Format the vulnerability data for an LLM,
+        include optional environment context, and generate an analysis
+        dictionary containing: a plain English explanation of the
+        vulnerability, a realistic attack scenario, the potential
+        business impact, and step-by-step remediation instructions.
+        Use the self.llm instance to generate the analysis."
+
+        Then review and test the generated code.
         """
         # YOUR CODE HERE
         pass
@@ -98,10 +106,15 @@ class VulnAnalyzer:
         """
         Assess real-world exploitability.
 
-        TODO:
-        1. Check for public exploits
-        2. Analyze attack complexity
-        3. Return exploitability assessment
+        TODO: Ask your AI assistant:
+        "Write Python code to assess the real-world exploitability of a
+        vulnerability. Check for public exploits (consider querying
+        Exploit-DB or using mock data), analyze the attack complexity
+        based on CVSS metrics, and return an exploitability assessment
+        dictionary with fields like 'has_public_exploit', 'complexity',
+        'likelihood', and 'assessment_notes'."
+
+        Then review and test the generated code.
         """
         # YOUR CODE HERE
         pass
@@ -122,11 +135,14 @@ class VulnPrioritizer:
         """
         Calculate contextual risk score.
 
-        TODO:
-        1. Consider CVSS score
-        2. Factor in asset criticality
-        3. Consider exposure
-        4. Return 0-100 risk score
+        TODO: Ask your AI assistant:
+        "Write Python code to calculate a contextual risk score (0-100)
+        for a vulnerability. Consider the CVSS score as a base factor,
+        adjust based on asset criticality if an asset dict is provided,
+        factor in network exposure (internal vs internet-facing),
+        and return a normalized risk score between 0 and 100."
+
+        Then review and test the generated code.
         """
         # YOUR CODE HERE
         pass
@@ -135,10 +151,14 @@ class VulnPrioritizer:
         """
         Prioritize vulnerability list.
 
-        TODO:
-        1. Calculate scores for each vuln
-        2. Sort by risk score
-        3. Return sorted list
+        TODO: Ask your AI assistant:
+        "Write Python code to prioritize a list of vulnerabilities.
+        Calculate the risk score for each vulnerability using the
+        calculate_risk_score method, add the score to each vuln dict,
+        sort the list by risk score in descending order (highest risk first),
+        and return the sorted list."
+
+        Then review and test the generated code.
         """
         # YOUR CODE HERE
         pass
@@ -159,10 +179,16 @@ class VulnReporter:
         """
         Generate executive summary.
 
-        TODO:
-        1. Summarize overall risk posture
-        2. Highlight top risks
-        3. Use non-technical language
+        TODO: Ask your AI assistant:
+        "Write Python code to generate an executive summary of
+        vulnerability findings. Summarize the overall risk posture
+        (total vulns, severity breakdown), highlight the top 3-5
+        highest-risk vulnerabilities, use non-technical language
+        suitable for executives, and return the summary as a
+        formatted string. Use self.llm for AI-powered generation
+        or create a template-based fallback."
+
+        Then review and test the generated code.
         """
         # YOUR CODE HERE
         pass
@@ -171,10 +197,15 @@ class VulnReporter:
         """
         Generate detailed technical report.
 
-        TODO:
-        1. List all vulnerabilities
-        2. Include technical details
-        3. Provide remediation steps
+        TODO: Ask your AI assistant:
+        "Write Python code to generate a detailed technical report
+        of all vulnerabilities. List each vulnerability with its
+        CVE ID, host, and severity. Include technical details like
+        affected service, port, and CVSS score. Provide specific
+        remediation steps for each vulnerability. Return the report
+        as a formatted string (consider markdown format)."
+
+        Then review and test the generated code.
         """
         # YOUR CODE HERE
         pass

@@ -54,7 +54,13 @@ class SampleAnalyzer:
         4. Filter out common/noisy strings
         5. Return unique strings
         """
-        # YOUR CODE HERE
+        # TODO: Ask your AI assistant:
+        # "Write Python code to extract strings from a binary file. Read the file in binary mode,
+        # use regex to find ASCII strings (printable characters of at least min_length), extract
+        # Unicode/wide strings (UTF-16LE pattern), filter out common noisy strings like 'http',
+        # 'www', or short repetitive patterns, and return a list of unique strings."
+        #
+        # Then review and test the generated code.
         pass
 
     def extract_hex_patterns(self, filepath: str, pattern_length: int = 16) -> List[str]:
@@ -67,7 +73,12 @@ class SampleAnalyzer:
         3. Look for high-entropy sections
         4. Return hex patterns
         """
-        # YOUR CODE HERE
+        # TODO: Ask your AI assistant:
+        # "Write Python code to extract interesting hex patterns from a binary file. Read the
+        # binary content, find repeated byte sequences of pattern_length bytes, identify sections
+        # with high entropy (potential encryption/packing), and return the patterns as hex strings."
+        #
+        # Then review and test the generated code.
         pass
 
     def get_file_info(self, filepath: str) -> dict:
@@ -80,7 +91,12 @@ class SampleAnalyzer:
         3. Detect file type
         4. Return info dict
         """
-        # YOUR CODE HERE
+        # TODO: Ask your AI assistant:
+        # "Write Python code to get file information including file size using os.path.getsize,
+        # MD5 and SHA256 hashes using hashlib, file type detection by reading magic bytes
+        # (e.g., MZ for PE, ELF for Linux binaries), and return all info in a dictionary."
+        #
+        # Then review and test the generated code.
         pass
 
 
@@ -112,7 +128,12 @@ class YARAGenerator:
 
     def __init__(self, llm=None):
         """Initialize with LLM client."""
-        # YOUR CODE HERE
+        # TODO: Ask your AI assistant:
+        # "Write Python code to initialize a YARAGenerator class. If an llm parameter is provided,
+        # use it; otherwise, create a ChatAnthropic instance using the ANTHROPIC_API_KEY environment
+        # variable with model 'claude-sonnet-4-20250514'. Store the llm as self.llm."
+        #
+        # Then review and test the generated code.
         pass
 
     def generate_rule(
@@ -131,7 +152,13 @@ class YARAGenerator:
         3. Ask LLM to generate rule
         4. Return YARA rule text
         """
-        # YOUR CODE HERE
+        # TODO: Ask your AI assistant:
+        # "Write Python code to generate a YARA rule using an LLM. Format the sample_info dict
+        # and extracted strings into a prompt, include the malware_family and rule_name if provided,
+        # send a message to self.llm with YARA_SYSTEM_PROMPT as the system message, and return
+        # the generated YARA rule text from the LLM response."
+        #
+        # Then review and test the generated code.
         pass
 
     def optimize_rule(self, rule: str, feedback: str = None) -> str:
@@ -143,7 +170,13 @@ class YARAGenerator:
         2. Apply LLM suggestions
         3. Return optimized rule
         """
-        # YOUR CODE HERE
+        # TODO: Ask your AI assistant:
+        # "Write Python code to optimize a YARA rule using an LLM. Send the current rule to
+        # self.llm asking for optimization suggestions (reduce false positives, improve
+        # performance, add metadata). If feedback is provided, include it in the prompt.
+        # Return the optimized YARA rule text."
+        #
+        # Then review and test the generated code.
         pass
 
 
@@ -161,7 +194,12 @@ def validate_yara_rule(rule_text: str) -> dict:
     2. Check for syntax errors
     3. Return validation result
     """
-    # YOUR CODE HERE
+    # TODO: Ask your AI assistant:
+    # "Write Python code to validate YARA rule syntax. Use yara.compile(source=rule_text) to
+    # attempt compilation, catch any yara.SyntaxError or yara.Error exceptions, and return a
+    # dict with 'valid' (bool), 'error' (str or None), and 'rule' (the compiled rule or None)."
+    #
+    # Then review and test the generated code.
     pass
 
 
@@ -177,7 +215,13 @@ def test_rule_on_samples(
     3. Scan negative samples (should not match)
     4. Calculate accuracy metrics
     """
-    # YOUR CODE HERE
+    # TODO: Ask your AI assistant:
+    # "Write Python code to test a YARA rule against sample files. Compile the rule, scan each
+    # positive_samples file (should match) and negative_samples file (should not match), calculate
+    # true positives, false negatives, true negatives, false positives, and return a dict with
+    # these counts plus precision, recall, and accuracy metrics."
+    #
+    # Then review and test the generated code.
     pass
 
 
