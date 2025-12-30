@@ -60,7 +60,7 @@ def get_llm_client():
     elif os.getenv('GOOGLE_API_KEY'):
         import google.generativeai as genai
         genai.configure(api_key=os.getenv('GOOGLE_API_KEY'))
-        return GeminiWrapper(genai.GenerativeModel('gemini-1.5-pro'))
+        return GeminiWrapper(genai.GenerativeModel('gemini-2.5-pro'))
 
     else:
         raise ValueError("No API key found. Set ANTHROPIC_API_KEY, OPENAI_API_KEY, or GOOGLE_API_KEY")
@@ -140,7 +140,7 @@ Always respond in valid JSON format matching this schema:
 
 ### Processing Individual Log Entries
 
-```python
+````python
 import json
 
 def analyze_log_entry(log_entry: dict, llm_client) -> dict:
@@ -179,7 +179,7 @@ Provide your analysis in the JSON format specified."""
         }
 
     return analysis
-```
+````
 
 ### Common Error #2: JSON Parsing Fails
 ```

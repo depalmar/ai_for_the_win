@@ -76,7 +76,6 @@ def setup_llm(provider: str = "anthropic"):
         # asking it to say 'ready', and return the configured client."
         #
         # Then review and test the generated code.
-        # Stuck? See the Hints section in README.md
         pass
 
     elif provider == "ollama":
@@ -147,7 +146,6 @@ Return a JSON object with these fields:
     # handling JSONDecodeError by attempting to extract JSON from the response text."
     #
     # Then review and test the generated code.
-    # Stuck? See the Hints section in README.md
     pass
 
 

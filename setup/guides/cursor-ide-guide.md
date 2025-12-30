@@ -438,8 +438,8 @@ Once configured, MCP tools are available in chat:
 | Model                        | Best For                                | Speed     | Cost |
 | ---------------------------- | --------------------------------------- | --------- | ---- |
 | **claude-sonnet-4-20250514** | Complex security analysis, long context | Medium    | $$   |
-| **claude-3-opus**            | Deepest reasoning, architecture design  | Slow      | $$$  |
-| **gpt-4-turbo**              | General coding, function calling        | Medium    | $$   |
+| **claude-opus-4-5**          | Deepest reasoning, architecture design  | Slow      | $$$  |
+| **gpt-4o**                   | General coding, function calling        | Medium    | $$   |
 | **gpt-4o**                   | Fast responses, balanced quality        | Fast      | $    |
 | **cursor-small**             | Quick completions, simple tasks         | Very Fast | $    |
 
@@ -455,7 +455,7 @@ Once configured, MCP tools are available in chat:
   "cursor.autocomplete.model": "cursor-small",
 
   // Use strongest model for Composer
-  "cursor.composer.model": "claude-3-opus",
+  "cursor.composer.model": "claude-opus-4-5",
 
   // Context settings
   "cursor.enableLongContext": true,

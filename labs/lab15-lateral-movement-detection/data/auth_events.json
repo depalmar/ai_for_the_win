@@ -1,0 +1,88 @@
+{
+  "auth_events": [
+    {"timestamp": "2024-01-15T08:00:00Z", "event_id": 4624, "source_ip": "192.168.1.10", "target_host": "workstation01", "username": "jsmith", "domain": "CORP", "logon_type": 2, "status": "success", "workstation_name": "WORKSTATION01"},
+    {"timestamp": "2024-01-15T08:05:00Z", "event_id": 4624, "source_ip": "192.168.1.10", "target_host": "workstation01", "username": "jsmith", "domain": "CORP", "logon_type": 2, "status": "success", "workstation_name": "WORKSTATION01"},
+    {"timestamp": "2024-01-15T08:10:00Z", "event_id": 4624, "source_ip": "192.168.1.11", "target_host": "workstation02", "username": "mjohnson", "domain": "CORP", "logon_type": 2, "status": "success", "workstation_name": "WORKSTATION02"},
+    {"timestamp": "2024-01-15T08:15:00Z", "event_id": 4624, "source_ip": "192.168.1.12", "target_host": "workstation03", "username": "bwilliams", "domain": "CORP", "logon_type": 2, "status": "success", "workstation_name": "WORKSTATION03"},
+    {"timestamp": "2024-01-15T08:20:00Z", "event_id": 4624, "source_ip": "192.168.1.10", "target_host": "fileserver", "username": "jsmith", "domain": "CORP", "logon_type": 3, "status": "success", "workstation_name": "WORKSTATION01"},
+    {"timestamp": "2024-01-15T08:25:00Z", "event_id": 4624, "source_ip": "192.168.1.11", "target_host": "fileserver", "username": "mjohnson", "domain": "CORP", "logon_type": 3, "status": "success", "workstation_name": "WORKSTATION02"},
+    {"timestamp": "2024-01-15T08:30:00Z", "event_id": 4624, "source_ip": "192.168.1.10", "target_host": "workstation01", "username": "jsmith", "domain": "CORP", "logon_type": 7, "status": "success", "workstation_name": "WORKSTATION01"},
+    {"timestamp": "2024-01-15T08:35:00Z", "event_id": 4624, "source_ip": "192.168.1.13", "target_host": "workstation04", "username": "asmith", "domain": "CORP", "logon_type": 2, "status": "success", "workstation_name": "WORKSTATION04"},
+    {"timestamp": "2024-01-15T08:40:00Z", "event_id": 4624, "source_ip": "192.168.1.14", "target_host": "workstation05", "username": "dgarcia", "domain": "CORP", "logon_type": 2, "status": "success", "workstation_name": "WORKSTATION05"},
+    {"timestamp": "2024-01-15T08:45:00Z", "event_id": 4624, "source_ip": "192.168.1.10", "target_host": "printserver", "username": "jsmith", "domain": "CORP", "logon_type": 3, "status": "success", "workstation_name": "WORKSTATION01"},
+
+    {"timestamp": "2024-01-15T09:00:00Z", "event_id": 4624, "source_ip": "192.168.1.10", "target_host": "workstation01", "username": "jsmith", "domain": "CORP", "logon_type": 2, "status": "success", "workstation_name": "WORKSTATION01"},
+    {"timestamp": "2024-01-15T09:05:00Z", "event_id": 4624, "source_ip": "192.168.1.11", "target_host": "workstation02", "username": "mjohnson", "domain": "CORP", "logon_type": 2, "status": "success", "workstation_name": "WORKSTATION02"},
+    {"timestamp": "2024-01-15T09:10:00Z", "event_id": 4624, "source_ip": "192.168.1.12", "target_host": "workstation03", "username": "bwilliams", "domain": "CORP", "logon_type": 3, "status": "success", "workstation_name": "WORKSTATION03"},
+    {"timestamp": "2024-01-15T09:15:00Z", "event_id": 4624, "source_ip": "192.168.1.15", "target_host": "server01", "username": "svc_backup", "domain": "CORP", "logon_type": 5, "status": "success", "workstation_name": "SERVER01"},
+    {"timestamp": "2024-01-15T09:20:00Z", "event_id": 4624, "source_ip": "192.168.1.16", "target_host": "server02", "username": "svc_sql", "domain": "CORP", "logon_type": 5, "status": "success", "workstation_name": "SERVER02"},
+
+    {"timestamp": "2024-01-15T10:00:00Z", "event_id": 4624, "source_ip": "192.168.1.10", "target_host": "workstation01", "username": "jsmith", "domain": "CORP", "logon_type": 2, "status": "success", "workstation_name": "WORKSTATION01"},
+    {"timestamp": "2024-01-15T10:05:00Z", "event_id": 4624, "source_ip": "192.168.1.10", "target_host": "fileserver", "username": "jsmith", "domain": "CORP", "logon_type": 3, "status": "success", "workstation_name": "WORKSTATION01"},
+    {"timestamp": "2024-01-15T10:10:00Z", "event_id": 4624, "source_ip": "192.168.1.11", "target_host": "workstation02", "username": "mjohnson", "domain": "CORP", "logon_type": 2, "status": "success", "workstation_name": "WORKSTATION02"},
+    {"timestamp": "2024-01-15T10:15:00Z", "event_id": 4624, "source_ip": "192.168.1.12", "target_host": "workstation03", "username": "bwilliams", "domain": "CORP", "logon_type": 2, "status": "success", "workstation_name": "WORKSTATION03"},
+    {"timestamp": "2024-01-15T10:20:00Z", "event_id": 4624, "source_ip": "192.168.1.13", "target_host": "workstation04", "username": "asmith", "domain": "CORP", "logon_type": 2, "status": "success", "workstation_name": "WORKSTATION04"},
+
+    {"timestamp": "2024-01-15T11:00:00Z", "event_id": 4624, "source_ip": "192.168.1.10", "target_host": "workstation01", "username": "jsmith", "domain": "CORP", "logon_type": 2, "status": "success", "workstation_name": "WORKSTATION01"},
+    {"timestamp": "2024-01-15T11:05:00Z", "event_id": 4624, "source_ip": "192.168.1.10", "target_host": "workstation01", "username": "jsmith", "domain": "CORP", "logon_type": 2, "status": "success", "workstation_name": "WORKSTATION01"},
+    {"timestamp": "2024-01-15T11:10:00Z", "event_id": 4624, "source_ip": "192.168.1.10", "target_host": "fileserver", "username": "jsmith", "domain": "CORP", "logon_type": 3, "status": "success", "workstation_name": "WORKSTATION01"},
+    {"timestamp": "2024-01-15T11:15:00Z", "event_id": 4624, "source_ip": "192.168.1.11", "target_host": "workstation02", "username": "mjohnson", "domain": "CORP", "logon_type": 2, "status": "success", "workstation_name": "WORKSTATION02"},
+    {"timestamp": "2024-01-15T11:20:00Z", "event_id": 4624, "source_ip": "192.168.1.11", "target_host": "printserver", "username": "mjohnson", "domain": "CORP", "logon_type": 3, "status": "success", "workstation_name": "WORKSTATION02"},
+
+    {"timestamp": "2024-01-15T12:00:00Z", "event_id": 4624, "source_ip": "192.168.1.10", "target_host": "workstation01", "username": "jsmith", "domain": "CORP", "logon_type": 2, "status": "success", "workstation_name": "WORKSTATION01"},
+    {"timestamp": "2024-01-15T12:05:00Z", "event_id": 4624, "source_ip": "192.168.1.11", "target_host": "workstation02", "username": "mjohnson", "domain": "CORP", "logon_type": 2, "status": "success", "workstation_name": "WORKSTATION02"},
+    {"timestamp": "2024-01-15T12:10:00Z", "event_id": 4624, "source_ip": "192.168.1.12", "target_host": "workstation03", "username": "bwilliams", "domain": "CORP", "logon_type": 2, "status": "success", "workstation_name": "WORKSTATION03"},
+    {"timestamp": "2024-01-15T12:15:00Z", "event_id": 4624, "source_ip": "192.168.1.13", "target_host": "workstation04", "username": "asmith", "domain": "CORP", "logon_type": 2, "status": "success", "workstation_name": "WORKSTATION04"},
+    {"timestamp": "2024-01-15T12:20:00Z", "event_id": 4624, "source_ip": "192.168.1.14", "target_host": "workstation05", "username": "dgarcia", "domain": "CORP", "logon_type": 2, "status": "success", "workstation_name": "WORKSTATION05"},
+
+    {"timestamp": "2024-01-15T13:00:00Z", "event_id": 4624, "source_ip": "192.168.1.10", "target_host": "workstation01", "username": "jsmith", "domain": "CORP", "logon_type": 2, "status": "success", "workstation_name": "WORKSTATION01"},
+    {"timestamp": "2024-01-15T13:05:00Z", "event_id": 4624, "source_ip": "192.168.1.10", "target_host": "fileserver", "username": "jsmith", "domain": "CORP", "logon_type": 3, "status": "success", "workstation_name": "WORKSTATION01"},
+    {"timestamp": "2024-01-15T13:10:00Z", "event_id": 4624, "source_ip": "192.168.1.11", "target_host": "fileserver", "username": "mjohnson", "domain": "CORP", "logon_type": 3, "status": "success", "workstation_name": "WORKSTATION02"},
+    {"timestamp": "2024-01-15T13:15:00Z", "event_id": 4624, "source_ip": "192.168.1.12", "target_host": "workstation03", "username": "bwilliams", "domain": "CORP", "logon_type": 2, "status": "success", "workstation_name": "WORKSTATION03"},
+    {"timestamp": "2024-01-15T13:20:00Z", "event_id": 4624, "source_ip": "192.168.1.15", "target_host": "server01", "username": "svc_backup", "domain": "CORP", "logon_type": 5, "status": "success", "workstation_name": "SERVER01"},
+
+    {"timestamp": "2024-01-15T14:00:00Z", "event_id": 4624, "source_ip": "192.168.1.10", "target_host": "workstation01", "username": "jsmith", "domain": "CORP", "logon_type": 2, "status": "success", "workstation_name": "WORKSTATION01"},
+    {"timestamp": "2024-01-15T14:05:00Z", "event_id": 4624, "source_ip": "192.168.1.11", "target_host": "workstation02", "username": "mjohnson", "domain": "CORP", "logon_type": 2, "status": "success", "workstation_name": "WORKSTATION02"},
+    {"timestamp": "2024-01-15T14:10:00Z", "event_id": 4624, "source_ip": "192.168.1.12", "target_host": "workstation03", "username": "bwilliams", "domain": "CORP", "logon_type": 2, "status": "success", "workstation_name": "WORKSTATION03"},
+    {"timestamp": "2024-01-15T14:15:00Z", "event_id": 4624, "source_ip": "192.168.1.13", "target_host": "workstation04", "username": "asmith", "domain": "CORP", "logon_type": 2, "status": "success", "workstation_name": "WORKSTATION04"},
+    {"timestamp": "2024-01-15T14:20:00Z", "event_id": 4624, "source_ip": "192.168.1.14", "target_host": "workstation05", "username": "dgarcia", "domain": "CORP", "logon_type": 2, "status": "success", "workstation_name": "WORKSTATION05"},
+
+    {"timestamp": "2024-01-15T15:00:00Z", "event_id": 4624, "source_ip": "192.168.1.10", "target_host": "workstation01", "username": "jsmith", "domain": "CORP", "logon_type": 2, "status": "success", "workstation_name": "WORKSTATION01"},
+    {"timestamp": "2024-01-15T15:05:00Z", "event_id": 4624, "source_ip": "192.168.1.10", "target_host": "fileserver", "username": "jsmith", "domain": "CORP", "logon_type": 3, "status": "success", "workstation_name": "WORKSTATION01"},
+    {"timestamp": "2024-01-15T15:10:00Z", "event_id": 4624, "source_ip": "192.168.1.11", "target_host": "workstation02", "username": "mjohnson", "domain": "CORP", "logon_type": 2, "status": "success", "workstation_name": "WORKSTATION02"},
+    {"timestamp": "2024-01-15T15:15:00Z", "event_id": 4624, "source_ip": "192.168.1.12", "target_host": "workstation03", "username": "bwilliams", "domain": "CORP", "logon_type": 2, "status": "success", "workstation_name": "WORKSTATION03"},
+    {"timestamp": "2024-01-15T15:20:00Z", "event_id": 4624, "source_ip": "192.168.1.13", "target_host": "workstation04", "username": "asmith", "domain": "CORP", "logon_type": 2, "status": "success", "workstation_name": "WORKSTATION04"},
+
+    {"timestamp": "2024-01-15T22:00:00Z", "event_id": 4624, "source_ip": "192.168.1.50", "target_host": "workstation01", "username": "jsmith", "domain": "CORP", "logon_type": 3, "status": "success", "workstation_name": "UNKNOWN"},
+    {"timestamp": "2024-01-15T22:01:00Z", "event_id": 4624, "source_ip": "192.168.1.50", "target_host": "server01", "username": "jsmith", "domain": "CORP", "logon_type": 3, "status": "success", "workstation_name": "UNKNOWN"},
+    {"timestamp": "2024-01-15T22:02:00Z", "event_id": 4624, "source_ip": "192.168.1.50", "target_host": "server02", "username": "jsmith", "domain": "CORP", "logon_type": 3, "status": "success", "workstation_name": "UNKNOWN"},
+    {"timestamp": "2024-01-15T22:03:00Z", "event_id": 4624, "source_ip": "192.168.1.50", "target_host": "dc01", "username": "jsmith", "domain": "CORP", "logon_type": 3, "status": "success", "workstation_name": "UNKNOWN"},
+    {"timestamp": "2024-01-15T22:05:00Z", "event_id": 4624, "source_ip": "192.168.1.50", "target_host": "dc01", "username": "administrator", "domain": "CORP", "logon_type": 10, "status": "success", "workstation_name": "UNKNOWN"},
+
+    {"timestamp": "2024-01-15T22:10:00Z", "event_id": 4625, "source_ip": "192.168.1.99", "target_host": "dc01", "username": "admin", "domain": "CORP", "logon_type": 3, "status": "failure", "workstation_name": "UNKNOWN"},
+    {"timestamp": "2024-01-15T22:10:05Z", "event_id": 4625, "source_ip": "192.168.1.99", "target_host": "dc01", "username": "administrator", "domain": "CORP", "logon_type": 3, "status": "failure", "workstation_name": "UNKNOWN"},
+    {"timestamp": "2024-01-15T22:10:10Z", "event_id": 4625, "source_ip": "192.168.1.99", "target_host": "dc01", "username": "svc_backup", "domain": "CORP", "logon_type": 3, "status": "failure", "workstation_name": "UNKNOWN"},
+    {"timestamp": "2024-01-15T22:10:15Z", "event_id": 4625, "source_ip": "192.168.1.99", "target_host": "dc01", "username": "svc_sql", "domain": "CORP", "logon_type": 3, "status": "failure", "workstation_name": "UNKNOWN"},
+    {"timestamp": "2024-01-15T22:10:20Z", "event_id": 4625, "source_ip": "192.168.1.99", "target_host": "dc01", "username": "jsmith", "domain": "CORP", "logon_type": 3, "status": "failure", "workstation_name": "UNKNOWN"},
+    {"timestamp": "2024-01-15T22:10:25Z", "event_id": 4625, "source_ip": "192.168.1.99", "target_host": "dc01", "username": "mjohnson", "domain": "CORP", "logon_type": 3, "status": "failure", "workstation_name": "UNKNOWN"},
+    {"timestamp": "2024-01-15T22:10:30Z", "event_id": 4625, "source_ip": "192.168.1.99", "target_host": "dc01", "username": "bwilliams", "domain": "CORP", "logon_type": 3, "status": "failure", "workstation_name": "UNKNOWN"},
+    {"timestamp": "2024-01-15T22:10:35Z", "event_id": 4625, "source_ip": "192.168.1.99", "target_host": "dc01", "username": "asmith", "domain": "CORP", "logon_type": 3, "status": "failure", "workstation_name": "UNKNOWN"},
+    {"timestamp": "2024-01-15T22:10:40Z", "event_id": 4625, "source_ip": "192.168.1.99", "target_host": "dc01", "username": "dgarcia", "domain": "CORP", "logon_type": 3, "status": "failure", "workstation_name": "UNKNOWN"},
+    {"timestamp": "2024-01-15T22:10:45Z", "event_id": 4625, "source_ip": "192.168.1.99", "target_host": "dc01", "username": "helpdesk", "domain": "CORP", "logon_type": 3, "status": "failure", "workstation_name": "UNKNOWN"},
+
+    {"timestamp": "2024-01-15T23:00:00Z", "event_id": 4624, "source_ip": "192.168.1.50", "target_host": "fileserver", "username": "administrator", "domain": "CORP", "logon_type": 3, "status": "success", "workstation_name": "DC01"},
+    {"timestamp": "2024-01-15T23:01:00Z", "event_id": 4624, "source_ip": "192.168.1.50", "target_host": "sql01", "username": "administrator", "domain": "CORP", "logon_type": 3, "status": "success", "workstation_name": "DC01"},
+    {"timestamp": "2024-01-15T23:02:00Z", "event_id": 4624, "source_ip": "192.168.1.50", "target_host": "exchange", "username": "administrator", "domain": "CORP", "logon_type": 3, "status": "success", "workstation_name": "DC01"}
+  ],
+  "system_events": [
+    {"timestamp": "2024-01-15T22:01:30Z", "event_id": 7045, "service_name": "PSEXESVC", "source_host": "workstation01", "target_host": "server01", "computer_name": "server01", "username": "jsmith", "service_file_name": "%SystemRoot%\\PSEXESVC.exe"},
+    {"timestamp": "2024-01-15T22:02:30Z", "event_id": 5140, "share_name": "ADMIN$", "source_ip": "192.168.1.50", "target_host": "server02", "computer_name": "server02", "username": "jsmith"},
+    {"timestamp": "2024-01-15T22:03:30Z", "event_id": 5857, "operation": "Win32_Process::Create", "source_host": "server01", "target_host": "dc01", "computer_name": "dc01", "username": "jsmith", "commandline": "cmd.exe /c net user"},
+    {"timestamp": "2024-01-15T22:04:00Z", "event_id": 5857, "operation": "Win32_Process::Create", "source_host": "server02", "target_host": "dc01", "computer_name": "dc01", "username": "jsmith", "commandline": "cmd.exe /c whoami /priv"},
+    {"timestamp": "2024-01-15T23:00:30Z", "event_id": 7045, "service_name": "PSEXESVC", "source_host": "dc01", "target_host": "fileserver", "computer_name": "fileserver", "username": "administrator", "service_file_name": "%SystemRoot%\\PSEXESVC.exe"},
+    {"timestamp": "2024-01-15T23:01:30Z", "event_id": 7045, "service_name": "PSEXESVC", "source_host": "dc01", "target_host": "sql01", "computer_name": "sql01", "username": "administrator", "service_file_name": "%SystemRoot%\\PSEXESVC.exe"},
+    {"timestamp": "2024-01-15T23:02:30Z", "event_id": 5857, "operation": "Win32_Process::Create", "source_host": "fileserver", "target_host": "exchange", "computer_name": "exchange", "username": "administrator", "commandline": "cmd.exe /c dir C:\\"},
+    {"timestamp": "2024-01-15T23:03:00Z", "event_id": 4688, "parent_process_name": "wmiprvse.exe", "source_host": "unknown", "target_host": "exchange", "computer_name": "exchange", "username": "administrator", "commandline": "powershell.exe -enc UwB0AGEAcgB0AC0AUwBsAGUAZQBwACAAMQAwADsAIAB3AGgAbwBhAG0AaQA="},
+    {"timestamp": "2024-01-15T23:05:00Z", "event_id": 91, "source_ip": "192.168.1.50", "target_host": "sql01", "computer_name": "sql01", "username": "administrator"}
+  ]
+}

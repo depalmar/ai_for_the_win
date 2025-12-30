@@ -1,0 +1,154 @@
+{
+  "campaigns": [
+    {
+      "id": "campaign_001",
+      "name": "SolarWinds Supply Chain Attack",
+      "start_date": "2020-03-01",
+      "end_date": "2020-12-13",
+      "targets": ["government", "technology", "consulting"],
+      "attributed_actor": "apt29",
+      "description": "Sophisticated supply chain compromise targeting SolarWinds Orion software to distribute SUNBURST backdoor",
+      "iocs": {
+        "domains": ["avsvmcloud.com", "digitalcollege.org", "freescanonline.com"],
+        "ips": ["13.59.205.66", "54.193.127.66"],
+        "hashes": ["019085a76ba7126fff22770d71bd901c325fc68ac55aa743327984e89f4b0134"]
+      }
+    },
+    {
+      "id": "campaign_002",
+      "name": "Operation Cloud Hopper",
+      "start_date": "2016-01-01",
+      "end_date": "2018-12-31",
+      "targets": ["msp", "technology", "healthcare"],
+      "attributed_actor": "apt10",
+      "description": "Extensive campaign targeting managed service providers to access client networks",
+      "iocs": {
+        "domains": ["update.mfrfrp.com", "cloud-kinect.com"],
+        "ips": ["185.234.72.19", "91.234.56.78"],
+        "hashes": ["5abc123def456789012345678901234567890123456789012345678901234567"]
+      }
+    },
+    {
+      "id": "campaign_003",
+      "name": "FIN7 Restaurant Attacks",
+      "start_date": "2023-06-01",
+      "end_date": "2024-01-15",
+      "targets": ["restaurant", "hospitality", "retail"],
+      "attributed_actor": "fin7",
+      "description": "Targeted phishing campaign against hospitality sector for POS malware deployment",
+      "iocs": {
+        "domains": ["menu-update.net", "pos-support.com", "restaurant-software.net"],
+        "ips": ["45.67.89.123", "123.45.67.89"],
+        "hashes": ["7def456789012345678901234567890123456789012345678901234567890123"]
+      }
+    },
+    {
+      "id": "campaign_004",
+      "name": "Lazarus Cryptocurrency Heist",
+      "start_date": "2023-09-01",
+      "end_date": "2024-02-01",
+      "targets": ["cryptocurrency", "finance", "blockchain"],
+      "attributed_actor": "lazarus",
+      "description": "Targeted attacks against cryptocurrency exchanges and DeFi platforms",
+      "iocs": {
+        "domains": ["wallet-verify.io", "crypto-update.net", "blockchain-secure.com"],
+        "ips": ["175.45.176.99", "210.52.109.22"],
+        "hashes": ["9abc789012345678901234567890123456789012345678901234567890123456"]
+      }
+    },
+    {
+      "id": "campaign_005",
+      "name": "APT28 Election Interference",
+      "start_date": "2023-01-01",
+      "end_date": "2024-01-01",
+      "targets": ["government", "political_organization", "think_tank"],
+      "attributed_actor": "apt28",
+      "description": "Credential harvesting and information operations targeting political entities",
+      "iocs": {
+        "domains": ["secure-login.info", "account-verify.net", "mail-security.org"],
+        "ips": ["194.85.61.76", "185.93.185.111"],
+        "hashes": ["bdef012345678901234567890123456789012345678901234567890123456789"]
+      }
+    }
+  ],
+  "malware_samples": [
+    {
+      "sha256": "019085a76ba7126fff22770d71bd901c325fc68ac55aa743327984e89f4b0134",
+      "family": "SUNBURST",
+      "first_seen": "2020-03-01",
+      "file_type": "PE32",
+      "size": 1024000,
+      "imphash": "a1b2c3d4e5f6a7b8",
+      "ssdeep": "24576:ABC123XYZ789DEF456:abc123xyz789",
+      "capabilities": ["backdoor", "c2", "persistence", "reconnaissance"],
+      "c2_domains": ["avsvmcloud.com"],
+      "mutex_names": [],
+      "attributed_actor": "APT29 (Cozy Bear)"
+    },
+    {
+      "sha256": "5abc123def456789012345678901234567890123456789012345678901234567",
+      "family": "PlugX",
+      "first_seen": "2023-06-15",
+      "file_type": "PE32",
+      "size": 512000,
+      "imphash": "b2c3d4e5f6a7b8c9",
+      "ssdeep": "12288:DEF456GHI789JKL012:def456ghi789",
+      "capabilities": ["backdoor", "keylogger", "screenshot", "file_exfil"],
+      "c2_domains": ["update.mfrfrp.com"],
+      "mutex_names": ["Global\\PlugXMutex"],
+      "attributed_actor": "APT41 (Double Dragon)"
+    },
+    {
+      "sha256": "7def456789012345678901234567890123456789012345678901234567890123",
+      "family": "Carbanak",
+      "first_seen": "2023-07-20",
+      "file_type": "PE32",
+      "size": 768000,
+      "imphash": "c3d4e5f6a7b8c9d0",
+      "ssdeep": "18432:GHI789JKL012MNO345:ghi789jkl012",
+      "capabilities": ["backdoor", "keylogger", "screenshot", "credential_theft", "video_capture"],
+      "c2_domains": ["menu-update.net", "pos-support.com"],
+      "mutex_names": ["Global\\Carbanak"],
+      "attributed_actor": "FIN7 (Carbanak)"
+    },
+    {
+      "sha256": "9abc789012345678901234567890123456789012345678901234567890123456",
+      "family": "AppleJeus",
+      "first_seen": "2023-09-15",
+      "file_type": "PE32",
+      "size": 384000,
+      "imphash": "d4e5f6a7b8c9d0e1",
+      "ssdeep": "8192:JKL012MNO345PQR678:jkl012mno345",
+      "capabilities": ["backdoor", "cryptocurrency_theft", "persistence"],
+      "c2_domains": ["wallet-verify.io"],
+      "mutex_names": ["Global\\AppleJeus"],
+      "attributed_actor": "Lazarus Group"
+    },
+    {
+      "sha256": "bdef012345678901234567890123456789012345678901234567890123456789",
+      "family": "Zebrocy",
+      "first_seen": "2023-02-10",
+      "file_type": "PE32",
+      "size": 256000,
+      "imphash": "e5f6a7b8c9d0e1f2",
+      "ssdeep": "6144:MNO345PQR678STU901:mno345pqr678",
+      "capabilities": ["backdoor", "screenshot", "file_exfil", "keylogger"],
+      "c2_domains": ["secure-login.info"],
+      "mutex_names": [],
+      "attributed_actor": "APT28 (Fancy Bear)"
+    },
+    {
+      "sha256": "abc123def456789012345678901234567890123456789012345678901234567a",
+      "family": "Cobalt Strike",
+      "first_seen": "2024-01-05",
+      "file_type": "PE32",
+      "size": 290816,
+      "imphash": "f6a7b8c9d0e1f2a3",
+      "ssdeep": "6144:PQR678STU901VWX234:pqr678stu901",
+      "capabilities": ["backdoor", "c2", "lateral_movement", "credential_theft"],
+      "c2_domains": ["malware-update.net", "c2-server.com"],
+      "mutex_names": [],
+      "attributed_actor": "Unknown"
+    }
+  ]
+}

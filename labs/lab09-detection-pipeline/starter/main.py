@@ -51,7 +51,14 @@ class EventIngestor:
         3. Normalize timestamps
         4. Return normalized event
         """
-        # YOUR CODE HERE
+        # TODO: Ask your AI assistant:
+        # "Write Python code to normalize a raw security event into a standard schema.
+        # Parse the event based on source type (sysmon, windows, or network),
+        # extract standard fields like timestamp, host, user, and event_type,
+        # normalize timestamps to ISO8601 format, and return the normalized event
+        # by calling self.create_normalized_event(raw_event, source)."
+        #
+        # Then review and test the generated code.
         pass
 
     def create_normalized_event(self, raw: dict, source: str) -> dict:
@@ -70,7 +77,14 @@ class EventIngestor:
             "raw": original_event
         }
         """
-        # YOUR CODE HERE
+        # TODO: Ask your AI assistant:
+        # "Write Python code to create a normalized event dictionary following
+        # the standard schema. Generate a UUID for the id field, ensure timestamp
+        # is in ISO8601 format, set the source from the parameter, extract
+        # event_type/host/user from the raw event, store additional fields in
+        # details, and include the original raw event."
+        #
+        # Then review and test the generated code.
         pass
 
 
@@ -96,7 +110,13 @@ class MLFilterStage:
         2. Encode categorical features
         3. Return feature vector
         """
-        # YOUR CODE HERE
+        # TODO: Ask your AI assistant:
+        # "Write Python code to extract ML features from a security event dict.
+        # Extract numeric features like port numbers or byte counts, encode
+        # categorical features like event_type and source as numeric values,
+        # and return a numpy array feature vector suitable for Isolation Forest."
+        #
+        # Then review and test the generated code.
         pass
 
     def train(self, events: List[dict]):
@@ -107,7 +127,13 @@ class MLFilterStage:
         1. Extract features from all events
         2. Train Isolation Forest
         """
-        # YOUR CODE HERE
+        # TODO: Ask your AI assistant:
+        # "Write Python code to train an Isolation Forest anomaly detection model.
+        # Extract features from all events using self.extract_features(), stack
+        # them into a feature matrix, initialize an IsolationForest with
+        # self.contamination, and fit the model storing it in self.model."
+        #
+        # Then review and test the generated code.
         pass
 
     def score_event(self, event: dict) -> float:
@@ -119,7 +145,13 @@ class MLFilterStage:
         2. Get anomaly score from model
         3. Normalize to 0-1
         """
-        # YOUR CODE HERE
+        # TODO: Ask your AI assistant:
+        # "Write Python code to score an event's anomaly level from 0 to 1.
+        # Extract features using self.extract_features(), use the trained
+        # self.model to get the anomaly score via decision_function(), and
+        # normalize the score to a 0-1 range where higher means more anomalous."
+        #
+        # Then review and test the generated code.
         pass
 
     def filter_events(self, events: List[dict]) -> List[dict]:
@@ -131,7 +163,13 @@ class MLFilterStage:
         2. Keep events > threshold
         3. Add score to event
         """
-        # YOUR CODE HERE
+        # TODO: Ask your AI assistant:
+        # "Write Python code to filter a list of events based on anomaly scores.
+        # Score each event using self.score_event(), keep only events with
+        # scores above self.threshold, add the 'anomaly_score' field to each
+        # kept event, and return the list of suspicious events."
+        #
+        # Then review and test the generated code.
         pass
 
 
@@ -157,7 +195,15 @@ class LLMEnrichmentStage:
         3. Parse and add enrichments
         4. Return enriched event
         """
-        # YOUR CODE HERE
+        # TODO: Ask your AI assistant:
+        # "Write Python code to enrich a security event using LLM analysis.
+        # Format the event as a prompt for self.llm asking for threat assessment
+        # and MITRE ATT&CK technique mapping, invoke the LLM, parse the response
+        # to extract threat level and tactics, add these as enrichment fields
+        # to the event, and return the enriched event. Use self.cache to avoid
+        # duplicate LLM calls for similar events."
+        #
+        # Then review and test the generated code.
         pass
 
 
@@ -175,7 +221,12 @@ class CorrelationStage:
 
     def add_event(self, event: dict):
         """Add event to correlation buffer."""
-        # YOUR CODE HERE
+        # TODO: Ask your AI assistant:
+        # "Write Python code to add a security event to self.event_buffer
+        # for correlation analysis. Append the event and optionally prune
+        # old events outside the time window to manage buffer size."
+        #
+        # Then review and test the generated code.
         pass
 
     def find_related_events(self, event: dict) -> List[dict]:
@@ -187,7 +238,13 @@ class CorrelationStage:
         2. Apply time window filter
         3. Match on host, user, or process
         """
-        # YOUR CODE HERE
+        # TODO: Ask your AI assistant:
+        # "Write Python code to find events related to a given event.
+        # Search self.event_buffer for events within self.time_window seconds
+        # of the given event's timestamp, match on shared attributes like
+        # host, user, or process_name, and return a list of related events."
+        #
+        # Then review and test the generated code.
         pass
 
     def detect_attack_chain(self, events: List[dict]) -> dict:
@@ -199,7 +256,15 @@ class CorrelationStage:
         2. Map to ATT&CK tactics
         3. Look for attack patterns
         """
-        # YOUR CODE HERE
+        # TODO: Ask your AI assistant:
+        # "Write Python code to detect attack chain patterns from a list of
+        # related events. Sort events by timestamp, map each event to MITRE
+        # ATT&CK tactics based on event_type and details, identify common
+        # attack patterns like initial access -> execution -> exfiltration,
+        # and return a dict with chain_detected (bool), tactics (list),
+        # and pattern_name if a known pattern is matched."
+        #
+        # Then review and test the generated code.
         pass
 
 
@@ -224,7 +289,14 @@ class VerdictStage:
         3. Determine verdict
         4. Generate explanation
         """
-        # YOUR CODE HERE
+        # TODO: Ask your AI assistant:
+        # "Write Python code to generate a final verdict from analyzed events.
+        # Analyze all events for threat indicators, calculate a confidence score
+        # based on anomaly scores and enrichments, determine a verdict (benign,
+        # suspicious, or malicious), generate a human-readable explanation,
+        # and return a dict with verdict, confidence, explanation, and evidence."
+        #
+        # Then review and test the generated code.
         pass
 
     def create_alert(self, events: List[dict], verdict: dict) -> dict:
@@ -236,7 +308,14 @@ class VerdictStage:
         2. Include evidence
         3. Add response actions
         """
-        # YOUR CODE HERE
+        # TODO: Ask your AI assistant:
+        # "Write Python code to create a SOC alert from events and verdict.
+        # Format an alert with id, timestamp, severity based on verdict,
+        # title summarizing the threat, include the events as evidence,
+        # add the verdict details, and suggest response actions like
+        # isolate host, block IP, or investigate user."
+        #
+        # Then review and test the generated code.
         pass
 
 
@@ -266,12 +345,24 @@ class DetectionPipeline:
         4. Correlate
         5. Generate verdict if needed
         """
-        # YOUR CODE HERE
+        # TODO: Ask your AI assistant:
+        # "Write Python code to process a single event through the detection
+        # pipeline. Normalize the event using self.ingestor.ingest_event(),
+        # score it with self.ml_filter.score_event(), if suspicious add to
+        # self.correlator and find related events, detect attack chains,
+        # and return an alert dict if a threat is detected or None otherwise."
+        #
+        # Then review and test the generated code.
         pass
 
     def process_batch(self, events: List[dict]) -> List[dict]:
         """Process batch of events."""
-        # YOUR CODE HERE
+        # TODO: Ask your AI assistant:
+        # "Write Python code to process a batch of events through the pipeline.
+        # Iterate through events calling self.process_event() for each,
+        # collect any generated alerts, and return the list of alerts."
+        #
+        # Then review and test the generated code.
         pass
 
 

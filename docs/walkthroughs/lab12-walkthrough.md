@@ -262,8 +262,19 @@ print(f"Artifacts: {result.artifacts_created}")
 import anthropic
 
 class DetectionValidator:
-    def __init__(self, siem_client=None):
-        self.siem_client = siem_client  # Splunk/Elastic client
+    def __init__(self, siem_client=None, siem_type: str = "auto"):
+        """
+        Initialize detection validator.
+
+        Args:
+            siem_client: Optional SIEM client (XSIAM, Splunk, Elastic, etc.)
+            siem_type: SIEM platform type - "xsiam", "splunk", "elastic", or "auto"
+
+        Note: SIEM integration is optional. The validator works in simulation
+        mode without a SIEM client for testing and development.
+        """
+        self.siem_client = siem_client
+        self.siem_type = siem_type
         self.client = anthropic.Anthropic()
         self.validation_results = []
 
@@ -278,12 +289,13 @@ Tactic: {technique.tactic.value}
 Description: {technique.description}
 Detection Sources: {technique.detection_sources}
 
-Generate detection queries for:
-1. Splunk (SPL)
-2. Elastic (EQL/KQL)
-3. Sigma rule
+Generate detection queries for these platforms (in order of preference):
+1. Cortex XSIAM/XDR (XQL)
+2. Splunk (SPL)
+3. Elastic (EQL/KQL)
+4. Sigma rule (platform-agnostic)
 
-Return JSON with keys: splunk_query, elastic_query, sigma_rule"""
+Return JSON with keys: xsiam_query, splunk_query, elastic_query, sigma_rule"""
 
         response = self.client.messages.create(
             model="claude-sonnet-4-20250514",

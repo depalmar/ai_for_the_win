@@ -1,0 +1,11 @@
+id,timestamp,description,severity,source_ip,destination_ip,rule_id
+1,2024-01-15T09:00:00,Brute force login attempt detected,HIGH,45.33.32.156,192.168.1.1,RULE-001
+2,2024-01-15T09:00:10,Multiple failed authentication attempts,MEDIUM,45.33.32.156,192.168.1.1,RULE-002
+3,2024-01-15T10:00:00,Suspicious port scan detected,HIGH,185.143.223.47,192.168.1.0/24,RULE-003
+4,2024-01-15T10:15:00,Unusual outbound traffic volume,MEDIUM,192.168.1.50,91.234.99.102,RULE-004
+5,2024-01-15T10:30:00,Known malicious IP connection,CRITICAL,192.168.1.100,185.143.223.47,RULE-005
+6,2024-01-15T11:00:00,SQL injection attempt blocked,HIGH,45.33.32.156,192.168.1.1,RULE-006
+7,2024-01-15T11:15:00,Cross-site scripting attempt,MEDIUM,203.0.113.50,192.168.1.1,RULE-007
+8,2024-01-15T11:30:00,Unauthorized admin access attempt,CRITICAL,91.234.99.102,192.168.1.1,RULE-008
+9,2024-01-15T12:00:00,Expired SSL certificate detected,LOW,192.168.1.1,10.0.0.50,RULE-009
+10,2024-01-15T12:15:00,Abnormal DNS query pattern,MEDIUM,192.168.1.75,8.8.8.8,RULE-010

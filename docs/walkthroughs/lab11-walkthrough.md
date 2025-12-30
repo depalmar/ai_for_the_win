@@ -242,7 +242,7 @@ print(f"Alerts raised: {len(detector.get_alerts())}")
 
 ### AI-Powered Note Analysis
 
-```python
+````python
 import anthropic
 import re
 
@@ -378,7 +378,7 @@ if detection['is_ransom_note']:
     content = Path("readme.txt").read_text()
     intelligence = analyzer.analyze_note(content)
     print(json.dumps(intelligence, indent=2))
-```
+````
 
 ---
 

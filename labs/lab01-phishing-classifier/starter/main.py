@@ -58,7 +58,6 @@ def load_data(filepath: str) -> pd.DataFrame:
     # print the dataset shape and label distribution, then return the DataFrame."
     #
     # Then review and test the generated code.
-    # Stuck? See the Hints section in README.md
     pass
 
 
@@ -99,7 +98,6 @@ def preprocess_text(text: str) -> str:
     # join the tokens back into a single string."
     #
     # Then review and test the generated code.
-    # Stuck? See the Hints section in README.md
     pass
 
 
@@ -170,7 +168,6 @@ def count_urls(text: str) -> int:
     # the count as an integer."
     #
     # Then review and test the generated code.
-    # Stuck? See the Hints section in README.md
     pass
 
 
@@ -289,7 +286,6 @@ def create_feature_matrix(
     # with the vectorizer."
     #
     # Then review and test the generated code.
-    # Stuck? See the Hints section in README.md
     pass
 
 
@@ -316,7 +312,6 @@ def train_model(X_train: np.ndarray, y_train: np.ndarray) -> RandomForestClassif
     # model on the training data and return the trained classifier."
     #
     # Then review and test the generated code.
-    # Stuck? See the Hints section in README.md
     pass
 
 

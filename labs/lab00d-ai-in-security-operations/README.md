@@ -4,12 +4,6 @@ Understanding where AI fits in your security workflow, its limitations, and the 
 
 ---
 
-> **Note:** This is a **conceptual lab** - no coding required. It provides essential background
-> for understanding *when* and *how* to deploy AI in security operations responsibly.
-> Complete this lab through reading and the exercises at the end.
-
----
-
 ## Overview
 
 | | |
@@ -18,7 +12,6 @@ Understanding where AI fits in your security workflow, its limitations, and the 
 | **Time** | 1-2 hours |
 | **Prerequisites** | None |
 | **API Keys Required** | No |
-| **Lab Type** | Reading + Exercises |
 
 ## Learning Objectives
 
@@ -582,56 +575,6 @@ Create a matrix showing:
 - "Adversarial Examples in the Physical World" (Kurakin et al.)
 - "Prompt Injection Attacks on LLMs" (Perez & Ribeiro)
 - "Machine Learning Security: Challenges and Solutions" (Papernot et al.)
-
----
-
-## Self-Assessment Quiz
-
-Test your understanding of this material. Write down your answers before checking below.
-
-### Questions
-
-1. A SOC receives 10,000 alerts/day. Which stage should AI automate first?
-   - a) Containment decisions
-   - b) Alert triage and routing
-   - c) Executive communications
-   - d) Regulatory reporting
-
-2. What is the primary risk of using LLMs to analyze security logs?
-   - a) Cost
-   - b) Prompt injection attacks
-   - c) Speed
-   - d) Storage
-
-3. An AI classifier has 95% accuracy. When should a human still review its decisions?
-   - a) Never - 95% is sufficient
-   - b) Only on weekends
-   - c) For uncertain classifications and containment actions
-   - d) Only when the AI requests review
-
-4. Why are feedback loops critical for security AI systems?
-   - a) To reduce API costs
-   - b) To prevent model degradation and concept drift
-   - c) To speed up inference
-   - d) To comply with GDPR
-
-5. What is the "80/20 rule" for security AI?
-   - a) 80% accuracy is acceptable
-   - b) AI handles 80% of volume, humans handle 20% of decisions
-   - c) 80% of attacks come from 20% of sources
-   - d) Train on 80%, test on 20%
-
-<details>
-<summary>Click for Answers</summary>
-
-1. **b) Alert triage and routing** - This is high-volume, pattern-matching work where AI adds the most value.
-2. **b) Prompt injection attacks** - Malicious log entries can manipulate LLM behavior.
-3. **c) For uncertain classifications and containment actions** - Human judgment is required for high-stakes decisions.
-4. **b) To prevent model degradation and concept drift** - Without human corrections, AI learns incorrect patterns.
-5. **b) AI handles 80% of volume, humans handle 20% of decisions** - AI reduces workload, humans maintain judgment.
-
-**Score:** 4-5 correct = Ready to proceed | 2-3 = Review relevant sections | 0-1 = Re-read the lab
-</details>
 
 ---
 

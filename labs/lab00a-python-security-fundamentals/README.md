@@ -539,6 +539,21 @@ You're ready for:
 
 ---
 
+## Ready for a Challenge?
+
+Test your Python security skills with a CTF challenge!
+
+After completing this lab, try:
+- **[CTF Challenge: Stolen Credentials](../../ctf-challenges/beginner/challenge-01/)** - Parse auth logs to find compromised accounts (100 pts)
+- **[CTF Challenge: IOC Extraction](../../ctf-challenges/beginner/challenge-03/)** - Extract indicators from threat intel (100 pts)
+
+Verify your flags with:
+```bash
+python scripts/verify_flag.py beginner-01 "FLAG{your_answer}"
+```
+
+---
+
 ## Quick Reference
 
 ```python

@@ -74,9 +74,9 @@ from pydantic import BaseModel, Field
 load_dotenv()
 
 try:
-    from langchain.tools import StructuredTool
     from langchain_anthropic import ChatAnthropic
     from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
+    from langchain_core.tools import StructuredTool
 
     LANGCHAIN_AVAILABLE = True
 except ImportError:
@@ -492,7 +492,7 @@ def get_mitre_technique(technique_id: str) -> dict:
 
 def get_tools() -> List["StructuredTool"]:
     """Create tool list for the agent."""
-    from langchain.tools import StructuredTool
+    from langchain_core.tools import StructuredTool
 
     return [
         StructuredTool.from_function(
@@ -819,6 +819,42 @@ class ThreatIntelAgent:
                 )
 
         return "Max iterations reached. Please refine your query."
+
+    def investigate(self, indicator: str, context: dict = None) -> dict:
+        """Investigate an indicator of compromise (IOC).
+
+        Args:
+            indicator: The IOC to investigate (IP, domain, hash, etc.)
+            context: Optional context dictionary with additional information
+
+        Returns:
+            Dictionary containing investigation results with summary and classification
+        """
+        # Build the query
+        query = f"Investigate this indicator: {indicator}"
+        if context:
+            context_str = ", ".join(f"{k}: {v}" for k, v in context.items())
+            query += f"\nAdditional context: {context_str}"
+        query += (
+            "\nProvide a summary and classification (malicious, suspicious, benign, or unknown)."
+        )
+
+        # Run the agent
+        result_str = self.run(query)
+
+        # Parse result into dict format
+        result = {"indicator": indicator, "summary": result_str, "classification": "unknown"}
+
+        # Try to extract classification from result
+        result_lower = result_str.lower()
+        if "malicious" in result_lower:
+            result["classification"] = "malicious"
+        elif "suspicious" in result_lower:
+            result["classification"] = "suspicious"
+        elif "benign" in result_lower or "legitimate" in result_lower:
+            result["classification"] = "benign"
+
+        return result
 
     def _parse_action(self, response: str) -> tuple:
         """Parse tool name and arguments from LLM response."""

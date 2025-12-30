@@ -3,13 +3,13 @@
 ### Build AI-Powered Security Tools | From Zero to Production
 
 [![CI](https://github.com/depalmar/ai_for_the_win/actions/workflows/ci.yml/badge.svg)](https://github.com/depalmar/ai_for_the_win/actions/workflows/ci.yml)
-[![Tests](https://img.shields.io/badge/tests-223%2F223%20passing-brightgreen)](https://github.com/depalmar/ai_for_the_win/actions/workflows/ci.yml)
+[![Tests](https://img.shields.io/badge/tests-839%2F839%20passing-brightgreen)](https://github.com/depalmar/ai_for_the_win/actions/workflows/ci.yml)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab01_phishing_classifier.ipynb)
 [![Docker](https://img.shields.io/badge/Docker-Ready-blue?logo=docker)](./Dockerfile)
 
-A hands-on training program for security practitioners who want to build AI-powered tools for threat detection, incident response, and security automation. **24 labs** (including 4 intro labs), **4 capstone projects**, **15 CTF challenges**. Includes **sample datasets** and **solution walkthroughs**. Designed for **vibe coding** with AI assistants like Cursor, Claude Code, and Copilot.
+A hands-on training program for security practitioners who want to build AI-powered tools for threat detection, incident response, and security automation. **25 labs** (including 5 intro labs), **4 capstone projects**, **15 CTF challenges**. Includes **sample datasets** and **solution walkthroughs**. Designed for **vibe coding** with AI assistants like Cursor, Claude Code, and Copilot.
 
 ---
 
@@ -59,31 +59,76 @@ python solution/main.py
 
 ---
 
+## Interactive Lab Navigator
+
+**Click any lab to explore** — Your learning journey from setup to expert:
+
+```mermaid
+flowchart LR
+    subgraph SETUP["🎯 SETUP"]
+        L00[00]
+    end
+
+    subgraph ML["🟢 ML BASICS<br/>No API Needed"]
+        L01[01] --> L02[02] --> L03[03]
+    end
+
+    subgraph LLM["🟡 LLM BASICS"]
+        L04[04] --> L05[05] --> L06[06] --> L07[07]
+    end
+
+    subgraph ADV["🟠 ADVANCED"]
+        L08[08] --> L09[09] --> L10[10]
+    end
+
+    subgraph EXPERT["🔴 EXPERT DFIR"]
+        L11[11] --> L12[12] --> L13[13] --> L14[14] --> L15[15]
+        L16[16] --> L17[17] --> L18[18] --> L19[19] --> L20[20]
+    end
+
+    SETUP --> ML --> LLM --> ADV --> EXPERT
+```
+
+<table>
+<tr>
+<td align="center"><a href="./labs/lab00-environment-setup/"><img src="https://img.shields.io/badge/00-Setup-gray?style=for-the-badge" alt="Lab 00"/></a></td>
+<td align="center"><a href="./labs/lab01-phishing-classifier/"><img src="https://img.shields.io/badge/01-Phishing-10b981?style=for-the-badge" alt="Lab 01"/></a></td>
+<td align="center"><a href="./labs/lab02-malware-clustering/"><img src="https://img.shields.io/badge/02-Malware-10b981?style=for-the-badge" alt="Lab 02"/></a></td>
+<td align="center"><a href="./labs/lab03-anomaly-detection/"><img src="https://img.shields.io/badge/03-Anomaly-10b981?style=for-the-badge" alt="Lab 03"/></a></td>
+<td align="center"><a href="./labs/lab04-llm-log-analysis/"><img src="https://img.shields.io/badge/04-Logs-6366f1?style=for-the-badge" alt="Lab 04"/></a></td>
+</tr>
+<tr>
+<td align="center"><a href="./labs/lab05-threat-intel-agent/"><img src="https://img.shields.io/badge/05-Intel-6366f1?style=for-the-badge" alt="Lab 05"/></a></td>
+<td align="center"><a href="./labs/lab06-security-rag/"><img src="https://img.shields.io/badge/06-RAG-6366f1?style=for-the-badge" alt="Lab 06"/></a></td>
+<td align="center"><a href="./labs/lab07-yara-generator/"><img src="https://img.shields.io/badge/07-YARA-6366f1?style=for-the-badge" alt="Lab 07"/></a></td>
+<td align="center"><a href="./labs/lab08-vuln-prioritizer/"><img src="https://img.shields.io/badge/08-Vuln-f59e0b?style=for-the-badge" alt="Lab 08"/></a></td>
+<td align="center"><a href="./labs/lab09-detection-pipeline/"><img src="https://img.shields.io/badge/09-Pipeline-f59e0b?style=for-the-badge" alt="Lab 09"/></a></td>
+</tr>
+<tr>
+<td align="center"><a href="./labs/lab10-ir-copilot/"><img src="https://img.shields.io/badge/10-IR_Bot-f59e0b?style=for-the-badge" alt="Lab 10"/></a></td>
+<td align="center"><a href="./labs/lab11-ransomware-detection/"><img src="https://img.shields.io/badge/11-Ransom-ef4444?style=for-the-badge" alt="Lab 11"/></a></td>
+<td align="center"><a href="./labs/lab12-ransomware-simulation/"><img src="https://img.shields.io/badge/12-Purple-ef4444?style=for-the-badge" alt="Lab 12"/></a></td>
+<td align="center"><a href="./labs/lab13-memory-forensics-ai/"><img src="https://img.shields.io/badge/13-Memory-ef4444?style=for-the-badge" alt="Lab 13"/></a></td>
+<td align="center"><a href="./labs/lab14-c2-traffic-analysis/"><img src="https://img.shields.io/badge/14-C2-ef4444?style=for-the-badge" alt="Lab 14"/></a></td>
+</tr>
+<tr>
+<td align="center"><a href="./labs/lab15-lateral-movement-detection/"><img src="https://img.shields.io/badge/15-Lateral-ef4444?style=for-the-badge" alt="Lab 15"/></a></td>
+<td align="center"><a href="./labs/lab16-threat-actor-profiling/"><img src="https://img.shields.io/badge/16-Actors-ef4444?style=for-the-badge" alt="Lab 16"/></a></td>
+<td align="center"><a href="./labs/lab17-adversarial-ml/"><img src="https://img.shields.io/badge/17-AdvML-ef4444?style=for-the-badge" alt="Lab 17"/></a></td>
+<td align="center"><a href="./labs/lab18-fine-tuning-security/"><img src="https://img.shields.io/badge/18-Tuning-ef4444?style=for-the-badge" alt="Lab 18"/></a></td>
+<td align="center"><a href="./labs/lab19-cloud-security-ai/"><img src="https://img.shields.io/badge/19-Cloud-ef4444?style=for-the-badge" alt="Lab 19"/></a></td>
+</tr>
+<tr>
+<td align="center"><a href="./labs/lab20-llm-red-teaming/"><img src="https://img.shields.io/badge/20-RedTeam-ef4444?style=for-the-badge" alt="Lab 20"/></a></td>
+<td align="center" colspan="4"><strong>Legend:</strong> 🟢 ML (Free) | 🟡 LLM | 🟠 Advanced | 🔴 Expert DFIR</td>
+</tr>
+</table>
+
+---
+
 ## Learning Paths
 
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                        CHOOSE YOUR PATH                                 │
-├─────────────────────────────────────────────────────────────────────────┤
-│                                                                         │
-│   🎯 INTRO             🟢 FOUNDATION        🟡 LLM TOOLS                │
-│   Labs 00a-00c         Labs 01-03           Labs 04-07                  │
-│   ────────────         ─────────────        ───────────                 │
-│   • Python Basics      • Text ML            • Prompt Eng                │
-│   • ML Concepts        • Clustering         • RAG Systems               │
-│   • Prompt Mastery     • Anomaly Det        • Code Generation           │
-│                                                                         │
-│   🟠 ADVANCED          🔴 EXPERT: Labs 11-19                            │
-│   Labs 05,08-10        ─────────────────────                            │
-│   ─────────────        • Ransomware Detection    • Memory Forensics     │
-│   • AI Agents          • Purple Team Sim         • C2 Traffic           │
-│   • Pipelines          • Adversarial ML          • Fine-tuning          │
-│   • IR Automation      • Cloud Security          • Threat Attribution   │
-│                                                                         │
-└─────────────────────────────────────────────────────────────────────────┘
-```
-
-### Recommended Learning Paths (Choose Yours!)
+### Recommended Paths by Background
 
 | Your Background | Start Here | Learning Path |
 |-----------------|------------|---------------|
@@ -129,19 +174,21 @@ python solution/main.py
 | **17** | **Adversarial ML** | Evasion attacks, poisoning attacks, adversarial training, robust ML defenses |
 | **18** | **Fine-Tuning for Security** | Custom embeddings, LoRA fine-tuning, security-specific models, deployment |
 | **19** | **Cloud Security AI** | AWS/Azure/GCP security, CloudTrail analysis, multi-cloud threat detection |
+| **20** | **LLM Red Teaming** | Prompt injection, jailbreaking defenses, guardrails, LLM security testing |
 
 ### Skills Progression
 
 ```
 ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
-│  INTRO          │  ML FOUNDATIONS   │  LLM BASICS        │  ADVANCED LLM      │  EXPERT        │
-│  Labs 00a-00c   │  Labs 01-03       │  Labs 04-07        │  Labs 08-10        │  Labs 11-20    │
+│  INTRO          │  ML FOUNDATIONS   │  LLM BASICS        │  ADVANCED LLM      │  EXPERT         │
+│  Labs 00a-00c   │  Labs 01-03       │  Labs 04-07        │  Labs 08-10        │  Labs 11-20     │
 ├─────────────────┼───────────────────┼────────────────────┼────────────────────┼────────────────┤
-│  • Python       │  • Supervised ML  │  • Prompt Eng      │  • System Design   │  • DFIR        │
-│  • ML Theory    │  • Unsupervised   │  • AI Agents       │  • ML+LLM Hybrid   │  • Forensics   │
-│  • Prompting    │  • Feature Eng    │  • RAG Systems     │  • Pipelines       │  • C2 Detect   │
-│  (optional)     │  • Evaluation     │  • Code Gen        │  • Production      │  • Attribution │
-│                 │                   │                    │                    │  • Adv ML      │
+│  • Python       │  • Supervised ML  │  • Prompt Eng      │  • System Design   │  • DFIR         │
+│  • ML Theory    │  • Unsupervised   │  • AI Agents       │  • ML+LLM Hybrid   │  • Forensics    │
+│  • Prompting    │  • Feature Eng    │  • RAG Systems     │  • Pipelines       │  • C2 Detect    │
+│  (optional)     │  • Evaluation     │  • Code Gen        │  • Production      │  • Attribution  │
+│                 │                   │                    │                    │  • Adv ML       │
+│                 │                   │                    │                    │  • LLM Red Team │
 │  💰 FREE        │  💰 FREE          │  💰 ~$2-8 API      │  💰 ~$5-15 API     │  💰 ~$10-25    │
 └────────────────────────────────────────────────────────────────────────────────────────────────┘
 
@@ -216,7 +263,7 @@ Run labs directly in your browser - no setup required:
 | Lab 04: Log Analysis | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab04_llm_log_analysis.ipynb) |
 | Lab 05: Threat Intel Agent | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab05_threat_intel_agent.ipynb) |
 | Lab 06: Security RAG | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab06_security_rag.ipynb) |
-| All 24 labs available | [Browse notebooks →](./notebooks/) |
+| All 23 notebooks available | [Browse notebooks →](./notebooks/) |
 
 ---
 
@@ -224,7 +271,8 @@ Run labs directly in your browser - no setup required:
 
 ```
 ai_for_the_win/
-├── labs/                          # 24 hands-on labs
+├── labs/                          # 25 hands-on labs
+│   ├── lab00-environment-setup/  # Setup guide for beginners
 │   ├── lab00a-python-security-fundamentals/ # Python basics for security
 │   ├── lab00b-ml-concepts-primer/ # ML theory before coding
 │   ├── lab00c-prompt-engineering-mastery/ # Prompt design & verification
@@ -243,7 +291,11 @@ ai_for_the_win/
 │   ├── lab13-memory-forensics-ai/ # Memory forensics with AI
 │   ├── lab14-c2-traffic-analysis/ # C2 detection & analysis
 │   ├── lab15-lateral-movement-detection/ # Attack path detection
-│   └── lab16-threat-actor-profiling/ # Attribution & profiling
+│   ├── lab16-threat-actor-profiling/ # Attribution & profiling
+│   ├── lab17-adversarial-ml/     # Evasion & poisoning attacks
+│   ├── lab18-fine-tuning/        # Custom security models
+│   ├── lab19-cloud-security/     # Multi-cloud threat detection
+│   └── lab20-llm-red-teaming/    # LLM security testing
 ├── notebooks/                     # Jupyter notebooks (Colab-ready)
 ├── capstone-projects/             # 4 comprehensive projects
 ├── templates/                     # Reusable code templates
@@ -263,7 +315,7 @@ ai_for_the_win/
 
 ## Learning Paths
 
-### Path 1: ML Foundations (Weeks 1-8)
+### Path 1: ML Foundations
 
 Build core machine learning skills for security:
 
@@ -277,7 +329,7 @@ Text ML   Clustering  Anomaly
 
 **Skills**: Supervised learning, unsupervised learning, feature engineering, model evaluation
 
-### Path 2: LLM & Agents (Weeks 9-16)
+### Path 2: LLM & Agents
 
 Master LLMs for security applications:
 
@@ -290,7 +342,7 @@ Prompts   Agents      RAG       Code Gen
 
 **Skills**: Prompt engineering, ReAct agents, RAG systems, tool use
 
-### Path 3: Production Systems (Weeks 17-24)
+### Path 3: Production Systems
 
 Build production-ready security systems:
 
@@ -310,6 +362,7 @@ Vuln Scan  Pipeline   IR Bot    Your Project
 Track your progress through the labs:
 
 **Intro (Recommended)**
+- [ ] **Lab 00**: Environment Setup (Python, VS Code, virtual env)
 - [ ] **Lab 00a**: Python for Security Fundamentals
 - [ ] **Lab 00b**: ML Concepts Primer
 - [ ] **Lab 00c**: Intro to Prompt Engineering
@@ -385,29 +438,34 @@ Jumpstart your projects with ready-to-use templates:
 
 ### Test Status
 
-**Current Status**: 223/223 tests passing (100%) ✅
+**Current Status**: 839/839 tests passing (100%) ✅
 
-All labs now have 100% test coverage! Recent fixes:
-- ✅ **Lab 05**: Fixed LangChain agent tests (updated model names)
-- ✅ **Lab 12**: Fixed API key detection (updated LLM model identifiers)
-- ✅ **All Models**: Updated to current 2025 API identifiers (Claude Sonnet 4.5, GPT-4o, Gemini 2.5 Pro)
+All 20 labs have comprehensive test coverage!
 
 | Lab | Tests | Status | Focus Area |
 |-----|-------|--------|------------|
-| Lab 01 | 15/15 | ✅ 100% | Phishing Classifier (ML) |
-| Lab 02 | 11/11 | ✅ 100% | Malware Clustering (ML) |
+| Lab 01 | 14/14 | ✅ 100% | Phishing Classifier (ML) |
+| Lab 02 | 9/9 | ✅ 100% | Malware Clustering (ML) |
 | Lab 03 | 11/11 | ✅ 100% | Anomaly Detection (ML) |
-| Lab 04 | 19/19 | ✅ 100% | Log Analysis (LLM) |
+| Lab 04 | 18/18 | ✅ 100% | Log Analysis (LLM) |
 | Lab 05 | 21/21 | ✅ 100% | Threat Intel Agent (LangChain) |
 | Lab 06 | 7/7 | ✅ 100% | Security RAG (Vector DB) |
 | Lab 07 | 8/8 | ✅ 100% | YARA Generator (Code Gen) |
 | Lab 08 | 11/11 | ✅ 100% | Vuln Scanner (Risk Prioritization) |
-| Lab 09 | 21/21 | ✅ 100% | Detection Pipeline (Multi-stage) |
-| Lab 10 | 18/18 | ✅ 100% | IR Copilot (Conversational) |
-| Lab 11 | 21/21 | ✅ 100% | Ransomware Detection (DFIR) |
-| Lab 12 | 11/11 | ✅ 100% | Purple Team Sim (Safe Emulation) |
+| Lab 09 | 15/15 | ✅ 100% | Detection Pipeline (Multi-stage) |
+| Lab 10 | 28/28 | ✅ 100% | IR Copilot (Conversational) |
+| Lab 11 | 37/37 | ✅ 100% | Ransomware Detection (DFIR) |
+| Lab 12 | 44/44 | ✅ 100% | Purple Team Sim (Safe Emulation) |
+| Lab 13 | 71/71 | ✅ 100% | Memory Forensics AI |
+| Lab 14 | 85/85 | ✅ 100% | C2 Traffic Analysis |
+| Lab 15 | 69/69 | ✅ 100% | Lateral Movement Detection |
+| Lab 16 | 90/90 | ✅ 100% | Threat Actor Profiling |
+| Lab 17 | 73/73 | ✅ 100% | Adversarial ML |
+| Lab 18 | 76/76 | ✅ 100% | Fine-Tuning for Security |
+| Lab 19 | 64/64 | ✅ 100% | Cloud Security AI |
+| Lab 20 | 88/88 | ✅ 100% | LLM Red Teaming |
 
-**API Requirements**: Labs 04-12 require at least one LLM provider API key (`ANTHROPIC_API_KEY`, `OPENAI_API_KEY`, or `GOOGLE_API_KEY`). Labs 01-03 work without API keys.
+**API Requirements**: Labs 04-20 require at least one LLM provider API key (`ANTHROPIC_API_KEY`, `OPENAI_API_KEY`, or `GOOGLE_API_KEY`). Labs 01-03 work without API keys.
 
 ### Running Tests
 
@@ -457,6 +515,11 @@ Copy `.env.example` to `.env` and configure:
 
 ## Getting Help
 
+- **New to this?**: Start with [Lab 00: Environment Setup](./labs/lab00-environment-setup/)
+- **Find your path**: See [Role-Based Learning Paths](./resources/role-based-learning-paths.md) for SOC, IR, hunting, etc.
+- **Confused by AI terms?**: Check the [Security-to-AI Glossary](./resources/security-to-ai-glossary.md)
+- **API Keys**: See the [API Keys Guide](./setup/guides/api-keys-guide.md) for setup and cost management
+- **Jupyter Notebooks**: Check the [Jupyter Basics Guide](./setup/guides/jupyter-basics-guide.md)
 - **Troubleshooting**: Check the [troubleshooting guide](./setup/guides/troubleshooting-guide.md)
 - **Error Handling**: See [error handling best practices](./setup/guides/error-handling-guide.md)
 - **Documentation**: Browse [setup guides](./setup/) and [resources](./resources/)
@@ -468,6 +531,11 @@ Copy `.env.example` to `.env` and configure:
 
 | Resource | Description |
 |----------|-------------|
+| [Environment Setup](./labs/lab00-environment-setup/) | First-time setup for beginners |
+| [Role-Based Learning Paths](./resources/role-based-learning-paths.md) | Paths for SOC, IR, hunting, red team |
+| [Security-to-AI Glossary](./resources/security-to-ai-glossary.md) | AI terms explained for security folks |
+| [API Keys Guide](./setup/guides/api-keys-guide.md) | Get API keys, manage costs |
+| [Quick Start](./QUICKSTART.md) | Get running fast |
 | [Documentation Guide](./DOCUMENTATION_GUIDE.md) | Find exactly what you need |
 | [Security Prompts](./resources/prompt-library/security-prompts.md) | Ready-to-use prompts for security tasks |
 | [Lab Walkthroughs](./docs/walkthroughs/) | Step-by-step solutions when stuck |

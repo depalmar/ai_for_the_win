@@ -125,9 +125,9 @@ Ctrl+Shift+L → Ask about your codebase
 
 ```
 # In Cursor chat, prefix with model:
-@claude-3-opus "Design the architecture for a SIEM integration"
-@claude-sonnet-4-20250514 "Write a function to parse these logs"
-@claude-3-haiku "Add comments to this code"
+@claude-opus-4-5 "Design the architecture for a SIEM integration"
+@claude-sonnet-4 "Write a function to parse these logs"
+@claude-haiku-4 "Add comments to this code"
 ```
 
 ---
@@ -733,8 +733,8 @@ def estimate_cost(input_tokens: int, output_tokens: int, model: str = "claude-so
     """Estimate API call cost."""
     pricing = {
         "claude-sonnet-4-20250514": {"input": 3.0, "output": 15.0},
-        "claude-3-opus": {"input": 15.0, "output": 75.0},
-        "claude-3-haiku": {"input": 0.25, "output": 1.25}
+        "claude-opus-4-5": {"input": 15.0, "output": 75.0},
+        "claude-haiku-4": {"input": 0.25, "output": 1.25}
     }
 
     rates = pricing.get(model, pricing["claude-sonnet-4-20250514"])

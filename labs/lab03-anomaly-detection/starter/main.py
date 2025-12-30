@@ -135,7 +135,6 @@ def statistical_baseline(df: pd.DataFrame, feature: str, n_std: float = 3.0) -> 
     # deviations away from the mean (either above or below)."
     #
     # Then review and test the generated code.
-    # Stuck? See the Hints section in README.md
     pass
 
 
@@ -179,7 +178,6 @@ def train_isolation_forest(
     # (trained model, anomaly scores array)."
     #
     # Then review and test the generated code.
-    # Stuck? See the Hints section in README.md
     pass
 
 

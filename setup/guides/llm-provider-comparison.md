@@ -116,15 +116,22 @@ START: What's your primary constraint?
 
 | Model | Input/1M | Output/1M | Context | Speed |
 |-------|----------|-----------|---------|-------|
+| Gemini 3 Pro | $2.50 | $15.00 | 1M | Fast |
+| Gemini 3 Flash | $0.15 | $0.60 | 1M | Fastest |
 | Gemini 2.5 Pro | $1.25 | $10.00 | 1M | Fast |
-| Gemini 2.0 Flash | $0.10 | $0.40 | 1M | Fastest |
-| Gemini 1.5 Pro | $1.25 | $5.00 | 2M | Medium |
+| Gemini 2.0 Flash | $0.10 | $0.40 | 1M | Very Fast |
 
 **Strengths:**
 - Best cost-to-quality ratio
-- Largest context window (up to 2M tokens!)
-- Free tier in AI Studio (generous limits)
+- Largest context window (up to 1M tokens)
+- **Free tier**: 1000 requests/day via Gemini CLI or AI Studio
 - Native Google Cloud integration
+- Google Search grounding for real-time threat intel
+
+**Free Access Options:**
+- [Gemini CLI](../guides/gemini-cli-guide.md): 60 req/min, 1000 req/day, 1M context
+- [Google AI Studio](https://aistudio.google.com): Web interface with free tier
+- [Gemini Code Assist](https://cloud.google.com/gemini/docs/codeassist): Free IDE integration
 
 **Weaknesses:**
 - Newer, less battle-tested

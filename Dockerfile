@@ -18,11 +18,17 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
-# Create non-root user
-RUN useradd --create-home --shell /bin/bash appuser
+# Create non-root user with sudo access
+RUN useradd --create-home --shell /bin/bash appuser && \
+    apt-get update && apt-get install -y --no-install-recommends sudo && \
+    echo "appuser ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && \
+    rm -rf /var/lib/apt/lists/*
 
 # Set work directory
 WORKDIR /app
+
+# Declare volume for persistent workspace data
+VOLUME ["/app/workspace"]
 
 # =============================================================================
 # Development Stage

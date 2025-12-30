@@ -257,166 +257,40 @@ python scripts/verify_flag.py beginner-02 "FLAG{your_answer}"
 
 ## 💡 Hints
 
-Click to expand each hint when you get stuck. Try to solve each task on your own first!
-
-### Task 1: Loading Data
-
 <details>
-<summary>Hint 1.1: Loading CSV files</summary>
+<summary>Hint 1: URL Extraction Regex</summary>
 
 ```python
-# Use pandas to load CSV
-df = pd.read_csv(filepath)
+import re
+url_pattern = r'https?://[^\s<>"{}|\\^`\[\]]+'
+urls = re.findall(url_pattern, text)
 ```
+
 </details>
 
 <details>
-<summary>Hint 1.2: Handling missing values and types</summary>
+<summary>Hint 2: Urgency Words List</summary>
 
 ```python
-# Remove rows with missing values
-df = df.dropna()
-
-# Ensure label is integer type
-df['label'] = df['label'].astype(int)
-
-# Print summary
-print(f"Dataset shape: {df.shape}")
-print(df['label'].value_counts())
+urgency_words = [
+    'urgent', 'immediate', 'action required', 'act now',
+    'limited time', 'expires', 'suspended', 'verify',
+    'confirm', 'alert', 'warning', 'attention'
+]
 ```
-</details>
 
-### Task 2: Text Preprocessing
-
-<details>
-<summary>Hint 2.1: Lowercase and HTML removal</summary>
-
-```python
-# Convert to lowercase
-text = text.lower()
-
-# Remove HTML tags
-text = re.sub(r'<[^>]+>', ' ', text)
-```
 </details>
 
 <details>
-<summary>Hint 2.2: URL and email removal</summary>
-
-```python
-# Remove URLs
-text = re.sub(r'https?://[^\s]+', ' ', text)
-
-# Remove email addresses
-text = re.sub(r'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}', ' ', text)
-```
-</details>
-
-<details>
-<summary>Hint 2.3: Tokenization and stemming</summary>
-
-```python
-from nltk.corpus import stopwords
-from nltk.stem import PorterStemmer
-
-# Remove special characters, keep only letters
-text = re.sub(r'[^a-z\s]', ' ', text)
-
-# Tokenize
-words = text.split()
-
-# Remove stopwords and stem
-stop_words = set(stopwords.words('english'))
-stemmer = PorterStemmer()
-words = [stemmer.stem(w) for w in words if w not in stop_words and len(w) > 2]
-
-return ' '.join(words)
-```
-</details>
-
-### Task 3: Feature Extraction
-
-<details>
-<summary>Hint 3.1: Counting URLs</summary>
-
-```python
-def count_urls(text: str) -> int:
-    urls = re.findall(r'https?://[^\s]+', str(text))
-    return len(urls)
-```
-</details>
-
-<details>
-<summary>Hint 3.2: Checking for urgency words</summary>
-
-```python
-def has_urgency(text: str) -> int:
-    text_lower = str(text).lower()
-    return 1 if any(word in text_lower for word in URGENCY_WORDS) else 0
-```
-</details>
-
-<details>
-<summary>Hint 3.3: Building the features DataFrame</summary>
-
-```python
-features['url_count'] = df['text'].apply(count_urls)
-features['has_urgency'] = df['text'].apply(has_urgency)
-features['text_length'] = df['text'].apply(len)
-features['exclamation_count'] = df['text'].apply(lambda x: str(x).count('!'))
-```
-</details>
-
-### Task 4: Training the Model
-
-<details>
-<summary>Hint 4.1: Creating the TF-IDF vectorizer</summary>
-
-```python
-if vectorizer is None:
-    vectorizer = TfidfVectorizer(max_features=5000)
-
-if fit:
-    tfidf_matrix = vectorizer.fit_transform(df['clean_text'])
-else:
-    tfidf_matrix = vectorizer.transform(df['clean_text'])
-```
-</details>
-
-<details>
-<summary>Hint 4.2: Combining features and training</summary>
+<summary>Hint 3: Feature Combination</summary>
 
 ```python
 from scipy.sparse import hstack
 
 # Combine TF-IDF with numeric features
-X_combined = hstack([tfidf_matrix, features_df.values])
-
-# Train Random Forest
-model = RandomForestClassifier(
-    n_estimators=100,
-    max_depth=15,
-    class_weight='balanced',
-    random_state=42
-)
-model.fit(X_train, y_train)
+X_combined = hstack([tfidf_features, numeric_features])
 ```
-</details>
 
-### Task 5: Evaluation
-
-<details>
-<summary>Hint 5.1: Generating metrics</summary>
-
-```python
-from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
-
-predictions = model.predict(X_test)
-accuracy = accuracy_score(y_test, predictions)
-
-print(classification_report(y_test, predictions, target_names=['Legitimate', 'Phishing']))
-print(confusion_matrix(y_test, predictions))
-```
 </details>
 
 ---

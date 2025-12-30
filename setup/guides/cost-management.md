@@ -429,7 +429,7 @@ def smart_analyze(logs: list[str]) -> list[dict]:
     for log in logs:
         # Stage 1: Quick filter with cheap model
         quick_response = client.messages.create(
-            model="claude-3-haiku-20240307",  # $0.25/1M input
+            model="claude-haiku-4-20250514",  # $0.25/1M input
             max_tokens=50,
             messages=[{"role": "user", "content": f"Is this log suspicious? Reply YES or NO only.\n{log}"}]
         )

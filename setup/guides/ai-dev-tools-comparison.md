@@ -278,7 +278,7 @@ Cons:
 
 ```bash
 # Start Aider with Claude
-aider --model claude-3-5-sonnet-20241022
+aider --model claude-sonnet-4-20250514
 
 # In Aider session
 /add src/analyzers/*.py
@@ -321,7 +321,7 @@ Create `.aider.conf.yml` in your project:
 
 ```yaml
 # .aider.conf.yml
-model: claude-3-5-sonnet-20241022
+model: claude-sonnet-4-20250514
 auto-commits: true
 dirty-commits: false
 attribute-author: true
@@ -438,7 +438,7 @@ Create `.continue/config.json`:
     {
       "title": "Claude Sonnet",
       "provider": "anthropic",
-      "model": "claude-3-5-sonnet-20241022",
+      "model": "claude-sonnet-4-20250514",
       "apiKey": "${ANTHROPIC_API_KEY}"
     },
     {
@@ -629,7 +629,7 @@ Cons:
 from openhands import OpenHands
 
 agent = OpenHands(
-    model="claude-3-5-sonnet-20241022",
+    model="claude-sonnet-4-20250514",
     sandbox=True  # Safe execution environment
 )
 

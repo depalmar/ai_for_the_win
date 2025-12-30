@@ -1,0 +1,119 @@
+{
+  "incidents": [
+    {
+      "id": "/subscriptions/xxx/resourceGroups/rg1/providers/Microsoft.SecurityInsights/incidents/inc-001",
+      "name": "inc-001",
+      "properties": {
+        "title": "Impossible travel activity",
+        "description": "User signed in from two geographically distant locations within a short time period",
+        "severity": "High",
+        "status": "New",
+        "createdTimeUtc": "2024-01-15T14:00:00Z",
+        "relatedAlerts": ["alert-001", "alert-002"],
+        "relatedEntities": [
+          {"type": "Account", "name": "admin@contoso.com"},
+          {"type": "IP", "address": "185.234.72.19"},
+          {"type": "IP", "address": "203.0.113.50"}
+        ]
+      }
+    },
+    {
+      "id": "/subscriptions/xxx/resourceGroups/rg1/providers/Microsoft.SecurityInsights/incidents/inc-002",
+      "name": "inc-002",
+      "properties": {
+        "title": "Suspicious sign-in from unfamiliar location",
+        "description": "Sign-in detected from a country not in the user's typical sign-in pattern",
+        "severity": "Medium",
+        "status": "New",
+        "createdTimeUtc": "2024-01-15T15:30:00Z",
+        "relatedAlerts": ["alert-003"],
+        "relatedEntities": [
+          {"type": "Account", "name": "jsmith@contoso.com"},
+          {"type": "IP", "address": "91.234.56.78"}
+        ]
+      }
+    },
+    {
+      "id": "/subscriptions/xxx/resourceGroups/rg1/providers/Microsoft.SecurityInsights/incidents/inc-003",
+      "name": "inc-003",
+      "properties": {
+        "title": "Potential cryptomining activity detected",
+        "description": "Unusual CPU usage pattern consistent with cryptomining detected on VM",
+        "severity": "High",
+        "status": "InProgress",
+        "createdTimeUtc": "2024-01-15T16:00:00Z",
+        "relatedAlerts": ["alert-004", "alert-005"],
+        "relatedEntities": [
+          {"type": "Host", "name": "vm-compromised-01"},
+          {"type": "IP", "address": "mining-pool.evil.com"}
+        ]
+      }
+    },
+    {
+      "id": "/subscriptions/xxx/resourceGroups/rg1/providers/Microsoft.SecurityInsights/incidents/inc-004",
+      "name": "inc-004",
+      "properties": {
+        "title": "Mass download by single user",
+        "description": "User downloaded unusually large volume of data from SharePoint",
+        "severity": "Medium",
+        "status": "New",
+        "createdTimeUtc": "2024-01-15T17:00:00Z",
+        "relatedAlerts": ["alert-006"],
+        "relatedEntities": [
+          {"type": "Account", "name": "departing-employee@contoso.com"}
+        ]
+      }
+    },
+    {
+      "id": "/subscriptions/xxx/resourceGroups/rg1/providers/Microsoft.SecurityInsights/incidents/inc-005",
+      "name": "inc-005",
+      "properties": {
+        "title": "Suspicious Azure AD application consent",
+        "description": "User granted permissions to potentially malicious application",
+        "severity": "High",
+        "status": "New",
+        "createdTimeUtc": "2024-01-15T18:00:00Z",
+        "relatedAlerts": ["alert-007"],
+        "relatedEntities": [
+          {"type": "Account", "name": "user@contoso.com"},
+          {"type": "Application", "name": "MaliciousApp"}
+        ]
+      }
+    }
+  ],
+  "activity_logs": [
+    {
+      "time": "2024-01-15T10:00:00Z",
+      "resourceId": "/subscriptions/xxx/resourceGroups/rg1/providers/Microsoft.Compute/virtualMachines/vm-01",
+      "operationName": "Microsoft.Compute/virtualMachines/write",
+      "caller": "admin@contoso.com",
+      "callerIpAddress": "185.234.72.19",
+      "status": "Succeeded"
+    },
+    {
+      "time": "2024-01-15T10:05:00Z",
+      "resourceId": "/subscriptions/xxx/resourceGroups/rg1/providers/Microsoft.Authorization/roleAssignments/xxx",
+      "operationName": "Microsoft.Authorization/roleAssignments/write",
+      "caller": "admin@contoso.com",
+      "callerIpAddress": "185.234.72.19",
+      "status": "Succeeded",
+      "properties": {"roleDefinitionId": "Owner"}
+    },
+    {
+      "time": "2024-01-15T10:10:00Z",
+      "resourceId": "/subscriptions/xxx/resourceGroups/rg1/providers/Microsoft.Storage/storageAccounts/sensitivedata",
+      "operationName": "Microsoft.Storage/storageAccounts/write",
+      "caller": "admin@contoso.com",
+      "callerIpAddress": "185.234.72.19",
+      "status": "Succeeded"
+    },
+    {
+      "time": "2024-01-15T11:00:00Z",
+      "resourceId": "/subscriptions/xxx/resourceGroups/rg1/providers/Microsoft.KeyVault/vaults/company-secrets",
+      "operationName": "Microsoft.KeyVault/vaults/secrets/read",
+      "caller": "service-principal-01",
+      "callerIpAddress": "10.0.0.100",
+      "status": "Succeeded"
+    }
+  ]
+}

@@ -40,7 +40,7 @@ class TestAnthropicConnection:
 
         client = Anthropic()
         response = client.messages.create(
-            model="claude-3-haiku-20240307",  # Use haiku for speed
+            model="claude-haiku-4-20250514",  # Use haiku for speed
             max_tokens=10,
             messages=[{"role": "user", "content": "Say 'test'"}],
         )
@@ -56,7 +56,7 @@ class TestAnthropicConnection:
         collected = []
 
         with client.messages.stream(
-            model="claude-3-haiku-20240307",
+            model="claude-haiku-4-20250514",
             max_tokens=20,
             messages=[{"role": "user", "content": "Count to 3"}],
         ) as stream:
@@ -82,7 +82,7 @@ class TestLab04LogAnalysis:
 
         client = Anthropic()
         response = client.messages.create(
-            model="claude-3-haiku-20240307",
+            model="claude-haiku-4-20250514",
             max_tokens=200,
             messages=[
                 {
@@ -106,7 +106,7 @@ class TestLab05ThreatIntel:
 
         client = Anthropic()
         response = client.messages.create(
-            model="claude-3-haiku-20240307",
+            model="claude-haiku-4-20250514",
             max_tokens=200,
             messages=[
                 {
@@ -129,7 +129,7 @@ class TestLab07YARAGeneration:
 
         client = Anthropic()
         response = client.messages.create(
-            model="claude-3-haiku-20240307",
+            model="claude-haiku-4-20250514",
             max_tokens=500,
             messages=[
                 {
@@ -163,7 +163,7 @@ class TestLab11RansomwareAnalysis:
 
         client = Anthropic()
         response = client.messages.create(
-            model="claude-3-haiku-20240307",
+            model="claude-haiku-4-20250514",
             max_tokens=300,
             messages=[
                 {
@@ -200,7 +200,7 @@ class TestToolUse:
 
         client = Anthropic()
         response = client.messages.create(
-            model="claude-3-haiku-20240307",
+            model="claude-haiku-4-20250514",
             max_tokens=100,
             tools=tools,
             messages=[{"role": "user", "content": "What's the weather in London?"}],
@@ -223,7 +223,7 @@ def anthropic_client():
 @pytest.fixture
 def quick_model():
     """Return fastest model for testing."""
-    return "claude-3-haiku-20240307"
+    return "claude-haiku-4-20250514"
 
 
 if __name__ == "__main__":

@@ -81,13 +81,13 @@ PROVIDER_CONFIG = {
     ),
     "openai": ProviderConfig(
         env_key="OPENAI_API_KEY",
-        default_model="gpt-4-turbo",
+        default_model="gpt-4o",
         max_tokens_param="max_tokens",
         supports_extended_tokens=True,
     ),
     "google": ProviderConfig(
         env_key="GOOGLE_API_KEY",
-        default_model="gemini-1.5-pro",
+        default_model="gemini-2.5-pro",
         max_tokens_param="max_output_tokens",
         supports_extended_tokens=True,
     ),
