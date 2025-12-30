@@ -1,0 +1,35 @@
+{
+  "api_url": "https://api.securityplatform.local/v1",
+  "api_timeout": 30,
+  "log_level": "INFO",
+  "monitoring": {
+    "enabled": true,
+    "interval_seconds": 60,
+    "endpoints": [
+      "/health",
+      "/metrics"
+    ]
+  },
+  "security": {
+    "max_login_attempts": 5,
+    "lockout_duration_minutes": 15,
+    "session_timeout_minutes": 30,
+    "require_mfa": true
+  },
+  "alerting": {
+    "email_enabled": true,
+    "email_recipients": [
+      "soc@company.com",
+      "security-alerts@company.com"
+    ],
+    "slack_webhook": "https://hooks.slack.com/services/XXX/YYY/ZZZ",
+    "severity_threshold": "MEDIUM"
+  },
+  "blocklist": {
+    "auto_update": true,
+    "sources": [
+      "https://feeds.example.com/malicious-ips.txt",
+      "https://threatintel.example.com/iocs.json"
+    ]
+  }
+}

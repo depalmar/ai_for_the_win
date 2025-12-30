@@ -1,0 +1,98 @@
+# AI for the Win - LLM Dependencies
+# For Labs 04+ (LLM features, agents, RAG)
+#
+# REQUIREMENTS: Python 3.10 or higher
+#
+# Install with:
+#   pip install -r requirements-core.txt   # Install core first
+#   pip install -r requirements-llm.txt    # Then LLM packages
+#
+# Or install everything at once:
+#   pip install -r requirements.txt
+
+# =============================================================================
+# INCLUDE CORE DEPENDENCIES
+# =============================================================================
+-r requirements-core.txt
+
+# =============================================================================
+# DEEP LEARNING (for embeddings and transformers)
+# =============================================================================
+torch>=2.0.0,<3.0.0
+
+# =============================================================================
+# LLM FRAMEWORKS & ORCHESTRATION
+# =============================================================================
+# LangChain ecosystem (primary framework)
+langchain>=0.3.0,<2.0.0
+langchain-anthropic>=0.3.0,<2.0.0
+langchain-openai>=0.2.0,<1.0.0
+langchain-google-genai>=2.0.0,<5.0.0
+langchain-community>=0.3.0,<1.0.0
+langgraph>=0.2.0,<2.0.0
+
+# Direct LLM SDKs (for low-level access)
+anthropic>=0.18.0,<1.0.0
+openai>=1.12.0,<2.0.0
+google-generativeai>=0.4.0,<1.0.0
+
+# Unified LLM API (supports 100+ providers)
+litellm>=1.0.0,<2.0.0
+
+# Structured outputs from LLMs
+instructor>=1.0.0,<2.0.0
+
+# =============================================================================
+# EMBEDDINGS & VECTOR DATABASES
+# =============================================================================
+chromadb>=0.4.0,<2.0.0
+sentence-transformers>=2.2.0,<3.0.0
+
+# Hugging Face ecosystem
+transformers>=4.36.0,<5.0.0
+huggingface-hub>=0.20.0,<2.0.0
+
+# =============================================================================
+# ADDITIONAL NLP
+# =============================================================================
+tiktoken>=0.5.0,<1.0.0
+spacy>=3.7.0,<4.0.0
+
+# =============================================================================
+# SECURITY TOOLS (Advanced Labs)
+# =============================================================================
+yara-python>=4.3.0,<5.0.0
+pefile>=2023.2.7
+
+# =============================================================================
+# WEB FRAMEWORKS (for demos and APIs)
+# =============================================================================
+aiohttp>=3.9.0,<4.0.0
+httpx>=0.26.0,<1.0.0
+fastapi>=0.104.0,<1.0.0
+uvicorn>=0.24.0,<1.0.0
+streamlit>=1.28.0,<2.0.0
+gradio>=6.1.0,<7.0.0
+
+# =============================================================================
+# DOCUMENT PROCESSING
+# =============================================================================
+pypdf>=3.17.0,<7.0.0
+docx2txt>=0.8
+unstructured>=0.12.0,<1.0.0
+
+# =============================================================================
+# ADDITIONAL VISUALIZATION
+# =============================================================================
+plotly>=5.18.0,<6.0.0
+networkx>=3.2.0,<4.0.0
+kaleido>=0.2.1,<2.0.0
+typer>=0.9.0,<1.0.0
+
+# =============================================================================
+# ADDITIONAL TESTING
+# =============================================================================
+pytest-asyncio>=0.21.0,<2.0.0
+flake8>=6.1.0
+mypy>=1.7.0
+bandit>=1.7.0,<2.0.0

@@ -1,0 +1,14 @@
+# Auto-generated blocklist
+# Generated from: /home/depal/ai_for_the_win/labs/lab00a-python-security-fundamentals/data/iocs.txt
+# Valid public IPs: 10
+
+1.0.0.1
+1.1.1.1
+104.21.45.67
+172.67.182.31
+185.143.223.47
+198.51.100.25
+203.0.113.50
+45.33.32.156
+8.8.8.8
+91.234.99.102

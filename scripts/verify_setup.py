@@ -189,6 +189,7 @@ def check_data_files():
     project_root = Path(__file__).parent.parent
 
     data_paths = [
+        ("labs/lab00a-python-security-fundamentals/data", "Lab 00a data"),
         ("labs/lab01-phishing-classifier/data", "Lab 01 data"),
         ("labs/lab02-malware-clustering/data", "Lab 02 data"),
         ("labs/lab03-anomaly-detection/data", "Lab 03 data"),
@@ -206,6 +207,70 @@ def check_data_files():
                 all_ok = False
         else:
             print_warning(f"{description}: directory not found")
+            all_ok = False
+
+    return all_ok
+
+
+def check_ctf_infrastructure():
+    """Check CTF challenge infrastructure"""
+    print_header("Checking CTF Infrastructure")
+
+    project_root = Path(__file__).parent.parent
+    all_ok = True
+
+    # Check verify_flag.py exists
+    verify_flag = project_root / "scripts" / "verify_flag.py"
+    if verify_flag.exists():
+        print_success("CTF flag verification script found")
+    else:
+        print_warning("scripts/verify_flag.py not found")
+        all_ok = False
+
+    # Check CTF challenge directories
+    ctf_dir = project_root / "ctf-challenges"
+    if ctf_dir.exists():
+        difficulties = ["beginner", "intermediate", "advanced"]
+        for difficulty in difficulties:
+            diff_dir = ctf_dir / difficulty
+            if diff_dir.exists():
+                challenges = list(diff_dir.glob("challenge-*"))
+                print_success(f"CTF {difficulty}: {len(challenges)} challenges found")
+            else:
+                print_warning(f"CTF {difficulty} directory not found")
+                all_ok = False
+    else:
+        print_warning("ctf-challenges directory not found")
+        all_ok = False
+
+    return all_ok
+
+
+def check_lab00a_structure():
+    """Check Lab 00a has proper structure"""
+    print_header("Checking Lab 00a Structure")
+
+    project_root = Path(__file__).parent.parent
+    lab00a = project_root / "labs" / "lab00a-python-security-fundamentals"
+
+    all_ok = True
+    required_components = [
+        ("data", "Sample data files"),
+        ("starter", "Starter code"),
+        ("solution", "Solution code"),
+    ]
+
+    for component, description in required_components:
+        path = lab00a / component
+        if path.exists():
+            files = list(path.glob("*"))
+            if files:
+                print_success(f"Lab 00a {description}: {len(files)} files")
+            else:
+                print_warning(f"Lab 00a {description}: directory empty")
+                all_ok = False
+        else:
+            print_warning(f"Lab 00a {description}: not found")
             all_ok = False
 
     return all_ok
@@ -305,6 +370,8 @@ def main():
         "Required Packages": check_required_packages(),
         "API Keys": check_api_keys(),
         "Sample Data": check_data_files(),
+        "Lab 00a Structure": check_lab00a_structure(),
+        "CTF Infrastructure": check_ctf_infrastructure(),
     }
 
     # Optional checks
