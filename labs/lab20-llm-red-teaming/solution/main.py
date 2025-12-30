@@ -512,7 +512,7 @@ class SecureLLMApp:
                     raw_response = response.content[0].text
                 elif provider == "openai":
                     response = client.chat.completions.create(
-                        model="gpt-4",
+                        model="gpt-4o",
                         max_tokens=1024,
                         messages=[
                             {"role": "system", "content": self.system_prompt},

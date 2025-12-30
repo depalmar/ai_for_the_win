@@ -163,7 +163,7 @@ from openai import OpenAI
 client = OpenAI(api_key="your-api-key")
 
 response = client.chat.completions.create(
-    model="gpt-4-turbo",
+    model="gpt-4o",
     messages=[{"role": "user", "content": "..."}]
 )
 ```
@@ -327,7 +327,7 @@ claude = ChatAnthropic(
 )
 
 gpt4 = ChatOpenAI(
-    model="gpt-4-turbo",
+    model="gpt-4o",
     api_key=os.getenv("OPENAI_API_KEY")
 )
 

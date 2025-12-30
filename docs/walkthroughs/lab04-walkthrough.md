@@ -60,7 +60,7 @@ def get_llm_client():
     elif os.getenv('GOOGLE_API_KEY'):
         import google.generativeai as genai
         genai.configure(api_key=os.getenv('GOOGLE_API_KEY'))
-        return GeminiWrapper(genai.GenerativeModel('gemini-1.5-pro'))
+        return GeminiWrapper(genai.GenerativeModel('gemini-2.5-pro'))
 
     else:
         raise ValueError("No API key found. Set ANTHROPIC_API_KEY, OPENAI_API_KEY, or GOOGLE_API_KEY")

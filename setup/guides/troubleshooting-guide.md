@@ -253,7 +253,7 @@ All LLM provider detection now works correctly. If you still see "No LLM provide
 
 3. **Use haiku model for simple tasks:**
    ```python
-   model="claude-3-haiku-20240307"
+   model="claude-haiku-4-20250514"
    ```
 
 ### Memory Issues

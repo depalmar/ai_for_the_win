@@ -401,7 +401,7 @@ def setup_llm(provider: str = "anthropic"):
         if not api_key:
             raise ValueError("OPENAI_API_KEY not set. Add to .env file.")
 
-        llm = ChatOpenAI(model="gpt-4-turbo", temperature=0, max_tokens=4096)
+        llm = ChatOpenAI(model="gpt-4o", temperature=0, max_tokens=4096)
 
     elif provider == "gemini":
         if not GEMINI_AVAILABLE:
@@ -413,7 +413,7 @@ def setup_llm(provider: str = "anthropic"):
         if not api_key:
             raise ValueError("GOOGLE_API_KEY not set. Add to .env file.")
 
-        llm = ChatGoogleGenerativeAI(model="gemini-1.5-pro", temperature=0, max_output_tokens=4096)
+        llm = ChatGoogleGenerativeAI(model="gemini-2.5-pro", temperature=0, max_output_tokens=4096)
 
     elif provider == "ollama":
         if not OLLAMA_AVAILABLE:
