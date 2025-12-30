@@ -755,13 +755,13 @@ title: AI for the Win
       <div class="stat-label">Learning Paths</div>
     </div>
     <div class="stat">
-      <div class="stat-number">100%</div>
-      <div class="stat-label">Open Source</div>
+      <div class="stat-number">MIT</div>
+      <div class="stat-label">Licensed</div>
     </div>
   </div>
 
   <div class="cta-buttons">
-    <a href="https://github.com/depalmar/ai_for_the_win#get-started-in-5-minutes" class="btn btn-primary">Get Started Free</a>
+    <a href="https://github.com/depalmar/ai_for_the_win#get-started-in-5-minutes" class="btn btn-primary">Get Started</a>
     <a href="https://github.com/depalmar/ai_for_the_win" class="btn btn-secondary">View on GitHub</a>
   </div>
 </div>
@@ -1541,7 +1541,7 @@ python solution/main.py</code></pre>
 </div>
 
 <div class="cta-buttons" style="margin: 2rem 0;">
-  <a href="https://github.com/depalmar/ai_for_the_win#get-started-in-5-minutes" class="btn btn-primary">Get Started Free</a>
+  <a href="https://github.com/depalmar/ai_for_the_win#get-started-in-5-minutes" class="btn btn-primary">Get Started</a>
   <a href="https://github.com/depalmar/ai_for_the_win" class="btn btn-secondary">Star on GitHub</a>
 </div>
 
