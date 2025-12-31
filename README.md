@@ -72,32 +72,43 @@ python solution/main.py
 
 <!-- TODO: Add screenshots. See docs/assets/README.md for guidance -->
 
-**Lab 01 - Phishing Classifier Output:**
+**Lab 01 - Phishing Classifier** catches what rules miss:
 
 ```
 $ python labs/lab01-phishing-classifier/solution/main.py
-Loading phishing dataset... 1,000 emails loaded
-Training classifier... done
-Accuracy: 97.3%
-Precision: 96.8% | Recall: 98.1%
 
-Sample predictions:
-  "Urgent: Verify your account" → PHISHING (confidence: 0.94)
-  "Meeting notes from today"    → LEGITIMATE (confidence: 0.89)
+[+] Trained on 1,000 labeled emails
+[+] Model: Random Forest with TF-IDF features
+
+Testing on new emails...
+  "Dear user, your account will be suspended" → 🚨 PHISHING (94%)
+  "Q3 revenue report attached"               → ✅ LEGIT (91%)
+  "Coinbase: verify identity immediately"    → 🚨 PHISHING (97%)
+
+Top phishing indicators learned:
+  1. urgency_score    (+0.34)  ← "immediately", "suspend", "verify"
+  2. url_mismatch     (+0.28)  ← display text ≠ actual link
+  3. sender_anomaly   (+0.19)  ← domain doesn't match brand
 ```
 
-**Lab 04 - LLM Log Analysis:**
+**Lab 04 - LLM Log Analysis** finds attacks in noise:
 
 ```
 $ python labs/lab04-llm-log-analysis/solution/main.py
-Analyzing auth_logs.json with Claude...
 
-Summary: 3 suspicious events detected
-- Brute force attempt from 192.168.1.105 (47 failed logins)
-- Privilege escalation: user 'jsmith' → admin
-- Off-hours access from unusual location
+Analyzing 10,000 auth events with Claude...
 
-MITRE ATT&CK: T1110 (Brute Force), T1078 (Valid Accounts)
+🔴 CRITICAL: Credential stuffing detected
+   Source: 45.33.32.156 (Tor exit node)
+   Target: 847 unique accounts in 6 minutes
+   Success: 12 accounts compromised
+   → MITRE ATT&CK: T1110.004 (Credential Stuffing)
+
+🟡 SUSPICIOUS: Lateral movement pattern
+   User 'svc_backup' → 3 new hosts in 10 min
+   → MITRE ATT&CK: T1021 (Remote Services)
+
+Recommended: Block source IP, force password reset for compromised accounts
 ```
 
 ---
