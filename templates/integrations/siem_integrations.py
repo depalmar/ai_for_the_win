@@ -1,8 +1,21 @@
 #!/usr/bin/env python3
 """
-SIEM Integration Templates
+SIEM Integration Templates - EXAMPLE CODE ONLY
 
-Templates for integrating with common SIEM platforms.
+⚠️  DISCLAIMER: These are EXAMPLE TEMPLATES for educational purposes only.
+    - NOT verified against actual SIEM instances
+    - NOT production-ready code
+    - API signatures and endpoints may be outdated
+    - Provided as starting points for your own implementations
+
+These templates demonstrate common patterns for SIEM integration.
+You will need to adapt them to your specific environment and
+consult official vendor documentation for production use.
+
+Supported pattern examples:
+    - Splunk REST API
+    - Elasticsearch/OpenSearch
+    - Microsoft Sentinel/Log Analytics
 """
 
 import json
@@ -19,7 +32,7 @@ import requests
 
 
 class SplunkClient:
-    """Basic Splunk REST API client."""
+    """Example Splunk REST API client pattern. NOT VERIFIED - adapt for your environment."""
 
     def __init__(
         self,
@@ -81,7 +94,7 @@ class SplunkClient:
 
 
 class ElasticClient:
-    """Basic Elasticsearch client."""
+    """Example Elasticsearch client pattern. NOT VERIFIED - adapt for your environment."""
 
     def __init__(
         self,
@@ -136,7 +149,7 @@ class ElasticClient:
 
 
 class SentinelClient:
-    """Azure Sentinel/Log Analytics client."""
+    """Example Azure Sentinel client pattern. NOT VERIFIED - adapt for your environment."""
 
     def __init__(
         self,
@@ -210,23 +223,32 @@ class SIEMInterface:
 
 def main():
     """Example usage of SIEM integrations."""
-    print("SIEM Integration Templates")
-    print("=" * 40)
+    print("SIEM Integration Templates - EXAMPLE CODE ONLY")
+    print("=" * 50)
+    print()
+    print("⚠️  DISCLAIMER: These are UNVERIFIED example templates.")
+    print("    Adapt to your environment and consult vendor docs.")
 
     # Example: Create a generic SIEM interface
     # siem = SIEMInterface("elastic", host="elastic.local")
     # alerts = siem.get_alerts(severity="high")
 
-    print("\nAvailable integrations:")
-    print("  - Splunk (SplunkClient)")
+    print("\nExample pattern templates:")
+    print("  - Splunk REST API (SplunkClient)")
     print("  - Elasticsearch/OpenSearch (ElasticClient)")
     print("  - Microsoft Sentinel (SentinelClient)")
     print("  - Generic interface (SIEMInterface)")
 
-    print("\nConfigure with environment variables:")
+    print("\nExample environment variables:")
     print("  SPLUNK_HOST, SPLUNK_TOKEN")
     print("  ELASTIC_HOST, ELASTIC_API_KEY")
     print("  SENTINEL_WORKSPACE_ID, AZURE_* credentials")
+
+    print("\nFor production use:")
+    print("  - Verify against your SIEM version")
+    print("  - Implement proper error handling")
+    print("  - Add authentication/retry logic")
+    print("  - Consult official vendor documentation")
 
 
 if __name__ == "__main__":
