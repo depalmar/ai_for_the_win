@@ -59,6 +59,38 @@ python solution/main.py
 
 ---
 
+## What It Looks Like
+
+<!-- TODO: Add screenshots. See docs/assets/README.md for guidance -->
+
+**Lab 01 - Phishing Classifier Output:**
+```
+$ python labs/lab01-phishing-classifier/solution/main.py
+Loading phishing dataset... 1,000 emails loaded
+Training classifier... done
+Accuracy: 97.3%
+Precision: 96.8% | Recall: 98.1%
+
+Sample predictions:
+  "Urgent: Verify your account" → PHISHING (confidence: 0.94)
+  "Meeting notes from today"    → LEGITIMATE (confidence: 0.89)
+```
+
+**Lab 04 - LLM Log Analysis:**
+```
+$ python labs/lab04-llm-log-analysis/solution/main.py
+Analyzing auth_logs.json with Claude...
+
+Summary: 3 suspicious events detected
+- Brute force attempt from 192.168.1.105 (47 failed logins)
+- Privilege escalation: user 'jsmith' → admin
+- Off-hours access from unusual location
+
+MITRE ATT&CK: T1110 (Brute Force), T1078 (Valid Accounts)
+```
+
+---
+
 ## Interactive Lab Navigator
 
 **Click any lab to explore** — Your learning journey from setup to expert:
