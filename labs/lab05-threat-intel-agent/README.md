@@ -80,6 +80,21 @@ Answer: Final response
 └─────────────────────────────────────────────────────┘
 ```
 
+### ⚠️ Agent Hallucination Risks
+
+Agents can make multi-step mistakes that compound:
+
+| Risk | Example | Mitigation |
+|------|---------|------------|
+| **Invented IOCs** | Agent "finds" IPs not in tool results | Validate all IOCs against tool output |
+| **Wrong tool calls** | Agent calls wrong tool with wrong args | Add input validation to tools |
+| **Confident misattribution** | "This is APT29" with no evidence | Require tool-sourced evidence |
+| **Infinite loops** | Agent keeps retrying failed actions | Set max iterations |
+
+**Key principle:** Tools return facts. Agent interprets them. Verify interpretations match tool data.
+
+> 📖 See [Security Prompts Template](../../templates/prompts/security_prompts.md) for anti-hallucination prompt patterns.
+
 ---
 
 ## 🔬 Lab Tasks
