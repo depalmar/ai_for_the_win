@@ -1749,43 +1749,28 @@ python solution/main.py</code></pre>
 <div class="section" id="faq">
   <h2 class="section-title">Frequently Asked Questions</h2>
 
-  <div class="faq">
-    <details class="faq-item">
+  <div class="faq"><details class="faq-item">
       <summary>Do I need prior ML/AI experience?</summary>
       <p>No. Labs 00a-00c cover Python basics, ML concepts, and prompt engineering from scratch. The Security-to-AI Glossary translates ML jargon into security terms you already know.</p>
-    </details>
-
-    <details class="faq-item">
+    </details><details class="faq-item">
       <summary>Which LLM provider should I use?</summary>
       <p>We recommend Anthropic Claude for best reasoning on security tasks. But all labs support OpenAI GPT-4, Google Gemini, and Ollama (free, local). You only need one.</p>
-    </details>
-
-    <details class="faq-item">
+    </details><details class="faq-item">
       <summary>Can I run everything locally without API costs?</summary>
       <p>Yes! Use Ollama to run models locally for free. Labs 01-03 don't need any API at all. You can complete the entire course for $0 if you use local models.</p>
-    </details>
-
-    <details class="faq-item">
+    </details><details class="faq-item">
       <summary>How long does it take to complete all labs?</summary>
       <p>The full course is approximately 40-89 hours depending on AI assistance level. With AI coding tools, most labs take 50-70% less time. Focus on your role's learning path first (~5-18 hours) for immediate value.</p>
-    </details>
-
-    <details class="faq-item">
+    </details><details class="faq-item">
       <summary>What if I get stuck on a lab?</summary>
       <p>Every lab includes complete solution code, step-by-step hints, and a Jupyter notebook. Check GitHub Discussions for community help or open an issue.</p>
-    </details>
-
-    <details class="faq-item">
+    </details><details class="faq-item">
       <summary>Are the labs production-ready?</summary>
       <p>The solutions demonstrate core concepts. For production use, you'd add error handling, logging, and scale considerations. Lab 09 (Detection Pipeline) shows production architecture patterns.</p>
-    </details>
-
-    <details class="faq-item">
+    </details><details class="faq-item">
       <summary>How is this different from other ML courses?</summary>
       <p>Every lab solves a real security problem. You won't build iris classifiers or digit recognizers. You'll build phishing detectors, threat intel agents, and ransomware analyzers.</p>
-    </details>
-
-  </div>
+    </details></div>
 </div>
 
 <div class="section" style="border-bottom: none;">
