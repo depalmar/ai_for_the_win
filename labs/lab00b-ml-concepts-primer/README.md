@@ -101,6 +101,72 @@ After Training:
 - Support Vector Machines (find boundaries)
 - Neural Networks (learn complex patterns)
 
+#### How a Decision Tree Works
+
+A decision tree asks yes/no questions to classify data:
+
+```
+                    ┌─────────────────────────────┐
+                    │  Does email have urgency    │
+                    │  words? ("urgent", "now")   │
+                    └─────────────────────────────┘
+                           /            \
+                         Yes             No
+                         /                \
+            ┌───────────────────┐  ┌───────────────────┐
+            │ Is sender domain  │  │ Does it have      │
+            │ suspicious?       │  │ attachments?      │
+            └───────────────────┘  └───────────────────┘
+                  /     \               /      \
+                Yes      No           Yes       No
+                /         \           /          \
+           🚨 SPAM    ┌────────┐  ┌────────┐   ✅ LEGIT
+                      │Link    │  │Known   │
+                      │count>3?│  │sender? │
+                      └────────┘  └────────┘
+                       /    \       /    \
+                     Yes    No    Yes    No
+                      /      \    /       \
+                  🚨SPAM  ⚠️CHECK ✅LEGIT  ⚠️CHECK
+```
+
+**Random Forest** = Many decision trees that vote together (reduces errors from any single tree)
+
+#### How Neural Networks Learn
+
+Neural networks are layers of connected "neurons" that transform inputs to outputs:
+
+```
+INPUT LAYER          HIDDEN LAYERS           OUTPUT LAYER
+(Features)           (Learn patterns)        (Prediction)
+
+ ┌───┐
+ │url│─────┐
+ │cnt│     │      ┌───┐
+ └───┘     ├─────►│ ○ │──┐
+           │      └───┘  │
+ ┌───┐     │      ┌───┐  │      ┌───┐
+ │urg│─────┼─────►│ ○ │──┼─────►│   │
+ │wrd│     │      └───┘  │      │0.94│──► 🚨 PHISHING
+ └───┘     │      ┌───┐  │      │   │
+           ├─────►│ ○ │──┘      └───┘
+ ┌───┐     │      └───┘
+ │sndr│────┘
+ │dom│                    Each connection has a "weight"
+ └───┘                    that the network learns
+
+TRAINING PROCESS:
+1. Forward pass: Input → Prediction (e.g., 0.3 = "not phishing")
+2. Compare to actual label (was actually phishing!)
+3. Calculate error: Expected 1.0, got 0.3 → Error = 0.7
+4. Backward pass: Adjust weights to reduce error
+5. Repeat 1000s of times until error is small
+
+After training, the network has learned:
+• "High urgency words + suspicious domain → phishing"
+• These patterns are encoded in the connection weights
+```
+
 ### 2.2 Unsupervised Learning
 
 **Definition:** Find patterns in data without labels.
@@ -131,6 +197,44 @@ After Clustering:
 - DBSCAN (density-based clustering)
 - Isolation Forest (anomaly detection)
 - t-SNE/UMAP (visualization)
+
+#### How K-Means Clustering Works
+
+K-Means groups data points by similarity, finding K cluster centers:
+
+```
+STEP 1: Random initial centers    STEP 2: Assign points to nearest center
+                                  
+    ★                                 ★ ←─────┐
+                                      │       │
+  ○   ○                             ○ ○ ○     │
+    ○   ○                             ○ ○ ○   │ Cluster 1
+  ○       ○                           ○   ○ ──┘
+                                  
+              ★                               ★ ←─────┐
+                                              │       │
+        ○ ○ ○                             ○ ○ ○       │
+          ○ ○                               ○ ○   ───┘ Cluster 2
+
+
+STEP 3: Move centers to cluster average    STEP 4: Repeat until stable
+
+     ★ (moved)                           FINAL CLUSTERS:
+       ↓                                 
+  ○ ○ ○                                  ┌─────────────────────┐
+    ○ ○ ○                                │ Cluster 1: Emotet   │
+  ○   ○                                  │ imports: urlmon,    │
+                                         │ wininet, crypt32    │
+         ★ (moved)                       └─────────────────────┘
+           ↓                             
+      ○ ○ ○                              ┌─────────────────────┐
+        ○ ○                              │ Cluster 2: Ryuk     │
+                                         │ imports: advapi32,  │
+                                         │ kernel32, bcrypt    │
+                                         └─────────────────────┘
+
+SECURITY USE: Group unknown malware samples to find families!
+```
 
 ### 2.3 Reinforcement Learning
 
@@ -179,6 +283,44 @@ EMAIL FEATURES:
 - Email: sender, subject keywords, attachment type
 
 **Feature Engineering** = creating useful features from raw data. This is often the most important part of ML!
+
+#### Deep Dive: TF-IDF (Text → Numbers)
+
+How do you turn text into numbers a model can understand? **TF-IDF** is the most common approach.
+
+```
+TF-IDF = Term Frequency × Inverse Document Frequency
+
+TF  = How often a word appears in THIS document
+IDF = How rare the word is across ALL documents
+
+┌─────────────────────────────────────────────────────────────────┐
+│ Example: 1000 emails, analyzing the word "urgent"               │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  EMAIL #1: "Urgent! Your account needs verification urgent!"    │
+│  ─────────────────────────────────────────────────────────────  │
+│  TF("urgent") = 2/7 words = 0.29                                │
+│                                                                 │
+│  ACROSS ALL EMAILS:                                             │
+│  ─────────────────────────────────────────────────────────────  │
+│  "urgent" appears in 50 of 1000 emails                          │
+│  IDF = log(1000/50) = 1.3 (moderately rare)                     │
+│                                                                 │
+│  TF-IDF = 0.29 × 1.3 = 0.38 ← Higher = more important           │
+│                                                                 │
+│  Compare to common word "the":                                  │
+│  "the" appears in 950 of 1000 emails                            │
+│  IDF = log(1000/950) = 0.02 (very common)                       │
+│  TF-IDF = 0.15 × 0.02 = 0.003 ← Lower = less important          │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+
+WHY IT WORKS FOR SECURITY:
+• "urgent", "verify", "suspend" → High TF-IDF in phishing
+• "the", "and", "is" → Low TF-IDF (appear everywhere)
+• Model learns: high "urgent" TF-IDF + high "verify" TF-IDF → phishing
+```
 
 ### 3.2 Labels
 
@@ -250,6 +392,39 @@ to capture pattern       the real pattern         noise in training data
 - Regularization (penalize complexity)
 - Cross-validation
 
+### 3.5 How Models Actually "Learn"
+
+Training is like rolling a ball downhill to find the lowest point (minimum error):
+
+```
+ERROR (LOSS)
+    │
+  5 │ ○ Start here (random weights)
+    │  \
+  4 │   \
+    │    \  Learning!
+  3 │     ○ (adjusting weights)
+    │      \
+  2 │       \
+    │        ○
+  1 │         \_____○___○_○_ ← Converged! (minimum error)
+    │
+  0 ├────────────────────────────►
+          TRAINING ITERATIONS
+
+GRADIENT DESCENT:
+1. Make a prediction with current weights
+2. Calculate error (how wrong were we?)
+3. Calculate gradient (which direction reduces error?)
+4. Adjust weights slightly in that direction
+5. Repeat until error stops decreasing
+
+LEARNING RATE = How big each step is
+├── Too high: Overshoot the minimum, never converge
+├── Too low:  Takes forever to train
+└── Just right: Smooth convergence
+```
+
 ### 3.5 Evaluation Metrics
 
 #### For Classification:
@@ -280,6 +455,46 @@ ACTUAL        ├──────────┼──────────
 - SOC analysts often prefer high precision (alert fatigue is real)
 - Critical systems might prefer high recall (can't miss attacks)
 
+#### The Precision-Recall Trade-off Visualized
+
+```
+SCENARIO: 1000 emails. 100 are actually phishing.
+
+HIGH PRECISION MODEL (Threshold = 0.9)
+"Only flag if I'm VERY sure it's phishing"
+─────────────────────────────────────────────────────────────
+Flagged: 50 emails
+├── 48 actually phishing (True Positives)    ✓
+└──  2 legitimate (False Positives)          ✗
+
+Precision = 48/50 = 96%  ← "Most alerts are real"
+Recall    = 48/100 = 48% ← "But missed half the phishing!"
+
+Impact: Few false alarms, but 52 phishing emails got through 😱
+
+
+HIGH RECALL MODEL (Threshold = 0.3)
+"Flag anything that might be phishing"
+─────────────────────────────────────────────────────────────
+Flagged: 300 emails
+├── 95 actually phishing (True Positives)    ✓
+└── 205 legitimate (False Positives)         ✗
+
+Precision = 95/300 = 32% ← "Most alerts are false alarms"
+Recall    = 95/100 = 95% ← "Caught almost all phishing!"
+
+Impact: Only 5 phishing emails got through, but 205 angry users 😤
+
+
+BALANCED MODEL (Threshold = 0.6)
+─────────────────────────────────────────────────────────────
+Precision = 80%
+Recall    = 85%
+F1 Score  = 82%  ← Good balance
+
+Which do YOU choose? Depends on the cost of each error!
+```
+
 #### For Anomaly Detection:
 
 ```
@@ -299,6 +514,113 @@ Key metrics:
 - **True Positive Rate** (TPR): % of anomalies detected
 - **False Positive Rate** (FPR): % of normal flagged as anomaly
 - **AUC-ROC**: Area under ROC curve (0.5 = random, 1.0 = perfect)
+
+#### How Anomaly Detection Works (Isolation Forest)
+
+Isolation Forest asks: "How easy is it to isolate this point?"
+
+```
+NORMAL POINTS: Hard to isolate (many splits needed)
+─────────────────────────────────────────────────────
+                    │
+                    │ split 1
+         ┌──────────┼──────────┐
+         │          │          │
+         │   ○ ○ ○  │          │ split 2
+         │   ○ ○    │     ┌────┼────┐
+         │   ○ ○ ○  │     │    │    │ split 3
+         │   ○ ○    │     │ ○○ │    │ ... many more
+                              ○○ │       splits needed
+
+Average path length to isolate: 8-10 splits → NORMAL
+
+
+ANOMALY: Easy to isolate (few splits needed)  
+─────────────────────────────────────────────────────
+                    │
+                    │ split 1
+         ┌──────────┼──────────┐
+         │          │          │
+         │   ○ ○ ○  │          │
+         │   ○ ○    │          │
+         │   ○ ○ ○  │          ●  ← Isolated in 1 split!
+         │   ○ ○    │
+
+Average path length to isolate: 1-2 splits → ANOMALY
+
+SECURITY USE: Network traffic at 3 AM from finance server 
+              to unknown IP → Easy to isolate → ANOMALY!
+```
+
+### 3.8 Embeddings: Words as Vectors
+
+For advanced NLP, we convert text to **embeddings** - dense vectors that capture meaning:
+
+```
+WORD EMBEDDINGS (simplified to 3 dimensions):
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+"malware"  → [0.8, -0.2, 0.5]  ─┐
+"virus"    → [0.7, -0.3, 0.6]  ─┼─ Similar vectors (close in space)
+"trojan"   → [0.9, -0.1, 0.4]  ─┘
+
+"benign"   → [-0.6, 0.8, 0.1]  ─┐
+"safe"     → [-0.5, 0.7, 0.2]  ─┼─ Similar vectors (far from malware)
+"clean"    → [-0.4, 0.9, 0.1]  ─┘
+
+
+VISUALIZED IN 2D:
+                    ▲ dimension 2
+                    │
+                    │  • benign    • safe
+                    │                    • clean
+                    │
+        ────────────┼────────────────────► dimension 1
+                    │
+      • malware     │
+          • virus   │
+              •trojan│
+
+SECURITY USE: 
+• "IEX DownloadString" is similar to other PowerShell attack patterns
+• Find similar threat reports using vector similarity
+• RAG systems use embeddings for semantic search (Lab 06)
+```
+
+### 3.7 Feature Importance (What Did the Model Learn?)
+
+After training, you can ask: "Which features matter most?"
+
+```
+PHISHING CLASSIFIER - FEATURE IMPORTANCE
+═══════════════════════════════════════════════════════════════
+
+urgency_words     ████████████████████████████████░░░░  0.28
+url_mismatch      ██████████████████████████░░░░░░░░░░  0.22
+sender_reputation ████████████████████░░░░░░░░░░░░░░░░  0.18
+link_count        ████████████████░░░░░░░░░░░░░░░░░░░░  0.14
+has_attachment    ██████████░░░░░░░░░░░░░░░░░░░░░░░░░░  0.09
+sent_hour         ██████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  0.05
+email_length      ████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  0.04
+                  └───────────────────────────────────┘
+                  0.0        0.15        0.30
+
+INTERPRETATION:
+• urgency_words (28%): "Urgent", "immediately", "suspend"
+  → Phishers create pressure to act quickly
+  
+• url_mismatch (22%): Display text ≠ actual link
+  → "Click here" actually goes to evil-site.com
+  
+• sender_reputation (18%): Domain age, SPF/DKIM
+  → Newly registered domains are suspicious
+
+WHY THIS MATTERS FOR SECURITY:
+1. Explainability: You can explain WHY an email was flagged
+2. Trust: Analysts can verify the model makes sense
+3. Improvement: Focus on features that matter most
+4. Adversarial: Know what attackers will try to evade
+```
 
 ---
 
