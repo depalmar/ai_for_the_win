@@ -178,16 +178,107 @@ Each lab follows a consistent structure for predictable learning:
 
 ```
 lab-XX-name/
-├── README.md           # Learning objectives, tasks, expected outcomes
-├── starter/            # Skeleton code for students to complete
-│   └── main.py         # Entry point with TODOs
-├── solution/           # Reference implementation
-│   ├── main.py         # Complete working solution
-│   └── utils.py        # Helper functions
-├── tests/              # Validation tests
-│   └── test_main.py    # pytest test cases
-└── data/               # Lab-specific sample data (if needed)
+├── README.md                    # Lab documentation
+├── starter/                     # Your starting point
+│   └── main.py                  # Code with TODOs to complete
+├── solution/                    # Reference implementation
+│   ├── main.py                  # Complete working solution
+│   └── utils.py                 # Helper functions (if needed)
+├── tests/                       # Validation tests
+│   └── test_main.py             # pytest test cases
+└── data/                        # Lab-specific datasets (if needed)
 ```
+
+#### README.md Structure
+
+Each lab README contains:
+
+| Section | Purpose |
+|---------|---------|
+| **Overview** | What you'll build and why it matters |
+| **Learning Objectives** | Specific skills you'll gain |
+| **Prerequisites** | Required knowledge and prior labs |
+| **Time Estimate** | Expected completion time |
+| **Instructions** | Step-by-step tasks with hints |
+| **Expected Output** | What success looks like |
+| **Extensions** | Optional challenges for deeper learning |
+| **Resources** | Links to docs, papers, tools |
+
+#### Starter Code Pattern
+
+```python
+# labs/labXX-name/starter/main.py
+
+"""
+Lab XX: [Title]
+================
+[Brief description of what this lab builds]
+
+Your Tasks:
+1. TODO: [First task description]
+2. TODO: [Second task description]
+3. TODO: [Third task description]
+
+Run with: python main.py
+Test with: pytest tests/
+"""
+
+def main():
+    # TODO: Implement your solution here
+    pass
+
+if __name__ == "__main__":
+    main()
+```
+
+#### Solution Code Pattern
+
+```python
+# labs/labXX-name/solution/main.py
+
+"""
+Lab XX: [Title] - Reference Solution
+=====================================
+This is the complete reference implementation.
+Compare with your starter/ solution after attempting.
+"""
+
+def main():
+    # Complete implementation with:
+    # - Clear variable names
+    # - Inline comments explaining key decisions
+    # - Error handling
+    # - Example output
+    pass
+
+if __name__ == "__main__":
+    main()
+```
+
+#### Test Pattern
+
+```python
+# labs/labXX-name/tests/test_main.py
+
+import pytest
+from solution.main import main, helper_function
+
+def test_basic_functionality():
+    """Test the core feature works."""
+    result = helper_function(sample_input)
+    assert result == expected_output
+
+def test_edge_cases():
+    """Test boundary conditions."""
+    pass
+
+@pytest.mark.slow
+def test_full_pipeline():
+    """Integration test (may take longer)."""
+    pass
+```
+
+---
 
 ### Technology Stack
 
