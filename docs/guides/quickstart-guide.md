@@ -535,7 +535,7 @@ echo "=== All checks complete ==="
 
 After completing setup:
 
-1. **Read the Curriculum**: `curriculum/ai-security-training-program.md`
+1. **Read the Curriculum**: `docs/ai-security-training-program.md`
 2. **Try Lab 1**: Build a phishing classifier
 3. **Explore Resources**: `resources/tools-and-resources.md`
 4. **Join Communities**: Discord, Reddit, MITRE ATT&CK

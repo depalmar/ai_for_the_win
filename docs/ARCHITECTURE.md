@@ -38,51 +38,49 @@ This document provides a comprehensive overview of the AI for the Win training p
 
 ```
 ai_for_the_win/
-├── labs/                          # 24 hands-on labs
+├── labs/                          # 24 hands-on labs (core content)
 │   ├── lab00a-python-security-fundamentals/
 │   ├── lab00b-ml-concepts-primer/
-│   ├── lab00c-prompt-engineering-mastery/
+│   ├── lab00c-intro-prompt-engineering/
+│   ├── lab00d-ai-in-security-operations/
 │   ├── lab01-phishing-classifier/
 │   │   ├── README.md              # Lab instructions
 │   │   ├── starter/               # Starting code templates
 │   │   ├── solution/              # Reference implementations
-│   │   └── tests/                 # Validation tests
-│   └── ... (labs 02-19)
+│   │   └── data/                  # Lab-specific data
+│   └── ... (labs 02-20)
 │
-├── capstone/                      # 4 capstone projects
-│   ├── project1-soc-assistant/
-│   ├── project2-threat-intel-platform/
-│   ├── project3-automated-ir/
-│   └── project4-detection-engineering/
+├── notebooks/                     # Jupyter notebooks (Colab-ready)
+│   └── lab01_phishing_classifier.ipynb ...
 │
-├── ctf-challenges/                # 15 CTF challenges
-│   ├── beginner/                  # 5 challenges (100 pts each)
-│   ├── intermediate/              # 5 challenges (250 pts each)
-│   └── advanced/                  # 5 challenges (500 pts each)
-│
-├── data/                          # Sample datasets
-│   ├── phishing/                  # Email samples
-│   ├── malware/                   # Malware metadata
-│   ├── logs/                      # Auth/system logs
-│   ├── network/                   # Network traffic
-│   └── threat-intel/              # IOC data
-│
-├── resources/                     # Learning resources
-│   ├── integrations/              # SIEM platform guides
-│   # Guides moved to setup/guides/
-│   ├── templates/                 # Code templates
-│   └── prompt-library/            # Curated prompts
-│
-├── docs/                          # Documentation
-│   ├── walkthroughs/              # Step-by-step solutions
-│   ├── guides/                    # Setup and usage guides
+├── docs/                          # All documentation
+│   ├── guides/                    # Setup, tools, and how-to guides
+│   ├── walkthroughs/              # Step-by-step lab solutions
+│   ├── index.md                   # GitHub Pages landing
+│   ├── ai-security-training-program.md  # Full curriculum
 │   └── ARCHITECTURE.md            # This document
 │
-├── setup/                         # Environment setup
-│   ├── guides/                    # IDE-specific guides
-│   └── scripts/                   # Automation scripts
+├── resources/                     # Reference materials
+│   ├── integrations/              # SIEM platform guides
+│   ├── prompt-library/            # Curated security prompts
+│   └── tools-and-resources.md     # External tools & APIs
 │
-└── notebooks/                     # Jupyter notebooks
+├── templates/                     # Reusable code templates
+│   ├── agents/                    # Agent patterns
+│   ├── visualizations/            # Dashboard templates
+│   └── workflow_orchestration.py  # Orchestration examples
+│
+├── scripts/                       # Utility scripts
+│   ├── launcher.py                # Demo launcher
+│   └── verify_setup.py            # Environment checker
+│
+├── capstone-projects/             # 4 comprehensive projects
+├── ctf-challenges/                # 15 CTF challenges
+├── data/                          # Sample datasets
+├── shared/                        # Shared Python modules
+├── tests/                         # Test suite
+├── setup/                         # Setup files & cursor-rules
+└── mcp-servers/                   # MCP server implementations
 ```
 
 ---

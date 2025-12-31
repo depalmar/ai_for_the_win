@@ -577,9 +577,9 @@ When you're ready to build production security tools, these guides will help:
 
 | Guide | What You'll Learn |
 |-------|-------------------|
-| [Structured Output Parsing](../../setup/guides/structured-output-parsing.md) | Parse LLM JSON reliably |
-| [Prompt Injection Defense](../../setup/guides/prompt-injection-defense.md) | Protect against adversarial inputs |
-| [LLM Evaluation & Testing](../../setup/guides/llm-evaluation-testing.md) | Build test suites for LLM tools |
+| [Structured Output Parsing](../../docs/guides/structured-output-parsing.md) | Parse LLM JSON reliably |
+| [Prompt Injection Defense](../../docs/guides/prompt-injection-defense.md) | Protect against adversarial inputs |
+| [LLM Evaluation & Testing](../../docs/guides/llm-evaluation-testing.md) | Build test suites for LLM tools |
 | [AI in Security Operations](../lab00d-ai-in-security-operations/) | Understand real-world limitations |
 
 ---

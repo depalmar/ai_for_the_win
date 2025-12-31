@@ -41,7 +41,7 @@ bandit -r labs/
 python labs/lab01-phishing-classifier/solution/main.py
 
 # Launch demos
-python demo/launcher.py
+python scripts/launcher.py
 
 # Docker
 docker-compose up dev
@@ -109,5 +109,5 @@ pytest -m "not requires_api"   # Skip tests requiring API keys
 - `templates/` - Reusable agent, prompt, and visualization templates
 - `resources/` - Tools, datasets, cheatsheets
 - `mcp-servers/` - MCP server implementations
-- `setup/guides/` - Troubleshooting and configuration guides
+- `docs/guides/` - Troubleshooting and configuration guides
 - `notebooks/` - Jupyter notebooks (Colab-ready)

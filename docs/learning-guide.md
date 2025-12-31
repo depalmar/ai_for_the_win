@@ -230,8 +230,8 @@ START: What type of data?
 | LLM prompting | Labs 04, 00c |
 | Hybrid pipelines | Lab 09 |
 | AI agents | Labs 05, 08, 10 |
-| Cost management | [Cost Management Guide](./setup/guides/cost-management.md) |
-| Provider selection | [Provider Comparison Guide](./setup/guides/llm-provider-comparison.md) |
+| Cost management | [Cost Management Guide](./guides/cost-management.md) |
+| Provider selection | [Provider Comparison Guide](./guides/llm-provider-comparison.md) |
 
 ---
 
@@ -774,7 +774,7 @@ llm = setup_llm(provider="ollama")     # Use local Llama
 
 | Framework | Use Case | Labs |
 |-----------|----------|------|
-| **Gradio** | Quick demos, prototypes | All labs (demo/) |
+| **Gradio** | Quick demos, prototypes | All labs (scripts/) |
 | **Streamlit** | Dashboards | Lab 08, 09 |
 | **FastAPI** | Production APIs | Lab 09, 10 |
 
@@ -784,9 +784,9 @@ This course is designed for AI-assisted development. Use these tools to accelera
 
 | Tool | Description | Guide |
 |------|-------------|-------|
-| [Cursor](https://cursor.sh/) | AI-native IDE with composer mode | [Guide](./setup/guides/cursor-ide-guide.md) |
-| [Claude Code](https://claude.ai/code) | Terminal AI coding assistant | [Guide](./setup/guides/claude-code-cli-guide.md) |
-| [Gemini CLI](https://github.com/google-gemini/gemini-cli) | 1M context, Google Search, free tier | [Guide](./setup/guides/gemini-cli-guide.md) |
+| [Cursor](https://cursor.sh/) | AI-native IDE with composer mode | [Guide](./guides/cursor-ide-guide.md) |
+| [Claude Code](https://claude.ai/code) | Terminal AI coding assistant | [Guide](./guides/claude-code-cli-guide.md) |
+| [Gemini CLI](https://github.com/google-gemini/gemini-cli) | 1M context, Google Search, free tier | [Guide](./guides/gemini-cli-guide.md) |
 | [GitHub Copilot](https://github.com/features/copilot) | Inline AI completions | VS Code extension |
 | [Windsurf](https://codeium.com/windsurf) | Free AI-powered IDE | Alternative to Cursor |
 
@@ -915,7 +915,7 @@ As you work through the labs, these resources will help you go deeper:
 | [Tools & APIs](../resources/tools-and-resources.md) | 80+ security tools, APIs, and datasets |
 | [Lab Walkthroughs](./walkthroughs/) | Step-by-step solutions when you're stuck |
 | [SIEM Integrations](../resources/integrations/) | Splunk, Elastic, XSIAM integration examples |
-| [Setup Guides](../setup/guides/) | LangChain, Cursor, Claude Code, ADK guides |
+| [Setup Guides](./guides/) | LangChain, Cursor, Claude Code, ADK guides |
 | [Documentation Guide](./documentation-guide.md) | Find any resource quickly |
 
 ---

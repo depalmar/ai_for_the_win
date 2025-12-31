@@ -1731,7 +1731,7 @@ function toggleTheme() {
   </table>
 
   <div class="cta-buttons" style="margin-top: 2rem;">
-    <a href="https://github.com/depalmar/ai_for_the_win/blob/main/setup/guides/api-keys-guide.md" class="btn btn-secondary">API Keys Setup Guide</a>
+    <a href="https://github.com/depalmar/ai_for_the_win/blob/main/docs/guides/api-keys-guide.md" class="btn btn-secondary">API Keys Setup Guide</a>
   </div>
 </div>
 
@@ -1758,7 +1758,9 @@ source venv/bin/activate  # Win: venv\Scripts\activate
 pip install -r requirements.txt
 
 # Run Lab 01 (no API key needed!)
+
 python labs/lab01-phishing-classifier/solution/main.py</code></pre>
+
   </div>
 
   <div class="cta-buttons">
@@ -1817,17 +1819,17 @@ python labs/lab01-phishing-classifier/solution/main.py</code></pre>
     </div>
     <div class="feature">
       <div class="feature-icon">&#128273;</div>
-      <h3><a href="https://github.com/depalmar/ai_for_the_win/blob/main/setup/guides/api-keys-guide.md">API Keys Guide</a></h3>
+      <h3><a href="https://github.com/depalmar/ai_for_the_win/blob/main/docs/guides/api-keys-guide.md">API Keys Guide</a></h3>
       <p>Setup and cost management</p>
     </div>
     <div class="feature">
       <div class="feature-icon">&#128211;</div>
-      <h3><a href="https://github.com/depalmar/ai_for_the_win/blob/main/setup/guides/jupyter-basics-guide.md">Jupyter Basics</a></h3>
+      <h3><a href="https://github.com/depalmar/ai_for_the_win/blob/main/docs/guides/jupyter-basics-guide.md">Jupyter Basics</a></h3>
       <p>Local notebook setup guide</p>
     </div>
     <div class="feature">
       <div class="feature-icon">☁️</div>
-      <h3><a href="https://github.com/depalmar/ai_for_the_win/blob/main/setup/guides/colab-guide.md">Google Colab Guide</a></h3>
+      <h3><a href="https://github.com/depalmar/ai_for_the_win/blob/main/docs/guides/colab-guide.md">Google Colab Guide</a></h3>
       <p>Zero-setup browser notebooks</p>
     </div>
   </div>

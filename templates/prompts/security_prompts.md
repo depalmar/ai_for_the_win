@@ -499,6 +499,6 @@ Include these in your prompts:
 ## See Also
 
 - [Lab 00c: Prompt Engineering](../../labs/lab00c-intro-prompt-engineering/) - Hands-on prompting basics
-- [Structured Output Parsing](../../setup/guides/structured-output-parsing.md) - Reliable JSON from LLMs
-- [LLM Evaluation & Testing](../../setup/guides/llm-evaluation-testing.md) - Measuring LLM accuracy
-- [Prompt Injection Defense](../../setup/guides/prompt-injection-defense.md) - Security for LLM inputs
+- [Structured Output Parsing](../../docs/guides/structured-output-parsing.md) - Reliable JSON from LLMs
+- [LLM Evaluation & Testing](../../docs/guides/llm-evaluation-testing.md) - Measuring LLM accuracy
+- [Prompt Injection Defense](../../docs/guides/prompt-injection-defense.md) - Security for LLM inputs

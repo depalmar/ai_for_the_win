@@ -170,10 +170,10 @@ Each lab includes a Gradio demo for quick experimentation:
 
 ```bash
 # Run any lab's demo
-python labs/lab04-llm-log-analysis/demo/app.py
+python labs/lab04-llm-log-analysis/scripts/app.py
 
 # Or use the unified demo launcher
-python demo/launcher.py
+python scripts/launcher.py
 ```
 
 ---
@@ -789,10 +789,10 @@ Found an issue or have an improvement?
 
 ## 📚 Additional Resources
 
-- [Curriculum Overview](../curriculum/ai-security-training-program.md)
+- [Curriculum Overview](../docs/ai-security-training-program.md)
 - [Development Setup](../setup/dev-environment-setup.md)
 - [Tools & Resources](../resources/tools-and-resources.md)
-- [Cursor IDE Guide](../setup/guides/cursor-ide-guide.md)
+- [Cursor IDE Guide](../docs/guides/cursor-ide-guide.md)
 
 ---
 

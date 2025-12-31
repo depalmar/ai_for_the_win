@@ -549,7 +549,7 @@ level: medium
 - [MCP Specification](https://modelcontextprotocol.io)
 - [MCP Server Registry](https://github.com/modelcontextprotocol/servers)
 - [Building MCP Servers](https://modelcontextprotocol.io/docs/servers)
-- [Claude Code MCP Guide](../setup/guides/claude-code-cli-guide.md#mcp-servers-integration)
+- [Claude Code MCP Guide](../docs/guides/claude-code-cli-guide.md#mcp-servers-integration)
 
 ---
 
@@ -559,12 +559,12 @@ level: medium
 
 | Guide | Focus | Link |
 |-------|-------|------|
-| **Claude Code CLI** | Anthropic's agentic CLI | [claude-code-cli-guide.md](../setup/guides/claude-code-cli-guide.md) |
-| **Gemini CLI** | Google's 1M context AI agent | [gemini-cli-guide.md](../setup/guides/gemini-cli-guide.md) |
-| **Google ADK** | Agent Development Kit | [google-adk-guide.md](../setup/guides/google-adk-guide.md) |
-| **Cursor IDE** | AI-native IDE | [cursor-ide-guide.md](../setup/guides/cursor-ide-guide.md) |
-| **AI Tools Comparison** | Tool selection guide | [ai-dev-tools-comparison.md](../setup/guides/ai-dev-tools-comparison.md) |
-| **Workshops Guide** | Hands-on exercises | [workshops-guide.md](../setup/guides/workshops-guide.md) |
+| **Claude Code CLI** | Anthropic's agentic CLI | [claude-code-cli-guide.md](../docs/guides/claude-code-cli-guide.md) |
+| **Gemini CLI** | Google's 1M context AI agent | [gemini-cli-guide.md](../docs/guides/gemini-cli-guide.md) |
+| **Google ADK** | Agent Development Kit | [google-adk-guide.md](../docs/guides/google-adk-guide.md) |
+| **Cursor IDE** | AI-native IDE | [cursor-ide-guide.md](../docs/guides/cursor-ide-guide.md) |
+| **AI Tools Comparison** | Tool selection guide | [ai-dev-tools-comparison.md](../docs/guides/ai-dev-tools-comparison.md) |
+| **Workshops Guide** | Hands-on exercises | [workshops-guide.md](../docs/guides/workshops-guide.md) |
 
 ---
 
@@ -616,6 +616,6 @@ level: medium
 
 ---
 
-**Next**: Return to [Training Program](../curriculum/ai-security-training-program.md) to start learning.
+**Next**: Return to [Training Program](../docs/ai-security-training-program.md) to start learning.
 
-**Development Guides**: [Claude Code CLI](../setup/guides/claude-code-cli-guide.md) | [Google ADK](../setup/guides/google-adk-guide.md) | [Cursor IDE](../setup/guides/cursor-ide-guide.md) | [AI Tools Comparison](../setup/guides/ai-dev-tools-comparison.md)
+**Development Guides**: [Claude Code CLI](../docs/guides/claude-code-cli-guide.md) | [Google ADK](../docs/guides/google-adk-guide.md) | [Cursor IDE](../docs/guides/cursor-ide-guide.md) | [AI Tools Comparison](../docs/guides/ai-dev-tools-comparison.md)
