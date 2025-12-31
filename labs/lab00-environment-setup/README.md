@@ -99,6 +99,18 @@ Any Python IDE works, but **VS Code or Cursor are recommended** for this course 
 
 > If you already use PyCharm, Sublime, Vim, etc. — that's fine! Just know the walkthroughs assume VS Code.
 
+### AI Coding Assistants (Optional but Recommended)
+
+These terminal-based tools work alongside any IDE for "vibe coding":
+
+| Tool | Best For | Setup |
+|------|----------|-------|
+| [Claude Code](https://docs.anthropic.com/en/docs/claude-code) | Git workflows, multi-file edits | See official docs |
+| [Gemini CLI](https://github.com/google-gemini/gemini-cli) | Large context (1M tokens), free tier | See GitHub repo |
+| [GitHub Copilot](https://github.com/features/copilot) | Inline completions in VS Code | VS Code extension |
+
+> 💡 **Tip:** You don't need all of these. Pick one and learn it well. The labs work without any AI assistant.
+
 ---
 
 ## Step 3: Install Git
