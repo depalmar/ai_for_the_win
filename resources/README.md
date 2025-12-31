@@ -36,10 +36,10 @@ resources/
 │   └── splunk-integration.md   # Splunk Enterprise/Cloud
 ├── prompt-library/              # Security analysis prompts
 │   └── security-prompts.md      # Curated prompt templates
-└── cheatsheets/                 # Quick reference guides
-    └── langchain-security-cheatsheet.md  # LangChain patterns
-    # Note: Cursor, Claude Code, Gemini CLI, and ADK references
-    # are now in their respective guides at setup/guides/
+# Note: All comprehensive guides are at setup/guides/
+# - LangChain Guide: setup/guides/langchain-guide.md
+# - Cursor IDE Guide: setup/guides/cursor-ide-guide.md
+# - Claude Code CLI: setup/guides/claude-code-cli-guide.md
 ```
 
 ## Quick Links
@@ -50,7 +50,7 @@ resources/
 | [MCP Servers Guide](./mcp-servers-security-guide.md) | DFIR, threat intel, offensive security MCP servers |
 | [Platform Integrations](./integrations/) | XSIAM, XDR, Splunk, Elastic guides |
 | [Prompt Library](./prompt-library/) | Ready-to-use security prompts |
-| [LangChain Cheatsheet](./cheatsheets/langchain-security-cheatsheet.md) | LangChain security patterns |
+| [LangChain Guide](../setup/guides/langchain-guide.md) | Comprehensive LangChain security guide |
 
 ## Tools & Resources Overview
 
@@ -102,10 +102,11 @@ Quick reference guides for common tools:
 - Session management
 - Best practices
 
-### LangChain
-- Common patterns
-- Chain templates
-- Tool definitions
+### LangChain ([Full Guide](../setup/guides/langchain-guide.md))
+- Multi-provider setup
+- Chains, agents, RAG
+- LangGraph workflows
+- Security best practices
 
 ## MCP Servers for Security
 
@@ -141,7 +142,7 @@ To add new resources:
 
 1. Add entries to `tools-and-resources.md` for tools/APIs
 2. Create new files in `prompt-library/` for prompts
-3. Add to `cheatsheets/` for quick references
+3. Add comprehensive guides to `setup/guides/`
 4. Update this README with new additions
 
 ### Resource Format

@@ -69,7 +69,7 @@ ai_for_the_win/
 │
 ├── resources/                     # Learning resources
 │   ├── integrations/              # SIEM platform guides
-│   ├── cheatsheets/               # Quick reference guides
+│   # Guides moved to setup/guides/
 │   ├── templates/                 # Code templates
 │   └── prompt-library/            # Curated prompts
 │

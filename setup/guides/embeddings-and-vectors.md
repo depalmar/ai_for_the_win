@@ -33,12 +33,12 @@ Different meaning → Different vectors
 
 ### Why They Matter for Security
 
-| Use Case | Without Embeddings | With Embeddings |
-|----------|-------------------|-----------------|
-| Log search | Exact keyword match only | Find semantically similar logs |
-| Threat intel | Manual IOC lookup | Find related threats by behavior |
-| Documentation | Keyword search | Natural language Q&A |
-| Alert triage | Rule-based grouping | Cluster similar alerts automatically |
+| Use Case      | Without Embeddings       | With Embeddings                      |
+| ------------- | ------------------------ | ------------------------------------ |
+| Log search    | Exact keyword match only | Find semantically similar logs       |
+| Threat intel  | Manual IOC lookup        | Find related threats by behavior     |
+| Documentation | Keyword search           | Natural language Q&A                 |
+| Alert triage  | Rule-based grouping      | Cluster similar alerts automatically |
 
 ### Visual Intuition
 
@@ -129,13 +129,13 @@ embeddings = get_voyage_embedding([
 
 ### Choosing an Embedding Model
 
-| Model | Dimensions | Speed | Quality | Cost |
-|-------|-----------|-------|---------|------|
-| all-MiniLM-L6-v2 | 384 | Fast | Good | Free |
-| all-mpnet-base-v2 | 768 | Medium | Better | Free |
-| text-embedding-3-small | 1536 | API | Very Good | $0.02/1M |
-| text-embedding-3-large | 3072 | API | Excellent | $0.13/1M |
-| voyage-2 | 1024 | API | Excellent | $0.10/1M |
+| Model                  | Dimensions | Speed  | Quality   | Cost     |
+| ---------------------- | ---------- | ------ | --------- | -------- |
+| all-MiniLM-L6-v2       | 384        | Fast   | Good      | Free     |
+| all-mpnet-base-v2      | 768        | Medium | Better    | Free     |
+| text-embedding-3-small | 1536       | API    | Very Good | $0.02/1M |
+| text-embedding-3-large | 3072       | API    | Excellent | $0.13/1M |
+| voyage-2               | 1024       | API    | Excellent | $0.10/1M |
 
 **Recommendation for security**: Start with `all-MiniLM-L6-v2` (free, local), upgrade to API models if needed.
 
@@ -688,12 +688,12 @@ test_pairs = [
 
 ### Common Issues
 
-| Problem | Cause | Solution |
-|---------|-------|----------|
-| Poor similarity results | Model mismatch | Use domain-specific model or fine-tune |
-| Slow embedding | Large batch | Use batching, GPU, or caching |
-| Out of memory | Too many vectors | Use disk-based index (FAISS, Pinecone) |
-| Inconsistent results | Preprocessing differences | Standardize preprocessing |
+| Problem                 | Cause                     | Solution                               |
+| ----------------------- | ------------------------- | -------------------------------------- |
+| Poor similarity results | Model mismatch            | Use domain-specific model or fine-tune |
+| Slow embedding          | Large batch               | Use batching, GPU, or caching          |
+| Out of memory           | Too many vectors          | Use disk-based index (FAISS, Pinecone) |
+| Inconsistent results    | Preprocessing differences | Standardize preprocessing              |
 
 ### Debugging Similarity Issues
 
@@ -782,13 +782,13 @@ results = collection.query(query_texts=["search query"], n_results=5)
 
 ## Next Steps
 
-| If you want to... | Go to... |
-|-------------------|----------|
-| Build a RAG system | [Lab 06](../../labs/lab06-rag-threat-intel/) |
-| Parse LLM outputs | [Structured Output Guide](./structured-output-parsing.md) |
-| Test your system | [LLM Evaluation Guide](./llm-evaluation-testing.md) |
-| Understand vectors visually | [Lab 02 - Clustering](../../labs/lab02-clustering-threat-grouping/) |
+| If you want to...           | Go to...                                                    |
+| --------------------------- | ----------------------------------------------------------- |
+| Build a RAG system          | [Lab 06](../../labs/lab06-security-rag/)                    |
+| Parse LLM outputs           | [Structured Output Guide](./structured-output-parsing.md)   |
+| Test your system            | [LLM Evaluation Guide](./llm-evaluation-testing.md)         |
+| Understand vectors visually | [Lab 02 - Clustering](../../labs/lab02-malware-clustering/) |
 
 ---
 
-*Last updated: January 2025*
+_Last updated: January 2025_

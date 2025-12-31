@@ -23,15 +23,15 @@ Build production-ready AI agents for security operations using Google's Agent De
 
 **Google Agent Development Kit (ADK)** is a Python framework for building sophisticated AI agents powered by Gemini and other LLMs. It provides:
 
-| Feature | Description |
-|---------|-------------|
-| **Agent Framework** | Structured approach to building LLM-powered agents |
-| **Tool System** | Define and compose custom tools for agent capabilities |
-| **Multi-Agent Orchestration** | Build systems with specialized, collaborating agents |
-| **Memory Management** | Persistent and session-based memory systems |
-| **Streaming Support** | Real-time response streaming for interactive applications |
-| **Model Flexibility** | Support for Gemini, OpenAI, and other LLM providers |
-| **Built-in Safety** | Content filtering and safety guardrails |
+| Feature                       | Description                                               |
+| ----------------------------- | --------------------------------------------------------- |
+| **Agent Framework**           | Structured approach to building LLM-powered agents        |
+| **Tool System**               | Define and compose custom tools for agent capabilities    |
+| **Multi-Agent Orchestration** | Build systems with specialized, collaborating agents      |
+| **Memory Management**         | Persistent and session-based memory systems               |
+| **Streaming Support**         | Real-time response streaming for interactive applications |
+| **Model Flexibility**         | Support for Gemini, OpenAI, and other LLM providers       |
+| **Built-in Safety**           | Content filtering and safety guardrails                   |
 
 ### Why ADK for Security Development?
 
@@ -43,12 +43,12 @@ Build production-ready AI agents for security operations using Google's Agent De
 
 ### Comparison with Other Frameworks
 
-| Framework | Strengths | Best For |
-|-----------|-----------|----------|
+| Framework      | Strengths                              | Best For                             |
+| -------------- | -------------------------------------- | ------------------------------------ |
 | **Google ADK** | Multi-agent, Gemini native, enterprise | Production systems, Google ecosystem |
-| **LangChain** | Extensive integrations, flexibility | Prototyping, diverse LLM support |
-| **CrewAI** | Role-based agents, simple API | Team simulations, workflows |
-| **AutoGen** | Microsoft ecosystem, async | Research, complex conversations |
+| **LangChain**  | Extensive integrations, flexibility    | Prototyping, diverse LLM support     |
+| **CrewAI**     | Role-based agents, simple API          | Team simulations, workflows          |
+| **AutoGen**    | Microsoft ecosystem, async             | Research, complex conversations      |
 
 ---
 
@@ -953,13 +953,130 @@ gcloud run deploy security-agents \
 
 ### Vertex AI Agent Builder
 
-For enterprise deployments, use Vertex AI Agent Builder:
+For enterprise deployments, Vertex AI Agent Builder provides a managed platform for deploying and scaling agents.
 
-1. Go to Google Cloud Console > Vertex AI > Agent Builder
-2. Create new agent
-3. Import your agent configuration
-4. Configure authentication and access controls
-5. Deploy and monitor
+#### When to Use Agent Builder
+
+| Use Case                  | Agent Builder          | ADK + Cloud Run      |
+| ------------------------- | ---------------------- | -------------------- |
+| **Rapid prototyping**     | ✅ Visual builder      | Code-first           |
+| **Enterprise compliance** | ✅ Built-in governance | Manual setup         |
+| **Scaling**               | ✅ Auto-managed        | Configure yourself   |
+| **Custom tools**          | Limited                | ✅ Full flexibility  |
+| **Cost**                  | Higher (managed)       | Lower (self-managed) |
+
+#### Setting Up Agent Builder
+
+**Step 1: Enable APIs**
+
+```bash
+gcloud services enable \
+    aiplatform.googleapis.com \
+    dialogflow.googleapis.com \
+    discoveryengine.googleapis.com
+```
+
+**Step 2: Create Agent in Console**
+
+1. Go to [Google Cloud Console](https://console.cloud.google.com)
+2. Navigate to **Vertex AI → Agent Builder**
+3. Click **Create Agent**
+4. Configure:
+   - **Name**: `security-analyst-agent`
+   - **Region**: Choose your region
+   - **Model**: Gemini 2.0 Flash or Pro
+
+**Step 3: Define Tools**
+
+In the Agent Builder UI:
+
+1. Click **Tools** → **Create Tool**
+2. Choose tool type:
+   - **OpenAPI**: Connect to REST APIs (VirusTotal, AbuseIPDB)
+   - **Data Store**: Query your threat intel documents
+   - **Code Interpreter**: Run Python analysis
+
+**Step 4: Configure Data Stores (RAG)**
+
+For security knowledge bases:
+
+```bash
+# Create data store for threat intel
+gcloud alpha discovery-engine data-stores create threat-intel-store \
+    --location=global \
+    --project=$PROJECT_ID \
+    --industry-vertical=generic
+
+# Import documents
+gcloud alpha discovery-engine documents import \
+    --data-store=threat-intel-store \
+    --location=global \
+    --source=gs://your-bucket/threat-reports/
+```
+
+**Step 5: Connect to ADK Code**
+
+Export your Agent Builder agent for use with ADK:
+
+```python
+from google.adk import Agent
+from google.adk.integrations import VertexAgentBuilder
+
+# Connect to deployed Agent Builder agent
+agent = VertexAgentBuilder.from_agent_id(
+    agent_id="projects/your-project/locations/us-central1/agents/security-analyst",
+    tools=additional_local_tools  # Combine with local tools
+)
+
+# Use like any ADK agent
+response = agent.run("Analyze this suspicious IP: 185.220.101.5")
+```
+
+#### Monitoring and Observability
+
+Agent Builder integrates with Google Cloud monitoring:
+
+```python
+# View agent metrics in Cloud Monitoring
+# Metrics available:
+# - agent/request_count
+# - agent/latency
+# - agent/error_count
+# - tool/invocation_count
+
+# Set up alerting
+gcloud alpha monitoring policies create \
+    --display-name="Agent Error Rate" \
+    --condition-display-name="High error rate" \
+    --condition-filter='metric.type="aiplatform.googleapis.com/agent/error_count"' \
+    --condition-threshold-value=10 \
+    --condition-threshold-duration=300s
+```
+
+#### Hybrid Architecture Pattern
+
+Best practice: Use Agent Builder for orchestration, ADK for custom tools:
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                  Vertex AI Agent Builder                     │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐          │
+│  │ Orchestrator│──│ RAG Store   │──│ Cloud Tools │          │
+│  │   Agent     │  │ (Threat     │  │ (BigQuery,  │          │
+│  │             │  │  Intel)     │  │  Logging)   │          │
+│  └──────┬──────┘  └─────────────┘  └─────────────┘          │
+└─────────┼───────────────────────────────────────────────────┘
+          │
+          │ gRPC/REST
+          ▼
+┌─────────────────────────────────────────────────────────────┐
+│                    ADK Custom Tools                          │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐          │
+│  │ YARA        │  │ PE Analysis │  │ Memory      │          │
+│  │ Scanner     │  │ Tool        │  │ Forensics   │          │
+│  └─────────────┘  └─────────────┘  └─────────────┘          │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ---
 

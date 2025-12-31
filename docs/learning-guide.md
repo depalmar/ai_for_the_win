@@ -911,18 +911,18 @@ As you work through the labs, these resources will help you go deeper:
 
 | Resource | Description |
 |----------|-------------|
-| [Security Prompts](./resources/prompt-library/security-prompts.md) | 500+ ready-to-use prompts for security analysis |
-| [Tools & APIs](./resources/tools-and-resources.md) | 80+ security tools, APIs, and datasets |
-| [Lab Walkthroughs](./docs/walkthroughs/) | Step-by-step solutions when you're stuck |
-| [SIEM Integrations](./resources/integrations/) | Splunk, Elastic, XSIAM integration examples |
-| [Cheatsheets](./resources/cheatsheets/) | Quick references for Cursor, Claude Code, LangChain |
+| [Security Prompts](../resources/prompt-library/security-prompts.md) | 500+ ready-to-use prompts for security analysis |
+| [Tools & APIs](../resources/tools-and-resources.md) | 80+ security tools, APIs, and datasets |
+| [Lab Walkthroughs](./walkthroughs/) | Step-by-step solutions when you're stuck |
+| [SIEM Integrations](../resources/integrations/) | Splunk, Elastic, XSIAM integration examples |
+| [Setup Guides](../setup/guides/) | LangChain, Cursor, Claude Code, ADK guides |
 | [Documentation Guide](./documentation-guide.md) | Find any resource quickly |
 
 ---
 
 ## Getting Help
 
-1. **Stuck on a lab?** Check the [walkthroughs](./docs/walkthroughs/) or solution file
+1. **Stuck on a lab?** Check the [walkthroughs](./walkthroughs/) or solution file
 2. **API errors?** Verify your `.env` file has correct keys
 3. **Want to discuss?** Open a GitHub Discussion
 4. **Found a bug?** Open an Issue with reproduction steps

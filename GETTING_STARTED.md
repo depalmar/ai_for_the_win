@@ -346,9 +346,9 @@ AI: [Executes and interprets results]
 ### Cheatsheets
 
 Quick references for AI coding tools:
-- [Cursor Cheatsheet](./resources/cheatsheets/cursor-cheatsheet.md)
-- [Claude Code Cheatsheet](./resources/cheatsheets/claude-code-cheatsheet.md)
-- [LangChain Security Cheatsheet](./resources/cheatsheets/langchain-security-cheatsheet.md)
+- [Cursor IDE Guide](./setup/guides/cursor-ide-guide.md)
+- [Claude Code CLI Guide](./setup/guides/claude-code-cli-guide.md)
+- [LangChain Security Guide](./setup/guides/langchain-guide.md)
 
 ---
 
