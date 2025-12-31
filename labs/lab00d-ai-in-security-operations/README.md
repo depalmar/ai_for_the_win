@@ -507,6 +507,77 @@ Year 1 ROI: ($2,500 × 365) - ($50 × 365) - $10,000 - ($1,000 × 12)
 
 ---
 
+## Part 8: Choosing Your LLM Provider
+
+### Provider Interchangeability
+
+All labs in this course work with **any major LLM provider**. You're not locked into one choice:
+
+| Provider | API Key | Best For | Cost |
+|----------|---------|----------|------|
+| **Anthropic (Claude)** | `ANTHROPIC_API_KEY` | Long documents, complex analysis | $$$ |
+| **OpenAI (GPT-4)** | `OPENAI_API_KEY` | General purpose, tool use | $$$ |
+| **Google (Gemini)** | `GOOGLE_API_KEY` | Free tier, fast responses | $ |
+| **Ollama (Local)** | None needed | Privacy, no cost | Free |
+
+### How Provider Selection Works
+
+The course uses a shared configuration that auto-detects your provider:
+
+```python
+from shared.llm_config import get_llm
+
+# Auto-detects based on which API key you have set
+llm = get_llm()  # Uses ANTHROPIC_API_KEY, OPENAI_API_KEY, or GOOGLE_API_KEY
+
+# Or explicitly choose a provider
+llm = get_llm(provider="anthropic")  # Claude
+llm = get_llm(provider="openai")     # GPT-4
+llm = get_llm(provider="google")     # Gemini
+llm = get_llm(provider="ollama")     # Local model
+```
+
+### Choosing the Right Provider for Security Tasks
+
+| Task | Recommended Approach | Why |
+|------|---------------------|-----|
+| **Log analysis (high volume)** | GPT-4o-mini or Gemini Flash | Cost-effective for bulk processing |
+| **Threat report analysis** | Claude or GPT-4o | Long context, nuanced understanding |
+| **IOC extraction** | Any provider | Structured task, all perform well |
+| **Incident response** | Claude or GPT-4o | Complex reasoning required |
+| **Sensitive data analysis** | Ollama (local) | Data never leaves your network |
+| **Learning/experimentation** | Gemini (free tier) | No cost while practicing |
+
+### Privacy Considerations by Provider
+
+```
+Cloud Providers (Anthropic, OpenAI, Google):
+├── Data sent to external servers
+├── Check data retention policies
+├── Review business associate agreements
+└── Consider: What data are you sending?
+
+Local Models (Ollama):
+├── Data stays on your machine
+├── No external API calls
+├── Full control over model
+└── Trade-off: May be less capable
+```
+
+### Switching Providers
+
+If you want to try a different provider mid-course:
+
+1. Get an API key for your new provider (see [API Keys Guide](../../setup/guides/api-keys-guide.md))
+2. Set the environment variable
+3. Run any lab — it auto-detects the new provider
+
+No code changes needed. All prompts and workflows are provider-agnostic.
+
+> 📖 **Deep Dive:** For detailed benchmarks and cost analysis, see [LLM Provider Comparison Guide](../../setup/guides/llm-provider-comparison.md)
+
+---
+
 ## Exercises
 
 ### Exercise 1: Map Your SOC Workflow
@@ -526,10 +597,11 @@ For a hypothetical AI-enhanced SOC, list:
 
 ### Exercise 3: Compliance Checklist
 
-Your organization is considering using Claude for log analysis.
+Your organization is considering using an LLM (Claude, GPT-4, Gemini, or a local model) for log analysis.
 - What data privacy questions should you ask?
 - What documentation would you need?
 - How would you handle GDPR's "right to explanation"?
+- How does your choice of provider (cloud vs. local) affect compliance?
 
 ### Exercise 4: Build an Escalation Matrix
 
@@ -564,6 +636,12 @@ Create a matrix showing:
 ---
 
 ## Resources
+
+### Course Resources
+- [LLM Provider Comparison Guide](../../setup/guides/llm-provider-comparison.md) - Choose the right provider
+- [API Keys Guide](../../setup/guides/api-keys-guide.md) - Setup and cost management
+- [Security Compliance Guide](../../setup/guides/security-compliance-guide.md) - Regulatory considerations
+- [Prompt Injection Defense Guide](../../setup/guides/prompt-injection-defense.md) - Protect your AI systems
 
 ### Further Reading
 - NIST AI Risk Management Framework

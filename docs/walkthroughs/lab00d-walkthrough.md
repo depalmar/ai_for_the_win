@@ -247,6 +247,7 @@ Human required:
 3. **Plan for failure** - AI will make mistakes
 4. **Validate continuously** - Models drift over time
 5. **Maintain accountability** - Humans own decisions
+6. **Provider choice is flexible** - All labs work with Claude, GPT-4, Gemini, or local models
 
 ---
 
