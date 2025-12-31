@@ -730,9 +730,9 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
   border-radius: 8px;
   padding: 1rem;
   margin: 1.5rem auto;
-  max-width: 500px;
+  max-width: 600px;
   font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   text-align: left;
 }
 
@@ -768,10 +768,21 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
   content: '';
 }
 
-.terminal-line:nth-child(2) { animation-delay: 0.5s; }
-.terminal-line:nth-child(3) { animation-delay: 1.5s; }
-.terminal-line:nth-child(4) { animation-delay: 2.5s; }
-.terminal-line:nth-child(5) { animation-delay: 3.5s; }
+.terminal-line:nth-child(2) { animation-delay: 0.3s; }
+.terminal-line:nth-child(3) { animation-delay: 0.5s; }
+.terminal-line:nth-child(4) { animation-delay: 0.7s; }
+.terminal-line:nth-child(5) { animation-delay: 0.9s; }
+.terminal-line:nth-child(6) { animation-delay: 1.1s; }
+.terminal-line:nth-child(7) { animation-delay: 1.3s; }
+.terminal-line:nth-child(8) { animation-delay: 1.5s; }
+.terminal-line:nth-child(9) { animation-delay: 1.7s; }
+.terminal-line:nth-child(10) { animation-delay: 1.9s; }
+.terminal-line:nth-child(11) { animation-delay: 2.1s; }
+.terminal-line:nth-child(12) { animation-delay: 2.3s; }
+.terminal-line:nth-child(13) { animation-delay: 2.5s; }
+.terminal-line:nth-child(14) { animation-delay: 2.7s; }
+.terminal-line:nth-child(15) { animation-delay: 2.9s; }
+.terminal-line:nth-child(16) { animation-delay: 3.1s; }
 
 @keyframes fadeIn {
   to { opacity: 1; }
@@ -895,7 +906,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
       <span class="terminal-dot yellow"></span>
       <span class="terminal-dot green"></span>
     </div>
-    <div class="terminal-line">$ python labs/lab01-phishing-classifier/solution/main.py</div>
+    <div class="terminal-line">python labs/lab01-phishing-classifier/solution/main.py</div>
     <div class="terminal-line output"></div>
     <div class="terminal-line output">[+] Trained on 1,000 labeled emails</div>
     <div class="terminal-line output">[+] Model: Random Forest with TF-IDF features</div>
