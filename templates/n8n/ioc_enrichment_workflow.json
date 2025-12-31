@@ -1,5 +1,11 @@
 {
   "name": "IOC Enrichment Workflow",
+  "meta": {
+    "description": "Auto-enrich IOCs (IPs, domains, hashes) from VirusTotal and AbuseIPDB, then use AI to summarize findings and notify via Slack.",
+    "version": "1.0.0",
+    "author": "AI for the Win",
+    "disclaimer": "EXAMPLE TEMPLATE - Configure credentials and test before production use"
+  },
   "nodes": [
     {
       "parameters": {

@@ -1,5 +1,11 @@
 {
   "name": "AI Alert Triage Workflow",
+  "meta": {
+    "description": "AI-powered alert triage that analyzes security alerts, assigns priority scores, maps to MITRE ATT&CK, and routes critical alerts to dedicated Slack channels.",
+    "version": "1.0.0",
+    "author": "AI for the Win",
+    "disclaimer": "EXAMPLE TEMPLATE - Configure credentials and test before production use"
+  },
   "nodes": [
     {
       "parameters": {

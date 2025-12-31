@@ -12,6 +12,14 @@ These walkthroughs provide:
 
 ## Walkthrough Index
 
+### Intro Labs (Prerequisites)
+
+| Lab | Walkthrough | Difficulty |
+|-----|-------------|------------|
+| [Lab 00b](./lab00b-walkthrough.md) | ML Concepts Primer | Intro |
+| [Lab 00c](./lab00c-walkthrough.md) | Prompt Engineering | Intro |
+| [Lab 00d](./lab00d-walkthrough.md) | AI in Security Ops | Intro |
+
 ### Foundation Labs
 
 | Lab | Walkthrough | Difficulty |
@@ -74,6 +82,14 @@ These walkthroughs provide:
 ---
 
 ## Quick Links by Skill Level
+
+### Intro Track (Start Here)
+```
+Lab 00b → Lab 00c → Lab 00d
+  |          |          |
+  v          v          v
+ML Concepts  Prompts    AI in SecOps
+```
 
 ### Beginner Track
 ```

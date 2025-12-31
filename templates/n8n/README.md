@@ -2,15 +2,17 @@
 
 Ready-to-use n8n workflows for security automation. Import these into your n8n instance.
 
+> ⚠️ **DISCLAIMER**: These are example templates for educational purposes. Configure credentials and test thoroughly before production use.
+
 ## Available Workflows
 
-| Workflow | Description | Triggers |
-|----------|-------------|----------|
-| [IOC Enrichment](#ioc-enrichment) | Auto-enrich IOCs from multiple sources | Webhook, Schedule |
-| [Alert Triage](#alert-triage) | AI-powered alert triage and prioritization | Webhook |
-| [Threat Intel Feed](#threat-intel-feed) | Aggregate and process threat intel feeds | Schedule |
-| [Incident Response](#incident-response) | Automated IR workflow with escalation | Webhook |
-| [Vulnerability Notifications](#vulnerability-notifications) | Alert on new critical CVEs | Schedule |
+| Workflow | Description | Triggers | Status |
+|----------|-------------|----------|--------|
+| [IOC Enrichment](#ioc-enrichment) | Auto-enrich IOCs from multiple sources | Webhook | ✅ Ready |
+| [Alert Triage](#alert-triage) | AI-powered alert triage and prioritization | Webhook | ✅ Ready |
+| [Threat Intel Feed](#threat-intel-feed) | Aggregate and process threat intel feeds | Schedule | 📋 Planned |
+| [Incident Response](#incident-response) | Automated IR workflow with escalation | Webhook | 📋 Planned |
+| [Vulnerability Notifications](#vulnerability-notifications) | Alert on new critical CVEs | Schedule | 📋 Planned |
 
 ## Setup Instructions
 
@@ -139,3 +141,12 @@ def trigger_enrichment(ioc: str, ioc_type: str):
 | API errors | Verify credentials and rate limits |
 | Workflow stuck | Check execution logs and error handlers |
 | Missing data | Verify webhook payload format |
+
+## Contributing
+
+Want to add a workflow? Please:
+1. Use the existing workflows as templates
+2. Include `meta` object with description and disclaimer
+3. Add error handling nodes
+4. Document required credentials
+5. Submit a PR with the workflow JSON and README updates
