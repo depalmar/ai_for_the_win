@@ -1567,7 +1567,7 @@ function toggleTheme() {
         <span class="path-toggle">&#9660;</span>
       </summary>
       <div class="path-content">
-        <p class="path-desc">Build production-ready tools. Detection pipelines, IR copilots, and DFIR automation.</p>
+        <p class="path-desc">Build advanced tools. Detection pipelines, IR copilots, and DFIR automation.</p>
         <div class="path-labs-list">
           <div class="path-lab-item">
             <span class="path-lab-num advanced">08</span>
