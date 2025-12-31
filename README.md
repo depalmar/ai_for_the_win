@@ -100,17 +100,20 @@ $ python labs/lab04-llm-log-analysis/solution/main.py
 [2/3] Found 23 anomalous patterns → sending to Claude
 [3/3] AI analysis complete
 
-🔴 CRITICAL: Credential stuffing detected
-   Source: 45.33.32.156 (Tor exit node)
-   Pattern: 847 failed logins in 6 minutes
-   Success: 12 accounts compromised
-   → MITRE ATT&CK: T1110.004 (Credential Stuffing)
+🔴 ATTACK CHAIN DETECTED
 
-🟡 SUSPICIOUS: Lateral movement
-   User 'svc_backup' accessed 3 new hosts
-   → MITRE ATT&CK: T1021 (Remote Services)
+  Stage 1: Credential Stuffing
+    Source: 45.33.32.156 (Tor exit node)
+    847 failed logins → 12 accounts compromised
+    → MITRE ATT&CK: T1110.004
 
-Action: Block source IP, reset compromised passwords
+  Stage 2: Lateral Movement (15 min later)
+    Compromised 'svc_backup' → 3 new hosts
+    → MITRE ATT&CK: T1021
+
+  Timeline: 02:14 initial access → 02:29 lateral spread
+
+Action: Isolate affected hosts, block source IP, reset all 12 accounts
 ```
 
 ---
