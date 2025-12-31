@@ -18,9 +18,13 @@ title: AI for the Win
   --border: #30363d;
 }
 
-/* Hide theme attribution from sidebar */
-#header p + p {
-  display: none;
+/* Hide theme attribution from sidebar and footer */
+#header p + p,
+footer,
+.footer,
+p:has(a[href*="mattgraham"]),
+a[href*="mattgraham"] {
+  display: none !important;
 }
 
 /* Light theme override */
