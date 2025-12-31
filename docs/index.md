@@ -23,8 +23,27 @@ title: AI for the Win
 footer,
 .footer,
 p:has(a[href*="mattgraham"]),
-a[href*="mattgraham"] {
+a[href*="mattgraham"],
+/* Hide Midnight theme "Hosted on GitHub Pages - Theme by" footer */
+body > footer,
+#footer,
+.wrapper > footer,
+section + p,
+section ~ p:last-of-type,
+/* Target the specific theme footer text */
+body > p:last-of-type,
+.inner > p:last-of-type,
+#main_content + p,
+#main_content ~ p,
+/* Hide incomplete theme attribution */
+section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
   display: none !important;
+}
+
+/* Re-show our custom footer */
+.footer-links,
+.footer-links + p {
+  display: flex !important;
 }
 
 /* Light theme override */
@@ -1359,6 +1378,24 @@ function toggleTheme() {
     const icon = document.getElementById('theme-icon');
     if (icon) icon.textContent = '🌙';
   }
+})();
+
+// Remove theme attribution footer
+(function() {
+  function removeThemeFooter() {
+    document.querySelectorAll('p, footer, span').forEach(function(el) {
+      if (el.textContent.includes('Theme by') || 
+          el.textContent.includes('Hosted on GitHub Pages')) {
+        el.style.display = 'none';
+      }
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', removeThemeFooter);
+  } else {
+    removeThemeFooter();
+  }
+  setTimeout(removeThemeFooter, 500);
 })();
 </script>
 
