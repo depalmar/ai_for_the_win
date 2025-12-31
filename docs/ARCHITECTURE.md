@@ -32,6 +32,95 @@ This document provides a comprehensive overview of the AI for the Win training p
 └──────────────────────────────────────────────────────────────────────────────┘
 ```
 
+### Learning Path Flow (Mermaid)
+
+```mermaid
+flowchart LR
+    subgraph intro [Intro Labs]
+        A00[00 Setup]
+        A00a[00a Python]
+        A00b[00b ML Concepts]
+        A00c[00c Prompts]
+        A00d[00d AI in SOC]
+    end
+    
+    subgraph ml [ML Basics]
+        B01[01 Phishing]
+        B02[02 Malware]
+        B03[03 Anomaly]
+    end
+    
+    subgraph llm [LLM Tools]
+        C04[04 Logs]
+        C05[05 Agent]
+        C06[06 RAG]
+        C07[07 YARA]
+    end
+    
+    subgraph adv [Advanced]
+        D08[08 Vuln]
+        D09[09 Pipeline]
+        D10[10 IR Copilot]
+    end
+    
+    subgraph expert [Expert DFIR]
+        E11[11-15 DFIR]
+        E16[16-20 AI]
+    end
+    
+    intro --> ml
+    ml --> llm
+    llm --> adv
+    adv --> expert
+```
+
+### Technology Stack
+
+```mermaid
+flowchart TB
+    subgraph frontend [User Interface]
+        Gradio[Gradio UI]
+        Streamlit[Streamlit]
+        Jupyter[Jupyter Notebooks]
+    end
+    
+    subgraph orchestration [LLM Orchestration]
+        LangChain[LangChain]
+        LangGraph[LangGraph]
+        LiteLLM[LiteLLM]
+    end
+    
+    subgraph providers [LLM Providers]
+        Anthropic[Claude]
+        OpenAI[GPT-4]
+        Google[Gemini]
+        Ollama[Ollama Local]
+    end
+    
+    subgraph ml_stack [ML Stack]
+        sklearn[scikit-learn]
+        PyTorch[PyTorch]
+        HF[Hugging Face]
+    end
+    
+    subgraph vectordb [Vector Storage]
+        ChromaDB[ChromaDB]
+        Embeddings[sentence-transformers]
+    end
+    
+    subgraph security [Security Tools]
+        YARA[YARA]
+        pefile[pefile]
+        MITRE[MITRE ATT&CK]
+    end
+    
+    frontend --> orchestration
+    orchestration --> providers
+    orchestration --> ml_stack
+    orchestration --> vectordb
+    ml_stack --> security
+```
+
 ---
 
 ## Directory Structure
