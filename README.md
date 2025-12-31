@@ -96,19 +96,21 @@ Top phishing indicators learned:
 ```
 $ python labs/lab04-llm-log-analysis/solution/main.py
 
-Analyzing 10,000 auth events with Claude...
+[1/3] Pre-filtering 10,000 auth events...
+[2/3] Found 23 anomalous patterns → sending to Claude
+[3/3] AI analysis complete
 
 🔴 CRITICAL: Credential stuffing detected
    Source: 45.33.32.156 (Tor exit node)
-   Target: 847 unique accounts in 6 minutes
+   Pattern: 847 failed logins in 6 minutes
    Success: 12 accounts compromised
    → MITRE ATT&CK: T1110.004 (Credential Stuffing)
 
-🟡 SUSPICIOUS: Lateral movement pattern
-   User 'svc_backup' → 3 new hosts in 10 min
+🟡 SUSPICIOUS: Lateral movement
+   User 'svc_backup' accessed 3 new hosts
    → MITRE ATT&CK: T1021 (Remote Services)
 
-Recommended: Block source IP, force password reset for compromised accounts
+Action: Block source IP, reset compromised passwords
 ```
 
 ---
