@@ -901,7 +901,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
     <div class="terminal-line output">Testing inbox...</div>
     <div class="terminal-line output">  "Verify your account immediately" → 🚨 PHISHING (96%)</div>
     <div class="terminal-line output">  "Q3 budget report attached"       → ✅ LEGIT (89%)</div>
-    <div class="terminal-line output">  "Unusual login from Russia"       → 🚨 PHISHING (91%)<span class="typing"></span></div>
+    <div class="terminal-line output">  "Reset password or account locked" → 🚨 PHISHING (93%)<span class="typing"></span></div>
   </div>
 
   <div class="stats">
@@ -1395,7 +1395,7 @@ function toggleTheme() {
 (function() {
   function removeThemeFooter() {
     document.querySelectorAll('p, footer, span').forEach(function(el) {
-      if (el.textContent.includes('Theme by') || 
+      if (el.textContent.includes('Theme by') ||
           el.textContent.includes('Hosted on GitHub Pages')) {
         el.style.display = 'none';
       }
@@ -1585,6 +1585,7 @@ function toggleTheme() {
         <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted);">Total: ~30 hours | Cost: ~$10-20</p>
       </div>
     </details>
+
   </div>
 
   <h3 style="margin-top: 2.5rem; margin-bottom: 1rem;">By Role</h3>
@@ -1680,13 +1681,16 @@ git clone https://github.com/depalmar/ai_for_the_win.git
 cd ai_for_the_win
 
 # Set up environment
+
 python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
+source venv/bin/activate # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 
 # Start with Lab 01 - no API key needed!
+
 cd labs/lab01-phishing-classifier
 python solution/main.py</code></pre>
+
   </div>
 
   <div class="cta-buttons" style="margin-top: 1.5rem;">
@@ -1732,6 +1736,7 @@ python solution/main.py</code></pre>
       <summary>How is this different from other ML courses?</summary>
       <p>Every lab solves a real security problem. You won't build iris classifiers or digit recognizers. You'll build phishing detectors, threat intel agents, and ransomware analyzers.</p>
     </details>
+
   </div>
 </div>
 
