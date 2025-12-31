@@ -1678,7 +1678,6 @@ function toggleTheme() {
         <th>Labs</th>
         <th>API Required</th>
         <th>Estimated Cost</th>
-        <th>Time</th>
       </tr>
     </thead>
     <tbody>
@@ -1686,31 +1685,26 @@ function toggleTheme() {
         <td>00-03 (ML Foundations)</td>
         <td>No</td>
         <td class="free">Free</td>
-        <td>~6 hrs</td>
       </tr>
       <tr>
         <td>04-07 (LLM Basics)</td>
         <td>Yes</td>
         <td>~$2-8</td>
-        <td>~13 hrs</td>
       </tr>
       <tr>
         <td>08-10 (Advanced)</td>
         <td>Yes</td>
         <td>~$5-15</td>
-        <td>~13 hrs</td>
       </tr>
       <tr>
         <td>11-20 (Expert)</td>
         <td>Yes</td>
         <td>~$10-25</td>
-        <td>~57 hrs</td>
       </tr>
       <tr>
         <td><strong>With Ollama (local)</strong></td>
         <td>No</td>
         <td class="free">$0 Total</td>
-        <td>~89 hrs</td>
       </tr>
     </tbody>
   </table>
