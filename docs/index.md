@@ -1340,7 +1340,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
   </div>
 
   <div class="cta-buttons" style="margin-top: 2rem;">
-    <a href="https://github.com/depalmar/ai_for_the_win#get-started-in-5-minutes" class="btn btn-primary">Start with Lab 01</a>
+    <a href="https://github.com/depalmar/ai_for_the_win#get-started-in-5-minutes" class="btn btn-primary">Get Started</a>
     <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs" class="btn btn-secondary">Browse All Labs</a>
   </div>
 </div>
