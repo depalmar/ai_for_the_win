@@ -1742,26 +1742,34 @@ function toggleTheme() {
 <div class="section">
   <h2 class="section-title">Quick Start</h2>
 
-  <div class="quick-start">
-<pre><code># Clone the repository
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 1.5rem;">
+    <div class="quick-start" style="margin: 0;">
+      <h3 style="margin-top: 0; color: var(--secondary);">🚀 Option 1: Zero Setup (Colab)</h3>
+      <p style="color: var(--text-muted); margin-bottom: 1rem;">Run labs directly in your browser — no installation needed!</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+        <a href="https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab01_phishing_classifier.ipynb" target="_blank" style="display: inline-block;"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open Lab 01"></a>
+        <a href="https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab04_llm_log_analysis.ipynb" target="_blank" style="display: inline-block;"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open Lab 04"></a>
+      </div>
+      <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem;">📓 <a href="https://github.com/depalmar/ai_for_the_win/tree/main/notebooks" style="color: var(--primary);">All 23 lab notebooks</a> available for Colab</p>
+    </div>
+
+    <div class="quick-start" style="margin: 0;">
+      <h3 style="margin-top: 0; color: var(--secondary);">💻 Option 2: Local Setup</h3>
+<pre><code># Clone and setup
 git clone https://github.com/depalmar/ai_for_the_win.git
 cd ai_for_the_win
-
-# Set up environment
-
 python -m venv venv
-source venv/bin/activate # Windows: venv\Scripts\activate
+source venv/bin/activate  # Win: venv\Scripts\activate
 pip install -r requirements.txt
 
-# Start with Lab 01 - no API key needed!
-
-cd labs/lab01-phishing-classifier
-python solution/main.py</code></pre>
-
+# Run Lab 01 (no API key needed!)
+python labs/lab01-phishing-classifier/solution/main.py</code></pre>
+    </div>
   </div>
 
-  <div class="cta-buttons" style="margin-top: 1.5rem;">
+  <div class="cta-buttons">
     <a href="https://github.com/depalmar/ai_for_the_win#get-started-in-5-minutes" class="btn btn-primary">Full Setup Instructions</a>
+    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/notebooks" class="btn btn-secondary">Browse All Notebooks</a>
   </div>
 </div>
 
@@ -1786,7 +1794,7 @@ python solution/main.py</code></pre>
 </details>
 <details class="faq-item">
 <summary>What if I get stuck on a lab?</summary>
-<p>Every lab includes complete solution code, step-by-step hints, and a Jupyter notebook. Check GitHub Discussions for community help or open an issue.</p>
+<p>Every lab includes complete solution code, step-by-step hints, and a Colab notebook you can run in your browser. Check GitHub Discussions for community help or open an issue.</p>
 </details>
 <details class="faq-item">
 <summary>Are the labs production-ready?</summary>
