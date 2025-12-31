@@ -35,39 +35,35 @@ This document provides a comprehensive overview of the AI for the Win training p
 ### Learning Path Flow (Mermaid)
 
 ```mermaid
-flowchart LR
-    subgraph intro [Intro Labs]
-        A00[00 Setup]
-        A00a[00a Python]
-        A00b[00b ML Concepts]
-        A00c[00c Prompts]
-        A00d[00d AI in SOC]
+flowchart TB
+    subgraph intro [🎯 Intro Labs]
+        A00[00 Setup] --> A00a[00a Python]
+        A00a --> A00b[00b ML Concepts]
+        A00b --> A00c[00c Prompts]
+        A00c --> A00d[00d AI in SOC]
     end
-    
-    subgraph ml [ML Basics]
-        B01[01 Phishing]
-        B02[02 Malware]
-        B03[03 Anomaly]
+
+    subgraph ml [🔬 ML Basics - No API Key]
+        B01[01 Phishing] --> B02[02 Malware]
+        B02 --> B03[03 Anomaly]
     end
-    
-    subgraph llm [LLM Tools]
-        C04[04 Logs]
-        C05[05 Agent]
-        C06[06 RAG]
-        C07[07 YARA]
+
+    subgraph llm [🤖 LLM Tools - API Required]
+        C04[04 Logs] --> C05[05 Agent]
+        C05 --> C06[06 RAG]
+        C06 --> C07[07 YARA]
     end
-    
-    subgraph adv [Advanced]
-        D08[08 Vuln]
-        D09[09 Pipeline]
-        D10[10 IR Copilot]
+
+    subgraph adv [⚡ Advanced]
+        D08[08 Vuln] --> D09[09 Pipeline]
+        D09 --> D10[10 IR Copilot]
     end
-    
-    subgraph expert [Expert DFIR]
+
+    subgraph expert [🔴 Expert]
         E11[11-15 DFIR]
-        E16[16-20 AI]
+        E16[16-20 AI Security]
     end
-    
+
     intro --> ml
     ml --> llm
     llm --> adv
@@ -83,37 +79,37 @@ flowchart TB
         Streamlit[Streamlit]
         Jupyter[Jupyter Notebooks]
     end
-    
+
     subgraph orchestration [LLM Orchestration]
         LangChain[LangChain]
         LangGraph[LangGraph]
         LiteLLM[LiteLLM]
     end
-    
+
     subgraph providers [LLM Providers]
         Anthropic[Claude]
         OpenAI[GPT-4]
         Google[Gemini]
         Ollama[Ollama Local]
     end
-    
+
     subgraph ml_stack [ML Stack]
         sklearn[scikit-learn]
         PyTorch[PyTorch]
         HF[Hugging Face]
     end
-    
+
     subgraph vectordb [Vector Storage]
         ChromaDB[ChromaDB]
         Embeddings[sentence-transformers]
     end
-    
+
     subgraph security [Security Tools]
         YARA[YARA]
         pefile[pefile]
         MITRE[MITRE ATT&CK]
     end
-    
+
     frontend --> orchestration
     orchestration --> providers
     orchestration --> ml_stack
@@ -473,22 +469,22 @@ api_key = os.getenv("ANTHROPIC_API_KEY")
 
 ### LLM API Optimization
 
-| Strategy | Description | Labs |
-|----------|-------------|------|
-| **Caching** | Cache repeated queries | All LLM labs |
-| **Batching** | Group similar requests | Labs 04, 09 |
-| **Streaming** | Real-time responses | Labs 05, 10 |
-| **Model Selection** | Use smaller models for simple tasks | Labs 04-07 |
-| **Token Management** | Optimize prompt length | All labs |
+| Strategy             | Description                         | Labs         |
+| -------------------- | ----------------------------------- | ------------ |
+| **Caching**          | Cache repeated queries              | All LLM labs |
+| **Batching**         | Group similar requests              | Labs 04, 09  |
+| **Streaming**        | Real-time responses                 | Labs 05, 10  |
+| **Model Selection**  | Use smaller models for simple tasks | Labs 04-07   |
+| **Token Management** | Optimize prompt length              | All labs     |
 
 ### ML Model Optimization
 
-| Strategy | Description | Labs |
-|----------|-------------|------|
-| **Incremental Training** | Update models with new data | Labs 01-03 |
-| **Feature Selection** | Reduce dimensionality | Labs 02, 03 |
-| **Model Caching** | Save trained models | Labs 01-03 |
-| **GPU Acceleration** | Use CUDA when available | Labs 17, 18 |
+| Strategy                 | Description                 | Labs        |
+| ------------------------ | --------------------------- | ----------- |
+| **Incremental Training** | Update models with new data | Labs 01-03  |
+| **Feature Selection**    | Reduce dimensionality       | Labs 02, 03 |
+| **Model Caching**        | Save trained models         | Labs 01-03  |
+| **GPU Acceleration**     | Use CUDA when available     | Labs 17, 18 |
 
 ---
 
@@ -523,6 +519,7 @@ docker run -it --env-file .env ai-security-labs
 ## Contributing Architecture
 
 See [CONTRIBUTING.md](../CONTRIBUTING.md) for:
+
 - Code style guidelines
 - Lab structure templates
 - Testing requirements
@@ -532,8 +529,8 @@ See [CONTRIBUTING.md](../CONTRIBUTING.md) for:
 
 ## Version History
 
-| Version | Date | Changes |
-|---------|------|---------|
-| 1.0 | 2024-01 | Initial 10 labs |
-| 2.0 | 2024-06 | Added labs 11-16, capstones |
-| 3.0 | 2024-12 | Added labs 17-19, CTF, integrations |
+| Version | Date    | Changes                             |
+| ------- | ------- | ----------------------------------- |
+| 1.0     | 2024-01 | Initial 10 labs                     |
+| 2.0     | 2024-06 | Added labs 11-16, capstones         |
+| 3.0     | 2024-12 | Added labs 17-19, CTF, integrations |
