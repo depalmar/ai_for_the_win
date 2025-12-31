@@ -916,7 +916,7 @@ As you work through the labs, these resources will help you go deeper:
 | [Lab Walkthroughs](./docs/walkthroughs/) | Step-by-step solutions when you're stuck |
 | [SIEM Integrations](./resources/integrations/) | Splunk, Elastic, XSIAM integration examples |
 | [Cheatsheets](./resources/cheatsheets/) | Quick references for Cursor, Claude Code, LangChain |
-| [Documentation Guide](./DOCUMENTATION_GUIDE.md) | Find any resource quickly |
+| [Documentation Guide](./documentation-guide.md) | Find any resource quickly |
 
 ---
 

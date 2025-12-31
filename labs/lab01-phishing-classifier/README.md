@@ -52,6 +52,84 @@ Phishing emails remain one of the most common attack vectors. Key indicators inc
 
 ---
 
+## 🧠 Key Concepts
+
+> **Want the full theory?** See [Lab 00b: ML Concepts Primer](../lab00b-ml-concepts-primer/) for detailed explanations, diagrams, and exercises.
+
+### TF-IDF (Term Frequency-Inverse Document Frequency)
+
+TF-IDF converts text into numbers that ML models can understand. It measures how important a word is to a document.
+
+```
+TF  = How often a word appears in THIS email
+IDF = How rare the word is across ALL emails
+TF-IDF = TF × IDF
+```
+
+**Why it works for phishing:** Words like "urgent" and "verify" appear often in phishing but rarely in legitimate emails, so they get high TF-IDF scores.
+
+### Random Forest
+
+A Random Forest is an ensemble of decision trees that vote on the final prediction.
+
+```
+       Email Features
+            │
+    ┌───────┼───────┐
+    ▼       ▼       ▼
+  Tree 1  Tree 2  Tree 3  ... (100 trees)
+    │       │       │
+    ▼       ▼       ▼
+ Phishing  Legit  Phishing
+            │
+            ▼
+    Majority Vote → PHISHING
+```
+
+**Why it works for phishing:** 
+- Handles mix of text (TF-IDF) and numeric features (URL count, caps ratio)
+- Resistant to overfitting
+- Shows which features matter most (feature importance)
+
+### Feature Engineering
+
+Features are measurable properties that help distinguish phishing from legitimate emails:
+
+| Feature | Why It Helps |
+|---------|--------------|
+| `url_count` | Phishing emails often contain multiple links |
+| `has_urgent_words` | "Act now!" creates pressure to click |
+| `caps_ratio` | EXCESSIVE CAPS = suspicious |
+| `link_text_mismatch` | "Click here" linking to `evil.com` |
+| `request_sensitive_info` | Asking for passwords/SSN = red flag |
+
+**Pro tip:** Good features encode attacker behavior. Think "what would a phisher do differently?"
+
+### Precision vs Recall: The Security Trade-off
+
+```
+                PREDICTED
+              Phish    Legit
+         ┌─────────┬─────────┐
+ ACTUAL  │   TP    │   FN    │  ← Missed phishing (dangerous!)
+ Phish   ├─────────┼─────────┤
+ Legit   │   FP    │   TN    │  ← False alarm (annoying)
+         └─────────┴─────────┘
+```
+
+| Metric | Formula | Security Meaning |
+|--------|---------|------------------|
+| **Precision** | TP/(TP+FP) | "Of emails flagged phishing, how many actually are?" |
+| **Recall** | TP/(TP+FN) | "Of all phishing emails, how many did we catch?" |
+
+**The trade-off:**
+- **High Precision** → Fewer false alarms, but might miss attacks
+- **High Recall** → Catch more phishing, but more false alarms
+
+For email filtering, SOC teams often prefer **high precision** to avoid alert fatigue. For critical systems, you might prefer **high recall** to never miss an attack.
+
+---
+
 ## 🔬 Lab Tasks
 
 ### Task 1: Load and Explore Data (10 min)

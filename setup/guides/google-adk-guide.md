@@ -1073,6 +1073,58 @@ def test_full_analysis_pipeline():
 
 ---
 
+## Quick Reference
+
+### Basic Agent
+
+```python
+from google.adk import Agent, Tool
+from google.adk.llms import Gemini
+
+agent = Agent(
+    name="security_analyst",
+    model=Gemini("gemini-2.0-flash"),
+    system_instruction="You are a security analyst."
+)
+response = agent.run("Analyze this IP: 192.168.1.100")
+```
+
+### Define Tools
+
+```python
+from pydantic import BaseModel, Field
+
+class IOCInput(BaseModel):
+    text: str = Field(description="Text containing IOCs")
+
+@Tool(schema=IOCInput)
+def extract_iocs(text: str) -> dict:
+    return {"ips": [], "domains": [], "hashes": []}
+```
+
+### Multi-Agent Team
+
+```python
+from google.adk import Team
+
+team = Team(
+    name="security_ops",
+    agents=[analyst, responder, reporter],
+    workflow="sequential"  # or "parallel", "coordinator"
+)
+result = team.run("Analyze alert and recommend actions")
+```
+
+### Tips
+
+1. Use `gemini-2.0-flash` for speed, `gemini-pro` for complex tasks
+2. Define clear Pydantic schemas for tools and outputs
+3. Add callbacks for logging and auditing
+4. Wrap in try/except for production
+5. Use teams for complex multi-step workflows
+
+---
+
 ## Resources
 
 - [Google ADK Documentation](https://ai.google.dev/adk)

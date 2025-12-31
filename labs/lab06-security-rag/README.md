@@ -77,6 +77,30 @@ pip install tiktoken pypdf docx2txt  # Document processing
 | Sigma Rules | Detection reference | Per-rule |
 | Threat Reports | Context & attribution | Semantic sections |
 
+### ⚠️ RAG Reduces (But Doesn't Eliminate) Hallucinations
+
+RAG grounds LLM responses in retrieved documents, but risks remain:
+
+| Risk | Example | Mitigation |
+|------|---------|------------|
+| **Wrong retrieval** | Retrieved docs don't match query | Check retrieval relevance scores |
+| **Mixing sources** | LLM combines chunks incorrectly | Ask LLM to cite specific sources |
+| **Beyond context** | LLM adds info not in retrieved docs | Prompt: "Only use provided context" |
+| **Outdated info** | Document database is stale | Track document freshness |
+
+**Key principle:** RAG provides context, but verify the response matches retrieved documents.
+
+```python
+# Good practice: Verify response cites retrieved docs
+prompt = """
+Answer using ONLY the context provided. 
+For each claim, cite which document supports it.
+If the answer isn't in the context, say "Not found in documentation."
+"""
+```
+
+> 📖 See [Security Prompts Template](../../templates/prompts/security_prompts.md) for anti-hallucination patterns.
+
 ---
 
 ## 🔬 Lab Tasks

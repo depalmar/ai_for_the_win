@@ -37,11 +37,9 @@ resources/
 ├── prompt-library/              # Security analysis prompts
 │   └── security-prompts.md      # Curated prompt templates
 └── cheatsheets/                 # Quick reference guides
-    ├── cursor-cheatsheet.md     # Cursor IDE shortcuts
-    ├── claude-code-cheatsheet.md # Claude Code reference
-    ├── gemini-cli-cheatsheet.md # Gemini CLI reference
-    ├── google-adk-cheatsheet.md # Google ADK guide
     └── langchain-security-cheatsheet.md  # LangChain patterns
+    # Note: Cursor, Claude Code, Gemini CLI, and ADK references
+    # are now in their respective guides at setup/guides/
 ```
 
 ## Quick Links
@@ -52,7 +50,7 @@ resources/
 | [MCP Servers Guide](./mcp-servers-security-guide.md) | DFIR, threat intel, offensive security MCP servers |
 | [Platform Integrations](./integrations/) | XSIAM, XDR, Splunk, Elastic guides |
 | [Prompt Library](./prompt-library/) | Ready-to-use security prompts |
-| [Cheatsheets](./cheatsheets/) | Quick reference guides |
+| [LangChain Cheatsheet](./cheatsheets/langchain-security-cheatsheet.md) | LangChain security patterns |
 
 ## Tools & Resources Overview
 

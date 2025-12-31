@@ -13,7 +13,7 @@ By the end of this lab, you will:
 
 ## Estimated Time
 
-2-3 hours (take your time!)
+3-4 hours (take your time! This covers everything you need for Labs 01-10)
 
 ## Prerequisites
 
@@ -446,9 +446,298 @@ for ioc_type, values in iocs.items():
 
 ---
 
-## Part 4: Making API Requests
+## Part 4: Essential Python for ML Labs
 
-### 4.1 Basic HTTP Requests
+These concepts are used heavily in Labs 01-10. Master them here!
+
+### 4.1 List Comprehensions - Concise Loops
+
+List comprehensions are one-line loops. You'll see them everywhere in ML code.
+
+```python
+# Traditional loop
+filtered_ips = []
+for ip in all_ips:
+    if ip.startswith("192.168"):
+        filtered_ips.append(ip)
+
+# Same thing as list comprehension (preferred in Python)
+filtered_ips = [ip for ip in all_ips if ip.startswith("192.168")]
+
+# More examples:
+numbers = [1, 2, 3, 4, 5]
+
+# Transform each item
+doubled = [n * 2 for n in numbers]  # [2, 4, 6, 8, 10]
+
+# Filter items
+evens = [n for n in numbers if n % 2 == 0]  # [2, 4]
+
+# Transform + filter
+risky_scores = [score * 1.5 for score in scores if score > 5]
+
+# Security example: Extract IPs from log entries
+log_lines = ["ERROR 192.168.1.1 failed", "INFO 10.0.0.5 success", "ERROR 172.16.0.1 failed"]
+error_lines = [line for line in log_lines if "ERROR" in line]
+# ['ERROR 192.168.1.1 failed', 'ERROR 172.16.0.1 failed']
+
+# Nested comprehension (flatten a list of lists)
+nested = [[1, 2], [3, 4], [5, 6]]
+flat = [item for sublist in nested for item in sublist]  # [1, 2, 3, 4, 5, 6]
+```
+
+### 4.2 Type Hints - Self-Documenting Code
+
+Type hints tell readers (and tools) what types your code expects. Labs 01+ use them throughout.
+
+```python
+from typing import List, Dict, Optional, Tuple
+
+# Basic type hints
+def calculate_risk(score: int, is_admin: bool) -> float:
+    """Type hints show: takes int and bool, returns float."""
+    multiplier = 1.5 if is_admin else 1.0
+    return score * multiplier
+
+# Collections
+def get_suspicious_ips(logs: List[str]) -> List[str]:
+    """Takes a list of strings, returns a list of strings."""
+    return [line.split()[1] for line in logs if "ERROR" in line]
+
+# Dictionaries
+def parse_event(line: str) -> Dict[str, str]:
+    """Returns a dictionary with string keys and string values."""
+    parts = line.split()
+    return {"timestamp": parts[0], "level": parts[1], "message": " ".join(parts[2:])}
+
+# Optional - value might be None
+def find_user(user_id: str) -> Optional[Dict]:
+    """Returns a dict or None if not found."""
+    users = {"alice": {"role": "admin"}, "bob": {"role": "analyst"}}
+    return users.get(user_id)  # Returns None if not found
+
+# Tuple - fixed-length, mixed types
+def get_stats(data: List[int]) -> Tuple[int, int, float]:
+    """Returns (min, max, average) as a tuple."""
+    return min(data), max(data), sum(data) / len(data)
+
+# Usage
+min_val, max_val, avg = get_stats([1, 2, 3, 4, 5])
+```
+
+**Why bother?** 
+- IDEs give better autocomplete
+- Catch bugs before running
+- Code is self-documenting
+
+### 4.3 Pandas Basics - Data Analysis Powerhouse
+
+Labs 01-03 use pandas heavily for data manipulation. Here's what you need to know:
+
+```python
+import pandas as pd
+
+# Create a DataFrame (like a spreadsheet)
+data = {
+    "ip": ["192.168.1.1", "10.0.0.5", "192.168.1.1", "172.16.0.1"],
+    "event": ["login", "login", "failed", "login"],
+    "user": ["alice", "bob", "alice", "charlie"],
+    "risk_score": [2, 5, 8, 3]
+}
+df = pd.DataFrame(data)
+
+print(df)
+#             ip   event     user  risk_score
+# 0  192.168.1.1   login    alice           2
+# 1     10.0.0.5   login      bob           5
+# 2  192.168.1.1  failed    alice           8
+# 3   172.16.0.1   login  charlie           3
+
+# Read from CSV (most common)
+df = pd.read_csv("alerts.csv")
+
+# Basic operations
+print(df.shape)           # (4, 4) - rows, columns
+print(df.columns)         # Index(['ip', 'event', 'user', 'risk_score'])
+print(df.head(2))         # First 2 rows
+print(df.describe())      # Statistics for numeric columns
+
+# Select columns
+ips = df["ip"]                        # Single column (Series)
+subset = df[["ip", "user"]]           # Multiple columns (DataFrame)
+
+# Filter rows
+high_risk = df[df["risk_score"] > 5]  # Rows where risk_score > 5
+failed = df[df["event"] == "failed"]  # Rows where event is "failed"
+
+# Multiple conditions (use & for AND, | for OR, wrap in parentheses)
+critical = df[(df["risk_score"] > 5) & (df["event"] == "failed")]
+
+# Apply function to column
+df["ip_type"] = df["ip"].apply(lambda x: "internal" if x.startswith("192") else "external")
+
+# Group and aggregate
+by_user = df.groupby("user")["risk_score"].mean()  # Average risk per user
+by_event = df.groupby("event").size()              # Count per event type
+
+# Add new column
+df["is_risky"] = df["risk_score"] > 5
+
+# String operations
+df["ip_prefix"] = df["ip"].str.split(".").str[0]   # First octet
+
+# Value counts (frequency)
+print(df["event"].value_counts())
+# login     3
+# failed    1
+
+# Save to CSV
+df.to_csv("output.csv", index=False)
+```
+
+**Pandas cheat sheet for security:**
+```python
+# Common patterns in the labs
+df = pd.read_csv("emails.csv")                     # Load data
+df["label"] = df["is_phishing"].map({0: "legit", 1: "phish"})  # Map values
+df["text_length"] = df["text"].str.len()           # Feature engineering
+X = df[["feature1", "feature2"]]                   # Features for ML
+y = df["label"]                                    # Labels for ML
+```
+
+### 4.4 Classes - Organizing Complex Code
+
+Labs 04+ use classes to organize related functions. Here's the pattern:
+
+```python
+class ThreatAnalyzer:
+    """Analyze security events for threats.
+    
+    Classes group related data (attributes) and functions (methods).
+    """
+    
+    def __init__(self, threshold: float = 0.7):
+        """Initialize the analyzer.
+        
+        __init__ runs when you create an instance.
+        self refers to the instance itself.
+        """
+        self.threshold = threshold
+        self.alerts = []
+    
+    def analyze(self, event: dict) -> dict:
+        """Analyze a single event."""
+        score = self._calculate_score(event)
+        result = {
+            "event": event,
+            "score": score,
+            "is_threat": score > self.threshold
+        }
+        if result["is_threat"]:
+            self.alerts.append(result)
+        return result
+    
+    def _calculate_score(self, event: dict) -> float:
+        """Private method (starts with _).
+        
+        Convention: methods starting with _ are internal.
+        """
+        score = 0.0
+        if event.get("failed_logins", 0) > 3:
+            score += 0.5
+        if event.get("is_admin", False):
+            score += 0.3
+        if event.get("after_hours", False):
+            score += 0.2
+        return min(score, 1.0)
+    
+    def get_summary(self) -> dict:
+        """Get analysis summary."""
+        return {
+            "total_alerts": len(self.alerts),
+            "threshold": self.threshold
+        }
+
+
+# Using the class
+analyzer = ThreatAnalyzer(threshold=0.5)  # Create instance
+
+events = [
+    {"user": "alice", "failed_logins": 5, "is_admin": True},
+    {"user": "bob", "failed_logins": 1, "is_admin": False},
+]
+
+for event in events:
+    result = analyzer.analyze(event)
+    print(f"{event['user']}: score={result['score']:.2f}, threat={result['is_threat']}")
+
+print(analyzer.get_summary())
+# alice: score=0.80, threat=True
+# bob: score=0.00, threat=False
+# {'total_alerts': 1, 'threshold': 0.5}
+```
+
+### 4.5 Exception Handling - Graceful Failures
+
+Production code needs to handle errors gracefully:
+
+```python
+def safe_parse_log(line: str) -> Optional[dict]:
+    """Parse a log line, returning None on failure."""
+    try:
+        parts = line.strip().split("|")
+        return {
+            "timestamp": parts[0],
+            "level": parts[1],
+            "message": parts[2]
+        }
+    except IndexError:
+        print(f"Warning: Malformed log line: {line}")
+        return None
+    except Exception as e:
+        print(f"Error parsing line: {e}")
+        return None
+
+
+def fetch_threat_intel(ip: str) -> dict:
+    """Fetch threat intel with proper error handling."""
+    import requests
+    
+    try:
+        response = requests.get(f"https://api.example.com/ip/{ip}", timeout=5)
+        response.raise_for_status()  # Raises exception for 4xx/5xx
+        return response.json()
+    except requests.Timeout:
+        return {"error": "Request timed out", "ip": ip}
+    except requests.HTTPError as e:
+        return {"error": f"HTTP error: {e.response.status_code}", "ip": ip}
+    except requests.RequestException as e:
+        return {"error": f"Request failed: {e}", "ip": ip}
+    except Exception as e:
+        return {"error": f"Unexpected error: {e}", "ip": ip}
+
+
+# Pattern: Try multiple operations, handle each failure mode
+def process_batch(items: List[str]) -> Tuple[List[dict], List[str]]:
+    """Process items, separating successes from failures."""
+    successes = []
+    failures = []
+    
+    for item in items:
+        try:
+            result = process_item(item)  # Your processing logic
+            successes.append(result)
+        except Exception as e:
+            failures.append(f"{item}: {e}")
+    
+    return successes, failures
+```
+
+---
+
+## Part 5: Making API Requests
+
+### 5.1 Basic HTTP Requests
 
 ```python
 import requests
@@ -469,7 +758,7 @@ response = requests.post("https://httpbin.org/post", json=data)
 print(response.json())
 ```
 
-### 4.2 API with Authentication
+### 5.2 API with Authentication
 
 ```python
 import requests
@@ -572,6 +861,10 @@ len(items)            # Get length
 items[0]              # First item
 items[-1]             # Last item
 
+# List comprehensions
+[x*2 for x in items]              # Transform: [2, 4, 6]
+[x for x in items if x > 1]       # Filter: [2, 3]
+
 # Dictionaries
 d = {"key": "value"}
 d["key"]              # Get value
@@ -585,10 +878,33 @@ with open("file.txt", "r") as f:  # Read
 with open("file.txt", "w") as f:  # Write
 with open("file.txt", "a") as f:  # Append
 
+# Pandas essentials
+import pandas as pd
+df = pd.read_csv("file.csv")      # Load CSV
+df.head()                          # First 5 rows
+df[df["col"] > 5]                  # Filter rows
+df["col"].apply(func)              # Apply function
+df.groupby("col").mean()           # Group & aggregate
+
+# Type hints
+from typing import List, Dict, Optional
+def func(x: int) -> str:           # Takes int, returns str
+def func(items: List[str]) -> Dict[str, int]:
+
+# Exception handling
+try:
+    risky_operation()
+except SpecificError as e:
+    handle_error(e)
+finally:
+    cleanup()
+
 # Common imports
 import json           # JSON parsing
 import csv            # CSV files
 import re             # Regular expressions
 import requests       # HTTP requests
 import os             # Environment variables
+import pandas as pd   # Data analysis
+from typing import List, Dict, Optional  # Type hints
 ```

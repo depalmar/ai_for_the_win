@@ -1,6 +1,6 @@
 # AI for the Win
 
-### Build AI-Powered Security Tools | From Zero to Production
+### Build AI-Powered Security Tools | Hands-On Learning
 
 [![CI](https://github.com/depalmar/ai_for_the_win/actions/workflows/ci.yml/badge.svg)](https://github.com/depalmar/ai_for_the_win/actions/workflows/ci.yml)
 [![Tests](https://img.shields.io/badge/tests-839%2F839%20passing-brightgreen)](https://github.com/depalmar/ai_for_the_win/actions/workflows/ci.yml)
@@ -64,7 +64,7 @@ python solution/main.py
 > 📖 **New to Python or ML?** Start with Labs 00a-00b-01-02-03 (no API keys required!)
 > 📖 **Know ML, want LLMs?** Jump to Lab 04 and get an API key first
 > 📖 **Need help?** Read [GETTING_STARTED.md](./GETTING_STARTED.md) for detailed setup
-> 📖 **Lost in the docs?** See [DOCUMENTATION_GUIDE.md](./DOCUMENTATION_GUIDE.md) for navigation
+> 📖 **Lost in the docs?** See [Documentation Guide](./docs/documentation-guide.md) for navigation
 
 ---
 
@@ -77,18 +77,32 @@ python solution/main.py
 ```
 $ python labs/lab01-phishing-classifier/solution/main.py
 
-[+] Trained on 1,000 labeled emails
-[+] Model: Random Forest with TF-IDF features
+[+] Training on 1,000 labeled emails...
+[+] Model: Random Forest + TF-IDF (847 features)
+[+] Accuracy: 96.2% | Precision: 94.1% | Recall: 97.8%
 
-Testing on new emails...
-  "Dear user, your account will be suspended" → 🚨 PHISHING (94%)
-  "Q3 revenue report attached"               → ✅ LEGIT (91%)
-  "Coinbase: verify identity immediately"    → 🚨 PHISHING (97%)
+📬 Scanning inbox (4 new emails)...
 
-Top phishing indicators learned:
-  1. urgency_score    (+0.34)  ← "immediately", "suspend", "verify"
-  2. url_mismatch     (+0.28)  ← display text ≠ actual link
-  3. sender_anomaly   (+0.19)  ← domain doesn't match brand
+  From: security@amaz0n-verify.com
+  Subj: "Your account will be suspended in 24 hours"
+  ──→ 🚨 PHISHING (98.2%)  [urgency + spoofed domain]
+
+  From: sarah.jones@company.com
+  Subj: "Q3 budget report attached"
+  ──→ ✅ LEGIT (94.6%)
+
+  From: helpdesk@paypa1.com
+  Subj: "Click here to verify your identity"
+  ──→ 🚨 PHISHING (96.7%)  [link mismatch + typosquat]
+
+  From: it-dept@company.com
+  Subj: "Password expires in 7 days - reset here"
+  ──→ ⚠️  SUSPICIOUS (67.3%)  [needs review]
+
+📊 Top features that caught phishing:
+   urgency_words: +0.34  (suspend, verify, immediately)
+   url_mismatch:  +0.28  (display ≠ actual link)
+   domain_spoof:  +0.22  (amaz0n, paypa1)
 ```
 
 **Lab 04 - LLM Log Analysis** finds attacks in noise:
@@ -258,7 +272,7 @@ flowchart LR
 | Phishing detection     | **Hybrid**    | ML for volume, LLM for sophisticated cases |
 | Detection pipeline     | **Hybrid**    | ML filters 90%, LLM analyzes 10%           |
 
-> 📖 **Full comparison**: See [ML vs LLM Decision Framework](./LEARNING_GUIDE.md#choosing-the-right-tool-ml-vs-llm) for detailed guidance, cost analysis, and hybrid architecture patterns.
+> 📖 **Full comparison**: See [ML vs LLM Decision Framework](./docs/learning-guide.md#choosing-the-right-tool-ml-vs-llm) for detailed guidance, cost analysis, and hybrid architecture patterns.
 
 ---
 
@@ -489,11 +503,10 @@ Copy `.env.example` to `.env` and configure:
 | [Role-Based Learning Paths](./resources/role-based-learning-paths.md) | Paths for SOC, IR, hunting, red team                |
 | [Security-to-AI Glossary](./resources/security-to-ai-glossary.md)     | AI terms explained for security folks               |
 | [API Keys Guide](./setup/guides/api-keys-guide.md)                    | Get API keys, manage costs                          |
-| [Quick Start](./QUICKSTART.md)                                        | Get running fast                                    |
-| [Documentation Guide](./DOCUMENTATION_GUIDE.md)                       | Find exactly what you need                          |
+| [Documentation Guide](./docs/documentation-guide.md)                  | Find exactly what you need                          |
 | [Security Prompts](./resources/prompt-library/security-prompts.md)    | Ready-to-use prompts for security tasks             |
 | [Lab Walkthroughs](./docs/walkthroughs/)                              | Step-by-step solutions when stuck                   |
-| [Cheatsheets](./resources/cheatsheets/)                               | Quick references for Claude Code, Cursor, LangChain |
+| [LangChain Cheatsheet](./resources/cheatsheets/langchain-security-cheatsheet.md) | Quick reference for LangChain security tools |
 | [SIEM Integrations](./resources/integrations/)                        | Splunk, Elastic, XSIAM integration guides           |
 | [Tools & APIs](./resources/tools-and-resources.md)                    | 80+ security tools, APIs, datasets                  |
 | [MCP Servers](./resources/mcp-servers-security-guide.md)              | MCP servers for DFIR, threat intel                  |

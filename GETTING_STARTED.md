@@ -304,7 +304,7 @@ After completing your first lab:
 1. **Track Progress**: Use the checklist in `labs/README.md`
 2. **Join Discussions**: Open GitHub Discussions for questions
 3. **Try Interactive Demos**: Run `python demo/launcher.py`
-4. **Plan Your Path**: See [LEARNING_GUIDE.md](./LEARNING_GUIDE.md) for detailed paths
+4. **Plan Your Path**: See [Learning Guide](./docs/learning-guide.md) for detailed paths
 
 ---
 
@@ -370,7 +370,7 @@ Quick references for AI coding tools:
 - **Setup Issues**: See [troubleshooting-guide.md](./setup/guides/troubleshooting-guide.md)
 - **Stuck on a Lab**: Check the [walkthroughs](./docs/walkthroughs/) for step-by-step solutions
 - **Lab Questions**: Check the lab's README hints section
-- **Find Resources**: See [DOCUMENTATION_GUIDE.md](./DOCUMENTATION_GUIDE.md) for navigation
+- **Find Resources**: See [Documentation Guide](./docs/documentation-guide.md) for navigation
 - **General Questions**: Open a GitHub Discussion
 - **Bugs**: Open a GitHub Issue
 

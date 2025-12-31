@@ -656,6 +656,12 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
   overflow-x: auto;
 }
 
+.quick-start pre, .quick-start code {
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
 .quick-start code {
   color: var(--secondary);
 }
@@ -730,9 +736,9 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
   border-radius: 8px;
   padding: 1rem;
   margin: 1.5rem auto;
-  max-width: 500px;
+  max-width: 600px;
   font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   text-align: left;
 }
 
@@ -768,10 +774,21 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
   content: '';
 }
 
-.terminal-line:nth-child(2) { animation-delay: 0.5s; }
-.terminal-line:nth-child(3) { animation-delay: 1.5s; }
-.terminal-line:nth-child(4) { animation-delay: 2.5s; }
-.terminal-line:nth-child(5) { animation-delay: 3.5s; }
+.terminal-line:nth-child(2) { animation-delay: 0.3s; }
+.terminal-line:nth-child(3) { animation-delay: 0.5s; }
+.terminal-line:nth-child(4) { animation-delay: 0.7s; }
+.terminal-line:nth-child(5) { animation-delay: 0.9s; }
+.terminal-line:nth-child(6) { animation-delay: 1.1s; }
+.terminal-line:nth-child(7) { animation-delay: 1.3s; }
+.terminal-line:nth-child(8) { animation-delay: 1.5s; }
+.terminal-line:nth-child(9) { animation-delay: 1.7s; }
+.terminal-line:nth-child(10) { animation-delay: 1.9s; }
+.terminal-line:nth-child(11) { animation-delay: 2.1s; }
+.terminal-line:nth-child(12) { animation-delay: 2.3s; }
+.terminal-line:nth-child(13) { animation-delay: 2.5s; }
+.terminal-line:nth-child(14) { animation-delay: 2.7s; }
+.terminal-line:nth-child(15) { animation-delay: 2.9s; }
+.terminal-line:nth-child(16) { animation-delay: 3.1s; }
 
 @keyframes fadeIn {
   to { opacity: 1; }
@@ -887,7 +904,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
 
 <div class="hero">
   <h1>AI for the Win</h1>
-  <p class="tagline">Build AI-Powered Security Tools | From Zero to Production</p>
+  <p class="tagline">Build AI-Powered Security Tools | Hands-On Learning</p>
 
   <div class="terminal-demo">
     <div class="terminal-header">
@@ -896,9 +913,19 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
       <span class="terminal-dot green"></span>
     </div>
     <div class="terminal-line">python labs/lab01-phishing-classifier/solution/main.py</div>
-    <div class="terminal-line output">Analyzing 1,000 emails...</div>
-    <div class="terminal-line output">Model accuracy: 97.3%</div>
-    <div class="terminal-line output">Detected 47 phishing attempts<span class="typing"></span></div>
+    <div class="terminal-line output"></div>
+    <div class="terminal-line output">[+] Trained on 1,000 labeled emails</div>
+    <div class="terminal-line output">[+] Model: Random Forest with TF-IDF features</div>
+    <div class="terminal-line output"></div>
+    <div class="terminal-line output">Testing on new emails...</div>
+    <div class="terminal-line output">  "Dear user, your account will be suspended" → 🚨 PHISHING (94%)</div>
+    <div class="terminal-line output">  "Q3 revenue report attached"               → ✅ LEGIT (91%)</div>
+    <div class="terminal-line output">  "Coinbase: verify identity immediately"    → 🚨 PHISHING (97%)</div>
+    <div class="terminal-line output"></div>
+    <div class="terminal-line output">Top phishing indicators learned:</div>
+    <div class="terminal-line output">  1. urgency_score  (+0.34) ← "immediately", "suspend", "verify"</div>
+    <div class="terminal-line output">  2. url_mismatch   (+0.28) ← display text ≠ actual link</div>
+    <div class="terminal-line output">  3. sender_anomaly (+0.19) ← domain doesn't match brand<span class="typing"></span></div>
   </div>
 
   <div class="stats">
@@ -1028,9 +1055,13 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
     <div class="nav-title">Your Learning Journey: Click any lab to explore</div>
     <div class="nav-path">
       <div class="nav-stage">
-        <div class="nav-stage-label">Setup</div>
+        <div class="nav-stage-label">Setup & Intro</div>
         <div class="nav-labs">
           <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab00-environment-setup" class="nav-lab intro" title="Lab 00: Environment Setup">00</a>
+          <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab00a-python-security-fundamentals" class="nav-lab intro" title="Lab 00a: Python for Security">00a</a>
+          <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab00b-ml-concepts-primer" class="nav-lab intro" title="Lab 00b: ML Concepts">00b</a>
+          <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab00c-intro-prompt-engineering" class="nav-lab intro" title="Lab 00c: Prompt Engineering">00c</a>
+          <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab00d-ai-in-security-operations" class="nav-lab intro" title="Lab 00d: AI in Security Ops">00d</a>
         </div>
       </div>
       <span class="nav-arrow">&#8594;</span>
@@ -1114,6 +1145,50 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
       <p class="lab-desc">Python, VS Code, virtual env, Jupyter</p>
       <div class="lab-meta">
         <span>&#128337; ~30 min</span>
+        <span class="difficulty difficulty-1">&#9733;&#9734;&#9734; Beginner</span>
+      </div>
+    </a>
+    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab00a-python-security-fundamentals" class="lab-card" data-category="intro">
+      <div class="lab-header">
+        <span class="lab-number">00a</span>
+        <span class="lab-title">Python for Security</span>
+      </div>
+      <p class="lab-desc">Variables, files, APIs, IOC extraction</p>
+      <div class="lab-meta">
+        <span>&#128337; ~2 hrs</span>
+        <span class="difficulty difficulty-1">&#9733;&#9734;&#9734; Beginner</span>
+      </div>
+    </a>
+    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab00b-ml-concepts-primer" class="lab-card" data-category="intro">
+      <div class="lab-header">
+        <span class="lab-number">00b</span>
+        <span class="lab-title">ML Concepts</span>
+      </div>
+      <p class="lab-desc">Supervised, unsupervised, features, metrics</p>
+      <div class="lab-meta">
+        <span>&#128337; ~1 hr</span>
+        <span class="difficulty difficulty-1">&#9733;&#9734;&#9734; Beginner</span>
+      </div>
+    </a>
+    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab00c-intro-prompt-engineering" class="lab-card" data-category="intro">
+      <div class="lab-header">
+        <span class="lab-number">00c</span>
+        <span class="lab-title">Prompt Engineering</span>
+      </div>
+      <p class="lab-desc">LLM basics, templates, free playgrounds</p>
+      <div class="lab-meta">
+        <span>&#128337; ~1 hr</span>
+        <span class="difficulty difficulty-1">&#9733;&#9734;&#9734; Beginner</span>
+      </div>
+    </a>
+    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab00d-ai-in-security-operations" class="lab-card" data-category="intro">
+      <div class="lab-header">
+        <span class="lab-number">00d</span>
+        <span class="lab-title">AI in Security Ops</span>
+      </div>
+      <p class="lab-desc">Real-world use cases, limitations, workflows</p>
+      <div class="lab-meta">
+        <span>&#128337; ~1 hr</span>
         <span class="difficulty difficulty-1">&#9733;&#9734;&#9734; Beginner</span>
       </div>
     </a>
@@ -1392,7 +1467,7 @@ function toggleTheme() {
 (function() {
   function removeThemeFooter() {
     document.querySelectorAll('p, footer, span').forEach(function(el) {
-      if (el.textContent.includes('Theme by') || 
+      if (el.textContent.includes('Theme by') ||
           el.textContent.includes('Hosted on GitHub Pages')) {
         el.style.display = 'none';
       }
@@ -1498,7 +1573,7 @@ function toggleTheme() {
         <span class="path-toggle">&#9660;</span>
       </summary>
       <div class="path-content">
-        <p class="path-desc">Build production-ready tools. Detection pipelines, IR copilots, and DFIR automation.</p>
+        <p class="path-desc">Build advanced tools. Detection pipelines, IR copilots, and DFIR automation.</p>
         <div class="path-labs-list">
           <div class="path-lab-item">
             <span class="path-lab-num advanced">08</span>
@@ -1582,6 +1657,7 @@ function toggleTheme() {
         <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted);">Total: ~30 hours | Cost: ~$10-20</p>
       </div>
     </details>
+
   </div>
 
   <h3 style="margin-top: 2.5rem; margin-bottom: 1rem;">By Role</h3>
@@ -1626,7 +1702,6 @@ function toggleTheme() {
         <th>Labs</th>
         <th>API Required</th>
         <th>Estimated Cost</th>
-        <th>Time</th>
       </tr>
     </thead>
     <tbody>
@@ -1634,31 +1709,26 @@ function toggleTheme() {
         <td>00-03 (ML Foundations)</td>
         <td>No</td>
         <td class="free">Free</td>
-        <td>~6 hrs</td>
       </tr>
       <tr>
         <td>04-07 (LLM Basics)</td>
         <td>Yes</td>
         <td>~$2-8</td>
-        <td>~13 hrs</td>
       </tr>
       <tr>
         <td>08-10 (Advanced)</td>
         <td>Yes</td>
         <td>~$5-15</td>
-        <td>~13 hrs</td>
       </tr>
       <tr>
         <td>11-20 (Expert)</td>
         <td>Yes</td>
         <td>~$10-25</td>
-        <td>~57 hrs</td>
       </tr>
       <tr>
         <td><strong>With Ollama (local)</strong></td>
         <td>No</td>
         <td class="free">$0 Total</td>
-        <td>~89 hrs</td>
       </tr>
     </tbody>
   </table>
@@ -1677,13 +1747,16 @@ git clone https://github.com/depalmar/ai_for_the_win.git
 cd ai_for_the_win
 
 # Set up environment
+
 python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
+source venv/bin/activate # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 
 # Start with Lab 01 - no API key needed!
+
 cd labs/lab01-phishing-classifier
 python solution/main.py</code></pre>
+
   </div>
 
   <div class="cta-buttons" style="margin-top: 1.5rem;">
@@ -1692,44 +1765,37 @@ python solution/main.py</code></pre>
 </div>
 
 <div class="section" id="faq">
-  <h2 class="section-title">Frequently Asked Questions</h2>
-
-  <div class="faq">
-    <details class="faq-item">
-      <summary>Do I need prior ML/AI experience?</summary>
-      <p>No. Labs 00a-00c cover Python basics, ML concepts, and prompt engineering from scratch. The Security-to-AI Glossary translates ML jargon into security terms you already know.</p>
-    </details>
-
-    <details class="faq-item">
-      <summary>Which LLM provider should I use?</summary>
-      <p>We recommend Anthropic Claude for best reasoning on security tasks. But all labs support OpenAI GPT-4, Google Gemini, and Ollama (free, local). You only need one.</p>
-    </details>
-
-    <details class="faq-item">
-      <summary>Can I run everything locally without API costs?</summary>
-      <p>Yes! Use Ollama to run models locally for free. Labs 01-03 don't need any API at all. You can complete the entire course for $0 if you use local models.</p>
-    </details>
-
-    <details class="faq-item">
-      <summary>How long does it take to complete all labs?</summary>
-      <p>The full course is approximately 40-89 hours depending on AI assistance level. With AI coding tools, most labs take 50-70% less time. Focus on your role's learning path first (~5-18 hours) for immediate value.</p>
-    </details>
-
-    <details class="faq-item">
-      <summary>What if I get stuck on a lab?</summary>
-      <p>Every lab includes complete solution code, step-by-step hints, and a Jupyter notebook. Check GitHub Discussions for community help or open an issue.</p>
-    </details>
-
-    <details class="faq-item">
-      <summary>Are the labs production-ready?</summary>
-      <p>The solutions demonstrate core concepts. For production use, you'd add error handling, logging, and scale considerations. Lab 09 (Detection Pipeline) shows production architecture patterns.</p>
-    </details>
-
-    <details class="faq-item">
-      <summary>How is this different from other ML courses?</summary>
-      <p>Every lab solves a real security problem. You won't build iris classifiers or digit recognizers. You'll build phishing detectors, threat intel agents, and ransomware analyzers.</p>
-    </details>
-  </div>
+<h2 class="section-title">Frequently Asked Questions</h2>
+<div class="faq">
+<details class="faq-item">
+<summary>Do I need prior ML/AI experience?</summary>
+<p>No. Labs 00a-00c cover Python basics, ML concepts, and prompt engineering from scratch. The Security-to-AI Glossary translates ML jargon into security terms you already know.</p>
+</details>
+<details class="faq-item">
+<summary>Which LLM provider should I use?</summary>
+<p>We recommend Anthropic Claude for best reasoning on security tasks. But all labs support OpenAI GPT-4, Google Gemini, and Ollama (free, local). You only need one.</p>
+</details>
+<details class="faq-item">
+<summary>Can I run everything locally without API costs?</summary>
+<p>Yes! Use Ollama to run models locally for free. Labs 01-03 don't need any API at all. You can complete the entire course for $0 if you use local models.</p>
+</details>
+<details class="faq-item">
+<summary>How long does it take to complete all labs?</summary>
+<p>The full course is approximately 40-89 hours depending on AI assistance level. With AI coding tools, most labs take 50-70% less time. Focus on your role's learning path first (~5-18 hours) for immediate value.</p>
+</details>
+<details class="faq-item">
+<summary>What if I get stuck on a lab?</summary>
+<p>Every lab includes complete solution code, step-by-step hints, and a Jupyter notebook. Check GitHub Discussions for community help or open an issue.</p>
+</details>
+<details class="faq-item">
+<summary>Are the labs production-ready?</summary>
+<p>The solutions demonstrate core concepts. For production use, you'd add error handling, logging, and scale considerations. Lab 09 (Detection Pipeline) shows production architecture patterns.</p>
+</details>
+<details class="faq-item">
+<summary>How is this different from other ML courses?</summary>
+<p>Every lab solves a real security problem. You won't build iris classifiers or digit recognizers. You'll build phishing detectors, threat intel agents, and ransomware analyzers.</p>
+</details>
+</div>
 </div>
 
 <div class="section" style="border-bottom: none;">
@@ -1772,5 +1838,5 @@ python solution/main.py</code></pre>
 </div>
 
 <p style="text-align: center; color: var(--text-muted); font-size: 0.85rem;">
-  MIT License | Built for security practitioners
+  MIT License | Built for security practitioners | Maintained by <a href="https://github.com/depalmar" style="color: var(--text-muted); text-decoration: underline;">depalmar</a>
 </p>
