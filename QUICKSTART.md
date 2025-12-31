@@ -18,6 +18,9 @@ pip install -r requirements.txt
 
 # Run your first lab (no API key needed!)
 python labs/lab01-phishing-classifier/solution/main.py
+
+# Or start with foundations (interactive exercises)
+python labs/lab00b-ml-concepts-primer/starter/main.py
 ```
 
 ## Option 2: Docker
@@ -67,12 +70,17 @@ python scripts/verify_setup.py
 
 ## Where to Start
 
-| Your Background | Start Here |
-|-----------------|------------|
-| New to Python | [Lab 00a](./labs/lab00a-python-security-fundamentals/) |
-| New to ML | [Lab 01](./labs/lab01-phishing-classifier/) |
-| Know ML, new to LLMs | [Lab 04](./labs/lab04-llm-log-analysis/) |
-| Want AI agents | [Lab 05](./labs/lab05-threat-intel-agent/) |
+| Your Background | Start Here | API Key? |
+|-----------------|------------|----------|
+| Brand new | [Lab 00](./labs/lab00-environment-setup/) - Setup | No |
+| New to Python | [Lab 00a](./labs/lab00a-python-security-fundamentals/) - Python basics | No |
+| New to ML concepts | [Lab 00b](./labs/lab00b-ml-concepts-primer/) - ML theory | No |
+| New to prompting | [Lab 00c](./labs/lab00c-intro-prompt-engineering/) - Prompt basics | No |
+| Ready for ML labs | [Lab 01](./labs/lab01-phishing-classifier/) - First ML model | No |
+| Know ML, want LLMs | [Lab 04](./labs/lab04-llm-log-analysis/) - First LLM | Yes |
+| Want AI agents | [Lab 05](./labs/lab05-threat-intel-agent/) - Agents | Yes |
+
+**Recommended path for beginners:** 00 → 00a → 00b → 00c → 01 → 02 → 03 → 04+
 
 ---
 
