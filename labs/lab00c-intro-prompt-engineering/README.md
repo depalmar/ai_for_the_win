@@ -613,15 +613,16 @@ When you're ready to build production security tools, these guides will help:
 
 ### Continue Learning
 
-**Free Resources:**
-- [Anthropic's Prompt Engineering Guide](https://docs.anthropic.com/claude/docs/intro-to-prompting)
-- [OpenAI Prompt Engineering Best Practices](https://platform.openai.com/docs/guides/prompt-engineering)
-- [Learn Prompting](https://learnprompting.org/) - Comprehensive free course
+**Official Prompting Guides (Highly Recommended):**
+- [Google's Prompting Strategies Guide](https://ai.google.dev/gemini-api/docs/prompting-strategies) - Comprehensive techniques
+- [Anthropic's Prompt Engineering Guide](https://docs.anthropic.com/claude/docs/intro-to-prompting) - Claude-specific patterns
+- [OpenAI Prompt Engineering Best Practices](https://platform.openai.com/docs/guides/prompt-engineering) - GPT patterns
+- [Learn Prompting](https://learnprompting.org/) - Free interactive course
 
-**Practice Playgrounds:**
-- [Google AI Studio](https://aistudio.google.com/) - Free Gemini access
-- [Claude.ai](https://claude.ai/) - Generous free tier
-- [Poe](https://poe.com/) - Try multiple models
+**Practice Playgrounds (No API Keys Needed):**
+- [Google AI Studio](https://aistudio.google.com/) - Free Gemini access, great for testing prompts
+- [Claude.ai](https://claude.ai/) - Generous free tier, excellent for security analysis
+- [Poe.com](https://poe.com/) - Try Claude, GPT-4, Gemini, Llama & more in one place (by Quora)
 
 ---
 
