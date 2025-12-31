@@ -15,7 +15,9 @@ for key in list(sys.modules.keys()):
 sys.path = [p for p in sys.path if "/labs/lab" not in p and "\\labs\\lab" not in p]
 
 # Add this lab's path
-lab_path = str(Path(__file__).parent.parent / "labs" / "lab00d-ai-in-security-operations" / "solution")
+lab_path = str(
+    Path(__file__).parent.parent / "labs" / "lab00d-ai-in-security-operations" / "solution"
+)
 sys.path.insert(0, lab_path)
 
 from main import generate_quick_reference, load_scenarios
