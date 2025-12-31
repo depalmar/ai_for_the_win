@@ -36,11 +36,10 @@ resources/
 │   └── splunk-integration.md   # Splunk Enterprise/Cloud
 ├── prompt-library/              # Security analysis prompts
 │   └── security-prompts.md      # Curated prompt templates
-└── cheatsheets/                 # Quick reference guides (legacy)
-    # Note: Comprehensive guides are now at setup/guides/
-    # - LangChain Guide: setup/guides/langchain-guide.md
-    # - Cursor IDE Guide: setup/guides/cursor-ide-guide.md
-    # - Claude Code CLI: setup/guides/claude-code-cli-guide.md
+# Note: All comprehensive guides are at setup/guides/
+# - LangChain Guide: setup/guides/langchain-guide.md
+# - Cursor IDE Guide: setup/guides/cursor-ide-guide.md
+# - Claude Code CLI: setup/guides/claude-code-cli-guide.md
 ```
 
 ## Quick Links
@@ -143,7 +142,7 @@ To add new resources:
 
 1. Add entries to `tools-and-resources.md` for tools/APIs
 2. Create new files in `prompt-library/` for prompts
-3. Add to `cheatsheets/` for quick references
+3. Add comprehensive guides to `setup/guides/`
 4. Update this README with new additions
 
 ### Resource Format

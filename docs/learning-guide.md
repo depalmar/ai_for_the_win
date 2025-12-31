@@ -915,7 +915,7 @@ As you work through the labs, these resources will help you go deeper:
 | [Tools & APIs](../resources/tools-and-resources.md) | 80+ security tools, APIs, and datasets |
 | [Lab Walkthroughs](./walkthroughs/) | Step-by-step solutions when you're stuck |
 | [SIEM Integrations](../resources/integrations/) | Splunk, Elastic, XSIAM integration examples |
-| [Cheatsheets](../resources/cheatsheets/) | Quick references (LangChain security patterns) |
+| [Setup Guides](../setup/guides/) | LangChain, Cursor, Claude Code, ADK guides |
 | [Documentation Guide](./documentation-guide.md) | Find any resource quickly |
 
 ---

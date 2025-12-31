@@ -50,7 +50,7 @@
 | **Ready-to-use security prompts** | [Security Prompt Library](../resources/prompt-library/security-prompts.md) |
 | **Tools, APIs, datasets** | [Tools & Resources](../resources/tools-and-resources.md) |
 | **MCP servers for security** | [MCP Servers Guide](../resources/mcp-servers-security-guide.md) |
-| **Quick reference cheatsheets** | [Cheatsheets](../resources/cheatsheets/) |
+| **Quick reference guides** | [Setup Guides](../setup/guides/) |
 
 ### Build Integrations
 
@@ -118,7 +118,7 @@ Root
 ├── resources/                   # Tools, prompts, integrations
 │   ├── tools-and-resources.md   # 80+ tools/APIs/datasets
 │   ├── prompt-library/          # Ready-to-use prompts
-│   ├── cheatsheets/             # Quick references
+│   # Guides at setup/guides/
 │   ├── integrations/            # SIEM integrations
 │   └── mcp-servers-security-guide.md
 │
