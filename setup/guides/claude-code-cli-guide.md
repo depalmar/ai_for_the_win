@@ -851,6 +851,43 @@ claude --help
 
 ---
 
+## Quick Reference
+
+### Essential Commands
+
+| Command | Description |
+|---------|-------------|
+| `claude` | Start interactive chat |
+| `claude "prompt"` | Run single prompt |
+| `claude -c` | Continue last conversation |
+| `claude -r "instructions"` | Resume with new instructions |
+| `claude --print` | Print response only (no interactive) |
+
+### Context Commands
+
+```bash
+/add src/auth.py      # Add file to context
+/clear                # Clear context
+/context              # Show current context
+/cost                 # Check session cost
+/help                 # Interactive help
+```
+
+### Security Workflows
+
+```bash
+# IOC extraction
+claude "Extract all IOCs from this threat report: $(cat report.txt)"
+
+# Malware analysis
+claude "Analyze this suspicious script" < script.ps1
+
+# Log analysis
+claude "Find authentication failures in these logs" < auth.log
+```
+
+---
+
 ## Resources
 
 - [Claude Code Documentation](https://docs.anthropic.com/claude-code)

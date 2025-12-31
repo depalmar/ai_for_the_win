@@ -12,14 +12,14 @@
 |------|-------|
 | **Quick setup (15 min)** | [Quick Start Guide](setup/guides/quickstart-guide.md) |
 | **Detailed setup** | [GETTING_STARTED.md](./GETTING_STARTED.md) |
-| **Choose my learning path** | [Learning Paths Guide](./LEARNING_GUIDE.md) |
+| **Choose my learning path** | [Learning Paths Guide](./learning-guide.md) |
 | **Run in Docker/Colab** | [README.md - Docker/Colab](./README.md#docker-quick-start) |
 
 ### Learn
 
 | Goal | Go To |
 |------|-------|
-| **ML vs LLM decision** | [Learning Guide - Choosing Tools](./LEARNING_GUIDE.md#choosing-the-right-tool-ml-vs-llm) |
+| **ML vs LLM decision** | [Learning Guide - Choosing Tools](./learning-guide.md#choosing-the-right-tool-ml-vs-llm) |
 | **Understanding each lab** | [Lab README files](./labs/) |
 | **Get unstuck on a lab** | [Lab Walkthroughs](./docs/walkthroughs/) |
 | **Find workshop materials** | [Workshops Guide](./setup/guides/workshops-guide.md) |
@@ -104,8 +104,8 @@ If you're stuck on a lab, these walkthroughs provide step-by-step solutions:
 Root
 ├── README.md                    # Project overview, quick start
 ├── GETTING_STARTED.md           # Detailed setup guide
-├── LEARNING_GUIDE.md            # Learning paths, ML vs LLM
-├── DOCUMENTATION_GUIDE.md       # You are here
+├── docs/learning-guide.md       # Learning paths, ML vs LLM
+├── docs/documentation-guide.md  # You are here
 │
 ├── setup/guides/                # Tool setup & troubleshooting
 │   ├── quickstart-guide.md      # 15-minute fast path

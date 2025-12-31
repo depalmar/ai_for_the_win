@@ -460,6 +460,45 @@ cat alerts.json | gemini "Triage and prioritize" | jq '.priority == "high"'
 
 ---
 
+## Quick Reference
+
+### Basic Commands
+
+```bash
+gemini                              # Interactive mode
+gemini "Your question"              # One-shot query
+gemini --file log.txt "Analyze"     # With file input
+cat data.json | gemini "Parse"      # Pipe input
+gemini --context ./project/ "Explain"  # Directory context
+```
+
+### Model Selection
+
+```bash
+gemini --model gemini-3-pro "Complex analysis"    # Most capable
+gemini --model gemini-3-flash "Quick task"        # Faster
+gemini --model gemini-2.5-pro "Large file"        # 1M context
+```
+
+### Security Workflows
+
+```bash
+gemini "Find brute force attacks" < /var/log/auth.log
+gemini --file suspicious.ps1 "Analyze for malicious behavior"
+gemini "Extract IOCs from this report" < threat_report.pdf
+gemini --search "Latest IOCs for LockBit ransomware"
+```
+
+### Free Tier Limits
+
+| Resource | Limit |
+|----------|-------|
+| Requests/minute | 60 |
+| Requests/day | 1,000 |
+| Context window | 1M tokens |
+
+---
+
 ## Resources
 
 - [GitHub Repository](https://github.com/google-gemini/gemini-cli)

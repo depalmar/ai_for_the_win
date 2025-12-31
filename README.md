@@ -64,7 +64,7 @@ python solution/main.py
 > 📖 **New to Python or ML?** Start with Labs 00a-00b-01-02-03 (no API keys required!)
 > 📖 **Know ML, want LLMs?** Jump to Lab 04 and get an API key first
 > 📖 **Need help?** Read [GETTING_STARTED.md](./GETTING_STARTED.md) for detailed setup
-> 📖 **Lost in the docs?** See [DOCUMENTATION_GUIDE.md](./DOCUMENTATION_GUIDE.md) for navigation
+> 📖 **Lost in the docs?** See [Documentation Guide](./docs/documentation-guide.md) for navigation
 
 ---
 
@@ -258,7 +258,7 @@ flowchart LR
 | Phishing detection     | **Hybrid**    | ML for volume, LLM for sophisticated cases |
 | Detection pipeline     | **Hybrid**    | ML filters 90%, LLM analyzes 10%           |
 
-> 📖 **Full comparison**: See [ML vs LLM Decision Framework](./LEARNING_GUIDE.md#choosing-the-right-tool-ml-vs-llm) for detailed guidance, cost analysis, and hybrid architecture patterns.
+> 📖 **Full comparison**: See [ML vs LLM Decision Framework](./docs/learning-guide.md#choosing-the-right-tool-ml-vs-llm) for detailed guidance, cost analysis, and hybrid architecture patterns.
 
 ---
 
@@ -489,11 +489,10 @@ Copy `.env.example` to `.env` and configure:
 | [Role-Based Learning Paths](./resources/role-based-learning-paths.md) | Paths for SOC, IR, hunting, red team                |
 | [Security-to-AI Glossary](./resources/security-to-ai-glossary.md)     | AI terms explained for security folks               |
 | [API Keys Guide](./setup/guides/api-keys-guide.md)                    | Get API keys, manage costs                          |
-| [Quick Start](./QUICKSTART.md)                                        | Get running fast                                    |
-| [Documentation Guide](./DOCUMENTATION_GUIDE.md)                       | Find exactly what you need                          |
+| [Documentation Guide](./docs/documentation-guide.md)                  | Find exactly what you need                          |
 | [Security Prompts](./resources/prompt-library/security-prompts.md)    | Ready-to-use prompts for security tasks             |
 | [Lab Walkthroughs](./docs/walkthroughs/)                              | Step-by-step solutions when stuck                   |
-| [Cheatsheets](./resources/cheatsheets/)                               | Quick references for Claude Code, Cursor, LangChain |
+| [LangChain Cheatsheet](./resources/cheatsheets/langchain-security-cheatsheet.md) | Quick reference for LangChain security tools |
 | [SIEM Integrations](./resources/integrations/)                        | Splunk, Elastic, XSIAM integration guides           |
 | [Tools & APIs](./resources/tools-and-resources.md)                    | 80+ security tools, APIs, datasets                  |
 | [MCP Servers](./resources/mcp-servers-security-guide.md)              | MCP servers for DFIR, threat intel                  |

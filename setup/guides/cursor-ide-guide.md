@@ -1053,4 +1053,38 @@ For analyzing malware in isolated environments:
 
 ---
 
+## Quick Reference
+
+### Keyboard Shortcuts
+
+| Shortcut | Action |
+|----------|--------|
+| `Cmd/Ctrl + K` | Inline edit (edit selected code) |
+| `Cmd/Ctrl + L` | Open Chat panel |
+| `Cmd/Ctrl + I` | Composer (multi-file edits) |
+| `Cmd/Ctrl + Shift + K` | Terminal command generation |
+| `Tab` | Accept autocomplete suggestion |
+| `Esc` | Reject suggestion |
+
+### Context References
+
+| Shortcut | Action |
+|----------|--------|
+| `@file` | Reference specific file |
+| `@folder` | Reference folder |
+| `@codebase` | Search entire codebase |
+| `@docs` | Reference documentation |
+| `@web` | Search the web |
+| `@git` | Reference git history |
+
+### Tips
+
+1. **Be specific** - Detailed prompts get better results
+2. **Use @mentions** - Reference files and docs explicitly
+3. **Review diffs** - Always review before accepting changes
+4. **Iterate** - Ask follow-up questions to refine
+5. **Use .cursorrules** - Set project-specific guidelines
+
+---
+
 **Next**: [Claude Code CLI Guide](./claude-code-cli-guide.md) | [Google ADK Guide](./google-adk-guide.md)
