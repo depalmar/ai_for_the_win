@@ -1,6 +1,6 @@
 # AI for the Win
 
-### Build AI-Powered Security Tools | From Zero to Production
+### Build AI-Powered Security Tools | Hands-On Learning
 
 [![CI](https://github.com/depalmar/ai_for_the_win/actions/workflows/ci.yml/badge.svg)](https://github.com/depalmar/ai_for_the_win/actions/workflows/ci.yml)
 [![Tests](https://img.shields.io/badge/tests-839%2F839%20passing-brightgreen)](https://github.com/depalmar/ai_for_the_win/actions/workflows/ci.yml)

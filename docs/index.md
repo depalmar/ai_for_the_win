@@ -887,7 +887,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
 
 <div class="hero">
   <h1>AI for the Win</h1>
-  <p class="tagline">Build AI-Powered Security Tools | From Zero to Production</p>
+  <p class="tagline">Build AI-Powered Security Tools | Hands-On Learning</p>
 
   <div class="terminal-demo">
     <div class="terminal-header">
@@ -895,13 +895,20 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
       <span class="terminal-dot yellow"></span>
       <span class="terminal-dot green"></span>
     </div>
-    <div class="terminal-line">python labs/lab01-phishing-classifier/solution/main.py</div>
-    <div class="terminal-line output">[+] Trained on 1,000 emails (Random Forest + TF-IDF)</div>
+    <div class="terminal-line">$ python labs/lab01-phishing-classifier/solution/main.py</div>
     <div class="terminal-line output"></div>
-    <div class="terminal-line output">Testing inbox...</div>
-    <div class="terminal-line output">  "Verify your account immediately" → 🚨 PHISHING (96%)</div>
-    <div class="terminal-line output">  "Q3 budget report attached"       → ✅ LEGIT (89%)</div>
-    <div class="terminal-line output">  "Reset password or account locked" → 🚨 PHISHING (93%)<span class="typing"></span></div>
+    <div class="terminal-line output">[+] Trained on 1,000 labeled emails</div>
+    <div class="terminal-line output">[+] Model: Random Forest with TF-IDF features</div>
+    <div class="terminal-line output"></div>
+    <div class="terminal-line output">Testing on new emails...</div>
+    <div class="terminal-line output">  "Dear user, your account will be suspended" → 🚨 PHISHING (94%)</div>
+    <div class="terminal-line output">  "Q3 revenue report attached"               → ✅ LEGIT (91%)</div>
+    <div class="terminal-line output">  "Coinbase: verify identity immediately"    → 🚨 PHISHING (97%)</div>
+    <div class="terminal-line output"></div>
+    <div class="terminal-line output">Top phishing indicators learned:</div>
+    <div class="terminal-line output">  1. urgency_score  (+0.34) ← "immediately", "suspend", "verify"</div>
+    <div class="terminal-line output">  2. url_mismatch   (+0.28) ← display text ≠ actual link</div>
+    <div class="terminal-line output">  3. sender_anomaly (+0.19) ← domain doesn't match brand<span class="typing"></span></div>
   </div>
 
   <div class="stats">
