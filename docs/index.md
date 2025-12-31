@@ -1584,8 +1584,36 @@ function toggleTheme() {
     </details>
   </div>
 
+  <h3 style="margin-top: 2.5rem; margin-bottom: 1rem;">By Role</h3>
+  <div class="features" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+    <a href="https://github.com/depalmar/ai_for_the_win/blob/main/resources/role-based-learning-paths.md#-soc-analyst-path" class="feature" style="text-decoration: none; cursor: pointer;">
+      <div class="feature-icon">🔵</div>
+      <h3 style="margin: 0;">SOC Analyst</h3>
+      <p>Automate triage, reduce alert fatigue</p>
+      <span style="font-size: 0.75rem; color: var(--secondary);">Labs 00→04→06→10</span>
+    </a>
+    <a href="https://github.com/depalmar/ai_for_the_win/blob/main/resources/role-based-learning-paths.md#-threat-hunter-path" class="feature" style="text-decoration: none; cursor: pointer;">
+      <div class="feature-icon">🟢</div>
+      <h3 style="margin: 0;">Threat Hunter</h3>
+      <p>Find unknowns, detect anomalies</p>
+      <span style="font-size: 0.75rem; color: var(--secondary);">Labs 03→02→14→15</span>
+    </a>
+    <a href="https://github.com/depalmar/ai_for_the_win/blob/main/resources/role-based-learning-paths.md#-detection-engineer-path" class="feature" style="text-decoration: none; cursor: pointer;">
+      <div class="feature-icon">🟡</div>
+      <h3 style="margin: 0;">Detection Engineer</h3>
+      <p>ML-powered rules, fewer false positives</p>
+      <span style="font-size: 0.75rem; color: var(--secondary);">Labs 01→03→07→09</span>
+    </a>
+    <a href="https://github.com/depalmar/ai_for_the_win/blob/main/resources/role-based-learning-paths.md#-red-team-path" class="feature" style="text-decoration: none; cursor: pointer;">
+      <div class="feature-icon">🔴</div>
+      <h3 style="margin: 0;">Red Team</h3>
+      <p>Evade ML, attack AI systems</p>
+      <span style="font-size: 0.75rem; color: var(--secondary);">Labs 03→17→20</span>
+    </a>
+  </div>
+
   <p style="text-align: center; margin-top: 1.5rem;">
-    <a href="https://github.com/depalmar/ai_for_the_win/blob/main/resources/role-based-learning-paths.md" class="btn btn-secondary">View Role-Based Paths</a>
+    <a href="https://github.com/depalmar/ai_for_the_win/blob/main/resources/role-based-learning-paths.md" class="btn btn-secondary">View All 9 Role Paths</a>
   </p>
 </div>
 
