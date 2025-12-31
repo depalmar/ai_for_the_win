@@ -77,18 +77,32 @@ python solution/main.py
 ```
 $ python labs/lab01-phishing-classifier/solution/main.py
 
-[+] Trained on 1,000 labeled emails
-[+] Model: Random Forest with TF-IDF features
+[+] Training on 1,000 labeled emails...
+[+] Model: Random Forest + TF-IDF (847 features)
+[+] Accuracy: 96.2% | Precision: 94.1% | Recall: 97.8%
 
-Testing on new emails...
-  "Dear user, your account will be suspended" → 🚨 PHISHING (94%)
-  "Q3 revenue report attached"               → ✅ LEGIT (91%)
-  "Coinbase: verify identity immediately"    → 🚨 PHISHING (97%)
+📬 Scanning inbox (4 new emails)...
 
-Top phishing indicators learned:
-  1. urgency_score    (+0.34)  ← "immediately", "suspend", "verify"
-  2. url_mismatch     (+0.28)  ← display text ≠ actual link
-  3. sender_anomaly   (+0.19)  ← domain doesn't match brand
+  From: security@amaz0n-verify.com
+  Subj: "Your account will be suspended in 24 hours"
+  ──→ 🚨 PHISHING (98.2%)  [urgency + spoofed domain]
+
+  From: sarah.jones@company.com
+  Subj: "Q3 budget report attached"
+  ──→ ✅ LEGIT (94.6%)
+
+  From: helpdesk@paypa1.com
+  Subj: "Click here to verify your identity"
+  ──→ 🚨 PHISHING (96.7%)  [link mismatch + typosquat]
+
+  From: it-dept@company.com
+  Subj: "Password expires in 7 days - reset here"
+  ──→ ⚠️  SUSPICIOUS (67.3%)  [needs review]
+
+📊 Top features that caught phishing:
+   urgency_words: +0.34  (suspend, verify, immediately)
+   url_mismatch:  +0.28  (display ≠ actual link)
+   domain_spoof:  +0.22  (amaz0n, paypa1)
 ```
 
 **Lab 04 - LLM Log Analysis** finds attacks in noise:
