@@ -70,7 +70,7 @@ python solution/main.py
 
 ## What It Looks Like
 
-<!-- TODO: Add screenshots. See docs/assets/README.md for guidance -->
+<!-- Screenshots can be added to docs/assets/ - see docs/assets/README.md for guidance -->
 
 **Lab 01 - Phishing Classifier** catches what rules miss:
 
