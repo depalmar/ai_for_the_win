@@ -105,6 +105,7 @@ $ python labs/lab04-llm-log-analysis/solution/main.py
   Stage 1: Credential Stuffing
     Source: 45.33.32.156 (Tor exit node)
     847 failed logins → 12 accounts compromised
+    ⚠️  All 12 had MFA disabled
     → MITRE ATT&CK: T1110.004
 
   Stage 2: Lateral Movement (15 min later)
@@ -113,7 +114,7 @@ $ python labs/lab04-llm-log-analysis/solution/main.py
 
   Timeline: 02:14 initial access → 02:29 lateral spread
 
-Action: Isolate affected hosts, block source IP, reset all 12 accounts
+Action: Isolate hosts, reset 12 accounts, enforce MFA policy
 ```
 
 ---
