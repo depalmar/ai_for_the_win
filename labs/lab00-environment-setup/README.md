@@ -90,11 +90,27 @@ You need a place to write code. Choose one:
 2. Download and install
 3. It's VS Code with AI built in - same extensions work
 
-### Option C: PyCharm Community Edition (Free)
+### Option C: Other IDEs
 
-1. Go to [jetbrains.com/pycharm](https://www.jetbrains.com/pycharm/)
-2. Download the **Community** edition (free)
-3. Install and run
+Any Python IDE works, but **VS Code or Cursor are recommended** for this course because:
+- Better AI assistant integration (Copilot, Claude)
+- Lighter weight than full IDEs
+- Same tools the labs were built with
+
+> If you already use PyCharm, Sublime, Vim, etc. — that's fine! Just know the walkthroughs assume VS Code.
+
+### AI Coding Assistants (Optional but Recommended)
+
+These tools work alongside your IDE for "vibe coding":
+
+| Tool | Type | Cost | Notes |
+|------|------|------|-------|
+| [Claude Code](https://docs.anthropic.com/en/docs/claude-code) | Terminal | Pay-per-use | Best for multi-file edits, git workflows |
+| [Gemini CLI](https://github.com/google-gemini/gemini-cli) | Terminal | Free tier | 1M token context, great for research |
+| [Codeium](https://codeium.com/) | IDE extension | Free | Good Copilot alternative |
+| [GitHub Copilot](https://github.com/features/copilot) | IDE extension | $10/mo | Inline completions |
+
+> 💡 **Tip:** You don't need all of these. Pick one and learn it well. **Cursor already includes AI** — if you chose Option B, you may not need anything else.
 
 ---
 

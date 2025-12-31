@@ -19,15 +19,15 @@ Answer these questions to find your starting point:
 
 ### Python Resources
 
-New to Python? These resources will get you ready in 1-2 weeks:
+New to Python? Here are some popular resources (not personally verified—do your own research):
 
-| Resource | Type | Best For |
-|----------|------|----------|
-| [Automate the Boring Stuff](https://automatetheboringstuff.com/) | Free online book | Practical Python from zero |
-| [Real Python - Start Here](https://realpython.com/start-here/) | Tutorials | Hands-on project-based learning |
-| [Python Crash Course](https://ehmatthes.github.io/pcc/) | Book | Structured beginner curriculum |
-| [freeCodeCamp Python](https://www.freecodecamp.org/learn/scientific-computing-with-python/) | Interactive | Free course with certification |
-| [Codecademy Python](https://www.codecademy.com/learn/learn-python-3) | Interactive | Browser-based practice |
+| Resource | Type | Notes |
+|----------|------|-------|
+| [Automate the Boring Stuff](https://automatetheboringstuff.com/) | Free online book | Often recommended for beginners |
+| [Real Python](https://realpython.com/start-here/) | Tutorials | Project-based approach |
+| [Python Crash Course](https://ehmatthes.github.io/pcc/) | Book | Structured curriculum |
+| [freeCodeCamp Python](https://www.freecodecamp.org/learn/scientific-computing-with-python/) | Interactive | Free with certification |
+| [Codecademy Python](https://www.codecademy.com/learn/learn-python-3) | Interactive | Browser-based |
 
 **Minimum skills needed for this course:**
 - Variables, functions, loops, conditionals

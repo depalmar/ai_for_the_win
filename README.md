@@ -15,7 +15,15 @@ A hands-on training program for security practitioners who want to build AI-powe
 
 ## Get Started in 5 Minutes
 
-### Complete Beginner? Start Here:
+### Option 1: Zero Setup (Google Colab)
+
+No installation needed — run labs directly in your browser:
+
+[![Open Lab 01 in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab01_phishing_classifier.ipynb) [![Open Lab 04 in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab04_llm_log_analysis.ipynb)
+
+> All notebooks are in the [`notebooks/`](./notebooks/) folder — open any `.ipynb` file in Colab.
+
+### Option 2: Local Setup
 
 ```bash
 # 1. Clone the repository
@@ -27,11 +35,12 @@ python -m venv venv
 source venv/bin/activate  # On Windows: .\venv\Scripts\activate
 pip install -r requirements.txt
 
-# 3. Start with Lab 00a (Python basics) - NO API KEY NEEDED!
-cd labs/lab00a-python-security-fundamentals
+# 3. Start with Lab 00 (environment setup) - NO API KEY NEEDED!
+cd labs/lab00-environment-setup
 cat README.md  # Read the lab instructions
 
-# Then try Lab 01 (ML classifier) - STILL NO API KEY NEEDED!
+# 4. Work through intro labs: 00a → 00b → 00c → 00d → 01
+# Or jump straight to Lab 01 if you know Python/ML basics
 cd ../lab01-phishing-classifier
 python solution/main.py
 ```
@@ -56,6 +65,58 @@ python solution/main.py
 > 📖 **Know ML, want LLMs?** Jump to Lab 04 and get an API key first
 > 📖 **Need help?** Read [GETTING_STARTED.md](./GETTING_STARTED.md) for detailed setup
 > 📖 **Lost in the docs?** See [DOCUMENTATION_GUIDE.md](./DOCUMENTATION_GUIDE.md) for navigation
+
+---
+
+## What It Looks Like
+
+<!-- TODO: Add screenshots. See docs/assets/README.md for guidance -->
+
+**Lab 01 - Phishing Classifier** catches what rules miss:
+
+```
+$ python labs/lab01-phishing-classifier/solution/main.py
+
+[+] Trained on 1,000 labeled emails
+[+] Model: Random Forest with TF-IDF features
+
+Testing on new emails...
+  "Dear user, your account will be suspended" → 🚨 PHISHING (94%)
+  "Q3 revenue report attached"               → ✅ LEGIT (91%)
+  "Coinbase: verify identity immediately"    → 🚨 PHISHING (97%)
+
+Top phishing indicators learned:
+  1. urgency_score    (+0.34)  ← "immediately", "suspend", "verify"
+  2. url_mismatch     (+0.28)  ← display text ≠ actual link
+  3. sender_anomaly   (+0.19)  ← domain doesn't match brand
+```
+
+**Lab 04 - LLM Log Analysis** finds attacks in noise:
+
+```
+$ python labs/lab04-llm-log-analysis/solution/main.py
+
+[1/3] Pre-filtering 10,000 auth events...
+[2/3] Found 23 anomalous patterns → sending to Claude
+[3/3] AI analysis complete
+
+🔴 ATTACK CHAIN DETECTED
+
+  Stage 1: Credential Stuffing
+    Source: 45.33.32.156 (Tor exit node)
+    847 failed logins → 12 accounts compromised
+    ⚠️  All 12 had MFA disabled
+    → MITRE ATT&CK: T1110.004
+
+  Stage 2: Lateral Movement (15 min later)
+    'svc_backup' → SMB to FILE01, FILE02, DC01
+    ⚠️  Includes domain controller
+    → MITRE ATT&CK: T1021.002 (SMB/Windows Admin Shares)
+
+  Timeline: 02:14 initial access → 02:29 lateral spread
+
+Action: Isolate FILE01/FILE02/DC01, reset 12 accounts, enforce MFA
+```
 
 ---
 
@@ -118,16 +179,16 @@ flowchart LR
 
 ### Recommended Paths by Background
 
-| Your Background | Start Here | Learning Path |
-|-----------------|------------|---------------|
-| **Complete beginner** (no Python) | Lab 00a | 00a (Python) → 00b (ML theory) → 01 (ML hands-on) → 02 → 03 → 04 (LLMs) → 00c (advanced prompting) |
-| **Know Python**, new to ML | Lab 00b | 00b (ML theory) → 01 → 02 → 03 (ML foundations) → 04 → 06 → 05 (LLM/agents) |
-| **Know Python & ML**, new to LLMs | Lab 04 | 04 (basic prompting) → 06 (RAG) → 05 (agents) → 00c (advanced prompting) → 07-10 |
-| **Want to build AI agents** | Lab 04 | 04 (prompting) → 05 (ReAct agents) → 06 (RAG) → 10 (copilot) → Capstone |
-| **DFIR/SOC analyst** | Lab 01 | 01 → 03 (ML detection) → 04 (log analysis) → 11 (ransomware) → 13 (memory forensics) |
-| **Red Team/Offensive** | Lab 03 | 03 (anomaly det) → 12 (purple team) → 14 (C2) → 15 (lateral movement) → 17 (adversarial ML) |
-| **Threat Intel analyst** | Lab 04 | 04 (log analysis) → 05 (threat intel agent) → 06 (RAG) → 14 (C2) → 16 (actor profiling) |
-| **Security engineer** (build production tools) | Lab 01 | 01 → 03 → 04 → 08 (vuln scanner) → 09 (pipeline) → 10 (IR copilot) → Capstone |
+| Your Background                                | Start Here | Learning Path                                                                                      |
+| ---------------------------------------------- | ---------- | -------------------------------------------------------------------------------------------------- |
+| **Complete beginner** (no Python)              | Lab 00a    | 00a (Python) → 00b (ML theory) → 01 (ML hands-on) → 02 → 03 → 04 (LLMs) → 00c (advanced prompting) |
+| **Know Python**, new to ML                     | Lab 00b    | 00b (ML theory) → 01 → 02 → 03 (ML foundations) → 04 → 06 → 05 (LLM/agents)                        |
+| **Know Python & ML**, new to LLMs              | Lab 04     | 04 (basic prompting) → 06 (RAG) → 05 (agents) → 00c (advanced prompting) → 07-10                   |
+| **Want to build AI agents**                    | Lab 04     | 04 (prompting) → 05 (ReAct agents) → 06 (RAG) → 10 (copilot) → Capstone                            |
+| **DFIR/SOC analyst**                           | Lab 01     | 01 → 03 (ML detection) → 04 (log analysis) → 11 (ransomware) → 13 (memory forensics)               |
+| **Red Team/Offensive**                         | Lab 03     | 03 (anomaly det) → 12 (purple team) → 14 (C2) → 15 (lateral movement) → 17 (adversarial ML)        |
+| **Threat Intel analyst**                       | Lab 04     | 04 (log analysis) → 05 (threat intel agent) → 06 (RAG) → 14 (C2) → 16 (actor profiling)            |
+| **Security engineer** (build production tools) | Lab 01     | 01 → 03 → 04 → 08 (vuln scanner) → 09 (pipeline) → 10 (IR copilot) → Capstone                      |
 
 **💡 Pro Tip**: Labs 01-03 require NO API keys - perfect for learning ML foundations cost-free! Get comfortable with ML before moving to LLM-powered labs (04+).
 
@@ -137,32 +198,32 @@ flowchart LR
 
 ### Labs Overview
 
-| Lab | Project | What You'll Learn |
-|-----|---------|-------------------|
-| **00a** | **Python for Security** | Variables, files, APIs, regex, security-focused Python basics |
-| **00b** | **ML Concepts Primer** | Supervised/unsupervised learning, features, training, evaluation metrics |
-| **00c** | **Intro to Prompt Engineering** | LLM basics with free playgrounds, prompting fundamentals, hallucination detection, security templates |
-| **00d** | **AI in Security Operations** | Where AI fits in SOC, human-in-the-loop, AI as attack surface, compliance considerations |
-| **01** | **Phishing Classifier** | Text preprocessing, TF-IDF vectorization, Random Forest classification, model evaluation metrics |
-| **02** | **Malware Clusterer** | Feature extraction from binaries, K-Means & DBSCAN clustering, dimensionality reduction, cluster analysis |
-| **03** | **Anomaly Detector** | Statistical baselines, Isolation Forest, Local Outlier Factor, threshold optimization for security |
-| **04** | **Log Analyzer** | Prompt engineering for security, structured output parsing, IOC extraction, LLM-powered analysis |
-| **05** | **Threat Intel Agent** | ReAct pattern implementation, tool use with LangChain, autonomous investigation workflows |
-| **06** | **Security RAG** | Document chunking, vector embeddings, ChromaDB, retrieval-augmented generation for Q&A |
-| **07** | **YARA Generator** | Static malware analysis, pattern extraction, AI-assisted rule generation, rule validation |
-| **08** | **Vuln Prioritizer** | CVSS scoring, risk-based prioritization, remediation planning with LLMs |
-| **09** | **Detection Pipeline** | Multi-stage architectures, ML filtering, LLM enrichment, alert correlation |
-| **10** | **IR Copilot** | Conversational agents, state management, playbook execution, incident documentation |
-| **11** | **Ransomware Detector** | Entropy analysis, behavioral detection, ransom note IOC extraction, response automation |
-| **12** | **Purple Team Sim** | Safe adversary emulation, detection validation, gap analysis, purple team exercises |
-| **13** | **Memory Forensics AI** | Volatility3 integration, process injection detection, credential dumping, LLM artifact analysis |
-| **14** | **C2 Traffic Analysis** | Beaconing detection, DNS tunneling, encrypted C2, JA3 fingerprinting, traffic classification |
-| **15** | **Lateral Movement Detection** | Auth anomaly detection, remote execution (PsExec/WMI/WinRM), graph-based attack paths |
-| **16** | **Threat Actor Profiling** | TTP extraction, campaign clustering, malware attribution, actor profile generation |
-| **17** | **Adversarial ML** | Evasion attacks, poisoning attacks, adversarial training, robust ML defenses |
-| **18** | **Fine-Tuning for Security** | Custom embeddings, LoRA fine-tuning, security-specific models, deployment |
-| **19** | **Cloud Security AI** | AWS/Azure/GCP security, CloudTrail analysis, multi-cloud threat detection |
-| **20** | **LLM Red Teaming** | Prompt injection, jailbreaking defenses, guardrails, LLM security testing |
+| Lab     | Project                         | What You'll Learn                                                                                         |
+| ------- | ------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| **00a** | **Python for Security**         | Variables, files, APIs, regex, security-focused Python basics                                             |
+| **00b** | **ML Concepts Primer**          | Supervised/unsupervised learning, features, training, evaluation metrics                                  |
+| **00c** | **Intro to Prompt Engineering** | LLM basics with free playgrounds, prompting fundamentals, hallucination detection, security templates     |
+| **00d** | **AI in Security Operations**   | Where AI fits in SOC, human-in-the-loop, AI as attack surface, compliance considerations                  |
+| **01**  | **Phishing Classifier**         | Text preprocessing, TF-IDF vectorization, Random Forest classification, model evaluation metrics          |
+| **02**  | **Malware Clusterer**           | Feature extraction from binaries, K-Means & DBSCAN clustering, dimensionality reduction, cluster analysis |
+| **03**  | **Anomaly Detector**            | Statistical baselines, Isolation Forest, Local Outlier Factor, threshold optimization for security        |
+| **04**  | **Log Analyzer**                | Prompt engineering for security, structured output parsing, IOC extraction, LLM-powered analysis          |
+| **05**  | **Threat Intel Agent**          | ReAct pattern implementation, tool use with LangChain, autonomous investigation workflows                 |
+| **06**  | **Security RAG**                | Document chunking, vector embeddings, ChromaDB, retrieval-augmented generation for Q&A                    |
+| **07**  | **YARA Generator**              | Static malware analysis, pattern extraction, AI-assisted rule generation, rule validation                 |
+| **08**  | **Vuln Prioritizer**            | CVSS scoring, risk-based prioritization, remediation planning with LLMs                                   |
+| **09**  | **Detection Pipeline**          | Multi-stage architectures, ML filtering, LLM enrichment, alert correlation                                |
+| **10**  | **IR Copilot**                  | Conversational agents, state management, playbook execution, incident documentation                       |
+| **11**  | **Ransomware Detector**         | Entropy analysis, behavioral detection, ransom note IOC extraction, response automation                   |
+| **12**  | **Purple Team Sim**             | Safe adversary emulation, detection validation, gap analysis, purple team exercises                       |
+| **13**  | **Memory Forensics AI**         | Volatility3 integration, process injection detection, credential dumping, LLM artifact analysis           |
+| **14**  | **C2 Traffic Analysis**         | Beaconing detection, DNS tunneling, encrypted C2, JA3 fingerprinting, traffic classification              |
+| **15**  | **Lateral Movement Detection**  | Auth anomaly detection, remote execution (PsExec/WMI/WinRM), graph-based attack paths                     |
+| **16**  | **Threat Actor Profiling**      | TTP extraction, campaign clustering, malware attribution, actor profile generation                        |
+| **17**  | **Adversarial ML**              | Evasion attacks, poisoning attacks, adversarial training, robust ML defenses                              |
+| **18**  | **Fine-Tuning for Security**    | Custom embeddings, LoRA fine-tuning, security-specific models, deployment                                 |
+| **19**  | **Cloud Security AI**           | AWS/Azure/GCP security, CloudTrail analysis, multi-cloud threat detection                                 |
+| **20**  | **LLM Red Teaming**             | Prompt injection, jailbreaking defenses, guardrails, LLM security testing                                 |
 
 ### Skills Progression
 
@@ -188,14 +249,14 @@ flowchart LR
 
 ### When to Use ML vs LLM
 
-| Security Task | Best Approach | Why |
-|--------------|---------------|-----|
-| Malware classification | **ML** | Fast, interpretable, structured features |
-| Log anomaly detection | **ML** | High volume, real-time capable |
-| Threat report analysis | **LLM** | Natural language understanding |
-| IOC extraction | **LLM** | Flexible parsing of unstructured text |
-| Phishing detection | **Hybrid** | ML for volume, LLM for sophisticated cases |
-| Detection pipeline | **Hybrid** | ML filters 90%, LLM analyzes 10% |
+| Security Task          | Best Approach | Why                                        |
+| ---------------------- | ------------- | ------------------------------------------ |
+| Malware classification | **ML**        | Fast, interpretable, structured features   |
+| Log anomaly detection  | **ML**        | High volume, real-time capable             |
+| Threat report analysis | **LLM**       | Natural language understanding             |
+| IOC extraction         | **LLM**       | Flexible parsing of unstructured text      |
+| Phishing detection     | **Hybrid**    | ML for volume, LLM for sophisticated cases |
+| Detection pipeline     | **Hybrid**    | ML filters 90%, LLM analyzes 10%           |
 
 > 📖 **Full comparison**: See [ML vs LLM Decision Framework](./LEARNING_GUIDE.md#choosing-the-right-tool-ml-vs-llm) for detailed guidance, cost analysis, and hybrid architecture patterns.
 
@@ -253,6 +314,7 @@ ai_for_the_win/
 Track your progress through the labs:
 
 **Intro (Recommended)**
+
 - [ ] **Lab 00**: Environment Setup (Python, VS Code, virtual env)
 - [ ] **Lab 00a**: Python for Security Fundamentals
 - [ ] **Lab 00b**: ML Concepts Primer
@@ -260,6 +322,7 @@ Track your progress through the labs:
 - [ ] **Lab 00d**: AI in Security Operations (conceptual)
 
 **Core Labs**
+
 - [ ] **Lab 01**: Phishing Email Classifier
 - [ ] **Lab 02**: Malware Sample Clustering
 - [ ] **Lab 03**: Network Anomaly Detection
@@ -286,16 +349,16 @@ Track your progress through the labs:
 
 ## Technology Stack
 
-| Category | Tools |
-|----------|-------|
-| **LLM Providers** | Claude, GPT-4, Gemini, Ollama (local) |
-| **LLM Frameworks** | LangChain, LangGraph, LiteLLM, Instructor |
-| **ML/AI** | scikit-learn, PyTorch, Hugging Face Transformers |
-| **Vector DB** | ChromaDB, sentence-transformers |
-| **Security** | YARA, Sigma, MITRE ATT&CK, pefile |
-| **Web/UI** | FastAPI, Gradio, Streamlit |
-| **Vibe Coding** | Cursor, Claude Code, GitHub Copilot, Windsurf |
-| **Development** | Python 3.10+, pytest, Docker, GitHub Actions |
+| Category           | Tools                                            |
+| ------------------ | ------------------------------------------------ |
+| **LLM Providers**  | Claude, GPT-4, Gemini, Ollama (local)            |
+| **LLM Frameworks** | LangChain, LangGraph, LiteLLM, Instructor        |
+| **ML/AI**          | scikit-learn, PyTorch, Hugging Face Transformers |
+| **Vector DB**      | ChromaDB, sentence-transformers                  |
+| **Security**       | YARA, Sigma, MITRE ATT&CK, pefile                |
+| **Web/UI**         | FastAPI, Gradio, Streamlit                       |
+| **Vibe Coding**    | Cursor, Claude Code, GitHub Copilot, Windsurf    |
+| **Development**    | Python 3.10+, pytest, Docker, GitHub Actions     |
 
 ---
 
@@ -303,12 +366,12 @@ Track your progress through the labs:
 
 Choose one to demonstrate mastery:
 
-| Project | Difficulty | Focus |
-|---------|------------|-------|
-| **Security Analyst Copilot** | Advanced | LLM agents, IR automation |
-| **Automated Threat Hunter** | Advanced | ML detection, pipelines |
-| **Malware Analysis Assistant** | Intermediate | Static analysis, YARA |
-| **Vulnerability Intel Platform** | Intermediate | RAG, prioritization |
+| Project                          | Difficulty   | Focus                     |
+| -------------------------------- | ------------ | ------------------------- |
+| **Security Analyst Copilot**     | Advanced     | LLM agents, IR automation |
+| **Automated Threat Hunter**      | Advanced     | ML detection, pipelines   |
+| **Malware Analysis Assistant**   | Intermediate | Static analysis, YARA     |
+| **Vulnerability Intel Platform** | Intermediate | RAG, prioritization       |
 
 Each project includes starter code, requirements, and evaluation criteria.
 
@@ -333,28 +396,28 @@ Jumpstart your projects with ready-to-use templates:
 
 All 20 labs have comprehensive test coverage!
 
-| Lab | Tests | Status | Focus Area |
-|-----|-------|--------|------------|
-| Lab 01 | 14/14 | ✅ 100% | Phishing Classifier (ML) |
-| Lab 02 | 9/9 | ✅ 100% | Malware Clustering (ML) |
-| Lab 03 | 11/11 | ✅ 100% | Anomaly Detection (ML) |
-| Lab 04 | 18/18 | ✅ 100% | Log Analysis (LLM) |
-| Lab 05 | 21/21 | ✅ 100% | Threat Intel Agent (LangChain) |
-| Lab 06 | 7/7 | ✅ 100% | Security RAG (Vector DB) |
-| Lab 07 | 8/8 | ✅ 100% | YARA Generator (Code Gen) |
+| Lab    | Tests | Status  | Focus Area                         |
+| ------ | ----- | ------- | ---------------------------------- |
+| Lab 01 | 14/14 | ✅ 100% | Phishing Classifier (ML)           |
+| Lab 02 | 9/9   | ✅ 100% | Malware Clustering (ML)            |
+| Lab 03 | 11/11 | ✅ 100% | Anomaly Detection (ML)             |
+| Lab 04 | 18/18 | ✅ 100% | Log Analysis (LLM)                 |
+| Lab 05 | 21/21 | ✅ 100% | Threat Intel Agent (LangChain)     |
+| Lab 06 | 7/7   | ✅ 100% | Security RAG (Vector DB)           |
+| Lab 07 | 8/8   | ✅ 100% | YARA Generator (Code Gen)          |
 | Lab 08 | 11/11 | ✅ 100% | Vuln Scanner (Risk Prioritization) |
-| Lab 09 | 15/15 | ✅ 100% | Detection Pipeline (Multi-stage) |
-| Lab 10 | 28/28 | ✅ 100% | IR Copilot (Conversational) |
-| Lab 11 | 37/37 | ✅ 100% | Ransomware Detection (DFIR) |
-| Lab 12 | 44/44 | ✅ 100% | Purple Team Sim (Safe Emulation) |
-| Lab 13 | 71/71 | ✅ 100% | Memory Forensics AI |
-| Lab 14 | 85/85 | ✅ 100% | C2 Traffic Analysis |
-| Lab 15 | 69/69 | ✅ 100% | Lateral Movement Detection |
-| Lab 16 | 90/90 | ✅ 100% | Threat Actor Profiling |
-| Lab 17 | 73/73 | ✅ 100% | Adversarial ML |
-| Lab 18 | 76/76 | ✅ 100% | Fine-Tuning for Security |
-| Lab 19 | 64/64 | ✅ 100% | Cloud Security AI |
-| Lab 20 | 88/88 | ✅ 100% | LLM Red Teaming |
+| Lab 09 | 15/15 | ✅ 100% | Detection Pipeline (Multi-stage)   |
+| Lab 10 | 28/28 | ✅ 100% | IR Copilot (Conversational)        |
+| Lab 11 | 37/37 | ✅ 100% | Ransomware Detection (DFIR)        |
+| Lab 12 | 44/44 | ✅ 100% | Purple Team Sim (Safe Emulation)   |
+| Lab 13 | 71/71 | ✅ 100% | Memory Forensics AI                |
+| Lab 14 | 85/85 | ✅ 100% | C2 Traffic Analysis                |
+| Lab 15 | 69/69 | ✅ 100% | Lateral Movement Detection         |
+| Lab 16 | 90/90 | ✅ 100% | Threat Actor Profiling             |
+| Lab 17 | 73/73 | ✅ 100% | Adversarial ML                     |
+| Lab 18 | 76/76 | ✅ 100% | Fine-Tuning for Security           |
+| Lab 19 | 64/64 | ✅ 100% | Cloud Security AI                  |
+| Lab 20 | 88/88 | ✅ 100% | LLM Red Teaming                    |
 
 **API Requirements**: Labs 04-20 require at least one LLM provider API key (`ANTHROPIC_API_KEY`, `OPENAI_API_KEY`, or `GOOGLE_API_KEY`). Labs 01-03 work without API keys.
 
@@ -392,13 +455,13 @@ bandit -r labs/
 
 Copy `.env.example` to `.env` and configure:
 
-| Variable | Description | Required |
-|----------|-------------|----------|
-| `ANTHROPIC_API_KEY` | Claude API key | One LLM key required |
-| `OPENAI_API_KEY` | OpenAI GPT-4 key | One LLM key required |
-| `GOOGLE_API_KEY` | Google Gemini key | One LLM key required |
-| `VIRUSTOTAL_API_KEY` | VirusTotal API | Optional (threat intel) |
-| `ABUSEIPDB_API_KEY` | AbuseIPDB API | Optional (threat intel) |
+| Variable             | Description       | Required                |
+| -------------------- | ----------------- | ----------------------- |
+| `ANTHROPIC_API_KEY`  | Claude API key    | One LLM key required    |
+| `OPENAI_API_KEY`     | OpenAI GPT-4 key  | One LLM key required    |
+| `GOOGLE_API_KEY`     | Google Gemini key | One LLM key required    |
+| `VIRUSTOTAL_API_KEY` | VirusTotal API    | Optional (threat intel) |
+| `ABUSEIPDB_API_KEY`  | AbuseIPDB API     | Optional (threat intel) |
 
 > **Note:** You only need ONE LLM provider key. All labs support multiple providers.
 
@@ -420,20 +483,20 @@ Copy `.env.example` to `.env` and configure:
 
 ## Quick Links
 
-| Resource | Description |
-|----------|-------------|
-| [Environment Setup](./labs/lab00-environment-setup/) | First-time setup for beginners |
-| [Role-Based Learning Paths](./resources/role-based-learning-paths.md) | Paths for SOC, IR, hunting, red team |
-| [Security-to-AI Glossary](./resources/security-to-ai-glossary.md) | AI terms explained for security folks |
-| [API Keys Guide](./setup/guides/api-keys-guide.md) | Get API keys, manage costs |
-| [Quick Start](./QUICKSTART.md) | Get running fast |
-| [Documentation Guide](./DOCUMENTATION_GUIDE.md) | Find exactly what you need |
-| [Security Prompts](./resources/prompt-library/security-prompts.md) | Ready-to-use prompts for security tasks |
-| [Lab Walkthroughs](./docs/walkthroughs/) | Step-by-step solutions when stuck |
-| [Cheatsheets](./resources/cheatsheets/) | Quick references for Claude Code, Cursor, LangChain |
-| [SIEM Integrations](./resources/integrations/) | Splunk, Elastic, XSIAM integration guides |
-| [Tools & APIs](./resources/tools-and-resources.md) | 80+ security tools, APIs, datasets |
-| [MCP Servers](./resources/mcp-servers-security-guide.md) | MCP servers for DFIR, threat intel |
+| Resource                                                              | Description                                         |
+| --------------------------------------------------------------------- | --------------------------------------------------- |
+| [Environment Setup](./labs/lab00-environment-setup/)                  | First-time setup for beginners                      |
+| [Role-Based Learning Paths](./resources/role-based-learning-paths.md) | Paths for SOC, IR, hunting, red team                |
+| [Security-to-AI Glossary](./resources/security-to-ai-glossary.md)     | AI terms explained for security folks               |
+| [API Keys Guide](./setup/guides/api-keys-guide.md)                    | Get API keys, manage costs                          |
+| [Quick Start](./QUICKSTART.md)                                        | Get running fast                                    |
+| [Documentation Guide](./DOCUMENTATION_GUIDE.md)                       | Find exactly what you need                          |
+| [Security Prompts](./resources/prompt-library/security-prompts.md)    | Ready-to-use prompts for security tasks             |
+| [Lab Walkthroughs](./docs/walkthroughs/)                              | Step-by-step solutions when stuck                   |
+| [Cheatsheets](./resources/cheatsheets/)                               | Quick references for Claude Code, Cursor, LangChain |
+| [SIEM Integrations](./resources/integrations/)                        | Splunk, Elastic, XSIAM integration guides           |
+| [Tools & APIs](./resources/tools-and-resources.md)                    | 80+ security tools, APIs, datasets                  |
+| [MCP Servers](./resources/mcp-servers-security-guide.md)              | MCP servers for DFIR, threat intel                  |
 
 ---
 
@@ -442,6 +505,7 @@ Copy `.env.example` to `.env` and configure:
 Contributions welcome! Please read [CONTRIBUTING.md](./CONTRIBUTING.md) before submitting PRs.
 
 Ways to contribute:
+
 - Fix bugs or improve existing labs
 - Add new sample data or test cases
 - Improve documentation
@@ -463,6 +527,6 @@ This training material is intended for **educational purposes** and **authorized
 
 <p align="center">
   <b>Ready to build AI-powered security tools?</b><br>
-  <a href="./labs/lab01-phishing-classifier/">Start with Lab 01</a> |
+  <a href="./labs/lab00-environment-setup/">Get Started</a> |
   <a href="./curriculum/ai-security-training-program.md">View Full Curriculum</a>
 </p>
