@@ -656,6 +656,12 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
   overflow-x: auto;
 }
 
+.quick-start pre, .quick-start code {
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
 .quick-start code {
   color: var(--secondary);
 }
