@@ -1,0 +1,58 @@
+{
+  "suitability_scenarios": [
+    {
+      "task": "Reviewing 5,000 daily firewall alerts to identify true positives",
+      "ai_suitable": true,
+      "reason": "High volume, pattern-based - perfect for ML triage"
+    },
+    {
+      "task": "Deciding whether to notify the CEO about a potential breach",
+      "ai_suitable": false,
+      "reason": "Requires organizational context, political awareness, human judgment"
+    },
+    {
+      "task": "Clustering malware samples by behavioral similarity",
+      "ai_suitable": true,
+      "reason": "Unsupervised ML excels at finding patterns in large datasets"
+    },
+    {
+      "task": "Approving emergency network isolation during active ransomware",
+      "ai_suitable": false,
+      "reason": "High-stakes decision with business impact - needs human approval"
+    },
+    {
+      "task": "Extracting IOCs from 50 threat intelligence reports",
+      "ai_suitable": true,
+      "reason": "Repetitive extraction task, good for LLM automation"
+    },
+    {
+      "task": "Determining if activity violates regulatory compliance",
+      "ai_suitable": false,
+      "reason": "Legal interpretation requires human accountability"
+    }
+  ],
+  "risk_scenarios": [
+    {
+      "scenario": "Your phishing detection model was trained on English emails but your company operates in 12 countries",
+      "risks": ["Model bias", "False negatives on non-English phishing", "Coverage gap"],
+      "mitigations": ["Multilingual training data", "Human review for non-English", "Language detection pre-filter"]
+    },
+    {
+      "scenario": "An LLM-based alert summarizer occasionally hallucinates IOCs that don't exist in the original data",
+      "risks": ["False IOCs wasting analyst time", "Wrong containment actions", "Eroded trust in AI"],
+      "mitigations": ["Human verification", "Cross-reference with raw data", "Confidence thresholds"]
+    },
+    {
+      "scenario": "Your ML model for detecting lateral movement was trained on data from 2022",
+      "risks": ["Concept drift", "New attack techniques missed", "Degraded accuracy"],
+      "mitigations": ["Regular retraining", "Monitor model metrics", "Human threat hunting"]
+    }
+  ],
+  "human_loop_decisions": [
+    {"action": "Block IP address identified as C2", "requires_human": "depends", "reason": "Low risk if automated with allowlist, human needed for critical infrastructure IPs"},
+    {"action": "Isolate endpoint showing ransomware behavior", "requires_human": "yes", "reason": "Business impact - could disrupt critical systems"},
+    {"action": "Add detection rule for new phishing pattern", "requires_human": "yes", "reason": "Could cause false positives affecting users"},
+    {"action": "Send alert summary to Slack channel", "requires_human": "no", "reason": "Informational only, no action taken"},
+    {"action": "Disable compromised user account", "requires_human": "yes", "reason": "Impacts user, could be false positive"}
+  ]
+}

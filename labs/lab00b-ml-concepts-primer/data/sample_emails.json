@@ -1,0 +1,12 @@
+[
+  {"subject": "Meeting tomorrow at 3pm", "body": "Hi team, reminder about our meeting tomorrow.", "label": "legitimate"},
+  {"subject": "URGENT: Your account will be suspended", "body": "Click here immediately to verify your account or it will be closed.", "label": "phishing"},
+  {"subject": "Q3 Report attached", "body": "Please find the quarterly report attached for your review.", "label": "legitimate"},
+  {"subject": "You've won $1,000,000!", "body": "Congratulations! Click to claim your prize now before it expires!", "label": "phishing"},
+  {"subject": "Project deadline reminder", "body": "Just a reminder that the project is due Friday.", "label": "legitimate"},
+  {"subject": "Verify your identity NOW", "body": "Your bank account has been compromised. Enter credentials here.", "label": "phishing"},
+  {"subject": "Team lunch Friday", "body": "Who's joining for team lunch this Friday? Let me know.", "label": "legitimate"},
+  {"subject": "Act fast - Limited time offer", "body": "Special discount just for you! Click now before offer expires!", "label": "phishing"},
+  {"subject": "Code review requested", "body": "Can you review the PR when you have a chance?", "label": "legitimate"},
+  {"subject": "Security alert: Unusual login", "body": "We detected unusual activity. Verify by clicking this link.", "label": "phishing"}
+]

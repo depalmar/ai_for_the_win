@@ -1,0 +1,12 @@
+[
+  {"bytes_sent": 1500, "bytes_recv": 45000, "duration_sec": 120, "packets": 50, "label": "normal"},
+  {"bytes_sent": 100, "bytes_recv": 100, "duration_sec": 60, "packets": 2, "label": "beacon"},
+  {"bytes_sent": 2500, "bytes_recv": 80000, "duration_sec": 300, "packets": 150, "label": "normal"},
+  {"bytes_sent": 100, "bytes_recv": 100, "duration_sec": 60, "packets": 2, "label": "beacon"},
+  {"bytes_sent": 500000, "bytes_recv": 1000, "duration_sec": 30, "packets": 500, "label": "exfiltration"},
+  {"bytes_sent": 3000, "bytes_recv": 120000, "duration_sec": 180, "packets": 200, "label": "normal"},
+  {"bytes_sent": 100, "bytes_recv": 100, "duration_sec": 60, "packets": 2, "label": "beacon"},
+  {"bytes_sent": 800000, "bytes_recv": 500, "duration_sec": 45, "packets": 800, "label": "exfiltration"},
+  {"bytes_sent": 1800, "bytes_recv": 55000, "duration_sec": 90, "packets": 80, "label": "normal"},
+  {"bytes_sent": 100, "bytes_recv": 100, "duration_sec": 60, "packets": 2, "label": "beacon"}
+]

