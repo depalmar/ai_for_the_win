@@ -13,6 +13,7 @@ You will need to adapt them to your specific environment and
 consult official vendor documentation for production use.
 
 Supported pattern examples:
+    - Cortex XSIAM (Palo Alto Networks)
     - Splunk REST API
     - Elasticsearch/OpenSearch
     - Microsoft Sentinel/Log Analytics
@@ -25,6 +26,97 @@ from datetime import datetime, timedelta
 from typing import Any, Dict, List, Optional
 
 import requests
+
+# =============================================================================
+# Cortex XSIAM Integration (Palo Alto Networks)
+# =============================================================================
+
+
+class XSIAMClient:
+    """Example Cortex XSIAM API client pattern. NOT VERIFIED - adapt for your environment."""
+
+    def __init__(
+        self,
+        api_url: str = None,
+        api_key: str = None,
+        api_key_id: str = None,
+    ):
+        self.api_url = api_url or os.getenv("XSIAM_API_URL")
+        self.api_key = api_key or os.getenv("XSIAM_API_KEY")
+        self.api_key_id = api_key_id or os.getenv("XSIAM_API_KEY_ID")
+        self.session = requests.Session()
+
+    def _get_headers(self) -> Dict[str, str]:
+        """Get authentication headers for XSIAM API."""
+        return {
+            "x-xdr-auth-id": self.api_key_id or "",
+            "Authorization": self.api_key or "",
+            "Content-Type": "application/json",
+        }
+
+    def query_xql(self, query: str, time_range: str = "24 hours") -> List[Dict]:
+        """Execute an XQL query against XSIAM."""
+        # XQL endpoint for running queries
+        url = f"{self.api_url}/public_api/v1/xql/start_xql_query"
+
+        payload = {
+            "request_data": {
+                "query": query,
+                "tenants": [],
+                "timeframe": {"relativeTime": time_range},
+            }
+        }
+
+        print(f"XSIAM XQL Query: {query}")
+        print("Note: Implement actual XSIAM API integration")
+
+        # In production:
+        # 1. Start query with start_xql_query
+        # 2. Poll get_xql_query_results until complete
+        # 3. Return results
+
+        return []
+
+    def get_incidents(self, status: str = "new", limit: int = 100) -> List[Dict]:
+        """Get XSIAM incidents."""
+        url = f"{self.api_url}/public_api/v1/incidents/get_incidents"
+
+        payload = {
+            "request_data": {
+                "filters": [{"field": "status", "operator": "eq", "value": status}],
+                "search_from": 0,
+                "search_to": limit,
+                "sort": {"field": "creation_time", "keyword": "desc"},
+            }
+        }
+
+        print(f"Getting XSIAM incidents (status={status})...")
+        print("Note: Implement actual XSIAM API integration")
+
+        return []
+
+    def get_alerts(self, severity: str = None, limit: int = 100) -> List[Dict]:
+        """Get XSIAM alerts."""
+        url = f"{self.api_url}/public_api/v1/alerts/get_alerts"
+
+        filters = []
+        if severity:
+            filters.append({"field": "severity", "operator": "eq", "value": severity})
+
+        payload = {
+            "request_data": {
+                "filters": filters,
+                "search_from": 0,
+                "search_to": limit,
+                "sort": {"field": "detection_timestamp", "keyword": "desc"},
+            }
+        }
+
+        print(f"Getting XSIAM alerts (severity={severity})...")
+        print("Note: Implement actual XSIAM API integration")
+
+        return []
+
 
 # =============================================================================
 # Splunk Integration
@@ -187,7 +279,9 @@ class SIEMInterface:
     def __init__(self, siem_type: str, **kwargs):
         self.siem_type = siem_type
 
-        if siem_type == "splunk":
+        if siem_type == "xsiam":
+            self.client = XSIAMClient(**kwargs)
+        elif siem_type == "splunk":
             self.client = SplunkClient(**kwargs)
         elif siem_type == "elastic":
             self.client = ElasticClient(**kwargs)
@@ -198,7 +292,9 @@ class SIEMInterface:
 
     def search_events(self, query: str, time_range: str = "24h") -> List[Dict]:
         """Search for events across any SIEM."""
-        if self.siem_type == "splunk":
+        if self.siem_type == "xsiam":
+            return self.client.query_xql(query, time_range=time_range)
+        elif self.siem_type == "splunk":
             return self.client.search(query, earliest=f"-{time_range}")
         elif self.siem_type == "elastic":
             es_query = {"query_string": {"query": query}}
@@ -208,7 +304,9 @@ class SIEMInterface:
 
     def get_alerts(self, severity: str = None) -> List[Dict]:
         """Get security alerts from any SIEM."""
-        if self.siem_type == "splunk":
+        if self.siem_type == "xsiam":
+            return self.client.get_alerts(severity=severity)
+        elif self.siem_type == "splunk":
             return self.client.get_alerts()
         elif self.siem_type == "elastic":
             return self.client.search_security_alerts(severity=severity)
@@ -234,12 +332,14 @@ def main():
     # alerts = siem.get_alerts(severity="high")
 
     print("\nExample pattern templates:")
+    print("  - Cortex XSIAM (XSIAMClient)")
     print("  - Splunk REST API (SplunkClient)")
     print("  - Elasticsearch/OpenSearch (ElasticClient)")
     print("  - Microsoft Sentinel (SentinelClient)")
     print("  - Generic interface (SIEMInterface)")
 
     print("\nExample environment variables:")
+    print("  XSIAM_API_URL, XSIAM_API_KEY, XSIAM_API_KEY_ID")
     print("  SPLUNK_HOST, SPLUNK_TOKEN")
     print("  ELASTIC_HOST, ELASTIC_API_KEY")
     print("  SENTINEL_WORKSPACE_ID, AZURE_* credentials")
