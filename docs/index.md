@@ -1031,9 +1031,12 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
     <div class="nav-title">Your Learning Journey: Click any lab to explore</div>
     <div class="nav-path">
       <div class="nav-stage">
-        <div class="nav-stage-label">Setup</div>
+        <div class="nav-stage-label">Setup & Intro</div>
         <div class="nav-labs">
           <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab00-environment-setup" class="nav-lab intro" title="Lab 00: Environment Setup">00</a>
+          <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab00a-python-security-fundamentals" class="nav-lab intro" title="Lab 00a: Python for Security">00a</a>
+          <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab00b-ml-concepts-primer" class="nav-lab intro" title="Lab 00b: ML Concepts">00b</a>
+          <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab00c-intro-prompt-engineering" class="nav-lab intro" title="Lab 00c: Prompt Engineering">00c</a>
         </div>
       </div>
       <span class="nav-arrow">&#8594;</span>
@@ -1117,6 +1120,39 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
       <p class="lab-desc">Python, VS Code, virtual env, Jupyter</p>
       <div class="lab-meta">
         <span>&#128337; ~30 min</span>
+        <span class="difficulty difficulty-1">&#9733;&#9734;&#9734; Beginner</span>
+      </div>
+    </a>
+    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab00a-python-security-fundamentals" class="lab-card" data-category="intro">
+      <div class="lab-header">
+        <span class="lab-number">00a</span>
+        <span class="lab-title">Python for Security</span>
+      </div>
+      <p class="lab-desc">Variables, files, APIs, IOC extraction</p>
+      <div class="lab-meta">
+        <span>&#128337; ~2 hrs</span>
+        <span class="difficulty difficulty-1">&#9733;&#9734;&#9734; Beginner</span>
+      </div>
+    </a>
+    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab00b-ml-concepts-primer" class="lab-card" data-category="intro">
+      <div class="lab-header">
+        <span class="lab-number">00b</span>
+        <span class="lab-title">ML Concepts</span>
+      </div>
+      <p class="lab-desc">Supervised, unsupervised, features, metrics</p>
+      <div class="lab-meta">
+        <span>&#128337; ~1 hr</span>
+        <span class="difficulty difficulty-1">&#9733;&#9734;&#9734; Beginner</span>
+      </div>
+    </a>
+    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab00c-intro-prompt-engineering" class="lab-card" data-category="intro">
+      <div class="lab-header">
+        <span class="lab-number">00c</span>
+        <span class="lab-title">Prompt Engineering</span>
+      </div>
+      <p class="lab-desc">LLM basics, templates, free playgrounds</p>
+      <div class="lab-meta">
+        <span>&#128337; ~1 hr</span>
         <span class="difficulty difficulty-1">&#9733;&#9734;&#9734; Beginner</span>
       </div>
     </a>
