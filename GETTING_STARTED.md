@@ -6,17 +6,6 @@ Welcome to **AI for the Win**! This guide will help you get set up and choose th
 
 ## Before You Begin
 
-### Check Your Background
-
-Answer these questions to find your starting point:
-
-| Question | Yes | No |
-|----------|-----|----|
-| Can you write Python functions and use pip? | Continue below | See [Python Resources](#python-resources) below |
-| Do you know what ML classification means? | Start at Lab 01 | Start at Lab 01 (it teaches ML basics) |
-| Have you used an LLM API (OpenAI, Claude)? | Jump to Lab 04 | Do Labs 01-03 first |
-| Can you explain what RAG means? | Jump to Lab 05 | Do Labs 04, 06 first |
-
 ### Python Resources
 
 New to Python? Here are some popular resources (not personally verified—do your own research):
