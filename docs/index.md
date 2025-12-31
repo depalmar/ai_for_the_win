@@ -896,9 +896,12 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
       <span class="terminal-dot green"></span>
     </div>
     <div class="terminal-line">python labs/lab01-phishing-classifier/solution/main.py</div>
-    <div class="terminal-line output">Analyzing 1,000 emails...</div>
-    <div class="terminal-line output">Model accuracy: 97.3%</div>
-    <div class="terminal-line output">Detected 47 phishing attempts<span class="typing"></span></div>
+    <div class="terminal-line output">[+] Trained on 1,000 emails (Random Forest + TF-IDF)</div>
+    <div class="terminal-line output"></div>
+    <div class="terminal-line output">Testing inbox...</div>
+    <div class="terminal-line output">  "Verify your account immediately" → 🚨 PHISHING (96%)</div>
+    <div class="terminal-line output">  "Q3 budget report attached"       → ✅ LEGIT (89%)</div>
+    <div class="terminal-line output">  "Unusual login from Russia"       → 🚨 PHISHING (91%)<span class="typing"></span></div>
   </div>
 
   <div class="stats">
