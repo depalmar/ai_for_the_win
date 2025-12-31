@@ -18,6 +18,14 @@ title: AI for the Win
   --border: #30363d;
 }
 
+/* Hide Midnight theme default header entirely */
+#header,
+header.inner,
+.inner > header,
+nav:first-of-type:not(.sticky-nav) {
+  display: none !important;
+}
+
 /* Hide theme attribution from sidebar and footer */
 #header p + p,
 footer,
