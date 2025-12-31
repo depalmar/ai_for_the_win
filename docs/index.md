@@ -708,6 +708,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
   padding: 0 1.25rem 1rem;
   color: var(--text-muted);
   font-size: 0.9rem;
+  display: block !important;
 }
 
 /* Footer */
