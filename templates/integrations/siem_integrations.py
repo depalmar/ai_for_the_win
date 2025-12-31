@@ -14,8 +14,8 @@ consult official vendor documentation for production use.
 
 Supported pattern examples:
     - Cortex XSIAM (Palo Alto Networks)
-    - Splunk REST API
     - Elasticsearch/OpenSearch
+    - Splunk REST API
     - Microsoft Sentinel/Log Analytics
 """
 
@@ -119,6 +119,61 @@ class XSIAMClient:
 
 
 # =============================================================================
+# Elastic/OpenSearch Integration
+# =============================================================================
+
+
+class ElasticClient:
+    """Example Elasticsearch client pattern. NOT VERIFIED - adapt for your environment."""
+
+    def __init__(
+        self,
+        host: str = None,
+        port: int = 9200,
+        username: str = None,
+        password: str = None,
+        api_key: str = None,
+    ):
+        self.host = host or os.getenv("ELASTIC_HOST", "localhost")
+        self.port = port
+        self.username = username or os.getenv("ELASTIC_USERNAME")
+        self.password = password or os.getenv("ELASTIC_PASSWORD")
+        self.api_key = api_key or os.getenv("ELASTIC_API_KEY")
+        self.base_url = f"https://{self.host}:{self.port}"
+        self.session = requests.Session()
+
+    def search(self, index: str, query: Dict, size: int = 100) -> List[Dict]:
+        """Execute an Elasticsearch search."""
+        url = f"{self.base_url}/{index}/_search"
+
+        headers = {"Content-Type": "application/json"}
+        if self.api_key:
+            headers["Authorization"] = f"ApiKey {self.api_key}"
+
+        auth = (self.username, self.password) if not self.api_key else None
+
+        body = {
+            "query": query,
+            "size": size,
+            "sort": [{"@timestamp": {"order": "desc"}}],
+        }
+
+        print(f"Elastic Query: {json.dumps(body, indent=2)}")
+        print("Note: Implement actual Elasticsearch API integration")
+
+        return []
+
+    def search_security_alerts(self, severity: str = None, hours: int = 24) -> List[Dict]:
+        """Search for security alerts."""
+        query = {"bool": {"must": [{"range": {"@timestamp": {"gte": f"now-{hours}h"}}}]}}
+
+        if severity:
+            query["bool"]["must"].append({"match": {"event.severity": severity}})
+
+        return self.search("security-*", query)
+
+
+# =============================================================================
 # Splunk Integration
 # =============================================================================
 
@@ -178,61 +233,6 @@ class SplunkClient:
         | sort -risk_score
         """
         return self.search(query)
-
-
-# =============================================================================
-# Elastic/OpenSearch Integration
-# =============================================================================
-
-
-class ElasticClient:
-    """Example Elasticsearch client pattern. NOT VERIFIED - adapt for your environment."""
-
-    def __init__(
-        self,
-        host: str = None,
-        port: int = 9200,
-        username: str = None,
-        password: str = None,
-        api_key: str = None,
-    ):
-        self.host = host or os.getenv("ELASTIC_HOST", "localhost")
-        self.port = port
-        self.username = username or os.getenv("ELASTIC_USERNAME")
-        self.password = password or os.getenv("ELASTIC_PASSWORD")
-        self.api_key = api_key or os.getenv("ELASTIC_API_KEY")
-        self.base_url = f"https://{self.host}:{self.port}"
-        self.session = requests.Session()
-
-    def search(self, index: str, query: Dict, size: int = 100) -> List[Dict]:
-        """Execute an Elasticsearch search."""
-        url = f"{self.base_url}/{index}/_search"
-
-        headers = {"Content-Type": "application/json"}
-        if self.api_key:
-            headers["Authorization"] = f"ApiKey {self.api_key}"
-
-        auth = (self.username, self.password) if not self.api_key else None
-
-        body = {
-            "query": query,
-            "size": size,
-            "sort": [{"@timestamp": {"order": "desc"}}],
-        }
-
-        print(f"Elastic Query: {json.dumps(body, indent=2)}")
-        print("Note: Implement actual Elasticsearch API integration")
-
-        return []
-
-    def search_security_alerts(self, severity: str = None, hours: int = 24) -> List[Dict]:
-        """Search for security alerts."""
-        query = {"bool": {"must": [{"range": {"@timestamp": {"gte": f"now-{hours}h"}}}]}}
-
-        if severity:
-            query["bool"]["must"].append({"match": {"event.severity": severity}})
-
-        return self.search("security-*", query)
 
 
 # =============================================================================
@@ -333,15 +333,15 @@ def main():
 
     print("\nExample pattern templates:")
     print("  - Cortex XSIAM (XSIAMClient)")
-    print("  - Splunk REST API (SplunkClient)")
     print("  - Elasticsearch/OpenSearch (ElasticClient)")
+    print("  - Splunk REST API (SplunkClient)")
     print("  - Microsoft Sentinel (SentinelClient)")
     print("  - Generic interface (SIEMInterface)")
 
     print("\nExample environment variables:")
     print("  XSIAM_API_URL, XSIAM_API_KEY, XSIAM_API_KEY_ID")
-    print("  SPLUNK_HOST, SPLUNK_TOKEN")
     print("  ELASTIC_HOST, ELASTIC_API_KEY")
+    print("  SPLUNK_HOST, SPLUNK_TOKEN")
     print("  SENTINEL_WORKSPACE_ID, AZURE_* credentials")
 
     print("\nFor production use:")
