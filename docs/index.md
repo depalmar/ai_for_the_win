@@ -1829,7 +1829,12 @@ python labs/lab01-phishing-classifier/solution/main.py</code></pre>
     <div class="feature">
       <div class="feature-icon">&#128211;</div>
       <h3><a href="https://github.com/depalmar/ai_for_the_win/blob/main/setup/guides/jupyter-basics-guide.md">Jupyter Basics</a></h3>
-      <p>Notebook guide for security analysts</p>
+      <p>Local notebook setup guide</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">☁️</div>
+      <h3><a href="https://github.com/depalmar/ai_for_the_win/blob/main/setup/guides/colab-guide.md">Google Colab Guide</a></h3>
+      <p>Zero-setup browser notebooks</p>
     </div>
   </div>
 </div>
