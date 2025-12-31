@@ -322,9 +322,11 @@ lab-XX-name/
 
 ### SIEM/SOAR Integration Pattern
 
+> ⚠️ **Template Notice**: These enterprise integration patterns are **reference templates** and have not been validated against live systems. Adapt for your specific platform versions and security requirements.
+
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                  ENTERPRISE INTEGRATIONS                     │
+│              ENTERPRISE INTEGRATIONS (Templates)             │
 ├─────────────────────────────────────────────────────────────┤
 │                                                              │
 │  ┌─────────────────┐    ┌─────────────────┐                │
