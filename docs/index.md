@@ -568,7 +568,15 @@ a[href*="mattgraham"] {
   border-radius: 3px;
   font-size: 0.75rem;
   font-weight: bold;
+  min-width: 28px;
+  text-align: center;
 }
+
+.path-lab-num.intro { background: var(--text-muted); }
+.path-lab-num.ml { background: var(--secondary); }
+.path-lab-num.llm { background: var(--primary); }
+.path-lab-num.advanced { background: var(--accent); }
+.path-lab-num.dfir { background: var(--danger); }
 
 .path-lab-name {
   color: var(--text);
@@ -1365,7 +1373,36 @@ function toggleTheme() {
         <span class="path-toggle">&#9660;</span>
       </summary>
       <div class="path-content">
-        <p class="path-desc">Start here! Learn ML fundamentals and LLM basics. No API key needed for Labs 01-03.</p>
+        <p class="path-desc">Start here! Foundations → ML basics → LLM basics. No API key needed until Lab 04.</p>
+        <p style="font-size: 0.8rem; color: var(--secondary); margin-bottom: 0.75rem; font-weight: 600;">📚 Foundations (Optional Prep)</p>
+        <div class="path-labs-list">
+          <div class="path-lab-item">
+            <span class="path-lab-num intro">00</span>
+            <span class="path-lab-name">Environment Setup</span>
+            <span class="path-time">~30 min</span>
+          </div>
+          <div class="path-lab-item">
+            <span class="path-lab-num intro">00a</span>
+            <span class="path-lab-name">Python for Security</span>
+            <span class="path-time">~2 hrs</span>
+          </div>
+          <div class="path-lab-item">
+            <span class="path-lab-num intro">00b</span>
+            <span class="path-lab-name">ML Concepts Primer</span>
+            <span class="path-time">~1 hr</span>
+          </div>
+          <div class="path-lab-item">
+            <span class="path-lab-num intro">00c</span>
+            <span class="path-lab-name">Prompt Engineering</span>
+            <span class="path-time">~1 hr</span>
+          </div>
+          <div class="path-lab-item">
+            <span class="path-lab-num intro">00d</span>
+            <span class="path-lab-name">AI in Security Ops</span>
+            <span class="path-time">~1 hr</span>
+          </div>
+        </div>
+        <p style="font-size: 0.8rem; color: var(--secondary); margin: 1rem 0 0.75rem; font-weight: 600;">🔬 ML Basics (No API Key)</p>
         <div class="path-labs-list">
           <div class="path-lab-item">
             <span class="path-lab-num ml">01</span>
@@ -1382,6 +1419,9 @@ function toggleTheme() {
             <span class="path-lab-name">Anomaly Detection</span>
             <span class="path-time">~2 hrs</span>
           </div>
+        </div>
+        <p style="font-size: 0.8rem; color: var(--primary); margin: 1rem 0 0.75rem; font-weight: 600;">🤖 LLM Basics (API Key Required)</p>
+        <div class="path-labs-list">
           <div class="path-lab-item">
             <span class="path-lab-num llm">04</span>
             <span class="path-lab-name">LLM Log Analysis</span>
@@ -1403,7 +1443,7 @@ function toggleTheme() {
             <span class="path-time">~3 hrs</span>
           </div>
         </div>
-        <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted);">Total: ~19 hours | Cost: Free → ~$5</p>
+        <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted);">Total: ~25 hours | Cost: Free → ~$5</p>
       </div>
     </details>
 
