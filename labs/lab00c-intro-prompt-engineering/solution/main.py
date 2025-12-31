@@ -26,9 +26,9 @@ def print_prompt(prompt: str, title: str = "PROMPT"):
     """Display a prompt in a formatted box."""
     print(f"\n{'='*60}")
     print(f"📝 {title}")
-    print("="*60)
+    print("=" * 60)
     print(prompt)
-    print("="*60)
+    print("=" * 60)
 
 
 def call_llm(prompt: str) -> str | None:
@@ -38,19 +38,20 @@ def call_llm(prompt: str) -> str | None:
     try:
         if HAS_ANTHROPIC:
             from anthropic import Anthropic
+
             client = Anthropic()
             response = client.messages.create(
                 model="claude-3-5-haiku-20241022",
                 max_tokens=1500,
-                messages=[{"role": "user", "content": prompt}]
+                messages=[{"role": "user", "content": prompt}],
             )
             return response.content[0].text
         elif HAS_OPENAI:
             from openai import OpenAI
+
             client = OpenAI()
             response = client.chat.completions.create(
-                model="gpt-4o-mini",
-                messages=[{"role": "user", "content": prompt}]
+                model="gpt-4o-mini", messages=[{"role": "user", "content": prompt}]
             )
             return response.choices[0].message.content
     except Exception as e:
@@ -62,10 +63,11 @@ def call_llm(prompt: str) -> str | None:
 # EXERCISE 1: Structured Log Analysis Prompt - SOLUTION
 # =============================================================================
 
+
 def exercise_1_solution(log_entries: list[str]) -> str:
     """
     Well-structured prompt for log analysis.
-    
+
     Key elements:
     1. Role/persona for the LLM
     2. Clear task description
@@ -73,7 +75,7 @@ def exercise_1_solution(log_entries: list[str]) -> str:
     4. Data clearly separated
     """
     logs_formatted = "\n".join(f"  {i+1}. {log}" for i, log in enumerate(log_entries))
-    
+
     prompt = f"""You are a senior security analyst reviewing authentication logs for suspicious activity.
 
 ## Task
@@ -110,22 +112,22 @@ Provide your analysis as a structured report:
 
 def run_exercise_1():
     """Demonstrate structured log analysis prompt."""
-    print("\n" + "="*60)
+    print("\n" + "=" * 60)
     print("EXERCISE 1: Structured Log Analysis - SOLUTION")
-    print("="*60)
-    
+    print("=" * 60)
+
     samples = load_samples()
     logs = samples["log_entries"]
-    
+
     prompt = exercise_1_solution(logs)
     print_prompt(prompt, "WELL-STRUCTURED PROMPT")
-    
+
     print("\n✅ Key improvements over weak prompt:")
     print("   - Role: 'senior security analyst'")
     print("   - Clear task: 'identify security concerns'")
     print("   - Structured output: table format")
     print("   - Specific asks: Status, Reason, IOCs")
-    
+
     if HAS_API:
         print("\n🤖 API Response:")
         response = call_llm(prompt)
@@ -137,10 +139,11 @@ def run_exercise_1():
 # EXERCISE 2: IOC Extraction Prompt - SOLUTION
 # =============================================================================
 
+
 def exercise_2_solution(threat_report: str) -> str:
     """
     Comprehensive IOC extraction prompt.
-    
+
     Key elements:
     - Specific IOC types to look for
     - Defanging instructions
@@ -203,22 +206,22 @@ Provide IOCs as JSON for easy ingestion into security tools:
 
 def run_exercise_2():
     """Demonstrate IOC extraction prompt."""
-    print("\n" + "="*60)
+    print("\n" + "=" * 60)
     print("EXERCISE 2: IOC Extraction - SOLUTION")
-    print("="*60)
-    
+    print("=" * 60)
+
     samples = load_samples()
     report = samples["threat_report_excerpt"]
-    
+
     prompt = exercise_2_solution(report)
     print_prompt(prompt, "IOC EXTRACTION PROMPT")
-    
+
     print("\n✅ Key elements:")
     print("   - Comprehensive IOC type list")
     print("   - JSON output for automation")
     print("   - Defanging instructions")
     print("   - Confidence levels")
-    
+
     if HAS_API:
         print("\n🤖 API Response:")
         response = call_llm(prompt)
@@ -230,10 +233,11 @@ def run_exercise_2():
 # EXERCISE 3: Phishing Analysis Prompt - SOLUTION
 # =============================================================================
 
+
 def exercise_3_solution(email: dict) -> str:
     """
     Comprehensive phishing analysis prompt.
-    
+
     Key elements:
     - Structured email display
     - Specific indicators to check
@@ -263,7 +267,7 @@ Evaluate each category:
 - Does the domain look like a legitimate company's domain?
 - Are there typos or lookalike characters?
 
-### 2. Content Analysis  
+### 2. Content Analysis
 - Urgency tactics (time pressure, threats)?
 - Grammar/spelling issues?
 - Generic vs personalized greeting?
@@ -305,22 +309,22 @@ Evaluate each category:
 
 def run_exercise_3():
     """Demonstrate phishing analysis prompt."""
-    print("\n" + "="*60)
+    print("\n" + "=" * 60)
     print("EXERCISE 3: Phishing Analysis - SOLUTION")
-    print("="*60)
-    
+    print("=" * 60)
+
     samples = load_samples()
     email = samples["suspicious_email"]
-    
+
     prompt = exercise_3_solution(email)
     print_prompt(prompt, "PHISHING ANALYSIS PROMPT")
-    
+
     print("\n✅ Key elements:")
     print("   - Structured analysis checklist")
     print("   - Clear verdict format")
     print("   - Risk scoring")
     print("   - Actionable recommendations")
-    
+
     if HAS_API:
         print("\n🤖 API Response:")
         response = call_llm(prompt)
@@ -332,10 +336,11 @@ def run_exercise_3():
 # EXERCISE 4: PowerShell Analysis Prompt - SOLUTION
 # =============================================================================
 
+
 def exercise_4_solution(encoded_command: str) -> str:
     """
     PowerShell deobfuscation and analysis prompt.
-    
+
     Key elements:
     - Step-by-step decoding
     - Behavior analysis
@@ -394,22 +399,22 @@ Provide clear sections for each analysis step above.
 
 def run_exercise_4():
     """Demonstrate PowerShell analysis prompt."""
-    print("\n" + "="*60)
+    print("\n" + "=" * 60)
     print("EXERCISE 4: PowerShell Analysis - SOLUTION")
-    print("="*60)
-    
+    print("=" * 60)
+
     samples = load_samples()
     ps_command = samples["powershell_command"]
-    
+
     prompt = exercise_4_solution(ps_command)
     print_prompt(prompt, "POWERSHELL ANALYSIS PROMPT")
-    
+
     print("\n✅ Key elements:")
     print("   - Step-by-step deobfuscation")
     print("   - MITRE ATT&CK mapping")
     print("   - Detection recommendations")
     print("   - IOC extraction")
-    
+
     if HAS_API:
         print("\n🤖 API Response:")
         response = call_llm(prompt)
@@ -421,19 +426,18 @@ def run_exercise_4():
 # BONUS: Reusable Security Prompt Template
 # =============================================================================
 
+
 def security_analysis_template(
-    task_type: str,
-    data: str,
-    output_format: str = "structured",
-    extract_iocs: bool = True
+    task_type: str, data: str, output_format: str = "structured", extract_iocs: bool = True
 ) -> str:
     """
     Reusable template for security analysis prompts.
-    
+
     This demonstrates how to create a flexible template
     that can be adapted for different security tasks.
     """
-    ioc_section = """
+    ioc_section = (
+        """
 ## IOCs to Extract
 If present, extract:
 - IP addresses (defanged)
@@ -441,7 +445,10 @@ If present, extract:
 - File hashes
 - File paths
 - Any other indicators
-""" if extract_iocs else ""
+"""
+        if extract_iocs
+        else ""
+    )
 
     prompt = f"""You are an experienced security analyst performing {task_type}.
 
@@ -472,20 +479,20 @@ Provide a {output_format} report with clear sections:
 
 def run_bonus():
     """Demonstrate reusable template."""
-    print("\n" + "="*60)
+    print("\n" + "=" * 60)
     print("BONUS: Reusable Security Analysis Template")
-    print("="*60)
-    
+    print("=" * 60)
+
     # Example usage
     sample_data = "User 'admin' logged in from IP 185.220.101.5 at 3:00 AM"
-    
+
     prompt = security_analysis_template(
         task_type="authentication log analysis",
         data=sample_data,
         output_format="structured markdown",
-        extract_iocs=True
+        extract_iocs=True,
     )
-    
+
     print_prompt(prompt, "TEMPLATE-GENERATED PROMPT")
     print("\n✅ This template can be reused for:")
     print("   - Log analysis")
@@ -498,17 +505,18 @@ def run_bonus():
 # MAIN
 # =============================================================================
 
+
 def main():
     """Run all solution demonstrations."""
-    print("\n" + "="*60)
+    print("\n" + "=" * 60)
     print("Lab 00c: Prompt Engineering - SOLUTIONS")
-    print("="*60)
-    
+    print("=" * 60)
+
     if HAS_API:
         print("✅ API key detected - will show LLM responses")
     else:
         print("ℹ️  No API key - prompts displayed for copy/paste")
-    
+
     exercises = [
         ("1", "Structured Log Analysis", run_exercise_1),
         ("2", "IOC Extraction", run_exercise_2),
@@ -516,14 +524,14 @@ def main():
         ("4", "PowerShell Analysis", run_exercise_4),
         ("B", "Bonus Template", run_bonus),
     ]
-    
+
     print("\nExercises:")
     for num, name, _ in exercises:
         print(f"  {num}. {name}")
     print("  A. Run all")
-    
+
     choice = input("\nWhich exercise? (1-4, B, or A): ").strip().upper()
-    
+
     if choice == "A":
         for _, _, func in exercises:
             func()
