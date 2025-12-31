@@ -703,12 +703,12 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
   content: '-';
 }
 
-.faq-item p {
+.faq-content {
   margin: 0;
-  padding: 0 1.25rem 1rem;
+  padding: 0.75rem 1.25rem 1rem;
   color: var(--text-muted);
   font-size: 0.9rem;
-  display: block !important;
+  line-height: 1.5;
 }
 
 /* Footer */
@@ -1041,10 +1041,6 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
       <h3>839 Tests</h3>
       <p>Every lab has comprehensive tests. Know your code works before deploying. 100% pass rate.</p>
     </div>
-  </div>
-
-  <div class="cta-buttons" style="margin-top: 2rem;">
-    <a href="https://github.com/depalmar/ai_for_the_win#get-started-in-5-minutes" class="btn btn-primary">Start Lab 01 Now</a>
   </div>
 </div>
 
@@ -1772,37 +1768,37 @@ python labs/lab01-phishing-classifier/solution/main.py</code></pre>
 </div>
 
 <div class="section" id="faq">
-<h2 class="section-title">Frequently Asked Questions</h2>
-<div class="faq">
-<details class="faq-item">
-<summary>Do I need prior ML/AI experience?</summary>
-<p>No. Labs 00a-00c cover Python basics, ML concepts, and prompt engineering from scratch. The Security-to-AI Glossary translates ML jargon into security terms you already know.</p>
-</details>
-<details class="faq-item">
-<summary>Which LLM provider should I use?</summary>
-<p>We recommend Anthropic Claude for best reasoning on security tasks. But all labs support OpenAI GPT-4, Google Gemini, and Ollama (free, local). You only need one.</p>
-</details>
-<details class="faq-item">
-<summary>Can I run everything locally without API costs?</summary>
-<p>Yes! Use Ollama to run models locally for free. Labs 01-03 don't need any API at all. You can complete the entire course for $0 if you use local models.</p>
-</details>
-<details class="faq-item">
-<summary>How long does it take to complete all labs?</summary>
-<p>The full course is approximately 40-89 hours depending on AI assistance level. With AI coding tools, most labs take 50-70% less time. Focus on your role's learning path first (~5-18 hours) for immediate value.</p>
-</details>
-<details class="faq-item">
-<summary>What if I get stuck on a lab?</summary>
-<p>Every lab includes complete solution code, step-by-step hints, and a Colab notebook you can run in your browser. Check GitHub Discussions for community help or open an issue.</p>
-</details>
-<details class="faq-item">
-<summary>Are the labs production-ready?</summary>
-<p>The solutions demonstrate core concepts. For production use, you'd add error handling, logging, and scale considerations. Lab 09 (Detection Pipeline) shows production architecture patterns.</p>
-</details>
-<details class="faq-item">
-<summary>How is this different from other ML courses?</summary>
-<p>Every lab solves a real security problem. You won't build iris classifiers or digit recognizers. You'll build phishing detectors, threat intel agents, and ransomware analyzers.</p>
-</details>
-</div>
+  <h2 class="section-title">Frequently Asked Questions</h2>
+  <div class="faq">
+    <details class="faq-item">
+      <summary>Do I need prior ML/AI experience?</summary>
+      <div class="faq-content">No. Labs 00a-00c cover Python basics, ML concepts, and prompt engineering from scratch. The Security-to-AI Glossary translates ML jargon into security terms you already know.</div>
+    </details>
+    <details class="faq-item">
+      <summary>Which LLM provider should I use?</summary>
+      <div class="faq-content">We recommend Anthropic Claude for best reasoning on security tasks. But all labs support OpenAI GPT-4, Google Gemini, and Ollama (free, local). You only need one.</div>
+    </details>
+    <details class="faq-item">
+      <summary>Can I run everything locally without API costs?</summary>
+      <div class="faq-content">Yes! Use Ollama to run models locally for free. Labs 01-03 don't need any API at all. You can complete the entire course for $0 if you use local models.</div>
+    </details>
+    <details class="faq-item">
+      <summary>How long does it take to complete all labs?</summary>
+      <div class="faq-content">The full course is approximately 40-89 hours depending on AI assistance level. With AI coding tools, most labs take 50-70% less time. Focus on your role's learning path first (~5-18 hours) for immediate value.</div>
+    </details>
+    <details class="faq-item">
+      <summary>What if I get stuck on a lab?</summary>
+      <div class="faq-content">Every lab includes complete solution code, step-by-step hints, and a Colab notebook you can run in your browser. Check GitHub Discussions for community help or open an issue.</div>
+    </details>
+    <details class="faq-item">
+      <summary>Are the labs production-ready?</summary>
+      <div class="faq-content">The solutions demonstrate core concepts. For production use, you'd add error handling, logging, and scale considerations. Lab 09 (Detection Pipeline) shows production architecture patterns.</div>
+    </details>
+    <details class="faq-item">
+      <summary>How is this different from other ML courses?</summary>
+      <div class="faq-content">Every lab solves a real security problem. You won't build iris classifiers or digit recognizers. You'll build phishing detectors, threat intel agents, and ransomware analyzers.</div>
+    </details>
+  </div>
 </div>
 
 <div class="section" style="border-bottom: none;">
