@@ -15,7 +15,15 @@ A hands-on training program for security practitioners who want to build AI-powe
 
 ## Get Started in 5 Minutes
 
-### Complete Beginner? Start Here:
+### Option 1: Zero Setup (Google Colab)
+
+No installation needed — run labs directly in your browser:
+
+[![Open Lab 01 in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab01_phishing_classifier.ipynb) [![Open Lab 04 in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab04_llm_log_analysis.ipynb)
+
+> All notebooks are in the [`notebooks/`](./notebooks/) folder — open any `.ipynb` file in Colab.
+
+### Option 2: Local Setup
 
 ```bash
 # 1. Clone the repository
