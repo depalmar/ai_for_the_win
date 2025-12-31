@@ -67,42 +67,48 @@ python solution/main.py
 flowchart LR
     subgraph S[" "]
         direction LR
-        A["🎯 Setup<br/>00"] --> B["🟢 ML Basics<br/>01-03"] --> C["🟡 LLM<br/>04-07"] --> D["🟠 Advanced<br/>08-10"] --> E["🔴 Expert<br/>11-20"]
+        A["⚪ Foundations<br/>00-00d"] --> B["🟢 ML Basics<br/>01-03"] --> C["🟡 LLM<br/>04-07"] --> D["🟠 Advanced<br/>08-10"] --> E["🔴 Expert<br/>11-20"]
     end
 ```
 
 <table>
 <tr>
 <td align="center"><a href="./labs/lab00-environment-setup/"><img src="https://img.shields.io/badge/00-Setup-gray?style=for-the-badge" alt="Lab 00"/></a></td>
+<td align="center"><a href="./labs/lab00a-python-security-fundamentals/"><img src="https://img.shields.io/badge/00a-Python-gray?style=for-the-badge" alt="Lab 00a"/></a></td>
+<td align="center"><a href="./labs/lab00b-ml-concepts-primer/"><img src="https://img.shields.io/badge/00b-ML_Intro-gray?style=for-the-badge" alt="Lab 00b"/></a></td>
+<td align="center"><a href="./labs/lab00c-intro-prompt-engineering/"><img src="https://img.shields.io/badge/00c-Prompts-gray?style=for-the-badge" alt="Lab 00c"/></a></td>
+<td align="center"><a href="./labs/lab00d-ai-in-security-operations/"><img src="https://img.shields.io/badge/00d-AI_in_SOC-gray?style=for-the-badge" alt="Lab 00d"/></a></td>
+</tr>
+<tr>
 <td align="center"><a href="./labs/lab01-phishing-classifier/"><img src="https://img.shields.io/badge/01-Phishing-10b981?style=for-the-badge" alt="Lab 01"/></a></td>
 <td align="center"><a href="./labs/lab02-malware-clustering/"><img src="https://img.shields.io/badge/02-Malware-10b981?style=for-the-badge" alt="Lab 02"/></a></td>
 <td align="center"><a href="./labs/lab03-anomaly-detection/"><img src="https://img.shields.io/badge/03-Anomaly-10b981?style=for-the-badge" alt="Lab 03"/></a></td>
 <td align="center"><a href="./labs/lab04-llm-log-analysis/"><img src="https://img.shields.io/badge/04-Logs-6366f1?style=for-the-badge" alt="Lab 04"/></a></td>
+<td align="center"><a href="./labs/lab05-threat-intel-agent/"><img src="https://img.shields.io/badge/05-Intel-6366f1?style=for-the-badge" alt="Lab 05"/></a></td>
 </tr>
 <tr>
-<td align="center"><a href="./labs/lab05-threat-intel-agent/"><img src="https://img.shields.io/badge/05-Intel-6366f1?style=for-the-badge" alt="Lab 05"/></a></td>
 <td align="center"><a href="./labs/lab06-security-rag/"><img src="https://img.shields.io/badge/06-RAG-6366f1?style=for-the-badge" alt="Lab 06"/></a></td>
 <td align="center"><a href="./labs/lab07-yara-generator/"><img src="https://img.shields.io/badge/07-YARA-6366f1?style=for-the-badge" alt="Lab 07"/></a></td>
 <td align="center"><a href="./labs/lab08-vuln-prioritizer/"><img src="https://img.shields.io/badge/08-Vuln-f59e0b?style=for-the-badge" alt="Lab 08"/></a></td>
 <td align="center"><a href="./labs/lab09-detection-pipeline/"><img src="https://img.shields.io/badge/09-Pipeline-f59e0b?style=for-the-badge" alt="Lab 09"/></a></td>
+<td align="center"><a href="./labs/lab10-ir-copilot/"><img src="https://img.shields.io/badge/10-IR_Bot-f59e0b?style=for-the-badge" alt="Lab 10"/></a></td>
 </tr>
 <tr>
-<td align="center"><a href="./labs/lab10-ir-copilot/"><img src="https://img.shields.io/badge/10-IR_Bot-f59e0b?style=for-the-badge" alt="Lab 10"/></a></td>
 <td align="center"><a href="./labs/lab11-ransomware-detection/"><img src="https://img.shields.io/badge/11-Ransom-ef4444?style=for-the-badge" alt="Lab 11"/></a></td>
 <td align="center"><a href="./labs/lab12-ransomware-simulation/"><img src="https://img.shields.io/badge/12-Purple-ef4444?style=for-the-badge" alt="Lab 12"/></a></td>
 <td align="center"><a href="./labs/lab13-memory-forensics-ai/"><img src="https://img.shields.io/badge/13-Memory-ef4444?style=for-the-badge" alt="Lab 13"/></a></td>
 <td align="center"><a href="./labs/lab14-c2-traffic-analysis/"><img src="https://img.shields.io/badge/14-C2-ef4444?style=for-the-badge" alt="Lab 14"/></a></td>
+<td align="center"><a href="./labs/lab15-lateral-movement-detection/"><img src="https://img.shields.io/badge/15-Lateral-ef4444?style=for-the-badge" alt="Lab 15"/></a></td>
 </tr>
 <tr>
-<td align="center"><a href="./labs/lab15-lateral-movement-detection/"><img src="https://img.shields.io/badge/15-Lateral-ef4444?style=for-the-badge" alt="Lab 15"/></a></td>
 <td align="center"><a href="./labs/lab16-threat-actor-profiling/"><img src="https://img.shields.io/badge/16-Actors-ef4444?style=for-the-badge" alt="Lab 16"/></a></td>
 <td align="center"><a href="./labs/lab17-adversarial-ml/"><img src="https://img.shields.io/badge/17-AdvML-ef4444?style=for-the-badge" alt="Lab 17"/></a></td>
 <td align="center"><a href="./labs/lab18-fine-tuning-security/"><img src="https://img.shields.io/badge/18-Tuning-ef4444?style=for-the-badge" alt="Lab 18"/></a></td>
 <td align="center"><a href="./labs/lab19-cloud-security-ai/"><img src="https://img.shields.io/badge/19-Cloud-ef4444?style=for-the-badge" alt="Lab 19"/></a></td>
+<td align="center"><a href="./labs/lab20-llm-red-teaming/"><img src="https://img.shields.io/badge/20-RedTeam-ef4444?style=for-the-badge" alt="Lab 20"/></a></td>
 </tr>
 <tr>
-<td align="center"><a href="./labs/lab20-llm-red-teaming/"><img src="https://img.shields.io/badge/20-RedTeam-ef4444?style=for-the-badge" alt="Lab 20"/></a></td>
-<td align="center" colspan="4"><strong>Legend:</strong> 🟢 ML (Free) | 🟡 LLM | 🟠 Advanced | 🔴 Expert DFIR</td>
+<td align="center" colspan="5"><strong>Legend:</strong> ⚪ Intro (Free) | 🟢 ML (Free) | 🟡 LLM | 🟠 Advanced | 🔴 Expert DFIR</td>
 </tr>
 </table>
 
@@ -195,60 +201,6 @@ flowchart LR
 
 ---
 
-## Quick Start
-
-```bash
-# Clone the repository
-git clone https://github.com/depalmar/ai_for_the_win.git
-cd ai_for_the_win
-
-# Create virtual environment
-python -m venv venv
-source venv/bin/activate  # Linux/Mac
-# or: .\venv\Scripts\activate  # Windows
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Set up API keys
-cp .env.example .env
-# Edit .env with your ANTHROPIC_API_KEY
-
-# Run your first lab
-cd labs/lab01-phishing-classifier
-python solution/main.py
-```
-
-### Docker Quick Start
-
-```bash
-# Build and run with Docker Compose
-docker-compose up dev
-
-# Run tests in container
-docker-compose run test
-
-# Launch Jupyter notebooks
-docker-compose up notebook
-# Open http://localhost:8888
-```
-
-### Google Colab
-
-Run labs directly in your browser - no setup required:
-
-| Lab | Colab Link |
-|-----|------------|
-| Lab 01: Phishing Classifier | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab01_phishing_classifier.ipynb) |
-| Lab 02: Malware Clustering | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab02_malware_clustering.ipynb) |
-| Lab 03: Anomaly Detection | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab03_anomaly_detection.ipynb) |
-| Lab 04: Log Analysis | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab04_llm_log_analysis.ipynb) |
-| Lab 05: Threat Intel Agent | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab05_threat_intel_agent.ipynb) |
-| Lab 06: Security RAG | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab06_security_rag.ipynb) |
-| All 23 notebooks available | [Browse notebooks →](./notebooks/) |
-
----
-
 ## Repository Structure
 
 ```
@@ -257,7 +209,8 @@ ai_for_the_win/
 │   ├── lab00-environment-setup/  # Setup guide for beginners
 │   ├── lab00a-python-security-fundamentals/ # Python basics for security
 │   ├── lab00b-ml-concepts-primer/ # ML theory before coding
-│   ├── lab00c-prompt-engineering-mastery/ # Prompt design & verification
+│   ├── lab00c-intro-prompt-engineering/ # Prompt design & basics
+│   ├── lab00d-ai-in-security-operations/ # AI in SOC workflows
 │   ├── lab01-phishing-classifier/ # ML text classification
 │   ├── lab02-malware-clustering/  # Unsupervised learning
 │   ├── lab03-anomaly-detection/   # Network security
@@ -292,50 +245,6 @@ ai_for_the_win/
 ├── Dockerfile                     # Multi-stage Docker build
 └── docker-compose.yml             # Dev, test, notebook services
 ```
-
----
-
-## Learning Paths
-
-### Path 1: ML Foundations
-
-Build core machine learning skills for security:
-
-```
-Lab 01 ──► Lab 02 ──► Lab 03
-  │          │          │
-  ▼          ▼          ▼
-Text ML   Clustering  Anomaly
-                      Detection
-```
-
-**Skills**: Supervised learning, unsupervised learning, feature engineering, model evaluation
-
-### Path 2: LLM & Agents
-
-Master LLMs for security applications:
-
-```
-Lab 04 ──► Lab 05 ──► Lab 06 ──► Lab 07
-  │          │          │          │
-  ▼          ▼          ▼          ▼
-Prompts   Agents      RAG       Code Gen
-```
-
-**Skills**: Prompt engineering, ReAct agents, RAG systems, tool use
-
-### Path 3: Production Systems
-
-Build production-ready security systems:
-
-```
-Lab 08 ──► Lab 09 ──► Lab 10 ──► Capstone
-  │          │          │          │
-  ▼          ▼          ▼          ▼
-Vuln Scan  Pipeline   IR Bot    Your Project
-```
-
-**Skills**: System design, multi-stage pipelines, conversational AI, deployment
 
 ---
 
