@@ -1102,4 +1102,4 @@ class ResilientAgent:
 
 ---
 
-**Next**: [Security & Compliance Guide](./security-compliance-guide.md) | [Quick Reference](./cheat-sheets.md)
+**Next**: [Security & Compliance Guide](./security-compliance-guide.md) | [Troubleshooting Guide](./troubleshooting-guide.md)

@@ -386,4 +386,4 @@ Full Foundation → All ML Labs → All LLM Labs → Advanced → Capstone
 3. Work through labs in order
 4. Build something real with a [capstone project](../capstone-projects/)
 
-Questions? Open an [issue](https://github.com/depalmar/ai_for_the_win/issues) or check the [FAQ](./faq.md).
+Questions? Open an [issue](https://github.com/depalmar/ai_for_the_win/issues) or check the [FAQ](https://depalmar.github.io/ai_for_the_win/#faq).
