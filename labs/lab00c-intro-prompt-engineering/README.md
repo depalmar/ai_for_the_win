@@ -97,10 +97,22 @@ We'll use **Google AI Studio** - it's free, requires no credit card, and perfect
 3. Click "Create new prompt"
 4. Choose "Freeform prompt"
 
+> 💡 **Google AI Studio Features:**
+> 
+> | Feature | How to Use | Why It Matters |
+> |---------|------------|----------------|
+> | **Model Selection** | Top dropdown | Compare Gemini 2.0 Flash vs Pro |
+> | **Temperature** | Right sidebar (0-2) | 0 = deterministic, 1+ = creative |
+> | **System Instructions** | "System instructions" tab | Set analyst persona |
+> | **Structured Output** | Enable JSON mode | Get parseable responses |
+> | **Save Prompts** | Click "Save" | Build your prompt library |
+> | **Get Code** | Click "Get code" | Export to Python/cURL |
+> | **Token Counter** | Bottom of screen | Track costs before API use |
+
 **Alternative Free Options:**
-- [Claude.ai](https://claude.ai/) - Free tier available
-- [Poe.com](https://poe.com/) - Access multiple models
-- [Perplexity.ai](https://perplexity.ai/) - Good for research
+- [Claude.ai](https://claude.ai/) - Free tier, excellent for long documents
+- [Poe.com](https://poe.com/) - Try Claude, GPT-4, Gemini, Llama in one place
+- [Perplexity.ai](https://perplexity.ai/) - Good for research with citations
 
 ---
 
