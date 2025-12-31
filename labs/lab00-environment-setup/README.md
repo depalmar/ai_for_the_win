@@ -101,15 +101,16 @@ Any Python IDE works, but **VS Code or Cursor are recommended** for this course 
 
 ### AI Coding Assistants (Optional but Recommended)
 
-These terminal-based tools work alongside any IDE for "vibe coding":
+These tools work alongside your IDE for "vibe coding":
 
-| Tool | Best For | Setup |
-|------|----------|-------|
-| [Claude Code](https://docs.anthropic.com/en/docs/claude-code) | Git workflows, multi-file edits | See official docs |
-| [Gemini CLI](https://github.com/google-gemini/gemini-cli) | Large context (1M tokens), free tier | See GitHub repo |
-| [GitHub Copilot](https://github.com/features/copilot) | Inline completions in VS Code | VS Code extension |
+| Tool | Type | Cost | Notes |
+|------|------|------|-------|
+| [Claude Code](https://docs.anthropic.com/en/docs/claude-code) | Terminal | Pay-per-use | Best for multi-file edits, git workflows |
+| [Gemini CLI](https://github.com/google-gemini/gemini-cli) | Terminal | Free tier | 1M token context, great for research |
+| [Codeium](https://codeium.com/) | IDE extension | Free | Good Copilot alternative |
+| [GitHub Copilot](https://github.com/features/copilot) | IDE extension | $10/mo | Inline completions |
 
-> 💡 **Tip:** You don't need all of these. Pick one and learn it well. The labs work without any AI assistant.
+> 💡 **Tip:** You don't need all of these. Pick one and learn it well. **Cursor already includes AI** — if you chose Option B, you may not need anything else.
 
 ---
 
