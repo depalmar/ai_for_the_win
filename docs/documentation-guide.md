@@ -83,7 +83,7 @@
 | Gemini CLI | [gemini-cli-guide.md](../setup/guides/gemini-cli-guide.md) |
 | Cursor IDE | [cursor-ide-guide.md](../setup/guides/cursor-ide-guide.md) |
 | Google ADK | [google-adk-guide.md](../setup/guides/google-adk-guide.md) |
-| LangChain Security | [langchain-security-cheatsheet.md](../resources/cheatsheets/langchain-security-cheatsheet.md) |
+| LangChain Security | [langchain-guide.md](../setup/guides/langchain-guide.md) |
 
 ### Lab Walkthroughs (Solutions)
 

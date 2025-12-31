@@ -506,7 +506,7 @@ Copy `.env.example` to `.env` and configure:
 | [Documentation Guide](./docs/documentation-guide.md)                  | Find exactly what you need                          |
 | [Security Prompts](./resources/prompt-library/security-prompts.md)    | Ready-to-use prompts for security tasks             |
 | [Lab Walkthroughs](./docs/walkthroughs/)                              | Step-by-step solutions when stuck                   |
-| [LangChain Cheatsheet](./resources/cheatsheets/langchain-security-cheatsheet.md) | Quick reference for LangChain security tools |
+| [LangChain Guide](./setup/guides/langchain-guide.md) | Comprehensive LangChain security guide |
 | [SIEM Integrations](./resources/integrations/)                        | Splunk, Elastic, XSIAM integration guides           |
 | [Tools & APIs](./resources/tools-and-resources.md)                    | 80+ security tools, APIs, datasets                  |
 | [MCP Servers](./resources/mcp-servers-security-guide.md)              | MCP servers for DFIR, threat intel                  |

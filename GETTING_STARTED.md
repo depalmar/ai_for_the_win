@@ -348,7 +348,7 @@ AI: [Executes and interprets results]
 Quick references for AI coding tools:
 - [Cursor IDE Guide](./setup/guides/cursor-ide-guide.md)
 - [Claude Code CLI Guide](./setup/guides/claude-code-cli-guide.md)
-- [LangChain Security Cheatsheet](./resources/cheatsheets/langchain-security-cheatsheet.md)
+- [LangChain Security Guide](./setup/guides/langchain-guide.md)
 
 ---
 
