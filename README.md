@@ -109,9 +109,9 @@ $ python labs/lab04-llm-log-analysis/solution/main.py
     → MITRE ATT&CK: T1110.004
 
   Stage 2: Lateral Movement (15 min later)
-    Compromised 'svc_backup' → 3 new hosts
+    'svc_backup' → SMB to 3 new hosts
     ⚠️  Service account with domain-wide read access
-    → MITRE ATT&CK: T1021
+    → MITRE ATT&CK: T1021.002 (SMB/Windows Admin Shares)
 
   Timeline: 02:14 initial access → 02:29 lateral spread
 
