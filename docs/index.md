@@ -1828,5 +1828,5 @@ python solution/main.py</code></pre>
 </div>
 
 <p style="text-align: center; color: var(--text-muted); font-size: 0.85rem;">
-  MIT License | Built for security practitioners
+  MIT License | Built for security practitioners | Maintained by <a href="https://github.com/depalmar" style="color: var(--text-muted); text-decoration: underline;">depalmar</a>
 </p>
