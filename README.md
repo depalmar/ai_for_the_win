@@ -115,7 +115,7 @@ $ python labs/lab04-llm-log-analysis/solution/main.py
 
   Timeline: 02:14 initial access → 02:29 lateral spread
 
-Action: Isolate hosts, reset 12 accounts, enforce MFA policy
+Action: Isolate FILE01/FILE02/DC01, reset 12 accounts, enforce MFA
 ```
 
 ---
