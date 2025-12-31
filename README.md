@@ -27,11 +27,12 @@ python -m venv venv
 source venv/bin/activate  # On Windows: .\venv\Scripts\activate
 pip install -r requirements.txt
 
-# 3. Start with Lab 00a (Python basics) - NO API KEY NEEDED!
-cd labs/lab00a-python-security-fundamentals
+# 3. Start with Lab 00 (environment setup) - NO API KEY NEEDED!
+cd labs/lab00-environment-setup
 cat README.md  # Read the lab instructions
 
-# Then try Lab 01 (ML classifier) - STILL NO API KEY NEEDED!
+# 4. Work through intro labs: 00a → 00b → 00c → 00d → 01
+# Or jump straight to Lab 01 if you know Python/ML basics
 cd ../lab01-phishing-classifier
 python solution/main.py
 ```
