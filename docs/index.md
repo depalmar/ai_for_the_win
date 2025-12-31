@@ -1359,107 +1359,13 @@ function toggleTheme() {
   <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Click to expand each path and see the recommended labs</p>
 
   <div class="path-grid">
-    <details class="path-card">
+    <details class="path-card" open>
       <summary class="path-header">
-        <h3>SOC Analyst</h3>
+        <h3>🟢 Beginner</h3>
         <span class="path-toggle">&#9660;</span>
       </summary>
       <div class="path-content">
-        <p class="path-desc">Automate alert triage, reduce fatigue, AI-assisted analysis. Perfect for Tier 1-2 analysts looking to level up.</p>
-        <div class="path-labs-list">
-          <div class="path-lab-item">
-            <span class="path-lab-num llm">04</span>
-            <span class="path-lab-name">LLM Log Analysis</span>
-            <span class="path-time">~3 hrs</span>
-          </div>
-          <div class="path-lab-item">
-            <span class="path-lab-num llm">06</span>
-            <span class="path-lab-name">Security RAG</span>
-            <span class="path-time">~4 hrs</span>
-          </div>
-          <div class="path-lab-item">
-            <span class="path-lab-num advanced">10</span>
-            <span class="path-lab-name">IR Copilot</span>
-            <span class="path-time">~4 hrs</span>
-          </div>
-        </div>
-        <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted);">Total: ~11 hours | Cost: ~$5-10</p>
-      </div>
-    </details>
-
-    <details class="path-card">
-      <summary class="path-header">
-        <h3>Incident Responder</h3>
-        <span class="path-toggle">&#9660;</span>
-      </summary>
-      <div class="path-content">
-        <p class="path-desc">Faster investigations, automated evidence collection, AI-powered forensics and triage.</p>
-        <div class="path-labs-list">
-          <div class="path-lab-item">
-            <span class="path-lab-num llm">04</span>
-            <span class="path-lab-name">LLM Log Analysis</span>
-            <span class="path-time">~3 hrs</span>
-          </div>
-          <div class="path-lab-item">
-            <span class="path-lab-num advanced">10</span>
-            <span class="path-lab-name">IR Copilot</span>
-            <span class="path-time">~4 hrs</span>
-          </div>
-          <div class="path-lab-item">
-            <span class="path-lab-num dfir">11</span>
-            <span class="path-lab-name">Ransomware Detection</span>
-            <span class="path-time">~5 hrs</span>
-          </div>
-          <div class="path-lab-item">
-            <span class="path-lab-num dfir">13</span>
-            <span class="path-lab-name">Memory Forensics AI</span>
-            <span class="path-time">~6 hrs</span>
-          </div>
-        </div>
-        <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted);">Total: ~18 hours | Cost: ~$10-20</p>
-      </div>
-    </details>
-
-    <details class="path-card">
-      <summary class="path-header">
-        <h3>Threat Hunter</h3>
-        <span class="path-toggle">&#9660;</span>
-      </summary>
-      <div class="path-content">
-        <p class="path-desc">Find what rules miss, detect unknown threats, AI-enhanced hypothesis generation and investigation.</p>
-        <div class="path-labs-list">
-          <div class="path-lab-item">
-            <span class="path-lab-num ml">03</span>
-            <span class="path-lab-name">Anomaly Detection</span>
-            <span class="path-time">~2 hrs</span>
-          </div>
-          <div class="path-lab-item">
-            <span class="path-lab-num dfir">14</span>
-            <span class="path-lab-name">C2 Traffic Analysis</span>
-            <span class="path-time">~5 hrs</span>
-          </div>
-          <div class="path-lab-item">
-            <span class="path-lab-num dfir">15</span>
-            <span class="path-lab-name">Lateral Movement</span>
-            <span class="path-time">~5 hrs</span>
-          </div>
-          <div class="path-lab-item">
-            <span class="path-lab-num dfir">16</span>
-            <span class="path-lab-name">Threat Actor Profiling</span>
-            <span class="path-time">~5 hrs</span>
-          </div>
-        </div>
-        <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted);">Total: ~17 hours | Cost: ~$10-15</p>
-      </div>
-    </details>
-
-    <details class="path-card">
-      <summary class="path-header">
-        <h3>Detection Engineer</h3>
-        <span class="path-toggle">&#9660;</span>
-      </summary>
-      <div class="path-content">
-        <p class="path-desc">ML-powered detection, fewer false positives, AI-assisted rule creation and tuning.</p>
+        <p class="path-desc">Start here! Learn ML fundamentals and LLM basics. No API key needed for Labs 01-03.</p>
         <div class="path-labs-list">
           <div class="path-lab-item">
             <span class="path-lab-num ml">01</span>
@@ -1467,28 +1373,15 @@ function toggleTheme() {
             <span class="path-time">~2 hrs</span>
           </div>
           <div class="path-lab-item">
-            <span class="path-lab-num llm">07</span>
-            <span class="path-lab-name">YARA Generator</span>
-            <span class="path-time">~3 hrs</span>
+            <span class="path-lab-num ml">02</span>
+            <span class="path-lab-name">Malware Clustering</span>
+            <span class="path-time">~2 hrs</span>
           </div>
           <div class="path-lab-item">
-            <span class="path-lab-num advanced">09</span>
-            <span class="path-lab-name">Detection Pipeline</span>
-            <span class="path-time">~5 hrs</span>
+            <span class="path-lab-num ml">03</span>
+            <span class="path-lab-name">Anomaly Detection</span>
+            <span class="path-time">~2 hrs</span>
           </div>
-        </div>
-        <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted);">Total: ~10 hours | Cost: ~$5-10</p>
-      </div>
-    </details>
-
-    <details class="path-card">
-      <summary class="path-header">
-        <h3>Threat Intel Analyst</h3>
-        <span class="path-toggle">&#9660;</span>
-      </summary>
-      <div class="path-content">
-        <p class="path-desc">Automate IOC extraction, AI-powered reports, threat actor tracking and attribution.</p>
-        <div class="path-labs-list">
           <div class="path-lab-item">
             <span class="path-lab-num llm">04</span>
             <span class="path-lab-name">LLM Log Analysis</span>
@@ -1505,27 +1398,80 @@ function toggleTheme() {
             <span class="path-time">~4 hrs</span>
           </div>
           <div class="path-lab-item">
-            <span class="path-lab-num dfir">16</span>
-            <span class="path-lab-name">Threat Actor Profiling</span>
-            <span class="path-time">~5 hrs</span>
+            <span class="path-lab-num llm">07</span>
+            <span class="path-lab-name">YARA Generator</span>
+            <span class="path-time">~3 hrs</span>
           </div>
         </div>
-        <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted);">Total: ~15 hours | Cost: ~$8-15</p>
+        <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted);">Total: ~19 hours | Cost: Free → ~$5</p>
       </div>
     </details>
 
     <details class="path-card">
       <summary class="path-header">
-        <h3>Red Teamer</h3>
+        <h3>🟡 Intermediate</h3>
         <span class="path-toggle">&#9660;</span>
       </summary>
       <div class="path-content">
-        <p class="path-desc">Evade ML detection, attack AI systems, understand adversarial techniques and defenses.</p>
+        <p class="path-desc">Build production-ready tools. Detection pipelines, IR copilots, and DFIR automation.</p>
         <div class="path-labs-list">
           <div class="path-lab-item">
-            <span class="path-lab-num ml">03</span>
-            <span class="path-lab-name">Anomaly Detection</span>
-            <span class="path-time">~2 hrs</span>
+            <span class="path-lab-num advanced">08</span>
+            <span class="path-lab-name">Vuln Prioritizer</span>
+            <span class="path-time">~4 hrs</span>
+          </div>
+          <div class="path-lab-item">
+            <span class="path-lab-num advanced">09</span>
+            <span class="path-lab-name">Detection Pipeline</span>
+            <span class="path-time">~5 hrs</span>
+          </div>
+          <div class="path-lab-item">
+            <span class="path-lab-num advanced">10</span>
+            <span class="path-lab-name">IR Copilot</span>
+            <span class="path-time">~4 hrs</span>
+          </div>
+          <div class="path-lab-item">
+            <span class="path-lab-num dfir">11</span>
+            <span class="path-lab-name">Ransomware Detection</span>
+            <span class="path-time">~5 hrs</span>
+          </div>
+          <div class="path-lab-item">
+            <span class="path-lab-num dfir">12</span>
+            <span class="path-lab-name">Purple Team Sim</span>
+            <span class="path-time">~6 hrs</span>
+          </div>
+          <div class="path-lab-item">
+            <span class="path-lab-num dfir">13</span>
+            <span class="path-lab-name">Memory Forensics</span>
+            <span class="path-time">~6 hrs</span>
+          </div>
+          <div class="path-lab-item">
+            <span class="path-lab-num dfir">14</span>
+            <span class="path-lab-name">C2 Traffic Analysis</span>
+            <span class="path-time">~5 hrs</span>
+          </div>
+          <div class="path-lab-item">
+            <span class="path-lab-num dfir">15</span>
+            <span class="path-lab-name">Lateral Movement</span>
+            <span class="path-time">~5 hrs</span>
+          </div>
+        </div>
+        <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted);">Total: ~40 hours | Cost: ~$15-25</p>
+      </div>
+    </details>
+
+    <details class="path-card">
+      <summary class="path-header">
+        <h3>🔴 Expert</h3>
+        <span class="path-toggle">&#9660;</span>
+      </summary>
+      <div class="path-content">
+        <p class="path-desc">Advanced techniques: threat actor profiling, adversarial ML, fine-tuning, and red teaming.</p>
+        <div class="path-labs-list">
+          <div class="path-lab-item">
+            <span class="path-lab-num dfir">16</span>
+            <span class="path-lab-name">Threat Actor Profiling</span>
+            <span class="path-time">~5 hrs</span>
           </div>
           <div class="path-lab-item">
             <span class="path-lab-num dfir">17</span>
@@ -1533,18 +1479,28 @@ function toggleTheme() {
             <span class="path-time">~6 hrs</span>
           </div>
           <div class="path-lab-item">
+            <span class="path-lab-num dfir">18</span>
+            <span class="path-lab-name">Fine-Tuning</span>
+            <span class="path-time">~8 hrs</span>
+          </div>
+          <div class="path-lab-item">
+            <span class="path-lab-num dfir">19</span>
+            <span class="path-lab-name">Cloud Security AI</span>
+            <span class="path-time">~5 hrs</span>
+          </div>
+          <div class="path-lab-item">
             <span class="path-lab-num dfir">20</span>
             <span class="path-lab-name">LLM Red Teaming</span>
             <span class="path-time">~6 hrs</span>
           </div>
         </div>
-        <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted);">Total: ~14 hours | Cost: ~$5-12</p>
+        <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted);">Total: ~30 hours | Cost: ~$10-20</p>
       </div>
     </details>
   </div>
 
   <p style="text-align: center; margin-top: 1.5rem;">
-    <a href="https://github.com/depalmar/ai_for_the_win/blob/main/resources/role-based-learning-paths.md" class="btn btn-secondary">View All 9 Learning Paths</a>
+    <a href="https://github.com/depalmar/ai_for_the_win/blob/main/resources/role-based-learning-paths.md" class="btn btn-secondary">View Role-Based Paths</a>
   </p>
 </div>
 
