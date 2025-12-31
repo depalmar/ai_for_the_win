@@ -1037,6 +1037,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
           <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab00a-python-security-fundamentals" class="nav-lab intro" title="Lab 00a: Python for Security">00a</a>
           <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab00b-ml-concepts-primer" class="nav-lab intro" title="Lab 00b: ML Concepts">00b</a>
           <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab00c-intro-prompt-engineering" class="nav-lab intro" title="Lab 00c: Prompt Engineering">00c</a>
+          <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab00d-ai-in-security-operations" class="nav-lab intro" title="Lab 00d: AI in Security Ops">00d</a>
         </div>
       </div>
       <span class="nav-arrow">&#8594;</span>
@@ -1151,6 +1152,17 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
         <span class="lab-title">Prompt Engineering</span>
       </div>
       <p class="lab-desc">LLM basics, templates, free playgrounds</p>
+      <div class="lab-meta">
+        <span>&#128337; ~1 hr</span>
+        <span class="difficulty difficulty-1">&#9733;&#9734;&#9734; Beginner</span>
+      </div>
+    </a>
+    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab00d-ai-in-security-operations" class="lab-card" data-category="intro">
+      <div class="lab-header">
+        <span class="lab-number">00d</span>
+        <span class="lab-title">AI in Security Ops</span>
+      </div>
+      <p class="lab-desc">Real-world use cases, limitations, workflows</p>
       <div class="lab-meta">
         <span>&#128337; ~1 hr</span>
         <span class="difficulty difficulty-1">&#9733;&#9734;&#9734; Beginner</span>
