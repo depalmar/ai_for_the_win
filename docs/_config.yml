@@ -7,6 +7,11 @@ plugins:
 url: https://depalmar.github.io
 baseurl: /ai_for_the_win
 
+# Prevent kramdown from parsing inside HTML blocks
+markdown: kramdown
+kramdown:
+  parse_block_html: false
+
 defaults:
   - scope:
       path: ""
