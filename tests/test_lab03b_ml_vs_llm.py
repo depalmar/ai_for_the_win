@@ -50,11 +50,13 @@ def test_ml_classifier_training():
     """Test ML classifier trains successfully."""
     from main import train_ml_classifier, LOGS
     
-    model, X_test, y_test = train_ml_classifier(LOGS)
+    model, X_test, y_test, test_indices = train_ml_classifier(LOGS)
     
     assert model is not None
     assert len(X_test) > 0
     assert len(y_test) > 0
+    assert len(test_indices) > 0
+    assert len(test_indices) == len(X_test)  # Same number of indices as test samples
 
 
 def test_llm_prompt_creation():

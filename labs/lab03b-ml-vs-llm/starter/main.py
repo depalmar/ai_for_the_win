@@ -56,9 +56,25 @@ LOGS = [
 
 # Keywords for feature extraction
 SUSPICIOUS_KEYWORDS = [
-    "failed", "admin", "root", "powershell", "cmd", "whoami", "net group",
-    "injection", "encoded", "shadow", "mimikatz", "ransomware", "brute",
-    "lateral", "c2", "exfil", "malicious", "unauthorized", "suspicious"
+    "failed",
+    "admin",
+    "root",
+    "powershell",
+    "cmd",
+    "whoami",
+    "net group",
+    "injection",
+    "encoded",
+    "shadow",
+    "mimikatz",
+    "ransomware",
+    "brute",
+    "lateral",
+    "c2",
+    "exfil",
+    "malicious",
+    "unauthorized",
+    "suspicious",
 ]
 
 
@@ -66,29 +82,30 @@ SUSPICIOUS_KEYWORDS = [
 # PART 1: ML CLASSIFIER
 # ============================================================================
 
+
 # TODO 1: Extract features from a log entry
 def extract_ml_features(log_text: str) -> list:
     """
     Extract numerical features from a log entry for ML classification.
-    
+
     Args:
         log_text: The log entry text
-        
+
     Returns:
         List of numerical features
     """
     log_lower = log_text.lower()
-    
+
     # TODO: Extract these features:
     # 1. Contains "failed"? (1 or 0)
     # 2. Contains "admin" or "root"? (1 or 0)
     # 3. Count of suspicious keywords
     # 4. Log length (normalized by dividing by 100)
     # 5. Contains external IP pattern? (non-192.168, non-10.)
-    
+
     # Your code here:
     features = [0, 0, 0, 0, 0]  # Replace with actual feature extraction
-    
+
     return features
 
 
@@ -96,32 +113,35 @@ def extract_ml_features(log_text: str) -> list:
 def train_ml_classifier(logs: list) -> tuple:
     """
     Train an ML classifier on the log data.
-    
+
     Args:
         logs: List of log dicts with 'text' and 'label'
-        
+
     Returns:
-        Tuple of (trained_model, X_test, y_test)
+        Tuple of (trained_model, X_test, y_test, test_indices)
+        test_indices are needed for fair LLM comparison
     """
-    # TODO: 
+    # TODO:
     # 1. Extract features for all logs
-    # 2. Split into train/test sets
-    # 3. Train LogisticRegression model
-    # 4. Return model and test data
-    
+    # 2. Create indices array: indices = np.arange(len(logs))
+    # 3. Split into train/test sets (include indices in split for fair comparison)
+    # 4. Train LogisticRegression model
+    # 5. Return model, test data, AND test_indices
+
     # Your code here:
     model = None
     X_test = None
     y_test = None
-    
-    return model, X_test, y_test
+    test_indices = None
+
+    return model, X_test, y_test, test_indices
 
 
 # TODO 3: Evaluate ML classifier
 def evaluate_ml_classifier(model, X_test, y_test) -> dict:
     """
     Evaluate the ML classifier and return metrics.
-    
+
     Returns:
         Dict with accuracy, predictions, and timing
     """
@@ -129,27 +149,24 @@ def evaluate_ml_classifier(model, X_test, y_test) -> dict:
     # 1. Time the predictions
     # 2. Calculate accuracy
     # 3. Return results dict
-    
+
     # Your code here:
-    return {
-        "accuracy": 0.0,
-        "prediction_time": 0.0,
-        "predictions": []
-    }
+    return {"accuracy": 0.0, "prediction_time": 0.0, "predictions": []}
 
 
 # ============================================================================
 # PART 2: LLM CLASSIFIER
 # ============================================================================
 
+
 # TODO 4: Create LLM classification prompt
 def create_llm_prompt(log_text: str) -> str:
     """
     Create a prompt for LLM classification.
-    
+
     Args:
         log_text: The log entry to classify
-        
+
     Returns:
         The prompt string
     """
@@ -157,10 +174,10 @@ def create_llm_prompt(log_text: str) -> str:
     # 1. Sets the role (security analyst)
     # 2. Provides the log entry
     # 3. Asks for ONLY "MALICIOUS" or "BENIGN"
-    
+
     # Your code here:
     prompt = ""
-    
+
     return prompt
 
 
@@ -168,11 +185,11 @@ def create_llm_prompt(log_text: str) -> str:
 def classify_with_llm(log_text: str, client=None) -> str:
     """
     Classify a log entry using an LLM.
-    
+
     Args:
         log_text: The log entry to classify
         client: Anthropic client (or None for simulation)
-        
+
     Returns:
         "MALICIOUS" or "BENIGN"
     """
@@ -181,10 +198,10 @@ def classify_with_llm(log_text: str, client=None) -> str:
     # 2. Call the LLM API
     # 3. Parse the response
     # 4. Return classification
-    
+
     # For now, we'll simulate LLM responses
     # Uncomment and implement when ready to use real LLM
-    
+
     # Your code here:
     return "BENIGN"  # Placeholder
 
@@ -193,20 +210,26 @@ def classify_with_llm(log_text: str, client=None) -> str:
 # PART 3: COMPARE APPROACHES
 # ============================================================================
 
+
 # TODO 6: Compare ML and LLM
 def compare_approaches(logs: list) -> dict:
     """
     Compare ML and LLM approaches on the same data.
-    
+
+    IMPORTANT: For a fair comparison, both classifiers must be
+    evaluated on the SAME test set. Use the test_indices returned
+    by train_ml_classifier to select the same logs for LLM evaluation.
+
     Returns:
         Dict with comparison results
     """
     # TODO:
-    # 1. Run ML classifier and measure time/accuracy
-    # 2. Run LLM classifier and measure time/accuracy
-    # 3. Calculate cost estimates
-    # 4. Return comparison dict
-    
+    # 1. Run ML classifier: model, X_test, y_test, test_indices = train_ml_classifier(logs)
+    # 2. Use test_indices to get the SAME logs for LLM: test_logs = [logs[i] for i in test_indices]
+    # 3. Run LLM classifier on test_logs
+    # 4. Calculate cost estimates
+    # 5. Return comparison dict
+
     # Your code here:
     return {
         "ml": {"accuracy": 0, "time": 0, "cost": 0},
@@ -218,19 +241,20 @@ def compare_approaches(logs: list) -> dict:
 # MAIN
 # ============================================================================
 
+
 def main():
     print("🔬 ML vs LLM Comparison")
     print("=" * 50)
-    
+
     print(f"\nDataset: {len(LOGS)} log entries")
     print(f"  Malicious: {sum(1 for l in LOGS if l['label'] == 1)}")
     print(f"  Benign: {sum(1 for l in LOGS if l['label'] == 0)}")
-    
+
     # Part 1: ML Classifier
     print("\n" + "=" * 50)
     print("PART 1: ML CLASSIFIER")
     print("=" * 50)
-    
+
     model, X_test, y_test = train_ml_classifier(LOGS)
     if model is not None:
         results = evaluate_ml_classifier(model, X_test, y_test)
@@ -239,35 +263,41 @@ def main():
         print(f"  Cost: $0.00")
     else:
         print("  ❌ Complete TODOs 1-3 to train ML classifier")
-    
+
     # Part 2: LLM Classifier
     print("\n" + "=" * 50)
     print("PART 2: LLM CLASSIFIER")
     print("=" * 50)
-    
+
     prompt = create_llm_prompt(LOGS[0]["text"])
     if prompt:
         print(f"  Sample prompt created (length: {len(prompt)})")
         print("  (Simulated - enable API for real LLM calls)")
     else:
         print("  ❌ Complete TODOs 4-5 for LLM classifier")
-    
+
     # Part 3: Comparison
     print("\n" + "=" * 50)
     print("PART 3: COMPARISON")
     print("=" * 50)
-    
+
     comparison = compare_approaches(LOGS)
     if comparison["ml"]["accuracy"] > 0:
         print("\n  ML vs LLM Results:")
         print(f"  {'Metric':<20} {'ML':<15} {'LLM':<15}")
         print(f"  {'-'*50}")
-        print(f"  {'Accuracy':<20} {comparison['ml']['accuracy']:.1%}{'':<10} {comparison['llm']['accuracy']:.1%}")
-        print(f"  {'Time (100 logs)':<20} {comparison['ml']['time']*1000:.1f}ms{'':<8} {comparison['llm']['time']:.1f}s")
-        print(f"  {'Cost (100 logs)':<20} ${comparison['ml']['cost']:.4f}{'':<8} ${comparison['llm']['cost']:.2f}")
+        print(
+            f"  {'Accuracy':<20} {comparison['ml']['accuracy']:.1%}{'':<10} {comparison['llm']['accuracy']:.1%}"
+        )
+        print(
+            f"  {'Time (100 logs)':<20} {comparison['ml']['time']*1000:.1f}ms{'':<8} {comparison['llm']['time']:.1f}s"
+        )
+        print(
+            f"  {'Cost (100 logs)':<20} ${comparison['ml']['cost']:.4f}{'':<8} ${comparison['llm']['cost']:.2f}"
+        )
     else:
         print("  ❌ Complete TODO 6 for comparison")
-    
+
     print("\n" + "=" * 50)
     print("📊 DECISION GUIDE")
     print("=" * 50)
