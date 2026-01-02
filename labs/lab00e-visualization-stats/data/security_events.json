@@ -1,0 +1,40 @@
+{
+  "description": "Sample security event data for visualization exercises",
+  "events": [
+    {"timestamp": "2024-01-15T08:00:00", "event_type": "login", "severity": "info", "source_ip": "192.168.1.100", "user": "alice", "success": true, "response_ms": 45},
+    {"timestamp": "2024-01-15T08:05:00", "event_type": "login", "severity": "info", "source_ip": "192.168.1.101", "user": "bob", "success": true, "response_ms": 52},
+    {"timestamp": "2024-01-15T08:10:00", "event_type": "file_access", "severity": "info", "source_ip": "192.168.1.100", "user": "alice", "success": true, "response_ms": 12},
+    {"timestamp": "2024-01-15T08:15:00", "event_type": "login", "severity": "warning", "source_ip": "10.0.0.50", "user": "admin", "success": false, "response_ms": 150},
+    {"timestamp": "2024-01-15T08:16:00", "event_type": "login", "severity": "warning", "source_ip": "10.0.0.50", "user": "admin", "success": false, "response_ms": 145},
+    {"timestamp": "2024-01-15T08:17:00", "event_type": "login", "severity": "critical", "source_ip": "10.0.0.50", "user": "admin", "success": false, "response_ms": 148},
+    {"timestamp": "2024-01-15T08:20:00", "event_type": "network_scan", "severity": "critical", "source_ip": "10.0.0.50", "user": null, "success": null, "response_ms": 5},
+    {"timestamp": "2024-01-15T08:30:00", "event_type": "login", "severity": "info", "source_ip": "192.168.1.102", "user": "charlie", "success": true, "response_ms": 48}
+  ],
+  "traffic_samples": [
+    {"hour": 0, "requests": 120, "bytes_in": 45000, "bytes_out": 12000, "errors": 2},
+    {"hour": 1, "requests": 85, "bytes_in": 32000, "bytes_out": 8500, "errors": 1},
+    {"hour": 2, "requests": 45, "bytes_in": 18000, "bytes_out": 4200, "errors": 0},
+    {"hour": 3, "requests": 30, "bytes_in": 12000, "bytes_out": 3000, "errors": 0},
+    {"hour": 4, "requests": 25, "bytes_in": 10000, "bytes_out": 2500, "errors": 0},
+    {"hour": 5, "requests": 40, "bytes_in": 15000, "bytes_out": 4000, "errors": 1},
+    {"hour": 6, "requests": 150, "bytes_in": 58000, "bytes_out": 15000, "errors": 3},
+    {"hour": 7, "requests": 350, "bytes_in": 140000, "bytes_out": 35000, "errors": 5},
+    {"hour": 8, "requests": 520, "bytes_in": 210000, "bytes_out": 52000, "errors": 8},
+    {"hour": 9, "requests": 680, "bytes_in": 275000, "bytes_out": 68000, "errors": 10},
+    {"hour": 10, "requests": 720, "bytes_in": 290000, "bytes_out": 72000, "errors": 12},
+    {"hour": 11, "requests": 750, "bytes_in": 300000, "bytes_out": 75000, "errors": 11},
+    {"hour": 12, "requests": 650, "bytes_in": 260000, "bytes_out": 65000, "errors": 9},
+    {"hour": 13, "requests": 700, "bytes_in": 280000, "bytes_out": 70000, "errors": 10},
+    {"hour": 14, "requests": 3500, "bytes_in": 1400000, "bytes_out": 350000, "errors": 150},
+    {"hour": 15, "requests": 680, "bytes_in": 272000, "bytes_out": 68000, "errors": 9},
+    {"hour": 16, "requests": 620, "bytes_in": 248000, "bytes_out": 62000, "errors": 8},
+    {"hour": 17, "requests": 450, "bytes_in": 180000, "bytes_out": 45000, "errors": 6},
+    {"hour": 18, "requests": 320, "bytes_in": 128000, "bytes_out": 32000, "errors": 4},
+    {"hour": 19, "requests": 280, "bytes_in": 112000, "bytes_out": 28000, "errors": 3},
+    {"hour": 20, "requests": 220, "bytes_in": 88000, "bytes_out": 22000, "errors": 3},
+    {"hour": 21, "requests": 180, "bytes_in": 72000, "bytes_out": 18000, "errors": 2},
+    {"hour": 22, "requests": 150, "bytes_in": 60000, "bytes_out": 15000, "errors": 2},
+    {"hour": 23, "requests": 130, "bytes_in": 52000, "bytes_out": 13000, "errors": 1}
+  ],
+  "threat_scores": [0.12, 0.15, 0.08, 0.45, 0.92, 0.88, 0.95, 0.22, 0.18, 0.67, 0.34, 0.11, 0.09, 0.78, 0.85, 0.91, 0.14, 0.16, 0.55, 0.62]
+}

@@ -20,20 +20,22 @@ Follow this progression for the best learning experience. Labs build on each oth
 | 00b | [ML Concepts Primer](./lab00b-ml-concepts-primer/) | ML theory | Supervised/unsupervised, features, evaluation |
 | 00c | [Intro to Prompt Engineering](./lab00c-intro-prompt-engineering/) | LLM prompting | Prompt design, hallucination detection, AI Studio |
 | 00d | [AI in Security Operations](./lab00d-ai-in-security-operations/) | SOC integration | Where AI fits, human-in-the-loop, compliance |
+| 00e | [Visualization & Statistics](./lab00e-visualization-stats/) | Data viz | Plotly, statistics, dashboards, distributions |
 
 **Who should do these:**
 - No Python experience → Start with **00a**
 - Python OK, new to ML → Start with **00b**
 - Want to use LLMs effectively → Do **00c** (highly recommended!)
 - Want SOC/operational context → Do **00d** (conceptual, no coding)
+- Need visualization skills → Do **00e** (Plotly, stats, dashboards)
 - Comfortable with all → Skip to Lab 01
 
 ```
-Lab 00a (Python) → Lab 00b (ML Concepts) → Lab 00c (Prompting) → Lab 00d (SOC) → Lab 01
-     ↓                   ↓                       ↓                    ↓              ↓
- "Learn Python      "Understand ML         "Master LLM          "Understand    "Build your
-  with security      theory before          prompts &            where AI fits   first ML
-  examples"          coding"                verification"        in SOC"         classifier"
+Lab 00a (Python) → Lab 00b (ML Concepts) → Lab 00c (Prompting) → Lab 00d (SOC) → Lab 00e (Viz) → Lab 01
+     ↓                   ↓                       ↓                    ↓               ↓             ↓
+ "Learn Python      "Understand ML         "Master LLM          "Understand     "Master        "Build your
+  with security      theory before          prompts &            where AI fits    Plotly &       first ML
+  examples"          coding"                verification"        in SOC"          dashboards"    classifier"
 ```
 
 > 💡 **Pro Tip:** Even experienced developers should do **Lab 00c** and **Lab 00d** - prompt engineering and SOC context are critical for real-world deployment!
@@ -751,6 +753,7 @@ Track your progress:
 - [ ] Lab 00b: ML Concepts Primer
 - [ ] Lab 00c: Intro to Prompt Engineering
 - [ ] Lab 00d: AI in Security Operations (conceptual)
+- [ ] Lab 00e: Visualization & Statistics
 
 **Core Labs**
 - [ ] Lab 01: Phishing Classifier

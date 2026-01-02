@@ -19,6 +19,7 @@ These walkthroughs provide:
 | [Lab 00b](./lab00b-walkthrough.md) | ML Concepts Primer | Intro |
 | [Lab 00c](./lab00c-walkthrough.md) | Prompt Engineering | Intro |
 | [Lab 00d](./lab00d-walkthrough.md) | AI in Security Ops | Intro |
+| [Lab 00e](./lab00e-walkthrough.md) | Visualization & Statistics | Intro |
 
 ### Foundation Labs
 
@@ -85,10 +86,10 @@ These walkthroughs provide:
 
 ### Intro Track (Start Here)
 ```
-Lab 00b → Lab 00c → Lab 00d
-  |          |          |
-  v          v          v
-ML Concepts  Prompts    AI in SecOps
+Lab 00b → Lab 00c → Lab 00d → Lab 00e
+  |          |          |          |
+  v          v          v          v
+ML Concepts  Prompts  AI in SecOps  Visualization
 ```
 
 ### Beginner Track
