@@ -578,6 +578,60 @@ class OnlineAnomalyDetector:
 
 ---
 
+## Bonus: Attack Progression Timeline
+
+The notebook includes an attack progression timeline showing anomalies over time.
+
+### Creating a Time-Based View
+
+```python
+# Add simulated timestamps to network flows
+df['simulated_time'] = pd.date_range(
+    start='2024-01-15 00:00', 
+    periods=len(df), 
+    freq='1min'
+)
+
+# Get anomaly scores from Isolation Forest
+df['anomaly_score'] = -iso_forest.score_samples(X_scaled)
+df['is_anomaly'] = predictions == 1
+```
+
+### Multi-Panel Attack Timeline
+
+```python
+fig = make_subplots(rows=3, cols=1, subplot_titles=[
+    'Traffic Volume Over Time',
+    'Anomaly Score Timeline',
+    'Attack Detection Events'
+])
+
+# Panel 1: Traffic volume
+fig.add_trace(go.Scatter(x=time, y=bytes, name='Bytes'), row=1, col=1)
+
+# Panel 2: Anomaly scores with threshold
+fig.add_trace(go.Scatter(x=time, y=scores, name='Anomaly Score'), row=2, col=1)
+fig.add_hline(y=threshold, line_dash='dash', line_color='red', row=2, col=1)
+
+# Panel 3: Attack events by type
+for attack_type in attack_types:
+    events = anomalies[anomalies['attack_type'] == attack_type]
+    fig.add_trace(go.Scatter(
+        x=events['time'], y=[attack_type] * len(events),
+        mode='markers', name=attack_type
+    ), row=3, col=1)
+```
+
+### Security Insight
+
+Attack timeline analysis reveals:
+- **Attack phases** - Recon → exploitation → persistence
+- **Correlation** - Traffic spikes align with anomaly score spikes
+- **Attack types** - Different attacks cluster at different times
+- **First/last detection** - Understand attack duration
+
+---
+
 ## Key Takeaways
 
 1. **Multiple methods** - Use statistical, Isolation Forest, and LOF together
@@ -585,6 +639,7 @@ class OnlineAnomalyDetector:
 3. **Threshold tuning** - Balance detection rate vs false alarms
 4. **Train on normal** - Baseline should exclude known attacks
 5. **Ensemble approach** - Combine detectors for robustness
+6. **Timeline analysis** - Attack progression aids incident response
 
 ---
 

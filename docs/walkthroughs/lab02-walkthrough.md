@@ -467,6 +467,59 @@ def cluster_stability(X, k, n_runs=10):
 
 ---
 
+## Bonus: Malware Discovery Timeline
+
+The notebook includes a timeline visualization showing when malware families were first discovered.
+
+### Adding Discovery Dates
+
+```python
+from datetime import datetime, timedelta
+
+# Different families emerge at different times
+family_ranges = {
+    'emotet': (0, 30),      # Early campaign
+    'trickbot': (20, 50),   # Mid-campaign
+    'cobalt_strike': (10, 40),
+    'qakbot': (30, 60),
+    'redline': (0, 90),     # Persistent throughout
+}
+
+for sample in samples:
+    days = random.randint(*family_ranges[sample['family']])
+    sample['first_seen'] = base_date + timedelta(days=days)
+```
+
+### Visualizing Family Emergence
+
+```python
+fig = make_subplots(rows=2, cols=1,
+    subplot_titles=['Daily Discoveries by Family', 'Cumulative Samples'])
+
+# Stacked area chart - shows which families are active when
+for family in families:
+    fig.add_trace(go.Scatter(
+        x=dates, y=counts[family],
+        name=family, stackgroup='one'
+    ), row=1, col=1)
+
+# Cumulative line - shows sample collection rate
+fig.add_trace(go.Scatter(
+    x=dates, y=cumulative,
+    fill='tozeroy', name='Total'
+), row=2, col=1)
+```
+
+### Security Insight
+
+Malware campaigns follow predictable patterns:
+- **New families emerge** at specific times (development cycles)
+- **Active campaigns** show burst discovery patterns
+- **Persistent families** (like info stealers) appear throughout
+- **APT tools** often appear later (targeted, slower spread)
+
+---
+
 ## Key Takeaways
 
 1. **Feature selection matters** - Choose features relevant to malware behavior
@@ -474,6 +527,7 @@ def cluster_stability(X, k, n_runs=10):
 3. **t-SNE is for visualization** - Don't cluster on t-SNE output
 4. **Multiple algorithms** - K-Means and DBSCAN find different structures
 5. **Interpret clusters** - Understand what each cluster represents
+6. **Timeline analysis** - Family emergence patterns aid attribution
 
 ---
 
