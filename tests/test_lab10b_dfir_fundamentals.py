@@ -1,8 +1,9 @@
 """Tests for Lab 10b: DFIR Fundamentals."""
 
-import pytest
 import sys
 from pathlib import Path
+
+import pytest
 
 # Add labs to path
 sys.path.insert(
@@ -13,14 +14,14 @@ sys.path.insert(
 def test_solution_imports():
     """Test that solution imports without errors."""
     from main import (
-        Severity,
+        SAMPLE_PROCESSES,
         Finding,
-        analyze_processes,
+        Severity,
         analyze_files,
         analyze_network,
-        map_to_attack,
+        analyze_processes,
         generate_report,
-        SAMPLE_PROCESSES,
+        map_to_attack,
     )
 
 
@@ -114,7 +115,7 @@ def test_network_analysis_detects_suspicious_port():
 
 def test_attack_mapping():
     """Test ATT&CK technique mapping."""
-    from main import map_to_attack, Finding, Severity
+    from main import Finding, Severity, map_to_attack
 
     finding = Finding(
         severity=Severity.CRITICAL,
@@ -129,7 +130,7 @@ def test_attack_mapping():
 
 def test_report_generation():
     """Test report generation."""
-    from main import generate_report, Finding, Severity
+    from main import Finding, Severity, generate_report
 
     findings = [
         Finding(Severity.CRITICAL, "process", "Test finding 1"),

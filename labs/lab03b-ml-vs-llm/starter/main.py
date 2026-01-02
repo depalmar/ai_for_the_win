@@ -7,10 +7,11 @@ Complete the TODOs to implement both approaches.
 
 import os
 import time
+
 import numpy as np
 from sklearn.linear_model import LogisticRegression
-from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, classification_report
+from sklearn.model_selection import train_test_split
 
 # Uncomment when implementing LLM section
 # from anthropic import Anthropic

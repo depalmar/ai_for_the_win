@@ -4,10 +4,10 @@ Lab 10b: DFIR Fundamentals (Solution)
 A complete artifact analysis toolkit for incident response.
 """
 
+from collections import defaultdict
 from dataclasses import dataclass
 from enum import Enum
-from typing import List, Dict, Optional
-from collections import defaultdict
+from typing import Dict, List, Optional
 
 
 class Severity(Enum):

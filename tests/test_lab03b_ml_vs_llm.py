@@ -1,8 +1,9 @@
 """Tests for Lab 03b: ML vs LLM Decision Lab."""
 
-import pytest
 import sys
 from pathlib import Path
+
+import pytest
 
 # Add labs to path
 sys.path.insert(0, str(Path(__file__).parent.parent / "labs" / "lab03b-ml-vs-llm" / "solution"))
@@ -11,13 +12,13 @@ sys.path.insert(0, str(Path(__file__).parent.parent / "labs" / "lab03b-ml-vs-llm
 def test_solution_imports():
     """Test that solution imports without errors."""
     from main import (
-        extract_ml_features,
-        train_ml_classifier,
-        evaluate_ml_classifier,
-        create_llm_prompt,
+        LOGS,
         classify_with_llm,
         compare_approaches,
-        LOGS,
+        create_llm_prompt,
+        evaluate_ml_classifier,
+        extract_ml_features,
+        train_ml_classifier,
     )
 
 
@@ -48,7 +49,7 @@ def test_feature_extraction_benign():
 
 def test_ml_classifier_training():
     """Test ML classifier trains successfully."""
-    from main import train_ml_classifier, LOGS
+    from main import LOGS, train_ml_classifier
 
     model, X_test, y_test, test_indices = train_ml_classifier(LOGS)
 
@@ -86,7 +87,7 @@ def test_simulated_llm_classification():
 
 def test_comparison_returns_both_results():
     """Test that comparison includes both ML and LLM results."""
-    from main import compare_approaches, LOGS
+    from main import LOGS, compare_approaches
 
     results = compare_approaches(LOGS)
 

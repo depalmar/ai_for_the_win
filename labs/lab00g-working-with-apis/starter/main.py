@@ -7,6 +7,7 @@ Complete the TODOs to build a working API client.
 
 import os
 import time
+
 import requests
 from requests.exceptions import RequestException
 

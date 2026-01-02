@@ -7,8 +7,7 @@ Complete the TODOs to analyze processes, files, network, and map to ATT&CK.
 
 from dataclasses import dataclass
 from enum import Enum
-from typing import List, Dict, Optional
-
+from typing import Dict, List, Optional
 
 # ============================================================================
 # DATA STRUCTURES

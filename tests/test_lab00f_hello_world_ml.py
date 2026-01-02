@@ -1,8 +1,9 @@
 """Tests for Lab 00f: Hello World ML."""
 
-import pytest
 import sys
 from pathlib import Path
+
+import pytest
 
 # Add labs to path
 sys.path.insert(
@@ -12,7 +13,7 @@ sys.path.insert(
 
 def test_solution_runs():
     """Test that solution code runs without errors."""
-    from main import main, extract_features, MESSAGES, LABELS
+    from main import LABELS, MESSAGES, extract_features, main
 
     # Test feature extraction
     features = extract_features("FREE MONEY! Click now!")
@@ -49,8 +50,8 @@ def test_feature_extraction_benign():
 
 def test_model_training():
     """Test that model trains and predicts."""
-    from main import extract_features, MESSAGES, LABELS
     import numpy as np
+    from main import LABELS, MESSAGES, extract_features
     from sklearn.linear_model import LogisticRegression
     from sklearn.model_selection import train_test_split
 

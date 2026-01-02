@@ -1,9 +1,10 @@
 """Tests for Lab 00g: Working with APIs."""
 
-import pytest
-import sys
 import os
+import sys
 from pathlib import Path
+
+import pytest
 
 # Add labs to path
 sys.path.insert(
@@ -15,9 +16,9 @@ def test_solution_imports():
     """Test that solution imports without errors."""
     from main import (
         basic_get_request,
-        safe_request,
         get_api_key,
         rate_limited_requests,
+        safe_request,
     )
 
 

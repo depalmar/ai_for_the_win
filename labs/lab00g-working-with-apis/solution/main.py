@@ -6,8 +6,9 @@ A complete API client demonstrating HTTP requests, JSON parsing, and best practi
 
 import os
 import time
+
 import requests
-from requests.exceptions import RequestException, Timeout, HTTPError
+from requests.exceptions import HTTPError, RequestException, Timeout
 
 
 def basic_get_request(url: str) -> dict | None:

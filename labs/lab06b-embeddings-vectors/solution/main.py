@@ -5,8 +5,8 @@ A complete semantic search system for security applications.
 """
 
 import numpy as np
-from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.decomposition import PCA
+from sklearn.metrics.pairwise import cosine_similarity
 
 try:
     from sentence_transformers import SentenceTransformer
