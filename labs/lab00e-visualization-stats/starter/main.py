@@ -334,9 +334,7 @@ def main():
     print("\n🔥 Exercise 4: Correlation Heatmap")
     print("-" * 40)
 
-    fig_corr = plot_correlation_heatmap(
-        traffic_df, ["requests", "bytes_in", "bytes_out", "errors"]
-    )
+    fig_corr = plot_correlation_heatmap(traffic_df, ["requests", "bytes_in", "bytes_out", "errors"])
     if fig_corr:
         print("✅ Correlation heatmap created")
         fig_corr.show()

@@ -584,17 +584,26 @@ def plot_exfiltration_detection(traffic_df: pd.DataFrame) -> go.Figure:
             line=dict(color=COLORS["primary"], width=2),
             hovertemplate="Hour %{x}<br>Ratio: %{y:.2f}<extra></extra>",
         ),
-        row=1, col=1,
+        row=1,
+        col=1,
     )
 
     # Add threshold line
     fig.add_hline(
-        y=0.5, line_dash="dash", line_color=COLORS["warning"],
-        annotation_text="Elevated Risk", row=1, col=1,
+        y=0.5,
+        line_dash="dash",
+        line_color=COLORS["warning"],
+        annotation_text="Elevated Risk",
+        row=1,
+        col=1,
     )
     fig.add_hline(
-        y=1.0, line_dash="dash", line_color=COLORS["danger"],
-        annotation_text="Critical Risk", row=1, col=1,
+        y=1.0,
+        line_dash="dash",
+        line_color=COLORS["danger"],
+        annotation_text="Critical Risk",
+        row=1,
+        col=1,
     )
 
     # Panel 2: Stacked bar of bytes in/out
@@ -605,7 +614,8 @@ def plot_exfiltration_detection(traffic_df: pd.DataFrame) -> go.Figure:
             name="Bytes In (KB)",
             marker_color=COLORS["info"],
         ),
-        row=1, col=2,
+        row=1,
+        col=2,
     )
     fig.add_trace(
         go.Bar(
@@ -614,7 +624,8 @@ def plot_exfiltration_detection(traffic_df: pd.DataFrame) -> go.Figure:
             name="Bytes Out (KB)",
             marker_color=COLORS["warning"],
         ),
-        row=1, col=2,
+        row=1,
+        col=2,
     )
 
     # Panel 3: Histogram of ratios
@@ -634,7 +645,8 @@ def plot_exfiltration_detection(traffic_df: pd.DataFrame) -> go.Figure:
                     marker_color=risk_colors[risk],
                     opacity=0.7,
                 ),
-                row=2, col=1,
+                row=2,
+                col=1,
             )
 
     # Panel 4: Risk pie chart
@@ -647,7 +659,8 @@ def plot_exfiltration_detection(traffic_df: pd.DataFrame) -> go.Figure:
             hole=0.4,
             textinfo="label+percent",
         ),
-        row=2, col=2,
+        row=2,
+        col=2,
     )
 
     fig.update_layout(
@@ -731,9 +744,7 @@ def main():
     print("\n🔥 Exercise 4: Correlation Heatmap")
     print("-" * 40)
 
-    fig_corr = plot_correlation_heatmap(
-        traffic_df, ["requests", "bytes_in", "bytes_out", "errors"]
-    )
+    fig_corr = plot_correlation_heatmap(traffic_df, ["requests", "bytes_in", "bytes_out", "errors"])
     print("✅ Correlation heatmap created")
     fig_corr.show()
 
