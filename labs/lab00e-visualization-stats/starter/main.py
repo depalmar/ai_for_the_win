@@ -8,7 +8,12 @@ No API keys required!
 """
 
 import json
+import sys
 from pathlib import Path
+
+# Fix Windows console encoding for emojis
+if sys.platform == "win32":
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 import numpy as np
 import pandas as pd
