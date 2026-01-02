@@ -84,33 +84,48 @@ LABELS = [1] * 25 + [0] * 25
 # SPAM INDICATOR WORDS
 # ============================================================================
 
-SPAM_WORDS = ["free", "win", "click", "urgent", "money", "prize", "congratulations", 
-              "winner", "claim", "act", "now", "limited", "offer", "deal"]
+SPAM_WORDS = [
+    "free",
+    "win",
+    "click",
+    "urgent",
+    "money",
+    "prize",
+    "congratulations",
+    "winner",
+    "claim",
+    "act",
+    "now",
+    "limited",
+    "offer",
+    "deal",
+]
 
 
 # ============================================================================
 # TODO 1: Create the feature extractor
 # ============================================================================
 
+
 def extract_features(message: str) -> list:
     """
     Extract features from a message.
-    
+
     For now, we'll use a simple approach: count how many spam words appear.
-    
+
     Args:
         message: The text message to analyze
-        
+
     Returns:
         A list of features (just one feature for now: spam word count)
     """
     # TODO: Count how many SPAM_WORDS appear in the message
     # Hint: Convert message to lowercase first
     # Hint: Use 'in' to check if a word appears in the message
-    
+
     # Your code here:
     spam_word_count = 0  # Replace this with actual counting
-    
+
     return [spam_word_count]
 
 
@@ -118,17 +133,20 @@ def extract_features(message: str) -> list:
 # MAIN FUNCTION
 # ============================================================================
 
+
 def main():
     print("📊 Hello World ML - Spam Classifier")
     print("=" * 40)
-    
+
     # Step 1: Load data
     print("\nStep 1: Loading data...")
     messages = MESSAGES
     labels = LABELS
     spam_count = sum(labels)
-    print(f"  Loaded {len(messages)} messages ({spam_count} spam, {len(messages) - spam_count} not spam)")
-    
+    print(
+        f"  Loaded {len(messages)} messages ({spam_count} spam, {len(messages) - spam_count} not spam)"
+    )
+
     # Step 2: Extract features
     print("\nStep 2: Extracting features...")
     # Convert each message to a feature vector
@@ -136,85 +154,85 @@ def main():
     X = np.array(features)
     y = np.array(labels)
     print("  Feature: spam word count per message")
-    
+
     # ========================================================================
     # TODO 2: Split data into training and test sets
     # ========================================================================
     print("\nStep 3: Splitting data...")
-    
+
     # TODO: Use train_test_split to split X and y
     # - test_size=0.2 means 20% for testing, 80% for training
     # - random_state=42 makes results reproducible
-    
+
     # Your code here:
     # X_train, X_test, y_train, y_test = ???
-    
+
     # Placeholder - remove these lines after completing TODO 2
     X_train, X_test = X[:40], X[40:]
     y_train, y_test = y[:40], y[40:]
-    
+
     print(f"  Training set: {len(X_train)} messages")
     print(f"  Test set: {len(X_test)} messages")
-    
+
     # ========================================================================
     # TODO 3: Train the model
     # ========================================================================
     print("\nStep 4: Training model...")
     print("  Model: LogisticRegression")
-    
+
     # TODO: Create a LogisticRegression model and train it
     # Hint: model = LogisticRegression()
     # Hint: model.fit(X_train, y_train)
-    
+
     # Your code here:
     model = None  # Replace with actual model
-    
+
     print("  Training complete!")
-    
+
     # ========================================================================
     # TODO 4: Make predictions
     # ========================================================================
     print("\nStep 5: Making predictions...")
-    
+
     # TODO: Use the trained model to predict on test data
     # Hint: predictions = model.predict(X_test)
-    
+
     # Your code here:
     predictions = np.zeros(len(X_test))  # Replace with actual predictions
-    
+
     print("  Predictions made on test set")
-    
+
     # ========================================================================
     # TODO 5: Calculate accuracy
     # ========================================================================
     print("\nStep 6: Evaluating...")
-    
+
     # TODO: Calculate accuracy using accuracy_score
     # Hint: accuracy = accuracy_score(y_test, predictions)
-    
+
     # Your code here:
     accuracy = 0.0  # Replace with actual calculation
     precision = 0.0  # Optional: precision_score(y_test, predictions)
     recall = 0.0  # Optional: recall_score(y_test, predictions)
-    
+
     print(f"  Accuracy: {accuracy:.1%}")
     print(f"  Precision: {precision:.1%}")
     print(f"  Recall: {recall:.1%}")
-    
+
     # ========================================================================
     # Test on new messages
     # ========================================================================
     print("\n" + "=" * 40)
     print("✅ Your first ML model is working!")
     print("\nTest it yourself:")
-    
+
     test_messages = [
         "FREE MONEY NOW! Click here!",
         "Meeting at 3pm tomorrow",
         "URGENT: Claim your prize!",
         "Thanks for the update",
     ]
-    
+
     if model is not None:
         for msg in test_messages:
             features = extract_features(msg)

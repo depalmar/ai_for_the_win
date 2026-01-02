@@ -72,8 +72,20 @@ MESSAGES = [
 LABELS = [1] * 25 + [0] * 25
 
 SPAM_WORDS = [
-    "free", "win", "click", "urgent", "money", "prize", "congratulations",
-    "winner", "claim", "act", "now", "limited", "offer", "deal"
+    "free",
+    "win",
+    "click",
+    "urgent",
+    "money",
+    "prize",
+    "congratulations",
+    "winner",
+    "claim",
+    "act",
+    "now",
+    "limited",
+    "offer",
+    "deal",
 ]
 
 
@@ -81,92 +93,93 @@ SPAM_WORDS = [
 # SOLUTION: Feature extractor
 # ============================================================================
 
+
 def extract_features(message: str) -> list:
     """
     Extract features from a message.
-    
+
     Args:
         message: The text message to analyze
-        
+
     Returns:
         A list of features
     """
     message_lower = message.lower()
-    
+
     # Feature 1: Count of spam words
     spam_word_count = sum(1 for word in SPAM_WORDS if word in message_lower)
-    
+
     # Feature 2: Number of exclamation marks (bonus feature)
     exclamation_count = message.count("!")
-    
+
     # Feature 3: Ratio of uppercase letters (bonus feature)
     if len(message) > 0:
         uppercase_ratio = sum(1 for c in message if c.isupper()) / len(message)
     else:
         uppercase_ratio = 0
-    
+
     return [spam_word_count, exclamation_count, uppercase_ratio]
 
 
 def main():
     print("📊 Hello World ML - Spam Classifier")
     print("=" * 40)
-    
+
     # Step 1: Load data
     print("\nStep 1: Loading data...")
     messages = MESSAGES
     labels = LABELS
     spam_count = sum(labels)
-    print(f"  Loaded {len(messages)} messages ({spam_count} spam, {len(messages) - spam_count} not spam)")
-    
+    print(
+        f"  Loaded {len(messages)} messages ({spam_count} spam, {len(messages) - spam_count} not spam)"
+    )
+
     # Step 2: Extract features
     print("\nStep 2: Extracting features...")
     features = [extract_features(msg) for msg in messages]
     X = np.array(features)
     y = np.array(labels)
     print("  Features: spam word count, exclamation marks, uppercase ratio")
-    
+
     # Step 3: Split data (SOLUTION)
     print("\nStep 3: Splitting data...")
-    X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.2, random_state=42
-    )
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
     print(f"  Training set: {len(X_train)} messages")
     print(f"  Test set: {len(X_test)} messages")
-    
+
     # Step 4: Train model (SOLUTION)
     print("\nStep 4: Training model...")
     print("  Model: LogisticRegression")
     model = LogisticRegression(random_state=42)
     model.fit(X_train, y_train)
     print("  Training complete!")
-    
+
     # Step 5: Make predictions (SOLUTION)
     print("\nStep 5: Making predictions...")
     predictions = model.predict(X_test)
     print("  Predictions made on test set")
-    
+
     # Step 6: Evaluate (SOLUTION)
     print("\nStep 6: Evaluating...")
     accuracy = accuracy_score(y_test, predictions)
     precision = precision_score(y_test, predictions, zero_division=0)
     recall = recall_score(y_test, predictions, zero_division=0)
-    
+
     print(f"  Accuracy: {accuracy:.1%}")
     print(f"  Precision: {precision:.1%}")
     print(f"  Recall: {recall:.1%}")
-    
+
     # Explain the metrics
     print("\n📖 What these metrics mean:")
     print(f"  • Accuracy: {accuracy:.0%} of all predictions were correct")
     print(f"  • Precision: When we said 'spam', we were right {precision:.0%} of the time")
     print(f"  • Recall: We caught {recall:.0%} of all actual spam")
-    
+
     # Test on new messages
     print("\n" + "=" * 40)
     print("✅ Your first ML model is working!")
     print("\nTest it yourself:")
-    
+
     test_messages = [
         "FREE MONEY NOW! Click here!",
         "Meeting at 3pm tomorrow",
@@ -175,7 +188,7 @@ def main():
         "WIN WIN WIN! You're a winner!",
         "Please review the attached document",
     ]
-    
+
     for msg in test_messages:
         features = extract_features(msg)
         pred = model.predict([features])[0]
@@ -183,7 +196,7 @@ def main():
         confidence = max(proba) * 100
         label = "SPAM ❌" if pred == 1 else "NOT SPAM ✅"
         print(f'  "{msg[:35]:35s}" → {label} ({confidence:.0f}% confident)')
-    
+
     # Show feature importance
     print("\n📊 Feature Importance:")
     feature_names = ["Spam words", "Exclamations", "Uppercase ratio"]

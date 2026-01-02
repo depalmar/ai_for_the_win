@@ -22,7 +22,7 @@ def parse_ip_info(ip_address: str) -> dict | None:
     """Get information about an IP address from ipinfo.io."""
     url = f"https://ipinfo.io/{ip_address}/json"
     data = basic_get_request(url)
-    
+
     if data:
         return {
             "ip": data.get("ip", "unknown"),
@@ -71,24 +71,25 @@ def rate_limited_requests(urls: list, delay_seconds: float = 1.0) -> list:
 # BONUS: Advanced patterns for security APIs
 # ============================================================================
 
+
 def request_with_retry(url: str, max_retries: int = 3, backoff: float = 2.0) -> dict | None:
     """Make request with exponential backoff retry."""
     for attempt in range(max_retries):
         try:
             response = requests.get(url, timeout=10)
-            
+
             if response.status_code == 429:  # Rate limited
-                wait_time = float(response.headers.get("Retry-After", backoff ** attempt))
+                wait_time = float(response.headers.get("Retry-After", backoff**attempt))
                 print(f"   Rate limited. Waiting {wait_time:.1f}s...")
                 time.sleep(wait_time)
                 continue
-            
+
             response.raise_for_status()
             return response.json()
-            
+
         except RequestException as e:
             if attempt < max_retries - 1:
-                wait_time = backoff ** attempt
+                wait_time = backoff**attempt
                 print(f"   Retry {attempt + 1}/{max_retries} after {wait_time:.1f}s...")
                 time.sleep(wait_time)
             else:
@@ -100,14 +101,11 @@ def request_with_retry(url: str, max_retries: int = 3, backoff: float = 2.0) -> 
 def check_ip_reputation(ip_address: str) -> dict:
     """
     Check IP reputation using multiple free sources.
-    
+
     This demonstrates aggregating data from multiple APIs.
     """
-    results = {
-        "ip": ip_address,
-        "sources": {}
-    }
-    
+    results = {"ip": ip_address, "sources": {}}
+
     # Source 1: ipinfo.io (geolocation)
     ip_info = parse_ip_info(ip_address)
     if ip_info:
@@ -115,7 +113,7 @@ def check_ip_reputation(ip_address: str) -> dict:
             "country": ip_info.get("country"),
             "org": ip_info.get("org"),
         }
-    
+
     # Source 2: ip-api.com (also free, different data)
     ip_api_data = safe_request(f"http://ip-api.com/json/{ip_address}")
     if ip_api_data:
@@ -124,14 +122,14 @@ def check_ip_reputation(ip_address: str) -> dict:
             "as": ip_api_data.get("as"),
             "proxy": ip_api_data.get("proxy", False),
         }
-    
+
     return results
 
 
 def main():
     print("🌐 Working with APIs - Security API Client")
     print("=" * 45)
-    
+
     # Test 1: Basic GET request
     print("\n1. Basic GET Request")
     print("-" * 30)
@@ -140,7 +138,7 @@ def main():
     if result:
         print(f"   ✅ Success! Got response with {len(result)} fields")
         print(f"   Origin IP: {result.get('origin', 'unknown')}")
-    
+
     # Test 2: Parse IP info
     print("\n2. IP Information Lookup")
     print("-" * 30)
@@ -149,20 +147,20 @@ def main():
         ip_info = parse_ip_info(ip)
         if ip_info:
             print(f"   {ip}: {ip_info['org']} ({ip_info['country']})")
-    
+
     # Test 3: Error handling
     print("\n3. Error Handling")
     print("-" * 30)
     print("   Testing various error conditions:")
-    
+
     # Invalid URL
     bad_result = safe_request("https://this-domain-does-not-exist-12345.com")
     print(f"   Invalid domain: {'Handled ✅' if bad_result is None else 'Failed ❌'}")
-    
+
     # 404 error
     not_found = safe_request("https://httpbin.org/status/404")
     print(f"   404 Not Found: {'Handled ✅' if not_found is None else 'Failed ❌'}")
-    
+
     # Test 4: API key loading
     print("\n4. API Key Loading")
     print("-" * 30)
@@ -171,7 +169,7 @@ def main():
     missing_key = get_api_key("NONEXISTENT_KEY")
     print(f"   Existing key: {'Loaded ✅' if key else 'Failed ❌'}")
     print(f"   Missing key: {'None (correct) ✅' if missing_key is None else 'Failed ❌'}")
-    
+
     # Test 5: Rate limiting
     print("\n5. Rate Limiting")
     print("-" * 30)
@@ -182,13 +180,13 @@ def main():
     elapsed = time.time() - start
     success_count = sum(1 for r in results if r is not None)
     print(f"   Completed: {success_count}/{len(results)} in {elapsed:.1f}s")
-    
+
     # Test 6: Retry with backoff
     print("\n6. Retry with Backoff (Bonus)")
     print("-" * 30)
     result = request_with_retry("https://httpbin.org/get")
     print(f"   Request with retry: {'Success ✅' if result else 'Failed ❌'}")
-    
+
     # Test 7: Multi-source IP check
     print("\n7. Multi-Source IP Reputation (Bonus)")
     print("-" * 30)
@@ -196,7 +194,7 @@ def main():
     print(f"   IP: {reputation['ip']}")
     for source, data in reputation["sources"].items():
         print(f"   [{source}]: {data}")
-    
+
     # Summary
     print("\n" + "=" * 45)
     print("✅ All API patterns demonstrated!")

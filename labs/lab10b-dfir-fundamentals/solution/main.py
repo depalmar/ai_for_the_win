@@ -20,6 +20,7 @@ class Severity(Enum):
 @dataclass
 class Finding:
     """Represents a security finding."""
+
     severity: Severity
     category: str
     description: str
@@ -30,44 +31,94 @@ class Finding:
 
 # Sample data (same as starter)
 SAMPLE_PROCESSES = [
-    {"pid": 4100, "name": "WINWORD.EXE", "parent": "explorer.exe",
-     "path": "C:\\Program Files\\Microsoft Office\\WINWORD.EXE",
-     "cmdline": "WINWORD.EXE /n Invoice.docm"},
-    {"pid": 4200, "name": "powershell.exe", "parent": "WINWORD.EXE",
-     "path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
-     "cmdline": "powershell.exe -enc JABjAGwAaQBlAG4="},
-    {"pid": 4350, "name": "rundll32.exe", "parent": "powershell.exe",
-     "path": "C:\\Windows\\System32\\rundll32.exe",
-     "cmdline": "rundll32.exe"},
-    {"pid": 5600, "name": "svchost.exe", "parent": "rundll32.exe",
-     "path": "C:\\Users\\Public\\svchost.exe",
-     "cmdline": "svchost.exe -k netsvcs"},
-    {"pid": 7000, "name": "locker.exe", "parent": "rundll32.exe",
-     "path": "C:\\Windows\\Temp\\locker.exe",
-     "cmdline": "locker.exe -encrypt C:\\"},
-    {"pid": 7100, "name": "vssadmin.exe", "parent": "locker.exe",
-     "path": "C:\\Windows\\System32\\vssadmin.exe",
-     "cmdline": "vssadmin delete shadows /all /quiet"},
-    {"pid": 800, "name": "svchost.exe", "parent": "services.exe",
-     "path": "C:\\Windows\\System32\\svchost.exe",
-     "cmdline": "svchost.exe -k DcomLaunch"},
-    {"pid": 2100, "name": "explorer.exe", "parent": "userinit.exe",
-     "path": "C:\\Windows\\explorer.exe",
-     "cmdline": "explorer.exe"},
+    {
+        "pid": 4100,
+        "name": "WINWORD.EXE",
+        "parent": "explorer.exe",
+        "path": "C:\\Program Files\\Microsoft Office\\WINWORD.EXE",
+        "cmdline": "WINWORD.EXE /n Invoice.docm",
+    },
+    {
+        "pid": 4200,
+        "name": "powershell.exe",
+        "parent": "WINWORD.EXE",
+        "path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "cmdline": "powershell.exe -enc JABjAGwAaQBlAG4=",
+    },
+    {
+        "pid": 4350,
+        "name": "rundll32.exe",
+        "parent": "powershell.exe",
+        "path": "C:\\Windows\\System32\\rundll32.exe",
+        "cmdline": "rundll32.exe",
+    },
+    {
+        "pid": 5600,
+        "name": "svchost.exe",
+        "parent": "rundll32.exe",
+        "path": "C:\\Users\\Public\\svchost.exe",
+        "cmdline": "svchost.exe -k netsvcs",
+    },
+    {
+        "pid": 7000,
+        "name": "locker.exe",
+        "parent": "rundll32.exe",
+        "path": "C:\\Windows\\Temp\\locker.exe",
+        "cmdline": "locker.exe -encrypt C:\\",
+    },
+    {
+        "pid": 7100,
+        "name": "vssadmin.exe",
+        "parent": "locker.exe",
+        "path": "C:\\Windows\\System32\\vssadmin.exe",
+        "cmdline": "vssadmin delete shadows /all /quiet",
+    },
+    {
+        "pid": 800,
+        "name": "svchost.exe",
+        "parent": "services.exe",
+        "path": "C:\\Windows\\System32\\svchost.exe",
+        "cmdline": "svchost.exe -k DcomLaunch",
+    },
+    {
+        "pid": 2100,
+        "name": "explorer.exe",
+        "parent": "userinit.exe",
+        "path": "C:\\Windows\\explorer.exe",
+        "cmdline": "explorer.exe",
+    },
 ]
 
 SAMPLE_FILES = [
     {"path": "C:\\Windows\\Temp\\locker.exe", "size": 245760, "created": "2024-01-15 09:15"},
     {"path": "C:\\Users\\Public\\svchost.exe", "size": 102400, "created": "2024-01-15 09:20"},
     {"path": "C:\\Users\\jsmith\\Desktop\\README.txt", "size": 2048, "created": "2024-01-15 11:00"},
-    {"path": "C:\\Users\\jsmith\\AppData\\Local\\Temp\\invoice.docm", "size": 51200,
-     "created": "2024-01-15 09:00"},
+    {
+        "path": "C:\\Users\\jsmith\\AppData\\Local\\Temp\\invoice.docm",
+        "size": 51200,
+        "created": "2024-01-15 09:00",
+    },
 ]
 
 SAMPLE_CONNECTIONS = [
-    {"pid": 4350, "local": "192.168.1.50:49667", "remote": "185.143.223.47:443", "state": "ESTABLISHED"},
-    {"pid": 4350, "local": "192.168.1.50:49668", "remote": "185.143.223.47:8080", "state": "ESTABLISHED"},
-    {"pid": 5600, "local": "192.168.1.50:49700", "remote": "45.33.32.156:4444", "state": "ESTABLISHED"},
+    {
+        "pid": 4350,
+        "local": "192.168.1.50:49667",
+        "remote": "185.143.223.47:443",
+        "state": "ESTABLISHED",
+    },
+    {
+        "pid": 4350,
+        "local": "192.168.1.50:49668",
+        "remote": "185.143.223.47:8080",
+        "state": "ESTABLISHED",
+    },
+    {
+        "pid": 5600,
+        "local": "192.168.1.50:49700",
+        "remote": "45.33.32.156:4444",
+        "state": "ESTABLISHED",
+    },
     {"pid": 800, "local": "192.168.1.50:135", "remote": "0.0.0.0:0", "state": "LISTENING"},
 ]
 
@@ -104,60 +155,72 @@ def analyze_processes(processes: List[Dict]) -> List[Finding]:
         # Check suspicious parent-child
         if name in suspicious_parents:
             if parent in suspicious_parents[name]:
-                findings.append(Finding(
-                    severity=Severity.CRITICAL,
-                    category="process",
-                    description=f"Office spawning shell: {proc['parent']} → {proc['name']}",
-                    evidence=f"PID {proc['pid']}: {cmdline}"
-                ))
+                findings.append(
+                    Finding(
+                        severity=Severity.CRITICAL,
+                        category="process",
+                        description=f"Office spawning shell: {proc['parent']} → {proc['name']}",
+                        evidence=f"PID {proc['pid']}: {cmdline}",
+                    )
+                )
 
         # Check masquerading
         if name in system_binaries:
             if "system32" not in path and "syswow64" not in path:
-                findings.append(Finding(
-                    severity=Severity.CRITICAL,
-                    category="process",
-                    description=f"Masquerading: {name} running from wrong path",
-                    evidence=f"Path: {proc['path']}"
-                ))
+                findings.append(
+                    Finding(
+                        severity=Severity.CRITICAL,
+                        category="process",
+                        description=f"Masquerading: {name} running from wrong path",
+                        evidence=f"Path: {proc['path']}",
+                    )
+                )
 
         # Check encoded PowerShell
         if "powershell" in name:
             if "-enc" in cmdline.lower() or "-encoded" in cmdline.lower():
-                findings.append(Finding(
-                    severity=Severity.HIGH,
-                    category="process",
-                    description="Encoded PowerShell command detected",
-                    evidence=f"Command: {cmdline[:50]}..."
-                ))
+                findings.append(
+                    Finding(
+                        severity=Severity.HIGH,
+                        category="process",
+                        description="Encoded PowerShell command detected",
+                        evidence=f"Command: {cmdline[:50]}...",
+                    )
+                )
 
         # Check rundll32 without args
         if "rundll32" in name:
             if cmdline.strip().lower() == "rundll32.exe":
-                findings.append(Finding(
-                    severity=Severity.MEDIUM,
-                    category="process",
-                    description="rundll32.exe without arguments (possible injection)",
-                    evidence=f"PID: {proc['pid']}"
-                ))
+                findings.append(
+                    Finding(
+                        severity=Severity.MEDIUM,
+                        category="process",
+                        description="rundll32.exe without arguments (possible injection)",
+                        evidence=f"PID: {proc['pid']}",
+                    )
+                )
 
         # Check for shadow copy deletion
         if "vssadmin" in name and "delete" in cmdline.lower():
-            findings.append(Finding(
-                severity=Severity.CRITICAL,
-                category="process",
-                description="Shadow copy deletion (ransomware indicator)",
-                evidence=f"Command: {cmdline}"
-            ))
+            findings.append(
+                Finding(
+                    severity=Severity.CRITICAL,
+                    category="process",
+                    description="Shadow copy deletion (ransomware indicator)",
+                    evidence=f"Command: {cmdline}",
+                )
+            )
 
         # Check for encryption activity
         if "encrypt" in cmdline.lower() or "locker" in name:
-            findings.append(Finding(
-                severity=Severity.CRITICAL,
-                category="process",
-                description="Encryption activity detected (ransomware indicator)",
-                evidence=f"Command: {cmdline}"
-            ))
+            findings.append(
+                Finding(
+                    severity=Severity.CRITICAL,
+                    category="process",
+                    description="Encryption activity detected (ransomware indicator)",
+                    evidence=f"Command: {cmdline}",
+                )
+            )
 
     return findings
 
@@ -183,22 +246,26 @@ def analyze_files(files: List[Dict]) -> List[Finding]:
             if location in path_lower:
                 for ext in suspicious_extensions:
                     if path_lower.endswith(ext):
-                        findings.append(Finding(
-                            severity=Severity.HIGH,
-                            category="file",
-                            description=f"Executable in suspicious location",
-                            evidence=f"Path: {file['path']}"
-                        ))
+                        findings.append(
+                            Finding(
+                                severity=Severity.HIGH,
+                                category="file",
+                                description=f"Executable in suspicious location",
+                                evidence=f"Path: {file['path']}",
+                            )
+                        )
                         break
 
         # Check for specific malicious indicators
         if "locker" in path_lower or "ransom" in path_lower:
-            findings.append(Finding(
-                severity=Severity.CRITICAL,
-                category="file",
-                description="Potential ransomware file detected",
-                evidence=f"Path: {file['path']}"
-            ))
+            findings.append(
+                Finding(
+                    severity=Severity.CRITICAL,
+                    category="file",
+                    description="Potential ransomware file detected",
+                    evidence=f"Path: {file['path']}",
+                )
+            )
 
     return findings
 
@@ -220,21 +287,25 @@ def analyze_network(connections: List[Dict]) -> List[Finding]:
 
         # Check suspicious ports
         if remote_port in suspicious_ports:
-            findings.append(Finding(
-                severity=Severity.CRITICAL,
-                category="network",
-                description=f"Connection to suspicious port {remote_port}",
-                evidence=f"PID {conn['pid']}: {conn['local']} → {conn['remote']}"
-            ))
+            findings.append(
+                Finding(
+                    severity=Severity.CRITICAL,
+                    category="network",
+                    description=f"Connection to suspicious port {remote_port}",
+                    evidence=f"PID {conn['pid']}: {conn['local']} → {conn['remote']}",
+                )
+            )
 
         # Check known C2
         if remote_ip in known_c2:
-            findings.append(Finding(
-                severity=Severity.CRITICAL,
-                category="network",
-                description=f"Connection to known C2 infrastructure",
-                evidence=f"IP: {remote_ip}, PID: {conn['pid']}"
-            ))
+            findings.append(
+                Finding(
+                    severity=Severity.CRITICAL,
+                    category="network",
+                    description=f"Connection to known C2 infrastructure",
+                    evidence=f"IP: {remote_ip}, PID: {conn['pid']}",
+                )
+            )
 
     return findings
 
