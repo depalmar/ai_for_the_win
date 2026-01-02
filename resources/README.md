@@ -46,11 +46,28 @@ resources/
 
 | Resource | Description |
 |----------|-------------|
+| [AI Agent Architectures](./ai-agent-architectures.md) | ReAct, Plan-Execute, LangGraph, Multi-Agent patterns |
 | [Tools & Resources](./tools-and-resources.md) | 70+ tools, APIs, datasets |
 | [MCP Servers Guide](./mcp-servers-security-guide.md) | DFIR, threat intel, offensive security MCP servers |
 | [Platform Integrations](./integrations/) | XSIAM, XDR, Splunk, Elastic guides |
 | [Prompt Library](./prompt-library/) | Ready-to-use security prompts |
 | [LangChain Guide](../docs/guides/langchain-guide.md) | Comprehensive LangChain security guide |
+
+## AI Agent Architectures
+
+The [AI Agent Architectures Guide](./ai-agent-architectures.md) covers:
+
+| Pattern | Best For | Complexity |
+|---------|----------|------------|
+| **Tool-Calling** | Single-step enrichment | Low |
+| **ReAct** | Simple investigations | Medium |
+| **Plan-and-Execute** | Complex investigations | Medium-High |
+| **LangGraph** | Workflows with approvals | High |
+| **Multi-Agent** | Full SOC automation | High |
+
+Includes code examples, security guardrails, and decision flowcharts.
+
+---
 
 ## Tools & Resources Overview
 
