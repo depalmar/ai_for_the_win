@@ -16,6 +16,7 @@ These walkthroughs provide:
 
 | Lab | Walkthrough | Difficulty |
 |-----|-------------|------------|
+| [Lab 00a](./lab00a-walkthrough.md) | Python for Security | Intro |
 | [Lab 00b](./lab00b-walkthrough.md) | ML Concepts Primer | Intro |
 | [Lab 00c](./lab00c-walkthrough.md) | Prompt Engineering | Intro |
 | [Lab 00d](./lab00d-walkthrough.md) | AI in Security Ops | Intro |
