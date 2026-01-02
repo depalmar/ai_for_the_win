@@ -33,7 +33,7 @@ langgraph>=0.2.0,<2.0.0
 
 # Direct LLM SDKs (for low-level access)
 anthropic>=0.18.0,<1.0.0
-openai>=1.12.0,<2.0.0
+openai>=1.12.0,<3.0.0
 google-generativeai>=0.4.0,<1.0.0
 
 # Unified LLM API (supports 100+ providers)
