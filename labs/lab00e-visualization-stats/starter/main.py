@@ -190,29 +190,50 @@ def plot_traffic_timeline(traffic_df: pd.DataFrame) -> go.Figure:
 # =============================================================================
 
 
-def plot_correlation_heatmap(df: pd.DataFrame, columns: list[str]) -> go.Figure:
+def plot_correlation_heatmap(
+    df: pd.DataFrame, columns: list[str], labels: dict[str, str] | None = None
+) -> go.Figure:
     """
-    Create a correlation heatmap for security features.
+    Create an improved correlation heatmap for security features.
 
     Correlation values:
-    - +1: Perfect positive correlation
-    - 0: No correlation
-    - -1: Perfect negative correlation
+    - +1: Perfect positive correlation (both variables increase together)
+    - 0: No correlation (no relationship)
+    - -1: Perfect negative correlation (one increases, other decreases)
 
     TODO: Create a heatmap showing correlations between features
+
+    Improvements to implement:
+    - Mask upper triangle (matrix is symmetric, redundant data)
+    - Add significance markers (*** >0.9, ** >0.7, * >0.5)
+    - Use human-readable labels
+    - Add clear colorbar with interpretation
 
     Args:
         df: DataFrame with numeric columns
         columns: List of column names to include
+        labels: Optional dict mapping column names to display labels
 
     Returns:
         Plotly Figure object
     """
     # TODO: Calculate correlation matrix
-    # Hint: df[columns].corr()
+    # Hint: corr_matrix = df[columns].corr()
 
-    # TODO: Create heatmap using go.Heatmap or px.imshow
-    # Hint: Add text annotations showing correlation values
+    # TODO: Create display labels (optional improvement)
+    # Hint: labels = {c: c.replace("_", " ").title() for c in columns}
+
+    # TODO: Mask upper triangle for cleaner visualization
+    # Hint: mask = np.triu(np.ones_like(corr_matrix, dtype=bool), k=1)
+    #       masked_corr = corr_matrix.where(~mask)
+
+    # TODO: Create heatmap using go.Heatmap
+    # Key parameters:
+    #   - z: correlation values
+    #   - colorscale: "RdBu_r" (blue=positive, red=negative)
+    #   - zmid: 0 (center color scale at zero)
+    #   - text: annotation values
+    #   - texttemplate: "%{text}"
 
     pass  # TODO: Replace with implementation
 

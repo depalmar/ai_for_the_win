@@ -297,18 +297,22 @@ def plot_traffic_timeline(traffic_df: pd.DataFrame) -> go.Figure:
 # =============================================================================
 
 
-def plot_correlation_heatmap(df: pd.DataFrame, columns: list[str]) -> go.Figure:
+def plot_correlation_heatmap(
+    df: pd.DataFrame, columns: list[str], labels: dict[str, str] | None = None
+) -> go.Figure:
     """
-    Create a correlation heatmap for security features.
+    Create an improved correlation heatmap for security features.
 
-    Correlation values:
-    - +1: Perfect positive correlation
-    - 0: No correlation
-    - -1: Perfect negative correlation
+    Features:
+    - Masked upper triangle (removes redundancy)
+    - Significance markers (*** >0.9, ** >0.7, * >0.5)
+    - Human-readable labels
+    - Clear color bar with interpretation
 
     Args:
         df: DataFrame with numeric columns
         columns: List of column names to include
+        labels: Optional dict mapping column names to display labels
 
     Returns:
         Plotly Figure object
@@ -316,28 +320,61 @@ def plot_correlation_heatmap(df: pd.DataFrame, columns: list[str]) -> go.Figure:
     # Calculate correlation matrix
     corr_matrix = df[columns].corr()
 
+    # Create display labels
+    if labels is None:
+        labels = {c: c.replace("_", " ").title() for c in columns}
+    display_labels = [labels.get(c, c) for c in columns]
+
+    # Mask upper triangle (correlation matrix is symmetric)
+    mask = np.triu(np.ones_like(corr_matrix, dtype=bool), k=1)
+    masked_corr = corr_matrix.where(~mask)
+
+    # Create annotation text with significance markers
+    def annotate_corr(val):
+        if pd.isna(val):
+            return ""
+        abs_val = abs(val)
+        stars = "***" if abs_val > 0.9 else "**" if abs_val > 0.7 else "*" if abs_val > 0.5 else ""
+        return f"{val:.2f}{stars}"
+
+    annotations = [
+        [annotate_corr(masked_corr.iloc[i, j]) for j in range(len(columns))]
+        for i in range(len(columns))
+    ]
+
     # Create heatmap
     fig = go.Figure(
         data=go.Heatmap(
-            z=corr_matrix.values,
-            x=corr_matrix.columns,
-            y=corr_matrix.index,
+            z=masked_corr.values,
+            x=display_labels,
+            y=display_labels,
             colorscale="RdBu_r",
             zmid=0,
-            text=np.round(corr_matrix.values, 2),
+            zmin=-1,
+            zmax=1,
+            text=annotations,
             texttemplate="%{text}",
-            textfont={"size": 12},
-            hovertemplate="%{x} vs %{y}<br>Correlation: %{z:.3f}<extra></extra>",
+            textfont={"size": 14, "color": "black"},
+            hovertemplate="<b>%{y}</b> vs <b>%{x}</b><br>Correlation: %{z:.3f}<extra></extra>",
+            colorbar=dict(
+                title="Correlation",
+                titleside="right",
+                tickvals=[-1, -0.5, 0, 0.5, 1],
+                ticktext=["−1 (inverse)", "−0.5", "0 (none)", "+0.5", "+1 (strong)"],
+            ),
         )
     )
 
     fig.update_layout(
-        title="Feature Correlation Matrix",
+        title=dict(
+            text="Feature Correlation Matrix<br><sup>Stars: *** >0.9, ** >0.7, * >0.5</sup>",
+            font=dict(size=14),
+        ),
         template=PLOTLY_TEMPLATE,
-        height=450,
-        width=500,
-        xaxis_title="Feature",
-        yaxis_title="Feature",
+        height=500,
+        width=600,
+        xaxis=dict(side="bottom", tickangle=0),
+        yaxis=dict(autorange="reversed"),
     )
 
     return fig
