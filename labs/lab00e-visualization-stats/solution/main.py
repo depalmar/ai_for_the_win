@@ -530,9 +530,12 @@ def plot_attack_timeline(events_df: pd.DataFrame) -> go.Figure:
     return fig
 
 
-def plot_bytes_analysis(traffic_df: pd.DataFrame) -> go.Figure:
+def plot_exfiltration_detection(traffic_df: pd.DataFrame) -> go.Figure:
     """
-    Create a scatter plot analyzing bytes in vs bytes out ratio.
+    Detect potential data exfiltration by analyzing bytes out/in ratio.
+
+    Normal traffic: bytes_out << bytes_in (downloading content)
+    Exfiltration: bytes_out >> bytes_in (uploading/stealing data)
 
     Args:
         traffic_df: DataFrame with bytes_in and bytes_out columns
@@ -540,38 +543,132 @@ def plot_bytes_analysis(traffic_df: pd.DataFrame) -> go.Figure:
     Returns:
         Plotly Figure object
     """
-    traffic_df = traffic_df.copy()
-    traffic_df["bytes_ratio"] = traffic_df["bytes_out"] / traffic_df["bytes_in"]
+    df = traffic_df.copy()
 
-    fig = px.scatter(
-        traffic_df,
-        x="bytes_in",
-        y="bytes_out",
-        size="requests",
-        color="errors",
-        title="Bytes In/Out Analysis (size = requests, color = errors)",
-        template=PLOTLY_TEMPLATE,
-        color_continuous_scale="Reds",
-        hover_data=["hour", "requests"],
+    # Calculate exfiltration risk metrics
+    df["out_in_ratio"] = df["bytes_out"] / df["bytes_in"]
+    df["total_bytes"] = df["bytes_in"] + df["bytes_out"]
+
+    # Normal ratio is ~0.25 (25% out vs in), flag if > 0.5
+    baseline_ratio = df["out_in_ratio"].median()
+    df["ratio_zscore"] = stats.zscore(df["out_in_ratio"])
+    df["exfil_risk"] = pd.cut(
+        df["out_in_ratio"],
+        bins=[0, 0.3, 0.5, 1.0, float("inf")],
+        labels=["Normal", "Elevated", "Suspicious", "Critical"],
     )
 
-    # Add reference line (1:4 ratio for typical traffic)
-    max_val = max(traffic_df["bytes_in"].max(), traffic_df["bytes_out"].max())
+    # Create multi-panel figure
+    fig = make_subplots(
+        rows=2,
+        cols=2,
+        subplot_titles=[
+            "Bytes Out/In Ratio Over Time",
+            "Exfiltration Risk by Hour",
+            "Bandwidth Distribution",
+            "Risk Assessment",
+        ],
+        specs=[
+            [{"secondary_y": True}, {}],
+            [{}, {"type": "pie"}],
+        ],
+    )
+
+    # Panel 1: Ratio over time with threshold
     fig.add_trace(
         go.Scatter(
-            x=[0, max_val],
-            y=[0, max_val / 4],
-            mode="lines",
-            name="Expected 1:4 Ratio",
-            line=dict(dash="dash", color="gray"),
-        )
+            x=df["hour"],
+            y=df["out_in_ratio"],
+            mode="lines+markers",
+            name="Out/In Ratio",
+            line=dict(color=COLORS["primary"], width=2),
+            hovertemplate="Hour %{x}<br>Ratio: %{y:.2f}<extra></extra>",
+        ),
+        row=1, col=1,
+    )
+
+    # Add threshold line
+    fig.add_hline(
+        y=0.5, line_dash="dash", line_color=COLORS["warning"],
+        annotation_text="Elevated Risk", row=1, col=1,
+    )
+    fig.add_hline(
+        y=1.0, line_dash="dash", line_color=COLORS["danger"],
+        annotation_text="Critical Risk", row=1, col=1,
+    )
+
+    # Panel 2: Stacked bar of bytes in/out
+    fig.add_trace(
+        go.Bar(
+            x=df["hour"],
+            y=df["bytes_in"] / 1000,
+            name="Bytes In (KB)",
+            marker_color=COLORS["info"],
+        ),
+        row=1, col=2,
+    )
+    fig.add_trace(
+        go.Bar(
+            x=df["hour"],
+            y=df["bytes_out"] / 1000,
+            name="Bytes Out (KB)",
+            marker_color=COLORS["warning"],
+        ),
+        row=1, col=2,
+    )
+
+    # Panel 3: Histogram of ratios
+    risk_colors = {
+        "Normal": COLORS["success"],
+        "Elevated": COLORS["warning"],
+        "Suspicious": COLORS["danger"],
+        "Critical": "#8B0000",
+    }
+    for risk in ["Normal", "Elevated", "Suspicious", "Critical"]:
+        risk_data = df[df["exfil_risk"] == risk]
+        if not risk_data.empty:
+            fig.add_trace(
+                go.Histogram(
+                    x=risk_data["out_in_ratio"],
+                    name=risk,
+                    marker_color=risk_colors[risk],
+                    opacity=0.7,
+                ),
+                row=2, col=1,
+            )
+
+    # Panel 4: Risk pie chart
+    risk_counts = df["exfil_risk"].value_counts()
+    fig.add_trace(
+        go.Pie(
+            labels=risk_counts.index,
+            values=risk_counts.values,
+            marker_colors=[risk_colors.get(r, "gray") for r in risk_counts.index],
+            hole=0.4,
+            textinfo="label+percent",
+        ),
+        row=2, col=2,
     )
 
     fig.update_layout(
-        xaxis_title="Bytes In",
-        yaxis_title="Bytes Out",
-        height=450,
+        title=dict(
+            text="🔍 Data Exfiltration Detection Dashboard",
+            font=dict(size=18),
+        ),
+        template=PLOTLY_TEMPLATE,
+        height=600,
+        width=1000,
+        barmode="group",
+        showlegend=True,
+        legend=dict(orientation="h", yanchor="bottom", y=1.02),
     )
+
+    fig.update_xaxes(title_text="Hour", row=1, col=1)
+    fig.update_yaxes(title_text="Out/In Ratio", row=1, col=1)
+    fig.update_xaxes(title_text="Hour", row=1, col=2)
+    fig.update_yaxes(title_text="Kilobytes", row=1, col=2)
+    fig.update_xaxes(title_text="Out/In Ratio", row=2, col=1)
+    fig.update_yaxes(title_text="Count", row=2, col=1)
 
     return fig
 
@@ -656,9 +753,9 @@ def main():
     print("✅ Attack timeline created")
     fig_attack.show()
 
-    fig_bytes = plot_bytes_analysis(traffic_df)
-    print("✅ Bytes analysis created")
-    fig_bytes.show()
+    fig_exfil = plot_exfiltration_detection(traffic_df)
+    print("✅ Exfiltration detection dashboard created")
+    fig_exfil.show()
 
     print("\n" + "=" * 60)
     print("Lab complete! Check the generated visualizations.")
