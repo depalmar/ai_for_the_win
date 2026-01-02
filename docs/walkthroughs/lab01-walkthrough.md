@@ -386,6 +386,53 @@ print(f"Mean: {scores.mean():.3f} (+/- {scores.std()*2:.3f})")
 
 ---
 
+## Bonus: Phishing Campaign Timeline
+
+The notebook includes an interactive timeline visualization showing phishing campaign patterns.
+
+### Adding Timestamps to Email Data
+
+```python
+from datetime import datetime, timedelta
+import random
+
+# Phishing campaigns cluster in waves; legitimate emails spread evenly
+base_date = datetime(2024, 1, 1)
+timestamps = []
+for label in labels:
+    if label == 1:  # Phishing - cluster in campaign waves
+        campaign_day = random.choice([3, 7, 15, 22, 28])
+        day_offset = campaign_day + random.randint(-2, 2)
+    else:  # Legitimate - spread evenly
+        day_offset = random.randint(0, 29)
+    timestamps.append(base_date + timedelta(days=day_offset))
+
+df['timestamp'] = timestamps
+```
+
+### Visualizing Campaign Waves
+
+```python
+fig = make_subplots(rows=2, cols=1,
+    subplot_titles=['Daily Email Volume', 'Cumulative Phishing'])
+
+# Stacked bar chart
+fig.add_trace(go.Bar(x=dates, y=legitimate, name='Legitimate'), row=1, col=1)
+fig.add_trace(go.Bar(x=dates, y=phishing, name='Phishing'), row=1, col=1)
+
+# Cumulative line shows campaign acceleration
+fig.add_trace(go.Scatter(x=dates, y=cumulative, fill='tozeroy'), row=2, col=1)
+```
+
+### Security Insight
+
+Real phishing campaigns show similar patterns:
+- **Burst activity** on specific days (campaign launches)
+- **Rapid accumulation** during active campaigns
+- **Quiet periods** between campaigns
+
+---
+
 ## Key Takeaways
 
 1. **Preprocessing matters** - Clean text improves classification
@@ -393,6 +440,7 @@ print(f"Mean: {scores.mean():.3f} (+/- {scores.std()*2:.3f})")
 3. **Recall vs Precision tradeoff** - In security, catching attacks matters
 4. **Feature analysis** - Understand what the model learned
 5. **Avoid data leakage** - Fit vectorizer only on training data
+6. **Timeline analysis** - Phishing campaigns cluster in waves
 
 ---
 
