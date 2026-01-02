@@ -299,6 +299,57 @@ fig.add_trace(trace, secondary_y=True)
 
 ---
 
+## Bonus: Data Exfiltration Detection Dashboard
+
+The solution includes an advanced 4-panel dashboard for detecting data exfiltration.
+
+### Detecting Exfiltration by Ratio Analysis
+
+```python
+# Calculate out/in ratio - exfiltration shows high outbound traffic
+df['out_in_ratio'] = df['bytes_out'] / df['bytes_in']
+
+# Categorize risk levels
+df['exfil_risk'] = pd.cut(
+    df['out_in_ratio'],
+    bins=[0, 0.3, 0.5, 1.0, float('inf')],
+    labels=['Normal', 'Elevated', 'Suspicious', 'Critical'],
+)
+```
+
+### Risk Levels
+
+| Risk Level | Out/In Ratio | Interpretation |
+|------------|--------------|----------------|
+| Normal | < 0.3 | Typical download-heavy traffic |
+| Elevated | 0.3 - 0.5 | Worth monitoring |
+| Suspicious | 0.5 - 1.0 | Unusual upload activity |
+| Critical | > 1.0 | Possible exfiltration |
+
+### 4-Panel Dashboard Layout
+
+```python
+fig = make_subplots(rows=2, cols=2, subplot_titles=[
+    'Out/In Ratio Over Time',     # Trend analysis
+    'Bandwidth Distribution',      # Bytes in vs out
+    'Risk Distribution',           # Histogram of ratios
+    'Risk Assessment',             # Pie chart summary
+])
+
+# Add threshold lines for visual alerts
+fig.add_hline(y=0.5, line_dash='dash', annotation_text='Elevated Risk')
+fig.add_hline(y=1.0, line_dash='dash', annotation_text='Critical Risk')
+```
+
+### Security Insight
+
+Normal traffic patterns:
+- **Web browsing**: bytes_out << bytes_in (downloading pages)
+- **Email**: Roughly balanced
+- **Exfiltration**: bytes_out >> bytes_in (uploading stolen data)
+
+---
+
 ## Extension Exercises
 
 ### Challenge 1: Add More Panels
