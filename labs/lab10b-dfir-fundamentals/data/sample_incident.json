@@ -1,0 +1,22 @@
+{
+  "description": "Sample incident data for DFIR Fundamentals lab",
+  "incident_id": "INC-2024-001",
+  "incident_type": "Suspected Ransomware",
+  "timeline": "2024-01-15 09:00 - 11:30",
+  "processes": [
+    {"pid": 4100, "name": "WINWORD.EXE", "parent": "explorer.exe", "path": "C:\\Program Files\\Microsoft Office\\WINWORD.EXE"},
+    {"pid": 4200, "name": "powershell.exe", "parent": "WINWORD.EXE", "path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"},
+    {"pid": 5600, "name": "svchost.exe", "parent": "rundll32.exe", "path": "C:\\Users\\Public\\svchost.exe"},
+    {"pid": 7100, "name": "vssadmin.exe", "parent": "locker.exe", "path": "C:\\Windows\\System32\\vssadmin.exe"}
+  ],
+  "network_connections": [
+    {"pid": 4350, "local": "192.168.1.50:49667", "remote": "185.143.223.47:443", "state": "ESTABLISHED"},
+    {"pid": 5600, "local": "192.168.1.50:49700", "remote": "45.33.32.156:4444", "state": "ESTABLISHED"}
+  ],
+  "mitre_techniques": [
+    {"id": "T1566.001", "name": "Phishing: Spearphishing Attachment"},
+    {"id": "T1059.001", "name": "Command and Scripting: PowerShell"},
+    {"id": "T1036.005", "name": "Masquerading"},
+    {"id": "T1490", "name": "Inhibit System Recovery"}
+  ]
+}

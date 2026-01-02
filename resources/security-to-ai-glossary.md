@@ -282,7 +282,236 @@ prediction = model.predict(features)
 
 ---
 
+## Advanced LLM Terms
+
+### Temperature
+**AI Definition**: Controls randomness in LLM outputs (0.0 = deterministic, 1.0+ = creative).
+
+**Security Analogy**: **Alert confidence threshold**. Temperature 0 = strict, consistent outputs (good for IOC extraction). Temperature 0.7+ = creative, varied responses (good for brainstorming threat scenarios).
+
+```python
+# Structured tasks (parsing, extraction)
+llm.generate(prompt, temperature=0.0)  # Deterministic
+
+# Creative tasks (report writing, analysis)
+llm.generate(prompt, temperature=0.7)  # Some creativity
+```
+
+---
+
+### Top-p (Nucleus Sampling)
+**AI Definition**: Only consider tokens whose cumulative probability is within top p%.
+
+**Security Analogy**: **Top-N alert filtering**. Top-p 0.9 means "only consider the most likely 90% of possible next words" - filters out weird outputs while allowing some variation.
+
+---
+
+### System Prompt
+**AI Definition**: Hidden instructions that define the AI's behavior and role.
+
+**Security Analogy**: Your **SOC playbook**. It defines how the AI should behave: "You are a security analyst. Always cite CVE IDs. Never recommend disabling security controls."
+
+```python
+system_prompt = """You are a security analyst. 
+Rules:
+- Always map findings to MITRE ATT&CK
+- Defang IOCs in output (hxxp://)
+- Never recommend disabling security controls
+"""
+```
+
+---
+
+### Few-Shot Learning
+**AI Definition**: Showing the model a few examples before asking it to perform a task.
+
+**Security Analogy**: **Training by example**. Instead of writing complex instructions, show 2-3 examples of input → expected output. The model learns the pattern.
+
+```python
+prompt = """
+Classify these logs:
+
+Log: Failed password for admin from 192.168.1.100
+Classification: SUSPICIOUS
+
+Log: User john.doe logged in successfully  
+Classification: BENIGN
+
+Log: Multiple failed SSH attempts from 45.33.32.156
+Classification: ???
+"""
+```
+
+---
+
+### Chain-of-Thought (CoT)
+**AI Definition**: Prompting the model to explain its reasoning step by step.
+
+**Security Analogy**: **Analyst notes in a ticket**. Instead of just "MALICIOUS", you want: "This is malicious because (1) unusual parent process, (2) encoded command, (3) known C2 pattern."
+
+```python
+prompt = "Analyze this log and explain your reasoning step by step before giving a verdict."
+```
+
+---
+
+## AI Agent Terms
+
+### ReAct (Reasoning + Acting)
+**AI Definition**: Agent pattern where the AI reasons about what to do, takes an action, observes the result, and repeats.
+
+**Security Analogy**: **Analyst investigation workflow**. Think: "I should check VirusTotal for this hash" → Act: Query VT API → Observe: "Known malware" → Think: "Check for lateral movement" → ...
+
+```
+THOUGHT: I need to check if this IP is malicious
+ACTION: ip_lookup("185.143.223.47")
+OBSERVATION: {"malicious": true, "tags": ["c2", "cobalt-strike"]}
+THOUGHT: It's a known C2. I should check for connections from our network.
+ACTION: siem_query("dest_ip=185.143.223.47")
+...
+```
+
+---
+
+### Tool Use / Function Calling
+**AI Definition**: LLM's ability to call external functions/APIs to get information or take actions.
+
+**Security Analogy**: **Analyst with access to security tools**. The AI can query VirusTotal, search logs in SIEM, look up CVEs, etc. Tools extend what the AI can do.
+
+```python
+tools = [
+    {"name": "ip_lookup", "description": "Check IP reputation"},
+    {"name": "hash_lookup", "description": "Check file hash in VT"},
+    {"name": "siem_query", "description": "Search security logs"},
+]
+```
+
+---
+
+### Agent Memory
+**AI Definition**: How agents remember context across interactions.
+
+**Security Analogy**: **Case management system**. Short-term memory = current investigation. Long-term memory = historical incidents, known IOCs, analyst notes.
+
+| Memory Type | Security Equivalent |
+|-------------|---------------------|
+| Short-term | Current ticket context |
+| Working | Active investigation notes |
+| Long-term | Threat intel database |
+
+---
+
+### Agentic Loops
+**AI Definition**: AI agents that run autonomously, making decisions and taking actions in a loop.
+
+**Security Analogy**: **Automated playbook execution**. SOAR but smarter - the agent decides next steps based on observations, not just predefined rules.
+
+---
+
+## ML Security Terms
+
+### Evasion Attack
+**AI Definition**: Crafting inputs to cause misclassification at inference time.
+
+**Security Analogy**: **AV evasion**. Malware authors modify their samples until they bypass ML-based detection, just like traditional signature evasion.
+
+---
+
+### Data Poisoning
+**AI Definition**: Corrupting training data to degrade model performance.
+
+**Security Analogy**: **Feeding bad intel to your team**. If attackers can influence your training data, they can make your detector blind to their techniques.
+
+---
+
+### Adversarial Example
+**AI Definition**: An input crafted to cause misclassification, often with minimal perturbation.
+
+**Security Analogy**: **Evasion sample**. A malware sample that's been slightly modified to flip the classifier's decision from "malicious" to "benign."
+
+---
+
+### Model Extraction
+**AI Definition**: Stealing a model by querying it many times and training a clone.
+
+**Security Analogy**: **Reverse engineering your detection logic**. Attacker queries your API thousands of times, uses the responses to train their own copy, then tests evasion offline.
+
+---
+
+### Backdoor Attack
+**AI Definition**: Implanting a hidden trigger in a model that causes specific misclassification.
+
+**Security Analogy**: **Supply chain compromise**. Attacker poisons a pre-trained model so that samples with a specific pattern are always classified as benign.
+
+---
+
+### Adversarial Training
+**AI Definition**: Training on adversarial examples to build robustness.
+
+**Security Analogy**: **Red team testing your detections**. Expose your model to evasion attempts during training so it learns to catch them.
+
+---
+
+## DFIR + AI Terms
+
+### Artifact Extraction
+**AI Definition**: Using AI to identify and extract forensic artifacts from data.
+
+**Security Analogy**: What you already do manually - finding IOCs, timestamps, user actions. AI accelerates this across large datasets.
+
+---
+
+### Timeline Reconstruction
+**AI Definition**: AI-assisted building of event timelines from logs/artifacts.
+
+**Security Analogy**: **Automated incident timeline**. AI correlates events across sources and builds the attack narrative.
+
+---
+
+### Memory Forensics + ML
+**AI Definition**: Using ML to detect anomalies in memory dumps.
+
+**Security Analogy**: **Pattern matching on steroids**. Instead of searching for known strings, ML finds anomalous process behavior, injection patterns, etc.
+
+---
+
+### TTP Extraction
+**AI Definition**: Using LLMs to identify MITRE ATT&CK techniques from incident data.
+
+**Security Analogy**: **Automated threat mapping**. LLM reads logs/reports and identifies techniques used: T1055 (Process Injection), T1059 (Command Line), etc.
+
+---
+
 ## Quick Reference Table
+
+| AI Term | Security Equivalent |
+|---------|---------------------|
+| Model | Trained detection ruleset |
+| Training | Tuning/teaching with examples |
+| Inference | Production detection |
+| Features | Log fields that matter |
+| Labels | Known verdicts (malicious/benign) |
+| Supervised | Learning from labeled incidents |
+| Unsupervised | Anomaly detection / hunting |
+| Classifier | Multi-category detection |
+| Precision | Alert fidelity |
+| Recall | Detection coverage |
+| False Positive | Alert, but benign |
+| False Negative | Attack, no alert |
+| Overfitting | Rule too specific |
+| Threshold | Alert severity cutoff |
+| Token | ~1 word of text |
+| Prompt | Query to AI |
+| Hallucination | AI makes stuff up |
+| RAG | AI with your docs |
+| Prompt Injection | SQL injection for AI |
+| Temperature | Output randomness control |
+| System Prompt | AI's playbook/rules |
+| ReAct | Think → Act → Observe loop |
+| Tool Use | AI calling external APIs |
+| Evasion | AV bypass for ML |
+| Poisoning | Bad training data attack |
+| Adversarial Training | Red team your ML |
 
 | AI Term | Security Equivalent |
 |---------|---------------------|

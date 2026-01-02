@@ -1,0 +1,12 @@
+{
+  "description": "Sample spam/not-spam messages for Hello World ML lab",
+  "messages": [
+    {"text": "FREE MONEY! Click now to claim your prize!", "label": 1},
+    {"text": "Hey, want to grab lunch tomorrow?", "label": 0},
+    {"text": "URGENT: Your account has been compromised!", "label": 1},
+    {"text": "Meeting moved to 3pm, see you there", "label": 0},
+    {"text": "Congratulations! You've won $1,000,000!", "label": 1},
+    {"text": "Can you review the document I sent?", "label": 0}
+  ],
+  "spam_keywords": ["free", "win", "click", "urgent", "money", "prize", "congratulations", "winner", "claim"]
+}
