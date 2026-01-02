@@ -2,7 +2,7 @@
 
 Practical labs for building AI-powered security tools.
 
-> 📖 **New to the course?** Start with [GETTING_STARTED.md](../GETTING_STARTED.md) for setup, then see [Learning Guide](../docs/learning-guide.md) for learning paths.
+> 📖 **New to the course?** Start with [GETTING_STARTED.md](../docs/GETTING_STARTED.md) for setup, then see [Learning Guide](../docs/learning-guide.md) for learning paths.
 
 ---
 

@@ -11,7 +11,7 @@
 | Goal | Go To |
 |------|-------|
 | **Quick setup (15 min)** | [Quick Start Guide](./guides/quickstart-guide.md) |
-| **Detailed setup** | [GETTING_STARTED.md](../GETTING_STARTED.md) |
+| **Detailed setup** | [GETTING_STARTED.md](./GETTING_STARTED.md) |
 | **Choose my learning path** | [Learning Paths Guide](./learning-guide.md) |
 | **Run in Docker/Colab** | [README.md - Docker/Colab](../README.md#docker-quick-start) |
 
@@ -103,9 +103,10 @@ If you're stuck on a lab, these walkthroughs provide step-by-step solutions:
 ```
 Root
 ├── README.md                    # Project overview, quick start
-├── GETTING_STARTED.md           # Detailed setup guide
 │
 ├── docs/                        # All documentation
+│   ├── GETTING_STARTED.md       # Detailed setup guide
+│   ├── CLAUDE.md                # AI assistant instructions
 │   ├── guides/                  # Tool setup & how-to guides
 │   │   ├── quickstart-guide.md
 │   │   ├── troubleshooting-guide.md

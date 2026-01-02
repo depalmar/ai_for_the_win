@@ -63,7 +63,7 @@ python solution/main.py
 
 > 📖 **New to Python or ML?** Start with Labs 00a-00b-01-02-03 (no API keys required!)
 > 📖 **Know ML, want LLMs?** Jump to Lab 04 and get an API key first
-> 📖 **Need help?** Read [GETTING_STARTED.md](./GETTING_STARTED.md) for detailed setup
+> 📖 **Need help?** Read [GETTING_STARTED.md](./docs/GETTING_STARTED.md) for detailed setup
 > 📖 **Lost in the docs?** See [Documentation Guide](./docs/documentation-guide.md) for navigation
 
 ---
