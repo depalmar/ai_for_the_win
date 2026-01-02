@@ -20,22 +20,30 @@ Follow this progression for the best learning experience. Labs build on each oth
 | 00b | [ML Concepts Primer](./lab00b-ml-concepts-primer/) | ML theory | Supervised/unsupervised, features, evaluation |
 | 00c | [Intro to Prompt Engineering](./lab00c-intro-prompt-engineering/) | LLM prompting | Prompt design, hallucination detection, AI Studio |
 | 00d | [AI in Security Operations](./lab00d-ai-in-security-operations/) | SOC integration | Where AI fits, human-in-the-loop, compliance |
-| 00e | [Visualization & Statistics](./lab00e-visualization-stats/) | Data viz | Plotly, statistics, dashboards, distributions |
+| 00e | [Visualization & Statistics](./lab00e-visualization-stats/) | Data viz | Plotly, Gradio, statistics, dashboards |
+| 00f | [Hello World ML](./lab00f-hello-world-ml/) | First classifier | 4-step ML workflow, accuracy, precision, recall |
+| 00g | [Working with APIs](./lab00g-working-with-apis/) | HTTP & REST | requests library, JSON, API keys, rate limiting |
 
 **Who should do these:**
 - No Python experience → Start with **00a**
-- Python OK, new to ML → Start with **00b**
+- Python OK, new to ML → Start with **00b** then **00f**
 - Want to use LLMs effectively → Do **00c** (highly recommended!)
 - Want SOC/operational context → Do **00d** (conceptual, no coding)
-- Need visualization skills → Do **00e** (Plotly, stats, dashboards)
+- Need visualization skills → Do **00e** (Plotly, Gradio, dashboards)
+- **New! First ML model** → Do **00f** before Lab 01 (simpler intro)
+- **New! API skills** → Do **00g** before Labs 04-07 (LLM APIs)
 - Comfortable with all → Skip to Lab 01
 
 ```
-Lab 00a (Python) → Lab 00b (ML Concepts) → Lab 00c (Prompting) → Lab 00d (SOC) → Lab 00e (Viz) → Lab 01
-     ↓                   ↓                       ↓                    ↓               ↓             ↓
- "Learn Python      "Understand ML         "Master LLM          "Understand     "Master        "Build your
-  with security      theory before          prompts &            where AI fits    Plotly &       first ML
-  examples"          coding"                verification"        in SOC"          dashboards"    classifier"
+Lab 00a (Python) → Lab 00b (ML) → Lab 00f (First ML) → Lab 01 (Phishing)
+     ↓                 ↓                 ↓                   ↓
+ "Learn Python    "Understand       "Build your         "Build real
+  basics"          ML theory"        FIRST model"        classifier"
+
+Lab 00c (Prompts) → Lab 00g (APIs) → Lab 04 (LLM Log Analysis)
+     ↓                  ↓                   ↓
+ "Master LLM        "HTTP & JSON       "Use LLMs
+  prompting"         skills"            for security"
 ```
 
 > 💡 **Pro Tip:** Even experienced developers should do **Lab 00c** and **Lab 00d** - prompt engineering and SOC context are critical for real-world deployment!
@@ -51,16 +59,17 @@ Start here if you're new to ML for security. These labs teach core concepts.
 | 01 | [Phishing Classifier](./lab01-phishing-classifier/) | Text classification | TF-IDF, Random Forest, precision/recall |
 | 02 | [Malware Clustering](./lab02-malware-clustering/) | Unsupervised learning | K-Means, t-SNE, PE file features |
 | 03 | [Anomaly Detection](./lab03-anomaly-detection/) | Outlier detection | Isolation Forest, network features |
+| 03b | [ML vs LLM Decision](./lab03b-ml-vs-llm/) | **NEW! Bridge lab** | When to use ML vs LLM, hybrid systems |
 
 **Progression:**
 ```
-Lab 01 (Text ML) → Lab 02 (Clustering) → Lab 03 (Anomaly Detection)
-     ↓                  ↓                      ↓
- "Classify           "Group              "Find unusual
-  emails"            malware"             network traffic"
+Lab 01 (Text ML) → Lab 02 (Clustering) → Lab 03 (Anomaly) → Lab 03b (ML vs LLM)
+     ↓                  ↓                      ↓                   ↓
+ "Classify           "Group              "Find unusual        "When to use
+  emails"            malware"             traffic"             ML vs LLM?"
 ```
 
-**Bridge to LLMs:** After Lab 03, you understand ML classification and anomaly detection. Lab 04 introduces how LLMs can enhance these with natural language understanding.
+**Bridge to LLMs:** Lab 03b is the critical bridge between ML and LLM sections. It teaches you when to use each approach and how to combine them effectively.
 
 ---
 
@@ -113,6 +122,7 @@ Deep dive into incident response, threat simulation, and offensive security anal
 
 | # | Lab | Topic | What You'll Learn |
 |---|-----|-------|-------------------|
+| 10b | [DFIR Fundamentals](./lab10b-dfir-fundamentals/) | **NEW! Bridge lab** | IR lifecycle, artifacts, ATT&CK mapping |
 | 11 | [Ransomware Detection](./lab11-ransomware-detection/) | Behavioral detection | Entropy, TTPs, response |
 | 12 | [Purple Team](./lab12-ransomware-simulation/) | Adversary emulation | Safe simulation, gap analysis |
 | 13 | [Memory Forensics AI](./lab13-memory-forensics-ai/) | Memory analysis | Volatility3, process injection, credential dumping |
@@ -126,10 +136,10 @@ Deep dive into incident response, threat simulation, and offensive security anal
 
 **Progression:**
 ```
-Lab 11 (Ransomware) → Lab 12 (Purple Team) → Lab 13 (Memory Forensics)
-     ↓                     ↓                      ↓
- "Detect              "Validate              "Analyze
-  ransomware"          detections"            memory dumps"
+Lab 10b (DFIR Fundamentals) → Lab 11 (Ransomware) → Lab 12 (Purple Team) → Lab 13 (Memory Forensics)
+     ↓                           ↓                     ↓                      ↓
+ "Learn IR              "Detect              "Validate              "Analyze
+  lifecycle"             ransomware"          detections"            memory dumps"
 
 Lab 14 (C2 Traffic) → Lab 15 (Lateral Movement) → Lab 16 (Attribution) → Lab 17 (Adversarial)
      ↓                      ↓                          ↓                      ↓
@@ -754,11 +764,14 @@ Track your progress:
 - [ ] Lab 00c: Intro to Prompt Engineering
 - [ ] Lab 00d: AI in Security Operations (conceptual)
 - [ ] Lab 00e: Visualization & Statistics
+- [ ] Lab 00f: Hello World ML (NEW - first classifier!)
+- [ ] Lab 00g: Working with APIs (NEW - HTTP/JSON skills)
 
 **Core Labs**
 - [ ] Lab 01: Phishing Classifier
 - [ ] Lab 02: Malware Clustering
 - [ ] Lab 03: Anomaly Detection
+- [ ] Lab 03b: ML vs LLM Decision (NEW - bridge lab)
 - [ ] Lab 04: LLM Log Analysis
 - [ ] Lab 05: Threat Intel Agent
 - [ ] Lab 06: Security RAG
@@ -766,6 +779,7 @@ Track your progress:
 - [ ] Lab 08: Vuln Scanner AI
 - [ ] Lab 09: Detection Pipeline
 - [ ] Lab 10: IR Copilot
+- [ ] Lab 10b: DFIR Fundamentals (NEW - IR lifecycle prep)
 - [ ] Lab 11: Ransomware Detection
 - [ ] Lab 12: Ransomware Simulation
 - [ ] Lab 13: Memory Forensics AI
