@@ -13,6 +13,8 @@ By completing this lab, you will:
 3. Train and evaluate a classification model
 4. Apply the model to detect phishing attempts
 
+> 📊 **Notebook Bonus**: The Colab notebook includes interactive Plotly visualizations including a Phishing Campaign Timeline that shows how attacks cluster over time.
+
 ---
 
 ## ⏱️ Estimated Time

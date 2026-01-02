@@ -14,6 +14,8 @@ By completing this lab, you will:
 4. Handle imbalanced data and tune thresholds
 5. Deploy real-time detection
 
+> 📊 **Notebook Bonus**: The Colab notebook includes Layer 7 protocol awareness (HTTP, DNS, TLS, RMM tools) and an Attack Progression Timeline with interactive Plotly dashboards.
+
 ---
 
 ## ⏱️ Estimated Time
