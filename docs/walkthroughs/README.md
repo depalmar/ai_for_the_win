@@ -22,6 +22,7 @@ These walkthroughs provide:
 | [Lab 00b](./lab00b-walkthrough.md) | ML Concepts Primer | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab00b_ml_concepts.ipynb) | Intro |
 | [Lab 00c](./lab00c-walkthrough.md) | Prompt Engineering | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab00c_prompt_engineering.ipynb) | Intro |
 | [Lab 00d](./lab00d-walkthrough.md) | AI in Security Ops | — | Intro |
+| [Lab 00e](./lab00e-walkthrough.md) | Visualization & Statistics | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab00e_visualization_stats.ipynb) | Intro |
 
 ### Foundation Labs (No API Key Required)
 
@@ -88,10 +89,10 @@ These walkthroughs provide:
 
 ### Intro Track (Start Here)
 ```
-Lab 00b → Lab 00c → Lab 00d
-  |          |          |
-  v          v          v
-ML Concepts  Prompts    AI in SecOps
+Lab 00b → Lab 00c → Lab 00d → Lab 00e
+  |          |          |          |
+  v          v          v          v
+ML Concepts  Prompts  AI in SecOps  Visualization
 ```
 
 ### Beginner Track
