@@ -70,7 +70,7 @@ python solution/main.py
 
 ## What It Looks Like
 
-<!-- TODO: Add screenshots. See docs/assets/README.md for guidance -->
+<!-- Screenshots can be added to docs/assets/ - see docs/assets/README.md for guidance -->
 
 **Lab 01 - Phishing Classifier** catches what rules miss:
 
@@ -486,11 +486,11 @@ Copy `.env.example` to `.env` and configure:
 - **New to this?**: Start with [Lab 00: Environment Setup](./labs/lab00-environment-setup/)
 - **Find your path**: See [Role-Based Learning Paths](./resources/role-based-learning-paths.md) for SOC, IR, hunting, etc.
 - **Confused by AI terms?**: Check the [Security-to-AI Glossary](./resources/security-to-ai-glossary.md)
-- **API Keys**: See the [API Keys Guide](./setup/guides/api-keys-guide.md) for setup and cost management
-- **Jupyter Notebooks**: Check the [Jupyter Basics Guide](./setup/guides/jupyter-basics-guide.md)
-- **Troubleshooting**: Check the [troubleshooting guide](./setup/guides/troubleshooting-guide.md)
-- **Error Handling**: See [error handling best practices](./setup/guides/error-handling-guide.md)
-- **Documentation**: Browse [setup guides](./setup/) and [resources](./resources/)
+- **API Keys**: See the [API Keys Guide](./docs/guides/api-keys-guide.md) for setup and cost management
+- **Jupyter Notebooks**: Check the [Jupyter Basics Guide](./docs/guides/jupyter-basics-guide.md)
+- **Troubleshooting**: Check the [troubleshooting guide](./docs/guides/troubleshooting-guide.md)
+- **Error Handling**: See [error handling best practices](./docs/guides/error-handling-guide.md)
+- **Documentation**: Browse [guides](./docs/guides/) and [resources](./resources/)
 - **Issues**: Open a [GitHub issue](https://github.com/depalmar/ai_for_the_win/issues)
 
 ---
@@ -502,11 +502,11 @@ Copy `.env.example` to `.env` and configure:
 | [Environment Setup](./labs/lab00-environment-setup/)                  | First-time setup for beginners                      |
 | [Role-Based Learning Paths](./resources/role-based-learning-paths.md) | Paths for SOC, IR, hunting, red team                |
 | [Security-to-AI Glossary](./resources/security-to-ai-glossary.md)     | AI terms explained for security folks               |
-| [API Keys Guide](./setup/guides/api-keys-guide.md)                    | Get API keys, manage costs                          |
+| [API Keys Guide](./docs/guides/api-keys-guide.md)                    | Get API keys, manage costs                          |
 | [Documentation Guide](./docs/documentation-guide.md)                  | Find exactly what you need                          |
 | [Security Prompts](./resources/prompt-library/security-prompts.md)    | Ready-to-use prompts for security tasks             |
 | [Lab Walkthroughs](./docs/walkthroughs/)                              | Step-by-step solutions when stuck                   |
-| [LangChain Guide](./setup/guides/langchain-guide.md) | Comprehensive LangChain security guide |
+| [LangChain Guide](./docs/guides/langchain-guide.md) | Comprehensive LangChain security guide |
 | [SIEM Integrations](./resources/integrations/)                        | Splunk, Elastic, XSIAM integration guides           |
 | [Tools & APIs](./resources/tools-and-resources.md)                    | 80+ security tools, APIs, datasets                  |
 | [MCP Servers](./resources/mcp-servers-security-guide.md)              | MCP servers for DFIR, threat intel                  |
@@ -541,5 +541,5 @@ This training material is intended for **educational purposes** and **authorized
 <p align="center">
   <b>Ready to build AI-powered security tools?</b><br>
   <a href="./labs/lab00-environment-setup/">Get Started</a> |
-  <a href="./curriculum/ai-security-training-program.md">View Full Curriculum</a>
+  <a href="./docs/ai-security-training-program.md">View Full Curriculum</a>
 </p>

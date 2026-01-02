@@ -170,10 +170,10 @@ Each lab includes a Gradio demo for quick experimentation:
 
 ```bash
 # Run any lab's demo
-python labs/lab04-llm-log-analysis/demo/app.py
+python labs/lab04-llm-log-analysis/scripts/app.py
 
 # Or use the unified demo launcher
-python demo/launcher.py
+python scripts/launcher.py
 ```
 
 ---
@@ -219,7 +219,7 @@ llm = setup_llm(provider="ollama")     # Local Llama
 
 1. **Python 3.10+** installed
 2. **Virtual environment** set up
-3. **API keys** configured (see [Setup Guide](../setup/dev-environment-setup.md))
+3. **API keys** configured (see [Setup Guide](../docs/guides/dev-environment-setup.md))
 
 ### Running a Lab
 
@@ -789,10 +789,10 @@ Found an issue or have an improvement?
 
 ## 📚 Additional Resources
 
-- [Curriculum Overview](../curriculum/ai-security-training-program.md)
-- [Development Setup](../setup/dev-environment-setup.md)
+- [Curriculum Overview](../docs/ai-security-training-program.md)
+- [Development Setup](../docs/guides/dev-environment-setup.md)
 - [Tools & Resources](../resources/tools-and-resources.md)
-- [Cursor IDE Guide](../setup/guides/cursor-ide-guide.md)
+- [Cursor IDE Guide](../docs/guides/cursor-ide-guide.md)
 
 ---
 

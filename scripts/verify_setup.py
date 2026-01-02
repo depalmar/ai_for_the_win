@@ -54,17 +54,17 @@ def print_error(text):
 
 
 def check_python_version():
-    """Check Python version is 3.9+"""
+    """Check Python version is 3.10+"""
     print_header("Checking Python Version")
 
     version = sys.version_info
     version_str = f"{version.major}.{version.minor}.{version.micro}"
 
-    if version.major >= 3 and version.minor >= 9:
-        print_success(f"Python {version_str} (3.9+ required)")
+    if version.major >= 3 and version.minor >= 10:
+        print_success(f"Python {version_str} (3.10+ required)")
         return True
     else:
-        print_error(f"Python {version_str} - requires 3.9+")
+        print_error(f"Python {version_str} - requires 3.10+")
         return False
 
 

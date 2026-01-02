@@ -32,57 +32,140 @@ This document provides a comprehensive overview of the AI for the Win training p
 └──────────────────────────────────────────────────────────────────────────────┘
 ```
 
+### Learning Path Flow (Mermaid)
+
+```mermaid
+flowchart TB
+    subgraph intro [🎯 Intro Labs]
+        A00[00 Setup] --> A00a[00a Python]
+        A00a --> A00b[00b ML Concepts]
+        A00b --> A00c[00c Prompts]
+        A00c --> A00d[00d AI in SOC]
+    end
+
+    subgraph ml [🔬 ML Basics - No API Key]
+        B01[01 Phishing] --> B02[02 Malware]
+        B02 --> B03[03 Anomaly]
+    end
+
+    subgraph llm [🤖 LLM Tools - API Required]
+        C04[04 Logs] --> C05[05 Agent]
+        C05 --> C06[06 RAG]
+        C06 --> C07[07 YARA]
+    end
+
+    subgraph adv [⚡ Advanced]
+        D08[08 Vuln] --> D09[09 Pipeline]
+        D09 --> D10[10 IR Copilot]
+    end
+
+    subgraph expert [🔴 Expert]
+        E11[11-15 DFIR]
+        E16[16-20 AI Security]
+    end
+
+    intro --> ml
+    ml --> llm
+    llm --> adv
+    adv --> expert
+```
+
+### Technology Stack
+
+```mermaid
+flowchart TB
+    subgraph frontend [User Interface]
+        Gradio[Gradio UI]
+        Streamlit[Streamlit]
+        Jupyter[Jupyter Notebooks]
+    end
+
+    subgraph orchestration [LLM Orchestration]
+        LangChain[LangChain]
+        LangGraph[LangGraph]
+        LiteLLM[LiteLLM]
+    end
+
+    subgraph providers [LLM Providers]
+        Anthropic[Claude]
+        OpenAI[GPT-4]
+        Google[Gemini]
+        Ollama[Ollama Local]
+    end
+
+    subgraph ml_stack [ML Stack]
+        sklearn[scikit-learn]
+        PyTorch[PyTorch]
+        HF[Hugging Face]
+    end
+
+    subgraph vectordb [Vector Storage]
+        ChromaDB[ChromaDB]
+        Embeddings[sentence-transformers]
+    end
+
+    subgraph security [Security Tools]
+        YARA[YARA]
+        pefile[pefile]
+        MITRE[MITRE ATT&CK]
+    end
+
+    frontend --> orchestration
+    orchestration --> providers
+    orchestration --> ml_stack
+    orchestration --> vectordb
+    ml_stack --> security
+```
+
 ---
 
 ## Directory Structure
 
 ```
 ai_for_the_win/
-├── labs/                          # 24 hands-on labs
+├── labs/                          # 24 hands-on labs (core content)
 │   ├── lab00a-python-security-fundamentals/
 │   ├── lab00b-ml-concepts-primer/
-│   ├── lab00c-prompt-engineering-mastery/
+│   ├── lab00c-intro-prompt-engineering/
+│   ├── lab00d-ai-in-security-operations/
 │   ├── lab01-phishing-classifier/
 │   │   ├── README.md              # Lab instructions
 │   │   ├── starter/               # Starting code templates
 │   │   ├── solution/              # Reference implementations
-│   │   └── tests/                 # Validation tests
-│   └── ... (labs 02-19)
+│   │   └── data/                  # Lab-specific data
+│   └── ... (labs 02-20)
 │
-├── capstone/                      # 4 capstone projects
-│   ├── project1-soc-assistant/
-│   ├── project2-threat-intel-platform/
-│   ├── project3-automated-ir/
-│   └── project4-detection-engineering/
+├── notebooks/                     # Jupyter notebooks (Colab-ready)
+│   └── lab01_phishing_classifier.ipynb ...
 │
-├── ctf-challenges/                # 15 CTF challenges
-│   ├── beginner/                  # 5 challenges (100 pts each)
-│   ├── intermediate/              # 5 challenges (250 pts each)
-│   └── advanced/                  # 5 challenges (500 pts each)
-│
-├── data/                          # Sample datasets
-│   ├── phishing/                  # Email samples
-│   ├── malware/                   # Malware metadata
-│   ├── logs/                      # Auth/system logs
-│   ├── network/                   # Network traffic
-│   └── threat-intel/              # IOC data
-│
-├── resources/                     # Learning resources
-│   ├── integrations/              # SIEM platform guides
-│   # Guides moved to setup/guides/
-│   ├── templates/                 # Code templates
-│   └── prompt-library/            # Curated prompts
-│
-├── docs/                          # Documentation
-│   ├── walkthroughs/              # Step-by-step solutions
-│   ├── guides/                    # Setup and usage guides
+├── docs/                          # All documentation
+│   ├── guides/                    # Setup, tools, and how-to guides
+│   ├── walkthroughs/              # Step-by-step lab solutions
+│   ├── index.md                   # GitHub Pages landing
+│   ├── ai-security-training-program.md  # Full curriculum
 │   └── ARCHITECTURE.md            # This document
 │
-├── setup/                         # Environment setup
-│   ├── guides/                    # IDE-specific guides
-│   └── scripts/                   # Automation scripts
+├── resources/                     # Reference materials
+│   ├── integrations/              # SIEM platform guides
+│   ├── prompt-library/            # Curated security prompts
+│   └── tools-and-resources.md     # External tools & APIs
 │
-└── notebooks/                     # Jupyter notebooks
+├── templates/                     # Reusable code templates
+│   ├── agents/                    # Agent patterns
+│   ├── visualizations/            # Dashboard templates
+│   └── workflow_orchestration.py  # Orchestration examples
+│
+├── scripts/                       # Utility scripts
+│   ├── launcher.py                # Demo launcher
+│   └── verify_setup.py            # Environment checker
+│
+├── capstone-projects/             # 4 comprehensive projects
+├── ctf-challenges/                # 15 CTF challenges
+├── data/                          # Sample datasets
+├── shared/                        # Shared Python modules
+├── tests/                         # Test suite
+├── setup/                         # Setup files & cursor-rules
+└── mcp-servers/                   # MCP server implementations
 ```
 
 ---
@@ -95,16 +178,107 @@ Each lab follows a consistent structure for predictable learning:
 
 ```
 lab-XX-name/
-├── README.md           # Learning objectives, tasks, expected outcomes
-├── starter/            # Skeleton code for students to complete
-│   └── main.py         # Entry point with TODOs
-├── solution/           # Reference implementation
-│   ├── main.py         # Complete working solution
-│   └── utils.py        # Helper functions
-├── tests/              # Validation tests
-│   └── test_main.py    # pytest test cases
-└── data/               # Lab-specific sample data (if needed)
+├── README.md                    # Lab documentation
+├── starter/                     # Your starting point
+│   └── main.py                  # Code with TODOs to complete
+├── solution/                    # Reference implementation
+│   ├── main.py                  # Complete working solution
+│   └── utils.py                 # Helper functions (if needed)
+├── tests/                       # Validation tests
+│   └── test_main.py             # pytest test cases
+└── data/                        # Lab-specific datasets (if needed)
 ```
+
+#### README.md Structure
+
+Each lab README contains:
+
+| Section | Purpose |
+|---------|---------|
+| **Overview** | What you'll build and why it matters |
+| **Learning Objectives** | Specific skills you'll gain |
+| **Prerequisites** | Required knowledge and prior labs |
+| **Time Estimate** | Expected completion time |
+| **Instructions** | Step-by-step tasks with hints |
+| **Expected Output** | What success looks like |
+| **Extensions** | Optional challenges for deeper learning |
+| **Resources** | Links to docs, papers, tools |
+
+#### Starter Code Pattern
+
+```python
+# labs/labXX-name/starter/main.py
+
+"""
+Lab XX: [Title]
+================
+[Brief description of what this lab builds]
+
+Your Tasks:
+1. TODO: [First task description]
+2. TODO: [Second task description]
+3. TODO: [Third task description]
+
+Run with: python main.py
+Test with: pytest tests/
+"""
+
+def main():
+    # TODO: Implement your solution here
+    pass
+
+if __name__ == "__main__":
+    main()
+```
+
+#### Solution Code Pattern
+
+```python
+# labs/labXX-name/solution/main.py
+
+"""
+Lab XX: [Title] - Reference Solution
+=====================================
+This is the complete reference implementation.
+Compare with your starter/ solution after attempting.
+"""
+
+def main():
+    # Complete implementation with:
+    # - Clear variable names
+    # - Inline comments explaining key decisions
+    # - Error handling
+    # - Example output
+    pass
+
+if __name__ == "__main__":
+    main()
+```
+
+#### Test Pattern
+
+```python
+# labs/labXX-name/tests/test_main.py
+
+import pytest
+from solution.main import main, helper_function
+
+def test_basic_functionality():
+    """Test the core feature works."""
+    result = helper_function(sample_input)
+    assert result == expected_output
+
+def test_edge_cases():
+    """Test boundary conditions."""
+    pass
+
+@pytest.mark.slow
+def test_full_pipeline():
+    """Integration test (may take longer)."""
+    pass
+```
+
+---
 
 ### Technology Stack
 
@@ -239,9 +413,11 @@ lab-XX-name/
 
 ### SIEM/SOAR Integration Pattern
 
+> ⚠️ **Template Notice**: These enterprise integration patterns are **reference templates** and have not been validated against live systems. Adapt for your specific platform versions and security requirements.
+
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                  ENTERPRISE INTEGRATIONS                     │
+│              ENTERPRISE INTEGRATIONS (Templates)             │
 ├─────────────────────────────────────────────────────────────┤
 │                                                              │
 │  ┌─────────────────┐    ┌─────────────────┐                │
@@ -386,22 +562,22 @@ api_key = os.getenv("ANTHROPIC_API_KEY")
 
 ### LLM API Optimization
 
-| Strategy | Description | Labs |
-|----------|-------------|------|
-| **Caching** | Cache repeated queries | All LLM labs |
-| **Batching** | Group similar requests | Labs 04, 09 |
-| **Streaming** | Real-time responses | Labs 05, 10 |
-| **Model Selection** | Use smaller models for simple tasks | Labs 04-07 |
-| **Token Management** | Optimize prompt length | All labs |
+| Strategy             | Description                         | Labs         |
+| -------------------- | ----------------------------------- | ------------ |
+| **Caching**          | Cache repeated queries              | All LLM labs |
+| **Batching**         | Group similar requests              | Labs 04, 09  |
+| **Streaming**        | Real-time responses                 | Labs 05, 10  |
+| **Model Selection**  | Use smaller models for simple tasks | Labs 04-07   |
+| **Token Management** | Optimize prompt length              | All labs     |
 
 ### ML Model Optimization
 
-| Strategy | Description | Labs |
-|----------|-------------|------|
-| **Incremental Training** | Update models with new data | Labs 01-03 |
-| **Feature Selection** | Reduce dimensionality | Labs 02, 03 |
-| **Model Caching** | Save trained models | Labs 01-03 |
-| **GPU Acceleration** | Use CUDA when available | Labs 17, 18 |
+| Strategy                 | Description                 | Labs        |
+| ------------------------ | --------------------------- | ----------- |
+| **Incremental Training** | Update models with new data | Labs 01-03  |
+| **Feature Selection**    | Reduce dimensionality       | Labs 02, 03 |
+| **Model Caching**        | Save trained models         | Labs 01-03  |
+| **GPU Acceleration**     | Use CUDA when available     | Labs 17, 18 |
 
 ---
 
@@ -436,6 +612,7 @@ docker run -it --env-file .env ai-security-labs
 ## Contributing Architecture
 
 See [CONTRIBUTING.md](../CONTRIBUTING.md) for:
+
 - Code style guidelines
 - Lab structure templates
 - Testing requirements
@@ -445,8 +622,8 @@ See [CONTRIBUTING.md](../CONTRIBUTING.md) for:
 
 ## Version History
 
-| Version | Date | Changes |
-|---------|------|---------|
-| 1.0 | 2024-01 | Initial 10 labs |
-| 2.0 | 2024-06 | Added labs 11-16, capstones |
-| 3.0 | 2024-12 | Added labs 17-19, CTF, integrations |
+| Version | Date    | Changes                             |
+| ------- | ------- | ----------------------------------- |
+| 1.0     | 2024-01 | Initial 10 labs                     |
+| 2.0     | 2024-06 | Added labs 11-16, capstones         |
+| 3.0     | 2024-12 | Added labs 17-19, CTF, integrations |

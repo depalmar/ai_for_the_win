@@ -28,7 +28,7 @@ By completing this lab, you will:
 - Anthropic or OpenAI API key
 - Understanding of embeddings and vector search
 
-> **New to embeddings?** Start with our [Embeddings and Vectors Guide](../../setup/guides/embeddings-and-vectors.md) for an introduction to how embeddings work, how to create them, and how vector databases enable semantic search.
+> **New to embeddings?** Start with our [Embeddings and Vectors Guide](../../docs/guides/embeddings-and-vectors.md) for an introduction to how embeddings work, how to create them, and how vector databases enable semantic search.
 
 ### Required Libraries
 

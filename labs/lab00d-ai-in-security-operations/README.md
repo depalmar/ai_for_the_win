@@ -568,13 +568,13 @@ Local Models (Ollama):
 
 If you want to try a different provider mid-course:
 
-1. Get an API key for your new provider (see [API Keys Guide](../../setup/guides/api-keys-guide.md))
+1. Get an API key for your new provider (see [API Keys Guide](../../docs/guides/api-keys-guide.md))
 2. Set the environment variable
 3. Run any lab — it auto-detects the new provider
 
 No code changes needed. All prompts and workflows are provider-agnostic.
 
-> 📖 **Deep Dive:** For detailed benchmarks and cost analysis, see [LLM Provider Comparison Guide](../../setup/guides/llm-provider-comparison.md)
+> 📖 **Deep Dive:** For detailed benchmarks and cost analysis, see [LLM Provider Comparison Guide](../../docs/guides/llm-provider-comparison.md)
 
 ---
 
@@ -631,17 +631,17 @@ Create a matrix showing:
 | Learn LLM basics | [Lab 00c: Intro Prompt Engineering](../lab00c-intro-prompt-engineering/) |
 | Build detection pipeline | [Lab 09: Detection Pipeline](../lab09-detection-pipeline/) |
 | Create IR assistant | [Lab 10: IR Copilot](../lab10-ir-copilot/) |
-| Understand compliance | [Security Compliance Guide](../../setup/guides/security-compliance-guide.md) |
+| Understand compliance | [Security Compliance Guide](../../docs/guides/security-compliance-guide.md) |
 
 ---
 
 ## Resources
 
 ### Course Resources
-- [LLM Provider Comparison Guide](../../setup/guides/llm-provider-comparison.md) - Choose the right provider
-- [API Keys Guide](../../setup/guides/api-keys-guide.md) - Setup and cost management
-- [Security Compliance Guide](../../setup/guides/security-compliance-guide.md) - Regulatory considerations
-- [Prompt Injection Defense Guide](../../setup/guides/prompt-injection-defense.md) - Protect your AI systems
+- [LLM Provider Comparison Guide](../../docs/guides/llm-provider-comparison.md) - Choose the right provider
+- [API Keys Guide](../../docs/guides/api-keys-guide.md) - Setup and cost management
+- [Security Compliance Guide](../../docs/guides/security-compliance-guide.md) - Regulatory considerations
+- [Prompt Injection Defense Guide](../../docs/guides/prompt-injection-defense.md) - Protect your AI systems
 
 ### Further Reading
 - NIST AI Risk Management Framework

@@ -1435,7 +1435,7 @@ This combines all workshop concepts into a real-world tool.
 
 1. Complete the [Labs](../../labs/README.md) for more hands-on practice
 2. Work on a [Capstone Project](../../capstone-projects/README.md)
-3. Explore the [Training Curriculum](../../curriculum/ai-security-training-program.md)
+3. Explore the [Training Curriculum](../../docs/ai-security-training-program.md)
 4. Review [Tools and Resources](../../resources/tools-and-resources.md)
 
 ---

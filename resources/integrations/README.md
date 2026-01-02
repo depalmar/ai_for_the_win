@@ -2,6 +2,8 @@
 
 Integrate AI-powered security tools with enterprise security platforms.
 
+> ⚠️ **Template Notice**: These integration guides are **reference templates** and have not been validated against live enterprise systems. They provide architectural patterns and code examples that you will need to adapt for your specific environment, API versions, and security requirements. Always test thoroughly in a non-production environment first.
+
 ```
 +-----------------------------------------------------------------------------+
 |                     AI SECURITY INTEGRATIONS                                 |

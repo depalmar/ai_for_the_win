@@ -315,7 +315,7 @@ capstone-project-name/
 ├── docker/
 │   ├── Dockerfile
 │   └── docker-compose.yml
-├── demo/
+├── scripts/
 │   └── video-link.md   # Link to demo video
 └── requirements.txt
 ```
@@ -366,7 +366,7 @@ capstone-project-name/
 ## Resources
 
 - [Lab Solutions](../labs/) - Reference implementations
-- [Tool Guides](../setup/guides/) - Development environment
+- [Tool Guides](../docs/guides/) - Development environment
 - [Sample Data](../labs/*/data/) - Test datasets
 - [GitHub Discussions](https://github.com/depalmar/ai_for_the_win/discussions) - Get help from peers
 

@@ -550,9 +550,9 @@ Did you guess any MITRE techniques? If so, mark as "possible".
 - [LangChain Documentation](https://python.langchain.com/docs/)
 
 ### Related Guides
-- [Structured Output Parsing](../../setup/guides/structured-output-parsing.md) - Parse LLM JSON reliably
-- [Prompt Injection Defense](../../setup/guides/prompt-injection-defense.md) - Protect against adversarial inputs in logs
-- [LLM Evaluation & Testing](../../setup/guides/llm-evaluation-testing.md) - Test your log analyzer's accuracy
+- [Structured Output Parsing](../../docs/guides/structured-output-parsing.md) - Parse LLM JSON reliably
+- [Prompt Injection Defense](../../docs/guides/prompt-injection-defense.md) - Protect against adversarial inputs in logs
+- [LLM Evaluation & Testing](../../docs/guides/llm-evaluation-testing.md) - Test your log analyzer's accuracy
 
 ---
 
