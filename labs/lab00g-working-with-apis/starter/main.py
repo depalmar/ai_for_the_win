@@ -179,7 +179,8 @@ def main():
     os.environ["TEST_API_KEY"] = "demo_key_12345"
     key = get_api_key("TEST_API_KEY")
     if key:
-        print(f"   ✅ Loaded key: {key[:5]}... (length: {len(key)})")
+        # Never log actual key values, even partially - just confirm it loaded
+        print(f"   ✅ Key loaded successfully (length: {len(key)} chars)")
     else:
         print("   ❌ Complete TODO 4 to load API keys")
 
