@@ -81,14 +81,16 @@ Learn to apply Large Language Models to security problems.
 |---|-----|-------|-------------------|
 | 04 | [LLM Log Analysis](./lab04-llm-log-analysis/) | Prompt engineering | Structured outputs, IOC extraction |
 | 06 | [Security RAG](./lab06-security-rag/) | Vector search + LLM | Embeddings, ChromaDB, retrieval |
+| 06b | [Embeddings & Vectors](./lab06b-embeddings-vectors/) | **NEW! Bridge lab** | How embeddings work, semantic search |
 | 07 | [YARA Generator](./lab07-yara-generator/) | AI code generation | Binary analysis, rule generation |
+| 07a | [Binary Analysis Basics](./lab07a-binary-basics/) | **NEW! Bridge lab** | PE structure, entropy, imports |
 
 **Progression:**
 ```
-Lab 04 (Prompts) → Lab 06 (RAG) → Lab 07 (Code Gen)
-     ↓                 ↓              ↓
- "Parse logs      "Search docs     "Generate
-  with LLM"        with AI"         YARA rules"
+Lab 04 (Prompts) → Lab 06b (Embeddings) → Lab 06 (RAG) → Lab 07a (Binary) → Lab 07 (YARA)
+     ↓                   ↓                    ↓               ↓                  ↓
+ "Parse logs      "How vectors       "Build RAG      "Understand        "Generate
+  with LLM"        work"              system"         PE files"          YARA rules"
 ```
 
 **Bridge to Agents:** Labs 04-07 teach you to use LLMs for specific tasks. Lab 05 combines these into an autonomous agent that can reason and use tools.
@@ -129,6 +131,7 @@ Deep dive into incident response, threat simulation, and offensive security anal
 | 14 | [C2 Traffic Analysis](./lab14-c2-traffic-analysis/) | Network forensics | Beaconing, DNS tunneling, encrypted C2 |
 | 15 | [Lateral Movement Detection](./lab15-lateral-movement-detection/) | Attack detection | Auth anomalies, remote execution, graph analysis |
 | 16 | [Threat Actor Profiling](./lab16-threat-actor-profiling/) | Attribution | TTP analysis, clustering, actor profiles |
+| 17a | [ML Security Intro](./lab17a-ml-security-intro/) | **NEW! Bridge lab** | ML threat models, attack taxonomy |
 | 17 | [Adversarial ML](./lab17-adversarial-ml/) | Attack/Defense | Evasion, poisoning, robust ML defenses |
 | 18 | [Fine-Tuning for Security](./lab18-fine-tuning-security/) | Custom models | LoRA, security embeddings, deployment |
 | 19 | [Cloud Security AI](./lab19-cloud-security-ai/) | Multi-cloud | CloudTrail, AWS/Azure/GCP threat detection |
@@ -773,6 +776,8 @@ Track your progress:
 - [ ] Lab 03: Anomaly Detection
 - [ ] Lab 03b: ML vs LLM Decision (NEW - bridge lab)
 - [ ] Lab 04: LLM Log Analysis
+- [ ] Lab 06b: Embeddings & Vectors (NEW - how vectors work)
+- [ ] Lab 07a: Binary Analysis Basics (NEW - PE fundamentals)
 - [ ] Lab 05: Threat Intel Agent
 - [ ] Lab 06: Security RAG
 - [ ] Lab 07: YARA Generator
@@ -786,6 +791,7 @@ Track your progress:
 - [ ] Lab 14: C2 Traffic Analysis
 - [ ] Lab 15: Lateral Movement Detection
 - [ ] Lab 16: Threat Actor Profiling
+- [ ] Lab 17a: ML Security Intro (NEW - threat models for ML)
 - [ ] Lab 17: Adversarial ML
 - [ ] Lab 18: Fine-Tuning for Security
 - [ ] Lab 19: Cloud Security AI
