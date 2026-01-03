@@ -40,11 +40,13 @@ These walkthroughs provide:
 | Lab | Walkthrough | Notebook | Difficulty |
 |-----|-------------|----------|------------|
 | [Lab 04](./lab04-llm-log-analysis-walkthrough.md) | LLM Log Analysis | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab04_llm_log_analysis.ipynb) | Intermediate |
+| [Lab 04b](./lab04b-first-ai-agent-walkthrough.md) | Your First AI Agent | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab04b_first_ai_agent.ipynb) | Intermediate |
 | [Lab 05](./lab05-threat-intel-agent-walkthrough.md) | Threat Intel Agent | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab05_threat_intel_agent.ipynb) | Intermediate |
 | [Lab 06](./lab06-security-rag-walkthrough.md) | Security RAG | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab06_security_rag.ipynb) | Intermediate |
 | [Lab 06a](./lab06a-embeddings-vectors-walkthrough.md) | Embeddings & Vectors | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab06a_embeddings_vectors.ipynb) | Intermediate |
 | [Lab 07](./lab07-yara-generator-walkthrough.md) | YARA Generator | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab07_yara_generator.ipynb) | Intermediate |
 | [Lab 07a](./lab07a-binary-basics-walkthrough.md) | Binary Analysis Basics | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab07a_binary_basics.ipynb) | Intermediate |
+| [Lab 07b](./lab07b-sigma-fundamentals-walkthrough.md) | Sigma Rule Fundamentals | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab07b_sigma_fundamentals.ipynb) | Intermediate |
 
 ### Production Systems
 
@@ -52,6 +54,7 @@ These walkthroughs provide:
 |-----|-------------|----------|------------|
 | [Lab 08](./lab08-vuln-scanner-ai-walkthrough.md) | Vulnerability Prioritizer | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab08_vuln_scanner_ai.ipynb) | Advanced |
 | [Lab 09](./lab09-detection-pipeline-walkthrough.md) | Detection Pipeline | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab09_detection_pipeline.ipynb) | Advanced |
+| [Lab 09b](./lab09b-monitoring-ai-systems-walkthrough.md) | Monitoring AI Systems | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab09b_monitoring_ai.ipynb) | Advanced |
 | [Lab 10](./lab10-ir-copilot-walkthrough.md) | IR Copilot | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab10_ir_copilot.ipynb) | Advanced |
 | [Lab 10a](./lab10a-dfir-fundamentals-walkthrough.md) | DFIR Fundamentals | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab10a_dfir_fundamentals.ipynb) | Advanced |
 
@@ -59,6 +62,7 @@ These walkthroughs provide:
 
 | Lab | Walkthrough | Notebook | Difficulty |
 |-----|-------------|----------|------------|
+| [Lab 11a](./lab11a-ransomware-fundamentals-walkthrough.md) | Ransomware Fundamentals | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab11a_ransomware_fundamentals.ipynb) | Intermediate |
 | [Lab 11](./lab11-ransomware-detection-walkthrough.md) | Ransomware Detection | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab11_ransomware_detection.ipynb) | Expert |
 | [Lab 12](./lab12-ransomware-simulation-walkthrough.md) | Purple Team Simulation | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab12_ransomware_simulation.ipynb) | Expert |
 | [Lab 13](./lab13-memory-forensics-ai-walkthrough.md) | Memory Forensics AI | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab13_memory_forensics.ipynb) | Expert |
