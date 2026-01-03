@@ -29,7 +29,6 @@ Comprehensive collection of tools, datasets, APIs, courses, and communities for 
 | **OpenAI** | GPT-4 Turbo, GPT-4o, o1 | General purpose, function calling | $2.50-60/M tokens | [platform.openai.com](https://platform.openai.com) |
 | **Google** | Gemini 2.0, Gemini Pro | Multimodal analysis, ADK agents | Varies | [ai.google.dev](https://ai.google.dev) |
 | **Ollama** | Llama 3.2, Mistral, Qwen, DeepSeek | Local/offline, privacy | Free (local) | [ollama.com](https://ollama.com) |
-| **Groq** | Llama 3.1, Mixtral | Ultra-fast inference | Free tier | [console.groq.com](https://console.groq.com) |
 | **Together.ai** | 200+ open models | Variety, fine-tuning | $0.10-2/M tokens | [together.ai](https://together.ai) |
 | **Fireworks.ai** | Llama, Mixtral, custom | Low latency, fine-tuning | $0.20/M tokens | [fireworks.ai](https://fireworks.ai) |
 | **Cerebras** | Llama 3.1 | Fastest inference | Free tier | [cerebras.ai](https://cerebras.ai) |
