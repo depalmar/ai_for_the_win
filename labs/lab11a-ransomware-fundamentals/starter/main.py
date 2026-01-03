@@ -11,16 +11,17 @@ Complete the TODOs to build your ransomware analysis skills.
 import json
 import re
 from dataclasses import dataclass
-from typing import Dict, List, Optional
 from enum import Enum
-
+from typing import Dict, List, Optional
 
 # =============================================================================
 # Ransomware Family Database
 # =============================================================================
 
+
 class RansomwareFamily(Enum):
     """Known ransomware families."""
+
     LOCKBIT = "lockbit"
     BLACKCAT = "blackcat"
     CONTI = "conti"
@@ -71,9 +72,11 @@ FAMILY_SIGNATURES = {
 # Task 1: Identify Ransomware Family
 # =============================================================================
 
+
 @dataclass
 class RansomwareArtifacts:
     """Artifacts collected from an infected system."""
+
     encrypted_extension: str
     ransom_note_filename: str
     ransom_note_content: str
@@ -83,16 +86,16 @@ class RansomwareArtifacts:
 def identify_ransomware_family(artifacts: RansomwareArtifacts) -> Dict:
     """
     Identify the ransomware family based on collected artifacts.
-    
+
     TODO:
     1. Check file extension against known families
     2. Check ransom note filename patterns
     3. Search note content for family indicators
     4. Return family name with confidence score
-    
+
     Args:
         artifacts: Collected ransomware artifacts
-        
+
     Returns:
         {
             "family": RansomwareFamily,
@@ -102,22 +105,22 @@ def identify_ransomware_family(artifacts: RansomwareArtifacts) -> Dict:
     """
     matched_indicators = []
     family_scores = {family: 0 for family in RansomwareFamily}
-    
+
     # TODO: Check extension matches
     # Hint: Loop through FAMILY_SIGNATURES and check if
     # artifacts.encrypted_extension matches any family's extensions
-    
+
     # TODO: Check ransom note filename
     # Hint: Check if artifacts.ransom_note_filename matches
     # any family's note_files patterns
-    
+
     # TODO: Check ransom note content
     # Hint: Search artifacts.ransom_note_content for
     # family-specific patterns (case-insensitive)
-    
+
     # TODO: Calculate best match
     # Return the family with highest score
-    
+
     return {
         "family": RansomwareFamily.UNKNOWN,
         "confidence": 0.0,
@@ -134,36 +137,29 @@ MITRE_TECHNIQUES = {
     "phishing": {"id": "T1566", "tactic": "Initial Access"},
     "exploit_public": {"id": "T1190", "tactic": "Initial Access"},
     "valid_accounts": {"id": "T1078", "tactic": "Initial Access"},
-    
     # Execution
     "powershell": {"id": "T1059.001", "tactic": "Execution"},
     "cmd": {"id": "T1059.003", "tactic": "Execution"},
     "macro": {"id": "T1204.002", "tactic": "Execution"},
-    
     # Persistence
     "scheduled_task": {"id": "T1053.005", "tactic": "Persistence"},
     "registry_run": {"id": "T1547.001", "tactic": "Persistence"},
     "service": {"id": "T1543.003", "tactic": "Persistence"},
-    
     # Discovery
     "ad_enum": {"id": "T1087.002", "tactic": "Discovery"},
     "network_scan": {"id": "T1046", "tactic": "Discovery"},
     "file_discovery": {"id": "T1083", "tactic": "Discovery"},
-    
     # Lateral Movement
     "psexec": {"id": "T1569.002", "tactic": "Lateral Movement"},
     "wmi": {"id": "T1047", "tactic": "Lateral Movement"},
     "rdp": {"id": "T1021.001", "tactic": "Lateral Movement"},
     "smb": {"id": "T1021.002", "tactic": "Lateral Movement"},
-    
     # Collection
     "archive": {"id": "T1560", "tactic": "Collection"},
     "data_staged": {"id": "T1074", "tactic": "Collection"},
-    
     # Exfiltration
     "exfil_cloud": {"id": "T1567", "tactic": "Exfiltration"},
     "exfil_c2": {"id": "T1041", "tactic": "Exfiltration"},
-    
     # Impact
     "encrypt": {"id": "T1486", "tactic": "Impact"},
     "inhibit_recovery": {"id": "T1490", "tactic": "Impact"},
@@ -175,6 +171,7 @@ MITRE_TECHNIQUES = {
 @dataclass
 class AttackEvent:
     """A single event in an attack timeline."""
+
     timestamp: str
     description: str
     techniques: List[str] = None  # To be filled
@@ -183,15 +180,15 @@ class AttackEvent:
 def map_event_to_mitre(event_description: str) -> List[Dict]:
     """
     Map an attack event description to MITRE ATT&CK techniques.
-    
+
     TODO:
     1. Parse the event description for keywords
     2. Match keywords to techniques in MITRE_TECHNIQUES
     3. Return list of matching techniques
-    
+
     Args:
         event_description: Natural language description of event
-        
+
     Returns:
         List of {
             "technique_id": "T1234",
@@ -199,13 +196,13 @@ def map_event_to_mitre(event_description: str) -> List[Dict]:
             "tactic": "...",
             "confidence": float
         }
-    
+
     Example:
         "PowerShell downloads beacon.exe" -> T1059.001 (PowerShell)
     """
     matches = []
     description_lower = event_description.lower()
-    
+
     # TODO: Define keyword mappings
     # Example: "powershell" -> "powershell" technique
     keyword_mappings = {
@@ -213,26 +210,28 @@ def map_event_to_mitre(event_description: str) -> List[Dict]:
         "powershell": "powershell",
         # TODO: Add more mappings
     }
-    
+
     # TODO: Search for keywords and add matches
-    
+
     return matches
 
 
 def map_attack_timeline(events: List[AttackEvent]) -> List[Dict]:
     """
     Map an entire attack timeline to MITRE ATT&CK.
-    
+
     Returns enriched timeline with technique mappings.
     """
     enriched = []
     for event in events:
         techniques = map_event_to_mitre(event.description)
-        enriched.append({
-            "timestamp": event.timestamp,
-            "description": event.description,
-            "techniques": techniques,
-        })
+        enriched.append(
+            {
+                "timestamp": event.timestamp,
+                "description": event.description,
+                "techniques": techniques,
+            }
+        )
     return enriched
 
 
@@ -240,20 +239,21 @@ def map_attack_timeline(events: List[AttackEvent]) -> List[Dict]:
 # Task 3: Extract IOCs from Ransom Note
 # =============================================================================
 
+
 def extract_iocs_from_note(note_content: str) -> Dict:
     """
     Extract Indicators of Compromise from a ransom note.
-    
+
     TODO:
     1. Extract .onion URLs (Tor addresses)
     2. Extract Bitcoin/cryptocurrency addresses
     3. Extract email addresses
     4. Extract victim IDs
     5. Identify family-specific patterns
-    
+
     Args:
         note_content: Full text of ransom note
-        
+
     Returns:
         {
             "onion_urls": [...],
@@ -272,25 +272,25 @@ def extract_iocs_from_note(note_content: str) -> Dict:
         "deadlines": [],
         "ransom_amount": None,
     }
-    
+
     # TODO: Extract .onion URLs
     # Pattern: [a-z2-7]{16,56}\.onion
     onion_pattern = r"[a-z2-7]{16,56}\.onion"
     # iocs["onion_urls"] = re.findall(onion_pattern, note_content)
-    
+
     # TODO: Extract Bitcoin addresses
     # Pattern: (bc1|[13])[a-zA-HJ-NP-Z0-9]{25,39}
     btc_pattern = r"(bc1|[13])[a-zA-HJ-NP-Z0-9]{25,39}"
     # iocs["bitcoin_addresses"] = re.findall(btc_pattern, note_content)
-    
+
     # TODO: Extract email addresses
     email_pattern = r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
     # iocs["email_addresses"] = re.findall(email_pattern, note_content)
-    
+
     # TODO: Look for victim IDs (often hex strings)
-    
+
     # TODO: Look for deadlines/timers
-    
+
     return iocs
 
 
@@ -298,9 +298,11 @@ def extract_iocs_from_note(note_content: str) -> Dict:
 # Task 4: Recovery Decision Framework
 # =============================================================================
 
+
 @dataclass
 class IncidentScenario:
     """Ransomware incident scenario for decision-making."""
+
     endpoints_encrypted: int
     total_endpoints: int
     backup_age_days: int
@@ -316,17 +318,17 @@ class IncidentScenario:
 def recommend_recovery_approach(scenario: IncidentScenario) -> Dict:
     """
     Recommend a recovery approach based on incident scenario.
-    
+
     TODO:
     1. Evaluate backup viability
     2. Check for free decryptors
     3. Assess regulatory requirements
     4. Consider business impact
     5. Return prioritized recommendations
-    
+
     Args:
         scenario: Incident details
-        
+
     Returns:
         {
             "primary_recommendation": str,
@@ -343,20 +345,20 @@ def recommend_recovery_approach(scenario: IncidentScenario) -> Dict:
         "estimated_recovery_time": "",
         "risk_assessment": "",
     }
-    
+
     # TODO: Evaluate backup option
     # If backups exist, are recent, and verified clean -> recommend restore
-    
+
     # TODO: Check decryptor availability
     # If free decryptor available -> recommend using it
-    
+
     # TODO: Assess regulatory requirements
     # GDPR: 72-hour notification
     # HIPAA: Breach notification
     # etc.
-    
+
     # TODO: Determine recommendation based on factors
-    
+
     return result
 
 
@@ -364,16 +366,17 @@ def recommend_recovery_approach(scenario: IncidentScenario) -> Dict:
 # Main
 # =============================================================================
 
+
 def main():
     """Run the lab exercises."""
     print("=" * 60)
     print("Lab 11a: Ransomware Fundamentals - Starter")
     print("=" * 60)
-    
+
     # Task 1: Identify ransomware family
     print("\n📋 Task 1: Identify Ransomware Family")
     print("-" * 40)
-    
+
     artifacts = RansomwareArtifacts(
         encrypted_extension=".lockbit",
         ransom_note_filename="Restore-My-Files.txt",
@@ -390,17 +393,17 @@ def main():
         """,
         suspicious_processes=["lockbit.exe", "psexec.exe"],
     )
-    
+
     result = identify_ransomware_family(artifacts)
     print(f"Family: {result['family']}")
     print(f"Confidence: {result['confidence']:.1%}")
     print(f"Indicators: {result['matched_indicators']}")
     print("\n⚠️  Complete the TODO in identify_ransomware_family()")
-    
+
     # Task 2: Map attack to MITRE
     print("\n📋 Task 2: Map Attack to MITRE ATT&CK")
     print("-" * 40)
-    
+
     events = [
         AttackEvent("09:00", "Phishing email with macro document received"),
         AttackEvent("09:15", "PowerShell downloads beacon.exe from attacker server"),
@@ -411,18 +414,18 @@ def main():
         AttackEvent("15:00", "vssadmin deletes all shadow copies"),
         AttackEvent("15:05", "Files begin encrypting with .lockbit extension"),
     ]
-    
+
     for event in events[:3]:
         techniques = map_event_to_mitre(event.description)
         print(f"{event.timestamp} - {event.description}")
         print(f"  Techniques: {techniques}")
     print("...")
     print("\n⚠️  Complete the TODO in map_event_to_mitre()")
-    
+
     # Task 3: Extract IOCs
     print("\n📋 Task 3: Extract IOCs from Ransom Note")
     print("-" * 40)
-    
+
     ransom_note = """
     ALL YOUR FILES HAVE BEEN ENCRYPTED BY LOCKBIT 3.0
     
@@ -438,17 +441,17 @@ def main():
     Deadline: 72 hours or price doubles
     After 7 days, your data will be published on our leak site.
     """
-    
+
     iocs = extract_iocs_from_note(ransom_note)
     print(f"Onion URLs: {iocs['onion_urls']}")
     print(f"Bitcoin addresses: {iocs['bitcoin_addresses']}")
     print(f"Victim ID: {iocs['victim_id']}")
     print("\n⚠️  Complete the TODO in extract_iocs_from_note()")
-    
+
     # Task 4: Recovery decision
     print("\n📋 Task 4: Recovery Decision")
     print("-" * 40)
-    
+
     scenario = IncidentScenario(
         endpoints_encrypted=500,
         total_endpoints=1250,
@@ -461,12 +464,12 @@ def main():
         critical_ops_down=True,
         regulatory_requirements=["GDPR"],
     )
-    
+
     recommendation = recommend_recovery_approach(scenario)
     print(f"Recommendation: {recommendation['primary_recommendation']}")
     print(f"Reasoning: {recommendation['reasoning']}")
     print("\n⚠️  Complete the TODO in recommend_recovery_approach()")
-    
+
     print("\n" + "=" * 60)
     print("Complete the TODOs, then compare with solution/main.py")
     print("=" * 60)

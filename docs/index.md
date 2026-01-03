@@ -1778,7 +1778,7 @@ function toggleTheme() {
     </a>
     <a href="https://github.com/depalmar/ai_for_the_win/blob/main/resources/role-based-learning-paths.md#-red-team-path" class="feature" style="text-decoration: none; cursor: pointer;">
       <div class="feature-icon">🔴</div>
-      <h3 style="margin: 0;">Red Team</h3>
+      <h3 style="margin: 0;">AI Red Team</h3>
       <p>Evade ML, attack AI systems</p>
       <span style="font-size: 0.75rem; color: var(--secondary);">Labs 03→17→20</span>
     </a>

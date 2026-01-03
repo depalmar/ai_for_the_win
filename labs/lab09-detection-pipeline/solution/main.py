@@ -477,10 +477,16 @@ class SigmaRuleGenerator:
                 for p in patterns[:3]:  # Limit to top 3 patterns
                     detection_items.append(f"            - '{p}'")
 
-        detection_yaml = "\n".join(detection_items) if detection_items else "        # TODO: Add detection logic"
+        detection_yaml = (
+            "\n".join(detection_items) if detection_items else "        # TODO: Add detection logic"
+        )
 
         # Build tags
-        tags_yaml = "\n".join([f"    - attack.{t.lower()}" for t in mitre]) if mitre else "    - attack.execution"
+        tags_yaml = (
+            "\n".join([f"    - attack.{t.lower()}" for t in mitre])
+            if mitre
+            else "    - attack.execution"
+        )
 
         rule = f"""title: Auto-Generated Detection - {process_name or 'Suspicious Activity'}
 id: {rule_id}

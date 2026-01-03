@@ -63,20 +63,57 @@ cd labs/lab04-llm-log-analysis
 python solution/main.py
 ```
 
-> 📖 **New to Python or ML?** Start with Labs 00a-00b-01-02-03 (no API keys required!)  
-> 📖 **Know ML, want LLMs?** Jump to Lab 04 and get an API key first  
-> 📖 **Need help?** Read [GETTING_STARTED.md](./docs/GETTING_STARTED.md) for detailed setup  
+> 📖 **New to Python or ML?** Start with Labs 00a-00b-01-02-03 (no API keys required!)
+> 📖 **Know ML, want LLMs?** Jump to Lab 04 and get an API key first
+> 📖 **Need help?** Read [GETTING_STARTED.md](./docs/GETTING_STARTED.md) for detailed setup
 > 📖 **Lost in the docs?** See [Documentation Guide](./docs/documentation-guide.md) for navigation
 
 ---
 
 ## What It Looks Like
 
-<!-- Screenshots can be added to docs/assets/ - see docs/assets/README.md for guidance -->
+### The AI Defense Pipeline
+
+This architecture (from **Lab 09**) shows how we combine cheap, fast ML models with smart, reasoning LLMs:
+
+```mermaid
+flowchart LR
+    %% Nodes
+    Input[("🔍 Logs & Events")]
+
+    subgraph ML ["🟢 Layer 1: ML Filter (Fast & Cheap)"]
+        direction TB
+        Model1["Phishing Classifier (Lab 01)"]
+        Model2["Anomaly Detector (Lab 03)"]
+    end
+
+    subgraph LLM ["🟣 Layer 2: AI Analysis (Reasoning)"]
+        direction TB
+        Analyst["Log Analyst (Lab 04)"]
+        Agent["Threat Intel Agent (Lab 05)"]
+    end
+
+    subgraph Action ["🟠 Layer 3: Response"]
+        Alert["🚨 High Fidelity Alert"]
+        Report["📋 Incident Report"]
+    end
+
+    %% Edges
+    Input --> ML
+    ML -- "Clear Benign (99%)" --> Discard((Discard))
+    ML -- "Suspicious" --> LLM
+    LLM --> Agent
+    Agent --> Alert & Report
+
+    %% Styling
+    classDef default fill:#1e293b,stroke:#334155,color:#fff;
+    classDef cluster fill:#0f172a,stroke:#475569,color:#fff;
+    classDef input fill:#0ea5e9,stroke:#0284c7,color:#fff;
+```
 
 **Lab 01 - Phishing Classifier** catches what rules miss:
 
-```
+```text
 $ python labs/lab01-phishing-classifier/solution/main.py
 
 [+] Training on 1,000 labeled emails...
@@ -109,29 +146,90 @@ $ python labs/lab01-phishing-classifier/solution/main.py
 
 **Lab 04 - LLM Log Analysis** finds attacks in noise:
 
-```
-$ python labs/lab04-llm-log-analysis/solution/main.py
+```text
+┌──────────────────────────────────────────────────────┐
+│ Lab 04: LLM-Powered Security Log Analysis - SOLUTION │
+└──────────────────────────────────────────────────────┘
+Security Log Analysis Pipeline
 
-[1/3] Pre-filtering 10,000 auth events...
-[2/3] Found 23 anomalous patterns → sending to Claude
-[3/3] AI analysis complete
+Step 1: Initializing LLM...
+  LLM initialized: READY
+Step 2: Parsing log entries...
+  Parsing entry 1/5...
+  Parsing entry 2/5...
+  Parsing entry 3/5...
+  Parsing entry 4/5...
+  Parsing entry 5/5...
+  Parsed 5 log entries
+Step 3: Analyzing for threats...
+  Found 2 threats
+  Severity: 8/10
+Step 4: Extracting IOCs...
+  Extracted 12 IOCs
+Step 5: Generating incident report...
+  Report generated
 
-🔴 ATTACK CHAIN DETECTED
+============================================================
+INCIDENT REPORT
+============================================================
 
-  Stage 1: Credential Stuffing
-    Source: 45.33.32.156 (Tor exit node)
-    847 failed logins → 12 accounts compromised
-    ⚠️  All 12 had MFA disabled
-    → MITRE ATT&CK: T1110.004
+┌──────────────────────────────────────────────────────────────────────────────┐
+│                           Security Incident Report                           │
+└──────────────────────────────────────────────────────────────────────────────┘
 
-  Stage 2: Lateral Movement (15 min later)
-    'svc_backup' → SMB to FILE01, FILE02, DC01
-    ⚠️  Includes domain controller
-    → MITRE ATT&CK: T1021.002 (SMB/Windows Admin Shares)
 
-  Timeline: 02:14 initial access → 02:29 lateral spread
+                               Executive Summary
 
-Action: Isolate FILE01/FILE02/DC01, reset 12 accounts, enforce MFA
+A critical security incident involving multi-stage attack behavior was detected
+on WORKSTATION01 involving user 'jsmith'. The attack progression includes
+initial PowerShell execution downloading a payload from a suspicious external
+domain, followed by system discovery commands, and culminating in persistence
+establishment via Registry Run keys and Scheduled Tasks. The presence of known
+malicious domains and persistence mechanisms indicates a high-risk compromise
+requiring immediate containment.
+
+
+                                    Timeline
+
+ 1 2025-01-15 03:22:10 - PowerShell script block execution: Downloaded content
+   from http://evil-c2.com/payload.ps1 using Net.WebClient.
+ 2 2025-01-15 03:22:15 - Discovery commands executed (whoami, hostname,
+   ipconfig) via cmd.exe.
+ 3 2025-01-15 03:22:18 - Network connection detected from powershell.exe to
+   evil-c2.com (185.143.223.47) over port 443.
+ 4 2025-01-15 03:23:00 - Persistence established: reg.exe added malware.exe to
+   HKCU Run keys.
+ 5 2025-01-15 03:25:00 - Persistence established: Scheduled Task SecurityUpdate
+   created pointing to malware.exe.
+
+
+                                Technical Analysis
+
+The attacker utilized a "Living off the Land" strategy, leveraging built-in
+Windows tools (PowerShell, cmd.exe, reg.exe) to evade initial detection.
+
+ • Initial Access/Execution: A PowerShell download cradle (New-Object
+   System.Net.WebClient) retrieved a remote script.
+ • C2/Exfiltration: Encrypted traffic (port 443) was observed to evil-c2.com.
+ • Persistence: Dual persistence mechanisms were created:
+    • Registry: HKCU\Software\Microsoft\Windows\CurrentVersion\Run
+    • Scheduled Task: \Microsoft\Windows\Maintenance\SecurityUpdate
+      (Masquerading as a legitimate update task).
+
+
+                              MITRE ATT&CK Mapping
+
+
+  Technique ID   Technique Name                  Evidence
+ ──────────────────────────────────────────────────────────────────────────────
+  T1059.001      Command and Scripting           powershell.exe,
+                 Interpreter: PowerShell         DownloadString, IEX
+  T1082          System Information Discovery    whoami, hostname, ipconfig
+  T1547.001      Boot or Logon Autostart         reg add ...
+                 Execution: Registry Run Keys    CurrentVersion\Run
+  T1053.005      Scheduled Task/Job: Scheduled   TaskName: ...SecurityUpdate
+                 Task
+  T1105          Ingress Tool Transfer           DownloadString('http://evil-…
 ```
 
 ---
@@ -139,14 +237,6 @@ Action: Isolate FILE01/FILE02/DC01, reset 12 accounts, enforce MFA
 ## Interactive Lab Navigator
 
 **Click any lab to explore** — Your learning journey from setup to expert:
-
-```mermaid
-flowchart LR
-    subgraph S[" "]
-        direction LR
-        A["⚪ Foundations<br/>00-00d"] --> B["🟢 ML Basics<br/>01-03"] --> C["🟡 LLM<br/>04-07"] --> D["🟠 Advanced<br/>08-10"] --> E["🔴 Expert<br/>11-20"]
-    end
-```
 
 <table>
 <tr>
@@ -202,7 +292,7 @@ flowchart LR
 | **Know Python & ML**, new to LLMs              | Lab 04     | 04 (basic prompting) → 06 (RAG) → 05 (agents) → 00c (advanced prompting) → 07-10                   |
 | **Want to build AI agents**                    | Lab 04     | 04 (prompting) → 05 (ReAct agents) → 06 (RAG) → 10 (copilot) → Capstone                            |
 | **DFIR/SOC analyst**                           | Lab 01     | 01 → 03 (ML detection) → 04 (log analysis) → 11 (ransomware) → 13 (memory forensics)               |
-| **Red Team/Offensive**                         | Lab 03     | 03 (anomaly det) → 12 (purple team) → 14 (C2) → 15 (lateral movement) → 17 (adversarial ML)        |
+| **AI Red Team/Offensive**                      | Lab 03     | 03 (anomaly det) → 12 (purple team) → 14 (C2) → 15 (lateral movement) → 17 (adversarial ML)        |
 | **Threat Intel analyst**                       | Lab 04     | 04 (log analysis) → 05 (threat intel agent) → 06 (RAG) → 14 (C2) → 16 (actor profiling)            |
 | **Security engineer** (build production tools) | Lab 01     | 01 → 03 → 04 → 08 (vuln scanner) → 09 (pipeline) → 10 (IR copilot) → Capstone                      |
 
@@ -227,11 +317,11 @@ flowchart LR
 | **05**  | **Threat Intel Agent**          | ReAct pattern implementation, tool use with LangChain, autonomous investigation workflows                 |
 | **06**  | **Security RAG**                | Document chunking, vector embeddings, ChromaDB, retrieval-augmented generation for Q&A                    |
 | **07**  | **YARA Generator**              | Static malware analysis, pattern extraction, AI-assisted rule generation, rule validation                 |
-| **07b** | **Sigma Fundamentals** 🌉       | Sigma rule syntax, log-based detection, SIEM query conversion, LLM rule generation                        |
+| **07b** | **Sigma Fundamentals**          | Sigma rule syntax, log-based detection, SIEM query conversion, LLM rule generation                        |
 | **08**  | **Vuln Prioritizer**            | CVSS scoring, risk-based prioritization, remediation planning with LLMs                                   |
 | **09**  | **Detection Pipeline**          | Multi-stage architectures, ML filtering, LLM enrichment, alert correlation                                |
 | **10**  | **IR Copilot**                  | Conversational agents, state management, playbook execution, incident documentation                       |
-| **11a** | **Ransomware Fundamentals** 🌉  | Ransomware evolution, families, attack lifecycle, indicators, recovery decisions                          |
+| **11a** | **Ransomware Fundamentals**     | Ransomware evolution, families, attack lifecycle, indicators, recovery decisions                          |
 | **11**  | **Ransomware Detector**         | Entropy analysis, behavioral detection, ransom note IOC extraction, response automation                   |
 | **12**  | **Purple Team Sim**             | Safe adversary emulation, detection validation, gap analysis, purple team exercises                       |
 | **13**  | **Memory Forensics AI**         | Volatility3 integration, process injection detection, credential dumping, LLM artifact analysis           |

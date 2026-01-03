@@ -1,6 +1,14 @@
 # Security Analysis Prompt Templates
 
-Production-ready prompt templates for security AI applications, with built-in hallucination mitigation.
+> ⚠️ **DISCLAIMER**: These prompts are provided for **educational and reference purposes only**. They are NOT production-ready without thorough testing and validation in your specific environment. Prompt effectiveness varies significantly based on:
+> - The LLM model and version used
+> - Your specific data formats and schemas
+> - Organizational context and requirements
+> - The evolving threat landscape
+>
+> **Always test prompts with representative data before any production use. Never auto-execute actions based solely on LLM output without human review.**
+
+Example prompt templates for security AI applications, with guidance on hallucination mitigation.
 
 ---
 
