@@ -1,69 +1,81 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
   <defs>
-    <!-- Background Gradient -->
-    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#0f172a"/>
+    <!-- Background Gradient (Dark Void) -->
+    <linearGradient id="bgGrad" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" style="stop-color:#020617"/>
       <stop offset="100%" style="stop-color:#1e293b"/>
     </linearGradient>
-    
+
+    <!-- Rim Light Gradient (Cyan to Purple) -->
+    <linearGradient id="rimGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#22d3ee"/> <!-- Cyan -->
+      <stop offset="50%" style="stop-color:#818cf8"/> <!-- Indigo -->
+      <stop offset="100%" style="stop-color:#c084fc"/> <!-- Purple -->
+    </linearGradient>
+
     <!-- Glow Filters -->
-    <filter id="blueGlow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="8" result="blur"/>
+    <filter id="glowBlue" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
       <feComposite in="SourceGraphic" in2="blur" operator="over"/>
     </filter>
-    <filter id="redGlow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="8" result="blur"/>
-      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
-    </filter>
-    <filter id="coreGlow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="12" result="blur"/>
+    <filter id="glowRed" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
       <feComposite in="SourceGraphic" in2="blur" operator="over"/>
     </filter>
   </defs>
 
-  <!-- Background Hexagon -->
-  <path d="M256 32 L464 140 V372 L256 480 L48 372 V140 Z" fill="url(#shieldGrad)" stroke="#334155" stroke-width="6"/>
+  <!-- Hexagon Shape (Regular) -->
+  <!-- Center: 256,256. Radius: 230. -->
+  <!-- Points: (256,26), (455,141), (455,371), (256,486), (57,371), (57,141) -->
+  <path d="M256 26 L455 141 L455 371 L256 486 L57 371 L57 141 Z" 
+        fill="url(#bgGrad)" 
+        stroke="url(#rimGrad)" 
+        stroke-width="8"/>
 
-  <!-- Left Hemisphere (Defense/Blue) - Ordered Circuits -->
-  <g filter="url(#blueGlow)" stroke="#3b82f6" stroke-width="14" stroke-linecap="round" fill="none">
-    <!-- Main trace top -->
-    <path d="M230 140 L160 140 L130 170 V230"/>
-    <!-- Main trace bottom -->
-    <path d="M230 372 L160 372 L130 342 V282"/>
-    <!-- Inner trace -->
-    <path d="M230 256 L180 256 L160 236"/>
+  <!-- Left Side: Defense (Blue Circuits) -->
+  <g stroke="#38bdf8" stroke-width="8" stroke-linecap="round" filter="url(#glowBlue)">
+    <path d="M256 120 L256 26" opacity="0.5"/> <!-- Top vertical divider -->
+    <path d="M256 392 L256 486" opacity="0.5"/> <!-- Bottom vertical divider -->
     
-    <!-- Nodes -->
-    <circle cx="130" cy="170" r="10" fill="#3b82f6" stroke="none"/>
-    <circle cx="130" cy="342" r="10" fill="#3b82f6" stroke="none"/>
+    <!-- Circuit Trace 1 -->
+    <path d="M140 180 L180 180 L200 160"/> 
+    <circle cx="140" cy="180" r="6" fill="#38bdf8" stroke="none"/>
+    
+    <!-- Circuit Trace 2 -->
+    <path d="M100 256 L160 256"/>
+    <circle cx="100" cy="256" r="6" fill="#38bdf8" stroke="none"/>
+    
+    <!-- Circuit Trace 3 -->
+    <path d="M140 332 L180 332 L200 352"/>
+    <circle cx="140" cy="332" r="6" fill="#38bdf8" stroke="none"/>
   </g>
 
-  <!-- Right Hemisphere (Offense/Red) - Aggressive Angles -->
-  <g filter="url(#redGlow)" stroke="#ef4444" stroke-width="14" stroke-linecap="round" fill="none">
-    <!-- Main trace top -->
-    <path d="M282 140 L352 140 L382 110 L412 140"/>
-    <!-- Main trace bottom -->
-    <path d="M282 372 L352 372 L382 402 L412 372"/>
-    <!-- Inner trace -->
-    <path d="M282 256 L332 256 L362 286 L382 266"/>
+  <!-- Right Side: Offense (Red Glitches) -->
+  <g stroke="#f87171" stroke-width="8" stroke-linecap="square" filter="url(#glowRed)">
+    <!-- Glitch 1 -->
+    <path d="M312 160 L332 180 L372 180"/>
+    <path d="M380 176 L390 184" stroke-width="4"/> <!-- Fragment -->
     
-    <!-- Glitch/Spikes -->
-    <path d="M390 180 L420 180" stroke-width="8" opacity="0.8"/>
-    <path d="M390 332 L420 332" stroke-width="8" opacity="0.8"/>
+    <!-- Glitch 2 -->
+    <path d="M352 256 L412 256" stroke-dasharray="20 10"/>
+    
+    <!-- Glitch 3 -->
+    <path d="M312 352 L332 332 L372 332"/>
+    <rect x="380" y="328" width="8" height="8" fill="#f87171" stroke="none"/> <!-- Pixel block -->
   </g>
 
-  <!-- Central AI Core (Purple) -->
-  <g filter="url(#coreGlow)">
-    <!-- Vertical Spine -->
-    <path d="M256 120 V392" stroke="#7c3aed" stroke-width="6" stroke-opacity="0.4"/>
+  <!-- Center: AI Core / Shield Eye -->
+  <g transform="translate(256, 256)">
+    <!-- Outer Ring -->
+    <circle r="60" fill="none" stroke="#e2e8f0" stroke-width="4" opacity="0.3"/>
+    <path d="M-60 0 A60 60 0 0 1 60 0" stroke="#818cf8" stroke-width="6" fill="none" opacity="0.8"/>
     
-    <!-- Central Node -->
-    <circle cx="256" cy="256" r="36" fill="#1e1b4b" stroke="#a855f7" stroke-width="8"/>
-    <circle cx="256" cy="256" r="16" fill="#d8b4fe"/>
-    
-    <!-- Top/Bottom Connectors -->
-    <circle cx="256" cy="160" r="12" fill="#7c3aed"/>
-    <circle cx="256" cy="352" r="12" fill="#7c3aed"/>
+    <!-- Inner Core -->
+    <circle r="30" fill="#1e1b4b" stroke="#c084fc" stroke-width="4"/>
+    <circle r="12" fill="#e879f9"/>
   </g>
+  
+  <!-- Text: AI4TW (Optional, stylized) -->
+  <!-- Removed to keep it clean as an icon -->
 
 </svg>
