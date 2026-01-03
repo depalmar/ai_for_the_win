@@ -5,13 +5,12 @@ Learn to detect and analyze AI-enhanced attack patterns.
 """
 
 import json
-import re
 import math
+import re
 from dataclasses import dataclass, field
-from typing import List, Dict, Optional, Set
 from enum import Enum
 from pathlib import Path
-
+from typing import Dict, List, Optional, Set
 
 # =============================================================================
 # Data Classes

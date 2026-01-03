@@ -6,11 +6,10 @@ Build AI-powered tools for purple team collaboration.
 
 import json
 from dataclasses import dataclass, field
-from typing import List, Dict, Optional, Set
+from datetime import datetime
 from enum import Enum
 from pathlib import Path
-from datetime import datetime
-
+from typing import Dict, List, Optional, Set
 
 # =============================================================================
 # Data Classes

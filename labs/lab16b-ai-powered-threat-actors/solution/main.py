@@ -5,14 +5,13 @@ Complete implementation of AI threat detection capabilities.
 """
 
 import json
-import re
 import math
+import re
 from dataclasses import dataclass, field
-from typing import List, Dict, Optional, Set
+from datetime import datetime
 from enum import Enum
 from pathlib import Path
-from datetime import datetime
-
+from typing import Dict, List, Optional, Set
 
 # =============================================================================
 # Data Classes
