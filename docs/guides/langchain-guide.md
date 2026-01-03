@@ -307,7 +307,7 @@ ioc_chain = (
 # Usage
 threat_report = """
 The attacker used IP 192.168.1.100 to connect to evil.malware.com.
-They downloaded payload from http://bad.actor.net/stage2.exe
+They downloaded payload from hxxp://bad[.]actor[.]net/stage2.exe
 File hash: a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4
 Contact: attacker@phishing.org
 """
