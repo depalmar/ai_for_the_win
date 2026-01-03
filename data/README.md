@@ -139,6 +139,49 @@ data/
 | `attack_patterns.json` | 50      | Full attack chains with TTPs      |
 | `actor_profiles.json`  | 20      | Threat actor profiles             |
 
+### Threat Actor TTP Database (`threat-actor-ttps/`)
+
+Comprehensive threat actor profiles based on MITRE ATT&CK and public threat intelligence.
+
+| Directory | Contents | Description |
+| --------- | -------- | ----------- |
+| `actors/` | 10 profiles | APT28, APT29, APT41, Lazarus, FIN7, LockBit, ALPHV, Scattered Spider, Cl0p, Conti |
+| `campaigns/` | 5 scenarios | SolarWinds, Colonial Pipeline, MOVEit, Log4Shell, Kaseya |
+| `attack-chains/` | 4 templates | Double extortion, supply chain, BEC fraud, insider threat |
+
+**Actor Profile Schema:**
+- Complete MITRE ATT&CK technique mappings with confidence scores
+- Malware families and tools used
+- Target sectors and regions
+- Infrastructure patterns (C2, hosting)
+- Notable campaigns and references
+
+**Usage:**
+```python
+import json
+from pathlib import Path
+
+# Load APT29 profile
+with open('data/threat-actor-ttps/actors/apt29.json') as f:
+    apt29 = json.load(f)
+
+print(f"Actor: {apt29['name']}")
+print(f"TTPs: {len(apt29['ttps'])} techniques")
+print(f"Malware: {', '.join(apt29['malware_families'][:3])}")
+```
+
+**Generate CTF Data from TTPs:**
+```bash
+# List available threat actors
+python scripts/generate_ctf_data.py --list-actors
+
+# Generate C2 beacon traffic based on APT29 profile
+python scripts/generate_ctf_data.py --actor apt29 --scenario beacon --output challenge_data.json
+
+# Generate auth logs with brute force attack
+python scripts/generate_ctf_data.py --actor apt28 --scenario auth_logs --output auth_logs.json
+```
+
 ### Digital Forensics Artifacts (`forensics/`)
 
 > ⚠️ **AV/EDR Notice**: Forensics data contains realistic attack indicators (tool names, file paths, techniques) for educational purposes. These are **JSON metadata files only** - no executables, no encoded payloads, no actual malware.

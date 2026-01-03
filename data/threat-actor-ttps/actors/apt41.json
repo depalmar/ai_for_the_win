@@ -248,7 +248,7 @@
   },
   "references": [
     "https://attack.mitre.org/groups/G0096/",
-    "https://www.fireeye.com/blog/threat-research/2019/08/apt41-dual-espionage-and-cyber-crime-operation.html",
+    "https://www.cisa.gov/news-events/cybersecurity-advisories/aa20-258a",
     "https://www.justice.gov/opa/pr/seven-international-cyber-defendants-including-apt41-actors-charged"
   ]
 }

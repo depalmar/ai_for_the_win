@@ -13,28 +13,36 @@ This database serves as a shared data layer for:
 
 ```
 threat-actor-ttps/
-├── actors/           # Individual threat actor profiles
-│   ├── apt28.json    # APT28 (Fancy Bear)
-│   ├── apt29.json    # APT29 (Cozy Bear)
-│   ├── apt41.json    # APT41 (Double Dragon)
-│   ├── lazarus.json  # Lazarus Group
-│   ├── fin7.json     # FIN7 (Carbanak)
-│   ├── lockbit.json  # LockBit ransomware group
-│   ├── alphv.json    # ALPHV/BlackCat
-│   ├── scattered_spider.json  # Scattered Spider
-│   ├── clop.json     # Cl0p ransomware group
-│   └── conti.json    # Conti (historical)
-├── campaigns/        # Notable attack campaigns
-│   ├── solarwinds.json
-│   ├── colonial_pipeline.json
-│   ├── log4shell.json
-│   ├── moveit.json
-│   └── kaseya.json
-└── attack-chains/    # Generic attack patterns
-    ├── double_extortion.json
-    ├── supply_chain.json
-    ├── bec_fraud.json
-    └── insider_threat.json
+├── actors/           # Individual threat actor profiles (14 actors)
+│   ├── apt28.json    # APT28 (Fancy Bear) - Russia/GRU
+│   ├── apt29.json    # APT29 (Cozy Bear) - Russia/SVR
+│   ├── apt41.json    # APT41 (Double Dragon) - China
+│   ├── lazarus.json  # Lazarus Group - North Korea
+│   ├── fin7.json     # FIN7 (Carbanak) - Financial crime
+│   ├── lockbit.json  # LockBit ransomware
+│   ├── alphv.json    # ALPHV/BlackCat ransomware
+│   ├── scattered_spider.json  # Scattered Spider - Social engineering
+│   ├── clop.json     # Cl0p ransomware
+│   ├── conti.json    # Conti (historical, disbanded 2022)
+│   ├── blackbasta.json  # Black Basta ransomware (2024 active)
+│   ├── akira.json    # Akira ransomware (2024 active)
+│   ├── rhysida.json  # Rhysida ransomware (2024 active)
+│   └── play.json     # Play ransomware (2024 active)
+├── campaigns/        # Notable attack campaigns (8 campaigns)
+│   ├── solarwinds.json        # APT29 supply chain (2020)
+│   ├── colonial_pipeline.json # DarkSide ransomware (2021)
+│   ├── log4shell.json         # Mass exploitation (2021)
+│   ├── moveit.json            # Cl0p mass exploitation (2023)
+│   ├── kaseya.json            # REvil supply chain (2021)
+│   ├── change_healthcare.json # ALPHV healthcare attack (2024)
+│   ├── mgm_caesars.json       # Scattered Spider casino attacks (2023)
+│   └── ivanti_exploitation.json # Mass VPN exploitation (2024)
+└── attack-chains/    # Generic attack patterns (5 patterns)
+    ├── double_extortion.json   # Modern ransomware playbook
+    ├── supply_chain.json       # Software supply chain attacks
+    ├── bec_fraud.json          # Business email compromise
+    ├── insider_threat.json     # Insider threat patterns
+    └── identity_compromise.json # Cloud/identity provider attacks
 ```
 
 ## Data Schema
