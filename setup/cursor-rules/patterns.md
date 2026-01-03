@@ -22,7 +22,7 @@ from langchain_anthropic import ChatAnthropic
 
 def create_security_agent(tools: list) -> AgentExecutor:
     """Create a security-focused ReAct agent."""
-    llm = ChatAnthropic(model="claude-sonnet-4-20250514", temperature=0)
+    llm = ChatAnthropic(model="claude-sonnet-4-5", temperature=0)
     # ... setup with proper error handling
 ```
 
@@ -67,7 +67,7 @@ class ThreatAnalysis(BaseModel):
 
 client = instructor.from_anthropic(Anthropic())
 result = client.chat.completions.create(
-    model="claude-sonnet-4-20250514",
+    model="claude-sonnet-4-5",
     response_model=ThreatAnalysis,
     messages=[{"role": "user", "content": f"Analyze: {data}"}],
 )

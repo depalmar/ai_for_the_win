@@ -192,7 +192,7 @@ class ThreatIntelAgent:
         # Initialize LLM
         # YOUR CODE HERE
         # if llm is None:
-        #     self.llm = ChatAnthropic(model="claude-sonnet-4-20250514", temperature=0)
+        #     self.llm = ChatAnthropic(model="claude-sonnet-4-5", temperature=0)
         # else:
         #     self.llm = llm
 

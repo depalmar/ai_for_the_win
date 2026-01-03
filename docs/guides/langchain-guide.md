@@ -135,7 +135,7 @@ def get_llm(
     if provider == "anthropic":
         from langchain_anthropic import ChatAnthropic
         return ChatAnthropic(
-            model=model or "claude-sonnet-4-20250514",
+            model=model or "claude-sonnet-4-5",
             temperature=temperature,
             max_tokens=max_tokens
         )
@@ -143,7 +143,7 @@ def get_llm(
     elif provider == "openai":
         from langchain_openai import ChatOpenAI
         return ChatOpenAI(
-            model=model or "gpt-5",
+            model=model or "gpt-5.2",
             temperature=temperature,
             max_tokens=max_tokens
         )
@@ -174,8 +174,8 @@ def get_llm(
 llm = get_llm()
 
 # Or specify explicitly
-llm = get_llm(provider="anthropic", model="claude-sonnet-4-20250514")
-llm = get_llm(provider="openai", model="gpt-5")
+llm = get_llm(provider="anthropic", model="claude-sonnet-4-5")
+llm = get_llm(provider="openai", model="gpt-5.2")
 llm = get_llm(provider="google", model="gemini-2.0-flash")
 llm = get_llm(provider="ollama", model="llama3.1:8b")
 ```
@@ -993,7 +993,7 @@ client = instructor.from_anthropic(Anthropic())
 
 # Use Pydantic models directly
 alert = client.messages.create(
-    model="claude-sonnet-4-20250514",
+    model="claude-sonnet-4-5",
     max_tokens=1024,
     messages=[{"role": "user", "content": f"Parse this event: {event_data}"}],
     response_model=SecurityAlert

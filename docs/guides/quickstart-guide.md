@@ -238,7 +238,7 @@ from langchain_anthropic import ChatAnthropic
 from langchain.prompts import ChatPromptTemplate
 
 # Initialize Claude
-llm = ChatAnthropic(model="claude-sonnet-4-20250514")
+llm = ChatAnthropic(model="claude-sonnet-4-5")
 
 # Create security analysis prompt
 prompt = ChatPromptTemplate.from_template("""

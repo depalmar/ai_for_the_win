@@ -484,7 +484,7 @@ Provide:
 - MITRE ATT&CK techniques observed"""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5",
             max_tokens=1500,
             messages=[{"role": "user", "content": prompt}]
         )
@@ -515,7 +515,7 @@ Return JSON with:
 - "recommended_detection": How to detect this C2 type"""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5",
             max_tokens=800,
             messages=[{"role": "user", "content": prompt}]
         )
@@ -543,7 +543,7 @@ Generate:
 Include comments explaining each rule."""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5",
             max_tokens=2000,
             messages=[{"role": "user", "content": prompt}]
         )

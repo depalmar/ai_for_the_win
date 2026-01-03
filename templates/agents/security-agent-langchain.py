@@ -40,7 +40,7 @@ from tenacity import retry, stop_after_attempt, wait_exponential
 # Configuration
 # ============================================================================
 
-MODEL_NAME = "claude-sonnet-4-20250514"
+MODEL_NAME = "claude-sonnet-4-5"
 MAX_TOKENS = 4096
 TEMPERATURE = 0.1  # Low temperature for security analysis
 

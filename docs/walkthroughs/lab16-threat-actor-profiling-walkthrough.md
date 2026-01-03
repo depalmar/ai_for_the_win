@@ -80,7 +80,7 @@ Extract TTPs in JSON format:
 Return ONLY valid JSON."""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5",
             max_tokens=2000,
             messages=[{"role": "user", "content": prompt}]
         )
@@ -368,7 +368,7 @@ Generate a profile with:
 Return ONLY valid JSON."""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5",
             max_tokens=1000,
             messages=[{"role": "user", "content": prompt}]
         )
@@ -513,7 +513,7 @@ Provide:
 6. Recommendations for further investigation"""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5",
             max_tokens=1000,
             messages=[{"role": "user", "content": prompt}]
         )
@@ -627,7 +627,7 @@ Generate a formal intelligence report with:
 7. Intelligence Gaps"""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5",
             max_tokens=3000,
             messages=[{"role": "user", "content": prompt}]
         )

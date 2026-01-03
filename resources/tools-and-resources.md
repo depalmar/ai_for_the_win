@@ -465,7 +465,7 @@ dvc                     # Data versioning
 ```python
 # Initialize LLM
 from langchain_anthropic import ChatAnthropic
-llm = ChatAnthropic(model="claude-sonnet-4-20250514")
+llm = ChatAnthropic(model="claude-sonnet-4-5")
 
 # Simple chain
 from langchain.prompts import ChatPromptTemplate

@@ -231,7 +231,7 @@ brew install --cask windsurf
 ```json
 // settings.json
 {
-  "windsurf.model": "claude-sonnet-4-20250514",
+  "windsurf.model": "claude-sonnet-4-5",
   "windsurf.enableCascade": true,
   "windsurf.localModelPath": "/path/to/ollama",
   "windsurf.privacy.excludePaths": [
@@ -278,7 +278,7 @@ Cons:
 
 ```bash
 # Start Aider with Claude
-aider --model claude-sonnet-4-20250514
+aider --model claude-sonnet-4-5
 
 # In Aider session
 /add src/analyzers/*.py
@@ -321,7 +321,7 @@ Create `.aider.conf.yml` in your project:
 
 ```yaml
 # .aider.conf.yml
-model: claude-sonnet-4-20250514
+model: claude-sonnet-4-5
 auto-commits: true
 dirty-commits: false
 attribute-author: true
@@ -438,7 +438,7 @@ Create `.continue/config.json`:
     {
       "title": "Claude Sonnet",
       "provider": "anthropic",
-      "model": "claude-sonnet-4-20250514",
+      "model": "claude-sonnet-4-5",
       "apiKey": "${ANTHROPIC_API_KEY}"
     },
     {
@@ -629,7 +629,7 @@ Cons:
 from openhands import OpenHands
 
 agent = OpenHands(
-    model="claude-sonnet-4-20250514",
+    model="claude-sonnet-4-5",
     sandbox=True  # Safe execution environment
 )
 

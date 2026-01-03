@@ -80,7 +80,7 @@ client = anthropic.Anthropic()
 
 # Test the connection
 message = client.messages.create(
-    model="claude-sonnet-4-20250514",
+    model="claude-sonnet-4-5",
     max_tokens=100,
     messages=[{"role": "user", "content": "Say 'API working!' if you can read this."}]
 )
@@ -99,7 +99,7 @@ Cursor has native Claude integration. Configure in settings:
 // settings.json
 {
   "cursor.aiProvider": "anthropic",
-  "cursor.defaultModel": "claude-sonnet-4-20250514",
+  "cursor.defaultModel": "claude-sonnet-4-5",
   "cursor.enableLongContext": true,
 
   // Optional: Use your own API key
@@ -145,7 +145,7 @@ export ANTHROPIC_API_KEY="sk-ant-..."
 
 # Use CLI (if available)
 anthropic messages create \
-  --model claude-sonnet-4-20250514 \
+  --model claude-sonnet-4-5 \
   --max-tokens 1024 \
   --messages '[{"role":"user","content":"Analyze this hash: abc123..."}]'
 ```
@@ -183,7 +183,7 @@ def analyze_file(filepath: str) -> str:
     content = Path(filepath).read_text()
 
     response = client.messages.create(
-        model="claude-sonnet-4-20250514",
+        model="claude-sonnet-4-5",
         max_tokens=4096,
         system=SECURITY_SYSTEM_PROMPT,
         messages=[{
@@ -196,7 +196,7 @@ def analyze_file(filepath: str) -> str:
 def extract_iocs(text: str) -> str:
     """Extract IOCs from text."""
     response = client.messages.create(
-        model="claude-sonnet-4-20250514",
+        model="claude-sonnet-4-5",
         max_tokens=2048,
         messages=[{
             "role": "user",
@@ -220,7 +220,7 @@ Output format:
 def generate_yara(description: str) -> str:
     """Generate YARA rule from description."""
     response = client.messages.create(
-        model="claude-sonnet-4-20250514",
+        model="claude-sonnet-4-5",
         max_tokens=2048,
         messages=[{
             "role": "user",
@@ -284,7 +284,7 @@ client = anthropic.Anthropic()  # Uses ANTHROPIC_API_KEY env var
 
 # Simple message
 response = client.messages.create(
-    model="claude-sonnet-4-20250514",
+    model="claude-sonnet-4-5",
     max_tokens=1024,
     messages=[
         {"role": "user", "content": "What is a SQL injection attack?"}
@@ -297,7 +297,7 @@ print(response.content[0].text)
 
 ```python
 response = client.messages.create(
-    model="claude-sonnet-4-20250514",
+    model="claude-sonnet-4-5",
     max_tokens=4096,
     system="""You are a senior security analyst at a SOC.
     Always provide:
@@ -315,7 +315,7 @@ response = client.messages.create(
 
 ```python
 with client.messages.stream(
-    model="claude-sonnet-4-20250514",
+    model="claude-sonnet-4-5",
     max_tokens=4096,
     messages=[{"role": "user", "content": "Write a detailed malware analysis report..."}]
 ) as stream:
@@ -332,7 +332,7 @@ def chat(user_message: str) -> str:
     conversation.append({"role": "user", "content": user_message})
 
     response = client.messages.create(
-        model="claude-sonnet-4-20250514",
+        model="claude-sonnet-4-5",
         max_tokens=4096,
         system="You are a malware analyst assistant.",
         messages=conversation
@@ -360,7 +360,7 @@ async def analyze_multiple_samples(samples: list[str]) -> list[str]:
 
     async def analyze_one(sample: str) -> str:
         response = await client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5",
             max_tokens=2048,
             messages=[{
                 "role": "user",
@@ -470,7 +470,7 @@ Output as structured JSON."""
 ````python
 def generate_sigma_rule(log_description: str) -> str:
     response = client.messages.create(
-        model="claude-sonnet-4-20250514",
+        model="claude-sonnet-4-5",
         max_tokens=2048,
         messages=[{
             "role": "user",
@@ -584,7 +584,7 @@ After receiving tool output, continue your analysis."""
 
         while True:
             response = self.client.messages.create(
-                model="claude-sonnet-4-20250514",
+                model="claude-sonnet-4-5",
                 max_tokens=4096,
                 system=full_system,
                 messages=self.conversation
@@ -713,7 +713,7 @@ def safe_claude_call(messages: list) -> str:
     try:
         client = anthropic.Anthropic()
         response = client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5",
             max_tokens=4096,
             messages=messages
         )
@@ -729,15 +729,15 @@ def safe_claude_call(messages: list) -> str:
 ### 3. Cost Management
 
 ```python
-def estimate_cost(input_tokens: int, output_tokens: int, model: str = "claude-sonnet-4-20250514") -> float:
+def estimate_cost(input_tokens: int, output_tokens: int, model: str = "claude-sonnet-4-5") -> float:
     """Estimate API call cost."""
     pricing = {
-        "claude-sonnet-4-20250514": {"input": 3.0, "output": 15.0},
+        "claude-sonnet-4-5": {"input": 3.0, "output": 15.0},
         "claude-opus-4-5": {"input": 15.0, "output": 75.0},
         "claude-haiku-4": {"input": 0.25, "output": 1.25}
     }
 
-    rates = pricing.get(model, pricing["claude-sonnet-4-20250514"])
+    rates = pricing.get(model, pricing["claude-sonnet-4-5"])
     input_cost = (input_tokens / 1_000_000) * rates["input"]
     output_cost = (output_tokens / 1_000_000) * rates["output"]
 
@@ -774,7 +774,7 @@ def cached_claude_call(prompt: str, **kwargs) -> str:
         return json.loads(cache_file.read_text())["response"]
 
     response = client.messages.create(
-        model=kwargs.get("model", "claude-sonnet-4-20250514"),
+        model=kwargs.get("model", "claude-sonnet-4-5"),
         max_tokens=kwargs.get("max_tokens", 4096),
         messages=[{"role": "user", "content": prompt}]
     )

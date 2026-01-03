@@ -95,7 +95,7 @@ tools = [
 ]
 
 # Create ReAct agent
-llm = ChatAnthropic(model="claude-sonnet-4-20250514")
+llm = ChatAnthropic(model="claude-sonnet-4-5")
 prompt = hub.pull("hwchase17/react")
 agent = create_react_agent(llm, tools, prompt)
 
@@ -180,7 +180,7 @@ from langchain_experimental.plan_and_execute import (
 )
 from langchain_anthropic import ChatAnthropic
 
-llm = ChatAnthropic(model="claude-sonnet-4-20250514")
+llm = ChatAnthropic(model="claude-sonnet-4-5")
 
 # Create planner and executor
 planner = load_chat_planner(llm)
@@ -281,7 +281,7 @@ class IRState(TypedDict):
 # Define nodes
 def triage_alert(state: IRState) -> IRState:
     """Analyze alert and determine severity."""
-    llm = ChatAnthropic(model="claude-sonnet-4-20250514")
+    llm = ChatAnthropic(model="claude-sonnet-4-5")
 
     response = llm.invoke(f"""
     Analyze this security alert and classify severity as
@@ -433,7 +433,7 @@ Multiple specialized agents working together.
 from crewai import Agent, Task, Crew, Process
 from langchain_anthropic import ChatAnthropic
 
-llm = ChatAnthropic(model="claude-sonnet-4-20250514")
+llm = ChatAnthropic(model="claude-sonnet-4-5")
 
 # Define specialized agents
 triage_agent = Agent(
@@ -593,7 +593,7 @@ def run_agent(user_message: str) -> str:
 
     while True:
         response = client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5",
             max_tokens=4096,
             tools=tools,
             messages=messages

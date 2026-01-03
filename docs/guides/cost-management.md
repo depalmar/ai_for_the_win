@@ -67,7 +67,7 @@ Cost = (Input Tokens × Input Price) + (Output Tokens × Output Price)
 ```python
 import tiktoken  # For OpenAI models
 
-def count_tokens(text: str, model: str = "gpt-5") -> int:
+def count_tokens(text: str, model: str = "gpt-5.2") -> int:
     """Count tokens for a given text."""
     encoding = tiktoken.encoding_for_model(model)
     return len(encoding.encode(text))
@@ -100,10 +100,10 @@ def estimate_project_cost(
         avg_output_tokens: Average output tokens per response
         provider: "claude", "openai", or "gemini"
     """
-    # 2025 pricing per 1M tokens
+    # 2026 pricing per 1M tokens (updated January 2026)
     pricing = {
-        "claude": {"input": 3.00, "output": 15.00},
-        "openai": {"input": 5.00, "output": 20.00},  # GPT-4o
+        "claude": {"input": 3.00, "output": 15.00},  # Claude Sonnet 4.5
+        "openai": {"input": 1.75, "output": 14.00},  # GPT-5.2
         "gemini": {"input": 1.25, "output": 10.00},  # Gemini 2.5 Pro
     }
 
@@ -140,16 +140,18 @@ print(result)
 
 ## Provider Pricing Comparison
 
-### Current Pricing (January 2025)
+### Current Pricing (January 2026)
 
 | Provider | Model | Input (per 1M) | Output (per 1M) | Best For |
 |----------|-------|----------------|-----------------|----------|
-| **Anthropic** | Claude 3.5 Sonnet | $3.00 | $15.00 | Long context, nuanced analysis |
-| **Anthropic** | Claude 3 Haiku | $0.25 | $1.25 | Fast, simple tasks |
-| **OpenAI** | GPT-4o | $5.00 | $20.00 | Complex reasoning |
-| **OpenAI** | GPT-4o-mini | $0.15 | $0.60 | Budget-friendly |
+| **Anthropic** | Claude Sonnet 4.5 | $3.00 | $15.00 | Long context, nuanced analysis |
+| **Anthropic** | Claude Haiku 4.5 | $0.25 | $1.25 | Fast, simple tasks |
+| **OpenAI** | GPT-5.2 | $1.75 | $14.00 | Complex reasoning, agentic tasks |
+| **OpenAI** | GPT-5.2 Mini | $0.25 | $2.00 | Budget-friendly |
 | **Google** | Gemini 2.5 Pro | $1.25 | $10.00 | Cost-effective, good quality |
-| **Google** | Gemini 2.0 Flash | $0.10 | $0.40 | Ultra-fast, very cheap |
+| **Google** | Gemini 2.5 Flash | $0.10 | $0.40 | Ultra-fast, very cheap |
+
+> **Note:** Prices subject to change. Check provider websites for latest pricing.
 
 ### Free Tiers and Credits
 
@@ -225,7 +227,7 @@ tracker = UsageTracker()
 def analyze_with_tracking(client, prompt: str, tracker: UsageTracker) -> str:
     """Make API call with usage tracking."""
     response = client.messages.create(
-        model="claude-sonnet-4-20250514",
+        model="claude-sonnet-4-5",
         max_tokens=1024,
         messages=[{"role": "user", "content": prompt}]
     )
@@ -262,7 +264,7 @@ class BudgetLimitedClient:
             )
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5",
             max_tokens=1024,
             messages=[{"role": "user", "content": prompt}]
         )
@@ -355,7 +357,7 @@ Logs:
 {chr(10).join(f'{j}. {log}' for j, log in enumerate(batch))}"""
 
         response = client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5",
             max_tokens=2048,
             messages=[{"role": "user", "content": prompt}]
         )
@@ -399,7 +401,7 @@ class CachedAnalyzer:
 
         self.cache_misses += 1
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5",
             max_tokens=1024,
             messages=[{"role": "user", "content": text}]
         )
@@ -437,7 +439,7 @@ def smart_analyze(logs: list[str]) -> list[dict]:
         if "YES" in quick_response.content[0].text.upper():
             # Stage 2: Deep analysis only for suspicious logs
             detailed_response = client.messages.create(
-                model="claude-sonnet-4-20250514",  # $3/1M input
+                model="claude-sonnet-4-5",  # $3/1M input
                 max_tokens=500,
                 messages=[{"role": "user", "content": f"Analyze this suspicious log:\n{log}"}]
             )

@@ -45,7 +45,7 @@ class RAGConfig:
     chunk_size: int = 1000
     chunk_overlap: int = 200
     persist_directory: str = "./chroma_db"
-    llm_model: str = "claude-sonnet-4-20250514"
+    llm_model: str = "claude-sonnet-4-5"
 
 
 # =============================================================================

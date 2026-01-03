@@ -298,7 +298,7 @@ Generate detection queries for these platforms (in order of preference):
 Return JSON with keys: splunk_query, elastic_query, sentinel_query, sigma_rule"""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5",
             max_tokens=1500,
             messages=[{"role": "user", "content": prompt}]
         )
@@ -366,7 +366,7 @@ Provide:
 4. Sample detection rules that should catch this"""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5",
             max_tokens=1000,
             messages=[{"role": "user", "content": prompt}]
         )
@@ -579,7 +579,7 @@ Generate a report with:
 Format as markdown."""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5",
             max_tokens=2000,
             messages=[{"role": "user", "content": prompt}]
         )
@@ -612,7 +612,7 @@ Provide JSON with:
 5. "tuning_tips": Tips to reduce false positives"""
 
             response = self.client.messages.create(
-                model="claude-sonnet-4-20250514",
+                model="claude-sonnet-4-5",
                 max_tokens=1000,
                 messages=[{"role": "user", "content": prompt}]
             )

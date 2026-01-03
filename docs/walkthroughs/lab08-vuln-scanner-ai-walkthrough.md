@@ -373,7 +373,7 @@ Provide:
 Be specific and actionable."""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5",
             max_tokens=1500,
             messages=[{"role": "user", "content": prompt}]
         )
@@ -494,7 +494,7 @@ Write a 2-3 paragraph executive summary that:
 4. Uses non-technical language appropriate for executives"""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5",
             max_tokens=800,
             messages=[{"role": "user", "content": prompt}]
         )

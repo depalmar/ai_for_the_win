@@ -260,7 +260,7 @@ Generate a YARA rule that:
 Return ONLY the YARA rule, no explanations."""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5",
             max_tokens=2048,
             messages=[{"role": "user", "content": prompt}]
         )
@@ -456,7 +456,7 @@ Please refine the rule to:
 Return ONLY the refined YARA rule."""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5",
             max_tokens=2048,
             messages=[{"role": "user", "content": prompt}]
         )

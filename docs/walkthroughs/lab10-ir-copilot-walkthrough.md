@@ -141,7 +141,7 @@ I'm ready to help investigate. What would you like to do first?"""
 
         # Call Claude
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5",
             max_tokens=2048,
             system=self.system_prompt.format(timestamp=datetime.now().isoformat()),
             messages=messages,
@@ -634,7 +634,7 @@ Write a 2-3 paragraph executive summary that:
 Keep it concise and factual."""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5",
             max_tokens=500,
             messages=[{"role": "user", "content": prompt}]
         )
@@ -669,7 +669,7 @@ Generate a lessons learned document with:
 Format as markdown."""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5",
             max_tokens=1000,
             messages=[{"role": "user", "content": prompt}]
         )

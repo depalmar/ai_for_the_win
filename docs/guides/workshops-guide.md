@@ -74,7 +74,7 @@ import anthropic
 
 client = anthropic.Anthropic()
 response = client.messages.create(
-    model="claude-sonnet-4-20250514",
+    model="claude-sonnet-4-5",
     max_tokens=100,
     messages=[{"role": "user", "content": "Say 'Setup complete!' if you can read this."}]
 )
@@ -203,7 +203,7 @@ from langchain.tools import Tool
 from langchain import hub
 
 # TODO 1: Initialize the Claude model
-# Hint: Use ChatAnthropic with model="claude-sonnet-4-20250514"
+# Hint: Use ChatAnthropic with model="claude-sonnet-4-5"
 
 # TODO 2: Define a simple tool
 def analyze_hash(hash_value: str) -> str:
@@ -387,7 +387,7 @@ Generate the YARA rule:"""
 def generate_yara_rule(description: str) -> str:
     """Generate a YARA rule from a malware description."""
     response = client.messages.create(
-        model="claude-sonnet-4-20250514",
+        model="claude-sonnet-4-5",
         max_tokens=2000,
         messages=[{
             "role": "user",
@@ -453,7 +453,7 @@ Generate the Sigma rule in YAML format:"""
 def generate_sigma_rule(scenario: str) -> str:
     """Generate a Sigma rule from a detection scenario."""
     response = client.messages.create(
-        model="claude-sonnet-4-20250514",
+        model="claude-sonnet-4-5",
         max_tokens=2000,
         messages=[{
             "role": "user",
@@ -601,7 +601,7 @@ Consider:
 - What defensive actions are appropriate?"""
 
     response = client.messages.create(
-        model="claude-sonnet-4-20250514",
+        model="claude-sonnet-4-5",
         max_tokens=1000,
         messages=[{"role": "user", "content": prompt}]
     )
@@ -670,7 +670,7 @@ def parse_threat_report(report_text: str) -> dict:
     client = Anthropic()
 
     response = client.messages.create(
-        model="claude-sonnet-4-20250514",
+        model="claude-sonnet-4-5",
         max_tokens=4000,
         messages=[{
             "role": "user",
@@ -821,7 +821,7 @@ def analyze_windows_logs(events: str) -> str:
     client = Anthropic()
 
     response = client.messages.create(
-        model="claude-sonnet-4-20250514",
+        model="claude-sonnet-4-5",
         max_tokens=2000,
         messages=[{
             "role": "user",
@@ -919,7 +919,7 @@ def correlate_logs(windows: str, network: str, firewall: str) -> str:
     client = Anthropic()
 
     response = client.messages.create(
-        model="claude-sonnet-4-20250514",
+        model="claude-sonnet-4-5",
         max_tokens=3000,
         messages=[{
             "role": "user",
@@ -1220,7 +1220,7 @@ class AgentOrchestrator:
         agent = self.agents[agent_name]
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5",
             max_tokens=2000,
             system=agent["system_prompt"],
             messages=[{
@@ -1263,7 +1263,7 @@ class SOCAutomation:
     """Automated Security Operations Center system."""
 
     def __init__(self):
-        self.llm = ChatAnthropic(model="claude-sonnet-4-20250514")
+        self.llm = ChatAnthropic(model="claude-sonnet-4-5")
         self.agents = {}
         self.setup_agents()
 

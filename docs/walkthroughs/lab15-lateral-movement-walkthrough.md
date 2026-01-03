@@ -566,7 +566,7 @@ Provide:
 8. **Evidence to Preserve** - What to collect for forensics"""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5",
             max_tokens=1500,
             messages=[{"role": "user", "content": prompt}]
         )
@@ -595,7 +595,7 @@ Create a prioritized containment plan with:
 Format as actionable checklist."""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5",
             max_tokens=1200,
             messages=[{"role": "user", "content": prompt}]
         )

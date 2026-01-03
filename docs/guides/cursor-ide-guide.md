@@ -105,7 +105,7 @@ Go to **Settings** > **Cursor** > **Models**:
 ```json
 {
   "cursor.aiProvider": "anthropic",
-  "cursor.defaultModel": "claude-sonnet-4-20250514",
+  "cursor.defaultModel": "claude-sonnet-4-5",
   "cursor.enableLongContext": true
 }
 ```
@@ -437,7 +437,7 @@ Once configured, MCP tools are available in chat:
 
 | Model                        | Best For                                | Speed     | Cost |
 | ---------------------------- | --------------------------------------- | --------- | ---- |
-| **claude-sonnet-4-20250514** | Complex security analysis, long context | Medium    | $$   |
+| **claude-sonnet-4-5** | Complex security analysis, long context | Medium    | $$   |
 | **claude-opus-4-5**          | Deepest reasoning, architecture design  | Slow      | $$$  |
 | **gpt-5**                   | General coding, function calling        | Medium    | $$   |
 | **gpt-5**                   | Fast responses, balanced quality        | Fast      | $    |
@@ -449,7 +449,7 @@ Once configured, MCP tools are available in chat:
 // settings.json
 {
   // Default model for most tasks
-  "cursor.defaultModel": "claude-sonnet-4-20250514",
+  "cursor.defaultModel": "claude-sonnet-4-5",
 
   // Use faster model for autocomplete
   "cursor.autocomplete.model": "cursor-small",
@@ -655,7 +655,7 @@ global: true
 - Least privilege principle
 
 ## My Preferences
-- Prefer Claude claude-sonnet-4-20250514 for security analysis
+- Prefer Claude claude-sonnet-4-5 for security analysis
 - Include detailed comments for complex security logic
 - Generate security test cases automatically
 - Flag potential security issues proactively
@@ -997,8 +997,8 @@ Create `.vscode/settings.json` for project-specific configuration:
 ```json
 {
   // Project-specific model selection
-  "cursor.defaultModel": "claude-sonnet-4-20250514",
-  "cursor.composer.model": "claude-sonnet-4-20250514",
+  "cursor.defaultModel": "claude-sonnet-4-5",
+  "cursor.composer.model": "claude-sonnet-4-5",
 
   // Custom instructions for this project
   "cursor.customInstructions": "This is a security analysis toolkit. Always consider OWASP Top 10 and map findings to MITRE ATT&CK.",

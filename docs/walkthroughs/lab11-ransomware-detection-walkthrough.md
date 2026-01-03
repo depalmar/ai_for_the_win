@@ -325,7 +325,7 @@ Extract the following information (return JSON):
 Return ONLY valid JSON."""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5",
             max_tokens=1000,
             messages=[{"role": "user", "content": prompt}]
         )
@@ -360,7 +360,7 @@ Return:
 4. Recommended resources for this family"""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5",
             max_tokens=500,
             messages=[{"role": "user", "content": prompt}]
         )
@@ -573,7 +573,7 @@ Provide 5-7 prioritized, actionable recommendations for the incident response te
 Format as a numbered list."""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5",
             max_tokens=500,
             messages=[{"role": "user", "content": prompt}]
         )

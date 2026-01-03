@@ -541,7 +541,7 @@ Provide a JSON response with:
 Return ONLY valid JSON."""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5",
             max_tokens=1024,
             messages=[{"role": "user", "content": prompt}],
         )
@@ -805,7 +805,7 @@ Generate a structured incident report with:
 6. IOCs for Blocking"""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5",
             max_tokens=2048,
             messages=[{"role": "user", "content": prompt}],
         )

@@ -460,7 +460,7 @@ Provide a structured analysis with:
 - Recommended next steps for investigation"""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5",
             max_tokens=1500,
             messages=[{"role": "user", "content": prompt}]
         )
@@ -489,7 +489,7 @@ Provide:
 - Recommended containment actions"""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5",
             max_tokens=1500,
             messages=[{"role": "user", "content": prompt}]
         )
@@ -521,7 +521,7 @@ Provide:
 5. Containment priorities"""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5",
             max_tokens=1500,
             messages=[{"role": "user", "content": prompt}]
         )
@@ -549,7 +549,7 @@ Create a professional forensic report with:
 Format as a formal report suitable for legal/compliance purposes."""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5",
             max_tokens=3000,
             messages=[{"role": "user", "content": prompt}]
         )

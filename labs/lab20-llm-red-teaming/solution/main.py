@@ -504,7 +504,7 @@ class SecureLLMApp:
 
                 if provider == "anthropic":
                     response = client.messages.create(
-                        model="claude-sonnet-4-20250514",
+                        model="claude-sonnet-4-5",
                         max_tokens=1024,
                         system=self.system_prompt,
                         messages=[{"role": "user", "content": sanitized_input}],
@@ -512,7 +512,7 @@ class SecureLLMApp:
                     raw_response = response.content[0].text
                 elif provider == "openai":
                     response = client.chat.completions.create(
-                        model="gpt-5",
+                        model="gpt-5.2",
                         max_tokens=1024,
                         messages=[
                             {"role": "system", "content": self.system_prompt},

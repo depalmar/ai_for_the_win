@@ -438,7 +438,7 @@ Provide analysis in JSON format with:
     try:
         if provider == "anthropic":
             response = client.messages.create(
-                model="claude-sonnet-4-20250514",
+                model="claude-sonnet-4-5",
                 max_tokens=1024,
                 messages=[{"role": "user", "content": prompt}],
             )
@@ -446,7 +446,7 @@ Provide analysis in JSON format with:
 
         elif provider == "openai":
             response = client.chat.completions.create(
-                model="gpt-5",
+                model="gpt-5.2",
                 messages=[{"role": "user", "content": prompt}],
                 response_format={"type": "json_object"},
             )

@@ -30,7 +30,7 @@ def safe_api_call(client: Anthropic, prompt: str) -> str:
     """Make API call with comprehensive error handling."""
     try:
         response = client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5",
             max_tokens=1024,
             messages=[{"role": "user", "content": prompt}]
         )
@@ -159,7 +159,7 @@ def retry_with_backoff(
 def make_threat_intel_request():
     return retry_with_backoff(
         lambda: client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5",
             max_tokens=512,
             messages=[{"role": "user", "content": "Analyze this IOC..."}]
         ),

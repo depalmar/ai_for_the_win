@@ -223,7 +223,7 @@ class VulnAnalyzer:
         if llm:
             self.llm = llm
         elif LANGCHAIN_AVAILABLE and os.getenv("ANTHROPIC_API_KEY"):
-            self.llm = ChatAnthropic(model="claude-sonnet-4-20250514", temperature=0)
+            self.llm = ChatAnthropic(model="claude-sonnet-4-5", temperature=0)
         else:
             self.llm = None
 

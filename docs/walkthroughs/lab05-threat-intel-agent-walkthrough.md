@@ -58,7 +58,7 @@ import os
 
 # Initialize LLM
 llm = ChatAnthropic(
-    model="claude-sonnet-4-20250514",
+    model="claude-sonnet-4-5",
     anthropic_api_key=os.getenv("ANTHROPIC_API_KEY")
 )
 ```
@@ -84,7 +84,7 @@ class SimpleReActAgent:
         for i in range(self.max_iterations):
             # Get agent response
             response = self.client.messages.create(
-                model="claude-sonnet-4-20250514",
+                model="claude-sonnet-4-5",
                 max_tokens=1024,
                 system=system_prompt,
                 messages=messages + [{"role": "user", "content": query if i == 0 else "Continue."}]

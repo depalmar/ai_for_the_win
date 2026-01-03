@@ -151,7 +151,7 @@ Respond in JSON format:
 """
 
         response = self.llm.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5",
             max_tokens=1024,
             messages=[{"role": "user", "content": prompt}]
         )
@@ -212,7 +212,7 @@ Identify:
 Respond in JSON format with findings."""
 
         response = self.llm.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5",
             max_tokens=2048,
             messages=[{"role": "user", "content": prompt}]
         )
@@ -287,7 +287,7 @@ Provide:
 Respond in JSON format."""
 
         response = self.llm.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5",
             max_tokens=1500,
             messages=[{"role": "user", "content": prompt}]
         )
@@ -386,7 +386,7 @@ Provide:
 Respond in JSON format."""
 
         response = self.llm.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5",
             max_tokens=1500,
             messages=[{"role": "user", "content": prompt}]
         )
@@ -411,7 +411,7 @@ KQL syntax examples:
 Return only the KQL query."""
 
         response = self.llm.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5",
             max_tokens=500,
             messages=[{"role": "user", "content": prompt}]
         )
@@ -484,7 +484,7 @@ Provide:
 Respond in JSON format."""
 
         response = self.llm.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5",
             max_tokens=1500,
             messages=[{"role": "user", "content": prompt}]
         )
@@ -581,7 +581,7 @@ Identify:
 Respond in JSON format."""
 
         response = self.llm.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5",
             max_tokens=2048,
             messages=[{"role": "user", "content": prompt}]
         )
@@ -613,7 +613,7 @@ Format as markdown with:
 6. Compliance Status"""
 
         response = self.llm.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5",
             max_tokens=3000,
             messages=[{"role": "user", "content": prompt}]
         )
@@ -697,7 +697,7 @@ Respond in JSON format:
 """
 
         response = self.llm.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5",
             max_tokens=2000,
             messages=[{"role": "user", "content": prompt}]
         )

@@ -337,14 +337,14 @@ Only include TTPs clearly indicated by the text."""
         try:
             if provider == "anthropic":
                 response = client.messages.create(
-                    model="claude-sonnet-4-20250514",
+                    model="claude-sonnet-4-5",
                     max_tokens=1024,
                     messages=[{"role": "user", "content": prompt}],
                 )
                 result_text = response.content[0].text
             elif provider == "openai":
                 response = client.chat.completions.create(
-                    model="gpt-5",
+                    model="gpt-5.2",
                     messages=[{"role": "user", "content": prompt}],
                     response_format={"type": "json_object"},
                 )
@@ -848,14 +848,14 @@ Create a concise profile including:
         try:
             if provider == "anthropic":
                 response = client.messages.create(
-                    model="claude-sonnet-4-20250514",
+                    model="claude-sonnet-4-5",
                     max_tokens=1024,
                     messages=[{"role": "user", "content": prompt}],
                 )
                 return response.content[0].text
             elif provider == "openai":
                 response = client.chat.completions.create(
-                    model="gpt-5", messages=[{"role": "user", "content": prompt}]
+                    model="gpt-5.2", messages=[{"role": "user", "content": prompt}]
                 )
                 return response.choices[0].message.content
             elif provider == "google":

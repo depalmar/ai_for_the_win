@@ -1169,7 +1169,7 @@ def main():
     llm = None
     api_key = os.getenv("ANTHROPIC_API_KEY")
     if api_key and LANGCHAIN_AVAILABLE:
-        llm = ChatAnthropic(model="claude-sonnet-4-20250514", temperature=0)
+        llm = ChatAnthropic(model="claude-sonnet-4-5", temperature=0)
         console.print("[green]LLM initialized[/green]")
     else:
         console.print("[yellow]Running without LLM (demo mode)[/yellow]")

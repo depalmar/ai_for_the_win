@@ -95,7 +95,7 @@ def simple_agent(user_query: str) -> str:
     
     # Step 1: Ask LLM (with tools available)
     response = client.messages.create(
-        model="claude-sonnet-4-20250514",
+        model="claude-sonnet-4-5",
         max_tokens=1024,
         system="You are a security analyst assistant.",
         tools=TOOLS,
@@ -123,7 +123,7 @@ def simple_agent(user_query: str) -> str:
         
         # Step 5: Get next response (may use another tool or finish)
         response = client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5",
             max_tokens=1024,
             system="You are a security analyst assistant.",
             tools=TOOLS,
@@ -297,7 +297,7 @@ client = OpenAI()
 
 # OpenAI uses "functions" instead of "tools"
 response = client.chat.completions.create(
-    model="gpt-5",
+    model="gpt-5.2",
     messages=[{"role": "user", "content": user_query}],
     tools=[{
         "type": "function",

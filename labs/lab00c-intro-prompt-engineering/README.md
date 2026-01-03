@@ -703,7 +703,7 @@ prompt = """You are a security analyst. Analyze this log entry for security conc
 192.168.1.100 - - [15/Jan/2024:10:30:00 +0000] "GET /admin/config.php HTTP/1.1" 200 5432"""
 
 response = client.messages.create(
-    model="claude-sonnet-4-20250514",
+    model="claude-sonnet-4-5",
     max_tokens=1024,
     messages=[{"role": "user", "content": prompt}]
 )

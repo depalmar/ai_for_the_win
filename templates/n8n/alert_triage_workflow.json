@@ -22,7 +22,7 @@
     },
     {
       "parameters": {
-        "model": "claude-sonnet-4-20250514",
+        "model": "claude-sonnet-4-5",
         "prompt": "You are a security alert triage analyst. Analyze the following alert and provide:\n\n1. Priority Score (1-10, where 10 is most critical)\n2. Classification (True Positive Likely, False Positive Likely, Needs Investigation)\n3. Brief explanation (2-3 sentences)\n4. Recommended immediate actions\n5. MITRE ATT&CK techniques if applicable\n\nAlert Data:\n{{ JSON.stringify($json) }}\n\nRespond in JSON format:\n{\n  \"priority\": <number>,\n  \"classification\": \"<string>\",\n  \"explanation\": \"<string>\",\n  \"actions\": [\"<action1>\", \"<action2>\"],\n  \"mitre_techniques\": [\"<technique_id>\"]\n}"
       },
       "id": "ai-triage",

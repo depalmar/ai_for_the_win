@@ -72,7 +72,7 @@
     },
     {
       "parameters": {
-        "model": "claude-sonnet-4-20250514",
+        "model": "claude-sonnet-4-5",
         "prompt": "Analyze the following threat intelligence data for IOC {{ $json.ioc }}:\n\nVirusTotal: {{ $node.VirusTotal.json }}\nAbuseIPDB: {{ $node.AbuseIPDB.json }}\n\nProvide a concise threat assessment including:\n1. Classification (Malicious/Suspicious/Clean)\n2. Confidence level\n3. Key findings\n4. Recommended actions"
       },
       "id": "ai-analysis",

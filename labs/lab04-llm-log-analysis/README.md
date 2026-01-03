@@ -118,7 +118,7 @@ def setup_llm():
     4. Return the client
 
     Options:
-    - Anthropic: ChatAnthropic(model="claude-sonnet-4-20250514")
+    - Anthropic: ChatAnthropic(model="claude-sonnet-4-5")
     - Ollama: ChatOllama(model="llama3.1:8b")
     """
     pass

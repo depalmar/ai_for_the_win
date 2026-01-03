@@ -193,7 +193,7 @@ def classify_with_llm(log_text: str, client=None, simulate: bool = True) -> tupl
     # Real LLM call (uncomment to use)
     # prompt = create_llm_prompt(log_text)
     # response = client.messages.create(
-    #     model="claude-sonnet-4-20250514",
+    #     model="claude-sonnet-4-5",
     #     max_tokens=100,
     #     messages=[{"role": "user", "content": prompt}]
     # )

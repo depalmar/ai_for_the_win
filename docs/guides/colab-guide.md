@@ -70,7 +70,7 @@ api_key = userdata.get('ANTHROPIC_API_KEY')
 
 # Use with LangChain
 from langchain_anthropic import ChatAnthropic
-llm = ChatAnthropic(model="claude-sonnet-4-20250514", api_key=api_key)
+llm = ChatAnthropic(model="claude-sonnet-4-5", api_key=api_key)
 ```
 
 **Option 2: Environment Variable (Quick but less secure)**

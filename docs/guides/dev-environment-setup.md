@@ -58,7 +58,7 @@ https://cursor.sh/
 ```json
 {
   "cursor.aiProvider": "anthropic",
-  "cursor.model": "claude-sonnet-4-20250514",
+  "cursor.model": "claude-sonnet-4-5",
   "cursor.contextLength": "long",
   "editor.formatOnSave": true,
   "python.analysis.typeCheckingMode": "basic"
@@ -118,7 +118,7 @@ jupyter lab
    client = anthropic.Anthropic(api_key="your-api-key")
 
    message = client.messages.create(
-       model="claude-sonnet-4-20250514",
+       model="claude-sonnet-4-5",
        max_tokens=4096,
        messages=[
            {"role": "user", "content": "Analyze this malware sample..."}
@@ -163,7 +163,7 @@ from openai import OpenAI
 client = OpenAI(api_key="your-api-key")
 
 response = client.chat.completions.create(
-    model="gpt-5",
+    model="gpt-5.2",
     messages=[{"role": "user", "content": "..."}]
 )
 ```
@@ -321,13 +321,13 @@ load_dotenv()
 
 # Initialize models
 claude = ChatAnthropic(
-    model="claude-sonnet-4-20250514",
+    model="claude-sonnet-4-5",
     api_key=os.getenv("ANTHROPIC_API_KEY"),
     max_tokens=4096
 )
 
 gpt4 = ChatOpenAI(
-    model="gpt-5",
+    model="gpt-5.2",
     api_key=os.getenv("OPENAI_API_KEY")
 )
 
@@ -354,7 +354,7 @@ from llama_index.llms.anthropic import Anthropic
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 
 # Configure defaults
-Settings.llm = Anthropic(model="claude-sonnet-4-20250514")
+Settings.llm = Anthropic(model="claude-sonnet-4-5")
 Settings.embed_model = HuggingFaceEmbedding(
     model_name="BAAI/bge-small-en-v1.5"
 )
@@ -376,7 +376,7 @@ pip install crewai crewai-tools
 from crewai import Agent, Task, Crew
 from langchain_anthropic import ChatAnthropic
 
-llm = ChatAnthropic(model="claude-sonnet-4-20250514")
+llm = ChatAnthropic(model="claude-sonnet-4-5")
 
 # Define specialized agents
 threat_analyst = Agent(

@@ -182,7 +182,7 @@ Focus on AWS-specific threats like:
 - Defense evasion"""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5",
             max_tokens=1500,
             messages=[{"role": "user", "content": prompt}]
         )
@@ -314,7 +314,7 @@ Consider Azure-specific threats:
 - Storage account exposure"""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5",
             max_tokens=1500,
             messages=[{"role": "user", "content": prompt}]
         )
@@ -453,7 +453,7 @@ Consider GCP-specific threats:
 - Compute Engine vulnerabilities"""
 
         response = self.ai_client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5",
             max_tokens=1500,
             messages=[{"role": "user", "content": prompt}]
         )
@@ -621,7 +621,7 @@ Consider:
 - Shared credentials/secrets"""
 
         response = self.ai_client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5",
             max_tokens=1500,
             messages=[{"role": "user", "content": prompt}]
         )
@@ -714,7 +714,7 @@ Create a 1-page executive brief with:
 Use business language appropriate for C-level executives."""
 
         response = self.multi_cloud.ai_client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5",
             max_tokens=1000,
             messages=[{"role": "user", "content": prompt}]
         )

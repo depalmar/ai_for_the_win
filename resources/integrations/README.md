@@ -52,7 +52,7 @@ Alert data:
 Respond in JSON format."""
 
     response = client.messages.create(
-        model="claude-sonnet-4-20250514",
+        model="claude-sonnet-4-5",
         max_tokens=1024,
         messages=[{"role": "user", "content": prompt}]
     )
@@ -103,7 +103,7 @@ Alerts:
 Respond as JSON array with same alert IDs."""
 
     response = client.messages.create(
-        model="claude-sonnet-4-20250514",
+        model="claude-sonnet-4-5",
         max_tokens=2048,
         messages=[{"role": "user", "content": prompt}]
     )
@@ -157,7 +157,7 @@ If platform is 'generic', provide pseudo-query that can be adapted.
 Respond as JSON array."""
 
     response = client.messages.create(
-        model="claude-sonnet-4-20250514",
+        model="claude-sonnet-4-5",
         max_tokens=2048,
         messages=[{"role": "user", "content": prompt}]
     )
@@ -204,7 +204,7 @@ Provide:
 Important: These are RECOMMENDATIONS requiring human review."""
 
     response = client.messages.create(
-        model="claude-sonnet-4-20250514",
+        model="claude-sonnet-4-5",
         max_tokens=1024,
         messages=[{"role": "user", "content": prompt}]
     )

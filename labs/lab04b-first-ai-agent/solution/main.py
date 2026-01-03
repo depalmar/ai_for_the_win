@@ -174,7 +174,7 @@ def simple_agent(user_query: str) -> str:
     # Step 1: Initial LLM call with tools
     print("🤔 Agent thinking...")
     response = client.messages.create(
-        model="claude-sonnet-4-20250514",
+        model="claude-sonnet-4-5",
         max_tokens=1024,
         system="""You are a security analyst assistant. Use the available tools to help answer questions about IP addresses, file hashes, and domains. 
 
@@ -225,7 +225,7 @@ Guidelines:
             # Get next response
             print("🤔 Agent reflecting on tool result...")
             response = client.messages.create(
-                model="claude-sonnet-4-20250514",
+                model="claude-sonnet-4-5",
                 max_tokens=1024,
                 system="""You are a security analyst assistant. Use the available tools to help answer questions about IP addresses, file hashes, and domains. Be concise and helpful.""",
                 tools=TOOLS,

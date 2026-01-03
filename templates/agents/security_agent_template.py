@@ -38,7 +38,7 @@ class AgentConfig:
     """Configuration for the security agent."""
 
     name: str = "SecurityAgent"
-    model: str = "claude-sonnet-4-20250514"
+    model: str = "claude-sonnet-4-5"
     temperature: float = 0
     max_iterations: int = 10
     verbose: bool = True

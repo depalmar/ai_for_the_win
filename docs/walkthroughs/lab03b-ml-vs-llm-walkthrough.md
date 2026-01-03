@@ -149,7 +149,7 @@ def classify_with_llm(log_text: str, client: Anthropic) -> tuple:
     prompt = create_llm_prompt(log_text)
 
     response = client.messages.create(
-        model="claude-sonnet-4-20250514",
+        model="claude-sonnet-4-5",
         max_tokens=50,
         messages=[{"role": "user", "content": prompt}]
     )
