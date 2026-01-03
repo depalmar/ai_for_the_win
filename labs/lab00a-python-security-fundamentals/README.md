@@ -1,5 +1,7 @@
 # Lab 00a: Python for Security Fundamentals
 
+**Difficulty: ⭐️ Easy | Time: 3-4 hours | No Prerequisites**
+
 Welcome to AI for the Win! This introductory lab teaches Python basics through security-focused examples. No prior programming experience required.
 
 ## Learning Objectives
