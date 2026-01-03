@@ -908,6 +908,12 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
   <h1>AI for the Win</h1>
   <p class="tagline">Build AI-Powered Security Tools | Hands-On Learning</p>
 
+  <div style="margin: 1rem 0;">
+    <a href="https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab01_phishing_classifier.ipynb" target="_blank">
+      <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab">
+    </a>
+  </div>
+
   <div class="terminal-demo">
     <div class="terminal-header">
       <span class="terminal-dot red"></span>
@@ -944,7 +950,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
       <div class="stat-label">Learning Paths</div>
     </div>
     <div class="stat">
-      <div class="stat-number">MIT</div>
+      <div class="stat-number">CC BY-NC</div>
       <div class="stat-label">Licensed</div>
     </div>
   </div>
