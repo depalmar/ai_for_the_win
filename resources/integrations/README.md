@@ -39,7 +39,7 @@ client = Anthropic()
 
 def enrich_alert(alert_data: dict) -> dict:
     """Enrich a security alert with AI analysis."""
-    
+
     prompt = f"""Analyze this security alert and provide:
 1. Severity assessment (1-10)
 2. MITRE ATT&CK techniques (if applicable)
@@ -56,7 +56,7 @@ Respond in JSON format."""
         max_tokens=1024,
         messages=[{"role": "user", "content": prompt}]
     )
-    
+
     # Parse and merge with original alert
     enrichment = json.loads(response.content[0].text)
     return {**alert_data, "ai_enrichment": enrichment}
@@ -89,9 +89,9 @@ Prioritizes alerts based on context, not just rule severity.
 
 def triage_alerts(alerts: list[dict]) -> list[dict]:
     """Triage a batch of alerts using AI."""
-    
+
     prompt = f"""You are a SOC analyst triaging security alerts.
-    
+
 For each alert, assign:
 - priority: critical/high/medium/low
 - reasoning: brief explanation
@@ -107,19 +107,19 @@ Respond as JSON array with same alert IDs."""
         max_tokens=2048,
         messages=[{"role": "user", "content": prompt}]
     )
-    
+
     triage_results = json.loads(response.content[0].text)
-    
+
     # Merge triage back into alerts
     triage_map = {t["id"]: t for t in triage_results}
     for alert in alerts:
         if alert["id"] in triage_map:
             alert["triage"] = triage_map[alert["id"]]
-    
+
     # Sort by priority
     priority_order = {"critical": 0, "high": 1, "medium": 2, "low": 3}
     alerts.sort(key=lambda a: priority_order.get(a.get("triage", {}).get("priority", "low"), 3))
-    
+
     return alerts
 ```
 
@@ -140,7 +140,7 @@ def generate_hunt_queries(
     timeframe: str = "7d"
 ) -> list[dict]:
     """Generate threat hunting queries from a hypothesis."""
-    
+
     prompt = f"""Generate threat hunting queries for: {hypothesis}
 
 Platform: {platform}
@@ -161,7 +161,7 @@ Respond as JSON array."""
         max_tokens=2048,
         messages=[{"role": "user", "content": prompt}]
     )
-    
+
     return json.loads(response.content[0].text)
 
 
@@ -186,7 +186,7 @@ Suggests actions but requires human approval.
 
 def recommend_response(alert: dict, context: dict = None) -> dict:
     """Generate response recommendations for an alert."""
-    
+
     prompt = f"""As a security analyst, recommend response actions for this alert.
 
 Alert:
@@ -208,11 +208,11 @@ Important: These are RECOMMENDATIONS requiring human review."""
         max_tokens=1024,
         messages=[{"role": "user", "content": prompt}]
     )
-    
+
     recommendations = json.loads(response.content[0].text)
     recommendations["requires_human_approval"] = True
     recommendations["auto_execute"] = False
-    
+
     return recommendations
 ```
 
@@ -224,15 +224,15 @@ Important: These are RECOMMENDATIONS requiring human review."""
 # Generic SIEM client interface
 class SIEMClient:
     """Abstract SIEM client - implement for your platform."""
-    
+
     def query(self, query: str, timeframe: str) -> list[dict]:
         """Execute a search query."""
         raise NotImplementedError
-    
+
     def get_alerts(self, filters: dict = None) -> list[dict]:
         """Retrieve alerts matching filters."""
         raise NotImplementedError
-    
+
     def update_alert(self, alert_id: str, updates: dict) -> bool:
         """Update an alert with enrichment data."""
         raise NotImplementedError
@@ -244,15 +244,15 @@ class SIEMClient:
 # Generic SOAR client interface
 class SOARClient:
     """Abstract SOAR client - implement for your platform."""
-    
+
     def create_case(self, alert: dict) -> str:
         """Create a case from an alert."""
         raise NotImplementedError
-    
+
     def run_playbook(self, playbook_id: str, inputs: dict) -> dict:
         """Execute an automated playbook."""
         raise NotImplementedError
-    
+
     def add_note(self, case_id: str, note: str) -> bool:
         """Add analysis notes to a case."""
         raise NotImplementedError
@@ -262,12 +262,12 @@ class SOARClient:
 
 These patterns enhance the following labs:
 
-| Lab | Pattern | Enhancement |
-|-----|---------|-------------|
-| Lab 04 | Alert Enrichment | Add AI analysis to log parsing |
-| Lab 05 | Query Generation | Generate IOC lookups |
-| Lab 09 | Automated Triage | Prioritize detection pipeline output |
-| Lab 10 | Response Recommendation | IR Copilot decision support |
+| Lab    | Pattern                 | Enhancement                          |
+| ------ | ----------------------- | ------------------------------------ |
+| Lab 04 | Alert Enrichment        | Add AI analysis to log parsing       |
+| Lab 05 | Query Generation        | Generate IOC lookups                 |
+| Lab 09 | Automated Triage        | Prioritize detection pipeline output |
+| Lab 10 | Response Recommendation | IR Copilot decision support          |
 
 ## Best Practices
 

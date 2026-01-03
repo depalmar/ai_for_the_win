@@ -1,6 +1,15 @@
 # Security Analysis Prompt Library
 
-Production-ready prompts for AI-powered security analysis.
+Example prompts for AI-powered security analysis.
+
+> ⚠️ **Educational Reference Only**: These prompts are provided as **learning examples and starting points**, not production-ready templates. Before using in any real environment:
+> - Validate outputs against your specific use cases
+> - Test thoroughly with your data and systems
+> - Adjust for your organization's policies and requirements
+> - Never rely solely on AI outputs for security decisions
+> - Always have human review for critical actions
+>
+> AI responses can be inconsistent, incomplete, or incorrect. These prompts demonstrate concepts from the labs and should be adapted and validated for your needs.
 
 ---
 
