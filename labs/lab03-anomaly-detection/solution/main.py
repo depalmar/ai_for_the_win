@@ -275,10 +275,10 @@ def train_isolation_forest(
     - Anomaly scores (more negative = more anomalous)
     """
     model = IsolationForest(
-        n_estimators=100,       # Number of trees (more = more stable)
+        n_estimators=100,  # Number of trees (more = more stable)
         contamination=contamination,  # Expected % anomalies
-        random_state=42,        # Reproducibility
-        n_jobs=-1               # Use all CPU cores
+        random_state=42,  # Reproducibility
+        n_jobs=-1,  # Use all CPU cores
     )
 
     model.fit(X)

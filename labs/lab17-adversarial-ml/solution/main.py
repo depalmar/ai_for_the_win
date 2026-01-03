@@ -1022,7 +1022,7 @@ def main():
     print("\n--- Creating Sample Data ---")
     samples = create_sample_data(n_samples=200, n_features=20)
     train_samples = samples[:160]  # 80% for training
-    test_samples = samples[160:]    # 20% for testing
+    test_samples = samples[160:]  # 20% for testing
     print(f"Created {len(samples)} samples")
 
     print("\n--- Training Classifier (Standard - No Defenses) ---")
