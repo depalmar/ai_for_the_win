@@ -7,9 +7,9 @@ Learn to monitor AI systems in production.
 Run: python main.py
 """
 
-import time
 import json
 import logging
+import time
 from dataclasses import dataclass, field
 from datetime import datetime
 from typing import Optional

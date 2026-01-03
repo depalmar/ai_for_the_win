@@ -7,8 +7,9 @@ A simple AI agent that can use tools to answer security questions.
 Run: python main.py
 """
 
-import os
 import json
+import os
+
 from anthropic import Anthropic
 
 # Initialize client

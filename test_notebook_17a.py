@@ -1,7 +1,7 @@
 # Test Lab 17a: ML Security Intro
+import numpy as np
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
-import numpy as np
 
 print("=" * 50)
 print("Testing Lab 17a: ML Security Intro")

@@ -6,9 +6,8 @@ Complete solution for cloud security log analysis exercises.
 """
 
 import json
-from typing import Dict, List, Optional, Tuple
 from datetime import datetime
-
+from typing import Dict, List, Optional, Tuple
 
 # =============================================================================
 # EXERCISE 1: Parse CloudTrail Events

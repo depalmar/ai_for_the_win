@@ -8,8 +8,9 @@ Complete the TODOs to make the agent work!
 Run: python main.py
 """
 
-import os
 import json
+import os
+
 from anthropic import Anthropic
 
 # Initialize client

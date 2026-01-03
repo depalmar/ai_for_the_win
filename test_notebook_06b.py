@@ -1,7 +1,7 @@
 # Test Lab 06b: Embeddings & Vectors (using TF-IDF as alternative)
+import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-import numpy as np
 
 print("=" * 50)
 print("Testing Lab 06b: Embeddings & Vectors")

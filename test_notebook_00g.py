@@ -1,6 +1,7 @@
 # Test Lab 00g: Working with APIs
+from typing import Dict, Optional
+
 import requests
-from typing import Optional, Dict
 
 print("=" * 50)
 print("Testing Lab 00g: Working with APIs")

@@ -1,6 +1,6 @@
 # Test Lab 00f: Hello World ML
-from sklearn.linear_model import LogisticRegression
 import numpy as np
+from sklearn.linear_model import LogisticRegression
 
 print("=" * 50)
 print("Testing Lab 00f: Hello World ML")

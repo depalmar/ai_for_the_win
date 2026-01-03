@@ -7,10 +7,10 @@ A complete AI monitoring system for security applications.
 Run: python main.py
 """
 
-import time
 import json
 import logging
 import random
+import time
 from dataclasses import dataclass, field
 from datetime import datetime
 from typing import Optional

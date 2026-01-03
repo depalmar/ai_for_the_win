@@ -11,9 +11,8 @@ Learning Objectives:
 """
 
 import json
-from typing import Dict, List, Optional
 from datetime import datetime
-
+from typing import Dict, List, Optional
 
 # =============================================================================
 # EXERCISE 1: Parse CloudTrail Events

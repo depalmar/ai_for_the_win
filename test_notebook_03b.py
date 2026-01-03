@@ -1,9 +1,10 @@
 # Test Lab 03b: ML vs LLM Comparison
-from sklearn.linear_model import LogisticRegression
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score, precision_score, recall_score
-import numpy as np
 import time
+
+import numpy as np
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, precision_score, recall_score
+from sklearn.model_selection import train_test_split
 
 print("=" * 50)
 print("Testing Lab 03b: ML vs LLM Comparison")
