@@ -80,6 +80,7 @@ Learn to apply Large Language Models to security problems.
 | # | Lab | Topic | What You'll Learn |
 |---|-----|-------|-------------------|
 | 04 | [LLM Log Analysis](./lab04-llm-log-analysis/) | Prompt engineering | Structured outputs, IOC extraction |
+| 04b | [Your First AI Agent](./lab04b-first-ai-agent/) | **NEW! Bridge lab** | Tool calling, ReAct basics |
 | 06 | [Security RAG](./lab06-security-rag/) | Vector search + LLM | Embeddings, ChromaDB, retrieval |
 | 06b | [Embeddings & Vectors](./lab06b-embeddings-vectors/) | **NEW! Bridge lab** | How embeddings work, semantic search |
 | 07 | [YARA Generator](./lab07-yara-generator/) | AI code generation | Binary analysis, rule generation |
@@ -87,13 +88,15 @@ Learn to apply Large Language Models to security problems.
 
 **Progression:**
 ```
-Lab 04 (Prompts) → Lab 06b (Embeddings) → Lab 06 (RAG) → Lab 07a (Binary) → Lab 07 (YARA)
-     ↓                   ↓                    ↓               ↓                  ↓
- "Parse logs      "How vectors       "Build RAG      "Understand        "Generate
-  with LLM"        work"              system"         PE files"          YARA rules"
+Lab 04 (Prompts) → Lab 04b (First Agent) → Lab 06b (Embeddings) → Lab 06 (RAG) → Lab 07 (YARA)
+     ↓                   ↓                        ↓                    ↓              ↓
+ "Parse logs       "Simple tool           "How vectors        "Build RAG      "Generate
+  with LLM"         calling"               work"               system"         YARA rules"
 ```
 
-**Bridge to Agents:** Labs 04-07 teach you to use LLMs for specific tasks. Lab 05 combines these into an autonomous agent that can reason and use tools.
+**Bridge to Full Agents:** Lab 04b teaches basic tool calling. This prepares you for Lab 05's full ReAct agent with memory and multiple tools.
+
+> ⚠️ **Note about Lab 05**: Despite its number, Lab 05 is in the "Advanced" section below because it builds on concepts from Labs 04-07. Do Lab 04b first if agents feel complex!
 
 ---
 
@@ -101,19 +104,22 @@ Lab 04 (Prompts) → Lab 06b (Embeddings) → Lab 06 (RAG) → Lab 07a (Binary) 
 
 Build AI agents and multi-stage pipelines.
 
+> 💡 **Why is Lab 05 here?** Lab 05 is numbered "05" but lives in the Advanced section because it requires understanding tool calling (Lab 04b), RAG (Lab 06), and prompt engineering (Lab 04). The numbering is historical - follow the progression below, not the numbers!
+
 | # | Lab | Topic | What You'll Learn |
 |---|-----|-------|-------------------|
-| 05 | [Threat Intel Agent](./lab05-threat-intel-agent/) | AI agents | ReAct pattern, tools, memory |
+| 05 | [Threat Intel Agent](./lab05-threat-intel-agent/) | AI agents | Full ReAct pattern, tools, memory |
 | 08 | [Vuln Scanner AI](./lab08-vuln-scanner-ai/) | Risk prioritization | CVSS, business context |
 | 09 | [Detection Pipeline](./lab09-detection-pipeline/) | ML + LLM pipeline | Multi-stage detection |
+| 09b | [Monitoring AI Systems](./lab09b-monitoring-ai-systems/) | **NEW! Bridge lab** | Observability, drift detection, logging |
 | 10 | [IR Copilot](./lab10-ir-copilot/) | Conversational AI | Orchestration, confirmation |
 
 **Progression:**
 ```
-Lab 05 (Agents) → Lab 08 (Vuln) → Lab 09 (Pipeline) → Lab 10 (Copilot)
-     ↓                ↓                ↓                   ↓
- "Autonomous       "Prioritize      "Combine           "Interactive
-  investigation"    risks"           ML + LLM"          assistant"
+Lab 04b (First Agent) → Lab 05 (Full Agent) → Lab 08 (Vuln) → Lab 09 (Pipeline) → Lab 09b (Monitoring)
+        ↓                       ↓                  ↓                ↓                    ↓
+   "Simple tools"        "ReAct + memory"    "Prioritize      "Combine           "Monitor
+                                              risks"           ML + LLM"          in prod"
 ```
 
 ---
@@ -775,28 +781,47 @@ Track your progress:
 - [ ] Lab 01: Phishing Classifier
 - [ ] Lab 02: Malware Clustering
 - [ ] Lab 03: Anomaly Detection
-- [ ] Lab 03b: ML vs LLM Decision (NEW - bridge lab)
+- [ ] Lab 03b: ML vs LLM Decision (bridge lab)
 - [ ] Lab 04: LLM Log Analysis
-- [ ] Lab 06b: Embeddings & Vectors (NEW - how vectors work)
-- [ ] Lab 07a: Binary Analysis Basics (NEW - PE fundamentals)
+- [ ] Lab 04b: Your First AI Agent (NEW - bridge lab)
+- [ ] Lab 06b: Embeddings & Vectors (how vectors work)
+- [ ] Lab 07a: Binary Analysis Basics (PE fundamentals)
 - [ ] Lab 05: Threat Intel Agent
 - [ ] Lab 06: Security RAG
 - [ ] Lab 07: YARA Generator
 - [ ] Lab 08: Vuln Scanner AI
 - [ ] Lab 09: Detection Pipeline
+- [ ] Lab 09b: Monitoring AI Systems (NEW - production observability)
 - [ ] Lab 10: IR Copilot
-- [ ] Lab 10b: DFIR Fundamentals (NEW - IR lifecycle prep)
+- [ ] Lab 10b: DFIR Fundamentals (IR lifecycle prep)
 - [ ] Lab 11: Ransomware Detection
 - [ ] Lab 12: Ransomware Simulation
 - [ ] Lab 13: Memory Forensics AI
 - [ ] Lab 14: C2 Traffic Analysis
 - [ ] Lab 15: Lateral Movement Detection
 - [ ] Lab 16: Threat Actor Profiling
-- [ ] Lab 17a: ML Security Intro (NEW - threat models for ML)
+- [ ] Lab 17a: ML Security Intro (threat models for ML)
 - [ ] Lab 17: Adversarial ML
 - [ ] Lab 18: Fine-Tuning for Security
+- [ ] Lab 19a: Cloud Security Fundamentals (NEW - cloud basics)
 - [ ] Lab 19: Cloud Security AI
 - [ ] Lab 20: LLM Red Teaming
+
+---
+
+## 🎯 CTF Challenges
+
+Test your skills with capture-the-flag challenges! These are separate from labs and provide hands-on practice.
+
+| Challenge Category | Description | Difficulty |
+|--------------------|-------------|------------|
+| [Phishing Analysis](../ctf-challenges/phishing/) | Analyze suspicious emails | Beginner |
+| [Log Analysis](../ctf-challenges/log-analysis/) | Find threats in logs | Beginner-Intermediate |
+| [Malware Triage](../ctf-challenges/malware/) | Analyze malware samples | Intermediate |
+| [Threat Intel](../ctf-challenges/threat-intel/) | Extract and correlate IOCs | Intermediate |
+| [Incident Response](../ctf-challenges/incident-response/) | Respond to simulated incidents | Advanced |
+
+> 💡 **Tip**: Complete relevant labs before attempting CTF challenges. For example, do Lab 01 before Phishing CTFs.
 
 ---
 

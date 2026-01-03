@@ -374,6 +374,8 @@ Labs 04-07 introduce Large Language Models (LLMs). Instead of training models on
 3. **Constraints:** "Return ONLY valid JSON"
 4. **Context:** Include MITRE ATT&CK knowledge
 
+> 🌉 **Bridge to Agents:** After Lab 04, do **Lab 04b: Your First AI Agent** before Lab 05. Lab 04b teaches tool calling basics that make Lab 05's full ReAct agent much easier to understand.
+
 ---
 
 #### Lab 06: Security RAG System
@@ -538,6 +540,8 @@ Assets ──► Scan ──► Vulns ──► AI Analysis ──► Prioritize
 │                                                             │
 └─────────────────────────────────────────────────────────────┘
 ```
+
+> 🌉 **Production Ready:** After Lab 09, consider **Lab 09b: Monitoring AI Systems** to learn how to monitor your detection pipeline in production (drift detection, alerting, metrics).
 
 ---
 
