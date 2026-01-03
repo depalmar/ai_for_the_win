@@ -484,7 +484,7 @@ Skills learned:
 - Confirmation workflows
 
 Copilot capabilities:
-- SIEM queries and log analysis
+- SIEM/SOAR queries and log analysis (Cortex XSIAM, Splunk, etc.)
 - IOC lookup and enrichment
 - Host isolation and containment
 - Timeline and report generation

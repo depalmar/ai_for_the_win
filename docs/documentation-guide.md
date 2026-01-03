@@ -119,7 +119,7 @@ Root
 ├── resources/                   # Reference materials
 │   ├── tools-and-resources.md   # 80+ tools/APIs/datasets
 │   ├── prompt-library/          # Ready-to-use prompts
-│   └── integrations/            # SIEM integrations
+│   └── integrations/            # SIEM/SOAR integrations (Cortex XSIAM, Splunk, etc.)
 │
 ├── labs/                        # 24 hands-on labs
 │   └── labXX-name/README.md

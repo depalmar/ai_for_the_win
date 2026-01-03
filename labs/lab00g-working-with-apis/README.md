@@ -33,7 +33,7 @@ Modern security tools rely heavily on APIs:
 | API Type | Use Case | Examples |
 |----------|----------|----------|
 | **Threat Intel** | Check IP/domain reputation | VirusTotal, AbuseIPDB, Shodan |
-| **SIEM** | Query logs and alerts | Splunk, Elastic, Sentinel |
+| **SIEM/SOAR** | Query logs and alerts | Cortex XSIAM, Splunk, Elastic, Sentinel |
 | **LLM** | AI-powered analysis | Anthropic, OpenAI, Google |
 | **Ticketing** | Create/update incidents | ServiceNow, Jira |
 

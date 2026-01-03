@@ -97,14 +97,14 @@ def explore_network_data(df: pd.DataFrame) -> None:
 def engineer_network_features(df: pd.DataFrame) -> pd.DataFrame:
     """
     Create anomaly detection features from raw network flow data.
-    
+
     Feature types:
     1. Volume features: total bytes, packets (detect bulk transfers)
     2. Rate features: bytes/sec, packets/sec (detect floods or throttling)
     3. Ratio features: sent/received ratio (detect asymmetric patterns)
     4. Port features: well-known vs high ports (detect port scanning)
     5. Time features: business hours, hour of day (detect off-hours activity)
-    
+
     Each feature is designed to capture a different attack pattern.
     """
     df = df.copy()
@@ -260,16 +260,16 @@ def train_isolation_forest(
 ) -> Tuple[IsolationForest, np.ndarray]:
     """
     Train Isolation Forest for anomaly detection.
-    
+
     Parameters:
     - X: Feature matrix (scaled)
     - contamination: Expected proportion of anomalies (0.05 = 5%)
-    
+
     Key insight:
     - Anomalies are "few and different"
     - They lie far from normal data points
     - Random forests can isolate them with fewer splits
-    
+
     Returns:
     - Trained model
     - Anomaly scores (more negative = more anomalous)

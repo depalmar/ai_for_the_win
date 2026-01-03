@@ -85,7 +85,7 @@ tools = [
     Tool(
         name="query_logs",
         func=lambda query: siem_query(query),
-        description="Query SIEM logs"
+        description="Query SIEM logs (Cortex XSIAM, Splunk, etc.)"
     ),
     Tool(
         name="check_asset",
@@ -567,7 +567,7 @@ tools = [
     },
     {
         "name": "query_logs",
-        "description": "Query SIEM logs with a search query",
+        "description": "Query SIEM logs (Cortex XSIAM, Splunk, etc.) with a search query",
         "input_schema": {
             "type": "object",
             "properties": {

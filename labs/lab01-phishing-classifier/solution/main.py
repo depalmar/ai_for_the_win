@@ -51,11 +51,11 @@ except LookupError:
 def load_data(filepath: str) -> pd.DataFrame:
     """
     Load email dataset from CSV.
-    
+
     The dataset has two columns:
     - text: The raw email content
     - label: 1 = phishing, 0 = legitimate
-    
+
     Returns a cleaned DataFrame ready for preprocessing.
     """
     df = pd.read_csv(filepath)
@@ -108,7 +108,7 @@ def explore_data(df: pd.DataFrame) -> None:
 def preprocess_text(text: str) -> str:
     """
     Clean and normalize email text for ML processing.
-    
+
     This function performs several important transformations:
     1. Lowercasing - normalizes case variations
     2. HTML removal - strips web formatting
@@ -116,7 +116,7 @@ def preprocess_text(text: str) -> str:
     4. Stopword removal - removes common words that don't indicate phishing
     5. Stemming - reduces words to their root form
        (e.g., "running", "runs", "ran" → "run")
-    
+
     Why each step matters:
     - Without lowercasing: "URGENT" and "urgent" are different tokens
     - Without HTML removal: <a>, <p> would be learned as words
@@ -173,7 +173,7 @@ def preprocess_dataset(df: pd.DataFrame) -> pd.DataFrame:
 #
 # Phishing emails have distinct characteristics that TF-IDF alone won't capture:
 # - They create urgency ("act now", "suspended") to prevent careful thinking
-# - They request sensitive info (passwords, credit cards) 
+# - They request sensitive info (passwords, credit cards)
 # - They often contain URLs to malicious sites
 # - They may use ALL CAPS to appear threatening
 #
@@ -222,7 +222,7 @@ SENSITIVE_WORDS = [
 def count_urls(text: str) -> int:
     """
     Count number of URLs in text.
-    
+
     Why this matters:
     - Phishing emails often contain multiple URLs trying to get clicks
     - Legitimate emails typically have 0-2 relevant URLs
@@ -235,12 +235,12 @@ def count_urls(text: str) -> int:
 def has_urgency(text: str) -> int:
     """
     Check if text contains urgency language.
-    
+
     Why this matters:
     - Phishers want you to act fast before you think
     - "Your account will be suspended in 24 hours!"
     - Creates fear and bypasses critical thinking
-    
+
     Returns: 1 if urgency words found, 0 otherwise
     """
     text_lower = str(text).lower()
@@ -250,12 +250,12 @@ def has_urgency(text: str) -> int:
 def requests_sensitive_info(text: str) -> int:
     """
     Check if text requests sensitive information.
-    
+
     Why this matters:
     - The primary goal of phishing is to steal credentials/info
     - Legitimate companies NEVER ask for passwords via email
     - Any email asking for sensitive info is suspicious
-    
+
     Returns: 1 if sensitive info requested, 0 otherwise
     """
     text_lower = str(text).lower()
@@ -265,12 +265,12 @@ def requests_sensitive_info(text: str) -> int:
 def calculate_caps_ratio(text: str) -> float:
     """
     Calculate ratio of uppercase letters.
-    
+
     Why this matters:
     - Phishing emails often use ALL CAPS to appear threatening
     - "YOUR ACCOUNT HAS BEEN COMPROMISED!!!"
     - Professional emails maintain normal capitalization
-    
+
     Returns: Float between 0.0 and 1.0
     """
     text = str(text)
@@ -284,12 +284,12 @@ def calculate_caps_ratio(text: str) -> float:
 def has_html(text: str) -> int:
     """
     Check if text contains HTML tags.
-    
+
     Why this matters:
     - Phishing emails often use HTML to hide malicious URLs
     - <a href="evil.com">Click here to verify your account</a>
     - Plain text emails are generally safer
-    
+
     Returns: 1 if HTML found, 0 otherwise
     """
     return int(bool(re.search(r"<[^>]+>", str(text))))
@@ -337,7 +337,7 @@ def build_feature_matrix(
     1. Extracts custom features (urgency, URLs, etc.)
     2. Creates TF-IDF features from text (word frequencies)
     3. Combines both into a single feature matrix
-    
+
     Why combine TF-IDF and custom features?
     - TF-IDF captures word patterns the model learns from data
     - Custom features encode expert knowledge about phishing
