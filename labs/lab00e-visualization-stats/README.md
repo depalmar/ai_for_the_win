@@ -1,5 +1,7 @@
 # Lab 00e: Visualization & Statistics for Security
 
+**Difficulty:** 🟢 Beginner | **Time:** 45-60 min | **Prerequisites:** Lab 00a
+
 Master interactive data visualization and statistical analysis for security data using Plotly and Python.
 
 ## Learning Objectives

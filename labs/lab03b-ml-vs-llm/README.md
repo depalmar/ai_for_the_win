@@ -1,5 +1,7 @@
 # Lab 03b: ML vs LLM - When to Use Which?
 
+**Difficulty:** 🟡 Intermediate | **Time:** 45-60 min | **Prerequisites:** Labs 01-03, API key
+
 Solve the same security problem with both ML and LLM, then compare results.
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab03b_ml_vs_llm.ipynb)

@@ -1,5 +1,7 @@
 # Lab 17a: ML Security Foundations
 
+**Difficulty:** 🟠 Advanced | **Time:** 45-60 min | **Prerequisites:** Labs 01-03
+
 Understanding the threat landscape for machine learning systems before diving into adversarial ML.
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab17a_ml_security_intro.ipynb)

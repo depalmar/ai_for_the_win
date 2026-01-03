@@ -1,5 +1,7 @@
 # Lab 00g: Working with APIs
 
+**Difficulty:** 🟢 Beginner | **Time:** 30-45 min | **Prerequisites:** Lab 00a
+
 Learn to make HTTP requests, handle JSON responses, and work with security APIs.
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab00g_working_with_apis.ipynb)

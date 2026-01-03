@@ -1,5 +1,7 @@
 # Lab 06: RAG System for Security Documentation
 
+**Difficulty:** 🟡 Intermediate | **Time:** 60-90 min | **Prerequisites:** Lab 06b, API key
+
 Build a Retrieval-Augmented Generation system for querying security documentation.
 
 ---
