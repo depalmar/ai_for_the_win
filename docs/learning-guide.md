@@ -918,7 +918,7 @@ As you work through the labs, these resources will help you go deeper:
 | [Security Prompts](../resources/prompt-library/security-prompts.md) | 500+ ready-to-use prompts for security analysis |
 | [Tools & APIs](../resources/tools-and-resources.md) | 80+ security tools, APIs, and datasets |
 | [Lab Walkthroughs](./walkthroughs/) | Step-by-step solutions when you're stuck |
-| [SIEM Integrations](../resources/integrations/) | Splunk, Elastic integration examples |
+| [SIEM Integrations](../resources/integrations/) | Platform-agnostic integration patterns |
 | [Setup Guides](./guides/) | LangChain, Cursor, Claude Code, ADK guides |
 | [Documentation Guide](./documentation-guide.md) | Find any resource quickly |
 

@@ -31,9 +31,7 @@ resources/
 ├── tools-and-resources.md       # Comprehensive tools and APIs guide
 ├── mcp-servers-security-guide.md # MCP servers for security operations
 ├── integrations/                # Enterprise platform integrations
-│   ├── README.md               # Integration overview
-│   ├── splunk-integration.md    # Splunk SIEM integration
-│   └── splunk-integration.md   # Splunk Enterprise/Cloud
+│   └── README.md               # Platform-agnostic integration patterns
 ├── prompt-library/              # Security analysis prompts
 │   └── security-prompts.md      # Curated prompt templates
 # Note: All comprehensive guides are in docs/guides/
@@ -49,7 +47,7 @@ resources/
 | [AI Agent Architectures](./ai-agent-architectures.md) | ReAct, Plan-Execute, LangGraph, Multi-Agent patterns |
 | [Tools & Resources](./tools-and-resources.md) | 70+ tools, APIs, datasets |
 | [MCP Servers Guide](./mcp-servers-security-guide.md) | DFIR, threat intel, offensive security MCP servers |
-| [Platform Integrations](./integrations/) | Splunk, Elastic integration guides |
+| [Platform Integrations](./integrations/) | Generic SIEM/SOAR integration patterns |
 | [Prompt Library](./prompt-library/) | Ready-to-use security prompts |
 | [LangChain Guide](../docs/guides/langchain-guide.md) | Comprehensive LangChain security guide |
 

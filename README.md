@@ -509,7 +509,7 @@ Copy `.env.example` to `.env` and configure:
 | [Security Prompts](./resources/prompt-library/security-prompts.md)    | Ready-to-use prompts for security tasks             |
 | [Lab Walkthroughs](./docs/walkthroughs/)                              | Step-by-step solutions when stuck                   |
 | [LangChain Guide](./docs/guides/langchain-guide.md) | Comprehensive LangChain security guide |
-| [SIEM Integrations](./resources/integrations/)                        | Splunk, Elastic integration guides                  |
+| [SIEM Integrations](./resources/integrations/)                        | Platform-agnostic integration patterns              |
 | [Tools & APIs](./resources/tools-and-resources.md)                    | 80+ security tools, APIs, datasets                  |
 | [MCP Servers](./resources/mcp-servers-security-guide.md)              | MCP servers for DFIR, threat intel                  |
 

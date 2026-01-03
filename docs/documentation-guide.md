@@ -57,9 +57,7 @@
 
 | Goal | Go To |
 |------|-------|
-| **Splunk integration** | [Splunk Guide](../resources/integrations/splunk-integration.md) |
-| **Elastic/ELK integration** | [Elastic Guide](../resources/integrations/elastic-integration.md) |
-| **All integrations** | [Integrations Index](../resources/integrations/) |
+| **SIEM/SOAR patterns** | [Integration Patterns](../resources/integrations/) |
 
 ### Go Deeper
 
