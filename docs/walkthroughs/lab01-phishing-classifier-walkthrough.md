@@ -112,7 +112,7 @@ emails['clean_text'] = emails['body'].apply(preprocess_email)
 ### What This Does
 | Original | After Preprocessing |
 |----------|---------------------|
-| "Click http://evil.com NOW!!!" | "click url now" |
+| "Click hxxp://evil[.]com NOW!!!" | "click url now" |
 | "From: admin@bank.com" | "from email" |
 | "Your $1,000,000 prize!" | "your prize" |
 

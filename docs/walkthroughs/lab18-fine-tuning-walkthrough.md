@@ -118,7 +118,7 @@ builder = SecurityDatasetBuilder()
 
 # Add phishing classification samples
 phishing_texts = [
-    "Your account has been compromised! Click here to verify: http://evil.com/verify",
+    "Your account has been compromised! Click here to verify: hxxp://evil[.]com/verify",
     "Meeting notes from yesterday's security review attached.",
     "URGENT: Wire transfer needed immediately. Reply with bank details."
 ]

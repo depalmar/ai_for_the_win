@@ -286,7 +286,7 @@ rule Trojan_Downloader_GenericHTTP
 
     strings:
         // C2 Communication
-        $url1 = "http://malicious-domain.com/gate.php" ascii wide
+        $url1 = "hxxp://malicious-domain[.]com/gate.php" ascii wide
         $url2 = "http://192.168.1.100:8080/beacon" ascii
 
         // Registry persistence
