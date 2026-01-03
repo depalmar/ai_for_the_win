@@ -117,7 +117,7 @@ rmdir test_folder      # Works on all systems (only if folder is empty)
 
 1. **Tab completion**: Start typing a folder name and press `Tab` - the terminal will auto-complete it
 2. **Up arrow**: Press `↑` to recall previous commands
-3. **Copy/paste**: 
+3. **Copy/paste**:
    - Windows: Right-click to paste in Command Prompt
    - macOS: `Cmd + V` works in Terminal
    - Linux: `Ctrl + Shift + V` (note the Shift!)
@@ -178,14 +178,17 @@ git pull
 
 **Verify it worked:**
 Open Command Prompt (search "cmd" in Start menu) and type:
+
 ```cmd
 python --version
 ```
+
 You should see something like `Python 3.11.5`
 
 ### macOS
 
 **Option A: Using Homebrew (recommended)**
+
 ```bash
 # Install Homebrew first if you don't have it
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -195,11 +198,13 @@ brew install python@3.11
 ```
 
 **Option B: Direct Download**
+
 1. Go to [python.org/downloads](https://www.python.org/downloads/)
 2. Download the macOS installer
 3. Run the installer
 
 **Verify:**
+
 ```bash
 python3 --version
 ```
@@ -212,6 +217,7 @@ sudo apt install python3.11 python3.11-venv python3-pip
 ```
 
 **Verify:**
+
 ```bash
 python3 --version
 ```
@@ -241,6 +247,7 @@ You need a place to write code. Choose one:
 ### Option C: Other IDEs
 
 Any Python IDE works, but **VS Code or Cursor are recommended** for this course because:
+
 - Better AI assistant integration (Copilot, Claude)
 - Lighter weight than full IDEs
 - Same tools the labs were built with
@@ -275,6 +282,7 @@ Git lets you download (clone) the lab repository.
 ### macOS
 
 Git comes pre-installed. If not:
+
 ```bash
 xcode-select --install
 ```
@@ -286,6 +294,7 @@ sudo apt install git
 ```
 
 **Verify:**
+
 ```bash
 git --version
 ```
@@ -297,6 +306,7 @@ git --version
 Now let's download all the labs!
 
 ### Windows (Command Prompt or PowerShell)
+
 ```cmd
 cd %USERPROFILE%\Documents
 git clone https://github.com/depalmar/ai_for_the_win.git
@@ -304,6 +314,7 @@ cd ai_for_the_win
 ```
 
 ### macOS/Linux
+
 ```bash
 cd ~/Documents
 git clone https://github.com/depalmar/ai_for_the_win.git
@@ -367,6 +378,7 @@ When you activate a virtual environment:
 ### Creating Your Virtual Environment
 
 #### Windows
+
 ```cmd
 cd ai_for_the_win
 python -m venv venv
@@ -376,6 +388,7 @@ venv\Scripts\activate
 You'll see `(venv)` at the start of your command line - that means it's active!
 
 #### macOS/Linux
+
 ```bash
 cd ai_for_the_win
 python3 -m venv venv
@@ -426,6 +439,7 @@ A: Just type `deactivate` and press Enter.
 
 **Q: Can I delete and recreate the venv?**
 A: Yes! Delete the `venv` folder, then recreate it:
+
 ```bash
 rm -rf venv                    # Delete
 python3 -m venv venv           # Recreate
@@ -467,6 +481,7 @@ python scripts/verify_setup.py
 ```
 
 You should see green checkmarks for:
+
 - [x] Python version
 - [x] Required packages
 - [x] Data files accessible
@@ -482,6 +497,7 @@ pip install jupyter
 ```
 
 To run a notebook:
+
 ```bash
 jupyter notebook
 ```
@@ -532,6 +548,7 @@ jupyter notebook
 ### "Python not found" or "python is not recognized"
 
 **Windows**: Python wasn't added to PATH during install
+
 - Reinstall Python and CHECK the "Add to PATH" box
 - Or manually add: `C:\Users\<YourName>\AppData\Local\Programs\Python\Python311` to PATH
 
@@ -546,15 +563,18 @@ python -m ensurepip --upgrade
 ### Build errors during pip install
 
 **Windows**: Install Visual Studio Build Tools
+
 - Download from [visualstudio.microsoft.com/visual-cpp-build-tools](https://visualstudio.microsoft.com/visual-cpp-build-tools/)
 - Select "Desktop development with C++"
 
 **macOS**:
+
 ```bash
 xcode-select --install
 ```
 
 **Linux**:
+
 ```bash
 sudo apt install build-essential python3-dev
 ```
@@ -655,6 +675,7 @@ What does each part do? I'm new to pandas."
 #### 2. Rubber Duck Debugging with AI
 
 When stuck, explain your problem to AI:
+
 - What you're trying to do
 - What you've tried
 - What you expected vs. what happened
@@ -757,6 +778,7 @@ If you're using **Cursor** (recommended) or **VS Code with Copilot**:
 Save these for quick copy-paste:
 
 **Error Help:**
+
 ```
 Error: [paste error]
 Code: [paste code]
@@ -765,18 +787,21 @@ Help me fix this.
 ```
 
 **Concept Explanation:**
+
 ```
 Explain [concept] for someone learning cybersecurity.
 Include a simple example and why it matters.
 ```
 
 **Code Review:**
+
 ```
 Review this code for bugs, security issues, and improvements:
 [paste code]
 ```
 
 **Learning Reinforcement:**
+
 ```
 I just learned [concept]. Give me 3 practice exercises
 to reinforce this, with solutions I can check.
