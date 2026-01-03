@@ -499,19 +499,19 @@ Copy `.env.example` to `.env` and configure:
 
 ## Quick Links
 
-| Resource                                                              | Description                                         |
-| --------------------------------------------------------------------- | --------------------------------------------------- |
-| [Environment Setup](./labs/lab00-environment-setup/)                  | First-time setup for beginners                      |
-| [Role-Based Learning Paths](./resources/role-based-learning-paths.md) | Paths for SOC, IR, hunting, red team                |
-| [Security-to-AI Glossary](./resources/security-to-ai-glossary.md)     | AI terms explained for security folks               |
-| [API Keys Guide](./docs/guides/api-keys-guide.md)                    | Get API keys, manage costs                          |
-| [Documentation Guide](./docs/documentation-guide.md)                  | Find exactly what you need                          |
-| [Security Prompts](./resources/prompt-library/security-prompts.md)    | Ready-to-use prompts for security tasks             |
-| [Lab Walkthroughs](./docs/walkthroughs/)                              | Step-by-step solutions when stuck                   |
-| [LangChain Guide](./docs/guides/langchain-guide.md) | Comprehensive LangChain security guide |
-| [SIEM Integrations](./resources/integrations/)                        | Platform-agnostic integration patterns              |
-| [Tools & APIs](./resources/tools-and-resources.md)                    | 80+ security tools, APIs, datasets                  |
-| [MCP Servers](./resources/mcp-servers-security-guide.md)              | MCP servers for DFIR, threat intel                  |
+| Resource                                                              | Description                             |
+| --------------------------------------------------------------------- | --------------------------------------- |
+| [Environment Setup](./labs/lab00-environment-setup/)                  | First-time setup for beginners          |
+| [Role-Based Learning Paths](./resources/role-based-learning-paths.md) | Paths for SOC, IR, hunting, red team    |
+| [Security-to-AI Glossary](./resources/security-to-ai-glossary.md)     | AI terms explained for security folks   |
+| [API Keys Guide](./docs/guides/api-keys-guide.md)                     | Get API keys, manage costs              |
+| [Documentation Guide](./docs/documentation-guide.md)                  | Find exactly what you need              |
+| [Security Prompts](./resources/prompt-library/security-prompts.md)    | Ready-to-use prompts for security tasks |
+| [Lab Walkthroughs](./docs/walkthroughs/)                              | Step-by-step solutions when stuck       |
+| [LangChain Guide](./docs/guides/langchain-guide.md)                   | Comprehensive LangChain security guide  |
+| [SIEM Integrations](./resources/integrations/)                        | Platform-agnostic integration patterns  |
+| [Tools & APIs](./resources/tools-and-resources.md)                    | 80+ security tools, APIs, datasets      |
+| [MCP Servers](./resources/mcp-servers-security-guide.md)              | MCP servers for DFIR, threat intel      |
 
 ---
 
