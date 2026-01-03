@@ -23,40 +23,40 @@ Comprehensive collection of tools, datasets, APIs, courses, and communities for 
 
 ### LLM Providers
 
-| Provider | Models | Best For | Pricing | Link |
-|----------|--------|----------|---------|------|
-| **Anthropic** | Claude Opus 4.5, Sonnet 4, Haiku | Complex reasoning, security analysis | $3-75/M tokens | [console.anthropic.com](https://console.anthropic.com) |
-| **OpenAI** | GPT-4 Turbo, GPT-4o, o1 | General purpose, function calling | $2.50-60/M tokens | [platform.openai.com](https://platform.openai.com) |
-| **Google** | Gemini 2.0, Gemini Pro | Multimodal analysis, ADK agents | Varies | [ai.google.dev](https://ai.google.dev) |
-| **Ollama** | Llama 3.2, Mistral, Qwen, DeepSeek | Local/offline, privacy | Free (local) | [ollama.com](https://ollama.com) |
-| **Together.ai** | 200+ open models | Variety, fine-tuning | $0.10-2/M tokens | [together.ai](https://together.ai) |
-| **Fireworks.ai** | Llama, Mixtral, custom | Low latency, fine-tuning | $0.20/M tokens | [fireworks.ai](https://fireworks.ai) |
-| **Cerebras** | Llama 3.1 | Fastest inference | Free tier | [cerebras.ai](https://cerebras.ai) |
+| Provider         | Models                             | Best For                             | Pricing           | Link                                                   |
+| ---------------- | ---------------------------------- | ------------------------------------ | ----------------- | ------------------------------------------------------ |
+| **Anthropic**    | Claude Opus 4.5, Sonnet 4, Haiku   | Complex reasoning, security analysis | $3-75/M tokens    | [console.anthropic.com](https://console.anthropic.com) |
+| **OpenAI**       | GPT-4 Turbo, GPT-4o, o1            | General purpose, function calling    | $2.50-60/M tokens | [platform.openai.com](https://platform.openai.com)     |
+| **Google**       | Gemini 2.0, Gemini Pro             | Multimodal analysis, ADK agents      | Varies            | [ai.google.dev](https://ai.google.dev)                 |
+| **Ollama**       | Llama 3.2, Mistral, Qwen, DeepSeek | Local/offline, privacy               | Free (local)      | [ollama.com](https://ollama.com)                       |
+| **Together.ai**  | 200+ open models                   | Variety, fine-tuning                 | $0.10-2/M tokens  | [together.ai](https://together.ai)                     |
+| **Fireworks.ai** | Llama, Mixtral, custom             | Low latency, fine-tuning             | $0.20/M tokens    | [fireworks.ai](https://fireworks.ai)                   |
+| **Cerebras**     | Llama 3.1                          | Fastest inference                    | Free tier         | [cerebras.ai](https://cerebras.ai)                     |
 
 ### AI Development Tools
 
-| Tool | Type | Best For | Cost | Link |
-|------|------|----------|------|------|
-| **Cursor** | AI-Native IDE | Full development, agent mode | $20/month | [cursor.sh](https://cursor.sh) |
-| **Claude Code** | CLI Agent | Terminal-based agentic coding | API costs | [anthropic.com/claude-code](https://docs.anthropic.com/claude-code) |
-| **Windsurf** | AI-Native IDE | Flow-based development | $15/month | [codeium.com/windsurf](https://codeium.com/windsurf) |
-| **Aider** | CLI Agent | Git-integrated pair programming | API costs | [aider.chat](https://aider.chat) |
-| **Continue.dev** | IDE Extension | Open-source AI assistant | Free | [continue.dev](https://continue.dev) |
-| **GitHub Copilot** | IDE Extension | Code completion | $10/month | [github.com/copilot](https://github.com/features/copilot) |
-| **Amazon Q** | IDE Extension | AWS development | Free tier | [aws.amazon.com/q](https://aws.amazon.com/q/developer/) |
-| **OpenHands** | Autonomous Agent | Complex autonomous tasks | Self-hosted | [all-hands.dev](https://www.all-hands.dev) |
+| Tool               | Type             | Best For                        | Cost        | Link                                                                |
+| ------------------ | ---------------- | ------------------------------- | ----------- | ------------------------------------------------------------------- |
+| **Cursor**         | AI-Native IDE    | Full development, agent mode    | $20/month   | [cursor.sh](https://cursor.sh)                                      |
+| **Claude Code**    | CLI Agent        | Terminal-based agentic coding   | API costs   | [anthropic.com/claude-code](https://docs.anthropic.com/claude-code) |
+| **Windsurf**       | AI-Native IDE    | Flow-based development          | $15/month   | [codeium.com/windsurf](https://codeium.com/windsurf)                |
+| **Aider**          | CLI Agent        | Git-integrated pair programming | API costs   | [aider.chat](https://aider.chat)                                    |
+| **Continue.dev**   | IDE Extension    | Open-source AI assistant        | Free        | [continue.dev](https://continue.dev)                                |
+| **GitHub Copilot** | IDE Extension    | Code completion                 | $10/month   | [github.com/copilot](https://github.com/features/copilot)           |
+| **Amazon Q**       | IDE Extension    | AWS development                 | Free tier   | [aws.amazon.com/q](https://aws.amazon.com/q/developer/)             |
+| **OpenHands**      | Autonomous Agent | Complex autonomous tasks        | Self-hosted | [all-hands.dev](https://www.all-hands.dev)                          |
 
 ### Agent Frameworks
 
-| Framework | Focus | Best For | Link |
-|-----------|-------|----------|------|
-| **LangChain** | General agents | Flexible agent building | [langchain.com](https://langchain.com) |
-| **LangGraph** | Stateful agents | Complex workflows | [langchain.com/langgraph](https://langchain.com/langgraph) |
-| **Google ADK** | Production agents | Gemini-powered agents | [ai.google.dev/adk](https://ai.google.dev/adk) |
-| **CrewAI** | Multi-agent | Role-based agent teams | [crewai.com](https://crewai.com) |
-| **AutoGen** | Conversational | Multi-agent conversations | [microsoft.github.io/autogen](https://microsoft.github.io/autogen) |
-| **Semantic Kernel** | Enterprise | Microsoft ecosystem | [github.com/microsoft/semantic-kernel](https://github.com/microsoft/semantic-kernel) |
-| **Pydantic AI** | Type-safe agents | Structured outputs | [ai.pydantic.dev](https://ai.pydantic.dev) |
+| Framework           | Focus             | Best For                  | Link                                                                                 |
+| ------------------- | ----------------- | ------------------------- | ------------------------------------------------------------------------------------ |
+| **LangChain**       | General agents    | Flexible agent building   | [langchain.com](https://langchain.com)                                               |
+| **LangGraph**       | Stateful agents   | Complex workflows         | [langchain.com/langgraph](https://langchain.com/langgraph)                           |
+| **Google ADK**      | Production agents | Gemini-powered agents     | [ai.google.dev/adk](https://ai.google.dev/adk)                                       |
+| **CrewAI**          | Multi-agent       | Role-based agent teams    | [crewai.com](https://crewai.com)                                                     |
+| **AutoGen**         | Conversational    | Multi-agent conversations | [microsoft.github.io/autogen](https://microsoft.github.io/autogen)                   |
+| **Semantic Kernel** | Enterprise        | Microsoft ecosystem       | [github.com/microsoft/semantic-kernel](https://github.com/microsoft/semantic-kernel) |
+| **Pydantic AI**     | Type-safe agents  | Structured outputs        | [ai.pydantic.dev](https://ai.pydantic.dev)                                           |
 
 ### Vector Databases
 
@@ -206,52 +206,52 @@ SANS is the premier cybersecurity training organization. While their courses are
 
 ### SANS Free Resources
 
-| Resource | Description | Link |
-|----------|-------------|------|
-| **Reading Room** | 3,500+ free white papers on every security topic | [sans.org/white-papers](https://www.sans.org/white-papers/) |
-| **Posters** | Print-quality reference guides (seriously, print these) | [sans.org/posters](https://www.sans.org/posters/) |
-| **Webcasts** | Free 1-hour technical webinars | [sans.org/webcasts](https://www.sans.org/webcasts/) |
-| **Internet Storm Center** | Daily security diaries and threat intel | [isc.sans.edu](https://isc.sans.edu/) |
-| **GIAC Papers** | Research from certified professionals | [giac.org/paper](https://www.giac.org/paper) |
-| **Cyber Aces** | Free intro to cybersecurity course | [cyberaces.org](https://www.cyberaces.org/) |
-| **Holiday Hack Challenge** | Annual free CTF (December) | [holidayhackchallenge.com](https://www.holidayhackchallenge.com/) |
+| Resource                   | Description                                             | Link                                                              |
+| -------------------------- | ------------------------------------------------------- | ----------------------------------------------------------------- |
+| **Reading Room**           | 3,500+ free white papers on every security topic        | [sans.org/white-papers](https://www.sans.org/white-papers/)       |
+| **Posters**                | Print-quality reference guides (seriously, print these) | [sans.org/posters](https://www.sans.org/posters/)                 |
+| **Webcasts**               | Free 1-hour technical webinars                          | [sans.org/webcasts](https://www.sans.org/webcasts/)               |
+| **Internet Storm Center**  | Daily security diaries and threat intel                 | [isc.sans.edu](https://isc.sans.edu/)                             |
+| **GIAC Papers**            | Research from certified professionals                   | [giac.org/paper](https://www.giac.org/paper)                      |
+| **Cyber Aces**             | Free intro to cybersecurity course                      | [cyberaces.org](https://www.cyberaces.org/)                       |
+| **Holiday Hack Challenge** | Annual free CTF (December)                              | [holidayhackchallenge.com](https://www.holidayhackchallenge.com/) |
 
 ### Essential SANS Posters (Download & Print)
 
-| Poster | Best For | Topics Covered |
-|--------|----------|----------------|
-| **[Hunt Evil](https://www.sans.org/posters/hunt-evil/)** | Threat hunting, SOC | Normal vs. suspicious Windows process behaviors |
-| **[Windows Forensic Analysis](https://www.sans.org/posters/windows-forensic-analysis/)** | DFIR | Registry, event logs, artifact locations |
-| **[Memory Forensics](https://www.sans.org/posters/memory-forensics-cheat-sheet/)** | Memory analysis | Volatility commands, RAM artifacts |
-| **[Network Forensics](https://www.sans.org/posters/network-forensics-poster/)** | Network investigation | Protocol analysis, packet inspection |
-| **[Cloud Security](https://www.sans.org/posters/cloud-security-top-10/)** | Cloud IR | AWS/Azure/GCP security controls |
-| **[Intrusion Discovery (Linux)](https://www.sans.org/posters/intrusion-discovery-cheat-sheet-linux/)** | Linux IR | Evidence artifact locations |
-| **[Intrusion Discovery (Windows)](https://www.sans.org/posters/intrusion-discovery-cheat-sheet-windows/)** | Windows IR | Evidence artifact locations |
-| **[PowerShell Cheat Sheet](https://www.sans.org/posters/powershell-cheat-sheet/)** | PowerShell analysis | Commands, logging, analysis |
-| **[SIFT Workstation](https://www.sans.org/posters/sift-cheat-sheet/)** | DFIR tools | Forensic tool reference |
+| Poster                                                                                                     | Best For              | Topics Covered                                  |
+| ---------------------------------------------------------------------------------------------------------- | --------------------- | ----------------------------------------------- |
+| **[Hunt Evil](https://www.sans.org/posters/hunt-evil/)**                                                   | Threat hunting, SOC   | Normal vs. suspicious Windows process behaviors |
+| **[Windows Forensic Analysis](https://www.sans.org/posters/windows-forensic-analysis/)**                   | DFIR                  | Registry, event logs, artifact locations        |
+| **[Memory Forensics](https://www.sans.org/posters/memory-forensics-cheat-sheet/)**                         | Memory analysis       | Volatility commands, RAM artifacts              |
+| **[Network Forensics](https://www.sans.org/posters/network-forensics-poster/)**                            | Network investigation | Protocol analysis, packet inspection            |
+| **[Cloud Security](https://www.sans.org/posters/cloud-security-top-10/)**                                  | Cloud IR              | AWS/Azure/GCP security controls                 |
+| **[Intrusion Discovery (Linux)](https://www.sans.org/posters/intrusion-discovery-cheat-sheet-linux/)**     | Linux IR              | Evidence artifact locations                     |
+| **[Intrusion Discovery (Windows)](https://www.sans.org/posters/intrusion-discovery-cheat-sheet-windows/)** | Windows IR            | Evidence artifact locations                     |
+| **[PowerShell Cheat Sheet](https://www.sans.org/posters/powershell-cheat-sheet/)**                         | PowerShell analysis   | Commands, logging, analysis                     |
+| **[SIFT Workstation](https://www.sans.org/posters/sift-cheat-sheet/)**                                     | DFIR tools            | Forensic tool reference                         |
 
 > 💡 **Tip**: The "Hunt Evil" poster is legendary in the security community. It shows exactly what legitimate Windows processes look like vs. what attackers try to mimic. Essential for SOC analysts.
 
 ### SANS Blog & News
 
-| Resource | Focus | Link |
-|----------|-------|------|
-| **ISC Handlers Diary** | Daily threat analysis | [isc.sans.edu/diary.html](https://isc.sans.edu/diary.html) |
-| **SANS Blog** | Security research and news | [sans.org/blog](https://www.sans.org/blog/) |
-| **NewsBites** | Weekly security news digest (email) | [sans.org/newsletters](https://www.sans.org/newsletters/) |
+| Resource               | Focus                               | Link                                                       |
+| ---------------------- | ----------------------------------- | ---------------------------------------------------------- |
+| **ISC Handlers Diary** | Daily threat analysis               | [isc.sans.edu/diary.html](https://isc.sans.edu/diary.html) |
+| **SANS Blog**          | Security research and news          | [sans.org/blog](https://www.sans.org/blog/)                |
+| **NewsBites**          | Weekly security news digest (email) | [sans.org/newsletters](https://www.sans.org/newsletters/)  |
 
 ### SANS Certifications (GIAC)
 
 Industry-recognized certifications for those who want to go deep:
 
-| Cert | Full Name | Focus | Exam Cost |
-|------|-----------|-------|-----------|
-| **GSEC** | GIAC Security Essentials | General security | $949 |
-| **GCIH** | GIAC Certified Incident Handler | Incident response | $949 |
-| **GCFA** | GIAC Certified Forensic Analyst | Advanced DFIR | $949 |
-| **GPEN** | GIAC Penetration Tester | Offensive security | $949 |
-| **GREM** | GIAC Reverse Engineering Malware | Malware analysis | $949 |
-| **GCTI** | GIAC Cyber Threat Intelligence | Threat intel | $949 |
+| Cert     | Full Name                        | Focus              | Exam Cost |
+| -------- | -------------------------------- | ------------------ | --------- |
+| **GSEC** | GIAC Security Essentials         | General security   | $949      |
+| **GCIH** | GIAC Certified Incident Handler  | Incident response  | $949      |
+| **GCFA** | GIAC Certified Forensic Analyst  | Advanced DFIR      | $949      |
+| **GPEN** | GIAC Penetration Tester          | Offensive security | $949      |
+| **GREM** | GIAC Reverse Engineering Malware | Malware analysis   | $949      |
+| **GCTI** | GIAC Cyber Threat Intelligence   | Threat intel       | $949      |
 
 > 💰 **Cost Note**: SANS courses are expensive ($7,000-9,000+). However, many employers pay for them, and you can attempt GIAC exams without taking the course (just buy the exam). The free resources above are excellent preparation.
 
@@ -263,23 +263,23 @@ Industry-recognized certifications for those who want to go deep:
 
 ### Free Courses & Materials
 
-| Resource                            | Provider       | Topics                   | Link                                                              |
-| ----------------------------------- | -------------- | ------------------------ | ----------------------------------------------------------------- |
-| **Hugging Face NLP Course**         | Hugging Face   | Transformers, NLP        | [huggingface.co/learn](https://huggingface.co/learn)              |
-| **Fast.ai Practical Deep Learning** | fast.ai        | Deep learning, ML basics | [course.fast.ai](https://course.fast.ai/)                         |
-| **Google ML Crash Course**          | Google         | ML fundamentals          | [developers.google.com](https://developers.google.com/machine-learning/crash-course) |
-| **LangChain Academy**               | LangChain      | LLM agents, RAG          | [academy.langchain.com](https://academy.langchain.com/)           |
-| **PortSwigger Web Security**        | PortSwigger    | Web security, testing    | [portswigger.net/web-security](https://portswigger.net/web-security) |
-| **DFIR Training**                   | 13Cubed        | Forensics, IR            | [youtube.com/13cubed](https://www.youtube.com/c/13Cubed)          |
+| Resource                            | Provider     | Topics                   | Link                                                                                 |
+| ----------------------------------- | ------------ | ------------------------ | ------------------------------------------------------------------------------------ |
+| **Hugging Face NLP Course**         | Hugging Face | Transformers, NLP        | [huggingface.co/learn](https://huggingface.co/learn)                                 |
+| **Fast.ai Practical Deep Learning** | fast.ai      | Deep learning, ML basics | [course.fast.ai](https://course.fast.ai/)                                            |
+| **Google ML Crash Course**          | Google       | ML fundamentals          | [developers.google.com](https://developers.google.com/machine-learning/crash-course) |
+| **LangChain Academy**               | LangChain    | LLM agents, RAG          | [academy.langchain.com](https://academy.langchain.com/)                              |
+| **PortSwigger Web Security**        | PortSwigger  | Web security, testing    | [portswigger.net/web-security](https://portswigger.net/web-security)                 |
+| **DFIR Training**                   | 13Cubed      | Forensics, IR            | [youtube.com/13cubed](https://www.youtube.com/c/13Cubed)                             |
 
 ### Free eBooks & Guides
 
-| Resource                          | Author/Org           | Topics                     | Link                                                                     |
-| --------------------------------- | -------------------- | -------------------------- | ------------------------------------------------------------------------ |
-| **The Threat Intelligence Handbook** | Recorded Future   | Threat intel fundamentals  | [recordedfuture.com](https://www.recordedfuture.com/threat-intelligence-handbook) |
-| **NIST Cybersecurity Framework**  | NIST                 | Security frameworks        | [nist.gov/cyberframework](https://www.nist.gov/cyberframework)           |
-| **OWASP Testing Guide**           | OWASP                | Application security       | [owasp.org](https://owasp.org/www-project-web-security-testing-guide/)   |
-| **Anthropic Prompt Engineering**  | Anthropic            | LLM prompting              | [docs.anthropic.com](https://docs.anthropic.com/claude/docs/prompt-engineering) |
+| Resource                             | Author/Org      | Topics                    | Link                                                                              |
+| ------------------------------------ | --------------- | ------------------------- | --------------------------------------------------------------------------------- |
+| **The Threat Intelligence Handbook** | Recorded Future | Threat intel fundamentals | [recordedfuture.com](https://www.recordedfuture.com/threat-intelligence-handbook) |
+| **NIST Cybersecurity Framework**     | NIST            | Security frameworks       | [nist.gov/cyberframework](https://www.nist.gov/cyberframework)                    |
+| **OWASP Testing Guide**              | OWASP           | Application security      | [owasp.org](https://owasp.org/www-project-web-security-testing-guide/)            |
+| **Anthropic Prompt Engineering**     | Anthropic       | LLM prompting             | [docs.anthropic.com](https://docs.anthropic.com/claude/docs/prompt-engineering)   |
 
 ---
 
@@ -547,43 +547,43 @@ level: medium
 
 ### AI Security Workshops
 
-| Workshop | Provider | Duration | Focus | Link |
-|----------|----------|----------|-------|------|
-| **Building AI-Powered Security Tools** | DeepLearning.AI | 2-4 hours | LangChain for security | [deeplearning.ai](https://www.deeplearning.ai/short-courses/) |
-| **LLM Security & Red Teaming** | AI Village | Workshop | LLM vulnerabilities | DEF CON events |
-| **Practical ML for Security** | SANS | 5 days | SEC595 content | [sans.org](https://www.sans.org) |
-| **Adversarial Machine Learning** | MITRE | Self-paced | ATLAS framework | [atlas.mitre.org](https://atlas.mitre.org) |
+| Workshop                               | Provider        | Duration   | Focus                  | Link                                                          |
+| -------------------------------------- | --------------- | ---------- | ---------------------- | ------------------------------------------------------------- |
+| **Building AI-Powered Security Tools** | DeepLearning.AI | 2-4 hours  | LangChain for security | [deeplearning.ai](https://www.deeplearning.ai/short-courses/) |
+| **LLM Security & Red Teaming**         | AI Village      | Workshop   | LLM vulnerabilities    | DEF CON events                                                |
+| **Practical ML for Security**          | SANS            | 5 days     | SEC595 content         | [sans.org](https://www.sans.org)                              |
+| **Adversarial Machine Learning**       | MITRE           | Self-paced | ATLAS framework        | [atlas.mitre.org](https://atlas.mitre.org)                    |
 
 ### Free Online Workshops
 
-| Resource | Type | Topics | Link |
-|----------|------|--------|------|
-| **LangChain Academy** | Interactive | Agents, RAG, chains | [academy.langchain.com](https://academy.langchain.com) |
-| **Hugging Face Courses** | Self-paced | NLP, transformers | [huggingface.co/learn](https://huggingface.co/learn) |
-| **Google AI Studio** | Hands-on | Gemini, ADK basics | [aistudio.google.com](https://aistudio.google.com) |
-| **Anthropic Cookbook** | Examples | Claude patterns | [github.com/anthropics/anthropic-cookbook](https://github.com/anthropics/anthropic-cookbook) |
-| **OpenAI Cookbook** | Examples | GPT patterns | [cookbook.openai.com](https://cookbook.openai.com) |
+| Resource                 | Type        | Topics              | Link                                                                                         |
+| ------------------------ | ----------- | ------------------- | -------------------------------------------------------------------------------------------- |
+| **LangChain Academy**    | Interactive | Agents, RAG, chains | [academy.langchain.com](https://academy.langchain.com)                                       |
+| **Hugging Face Courses** | Self-paced  | NLP, transformers   | [huggingface.co/learn](https://huggingface.co/learn)                                         |
+| **Google AI Studio**     | Hands-on    | Gemini, ADK basics  | [aistudio.google.com](https://aistudio.google.com)                                           |
+| **Anthropic Cookbook**   | Examples    | Claude patterns     | [github.com/anthropics/anthropic-cookbook](https://github.com/anthropics/anthropic-cookbook) |
+| **OpenAI Cookbook**      | Examples    | GPT patterns        | [cookbook.openai.com](https://cookbook.openai.com)                                           |
 
 ### Security-Specific Training Platforms
 
-| Platform | Focus | Cost | Link |
-|----------|-------|------|------|
-| **CyberDefenders** | DFIR challenges | Free + Premium | [cyberdefenders.org](https://cyberdefenders.org) |
-| **Blue Team Labs** | SOC analysis | Free + Premium | [blueteamlabs.online](https://blueteamlabs.online) |
-| **LetsDefend** | SOC/IR training | Free + Premium | [letsdefend.io](https://letsdefend.io) |
-| **TryHackMe** | Security paths | Free + Premium | [tryhackme.com](https://tryhackme.com) |
-| **HackTheBox** | Penetration testing | Free + Premium | [hackthebox.com](https://hackthebox.com) |
-| **PentesterLab** | Web security | Subscription | [pentesterlab.com](https://pentesterlab.com) |
+| Platform           | Focus               | Cost           | Link                                               |
+| ------------------ | ------------------- | -------------- | -------------------------------------------------- |
+| **CyberDefenders** | DFIR challenges     | Free + Premium | [cyberdefenders.org](https://cyberdefenders.org)   |
+| **Blue Team Labs** | SOC analysis        | Free + Premium | [blueteamlabs.online](https://blueteamlabs.online) |
+| **LetsDefend**     | SOC/IR training     | Free + Premium | [letsdefend.io](https://letsdefend.io)             |
+| **TryHackMe**      | Security paths      | Free + Premium | [tryhackme.com](https://tryhackme.com)             |
+| **HackTheBox**     | Penetration testing | Free + Premium | [hackthebox.com](https://hackthebox.com)           |
+| **PentesterLab**   | Web security        | Subscription   | [pentesterlab.com](https://pentesterlab.com)       |
 
 ### Conference Workshops & Talks
 
-| Event | AI Security Content | When | Link |
-|-------|---------------------|------|------|
-| **DEF CON AI Village** | AI/ML security research | Annual (August) | [aivillage.org](https://aivillage.org) |
-| **Black Hat** | AI security briefings | Annual | [blackhat.com](https://blackhat.com) |
-| **BSides** | Community security talks | Various | Regional events |
-| **SANS Summits** | Specialized tracks | Throughout year | [sans.org](https://sans.org) |
-| **NeurIPS ML Safety** | Research workshops | Annual (December) | [neurips.cc](https://neurips.cc) |
+| Event                  | AI Security Content      | When              | Link                                   |
+| ---------------------- | ------------------------ | ----------------- | -------------------------------------- |
+| **DEF CON AI Village** | AI/ML security research  | Annual (August)   | [aivillage.org](https://aivillage.org) |
+| **Black Hat**          | AI security briefings    | Annual            | [blackhat.com](https://blackhat.com)   |
+| **BSides**             | Community security talks | Various           | Regional events                        |
+| **SANS Summits**       | Specialized tracks       | Throughout year   | [sans.org](https://sans.org)           |
+| **NeurIPS ML Safety**  | Research workshops       | Annual (December) | [neurips.cc](https://neurips.cc)       |
 
 ---
 
@@ -591,14 +591,14 @@ level: medium
 
 ### MCP Servers for Security
 
-| Server | Purpose | Link |
-|--------|---------|------|
-| **filesystem** | Secure file access | [@modelcontextprotocol/server-filesystem](https://github.com/modelcontextprotocol/servers) |
-| **sqlite** | Database queries | [@modelcontextprotocol/server-sqlite](https://github.com/modelcontextprotocol/servers) |
-| **postgres** | PostgreSQL access | [@modelcontextprotocol/server-postgres](https://github.com/modelcontextprotocol/servers) |
-| **brave-search** | Web search | [@anthropic-ai/mcp-server-brave-search](https://github.com/anthropics/mcp-servers) |
-| **fetch** | HTTP requests | [@anthropic-ai/mcp-server-fetch](https://github.com/anthropics/mcp-servers) |
-| **github** | Repository access | [@modelcontextprotocol/server-github](https://github.com/modelcontextprotocol/servers) |
+| Server           | Purpose            | Link                                                                                       |
+| ---------------- | ------------------ | ------------------------------------------------------------------------------------------ |
+| **filesystem**   | Secure file access | [@modelcontextprotocol/server-filesystem](https://github.com/modelcontextprotocol/servers) |
+| **sqlite**       | Database queries   | [@modelcontextprotocol/server-sqlite](https://github.com/modelcontextprotocol/servers)     |
+| **postgres**     | PostgreSQL access  | [@modelcontextprotocol/server-postgres](https://github.com/modelcontextprotocol/servers)   |
+| **brave-search** | Web search         | [@anthropic-ai/mcp-server-brave-search](https://github.com/anthropics/mcp-servers)         |
+| **fetch**        | HTTP requests      | [@anthropic-ai/mcp-server-fetch](https://github.com/anthropics/mcp-servers)                |
+| **github**       | Repository access  | [@modelcontextprotocol/server-github](https://github.com/modelcontextprotocol/servers)     |
 
 ### MCP Documentation
 
@@ -613,14 +613,14 @@ level: medium
 
 ### This Repository
 
-| Guide | Focus | Link |
-|-------|-------|------|
-| **Claude Code CLI** | Anthropic's agentic CLI | [claude-code-cli-guide.md](../docs/guides/claude-code-cli-guide.md) |
-| **Gemini CLI** | Google's 1M context AI agent | [gemini-cli-guide.md](../docs/guides/gemini-cli-guide.md) |
-| **Google ADK** | Agent Development Kit | [google-adk-guide.md](../docs/guides/google-adk-guide.md) |
-| **Cursor IDE** | AI-native IDE | [cursor-ide-guide.md](../docs/guides/cursor-ide-guide.md) |
-| **AI Tools Comparison** | Tool selection guide | [ai-dev-tools-comparison.md](../docs/guides/ai-dev-tools-comparison.md) |
-| **Workshops Guide** | Hands-on exercises | [workshops-guide.md](../docs/guides/workshops-guide.md) |
+| Guide                   | Focus                        | Link                                                                    |
+| ----------------------- | ---------------------------- | ----------------------------------------------------------------------- |
+| **Claude Code CLI**     | Anthropic's agentic CLI      | [claude-code-cli-guide.md](../docs/guides/claude-code-cli-guide.md)     |
+| **Gemini CLI**          | Google's 1M context AI agent | [gemini-cli-guide.md](../docs/guides/gemini-cli-guide.md)               |
+| **Google ADK**          | Agent Development Kit        | [google-adk-guide.md](../docs/guides/google-adk-guide.md)               |
+| **Cursor IDE**          | AI-native IDE                | [cursor-ide-guide.md](../docs/guides/cursor-ide-guide.md)               |
+| **AI Tools Comparison** | Tool selection guide         | [ai-dev-tools-comparison.md](../docs/guides/ai-dev-tools-comparison.md) |
+| **Workshops Guide**     | Hands-on exercises           | [workshops-guide.md](../docs/guides/workshops-guide.md)                 |
 
 ---
 
@@ -628,23 +628,23 @@ level: medium
 
 ### AI/ML Development
 
-| Channel | Focus | Link |
-|---------|-------|------|
-| **Andrej Karpathy** | Neural networks, LLMs | [youtube.com/@AndrejKarpathy](https://www.youtube.com/@AndrejKarpathy) |
-| **3Blue1Brown** | Math & ML visualization | [youtube.com/@3blue1brown](https://www.youtube.com/@3blue1brown) |
-| **Sentdex** | Python ML tutorials | [youtube.com/@sentdex](https://www.youtube.com/@sentdex) |
-| **Two Minute Papers** | AI research summaries | [youtube.com/@TwoMinutePapers](https://www.youtube.com/@TwoMinutePapers) |
-| **Yannic Kilcher** | Paper explanations | [youtube.com/@YannicKilcher](https://www.youtube.com/@YannicKilcher) |
+| Channel               | Focus                   | Link                                                                     |
+| --------------------- | ----------------------- | ------------------------------------------------------------------------ |
+| **Andrej Karpathy**   | Neural networks, LLMs   | [youtube.com/@AndrejKarpathy](https://www.youtube.com/@AndrejKarpathy)   |
+| **3Blue1Brown**       | Math & ML visualization | [youtube.com/@3blue1brown](https://www.youtube.com/@3blue1brown)         |
+| **Sentdex**           | Python ML tutorials     | [youtube.com/@sentdex](https://www.youtube.com/@sentdex)                 |
+| **Two Minute Papers** | AI research summaries   | [youtube.com/@TwoMinutePapers](https://www.youtube.com/@TwoMinutePapers) |
+| **Yannic Kilcher**    | Paper explanations      | [youtube.com/@YannicKilcher](https://www.youtube.com/@YannicKilcher)     |
 
 ### Security & DFIR
 
-| Channel | Focus | Link |
-|---------|-------|------|
-| **13Cubed** | DFIR tutorials | [youtube.com/@13Cubed](https://www.youtube.com/@13Cubed) |
-| **John Hammond** | CTF, malware analysis | [youtube.com/@_JohnHammond](https://www.youtube.com/@_JohnHammond) |
-| **IppSec** | HackTheBox walkthroughs | [youtube.com/@ippsec](https://www.youtube.com/@ippsec) |
-| **LiveOverflow** | Security research | [youtube.com/@LiveOverflow](https://www.youtube.com/@LiveOverflow) |
-| **NetworkChuck** | Networking, security | [youtube.com/@NetworkChuck](https://www.youtube.com/@NetworkChuck) |
+| Channel          | Focus                   | Link                                                                |
+| ---------------- | ----------------------- | ------------------------------------------------------------------- |
+| **13Cubed**      | DFIR tutorials          | [youtube.com/@13Cubed](https://www.youtube.com/@13Cubed)            |
+| **John Hammond** | CTF, malware analysis   | [youtube.com/@\_JohnHammond](https://www.youtube.com/@_JohnHammond) |
+| **IppSec**       | HackTheBox walkthroughs | [youtube.com/@ippsec](https://www.youtube.com/@ippsec)              |
+| **LiveOverflow** | Security research       | [youtube.com/@LiveOverflow](https://www.youtube.com/@LiveOverflow)  |
+| **NetworkChuck** | Networking, security    | [youtube.com/@NetworkChuck](https://www.youtube.com/@NetworkChuck)  |
 
 ---
 
@@ -652,23 +652,23 @@ level: medium
 
 ### AI/ML Security
 
-| Resource | Focus | Link |
-|----------|-------|------|
-| **The Batch** | Weekly AI news | [deeplearning.ai/the-batch](https://www.deeplearning.ai/the-batch/) |
-| **Import AI** | AI research digest | [importai.substack.com](https://importai.substack.com) |
-| **AI Snake Oil** | AI critical analysis | [aisnakeoil.com](https://www.aisnakeoil.com) |
-| **Simon Willison** | LLM tools & techniques | [simonwillison.net](https://simonwillison.net) |
-| **Anthropic Research** | Claude developments | [anthropic.com/research](https://www.anthropic.com/research) |
+| Resource               | Focus                  | Link                                                                |
+| ---------------------- | ---------------------- | ------------------------------------------------------------------- |
+| **The Batch**          | Weekly AI news         | [deeplearning.ai/the-batch](https://www.deeplearning.ai/the-batch/) |
+| **Import AI**          | AI research digest     | [importai.substack.com](https://importai.substack.com)              |
+| **AI Snake Oil**       | AI critical analysis   | [aisnakeoil.com](https://www.aisnakeoil.com)                        |
+| **Simon Willison**     | LLM tools & techniques | [simonwillison.net](https://simonwillison.net)                      |
+| **Anthropic Research** | Claude developments    | [anthropic.com/research](https://www.anthropic.com/research)        |
 
 ### Security
 
-| Resource | Focus | Link |
-|----------|-------|------|
-| **Krebs on Security** | Security news | [krebsonsecurity.com](https://krebsonsecurity.com) |
-| **The Hacker News** | Security news | [thehackernews.com](https://thehackernews.com) |
-| **Risky Business** | Security podcast | [risky.biz](https://risky.biz) |
-| **SANS Reading Room** | Research papers | [sans.org/reading-room](https://www.sans.org/white-papers/) |
-| **SpecterOps Blog** | Red/blue team | [specterops.io/blog](https://specterops.io/blog) |
+| Resource              | Focus            | Link                                                        |
+| --------------------- | ---------------- | ----------------------------------------------------------- |
+| **Krebs on Security** | Security news    | [krebsonsecurity.com](https://krebsonsecurity.com)          |
+| **The Hacker News**   | Security news    | [thehackernews.com](https://thehackernews.com)              |
+| **Risky Business**    | Security podcast | [risky.biz](https://risky.biz)                              |
+| **SANS Reading Room** | Research papers  | [sans.org/reading-room](https://www.sans.org/white-papers/) |
+| **SpecterOps Blog**   | Red/blue team    | [specterops.io/blog](https://specterops.io/blog)            |
 
 ---
 
