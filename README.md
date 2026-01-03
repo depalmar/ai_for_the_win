@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/assets/images/logo.svg" alt="AI for the Win Logo" width="200">
+  <img src="docs/assets/images/logo.svg" alt="AI for the Win Logo" width="150" height="150">
 </p>
 
 # AI for the Win
