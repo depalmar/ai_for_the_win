@@ -130,7 +130,7 @@ Deep dive into incident response, threat simulation, and offensive security anal
 
 | # | Lab | Topic | What You'll Learn |
 |---|-----|-------|-------------------|
-| 10b | [DFIR Fundamentals](./lab10b-dfir-fundamentals/) | **NEW! Bridge lab** | IR lifecycle, artifacts, ATT&CK mapping |
+| 10b | [DFIR Fundamentals](./lab10a-dfir-fundamentals/) | **NEW! Bridge lab** | IR lifecycle, artifacts, ATT&CK mapping |
 | 11 | [Ransomware Detection](./lab11-ransomware-detection/) | Behavioral detection | Entropy, TTPs, response |
 | 12 | [Purple Team](./lab12-ransomware-simulation/) | Adversary emulation | Safe simulation, gap analysis |
 | 13 | [Memory Forensics AI](./lab13-memory-forensics-ai/) | Memory analysis | Volatility3, process injection, credential dumping |
@@ -146,7 +146,7 @@ Deep dive into incident response, threat simulation, and offensive security anal
 
 **Progression:**
 ```
-Lab 10b (DFIR Fundamentals) → Lab 11 (Ransomware) → Lab 12 (Purple Team) → Lab 13 (Memory Forensics)
+Lab 10a (DFIR Fundamentals) → Lab 11 (Ransomware) → Lab 12 (Purple Team) → Lab 13 (Memory Forensics)
      ↓                           ↓                     ↓                      ↓
  "Learn IR              "Detect              "Validate              "Analyze
   lifecycle"             ransomware"          detections"            memory dumps"
@@ -793,7 +793,7 @@ Track your progress:
 - [ ] Lab 09: Detection Pipeline
 - [ ] Lab 09b: Monitoring AI Systems (NEW - production observability)
 - [ ] Lab 10: IR Copilot
-- [ ] Lab 10b: DFIR Fundamentals (IR lifecycle prep)
+- [ ] Lab 10a: DFIR Fundamentals (IR lifecycle prep)
 - [ ] Lab 11: Ransomware Detection
 - [ ] Lab 12: Ransomware Simulation
 - [ ] Lab 13: Memory Forensics AI

@@ -1,4 +1,4 @@
-"""Tests for Lab 10b: DFIR Fundamentals."""
+"""Tests for Lab 10a: DFIR Fundamentals."""
 
 import sys
 from pathlib import Path
@@ -7,7 +7,7 @@ import pytest
 
 # Add labs to path
 sys.path.insert(
-    0, str(Path(__file__).parent.parent / "labs" / "lab10b-dfir-fundamentals" / "solution")
+    0, str(Path(__file__).parent.parent / "labs" / "lab10a-dfir-fundamentals" / "solution")
 )
 
 

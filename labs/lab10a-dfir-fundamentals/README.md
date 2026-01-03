@@ -1,10 +1,10 @@
-# Lab 10b: DFIR Fundamentals
+# Lab 10a: DFIR Fundamentals
 
 **Difficulty:** 🟡 Intermediate | **Time:** 60-90 min | **Prerequisites:** Labs 01-10
 
 Essential incident response concepts before diving into advanced DFIR labs.
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab10b_dfir_fundamentals.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab10a_dfir_fundamentals.ipynb)
 
 ## Learning Objectives
 

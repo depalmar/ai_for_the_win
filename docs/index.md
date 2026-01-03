@@ -1365,7 +1365,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
         <span class="difficulty difficulty-2">&#9733;&#9733;&#9734; Intermediate</span>
       </div>
     </a>
-    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab10b-dfir-fundamentals" class="lab-card" data-category="dfir">
+    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab10a-dfir-fundamentals" class="lab-card" data-category="dfir">
       <div class="lab-header">
         <span class="lab-number dfir">10b</span>
         <span class="lab-title">DFIR Fundamentals</span>

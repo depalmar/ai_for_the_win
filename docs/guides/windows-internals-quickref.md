@@ -415,6 +415,6 @@ netstat -ano
 ## Learn More
 
 - Lab 13: Memory Forensics AI
-- Lab 10b: DFIR Fundamentals
+- Lab 10a: DFIR Fundamentals
 - [Windows Internals Book](https://docs.microsoft.com/en-us/sysinternals/resources/windows-internals) (Microsoft)
 - [Sysinternals Tools](https://docs.microsoft.com/en-us/sysinternals/) (Process Explorer, Autoruns, etc.)

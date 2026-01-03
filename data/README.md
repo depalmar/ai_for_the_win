@@ -273,8 +273,8 @@ python scripts/generate_datasets.py --type malware --count 500
 | `network/traffic.csv`              | Lab 03 (Anomaly), Lab 14 (C2 Traffic)                              |
 | `threat-intel/iocs.json`           | Lab 05 (Threat Intel), Lab 06 (RAG)                                |
 | `threat-intel/actor_profiles.json` | Lab 16 (Actor Profiling)                                           |
-| `forensics/`                       | Lab 10b (DFIR), Lab 13 (Memory Forensics)                          |
-| `forensics/super_timeline.json`    | Lab 10 (IR Copilot), Lab 10b (DFIR Fundamentals)                   |
+| `forensics/`                       | Lab 10a (DFIR), Lab 13 (Memory Forensics)                          |
+| `forensics/super_timeline.json`    | Lab 10 (IR Copilot), Lab 10a (DFIR Fundamentals)                   |
 
 ## Public Datasets for Production-Scale Practice
 

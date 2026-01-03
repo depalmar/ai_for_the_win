@@ -53,7 +53,7 @@ These walkthroughs provide:
 | [Lab 08](./lab08-vuln-scanner-ai-walkthrough.md) | Vulnerability Prioritizer | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab08_vuln_scanner_ai.ipynb) | Advanced |
 | [Lab 09](./lab09-detection-pipeline-walkthrough.md) | Detection Pipeline | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab09_detection_pipeline.ipynb) | Advanced |
 | [Lab 10](./lab10-ir-copilot-walkthrough.md) | IR Copilot | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab10_ir_copilot.ipynb) | Advanced |
-| [Lab 10b](./lab10b-dfir-fundamentals-walkthrough.md) | DFIR Fundamentals | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab10b_dfir_fundamentals.ipynb) | Advanced |
+| [Lab 10a](./lab10a-dfir-fundamentals-walkthrough.md) | DFIR Fundamentals | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab10a_dfir_fundamentals.ipynb) | Advanced |
 
 ### DFIR & Expert Labs
 
