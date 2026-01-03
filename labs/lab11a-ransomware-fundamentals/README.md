@@ -67,6 +67,22 @@ By completing this lab, you will:
 | **2021** | REvil/Kaseya | Supply chain attacks, $70M ransom |
 | **2023+** | LockBit 3.0 | RaaS ecosystem, bug bounties, triple extortion |
 
+### AI/LLM Evolution in Ransomware
+
+Modern ransomware groups are increasingly leveraging AI:
+
+| AI Use Case | How Attackers Use It | Defensive Implications |
+|-------------|---------------------|------------------------|
+| **Phishing generation** | LLMs create convincing, personalized phishing emails at scale | Traditional detection struggles with AI-generated content |
+| **Code obfuscation** | AI generates polymorphic code to evade signatures | Need behavioral detection, not just signatures |
+| **Target research** | AI scrapes and analyzes victim organizations | Attackers arrive better prepared |
+| **Negotiation** | Chatbots handle ransom negotiations 24/7 | More professional criminal operations |
+| **Translation** | Instant localization of ransom notes | Global reach without language barriers |
+
+> ⚠️ **Defender's Edge**: AI works both ways. The same capabilities that help attackers can power better detection (Labs 09-11).
+
+---
+
 ### Modern Ransomware-as-a-Service (RaaS)
 
 ```
@@ -481,6 +497,12 @@ lab11a-ransomware-fundamentals/
 - [CISA StopRansomware](https://www.cisa.gov/stopransomware) - Alerts and guidance
 - [ID Ransomware](https://id-ransomware.malwarehunterteam.com/) - Family identification
 - [Ransomware Overview (MITRE)](https://attack.mitre.org/techniques/T1486/)
+
+### Purple Team & Detection Validation
+- [Atomic Red Team](https://github.com/redcanaryco/atomic-red-team) - Library of tests mapped to MITRE ATT&CK
+- [MITRE Caldera](https://caldera.mitre.org/) - Automated adversary emulation platform
+- [Atomic Red Team - Ransomware Tests](https://github.com/redcanaryco/atomic-red-team/tree/master/atomics/T1486) - Specific T1486 tests
+- [Purple Team Exercise Framework](https://github.com/scythe-io/purple-team-exercise-framework) - Structured exercises
 
 ### Threat Intelligence
 - [Mandiant Ransomware Reports](https://www.mandiant.com/)
