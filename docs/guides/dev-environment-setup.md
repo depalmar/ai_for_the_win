@@ -867,4 +867,4 @@ python -c "import yara; print('YARA: OK')"
 
 ---
 
-**Next**: Proceed to [Resources & Tools](../resources/tools-and-resources.md) for learning materials and datasets.
+**Next**: Proceed to [Resources & Tools](../../resources/tools-and-resources.md) for learning materials and datasets.

@@ -39,6 +39,8 @@ jobs:
             --exclude '^https://platform\.openai\.com'
             --exclude '^https://aistudio\.google\.com'
             --exclude '^https://claude\.ai'
+            --exclude '^https://chat\.openai\.com'
+            --exclude '^https://join\.slack\.com'
             --exclude '^https://localhost'
             --exclude '^http://localhost'
             --exclude '127\.0\.0\.1'
