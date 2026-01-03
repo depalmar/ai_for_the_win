@@ -254,6 +254,6 @@ Human required:
 ## Next Steps
 
 Continue to:
-- [Lab 01: Phishing Classifier](./lab01-walkthrough.md) - Build your first ML model
-- [Lab 04: LLM Log Analysis](./lab04-walkthrough.md) - Apply LLMs to security
-- [Lab 10: IR Copilot](./lab10-walkthrough.md) - Build an AI assistant
+- [Lab 01: Phishing Classifier](./lab01-phishing-classifier-walkthrough.md) - Build your first ML model
+- [Lab 04: LLM Log Analysis](./lab04-llm-log-analysis-walkthrough.md) - Apply LLMs to security
+- [Lab 10: IR Copilot](./lab10-ir-copilot-walkthrough.md) - Build an AI assistant

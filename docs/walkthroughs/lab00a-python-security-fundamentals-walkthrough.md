@@ -275,4 +275,4 @@ with open("file.txt", "w") as f:     # Write
 
 ## Next Lab
 
-Continue to [Lab 00b: ML Concepts Primer](./lab00b-walkthrough.md) to understand machine learning fundamentals before coding.
+Continue to [Lab 00b: ML Concepts Primer](./lab00b-ml-concepts-primer-walkthrough.md) to understand machine learning fundamentals before coding.

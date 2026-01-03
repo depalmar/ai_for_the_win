@@ -645,4 +645,4 @@ Attack timeline analysis reveals:
 
 ## Next Lab
 
-Continue to [Lab 04: LLM Log Analysis](./lab04-walkthrough.md) to learn how to use LLMs for security log analysis.
+Continue to [Lab 04: LLM Log Analysis](./lab04-llm-log-analysis-walkthrough.md) to learn how to use LLMs for security log analysis.

@@ -565,4 +565,4 @@ async def analyze_stream(log_stream, llm_client):
 
 ## Next Lab
 
-Continue to [Lab 05: Threat Intel Agent](./lab05-walkthrough.md) to build an autonomous investigation agent.
+Continue to [Lab 05: Threat Intel Agent](./lab05-threat-intel-agent-walkthrough.md) to build an autonomous investigation agent.

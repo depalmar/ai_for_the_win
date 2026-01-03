@@ -319,5 +319,5 @@ python solution/main.py
 ## Next Steps
 
 Continue to:
-- [Lab 00d: AI in Security Ops](./lab00d-walkthrough.md) - When to use AI
-- [Lab 04: LLM Log Analysis](./lab04-walkthrough.md) - Apply prompts to real logs
+- [Lab 00d: AI in Security Ops](./lab00d-ai-in-security-ops-walkthrough.md) - When to use AI
+- [Lab 04: LLM Log Analysis](./lab04-llm-log-analysis-walkthrough.md) - Apply prompts to real logs

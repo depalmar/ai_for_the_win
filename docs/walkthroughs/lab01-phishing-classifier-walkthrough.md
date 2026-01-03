@@ -446,4 +446,4 @@ Real phishing campaigns show similar patterns:
 
 ## Next Lab
 
-Continue to [Lab 02: Malware Clustering](./lab02-walkthrough.md) to learn unsupervised learning for malware analysis.
+Continue to [Lab 02: Malware Clustering](./lab02-malware-clustering-walkthrough.md) to learn unsupervised learning for malware analysis.
