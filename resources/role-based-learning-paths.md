@@ -13,7 +13,7 @@ Find your path based on your current role and goals. Each path is ordered for ma
 | Threat Hunter | Find unknowns, build detection | [Threat Hunter Path](#-threat-hunter-path) |
 | Detection Engineer | Better rules, ML-powered detection | [Detection Engineer Path](#-detection-engineer-path) |
 | Threat Intel Analyst | Process reports faster, automate IOC extraction | [Threat Intel Path](#-threat-intel-analyst-path) |
-| Red Teamer / Pentester | Understand AI defenses, adversarial ML | [Red Team Path](#-red-team-path) |
+| Red Teamer / Pentester | Understand AI defenses, adversarial ML | [AI Red Team Path](#-ai-red-team-path) |
 | Security Engineer | Build AI-powered tools and pipelines | [Security Engineer Path](#-security-engineer-path) |
 | Manager / Leader | Understand capabilities, make informed decisions | [Leadership Path](#-leadership-path) |
 | Career Changer | Break into security with AI skills | [Career Changer Path](#-career-changer-path) |
@@ -204,7 +204,7 @@ Lab 00  00a       00c        Lab 04          Lab 05          Lab 06     Lab 16
 
 ---
 
-## 🔴 Red Team Path
+## 🔴 AI Red Team Path
 
 **Goal**: Understand AI defenses, exploit ML systems, test LLM guardrails.
 

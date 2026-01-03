@@ -1,4 +1,4 @@
-# Lab 10b: DFIR Fundamentals Walkthrough
+# Lab 10a: DFIR Fundamentals Walkthrough
 
 Step-by-step guide to incident response and forensic analysis.
 

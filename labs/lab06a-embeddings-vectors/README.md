@@ -1,10 +1,10 @@
-# Lab 06b: Embeddings & Vectors Explained
+# Lab 06a: Embeddings & Vectors Explained
 
 **Difficulty:** 🟡 Intermediate | **Time:** 45-60 min | **Prerequisites:** Lab 04
 
 Understand how AI "understands" meaning through vector representations.
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab06b_embeddings_vectors.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab06a_embeddings_vectors.ipynb)
 
 ## Learning Objectives
 

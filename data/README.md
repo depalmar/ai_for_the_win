@@ -4,6 +4,20 @@ Sanitized, safe-to-use datasets for the AI Security Training Program labs.
 
 > ⚠️ **Security Software Notice**: Some sample data contains realistic attack patterns, tool names, and command-line examples that may trigger antivirus or EDR alerts. This is **expected behavior** - these are educational datasets designed to teach threat detection. The data contains **no actual malware, no executable code, and no real credentials**. If your security software flags these files, you can safely add an exception for this educational repository.
 
+---
+
+**📋 Usage Disclaimer**
+
+This data is provided for **educational purposes only**:
+
+- **Synthetic Data**: All samples are synthetic or heavily sanitized. They represent realistic patterns but are not derived from actual incidents without anonymization.
+- **No Production Use**: These datasets are designed for learning, not for training production detection systems. Real-world data has different distributions and edge cases.
+- **No Guarantees**: The labels (malicious/benign) are for educational illustration. Do not use these labels as ground truth for production classifiers.
+- **Responsible Use**: Do not use patterns from this data to conduct unauthorized attacks. These are for defensive training only.
+- **Not Comprehensive**: These datasets intentionally cover common patterns. Real threats include many variants not represented here.
+
+---
+
 ```
 data/
 +-- README.md                 # This file
@@ -273,8 +287,8 @@ python scripts/generate_datasets.py --type malware --count 500
 | `network/traffic.csv`              | Lab 03 (Anomaly), Lab 14 (C2 Traffic)                              |
 | `threat-intel/iocs.json`           | Lab 05 (Threat Intel), Lab 06 (RAG)                                |
 | `threat-intel/actor_profiles.json` | Lab 16 (Actor Profiling)                                           |
-| `forensics/`                       | Lab 10b (DFIR), Lab 13 (Memory Forensics)                          |
-| `forensics/super_timeline.json`    | Lab 10 (IR Copilot), Lab 10b (DFIR Fundamentals)                   |
+| `forensics/`                       | Lab 10a (DFIR), Lab 13 (Memory Forensics)                          |
+| `forensics/super_timeline.json`    | Lab 10 (IR Copilot), Lab 10a (DFIR Fundamentals)                   |
 
 ## Public Datasets for Production-Scale Practice
 

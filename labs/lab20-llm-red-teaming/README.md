@@ -1,5 +1,42 @@
 # Lab 20: LLM Red Teaming - Attacking AI Systems
 
+## ⚠️ LEGAL NOTICE
+
+```
+╔═══════════════════════════════════════════════════════════════════════════════╗
+║                           LEGAL DISCLAIMER                                    ║
+╠═══════════════════════════════════════════════════════════════════════════════╣
+║                                                                               ║
+║  This lab is provided for EDUCATIONAL and AUTHORIZED SECURITY TESTING        ║
+║  purposes ONLY. The techniques described are for:                            ║
+║                                                                               ║
+║    ✓ Security professionals testing their own AI systems                     ║
+║    ✓ Red team exercises with proper authorization                            ║
+║    ✓ AI safety research in controlled environments                           ║
+║    ✓ Academic research and responsible disclosure                            ║
+║                                                                               ║
+║  UNAUTHORIZED USE IS PROHIBITED. Using these techniques against AI systems   ║
+║  you do not own or have explicit permission to test may violate:             ║
+║                                                                               ║
+║    • Computer Fraud and Abuse Act (CFAA) - United States                     ║
+║    • Computer Misuse Act - United Kingdom                                    ║
+║    • Terms of Service of AI providers                                        ║
+║    • Similar laws in your jurisdiction                                       ║
+║                                                                               ║
+║  RESPONSIBLE DISCLOSURE: If you discover vulnerabilities in production AI    ║
+║  systems, follow responsible disclosure practices. Report issues to the      ║
+║  vendor's security team before public disclosure.                            ║
+║                                                                               ║
+║  The authors assume NO LIABILITY for misuse of this material.                ║
+║                                                                               ║
+║  By proceeding, you acknowledge that you will only use this content          ║
+║  in authorized, legal contexts.                                              ║
+║                                                                               ║
+╚═══════════════════════════════════════════════════════════════════════════════╝
+```
+
+---
+
 ## Offensive Security for Large Language Models
 
 ```

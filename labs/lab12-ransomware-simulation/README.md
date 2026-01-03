@@ -2,6 +2,40 @@
 
 Build AI-powered tools to simulate ransomware attacks for purple team exercises and defense validation.
 
+---
+
+## ⚠️ LEGAL NOTICE
+
+```
+╔═══════════════════════════════════════════════════════════════════════════════╗
+║                           LEGAL DISCLAIMER                                    ║
+╠═══════════════════════════════════════════════════════════════════════════════╣
+║                                                                               ║
+║  This lab is provided for EDUCATIONAL and AUTHORIZED DEFENSIVE TESTING       ║
+║  purposes ONLY. The techniques described are for:                            ║
+║                                                                               ║
+║    ✓ Security professionals testing their own systems                        ║
+║    ✓ Purple team exercises with proper authorization                         ║
+║    ✓ Detection engineering and validation                                    ║
+║    ✓ Academic research in controlled environments                            ║
+║                                                                               ║
+║  UNAUTHORIZED USE IS ILLEGAL. Deploying these techniques against systems     ║
+║  you do not own or have explicit written permission to test may violate:     ║
+║                                                                               ║
+║    • Computer Fraud and Abuse Act (CFAA) - United States                     ║
+║    • Computer Misuse Act - United Kingdom                                    ║
+║    • Similar laws in your jurisdiction                                       ║
+║                                                                               ║
+║  The authors assume NO LIABILITY for misuse of this material.                ║
+║                                                                               ║
+║  By proceeding, you acknowledge that you will only use this content          ║
+║  in authorized, legal contexts.                                              ║
+║                                                                               ║
+╚═══════════════════════════════════════════════════════════════════════════════╝
+```
+
+---
+
 ## 🎯 Learning Objectives
 
 By completing this lab, you will:
@@ -509,10 +543,19 @@ class PurpleTeamExercise:
 
 ## Resources
 
-- [MITRE ATT&CK: Ransomware](https://attack.mitre.org/)
-- [Atomic Red Team](https://github.com/redcanaryco/atomic-red-team)
-- [CISA Ransomware Guide](https://www.cisa.gov/stopransomware)
+### Purple Team Platforms
+- [Atomic Red Team](https://github.com/redcanaryco/atomic-red-team) - Open source TTP tests mapped to ATT&CK
+- [MITRE Caldera](https://caldera.mitre.org/) - Automated adversary emulation platform
 - [Purple Team Exercise Framework](https://github.com/scythe-io/purple-team-exercise-framework)
+
+### Ransomware-Specific
+- [MITRE ATT&CK: Ransomware](https://attack.mitre.org/techniques/T1486/)
+- [Atomic Red Team T1486 Tests](https://github.com/redcanaryco/atomic-red-team/tree/master/atomics/T1486)
+- [CISA StopRansomware](https://www.cisa.gov/stopransomware)
+
+### SANS Resources
+- [FOR528: Ransomware for Incident Responders](https://www.sans.org/cyber-security-courses/ransomware-incident-responders/) - By Ryan Chapman
+- [SANS Webcasts - Purple Team](https://www.sans.org/webcasts/)
 
 ## Safety Reminders
 

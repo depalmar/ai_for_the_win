@@ -400,7 +400,7 @@ Now that you understand the basics, here's how Lab 05 builds on this:
 | If you want to... | Go to... |
 |-------------------|----------|
 | Build a full threat intel agent | [Lab 05: Threat Intel Agent](../lab05-threat-intel-agent/) |
-| Learn about embeddings first | [Lab 06b: Embeddings & Vectors](../lab06b-embeddings-vectors/) |
+| Learn about embeddings first | [Lab 06a: Embeddings & Vectors](../lab06a-embeddings-vectors/) |
 | Build a RAG system | [Lab 06: Security RAG](../lab06-security-rag/) |
 
 ---

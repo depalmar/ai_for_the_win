@@ -82,6 +82,7 @@ def check_required_packages():
         "langchain_anthropic": "LangChain Anthropic (Claude)",
         "langchain_openai": "LangChain OpenAI (GPT)",
         "langchain_google_genai": "LangChain Google (Gemini)",
+        "langchain_community": "LangChain Community (Tools/Integrations)",
         # Vector DB
         "chromadb": "ChromaDB (vector database)",
         # Security

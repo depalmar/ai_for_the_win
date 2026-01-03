@@ -325,7 +325,7 @@ CEF:0|Security|Firewall|1.0|BLOCK|Blocked connection|5|src=192.168.1.100 dst=10.
 | **Forensics** | Investigate what happened and how |
 | **Chain of Custody** | Document who handled evidence and when |
 
-**Lab Connection**: Lab 10b (DFIR Fundamentals) covers this in depth.
+**Lab Connection**: Lab 10a (DFIR Fundamentals) covers this in depth.
 
 ---
 
@@ -430,7 +430,7 @@ These reference posters are gold - download and print them:
 ### In This Course
 
 - **Lab 00d**: AI in Security Operations - conceptual overview
-- **Lab 10b**: DFIR Fundamentals - incident response basics
+- **Lab 10a**: DFIR Fundamentals - incident response basics
 - **Glossary**: [security-to-ai-glossary.md](../../resources/security-to-ai-glossary.md) - AI terms explained for security folks
 
 ---

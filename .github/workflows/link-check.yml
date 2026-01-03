@@ -1,0 +1,57 @@
+# Link Checker Workflow
+# Validates internal and external links in documentation
+
+name: Link Check
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**.md'
+      - 'docs/**'
+  pull_request:
+    branches: [main]
+    paths:
+      - '**.md'
+      - 'docs/**'
+  schedule:
+    # Run weekly on Mondays at 00:00 UTC
+    - cron: '0 0 * * 1'
+  workflow_dispatch:
+
+jobs:
+  link-check:
+    name: Check Links
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check links
+        uses: lycheeverse/lychee-action@v1
+        with:
+          args: >-
+            --verbose
+            --no-progress
+            --accept 200,204,206,301,302,304
+            --exclude-mail
+            --exclude '^https://console\.anthropic\.com'
+            --exclude '^https://platform\.openai\.com'
+            --exclude '^https://aistudio\.google\.com'
+            --exclude '^https://localhost'
+            --exclude '^http://localhost'
+            --exclude '127\.0\.0\.1'
+            --exclude 'YOUR_USERNAME'
+            --exclude 'your-key-here'
+            './**/*.md'
+          fail: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create Issue on Failure
+        if: failure()
+        uses: peter-evans/create-issue-from-file@v5
+        with:
+          title: Link Check Report
+          content-filepath: ./lychee/out.md
+          labels: documentation, automated

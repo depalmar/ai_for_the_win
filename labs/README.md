@@ -82,13 +82,13 @@ Learn to apply Large Language Models to security problems.
 | 04 | [LLM Log Analysis](./lab04-llm-log-analysis/) | Prompt engineering | Structured outputs, IOC extraction |
 | 04b | [Your First AI Agent](./lab04b-first-ai-agent/) | **NEW! Bridge lab** | Tool calling, ReAct basics |
 | 06 | [Security RAG](./lab06-security-rag/) | Vector search + LLM | Embeddings, ChromaDB, retrieval |
-| 06b | [Embeddings & Vectors](./lab06b-embeddings-vectors/) | **NEW! Bridge lab** | How embeddings work, semantic search |
+| 06b | [Embeddings & Vectors](./lab06a-embeddings-vectors/) | **NEW! Bridge lab** | How embeddings work, semantic search |
 | 07 | [YARA Generator](./lab07-yara-generator/) | AI code generation | Binary analysis, rule generation |
 | 07a | [Binary Analysis Basics](./lab07a-binary-basics/) | **NEW! Bridge lab** | PE structure, entropy, imports |
 
 **Progression:**
 ```
-Lab 04 (Prompts) → Lab 04b (First Agent) → Lab 06b (Embeddings) → Lab 06 (RAG) → Lab 07 (YARA)
+Lab 04 (Prompts) → Lab 04b (First Agent) → Lab 06a (Embeddings) → Lab 06 (RAG) → Lab 07 (YARA)
      ↓                   ↓                        ↓                    ↓              ↓
  "Parse logs       "Simple tool           "How vectors        "Build RAG      "Generate
   with LLM"         calling"               work"               system"         YARA rules"
@@ -130,7 +130,8 @@ Deep dive into incident response, threat simulation, and offensive security anal
 
 | # | Lab | Topic | What You'll Learn |
 |---|-----|-------|-------------------|
-| 10b | [DFIR Fundamentals](./lab10b-dfir-fundamentals/) | **NEW! Bridge lab** | IR lifecycle, artifacts, ATT&CK mapping |
+| 10a | [DFIR Fundamentals](./lab10a-dfir-fundamentals/) | **Bridge lab** | IR lifecycle, artifacts, ATT&CK mapping |
+| 11a | [Ransomware Fundamentals](./lab11a-ransomware-fundamentals/) | **NEW! Bridge lab** | Evolution, families, indicators, recovery |
 | 11 | [Ransomware Detection](./lab11-ransomware-detection/) | Behavioral detection | Entropy, TTPs, response |
 | 12 | [Purple Team](./lab12-ransomware-simulation/) | Adversary emulation | Safe simulation, gap analysis |
 | 13 | [Memory Forensics AI](./lab13-memory-forensics-ai/) | Memory analysis | Volatility3, process injection, credential dumping |
@@ -146,7 +147,7 @@ Deep dive into incident response, threat simulation, and offensive security anal
 
 **Progression:**
 ```
-Lab 10b (DFIR Fundamentals) → Lab 11 (Ransomware) → Lab 12 (Purple Team) → Lab 13 (Memory Forensics)
+Lab 10a (DFIR Fundamentals) → Lab 11a (Ransomware Basics) → Lab 11 (Detection) → Lab 12 (Purple Team) → Lab 13 (Memory)
      ↓                           ↓                     ↓                      ↓
  "Learn IR              "Detect              "Validate              "Analyze
   lifecycle"             ransomware"          detections"            memory dumps"
@@ -784,7 +785,7 @@ Track your progress:
 - [ ] Lab 03b: ML vs LLM Decision (bridge lab)
 - [ ] Lab 04: LLM Log Analysis
 - [ ] Lab 04b: Your First AI Agent (NEW - bridge lab)
-- [ ] Lab 06b: Embeddings & Vectors (how vectors work)
+- [ ] Lab 06a: Embeddings & Vectors (how vectors work)
 - [ ] Lab 07a: Binary Analysis Basics (PE fundamentals)
 - [ ] Lab 05: Threat Intel Agent
 - [ ] Lab 06: Security RAG
@@ -793,7 +794,8 @@ Track your progress:
 - [ ] Lab 09: Detection Pipeline
 - [ ] Lab 09b: Monitoring AI Systems (NEW - production observability)
 - [ ] Lab 10: IR Copilot
-- [ ] Lab 10b: DFIR Fundamentals (IR lifecycle prep)
+- [ ] Lab 10a: DFIR Fundamentals (IR lifecycle prep)
+- [ ] Lab 11a: Ransomware Fundamentals (NEW - bridge lab)
 - [ ] Lab 11: Ransomware Detection
 - [ ] Lab 12: Ransomware Simulation
 - [ ] Lab 13: Memory Forensics AI

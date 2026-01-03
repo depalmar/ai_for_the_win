@@ -1299,7 +1299,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
         <span class="difficulty difficulty-2">&#9733;&#9733;&#9734; Intermediate</span>
       </div>
     </a>
-    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab06b-embeddings-vectors" class="lab-card" data-category="llm">
+    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab06a-embeddings-vectors" class="lab-card" data-category="llm">
       <div class="lab-header">
         <span class="lab-number llm">06b</span>
         <span class="lab-title">Embeddings & Vectors</span>
@@ -1365,7 +1365,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
         <span class="difficulty difficulty-2">&#9733;&#9733;&#9734; Intermediate</span>
       </div>
     </a>
-    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab10b-dfir-fundamentals" class="lab-card" data-category="dfir">
+    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab10a-dfir-fundamentals" class="lab-card" data-category="dfir">
       <div class="lab-header">
         <span class="lab-number dfir">10b</span>
         <span class="lab-title">DFIR Fundamentals</span>
@@ -1778,7 +1778,7 @@ function toggleTheme() {
     </a>
     <a href="https://github.com/depalmar/ai_for_the_win/blob/main/resources/role-based-learning-paths.md#-red-team-path" class="feature" style="text-decoration: none; cursor: pointer;">
       <div class="feature-icon">🔴</div>
-      <h3 style="margin: 0;">Red Team</h3>
+      <h3 style="margin: 0;">AI Red Team</h3>
       <p>Evade ML, attack AI systems</p>
       <span style="font-size: 0.75rem; color: var(--secondary);">Labs 03→17→20</span>
     </a>
