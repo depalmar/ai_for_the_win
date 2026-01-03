@@ -66,6 +66,38 @@ class Severity(Enum):
     LOW = "low"
     INFO = "info"
 
+    @property
+    def order(self) -> int:
+        """Return numeric order for sorting (higher = more severe)."""
+        return {
+            Severity.CRITICAL: 5,
+            Severity.HIGH: 4,
+            Severity.MEDIUM: 3,
+            Severity.LOW: 2,
+            Severity.INFO: 1,
+        }[self]
+
+    def __lt__(self, other: "Severity") -> bool:
+        """Enable proper severity comparison."""
+        if not isinstance(other, Severity):
+            return NotImplemented
+        return self.order < other.order
+
+    def __le__(self, other: "Severity") -> bool:
+        if not isinstance(other, Severity):
+            return NotImplemented
+        return self.order <= other.order
+
+    def __gt__(self, other: "Severity") -> bool:
+        if not isinstance(other, Severity):
+            return NotImplemented
+        return self.order > other.order
+
+    def __ge__(self, other: "Severity") -> bool:
+        if not isinstance(other, Severity):
+            return NotImplemented
+        return self.order >= other.order
+
 
 @dataclass
 class ReportSection:

@@ -198,8 +198,57 @@ challenge-name/
 
 ---
 
+## Prerequisite Labs
+
+Complete these labs before attempting CTF challenges for the best experience:
+
+### Beginner Challenges
+
+| CTF Challenge | Recommended Labs | Why |
+|---------------|------------------|-----|
+| Log Detective | [Lab 04: LLM Log Analysis](../labs/lab04-llm-log-analysis/) | Learn log parsing and pattern recognition |
+| Phish Finder | [Lab 01: Phishing Classifier](../labs/lab01-phishing-classifier/) | Understand email classification techniques |
+| Hidden IOC | [Lab 05: Threat Intel Agent](../labs/lab05-threat-intel-agent/) | Learn IOC extraction and correlation |
+| Malware Classifier | [Lab 02: Malware Clustering](../labs/lab02-malware-clustering/) | Understand feature engineering for malware |
+| Prompt Injection 101 | [Lab 20: LLM Red Teaming](../labs/lab20-llm-red-teaming/) | Learn prompt injection fundamentals |
+
+### Intermediate Challenges
+
+| CTF Challenge | Recommended Labs | Why |
+|---------------|------------------|-----|
+| C2 Hunter | [Lab 14: C2 Traffic Analysis](../labs/lab14-c2-traffic-analysis/) | Master beaconing detection and DNS analysis |
+| Memory Forensics | [Lab 13: Memory Forensics AI](../labs/lab13-memory-forensics-ai/) | Learn Volatility and memory artifact analysis |
+| Adversarial Samples | [Lab 17: Adversarial ML](../labs/lab17-adversarial-ml/) | Understand ML evasion techniques |
+| Agent Investigation | [Lab 04b: First AI Agent](../labs/lab04b-first-ai-agent/) | Learn ReAct pattern and tool calling |
+| Ransomware Response | [Lab 11: Ransomware Detection](../labs/lab11-ransomware-detection/) | Master ransomware analysis techniques |
+
+### Advanced Challenges
+
+| CTF Challenge | Recommended Labs | Why |
+|---------------|------------------|-----|
+| APT Attribution | [Lab 16: Threat Actor Profiling](../labs/lab16-threat-actor-profiling/) | Learn TTP analysis and attribution |
+| Model Poisoning | [Lab 17: Adversarial ML](../labs/lab17-adversarial-ml/) | Understand data poisoning attacks |
+| Cloud Compromise | [Lab 19: Cloud Security AI](../labs/lab19-cloud-security-ai/) | Multi-cloud security monitoring |
+| Zero-Day Detection | [Lab 03: Anomaly Detection](../labs/lab03-anomaly-detection/) | Build anomaly detection systems |
+| Full IR Scenario | [Lab 10: IR Copilot](../labs/lab10-ir-copilot/) | Complete incident response workflow |
+
+---
+
+## Threat Actor TTP Database
+
+CTF challenges use realistic threat actor data from our TTP database:
+
+- **Actor Profiles**: APT28, APT29, APT41, Lazarus, FIN7, LockBit, ALPHV, Scattered Spider, Cl0p, Conti
+- **Campaign Data**: SolarWinds, Colonial Pipeline, MOVEit, Log4Shell, Kaseya
+- **Attack Patterns**: Double extortion, supply chain, BEC fraud, insider threat
+
+See [`data/threat-actor-ttps/`](../data/threat-actor-ttps/) for comprehensive threat intelligence.
+
+---
+
 ## Resources
 
 - [Lab Walkthroughs](../docs/walkthroughs/) - Review if stuck
 - [Sample Datasets](../data/) - Practice data
+- [Threat Actor TTPs](../data/threat-actor-ttps/) - Real-world adversary profiles
 - [Prompt Library](../resources/prompt-library/) - Prompt templates
