@@ -904,7 +904,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
 </nav>
 
 <div class="hero">
-  <img src="assets/images/logo.svg" alt="AI for the Win Logo" width="120" height="120" style="margin-bottom: 1rem;">
+  <img src="assets/images/logo.png" alt="AI for the Win Logo" width="120" height="120" style="margin-bottom: 1rem;">
   <h1>AI for the Win</h1>
   <p class="tagline">Build AI-Powered Security Tools | Hands-On Learning</p>
 

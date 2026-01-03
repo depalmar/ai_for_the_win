@@ -609,8 +609,7 @@ SECURITY_TRAINING_SAMPLES = [
     },
     {
         "instruction": "Write a YARA rule to detect this malware behavior: PowerShell script that downloads and executes content from pastebin",
-        "output": """```yara
-rule PowerShell_Pastebin_Downloader {
+        "output": """rule PowerShell_Pastebin_Downloader {
     meta:
         description = "Detects PowerShell downloading from Pastebin"
         author = "Security Team"
@@ -632,8 +631,7 @@ rule PowerShell_Pastebin_Downloader {
         ($dl1 or $dl2 or $dl3) and
         ($pb1 or $pb2) and
         ($exec1 or $exec2)
-}
-```"""
+}"""
     }
 ]
 ```
