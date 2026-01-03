@@ -431,6 +431,78 @@ SENSITIVE_PATTERNS = [
 
 ---
 
+## Sigma Rules for Lateral Movement
+
+### PsExec Detection
+
+```yaml
+title: PsExec Service Installation
+status: stable
+description: Detects PsExec service installation on target host
+logsource:
+    product: windows
+    service: system
+detection:
+    selection:
+        EventID: 7045
+        ServiceName|contains: 'PSEXE'
+    condition: selection
+level: high
+tags:
+    - attack.lateral_movement
+    - attack.t1021.002
+    - attack.execution
+    - attack.t1569.002
+```
+
+### WMI Remote Execution
+
+```yaml
+title: Remote WMI Process Creation
+status: experimental
+description: Detects WMI spawning processes remotely
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection:
+        ParentImage|endswith: '\WmiPrvSE.exe'
+        Image|endswith:
+            - '\cmd.exe'
+            - '\powershell.exe'
+    condition: selection
+level: high
+tags:
+    - attack.execution
+    - attack.t1047
+```
+
+### Pass-the-Hash Detection
+
+```yaml
+title: Pass the Hash Activity
+status: experimental
+description: Detects PtH by monitoring for NTLM auth type 3 logons
+logsource:
+    product: windows
+    service: security
+detection:
+    selection:
+        EventID: 4624
+        LogonType: 3
+        AuthenticationPackageName: 'NTLM'
+        WorkstationName|not endswith: '$'  # Exclude machine accounts
+    filter:
+        TargetUserName|endswith: '$'  # Exclude machine accounts
+    condition: selection and not filter
+level: medium
+tags:
+    - attack.lateral_movement
+    - attack.t1550.002
+```
+
+---
+
 ## Bonus Challenges
 
 1. **Kerberoasting Detection**: Detect service ticket requests for crackable accounts

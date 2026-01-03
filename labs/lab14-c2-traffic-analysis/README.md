@@ -274,7 +274,57 @@ class TLSCertAnalyzer:
         }
 ```
 
-### Task 5: C2 Detection Pipeline
+### Task 5: Sigma Rule Generation
+
+Generate detection rules from your findings.
+
+```yaml
+# Example Sigma rule for Cobalt Strike beaconing
+title: Potential Cobalt Strike Beacon Activity
+status: experimental
+description: Detects potential Cobalt Strike beacon based on HTTP patterns
+author: Security Training Lab
+date: 2024/01/15
+references:
+    - https://attack.mitre.org/software/S0154/
+logsource:
+    category: proxy
+detection:
+    selection:
+        cs-method: 'GET'
+        cs-uri-query|contains:
+            - '/submit.php'
+            - '/pixel.gif'
+            - '/__utm.gif'
+            - '/visit.js'
+    timeframe: 5m
+    condition: selection | count() by src_ip > 10
+falsepositives:
+    - Legitimate analytics services
+level: high
+tags:
+    - attack.command_and_control
+    - attack.t1071.001
+```
+
+```yaml
+# DNS tunneling detection
+title: Potential DNS Tunneling
+status: experimental
+description: Detects DNS queries with high entropy subdomains
+logsource:
+    category: dns
+detection:
+    selection:
+        query|re: '^[a-z0-9]{32,}\.'  # Long random-looking subdomains
+    condition: selection
+level: medium
+tags:
+    - attack.exfiltration
+    - attack.t1572
+```
+
+### Task 6: C2 Detection Pipeline
 
 Build end-to-end C2 detection.
 

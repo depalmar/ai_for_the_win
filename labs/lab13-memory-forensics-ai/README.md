@@ -302,6 +302,54 @@ def entropy(s):
 
 ---
 
+## Volatility3 Quick Reference
+
+For real-world investigations, use these Volatility3 commands:
+
+```bash
+# Identify Windows version/profile
+vol -f memory.dmp windows.info
+
+# List running processes
+vol -f memory.dmp windows.pslist
+vol -f memory.dmp windows.pstree  # Tree view
+
+# Network connections
+vol -f memory.dmp windows.netscan
+
+# Detect code injection (malfind)
+vol -f memory.dmp windows.malfind
+
+# List loaded DLLs for a process
+vol -f memory.dmp windows.dlllist --pid 1234
+
+# Dump process memory
+vol -f memory.dmp windows.memmap --pid 1234 --dump
+
+# Extract handles (files, registry, etc.)
+vol -f memory.dmp windows.handles --pid 1234
+
+# Registry analysis
+vol -f memory.dmp windows.registry.printkey
+
+# Command history
+vol -f memory.dmp windows.cmdline
+```
+
+### Key Volatility3 Plugins for DFIR
+
+| Plugin | Purpose | Finds |
+|--------|---------|-------|
+| `windows.malfind` | Injected code | Process injection (T1055) |
+| `windows.pslist` / `pstree` | Process listing | Suspicious processes |
+| `windows.netscan` | Network connections | C2 connections |
+| `windows.dlllist` | Loaded modules | Reflective DLL loading |
+| `windows.cmdline` | Command lines | Encoded PowerShell |
+| `windows.handles` | Open handles | File/registry access |
+| `windows.registry.printkey` | Registry keys | Persistence mechanisms |
+
+---
+
 ## Resources
 
 - [Volatility3 Documentation](https://volatility3.readthedocs.io/)
