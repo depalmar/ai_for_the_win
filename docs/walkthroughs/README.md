@@ -68,6 +68,7 @@ These walkthroughs provide:
 | [Lab 17](./lab17-walkthrough.md) | Adversarial ML | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab17_adversarial_ml.ipynb) | Expert |
 | [Lab 17a](./lab17a-walkthrough.md) | ML Security Foundations | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab17a_ml_security_intro.ipynb) | Expert |
 | [Lab 18](./lab18-walkthrough.md) | Fine-Tuning for Security | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab18_fine_tuning.ipynb) | Expert |
+| [Lab 19a](./lab19a-walkthrough.md) | Cloud Security Fundamentals | — | Intermediate |
 | [Lab 19](./lab19-walkthrough.md) | Cloud Security AI | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab19_cloud_security.ipynb) | Expert |
 | [Lab 20](./lab20-walkthrough.md) | LLM Red Teaming | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab20_llm_red_teaming.ipynb) | Expert |
 
@@ -134,9 +135,9 @@ Lab 11 → Lab 12 → Lab 13 → Lab 14 → Lab 15 → Lab 16
 Ransomware  Purple   Memory    C2      Lateral   Actor
 Detection   Team     Forensics Traffic Movement  Profiling
 
-Lab 17 → Lab 18 → Lab 19
-  |         |         |
-  v         v         v
-Adversarial Fine-     Cloud
-ML          Tuning    Security
+Lab 17 → Lab 18 → Lab 19a → Lab 19 → Lab 20
+  |         |          |          |         |
+  v         v          v          v         v
+Adversarial Fine-    Cloud      Cloud     LLM
+ML          Tuning   Basics     AI        Red Team
 ```

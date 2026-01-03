@@ -26,6 +26,18 @@ By completing this lab, you will:
 - Basic understanding of Windows internals (processes, DLLs, registry)
 - Familiarity with memory acquisition concepts
 
+### New to Windows Internals?
+
+If terms like "process injection", "DLLs", or "LSASS" are unfamiliar, check out these resources first:
+
+| Resource | What It Covers | Time |
+|----------|----------------|------|
+| [Windows Internals Quick Reference](../../docs/guides/windows-internals-quickref.md) | Processes, DLLs, memory, registry basics | 20-30 min |
+| [SANS Hunt Evil Poster](https://www.sans.org/posters/hunt-evil/) | Normal vs. suspicious process behaviors | Reference |
+| [SANS Windows Forensics Poster](https://www.sans.org/posters/windows-forensic-analysis/) | Artifact locations and analysis | Reference |
+
+> 💡 **Tip**: Download the SANS "Hunt Evil" poster and keep it visible while doing this lab - it shows exactly what legitimate Windows processes should look like.
+
 ---
 
 ## 📖 Background

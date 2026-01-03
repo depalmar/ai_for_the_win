@@ -502,6 +502,54 @@ Modern IR often involves cloud environments. Key artifacts:
 
 ---
 
+## SANS DFIR Resources
+
+SANS is the gold standard for DFIR training. These free resources will level up your skills:
+
+### Essential SANS Posters (Free Downloads)
+
+| Poster | What It Covers | Why You Need It |
+|--------|----------------|-----------------|
+| **[Hunt Evil](https://www.sans.org/posters/hunt-evil/)** | Normal vs. malicious Windows process behaviors | Know what suspicious looks like |
+| **[Windows Forensic Analysis](https://www.sans.org/posters/windows-forensic-analysis/)** | Registry, event logs, artifacts by location | Quick reference during investigations |
+| **[DFIR Memory Forensics](https://www.sans.org/posters/memory-forensics-cheat-sheet/)** | Volatility commands, memory analysis | Lab 13 companion |
+| **[Network Forensics](https://www.sans.org/posters/network-forensics-poster/)** | Protocol analysis, packet investigation | Lab 14 companion |
+| **[Intrusion Discovery Cheat Sheet](https://www.sans.org/posters/intrusion-discovery-cheat-sheet-linux/)** | Linux artifact locations | Linux IR |
+
+> 💡 **Pro Tip**: Print the "Hunt Evil" poster and keep it visible. It shows what normal Windows processes look like vs. what attackers try to mimic. Invaluable during triage.
+
+### SANS DFIR Reading Room Papers
+
+Search these topics at [sans.org/white-papers](https://www.sans.org/white-papers/):
+- "Incident Response" - IR methodology and case studies
+- "Memory Forensics" - RAM analysis techniques
+- "Timeline Analysis" - Building attack timelines
+- "Windows Forensics" - Artifact deep dives
+- "Cloud Forensics" - AWS/Azure/GCP IR
+
+### SANS Webcasts (Free)
+
+[sans.org/webcasts](https://www.sans.org/webcasts/) offers free 1-hour technical sessions. Search for:
+- "DFIR Summit" presentations
+- "Blue Team" defensive techniques
+- "Threat Hunting" methodologies
+
+### SANS DFIR Courses (Paid, but excellent)
+
+If you want to go deep, these are industry-standard certifications:
+
+| Course | Focus | Certification |
+|--------|-------|---------------|
+| **FOR500** | Windows Forensics | GCFE |
+| **FOR508** | Advanced Incident Response | GCFA |
+| **FOR572** | Network Forensics | GNFA |
+| **FOR610** | Malware Analysis | GREM |
+| **FOR578** | Threat Intelligence | GCTI |
+
+> Most employers recognize GIAC certifications. FOR508 (GCFA) is particularly valued for IR roles.
+
+---
+
 ## What's Next?
 
 You're now ready for advanced DFIR labs:

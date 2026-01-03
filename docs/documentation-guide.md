@@ -42,6 +42,7 @@
 | **Fix common errors** | [Troubleshooting Guide](./guides/troubleshooting-guide.md) |
 | **Error handling patterns** | [Error Handling Guide](./guides/error-handling-guide.md) |
 | **Cost management** | [Cost Management Guide](./guides/cost-management.md) |
+| **Using AI for help** | [Using AI for Learning](./guides/using-ai-for-learning.md) |
 
 ### Find Resources
 
@@ -58,7 +59,6 @@
 |------|-------|
 | **Splunk integration** | [Splunk Guide](../resources/integrations/splunk-integration.md) |
 | **Elastic/ELK integration** | [Elastic Guide](../resources/integrations/elastic-integration.md) |
-| **Palo Alto XSIAM/XDR** | [XSIAM/XDR Guide](../resources/integrations/xsiam-xdr-integration.md) |
 | **All integrations** | [Integrations Index](../resources/integrations/) |
 
 ### Go Deeper
@@ -70,6 +70,15 @@
 | **LLM output parsing** | [Structured Output Guide](./guides/structured-output-parsing.md) |
 | **LLM testing/evaluation** | [LLM Evaluation Guide](./guides/llm-evaluation-testing.md) |
 | **Prompt injection defense** | [Security Best Practices](./guides/prompt-injection-defense.md) |
+| **Windows internals** | [Windows Internals Quick Reference](./guides/windows-internals-quickref.md) |
+
+### For Beginners
+
+| Goal | Go To |
+|------|-------|
+| **Security basics** | [Security Fundamentals for Beginners](./guides/security-fundamentals-for-beginners.md) |
+| **Using AI to learn** | [Using AI for Learning](./guides/using-ai-for-learning.md) |
+| **Cloud security basics** | [Lab 19a: Cloud Security Fundamentals](../labs/lab19a-cloud-security-fundamentals/) |
 
 ---
 
@@ -119,7 +128,7 @@ Root
 ├── resources/                   # Reference materials
 │   ├── tools-and-resources.md   # 80+ tools/APIs/datasets
 │   ├── prompt-library/          # Ready-to-use prompts
-│   └── integrations/            # SIEM/SOAR integrations (Cortex XSIAM, Splunk, etc.)
+│   └── integrations/            # SIEM/SOAR integrations (Splunk, Elastic, etc.)
 │
 ├── labs/                        # 24 hands-on labs
 │   └── labXX-name/README.md

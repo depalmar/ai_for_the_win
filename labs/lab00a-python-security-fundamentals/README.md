@@ -395,7 +395,152 @@ for ip in ips:
     print(f"{ip}: valid={valid}, private={private}")
 ```
 
-### 3.3 Simple IOC Extractor
+### 3.3 Regular Expressions (Regex) Basics
+
+Regular expressions are patterns used to match text. They're **essential** for security work - IOC extraction, log parsing, and pattern matching all use regex.
+
+#### Why Regex Matters for Security
+
+```python
+# Without regex: Manual, error-prone
+text = "The malware connects to 192.168.1.100"
+# How do you find the IP? Split? Check each word? What about edge cases?
+
+# With regex: One line, handles all cases
+import re
+ips = re.findall(r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}', text)
+# Result: ['192.168.1.100']
+```
+
+#### Essential Regex Syntax
+
+| Pattern | Meaning | Example | Matches |
+|---------|---------|---------|---------|
+| `\d` | Any digit (0-9) | `\d\d\d` | "192", "255", "007" |
+| `\w` | Word character (a-z, A-Z, 0-9, _) | `\w+` | "admin", "user_1" |
+| `\s` | Whitespace (space, tab, newline) | `\s+` | "   ", "\t\n" |
+| `.` | Any character except newline | `a.c` | "abc", "a1c", "a-c" |
+| `+` | One or more of previous | `\d+` | "1", "123", "999999" |
+| `*` | Zero or more of previous | `\d*` | "", "1", "123" |
+| `{n}` | Exactly n of previous | `\d{3}` | "192", "255" (3 digits) |
+| `{n,m}` | Between n and m of previous | `\d{1,3}` | "1", "12", "192" |
+| `[]` | Character class (any one of) | `[abc]` | "a", "b", or "c" |
+| `[^]` | Not in character class | `[^0-9]` | Any non-digit |
+| `\b` | Word boundary | `\bcat\b` | "cat" but not "catalog" |
+| `^` | Start of string/line | `^Error` | Lines starting with "Error" |
+| `$` | End of string/line | `\.exe$` | Strings ending in ".exe" |
+| `\|` | Or | `cat\|dog` | "cat" or "dog" |
+| `()` | Grouping | `(ab)+` | "ab", "abab", "ababab" |
+| `\.` | Literal period (escaped) | `192\.168` | "192.168" literally |
+
+#### Common Security Regex Patterns Explained
+
+```python
+import re
+
+# IPv4 Address Pattern
+# \d{1,3}  = 1-3 digits
+# \.       = literal period (escaped because . means "any char")
+# {3}      = repeat previous group 3 times
+# \b       = word boundary (so we don't match "1.2.3.4.5.6.7.8")
+ipv4_pattern = r'\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b'
+# Matches: "192.168.1.1", "10.0.0.5", "8.8.8.8"
+
+# MD5 Hash Pattern (32 hex characters)
+# [a-fA-F0-9] = any hex character
+# {32}        = exactly 32 of them
+md5_pattern = r'\b[a-fA-F0-9]{32}\b'
+# Matches: "d41d8cd98f00b204e9800998ecf8427e"
+
+# SHA256 Hash Pattern (64 hex characters)
+sha256_pattern = r'\b[a-fA-F0-9]{64}\b'
+
+# Email Pattern
+# [A-Za-z0-9._%+-]+  = one or more valid email chars before @
+# @                   = literal @
+# [A-Za-z0-9.-]+     = domain name
+# \.                  = literal period
+# [A-Za-z]{2,}       = TLD (2+ letters)
+email_pattern = r'[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}'
+
+# Domain Pattern
+domain_pattern = r'\b[a-zA-Z0-9][-a-zA-Z0-9]*\.[a-zA-Z]{2,}\b'
+# Matches: "evil.com", "malware-c2.net"
+```
+
+#### Key Regex Functions in Python
+
+```python
+import re
+
+text = "Failed login from 192.168.1.100 at 10:30:00"
+
+# re.findall() - Find ALL matches (most common for IOC extraction)
+ips = re.findall(r'\d+\.\d+\.\d+\.\d+', text)
+print(ips)  # ['192.168.1.100']
+
+# re.search() - Find FIRST match (returns Match object or None)
+match = re.search(r'\d{2}:\d{2}:\d{2}', text)
+if match:
+    print(match.group())  # '10:30:00'
+
+# re.match() - Match at START of string only
+if re.match(r'Failed', text):
+    print("Starts with 'Failed'")
+
+# re.sub() - Replace matches
+cleaned = re.sub(r'\d+\.\d+\.\d+\.\d+', '[REDACTED]', text)
+print(cleaned)  # "Failed login from [REDACTED] at 10:30:00"
+
+# re.split() - Split on pattern
+parts = re.split(r'\s+', text)  # Split on whitespace
+print(parts)  # ['Failed', 'login', 'from', '192.168.1.100', 'at', '10:30:00']
+```
+
+#### Common Mistakes
+
+```python
+# MISTAKE 1: Forgetting to escape special characters
+re.findall(r'192.168.1.1', text)     # BAD: . matches ANY character
+re.findall(r'192\.168\.1\.1', text)  # GOOD: \. matches literal period
+
+# MISTAKE 2: Using match() when you want search()
+re.match(r'login', "Failed login")   # None! (doesn't start with 'login')
+re.search(r'login', "Failed login")  # Match found
+
+# MISTAKE 3: Not using raw strings
+pattern = '\d+'    # BAD: Python interprets \d as escape sequence
+pattern = r'\d+'   # GOOD: Raw string, regex gets literal \d
+```
+
+#### Practice: Build Your Own Patterns
+
+```python
+import re
+
+# Practice 1: Extract timestamps (HH:MM:SS format)
+log = "Event at 14:30:45 and 09:15:00"
+timestamps = re.findall(r'\d{2}:\d{2}:\d{2}', log)
+print(timestamps)  # ['14:30:45', '09:15:00']
+
+# Practice 2: Find Windows Event IDs (4-digit numbers after "Event ID:")
+log = "Event ID: 4624 - Successful login. Event ID: 4625 - Failed login."
+event_ids = re.findall(r'Event ID: (\d{4})', log)  # () captures just the number
+print(event_ids)  # ['4624', '4625']
+
+# Practice 3: Extract usernames from log
+log = "User 'admin' logged in. User 'john.doe' failed auth."
+users = re.findall(r"User '([^']+)'", log)  # [^']+ = anything except quote
+print(users)  # ['admin', 'john.doe']
+```
+
+> 💡 **Pro Tip**: Use [regex101.com](https://regex101.com/) to test and debug your patterns. It explains what each part does and shows matches in real-time.
+
+---
+
+### 3.4 Simple IOC Extractor
+
+Now let's put regex to work extracting Indicators of Compromise:
 
 ```python
 import re
@@ -733,6 +878,196 @@ def process_batch(items: List[str]) -> Tuple[List[dict], List[str]]:
             failures.append(f"{item}: {e}")
     
     return successes, failures
+```
+
+### 4.6 Reading Python Errors (Debugging 101)
+
+When your code breaks, Python shows you an **error message** (traceback). Learning to read these is a superpower!
+
+#### Anatomy of a Traceback
+
+```python
+# This code has a bug
+def analyze_log(log_entry):
+    parts = log_entry.split("|")
+    return {"ip": parts[3], "action": parts[4]}
+
+logs = ["2024-01-15|ERROR|Failed login"]
+for log in logs:
+    result = analyze_log(log)
+```
+
+When you run this, Python shows:
+
+```
+Traceback (most recent call last):        ← Start of error info
+  File "main.py", line 7, in <module>     ← Where error happened (your code)
+    result = analyze_log(log)             ← The line that failed
+  File "main.py", line 3, in analyze_log  ← Inside the function
+    return {"ip": parts[3], "action": parts[4]}  ← The actual problem
+IndexError: list index out of range       ← THE ERROR TYPE AND MESSAGE
+```
+
+**Reading order**: Start from the BOTTOM!
+1. `IndexError: list index out of range` - The error type and message
+2. Line 3 - Where in your code it happened
+3. `parts[3]` - The operation that failed
+
+**The fix**: The log only has 3 parts (indices 0, 1, 2), but we're asking for index 3 and 4.
+
+#### Common Python Errors and Fixes
+
+| Error | What It Means | Common Causes | Fix |
+|-------|---------------|---------------|-----|
+| **NameError** | Variable doesn't exist | Typo, not defined yet, wrong scope | Check spelling; define before using |
+| **TypeError** | Wrong data type | Using wrong type (string + int) | Convert types: `str()`, `int()` |
+| **IndexError** | List index out of range | Accessing index that doesn't exist | Check `len(list)` first |
+| **KeyError** | Dict key doesn't exist | Typo in key, key not added | Use `.get(key, default)` |
+| **AttributeError** | Object doesn't have that method | Wrong object type | Check what type you have |
+| **FileNotFoundError** | File doesn't exist | Wrong path, typo | Check path; use absolute path |
+| **IndentationError** | Spaces/tabs wrong | Mixed spaces and tabs | Use consistent indentation |
+| **SyntaxError** | Invalid Python syntax | Missing colon, bracket, quote | Check line above error |
+| **ModuleNotFoundError** | Import failed | Package not installed | Run `pip install package_name` |
+| **ValueError** | Right type, wrong value | e.g., `int("abc")` | Validate input before converting |
+
+#### Examples of Each Error
+
+```python
+# NameError - using undefined variable
+print(user_name)  # NameError: name 'user_name' is not defined
+# Fix: Define it first
+user_name = "alice"
+print(user_name)
+
+# TypeError - wrong types
+"Risk score: " + 85  # TypeError: can only concatenate str to str
+# Fix: Convert to string
+"Risk score: " + str(85)  # or use f-string: f"Risk score: {85}"
+
+# IndexError - list too short
+ips = ["1.1.1.1", "2.2.2.2"]
+print(ips[5])  # IndexError: list index out of range
+# Fix: Check length first
+if len(ips) > 5:
+    print(ips[5])
+
+# KeyError - missing dictionary key
+event = {"type": "login", "user": "alice"}
+print(event["ip"])  # KeyError: 'ip'
+# Fix: Use .get() with default
+print(event.get("ip", "unknown"))  # Returns "unknown"
+
+# AttributeError - wrong object type
+data = None
+data.split(",")  # AttributeError: 'NoneType' object has no attribute 'split'
+# Fix: Check for None first
+if data:
+    data.split(",")
+
+# FileNotFoundError - file doesn't exist
+with open("missing_file.txt") as f:  # FileNotFoundError
+    content = f.read()
+# Fix: Check if file exists
+from pathlib import Path
+if Path("missing_file.txt").exists():
+    with open("missing_file.txt") as f:
+        content = f.read()
+```
+
+#### Debugging Strategies
+
+**1. Print Debugging** - Add prints to see what's happening:
+
+```python
+def process_alert(alert):
+    print(f"DEBUG: alert = {alert}")           # What did we receive?
+    print(f"DEBUG: alert type = {type(alert)}") # What type is it?
+    
+    severity = alert.get("severity")
+    print(f"DEBUG: severity = {severity}")      # What did we get?
+    
+    if severity > 5:  # This might fail if severity is None
+        print("High severity!")
+```
+
+**2. Check Types** - Verify you have what you expect:
+
+```python
+def analyze(data):
+    print(f"Type: {type(data)}")      # Is it a list? dict? string?
+    print(f"Length: {len(data)}")      # How many items?
+    if isinstance(data, list):
+        print(f"First item: {data[0]}")
+```
+
+**3. Use AI for Help** - AI assistants are excellent debugging partners:
+
+```
+I'm getting this error:
+
+Traceback (most recent call last):
+  File "main.py", line 10
+    return {"ip": parts[3]}
+IndexError: list index out of range
+
+My code is:
+[paste your code]
+
+What's wrong and how do I fix it?
+```
+
+**AI Prompts for Different Situations:**
+
+| Situation | Prompt Template |
+|-----------|-----------------|
+| Error message | "Explain this error and how to fix it: [paste error]" |
+| Code doesn't work | "My code should [expected], but it [actual]. Here's my code: [paste]" |
+| Don't understand code | "Explain this code line by line: [paste code]" |
+| Need a better approach | "Is there a better way to [what you're doing]? My current approach: [paste]" |
+
+> 💡 **Pro Tip**: Always include the **full error message**, your **code**, and what you were **trying to do**. The more context you give AI, the better help you'll get.
+
+**4. Isolate the Problem** - Test small pieces:
+
+```python
+# Instead of running the whole script, test the function alone:
+log = "2024-01-15|ERROR|Failed login"
+parts = log.split("|")
+print(parts)        # ['2024-01-15', 'ERROR', 'Failed login']
+print(len(parts))   # 3 - only indices 0, 1, 2 exist!
+```
+
+#### Security-Specific Debugging Tips
+
+```python
+# When parsing logs, always validate structure
+def parse_log_safely(line):
+    parts = line.strip().split("|")
+    
+    # Validate before accessing
+    if len(parts) < 3:
+        print(f"Warning: Malformed log (only {len(parts)} parts): {line}")
+        return None
+    
+    return {
+        "timestamp": parts[0],
+        "level": parts[1],
+        "message": parts[2],
+        # Use .get() pattern for optional fields
+        "extra": parts[3] if len(parts) > 3 else None
+    }
+
+# When working with JSON from APIs
+import json
+
+def parse_api_response(response_text):
+    try:
+        data = json.loads(response_text)
+        # Safely navigate nested structure
+        return data.get("results", {}).get("ip", "unknown")
+    except json.JSONDecodeError as e:
+        print(f"Invalid JSON: {e}")
+        return None
 ```
 
 ---

@@ -21,7 +21,7 @@ ML Model:    You provide examples → Model learns patterns → Model makes deci
 ### Training
 **AI Definition**: The process of teaching a model by showing it many examples.
 
-**Security Analogy**: Like **tuning a SIEM** (Cortex XSIAM, Splunk, etc.). You feed it logs, tell it which are attacks and which are benign, and it learns to distinguish them. The more quality examples, the better it gets.
+**Security Analogy**: Like **tuning a SIEM** (Splunk, Elastic, Sentinel, etc.). You feed it logs, tell it which are attacks and which are benign, and it learns to distinguish them. The more quality examples, the better it gets.
 
 ---
 
@@ -376,7 +376,7 @@ ACTION: siem_query("dest_ip=185.143.223.47")
 ### Tool Use / Function Calling
 **AI Definition**: LLM's ability to call external functions/APIs to get information or take actions.
 
-**Security Analogy**: **Analyst with access to security tools**. The AI can query VirusTotal, search logs in SIEM (Cortex XSIAM, Splunk, etc.), look up CVEs, etc. Tools extend what the AI can do.
+**Security Analogy**: **Analyst with access to security tools**. The AI can query VirusTotal, search logs in SIEM (Splunk, Elastic, etc.), look up CVEs, etc. Tools extend what the AI can do.
 
 ```python
 tools = [

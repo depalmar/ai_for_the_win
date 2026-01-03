@@ -16,7 +16,7 @@ Curated resources for the AI Security Training Program.
 ║                                                                               ║
 ║  ┌─────────────────┐  ┌─────────────────────────────────────────┐            ║
 ║  │ 🔌 MCP Servers  │  │ 🔗 Platform Integrations                │            ║
-║  │  DFIR, TI, Red  │  │  XSIAM, XDR, Splunk, Elastic            │            ║
+║  │  DFIR, TI, Red  │  │  Splunk, Elastic, Sentinel              │            ║
 ║  │  Report Gen     │  │  SOAR, Threat Intel                     │            ║
 ║  └─────────────────┘  └─────────────────────────────────────────┘            ║
 ║                                                                               ║
@@ -32,7 +32,7 @@ resources/
 ├── mcp-servers-security-guide.md # MCP servers for security operations
 ├── integrations/                # Enterprise platform integrations
 │   ├── README.md               # Integration overview
-│   ├── xsiam-xdr-integration.md # Palo Alto Cortex XSIAM/XDR
+│   ├── splunk-integration.md    # Splunk SIEM integration
 │   └── splunk-integration.md   # Splunk Enterprise/Cloud
 ├── prompt-library/              # Security analysis prompts
 │   └── security-prompts.md      # Curated prompt templates
@@ -49,7 +49,7 @@ resources/
 | [AI Agent Architectures](./ai-agent-architectures.md) | ReAct, Plan-Execute, LangGraph, Multi-Agent patterns |
 | [Tools & Resources](./tools-and-resources.md) | 70+ tools, APIs, datasets |
 | [MCP Servers Guide](./mcp-servers-security-guide.md) | DFIR, threat intel, offensive security MCP servers |
-| [Platform Integrations](./integrations/) | XSIAM, XDR, Splunk, Elastic guides |
+| [Platform Integrations](./integrations/) | Splunk, Elastic integration guides |
 | [Prompt Library](./prompt-library/) | Ready-to-use security prompts |
 | [LangChain Guide](../docs/guides/langchain-guide.md) | Comprehensive LangChain security guide |
 

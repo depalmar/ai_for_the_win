@@ -931,7 +931,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
 
   <div class="stats">
     <div class="stat">
-      <div class="stat-number">25</div>
+      <div class="stat-number">30+</div>
       <div class="stat-label">Hands-On Labs</div>
     </div>
     <div class="stat">
@@ -1122,7 +1122,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
     </div>
   </div>
 
-  <h3 style="margin-top: 2rem; margin-bottom: 1rem;">All 25 Labs</h3>
+  <h3 style="margin-top: 2rem; margin-bottom: 1rem;">All 30+ Labs (Including Bridge Labs)</h3>
 
   <!-- Lab Filter Tabs -->
   <div class="lab-filters">
@@ -1189,6 +1189,39 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
         <span class="difficulty difficulty-1">&#9733;&#9734;&#9734; Beginner</span>
       </div>
     </a>
+    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab00e-visualization-stats" class="lab-card" data-category="intro">
+      <div class="lab-header">
+        <span class="lab-number">00e</span>
+        <span class="lab-title">Visualization & Stats</span>
+      </div>
+      <p class="lab-desc">Statistics, Plotly, security dashboards</p>
+      <div class="lab-meta">
+        <span>&#128337; ~2 hrs</span>
+        <span class="difficulty difficulty-1">&#9733;&#9734;&#9734; Beginner</span>
+      </div>
+    </a>
+    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab00f-hello-world-ml" class="lab-card" data-category="intro">
+      <div class="lab-header">
+        <span class="lab-number">00f</span>
+        <span class="lab-title">Hello World ML</span>
+      </div>
+      <p class="lab-desc">Your first ML model, scikit-learn basics</p>
+      <div class="lab-meta">
+        <span>&#128337; ~1 hr</span>
+        <span class="difficulty difficulty-1">&#9733;&#9734;&#9734; Beginner</span>
+      </div>
+    </a>
+    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab00g-working-with-apis" class="lab-card" data-category="intro">
+      <div class="lab-header">
+        <span class="lab-number">00g</span>
+        <span class="lab-title">Working with APIs</span>
+      </div>
+      <p class="lab-desc">HTTP basics, requests, JSON parsing</p>
+      <div class="lab-meta">
+        <span>&#128337; ~1 hr</span>
+        <span class="difficulty difficulty-1">&#9733;&#9734;&#9734; Beginner</span>
+      </div>
+    </a>
     <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab01-phishing-classifier" class="lab-card" data-category="ml">
       <div class="lab-header">
         <span class="lab-number ml">01</span>
@@ -1219,6 +1252,17 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
       <p class="lab-desc">Isolation Forest, statistical baselines</p>
       <div class="lab-meta">
         <span>&#128337; ~2 hrs</span>
+        <span class="difficulty difficulty-1">&#9733;&#9734;&#9734; Beginner</span>
+      </div>
+    </a>
+    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab03b-ml-vs-llm" class="lab-card" data-category="ml">
+      <div class="lab-header">
+        <span class="lab-number ml">03b</span>
+        <span class="lab-title">ML vs LLM</span>
+      </div>
+      <p class="lab-desc">When to use ML vs LLM, cost comparison</p>
+      <div class="lab-meta">
+        <span>&#128337; ~1 hr</span>
         <span class="difficulty difficulty-1">&#9733;&#9734;&#9734; Beginner</span>
       </div>
     </a>
@@ -1255,6 +1299,17 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
         <span class="difficulty difficulty-2">&#9733;&#9733;&#9734; Intermediate</span>
       </div>
     </a>
+    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab06b-embeddings-vectors" class="lab-card" data-category="llm">
+      <div class="lab-header">
+        <span class="lab-number llm">06b</span>
+        <span class="lab-title">Embeddings & Vectors</span>
+      </div>
+      <p class="lab-desc">Deep dive into embeddings for RAG</p>
+      <div class="lab-meta">
+        <span>&#128337; ~2 hrs</span>
+        <span class="difficulty difficulty-2">&#9733;&#9733;&#9734; Intermediate</span>
+      </div>
+    </a>
     <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab07-yara-generator" class="lab-card" data-category="llm">
       <div class="lab-header">
         <span class="lab-number llm">07</span>
@@ -1263,6 +1318,17 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
       <p class="lab-desc">AI-assisted rule generation, validation</p>
       <div class="lab-meta">
         <span>&#128337; ~3 hrs</span>
+        <span class="difficulty difficulty-2">&#9733;&#9733;&#9734; Intermediate</span>
+      </div>
+    </a>
+    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab07a-binary-basics" class="lab-card" data-category="llm">
+      <div class="lab-header">
+        <span class="lab-number llm">07a</span>
+        <span class="lab-title">Binary Basics</span>
+      </div>
+      <p class="lab-desc">PE files, headers, sections for YARA</p>
+      <div class="lab-meta">
+        <span>&#128337; ~2 hrs</span>
         <span class="difficulty difficulty-2">&#9733;&#9733;&#9734; Intermediate</span>
       </div>
     </a>
@@ -1296,6 +1362,17 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
       <p class="lab-desc">Conversational IR assistant, playbooks</p>
       <div class="lab-meta">
         <span>&#128337; ~4 hrs</span>
+        <span class="difficulty difficulty-2">&#9733;&#9733;&#9734; Intermediate</span>
+      </div>
+    </a>
+    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab10b-dfir-fundamentals" class="lab-card" data-category="dfir">
+      <div class="lab-header">
+        <span class="lab-number dfir">10b</span>
+        <span class="lab-title">DFIR Fundamentals</span>
+      </div>
+      <p class="lab-desc">IR lifecycle, Windows artifacts, ATT&CK</p>
+      <div class="lab-meta">
+        <span>&#128337; ~2 hrs</span>
         <span class="difficulty difficulty-2">&#9733;&#9733;&#9734; Intermediate</span>
       </div>
     </a>
@@ -1376,6 +1453,17 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
         <span class="difficulty difficulty-3">&#9733;&#9733;&#9733; Advanced</span>
       </div>
     </a>
+    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab17a-ml-security-intro" class="lab-card" data-category="dfir">
+      <div class="lab-header">
+        <span class="lab-number dfir">17a</span>
+        <span class="lab-title">ML Security Intro</span>
+      </div>
+      <p class="lab-desc">ML threat models, attack taxonomy</p>
+      <div class="lab-meta">
+        <span>&#128337; ~1 hr</span>
+        <span class="difficulty difficulty-2">&#9733;&#9733;&#9734; Intermediate</span>
+      </div>
+    </a>
     <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab18-fine-tuning-security" class="lab-card" data-category="dfir">
       <div class="lab-header">
         <span class="lab-number dfir">18</span>
@@ -1387,12 +1475,23 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
         <span class="difficulty difficulty-3">&#9733;&#9733;&#9733; Expert</span>
       </div>
     </a>
+    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab19a-cloud-security-fundamentals" class="lab-card" data-category="dfir">
+      <div class="lab-header">
+        <span class="lab-number dfir">19a</span>
+        <span class="lab-title">Cloud Security Basics</span>
+      </div>
+      <p class="lab-desc">AWS/Azure/GCP fundamentals, IAM, logs</p>
+      <div class="lab-meta">
+        <span>&#128337; ~2 hrs</span>
+        <span class="difficulty difficulty-2">&#9733;&#9733;&#9734; Intermediate</span>
+      </div>
+    </a>
     <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab19-cloud-security-ai" class="lab-card" data-category="dfir">
       <div class="lab-header">
         <span class="lab-number dfir">19</span>
         <span class="lab-title">Cloud Security AI</span>
       </div>
-      <p class="lab-desc">AWS/Azure/GCP, CloudTrail analysis</p>
+      <p class="lab-desc">AI-powered CloudTrail analysis</p>
       <div class="lab-meta">
         <span>&#128337; ~5 hrs</span>
         <span class="difficulty difficulty-3">&#9733;&#9733;&#9733; Advanced</span>
@@ -1849,4 +1948,8 @@ python labs/lab01-phishing-classifier/solution/main.py</code></pre>
 
 <p style="text-align: center; color: var(--text-muted); font-size: 0.85rem;">
   MIT License | Built for security practitioners | Maintained by <a href="https://github.com/depalmar" style="color: var(--text-muted); text-decoration: underline;">depalmar</a>
+</p>
+
+<p style="text-align: center; color: var(--text-muted); font-size: 0.75rem; margin-top: 1rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+  <em>Disclaimer: This is a personal educational project created on personal time. It is not affiliated with, endorsed by, or sponsored by any employer or vendor. All tool references are for educational purposes only.</em>
 </p>

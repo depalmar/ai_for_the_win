@@ -2,6 +2,8 @@
 
 Thank you for your interest in contributing to the AI Security Training Program! This document provides guidelines for contributing.
 
+> **Note**: This is a personal educational project not affiliated with any employer or vendor. Contributions should remain vendor-neutral and focused on educational value.
+
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                    CONTRIBUTION WORKFLOW                     │

@@ -201,6 +201,63 @@ Comprehensive collection of tools, datasets, APIs, courses, and communities for 
 
 ---
 
+## 🏛️ SANS Resources (Industry Gold Standard)
+
+SANS is the premier cybersecurity training organization. While their courses are expensive, they offer extensive **free** resources that are invaluable for learning.
+
+### SANS Free Resources
+
+| Resource | Description | Link |
+|----------|-------------|------|
+| **Reading Room** | 3,500+ free white papers on every security topic | [sans.org/white-papers](https://www.sans.org/white-papers/) |
+| **Posters** | Print-quality reference guides (seriously, print these) | [sans.org/posters](https://www.sans.org/posters/) |
+| **Webcasts** | Free 1-hour technical webinars | [sans.org/webcasts](https://www.sans.org/webcasts/) |
+| **Internet Storm Center** | Daily security diaries and threat intel | [isc.sans.edu](https://isc.sans.edu/) |
+| **GIAC Papers** | Research from certified professionals | [giac.org/paper](https://www.giac.org/paper) |
+| **Cyber Aces** | Free intro to cybersecurity course | [cyberaces.org](https://www.cyberaces.org/) |
+| **Holiday Hack Challenge** | Annual free CTF (December) | [holidayhackchallenge.com](https://www.holidayhackchallenge.com/) |
+
+### Essential SANS Posters (Download & Print)
+
+| Poster | Best For | Topics Covered |
+|--------|----------|----------------|
+| **[Hunt Evil](https://www.sans.org/posters/hunt-evil/)** | Threat hunting, SOC | Normal vs. suspicious Windows process behaviors |
+| **[Windows Forensic Analysis](https://www.sans.org/posters/windows-forensic-analysis/)** | DFIR | Registry, event logs, artifact locations |
+| **[Memory Forensics](https://www.sans.org/posters/memory-forensics-cheat-sheet/)** | Memory analysis | Volatility commands, RAM artifacts |
+| **[Network Forensics](https://www.sans.org/posters/network-forensics-poster/)** | Network investigation | Protocol analysis, packet inspection |
+| **[Cloud Security](https://www.sans.org/posters/cloud-security-top-10/)** | Cloud IR | AWS/Azure/GCP security controls |
+| **[Intrusion Discovery (Linux)](https://www.sans.org/posters/intrusion-discovery-cheat-sheet-linux/)** | Linux IR | Evidence artifact locations |
+| **[Intrusion Discovery (Windows)](https://www.sans.org/posters/intrusion-discovery-cheat-sheet-windows/)** | Windows IR | Evidence artifact locations |
+| **[PowerShell Cheat Sheet](https://www.sans.org/posters/powershell-cheat-sheet/)** | PowerShell analysis | Commands, logging, analysis |
+| **[SIFT Workstation](https://www.sans.org/posters/sift-cheat-sheet/)** | DFIR tools | Forensic tool reference |
+
+> 💡 **Tip**: The "Hunt Evil" poster is legendary in the security community. It shows exactly what legitimate Windows processes look like vs. what attackers try to mimic. Essential for SOC analysts.
+
+### SANS Blog & News
+
+| Resource | Focus | Link |
+|----------|-------|------|
+| **ISC Handlers Diary** | Daily threat analysis | [isc.sans.edu/diary.html](https://isc.sans.edu/diary.html) |
+| **SANS Blog** | Security research and news | [sans.org/blog](https://www.sans.org/blog/) |
+| **NewsBites** | Weekly security news digest (email) | [sans.org/newsletters](https://www.sans.org/newsletters/) |
+
+### SANS Certifications (GIAC)
+
+Industry-recognized certifications for those who want to go deep:
+
+| Cert | Full Name | Focus | Exam Cost |
+|------|-----------|-------|-----------|
+| **GSEC** | GIAC Security Essentials | General security | $949 |
+| **GCIH** | GIAC Certified Incident Handler | Incident response | $949 |
+| **GCFA** | GIAC Certified Forensic Analyst | Advanced DFIR | $949 |
+| **GPEN** | GIAC Penetration Tester | Offensive security | $949 |
+| **GREM** | GIAC Reverse Engineering Malware | Malware analysis | $949 |
+| **GCTI** | GIAC Cyber Threat Intelligence | Threat intel | $949 |
+
+> 💰 **Cost Note**: SANS courses are expensive ($7,000-9,000+). However, many employers pay for them, and you can attempt GIAC exams without taking the course (just buy the exam). The free resources above are excellent preparation.
+
+---
+
 ## 📖 Free Learning Resources
 
 > **Note**: For books, we recommend checking your local library (many offer O'Reilly Learning access), employer learning benefits, or searching for free previews. The resources below are freely available.

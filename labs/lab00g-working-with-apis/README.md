@@ -33,7 +33,7 @@ Modern security tools rely heavily on APIs:
 | API Type | Use Case | Examples |
 |----------|----------|----------|
 | **Threat Intel** | Check IP/domain reputation | VirusTotal, AbuseIPDB, Shodan |
-| **SIEM/SOAR** | Query logs and alerts | Cortex XSIAM, Splunk, Elastic, Sentinel |
+| **SIEM/SOAR** | Query logs and alerts | Splunk, Elastic, Microsoft Sentinel |
 | **LLM** | AI-powered analysis | Anthropic, OpenAI, Google |
 | **Ticketing** | Create/update incidents | ServiceNow, Jira |
 
@@ -141,6 +141,221 @@ response = requests.post(
     json=payload,  # Automatically converts to JSON
     headers=headers
 )
+```
+
+---
+
+## Working with Nested JSON (Security APIs)
+
+Security API responses are often deeply nested. Here's how to navigate them safely.
+
+### The Challenge: Deeply Nested Responses
+
+```python
+# Typical VirusTotal response structure
+vt_response = {
+    "data": {
+        "id": "abc123",
+        "type": "file",
+        "attributes": {
+            "last_analysis_stats": {
+                "malicious": 45,
+                "suspicious": 2,
+                "harmless": 10,
+                "undetected": 5
+            },
+            "sha256": "5d41402abc4b2a76b9719d911017c592",
+            "names": ["malware.exe", "bad_file.exe"]
+        }
+    }
+}
+
+# BAD: Crashes if any key is missing
+malicious_count = vt_response["data"]["attributes"]["last_analysis_stats"]["malicious"]
+# KeyError if "data" or "attributes" doesn't exist!
+```
+
+### Safe Navigation with `.get()`
+
+```python
+# GOOD: Use .get() with defaults - never crashes
+def extract_vt_stats(response):
+    """Safely extract stats from VirusTotal response."""
+    data = response.get("data", {})
+    attributes = data.get("attributes", {})
+    stats = attributes.get("last_analysis_stats", {})
+    
+    return {
+        "malicious": stats.get("malicious", 0),
+        "suspicious": stats.get("suspicious", 0),
+        "harmless": stats.get("harmless", 0),
+        "sha256": attributes.get("sha256", "unknown")
+    }
+
+# Works even if response is empty or malformed
+result = extract_vt_stats({})  # Returns defaults, no crash
+print(result)  # {'malicious': 0, 'suspicious': 0, 'harmless': 0, 'sha256': 'unknown'}
+```
+
+### Chaining `.get()` for Deep Access
+
+```python
+# One-liner for deep access with default
+malicious = response.get("data", {}).get("attributes", {}).get("last_analysis_stats", {}).get("malicious", 0)
+
+# More readable version with intermediate variables
+def get_nested(data, keys, default=None):
+    """
+    Safely get a nested value from a dict.
+    
+    Usage: get_nested(response, ["data", "attributes", "sha256"], "unknown")
+    """
+    for key in keys:
+        if isinstance(data, dict):
+            data = data.get(key, default)
+        else:
+            return default
+    return data
+
+# Usage
+sha256 = get_nested(vt_response, ["data", "attributes", "sha256"], "not_found")
+```
+
+### Working with Lists in JSON
+
+```python
+# Response with lists
+threat_report = {
+    "indicators": [
+        {"type": "ip", "value": "192.168.1.100", "malicious": True},
+        {"type": "domain", "value": "evil.com", "malicious": True},
+        {"type": "hash", "value": "abc123", "malicious": False}
+    ],
+    "tags": ["ransomware", "apt29", "cobalt-strike"]
+}
+
+# Safely get lists
+indicators = threat_report.get("indicators", [])  # Empty list if missing
+tags = threat_report.get("tags", [])
+
+# Filter malicious indicators
+malicious_iocs = [
+    ioc for ioc in indicators 
+    if ioc.get("malicious", False)  # Safe access inside list comprehension
+]
+print(malicious_iocs)
+# [{'type': 'ip', 'value': '192.168.1.100', 'malicious': True}, ...]
+
+# Extract just the values
+malicious_values = [ioc.get("value") for ioc in malicious_iocs]
+print(malicious_values)  # ['192.168.1.100', 'evil.com']
+```
+
+### Real-World Example: Parsing AbuseIPDB Response
+
+```python
+def parse_abuseipdb_response(response_json):
+    """
+    Parse AbuseIPDB API response safely.
+    
+    Example response:
+    {
+        "data": {
+            "ipAddress": "185.220.101.5",
+            "abuseConfidenceScore": 100,
+            "countryCode": "DE",
+            "reports": [
+                {"reporterId": 123, "categories": [14, 15], "comment": "SSH brute force"},
+                {"reporterId": 456, "categories": [21], "comment": "Port scan"}
+            ]
+        }
+    }
+    """
+    data = response_json.get("data", {})
+    
+    # Basic info
+    result = {
+        "ip": data.get("ipAddress", "unknown"),
+        "score": data.get("abuseConfidenceScore", 0),
+        "country": data.get("countryCode", "??"),
+        "report_count": len(data.get("reports", []))
+    }
+    
+    # Extract attack categories from all reports
+    reports = data.get("reports", [])
+    all_categories = []
+    for report in reports:
+        categories = report.get("categories", [])
+        all_categories.extend(categories)
+    
+    result["attack_categories"] = list(set(all_categories))  # Unique categories
+    
+    return result
+
+# Usage
+api_response = {
+    "data": {
+        "ipAddress": "185.220.101.5",
+        "abuseConfidenceScore": 100,
+        "countryCode": "DE",
+        "reports": [
+            {"categories": [14, 15]},
+            {"categories": [21, 14]}
+        ]
+    }
+}
+
+parsed = parse_abuseipdb_response(api_response)
+print(parsed)
+# {'ip': '185.220.101.5', 'score': 100, 'country': 'DE', 'report_count': 2, 'attack_categories': [14, 15, 21]}
+```
+
+### Validating JSON Structure
+
+```python
+def validate_response(response, required_fields):
+    """Check if response has required fields."""
+    missing = []
+    for field in required_fields:
+        if field not in response:
+            missing.append(field)
+    
+    if missing:
+        raise ValueError(f"Response missing required fields: {missing}")
+    
+    return True
+
+# Usage
+try:
+    validate_response(api_response, ["data"])
+    data = api_response["data"]
+    validate_response(data, ["ipAddress", "abuseConfidenceScore"])
+    # Now safe to access
+except ValueError as e:
+    print(f"Invalid response: {e}")
+```
+
+### Quick Reference: JSON Navigation
+
+```python
+# Safe access patterns
+data.get("key", default)              # Single key with default
+data.get("key", {}).get("nested")     # Chained for nested
+data.get("list_key", [])              # Empty list default for lists
+
+# List comprehension with safe access
+[item.get("value") for item in data.get("items", [])]
+
+# Check before access
+if "key" in data:
+    value = data["key"]
+
+# Try/except for critical paths
+try:
+    critical_value = data["must"]["exist"]["path"]
+except KeyError as e:
+    print(f"Missing required field: {e}")
+    critical_value = None
 ```
 
 ---

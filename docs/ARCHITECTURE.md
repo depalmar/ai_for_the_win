@@ -307,7 +307,7 @@ def test_full_pipeline():
 ├────────────────────────────────────────────────────────────────┤
 │                     INTEGRATIONS LAYER                          │
 ├────────────────────────────────────────────────────────────────┤
-│  Splunk SDK  │  Elastic  │  Cortex XSIAM/XDR  │  Cloud APIs    │
+│  Splunk SDK  │  Elastic  │  Sentinel  │  Cloud APIs    │
 └────────────────────────────────────────────────────────────────┘
 ```
 
@@ -421,11 +421,11 @@ def test_full_pipeline():
 ├─────────────────────────────────────────────────────────────┤
 │                                                              │
 │  ┌─────────────────┐    ┌─────────────────┐                │
-│  │  Cortex XSIAM   │    │     Splunk      │                │
+│  │     Elastic     │    │     Splunk      │                │
 │  │  ─────────────  │    │  ─────────────  │                │
-│  │  • XQL Queries  │    │  • SPL Queries  │                │
-│  │  • XDR API      │    │  • SDK Client   │                │
-│  │  • XSOAR Auto   │    │  • HEC Ingest   │                │
+│  │  • EQL Queries  │    │  • SPL Queries  │                │
+│  │  • REST API     │    │  • SDK Client   │                │
+│  │  • Detection    │    │  • HEC Ingest   │                │
 │  └────────┬────────┘    └────────┬────────┘                │
 │           │                      │                          │
 │           └──────────┬───────────┘                          │

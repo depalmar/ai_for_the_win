@@ -397,3 +397,53 @@ Save as `check_env.py` and run:
 ```bash
 python check_env.py
 ```
+
+---
+
+## Still Stuck? Use AI for Help
+
+If the solutions above don't work, AI assistants are excellent at debugging:
+
+### Ask AI for Help
+
+Copy this template into Claude.ai or ChatGPT:
+
+```
+I'm working on [Lab name] in the AI for the Win security training course.
+
+Problem:
+[Describe what's happening]
+
+Error message:
+[Paste the full error traceback]
+
+My code:
+[Paste relevant code]
+
+What I've tried:
+[List what you've attempted]
+
+Environment:
+- OS: [Windows/Mac/Linux]
+- Python version: [run `python --version`]
+- Error happens when: [running script/importing/etc.]
+
+Can you help me debug this?
+```
+
+### Pro Tips for AI Debugging
+
+1. **Include the FULL error message** - The whole traceback, not just the last line
+2. **Paste your actual code** - Don't paraphrase; copy-paste exactly
+3. **Describe what you expected** - "I expected X but got Y"
+4. **Mention what you've tried** - Helps AI avoid suggesting things you've already done
+
+### Recommended AI Tools
+
+| Tool | Best For | Link |
+|------|----------|------|
+| **Claude.ai** | Complex debugging, explanations | [claude.ai](https://claude.ai) |
+| **ChatGPT** | Quick questions | [chat.openai.com](https://chat.openai.com) |
+| **Phind** | Developer-focused search | [phind.com](https://phind.com) |
+
+> 📖 See [Using AI for Learning](./using-ai-for-learning.md) for comprehensive tips on leveraging AI throughout the course.

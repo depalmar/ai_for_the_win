@@ -24,6 +24,30 @@ New to Python? Here are some popular resources (not personally verified—do you
 - Installing packages with `pip`
 - Running scripts from command line
 
+### New to Security?
+
+If you're coming from data science or development and don't have a security background, check out our [Security Fundamentals for Beginners](./guides/security-fundamentals-for-beginners.md) guide. It explains concepts like IOCs, MITRE ATT&CK, and SOC workflows that are used throughout the labs.
+
+### Using AI to Help You Learn
+
+AI assistants are your best friends for learning. Use them to:
+
+| Task | Example Prompt |
+|------|----------------|
+| **Debug errors** | "I'm getting this error: [paste error]. My code is: [paste code]. What's wrong?" |
+| **Explain concepts** | "Explain TF-IDF like I'm a beginner. Why is it used for phishing detection?" |
+| **Review your code** | "Review this code for bugs and improvements: [paste code]" |
+| **Get unstuck** | "I'm stuck on Lab 01. I understand X but don't know how to do Y." |
+
+**Recommended AI tools:**
+- **[Claude.ai](https://claude.ai)** - Great for explanations and debugging (free tier)
+- **[Cursor](https://cursor.sh)** - AI-powered code editor (what we recommend for this course)
+- **[ChatGPT](https://chat.openai.com)** - General help and explanations (free tier)
+
+> 💡 **Pro Tip**: Try solving problems yourself first, then use AI for help. You'll learn more by struggling a bit before getting hints!
+
+See the full guide on [Using AI for Learning](../labs/lab00-environment-setup/README.md#using-ai-to-accelerate-your-learning) in Lab 00.
+
 ---
 
 ## Quick Setup (5 minutes)

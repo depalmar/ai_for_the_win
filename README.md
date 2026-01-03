@@ -9,7 +9,9 @@
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab01_phishing_classifier.ipynb)
 [![Docker](https://img.shields.io/badge/Docker-Ready-blue?logo=docker)](./Dockerfile)
 
-A hands-on training program for security practitioners who want to build AI-powered tools for threat detection, incident response, and security automation. **25 labs** (including 5 intro labs), **4 capstone projects**, **15 CTF challenges**. Includes **sample datasets** and **solution walkthroughs**. Designed for **vibe coding** with AI assistants like Cursor, Claude Code, and Copilot.
+> **Disclaimer**: This is a personal educational project created and maintained on personal time. It is not affiliated with, endorsed by, or sponsored by any employer, organization, or vendor. All tool and platform references are for educational purposes only and do not constitute endorsement or recommendation. The author's views are their own.
+
+A hands-on training program for security practitioners who want to build AI-powered tools for threat detection, incident response, and security automation. **30+ labs** (including 8 intro labs and 10 bridge labs), **4 capstone projects**, **15 CTF challenges**. Includes **sample datasets** and **solution walkthroughs**. Designed for **vibe coding** with AI assistants like Cursor, Claude Code, and Copilot.
 
 ---
 
@@ -280,7 +282,7 @@ flowchart LR
 
 ```
 ai_for_the_win/
-├── labs/                          # 25 hands-on labs
+├── labs/                          # 30+ hands-on labs
 │   ├── lab00-environment-setup/  # Setup guide for beginners
 │   ├── lab00a-python-security-fundamentals/ # Python basics for security
 │   ├── lab00b-ml-concepts-primer/ # ML theory before coding
@@ -397,7 +399,7 @@ Jumpstart your projects with ready-to-use templates:
 
 - **Agent Templates**: LangChain security agent, RAG agent
 - **n8n Workflows**: IOC enrichment, alert triage with AI
-- **SIEM Integrations**: Cortex XSIAM, Splunk, Elasticsearch, Microsoft Sentinel
+- **SIEM Integrations**: Splunk, Elasticsearch, Microsoft Sentinel
 - **Prompt Library**: Log analysis, threat detection, report generation
 
 ---
@@ -507,7 +509,7 @@ Copy `.env.example` to `.env` and configure:
 | [Security Prompts](./resources/prompt-library/security-prompts.md)    | Ready-to-use prompts for security tasks             |
 | [Lab Walkthroughs](./docs/walkthroughs/)                              | Step-by-step solutions when stuck                   |
 | [LangChain Guide](./docs/guides/langchain-guide.md) | Comprehensive LangChain security guide |
-| [SIEM Integrations](./resources/integrations/)                        | Splunk, Elastic, XSIAM integration guides           |
+| [SIEM Integrations](./resources/integrations/)                        | Splunk, Elastic integration guides                  |
 | [Tools & APIs](./resources/tools-and-resources.md)                    | 80+ security tools, APIs, datasets                  |
 | [MCP Servers](./resources/mcp-servers-security-guide.md)              | MCP servers for DFIR, threat intel                  |
 

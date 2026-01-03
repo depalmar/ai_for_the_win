@@ -1,0 +1,130 @@
+{
+    "Records": [
+        {
+            "eventVersion": "1.08",
+            "eventTime": "2024-01-15T10:00:00Z",
+            "eventSource": "iam.amazonaws.com",
+            "eventName": "ListUsers",
+            "awsRegion": "us-east-1",
+            "sourceIPAddress": "203.0.113.50",
+            "userIdentity": {
+                "type": "IAMUser",
+                "principalId": "AIDAXXXXXXXXXXXXXXXXX",
+                "arn": "arn:aws:iam::123456789012:user/suspicious-user",
+                "accountId": "123456789012",
+                "userName": "suspicious-user"
+            },
+            "requestParameters": null,
+            "responseElements": null
+        },
+        {
+            "eventVersion": "1.08",
+            "eventTime": "2024-01-15T10:01:00Z",
+            "eventSource": "iam.amazonaws.com",
+            "eventName": "ListRoles",
+            "awsRegion": "us-east-1",
+            "sourceIPAddress": "203.0.113.50",
+            "userIdentity": {
+                "type": "IAMUser",
+                "principalId": "AIDAXXXXXXXXXXXXXXXXX",
+                "arn": "arn:aws:iam::123456789012:user/suspicious-user",
+                "accountId": "123456789012",
+                "userName": "suspicious-user"
+            },
+            "requestParameters": null,
+            "responseElements": null
+        },
+        {
+            "eventVersion": "1.08",
+            "eventTime": "2024-01-15T10:05:00Z",
+            "eventSource": "iam.amazonaws.com",
+            "eventName": "AttachUserPolicy",
+            "awsRegion": "us-east-1",
+            "sourceIPAddress": "203.0.113.50",
+            "userIdentity": {
+                "type": "IAMUser",
+                "principalId": "AIDAXXXXXXXXXXXXXXXXX",
+                "arn": "arn:aws:iam::123456789012:user/suspicious-user",
+                "accountId": "123456789012",
+                "userName": "suspicious-user"
+            },
+            "requestParameters": {
+                "userName": "suspicious-user",
+                "policyArn": "arn:aws:iam::aws:policy/AdministratorAccess"
+            },
+            "responseElements": null
+        },
+        {
+            "eventVersion": "1.08",
+            "eventTime": "2024-01-15T10:06:00Z",
+            "eventSource": "iam.amazonaws.com",
+            "eventName": "CreateAccessKey",
+            "awsRegion": "us-east-1",
+            "sourceIPAddress": "203.0.113.50",
+            "userIdentity": {
+                "type": "IAMUser",
+                "principalId": "AIDAXXXXXXXXXXXXXXXXX",
+                "arn": "arn:aws:iam::123456789012:user/suspicious-user",
+                "accountId": "123456789012",
+                "userName": "suspicious-user"
+            },
+            "requestParameters": {
+                "userName": "suspicious-user"
+            },
+            "responseElements": {
+                "accessKey": {
+                    "accessKeyId": "AKIAIOSFODNN7EXAMPLE",
+                    "status": "Active",
+                    "userName": "suspicious-user"
+                }
+            }
+        },
+        {
+            "eventVersion": "1.08",
+            "eventTime": "2024-01-15T10:10:00Z",
+            "eventSource": "s3.amazonaws.com",
+            "eventName": "PutBucketPolicy",
+            "awsRegion": "us-east-1",
+            "sourceIPAddress": "203.0.113.50",
+            "userIdentity": {
+                "type": "IAMUser",
+                "principalId": "AIDAXXXXXXXXXXXXXXXXX",
+                "arn": "arn:aws:iam::123456789012:user/suspicious-user",
+                "accountId": "123456789012",
+                "userName": "suspicious-user"
+            },
+            "requestParameters": {
+                "bucketName": "sensitive-data-bucket",
+                "bucketPolicy": {
+                    "Version": "2012-10-17",
+                    "Statement": [{
+                        "Effect": "Allow",
+                        "Principal": "*",
+                        "Action": "s3:GetObject",
+                        "Resource": "arn:aws:s3:::sensitive-data-bucket/*"
+                    }]
+                }
+            }
+        },
+        {
+            "eventVersion": "1.08",
+            "eventTime": "2024-01-15T10:15:00Z",
+            "eventSource": "signin.amazonaws.com",
+            "eventName": "ConsoleLogin",
+            "awsRegion": "us-east-1",
+            "sourceIPAddress": "198.51.100.25",
+            "userIdentity": {
+                "type": "Root",
+                "principalId": "123456789012",
+                "arn": "arn:aws:iam::123456789012:root",
+                "accountId": "123456789012"
+            },
+            "responseElements": {
+                "ConsoleLogin": "Success"
+            },
+            "additionalEventData": {
+                "MFAUsed": "No"
+            }
+        }
+    ]
+}

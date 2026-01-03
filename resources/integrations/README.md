@@ -9,12 +9,12 @@ Integrate AI-powered security tools with enterprise security platforms.
 |                     AI SECURITY INTEGRATIONS                                 |
 +-----------------------------------------------------------------------------+
 |                                                                             |
-|   SIEM/XDR              SOAR                  THREAT INTEL                  |
+|   SIEM                 SOAR                  THREAT INTEL                   |
 |   ┌──────────┐         ┌──────────┐          ┌──────────┐                  |
-|   │ XSIAM    │         │ XSOAR    │          │ MISP     │                  |
-|   │ XDR      │<------->│ Playbooks│<-------->│ VirusTotal│                 |
-|   │ Splunk   │    AI   │ Cortex   │    AI    │ Shodan   │                  |
-|   │ Elastic  │         │ Tines    │          │ GreyNoise│                  |
+|   │ Splunk   │         │ SOAR     │          │ MISP     │                  |
+|   │ Elastic  │<------->│ Playbooks│<-------->│ VirusTotal│                 |
+|   │ Sentinel │    AI   │ Tines    │    AI    │ Shodan   │                  |
+|   │ QRadar   │         │ Swimlane │          │ GreyNoise│                  |
 |   └──────────┘         └──────────┘          └──────────┘                  |
 |         |                   |                      |                        |
 |         +-------------------+----------------------+                        |
@@ -32,9 +32,10 @@ Integrate AI-powered security tools with enterprise security platforms.
 
 | Platform | Guide | Use Cases |
 |----------|-------|-----------|
-| **Cortex XSIAM/XDR** | [xsiam-xdr-integration.md](./xsiam-xdr-integration.md) | Alert enrichment, threat hunting, automated response |
 | **Splunk** | [splunk-integration.md](./splunk-integration.md) | Log analysis, detection engineering, SIEM integration |
 | **Elastic Security** | [elastic-integration.md](./elastic-integration.md) | ELK stack, detection rules, ML anomaly detection |
+
+> 💡 **Other platforms**: The patterns in these guides can be adapted for other SIEM/SOAR platforms (Microsoft Sentinel, IBM QRadar, etc.) by adjusting the API calls.
 
 ## Quick Start
 
@@ -45,8 +46,6 @@ Integrate AI-powered security tools with enterprise security platforms.
 cp .env.example .env
 
 # Add platform-specific credentials
-echo "XDR_API_KEY=your-key" >> .env
-# OR
 echo "SPLUNK_TOKEN=your-token" >> .env
 # OR
 echo "ELASTIC_API_KEY=your-key" >> .env
@@ -60,14 +59,12 @@ pip install -r requirements.txt
 # Platform-specific packages
 pip install splunk-sdk          # For Splunk
 pip install elasticsearch       # For Elastic
-pip install cortex-xdr-sdk      # For XDR (unofficial)
 ```
 
 ### 3. Run Integration Tests
 
 ```bash
 # Test your integration
-python scripts/test_integrations.py --platform xdr
 python scripts/test_integrations.py --platform splunk
 python scripts/test_integrations.py --platform elastic
 ```
@@ -115,7 +112,7 @@ These integrations enhance the following labs:
 |-----|-------------|-------------|
 | Lab 04 | Splunk/Elastic | Real SIEM data instead of samples |
 | Lab 05 | All platforms | Live threat intel feeds |
-| Lab 09 | XSIAM/XDR | Production detection pipeline |
+| Lab 09 | SIEM | Production detection pipeline |
 | Lab 10 | SOAR | Automated playbook execution |
 | Lab 14 | Network tools | Live C2 detection |
 
@@ -131,6 +128,6 @@ To add a new integration:
 
 ## Resources
 
-- [Palo Alto Cortex Documentation](https://docs-cortex.paloaltonetworks.com/)
 - [Splunk Developer Documentation](https://dev.splunk.com/)
 - [Elastic Security Documentation](https://www.elastic.co/guide/en/security/current/index.html)
+- [Microsoft Sentinel Documentation](https://docs.microsoft.com/en-us/azure/sentinel/)

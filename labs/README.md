@@ -134,6 +134,7 @@ Deep dive into incident response, threat simulation, and offensive security anal
 | 17a | [ML Security Intro](./lab17a-ml-security-intro/) | **NEW! Bridge lab** | ML threat models, attack taxonomy |
 | 17 | [Adversarial ML](./lab17-adversarial-ml/) | Attack/Defense | Evasion, poisoning, robust ML defenses |
 | 18 | [Fine-Tuning for Security](./lab18-fine-tuning-security/) | Custom models | LoRA, security embeddings, deployment |
+| 19a | [Cloud Security Fundamentals](./lab19a-cloud-security-fundamentals/) | **NEW! Bridge lab** | AWS/Azure/GCP basics, IAM, CloudTrail |
 | 19 | [Cloud Security AI](./lab19-cloud-security-ai/) | Multi-cloud | CloudTrail, AWS/Azure/GCP threat detection |
 | 20 | [LLM Red Teaming](./lab20-llm-red-teaming/) | Offensive AI Security | Prompt injection, jailbreaking, agentic attacks |
 
@@ -149,13 +150,13 @@ Lab 14 (C2 Traffic) → Lab 15 (Lateral Movement) → Lab 16 (Attribution) → L
  "Detect C2            "Track attacker           "Profile             "Attack/defend
   communications"        movement"                threat actors"        ML models"
 
-Lab 18 (Fine-Tuning) → Lab 19 (Cloud Security) → Lab 20 (LLM Red Team)
-     ↓                      ↓                          ↓
- "Build custom          "Secure cloud             "Attack AI
-  security models"       environments"             systems"
+Lab 18 (Fine-Tuning) → Lab 19a (Cloud Fundamentals) → Lab 19 (Cloud Security AI) → Lab 20 (LLM Red Team)
+     ↓                          ↓                           ↓                          ↓
+ "Build custom            "Learn cloud                 "AI-powered              "Attack AI
+  security models"         security basics"             cloud detection"          systems"
 ```
 
-**Bridge from Core:** Labs 11-20 build on detection skills from Labs 09-10 and apply them to advanced DFIR, adversarial ML, and cloud security scenarios. Lab 17 teaches how to attack and defend ML models. Labs 18-19 cover custom model training and multi-cloud security. Lab 20 focuses on offensive security for LLM applications - prompt injection, jailbreaking, and exploiting agentic AI systems.
+**Bridge from Core:** Labs 11-20 build on detection skills from Labs 09-10 and apply them to advanced DFIR, adversarial ML, and cloud security scenarios. Lab 17 teaches how to attack and defend ML models. Lab 19a introduces cloud security fundamentals for those new to AWS/Azure/GCP. Labs 18-19 cover custom model training and multi-cloud security. Lab 20 focuses on offensive security for LLM applications - prompt injection, jailbreaking, and exploiting agentic AI systems.
 
 ---
 
@@ -484,7 +485,7 @@ Skills learned:
 - Confirmation workflows
 
 Copilot capabilities:
-- SIEM/SOAR queries and log analysis (Cortex XSIAM, Splunk, etc.)
+- SIEM/SOAR queries and log analysis (Splunk, Elastic, Sentinel, etc.)
 - IOC lookup and enrichment
 - Host isolation and containment
 - Timeline and report generation
