@@ -1947,7 +1947,7 @@ python labs/lab01-phishing-classifier/solution/main.py</code></pre>
 </div>
 
 <p style="text-align: center; color: var(--text-muted); font-size: 0.85rem;">
-  MIT License | Built for security practitioners | Maintained by <a href="https://github.com/depalmar" style="color: var(--text-muted); text-decoration: underline;">depalmar</a>
+  MIT License | Built for security practitioners | Created by <a href="https://www.linkedin.com/in/raymond-depalma" style="color: var(--text-muted); text-decoration: underline;">Raymond DePalma</a>
 </p>
 
 <p style="text-align: center; color: var(--text-muted); font-size: 0.75rem; margin-top: 1rem; max-width: 600px; margin-left: auto; margin-right: auto;">
