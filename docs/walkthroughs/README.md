@@ -23,6 +23,8 @@ These walkthroughs provide:
 | [Lab 00c](./lab00c-walkthrough.md) | Prompt Engineering | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab00c_prompt_engineering.ipynb) | Intro |
 | [Lab 00d](./lab00d-walkthrough.md) | AI in Security Ops | — | Intro |
 | [Lab 00e](./lab00e-walkthrough.md) | Visualization & Statistics | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab00e_visualization_stats.ipynb) | Intro |
+| [Lab 00f](./lab00f-walkthrough.md) | Hello World ML | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab00f_hello_world_ml.ipynb) | Intro |
+| [Lab 00g](./lab00g-walkthrough.md) | Working with APIs | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab00g_working_with_apis.ipynb) | Intro |
 
 ### Foundation Labs (No API Key Required)
 
@@ -31,6 +33,7 @@ These walkthroughs provide:
 | [Lab 01](./lab01-walkthrough.md) | Phishing Classifier | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab01_phishing_classifier.ipynb) | Beginner |
 | [Lab 02](./lab02-walkthrough.md) | Malware Clustering | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab02_malware_clustering.ipynb) | Beginner |
 | [Lab 03](./lab03-walkthrough.md) | Anomaly Detection | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab03_anomaly_detection.ipynb) | Beginner |
+| [Lab 03b](./lab03b-walkthrough.md) | ML vs LLM Decision Lab | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab03b_ml_vs_llm.ipynb) | Beginner |
 
 ### LLM & Agent Labs (API Key Required)
 
@@ -39,7 +42,9 @@ These walkthroughs provide:
 | [Lab 04](./lab04-walkthrough.md) | LLM Log Analysis | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab04_llm_log_analysis.ipynb) | Intermediate |
 | [Lab 05](./lab05-walkthrough.md) | Threat Intel Agent | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab05_threat_intel_agent.ipynb) | Intermediate |
 | [Lab 06](./lab06-walkthrough.md) | Security RAG | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab06_security_rag.ipynb) | Intermediate |
+| [Lab 06b](./lab06b-walkthrough.md) | Embeddings & Vectors | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab06b_embeddings_vectors.ipynb) | Intermediate |
 | [Lab 07](./lab07-walkthrough.md) | YARA Generator | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab07_yara_generator.ipynb) | Intermediate |
+| [Lab 07a](./lab07a-walkthrough.md) | Binary Analysis Basics | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab07a_binary_basics.ipynb) | Intermediate |
 
 ### Production Systems
 
@@ -48,6 +53,7 @@ These walkthroughs provide:
 | [Lab 08](./lab08-walkthrough.md) | Vulnerability Prioritizer | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab08_vuln_scanner_ai.ipynb) | Advanced |
 | [Lab 09](./lab09-walkthrough.md) | Detection Pipeline | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab09_detection_pipeline.ipynb) | Advanced |
 | [Lab 10](./lab10-walkthrough.md) | IR Copilot | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab10_ir_copilot.ipynb) | Advanced |
+| [Lab 10b](./lab10b-walkthrough.md) | DFIR Fundamentals | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab10b_dfir_fundamentals.ipynb) | Advanced |
 
 ### DFIR & Expert Labs
 
@@ -60,6 +66,7 @@ These walkthroughs provide:
 | [Lab 15](./lab15-walkthrough.md) | Lateral Movement Detection | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab15_lateral_movement.ipynb) | Expert |
 | [Lab 16](./lab16-walkthrough.md) | Threat Actor Profiling | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab16_threat_actor_profiling.ipynb) | Expert |
 | [Lab 17](./lab17-walkthrough.md) | Adversarial ML | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab17_adversarial_ml.ipynb) | Expert |
+| [Lab 17a](./lab17a-walkthrough.md) | ML Security Foundations | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab17a_ml_security_intro.ipynb) | Expert |
 | [Lab 18](./lab18-walkthrough.md) | Fine-Tuning for Security | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab18_fine_tuning.ipynb) | Expert |
 | [Lab 19](./lab19-walkthrough.md) | Cloud Security AI | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab19_cloud_security.ipynb) | Expert |
 | [Lab 20](./lab20-walkthrough.md) | LLM Red Teaming | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab20_llm_red_teaming.ipynb) | Expert |

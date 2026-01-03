@@ -1,5 +1,7 @@
 # Lab 03: Network Anomaly Detection
 
+**Difficulty:** 🟢 Beginner | **Time:** 45-60 min | **Prerequisites:** Labs 01-02
+
 Build an anomaly detection system to identify malicious network activity.
 
 ---

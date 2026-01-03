@@ -1,5 +1,7 @@
 # Lab 06: RAG System for Security Documentation
 
+**Difficulty:** 🟡 Intermediate | **Time:** 60-90 min | **Prerequisites:** Lab 06b, API key
+
 Build a Retrieval-Augmented Generation system for querying security documentation.
 
 ---
@@ -48,6 +50,42 @@ pip install tiktoken pypdf docx2txt  # Document processing
 2. **Augmentation**: Add retrieved context to the prompt
 3. **Generation**: LLM generates response using context
 
+```mermaid
+flowchart LR
+    subgraph Retrieval["1️⃣ Retrieval"]
+        Query[/"Query"/]
+        Embed["Embed"]
+        VectorDB[(Vector DB)]
+        TopK["Top K Docs"]
+    end
+
+    subgraph Augmentation["2️⃣ Augmentation"]
+        Context["Retrieved<br/>Context"]
+        Combine["Query +<br/>Context"]
+    end
+
+    subgraph Generation["3️⃣ Generation"]
+        LLM["🧠 LLM"]
+        Response[/"Response"/]
+    end
+
+    Query --> Embed
+    Embed --> VectorDB
+    VectorDB --> TopK
+    TopK --> Context
+    Query --> Combine
+    Context --> Combine
+    Combine --> LLM
+    LLM --> Response
+
+    style Query fill:#4a90d9,stroke:#fff
+    style LLM fill:#e94560,stroke:#fff
+    style VectorDB fill:#2ecc71,stroke:#fff
+    style Response fill:#4a90d9,stroke:#fff
+```
+
+**ASCII fallback (for non-Mermaid viewers):**
+
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                      RAG Pipeline                            │
@@ -93,7 +131,7 @@ RAG grounds LLM responses in retrieved documents, but risks remain:
 ```python
 # Good practice: Verify response cites retrieved docs
 prompt = """
-Answer using ONLY the context provided. 
+Answer using ONLY the context provided.
 For each claim, cite which document supports it.
 If the answer isn't in the context, say "Not found in documentation."
 """
@@ -110,11 +148,11 @@ If the answer isn't in the context, say "Not found in documentation."
 ```python
 class SecurityDocLoader:
     """Load and process security documents."""
-    
+
     def load_cve_data(self, filepath: str) -> List[Document]:
         """
         Load CVE data and create documents.
-        
+
         TODO:
         1. Parse CVE JSON/CSV
         2. Create Document for each CVE
@@ -122,11 +160,11 @@ class SecurityDocLoader:
         4. Return list of Documents
         """
         pass
-    
+
     def load_mitre_attack(self, filepath: str) -> List[Document]:
         """
         Load MITRE ATT&CK techniques.
-        
+
         TODO:
         1. Parse ATT&CK JSON
         2. Create Document per technique
@@ -134,11 +172,11 @@ class SecurityDocLoader:
         4. Add tactic and technique IDs as metadata
         """
         pass
-    
+
     def load_playbooks(self, directory: str) -> List[Document]:
         """
         Load IR playbooks from markdown files.
-        
+
         TODO:
         1. Find all .md files
         2. Parse each playbook
@@ -154,14 +192,14 @@ class SecurityDocLoader:
 def chunk_security_documents(documents: List[Document]) -> List[Document]:
     """
     Chunk documents for optimal retrieval.
-    
+
     TODO:
     1. Use RecursiveCharacterTextSplitter
     2. Set appropriate chunk size (500-1000 tokens)
     3. Set overlap (50-100 tokens)
     4. Preserve section boundaries
     5. Keep metadata with chunks
-    
+
     Security considerations:
     - Don't split CVE IDs mid-chunk
     - Keep technique IDs with descriptions
@@ -176,13 +214,13 @@ def chunk_security_documents(documents: List[Document]) -> List[Document]:
 def create_vector_store(chunks: List[Document]) -> Chroma:
     """
     Create vector store with embeddings.
-    
+
     TODO:
     1. Initialize embedding model
     2. Create ChromaDB collection
     3. Add documents with embeddings
     4. Configure similarity metric
-    
+
     Options:
     - OpenAI embeddings (best quality)
     - Sentence-transformers (local, free)
@@ -200,7 +238,7 @@ def create_security_retriever(
 ) -> VectorStoreRetriever:
     """
     Create retriever with security-optimized settings.
-    
+
     TODO:
     1. Configure similarity search
     2. Set number of results (k)
@@ -215,16 +253,16 @@ def create_security_retriever(
 ```python
 class SecurityRAG:
     """RAG system for security queries."""
-    
+
     def __init__(self, retriever, llm):
         self.retriever = retriever
         self.llm = llm
         self.prompt = self._create_prompt()
-    
+
     def _create_prompt(self) -> ChatPromptTemplate:
         """
         Create prompt template for security Q&A.
-        
+
         TODO:
         1. Include system context (security analyst role)
         2. Add placeholder for retrieved docs
@@ -232,11 +270,11 @@ class SecurityRAG:
         4. Include instructions for citing sources
         """
         pass
-    
+
     def query(self, question: str) -> dict:
         """
         Answer security question using RAG.
-        
+
         TODO:
         1. Retrieve relevant documents
         2. Format context from documents
@@ -244,16 +282,16 @@ class SecurityRAG:
         4. Return answer and sources
         """
         pass
-    
+
     def query_with_filters(
-        self, 
-        question: str, 
+        self,
+        question: str,
         doc_type: str = None,
         severity: str = None
     ) -> dict:
         """
         Query with metadata filters.
-        
+
         TODO:
         1. Build filter dict
         2. Apply to retriever
@@ -269,14 +307,14 @@ class SecurityRAG:
 def evaluate_rag_system(rag: SecurityRAG, test_cases: List[dict]) -> dict:
     """
     Evaluate RAG system performance.
-    
+
     Test cases format:
     {
         "question": "What is CVE-2024-1234?",
         "expected_keywords": ["remote code execution", "critical"],
         "expected_sources": ["CVE-2024-1234"]
     }
-    
+
     TODO:
     1. Run each test case
     2. Check for expected keywords in response
@@ -322,15 +360,15 @@ queries = [
     # CVE queries
     "What is CVE-2024-1234 and how do I mitigate it?",
     "List all critical CVEs affecting Apache from 2024",
-    
-    # MITRE queries  
+
+    # MITRE queries
     "How do attackers use PowerShell for execution?",
     "What are detection strategies for credential dumping?",
-    
+
     # Playbook queries
     "What are the first steps when responding to ransomware?",
     "How should I handle a phishing incident?",
-    
+
     # Complex queries
     "I found T1059.001 activity - what should I do?",
     "Compare different lateral movement techniques"
@@ -414,4 +452,3 @@ Question: {question}
 > **Stuck?** See the [Lab 06 Walkthrough](../../docs/walkthroughs/lab06-walkthrough.md) for step-by-step guidance.
 
 **Next Lab**: [Lab 07 - YARA Rule Generator](../lab07-yara-generator/)
-

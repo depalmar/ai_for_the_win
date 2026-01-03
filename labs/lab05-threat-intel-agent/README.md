@@ -1,5 +1,7 @@
 # Lab 05: Build a Threat Intelligence AI Agent
 
+**Difficulty:** 🟡 Intermediate | **Time:** 60-90 min | **Prerequisites:** Lab 04, API key
+
 Create an AI agent that gathers, correlates, and reports on threat intelligence.
 
 ---
@@ -51,6 +53,27 @@ An AI agent is an LLM that can:
 
 **Re**asoning + **Act**ing = ReAct
 
+```mermaid
+flowchart LR
+    subgraph ReAct["ReAct Loop"]
+        Think["🤔 Think<br/>What do I need?"]
+        Act["⚡ Act<br/>Use a tool"]
+        Observe["👀 Observe<br/>What did I learn?"]
+    end
+
+    Query[/"Query"/] --> Think
+    Think --> Act
+    Act --> Observe
+    Observe --> Think
+    Observe -->|Done| Answer[/"Final Answer"/]
+
+    style Think fill:#4a90d9,stroke:#fff
+    style Act fill:#e94560,stroke:#fff
+    style Observe fill:#2ecc71,stroke:#fff
+```
+
+**ASCII fallback:**
+
 ```
 Think: What do I need to do?
 Act: Use a tool to get information
@@ -61,6 +84,54 @@ Answer: Final response
 ```
 
 ### Agent Architecture
+
+```mermaid
+flowchart TB
+    subgraph Agent["🤖 AI AGENT"]
+        direction TB
+
+        subgraph Core["Core Components"]
+            LLM["🧠 LLM<br/>(Brain)"]
+            Memory["💾 Memory<br/>(Context)"]
+        end
+
+        subgraph Tools["🔧 Tools"]
+            IP["IP Lookup"]
+            Domain["Domain Analysis"]
+            Hash["Hash Check"]
+            CVE["CVE Search"]
+            MITRE["MITRE ATT&CK"]
+        end
+
+        Executor["⚡ Executor"]
+    end
+
+    Query[/"User Query"/] --> LLM
+    LLM <--> Memory
+    LLM --> Executor
+    Executor --> IP
+    Executor --> Domain
+    Executor --> Hash
+    Executor --> CVE
+    Executor --> MITRE
+
+    IP --> Results[/"Tool Results"/]
+    Domain --> Results
+    Hash --> Results
+    CVE --> Results
+    MITRE --> Results
+
+    Results --> LLM
+    LLM --> Response[/"Final Response"/]
+
+    style Agent fill:#1a1a2e,stroke:#4a90d9,stroke-width:2px
+    style Core fill:#16213e,stroke:#4a90d9
+    style Tools fill:#16213e,stroke:#4a90d9
+    style LLM fill:#4a90d9,stroke:#fff
+    style Executor fill:#e94560,stroke:#fff
+```
+
+**ASCII fallback (for non-Mermaid viewers):**
 
 ```
 ┌─────────────────────────────────────────────────────┐

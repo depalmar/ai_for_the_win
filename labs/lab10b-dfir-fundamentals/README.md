@@ -1,5 +1,7 @@
 # Lab 10b: DFIR Fundamentals
 
+**Difficulty:** 🟡 Intermediate | **Time:** 60-90 min | **Prerequisites:** Labs 01-10
+
 Essential incident response concepts before diving into advanced DFIR labs.
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab10b_dfir_fundamentals.ipynb)
@@ -21,6 +23,63 @@ By the end of this lab, you will:
 ## Time Required
 
 ⏱️ **60-90 minutes**
+
+---
+
+## Windows Event Log Quick Reference
+
+### Critical Security Events
+
+| Event ID | Log | Description | Technique |
+|----------|-----|-------------|-----------|
+| **4624** | Security | Successful logon | - |
+| **4625** | Security | Failed logon | T1110 (Brute Force) |
+| **4648** | Security | Explicit credential logon | T1078 (Valid Accounts) |
+| **4672** | Security | Admin privileges assigned | Priv Escalation indicator |
+| **4688** | Security | Process created | All execution |
+| **4689** | Security | Process terminated | - |
+| **4697** | Security | Service installed | T1543.003 (Service) |
+| **4698** | Security | Scheduled task created | T1053 (Scheduled Task) |
+| **4720** | Security | User account created | T1136 (Create Account) |
+| **4732** | Security | User added to local group | - |
+| **7045** | System | Service installed | T1543.003 |
+| **1102** | Security | Audit log cleared | T1070.001 (Clear Logs) |
+
+### PowerShell Logging
+
+| Event ID | Log | Description |
+|----------|-----|-------------|
+| **4103** | PowerShell | Module logging |
+| **4104** | PowerShell | Script block logging (shows actual code!) |
+| **4105** | PowerShell | Script block start |
+| **4106** | PowerShell | Script block stop |
+
+### Event Log Parsing with PowerShell
+
+```powershell
+# Get failed logins in last 24 hours
+Get-WinEvent -FilterHashtable @{
+    LogName='Security'
+    Id=4625
+    StartTime=(Get-Date).AddDays(-1)
+}
+
+# Get process creation events
+Get-WinEvent -FilterHashtable @{
+    LogName='Security'
+    Id=4688
+} | Select-Object TimeCreated, @{N='Process';E={$_.Properties[5].Value}}
+
+# Get PowerShell script blocks (requires script block logging enabled)
+Get-WinEvent -FilterHashtable @{
+    LogName='Microsoft-Windows-PowerShell/Operational'
+    Id=4104
+} | Select-Object TimeCreated, Message
+
+# Export events to CSV
+Get-WinEvent -FilterHashtable @{LogName='Security'; Id=4624,4625} | 
+    Export-Csv -Path "auth_events.csv" -NoTypeInformation
+```
 
 ---
 
@@ -106,10 +165,50 @@ Suspicious process indicators:
 
 | Location | Purpose | Attack Use |
 |----------|---------|------------|
-| `HKLM\...\Run` | Startup programs | Persistence |
-| `HKCU\...\Run` | User startup | Persistence |
-| `HKLM\...\Services` | Windows services | Backdoor services |
-| `HKLM\...\Winlogon` | Login process | Credential theft |
+| `HKLM\...\Run` | Startup programs | Persistence (T1547.001) |
+| `HKCU\...\Run` | User startup | Persistence (T1547.001) |
+| `HKLM\...\Services` | Windows services | Backdoor services (T1543.003) |
+| `HKLM\...\Winlogon` | Login process | Credential theft (T1547.004) |
+
+#### Deep Dive: Registry Persistence Locations
+
+```
+🔴 HIGH PRIORITY (check first):
+├── HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+├── HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+├── HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce
+├── HKLM\SYSTEM\CurrentControlSet\Services  ← Malicious services
+├── HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon
+│   └── Shell, Userinit, Notify  ← Login hooks
+│
+🟡 MEDIUM PRIORITY:
+├── HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders
+├── HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options
+│   └── Debugger hijacking (T1546.012)
+├── HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Browser Helper Objects
+│   └── BHO malware
+│
+🔵 EVIDENCE (user activity):
+├── HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\TypedPaths
+├── HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs
+├── NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Explorer\UserAssist
+│   └── Program execution history (ROT13 encoded)
+```
+
+#### Registry Analysis Commands
+
+```powershell
+# PowerShell: Check Run keys
+Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run"
+Get-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run"
+
+# Check services for suspicious entries
+Get-WmiObject Win32_Service | Where-Object {$_.PathName -like "*Temp*" -or $_.PathName -like "*Users\Public*"}
+
+# Check Image File Execution Options (debugger hijacking)
+Get-ChildItem "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options" | 
+    Where-Object {(Get-ItemProperty $_.PSPath).Debugger}
+```
 
 ---
 
@@ -297,6 +396,50 @@ RECOMMENDED ACTIONS:
 
 ---
 
+---
+
+## Timeline Generation
+
+Building a timeline is critical for understanding attack progression.
+
+### Super Timeline with Plaso (log2timeline)
+
+```bash
+# Create timeline from disk image
+log2timeline.py --storage-file timeline.plaso disk_image.E01
+
+# Parse specific artifacts only (faster)
+log2timeline.py --parsers "winevtx,prefetch,mft" timeline.plaso disk_image.E01
+
+# Convert to CSV for analysis
+psort.py -o l2tcsv -w timeline.csv timeline.plaso
+
+# Filter to specific time window
+psort.py -o l2tcsv -w timeline.csv timeline.plaso "date > '2024-01-15 08:00:00' AND date < '2024-01-15 18:00:00'"
+```
+
+### Key Artifacts for Timeline
+
+| Artifact | Parser | What It Shows |
+|----------|--------|---------------|
+| Windows Event Logs | `winevtx` | Security events, logins, process creation |
+| Prefetch | `prefetch` | Program execution with timestamps |
+| $MFT | `mft` | File creation/modification/access |
+| Registry | `winreg` | Configuration changes |
+| ShimCache | `appcompatcache` | Program execution evidence |
+| AmCache | `amcache` | First execution times |
+| Browser History | `chrome_history`, `firefox_history` | Web activity |
+
+### Timeline Analysis Tips
+
+1. **Start from known-bad** - Anchor on confirmed malicious activity
+2. **Work backwards** - How did attacker get initial access?
+3. **Work forwards** - What did they do after compromise?
+4. **Look for gaps** - Missing logs = potential anti-forensics
+5. **Correlate sources** - Cross-reference events with network data
+
+---
+
 ## Key Concepts
 
 ### Severity Levels
@@ -334,6 +477,28 @@ Always document:
 3. **Map to ATT&CK** - Gives common language and helps identify gaps
 4. **Preserve evidence** - Order of volatility matters
 5. **Document everything** - Chain of custody is critical
+
+---
+
+---
+
+## Cloud DFIR (Brief Overview)
+
+Modern IR often involves cloud environments. Key artifacts:
+
+| Cloud | Log Source | What It Contains |
+|-------|------------|------------------|
+| **AWS** | CloudTrail | API calls, console logins |
+| **AWS** | GuardDuty | Threat detection findings |
+| **AWS** | VPC Flow Logs | Network traffic metadata |
+| **Azure** | Activity Log | Control plane operations |
+| **Azure** | Sign-in Logs | Authentication events |
+| **Azure** | Sentinel | SIEM alerts and incidents |
+| **GCP** | Cloud Audit Logs | Admin activity, data access |
+| **GCP** | VPC Flow Logs | Network traffic |
+
+> 💡 **Tip**: For cloud IR, focus on IAM (who), API calls (what), and timestamps (when).  
+> Most cloud providers have 90-day log retention by default - plan accordingly!
 
 ---
 

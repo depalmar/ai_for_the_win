@@ -21,7 +21,7 @@ ML Model:    You provide examples → Model learns patterns → Model makes deci
 ### Training
 **AI Definition**: The process of teaching a model by showing it many examples.
 
-**Security Analogy**: Like **tuning a SIEM**. You feed it logs, tell it which are attacks and which are benign, and it learns to distinguish them. The more quality examples, the better it gets.
+**Security Analogy**: Like **tuning a SIEM** (Cortex XSIAM, Splunk, etc.). You feed it logs, tell it which are attacks and which are benign, and it learns to distinguish them. The more quality examples, the better it gets.
 
 ---
 
@@ -312,7 +312,7 @@ llm.generate(prompt, temperature=0.7)  # Some creativity
 **Security Analogy**: Your **SOC playbook**. It defines how the AI should behave: "You are a security analyst. Always cite CVE IDs. Never recommend disabling security controls."
 
 ```python
-system_prompt = """You are a security analyst. 
+system_prompt = """You are a security analyst.
 Rules:
 - Always map findings to MITRE ATT&CK
 - Defang IOCs in output (hxxp://)
@@ -334,7 +334,7 @@ Classify these logs:
 Log: Failed password for admin from 192.168.1.100
 Classification: SUSPICIOUS
 
-Log: User john.doe logged in successfully  
+Log: User john.doe logged in successfully
 Classification: BENIGN
 
 Log: Multiple failed SSH attempts from 45.33.32.156
@@ -376,7 +376,7 @@ ACTION: siem_query("dest_ip=185.143.223.47")
 ### Tool Use / Function Calling
 **AI Definition**: LLM's ability to call external functions/APIs to get information or take actions.
 
-**Security Analogy**: **Analyst with access to security tools**. The AI can query VirusTotal, search logs in SIEM, look up CVEs, etc. Tools extend what the AI can do.
+**Security Analogy**: **Analyst with access to security tools**. The AI can query VirusTotal, search logs in SIEM (Cortex XSIAM, Splunk, etc.), look up CVEs, etc. Tools extend what the AI can do.
 
 ```python
 tools = [
@@ -512,28 +512,6 @@ tools = [
 | Evasion | AV bypass for ML |
 | Poisoning | Bad training data attack |
 | Adversarial Training | Red team your ML |
-
-| AI Term | Security Equivalent |
-|---------|---------------------|
-| Model | Trained detection ruleset |
-| Training | Tuning/teaching with examples |
-| Inference | Production detection |
-| Features | Log fields that matter |
-| Labels | Known verdicts (malicious/benign) |
-| Supervised | Learning from labeled incidents |
-| Unsupervised | Anomaly detection / hunting |
-| Classifier | Multi-category detection |
-| Precision | Alert fidelity |
-| Recall | Detection coverage |
-| False Positive | Alert, but benign |
-| False Negative | Attack, no alert |
-| Overfitting | Rule too specific |
-| Threshold | Alert severity cutoff |
-| Token | ~1 word of text |
-| Prompt | Query to AI |
-| Hallucination | AI makes stuff up |
-| RAG | AI with your docs |
-| Prompt Injection | SQL injection for AI |
 
 ---
 

@@ -1,5 +1,7 @@
 # Lab 07a: Binary Analysis Basics
 
+**Difficulty:** 🟡 Intermediate | **Time:** 45-60 min | **Prerequisites:** Lab 00a
+
 Essential binary/malware analysis concepts before building YARA rules.
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab07a_binary_basics.ipynb)

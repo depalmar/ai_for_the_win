@@ -1,5 +1,7 @@
 # Lab 00f: Hello World ML
 
+**Difficulty:** 🟢 Beginner | **Time:** 30-45 min | **Prerequisites:** Lab 00a, 00b
+
 Your first machine learning model - a simple spam detector in under 50 lines of code.
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab00f_hello_world_ml.ipynb)
