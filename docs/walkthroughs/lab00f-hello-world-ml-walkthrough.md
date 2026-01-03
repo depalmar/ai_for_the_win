@@ -198,14 +198,24 @@ recall = recall_score(y_test, predictions)
 ### Understanding the Metrics
 
 ```
-                    Predicted
-                 SPAM    NOT SPAM
-Actual  SPAM     TP=8      FN=2     ← Recall: TP/(TP+FN) = 8/10 = 80%
-       NOT SPAM  FP=1      TN=9
-                  ↓
-        Precision: TP/(TP+FP) = 8/9 = 89%
-
-Accuracy: (TP+TN)/Total = (8+9)/20 = 85%
+┌─────────────────────────────────────────────────────────┐
+│                    CONFUSION MATRIX                     │
+├─────────────────────────────────────────────────────────┤
+│                      Predicted                          │
+│                  SPAM      NOT SPAM                     │
+│              ┌──────────┬──────────┐                    │
+│   Actual     │          │          │                    │
+│   SPAM       │  TP = 8  │  FN = 2  │ → Recall = 80%     │
+│              ├──────────┼──────────┤                    │
+│   NOT SPAM   │  FP = 1  │  TN = 9  │                    │
+│              └──────────┴──────────┘                    │
+│                    ↓                                    │
+│            Precision = 89%                              │
+├─────────────────────────────────────────────────────────┤
+│  Accuracy  = (8 + 9) / 20 = 85%                         │
+│  Precision = 8 / (8 + 1) = 89%                          │
+│  Recall    = 8 / (8 + 2) = 80%                          │
+└─────────────────────────────────────────────────────────┘
 ```
 
 ### Which Metric Matters?
