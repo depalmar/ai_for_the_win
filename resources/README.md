@@ -31,9 +31,7 @@ resources/
 ├── tools-and-resources.md       # Comprehensive tools and APIs guide
 ├── mcp-servers-security-guide.md # MCP servers for security operations
 ├── integrations/                # Enterprise platform integrations
-│   ├── README.md               # Integration overview
-│   ├── splunk-integration.md    # Splunk SIEM integration
-│   └── splunk-integration.md   # Splunk Enterprise/Cloud
+│   └── README.md               # Platform-agnostic integration patterns
 ├── prompt-library/              # Security analysis prompts
 │   └── security-prompts.md      # Curated prompt templates
 # Note: All comprehensive guides are in docs/guides/

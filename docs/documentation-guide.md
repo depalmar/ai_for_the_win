@@ -57,8 +57,8 @@
 
 | Goal | Go To |
 |------|-------|
-| **Splunk integration** | [Splunk Guide](../resources/integrations/splunk-integration.md) |
-| **Elastic/ELK integration** | [Elastic Guide](../resources/integrations/elastic-integration.md) |
+| **SIEM integration patterns** | [Integration Patterns](../resources/integrations/) |
+| **Alert enrichment** | [Integration Patterns](../resources/integrations/) |
 | **All integrations** | [Integrations Index](../resources/integrations/) |
 
 ### Go Deeper
