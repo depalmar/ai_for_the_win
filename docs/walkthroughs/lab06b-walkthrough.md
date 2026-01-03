@@ -71,8 +71,10 @@ print(f"Dimensions: {len(embedding)}")  # 1536
 |-------|------------|-------|---------|------|
 | `all-MiniLM-L6-v2` | 384 | Fast | Good | Free |
 | `all-mpnet-base-v2` | 768 | Medium | Better | Free |
-| `text-embedding-3-small` | 1536 | Fast | Great | $0.02/1M |
-| `text-embedding-3-large` | 3072 | Medium | Best | $0.13/1M |
+| `text-embedding-3-small` | 1536 | Fast | Great | ~$0.02/1M tokens* |
+| `text-embedding-3-large` | 3072 | Medium | Best | ~$0.13/1M tokens* |
+
+*API pricing changes frequently - check provider documentation for current rates.*
 
 ---
 
@@ -114,6 +116,8 @@ print(f"credential theft vs quarterly report: {sim3:.3f}")  # ~0.15
 
 ### Similarity Interpretation
 
+> **Note**: Cosine similarity ranges from -1 to 1, but for text embeddings, values are typically 0 to 1 since embeddings tend to have positive values.
+
 ```
 1.0  = Identical meaning
 0.8+ = Very similar (synonyms, same topic)
@@ -121,6 +125,8 @@ print(f"credential theft vs quarterly report: {sim3:.3f}")  # ~0.15
 0.3-0.5 = Loosely related
 <0.3 = Unrelated
 ```
+
+*Thresholds are approximate and vary by model. Always calibrate for your specific use case.*
 
 ---
 

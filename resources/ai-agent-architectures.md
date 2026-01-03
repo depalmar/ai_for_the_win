@@ -174,8 +174,8 @@ Agent creates a plan first, then executes step-by-step.
 ```python
 from langchain.agents import AgentExecutor
 from langchain_experimental.plan_and_execute import (
-    PlanAndExecute, 
-    load_agent_executor, 
+    PlanAndExecute,
+    load_agent_executor,
     load_chat_planner
 )
 from langchain_anthropic import ChatAnthropic
@@ -282,14 +282,14 @@ class IRState(TypedDict):
 def triage_alert(state: IRState) -> IRState:
     """Analyze alert and determine severity."""
     llm = ChatAnthropic(model="claude-sonnet-4-20250514")
-    
+
     response = llm.invoke(f"""
-    Analyze this security alert and classify severity as 
+    Analyze this security alert and classify severity as
     CRITICAL, HIGH, MEDIUM, or LOW:
-    
+
     {state['alert']}
     """)
-    
+
     # Parse severity from response
     severity = parse_severity(response.content)
     return {"severity": severity}
@@ -439,8 +439,8 @@ llm = ChatAnthropic(model="claude-sonnet-4-20250514")
 triage_agent = Agent(
     role="Security Triage Analyst",
     goal="Quickly classify and prioritize security alerts",
-    backstory="""You are a Tier 1 SOC analyst with expertise in 
-    alert triage. You efficiently classify alerts by severity and 
+    backstory="""You are a Tier 1 SOC analyst with expertise in
+    alert triage. You efficiently classify alerts by severity and
     determine which require immediate attention.""",
     llm=llm,
     tools=[alert_lookup_tool, asset_lookup_tool]
@@ -449,8 +449,8 @@ triage_agent = Agent(
 hunter_agent = Agent(
     role="Threat Hunter",
     goal="Proactively search for indicators of compromise",
-    backstory="""You are an experienced threat hunter who 
-    specializes in finding hidden threats that evade automated 
+    backstory="""You are an experienced threat hunter who
+    specializes in finding hidden threats that evade automated
     detection. You use hypothesis-driven hunting techniques.""",
     llm=llm,
     tools=[siem_query_tool, ti_lookup_tool, endpoint_query_tool]
@@ -459,8 +459,8 @@ hunter_agent = Agent(
 responder_agent = Agent(
     role="Incident Responder",
     goal="Contain and remediate security incidents",
-    backstory="""You are a senior incident responder who 
-    executes containment and remediation actions. You follow 
+    backstory="""You are a senior incident responder who
+    executes containment and remediation actions. You follow
     established playbooks while adapting to unique situations.""",
     llm=llm,
     tools=[containment_tool, remediation_tool, ticket_tool]
@@ -590,7 +590,7 @@ def execute_tool(name: str, inputs: dict) -> str:
 # Agent loop
 def run_agent(user_message: str) -> str:
     messages = [{"role": "user", "content": user_message}]
-    
+
     while True:
         response = client.messages.create(
             model="claude-sonnet-4-20250514",
@@ -598,7 +598,7 @@ def run_agent(user_message: str) -> str:
             tools=tools,
             messages=messages
         )
-        
+
         # Check if model wants to use a tool
         if response.stop_reason == "tool_use":
             # Execute each tool call
@@ -611,7 +611,7 @@ def run_agent(user_message: str) -> str:
                         "tool_use_id": block.id,
                         "content": result
                     })
-            
+
             # Add assistant message and tool results
             messages.append({"role": "assistant", "content": response.content})
             messages.append({"role": "user", "content": tool_results})
@@ -679,14 +679,14 @@ def require_approval(action_type: str):
         def wrapper(*args, **kwargs):
             # Log the attempted action
             audit_logger.info(f"Action requested: {action_type} - {args}, {kwargs}")
-            
+
             # In production, this would integrate with approval system
             if action_type in ["block_ip", "isolate_host", "disable_account"]:
                 approval = request_human_approval(action_type, args, kwargs)
                 if not approval:
                     audit_logger.warning(f"Action denied: {action_type}")
                     return {"status": "denied", "reason": "Approval required"}
-            
+
             result = func(*args, **kwargs)
             audit_logger.info(f"Action completed: {action_type} - {result}")
             return result
@@ -699,7 +699,7 @@ def block_ip_at_firewall(ip: str) -> dict:
     # Implementation
     pass
 
-@require_approval("isolate_host")  
+@require_approval("isolate_host")
 def isolate_host(hostname: str) -> dict:
     """Isolate host from network - requires approval."""
     # Implementation
@@ -713,7 +713,7 @@ class RateLimiter:
     def __init__(self, calls_per_minute: int = 30):
         self.calls_per_minute = calls_per_minute
         self.calls = []
-    
+
     def check(self) -> bool:
         now = time.time()
         self.calls = [c for c in self.calls if now - c < 60]

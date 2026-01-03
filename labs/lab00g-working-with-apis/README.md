@@ -222,13 +222,13 @@ import time
 def rate_limited_request(urls, requests_per_minute=60):
     """Make requests with rate limiting."""
     delay = 60 / requests_per_minute  # seconds between requests
-    
+
     results = []
     for url in urls:
         response = requests.get(url)
         results.append(response.json())
         time.sleep(delay)  # Wait before next request
-    
+
     return results
 ```
 
@@ -239,15 +239,15 @@ def request_with_retry(url, max_retries=3):
     """Retry on rate limit."""
     for attempt in range(max_retries):
         response = requests.get(url)
-        
+
         if response.status_code == 429:
             wait_time = int(response.headers.get("Retry-After", 60))
             print(f"Rate limited. Waiting {wait_time}s...")
             time.sleep(wait_time)
             continue
-        
+
         return response
-    
+
     raise Exception("Max retries exceeded")
 ```
 
@@ -359,7 +359,7 @@ def check_hash_virustotal(file_hash, api_key):
     """Check file hash on VirusTotal."""
     url = f"https://www.virustotal.com/api/v3/files/{file_hash}"
     headers = {"x-apikey": api_key}
-    
+
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
         data = response.json()
@@ -380,7 +380,7 @@ def check_ip_abuseipdb(ip_address, api_key):
     url = "https://api.abuseipdb.com/api/v2/check"
     headers = {"Key": api_key, "Accept": "application/json"}
     params = {"ipAddress": ip_address, "maxAgeInDays": 90}
-    
+
     response = requests.get(url, headers=headers, params=params)
     if response.status_code == 200:
         data = response.json()["data"]
