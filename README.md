@@ -364,8 +364,8 @@ High Confidence (Attributed to FIN7/Carbanak) based on:
 
 💡 **Cost-Saving Tip**: Complete Labs 01-03 first (FREE, no API keys) to build ML foundations before
    investing in LLM API credits. Then use free tiers: Anthropic ($5 free), Google AI Studio (free),
-   OpenAI ($5 free for new accounts). Costs based on 2025 pricing: Claude 3.5 Sonnet ($3/$15 per 1M
-   tokens), GPT-4o ($5/$20 per 1M), Gemini 2.5 Pro ($1.25/$10 per 1M).
+   OpenAI ($5 free for new accounts). 2026 pricing: Claude Sonnet 4 ($3/$15 per 1M tokens),
+   GPT-5.2 ($1.75/$14 per 1M), Gemini 2.5 Pro ($1.25/$10 per 1M).
 ```
 
 ### When to Use ML vs LLM
