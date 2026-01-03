@@ -2,7 +2,22 @@
 """
 Lab 03: Network Anomaly Detection - Solution
 
-Complete implementation of network anomaly detection system.
+This lab implements unsupervised anomaly detection for network traffic.
+
+Key concepts:
+- Anomaly detection finds "unusual" patterns without labeled examples
+- Unlike classification, we don't need examples of all attack types
+- This is powerful because we can detect NOVEL attacks
+
+Why unsupervised for security?
+- We rarely have complete labeled datasets of attacks
+- New attack techniques appear constantly (zero-days)
+- Anomaly detection can catch what we've never seen before
+
+The trade-off:
+- Supervised models (Lab 01) are more accurate for KNOWN attack types
+- Unsupervised models catch unknown attacks but have more false positives
+- Production systems often combine both approaches
 """
 
 from datetime import datetime
@@ -69,44 +84,90 @@ def explore_network_data(df: pd.DataFrame) -> None:
 # =============================================================================
 # Task 2: Feature Engineering - SOLUTION
 # =============================================================================
+# Feature engineering for anomaly detection focuses on creating features
+# that distinguish "normal" behavior patterns from anomalies.
+#
+# Network anomalies often appear as:
+# - Unusual traffic volumes (DDoS, data exfiltration)
+# - Abnormal ratios (beaconing with tiny requests/responses)
+# - Suspicious timing (C2 communication at regular intervals)
+# - Port scanning (connections to many ports quickly)
 
 
 def engineer_network_features(df: pd.DataFrame) -> pd.DataFrame:
-    """Create anomaly detection features."""
+    """
+    Create anomaly detection features from raw network flow data.
+    
+    Feature types:
+    1. Volume features: total bytes, packets (detect bulk transfers)
+    2. Rate features: bytes/sec, packets/sec (detect floods or throttling)
+    3. Ratio features: sent/received ratio (detect asymmetric patterns)
+    4. Port features: well-known vs high ports (detect port scanning)
+    5. Time features: business hours, hour of day (detect off-hours activity)
+    
+    Each feature is designed to capture a different attack pattern.
+    """
     df = df.copy()
 
-    # Ensure duration is not zero
+    # Ensure duration is not zero to avoid division errors
     df["duration"] = df["duration"].clip(lower=0.001)
 
-    # Total bytes and packets
+    # =========================================
+    # VOLUME FEATURES - Detect bulk transfers
+    # =========================================
+    # Data exfiltration: large bytes_sent to external IPs
+    # DDoS: massive incoming traffic
     df["total_bytes"] = df["bytes_sent"] + df["bytes_recv"]
     df["total_packets"] = df["packets_sent"] + df["packets_recv"]
 
-    # Rate features
+    # =========================================
+    # RATE FEATURES - Detect floods or throttling
+    # =========================================
+    # Port scans: high packets_per_second but low bytes_per_second
+    # DDoS: extremely high rates
+    # C2 beaconing: regular, low rates
     df["bytes_per_second"] = df["total_bytes"] / df["duration"]
     df["packets_per_second"] = df["total_packets"] / df["duration"]
 
-    # Ratio features
+    # =========================================
+    # RATIO FEATURES - Detect asymmetric patterns
+    # =========================================
+    # Normal web: small requests, large responses (low bytes_ratio)
+    # Exfiltration: large uploads (high bytes_ratio)
+    # C2: symmetric small exchanges (ratio ~0.5)
     df["bytes_ratio"] = df["bytes_sent"] / (df["total_bytes"] + 1)
     df["packets_ratio"] = df["packets_sent"] / (df["total_packets"] + 1)
 
-    # Bytes per packet
+    # Bytes per packet - detect protocol anomalies
+    # Small: TCP SYN scans (~60 bytes)
+    # Large: file transfers (1500 bytes MTU)
     df["bytes_per_packet"] = df["total_bytes"] / (df["total_packets"] + 1)
 
-    # Port features
+    # =========================================
+    # PORT FEATURES - Detect service access patterns
+    # =========================================
+    # Well-known ports (0-1023): standard services
+    # High ports (49152+): often used by malware to blend in
     df["is_well_known_port"] = (df["dst_port"] < 1024).astype(int)
     df["is_high_port"] = (df["dst_port"] > 49152).astype(int)
 
-    # Time features
+    # =========================================
+    # TIME FEATURES - Detect off-hours activity
+    # =========================================
+    # Attackers often operate when defenders aren't watching
+    # Activity at 3am on Sunday is suspicious
     if "timestamp" in df.columns:
         df["hour_of_day"] = df["timestamp"].dt.hour
         df["is_business_hours"] = ((df["hour_of_day"] >= 9) & (df["hour_of_day"] <= 17)).astype(int)
 
-    # Internal IP check (simplified)
+    # Internal IP check (simplified for demo)
+    # External-to-external traffic from internal machine is suspicious
     df["is_internal_src"] = df["src_ip"].str.startswith("192.168.").astype(int)
     df["is_internal_dst"] = df["dst_ip"].str.startswith("192.168.").astype(int)
 
     # Log transforms for highly skewed features
+    # Network data often follows power-law distributions
+    # Log transform makes it more Gaussian (better for some ML algorithms)
     df["log_bytes"] = np.log1p(df["total_bytes"])
     df["log_duration"] = np.log1p(df["duration"])
 
@@ -180,19 +241,52 @@ def iqr_baseline(df: pd.DataFrame, feature: str, k: float = 1.5) -> pd.Series:
 # =============================================================================
 # Task 4: Train Isolation Forest - SOLUTION
 # =============================================================================
+# Isolation Forest is ideal for anomaly detection because:
+# 1. No labels needed - learns what "normal" looks like
+# 2. Works well with high-dimensional data
+# 3. Fast training and prediction
+# 4. Built-in handling of contamination (expected % of anomalies)
+#
+# How it works:
+# - Randomly selects a feature and a split value
+# - Isolates points by creating partitions
+# - Anomalies are isolated quickly (few splits needed)
+# - Normal points take many splits to isolate
+# - Anomaly score = average path length (shorter = more anomalous)
 
 
 def train_isolation_forest(
     X: np.ndarray, contamination: float = 0.05
 ) -> Tuple[IsolationForest, np.ndarray]:
-    """Train Isolation Forest for anomaly detection."""
+    """
+    Train Isolation Forest for anomaly detection.
+    
+    Parameters:
+    - X: Feature matrix (scaled)
+    - contamination: Expected proportion of anomalies (0.05 = 5%)
+    
+    Key insight:
+    - Anomalies are "few and different"
+    - They lie far from normal data points
+    - Random forests can isolate them with fewer splits
+    
+    Returns:
+    - Trained model
+    - Anomaly scores (more negative = more anomalous)
+    """
     model = IsolationForest(
-        n_estimators=100, contamination=contamination, random_state=42, n_jobs=-1
+        n_estimators=100,       # Number of trees (more = more stable)
+        contamination=contamination,  # Expected % anomalies
+        random_state=42,        # Reproducibility
+        n_jobs=-1               # Use all CPU cores
     )
 
     model.fit(X)
 
-    # Get anomaly scores (negative = more anomalous)
+    # Get anomaly scores
+    # IMPORTANT: More negative = more anomalous
+    # Normal points have scores near 0
+    # Anomalies have scores much below 0
     scores = model.decision_function(X)
 
     print(f"Isolation Forest trained (contamination={contamination})")
