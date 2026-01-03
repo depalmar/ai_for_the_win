@@ -441,7 +441,7 @@ def setup_llm():
     """Detect and configure LLM provider."""
     providers = {
         "anthropic": ("ANTHROPIC_API_KEY", "claude-sonnet-4-20250514"),
-        "openai": ("OPENAI_API_KEY", "gpt-5"),
+        "openai": ("OPENAI_API_KEY", "gpt-4o"),
         "google": ("GOOGLE_API_KEY", "gemini-2.5-pro"),
     }
     
