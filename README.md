@@ -192,11 +192,11 @@ requiring immediate containment.
                                     Timeline
 
  1 2025-01-15 03:22:10 - PowerShell script block execution: Downloaded content
-   from http://evil-c2.com/payload.ps1 using Net.WebClient.
+   from hxxp://evil-c2[.]com/payload.ps1 using Net.WebClient.
  2 2025-01-15 03:22:15 - Discovery commands executed (whoami, hostname,
    ipconfig) via cmd.exe.
  3 2025-01-15 03:22:18 - Network connection detected from powershell.exe to
-   evil-c2.com (185.143.223.47) over port 443.
+   evil-c2[.]com (185[.]143[.]223[.]47) over port 443.
  4 2025-01-15 03:23:00 - Persistence established: reg.exe added malware.exe to
    HKCU Run keys.
  5 2025-01-15 03:25:00 - Persistence established: Scheduled Task SecurityUpdate
@@ -210,7 +210,7 @@ Windows tools (PowerShell, cmd.exe, reg.exe) to evade initial detection.
 
  • Initial Access/Execution: A PowerShell download cradle (New-Object
    System.Net.WebClient) retrieved a remote script.
- • C2/Exfiltration: Encrypted traffic (port 443) was observed to evil-c2.com.
+ • C2/Exfiltration: Encrypted traffic (port 443) was observed to evil-c2[.]com.
  • Persistence: Dual persistence mechanisms were created:
     • Registry: HKCU\Software\Microsoft\Windows\CurrentVersion\Run
     • Scheduled Task: \Microsoft\Windows\Maintenance\SecurityUpdate
@@ -229,7 +229,7 @@ Windows tools (PowerShell, cmd.exe, reg.exe) to evade initial detection.
                  Execution: Registry Run Keys    CurrentVersion\Run
   T1053.005      Scheduled Task/Job: Scheduled   TaskName: ...SecurityUpdate
                  Task
-  T1105          Ingress Tool Transfer           DownloadString('http://evil-…
+  T1105          Ingress Tool Transfer           DownloadString('hxxp://evil-…
 ```
 
 ---
