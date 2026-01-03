@@ -217,6 +217,15 @@ Windows tools (PowerShell, cmd.exe, reg.exe) to evade initial detection.
       (Masquerading as a legitimate update task).
 
 
+                                Attribution Analysis
+
+High Confidence (Attributed to FIN7/Carbanak) based on:
+ • Tooling: Use of modified `certutil` and `DNS-based C2` matches known campaigns.
+ • Infrastructure: `evil-c2[.]com` has historical associations with FIN7 (Mock Intel).
+ • TTP Overlap: The specific sequence of PowerShell obfuscation -> Registry Run Key
+   is a signature behavior pattern.
+
+
                               MITRE ATT&CK Mapping
 
 
@@ -611,7 +620,7 @@ Copy `.env.example` to `.env` and configure:
 
 Created by **Raymond DePalma**
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/depalmar)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/raymond-depalma)
 
 ---
 
