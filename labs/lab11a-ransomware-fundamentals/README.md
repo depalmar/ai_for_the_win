@@ -489,6 +489,9 @@ lab11a-ransomware-fundamentals/
 - [CrowdStrike Adversary Reports](https://www.crowdstrike.com/)
 
 ### SANS Resources
+- [FOR528: Ransomware for Incident Responders](https://www.sans.org/cyber-security-courses/ransomware-incident-responders/) - Dedicated ransomware course by **Ryan Chapman**
+- [GIAC GRIT](https://www.giac.org/certifications/response-industrial-defense-tactics-grit/) - Ransomware incident response certification
+- [Ryan Chapman's Ransomware Research](https://www.sans.org/profiles/ryan-chapman/) - SANS instructor, ransomware specialist
 - [SANS Ransomware Summit](https://www.sans.org/cyber-security-summit/) - Annual event
 - [SANS Reading Room - Ransomware](https://www.sans.org/white-papers/)
 - [GIAC GCIH](https://www.giac.org/certifications/certified-incident-handler-gcih/) - Incident handling certification
