@@ -223,7 +223,7 @@
   },
   "references": [
     "https://attack.mitre.org/groups/G0007/",
-    "https://www.fireeye.com/current-threats/apt-groups.html",
-    "https://www.crowdstrike.com/blog/bears-midst-intrusion-democratic-national-committee/"
+    "https://www.cisa.gov/news-events/cybersecurity-advisories/aa20-296a",
+    "https://www.justice.gov/opa/pr/us-charges-russian-gru-officers-international-hacking-and-related-influence-and"
   ]
 }

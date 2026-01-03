@@ -192,11 +192,11 @@ requiring immediate containment.
                                     Timeline
 
  1 2025-01-15 03:22:10 - PowerShell script block execution: Downloaded content
-   from http://evil-c2.com/payload.ps1 using Net.WebClient.
+   from hxxp://evil-c2[.]com/payload.ps1 using Net.WebClient.
  2 2025-01-15 03:22:15 - Discovery commands executed (whoami, hostname,
    ipconfig) via cmd.exe.
  3 2025-01-15 03:22:18 - Network connection detected from powershell.exe to
-   evil-c2.com (185.143.223.47) over port 443.
+   evil-c2[.]com (185.143.223.47) over port 443.
  4 2025-01-15 03:23:00 - Persistence established: reg.exe added malware.exe to
    HKCU Run keys.
  5 2025-01-15 03:25:00 - Persistence established: Scheduled Task SecurityUpdate
@@ -210,7 +210,7 @@ Windows tools (PowerShell, cmd.exe, reg.exe) to evade initial detection.
 
  • Initial Access/Execution: A PowerShell download cradle (New-Object
    System.Net.WebClient) retrieved a remote script.
- • C2/Exfiltration: Encrypted traffic (port 443) was observed to evil-c2.com.
+ • C2/Exfiltration: Encrypted traffic (port 443) was observed to evil-c2[.]com.
  • Persistence: Dual persistence mechanisms were created:
     • Registry: HKCU\Software\Microsoft\Windows\CurrentVersion\Run
     • Scheduled Task: \Microsoft\Windows\Maintenance\SecurityUpdate
@@ -300,7 +300,7 @@ High Confidence (Attributed to FIN7/Carbanak) based on:
 | **Know Python**, new to ML                     | Lab 00b    | 00b (ML theory) → 01 → 02 → 03 (ML foundations) → 04 → 06 → 05 (LLM/agents)                        |
 | **Know Python & ML**, new to LLMs              | Lab 04     | 04 (basic prompting) → 06 (RAG) → 05 (agents) → 00c (advanced prompting) → 07-10                   |
 | **Want to build AI agents**                    | Lab 04     | 04 (prompting) → 05 (ReAct agents) → 06 (RAG) → 10 (copilot) → Capstone                            |
-| **AI Blue Team / SOC**                       | Lab 01     | 01 → 03 (ML detection) → 04 (log analysis) → 11 (ransomware) → 13 (memory forensics)               |
+| **AI Blue Team / SOC**                         | Lab 01     | 01 → 03 (ML detection) → 04 (log analysis) → 11 (ransomware) → 13 (memory forensics)               |
 | **AI Red Team/Offensive**                      | Lab 03     | 03 (anomaly det) → 12 (purple team) → 14 (C2) → 15 (lateral movement) → 17 (adversarial ML)        |
 | **Threat Intel analyst**                       | Lab 04     | 04 (log analysis) → 05 (threat intel agent) → 06 (RAG) → 14 (C2) → 16 (actor profiling)            |
 | **Security engineer** (build production tools) | Lab 01     | 01 → 03 → 04 → 08 (vuln scanner) → 09 (pipeline) → 10 (IR copilot) → Capstone                      |

@@ -1,21 +1,578 @@
-[
-  {"timestamp": "2024-03-15T08:00:01Z", "event": "login_success", "username": "alice.johnson", "source_ip": "192.168.1.10", "method": "password", "session_id": "sess_a1b2c3"},
-  {"timestamp": "2024-03-15T08:15:22Z", "event": "login_success", "username": "bob.smith", "source_ip": "192.168.1.11", "method": "ssh_key", "session_id": "sess_d4e5f6"},
-  {"timestamp": "2024-03-15T09:00:00Z", "event": "login_success", "username": "charlie.brown", "source_ip": "192.168.1.12", "method": "password", "session_id": "sess_g7h8i9"},
-  {"timestamp": "2024-03-15T02:14:33Z", "event": "login_failure", "username": "admin", "source_ip": "45.33.32.156", "method": "password", "reason": "invalid_password"},
-  {"timestamp": "2024-03-15T02:14:35Z", "event": "login_failure", "username": "admin", "source_ip": "45.33.32.156", "method": "password", "reason": "invalid_password"},
-  {"timestamp": "2024-03-15T02:14:37Z", "event": "login_failure", "username": "administrator", "source_ip": "45.33.32.156", "method": "password", "reason": "invalid_user"},
-  {"timestamp": "2024-03-15T02:14:39Z", "event": "login_failure", "username": "root", "source_ip": "45.33.32.156", "method": "password", "reason": "invalid_password"},
-  {"timestamp": "2024-03-15T02:14:41Z", "event": "login_failure", "username": "svc_backup", "source_ip": "45.33.32.156", "method": "password", "reason": "invalid_password"},
-  {"timestamp": "2024-03-15T02:14:43Z", "event": "login_success", "username": "svc_backup", "source_ip": "45.33.32.156", "method": "password", "session_id": "sess_BRUT3F0RC3D"},
-  {"timestamp": "2024-03-15T10:30:00Z", "event": "login_success", "username": "david.wilson", "source_ip": "192.168.1.13", "method": "ssh_key", "session_id": "sess_j0k1l2"},
-  {"timestamp": "2024-03-15T11:00:00Z", "event": "login_failure", "username": "eve.martinez", "source_ip": "192.168.1.14", "method": "password", "reason": "invalid_password"},
-  {"timestamp": "2024-03-15T11:00:15Z", "event": "login_success", "username": "eve.martinez", "source_ip": "192.168.1.14", "method": "password", "session_id": "sess_m3n4o5"},
-  {"timestamp": "2024-03-15T12:00:00Z", "event": "logout", "username": "alice.johnson", "source_ip": "192.168.1.10", "session_id": "sess_a1b2c3"},
-  {"timestamp": "2024-03-15T02:15:00Z", "event": "command_executed", "username": "svc_backup", "source_ip": "45.33.32.156", "command": "whoami", "session_id": "sess_BRUT3F0RC3D"},
-  {"timestamp": "2024-03-15T02:15:05Z", "event": "command_executed", "username": "svc_backup", "source_ip": "45.33.32.156", "command": "cat /etc/shadow", "session_id": "sess_BRUT3F0RC3D"},
-  {"timestamp": "2024-03-15T02:15:10Z", "event": "command_executed", "username": "svc_backup", "source_ip": "45.33.32.156", "command": "echo FLAG{BRUT3_F0RC3_4TT4CK_D3T3CT3D}", "session_id": "sess_BRUT3F0RC3D"},
-  {"timestamp": "2024-03-15T02:15:30Z", "event": "file_access", "username": "svc_backup", "source_ip": "45.33.32.156", "file": "/home/admin/.ssh/id_rsa", "session_id": "sess_BRUT3F0RC3D"},
-  {"timestamp": "2024-03-15T02:15:45Z", "event": "file_exfil", "username": "svc_backup", "source_ip": "45.33.32.156", "file": "/etc/passwd", "destination": "185.220.101.42", "session_id": "sess_BRUT3F0RC3D"},
-  {"timestamp": "2024-03-15T13:00:00Z", "event": "login_success", "username": "frank.garcia", "source_ip": "192.168.1.15", "method": "mfa", "session_id": "sess_p6q7r8"}
-]
+{
+  "_metadata": {
+    "source": "auth.log from web server WEBSRV01",
+    "collection_period": "2024-03-15 00:00:00 to 2024-03-15 23:59:59",
+    "timezone": "UTC",
+    "note": "Logs have been parsed from syslog format to JSON for easier analysis"
+  },
+  "events": [
+    {
+      "timestamp": "2024-03-15T00:15:22Z",
+      "event": "login_success",
+      "username": "alice.johnson",
+      "source_ip": "192.168.1.10",
+      "method": "password",
+      "session_id": "sess_a1b2c3"
+    },
+    {
+      "timestamp": "2024-03-15T00:45:33Z",
+      "event": "logout",
+      "username": "alice.johnson",
+      "source_ip": "192.168.1.10",
+      "session_id": "sess_a1b2c3"
+    },
+    {
+      "timestamp": "2024-03-15T01:12:45Z",
+      "event": "login_success",
+      "username": "bob.smith",
+      "source_ip": "192.168.1.11",
+      "method": "ssh_key",
+      "session_id": "sess_d4e5f6"
+    },
+    {
+      "timestamp": "2024-03-15T02:00:01Z",
+      "event": "login_failure",
+      "username": "admin",
+      "source_ip": "45.33.32.156",
+      "method": "password",
+      "reason": "invalid_password"
+    },
+    {
+      "timestamp": "2024-03-15T02:00:03Z",
+      "event": "login_failure",
+      "username": "admin",
+      "source_ip": "45.33.32.156",
+      "method": "password",
+      "reason": "invalid_password"
+    },
+    {
+      "timestamp": "2024-03-15T02:00:05Z",
+      "event": "login_failure",
+      "username": "administrator",
+      "source_ip": "45.33.32.156",
+      "method": "password",
+      "reason": "invalid_user"
+    },
+    {
+      "timestamp": "2024-03-15T02:00:07Z",
+      "event": "login_failure",
+      "username": "root",
+      "source_ip": "45.33.32.156",
+      "method": "password",
+      "reason": "invalid_password"
+    },
+    {
+      "timestamp": "2024-03-15T02:00:09Z",
+      "event": "login_failure",
+      "username": "guest",
+      "source_ip": "45.33.32.156",
+      "method": "password",
+      "reason": "invalid_user"
+    },
+    {
+      "timestamp": "2024-03-15T02:00:11Z",
+      "event": "login_failure",
+      "username": "test",
+      "source_ip": "45.33.32.156",
+      "method": "password",
+      "reason": "invalid_user"
+    },
+    {
+      "timestamp": "2024-03-15T02:00:13Z",
+      "event": "login_failure",
+      "username": "user",
+      "source_ip": "45.33.32.156",
+      "method": "password",
+      "reason": "invalid_user"
+    },
+    {
+      "timestamp": "2024-03-15T02:00:15Z",
+      "event": "login_failure",
+      "username": "webadmin",
+      "source_ip": "45.33.32.156",
+      "method": "password",
+      "reason": "invalid_user"
+    },
+    {
+      "timestamp": "2024-03-15T02:00:17Z",
+      "event": "login_failure",
+      "username": "sysadmin",
+      "source_ip": "45.33.32.156",
+      "method": "password",
+      "reason": "invalid_user"
+    },
+    {
+      "timestamp": "2024-03-15T02:00:19Z",
+      "event": "login_failure",
+      "username": "support",
+      "source_ip": "45.33.32.156",
+      "method": "password",
+      "reason": "invalid_user"
+    },
+    {
+      "timestamp": "2024-03-15T02:00:21Z",
+      "event": "login_failure",
+      "username": "backup",
+      "source_ip": "45.33.32.156",
+      "method": "password",
+      "reason": "invalid_password"
+    },
+    {
+      "timestamp": "2024-03-15T02:00:23Z",
+      "event": "login_failure",
+      "username": "oracle",
+      "source_ip": "45.33.32.156",
+      "method": "password",
+      "reason": "invalid_user"
+    },
+    {
+      "timestamp": "2024-03-15T02:00:25Z",
+      "event": "login_failure",
+      "username": "mysql",
+      "source_ip": "45.33.32.156",
+      "method": "password",
+      "reason": "invalid_user"
+    },
+    {
+      "timestamp": "2024-03-15T02:00:27Z",
+      "event": "login_failure",
+      "username": "postgres",
+      "source_ip": "45.33.32.156",
+      "method": "password",
+      "reason": "invalid_user"
+    },
+    {
+      "timestamp": "2024-03-15T02:00:29Z",
+      "event": "login_failure",
+      "username": "ftpuser",
+      "source_ip": "45.33.32.156",
+      "method": "password",
+      "reason": "invalid_user"
+    },
+    {
+      "timestamp": "2024-03-15T02:00:31Z",
+      "event": "login_failure",
+      "username": "www-data",
+      "source_ip": "45.33.32.156",
+      "method": "password",
+      "reason": "invalid_user"
+    },
+    {
+      "timestamp": "2024-03-15T02:00:33Z",
+      "event": "login_failure",
+      "username": "apache",
+      "source_ip": "45.33.32.156",
+      "method": "password",
+      "reason": "invalid_user"
+    },
+    {
+      "timestamp": "2024-03-15T02:00:35Z",
+      "event": "login_failure",
+      "username": "nginx",
+      "source_ip": "45.33.32.156",
+      "method": "password",
+      "reason": "invalid_user"
+    },
+    {
+      "timestamp": "2024-03-15T02:00:37Z",
+      "event": "login_failure",
+      "username": "jenkins",
+      "source_ip": "45.33.32.156",
+      "method": "password",
+      "reason": "invalid_user"
+    },
+    {
+      "timestamp": "2024-03-15T02:00:39Z",
+      "event": "login_failure",
+      "username": "deploy",
+      "source_ip": "45.33.32.156",
+      "method": "password",
+      "reason": "invalid_user"
+    },
+    {
+      "timestamp": "2024-03-15T02:00:41Z",
+      "event": "login_failure",
+      "username": "developer",
+      "source_ip": "45.33.32.156",
+      "method": "password",
+      "reason": "invalid_user"
+    },
+    {
+      "timestamp": "2024-03-15T02:00:43Z",
+      "event": "login_failure",
+      "username": "dev",
+      "source_ip": "45.33.32.156",
+      "method": "password",
+      "reason": "invalid_user"
+    },
+    {
+      "timestamp": "2024-03-15T02:00:45Z",
+      "event": "login_failure",
+      "username": "staging",
+      "source_ip": "45.33.32.156",
+      "method": "password",
+      "reason": "invalid_user"
+    },
+    {
+      "timestamp": "2024-03-15T02:00:47Z",
+      "event": "login_failure",
+      "username": "prod",
+      "source_ip": "45.33.32.156",
+      "method": "password",
+      "reason": "invalid_user"
+    },
+    {
+      "timestamp": "2024-03-15T02:00:49Z",
+      "event": "login_failure",
+      "username": "svc_account",
+      "source_ip": "45.33.32.156",
+      "method": "password",
+      "reason": "invalid_password"
+    },
+    {
+      "timestamp": "2024-03-15T02:00:51Z",
+      "event": "login_failure",
+      "username": "service",
+      "source_ip": "45.33.32.156",
+      "method": "password",
+      "reason": "invalid_user"
+    },
+    {
+      "timestamp": "2024-03-15T02:00:53Z",
+      "event": "login_failure",
+      "username": "monitoring",
+      "source_ip": "45.33.32.156",
+      "method": "password",
+      "reason": "invalid_user"
+    },
+    {
+      "timestamp": "2024-03-15T02:00:55Z",
+      "event": "login_failure",
+      "username": "backup_admin",
+      "source_ip": "45.33.32.156",
+      "method": "password",
+      "reason": "invalid_password"
+    },
+    {
+      "timestamp": "2024-03-15T02:00:57Z",
+      "event": "login_failure",
+      "username": "backup_admin",
+      "source_ip": "45.33.32.156",
+      "method": "password",
+      "reason": "invalid_password"
+    },
+    {
+      "timestamp": "2024-03-15T02:00:59Z",
+      "event": "login_failure",
+      "username": "backup_admin",
+      "source_ip": "45.33.32.156",
+      "method": "password",
+      "reason": "invalid_password"
+    },
+    {
+      "timestamp": "2024-03-15T02:01:01Z",
+      "event": "login_success",
+      "username": "backup_admin",
+      "source_ip": "45.33.32.156",
+      "method": "password",
+      "session_id": "sess_mal1c10us"
+    },
+    {
+      "timestamp": "2024-03-15T02:01:15Z",
+      "event": "command_executed",
+      "username": "backup_admin",
+      "source_ip": "45.33.32.156",
+      "command": "whoami",
+      "session_id": "sess_mal1c10us"
+    },
+    {
+      "timestamp": "2024-03-15T02:01:22Z",
+      "event": "command_executed",
+      "username": "backup_admin",
+      "source_ip": "45.33.32.156",
+      "command": "cat /etc/passwd",
+      "session_id": "sess_mal1c10us"
+    },
+    {
+      "timestamp": "2024-03-15T02:01:35Z",
+      "event": "command_executed",
+      "username": "backup_admin",
+      "source_ip": "45.33.32.156",
+      "command": "cat /etc/shadow",
+      "session_id": "sess_mal1c10us"
+    },
+    {
+      "timestamp": "2024-03-15T02:01:48Z",
+      "event": "file_access",
+      "username": "backup_admin",
+      "source_ip": "45.33.32.156",
+      "file": "/home/admin/.ssh/id_rsa",
+      "action": "read",
+      "session_id": "sess_mal1c10us"
+    },
+    {
+      "timestamp": "2024-03-15T02:02:05Z",
+      "event": "command_executed",
+      "username": "backup_admin",
+      "source_ip": "45.33.32.156",
+      "command": "netstat -tulpn",
+      "session_id": "sess_mal1c10us"
+    },
+    {
+      "timestamp": "2024-03-15T02:02:22Z",
+      "event": "file_access",
+      "username": "backup_admin",
+      "source_ip": "45.33.32.156",
+      "file": "/var/www/html/config.php",
+      "action": "read",
+      "session_id": "sess_mal1c10us"
+    },
+    {
+      "timestamp": "2024-03-15T02:02:45Z",
+      "event": "logout",
+      "username": "backup_admin",
+      "source_ip": "45.33.32.156",
+      "session_id": "sess_mal1c10us"
+    },
+    {
+      "timestamp": "2024-03-15T06:30:00Z",
+      "event": "login_success",
+      "username": "charlie.davis",
+      "source_ip": "192.168.1.12",
+      "method": "password",
+      "session_id": "sess_g7h8i9"
+    },
+    {
+      "timestamp": "2024-03-15T07:00:15Z",
+      "event": "login_success",
+      "username": "diana.wilson",
+      "source_ip": "192.168.1.13",
+      "method": "mfa",
+      "session_id": "sess_j0k1l2"
+    },
+    {
+      "timestamp": "2024-03-15T07:45:22Z",
+      "event": "login_failure",
+      "username": "eve.martin",
+      "source_ip": "192.168.1.14",
+      "method": "password",
+      "reason": "invalid_password"
+    },
+    {
+      "timestamp": "2024-03-15T07:45:35Z",
+      "event": "login_success",
+      "username": "eve.martin",
+      "source_ip": "192.168.1.14",
+      "method": "password",
+      "session_id": "sess_m3n4o5"
+    },
+    {
+      "timestamp": "2024-03-15T08:00:00Z",
+      "event": "login_success",
+      "username": "frank.brown",
+      "source_ip": "192.168.1.15",
+      "method": "ssh_key",
+      "session_id": "sess_p6q7r8"
+    },
+    {
+      "timestamp": "2024-03-15T08:15:33Z",
+      "event": "logout",
+      "username": "charlie.davis",
+      "source_ip": "192.168.1.12",
+      "session_id": "sess_g7h8i9"
+    },
+    {
+      "timestamp": "2024-03-15T08:30:00Z",
+      "event": "login_success",
+      "username": "grace.lee",
+      "source_ip": "192.168.1.16",
+      "method": "mfa",
+      "session_id": "sess_s9t0u1"
+    },
+    {
+      "timestamp": "2024-03-15T09:00:45Z",
+      "event": "login_success",
+      "username": "henry.kim",
+      "source_ip": "192.168.1.17",
+      "method": "password",
+      "session_id": "sess_v2w3x4"
+    },
+    {
+      "timestamp": "2024-03-15T09:30:00Z",
+      "event": "logout",
+      "username": "diana.wilson",
+      "source_ip": "192.168.1.13",
+      "session_id": "sess_j0k1l2"
+    },
+    {
+      "timestamp": "2024-03-15T10:00:22Z",
+      "event": "login_failure",
+      "username": "ivan.petrov",
+      "source_ip": "192.168.1.18",
+      "method": "password",
+      "reason": "account_locked"
+    },
+    {
+      "timestamp": "2024-03-15T10:15:00Z",
+      "event": "login_success",
+      "username": "julia.chen",
+      "source_ip": "192.168.1.19",
+      "method": "ssh_key",
+      "session_id": "sess_y5z6a7"
+    },
+    {
+      "timestamp": "2024-03-15T11:00:00Z",
+      "event": "logout",
+      "username": "eve.martin",
+      "source_ip": "192.168.1.14",
+      "session_id": "sess_m3n4o5"
+    },
+    {
+      "timestamp": "2024-03-15T11:30:15Z",
+      "event": "logout",
+      "username": "frank.brown",
+      "source_ip": "192.168.1.15",
+      "session_id": "sess_p6q7r8"
+    },
+    {
+      "timestamp": "2024-03-15T12:00:00Z",
+      "event": "login_success",
+      "username": "kevin.wang",
+      "source_ip": "192.168.1.20",
+      "method": "mfa",
+      "session_id": "sess_b8c9d0"
+    },
+    {
+      "timestamp": "2024-03-15T12:30:45Z",
+      "event": "logout",
+      "username": "grace.lee",
+      "source_ip": "192.168.1.16",
+      "session_id": "sess_s9t0u1"
+    },
+    {
+      "timestamp": "2024-03-15T13:00:00Z",
+      "event": "login_success",
+      "username": "linda.garcia",
+      "source_ip": "192.168.1.21",
+      "method": "password",
+      "session_id": "sess_e1f2g3"
+    },
+    {
+      "timestamp": "2024-03-15T13:45:22Z",
+      "event": "logout",
+      "username": "henry.kim",
+      "source_ip": "192.168.1.17",
+      "session_id": "sess_v2w3x4"
+    },
+    {
+      "timestamp": "2024-03-15T14:00:00Z",
+      "event": "login_success",
+      "username": "mike.taylor",
+      "source_ip": "192.168.1.22",
+      "method": "ssh_key",
+      "session_id": "sess_h4i5j6"
+    },
+    {
+      "timestamp": "2024-03-15T14:30:00Z",
+      "event": "logout",
+      "username": "julia.chen",
+      "source_ip": "192.168.1.19",
+      "session_id": "sess_y5z6a7"
+    },
+    {
+      "timestamp": "2024-03-15T15:00:15Z",
+      "event": "login_success",
+      "username": "nancy.white",
+      "source_ip": "192.168.1.23",
+      "method": "mfa",
+      "session_id": "sess_k7l8m9"
+    },
+    {
+      "timestamp": "2024-03-15T15:30:00Z",
+      "event": "logout",
+      "username": "kevin.wang",
+      "source_ip": "192.168.1.20",
+      "session_id": "sess_b8c9d0"
+    },
+    {
+      "timestamp": "2024-03-15T16:00:00Z",
+      "event": "login_success",
+      "username": "oscar.jones",
+      "source_ip": "192.168.1.24",
+      "method": "password",
+      "session_id": "sess_n0o1p2"
+    },
+    {
+      "timestamp": "2024-03-15T16:45:33Z",
+      "event": "logout",
+      "username": "linda.garcia",
+      "source_ip": "192.168.1.21",
+      "session_id": "sess_e1f2g3"
+    },
+    {
+      "timestamp": "2024-03-15T17:00:00Z",
+      "event": "login_success",
+      "username": "patricia.martinez",
+      "source_ip": "192.168.1.25",
+      "method": "ssh_key",
+      "session_id": "sess_q3r4s5"
+    },
+    {
+      "timestamp": "2024-03-15T17:30:00Z",
+      "event": "logout",
+      "username": "mike.taylor",
+      "source_ip": "192.168.1.22",
+      "session_id": "sess_h4i5j6"
+    },
+    {
+      "timestamp": "2024-03-15T18:00:22Z",
+      "event": "logout",
+      "username": "nancy.white",
+      "source_ip": "192.168.1.23",
+      "session_id": "sess_k7l8m9"
+    },
+    {
+      "timestamp": "2024-03-15T18:30:00Z",
+      "event": "logout",
+      "username": "oscar.jones",
+      "source_ip": "192.168.1.24",
+      "session_id": "sess_n0o1p2"
+    },
+    {
+      "timestamp": "2024-03-15T19:00:00Z",
+      "event": "logout",
+      "username": "patricia.martinez",
+      "source_ip": "192.168.1.25",
+      "session_id": "sess_q3r4s5"
+    },
+    {
+      "timestamp": "2024-03-15T20:00:15Z",
+      "event": "login_success",
+      "username": "bob.smith",
+      "source_ip": "192.168.1.11",
+      "method": "ssh_key",
+      "session_id": "sess_t6u7v8"
+    },
+    {
+      "timestamp": "2024-03-15T21:30:00Z",
+      "event": "logout",
+      "username": "bob.smith",
+      "source_ip": "192.168.1.11",
+      "session_id": "sess_t6u7v8"
+    },
+    {
+      "timestamp": "2024-03-15T23:45:00Z",
+      "event": "login_success",
+      "username": "alice.johnson",
+      "source_ip": "192.168.1.10",
+      "method": "password",
+      "session_id": "sess_w9x0y1"
+    }
+  ],
+  "analysis_hints": {
+    "attacker_ip": "Look for the IP with many failed login attempts",
+    "attack_type": "This appears to be a credential stuffing or brute force attack",
+    "compromise_time": "02:01:01Z",
+    "flag_derivation": "FLAG{IP_last_octet + attack_hour + compromised_username}"
+  }
+}
