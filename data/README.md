@@ -23,6 +23,13 @@ data/
 |   +-- iocs.json            # Indicators of Compromise
 |   +-- attack_patterns.json # MITRE ATT&CK mapped attacks
 |   +-- actor_profiles.json  # Threat actor TTPs
++-- forensics/                # Digital forensics artifacts
+|   +-- prefetch/            # Windows Prefetch execution history
+|   +-- registry/            # Registry persistence & artifacts
+|   +-- filesystem/          # MFT entries, USN journal
+|   +-- browser/             # Browser history, downloads
+|   +-- memory/              # Process analysis, network connections
+|   +-- super_timeline.json  # Consolidated forensic timeline
 ```
 
 ## Dataset Descriptions
@@ -67,20 +74,21 @@ data/
 
 **Realistic attack patterns in auth_logs.json:**
 
-| Category | Techniques | MITRE ATT&CK |
-|----------|------------|--------------|
-| **Initial Access** | Password spray, compromised account | T1110.003, T1078 |
-| **Execution** | Encoded PowerShell, LOLBins | T1059.001, T1218 |
-| **Persistence** | Scheduled tasks, services, Run keys | T1053.005, T1543.003, T1547.001 |
-| **Privilege Escalation** | Kerberoasting, AS-REP roasting | T1558.003, T1558.004 |
-| **Credential Access** | Mimikatz, DCSync, LSASS dump, SAM dump | T1003.001, T1003.006, T1003.002 |
-| **Discovery** | Net commands, BloodHound, PowerView | T1069, T1087, T1018 |
-| **Lateral Movement** | PsExec, WMIC, SMB | T1021.002, T1047 |
-| **Collection** | Data staging, archiving | T1560.001 |
-| **Exfiltration** | Rclone to cloud | T1567.002 |
-| **Defense Evasion** | Event log clearing | T1070.001 |
+| Category                 | Techniques                             | MITRE ATT&CK                    |
+| ------------------------ | -------------------------------------- | ------------------------------- |
+| **Initial Access**       | Password spray, compromised account    | T1110.003, T1078                |
+| **Execution**            | Encoded PowerShell, LOLBins            | T1059.001, T1218                |
+| **Persistence**          | Scheduled tasks, services, Run keys    | T1053.005, T1543.003, T1547.001 |
+| **Privilege Escalation** | Kerberoasting, AS-REP roasting         | T1558.003, T1558.004            |
+| **Credential Access**    | Mimikatz, DCSync, LSASS dump, SAM dump | T1003.001, T1003.006, T1003.002 |
+| **Discovery**            | Net commands, BloodHound, PowerView    | T1069, T1087, T1018             |
+| **Lateral Movement**     | PsExec, WMIC, SMB                      | T1021.002, T1047                |
+| **Collection**           | Data staging, archiving                | T1560.001                       |
+| **Exfiltration**         | Rclone to cloud                        | T1567.002                       |
+| **Defense Evasion**      | Event log clearing                     | T1070.001                       |
 
 **LOLBins included:**
+
 - `certutil.exe` - download, decode (T1105, T1140)
 - `mshta.exe` - HTA/VBScript execution (T1218.005)
 - `regsvr32.exe` - Squiblydoo attack (T1218.010)
@@ -93,6 +101,7 @@ data/
 - `cscript/wscript.exe` - script execution (T1059.005/007)
 
 **Offensive tools referenced:**
+
 - Mimikatz, Rubeus, BloodHound/SharpHound
 - PowerView, PsExec, ProcDump, Rclone
 
@@ -111,6 +120,57 @@ data/
 | `iocs.json`            | 1000    | IPs, domains, hashes with context |
 | `attack_patterns.json` | 50      | Full attack chains with TTPs      |
 | `actor_profiles.json`  | 20      | Threat actor profiles             |
+
+### Digital Forensics Artifacts (`forensics/`)
+
+Complete DFIR dataset simulating a compromised Windows environment.
+
+| Directory | Artifact Type | Description |
+| --------- | ------------- | ----------- |
+| `prefetch/` | Execution history | Windows Prefetch files showing program execution |
+| `registry/` | Persistence | Run keys, services, Shimcache, Amcache, UserAssist |
+| `filesystem/` | File activity | MFT entries, USN journal showing file creation/deletion |
+| `browser/` | Web activity | Chrome/Edge history, downloads, cookies |
+| `memory/` | Live analysis | Process list, network connections, injected code |
+| `super_timeline.json` | Consolidated | Plaso-style timeline of entire attack |
+
+**Attack scenario covered:**
+- Password spray → Initial access → PowerShell execution
+- LOLBin abuse (certutil, mshta) → Payload download
+- Kerberoasting → Lateral movement (PsExec)
+- DCSync → LSASS dump → Golden ticket
+- Data staging → Exfiltration → Log clearing
+
+**Forensic artifacts included:**
+| Artifact | Evidence Value |
+| -------- | -------------- |
+| Prefetch | Program execution with timestamps |
+| Shimcache | Application compatibility cache |
+| Amcache | Application install/execution |
+| MFT | File creation/modification times |
+| USN Journal | File system changes (even deleted) |
+| Registry Run keys | Persistence mechanisms |
+| Browser history | Payload download sources |
+| Memory processes | Running malware, C2 connections |
+
+**Usage:**
+```python
+import json
+
+# Load super timeline
+with open('data/forensics/super_timeline.json') as f:
+    timeline = json.load(f)
+
+# Filter for credential access events
+cred_events = [
+    e for e in timeline['timeline']
+    if e['label'] == 'credential_access'
+]
+
+# Analyze attack progression
+for event in timeline['timeline'][:10]:
+    print(f"{event['timestamp']} - {event['description']}")
+```
 
 ## Usage Examples
 
@@ -205,6 +265,8 @@ python scripts/generate_datasets.py --type malware --count 500
 | `network/traffic.csv`              | Lab 03 (Anomaly), Lab 14 (C2 Traffic)                              |
 | `threat-intel/iocs.json`           | Lab 05 (Threat Intel), Lab 06 (RAG)                                |
 | `threat-intel/actor_profiles.json` | Lab 16 (Actor Profiling)                                           |
+| `forensics/`                       | Lab 10b (DFIR), Lab 13 (Memory Forensics)                          |
+| `forensics/super_timeline.json`    | Lab 10 (IR Copilot), Lab 10b (DFIR Fundamentals)                   |
 
 ## Public Datasets for Production-Scale Practice
 

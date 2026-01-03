@@ -1,0 +1,156 @@
+{
+  "description": "Master File Table (MFT) entries showing file system activity",
+  "source": "$MFT",
+  "collection_time": "2024-03-16T09:00:00Z",
+  "entries": [
+    {
+      "entry_number": 145892,
+      "filename": "beacon.exe",
+      "full_path": "C:\\Users\\Public\\beacon.exe",
+      "size_bytes": 245760,
+      "created": "2024-03-15T02:21:30Z",
+      "modified": "2024-03-15T02:21:30Z",
+      "accessed": "2024-03-15T04:40:00Z",
+      "mft_modified": "2024-03-15T02:21:30Z",
+      "is_directory": false,
+      "is_deleted": false,
+      "label": "malicious",
+      "notes": "Downloaded payload - timestamps align with certutil execution"
+    },
+    {
+      "entry_number": 145893,
+      "filename": "svc.exe",
+      "full_path": "C:\\Windows\\Temp\\svc.exe",
+      "size_bytes": 189440,
+      "created": "2024-03-15T04:30:00Z",
+      "modified": "2024-03-15T04:30:00Z",
+      "accessed": "2024-03-15T04:30:35Z",
+      "mft_modified": "2024-03-15T04:30:00Z",
+      "is_directory": false,
+      "is_deleted": false,
+      "label": "malicious",
+      "notes": "Persistence mechanism - service binary"
+    },
+    {
+      "entry_number": 145894,
+      "filename": "update.ps1",
+      "full_path": "C:\\Users\\blee\\AppData\\Local\\Temp\\update.ps1",
+      "size_bytes": 4096,
+      "created": "2024-03-15T02:20:15Z",
+      "modified": "2024-03-15T02:20:15Z",
+      "accessed": "2024-03-15T04:35:00Z",
+      "mft_modified": "2024-03-15T02:20:15Z",
+      "is_directory": false,
+      "is_deleted": false,
+      "label": "malicious",
+      "notes": "PowerShell script for persistence"
+    },
+    {
+      "entry_number": 145900,
+      "filename": "exfil.7z",
+      "full_path": "C:\\temp\\exfil.7z",
+      "size_bytes": 52428800,
+      "created": "2024-03-15T04:20:00Z",
+      "modified": "2024-03-15T04:20:00Z",
+      "accessed": "2024-03-15T04:25:00Z",
+      "mft_modified": "2024-03-15T04:20:00Z",
+      "is_directory": false,
+      "is_deleted": true,
+      "label": "malicious",
+      "notes": "Staged data archive - deleted after exfiltration"
+    },
+    {
+      "entry_number": 145901,
+      "filename": "lsass.dmp",
+      "full_path": "C:\\temp\\lsass.dmp",
+      "size_bytes": 67108864,
+      "created": "2024-03-15T03:50:00Z",
+      "modified": "2024-03-15T03:50:00Z",
+      "accessed": "2024-03-15T03:55:00Z",
+      "mft_modified": "2024-03-15T03:50:00Z",
+      "is_directory": false,
+      "is_deleted": true,
+      "label": "malicious",
+      "notes": "LSASS memory dump - credential theft"
+    },
+    {
+      "entry_number": 145902,
+      "filename": "sam.save",
+      "full_path": "C:\\temp\\sam.save",
+      "size_bytes": 262144,
+      "created": "2024-03-15T04:10:00Z",
+      "modified": "2024-03-15T04:10:00Z",
+      "accessed": "2024-03-15T04:12:00Z",
+      "mft_modified": "2024-03-15T04:10:00Z",
+      "is_directory": false,
+      "is_deleted": true,
+      "label": "malicious",
+      "notes": "SAM hive export - credential theft"
+    },
+    {
+      "entry_number": 145903,
+      "filename": "system.save",
+      "full_path": "C:\\temp\\system.save",
+      "size_bytes": 16777216,
+      "created": "2024-03-15T04:10:15Z",
+      "modified": "2024-03-15T04:10:15Z",
+      "accessed": "2024-03-15T04:12:00Z",
+      "mft_modified": "2024-03-15T04:10:15Z",
+      "is_directory": false,
+      "is_deleted": true,
+      "label": "malicious",
+      "notes": "SYSTEM hive export - needed to decrypt SAM"
+    },
+    {
+      "entry_number": 100001,
+      "filename": "Q1_Report.docx",
+      "full_path": "C:\\Users\\jsmith\\Documents\\Q1_Report.docx",
+      "size_bytes": 45056,
+      "created": "2024-03-10T09:00:00Z",
+      "modified": "2024-03-15T14:30:00Z",
+      "accessed": "2024-03-15T14:30:00Z",
+      "mft_modified": "2024-03-15T14:30:00Z",
+      "is_directory": false,
+      "is_deleted": false,
+      "label": "normal"
+    }
+  ],
+  "usn_journal": [
+    {
+      "timestamp": "2024-03-15T02:21:30Z",
+      "filename": "beacon.exe",
+      "full_path": "C:\\Users\\Public\\beacon.exe",
+      "reason": "FILE_CREATE",
+      "label": "malicious"
+    },
+    {
+      "timestamp": "2024-03-15T02:21:30Z",
+      "filename": "beacon.exe",
+      "full_path": "C:\\Users\\Public\\beacon.exe",
+      "reason": "DATA_EXTEND | DATA_TRUNCATION | CLOSE",
+      "label": "malicious"
+    },
+    {
+      "timestamp": "2024-03-15T03:50:00Z",
+      "filename": "lsass.dmp",
+      "full_path": "C:\\temp\\lsass.dmp",
+      "reason": "FILE_CREATE",
+      "label": "malicious"
+    },
+    {
+      "timestamp": "2024-03-15T03:55:00Z",
+      "filename": "lsass.dmp",
+      "full_path": "C:\\temp\\lsass.dmp",
+      "reason": "FILE_DELETE | CLOSE",
+      "label": "malicious",
+      "notes": "Evidence of anti-forensics"
+    },
+    {
+      "timestamp": "2024-03-15T04:25:30Z",
+      "filename": "exfil.7z",
+      "full_path": "C:\\temp\\exfil.7z",
+      "reason": "FILE_DELETE | CLOSE",
+      "label": "malicious"
+    }
+  ]
+}

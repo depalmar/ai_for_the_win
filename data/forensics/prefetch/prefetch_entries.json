@@ -1,0 +1,170 @@
+{
+  "description": "Windows Prefetch artifacts showing program execution history",
+  "source": "C:\\Windows\\Prefetch\\",
+  "collection_time": "2024-03-16T09:00:00Z",
+  "entries": [
+    {
+      "filename": "CMD.EXE-89305D47.pf",
+      "executable": "CMD.EXE",
+      "hash": "89305D47",
+      "run_count": 47,
+      "last_run": "2024-03-15T04:30:00Z",
+      "created": "2024-02-01T08:15:00Z",
+      "file_size": 12288,
+      "label": "normal"
+    },
+    {
+      "filename": "POWERSHELL.EXE-022A1004.pf",
+      "executable": "POWERSHELL.EXE",
+      "hash": "022A1004",
+      "run_count": 156,
+      "last_run": "2024-03-15T02:20:00Z",
+      "created": "2024-01-15T10:00:00Z",
+      "file_size": 45056,
+      "volumes_accessed": ["\\VOLUME{01234567-0000}\\"],
+      "directories_accessed": ["\\WINDOWS\\SYSTEM32\\", "\\USERS\\BLEE\\APPDATA\\"],
+      "label": "suspicious",
+      "notes": "High run count overnight, accessed user AppData"
+    },
+    {
+      "filename": "NOTEPAD.EXE-D8414F97.pf",
+      "executable": "NOTEPAD.EXE",
+      "hash": "D8414F97",
+      "run_count": 23,
+      "last_run": "2024-03-15T14:22:00Z",
+      "created": "2024-01-10T09:00:00Z",
+      "file_size": 8192,
+      "label": "normal"
+    },
+    {
+      "filename": "CERTUTIL.EXE-F0E9AACF.pf",
+      "executable": "CERTUTIL.EXE",
+      "hash": "F0E9AACF",
+      "run_count": 3,
+      "last_run": "2024-03-15T02:21:00Z",
+      "created": "2024-03-15T02:21:00Z",
+      "file_size": 16384,
+      "label": "suspicious",
+      "notes": "First execution during attack timeframe, commonly abused LOLBin"
+    },
+    {
+      "filename": "NET.EXE-DB2D8CA2.pf",
+      "executable": "NET.EXE",
+      "hash": "DB2D8CA2",
+      "run_count": 12,
+      "last_run": "2024-03-15T02:50:30Z",
+      "created": "2024-02-20T11:00:00Z",
+      "file_size": 10240,
+      "label": "suspicious",
+      "notes": "Multiple executions during attack window - reconnaissance"
+    },
+    {
+      "filename": "NLTEST.EXE-E7D09512.pf",
+      "executable": "NLTEST.EXE",
+      "hash": "E7D09512",
+      "run_count": 1,
+      "last_run": "2024-03-15T02:50:00Z",
+      "created": "2024-03-15T02:50:00Z",
+      "file_size": 8192,
+      "label": "suspicious",
+      "notes": "First-time execution, domain reconnaissance tool"
+    },
+    {
+      "filename": "WMIC.EXE-1A1E591B.pf",
+      "executable": "WMIC.EXE",
+      "hash": "1A1E591B",
+      "run_count": 5,
+      "last_run": "2024-03-15T02:24:30Z",
+      "created": "2024-03-01T15:00:00Z",
+      "file_size": 12288,
+      "label": "suspicious",
+      "notes": "Used for remote execution during lateral movement"
+    },
+    {
+      "filename": "SCHTASKS.EXE-47D4C6A7.pf",
+      "executable": "SCHTASKS.EXE",
+      "hash": "47D4C6A7",
+      "run_count": 2,
+      "last_run": "2024-03-15T03:25:00Z",
+      "created": "2024-03-15T03:25:00Z",
+      "file_size": 10240,
+      "label": "suspicious",
+      "notes": "Task creation for persistence"
+    },
+    {
+      "filename": "REG.EXE-14563E21.pf",
+      "executable": "REG.EXE",
+      "hash": "14563E21",
+      "run_count": 8,
+      "last_run": "2024-03-15T04:10:30Z",
+      "created": "2024-02-15T08:00:00Z",
+      "file_size": 8192,
+      "label": "suspicious",
+      "notes": "Registry manipulation - potential credential dumping"
+    },
+    {
+      "filename": "MSHTA.EXE-A3C5A512.pf",
+      "executable": "MSHTA.EXE",
+      "hash": "A3C5A512",
+      "run_count": 1,
+      "last_run": "2024-03-15T02:22:00Z",
+      "created": "2024-03-15T02:22:00Z",
+      "file_size": 8192,
+      "label": "malicious",
+      "notes": "First execution - LOLBin for script execution"
+    },
+    {
+      "filename": "RUNDLL32.EXE-D41D8CD9.pf",
+      "executable": "RUNDLL32.EXE",
+      "hash": "D41D8CD9",
+      "run_count": 34,
+      "last_run": "2024-03-15T03:50:30Z",
+      "created": "2024-01-01T00:00:00Z",
+      "file_size": 20480,
+      "label": "suspicious",
+      "notes": "Recent spike in execution, used for comsvcs.dll LSASS dump"
+    },
+    {
+      "filename": "7Z.EXE-E8F4A215.pf",
+      "executable": "7Z.EXE",
+      "hash": "E8F4A215",
+      "run_count": 1,
+      "last_run": "2024-03-15T04:20:00Z",
+      "created": "2024-03-15T04:20:00Z",
+      "file_size": 12288,
+      "label": "suspicious",
+      "notes": "Data staging/archiving before exfiltration"
+    },
+    {
+      "filename": "CHROME.EXE-C4D84D2A.pf",
+      "executable": "CHROME.EXE",
+      "hash": "C4D84D2A",
+      "run_count": 892,
+      "last_run": "2024-03-15T17:30:00Z",
+      "created": "2024-01-02T09:00:00Z",
+      "file_size": 65536,
+      "label": "normal"
+    },
+    {
+      "filename": "OUTLOOK.EXE-F7C89012.pf",
+      "executable": "OUTLOOK.EXE",
+      "hash": "F7C89012",
+      "run_count": 245,
+      "last_run": "2024-03-15T17:00:00Z",
+      "created": "2024-01-02T08:30:00Z",
+      "file_size": 131072,
+      "label": "normal"
+    },
+    {
+      "filename": "VSSADMIN.EXE-B2D90123.pf",
+      "executable": "VSSADMIN.EXE",
+      "hash": "B2D90123",
+      "run_count": 1,
+      "last_run": "2024-03-15T04:15:00Z",
+      "created": "2024-03-15T04:15:00Z",
+      "file_size": 8192,
+      "label": "malicious",
+      "notes": "Shadow copy creation - likely for NTDS.dit extraction"
+    }
+  ]
+}

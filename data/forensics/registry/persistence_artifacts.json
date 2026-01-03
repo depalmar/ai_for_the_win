@@ -1,0 +1,146 @@
+{
+  "description": "Windows Registry persistence and artifact analysis",
+  "collection_time": "2024-03-16T09:00:00Z",
+  "run_keys": [
+    {
+      "hive": "HKLM",
+      "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run",
+      "value_name": "SecurityHealth",
+      "value_data": "C:\\Windows\\System32\\SecurityHealthSystray.exe",
+      "value_type": "REG_SZ",
+      "last_modified": "2024-01-15T10:00:00Z",
+      "label": "normal",
+      "notes": "Legitimate Windows Security"
+    },
+    {
+      "hive": "HKLM",
+      "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run",
+      "value_name": "WindowsUpdateSvc",
+      "value_data": "C:\\Users\\Public\\update.exe",
+      "value_type": "REG_SZ",
+      "last_modified": "2024-03-15T04:35:00Z",
+      "label": "malicious",
+      "notes": "Suspicious - masquerading as update, unusual path"
+    },
+    {
+      "hive": "HKCU",
+      "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run",
+      "value_name": "OneDrive",
+      "value_data": "\"C:\\Program Files\\Microsoft OneDrive\\OneDrive.exe\" /background",
+      "value_type": "REG_SZ",
+      "last_modified": "2024-02-01T08:00:00Z",
+      "label": "normal"
+    },
+    {
+      "hive": "HKCU",
+      "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run",
+      "value_name": "SecurityUpdate",
+      "value_data": "powershell.exe -windowstyle hidden -file C:\\Users\\blee\\AppData\\Local\\Temp\\update.ps1",
+      "value_type": "REG_SZ",
+      "last_modified": "2024-03-15T04:35:00Z",
+      "label": "malicious",
+      "notes": "Hidden PowerShell execution from Temp folder"
+    }
+  ],
+  "services": [
+    {
+      "key": "SYSTEM\\CurrentControlSet\\Services\\wuauserv",
+      "display_name": "Windows Update",
+      "image_path": "C:\\Windows\\system32\\svchost.exe -k netsvcs -p",
+      "start_type": 3,
+      "service_type": 32,
+      "last_modified": "2024-01-10T00:00:00Z",
+      "label": "normal"
+    },
+    {
+      "key": "SYSTEM\\CurrentControlSet\\Services\\WindowsUpdateSvc",
+      "display_name": "Windows Update Service",
+      "image_path": "C:\\Windows\\Temp\\svc.exe",
+      "start_type": 2,
+      "service_type": 16,
+      "last_modified": "2024-03-15T04:30:30Z",
+      "label": "malicious",
+      "notes": "Fake service - similar name to legitimate, unusual path"
+    },
+    {
+      "key": "SYSTEM\\CurrentControlSet\\Services\\PSEXESVC",
+      "display_name": "PSEXESVC",
+      "image_path": "%SystemRoot%\\PSEXESVC.exe",
+      "start_type": 3,
+      "service_type": 16,
+      "last_modified": "2024-03-15T03:20:30Z",
+      "label": "suspicious",
+      "notes": "PsExec service - indicates remote execution tool usage"
+    }
+  ],
+  "shimcache": [
+    {
+      "path": "C:\\Windows\\System32\\cmd.exe",
+      "last_modified": "2024-03-15T04:30:00Z",
+      "executed": true,
+      "label": "normal"
+    },
+    {
+      "path": "C:\\Windows\\System32\\certutil.exe",
+      "last_modified": "2024-03-15T02:21:00Z",
+      "executed": true,
+      "label": "suspicious",
+      "notes": "LOLBin execution"
+    },
+    {
+      "path": "C:\\Users\\Public\\beacon.exe",
+      "last_modified": "2024-03-15T02:21:30Z",
+      "executed": true,
+      "label": "malicious",
+      "notes": "Unknown executable in Public folder"
+    },
+    {
+      "path": "C:\\Windows\\System32\\mshta.exe",
+      "last_modified": "2024-03-15T02:22:00Z",
+      "executed": true,
+      "label": "suspicious"
+    },
+    {
+      "path": "C:\\Windows\\Temp\\svc.exe",
+      "last_modified": "2024-03-15T04:30:00Z",
+      "executed": true,
+      "label": "malicious",
+      "notes": "Executable in Temp folder - persistence mechanism"
+    }
+  ],
+  "amcache": [
+    {
+      "path": "C:\\Users\\Public\\beacon.exe",
+      "sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+      "first_run": "2024-03-15T02:21:35Z",
+      "publisher": "",
+      "version": "1.0.0.0",
+      "label": "malicious",
+      "notes": "No publisher, suspicious path"
+    },
+    {
+      "path": "C:\\Windows\\Temp\\svc.exe",
+      "sha1": "a94a8fe5ccb19ba61c4c0873d391e987982fbbd3",
+      "first_run": "2024-03-15T04:30:35Z",
+      "publisher": "",
+      "version": "1.0.0.0",
+      "label": "malicious"
+    }
+  ],
+  "userassist": [
+    {
+      "user": "blee",
+      "program": "C:\\Windows\\System32\\cmd.exe",
+      "run_count": 47,
+      "last_run": "2024-03-15T04:30:00Z",
+      "focus_time_seconds": 3600
+    },
+    {
+      "user": "blee",
+      "program": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "run_count": 156,
+      "last_run": "2024-03-15T02:20:00Z",
+      "focus_time_seconds": 7200
+    }
+  ]
+}

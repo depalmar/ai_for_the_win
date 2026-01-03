@@ -1,0 +1,268 @@
+{
+  "description": "Consolidated forensic timeline (Plaso-style super timeline)",
+  "case_id": "IR-2024-0315",
+  "analyst": "Incident Response Team",
+  "collection_time": "2024-03-16T09:00:00Z",
+  "timeline": [
+    {
+      "timestamp": "2024-03-15T02:14:33Z",
+      "source": "auth_logs",
+      "event_type": "authentication",
+      "description": "Password spray attack begins against VPN-GW",
+      "details": "Multiple failed logins from 185.234.72.19",
+      "host": "VPN-GW",
+      "user": "multiple",
+      "mitre_attack": "T1110.003",
+      "label": "initial_access"
+    },
+    {
+      "timestamp": "2024-03-15T02:14:41Z",
+      "source": "auth_logs",
+      "event_type": "authentication",
+      "description": "Successful login - compromised account",
+      "details": "User blee authenticated from attacker IP",
+      "host": "VPN-GW",
+      "user": "blee",
+      "source_ip": "185.234.72.19",
+      "mitre_attack": "T1078",
+      "label": "initial_access"
+    },
+    {
+      "timestamp": "2024-03-15T02:18:00Z",
+      "source": "browser_history",
+      "event_type": "web_access",
+      "description": "Accessed Pastebin raw paste",
+      "details": "URL: https://pastebin.com/raw/abc123",
+      "host": "WS-BLEE",
+      "user": "blee",
+      "label": "payload_staging"
+    },
+    {
+      "timestamp": "2024-03-15T02:20:00Z",
+      "source": "prefetch",
+      "event_type": "execution",
+      "description": "PowerShell execution with hidden window",
+      "details": "powershell.exe -nop -w hidden -ep bypass",
+      "host": "WS-BLEE",
+      "user": "blee",
+      "mitre_attack": "T1059.001",
+      "label": "execution"
+    },
+    {
+      "timestamp": "2024-03-15T02:20:15Z",
+      "source": "mft",
+      "event_type": "file_creation",
+      "description": "PowerShell script created",
+      "details": "C:\\Users\\blee\\AppData\\Local\\Temp\\update.ps1",
+      "host": "WS-BLEE",
+      "label": "payload_drop"
+    },
+    {
+      "timestamp": "2024-03-15T02:21:00Z",
+      "source": "prefetch",
+      "event_type": "execution",
+      "description": "Certutil LOLBin execution",
+      "details": "certutil.exe -urlcache -split -f - file download",
+      "host": "WS-BLEE",
+      "user": "blee",
+      "mitre_attack": "T1105",
+      "label": "delivery"
+    },
+    {
+      "timestamp": "2024-03-15T02:21:30Z",
+      "source": "mft",
+      "event_type": "file_creation",
+      "description": "Malicious executable created",
+      "details": "C:\\Users\\Public\\beacon.exe (245760 bytes)",
+      "host": "WS-BLEE",
+      "label": "payload_drop"
+    },
+    {
+      "timestamp": "2024-03-15T02:21:35Z",
+      "source": "memory",
+      "event_type": "process_creation",
+      "description": "Beacon process started",
+      "details": "PID 5512 - beacon.exe running as blee",
+      "host": "WS-BLEE",
+      "user": "blee",
+      "label": "c2_established"
+    },
+    {
+      "timestamp": "2024-03-15T02:22:00Z",
+      "source": "prefetch",
+      "event_type": "execution",
+      "description": "MSHTA LOLBin execution",
+      "details": "mshta.exe - HTA execution for defense evasion",
+      "host": "WS-BLEE",
+      "mitre_attack": "T1218.005",
+      "label": "defense_evasion"
+    },
+    {
+      "timestamp": "2024-03-15T02:45:00Z",
+      "source": "auth_logs",
+      "event_type": "kerberos",
+      "description": "Kerberoasting attack detected",
+      "details": "Multiple TGS requests with RC4 encryption for service accounts",
+      "host": "DC01",
+      "user": "blee",
+      "mitre_attack": "T1558.003",
+      "label": "credential_access"
+    },
+    {
+      "timestamp": "2024-03-15T02:50:00Z",
+      "source": "prefetch",
+      "event_type": "execution",
+      "description": "Domain reconnaissance",
+      "details": "nltest.exe, net.exe - enumerating domain",
+      "host": "WS-BLEE",
+      "user": "blee",
+      "mitre_attack": "T1018",
+      "label": "discovery"
+    },
+    {
+      "timestamp": "2024-03-15T03:15:00Z",
+      "source": "auth_logs",
+      "event_type": "authentication",
+      "description": "Lateral movement begins",
+      "details": "NTLM auth to WS-JSMITH, WS-MCHEN, FILE-SRV01",
+      "host": "multiple",
+      "user": "blee",
+      "source_ip": "10.0.0.50",
+      "mitre_attack": "T1021.002",
+      "label": "lateral_movement"
+    },
+    {
+      "timestamp": "2024-03-15T03:20:30Z",
+      "source": "registry",
+      "event_type": "service_install",
+      "description": "PsExec service installed",
+      "details": "PSEXESVC service created on WS-MCHEN",
+      "host": "WS-MCHEN",
+      "mitre_attack": "T1021.002",
+      "label": "lateral_movement"
+    },
+    {
+      "timestamp": "2024-03-15T03:25:00Z",
+      "source": "prefetch",
+      "event_type": "execution",
+      "description": "Scheduled task persistence",
+      "details": "schtasks.exe - created persistence mechanism",
+      "host": "WS-JSMITH",
+      "mitre_attack": "T1053.005",
+      "label": "persistence"
+    },
+    {
+      "timestamp": "2024-03-15T03:45:00Z",
+      "source": "auth_logs",
+      "event_type": "directory_replication",
+      "description": "DCSync attack detected",
+      "details": "Replicating Directory Changes All requested",
+      "host": "DC01",
+      "user": "svc_sql",
+      "mitre_attack": "T1003.006",
+      "label": "credential_access"
+    },
+    {
+      "timestamp": "2024-03-15T03:50:00Z",
+      "source": "mft",
+      "event_type": "file_creation",
+      "description": "LSASS memory dump created",
+      "details": "C:\\temp\\lsass.dmp (67MB)",
+      "host": "DC01",
+      "mitre_attack": "T1003.001",
+      "label": "credential_access"
+    },
+    {
+      "timestamp": "2024-03-15T03:55:00Z",
+      "source": "usn_journal",
+      "event_type": "file_deletion",
+      "description": "LSASS dump deleted",
+      "details": "Anti-forensics - evidence destruction",
+      "host": "DC01",
+      "mitre_attack": "T1070.004",
+      "label": "defense_evasion"
+    },
+    {
+      "timestamp": "2024-03-15T04:00:00Z",
+      "source": "auth_logs",
+      "event_type": "authentication",
+      "description": "Golden ticket detected",
+      "details": "Forged Kerberos ticket with suspicious attributes",
+      "host": "DC01",
+      "mitre_attack": "T1558.001",
+      "label": "credential_access"
+    },
+    {
+      "timestamp": "2024-03-15T04:10:00Z",
+      "source": "prefetch",
+      "event_type": "execution",
+      "description": "Registry hive export",
+      "details": "reg.exe - SAM, SYSTEM, SECURITY hives exported",
+      "host": "DC01",
+      "mitre_attack": "T1003.002",
+      "label": "credential_access"
+    },
+    {
+      "timestamp": "2024-03-15T04:20:00Z",
+      "source": "mft",
+      "event_type": "file_creation",
+      "description": "Data staging",
+      "details": "C:\\temp\\exfil.7z (50MB) - compressed sensitive data",
+      "host": "FILE-SRV01",
+      "mitre_attack": "T1560.001",
+      "label": "collection"
+    },
+    {
+      "timestamp": "2024-03-15T04:25:00Z",
+      "source": "network",
+      "event_type": "data_transfer",
+      "description": "Data exfiltration",
+      "details": "50MB transferred to cloud storage via rclone",
+      "host": "FILE-SRV01",
+      "mitre_attack": "T1567.002",
+      "label": "exfiltration"
+    },
+    {
+      "timestamp": "2024-03-15T04:30:00Z",
+      "source": "registry",
+      "event_type": "service_install",
+      "description": "Malicious service persistence",
+      "details": "WindowsUpdateSvc service installed with svc.exe",
+      "host": "WS-MCHEN",
+      "mitre_attack": "T1543.003",
+      "label": "persistence"
+    },
+    {
+      "timestamp": "2024-03-15T04:35:00Z",
+      "source": "registry",
+      "event_type": "registry_modification",
+      "description": "Run key persistence",
+      "details": "HKCU\\Run\\SecurityUpdate added",
+      "host": "WS-JSMITH",
+      "mitre_attack": "T1547.001",
+      "label": "persistence"
+    },
+    {
+      "timestamp": "2024-03-15T06:00:00Z",
+      "source": "auth_logs",
+      "event_type": "log_cleared",
+      "description": "Security event log cleared",
+      "details": "wevtutil.exe used to clear Security log",
+      "host": "DC01",
+      "mitre_attack": "T1070.001",
+      "label": "defense_evasion"
+    }
+  ],
+  "attack_summary": {
+    "initial_access": "Password spray via VPN",
+    "execution": "PowerShell, LOLBins (certutil, mshta, wmic)",
+    "persistence": "Scheduled tasks, services, Run keys",
+    "privilege_escalation": "Kerberoasting, DCSync",
+    "credential_access": "LSASS dump, SAM/SYSTEM export, Golden ticket",
+    "discovery": "Domain recon with net.exe, nltest.exe",
+    "lateral_movement": "PsExec, WMIC, SMB",
+    "collection": "7z archive of sensitive data",
+    "exfiltration": "Rclone to cloud storage",
+    "impact": "Data theft, persistent access established"
+  }
+}
