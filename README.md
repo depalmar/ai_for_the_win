@@ -620,7 +620,7 @@ Copy `.env.example` to `.env` and configure:
 
 Created by **Raymond DePalma**
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/depalmar)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/raymond-depalma)
 
 ---
 
