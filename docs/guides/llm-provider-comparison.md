@@ -499,7 +499,7 @@ def get_llm(provider: str = "claude"):
     """Get LLM instance by provider name."""
     providers = {
         "claude": ChatAnthropic(model="claude-sonnet-4-20250514"),
-        "openai": ChatOpenAI(model="gpt-4o"),
+        "openai": ChatOpenAI(model="gpt-5"),
         "gemini": ChatGoogleGenerativeAI(model="gemini-2.5-pro"),
     }
     return providers.get(provider)
