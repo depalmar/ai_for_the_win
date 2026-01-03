@@ -227,6 +227,7 @@ flowchart LR
 | **05**  | **Threat Intel Agent**          | ReAct pattern implementation, tool use with LangChain, autonomous investigation workflows                 |
 | **06**  | **Security RAG**                | Document chunking, vector embeddings, ChromaDB, retrieval-augmented generation for Q&A                    |
 | **07**  | **YARA Generator**              | Static malware analysis, pattern extraction, AI-assisted rule generation, rule validation                 |
+| **07b** | **Sigma Fundamentals** 🌉       | Sigma rule syntax, log-based detection, SIEM query conversion, LLM rule generation                        |
 | **08**  | **Vuln Prioritizer**            | CVSS scoring, risk-based prioritization, remediation planning with LLMs                                   |
 | **09**  | **Detection Pipeline**          | Multi-stage architectures, ML filtering, LLM enrichment, alert correlation                                |
 | **10**  | **IR Copilot**                  | Conversational agents, state management, playbook execution, incident documentation                       |

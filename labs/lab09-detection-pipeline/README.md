@@ -532,11 +532,42 @@ lab09-detection-pipeline/
 
 ---
 
+## 📋 Sigma Rule Output
+
+The pipeline automatically generates **Sigma detection rules** from detected threats:
+
+```yaml
+# Example auto-generated Sigma rule
+title: Pipeline Detection - powershell.exe
+id: a1b2c3d4-5678-90ab-cdef-123456789012
+status: experimental
+description: Automatically generated from pipeline detection
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection:
+        Image|endswith: '\powershell.exe'
+        CommandLine|contains:
+            - '-enc'
+            - '-nop'
+    condition: selection
+level: critical
+tags:
+    - attack.t1059.001
+```
+
+Export rules to your SIEM using [pySigma](https://github.com/SigmaHQ/pySigma).
+
+> 🌉 **Want to learn more about Sigma?** Complete [Lab 07b: Sigma Rule Fundamentals](../lab07b-sigma-fundamentals/) first.
+
+---
+
 ## 🚀 Bonus Challenges
 
 1. **Real-time**: Process events from Kafka/Redis stream
 2. **Feedback Loop**: Update ML model based on analyst feedback
-3. **Custom Rules**: Add Sigma rule integration
+3. **Rule Tuning**: Improve generated Sigma rules with LLM
 4. **Visualization**: Build alert timeline UI
 5. **Auto-Response**: Integrate with SOAR for automation
 

@@ -433,12 +433,33 @@ Sample ──► Static Analysis ──► Extract Patterns ──► LLM ──
 
 ---
 
+#### Lab 07b: Sigma Rule Fundamentals (Bridge)
+**Difficulty:** ⭐⭐ Intermediate | **Prerequisites:** Lab 04, Lab 07
+
+**What You'll Learn:**
+- Sigma rule syntax and structure
+- Detection rule creation for logs
+- LLM-assisted rule generation
+- Rule conversion to SIEM formats
+
+**Key Concepts:**
+```
+YARA = File-based detection (binaries)
+Sigma = Log-based detection (events)
+
+Write once → Convert to: Splunk SPL, Elastic KQL, QRadar AQL
+```
+
+> 🌉 This bridge lab connects YARA (Lab 07) with Detection Pipelines (Lab 09).
+
+---
+
 ### 🌉 Transition: From Tasks to Agents
 
 **After Labs 04-07, you know how to:**
 - Write effective prompts for security tasks
 - Build RAG systems for knowledge retrieval
-- Generate code (YARA rules) with LLMs
+- Generate code (YARA rules, Sigma rules) with LLMs
 
 **What's Next?**
 Labs 05-10 introduce AI agents - systems that can:
