@@ -2,6 +2,8 @@
 
 Sanitized, safe-to-use datasets for the AI Security Training Program labs.
 
+> ⚠️ **Security Software Notice**: Some sample data contains realistic attack patterns, tool names, and command-line examples that may trigger antivirus or EDR alerts. This is **expected behavior** - these are educational datasets designed to teach threat detection. The data contains **no actual malware, no executable code, and no real credentials**. If your security software flags these files, you can safely add an exception for this educational repository.
+
 ```
 data/
 +-- README.md                 # This file
@@ -66,9 +68,11 @@ data/
 
 ### Security Logs (`logs/`)
 
+> ⚠️ **Content Notice**: Log data includes realistic command-line patterns from offensive tools for educational detection training. All patterns are descriptive text - no executable content.
+
 | File                  | Records | Description                                          |
 | --------------------- | ------- | ---------------------------------------------------- |
-| `auth_logs.json`      | ~100    | Authentication events with realistic attack patterns |
+| `auth_logs.json`      | ~120    | Authentication events with realistic attack patterns |
 | `firewall_logs.csv`   | -       | Network firewall allow/deny logs (coming soon)       |
 | `windows_events.json` | -       | Windows Security Event Log entries (coming soon)     |
 
@@ -123,18 +127,21 @@ data/
 
 ### Digital Forensics Artifacts (`forensics/`)
 
+> ⚠️ **AV/EDR Notice**: Forensics data contains realistic attack indicators (tool names, file paths, techniques) for educational purposes. These are **JSON metadata files only** - no executables, no encoded payloads, no actual malware.
+
 Complete DFIR dataset simulating a compromised Windows environment.
 
-| Directory | Artifact Type | Description |
-| --------- | ------------- | ----------- |
-| `prefetch/` | Execution history | Windows Prefetch files showing program execution |
-| `registry/` | Persistence | Run keys, services, Shimcache, Amcache, UserAssist |
-| `filesystem/` | File activity | MFT entries, USN journal showing file creation/deletion |
-| `browser/` | Web activity | Chrome/Edge history, downloads, cookies |
-| `memory/` | Live analysis | Process list, network connections, injected code |
-| `super_timeline.json` | Consolidated | Plaso-style timeline of entire attack |
+| Directory             | Artifact Type     | Description                                             |
+| --------------------- | ----------------- | ------------------------------------------------------- |
+| `prefetch/`           | Execution history | Windows Prefetch files showing program execution        |
+| `registry/`           | Persistence       | Run keys, services, Shimcache, Amcache, UserAssist      |
+| `filesystem/`         | File activity     | MFT entries, USN journal showing file creation/deletion |
+| `browser/`            | Web activity      | Chrome/Edge history, downloads, cookies                 |
+| `memory/`             | Live analysis     | Process list, network connections, injected code        |
+| `super_timeline.json` | Consolidated      | Plaso-style timeline of entire attack                   |
 
 **Attack scenario covered:**
+
 - Password spray → Initial access → PowerShell execution
 - LOLBin abuse (certutil, mshta) → Payload download
 - Kerberoasting → Lateral movement (PsExec)
@@ -154,6 +161,7 @@ Complete DFIR dataset simulating a compromised Windows environment.
 | Memory processes | Running malware, C2 connections |
 
 **Usage:**
+
 ```python
 import json
 
