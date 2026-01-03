@@ -698,4 +698,4 @@ def create_custom_tool(name: str, api_endpoint: str, api_key_env: str):
 
 ## Next Lab
 
-Continue to [Lab 06: Security RAG](./lab06-walkthrough.md) to build a retrieval-augmented generation system for security documentation.
+Continue to [Lab 06: Security RAG](./lab06-security-rag-walkthrough.md) to build a retrieval-augmented generation system for security documentation.
