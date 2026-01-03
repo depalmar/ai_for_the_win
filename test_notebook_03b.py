@@ -34,7 +34,7 @@ logs = [
     "User session timeout for inactive user bob",
     "Antivirus scan completed: no threats found",
 ]
-labels = [1]*10 + [0]*10  # 1=malicious, 0=benign
+labels = [1] * 10 + [0] * 10  # 1=malicious, 0=benign
 
 print(f"\nDataset: {len(logs)} logs ({sum(labels)} malicious, {len(labels)-sum(labels)} benign)")
 
@@ -43,17 +43,31 @@ print("\n--- ML Approach ---")
 
 # Feature extraction
 MALICIOUS_KEYWORDS = [
-    'failed', 'attack', 'shell', 'powershell', 'cmd.exe', 'encodedcommand',
-    'mimikatz', 'injection', 'ransomware', 'beacon', 'reverse', 'hacker',
-    'break-in', 'authentication failure', 'cobalt'
+    "failed",
+    "attack",
+    "shell",
+    "powershell",
+    "cmd.exe",
+    "encodedcommand",
+    "mimikatz",
+    "injection",
+    "ransomware",
+    "beacon",
+    "reverse",
+    "hacker",
+    "break-in",
+    "authentication failure",
+    "cobalt",
 ]
+
 
 def extract_features(log):
     log_lower = log.lower()
     keyword_count = sum(1 for kw in MALICIOUS_KEYWORDS if kw in log_lower)
-    has_ip = 1 if any(c.isdigit() and '.' in log for c in log) else 0
+    has_ip = 1 if any(c.isdigit() and "." in log for c in log) else 0
     log_length = len(log)
     return [keyword_count, has_ip, log_length]
+
 
 X = np.array([extract_features(log) for log in logs])
 y = np.array(labels)
@@ -89,15 +103,29 @@ print(f"Recall: {ml_recall:.1%}")
 # === SIMULATED LLM APPROACH ===
 print("\n--- LLM Approach (Simulated) ---")
 
+
 def llm_classify_simulated(log):
     """Simulate LLM classification based on keywords"""
     log_lower = log.lower()
-    malicious_signals = ['fail', 'attack', 'shell', 'malware', 'ransomware',
-                         'beacon', 'injection', 'mimikatz', 'hacker', 'reverse',
-                         'break-in', 'encodedcommand', 'cobalt']
+    malicious_signals = [
+        "fail",
+        "attack",
+        "shell",
+        "malware",
+        "ransomware",
+        "beacon",
+        "injection",
+        "mimikatz",
+        "hacker",
+        "reverse",
+        "break-in",
+        "encodedcommand",
+        "cobalt",
+    ]
     if any(signal in log_lower for signal in malicious_signals):
         return 1
     return 0
+
 
 # Use SAME test set for fair comparison
 test_logs = [logs[i] for i in test_idx]
@@ -128,6 +156,8 @@ print(f"{'Cost per 1000 logs':<20} {'~$0':<15} {'~$5-50':<15}")
 
 # === HYBRID APPROACH ===
 print("\n--- Hybrid Approach Demo ---")
+
+
 def hybrid_classify(log, model, threshold_low=0.3, threshold_high=0.7):
     """Use ML for confident cases, LLM for uncertain ones."""
     features = np.array([extract_features(log)])
@@ -140,6 +170,7 @@ def hybrid_classify(log, model, threshold_low=0.3, threshold_high=0.7):
     else:
         # Uncertain - would use LLM in production
         return llm_classify_simulated(log), True
+
 
 llm_calls = 0
 for log in test_logs:

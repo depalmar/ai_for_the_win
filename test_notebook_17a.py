@@ -13,17 +13,21 @@ n_samples = 200
 
 # Features: [suspicious_api_count, entropy]
 # Benign: low suspicious APIs, normal entropy
-benign_features = np.column_stack([
-    np.random.randint(0, 4, n_samples // 2),  # 0-3 suspicious APIs
-    np.random.uniform(4.0, 6.0, n_samples // 2)  # Normal entropy
-])
+benign_features = np.column_stack(
+    [
+        np.random.randint(0, 4, n_samples // 2),  # 0-3 suspicious APIs
+        np.random.uniform(4.0, 6.0, n_samples // 2),  # Normal entropy
+    ]
+)
 benign_labels = np.zeros(n_samples // 2)
 
 # Malicious: high suspicious APIs, high entropy
-malware_features = np.column_stack([
-    np.random.randint(5, 15, n_samples // 2),  # 5-15 suspicious APIs
-    np.random.uniform(6.5, 8.0, n_samples // 2)  # High entropy
-])
+malware_features = np.column_stack(
+    [
+        np.random.randint(5, 15, n_samples // 2),  # 5-15 suspicious APIs
+        np.random.uniform(6.5, 8.0, n_samples // 2),  # High entropy
+    ]
+)
 malware_labels = np.ones(n_samples // 2)
 
 # Combine
@@ -55,7 +59,9 @@ original_pred = classifier.predict(original_malware)[0]
 original_prob = classifier.predict_proba(original_malware)[0][1]
 
 print(f"Original malware: APIs=9, Entropy=7.3")
-print(f"  Prediction: {'MALICIOUS' if original_pred == 1 else 'BENIGN'} (conf: {original_prob:.1%})")
+print(
+    f"  Prediction: {'MALICIOUS' if original_pred == 1 else 'BENIGN'} (conf: {original_prob:.1%})"
+)
 
 # Evaded version - reduce features while keeping malicious behavior
 evaded_malware = np.array([[4, 5.5]])
@@ -74,10 +80,12 @@ else:
 print("\n--- Poisoning Attack Demo ---")
 # Add poisoned samples to training data
 n_poison = 20
-poison_features = np.column_stack([
-    np.random.randint(8, 12, n_poison),  # High APIs (looks malicious)
-    np.random.uniform(6.5, 7.5, n_poison)  # High entropy
-])
+poison_features = np.column_stack(
+    [
+        np.random.randint(8, 12, n_poison),  # High APIs (looks malicious)
+        np.random.uniform(6.5, 7.5, n_poison),  # High entropy
+    ]
+)
 poison_labels = np.zeros(n_poison)  # But labeled as benign!
 
 X_poisoned = np.vstack([X_train, poison_features])

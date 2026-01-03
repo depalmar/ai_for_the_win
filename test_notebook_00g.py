@@ -21,6 +21,7 @@ except Exception as e:
 # === ERROR HANDLING ===
 print("\n--- Error Handling ---")
 
+
 def safe_api_call(url: str, timeout: int = 10) -> Optional[Dict]:
     """Make a safe API call with proper error handling."""
     try:
@@ -39,6 +40,7 @@ def safe_api_call(url: str, timeout: int = 10) -> Optional[Dict]:
     except requests.exceptions.RequestException as e:
         print(f"  Request failed: {e}")
         return None
+
 
 # Test successful call
 print("Testing successful API call...")
@@ -59,11 +61,7 @@ print("\n--- POST Request ---")
 
 try:
     data = {"indicator": "192.168.1.100", "type": "ip"}
-    response = requests.post(
-        "https://httpbin.org/post",
-        json=data,
-        timeout=10
-    )
+    response = requests.post("https://httpbin.org/post", json=data, timeout=10)
     response_data = response.json()
     if response_data.get("json") == data:
         print("[OK] POST request with JSON body works!")
@@ -76,15 +74,8 @@ except Exception as e:
 print("\n--- Headers & Authentication ---")
 
 try:
-    headers = {
-        "Authorization": "Bearer test_token_12345",
-        "User-Agent": "SecurityLabTest/1.0"
-    }
-    response = requests.get(
-        "https://httpbin.org/headers",
-        headers=headers,
-        timeout=10
-    )
+    headers = {"Authorization": "Bearer test_token_12345", "User-Agent": "SecurityLabTest/1.0"}
+    response = requests.get("https://httpbin.org/headers", headers=headers, timeout=10)
     response_headers = response.json().get("headers", {})
     if "Authorization" in response_headers:
         print("[OK] Custom headers sent correctly!")
@@ -98,11 +89,13 @@ print("\n--- Rate Limiting Pattern ---")
 
 import time
 
+
 def rate_limited_call(url: str, calls_per_second: float = 2):
     """Make API call with rate limiting."""
     delay = 1.0 / calls_per_second
     time.sleep(delay)
     return safe_api_call(url)
+
 
 print(f"Rate limiting at 2 calls/second (0.5s delay)")
 start = time.time()
