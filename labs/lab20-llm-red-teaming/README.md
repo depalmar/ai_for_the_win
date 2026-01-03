@@ -409,7 +409,7 @@ Use the testing framework against an LLM application you've built.
 
 ---
 
-> **Stuck?** See the [Lab 20 Walkthrough](../../docs/walkthroughs/lab20-walkthrough.md) for step-by-step guidance.
+> **Stuck?** See the [Lab 20 Walkthrough](../../docs/walkthroughs/lab20-llm-red-teaming-walkthrough.md) for step-by-step guidance.
 
 ## 🎯 Next Steps
 

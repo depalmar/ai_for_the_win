@@ -532,6 +532,6 @@ class PurpleTeamExercise:
 
 ---
 
-> **Stuck?** See the [Lab 12 Walkthrough](../../docs/walkthroughs/lab12-walkthrough.md) for step-by-step guidance.
+> **Stuck?** See the [Lab 12 Walkthrough](../../docs/walkthroughs/lab12-ransomware-simulation-walkthrough.md) for step-by-step guidance.
 
 **Next Lab**: [Lab 13 - AI-Powered Memory Forensics](../lab13-memory-forensics-ai/)

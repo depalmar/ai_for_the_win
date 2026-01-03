@@ -556,6 +556,6 @@ Did you guess any MITRE techniques? If so, mark as "possible".
 
 ---
 
-> **Stuck?** See the [Lab 04 Walkthrough](../../docs/walkthroughs/lab04-walkthrough.md) for step-by-step guidance.
+> **Stuck?** See the [Lab 04 Walkthrough](../../docs/walkthroughs/lab04-llm-log-analysis-walkthrough.md) for step-by-step guidance.
 
 **Next Lab**: [Lab 05 - Threat Intelligence Agent](../lab05-threat-intel-agent/)

@@ -314,6 +314,6 @@ optimal_threshold = thresholds[optimal_idx]
 
 ---
 
-> **Stuck?** See the [Lab 03 Walkthrough](../../docs/walkthroughs/lab03-walkthrough.md) for step-by-step guidance.
+> **Stuck?** See the [Lab 03 Walkthrough](../../docs/walkthroughs/lab03-anomaly-detection-walkthrough.md) for step-by-step guidance.
 
 **Next Lab**: [Lab 04 - LLM Log Analysis](../lab04-llm-log-analysis/)

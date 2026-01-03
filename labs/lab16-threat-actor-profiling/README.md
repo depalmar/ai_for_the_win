@@ -768,6 +768,6 @@ CONFIDENCE_CRITERIA = {
 
 ---
 
-> **Stuck?** See the [Lab 16 Walkthrough](../../docs/walkthroughs/lab16-walkthrough.md) for step-by-step guidance.
+> **Stuck?** See the [Lab 16 Walkthrough](../../docs/walkthroughs/lab16-threat-actor-profiling-walkthrough.md) for step-by-step guidance.
 
 **Next Lab**: [Lab 17 - Adversarial Machine Learning](../lab17-adversarial-ml/)

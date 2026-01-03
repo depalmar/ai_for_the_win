@@ -100,9 +100,9 @@ If you're stuck on a lab, these walkthroughs provide step-by-step solutions:
 
 | Labs | Walkthroughs |
 |------|--------------|
-| Labs 01-05 | [lab01](./walkthroughs/lab01-walkthrough.md), [lab02](./walkthroughs/lab02-walkthrough.md), [lab03](./walkthroughs/lab03-walkthrough.md), [lab04](./walkthroughs/lab04-walkthrough.md), [lab05](./walkthroughs/lab05-walkthrough.md) |
-| Labs 06-10 | [lab06](./walkthroughs/lab06-walkthrough.md), [lab07](./walkthroughs/lab07-walkthrough.md), [lab08](./walkthroughs/lab08-walkthrough.md), [lab09](./walkthroughs/lab09-walkthrough.md), [lab10](./walkthroughs/lab10-walkthrough.md) |
-| Labs 11-16 | [lab11](./walkthroughs/lab11-walkthrough.md), [lab12](./walkthroughs/lab12-walkthrough.md), [lab13](./walkthroughs/lab13-walkthrough.md), [lab14](./walkthroughs/lab14-walkthrough.md), [lab15](./walkthroughs/lab15-walkthrough.md), [lab16](./walkthroughs/lab16-walkthrough.md) |
+| Labs 01-05 | [lab01](./walkthroughs/lab01-phishing-classifier-walkthrough.md), [lab02](./walkthroughs/lab02-malware-clustering-walkthrough.md), [lab03](./walkthroughs/lab03-anomaly-detection-walkthrough.md), [lab04](./walkthroughs/lab04-llm-log-analysis-walkthrough.md), [lab05](./walkthroughs/lab05-threat-intel-agent-walkthrough.md) |
+| Labs 06-10 | [lab06](./walkthroughs/lab06-security-rag-walkthrough.md), [lab07](./walkthroughs/lab07-yara-generator-walkthrough.md), [lab08](./walkthroughs/lab08-vuln-scanner-ai-walkthrough.md), [lab09](./walkthroughs/lab09-detection-pipeline-walkthrough.md), [lab10](./walkthroughs/lab10-ir-copilot-walkthrough.md) |
+| Labs 11-16 | [lab11](./walkthroughs/lab11-ransomware-detection-walkthrough.md), [lab12](./walkthroughs/lab12-ransomware-simulation-walkthrough.md), [lab13](./walkthroughs/lab13-memory-forensics-ai-walkthrough.md), [lab14](./walkthroughs/lab14-c2-traffic-analysis-walkthrough.md), [lab15](./walkthroughs/lab15-lateral-movement-walkthrough.md), [lab16](./walkthroughs/lab16-threat-actor-profiling-walkthrough.md) |
 | All walkthroughs | [Browse all](./walkthroughs/) |
 
 ---

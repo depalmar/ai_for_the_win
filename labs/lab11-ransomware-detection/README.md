@@ -409,6 +409,6 @@ Test your implementation with the provided sample data:
 
 ---
 
-> **Stuck?** See the [Lab 11 Walkthrough](../../docs/walkthroughs/lab11-walkthrough.md) for step-by-step guidance.
+> **Stuck?** See the [Lab 11 Walkthrough](../../docs/walkthroughs/lab11-ransomware-detection-walkthrough.md) for step-by-step guidance.
 
 **Next Lab**: [Lab 12 - Ransomware Attack Simulation & Purple Team](../lab12-ransomware-simulation/)

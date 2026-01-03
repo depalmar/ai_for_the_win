@@ -617,6 +617,6 @@ Shall I proceed with any of these?
 
 ---
 
-> **Stuck?** See the [Lab 10 Walkthrough](../../docs/walkthroughs/lab10-walkthrough.md) for step-by-step guidance.
+> **Stuck?** See the [Lab 10 Walkthrough](../../docs/walkthroughs/lab10-ir-copilot-walkthrough.md) for step-by-step guidance.
 
 **Next Lab**: [Lab 11 - AI-Powered Ransomware Detection](../lab11-ransomware-detection/)

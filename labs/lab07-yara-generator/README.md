@@ -403,7 +403,7 @@ Return only the YARA rule, no explanation.
 
 ---
 
-> **Stuck?** See the [Lab 07 Walkthrough](../../docs/walkthroughs/lab07-walkthrough.md) for step-by-step guidance.
+> **Stuck?** See the [Lab 07 Walkthrough](../../docs/walkthroughs/lab07-yara-generator-walkthrough.md) for step-by-step guidance.
 
 **Next Lab**: [Lab 08 - Vulnerability Scanner AI](../lab08-vuln-scanner-ai/)
 

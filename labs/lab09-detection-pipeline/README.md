@@ -551,6 +551,6 @@ lab09-detection-pipeline/
 
 ---
 
-> **Stuck?** See the [Lab 09 Walkthrough](../../docs/walkthroughs/lab09-walkthrough.md) for step-by-step guidance.
+> **Stuck?** See the [Lab 09 Walkthrough](../../docs/walkthroughs/lab09-detection-pipeline-walkthrough.md) for step-by-step guidance.
 
 **Next Lab**: [Lab 10 - IR Copilot Agent](../lab10-ir-copilot/)

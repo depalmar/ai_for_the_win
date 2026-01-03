@@ -446,7 +446,7 @@ Your environment has **47 vulnerabilities** across 12 systems.
 
 ---
 
-> **Stuck?** See the [Lab 08 Walkthrough](../../docs/walkthroughs/lab08-walkthrough.md) for step-by-step guidance.
+> **Stuck?** See the [Lab 08 Walkthrough](../../docs/walkthroughs/lab08-vuln-scanner-ai-walkthrough.md) for step-by-step guidance.
 
 **Next Lab**: [Lab 09 - Threat Detection Pipeline](../lab09-detection-pipeline/)
 

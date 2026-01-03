@@ -745,7 +745,7 @@ Automate CIS benchmark checks across all cloud providers.
 
 ---
 
-> **Stuck?** See the [Lab 19 Walkthrough](../../docs/walkthroughs/lab19-walkthrough.md) for step-by-step guidance.
+> **Stuck?** See the [Lab 19 Walkthrough](../../docs/walkthroughs/lab19-cloud-security-ai-walkthrough.md) for step-by-step guidance.
 
 **Congratulations!** You've completed all the AI Security labs.
 
