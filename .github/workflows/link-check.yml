@@ -38,6 +38,7 @@ jobs:
             --exclude '^https://console\.anthropic\.com'
             --exclude '^https://platform\.openai\.com'
             --exclude '^https://aistudio\.google\.com'
+            --exclude '^https://claude\.ai'
             --exclude '^https://localhost'
             --exclude '^http://localhost'
             --exclude '127\.0\.0\.1'
