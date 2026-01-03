@@ -11,7 +11,7 @@ Labs 04-20 use Large Language Models (LLMs) like Claude, GPT-4, or Gemini. This 
 | Provider | Free Credits | Best For | Recommended Model |
 |----------|--------------|----------|-------------------|
 | **Anthropic (Claude)** | $5 free | Best reasoning, coding | `claude-sonnet-4-20250514` |
-| **OpenAI (GPT)** | $5 free (new accounts) | Widely supported | `gpt-4o` |
+| **OpenAI (GPT)** | $5 free (new accounts) | Widely supported | `gpt-5` |
 | **Google (Gemini)** | Free tier (generous) | Budget-friendly | `gemini-2.0-flash` |
 | **Ollama** | Completely free | Privacy, offline use | `llama3.2`, `mistral` |
 

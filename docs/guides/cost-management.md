@@ -67,7 +67,7 @@ Cost = (Input Tokens × Input Price) + (Output Tokens × Output Price)
 ```python
 import tiktoken  # For OpenAI models
 
-def count_tokens(text: str, model: str = "gpt-4o") -> int:
+def count_tokens(text: str, model: str = "gpt-5") -> int:
     """Count tokens for a given text."""
     encoding = tiktoken.encoding_for_model(model)
     return len(encoding.encode(text))

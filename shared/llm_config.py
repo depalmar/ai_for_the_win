@@ -81,7 +81,7 @@ PROVIDER_CONFIG = {
     ),
     "openai": ProviderConfig(
         env_key="OPENAI_API_KEY",
-        default_model="gpt-4o",
+        default_model="gpt-5",
         max_tokens_param="max_tokens",
         supports_extended_tokens=True,
     ),
@@ -441,7 +441,7 @@ def setup_llm():
     """Detect and configure LLM provider."""
     providers = {
         "anthropic": ("ANTHROPIC_API_KEY", "claude-sonnet-4-20250514"),
-        "openai": ("OPENAI_API_KEY", "gpt-4o"),
+        "openai": ("OPENAI_API_KEY", "gpt-5"),
         "google": ("GOOGLE_API_KEY", "gemini-2.5-pro"),
     }
     

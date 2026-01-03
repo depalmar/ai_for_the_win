@@ -141,7 +141,7 @@ def get_llm_client(provider: str = "auto"):
         elif prov == "openai":
             api_key = os.getenv("OPENAI_API_KEY")
             if api_key and OPENAI_AVAILABLE:
-                return OpenAI(api_key=api_key), "openai", "gpt-4o"
+                return OpenAI(api_key=api_key), "openai", "gpt-5"
 
         elif prov == "gemini":
             api_key = os.getenv("GOOGLE_API_KEY")

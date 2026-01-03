@@ -746,7 +746,7 @@ class ThreatIntelAgent:
                 elif prov == "openai":
                     api_key = os.getenv("OPENAI_API_KEY")
                     if api_key and OPENAI_AVAILABLE:
-                        return ChatOpenAI(model="gpt-4o", temperature=0, api_key=api_key)
+                        return ChatOpenAI(model="gpt-5", temperature=0, api_key=api_key)
 
                 elif prov == "gemini":
                     api_key = os.getenv("GOOGLE_API_KEY")

@@ -302,7 +302,7 @@ from openai import OpenAI
 client = OpenAI()
 
 response = client.chat.completions.create(
-    model="gpt-4o",
+    model="gpt-5",
     messages=[{
         "role": "user",
         "content": "Analyze this log for security threats: {log_entry}"
@@ -455,7 +455,7 @@ def high_confidence_analysis(text: str) -> dict:
 from openai import OpenAI
 client = OpenAI()
 response = client.chat.completions.create(
-    model="gpt-4o",
+    model="gpt-5",
     messages=[{"role": "user", "content": prompt}]
 )
 result = response.choices[0].message.content
@@ -499,7 +499,7 @@ def get_llm(provider: str = "claude"):
     """Get LLM instance by provider name."""
     providers = {
         "claude": ChatAnthropic(model="claude-sonnet-4-20250514"),
-        "openai": ChatOpenAI(model="gpt-4o"),
+        "openai": ChatOpenAI(model="gpt-5"),
         "gemini": ChatGoogleGenerativeAI(model="gemini-2.5-pro"),
     }
     return providers.get(provider)
