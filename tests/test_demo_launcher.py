@@ -18,7 +18,7 @@ class TestDemoImports:
 
     def test_import_demo_module(self):
         """Test that demo launcher module can be imported."""
-        from demo import launcher
+        from scripts import launcher
 
         assert launcher is not None
 
