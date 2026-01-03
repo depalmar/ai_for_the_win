@@ -265,7 +265,7 @@ High Confidence (Attributed to FIN7/Carbanak) based on:
 <tr>
 <td align="center"><a href="./labs/lab06-security-rag/"><img src="https://img.shields.io/badge/06-RAG-6366f1?style=for-the-badge" alt="Lab 06"/></a></td>
 <td align="center"><a href="./labs/lab07-yara-generator/"><img src="https://img.shields.io/badge/07-YARA-6366f1?style=for-the-badge" alt="Lab 07"/></a></td>
-<td align="center"><a href="./labs/lab08-vuln-prioritizer/"><img src="https://img.shields.io/badge/08-Vuln-f59e0b?style=for-the-badge" alt="Lab 08"/></a></td>
+<td align="center"><a href="./labs/lab08-vuln-scanner-ai/"><img src="https://img.shields.io/badge/08-Vuln-f59e0b?style=for-the-badge" alt="Lab 08"/></a></td>
 <td align="center"><a href="./labs/lab09-detection-pipeline/"><img src="https://img.shields.io/badge/09-Pipeline-f59e0b?style=for-the-badge" alt="Lab 09"/></a></td>
 <td align="center"><a href="./labs/lab10-ir-copilot/"><img src="https://img.shields.io/badge/10-IR_Bot-f59e0b?style=for-the-badge" alt="Lab 10"/></a></td>
 </tr>

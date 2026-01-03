@@ -141,5 +141,5 @@ Root
 ## Still Can't Find It?
 
 1. **Search the repo**: Use `Ctrl+Shift+F` in VS Code/Cursor
-2. **Check the main README**: [README.md](./README.md)
+2. **Check the main README**: [README.md](../README.md)
 3. **Open an issue**: [GitHub Issues](https://github.com/depalmar/ai_for_the_win/issues)

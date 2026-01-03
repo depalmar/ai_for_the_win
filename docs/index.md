@@ -1084,7 +1084,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
       <div class="nav-stage">
         <div class="nav-stage-label">Advanced</div>
         <div class="nav-labs">
-          <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab08-vuln-prioritizer" class="nav-lab advanced" title="Lab 08: Vuln Prioritizer (~4 hrs)">08</a>
+          <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab08-vuln-scanner-ai" class="nav-lab advanced" title="Lab 08: Vuln Prioritizer (~4 hrs)">08</a>
           <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab09-detection-pipeline" class="nav-lab advanced" title="Lab 09: Detection Pipeline (~5 hrs)">09</a>
           <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab10-ir-copilot" class="nav-lab advanced" title="Lab 10: IR Copilot (~4 hrs)">10</a>
         </div>
@@ -1332,7 +1332,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
         <span class="difficulty difficulty-2">&#9733;&#9733;&#9734; Intermediate</span>
       </div>
     </a>
-    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab08-vuln-prioritizer" class="lab-card" data-category="advanced">
+    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab08-vuln-scanner-ai" class="lab-card" data-category="advanced">
       <div class="lab-header">
         <span class="lab-number advanced">08</span>
         <span class="lab-title">Vuln Prioritizer</span>
@@ -1947,7 +1947,7 @@ python labs/lab01-phishing-classifier/solution/main.py</code></pre>
 </div>
 
 <p style="text-align: center; color: var(--text-muted); font-size: 0.85rem;">
-  MIT License | Built for security practitioners | Maintained by <a href="https://github.com/depalmar" style="color: var(--text-muted); text-decoration: underline;">depalmar</a>
+  MIT License | Built for security practitioners | Created by <a href="https://www.linkedin.com/in/raymond-depalma" style="color: var(--text-muted); text-decoration: underline;">Raymond DePalma</a>
 </p>
 
 <p style="text-align: center; color: var(--text-muted); font-size: 0.75rem; margin-top: 1rem; max-width: 600px; margin-left: auto; margin-right: auto;">
