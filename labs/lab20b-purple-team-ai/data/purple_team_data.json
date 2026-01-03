@@ -1,0 +1,200 @@
+{
+  "attack_matrix_subset": {
+    "execution": {
+      "T1059.001": {"name": "PowerShell", "priority": "critical"},
+      "T1059.003": {"name": "Windows Command Shell", "priority": "high"},
+      "T1047": {"name": "WMI", "priority": "medium"}
+    },
+    "credential_access": {
+      "T1003.001": {"name": "LSASS Memory", "priority": "critical"},
+      "T1003.002": {"name": "Security Account Manager", "priority": "high"},
+      "T1558.003": {"name": "Kerberoasting", "priority": "high"}
+    },
+    "lateral_movement": {
+      "T1021.001": {"name": "Remote Desktop Protocol", "priority": "high"},
+      "T1021.002": {"name": "SMB/Windows Admin Shares", "priority": "high"},
+      "T1550.002": {"name": "Pass the Hash", "priority": "critical"}
+    },
+    "defense_evasion": {
+      "T1070.001": {"name": "Clear Windows Event Logs", "priority": "critical"},
+      "T1055.001": {"name": "DLL Injection", "priority": "critical"},
+      "T1036": {"name": "Masquerading", "priority": "high"}
+    },
+    "exfiltration": {
+      "T1567.002": {"name": "Exfiltration to Cloud Storage", "priority": "high"},
+      "T1041": {"name": "Exfiltration Over C2 Channel", "priority": "high"}
+    }
+  },
+  "sample_detection_rules": [
+    {
+      "rule_id": "sigma_powershell_001",
+      "name": "Suspicious PowerShell Execution",
+      "description": "Detects PowerShell with common attack flags",
+      "techniques": ["T1059.001"],
+      "log_sources": ["windows_powershell", "sysmon"],
+      "false_positive_rate": "medium",
+      "enabled": true
+    },
+    {
+      "rule_id": "sigma_lsass_001",
+      "name": "LSASS Memory Access Detection",
+      "description": "Detects processes accessing LSASS memory",
+      "techniques": ["T1003.001"],
+      "log_sources": ["sysmon"],
+      "false_positive_rate": "low",
+      "enabled": true
+    },
+    {
+      "rule_id": "sigma_logclear_001",
+      "name": "Security Log Cleared",
+      "description": "Detects when security event log is cleared",
+      "techniques": ["T1070.001"],
+      "log_sources": ["windows_security"],
+      "false_positive_rate": "low",
+      "enabled": true
+    },
+    {
+      "rule_id": "sigma_adminshare_001",
+      "name": "Admin Share Access",
+      "description": "Detects access to administrative shares",
+      "techniques": ["T1021.002"],
+      "log_sources": ["windows_security"],
+      "false_positive_rate": "high",
+      "enabled": false
+    }
+  ],
+  "sample_exercise_findings": [
+    {
+      "id": "PT-2026-001",
+      "title": "PowerShell Bypass Execution Detected",
+      "severity": "high",
+      "technique_id": "T1059.001",
+      "technique_name": "PowerShell",
+      "description": "PowerShell execution with -ExecutionPolicy Bypass was successfully detected",
+      "attack_executed": "powershell.exe -NoProfile -ExecutionPolicy Bypass -Command \"whoami\"",
+      "detection_result": "detected",
+      "evidence": [
+        "Windows Event ID 4104 - Script Block Logging triggered",
+        "Sigma rule sigma_powershell_001 matched",
+        "Alert generated in SIEM within 30 seconds"
+      ],
+      "recommendations": []
+    },
+    {
+      "id": "PT-2026-002",
+      "title": "LSASS Dump Partially Detected",
+      "severity": "critical",
+      "technique_id": "T1003.001",
+      "technique_name": "LSASS Memory",
+      "description": "LSASS memory dump was partially detected - process creation logged but access event missed",
+      "attack_executed": "procdump.exe -ma lsass.exe lsass.dmp",
+      "detection_result": "partially_detected",
+      "evidence": [
+        "Sysmon Event ID 1 - Process creation logged",
+        "Sysmon Event ID 10 - Process access NOT logged (config issue)"
+      ],
+      "recommendations": [
+        "Enable Sysmon Event ID 10 in configuration",
+        "Add LSASS access detection rule",
+        "Consider EDR solution for better coverage"
+      ]
+    },
+    {
+      "id": "PT-2026-003",
+      "title": "Admin Share Lateral Movement Not Detected",
+      "severity": "high",
+      "technique_id": "T1021.002",
+      "technique_name": "SMB/Windows Admin Shares",
+      "description": "Access to C$ admin share was not detected due to disabled rule",
+      "attack_executed": "net use \\\\DC01\\C$ /user:admin P@ssw0rd",
+      "detection_result": "not_detected",
+      "evidence": [
+        "Windows Event ID 5140 logged but not monitored",
+        "Detection rule disabled due to high false positive rate"
+      ],
+      "recommendations": [
+        "Re-enable sigma_adminshare_001 with tuning",
+        "Add filters for known admin activities",
+        "Implement time-based alerting (off-hours access)"
+      ]
+    },
+    {
+      "id": "PT-2026-004",
+      "title": "Pass the Hash Not Detected",
+      "severity": "critical",
+      "technique_id": "T1550.002",
+      "technique_name": "Pass the Hash",
+      "description": "Pass the Hash attack was not detected - no rule exists",
+      "attack_executed": "mimikatz sekurlsa::pth /user:admin /domain:corp /ntlm:hash",
+      "detection_result": "not_detected",
+      "evidence": [
+        "Windows Event ID 4624 Type 9 logged",
+        "No detection rule for PtH pattern"
+      ],
+      "recommendations": [
+        "Implement Sigma rule for Event ID 4624 Type 9",
+        "Monitor for NTLM authentication anomalies",
+        "Consider deploying Microsoft ATA/MDI"
+      ]
+    },
+    {
+      "id": "PT-2026-005",
+      "title": "Cloud Exfiltration Not Detected",
+      "severity": "high",
+      "technique_id": "T1567.002",
+      "technique_name": "Exfiltration to Cloud Storage",
+      "description": "Data upload to cloud storage was not detected",
+      "attack_executed": "rclone copy sensitive_data remote:bucket",
+      "detection_result": "not_detected",
+      "evidence": [
+        "No network monitoring for cloud storage APIs",
+        "Endpoint did not flag rclone execution"
+      ],
+      "recommendations": [
+        "Implement DLP solution for cloud uploads",
+        "Monitor for rclone/cloud CLI tool execution",
+        "Add network rules for cloud storage APIs"
+      ]
+    }
+  ],
+  "threat_scenarios": [
+    {
+      "name": "APT29 Data Exfiltration",
+      "description": "Simulation of APT29 (Cozy Bear) tactics for data theft",
+      "techniques": ["T1566.001", "T1059.001", "T1003.001", "T1021.002", "T1567.002"],
+      "objective": "Exfiltrate sensitive documents from finance department",
+      "duration_hours": 4
+    },
+    {
+      "name": "Ransomware Precursor",
+      "description": "Early-stage ransomware attack simulation",
+      "techniques": ["T1059.001", "T1003.001", "T1021.002", "T1070.001"],
+      "objective": "Establish persistence and prepare for encryption",
+      "duration_hours": 2
+    },
+    {
+      "name": "Insider Threat",
+      "description": "Malicious insider data theft simulation",
+      "techniques": ["T1567.002", "T1074", "T1560"],
+      "objective": "Collect and exfiltrate intellectual property",
+      "duration_hours": 3
+    }
+  ],
+  "atomic_red_team_references": {
+    "T1059.001": {
+      "name": "PowerShell",
+      "url": "https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1059.001/T1059.001.md",
+      "test_count": 12
+    },
+    "T1003.001": {
+      "name": "LSASS Memory",
+      "url": "https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1003.001/T1003.001.md",
+      "test_count": 8
+    },
+    "T1021.002": {
+      "name": "SMB/Windows Admin Shares",
+      "url": "https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1021.002/T1021.002.md",
+      "test_count": 4
+    }
+  }
+}

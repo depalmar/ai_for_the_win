@@ -1,0 +1,186 @@
+{
+  "phishing_emails": [
+    {
+      "id": "ai_generated_001",
+      "subject": "Urgent: Wire Transfer Authorization Required",
+      "body": "I hope this email finds you well. I am reaching out regarding an urgent matter that requires your immediate attention. As per our previous conversation, we need to process a wire transfer within the next 24 hours to finalize the acquisition deal. Please find attached the payment details and authorization form. Thank you for your prompt attention to this matter. At your earliest convenience, please confirm receipt of this message and proceed with the transfer. Looking forward to hearing from you.",
+      "sender": "john.smith.ceo@acme-corp.net",
+      "is_ai_generated": true,
+      "attack_type": "BEC",
+      "indicators": ["perfect_grammar", "multiple_ai_phrases", "urgency_pattern"]
+    },
+    {
+      "id": "ai_generated_002",
+      "subject": "Account Security Alert - Immediate Action Required",
+      "body": "I trust this message finds you in good health. We are writing to inform you that unusual activity has been detected on your corporate account. To ensure the security of your information, immediate verification is required. Failure to verify your account within 48 hours may result in temporary suspension. Please click the secure link below to verify your identity. Thank you for your cooperation in maintaining the security of your account.",
+      "sender": "security-alert@company-secure.com",
+      "is_ai_generated": true,
+      "attack_type": "credential_phishing",
+      "indicators": ["perfect_grammar", "urgency_pattern", "formal_tone"]
+    },
+    {
+      "id": "ai_generated_003",
+      "subject": "Quarterly Report Review Request",
+      "body": "I hope this email finds you well. I am reaching out to request your assistance with reviewing the quarterly financial report before our board meeting next week. As you are aware, accuracy is paramount in these matters. I have attached the preliminary figures for your review. Please examine the data and provide your feedback at your earliest convenience. I look forward to your valuable input on this matter. Thank you for your continued dedication to excellence.",
+      "sender": "finance.director@company-reports.org",
+      "is_ai_generated": true,
+      "attack_type": "attachment_malware",
+      "indicators": ["multiple_ai_phrases", "formal_consistency", "clean_structure"]
+    },
+    {
+      "id": "human_001",
+      "subject": "hey quick question",
+      "body": "Hey, do you have a sec? I tried to call but your line was busy.. Can you send me the Q4 numbers when you get a chance? No rush, just need them for the meeting tmrw. thx!",
+      "sender": "sarah.jones@company.com",
+      "is_ai_generated": false,
+      "attack_type": null,
+      "indicators": []
+    },
+    {
+      "id": "human_002",
+      "subject": "Re: Project Update",
+      "body": "Thanks for the update! Looks good overall but I noticed a small typo on slide 12 - it says 'recieve' instead of receive. Also  the timeline on slide 15 might need adjusting based on yesterdays meeting. Let me know if you want to hop on a call to discuss?",
+      "sender": "mike.chen@company.com",
+      "is_ai_generated": false,
+      "attack_type": null,
+      "indicators": []
+    },
+    {
+      "id": "human_003",
+      "subject": "Lunch Friday?",
+      "body": "Hey!\n\nAre you free for lunch on friday? thinking about trying that new thai place down the street. Sarah mentioned its really good. \n\nLmk!\n-J",
+      "sender": "jennifer.wu@company.com",
+      "is_ai_generated": false,
+      "attack_type": null,
+      "indicators": []
+    },
+    {
+      "id": "ai_generated_004",
+      "subject": "Invoice Payment Reminder",
+      "body": "I hope this message finds you well. This is a friendly reminder regarding the outstanding invoice #INV-2024-0892 that is currently past due. As per our agreed payment terms, we kindly request that you process this payment at your earliest convenience. To facilitate a smooth transaction, I have attached an updated invoice with our new banking details. Please note that our banking information has recently changed due to internal restructuring. Thank you for your prompt attention to this matter.",
+      "sender": "accounts@vendor-payments.com",
+      "is_ai_generated": true,
+      "attack_type": "invoice_fraud",
+      "indicators": ["perfect_grammar", "banking_change_red_flag", "formal_tone"]
+    },
+    {
+      "id": "ai_generated_005",
+      "subject": "Job Application Follow-up",
+      "body": "I trust this email finds you well. I am writing to follow up on my recent application for the Senior Security Analyst position at your esteemed organization. I remain highly interested in this opportunity and believe my qualifications align perfectly with your requirements. I have attached my updated resume and a brief portfolio showcasing my recent cybersecurity projects. I would welcome the opportunity to discuss how my skills could benefit your team. Thank you for considering my application.",
+      "sender": "candidate.resume@secure-mail.net",
+      "is_ai_generated": true,
+      "attack_type": "resume_malware",
+      "indicators": ["overly_formal", "attachment_lure", "perfect_structure"]
+    }
+  ],
+  "vishing_scenarios": [
+    {
+      "id": "attack_001",
+      "caller_claims": "CEO - Michael Johnson",
+      "request": "wire_transfer_request",
+      "urgency": "critical",
+      "callback_offered": false,
+      "verification_accepted": false,
+      "script": "This is Michael Johnson. I'm at the airport about to board a flight and I need you to process an urgent wire transfer for a confidential acquisition. I can't discuss details over the phone but it needs to happen in the next hour.",
+      "is_attack": true,
+      "attack_group": "Scattered Spider pattern"
+    },
+    {
+      "id": "attack_002",
+      "caller_claims": "IT Helpdesk - Kevin from IT",
+      "request": "mfa_bypass_request",
+      "urgency": "immediate",
+      "callback_offered": false,
+      "verification_accepted": false,
+      "script": "Hi, this is Kevin from IT. We're seeing some suspicious activity on your account and need to verify it's really you. Can you read me the code that was just sent to your phone?",
+      "is_attack": true,
+      "attack_group": "MFA fatigue/bypass"
+    },
+    {
+      "id": "attack_003",
+      "caller_claims": "CFO - Lisa Chen",
+      "request": "vendor_payment_change",
+      "urgency": "high",
+      "callback_offered": false,
+      "verification_accepted": false,
+      "script": "Hi, this is Lisa Chen from Finance. We need to update the banking details for one of our major vendors before the end of day payment run. Can you make the change in the system?",
+      "is_attack": true,
+      "attack_group": "BEC voice variant"
+    },
+    {
+      "id": "legitimate_001",
+      "caller_claims": "IT Helpdesk - Sarah Miller",
+      "request": "password_assistance",
+      "urgency": "normal",
+      "callback_offered": true,
+      "verification_accepted": true,
+      "script": "Hi, this is Sarah from IT Helpdesk. I see you submitted a ticket about password issues. Would you like me to help you reset it, or would you prefer to call me back at the helpdesk number listed on the intranet?",
+      "is_attack": false,
+      "attack_group": null
+    },
+    {
+      "id": "legitimate_002",
+      "caller_claims": "Vendor - ABC Supplies - Tom Wilson",
+      "request": "invoice_inquiry",
+      "urgency": "normal",
+      "callback_offered": true,
+      "verification_accepted": true,
+      "script": "Hi, this is Tom Wilson from ABC Supplies. I'm calling to follow up on invoice #4521. I'm happy to give you my direct line if you'd like to verify and call me back.",
+      "is_attack": false,
+      "attack_group": null
+    }
+  ],
+  "malware_variants": [
+    {
+      "family": "AI-Poly-RAT",
+      "hash": "a1b2c3d4e5f6...",
+      "functions": ["keylog", "screenshot", "exfil", "persist", "c2_beacon"],
+      "first_seen": "2025-11-15",
+      "variant_number": 1,
+      "obfuscation_type": "string_encryption",
+      "notes": "First observed variant with AI-generated string obfuscation"
+    },
+    {
+      "family": "AI-Poly-RAT",
+      "hash": "b2c3d4e5f6g7...",
+      "functions": ["keylog", "screenshot", "exfil", "persist", "c2_beacon"],
+      "first_seen": "2025-11-16",
+      "variant_number": 2,
+      "obfuscation_type": "control_flow",
+      "notes": "Same functionality, different code structure"
+    },
+    {
+      "family": "AI-Poly-RAT",
+      "hash": "c3d4e5f6g7h8...",
+      "functions": ["keylog", "screenshot", "exfil", "persist", "c2_beacon"],
+      "first_seen": "2025-11-16",
+      "variant_number": 3,
+      "obfuscation_type": "dead_code_insertion",
+      "notes": "Rapid variant generation suggests automation"
+    }
+  ],
+  "threat_actors_using_ai": [
+    {
+      "name": "Scattered Spider",
+      "aliases": ["UNC3944", "0ktapus"],
+      "ai_capabilities": [
+        "Voice cloning for helpdesk attacks",
+        "AI-generated phishing lures",
+        "Automated OSINT gathering"
+      ],
+      "notable_campaigns": ["MGM Resorts 2023", "Caesars Entertainment 2023"],
+      "mitre_techniques": ["T1598.001", "T1566.002", "T1078"]
+    },
+    {
+      "name": "FIN7",
+      "aliases": ["Carbanak", "Navigator Group"],
+      "ai_capabilities": [
+        "LLM-generated BEC emails",
+        "Automated spearphishing",
+        "AI-assisted malware development"
+      ],
+      "notable_campaigns": ["Banking sector BEC campaigns"],
+      "mitre_techniques": ["T1566.001", "T1534", "T1059"]
+    }
+  ]
+}
