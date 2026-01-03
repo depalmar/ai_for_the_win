@@ -231,6 +231,7 @@ flowchart LR
 | **08**  | **Vuln Prioritizer**            | CVSS scoring, risk-based prioritization, remediation planning with LLMs                                   |
 | **09**  | **Detection Pipeline**          | Multi-stage architectures, ML filtering, LLM enrichment, alert correlation                                |
 | **10**  | **IR Copilot**                  | Conversational agents, state management, playbook execution, incident documentation                       |
+| **11a** | **Ransomware Fundamentals** 🌉  | Ransomware evolution, families, attack lifecycle, indicators, recovery decisions                          |
 | **11**  | **Ransomware Detector**         | Entropy analysis, behavioral detection, ransom note IOC extraction, response automation                   |
 | **12**  | **Purple Team Sim**             | Safe adversary emulation, detection validation, gap analysis, purple team exercises                       |
 | **13**  | **Memory Forensics AI**         | Volatility3 integration, process injection detection, credential dumping, LLM artifact analysis           |
