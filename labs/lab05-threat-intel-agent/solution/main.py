@@ -740,7 +740,7 @@ class ThreatIntelAgent:
                     api_key = os.getenv("ANTHROPIC_API_KEY")
                     if api_key and LANGCHAIN_AVAILABLE:
                         return ChatAnthropic(
-                            model="claude-sonnet-4-5-20250929", temperature=0, api_key=api_key
+                            model="claude-sonnet-4-20250514", temperature=0, api_key=api_key
                         )
 
                 elif prov == "openai":

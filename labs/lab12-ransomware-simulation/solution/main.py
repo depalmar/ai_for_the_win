@@ -136,7 +136,7 @@ def get_llm_client(provider: str = "auto"):
         if prov == "anthropic":
             api_key = os.getenv("ANTHROPIC_API_KEY")
             if api_key and ANTHROPIC_AVAILABLE:
-                return Anthropic(api_key=api_key), "anthropic", "claude-sonnet-4-5-20250929"
+                return Anthropic(api_key=api_key), "anthropic", "claude-sonnet-4-20250514"
 
         elif prov == "openai":
             api_key = os.getenv("OPENAI_API_KEY")

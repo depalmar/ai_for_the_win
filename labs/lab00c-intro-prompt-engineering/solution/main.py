@@ -41,7 +41,7 @@ def call_llm(prompt: str) -> str | None:
 
             client = Anthropic()
             response = client.messages.create(
-                model="claude-3-5-haiku-20241022",
+                model="claude-haiku-4-20250514",
                 max_tokens=1500,
                 messages=[{"role": "user", "content": prompt}],
             )

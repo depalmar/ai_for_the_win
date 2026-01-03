@@ -267,7 +267,7 @@ import anthropic
 client = anthropic.Anthropic()
 
 response = client.messages.create(
-    model="claude-sonnet-4-5-20250929",
+    model="claude-sonnet-4-20250514",
     max_tokens=1024,
     messages=[{
         "role": "user",
@@ -464,7 +464,7 @@ result = response.choices[0].message.content
 import anthropic
 client = anthropic.Anthropic()
 response = client.messages.create(
-    model="claude-sonnet-4-5-20250929",
+    model="claude-sonnet-4-20250514",
     max_tokens=1024,
     messages=[{"role": "user", "content": prompt}]
 )
@@ -476,7 +476,7 @@ result = response.content[0].text
 ```python
 # Claude
 response = client.messages.create(
-    model="claude-sonnet-4-5-20250929",
+    model="claude-sonnet-4-20250514",
     max_tokens=1024,
     messages=[{"role": "user", "content": prompt}]
 )
@@ -498,7 +498,7 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 def get_llm(provider: str = "claude"):
     """Get LLM instance by provider name."""
     providers = {
-        "claude": ChatAnthropic(model="claude-sonnet-4-5-20250929"),
+        "claude": ChatAnthropic(model="claude-sonnet-4-20250514"),
         "openai": ChatOpenAI(model="gpt-4o"),
         "gemini": ChatGoogleGenerativeAI(model="gemini-2.5-pro"),
     }

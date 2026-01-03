@@ -194,7 +194,7 @@ pip install scikit-learn
 **Status:** ✅ **RESOLVED** - All tests now passing (21/21)
 
 **What was fixed:**
-- Updated LangChain ChatAnthropic model name to current API identifier (`claude-sonnet-4-5-20250929`)
+- Updated LangChain ChatAnthropic model name to current API identifier (`claude-sonnet-4-20250514`)
 - Updated ChatOpenAI model to `gpt-4o` (from deprecated `gpt-4-turbo`)
 - Updated ChatGoogleGenerativeAI model to `gemini-2.5-pro` (from deprecated `gemini-1.5-pro`)
 
@@ -221,7 +221,7 @@ pip install chromadb
 **Status:** ✅ **RESOLVED** - All tests now passing (11/11)
 
 **What was fixed:**
-- Updated Anthropic SDK model name to current API identifier (`claude-sonnet-4-5-20250929`)
+- Updated Anthropic SDK model name to current API identifier (`claude-sonnet-4-20250514`)
 - Updated OpenAI model to `gpt-4o` (from deprecated `gpt-4-turbo`)
 - Updated Google Gemini model to `gemini-2.5-pro` (from deprecated `gemini-1.5-pro`)
 
