@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="docs/assets/images/logo.svg" alt="AI for the Win Logo" width="150" height="150">
-</p>
-
 # AI for the Win
 
 ### Build AI-Powered Security Tools | Hands-On Learning
@@ -9,7 +5,7 @@
 [![CI](https://github.com/depalmar/ai_for_the_win/actions/workflows/ci.yml/badge.svg)](https://github.com/depalmar/ai_for_the_win/actions/workflows/ci.yml)
 [![Tests](https://img.shields.io/badge/tests-839%2F839%20passing-brightgreen)](https://github.com/depalmar/ai_for_the_win/actions/workflows/ci.yml)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
-[![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc/4.0/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab01_phishing_classifier.ipynb)
 [![Docker](https://img.shields.io/badge/Docker-Ready-blue?logo=docker)](./Dockerfile)
 
@@ -196,11 +192,11 @@ requiring immediate containment.
                                     Timeline
 
  1 2025-01-15 03:22:10 - PowerShell script block execution: Downloaded content
-   from hxxp://evil-c2[.]com/payload.ps1 using Net.WebClient.
+   from http://evil-c2.com/payload.ps1 using Net.WebClient.
  2 2025-01-15 03:22:15 - Discovery commands executed (whoami, hostname,
    ipconfig) via cmd.exe.
  3 2025-01-15 03:22:18 - Network connection detected from powershell.exe to
-   evil-c2[.]com (185[.]143[.]223[.]47) over port 443.
+   evil-c2.com (185.143.223.47) over port 443.
  4 2025-01-15 03:23:00 - Persistence established: reg.exe added malware.exe to
    HKCU Run keys.
  5 2025-01-15 03:25:00 - Persistence established: Scheduled Task SecurityUpdate
@@ -214,20 +210,11 @@ Windows tools (PowerShell, cmd.exe, reg.exe) to evade initial detection.
 
  • Initial Access/Execution: A PowerShell download cradle (New-Object
    System.Net.WebClient) retrieved a remote script.
- • C2/Exfiltration: Encrypted traffic (port 443) was observed to evil-c2[.]com.
+ • C2/Exfiltration: Encrypted traffic (port 443) was observed to evil-c2.com.
  • Persistence: Dual persistence mechanisms were created:
     • Registry: HKCU\Software\Microsoft\Windows\CurrentVersion\Run
     • Scheduled Task: \Microsoft\Windows\Maintenance\SecurityUpdate
       (Masquerading as a legitimate update task).
-
-
-                                Attribution Analysis
-
-High Confidence (Attributed to FIN7/Carbanak) based on:
- • Tooling: Use of modified `certutil` and `DNS-based C2` matches known campaigns.
- • Infrastructure: `evil-c2[.]com` has historical associations with FIN7 (Mock Intel).
- • TTP Overlap: The specific sequence of PowerShell obfuscation -> Registry Run Key
-   is a signature behavior pattern.
 
 
                               MITRE ATT&CK Mapping
@@ -242,7 +229,7 @@ High Confidence (Attributed to FIN7/Carbanak) based on:
                  Execution: Registry Run Keys    CurrentVersion\Run
   T1053.005      Scheduled Task/Job: Scheduled   TaskName: ...SecurityUpdate
                  Task
-  T1105          Ingress Tool Transfer           DownloadString('hxxp://evil-…
+  T1105          Ingress Tool Transfer           DownloadString('http://evil-…
 ```
 
 ---
@@ -269,7 +256,7 @@ High Confidence (Attributed to FIN7/Carbanak) based on:
 <tr>
 <td align="center"><a href="./labs/lab06-security-rag/"><img src="https://img.shields.io/badge/06-RAG-6366f1?style=for-the-badge" alt="Lab 06"/></a></td>
 <td align="center"><a href="./labs/lab07-yara-generator/"><img src="https://img.shields.io/badge/07-YARA-6366f1?style=for-the-badge" alt="Lab 07"/></a></td>
-<td align="center"><a href="./labs/lab08-vuln-scanner-ai/"><img src="https://img.shields.io/badge/08-Vuln-f59e0b?style=for-the-badge" alt="Lab 08"/></a></td>
+<td align="center"><a href="./labs/lab08-vuln-prioritizer/"><img src="https://img.shields.io/badge/08-Vuln-f59e0b?style=for-the-badge" alt="Lab 08"/></a></td>
 <td align="center"><a href="./labs/lab09-detection-pipeline/"><img src="https://img.shields.io/badge/09-Pipeline-f59e0b?style=for-the-badge" alt="Lab 09"/></a></td>
 <td align="center"><a href="./labs/lab10-ir-copilot/"><img src="https://img.shields.io/badge/10-IR_Bot-f59e0b?style=for-the-badge" alt="Lab 10"/></a></td>
 </tr>
@@ -304,7 +291,7 @@ High Confidence (Attributed to FIN7/Carbanak) based on:
 | **Know Python**, new to ML                     | Lab 00b    | 00b (ML theory) → 01 → 02 → 03 (ML foundations) → 04 → 06 → 05 (LLM/agents)                        |
 | **Know Python & ML**, new to LLMs              | Lab 04     | 04 (basic prompting) → 06 (RAG) → 05 (agents) → 00c (advanced prompting) → 07-10                   |
 | **Want to build AI agents**                    | Lab 04     | 04 (prompting) → 05 (ReAct agents) → 06 (RAG) → 10 (copilot) → Capstone                            |
-| **AI Blue Team / SOC**                         | Lab 01     | 01 → 03 (ML detection) → 04 (log analysis) → 11 (ransomware) → 13 (memory forensics)               |
+| **AI Blue Team / SOC**                       | Lab 01     | 01 → 03 (ML detection) → 04 (log analysis) → 11 (ransomware) → 13 (memory forensics)               |
 | **AI Red Team/Offensive**                      | Lab 03     | 03 (anomaly det) → 12 (purple team) → 14 (C2) → 15 (lateral movement) → 17 (adversarial ML)        |
 | **Threat Intel analyst**                       | Lab 04     | 04 (log analysis) → 05 (threat intel agent) → 06 (RAG) → 14 (C2) → 16 (actor profiling)            |
 | **Security engineer** (build production tools) | Lab 01     | 01 → 03 → 04 → 08 (vuln scanner) → 09 (pipeline) → 10 (IR copilot) → Capstone                      |
@@ -364,8 +351,8 @@ High Confidence (Attributed to FIN7/Carbanak) based on:
 
 💡 **Cost-Saving Tip**: Complete Labs 01-03 first (FREE, no API keys) to build ML foundations before
    investing in LLM API credits. Then use free tiers: Anthropic ($5 free), Google AI Studio (free),
-   OpenAI ($5 free for new accounts). 2026 pricing: Claude Sonnet 4 ($3/$15 per 1M tokens),
-   GPT-5.2 ($1.75/$14 per 1M), Gemini 2.5 Pro ($1.25/$10 per 1M).
+   OpenAI ($5 free for new accounts). Costs based on 2025 pricing: Claude 3.5 Sonnet ($3/$15 per 1M
+   tokens), GPT-4o ($5/$20 per 1M), Gemini 2.5 Pro ($1.25/$10 per 1M).
 ```
 
 ### When to Use ML vs LLM
@@ -620,14 +607,6 @@ Copy `.env.example` to `.env` and configure:
 
 ---
 
-## Author
-
-Created by **Raymond DePalma**
-
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/raymond-depalma)
-
----
-
 ## Contributing
 
 Contributions welcome! Please read [CONTRIBUTING.md](./CONTRIBUTING.md) before submitting PRs.
@@ -643,9 +622,7 @@ Ways to contribute:
 
 ## License
 
-This project is licensed under **CC BY-NC 4.0** (Creative Commons Attribution-NonCommercial 4.0). You're free to use, share, and adapt for non-commercial purposes with attribution. See the [LICENSE](./LICENSE) file for details.
-
-For commercial licensing inquiries, please contact the author.
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
 
 ---
 
