@@ -20,7 +20,7 @@ from typing import Optional, Tuple
 CHALLENGES = {
     # Beginner Challenges (100 pts each)
     "beginner-01": {
-        "hash": "e8b0c5f1a9d3e2c4b6a8f0d2e4c6a8b0d2f4e6c8a0b2d4f6e8c0a2b4d6f8e0c2",  # FLAG{flag_user_br34ch_156_02}
+        "hash": "a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2",  # FLAG{backup_admin_156_02}
         "points": 100,
         "title": "Log Detective",
         "category": "Log Analysis",
@@ -115,7 +115,7 @@ CHALLENGES = {
 
 # Actual flag hashes (SHA-256)
 FLAG_HASHES = {
-    "beginner-01": hashlib.sha256(b"FLAG{flag_user_br34ch_156_02}").hexdigest(),
+    "beginner-01": hashlib.sha256(b"FLAG{backup_admin_156_02}").hexdigest(),
     "beginner-02": hashlib.sha256(b"FLAG{PH1SH_F0UND}").hexdigest(),
     "beginner-03": hashlib.sha256(b"FLAG{IOC_MASTER}").hexdigest(),
     "beginner-04": hashlib.sha256(b"FLAG{ML_CL4SS1F13R}").hexdigest(),

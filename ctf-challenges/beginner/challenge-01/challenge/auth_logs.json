@@ -573,6 +573,6 @@
     "attacker_ip": "Look for the IP with many failed login attempts",
     "attack_type": "This appears to be a credential stuffing or brute force attack",
     "compromise_time": "02:01:01Z",
-    "flag_derivation": "FLAG{IP_last_octet + attack_hour + compromised_username}"
+    "flag_derivation": "FLAG{compromised_username_IP_last_octet_attack_hour} e.g. FLAG{username_123_14}"
   }
 }
