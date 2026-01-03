@@ -6,7 +6,7 @@ Complete guide to setting up your AI security development environment with all t
 
 ## 🚀 Quick Start
 
-**Want to get started fast?** Check out the [Quick Start Guide](./guides/quickstart-guide.md) for a 15-minute setup.
+**Want to get started fast?** Check out the [Quick Start Guide](./quickstart-guide.md) for a 15-minute setup.
 
 ---
 
@@ -14,12 +14,12 @@ Complete guide to setting up your AI security development environment with all t
 
 | Guide                                                      | Description                                 |
 | ---------------------------------------------------------- | ------------------------------------------- |
-| [Quick Start Guide](./guides/quickstart-guide.md)          | Get running in 15 minutes                   |
-| [Cursor IDE Guide](./guides/cursor-ide-guide.md)           | Complete Cursor setup and workflows         |
-| [Claude Code Guide](./guides/claude-code-cli-guide.md)     | Claude Code CLI and agent development       |
-| [Gemini CLI Guide](./guides/gemini-cli-guide.md)           | Google's AI agent with 1M context window    |
-| [Google ADK Guide](./guides/google-adk-guide.md)           | Build agents with Google Agent Dev Kit      |
-| [GitHub Workflow Guide](./guides/github-workflow-guide.md) | Git, GitHub CLI, Actions, and collaboration |
+| [Quick Start Guide](./quickstart-guide.md)          | Get running in 15 minutes                   |
+| [Cursor IDE Guide](./cursor-ide-guide.md)           | Complete Cursor setup and workflows         |
+| [Claude Code Guide](./claude-code-cli-guide.md)     | Claude Code CLI and agent development       |
+| [Gemini CLI Guide](./gemini-cli-guide.md)           | Google's AI agent with 1M context window    |
+| [Google ADK Guide](./google-adk-guide.md)           | Build agents with Google Agent Dev Kit      |
+| [GitHub Workflow Guide](./github-workflow-guide.md) | Git, GitHub CLI, Actions, and collaboration |
 
 ---
 
@@ -867,4 +867,4 @@ python -c "import yara; print('YARA: OK')"
 
 ---
 
-**Next**: Proceed to [Resources & Tools](../resources/tools-and-resources.md) for learning materials and datasets.
+**Next**: Proceed to [Resources & Tools](../../resources/tools-and-resources.md) for learning materials and datasets.

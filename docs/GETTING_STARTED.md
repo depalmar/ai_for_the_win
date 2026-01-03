@@ -94,7 +94,7 @@ nano .env   # or use any editor
 - `OPENAI_API_KEY` - Get from [OpenAI Platform](https://platform.openai.com/)
 - `GOOGLE_API_KEY` - Get from [Google AI Studio](https://aistudio.google.com/)
 
-> 📊 **Which provider should I choose?** See our [LLM Provider Comparison Guide](./docs/guides/llm-provider-comparison.md) for benchmarks and recommendations. For cost optimization strategies, see the [Cost Management Guide](./docs/guides/cost-management.md).
+> 📊 **Which provider should I choose?** See our [LLM Provider Comparison Guide](./guides/llm-provider-comparison.md) for benchmarks and recommendations. For cost optimization strategies, see the [Cost Management Guide](./guides/cost-management.md).
 
 **Google AI Ecosystem** (free tools):
 
@@ -105,7 +105,7 @@ nano .env   # or use any editor
 | [Gemini Code Assist](https://cloud.google.com/gemini/docs/codeassist) | Free AI coding assistant for IDEs | VS Code, JetBrains integration |
 | [Firebase Studio](https://firebase.studio) | Full-stack AI app builder | Building security dashboards |
 
-> See our [Gemini CLI Guide](./docs/guides/gemini-cli-guide.md) and [Google ADK Guide](./docs/guides/google-adk-guide.md) for detailed setup.
+> See our [Gemini CLI Guide](./guides/gemini-cli-guide.md) and [Google ADK Guide](./guides/google-adk-guide.md) for detailed setup.
 
 **Optional** (for threat intel labs):
 - `VIRUSTOTAL_API_KEY`
@@ -328,7 +328,7 @@ After completing your first lab:
 1. **Track Progress**: Use the checklist in `labs/README.md`
 2. **Join Discussions**: Open GitHub Discussions for questions
 3. **Try Interactive Demos**: Run `python scripts/launcher.py`
-4. **Plan Your Path**: See [Learning Guide](./docs/learning-guide.md) for detailed paths
+4. **Plan Your Path**: See [Learning Guide](./learning-guide.md) for detailed paths
 
 ---
 
@@ -340,9 +340,9 @@ This course is designed for **vibe coding** - working alongside AI to write and 
 
 | Tool | Best For | Guide |
 |------|----------|-------|
-| [Cursor](https://cursor.sh/) | Full IDE with AI built-in, composer mode | [Cursor Guide](./docs/guides/cursor-ide-guide.md) |
-| [Claude Code](https://claude.ai/code) | Terminal-based AI coding assistant | [Claude Code Guide](./docs/guides/claude-code-cli-guide.md) |
-| [Gemini CLI](https://github.com/google-gemini/gemini-cli) | 1M token context, Google Search grounding, free tier | [Gemini CLI Guide](./docs/guides/gemini-cli-guide.md) |
+| [Cursor](https://cursor.sh/) | Full IDE with AI built-in, composer mode | [Cursor Guide](./guides/cursor-ide-guide.md) |
+| [Claude Code](https://claude.ai/code) | Terminal-based AI coding assistant | [Claude Code Guide](./guides/claude-code-cli-guide.md) |
+| [Gemini CLI](https://github.com/google-gemini/gemini-cli) | 1M token context, Google Search grounding, free tier | [Gemini CLI Guide](./guides/gemini-cli-guide.md) |
 | [GitHub Copilot](https://github.com/features/copilot) | Inline completions in VS Code | Works with any editor |
 | [Windsurf](https://codeium.com/windsurf) | Free AI-powered IDE | Alternative to Cursor |
 
@@ -370,9 +370,9 @@ AI: [Executes and interprets results]
 ### Cheatsheets
 
 Quick references for AI coding tools:
-- [Cursor IDE Guide](./docs/guides/cursor-ide-guide.md)
-- [Claude Code CLI Guide](./docs/guides/claude-code-cli-guide.md)
-- [LangChain Security Guide](./docs/guides/langchain-guide.md)
+- [Cursor IDE Guide](./guides/cursor-ide-guide.md)
+- [Claude Code CLI Guide](./guides/claude-code-cli-guide.md)
+- [LangChain Security Guide](./guides/langchain-guide.md)
 
 ---
 
@@ -391,10 +391,10 @@ Quick references for AI coding tools:
 
 ## Getting Help
 
-- **Setup Issues**: See [troubleshooting-guide.md](./docs/guides/troubleshooting-guide.md)
-- **Stuck on a Lab**: Check the [walkthroughs](./docs/walkthroughs/) for step-by-step solutions
+- **Setup Issues**: See [troubleshooting-guide.md](./guides/troubleshooting-guide.md)
+- **Stuck on a Lab**: Check the [walkthroughs](./walkthroughs/) for step-by-step solutions
 - **Lab Questions**: Check the lab's README hints section
-- **Find Resources**: See [Documentation Guide](./docs/documentation-guide.md) for navigation
+- **Find Resources**: See [Documentation Guide](./documentation-guide.md) for navigation
 - **General Questions**: Open a GitHub Discussion
 - **Bugs**: Open a GitHub Issue
 

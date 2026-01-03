@@ -1252,4 +1252,4 @@ result = team.run("Analyze alert and recommend actions")
 
 ---
 
-**Next**: [Claude Code CLI Guide](./claude-code-cli-guide.md) | [LangChain Integration](../curriculum/ai-security-training-program.md)
+**Next**: [Claude Code CLI Guide](./claude-code-cli-guide.md) | [LangChain Integration](./langchain-guide.md)
