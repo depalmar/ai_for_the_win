@@ -1,0 +1,223 @@
+{
+  "id": "bec-fraud",
+  "name": "Business Email Compromise Attack Chain",
+  "description": "Social engineering attack pattern where adversaries compromise or impersonate business email accounts to conduct fraudulent financial transfers or data theft. BEC attacks caused over $2.7 billion in losses in 2022.",
+  "typical_actors": ["Scattered Spider", "FIN7", "Various criminal groups"],
+  "average_loss": "$125,000 per incident",
+  "phases": [
+    {
+      "phase": 1,
+      "name": "Target Research",
+      "duration": "Days to weeks",
+      "techniques": [
+        {"id": "T1591.004", "name": "Identify Roles"},
+        {"id": "T1593.001", "name": "Social Media"},
+        {"id": "T1593.002", "name": "Search Engines"}
+      ],
+      "activities": [
+        "Research company structure and key personnel",
+        "Identify executives, finance, and HR staff",
+        "Find vendor/supplier relationships",
+        "Determine payment processes and timing",
+        "Gather personal information from LinkedIn/social media"
+      ],
+      "target_roles": [
+        "CEO/CFO for impersonation",
+        "Finance/accounting for payments",
+        "HR for W-2/payroll data",
+        "Executives for wire transfers"
+      ]
+    },
+    {
+      "phase": 2,
+      "name": "Email Account Compromise or Setup",
+      "duration": "Hours to days",
+      "techniques": [
+        {"id": "T1566.001", "name": "Spearphishing Attachment"},
+        {"id": "T1566.002", "name": "Spearphishing Link"},
+        {"id": "T1586.002", "name": "Email Accounts"}
+      ],
+      "methods": {
+        "account_compromise": [
+          "Credential phishing targeting executives",
+          "Password spraying against email",
+          "OAuth consent phishing",
+          "AiTM (Adversary-in-the-Middle) phishing"
+        ],
+        "impersonation": [
+          "Register lookalike domains",
+          "Create free email accounts mimicking executives",
+          "Spoof email headers"
+        ]
+      },
+      "indicators": [
+        "Phishing emails targeting specific employees",
+        "New domains registered similar to company",
+        "OAuth app consent requests",
+        "Unusual email login locations"
+      ]
+    },
+    {
+      "phase": 3,
+      "name": "Email Access and Reconnaissance",
+      "duration": "Days to weeks",
+      "techniques": [
+        {"id": "T1114.002", "name": "Remote Email Collection"},
+        {"id": "T1098.005", "name": "Device Registration"}
+      ],
+      "activities": [
+        "Read email to understand business context",
+        "Identify ongoing transactions",
+        "Learn communication patterns/writing style",
+        "Set up mail forwarding rules",
+        "Register attacker device for MFA"
+      ],
+      "persistence_methods": [
+        "Create email forwarding rules",
+        "Add delegate access",
+        "Register new MFA device",
+        "Create inbox rules to hide responses"
+      ],
+      "indicators": [
+        "New email forwarding rules",
+        "Unusual email access patterns",
+        "New MFA device registration",
+        "Inbox rules hiding emails"
+      ]
+    },
+    {
+      "phase": 4,
+      "name": "Social Engineering Execution",
+      "duration": "Hours to days",
+      "techniques": [
+        {"id": "T1534", "name": "Internal Spearphishing"},
+        {"id": "T1656", "name": "Impersonation"}
+      ],
+      "attack_variants": {
+        "ceo_fraud": {
+          "description": "Impersonate CEO requesting urgent wire transfer",
+          "target": "CFO or finance staff",
+          "pretext": "Confidential acquisition, time-sensitive deal"
+        },
+        "vendor_invoice": {
+          "description": "Impersonate vendor requesting payment to new account",
+          "target": "Accounts payable",
+          "pretext": "Updated banking information"
+        },
+        "payroll_diversion": {
+          "description": "Impersonate employee requesting direct deposit change",
+          "target": "HR or payroll",
+          "pretext": "Changed banks, new account"
+        },
+        "data_theft": {
+          "description": "Request sensitive data like W-2 forms",
+          "target": "HR",
+          "pretext": "Audit, tax purposes, executive request"
+        },
+        "gift_card": {
+          "description": "Request purchase of gift cards",
+          "target": "Executive assistants",
+          "pretext": "Client gifts, employee rewards"
+        }
+      },
+      "urgency_tactics": [
+        "Time pressure (deal closing, deadline)",
+        "Authority (CEO, CFO request)",
+        "Secrecy (confidential, don't discuss)",
+        "Travel (CEO traveling, can't call)"
+      ]
+    },
+    {
+      "phase": 5,
+      "name": "Financial Transfer",
+      "duration": "Minutes to hours",
+      "techniques": [
+        {"id": "T1657", "name": "Financial Theft"}
+      ],
+      "transfer_methods": [
+        "Wire transfer to attacker-controlled account",
+        "ACH transfer",
+        "Gift card codes sent via email",
+        "Cryptocurrency purchase"
+      ],
+      "money_mule_network": [
+        "Domestic accounts (US)",
+        "International accounts (often Hong Kong, China)",
+        "Cryptocurrency exchanges",
+        "Layered transfers to obscure trail"
+      ]
+    },
+    {
+      "phase": 6,
+      "name": "Evidence Destruction",
+      "duration": "Hours",
+      "techniques": [
+        {"id": "T1070.008", "name": "Clear Mailbox Data"}
+      ],
+      "activities": [
+        "Delete sent emails",
+        "Remove forwarding rules",
+        "Clear traces of access",
+        "Abandon compromised accounts"
+      ]
+    }
+  ],
+  "email_indicators": {
+    "header_anomalies": [
+      "Reply-to different from From",
+      "Display name spoofing",
+      "Lookalike domains",
+      "Recent domain registration"
+    ],
+    "content_indicators": [
+      "Urgency language",
+      "Secrecy requests",
+      "Grammar/spelling inconsistencies",
+      "Unusual requests",
+      "Changed payment details"
+    ],
+    "behavioral_indicators": [
+      "Unusual sending times",
+      "Different writing style",
+      "Breaking normal approval processes",
+      "Pressure to bypass controls"
+    ]
+  },
+  "detection_opportunities": {
+    "email_security": [
+      "DMARC/DKIM/SPF failures",
+      "Lookalike domain detection",
+      "Display name spoofing detection",
+      "New sender analysis"
+    ],
+    "identity_protection": [
+      "Impossible travel alerts",
+      "New device/location logins",
+      "MFA registration alerts",
+      "Email forwarding rule creation"
+    ],
+    "process_controls": [
+      "Out-of-band verification for wire transfers",
+      "Multi-person approval for large payments",
+      "Vendor verification procedures"
+    ]
+  },
+  "prevention_measures": [
+    "Email authentication (DMARC, DKIM, SPF)",
+    "MFA on all email accounts",
+    "Security awareness training",
+    "Out-of-band verification for financial requests",
+    "Domain monitoring for lookalikes",
+    "Payment process controls",
+    "Executive impersonation alerts"
+  ],
+  "response_actions": [
+    "Contact bank immediately to recall funds",
+    "File FBI IC3 complaint",
+    "Preserve email evidence",
+    "Reset compromised account credentials",
+    "Review and remove malicious mail rules",
+    "Audit recent financial transactions",
+    "Notify affected parties"
+  ]
+}

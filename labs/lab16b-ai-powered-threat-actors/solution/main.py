@@ -22,7 +22,7 @@ from datetime import datetime
 @dataclass
 class PhishingAnalysis:
     """Results of AI-generated content analysis."""
-    
+
     text: str
     ai_probability: float
     indicators: List[str]
@@ -32,7 +32,7 @@ class PhishingAnalysis:
 
 class DeepfakeIndicator(Enum):
     """Indicators of synthetic voice."""
-    
+
     UNNATURAL_PAUSES = "unnatural_pauses"
     BREATHING_ANOMALIES = "breathing_anomalies"
     EMOTION_INCONSISTENCY = "emotion_inconsistency"
@@ -45,7 +45,7 @@ class DeepfakeIndicator(Enum):
 @dataclass
 class VoiceAnalysis:
     """Analysis of potential voice deepfake."""
-    
+
     synthetic_probability: float
     indicators: List[DeepfakeIndicator]
     confidence: str
@@ -55,7 +55,7 @@ class VoiceAnalysis:
 
 class AIEnhancement(Enum):
     """Types of AI enhancement in malware."""
-    
+
     POLYMORPHIC_CODE = "polymorphic_code"
     EVASION_OPTIMIZATION = "evasion_optimization"
     PAYLOAD_GENERATION = "payload_generation"
@@ -67,7 +67,7 @@ class AIEnhancement(Enum):
 @dataclass
 class MalwareAIIndicators:
     """Indicators of AI-assisted malware development."""
-    
+
     sample_hash: str
     ai_enhancements: List[AIEnhancement]
     variant_count: int
@@ -86,7 +86,7 @@ class ThreatLevel(Enum):
 @dataclass
 class AIThreatReport:
     """Structured AI threat intelligence report."""
-    
+
     title: str
     tlp: str
     report_date: str
@@ -106,11 +106,11 @@ class AIThreatReport:
 class AIPhishingDetector:
     """
     Detect AI-generated phishing content.
-    
+
     This detector looks for patterns common in AI-generated text
     that may indicate automated phishing campaigns.
     """
-    
+
     def __init__(self):
         self.ai_indicators = {
             "perfect_grammar": self._check_perfect_grammar,
@@ -119,7 +119,7 @@ class AIPhishingDetector:
             "unusual_formality": self._check_formality,
             "statistical_anomalies": self._check_statistical_anomalies,
         }
-        
+
         self.ai_phrases = [
             "I hope this email finds you well",
             "As per our previous conversation",
@@ -132,7 +132,7 @@ class AIPhishingDetector:
             "Please do not hesitate to contact",
             "Looking forward to hearing from you",
         ]
-        
+
         self.urgency_patterns = [
             r"urgent.*action.*required",
             r"immediate.*attention",
@@ -144,31 +144,31 @@ class AIPhishingDetector:
             r"act.*now",
             r"expires?\s*(today|soon|shortly)",
         ]
-    
+
     def analyze(self, email_text: str, metadata: Optional[Dict] = None) -> PhishingAnalysis:
         """
         Analyze email for AI-generated phishing indicators.
         """
         indicators = []
         scores = []
-        
+
         for name, check_func in self.ai_indicators.items():
             score, indicator = check_func(email_text)
             if indicator:
                 indicators.append(indicator)
             scores.append(score)
-        
+
         ai_probability = sum(scores) / len(scores) if scores else 0.0
-        
+
         if ai_probability > 0.8:
             confidence = "high"
         elif ai_probability > 0.5:
             confidence = "medium"
         else:
             confidence = "low"
-        
+
         recommendations = self._generate_recommendations(ai_probability, indicators)
-        
+
         return PhishingAnalysis(
             text=email_text[:200] + "..." if len(email_text) > 200 else email_text,
             ai_probability=ai_probability,
@@ -176,7 +176,7 @@ class AIPhishingDetector:
             confidence=confidence,
             recommendations=recommendations,
         )
-    
+
     def _check_perfect_grammar(self, text: str) -> tuple:
         """Check for suspiciously perfect grammar."""
         human_errors = [
@@ -187,111 +187,128 @@ class AIPhishingDetector:
             r"!{2,}",  # Multiple exclamation marks
             r"\?\?",  # Multiple question marks
         ]
-        
+
         error_count = sum(1 for p in human_errors if re.search(p, text))
-        
+
         if len(text) > 500 and error_count == 0:
             return 0.7, "Suspiciously perfect grammar (no typical human errors)"
         elif len(text) > 200 and error_count == 0:
             return 0.4, "Very clean text (minimal human errors)"
-        
+
         return 0.1, None
-    
+
     def _check_generic_urgency(self, text: str) -> tuple:
         """Check for generic urgency patterns."""
         text_lower = text.lower()
         matches = []
-        
+
         for pattern in self.urgency_patterns:
             if re.search(pattern, text_lower):
                 matches.append(pattern)
-        
+
         if len(matches) >= 3:
             return 0.9, f"Multiple urgency patterns detected ({len(matches)} found)"
         elif len(matches) >= 2:
             return 0.6, "Generic urgency language detected"
         elif len(matches) == 1:
             return 0.3, "Single urgency pattern found"
-        
+
         return 0.1, None
-    
+
     def _check_template_patterns(self, text: str) -> tuple:
         """Check for common AI template patterns."""
         text_lower = text.lower()
         matches = sum(1 for phrase in self.ai_phrases if phrase.lower() in text_lower)
-        
+
         if matches >= 3:
             return 0.8, f"Multiple AI-common phrases detected ({matches} found)"
         elif matches >= 2:
             return 0.5, "Template-like language patterns"
         elif matches == 1:
             return 0.25, None
-        
+
         return 0.1, None
-    
+
     def _check_formality(self, text: str) -> tuple:
         """Check for unusual formality consistency."""
         formal_words = [
-            "therefore", "consequently", "furthermore", "regarding",
-            "pertaining", "pursuant", "hereby", "aforementioned",
+            "therefore",
+            "consequently",
+            "furthermore",
+            "regarding",
+            "pertaining",
+            "pursuant",
+            "hereby",
+            "aforementioned",
         ]
         informal_words = [
-            "gonna", "wanna", "kinda", "stuff", "things", "yeah",
-            "ok", "lol", "btw", "asap", "fyi",
+            "gonna",
+            "wanna",
+            "kinda",
+            "stuff",
+            "things",
+            "yeah",
+            "ok",
+            "lol",
+            "btw",
+            "asap",
+            "fyi",
         ]
-        
+
         text_lower = text.lower()
         formal_count = sum(1 for w in formal_words if w in text_lower)
         informal_count = sum(1 for w in informal_words if w in text_lower)
-        
+
         if formal_count >= 3 and informal_count == 0:
             return 0.5, "Unnaturally consistent formal tone"
-        
+
         return 0.2, None
-    
+
     def _check_statistical_anomalies(self, text: str) -> tuple:
         """Check for statistical patterns common in AI text."""
         words = text.split()
         if len(words) < 50:
             return 0.2, None
-        
-        sentences = re.split(r'[.!?]+', text)
+
+        sentences = re.split(r"[.!?]+", text)
         sentences = [s.strip() for s in sentences if s.strip()]
-        
+
         if len(sentences) >= 5:
             lengths = [len(s.split()) for s in sentences]
             avg_len = sum(lengths) / len(lengths)
             variance = sum((l - avg_len) ** 2 for l in lengths) / len(lengths)
             std_dev = math.sqrt(variance)
-            
+
             if std_dev < 3 and avg_len > 10:
                 return 0.6, "Unusually consistent sentence structure"
-        
+
         return 0.2, None
-    
-    def _generate_recommendations(
-        self, probability: float, indicators: List[str]
-    ) -> List[str]:
+
+    def _generate_recommendations(self, probability: float, indicators: List[str]) -> List[str]:
         """Generate actionable recommendations."""
         recommendations = []
-        
+
         if probability > 0.7:
-            recommendations.extend([
-                "⚠️ HIGH RISK: Treat as likely AI-generated phishing",
-                "Do NOT click any links or download attachments",
-                "Verify sender through out-of-band communication",
-                "Report to security team immediately",
-            ])
+            recommendations.extend(
+                [
+                    "⚠️ HIGH RISK: Treat as likely AI-generated phishing",
+                    "Do NOT click any links or download attachments",
+                    "Verify sender through out-of-band communication",
+                    "Report to security team immediately",
+                ]
+            )
         elif probability > 0.4:
-            recommendations.extend([
-                "⚡ MEDIUM RISK: Exercise caution with this message",
-                "Verify sender identity before taking action",
-                "Check for lookalike domains in sender address",
-                "Contact IT if requesting sensitive information",
-            ])
+            recommendations.extend(
+                [
+                    "⚡ MEDIUM RISK: Exercise caution with this message",
+                    "Verify sender identity before taking action",
+                    "Check for lookalike domains in sender address",
+                    "Contact IT if requesting sensitive information",
+                ]
+            )
         else:
             recommendations.append("✅ LOW RISK: Standard vigilance recommended")
-        
+
         return recommendations
 
 
@@ -304,7 +321,7 @@ class VishingDetector:
     """
     Framework for detecting AI-powered vishing attacks.
     """
-    
+
     def __init__(self):
         self.high_risk_scenarios = [
             "wire_transfer_request",
@@ -315,7 +332,7 @@ class VishingDetector:
             "password_reset_request",
             "vpn_access_request",
         ]
-        
+
         self.challenge_questions = [
             "What did we discuss in our last meeting?",
             "Can you remind me of the project we worked on together?",
@@ -324,7 +341,7 @@ class VishingDetector:
             "What floor is your office on?",
             "Who else is on your team?",
         ]
-    
+
     def analyze_call_context(
         self,
         caller_claims: str,
@@ -336,39 +353,39 @@ class VishingDetector:
         """Analyze call context for vishing indicators."""
         indicators = []
         risk_score = 0.0
-        
+
         # Check for high-risk request types
         if request_type in self.high_risk_scenarios:
             risk_score += 0.3
             indicators.append(DeepfakeIndicator.CONTEXT_CONFUSION)
-        
+
         # Urgency is a major red flag
         if urgency_level in ["critical", "emergency", "immediate"]:
             risk_score += 0.25
             indicators.append(DeepfakeIndicator.RESPONSE_LATENCY)
         elif urgency_level in ["high", "urgent"]:
             risk_score += 0.15
-        
+
         # Refusing callback is suspicious
         if not callback_offered:
             risk_score += 0.2
-        
+
         # Refusing verification is very suspicious
         if not verification_accepted:
             risk_score += 0.25
             indicators.append(DeepfakeIndicator.CONTEXT_CONFUSION)
-        
+
         # Executive impersonation adds risk
         executive_terms = ["ceo", "cfo", "cto", "president", "director", "vp"]
         if any(term in caller_claims.lower() for term in executive_terms):
             risk_score += 0.1
-        
+
         confidence = "high" if risk_score > 0.6 else "medium" if risk_score > 0.3 else "low"
-        
+
         recommendations = self._generate_vishing_recommendations(
             risk_score, caller_claims, request_type
         )
-        
+
         return VoiceAnalysis(
             synthetic_probability=min(risk_score, 1.0),
             indicators=indicators,
@@ -382,7 +399,7 @@ class VishingDetector:
             },
             recommendations=recommendations,
         )
-    
+
     def get_verification_protocol(self, caller_claims: str) -> List[str]:
         """Get verification steps based on claimed identity."""
         base_protocol = [
@@ -391,59 +408,69 @@ class VishingDetector:
             "3. Call back using a known-good number from company directory",
             "4. Use a pre-established code word if available",
         ]
-        
+
         caller_lower = caller_claims.lower()
-        
+
         if any(term in caller_lower for term in ["executive", "ceo", "cfo", "cto", "president"]):
-            base_protocol.extend([
-                "5. EXECUTIVE CLAIM: Contact their assistant directly",
-                "6. Verify through secondary channel (Slack, Teams, email)",
-                "7. Involve your manager before taking any action",
-                "8. Never process financial requests from voice-only requests",
-            ])
-        
+            base_protocol.extend(
+                [
+                    "5. EXECUTIVE CLAIM: Contact their assistant directly",
+                    "6. Verify through secondary channel (Slack, Teams, email)",
+                    "7. Involve your manager before taking any action",
+                    "8. Never process financial requests from voice-only requests",
+                ]
+            )
+
         elif any(term in caller_lower for term in ["it", "helpdesk", "tech support"]):
-            base_protocol.extend([
-                "5. IT CLAIM: Check if ticket exists for this request",
-                "6. Verify caller's employee ID and department",
-                "7. Never provide credentials over the phone",
-                "8. IT should never need your password - they can reset it",
-            ])
-        
+            base_protocol.extend(
+                [
+                    "5. IT CLAIM: Check if ticket exists for this request",
+                    "6. Verify caller's employee ID and department",
+                    "7. Never provide credentials over the phone",
+                    "8. IT should never need your password - they can reset it",
+                ]
+            )
+
         elif any(term in caller_lower for term in ["vendor", "supplier", "contractor"]):
-            base_protocol.extend([
-                "5. VENDOR CLAIM: Verify against vendor contact list",
-                "6. Call the vendor using known-good number",
-                "7. Verify any payment changes through procurement",
-                "8. Require email confirmation from known address",
-            ])
-        
+            base_protocol.extend(
+                [
+                    "5. VENDOR CLAIM: Verify against vendor contact list",
+                    "6. Call the vendor using known-good number",
+                    "7. Verify any payment changes through procurement",
+                    "8. Require email confirmation from known address",
+                ]
+            )
+
         return base_protocol
-    
+
     def _generate_vishing_recommendations(
         self, risk_score: float, caller_claims: str, request_type: str
     ) -> List[str]:
         """Generate recommendations based on risk."""
         recs = []
-        
+
         if risk_score > 0.6:
-            recs.extend([
-                "⚠️ HIGH RISK: Likely vishing attempt",
-                "Do NOT comply with any requests",
-                "End the call and report to security",
-                "Document caller ID, time, and request details",
-                "Warn colleagues about this attack pattern",
-            ])
+            recs.extend(
+                [
+                    "⚠️ HIGH RISK: Likely vishing attempt",
+                    "Do NOT comply with any requests",
+                    "End the call and report to security",
+                    "Document caller ID, time, and request details",
+                    "Warn colleagues about this attack pattern",
+                ]
+            )
         elif risk_score > 0.3:
-            recs.extend([
-                "⚡ ELEVATED RISK: Proceed with caution",
-                "Require callback verification before any action",
-                "Use challenge questions to verify identity",
-                "Involve supervisor for sensitive requests",
-            ])
+            recs.extend(
+                [
+                    "⚡ ELEVATED RISK: Proceed with caution",
+                    "Require callback verification before any action",
+                    "Use challenge questions to verify identity",
+                    "Involve supervisor for sensitive requests",
+                ]
+            )
         else:
             recs.append("✅ LOWER RISK: Follow standard verification procedures")
-        
+
         return recs
 
 
@@ -456,7 +483,7 @@ class AIMalwareAnalyzer:
     """
     Analyze malware samples for AI-assisted development indicators.
     """
-    
+
     def __init__(self):
         self.ai_indicators = {
             "rapid_variants": "Multiple variants with similar functionality but different signatures",
@@ -465,7 +492,7 @@ class AIMalwareAnalyzer:
             "generated_strings": "Strings that appear LLM-generated",
             "optimized_evasion": "Systematically tested evasion techniques",
         }
-        
+
         self.ai_families = {
             "BlackMamba": {
                 "description": "Proof-of-concept polymorphic keylogger using LLM",
@@ -480,12 +507,12 @@ class AIMalwareAnalyzer:
                 "techniques": ["T1566", "T1059"],
             },
         }
-    
+
     def analyze_variant_patterns(self, samples: List[Dict]) -> Dict:
         """Analyze multiple samples for AI-generated variant patterns."""
         if len(samples) < 2:
             return {"error": "Need multiple samples for variant analysis"}
-        
+
         analysis = {
             "total_samples": len(samples),
             "variant_clusters": [],
@@ -493,10 +520,10 @@ class AIMalwareAnalyzer:
             "indicators": [],
             "analysis_timestamp": datetime.now().isoformat(),
         }
-        
+
         unique_hashes = set(s.get("hash", "") for s in samples)
         common_functions = self._find_common_functions(samples)
-        
+
         if len(unique_hashes) > 10 and len(common_functions) > 5:
             analysis["ai_probability"] = 0.7
             analysis["indicators"].append(
@@ -504,10 +531,8 @@ class AIMalwareAnalyzer:
             )
         elif len(unique_hashes) > 5 and len(common_functions) > 3:
             analysis["ai_probability"] = 0.5
-            analysis["indicators"].append(
-                "Moderate variant count with shared code patterns"
-            )
-        
+            analysis["indicators"].append("Moderate variant count with shared code patterns")
+
         # Check for rapid generation timestamps
         timestamps = [s.get("first_seen") for s in samples if s.get("first_seen")]
         if len(timestamps) >= 5:
@@ -515,20 +540,20 @@ class AIMalwareAnalyzer:
             analysis["indicators"].append(
                 f"Multiple variants ({len(timestamps)}) detected - possible automation"
             )
-        
+
         return analysis
-    
+
     def _find_common_functions(self, samples: List[Dict]) -> Set[str]:
         """Find functions common across samples."""
         if not samples:
             return set()
-        
+
         common = set(samples[0].get("functions", []))
         for sample in samples[1:]:
             common &= set(sample.get("functions", []))
-        
+
         return common
-    
+
     def get_detection_strategies(self, enhancement_type: AIEnhancement) -> List[str]:
         """Get detection strategies for specific AI enhancement types."""
         strategies = {
@@ -561,12 +586,15 @@ class AIMalwareAnalyzer:
                 "Use threat intel for known C2 infrastructure",
             ],
         }
-        
-        return strategies.get(enhancement_type, [
-            "Monitor for unusual patterns",
-            "Implement behavioral detection",
-            "Share IOCs with threat intel community",
-        ])
+
+        return strategies.get(
+            enhancement_type,
+            [
+                "Monitor for unusual patterns",
+                "Implement behavioral detection",
+                "Share IOCs with threat intel community",
+            ],
+        )
 
 
 # =============================================================================
@@ -576,11 +604,11 @@ class AIMalwareAnalyzer:
 
 class AIThreatIntelGenerator:
     """Generate threat intelligence about AI-powered attacks."""
-    
+
     def __init__(self, llm=None):
         self.llm = llm
         self.threat_db = self._load_threat_database()
-    
+
     def _load_threat_database(self) -> Dict:
         """Load known AI threat patterns."""
         return {
@@ -653,7 +681,7 @@ class AIThreatIntelGenerator:
                 },
             ],
         }
-    
+
     def generate_threat_brief(
         self,
         threat_type: str,
@@ -661,7 +689,7 @@ class AIThreatIntelGenerator:
     ) -> AIThreatReport:
         """Generate a threat intelligence brief."""
         threat_info = self.threat_db.get(threat_type, [])
-        
+
         report = AIThreatReport(
             title=f"AI Threat Brief: {threat_type.replace('_', ' ').title()}",
             tlp="AMBER",
@@ -673,12 +701,10 @@ class AIThreatIntelGenerator:
             mitigations=self._extract_mitigations(threat_info),
             references=self._get_references(threat_type),
         )
-        
+
         return report
-    
-    def _generate_executive_summary(
-        self, threat_type: str, threat_info: List[Dict]
-    ) -> str:
+
+    def _generate_executive_summary(self, threat_type: str, threat_info: List[Dict]) -> str:
         """Generate executive summary."""
         summaries = {
             "ai_phishing_patterns": (
@@ -713,7 +739,7 @@ class AIThreatIntelGenerator:
             ),
         }
         return summaries.get(threat_type, "AI-powered threats require adaptive defenses.")
-    
+
     def _extract_techniques(self, threat_info: List[Dict]) -> List[str]:
         """Extract observed techniques."""
         techniques = []
@@ -722,7 +748,7 @@ class AIThreatIntelGenerator:
                 techniques.append(item["description"])
             techniques.extend(item.get("mitre_techniques", []))
         return techniques
-    
+
     def _extract_indicators(self, threat_info: List[Dict]) -> List[Dict]:
         """Extract indicators of compromise/activity."""
         indicators = []
@@ -730,14 +756,14 @@ class AIThreatIntelGenerator:
             for ind in item.get("indicators", []):
                 indicators.append({"type": "behavioral", "value": ind})
         return indicators
-    
+
     def _extract_mitigations(self, threat_info: List[Dict]) -> List[str]:
         """Extract mitigation recommendations."""
         mitigations = []
         for item in threat_info:
             mitigations.extend(item.get("mitigations", []))
         return list(set(mitigations))
-    
+
     def _get_references(self, threat_type: str) -> List[str]:
         """Get relevant references."""
         references = {
@@ -759,41 +785,41 @@ class AIThreatIntelGenerator:
             ],
         }
         return references.get(threat_type, ["https://atlas.mitre.org/"])
-    
+
     def assess_organizational_risk(self, org_profile: Dict) -> Dict:
         """Assess organization's risk to AI-powered threats."""
         risk_score = 0.0
         risk_factors = []
-        
+
         # High-profile executives increase voice cloning risk
         if org_profile.get("public_executives", 0) > 3:
             risk_score += 0.2
             risk_factors.append("Multiple public-facing executives increase voice cloning risk")
-        
+
         # Financial sector is high-target
         high_target_sectors = ["financial", "healthcare", "government", "defense"]
         if org_profile.get("sector", "").lower() in high_target_sectors:
             risk_score += 0.2
             risk_factors.append(f"Sector ({org_profile.get('sector')}) is high-value target")
-        
+
         # Large employee count = larger attack surface
         if org_profile.get("employee_count", 0) > 1000:
             risk_score += 0.15
             risk_factors.append("Large employee count increases social engineering surface")
-        
+
         # Check for existing controls
         if not org_profile.get("has_security_awareness_training", False):
             risk_score += 0.15
             risk_factors.append("Missing security awareness training")
-        
+
         if not org_profile.get("has_email_filtering", False):
             risk_score += 0.15
             risk_factors.append("Missing AI-based email filtering")
-        
+
         if not org_profile.get("has_callback_verification", False):
             risk_score += 0.15
             risk_factors.append("Missing callback verification procedures")
-        
+
         # Determine risk level
         if risk_score > 0.7:
             risk_level = "CRITICAL"
@@ -803,33 +829,35 @@ class AIThreatIntelGenerator:
             risk_level = "MEDIUM"
         else:
             risk_level = "LOW"
-        
+
         return {
             "overall_risk_score": min(risk_score, 1.0),
             "risk_level": risk_level,
             "risk_factors": risk_factors,
             "recommendations": self._generate_risk_recommendations(risk_factors),
         }
-    
+
     def _generate_risk_recommendations(self, risk_factors: List[str]) -> List[str]:
         """Generate recommendations based on risk factors."""
         recommendations = []
-        
+
         if any("voice cloning" in f for f in risk_factors):
             recommendations.append("Implement code word system for executive verification")
-        
+
         if any("awareness training" in f for f in risk_factors):
             recommendations.append("Deploy AI threat awareness training program")
-        
+
         if any("email filtering" in f for f in risk_factors):
             recommendations.append("Implement AI-based email security solution")
-        
+
         if any("callback" in f for f in risk_factors):
-            recommendations.append("Establish mandatory callback verification for sensitive requests")
-        
+            recommendations.append(
+                "Establish mandatory callback verification for sensitive requests"
+            )
+
         recommendations.append("Conduct AI threat tabletop exercises")
         recommendations.append("Share threat intelligence with industry peers")
-        
+
         return recommendations
 
 
@@ -840,14 +868,14 @@ class AIThreatIntelGenerator:
 
 def main():
     """Demonstrate AI threat detection capabilities."""
-    
+
     print("=" * 70)
     print("Lab 16b: Understanding AI-Powered Threat Actors - SOLUTION")
     print("=" * 70)
-    
+
     # Load sample data
     data_path = Path(__file__).parent.parent / "data" / "ai_threat_samples.json"
-    
+
     if data_path.exists():
         with open(data_path) as f:
             samples = json.load(f)
@@ -912,14 +940,14 @@ def main():
                 },
             ],
         }
-    
+
     # Demo: Phishing Detection
     print("\n" + "=" * 70)
     print("[1] AI-Generated Phishing Detection")
     print("=" * 70)
-    
+
     detector = AIPhishingDetector()
-    
+
     for email in samples.get("phishing_emails", []):
         print(f"\n📧 Analyzing: {email['subject']}")
         print("-" * 50)
@@ -929,17 +957,19 @@ def main():
         print(f"  Indicators Found: {len(result.indicators)}")
         for indicator in result.indicators:
             print(f"    • {indicator}")
-        print(f"  Ground Truth: {'🤖 AI-generated' if email.get('is_ai_generated') else '👤 Human'}")
-        correct = (result.ai_probability > 0.5) == email.get('is_ai_generated', False)
+        print(
+            f"  Ground Truth: {'🤖 AI-generated' if email.get('is_ai_generated') else '👤 Human'}"
+        )
+        correct = (result.ai_probability > 0.5) == email.get("is_ai_generated", False)
         print(f"  Detection: {'✅ Correct' if correct else '❌ Incorrect'}")
-    
+
     # Demo: Vishing Detection
     print("\n" + "=" * 70)
     print("[2] Vishing Detection Framework")
     print("=" * 70)
-    
+
     vishing_detector = VishingDetector()
-    
+
     for scenario in samples.get("vishing_scenarios", []):
         print(f"\n📞 Analyzing call from: {scenario['caller_claims']}")
         print("-" * 50)
@@ -953,22 +983,22 @@ def main():
         print(f"  Risk Score: {result.synthetic_probability:.1%}")
         print(f"  Confidence: {result.confidence.upper()}")
         print(f"  Ground Truth: {'🚨 Attack' if scenario.get('is_attack') else '✅ Legitimate'}")
-        
-        correct = (result.synthetic_probability > 0.5) == scenario.get('is_attack', False)
+
+        correct = (result.synthetic_probability > 0.5) == scenario.get("is_attack", False)
         print(f"  Detection: {'✅ Correct' if correct else '❌ Incorrect'}")
-        
+
         # Show verification protocol
         print(f"\n  Verification Protocol:")
         for step in vishing_detector.get_verification_protocol(scenario["caller_claims"])[:4]:
             print(f"    {step}")
-    
+
     # Demo: Threat Intelligence
     print("\n" + "=" * 70)
     print("[3] AI Threat Intelligence Generation")
     print("=" * 70)
-    
+
     intel_generator = AIThreatIntelGenerator()
-    
+
     for threat_type in ["voice_cloning_attacks", "ai_phishing_patterns"]:
         report = intel_generator.generate_threat_brief(threat_type)
         print(f"\n📋 {report.title}")
@@ -980,12 +1010,12 @@ def main():
         print(f"\n  Mitigations: {len(report.mitigations)}")
         for mit in report.mitigations[:3]:
             print(f"    • {mit}")
-    
+
     # Demo: Organization Risk Assessment
     print("\n" + "=" * 70)
     print("[4] Organizational Risk Assessment")
     print("=" * 70)
-    
+
     sample_org = {
         "name": "Acme Financial",
         "sector": "financial",
@@ -995,20 +1025,20 @@ def main():
         "has_email_filtering": False,
         "has_callback_verification": False,
     }
-    
+
     risk_assessment = intel_generator.assess_organizational_risk(sample_org)
-    
+
     print(f"\n🏢 Organization: {sample_org['name']}")
     print("-" * 50)
     print(f"  Overall Risk Score: {risk_assessment['overall_risk_score']:.1%}")
     print(f"  Risk Level: {risk_assessment['risk_level']}")
     print(f"\n  Risk Factors:")
-    for factor in risk_assessment['risk_factors']:
+    for factor in risk_assessment["risk_factors"]:
         print(f"    ⚠️ {factor}")
     print(f"\n  Recommendations:")
-    for rec in risk_assessment['recommendations'][:4]:
+    for rec in risk_assessment["recommendations"][:4]:
         print(f"    → {rec}")
-    
+
     print("\n" + "=" * 70)
     print("Lab 16b Complete!")
     print("=" * 70)

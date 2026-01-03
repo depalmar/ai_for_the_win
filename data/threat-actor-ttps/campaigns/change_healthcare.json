@@ -1,0 +1,165 @@
+{
+  "id": "change-healthcare",
+  "name": "Change Healthcare Ransomware Attack",
+  "threat_actor": "alphv",
+  "affiliate": "Unknown ALPHV/BlackCat affiliate",
+  "classification": "ransomware_healthcare",
+  "timeframe": {
+    "initial_access": "2024-02-12",
+    "ransomware_deployment": "2024-02-21",
+    "discovery": "2024-02-21",
+    "service_restoration": "2024-03 onwards"
+  },
+  "summary": "ALPHV/BlackCat affiliate compromised Change Healthcare, a subsidiary of UnitedHealth Group that processes ~15 billion healthcare transactions annually. The attack disrupted healthcare payment processing nationwide, affecting pharmacies, hospitals, and healthcare providers across the United States. Considered one of the most impactful healthcare cyberattacks in US history.",
+  "attack_phases": [
+    {
+      "phase": 1,
+      "name": "Initial Access via Citrix",
+      "timeframe": "February 12, 2024",
+      "techniques": ["T1133", "T1078"],
+      "description": "Attackers gained access through a Citrix remote access portal using compromised credentials. The account reportedly lacked multi-factor authentication.",
+      "indicators": [
+        "Citrix portal access from unusual location",
+        "Credential use without MFA",
+        "Initial foothold establishment"
+      ],
+      "detection_opportunities": [
+        "Citrix access from anomalous IP",
+        "Single-factor authentication to critical systems",
+        "Unusual login times"
+      ]
+    },
+    {
+      "phase": 2,
+      "name": "Lateral Movement and Persistence",
+      "timeframe": "February 12-21, 2024",
+      "techniques": ["T1021.001", "T1021.002", "T1003.001"],
+      "description": "Nine-day dwell time during which attackers moved laterally through the network, harvested credentials, and established persistence.",
+      "indicators": [
+        "RDP connections between systems",
+        "Credential dumping activity",
+        "Reconnaissance commands"
+      ],
+      "detection_opportunities": [
+        "Lateral movement patterns",
+        "LSASS access",
+        "Internal scanning"
+      ]
+    },
+    {
+      "phase": 3,
+      "name": "Data Exfiltration",
+      "timeframe": "Before encryption",
+      "techniques": ["T1567.002", "T1560.001"],
+      "description": "Attackers exfiltrated approximately 6 TB of data containing protected health information (PHI) for millions of Americans.",
+      "indicators": [
+        "Large data transfers",
+        "Archive creation",
+        "Cloud storage uploads"
+      ],
+      "detection_opportunities": [
+        "Data loss prevention alerts",
+        "Unusual egress traffic",
+        "Archive file creation"
+      ]
+    },
+    {
+      "phase": 4,
+      "name": "Ransomware Deployment",
+      "timeframe": "February 21, 2024",
+      "techniques": ["T1486", "T1490", "T1489"],
+      "description": "ALPHV/BlackCat ransomware deployed across Change Healthcare systems, encrypting critical healthcare processing infrastructure.",
+      "indicators": [
+        "Mass encryption events",
+        "Shadow copy deletion",
+        "Service termination"
+      ]
+    }
+  ],
+  "impact": {
+    "ransom_paid": 22000000,
+    "currency": "USD (Bitcoin)",
+    "data_stolen_tb": 6,
+    "individuals_affected": "Potentially 100+ million Americans",
+    "operational_impact": {
+      "transactions_disrupted": "15 billion annual transactions",
+      "pharmacies_affected": "90% of US pharmacies",
+      "claims_processing": "Nationwide disruption for weeks",
+      "healthcare_providers": "Hospitals unable to verify insurance, process claims"
+    },
+    "financial_impact": {
+      "unitedhealth_costs": "$870+ million (Q1 2024)",
+      "provider_impact": "Billions in delayed payments to healthcare providers"
+    }
+  },
+  "notable_events": [
+    {
+      "date": "2024-02-21",
+      "event": "Change Healthcare takes systems offline"
+    },
+    {
+      "date": "2024-02-26",
+      "event": "UnitedHealth confirms cyberattack"
+    },
+    {
+      "date": "2024-02-29",
+      "event": "ALPHV claims responsibility"
+    },
+    {
+      "date": "2024-03-01",
+      "event": "Initial ransom reportedly paid (~$22M)"
+    },
+    {
+      "date": "2024-03-04",
+      "event": "ALPHV conducts exit scam, claims law enforcement seizure"
+    },
+    {
+      "date": "2024-03-07",
+      "event": "Partial systems restoration begins"
+    },
+    {
+      "date": "2024-04",
+      "event": "RansomHub (affiliate) threatens second leak"
+    },
+    {
+      "date": "2024-05-01",
+      "event": "UnitedHealth CEO testifies to Congress"
+    }
+  ],
+  "alphv_exit_scam": {
+    "description": "After receiving ransom payment, ALPHV operators conducted an exit scam, posting fake FBI seizure notice and absconding with affiliate's share",
+    "affiliate_response": "Affiliate reportedly still had data, threatened further leaks through RansomHub"
+  },
+  "regulatory_response": [
+    "HHS investigation launched",
+    "Congressional hearings held",
+    "OCR investigating HIPAA compliance",
+    "State AG investigations"
+  ],
+  "lessons_learned": [
+    "MFA is critical for remote access portals",
+    "Healthcare supply chain creates systemic risk",
+    "Single points of failure in healthcare infrastructure",
+    "Ransom payment doesn't guarantee data security",
+    "Exit scams demonstrate criminal unpredictability"
+  ],
+  "detection_indicators": {
+    "initial_access": [
+      "Citrix portal anomalous access",
+      "Single-factor authentication events"
+    ],
+    "lateral_movement": [
+      "RDP between unusual system pairs",
+      "Credential access patterns"
+    ],
+    "exfiltration": [
+      "Large outbound transfers",
+      "Cloud storage connections"
+    ]
+  },
+  "references": [
+    "https://www.cisa.gov/news-events/alerts/2024/02/27/cisa-fbi-and-hhs-release-joint-advisory-alphvblackcat-ransomware",
+    "https://www.hhs.gov/sites/default/files/change-healthcare-breach-notification.pdf",
+    "https://www.unitedhealthgroup.com/newsroom/2024/uhg-update-change-healthcare-cyber-response.html"
+  ]
+}

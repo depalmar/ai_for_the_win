@@ -1,0 +1,182 @@
+{
+  "id": "colonial-pipeline",
+  "name": "Colonial Pipeline Ransomware Attack",
+  "threat_actor": "darkside",
+  "affiliate": "Unknown DarkSide affiliate",
+  "classification": "ransomware",
+  "timeframe": {
+    "initial_access": "2021-04-29",
+    "ransomware_deployment": "2021-05-06",
+    "discovery": "2021-05-07",
+    "pipeline_shutdown": "2021-05-07",
+    "ransom_paid": "2021-05-08",
+    "operations_restored": "2021-05-12"
+  },
+  "summary": "DarkSide ransomware affiliate gained access to Colonial Pipeline's IT network through a compromised VPN password. The attack led to a precautionary shutdown of the largest fuel pipeline in the US, causing widespread fuel shortages across the East Coast.",
+  "attack_phases": [
+    {
+      "phase": 1,
+      "name": "Initial Access via Compromised VPN",
+      "timeframe": "April 29, 2021",
+      "techniques": ["T1133", "T1078"],
+      "description": "Attackers gained access using a compromised VPN account password. The account was no longer in active use but still had VPN access without MFA enabled.",
+      "indicators": [
+        "VPN login from unusual location",
+        "Legacy account authentication",
+        "Missing MFA on VPN access"
+      ],
+      "detection_opportunities": [
+        "VPN authentication from new geographic location",
+        "Login to inactive account",
+        "Single-factor authentication alert"
+      ]
+    },
+    {
+      "phase": 2,
+      "name": "Network Reconnaissance",
+      "timeframe": "April 29 - May 6, 2021",
+      "techniques": ["T1087.002", "T1018", "T1083"],
+      "description": "Attackers performed reconnaissance to understand network topology, identify high-value systems, and locate sensitive data for exfiltration.",
+      "indicators": [
+        "Active Directory enumeration",
+        "Network scanning activity",
+        "File share access patterns"
+      ],
+      "detection_opportunities": [
+        "ADFind or similar tool execution",
+        "Unusual internal scanning",
+        "Mass file system access"
+      ]
+    },
+    {
+      "phase": 3,
+      "name": "Credential Harvesting",
+      "timeframe": "During intrusion",
+      "techniques": ["T1003.001", "T1003.003"],
+      "description": "Attackers harvested credentials to enable lateral movement and domain-wide access.",
+      "indicators": [
+        "LSASS memory access",
+        "NTDS.dit extraction attempts"
+      ],
+      "detection_opportunities": [
+        "Credential dumping tool signatures",
+        "LSASS memory read access",
+        "ntdsutil execution"
+      ]
+    },
+    {
+      "phase": 4,
+      "name": "Data Exfiltration",
+      "timeframe": "Before ransomware deployment",
+      "techniques": ["T1560.001", "T1567.002"],
+      "description": "Approximately 100 GB of data exfiltrated before ransomware deployment as part of double extortion strategy.",
+      "indicators": [
+        "Large outbound data transfers",
+        "Archive file creation",
+        "Cloud storage uploads"
+      ],
+      "detection_opportunities": [
+        "Unusual egress traffic volume",
+        "Archive creation in sensitive directories",
+        "Data loss prevention alerts"
+      ]
+    },
+    {
+      "phase": 5,
+      "name": "Ransomware Deployment",
+      "timeframe": "May 6-7, 2021",
+      "techniques": ["T1486", "T1490", "T1489"],
+      "description": "DarkSide ransomware deployed to IT network. Colonial Pipeline shut down OT network as precaution despite it not being directly affected.",
+      "indicators": [
+        "Shadow copy deletion",
+        "Service termination",
+        "Mass file encryption"
+      ],
+      "detection_opportunities": [
+        "vssadmin delete shadows",
+        "Multiple service stops",
+        "High-entropy file writes"
+      ]
+    }
+  ],
+  "iocs": {
+    "darkside_general": {
+      "note": "Specific IOCs from this incident not fully disclosed",
+      "tor_site_defanged": "darksidc3iux462n6yunevoag52ntvwp6wulaz3zirkmh4cnz6ber35id[.]onion"
+    },
+    "file_indicators": {
+      "extensions": [".darkside"],
+      "ransom_note": "README.txt"
+    }
+  },
+  "impact": {
+    "ransom_demanded": 4400000,
+    "ransom_paid": 4400000,
+    "ransom_recovered": 2300000,
+    "currency": "USD (paid in Bitcoin)",
+    "operational_impact": {
+      "pipeline_shutdown_days": 5,
+      "fuel_supply_affected": "45% of East Coast fuel supply",
+      "states_affected": 17,
+      "gas_stations_without_fuel": "Over 10,000"
+    },
+    "economic_impact": "Billions in economic disruption",
+    "data_exfiltrated_gb": 100
+  },
+  "response_actions": [
+    {
+      "action": "Pipeline shutdown",
+      "timestamp": "2021-05-07",
+      "description": "Colonial proactively shut down pipeline operations as precaution"
+    },
+    {
+      "action": "FBI engagement",
+      "timestamp": "2021-05-07",
+      "description": "FBI notified and began investigation"
+    },
+    {
+      "action": "Ransom payment",
+      "timestamp": "2021-05-08",
+      "description": "Colonial paid 75 Bitcoin (~$4.4M) to obtain decryptor"
+    },
+    {
+      "action": "Emergency declaration",
+      "timestamp": "2021-05-09",
+      "description": "US declared state of emergency to address fuel shortages"
+    },
+    {
+      "action": "Operations restored",
+      "timestamp": "2021-05-12",
+      "description": "Pipeline operations gradually restored"
+    },
+    {
+      "action": "Ransom recovery",
+      "timestamp": "2021-06-07",
+      "description": "DOJ recovered 63.7 Bitcoin (~$2.3M) from DarkSide wallet"
+    }
+  ],
+  "darkside_aftermath": {
+    "shutdown": "DarkSide announced shutdown May 14, 2021",
+    "reason": "Law enforcement pressure following Colonial incident",
+    "successor": "BlackMatter (later shutdown) -> ALPHV/BlackCat"
+  },
+  "lessons_learned": [
+    "Legacy accounts pose significant risk",
+    "MFA is critical for all remote access",
+    "IT/OT network segmentation is essential",
+    "Incident response plans must include OT considerations",
+    "Critical infrastructure requires enhanced monitoring",
+    "Ransom recovery is possible with law enforcement cooperation"
+  ],
+  "regulatory_response": [
+    "TSA issued security directives for pipeline operators",
+    "Mandatory incident reporting requirements",
+    "Cybersecurity assessment requirements",
+    "Executive Order on Improving Nation's Cybersecurity"
+  ],
+  "references": [
+    "https://www.cisa.gov/news-events/cybersecurity-advisories/aa21-131a",
+    "https://www.justice.gov/opa/pr/department-justice-seizes-23-million-cryptocurrency-paid-ransomware-extortionists-darkside",
+    "https://www.bloomberg.com/news/articles/2021-06-04/hackers-breached-colonial-pipeline-using-compromised-password"
+  ]
+}

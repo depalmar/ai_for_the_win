@@ -1,0 +1,225 @@
+{
+  "id": "clop",
+  "name": "Cl0p",
+  "aliases": ["Clop", "TA505", "FIN11", "Lace Tempest", "DEV-0950"],
+  "country": "Russia",
+  "attributed_to": "Russian-speaking cybercriminal group, associated with TA505",
+  "motivation": "financial",
+  "active_since": "2019",
+  "sophistication": "advanced",
+  "description": "Cl0p is a ransomware operation known for large-scale data theft campaigns exploiting zero-day vulnerabilities in file transfer applications. Notable for MOVEit, GoAnywhere, and Accellion FTA exploitation campaigns affecting hundreds of organizations simultaneously.",
+  "ttps": [
+    {
+      "technique_id": "T1190",
+      "technique_name": "Exploit Public-Facing Application",
+      "tactic": "Initial Access",
+      "procedure": "Exploits zero-day vulnerabilities in file transfer applications (MOVEit, GoAnywhere, Accellion)",
+      "confidence": 0.98
+    },
+    {
+      "technique_id": "T1566.001",
+      "technique_name": "Spearphishing Attachment",
+      "tactic": "Initial Access",
+      "procedure": "Sends phishing emails with malicious Excel documents",
+      "confidence": 0.85
+    },
+    {
+      "technique_id": "T1059.001",
+      "technique_name": "PowerShell",
+      "tactic": "Execution",
+      "procedure": "Uses PowerShell for payload execution and reconnaissance",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1059.003",
+      "technique_name": "Windows Command Shell",
+      "tactic": "Execution",
+      "procedure": "Uses cmd.exe for batch operations",
+      "confidence": 0.85
+    },
+    {
+      "technique_id": "T1505.003",
+      "technique_name": "Web Shell",
+      "tactic": "Persistence",
+      "procedure": "Deploys web shells on exploited file transfer servers",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1053.005",
+      "technique_name": "Scheduled Task",
+      "tactic": "Persistence",
+      "procedure": "Creates scheduled tasks for persistence",
+      "confidence": 0.85
+    },
+    {
+      "technique_id": "T1562.001",
+      "technique_name": "Disable or Modify Tools",
+      "tactic": "Defense Evasion",
+      "procedure": "Disables security tools and services",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1070.001",
+      "technique_name": "Clear Windows Event Logs",
+      "tactic": "Defense Evasion",
+      "procedure": "Clears logs after operations",
+      "confidence": 0.85
+    },
+    {
+      "technique_id": "T1003.001",
+      "technique_name": "LSASS Memory",
+      "tactic": "Credential Access",
+      "procedure": "Dumps credentials when lateral movement is needed",
+      "confidence": 0.80
+    },
+    {
+      "technique_id": "T1083",
+      "technique_name": "File and Directory Discovery",
+      "tactic": "Discovery",
+      "procedure": "Identifies sensitive files on compromised file transfer servers",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1005",
+      "technique_name": "Data from Local System",
+      "tactic": "Collection",
+      "procedure": "Collects files directly from compromised file transfer applications",
+      "confidence": 0.98
+    },
+    {
+      "technique_id": "T1560.001",
+      "technique_name": "Archive via Utility",
+      "tactic": "Collection",
+      "procedure": "Archives stolen data for exfiltration",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1048.003",
+      "technique_name": "Exfiltration Over Unencrypted Non-C2 Protocol",
+      "tactic": "Exfiltration",
+      "procedure": "Exfiltrates data directly from compromised servers",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1567.002",
+      "technique_name": "Exfiltration to Cloud Storage",
+      "tactic": "Exfiltration",
+      "procedure": "Transfers stolen data to attacker-controlled infrastructure",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1486",
+      "technique_name": "Data Encrypted for Impact",
+      "tactic": "Impact",
+      "procedure": "Encrypts files in traditional ransomware operations",
+      "confidence": 0.85
+    },
+    {
+      "technique_id": "T1490",
+      "technique_name": "Inhibit System Recovery",
+      "tactic": "Impact",
+      "procedure": "Deletes shadow copies before encryption",
+      "confidence": 0.85
+    }
+  ],
+  "malware_families": [
+    "Clop ransomware",
+    "DEWMODE web shell",
+    "LEMURLOOT web shell",
+    "Truebot",
+    "Get2 loader",
+    "FlawedAmmyy RAT"
+  ],
+  "tools": [
+    "Cobalt Strike",
+    "TrueBot",
+    "Web shells"
+  ],
+  "target_sectors": [
+    "finance",
+    "healthcare",
+    "government",
+    "education",
+    "retail",
+    "technology",
+    "legal"
+  ],
+  "target_regions": [
+    "North America",
+    "Europe",
+    "Global"
+  ],
+  "infrastructure": {
+    "c2_patterns": [
+      "Tor hidden services for leak site",
+      "Compromised servers",
+      "Web shells on victim infrastructure"
+    ],
+    "hosting_preferences": [
+      "Tor network",
+      "Victim infrastructure",
+      "Bulletproof hosting"
+    ],
+    "sample_domains_defanged": [
+      "clop-leaks[.]onion"
+    ]
+  },
+  "notable_campaigns": [
+    "Accellion FTA exploitation (2020-2021) - 100+ organizations",
+    "GoAnywhere MFT exploitation (2023) - 130+ organizations",
+    "MOVEit Transfer exploitation (2023) - 2,500+ organizations affected",
+    "SolarWinds Serv-U exploitation (2021)"
+  ],
+  "detection_signatures": {
+    "yara_hints": [
+      "Clop ransomware encryption patterns",
+      "DEWMODE/LEMURLOOT web shell signatures",
+      "Characteristic ransom note strings"
+    ],
+    "sigma_hints": [
+      "MOVEit CVE-2023-34362 exploitation",
+      "Web shell activity on file transfer servers",
+      "Mass file access from file transfer applications"
+    ]
+  },
+  "ransom_note_indicators": {
+    "extensions": [".clop", ".CIop", ".Cllp"],
+    "note_filenames": ["ClopReadMe.txt", "README_README.txt"],
+    "contact_methods": ["Tor negotiation site", "Email"]
+  },
+  "exploitation_campaigns": {
+    "moveit": {
+      "cve": "CVE-2023-34362",
+      "type": "SQL injection leading to RCE",
+      "victims": "2,500+ organizations",
+      "date": "May-June 2023"
+    },
+    "goanywhere": {
+      "cve": "CVE-2023-0669",
+      "type": "Pre-authentication RCE",
+      "victims": "130+ organizations",
+      "date": "January-February 2023"
+    },
+    "accellion": {
+      "cves": ["CVE-2021-27101", "CVE-2021-27102", "CVE-2021-27103", "CVE-2021-27104"],
+      "type": "Multiple vulnerabilities",
+      "victims": "100+ organizations",
+      "date": "December 2020 - February 2021"
+    }
+  },
+  "operational_notes": {
+    "unique_characteristics": [
+      "Specializes in file transfer application exploitation",
+      "Often skips encryption, focusing on data theft",
+      "Mass exploitation campaigns affecting hundreds simultaneously",
+      "Aggressive public disclosure on leak site",
+      "Maintains victim lists on clearweb mirrors"
+    ],
+    "extortion_only": "Increasingly conducts extortion-only attacks without deploying ransomware, relying solely on data theft for leverage"
+  },
+  "references": [
+    "https://www.cisa.gov/news-events/cybersecurity-advisories/aa23-158a",
+    "https://www.mandiant.com/resources/blog/zero-day-moveit-data-theft",
+    "https://www.microsoft.com/en-us/security/blog/2023/07/06/the-five-day-job-a-blackbyte-ransomware-intrusion-case-study/"
+  ]
+}

@@ -1,0 +1,249 @@
+{
+  "id": "insider-threat",
+  "name": "Insider Threat Attack Pattern",
+  "description": "Attack pattern involving malicious or negligent insiders who abuse their legitimate access to steal data, sabotage systems, or facilitate external attackers. Insiders account for approximately 25% of data breaches.",
+  "threat_types": [
+    "Malicious insider (intentional harm)",
+    "Negligent insider (unintentional harm)",
+    "Compromised insider (credential/account compromise)",
+    "Departing employee (data theft before leaving)"
+  ],
+  "average_cost": "$15.4 million per incident",
+  "phases": [
+    {
+      "phase": 1,
+      "name": "Motivation Development",
+      "duration": "Weeks to months",
+      "indicators": [
+        "Performance issues or disciplinary actions",
+        "Passed over for promotion",
+        "Salary/compensation disputes",
+        "Announced resignation or job searching",
+        "Personal financial problems",
+        "Ideological disagreements"
+      ],
+      "risk_factors": [
+        "Access to sensitive data",
+        "Technical capability",
+        "Disgruntlement",
+        "External pressures (financial, coercion)",
+        "Lack of monitoring"
+      ]
+    },
+    {
+      "phase": 2,
+      "name": "Reconnaissance and Planning",
+      "duration": "Days to weeks",
+      "techniques": [
+        {"id": "T1083", "name": "File and Directory Discovery"},
+        {"id": "T1087.002", "name": "Domain Account Discovery"}
+      ],
+      "activities": [
+        "Identify valuable data/systems",
+        "Test access boundaries",
+        "Research detection capabilities",
+        "Plan exfiltration methods",
+        "Identify accomplices if needed"
+      ],
+      "indicators": [
+        "Unusual access patterns",
+        "Accessing data outside job function",
+        "Researching security controls",
+        "Testing data transfer methods"
+      ]
+    },
+    {
+      "phase": 3,
+      "name": "Privilege Escalation (if needed)",
+      "duration": "Days",
+      "techniques": [
+        {"id": "T1078", "name": "Valid Accounts"},
+        {"id": "T1098", "name": "Account Manipulation"}
+      ],
+      "methods": [
+        "Request unnecessary access",
+        "Abuse admin credentials if available",
+        "Social engineer additional access",
+        "Exploit internal trust relationships"
+      ],
+      "indicators": [
+        "Access requests outside job scope",
+        "Using others' credentials",
+        "Accessing admin systems",
+        "Unusual privilege changes"
+      ]
+    },
+    {
+      "phase": 4,
+      "name": "Data Collection",
+      "duration": "Days to weeks",
+      "techniques": [
+        {"id": "T1005", "name": "Data from Local System"},
+        {"id": "T1213", "name": "Data from Information Repositories"},
+        {"id": "T1114", "name": "Email Collection"}
+      ],
+      "targets": [
+        "Customer databases",
+        "Intellectual property",
+        "Source code",
+        "Financial records",
+        "Employee data",
+        "Strategic plans"
+      ],
+      "collection_methods": [
+        "Bulk downloads",
+        "Database queries",
+        "Screenshot capture",
+        "Print to PDF",
+        "Email forwarding"
+      ],
+      "indicators": [
+        "Large volume data access",
+        "Access outside normal hours",
+        "Bulk downloads",
+        "Accessing sensitive repositories",
+        "Unusual database queries"
+      ]
+    },
+    {
+      "phase": 5,
+      "name": "Data Exfiltration",
+      "duration": "Hours to days",
+      "techniques": [
+        {"id": "T1567.002", "name": "Exfiltration to Cloud Storage"},
+        {"id": "T1052.001", "name": "Exfiltration over USB"},
+        {"id": "T1048.003", "name": "Exfiltration Over Unencrypted Protocol"}
+      ],
+      "methods": {
+        "physical": [
+          "USB drives",
+          "External hard drives",
+          "Printed documents",
+          "Mobile phone photos"
+        ],
+        "digital": [
+          "Personal email",
+          "Cloud storage (Google Drive, Dropbox)",
+          "Encrypted file sharing",
+          "Personal devices on network"
+        ],
+        "covert": [
+          "Steganography",
+          "Encrypted archives",
+          "Data hidden in legitimate transfers"
+        ]
+      },
+      "indicators": [
+        "USB device connections",
+        "Large email attachments",
+        "Cloud storage uploads",
+        "Printing spike",
+        "After-hours data transfers"
+      ]
+    },
+    {
+      "phase": 6,
+      "name": "Covering Tracks (Malicious)",
+      "duration": "Hours",
+      "techniques": [
+        {"id": "T1070", "name": "Indicator Removal"}
+      ],
+      "activities": [
+        "Delete access logs (if possible)",
+        "Remove downloaded files",
+        "Clear browser history",
+        "Delete emails showing intent"
+      ],
+      "indicators": [
+        "Log tampering attempts",
+        "File deletion patterns",
+        "Evidence destruction"
+      ]
+    }
+  ],
+  "behavioral_indicators": {
+    "pre_attack": [
+      "Expressed dissatisfaction",
+      "Job searching during work",
+      "Unusual interest in security controls",
+      "Building relationships with competitors"
+    ],
+    "during_attack": [
+      "Working unusual hours",
+      "Accessing data outside job function",
+      "Large data movements",
+      "Using personal devices",
+      "Circumventing security controls"
+    ],
+    "post_attack": [
+      "Sudden resignation",
+      "Trying to delete evidence",
+      "Unusual financial improvements",
+      "Joining competitor shortly after"
+    ]
+  },
+  "detection_strategies": {
+    "user_behavior_analytics": [
+      "Baseline normal user activity",
+      "Detect anomalous access patterns",
+      "Monitor data volume transfers",
+      "Track access outside job function"
+    ],
+    "data_loss_prevention": [
+      "Monitor sensitive data access",
+      "Block unauthorized transfers",
+      "Alert on bulk downloads",
+      "Control USB usage"
+    ],
+    "access_monitoring": [
+      "Log all data access",
+      "Monitor privileged actions",
+      "Track authentication events",
+      "Review access to sensitive systems"
+    ],
+    "process_controls": [
+      "Exit interview procedures",
+      "Access review before departure",
+      "Separation of duties",
+      "Need-to-know access"
+    ]
+  },
+  "high_risk_periods": [
+    "Resignation announcement to departure",
+    "After negative performance review",
+    "Following disciplinary action",
+    "During organizational change",
+    "Economic downturns"
+  ],
+  "prevention_measures": {
+    "technical": [
+      "Data loss prevention (DLP)",
+      "User behavior analytics (UBA)",
+      "Access controls and least privilege",
+      "USB device restrictions",
+      "Email monitoring"
+    ],
+    "process": [
+      "Background checks",
+      "Exit procedures including access revocation",
+      "Regular access reviews",
+      "Separation of duties",
+      "Monitoring departing employees"
+    ],
+    "cultural": [
+      "Positive work environment",
+      "Clear security policies",
+      "Reporting mechanisms",
+      "Security awareness training"
+    ]
+  },
+  "investigation_priorities": [
+    "Preserve evidence immediately",
+    "Interview HR for context",
+    "Review access logs",
+    "Check for data exfiltration",
+    "Forensic analysis of devices",
+    "Assess scope of compromise",
+    "Legal/compliance notification"
+  ]
+}

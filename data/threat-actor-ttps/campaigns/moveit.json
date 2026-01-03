@@ -1,0 +1,175 @@
+{
+  "id": "moveit-exploitation",
+  "name": "MOVEit Transfer Mass Exploitation Campaign",
+  "threat_actor": "clop",
+  "classification": "mass_exploitation",
+  "timeframe": {
+    "vulnerability_exploitation_start": "2023-05-27",
+    "public_disclosure": "2023-05-31",
+    "patch_released": "2023-05-31",
+    "extortion_start": "2023-06-06",
+    "campaign_duration": "Ongoing data leaks through 2024"
+  },
+  "summary": "Cl0p ransomware group exploited a zero-day SQL injection vulnerability (CVE-2023-34362) in Progress Software's MOVEit Transfer file transfer application. The campaign affected over 2,500 organizations globally, making it one of the largest mass exploitation events in history.",
+  "vulnerability": {
+    "cve": "CVE-2023-34362",
+    "type": "SQL injection leading to remote code execution",
+    "cvss": 9.8,
+    "affected_product": "MOVEit Transfer",
+    "affected_versions": "All versions before patch",
+    "exploitation_method": "Unauthenticated SQL injection through web interface",
+    "additional_cves": ["CVE-2023-35036", "CVE-2023-35708"]
+  },
+  "attack_phases": [
+    {
+      "phase": 1,
+      "name": "Zero-Day Exploitation",
+      "timeframe": "May 27-31, 2023",
+      "techniques": ["T1190", "T1505.003"],
+      "description": "Cl0p exploited CVE-2023-34362 to deploy LEMURLOOT web shell on internet-facing MOVEit Transfer servers. Exploitation was automated and rapid.",
+      "indicators": [
+        "SQL injection in MOVEit Transfer",
+        "Web shell deployment (human2.aspx)",
+        "Unusual file in MOVEit wwwroot"
+      ],
+      "detection_opportunities": [
+        "IIS logs showing suspicious requests",
+        "New ASPX files in MOVEit directories",
+        "SQL errors in application logs"
+      ]
+    },
+    {
+      "phase": 2,
+      "name": "Web Shell Operations",
+      "timeframe": "May 27 - June 2023",
+      "techniques": ["T1505.003", "T1083", "T1005"],
+      "description": "LEMURLOOT web shell used to enumerate files, extract Azure Blob Storage credentials, and download transferred files.",
+      "indicators": [
+        "human2.aspx web shell",
+        "Azure Blob storage credential extraction",
+        "Mass file downloads via web shell"
+      ],
+      "detection_opportunities": [
+        "POST requests to human2.aspx",
+        "Unusual MOVEit database queries",
+        "Large file downloads from MOVEit"
+      ]
+    },
+    {
+      "phase": 3,
+      "name": "Data Exfiltration",
+      "timeframe": "Throughout campaign",
+      "techniques": ["T1005", "T1048.003"],
+      "description": "Attackers exfiltrated files directly from MOVEit servers and connected Azure Blob storage. No lateral movement to internal networks in most cases.",
+      "indicators": [
+        "Large outbound data transfers",
+        "Azure Blob storage access from unusual IPs",
+        "Bulk file access in MOVEit logs"
+      ],
+      "detection_opportunities": [
+        "Egress traffic anomalies",
+        "Azure storage access from unknown IPs",
+        "MOVEit audit log analysis"
+      ]
+    },
+    {
+      "phase": 4,
+      "name": "Extortion Without Encryption",
+      "timeframe": "June 2023 onwards",
+      "techniques": ["T1657"],
+      "description": "Cl0p contacted victims demanding payment to prevent data publication. No ransomware deployed - pure data theft extortion.",
+      "indicators": [
+        "Contact from Cl0p via email",
+        "Organization listed on leak site",
+        "Ransom negotiation requests"
+      ],
+      "detection_opportunities": [
+        "Monitoring of Cl0p leak site",
+        "Dark web monitoring services"
+      ]
+    }
+  ],
+  "iocs": {
+    "web_shells": {
+      "filenames": ["human2.aspx", "human.aspx", "_human2.aspx"],
+      "locations": [
+        "MOVEit\\wwwroot\\",
+        "MOVEitDMZ\\wwwroot\\"
+      ]
+    },
+    "ips_defanged": [
+      "5[.]252[.]23[.]116",
+      "5[.]252[.]25[.]88",
+      "89[.]39[.]104[.]118",
+      "91[.]222[.]174[.]95",
+      "138[.]197[.]152[.]201",
+      "209[.]97[.]137[.]33"
+    ],
+    "user_agents": [
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    ]
+  },
+  "impact": {
+    "organizations_affected": 2500,
+    "individuals_affected": "60+ million",
+    "notable_victims": [
+      "US Department of Energy",
+      "Shell",
+      "British Airways",
+      "BBC",
+      "Boots",
+      "Johns Hopkins University",
+      "Multiple US state governments",
+      "Ernst & Young",
+      "PwC",
+      "Deloitte"
+    ],
+    "sectors_impacted": [
+      "Government",
+      "Healthcare",
+      "Finance",
+      "Education",
+      "Legal",
+      "Technology"
+    ],
+    "estimated_cost": "Tens of billions in aggregate"
+  },
+  "detection_rules": {
+    "sigma_hint": "title: MOVEit CVE-2023-34362 Exploitation\nlogsource: category: webserver\ndetection: selection: cs-uri-query|contains: 'X-siLock-Comment'",
+    "snort_hint": "alert tcp any any -> any 443 (msg:'MOVEit SQLi Attempt'; content:'X-siLock-Comment'; sid:1000002;)",
+    "iis_log_pattern": "Look for requests containing 'X-siLock-Comment' header manipulation"
+  },
+  "remediation": {
+    "immediate": [
+      "Apply MOVEit patches immediately",
+      "Block IOC IP addresses",
+      "Search for LEMURLOOT web shell",
+      "Review MOVEit audit logs",
+      "Check Azure Blob storage access logs"
+    ],
+    "forensic": [
+      "Preserve IIS and MOVEit logs",
+      "Inventory all files that were accessible",
+      "Check for signs of data access/exfiltration",
+      "Review database query logs"
+    ],
+    "long_term": [
+      "Implement network segmentation for file transfer systems",
+      "Enable enhanced logging",
+      "Consider alternative file transfer solutions",
+      "Regular vulnerability scanning"
+    ]
+  },
+  "lessons_learned": [
+    "Zero-day vulnerabilities in file transfer apps are high-value targets",
+    "Data theft extortion doesn't require ransomware deployment",
+    "Mass exploitation can occur within days of vulnerability discovery",
+    "Supply chain risk extends to service providers using vulnerable software",
+    "File transfer applications often contain highly sensitive data"
+  ],
+  "references": [
+    "https://www.cisa.gov/news-events/cybersecurity-advisories/aa23-158a",
+    "https://www.mandiant.com/resources/blog/zero-day-moveit-data-theft",
+    "https://community.progress.com/s/article/MOVEit-Transfer-Critical-Vulnerability-31May2023"
+  ]
+}

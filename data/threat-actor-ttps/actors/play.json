@@ -1,0 +1,234 @@
+{
+  "id": "play",
+  "name": "Play",
+  "aliases": ["PlayCrypt", "Balloonfly"],
+  "country": "Unknown",
+  "attributed_to": "Closed ransomware group (not RaaS), possibly Eastern European",
+  "motivation": "financial",
+  "active_since": "2022-06",
+  "sophistication": "advanced",
+  "description": "Play ransomware emerged in June 2022 and operates as a closed group rather than ransomware-as-a-service. Known for exploiting FortiOS and Microsoft Exchange vulnerabilities for initial access. Has targeted critical infrastructure including telecommunications and government. Estimated to have impacted 300+ organizations globally.",
+  "ttps": [
+    {
+      "technique_id": "T1190",
+      "technique_name": "Exploit Public-Facing Application",
+      "tactic": "Initial Access",
+      "procedure": "Exploits FortiOS (CVE-2018-13379, CVE-2020-12812), Microsoft Exchange (ProxyNotShell), and Citrix vulnerabilities",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1133",
+      "technique_name": "External Remote Services",
+      "tactic": "Initial Access",
+      "procedure": "Abuses exposed RDP services and valid VPN accounts",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1078",
+      "technique_name": "Valid Accounts",
+      "tactic": "Initial Access",
+      "procedure": "Uses compromised domain and local accounts",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1059.001",
+      "technique_name": "PowerShell",
+      "tactic": "Execution",
+      "procedure": "Uses PowerShell scripts for reconnaissance and tool deployment",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1059.003",
+      "technique_name": "Windows Command Shell",
+      "tactic": "Execution",
+      "procedure": "Uses batch files for automated deployment",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1053.005",
+      "technique_name": "Scheduled Task",
+      "tactic": "Persistence",
+      "procedure": "Creates scheduled tasks for persistence",
+      "confidence": 0.85
+    },
+    {
+      "technique_id": "T1136.002",
+      "technique_name": "Domain Account",
+      "tactic": "Persistence",
+      "procedure": "Creates domain accounts for persistent access",
+      "confidence": 0.85
+    },
+    {
+      "technique_id": "T1562.001",
+      "technique_name": "Disable or Modify Tools",
+      "tactic": "Defense Evasion",
+      "procedure": "Disables antivirus and EDR using GMER, Process Hacker, IOBit",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1070.001",
+      "technique_name": "Clear Windows Event Logs",
+      "tactic": "Defense Evasion",
+      "procedure": "Clears Windows event logs",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1003.001",
+      "technique_name": "LSASS Memory",
+      "tactic": "Credential Access",
+      "procedure": "Dumps LSASS using Mimikatz or built-in tools",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1003.003",
+      "technique_name": "NTDS",
+      "tactic": "Credential Access",
+      "procedure": "Extracts Active Directory database",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1087.002",
+      "technique_name": "Domain Account",
+      "tactic": "Discovery",
+      "procedure": "Uses ADFind and Bloodhound for domain enumeration",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1046",
+      "technique_name": "Network Service Discovery",
+      "tactic": "Discovery",
+      "procedure": "Uses Netscan for network discovery",
+      "confidence": 0.85
+    },
+    {
+      "technique_id": "T1021.002",
+      "technique_name": "SMB/Windows Admin Shares",
+      "tactic": "Lateral Movement",
+      "procedure": "Uses PsExec and SMB for lateral movement",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1021.001",
+      "technique_name": "Remote Desktop Protocol",
+      "tactic": "Lateral Movement",
+      "procedure": "Uses RDP with compromised credentials",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1570",
+      "technique_name": "Lateral Tool Transfer",
+      "tactic": "Lateral Movement",
+      "procedure": "Distributes ransomware via Group Policy Objects",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1071.001",
+      "technique_name": "Web Protocols",
+      "tactic": "Command and Control",
+      "procedure": "Uses Cobalt Strike and SystemBC for C2",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1567.002",
+      "technique_name": "Exfiltration to Cloud Storage",
+      "tactic": "Exfiltration",
+      "procedure": "Uses WinSCP and WinRAR for data exfiltration",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1486",
+      "technique_name": "Data Encrypted for Impact",
+      "tactic": "Impact",
+      "procedure": "Encrypts files using AES-RSA hybrid encryption, adds .play extension",
+      "confidence": 0.98
+    },
+    {
+      "technique_id": "T1490",
+      "technique_name": "Inhibit System Recovery",
+      "tactic": "Impact",
+      "procedure": "Deletes shadow copies and system state backups",
+      "confidence": 0.95
+    }
+  ],
+  "malware_families": [
+    "Play ransomware",
+    "Cobalt Strike",
+    "SystemBC",
+    "Prill (custom tool)",
+    "Grixba (infostealer)"
+  ],
+  "tools": [
+    "Cobalt Strike",
+    "SystemBC",
+    "Mimikatz",
+    "PsExec",
+    "ADFind",
+    "BloodHound",
+    "GMER",
+    "Process Hacker",
+    "IOBit",
+    "Netscan",
+    "WinSCP",
+    "WinRAR"
+  ],
+  "target_sectors": [
+    "government",
+    "telecommunications",
+    "healthcare",
+    "manufacturing",
+    "transportation",
+    "legal"
+  ],
+  "target_regions": [
+    "North America",
+    "Latin America",
+    "Europe",
+    "Australia"
+  ],
+  "infrastructure": {
+    "c2_patterns": [
+      "Cobalt Strike",
+      "SystemBC proxy",
+      "Tor hidden services"
+    ],
+    "hosting_preferences": [
+      "Tor network",
+      "Compromised infrastructure"
+    ]
+  },
+  "notable_campaigns": [
+    "City of Oakland (2023)",
+    "Rackspace (2022)",
+    "Arnold Clark (2022)",
+    "Judiciary of Córdoba, Argentina (2022)",
+    "300+ global organizations impacted"
+  ],
+  "detection_signatures": {
+    "yara_hints": [
+      "Play ransomware encryption",
+      "AES-RSA hybrid pattern",
+      "Ransom note template"
+    ],
+    "sigma_hints": [
+      "FortiOS exploitation",
+      "ProxyNotShell exploitation",
+      "GPO-based ransomware deployment"
+    ]
+  },
+  "ransom_note_indicators": {
+    "extensions": [".play"],
+    "note_filenames": ["ReadMe.txt"],
+    "contact_methods": ["Email addresses in ransom note"]
+  },
+  "cves_exploited": [
+    "CVE-2018-13379 (FortiOS)",
+    "CVE-2020-12812 (FortiOS)",
+    "CVE-2022-41040 (ProxyNotShell)",
+    "CVE-2022-41082 (ProxyNotShell)"
+  ],
+  "references": [
+    "https://www.cisa.gov/news-events/cybersecurity-advisories/aa23-352a",
+    "https://www.ic3.gov/Media/News/2023/231218.pdf",
+    "https://attack.mitre.org/software/S1068/"
+  ]
+}

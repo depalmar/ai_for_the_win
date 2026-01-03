@@ -19,7 +19,7 @@ from datetime import datetime
 
 class AttackPhase(Enum):
     """Kill chain phases."""
-    
+
     INITIAL_ACCESS = "initial_access"
     EXECUTION = "execution"
     PERSISTENCE = "persistence"
@@ -36,7 +36,7 @@ class AttackPhase(Enum):
 
 class CoverageLevel(Enum):
     """Detection coverage levels."""
-    
+
     NONE = "none"
     PARTIAL = "partial"
     GOOD = "good"
@@ -45,7 +45,7 @@ class CoverageLevel(Enum):
 
 class FindingSeverity(Enum):
     """Severity levels for findings."""
-    
+
     CRITICAL = "critical"
     HIGH = "high"
     MEDIUM = "medium"
@@ -56,7 +56,7 @@ class FindingSeverity(Enum):
 @dataclass
 class AttackTechnique:
     """A single ATT&CK technique for simulation."""
-    
+
     technique_id: str
     name: str
     phase: AttackPhase
@@ -70,7 +70,7 @@ class AttackTechnique:
 @dataclass
 class AttackScenario:
     """A complete attack scenario for purple team exercise."""
-    
+
     name: str
     description: str
     threat_actor: str
@@ -83,7 +83,7 @@ class AttackScenario:
 @dataclass
 class DetectionRule:
     """A detection rule with ATT&CK mapping."""
-    
+
     rule_id: str
     name: str
     description: str
@@ -96,7 +96,7 @@ class DetectionRule:
 @dataclass
 class GapAnalysis:
     """Results of detection gap analysis."""
-    
+
     total_techniques: int
     covered_techniques: int
     coverage_percentage: float
@@ -108,7 +108,7 @@ class GapAnalysis:
 @dataclass
 class PurpleTeamFinding:
     """A finding from a purple team exercise."""
-    
+
     id: str
     title: str
     severity: FindingSeverity
@@ -129,19 +129,19 @@ class PurpleTeamFinding:
 class AttackSimulator:
     """
     Generate and execute attack simulations for purple team exercises.
-    
+
     TODO: Implement the simulation methods.
     """
-    
+
     def __init__(self, llm=None):
         self.llm = llm
         self.technique_library = self._load_technique_library()
-    
+
     def _load_technique_library(self) -> Dict[str, AttackTechnique]:
         """Load library of safe attack simulations."""
         # TODO: Load technique library from data file or define inline
         return {}
-    
+
     def generate_scenario(
         self,
         threat_actor: str,
@@ -150,14 +150,14 @@ class AttackSimulator:
     ) -> AttackScenario:
         """
         Generate a complete attack scenario.
-        
+
         TODO: Implement scenario generation
-        
+
         Args:
             threat_actor: Name/type of threat actor to simulate
             objective: What the attacker is trying to achieve
             techniques: List of ATT&CK technique IDs to include
-            
+
         Returns:
             AttackScenario ready for execution
         """
@@ -165,11 +165,11 @@ class AttackSimulator:
         # TODO: Calculate expected detections
         # TODO: Identify potential gaps
         pass
-    
+
     def get_atomic_tests(self, technique_id: str) -> List[Dict]:
         """
         Get Atomic Red Team tests for a technique.
-        
+
         TODO: Return relevant Atomic Red Team test information
         """
         pass
@@ -183,31 +183,31 @@ class AttackSimulator:
 class DetectionGapAnalyzer:
     """
     Analyze detection coverage against MITRE ATT&CK.
-    
+
     TODO: Implement gap analysis methods.
     """
-    
+
     def __init__(self, llm=None):
         self.llm = llm
         self.attack_matrix = self._load_attack_matrix()
-    
+
     def _load_attack_matrix(self) -> Dict[str, Dict]:
         """Load ATT&CK matrix."""
         # TODO: Load from data file or define inline
         return {}
-    
+
     def analyze_coverage(
         self,
         detection_rules: List[DetectionRule],
     ) -> GapAnalysis:
         """
         Analyze detection coverage against ATT&CK matrix.
-        
+
         TODO: Implement coverage analysis
-        
+
         Args:
             detection_rules: List of existing detection rules
-            
+
         Returns:
             GapAnalysis with coverage metrics and recommendations
         """
@@ -216,11 +216,11 @@ class DetectionGapAnalyzer:
         # TODO: Identify critical gaps
         # TODO: Generate recommendations
         pass
-    
+
     def suggest_detection_rule(self, technique_id: str) -> Dict:
         """
         Use AI to suggest a detection rule for a technique.
-        
+
         TODO: Return Sigma rule template for the technique
         """
         pass
@@ -234,13 +234,13 @@ class DetectionGapAnalyzer:
 class PurpleTeamReporter:
     """
     Generate comprehensive purple team reports.
-    
+
     TODO: Implement report generation methods.
     """
-    
+
     def __init__(self, llm=None):
         self.llm = llm
-    
+
     def generate_report(
         self,
         exercise_name: str,
@@ -250,9 +250,9 @@ class PurpleTeamReporter:
     ) -> Dict:
         """
         Generate a complete purple team report.
-        
+
         TODO: Implement report generation
-        
+
         Should include:
         - Executive summary
         - Detection rate metrics
@@ -264,11 +264,11 @@ class PurpleTeamReporter:
         # TODO: Prioritize findings
         # TODO: Create recommendations
         pass
-    
+
     def calculate_score(self, findings: List[PurpleTeamFinding]) -> float:
         """
         Calculate overall security score.
-        
+
         TODO: Implement weighted scoring based on severity
         """
         pass
@@ -281,14 +281,14 @@ class PurpleTeamReporter:
 
 def main():
     """Demonstrate purple team AI capabilities."""
-    
+
     print("=" * 70)
     print("Lab 20b: AI-Assisted Purple Team Exercises")
     print("=" * 70)
-    
+
     # Load sample data
     data_path = Path(__file__).parent.parent / "data" / "purple_team_data.json"
-    
+
     if data_path.exists():
         with open(data_path) as f:
             data = json.load(f)
@@ -321,36 +321,36 @@ def main():
                 },
             ],
         }
-    
+
     # Demo: Attack Simulation
     print("\n[1] Attack Scenario Generation")
     print("-" * 40)
-    
+
     simulator = AttackSimulator()
     print("TODO: Generate attack scenario for APT29")
     print("  - Techniques: T1059.001, T1003.001, T1567.002")
     print("  - Objective: Data exfiltration")
-    
+
     # Demo: Gap Analysis
     print("\n[2] Detection Gap Analysis")
     print("-" * 40)
-    
+
     analyzer = DetectionGapAnalyzer()
     print("TODO: Analyze coverage against ATT&CK matrix")
     print("  - Map existing rules to techniques")
     print("  - Identify critical gaps")
     print("  - Generate recommendations")
-    
+
     # Demo: Report Generation
     print("\n[3] Purple Team Report Generation")
     print("-" * 40)
-    
+
     reporter = PurpleTeamReporter()
     print("TODO: Generate comprehensive exercise report")
     print("  - Calculate detection rate")
     print("  - Generate executive summary")
     print("  - Prioritize findings")
-    
+
     print("\n" + "=" * 70)
     print("TODO: Implement the classes above!")
     print("=" * 70)

@@ -1,0 +1,220 @@
+{
+  "id": "supply-chain",
+  "name": "Supply Chain Attack Pattern",
+  "description": "Attack pattern where adversaries compromise software vendors, MSPs, or trusted third parties to gain access to multiple downstream targets through trusted channels.",
+  "typical_actors": ["APT29", "APT41", "Cl0p", "REvil"],
+  "notable_examples": ["SolarWinds", "Kaseya", "MOVEit", "3CX", "CCleaner"],
+  "average_impact": "Hundreds to thousands of organizations",
+  "phases": [
+    {
+      "phase": 1,
+      "name": "Vendor/Supplier Targeting",
+      "duration": "Weeks to months",
+      "techniques": [
+        {"id": "T1591", "name": "Gather Victim Org Information"},
+        {"id": "T1590", "name": "Gather Victim Network Information"},
+        {"id": "T1598", "name": "Phishing for Information"}
+      ],
+      "activities": [
+        "Identify software vendors with wide distribution",
+        "Research build/deployment infrastructure",
+        "Identify employees with privileged access",
+        "Map software update mechanisms"
+      ],
+      "target_selection_criteria": [
+        "Wide customer base",
+        "Trusted software distribution",
+        "Complex supply chain",
+        "Insufficient security controls"
+      ]
+    },
+    {
+      "phase": 2,
+      "name": "Initial Vendor Compromise",
+      "duration": "Days to weeks",
+      "techniques": [
+        {"id": "T1566.001", "name": "Spearphishing Attachment"},
+        {"id": "T1190", "name": "Exploit Public-Facing Application"},
+        {"id": "T1078", "name": "Valid Accounts"}
+      ],
+      "common_methods": [
+        "Spearphishing vendor employees",
+        "Exploiting internet-facing applications",
+        "Credential theft/compromise",
+        "Watering hole attacks on developer sites"
+      ],
+      "indicators": [
+        "Unusual access to development systems",
+        "Suspicious code repository access",
+        "New/unusual admin accounts"
+      ]
+    },
+    {
+      "phase": 3,
+      "name": "Build System/Pipeline Access",
+      "duration": "Days to weeks",
+      "techniques": [
+        {"id": "T1199", "name": "Trusted Relationship"},
+        {"id": "T1078.004", "name": "Cloud Accounts"},
+        {"id": "T1021", "name": "Remote Services"}
+      ],
+      "targets": [
+        "CI/CD pipelines",
+        "Build servers",
+        "Code signing infrastructure",
+        "Software repositories",
+        "Update servers"
+      ],
+      "indicators": [
+        "Unusual build system access",
+        "Code signing key usage anomalies",
+        "Repository access from unusual locations"
+      ]
+    },
+    {
+      "phase": 4,
+      "name": "Malicious Code Injection",
+      "duration": "Single event to ongoing",
+      "techniques": [
+        {"id": "T1195.002", "name": "Compromise Software Supply Chain"},
+        {"id": "T1554", "name": "Compromise Client Software Binary"}
+      ],
+      "methods": [
+        "Insert backdoor into source code",
+        "Modify build process to inject malware",
+        "Replace legitimate binaries",
+        "Poison dependencies"
+      ],
+      "stealth_techniques": [
+        "Code appears legitimate",
+        "Uses existing signing certificates",
+        "Minimal footprint in codebase",
+        "Dormant until activated"
+      ],
+      "indicators": [
+        "Unexpected code changes",
+        "Build artifact hash mismatches",
+        "Unsigned or re-signed binaries"
+      ]
+    },
+    {
+      "phase": 5,
+      "name": "Distribution Through Trusted Channel",
+      "duration": "Days to months",
+      "techniques": [
+        {"id": "T1195.002", "name": "Compromise Software Supply Chain"},
+        {"id": "T1072", "name": "Software Deployment Tools"}
+      ],
+      "distribution_methods": [
+        "Automatic software updates",
+        "Manual software downloads",
+        "MSP deployment to clients",
+        "Package manager distribution"
+      ],
+      "advantages_for_attacker": [
+        "Bypasses network perimeter",
+        "Trusted by security tools",
+        "Wide distribution automatically",
+        "Difficult to detect"
+      ]
+    },
+    {
+      "phase": 6,
+      "name": "Downstream Victim Selection",
+      "duration": "Days to weeks",
+      "techniques": [
+        {"id": "T1082", "name": "System Information Discovery"},
+        {"id": "T1016", "name": "System Network Configuration Discovery"}
+      ],
+      "selection_methods": [
+        "Beacon to C2 from all victims",
+        "Collect system/network information",
+        "Identify high-value targets",
+        "Selective activation of payloads"
+      ],
+      "high_value_criteria": [
+        "Government organizations",
+        "Critical infrastructure",
+        "Large enterprises",
+        "Organizations with valuable data"
+      ]
+    },
+    {
+      "phase": 7,
+      "name": "Secondary Payload Deployment",
+      "duration": "Varies",
+      "techniques": [
+        {"id": "T1105", "name": "Ingress Tool Transfer"},
+        {"id": "T1055", "name": "Process Injection"}
+      ],
+      "payloads": {
+        "espionage": ["Cobalt Strike", "Custom backdoors", "RATs"],
+        "ransomware": ["Ransomware deployment to all victims"],
+        "data_theft": ["Exfiltration tools", "Credential stealers"]
+      }
+    },
+    {
+      "phase": 8,
+      "name": "Objective Execution",
+      "duration": "Days to months",
+      "techniques": [
+        {"id": "T1041", "name": "Exfiltration Over C2 Channel"},
+        {"id": "T1486", "name": "Data Encrypted for Impact"},
+        {"id": "T1485", "name": "Data Destruction"}
+      ],
+      "objectives_by_actor_type": {
+        "nation_state": [
+          "Long-term persistent access",
+          "Data exfiltration",
+          "Intelligence collection"
+        ],
+        "ransomware": [
+          "Mass encryption",
+          "Data theft for extortion",
+          "Ransom demands"
+        ],
+        "criminal": [
+          "Financial theft",
+          "Credential harvesting",
+          "Cryptomining"
+        ]
+      }
+    }
+  ],
+  "detection_challenges": [
+    "Malware delivered through trusted channels",
+    "Signed with legitimate certificates",
+    "Blends with normal software activity",
+    "May remain dormant for extended periods",
+    "Traditional perimeter defenses ineffective"
+  ],
+  "detection_opportunities": {
+    "at_vendor": [
+      "Code review and integrity monitoring",
+      "Build system security monitoring",
+      "Code signing audit trails"
+    ],
+    "at_customer": [
+      "Behavioral analysis of trusted software",
+      "Network traffic anomalies from trusted apps",
+      "Process lineage monitoring",
+      "Software hash verification"
+    ]
+  },
+  "prevention_measures": {
+    "for_vendors": [
+      "Secure development lifecycle (SDL)",
+      "Build system isolation and monitoring",
+      "Code signing key protection",
+      "Dependency verification",
+      "Reproducible builds"
+    ],
+    "for_customers": [
+      "Software bill of materials (SBOM)",
+      "Vendor security assessments",
+      "Network segmentation",
+      "Behavioral monitoring of trusted software",
+      "Delayed update deployment for testing"
+    ]
+  }
+}

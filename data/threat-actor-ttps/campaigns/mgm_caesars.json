@@ -1,0 +1,134 @@
+{
+  "id": "mgm-caesars-2023",
+  "name": "MGM Resorts and Caesars Entertainment Attacks",
+  "threat_actors": ["scattered_spider", "alphv"],
+  "classification": "ransomware_social_engineering",
+  "timeframe": {
+    "caesars_attack": "2023-08-27",
+    "mgm_attack": "2023-09-10",
+    "mgm_discovery": "2023-09-10",
+    "mgm_restoration": "2023-09-20"
+  },
+  "summary": "Scattered Spider (UNC3944) conducted highly sophisticated social engineering attacks against MGM Resorts and Caesars Entertainment, partnering with ALPHV/BlackCat for ransomware deployment. The attacks demonstrated the effectiveness of phone-based social engineering (vishing) against enterprise IT help desks.",
+  "attack_phases": [
+    {
+      "phase": 1,
+      "name": "Social Engineering Reconnaissance",
+      "techniques": ["T1591.004", "T1593.001"],
+      "description": "Attackers researched employees via LinkedIn and social media to gather personal information for impersonation.",
+      "indicators": [
+        "Employee profiling on LinkedIn",
+        "Personal information gathering",
+        "Target identification"
+      ]
+    },
+    {
+      "phase": 2,
+      "name": "Vishing Attack on Help Desk",
+      "techniques": ["T1566.004", "T1078"],
+      "description": "Attackers called IT help desk impersonating employees, using personal details to bypass verification. Convinced help desk to reset MFA and provide access.",
+      "indicators": ["Password reset requests", "MFA device changes", "Help desk call patterns"],
+      "social_engineering_details": {
+        "method": "Phone call to IT help desk",
+        "pretext": "Employee locked out, needs password/MFA reset",
+        "success_factor": "Native English speakers with employee knowledge"
+      }
+    },
+    {
+      "phase": 3,
+      "name": "Initial Access and Persistence",
+      "techniques": ["T1078", "T1098", "T1136.002"],
+      "description": "Using reset credentials, attackers accessed Okta admin portal and created additional accounts for persistence.",
+      "indicators": ["New admin account creation", "Okta configuration changes", "MFA bypass"]
+    },
+    {
+      "phase": 4,
+      "name": "Identity Provider Compromise",
+      "techniques": ["T1556.006", "T1550.001"],
+      "description": "Attackers compromised identity infrastructure, gaining access to federated applications and cloud resources.",
+      "indicators": ["Okta admin activity", "Azure AD changes", "Application consent grants"]
+    },
+    {
+      "phase": 5,
+      "name": "Lateral Movement and Data Collection",
+      "techniques": ["T1021.007", "T1213", "T1114.002"],
+      "description": "Moved through cloud and on-premises infrastructure, accessing email, documents, and sensitive systems.",
+      "indicators": ["Cross-environment movement", "Mass data access", "Email collection"]
+    },
+    {
+      "phase": 6,
+      "name": "Ransomware Deployment (MGM)",
+      "techniques": ["T1486", "T1490"],
+      "description": "ALPHV/BlackCat ransomware deployed across MGM infrastructure, encrypting over 100 ESXi hypervisors.",
+      "indicators": ["ESXi encryption", "VM destruction", "Ransomware deployment"]
+    }
+  ],
+  "mgm_impact": {
+    "operational_disruption": {
+      "duration_days": 10,
+      "systems_affected": [
+        "Slot machines",
+        "Hotel room keys",
+        "Reservation systems",
+        "Website and mobile app",
+        "Digital payment systems"
+      ],
+      "properties_affected": "All MGM properties (Bellagio, MGM Grand, Mandalay Bay, etc.)"
+    },
+    "financial_impact": {
+      "estimated_cost": "$100+ million",
+      "ransom_paid": false
+    }
+  },
+  "caesars_impact": {
+    "ransom_demanded": 30000000,
+    "ransom_paid": 15000000,
+    "data_stolen": "Driver's license and SSN for loyalty program members",
+    "public_disclosure": "SEC 8-K filing"
+  },
+  "scattered_spider_tactics": {
+    "unique_characteristics": [
+      "Native English speakers",
+      "Young attackers (teenagers to early 20s)",
+      "Expert social engineers",
+      "Use legitimate remote access tools",
+      "Active on Telegram/Discord"
+    ],
+    "social_engineering_methods": [
+      "IT help desk impersonation",
+      "MFA fatigue attacks",
+      "SMS phishing",
+      "SIM swapping background"
+    ]
+  },
+  "detection_opportunities": {
+    "help_desk": [
+      "Multiple password reset requests",
+      "MFA device changes for privileged accounts",
+      "Out-of-band verification failures"
+    ],
+    "identity": [
+      "New admin account creation",
+      "Unusual Okta/Azure AD activity",
+      "MFA registration from new devices"
+    ],
+    "infrastructure": [
+      "RMM tool deployment",
+      "Cloud resource enumeration",
+      "ESXi administrative access"
+    ]
+  },
+  "lessons_learned": [
+    "Help desk procedures must include strong verification",
+    "MFA alone is insufficient against social engineering",
+    "Identity provider security is critical",
+    "Out-of-band verification for sensitive operations",
+    "Young attackers can be highly sophisticated",
+    "Casino/hospitality sector is high-value target"
+  ],
+  "references": [
+    "https://www.cisa.gov/news-events/cybersecurity-advisories/aa23-320a",
+    "https://www.sec.gov/ix?doc=/Archives/edgar/data/858339/000119312523236093/d557978d8k.htm",
+    "https://cloud.google.com/blog/topics/threat-intelligence/unc3944-targets-saas-applications"
+  ]
+}

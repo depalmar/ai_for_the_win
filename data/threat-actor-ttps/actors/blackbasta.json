@@ -1,0 +1,247 @@
+{
+  "id": "blackbasta",
+  "name": "Black Basta",
+  "aliases": ["Dahlia Spider", "Storm-0506", "UNC4393"],
+  "country": "Russia",
+  "attributed_to": "Russian-speaking RaaS operation, believed to include former Conti members",
+  "motivation": "financial",
+  "active_since": "2022-04",
+  "sophistication": "advanced",
+  "description": "Black Basta emerged in April 2022 following Conti's dissolution and rapidly became one of the most prolific ransomware operations. Known for sophisticated initial access via Qakbot (until its takedown), SystemBC, and partnerships with initial access brokers. Targets critical infrastructure and has caused significant damage to healthcare sector.",
+  "ttps": [
+    {
+      "technique_id": "T1190",
+      "technique_name": "Exploit Public-Facing Application",
+      "tactic": "Initial Access",
+      "procedure": "Exploits ConnectWise ScreenConnect (CVE-2024-1709), Citrix Bleed (CVE-2023-4966), and other vulnerabilities",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1566.001",
+      "technique_name": "Spearphishing Attachment",
+      "tactic": "Initial Access",
+      "procedure": "Phishing emails delivering Qakbot, DarkGate, or Pikabot loaders",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1566.004",
+      "technique_name": "Spearphishing Voice",
+      "tactic": "Initial Access",
+      "procedure": "Uses vishing (voice phishing) campaigns impersonating IT support to gain access",
+      "confidence": 0.85
+    },
+    {
+      "technique_id": "T1059.001",
+      "technique_name": "PowerShell",
+      "tactic": "Execution",
+      "procedure": "Uses PowerShell for reconnaissance, tool deployment, and defense evasion",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1059.003",
+      "technique_name": "Windows Command Shell",
+      "tactic": "Execution",
+      "procedure": "Executes batch scripts for service manipulation and ransomware deployment",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1053.005",
+      "technique_name": "Scheduled Task",
+      "tactic": "Persistence",
+      "procedure": "Creates scheduled tasks for persistence and lateral tool execution",
+      "confidence": 0.85
+    },
+    {
+      "technique_id": "T1543.003",
+      "technique_name": "Windows Service",
+      "tactic": "Persistence",
+      "procedure": "Installs malware as Windows services",
+      "confidence": 0.80
+    },
+    {
+      "technique_id": "T1562.001",
+      "technique_name": "Disable or Modify Tools",
+      "tactic": "Defense Evasion",
+      "procedure": "Disables Windows Defender, EDR tools using multiple techniques including BYOVD",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1562.009",
+      "technique_name": "Safe Mode Boot",
+      "tactic": "Defense Evasion",
+      "procedure": "Reboots systems in Safe Mode to disable security tools before encryption",
+      "confidence": 0.85
+    },
+    {
+      "technique_id": "T1070.001",
+      "technique_name": "Clear Windows Event Logs",
+      "tactic": "Defense Evasion",
+      "procedure": "Clears event logs to hinder forensic investigation",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1003.001",
+      "technique_name": "LSASS Memory",
+      "tactic": "Credential Access",
+      "procedure": "Dumps credentials using Mimikatz or custom tools",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1003.003",
+      "technique_name": "NTDS",
+      "tactic": "Credential Access",
+      "procedure": "Extracts NTDS.dit for offline credential extraction",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1087.002",
+      "technique_name": "Domain Account",
+      "tactic": "Discovery",
+      "procedure": "Uses ADFind, BloodHound, and net commands for domain enumeration",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1018",
+      "technique_name": "Remote System Discovery",
+      "tactic": "Discovery",
+      "procedure": "Scans for systems using SoftPerfect Network Scanner and built-in tools",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1021.002",
+      "technique_name": "SMB/Windows Admin Shares",
+      "tactic": "Lateral Movement",
+      "procedure": "Uses SMB and admin shares for lateral movement with PsExec and Impacket",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1021.001",
+      "technique_name": "Remote Desktop Protocol",
+      "tactic": "Lateral Movement",
+      "procedure": "Uses RDP with compromised credentials for lateral movement",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1219",
+      "technique_name": "Remote Access Software",
+      "tactic": "Command and Control",
+      "procedure": "Deploys legitimate RMM tools (AnyDesk, Splashtop, ConnectWise) for persistent access",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1567.002",
+      "technique_name": "Exfiltration to Cloud Storage",
+      "tactic": "Exfiltration",
+      "procedure": "Exfiltrates data using Rclone to cloud storage before encryption",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1486",
+      "technique_name": "Data Encrypted for Impact",
+      "tactic": "Impact",
+      "procedure": "Encrypts files using ChaCha20 algorithm with RSA-4096 key protection",
+      "confidence": 0.98
+    },
+    {
+      "technique_id": "T1490",
+      "technique_name": "Inhibit System Recovery",
+      "tactic": "Impact",
+      "procedure": "Deletes shadow copies using vssadmin and WMIC",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1489",
+      "technique_name": "Service Stop",
+      "tactic": "Impact",
+      "procedure": "Stops database, backup, and security services before encryption",
+      "confidence": 0.95
+    }
+  ],
+  "malware_families": [
+    "Black Basta ransomware",
+    "Qakbot (pre-takedown)",
+    "DarkGate",
+    "Pikabot",
+    "SystemBC",
+    "Cobalt Strike",
+    "Brute Ratel C4"
+  ],
+  "tools": [
+    "Cobalt Strike",
+    "Brute Ratel C4",
+    "Mimikatz",
+    "PsExec",
+    "ADFind",
+    "BloodHound",
+    "Rclone",
+    "AnyDesk",
+    "Splashtop",
+    "SoftPerfect Network Scanner",
+    "Impacket"
+  ],
+  "target_sectors": [
+    "healthcare",
+    "manufacturing",
+    "technology",
+    "construction",
+    "finance",
+    "legal",
+    "government"
+  ],
+  "target_regions": [
+    "North America",
+    "Europe",
+    "Australia",
+    "Global"
+  ],
+  "infrastructure": {
+    "c2_patterns": [
+      "Cobalt Strike Malleable C2",
+      "Brute Ratel C4",
+      "Legitimate RMM tools",
+      "Tor hidden services for data leak"
+    ],
+    "hosting_preferences": [
+      "Bulletproof hosting",
+      "Tor network",
+      "Cloud services"
+    ]
+  },
+  "notable_campaigns": [
+    "Ascension Health attack (May 2024) - major healthcare disruption",
+    "ABB attack (May 2023)",
+    "Yellow Pages Canada (2023)",
+    "Capita breach (2023)",
+    "Over 500 victims since emergence"
+  ],
+  "detection_signatures": {
+    "yara_hints": [
+      "Black Basta ChaCha20 encryption",
+      "Characteristic ransom note patterns",
+      "Safe Mode boot modifications"
+    ],
+    "sigma_hints": [
+      "bcdedit Safe Mode configuration",
+      "VSS shadow copy deletion",
+      "RMM tool deployment",
+      "Qakbot/DarkGate loader activity"
+    ]
+  },
+  "ransom_note_indicators": {
+    "extensions": [".basta"],
+    "note_filenames": ["readme.txt"],
+    "wallpaper_change": true,
+    "contact_methods": ["Tor chat portal with unique victim ID"]
+  },
+  "cves_exploited": [
+    "CVE-2024-1709 (ConnectWise ScreenConnect)",
+    "CVE-2023-4966 (Citrix Bleed)",
+    "CVE-2024-1708 (ConnectWise ScreenConnect)",
+    "CVE-2023-27350 (PaperCut)"
+  ],
+  "references": [
+    "https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-131a",
+    "https://attack.mitre.org/software/S1070/",
+    "https://www.hhs.gov/sites/default/files/black-basta-analyst-note.pdf"
+  ]
+}

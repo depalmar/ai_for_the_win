@@ -1,0 +1,267 @@
+{
+  "id": "alphv",
+  "name": "ALPHV",
+  "aliases": ["BlackCat", "Noberus", "ALPHV BlackCat"],
+  "country": "Russia",
+  "attributed_to": "Russian-speaking ransomware-as-a-service operation, believed to include former DarkSide/BlackMatter members",
+  "motivation": "financial",
+  "active_since": "2021",
+  "sophistication": "advanced",
+  "description": "ALPHV/BlackCat is a sophisticated ransomware-as-a-service operation notable for being written in Rust programming language. Known for triple extortion tactics, searchable data leak site, and API for checking leaked data. Responsible for MGM Resorts attack in 2023.",
+  "ttps": [
+    {
+      "technique_id": "T1190",
+      "technique_name": "Exploit Public-Facing Application",
+      "tactic": "Initial Access",
+      "procedure": "Exploits vulnerabilities in public-facing applications and VPN appliances",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1133",
+      "technique_name": "External Remote Services",
+      "tactic": "Initial Access",
+      "procedure": "Uses compromised RDP and VPN credentials from initial access brokers",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1078",
+      "technique_name": "Valid Accounts",
+      "tactic": "Initial Access",
+      "procedure": "Uses stolen credentials for initial access",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1059.001",
+      "technique_name": "PowerShell",
+      "tactic": "Execution",
+      "procedure": "Uses PowerShell for reconnaissance and tool deployment",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1059.003",
+      "technique_name": "Windows Command Shell",
+      "tactic": "Execution",
+      "procedure": "Uses cmd.exe for batch operations and service manipulation",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1053.005",
+      "technique_name": "Scheduled Task",
+      "tactic": "Persistence",
+      "procedure": "Creates scheduled tasks for persistence",
+      "confidence": 0.85
+    },
+    {
+      "technique_id": "T1547.001",
+      "technique_name": "Registry Run Keys",
+      "tactic": "Persistence",
+      "procedure": "Adds entries to registry Run keys",
+      "confidence": 0.80
+    },
+    {
+      "technique_id": "T1562.001",
+      "technique_name": "Disable or Modify Tools",
+      "tactic": "Defense Evasion",
+      "procedure": "Disables EDR, antivirus, and Windows Defender",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1070.001",
+      "technique_name": "Clear Windows Event Logs",
+      "tactic": "Defense Evasion",
+      "procedure": "Clears event logs to hinder investigation",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1027",
+      "technique_name": "Obfuscated Files or Information",
+      "tactic": "Defense Evasion",
+      "procedure": "Uses Rust-based obfuscation and encryption",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1003.001",
+      "technique_name": "LSASS Memory",
+      "tactic": "Credential Access",
+      "procedure": "Extracts credentials from LSASS memory",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1003.003",
+      "technique_name": "NTDS",
+      "tactic": "Credential Access",
+      "procedure": "Dumps Active Directory database",
+      "confidence": 0.85
+    },
+    {
+      "technique_id": "T1558.003",
+      "technique_name": "Kerberoasting",
+      "tactic": "Credential Access",
+      "procedure": "Requests service tickets for offline password cracking",
+      "confidence": 0.85
+    },
+    {
+      "technique_id": "T1087.002",
+      "technique_name": "Domain Account",
+      "tactic": "Discovery",
+      "procedure": "Enumerates domain accounts and admin groups",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1083",
+      "technique_name": "File and Directory Discovery",
+      "tactic": "Discovery",
+      "procedure": "Identifies sensitive files and network shares",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1021.002",
+      "technique_name": "SMB/Windows Admin Shares",
+      "tactic": "Lateral Movement",
+      "procedure": "Uses SMB for lateral movement",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1021.001",
+      "technique_name": "Remote Desktop Protocol",
+      "tactic": "Lateral Movement",
+      "procedure": "Uses RDP with compromised credentials",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1570",
+      "technique_name": "Lateral Tool Transfer",
+      "tactic": "Lateral Movement",
+      "procedure": "Transfers ransomware across network",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1560.001",
+      "technique_name": "Archive via Utility",
+      "tactic": "Collection",
+      "procedure": "Compresses data using 7-Zip before exfiltration",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1567.002",
+      "technique_name": "Exfiltration to Cloud Storage",
+      "tactic": "Exfiltration",
+      "procedure": "Exfiltrates data to cloud storage platforms",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1486",
+      "technique_name": "Data Encrypted for Impact",
+      "tactic": "Impact",
+      "procedure": "Encrypts files using AES with ChaCha20 stream cipher",
+      "confidence": 0.98
+    },
+    {
+      "technique_id": "T1490",
+      "technique_name": "Inhibit System Recovery",
+      "tactic": "Impact",
+      "procedure": "Deletes shadow copies and system backups",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1489",
+      "technique_name": "Service Stop",
+      "tactic": "Impact",
+      "procedure": "Terminates services that could interfere with encryption",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1491.001",
+      "technique_name": "Internal Defacement",
+      "tactic": "Impact",
+      "procedure": "Changes desktop wallpaper to ransom message",
+      "confidence": 0.85
+    }
+  ],
+  "malware_families": [
+    "BlackCat",
+    "ALPHV",
+    "Noberus",
+    "ExMatter (exfiltration tool)",
+    "Eamfo (credential stealer)"
+  ],
+  "tools": [
+    "Cobalt Strike",
+    "Mimikatz",
+    "PsExec",
+    "Advanced IP Scanner",
+    "Rclone",
+    "MEGAsync"
+  ],
+  "target_sectors": [
+    "healthcare",
+    "gambling",
+    "hospitality",
+    "finance",
+    "legal",
+    "manufacturing",
+    "technology"
+  ],
+  "target_regions": [
+    "North America",
+    "Europe",
+    "Global"
+  ],
+  "infrastructure": {
+    "c2_patterns": [
+      "Tor hidden services",
+      "Unique victim negotiation sites",
+      "API-accessible data leak site"
+    ],
+    "hosting_preferences": [
+      "Tor network",
+      "Bulletproof hosting",
+      "Cloud services for exfiltration"
+    ],
+    "sample_domains_defanged": [
+      "alphvmmm27o3abo3r2mlmjrpdmzle3rykajqc5xsj7j7ejksbpsa36ad[.]onion"
+    ]
+  },
+  "notable_campaigns": [
+    "MGM Resorts attack (2023) - $100M+ impact",
+    "Caesars Entertainment ($15M ransom paid) (2023)",
+    "Reddit data theft (2023)",
+    "Change Healthcare attack (2024)"
+  ],
+  "detection_signatures": {
+    "yara_hints": [
+      "Rust binary characteristics",
+      "BlackCat encryption routines",
+      "ExMatter exfiltration patterns"
+    ],
+    "sigma_hints": [
+      "Ransomware file extension changes",
+      "VSS deletion commands",
+      "Service termination patterns"
+    ]
+  },
+  "ransom_note_indicators": {
+    "extensions": [".alphv", ".[random]"],
+    "note_filenames": ["RECOVER-[random]-FILES.txt"],
+    "contact_methods": ["Tor negotiation site with unique ID"]
+  },
+  "operational_notes": {
+    "unique_characteristics": [
+      "Written in Rust (first major ransomware to do so)",
+      "Cross-platform capability (Windows, Linux, VMware ESXi)",
+      "Searchable data leak site with API",
+      "Triple extortion (encryption + theft + DDoS threats)",
+      "Highly customizable via command-line arguments"
+    ],
+    "law_enforcement": {
+      "disruption": "December 2023 infrastructure seizure",
+      "aftermath": "Quickly rebuilt infrastructure and continued operations"
+    },
+    "social_engineering": "Associated with Scattered Spider for social engineering access"
+  },
+  "references": [
+    "https://www.cisa.gov/news-events/cybersecurity-advisories/aa23-353a",
+    "https://www.fbi.gov/news/press-releases/fbi-releases-decryption-tool-for-blackcat-ransomware",
+    "https://attack.mitre.org/software/S1068/"
+  ]
+}

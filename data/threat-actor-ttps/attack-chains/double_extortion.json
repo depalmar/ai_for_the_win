@@ -1,0 +1,235 @@
+{
+  "id": "double-extortion",
+  "name": "Double Extortion Ransomware Attack Chain",
+  "description": "Modern ransomware attack pattern combining data theft with encryption for maximum leverage. Attackers exfiltrate sensitive data before deploying ransomware, threatening to publish stolen data if ransom is not paid.",
+  "typical_actors": ["LockBit", "ALPHV/BlackCat", "Cl0p", "Royal", "Play"],
+  "average_dwell_time_days": "3-21",
+  "phases": [
+    {
+      "phase": 1,
+      "name": "Initial Access",
+      "duration": "Minutes to hours",
+      "techniques": [
+        {"id": "T1190", "name": "Exploit Public-Facing Application", "common": true},
+        {"id": "T1133", "name": "External Remote Services", "common": true},
+        {"id": "T1566.001", "name": "Spearphishing Attachment", "common": true},
+        {"id": "T1078", "name": "Valid Accounts", "common": true}
+      ],
+      "common_methods": [
+        "Exploiting VPN/firewall vulnerabilities",
+        "Compromised RDP credentials from IABs",
+        "Phishing emails with malicious documents",
+        "Credential stuffing attacks"
+      ],
+      "indicators": [
+        "Unusual VPN/RDP logins",
+        "Exploitation signatures in logs",
+        "Phishing emails reported",
+        "Failed authentication spikes"
+      ],
+      "detection_priority": "Critical"
+    },
+    {
+      "phase": 2,
+      "name": "Execution & Persistence",
+      "duration": "Hours",
+      "techniques": [
+        {"id": "T1059.001", "name": "PowerShell", "common": true},
+        {"id": "T1053.005", "name": "Scheduled Task", "common": true},
+        {"id": "T1543.003", "name": "Windows Service", "common": false},
+        {"id": "T1547.001", "name": "Registry Run Keys", "common": false}
+      ],
+      "common_methods": [
+        "Cobalt Strike beacon deployment",
+        "Remote access tool installation (AnyDesk, TeamViewer)",
+        "Scheduled tasks for persistence",
+        "Registry modifications"
+      ],
+      "indicators": [
+        "PowerShell with encoded commands",
+        "New scheduled tasks",
+        "Remote access tool installation",
+        "Cobalt Strike beacon traffic"
+      ],
+      "detection_priority": "High"
+    },
+    {
+      "phase": 3,
+      "name": "Defense Evasion",
+      "duration": "Throughout attack",
+      "techniques": [
+        {"id": "T1562.001", "name": "Disable or Modify Tools", "common": true},
+        {"id": "T1070.001", "name": "Clear Windows Event Logs", "common": true},
+        {"id": "T1027", "name": "Obfuscated Files", "common": true}
+      ],
+      "common_methods": [
+        "Disabling Windows Defender",
+        "Killing EDR processes",
+        "Clearing event logs",
+        "Using LOLBins"
+      ],
+      "indicators": [
+        "Security service stops",
+        "Event log clearing",
+        "EDR tampering alerts",
+        "Process injection"
+      ],
+      "detection_priority": "Critical"
+    },
+    {
+      "phase": 4,
+      "name": "Credential Access",
+      "duration": "Hours to days",
+      "techniques": [
+        {"id": "T1003.001", "name": "LSASS Memory", "common": true},
+        {"id": "T1003.003", "name": "NTDS", "common": true},
+        {"id": "T1558.003", "name": "Kerberoasting", "common": true}
+      ],
+      "common_methods": [
+        "Mimikatz execution",
+        "LSASS memory dumping",
+        "NTDS.dit extraction",
+        "Kerberoasting attacks"
+      ],
+      "indicators": [
+        "LSASS access from unusual processes",
+        "Mimikatz signatures",
+        "ntdsutil execution",
+        "Kerberos TGS requests spike"
+      ],
+      "detection_priority": "Critical"
+    },
+    {
+      "phase": 5,
+      "name": "Discovery",
+      "duration": "Hours to days",
+      "techniques": [
+        {"id": "T1087.002", "name": "Domain Account", "common": true},
+        {"id": "T1018", "name": "Remote System Discovery", "common": true},
+        {"id": "T1083", "name": "File and Directory Discovery", "common": true}
+      ],
+      "common_methods": [
+        "ADFind/BloodHound for AD enumeration",
+        "Network scanning",
+        "Share enumeration",
+        "Identifying backup systems"
+      ],
+      "indicators": [
+        "ADFind execution",
+        "BloodHound collection",
+        "Mass share access",
+        "Internal scanning activity"
+      ],
+      "detection_priority": "High"
+    },
+    {
+      "phase": 6,
+      "name": "Lateral Movement",
+      "duration": "Days",
+      "techniques": [
+        {"id": "T1021.002", "name": "SMB/Windows Admin Shares", "common": true},
+        {"id": "T1021.001", "name": "Remote Desktop Protocol", "common": true},
+        {"id": "T1570", "name": "Lateral Tool Transfer", "common": true}
+      ],
+      "common_methods": [
+        "PSExec for remote execution",
+        "RDP with stolen credentials",
+        "SMB lateral movement",
+        "WMI remote execution"
+      ],
+      "indicators": [
+        "PSExec service creation",
+        "RDP from unusual sources",
+        "Admin share access patterns",
+        "Remote service installation"
+      ],
+      "detection_priority": "High"
+    },
+    {
+      "phase": 7,
+      "name": "Data Collection & Exfiltration",
+      "duration": "Hours to days",
+      "techniques": [
+        {"id": "T1560.001", "name": "Archive via Utility", "common": true},
+        {"id": "T1567.002", "name": "Exfiltration to Cloud Storage", "common": true},
+        {"id": "T1048", "name": "Exfiltration Over Alternative Protocol", "common": false}
+      ],
+      "common_methods": [
+        "7-Zip/WinRAR compression",
+        "Rclone to cloud storage",
+        "MEGA/OneDrive uploads",
+        "Custom exfiltration tools"
+      ],
+      "indicators": [
+        "Large archive creation",
+        "Rclone execution",
+        "Unusual cloud storage traffic",
+        "Large outbound transfers"
+      ],
+      "detection_priority": "Critical",
+      "data_targets": [
+        "Financial documents",
+        "Customer databases",
+        "HR/employee records",
+        "Intellectual property",
+        "Legal documents",
+        "Email archives"
+      ]
+    },
+    {
+      "phase": 8,
+      "name": "Impact - Ransomware Deployment",
+      "duration": "Hours",
+      "techniques": [
+        {"id": "T1490", "name": "Inhibit System Recovery", "common": true},
+        {"id": "T1489", "name": "Service Stop", "common": true},
+        {"id": "T1486", "name": "Data Encrypted for Impact", "common": true}
+      ],
+      "common_methods": [
+        "Delete shadow copies (vssadmin, WMIC)",
+        "Stop backup services",
+        "Disable recovery boot options",
+        "Deploy ransomware via GPO/PSExec/SMB"
+      ],
+      "indicators": [
+        "vssadmin delete shadows",
+        "bcdedit modifications",
+        "Mass service termination",
+        "High-entropy file writes",
+        "Mass file extension changes"
+      ],
+      "detection_priority": "Critical",
+      "pre_encryption_commands": [
+        "vssadmin delete shadows /all /quiet",
+        "wmic shadowcopy delete",
+        "bcdedit /set {default} recoveryenabled No",
+        "wbadmin delete catalog -quiet"
+      ]
+    }
+  ],
+  "extortion_tactics": {
+    "first_extortion": "Pay to decrypt files",
+    "second_extortion": "Pay to prevent data publication",
+    "additional_pressure": [
+      "DDoS attacks during negotiations",
+      "Contacting customers/partners",
+      "Media/social media disclosure",
+      "Regulatory notification threats"
+    ]
+  },
+  "detection_opportunities_summary": {
+    "initial_access": ["VPN anomalies", "Phishing detection", "Credential abuse"],
+    "early_stage": ["C2 traffic", "Persistence mechanisms", "Tool deployment"],
+    "mid_stage": ["Credential access", "Lateral movement", "Discovery activity"],
+    "late_stage": ["Data staging", "Exfiltration", "Pre-encryption activity"]
+  },
+  "response_priorities": [
+    "Isolate affected systems immediately",
+    "Preserve evidence (memory, logs)",
+    "Identify scope of compromise",
+    "Assess data exfiltration",
+    "Engage incident response team",
+    "Notify legal/compliance",
+    "Contact law enforcement"
+  ]
+}

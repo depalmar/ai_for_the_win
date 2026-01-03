@@ -1,0 +1,211 @@
+{
+  "id": "rhysida",
+  "name": "Rhysida",
+  "aliases": [],
+  "country": "Unknown",
+  "attributed_to": "Ransomware-as-a-Service operation, possibly with ties to Vice Society",
+  "motivation": "financial",
+  "active_since": "2023-05",
+  "sophistication": "advanced",
+  "description": "Rhysida emerged in May 2023 and quickly gained notoriety for targeting healthcare, education, and government sectors. The group presents itself as a 'cybersecurity team' claiming to help victims by exposing security weaknesses. Notable for attacks on healthcare organizations including Prospect Medical Holdings and the British Library.",
+  "ttps": [
+    {
+      "technique_id": "T1566.001",
+      "technique_name": "Spearphishing Attachment",
+      "tactic": "Initial Access",
+      "procedure": "Sends phishing emails with malicious attachments",
+      "confidence": 0.85
+    },
+    {
+      "technique_id": "T1133",
+      "technique_name": "External Remote Services",
+      "tactic": "Initial Access",
+      "procedure": "Compromises VPN and RDP services using stolen or brute-forced credentials",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1190",
+      "technique_name": "Exploit Public-Facing Application",
+      "tactic": "Initial Access",
+      "procedure": "Exploits Zerologon (CVE-2020-1472) and other vulnerabilities",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1059.001",
+      "technique_name": "PowerShell",
+      "tactic": "Execution",
+      "procedure": "Uses PowerShell for execution and reconnaissance",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1059.003",
+      "technique_name": "Windows Command Shell",
+      "tactic": "Execution",
+      "procedure": "Uses cmd.exe for batch operations",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1053.005",
+      "technique_name": "Scheduled Task",
+      "tactic": "Persistence",
+      "procedure": "Creates scheduled tasks for persistence",
+      "confidence": 0.85
+    },
+    {
+      "technique_id": "T1562.001",
+      "technique_name": "Disable or Modify Tools",
+      "tactic": "Defense Evasion",
+      "procedure": "Disables Windows Defender and EDR using various techniques",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1070.001",
+      "technique_name": "Clear Windows Event Logs",
+      "tactic": "Defense Evasion",
+      "procedure": "Clears event logs to hide activity",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1003.001",
+      "technique_name": "LSASS Memory",
+      "tactic": "Credential Access",
+      "procedure": "Dumps LSASS memory for credentials",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1003.003",
+      "technique_name": "NTDS",
+      "tactic": "Credential Access",
+      "procedure": "Extracts NTDS.dit from domain controllers using ntdsutil",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1087.002",
+      "technique_name": "Domain Account",
+      "tactic": "Discovery",
+      "procedure": "Enumerates domain accounts and groups using built-in commands",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1021.002",
+      "technique_name": "SMB/Windows Admin Shares",
+      "tactic": "Lateral Movement",
+      "procedure": "Uses PsExec and admin shares for lateral movement",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1021.001",
+      "technique_name": "Remote Desktop Protocol",
+      "tactic": "Lateral Movement",
+      "procedure": "Uses RDP for lateral movement",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1219",
+      "technique_name": "Remote Access Software",
+      "tactic": "Command and Control",
+      "procedure": "Deploys AnyDesk, PuTTY for persistent access",
+      "confidence": 0.85
+    },
+    {
+      "technique_id": "T1071.001",
+      "technique_name": "Web Protocols",
+      "tactic": "Command and Control",
+      "procedure": "Uses Cobalt Strike over HTTPS",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1567.002",
+      "technique_name": "Exfiltration to Cloud Storage",
+      "tactic": "Exfiltration",
+      "procedure": "Exfiltrates data before encryption for double extortion",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1486",
+      "technique_name": "Data Encrypted for Impact",
+      "tactic": "Impact",
+      "procedure": "Encrypts files using ChaCha20 with RSA-4096",
+      "confidence": 0.98
+    },
+    {
+      "technique_id": "T1490",
+      "technique_name": "Inhibit System Recovery",
+      "tactic": "Impact",
+      "procedure": "Deletes shadow copies and disables recovery",
+      "confidence": 0.95
+    }
+  ],
+  "malware_families": [
+    "Rhysida ransomware",
+    "Cobalt Strike",
+    "SystemBC"
+  ],
+  "tools": [
+    "Cobalt Strike",
+    "PsExec",
+    "Mimikatz",
+    "Secretsdump",
+    "ntdsutil",
+    "AnyDesk",
+    "PuTTY",
+    "WinSCP",
+    "7-Zip"
+  ],
+  "target_sectors": [
+    "healthcare",
+    "education",
+    "government",
+    "manufacturing",
+    "technology"
+  ],
+  "target_regions": [
+    "North America",
+    "Europe",
+    "South America",
+    "Australia"
+  ],
+  "infrastructure": {
+    "c2_patterns": [
+      "Cobalt Strike",
+      "Tor hidden services for leak site",
+      "RMM tools"
+    ],
+    "hosting_preferences": [
+      "Tor network",
+      "Bulletproof hosting"
+    ]
+  },
+  "notable_campaigns": [
+    "Prospect Medical Holdings (August 2023) - 17 hospitals affected",
+    "British Library (October 2023)",
+    "Chilean Army (2023)",
+    "Insomniac Games/Sony (2023)",
+    "City of Columbus, Ohio (2024)"
+  ],
+  "detection_signatures": {
+    "yara_hints": [
+      "Rhysida encryption routine",
+      "PDF ransom note generation",
+      "Characteristic string patterns"
+    ],
+    "sigma_hints": [
+      "Zerologon exploitation",
+      "PsExec deployment patterns",
+      "NTDS extraction"
+    ]
+  },
+  "ransom_note_indicators": {
+    "extensions": [".rhysida"],
+    "note_filenames": ["CriticalBreachDetected.pdf"],
+    "contact_methods": ["Tor portal", "TOX messenger"]
+  },
+  "cves_exploited": [
+    "CVE-2020-1472 (Zerologon)"
+  ],
+  "references": [
+    "https://www.cisa.gov/news-events/cybersecurity-advisories/aa23-319a",
+    "https://www.hhs.gov/sites/default/files/rhysida-ransomware-sector-alert.pdf",
+    "https://attack.mitre.org/software/S1130/"
+  ]
+}

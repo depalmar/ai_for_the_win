@@ -1,0 +1,173 @@
+{
+  "id": "solarwinds-sunburst",
+  "name": "SolarWinds Supply Chain Attack (SUNBURST)",
+  "threat_actor": "apt29",
+  "classification": "supply_chain",
+  "timeframe": {
+    "initial_compromise": "2019-10",
+    "active_intrusion": "2020-03",
+    "discovery": "2020-12-08",
+    "public_disclosure": "2020-12-13"
+  },
+  "summary": "APT29 compromised SolarWinds Orion software build system and inserted malicious code (SUNBURST) into software updates. Approximately 18,000 organizations installed trojanized updates, with follow-on activity against ~100 high-value targets.",
+  "attack_phases": [
+    {
+      "phase": 1,
+      "name": "Build System Compromise",
+      "timeframe": "October 2019",
+      "techniques": ["T1195.002"],
+      "description": "Attackers gained access to SolarWinds build environment and tested their ability to inject code into the Orion platform.",
+      "indicators": [
+        "Access to SolarWinds development environment",
+        "Code injection into Orion.Core.BusinessLayer.dll"
+      ],
+      "detection_opportunities": [
+        "Build system access anomalies",
+        "Code signing certificate usage"
+      ]
+    },
+    {
+      "phase": 2,
+      "name": "Backdoor Deployment",
+      "timeframe": "March 2020",
+      "techniques": ["T1195.002", "T1027", "T1036"],
+      "description": "SUNBURST backdoor inserted into legitimate Orion software updates (versions 2019.4 HF 5 through 2020.2.1). Code signed with legitimate SolarWinds certificate.",
+      "indicators": [
+        "Malicious DLL OrionImprovementBusinessLayer.dll",
+        "DGA-based C2 using avsvmcloud[.]com"
+      ],
+      "detection_opportunities": [
+        "Suspicious DNS queries to avsvmcloud[.]com",
+        "Orion spawning unusual processes"
+      ]
+    },
+    {
+      "phase": 3,
+      "name": "Initial Beacon and Victim Selection",
+      "timeframe": "March - December 2020",
+      "techniques": ["T1071.004", "T1071.001", "T1082"],
+      "description": "SUNBURST used steganographic DNS C2 to beacon. Attackers performed initial reconnaissance to identify high-value targets among 18,000 infected organizations.",
+      "indicators": [
+        "DNS queries with encoded hostnames",
+        "HTTP requests to compromised domains",
+        "System information collection"
+      ],
+      "detection_opportunities": [
+        "Unusual DNS TXT record queries",
+        "Encoded subdomain patterns",
+        "C2 to known SUNBURST domains"
+      ]
+    },
+    {
+      "phase": 4,
+      "name": "TEARDROP Deployment",
+      "timeframe": "April - December 2020",
+      "techniques": ["T1055", "T1027.002", "T1105"],
+      "description": "For selected high-value targets, TEARDROP memory-only dropper deployed to load Cobalt Strike beacon. RAINDROP variant used in some cases.",
+      "indicators": [
+        "In-memory Cobalt Strike beacon",
+        "TEARDROP service installation",
+        "Modified legitimate service DLLs"
+      ],
+      "detection_opportunities": [
+        "Memory-only payload execution",
+        "Unusual service DLL modifications",
+        "Cobalt Strike beacon patterns"
+      ]
+    },
+    {
+      "phase": 5,
+      "name": "Lateral Movement and Persistence",
+      "timeframe": "Throughout intrusion",
+      "techniques": ["T1078", "T1098", "T1558.003", "T1003.006", "T1556.001"],
+      "description": "Attackers moved laterally using stolen credentials, established additional persistence through SAML token forgery and compromised federation services.",
+      "indicators": [
+        "Golden SAML attacks",
+        "Azure AD Connect compromise",
+        "Service principal credential theft"
+      ],
+      "detection_opportunities": [
+        "Unusual SAML token parameters",
+        "Azure AD anomalous activity",
+        "Federation server access"
+      ]
+    },
+    {
+      "phase": 6,
+      "name": "Data Collection and Exfiltration",
+      "timeframe": "Throughout intrusion",
+      "techniques": ["T1114.002", "T1213", "T1567.002"],
+      "description": "Attackers accessed email, documents, and source code repositories. Data exfiltrated through existing C2 channels and cloud services.",
+      "indicators": [
+        "Email access from unusual locations",
+        "Mass document access",
+        "Source code repository cloning"
+      ],
+      "detection_opportunities": [
+        "Unusual M365 audit logs",
+        "Large data transfers",
+        "Repository access anomalies"
+      ]
+    }
+  ],
+  "iocs": {
+    "domains_defanged": [
+      "avsvmcloud[.]com",
+      "digitalcollege[.]org",
+      "freescanonline[.]com",
+      "deftsecurity[.]com",
+      "thedoccloud[.]com",
+      "websitetheme[.]com",
+      "highdatabase[.]com",
+      "incomeupdate[.]com",
+      "databasegalore[.]com",
+      "paborncity[.]com",
+      "zaboronin[.]org"
+    ],
+    "ips_defanged": [
+      "13[.]59[.]205[.]66",
+      "54[.]193[.]127[.]66",
+      "54[.]215[.]192[.]52",
+      "34[.]203[.]203[.]23",
+      "139[.]99[.]115[.]204"
+    ],
+    "file_hashes": {
+      "sunburst_dll": "32519b85c0b422e4656de6e6c41878e95fd95026267daab4215ee59c107d6c77",
+      "teardrop": "1817a5bf9c01035bcf8a975c9f1d94b0ce7f6a200339485d8f93859f8f6d730c"
+    },
+    "user_agents": [
+      "Mozilla/5.0 (compatible; SolarWinds Orion)"
+    ]
+  },
+  "impact": {
+    "organizations_with_trojanized_software": 18000,
+    "organizations_with_follow_on_activity": 100,
+    "confirmed_breached": [
+      "US Treasury Department",
+      "US Commerce Department (NTIA)",
+      "US Department of Homeland Security",
+      "FireEye",
+      "Microsoft",
+      "Multiple Fortune 500 companies"
+    ],
+    "estimated_cost": "Billions of dollars in remediation"
+  },
+  "detection_rules": {
+    "snort": "alert dns any any -> any any (msg:'SUNBURST DNS Beacon'; content:'avsvmcloud'; sid:1000001;)",
+    "sigma_title": "SolarWinds SUNBURST Suspicious DLL Load",
+    "yara_hint": "rule SUNBURST_DLL { strings: $a = 'OrionImprovementBusinessLayer' condition: $a }"
+  },
+  "lessons_learned": [
+    "Supply chain attacks can bypass perimeter defenses",
+    "Code signing does not guarantee safety",
+    "Long dwell times enable extensive access",
+    "Monitor for unusual process behavior from trusted software",
+    "Implement zero-trust architecture"
+  ],
+  "references": [
+    "https://www.cisa.gov/news-events/cybersecurity-advisories/aa20-352a",
+    "https://www.cisa.gov/emergency-directives/ed-21-01",
+    "https://www.microsoft.com/security/blog/2020/12/18/analyzing-solorigate-the-compromised-dll-file-that-started-a-sophisticated-cyberattack-and-how-microsoft-defender-helps-protect/",
+    "https://www.justice.gov/opa/pr/four-russian-government-employees-charged-two-historical-hacking-campaigns"
+  ]
+}

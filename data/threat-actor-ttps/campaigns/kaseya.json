@@ -1,0 +1,170 @@
+{
+  "id": "kaseya-revil",
+  "name": "Kaseya VSA Supply Chain Attack",
+  "threat_actor": "REvil (Sodinokibi)",
+  "classification": "supply_chain_ransomware",
+  "timeframe": {
+    "exploitation_start": "2021-07-02",
+    "discovery": "2021-07-02",
+    "decryptor_released": "2021-07-22"
+  },
+  "summary": "REvil ransomware group exploited zero-day vulnerabilities in Kaseya VSA remote management software to conduct a massive supply chain attack. By compromising MSP infrastructure, attackers deployed ransomware to approximately 1,500 downstream businesses through trusted software update channels.",
+  "vulnerability": {
+    "cves": ["CVE-2021-30116", "CVE-2021-30119", "CVE-2021-30120"],
+    "type": "Authentication bypass, SQL injection, path traversal",
+    "affected_product": "Kaseya VSA",
+    "exploitation_method": "Chained vulnerabilities to achieve unauthenticated RCE"
+  },
+  "attack_phases": [
+    {
+      "phase": 1,
+      "name": "Initial VSA Server Compromise",
+      "timeframe": "July 2, 2021",
+      "techniques": ["T1190", "T1195.002"],
+      "description": "REvil exploited authentication bypass vulnerabilities in internet-facing Kaseya VSA servers to gain administrative access.",
+      "indicators": [
+        "Exploitation of /dl.asp endpoint",
+        "SQL injection in VSA web interface",
+        "Authentication bypass"
+      ],
+      "detection_opportunities": [
+        "Unusual VSA server activity",
+        "Web application firewall alerts",
+        "Failed authentication attempts"
+      ]
+    },
+    {
+      "phase": 2,
+      "name": "Malicious Procedure Deployment",
+      "timeframe": "July 2, 2021",
+      "techniques": ["T1072", "T1059.001"],
+      "description": "Attackers used compromised VSA servers to push malicious 'Kaseya VSA Agent Hot-fix' procedure to all managed endpoints.",
+      "indicators": [
+        "New VSA procedure creation",
+        "Mass procedure deployment",
+        "Suspicious agent update"
+      ],
+      "detection_opportunities": [
+        "VSA procedure creation audit",
+        "Mass deployment alerts",
+        "Agent update anomalies"
+      ]
+    },
+    {
+      "phase": 3,
+      "name": "Security Tool Disabling",
+      "timeframe": "July 2, 2021",
+      "techniques": ["T1562.001", "T1059.001"],
+      "description": "Malicious procedure disabled Windows Defender and other security tools using PowerShell before ransomware deployment.",
+      "indicators": [
+        "PowerShell execution to disable Defender",
+        "Security service stops",
+        "Firewall modifications"
+      ],
+      "commands_used": [
+        "Set-MpPreference -DisableRealtimeMonitoring $true",
+        "Set-MpPreference -DisableIOAVProtection $true"
+      ]
+    },
+    {
+      "phase": 4,
+      "name": "Ransomware Deployment",
+      "timeframe": "July 2, 2021",
+      "techniques": ["T1486", "T1490"],
+      "description": "REvil ransomware deployed via legitimate VSA agent to all managed endpoints. Ransomware encrypted files and demanded ransom.",
+      "indicators": [
+        "agent.exe dropped by VSA",
+        "Mass file encryption",
+        "Ransom note deployment"
+      ],
+      "detection_opportunities": [
+        "VSA agent spawning unexpected processes",
+        "High entropy file writes",
+        "Shadow copy deletion"
+      ]
+    }
+  ],
+  "iocs": {
+    "files": {
+      "dropper": "agent.crt (renamed agent.exe)",
+      "ransomware": "mpsvc.dll (side-loaded)",
+      "legitimate_binary": "MsMpEng.exe (used for DLL side-loading)"
+    },
+    "hashes": {
+      "agent_exe": "D55F983C994CAA160EC63A59F6B4250FE67FB3E8C43A388AEC60A4A6978E9F1E"
+    },
+    "ransom_note": "REvil-README.txt"
+  },
+  "impact": {
+    "msp_servers_compromised": 60,
+    "downstream_businesses_affected": 1500,
+    "ransom_demanded": {
+      "universal_decryptor": 70000000,
+      "per_victim": "45000-5000000",
+      "currency": "USD"
+    },
+    "sectors_impacted": [
+      "Retail",
+      "Healthcare",
+      "Legal",
+      "Professional services",
+      "Small/medium businesses"
+    ],
+    "geographic_impact": [
+      "United States",
+      "Europe",
+      "Australia",
+      "Global"
+    ]
+  },
+  "response_timeline": [
+    {
+      "date": "2021-07-02 14:00 EDT",
+      "event": "Kaseya becomes aware of attack"
+    },
+    {
+      "date": "2021-07-02 15:00 EDT",
+      "event": "Kaseya shuts down VSA SaaS"
+    },
+    {
+      "date": "2021-07-02 16:00 EDT",
+      "event": "Kaseya advises on-prem customers to shut down VSA"
+    },
+    {
+      "date": "2021-07-04",
+      "event": "REvil claims responsibility, demands $70M"
+    },
+    {
+      "date": "2021-07-13",
+      "event": "REvil infrastructure goes offline"
+    },
+    {
+      "date": "2021-07-22",
+      "event": "Kaseya obtains universal decryptor"
+    }
+  ],
+  "decryptor_source": {
+    "official_statement": "From 'trusted third party'",
+    "speculation": [
+      "Law enforcement operation",
+      "Russian government intervention",
+      "REvil internal decision"
+    ]
+  },
+  "detection_rules": {
+    "sigma_hint": "title: Kaseya VSA Malicious Procedure\nlogsource: category: process_creation\ndetection: selection: ParentImage|endswith: 'AgentMon.exe' CommandLine|contains: 'MsMpEng.exe'",
+    "yara_hint": "Rule for agent.crt/agent.exe dropper characteristics"
+  },
+  "lessons_learned": [
+    "MSP software is high-value supply chain target",
+    "Zero-day vulnerabilities enable mass compromise",
+    "Trusted software channels bypass many controls",
+    "Rapid response and shutdown can limit damage",
+    "Universal decryptors may become available"
+  ],
+  "references": [
+    "https://www.cisa.gov/news-events/cybersecurity-advisories/aa21-188a",
+    "https://helpdesk.kaseya.com/hc/en-gb/articles/4403440684689",
+    "https://www.huntress.com/blog/rapid-response-kaseya-vsa-mass-msp-ransomware-incident"
+  ]
+}

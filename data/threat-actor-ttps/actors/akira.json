@@ -1,0 +1,231 @@
+{
+  "id": "akira",
+  "name": "Akira",
+  "aliases": ["Storm-1567"],
+  "country": "Russia",
+  "attributed_to": "Russian-speaking ransomware group with potential ties to former Conti members",
+  "motivation": "financial",
+  "active_since": "2023-03",
+  "sophistication": "advanced",
+  "description": "Akira emerged in March 2023 and has rapidly grown to become one of the most active ransomware operations. Known for targeting small-to-medium businesses, exploiting VPN vulnerabilities (especially Cisco), and operating both Windows and Linux variants. Uses retro 1980s aesthetic for branding. As of January 2024, had impacted over 250 organizations.",
+  "ttps": [
+    {
+      "technique_id": "T1190",
+      "technique_name": "Exploit Public-Facing Application",
+      "tactic": "Initial Access",
+      "procedure": "Exploits Cisco VPN vulnerabilities (CVE-2023-20269, CVE-2020-3259) and other public-facing services",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1133",
+      "technique_name": "External Remote Services",
+      "tactic": "Initial Access",
+      "procedure": "Compromises VPN without MFA, uses stolen VPN credentials",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1078",
+      "technique_name": "Valid Accounts",
+      "tactic": "Initial Access",
+      "procedure": "Uses compromised credentials obtained from initial access brokers or credential theft",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1059.001",
+      "technique_name": "PowerShell",
+      "tactic": "Execution",
+      "procedure": "Uses PowerShell for reconnaissance and tool deployment",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1059.004",
+      "technique_name": "Unix Shell",
+      "tactic": "Execution",
+      "procedure": "Uses bash scripts for Linux variant deployment",
+      "confidence": 0.85
+    },
+    {
+      "technique_id": "T1053.005",
+      "technique_name": "Scheduled Task",
+      "tactic": "Persistence",
+      "procedure": "Creates scheduled tasks for persistence",
+      "confidence": 0.85
+    },
+    {
+      "technique_id": "T1136.001",
+      "technique_name": "Local Account",
+      "tactic": "Persistence",
+      "procedure": "Creates local admin accounts for persistent access",
+      "confidence": 0.85
+    },
+    {
+      "technique_id": "T1562.001",
+      "technique_name": "Disable or Modify Tools",
+      "tactic": "Defense Evasion",
+      "procedure": "Disables Windows Defender and other security tools using PowerShell",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1070.001",
+      "technique_name": "Clear Windows Event Logs",
+      "tactic": "Defense Evasion",
+      "procedure": "Clears event logs using wevtutil",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1003.001",
+      "technique_name": "LSASS Memory",
+      "tactic": "Credential Access",
+      "procedure": "Dumps credentials using Mimikatz and other tools",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1003.003",
+      "technique_name": "NTDS",
+      "tactic": "Credential Access",
+      "procedure": "Extracts NTDS.dit from domain controllers",
+      "confidence": 0.85
+    },
+    {
+      "technique_id": "T1087.002",
+      "technique_name": "Domain Account",
+      "tactic": "Discovery",
+      "procedure": "Enumerates domain accounts and groups",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1083",
+      "technique_name": "File and Directory Discovery",
+      "tactic": "Discovery",
+      "procedure": "Identifies sensitive files and network shares for exfiltration",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1021.002",
+      "technique_name": "SMB/Windows Admin Shares",
+      "tactic": "Lateral Movement",
+      "procedure": "Uses SMB for lateral movement with stolen credentials",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1021.001",
+      "technique_name": "Remote Desktop Protocol",
+      "tactic": "Lateral Movement",
+      "procedure": "Uses RDP for lateral movement",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1219",
+      "technique_name": "Remote Access Software",
+      "tactic": "Command and Control",
+      "procedure": "Deploys AnyDesk, RustDesk for persistent remote access",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1567.002",
+      "technique_name": "Exfiltration to Cloud Storage",
+      "tactic": "Exfiltration",
+      "procedure": "Exfiltrates data using WinSCP, Rclone, or cloud storage services",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1486",
+      "technique_name": "Data Encrypted for Impact",
+      "tactic": "Impact",
+      "procedure": "Encrypts files using ChaCha20/ChaCha8 with RSA encryption",
+      "confidence": 0.98
+    },
+    {
+      "technique_id": "T1490",
+      "technique_name": "Inhibit System Recovery",
+      "tactic": "Impact",
+      "procedure": "Deletes shadow copies and disables recovery options",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1489",
+      "technique_name": "Service Stop",
+      "tactic": "Impact",
+      "procedure": "Stops services that could interfere with encryption",
+      "confidence": 0.90
+    }
+  ],
+  "malware_families": [
+    "Akira ransomware (Windows)",
+    "Akira ransomware (Linux/VMware ESXi)",
+    "Megazord (PowerShell-based variant)"
+  ],
+  "tools": [
+    "Mimikatz",
+    "LaZagne",
+    "AnyDesk",
+    "RustDesk",
+    "WinRAR",
+    "WinSCP",
+    "Rclone",
+    "Advanced IP Scanner",
+    "PCHunter",
+    "AdFind"
+  ],
+  "target_sectors": [
+    "manufacturing",
+    "professional_services",
+    "construction",
+    "education",
+    "healthcare",
+    "retail",
+    "technology"
+  ],
+  "target_regions": [
+    "North America",
+    "Europe",
+    "Australia",
+    "Global"
+  ],
+  "infrastructure": {
+    "c2_patterns": [
+      "Legitimate RMM tools",
+      "Tor hidden services",
+      "Direct victim communication"
+    ],
+    "hosting_preferences": [
+      "Tor network for leak site",
+      "Cloud services for exfiltration"
+    ],
+    "leak_site_style": "Retro 1980s command-line aesthetic"
+  },
+  "notable_campaigns": [
+    "Stanford University (2023)",
+    "Nissan Australia (2023)",
+    "Over 250 organizations impacted by January 2024",
+    "Estimated $42M+ in ransom payments received"
+  ],
+  "detection_signatures": {
+    "yara_hints": [
+      "Akira encryption routines",
+      "PowerShell Megazord variant",
+      "Linux variant characteristics"
+    ],
+    "sigma_hints": [
+      "Cisco VPN exploitation patterns",
+      "RMM tool deployment",
+      "Shadow copy deletion",
+      "Unusual PowerShell execution"
+    ]
+  },
+  "ransom_note_indicators": {
+    "extensions": [".akira"],
+    "note_filenames": ["akira_readme.txt"],
+    "contact_methods": ["Tor chat with retro CLI interface"]
+  },
+  "cves_exploited": [
+    "CVE-2023-20269 (Cisco ASA/FTD VPN)",
+    "CVE-2020-3259 (Cisco ASA)",
+    "CVE-2023-48788 (Fortinet FortiClient EMS)"
+  ],
+  "references": [
+    "https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-109a",
+    "https://www.ic3.gov/Media/News/2024/240418.pdf",
+    "https://attack.mitre.org/software/S1129/"
+  ]
+}

@@ -1,0 +1,282 @@
+{
+  "id": "conti",
+  "name": "Conti",
+  "aliases": ["Wizard Spider", "Gold Ulrick", "DEV-0230"],
+  "country": "Russia",
+  "attributed_to": "Russian-speaking cybercriminal group, operated TrickBot infrastructure",
+  "motivation": "financial",
+  "active_since": "2020",
+  "disbanded": "2022",
+  "sophistication": "advanced",
+  "description": "Conti was one of the most prolific ransomware operations until disbanding in 2022 following internal leaks and Russia-Ukraine war fallout. Known for sophisticated operations, leaked playbooks provide unprecedented insight into ransomware gang operations. Members dispersed to other groups including Royal, Black Basta, and ALPHV.",
+  "ttps": [
+    {
+      "technique_id": "T1566.001",
+      "technique_name": "Spearphishing Attachment",
+      "tactic": "Initial Access",
+      "procedure": "Sends phishing emails with malicious documents containing TrickBot or BazarLoader",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1190",
+      "technique_name": "Exploit Public-Facing Application",
+      "tactic": "Initial Access",
+      "procedure": "Exploits vulnerabilities in external services (ProxyShell, Log4j)",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1133",
+      "technique_name": "External Remote Services",
+      "tactic": "Initial Access",
+      "procedure": "Uses compromised RDP credentials from IABs",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1059.001",
+      "technique_name": "PowerShell",
+      "tactic": "Execution",
+      "procedure": "Uses PowerShell extensively for execution and tool deployment",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1059.003",
+      "technique_name": "Windows Command Shell",
+      "tactic": "Execution",
+      "procedure": "Uses cmd.exe for batch operations and service manipulation",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1053.005",
+      "technique_name": "Scheduled Task",
+      "tactic": "Persistence",
+      "procedure": "Creates scheduled tasks for persistence",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1543.003",
+      "technique_name": "Windows Service",
+      "tactic": "Persistence",
+      "procedure": "Installs malware as Windows services",
+      "confidence": 0.85
+    },
+    {
+      "technique_id": "T1562.001",
+      "technique_name": "Disable or Modify Tools",
+      "tactic": "Defense Evasion",
+      "procedure": "Disables Windows Defender and other security products",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1070.001",
+      "technique_name": "Clear Windows Event Logs",
+      "tactic": "Defense Evasion",
+      "procedure": "Clears event logs using wevtutil",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1003.001",
+      "technique_name": "LSASS Memory",
+      "tactic": "Credential Access",
+      "procedure": "Dumps credentials using Mimikatz or custom tools",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1003.003",
+      "technique_name": "NTDS",
+      "tactic": "Credential Access",
+      "procedure": "Extracts NTDS.dit using ntdsutil",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1558.003",
+      "technique_name": "Kerberoasting",
+      "tactic": "Credential Access",
+      "procedure": "Performs Kerberoasting attacks for service account credentials",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1087.002",
+      "technique_name": "Domain Account",
+      "tactic": "Discovery",
+      "procedure": "Uses ADFind and BloodHound for domain enumeration",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1018",
+      "technique_name": "Remote System Discovery",
+      "tactic": "Discovery",
+      "procedure": "Scans for remote systems using built-in commands",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1021.002",
+      "technique_name": "SMB/Windows Admin Shares",
+      "tactic": "Lateral Movement",
+      "procedure": "Uses SMB and admin shares for lateral movement",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1021.001",
+      "technique_name": "Remote Desktop Protocol",
+      "tactic": "Lateral Movement",
+      "procedure": "Uses RDP for interactive access",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1570",
+      "technique_name": "Lateral Tool Transfer",
+      "tactic": "Lateral Movement",
+      "procedure": "Copies ransomware binary via SMB",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1560.001",
+      "technique_name": "Archive via Utility",
+      "tactic": "Collection",
+      "procedure": "Uses 7-Zip to archive data before exfiltration",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1567.002",
+      "technique_name": "Exfiltration to Cloud Storage",
+      "tactic": "Exfiltration",
+      "procedure": "Exfiltrates data to cloud storage using Rclone or MEGAsync",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1486",
+      "technique_name": "Data Encrypted for Impact",
+      "tactic": "Impact",
+      "procedure": "Encrypts files using ChaCha20 with RSA-4096 key protection",
+      "confidence": 0.98
+    },
+    {
+      "technique_id": "T1490",
+      "technique_name": "Inhibit System Recovery",
+      "tactic": "Impact",
+      "procedure": "Deletes shadow copies using vssadmin and WMIC",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1489",
+      "technique_name": "Service Stop",
+      "tactic": "Impact",
+      "procedure": "Stops database, backup, and security services",
+      "confidence": 0.95
+    }
+  ],
+  "malware_families": [
+    "Conti ransomware",
+    "TrickBot",
+    "BazarLoader/BazarBackdoor",
+    "Anchor",
+    "Ryuk (predecessor)"
+  ],
+  "tools": [
+    "Cobalt Strike",
+    "Mimikatz",
+    "AdFind",
+    "BloodHound",
+    "Rclone",
+    "AnyDesk",
+    "PSExec",
+    "WMIC"
+  ],
+  "target_sectors": [
+    "healthcare",
+    "government",
+    "manufacturing",
+    "education",
+    "technology",
+    "finance",
+    "legal"
+  ],
+  "target_regions": [
+    "North America",
+    "Europe",
+    "Global"
+  ],
+  "infrastructure": {
+    "c2_patterns": [
+      "Cobalt Strike team servers",
+      "Tor hidden services",
+      "Cloud storage for exfiltration"
+    ],
+    "hosting_preferences": [
+      "Bulletproof hosting",
+      "Tor network",
+      "Compromised infrastructure"
+    ]
+  },
+  "notable_campaigns": [
+    "Ireland HSE attack (2021)",
+    "Costa Rica government attack (2022)",
+    "Fat Face breach (2021)",
+    "JVCKenwood attack (2021)"
+  ],
+  "detection_signatures": {
+    "yara_hints": [
+      "Conti encryption routines",
+      "TrickBot loader patterns",
+      "BazarLoader signatures"
+    ],
+    "sigma_hints": [
+      "ADFind usage patterns",
+      "VSS deletion commands",
+      "Cobalt Strike beacon activity"
+    ]
+  },
+  "ransom_note_indicators": {
+    "extensions": [".CONTI"],
+    "note_filenames": ["readme.txt", "CONTI_README.txt"],
+    "contact_methods": ["Tor negotiation portal"]
+  },
+  "leaked_playbooks": {
+    "note": "Internal documentation leaked in August 2021 and February 2022",
+    "contents": [
+      "Detailed attack methodologies",
+      "Tool usage instructions",
+      "Network penetration guides",
+      "Negotiation tactics",
+      "Internal chat logs"
+    ],
+    "significance": "Provides unprecedented insight into ransomware gang operations and TTPs"
+  },
+  "successor_groups": [
+    {
+      "name": "Royal",
+      "relation": "Core Conti members"
+    },
+    {
+      "name": "Black Basta",
+      "relation": "Conti spin-off"
+    },
+    {
+      "name": "Karakurt",
+      "relation": "Conti data extortion arm"
+    },
+    {
+      "name": "ALPHV affiliates",
+      "relation": "Some members became affiliates"
+    }
+  ],
+  "operational_notes": {
+    "unique_characteristics": [
+      "Highly organized with corporate structure",
+      "Separate teams for access, escalation, exfiltration, encryption",
+      "HR department for recruiting",
+      "Internal training programs",
+      "Performance reviews and bonuses"
+    ],
+    "dissolution": {
+      "cause": "Internal leaks and public support for Russia in Ukraine war",
+      "date": "May 2022",
+      "aftermath": "Members dispersed to multiple successor groups"
+    }
+  },
+  "references": [
+    "https://www.cisa.gov/news-events/cybersecurity-advisories/aa21-265a",
+    "https://attack.mitre.org/software/S0575/",
+    "https://therecord.media/conti-leaks-the-panama-papers-of-ransomware"
+  ]
+}

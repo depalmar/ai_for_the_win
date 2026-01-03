@@ -1,0 +1,215 @@
+{
+  "id": "identity-compromise",
+  "name": "Identity Provider and Cloud Compromise",
+  "description": "Modern attack pattern targeting identity providers (Okta, Azure AD/Entra ID, Google Workspace) and cloud infrastructure. Increasingly used by sophisticated actors who understand that compromising identity = compromising everything.",
+  "typical_actors": ["Scattered Spider", "APT29", "LAPSUS$"],
+  "notable_examples": ["MGM Resorts", "Okta breach", "Microsoft token theft"],
+  "average_dwell_time": "Hours to days",
+  "phases": [
+    {
+      "phase": 1,
+      "name": "Initial Identity Compromise",
+      "duration": "Minutes to hours",
+      "techniques": [
+        {"id": "T1566.004", "name": "Spearphishing Voice", "common": true},
+        {"id": "T1621", "name": "Multi-Factor Authentication Request Generation", "common": true},
+        {"id": "T1111", "name": "Multi-Factor Authentication Interception", "common": true},
+        {"id": "T1078", "name": "Valid Accounts", "common": true}
+      ],
+      "methods": {
+        "social_engineering": [
+          "Vishing IT help desk for password/MFA reset",
+          "MFA fatigue (push bombing)",
+          "Real-time phishing (AiTM/EvilGinx)",
+          "SIM swapping for SMS-based MFA"
+        ],
+        "technical": [
+          "Credential stuffing",
+          "Password spraying",
+          "Compromised session tokens",
+          "OAuth consent phishing"
+        ]
+      },
+      "indicators": [
+        "Password reset requests for privileged accounts",
+        "MFA device registration from unusual locations",
+        "Multiple failed MFA attempts followed by success",
+        "OAuth application consent requests"
+      ],
+      "detection_priority": "Critical"
+    },
+    {
+      "phase": 2,
+      "name": "Identity Provider Access",
+      "duration": "Hours",
+      "techniques": [
+        {"id": "T1538", "name": "Cloud Service Dashboard", "common": true},
+        {"id": "T1098.001", "name": "Additional Cloud Credentials", "common": true},
+        {"id": "T1136.003", "name": "Cloud Account", "common": true}
+      ],
+      "activities": [
+        "Access Okta/Azure AD/Google Admin console",
+        "Enumerate users, groups, applications",
+        "Create additional admin accounts",
+        "Modify MFA settings",
+        "Register new MFA devices"
+      ],
+      "indicators": [
+        "Admin console access from new location/device",
+        "User creation in identity provider",
+        "MFA policy modifications",
+        "Unusual application assignments"
+      ],
+      "detection_priority": "Critical"
+    },
+    {
+      "phase": 3,
+      "name": "Persistence via Identity",
+      "duration": "Minutes to hours",
+      "techniques": [
+        {"id": "T1556.006", "name": "Multi-Factor Authentication", "common": true},
+        {"id": "T1098.005", "name": "Device Registration", "common": true},
+        {"id": "T1098.003", "name": "Additional Cloud Roles", "common": true}
+      ],
+      "methods": [
+        "Create backdoor admin accounts",
+        "Register attacker-controlled MFA devices",
+        "Add OAuth applications with broad permissions",
+        "Modify federation settings",
+        "Create service principals with credentials"
+      ],
+      "indicators": [
+        "New admin accounts created",
+        "OAuth apps with mail/files permissions",
+        "Service principal credential additions",
+        "Federation configuration changes"
+      ],
+      "detection_priority": "Critical"
+    },
+    {
+      "phase": 4,
+      "name": "Federated Application Access",
+      "duration": "Hours to days",
+      "techniques": [
+        {"id": "T1550.001", "name": "Application Access Token", "common": true},
+        {"id": "T1021.007", "name": "Cloud Services", "common": true}
+      ],
+      "targets": [
+        "Email (M365/Gmail) for data and further phishing",
+        "Cloud storage (OneDrive, Google Drive, SharePoint)",
+        "Code repositories (GitHub, GitLab)",
+        "CI/CD pipelines",
+        "Cloud infrastructure (AWS, Azure, GCP)"
+      ],
+      "indicators": [
+        "Access to applications from unusual locations",
+        "Mass data access",
+        "Email forwarding rule creation",
+        "Repository cloning"
+      ],
+      "detection_priority": "High"
+    },
+    {
+      "phase": 5,
+      "name": "Data Collection and Exfiltration",
+      "duration": "Hours to days",
+      "techniques": [
+        {"id": "T1114.002", "name": "Remote Email Collection", "common": true},
+        {"id": "T1213.002", "name": "Sharepoint", "common": true},
+        {"id": "T1530", "name": "Data from Cloud Storage", "common": true}
+      ],
+      "data_targets": [
+        "Email archives",
+        "SharePoint/OneDrive documents",
+        "Source code repositories",
+        "Cloud storage buckets",
+        "Secrets/credentials in code"
+      ],
+      "indicators": [
+        "Mass email access",
+        "Large downloads from cloud storage",
+        "Full repository clones",
+        "eDiscovery or compliance search abuse"
+      ],
+      "detection_priority": "High"
+    },
+    {
+      "phase": 6,
+      "name": "Lateral Movement to On-Premises",
+      "duration": "Hours to days",
+      "techniques": [
+        {"id": "T1078.004", "name": "Cloud Accounts", "common": true},
+        {"id": "T1199", "name": "Trusted Relationship", "common": true}
+      ],
+      "methods": [
+        "Use Azure AD Connect to pivot to on-prem AD",
+        "VPN access with stolen credentials",
+        "Abuse hybrid identity configurations",
+        "Access on-prem resources via cloud proxy"
+      ],
+      "indicators": [
+        "Azure AD Connect suspicious activity",
+        "VPN access from cloud IPs",
+        "On-prem access from cloud-synced accounts"
+      ]
+    }
+  ],
+  "key_vulnerabilities_exploited": {
+    "human": [
+      "Help desk insufficient verification",
+      "MFA fatigue acceptance",
+      "Phishing susceptibility"
+    ],
+    "technical": [
+      "Lack of MFA on admin accounts",
+      "Overly permissive OAuth consent",
+      "Weak conditional access policies",
+      "No monitoring of identity provider logs"
+    ]
+  },
+  "detection_data_sources": {
+    "identity_provider": [
+      "Okta System Log",
+      "Azure AD Sign-in Logs",
+      "Azure AD Audit Logs",
+      "Google Workspace Admin Audit"
+    ],
+    "cloud_services": [
+      "Microsoft 365 Unified Audit Log",
+      "Google Workspace Activity Reports",
+      "AWS CloudTrail",
+      "Azure Activity Log"
+    ]
+  },
+  "prevention_measures": {
+    "identity": [
+      "Phishing-resistant MFA (FIDO2, passkeys)",
+      "Number matching for push MFA",
+      "Conditional access policies",
+      "Privileged Identity Management (PIM)",
+      "Break-glass account procedures"
+    ],
+    "help_desk": [
+      "Out-of-band verification for password resets",
+      "Video verification for privileged accounts",
+      "Callback procedures",
+      "Security awareness training"
+    ],
+    "monitoring": [
+      "Identity provider log monitoring",
+      "Impossible travel detection",
+      "New MFA device alerts",
+      "OAuth application consent monitoring"
+    ]
+  },
+  "response_priorities": [
+    "Revoke active sessions immediately",
+    "Disable compromised accounts",
+    "Remove attacker-created accounts",
+    "Revoke malicious OAuth applications",
+    "Reset credentials for affected users",
+    "Review and remove unauthorized MFA devices",
+    "Audit recent identity provider changes",
+    "Hunt for persistence mechanisms"
+  ]
+}
