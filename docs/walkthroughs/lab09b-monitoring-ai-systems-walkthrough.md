@@ -529,6 +529,7 @@ alerts = monitored_classifier.monitor.check_alerts()
 
 ### Prometheus Format
 
+{% raw %}
 ```python
 def export_prometheus_metrics(self) -> str:
     """Export metrics in Prometheus text format."""
@@ -560,6 +561,7 @@ def export_prometheus_metrics(self) -> str:
     
     return '\n'.join(lines)
 ```
+{% endraw %}
 
 ### JSON Export
 
