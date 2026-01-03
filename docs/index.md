@@ -1299,7 +1299,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
         <span class="difficulty difficulty-2">&#9733;&#9733;&#9734; Intermediate</span>
       </div>
     </a>
-    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab06b-embeddings-vectors" class="lab-card" data-category="llm">
+    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab06a-embeddings-vectors" class="lab-card" data-category="llm">
       <div class="lab-header">
         <span class="lab-number llm">06b</span>
         <span class="lab-title">Embeddings & Vectors</span>

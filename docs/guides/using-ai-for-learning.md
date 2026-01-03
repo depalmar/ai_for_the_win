@@ -187,7 +187,7 @@ Include test cases so I can verify my solutions.
 When learning new concepts:
 ```
 How does [new concept] relate to [previous concept]?
-For example, how does RAG (Lab 06) build on embeddings (Lab 06b)?
+For example, how does RAG (Lab 06) build on embeddings (Lab 06a)?
 Help me see the bigger picture.
 ```
 

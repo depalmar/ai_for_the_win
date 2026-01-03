@@ -1,4 +1,4 @@
-# Lab 06b: Embeddings & Vectors Walkthrough
+# Lab 06a: Embeddings & Vectors Walkthrough
 
 Step-by-step guide to understanding how AI captures meaning through embeddings.
 

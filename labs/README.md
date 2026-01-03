@@ -82,13 +82,13 @@ Learn to apply Large Language Models to security problems.
 | 04 | [LLM Log Analysis](./lab04-llm-log-analysis/) | Prompt engineering | Structured outputs, IOC extraction |
 | 04b | [Your First AI Agent](./lab04b-first-ai-agent/) | **NEW! Bridge lab** | Tool calling, ReAct basics |
 | 06 | [Security RAG](./lab06-security-rag/) | Vector search + LLM | Embeddings, ChromaDB, retrieval |
-| 06b | [Embeddings & Vectors](./lab06b-embeddings-vectors/) | **NEW! Bridge lab** | How embeddings work, semantic search |
+| 06b | [Embeddings & Vectors](./lab06a-embeddings-vectors/) | **NEW! Bridge lab** | How embeddings work, semantic search |
 | 07 | [YARA Generator](./lab07-yara-generator/) | AI code generation | Binary analysis, rule generation |
 | 07a | [Binary Analysis Basics](./lab07a-binary-basics/) | **NEW! Bridge lab** | PE structure, entropy, imports |
 
 **Progression:**
 ```
-Lab 04 (Prompts) → Lab 04b (First Agent) → Lab 06b (Embeddings) → Lab 06 (RAG) → Lab 07 (YARA)
+Lab 04 (Prompts) → Lab 04b (First Agent) → Lab 06a (Embeddings) → Lab 06 (RAG) → Lab 07 (YARA)
      ↓                   ↓                        ↓                    ↓              ↓
  "Parse logs       "Simple tool           "How vectors        "Build RAG      "Generate
   with LLM"         calling"               work"               system"         YARA rules"
@@ -784,7 +784,7 @@ Track your progress:
 - [ ] Lab 03b: ML vs LLM Decision (bridge lab)
 - [ ] Lab 04: LLM Log Analysis
 - [ ] Lab 04b: Your First AI Agent (NEW - bridge lab)
-- [ ] Lab 06b: Embeddings & Vectors (how vectors work)
+- [ ] Lab 06a: Embeddings & Vectors (how vectors work)
 - [ ] Lab 07a: Binary Analysis Basics (PE fundamentals)
 - [ ] Lab 05: Threat Intel Agent
 - [ ] Lab 06: Security RAG
