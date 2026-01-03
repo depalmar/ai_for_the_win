@@ -401,7 +401,7 @@ def setup_llm(provider: str = "anthropic"):
         if not api_key:
             raise ValueError("OPENAI_API_KEY not set. Add to .env file.")
 
-        llm = ChatOpenAI(model="gpt-4o", temperature=0, max_tokens=4096)
+        llm = ChatOpenAI(model="gpt-5", temperature=0, max_tokens=4096)
 
     elif provider == "gemini":
         if not GEMINI_AVAILABLE:

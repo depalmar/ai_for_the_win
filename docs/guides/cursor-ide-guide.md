@@ -439,8 +439,8 @@ Once configured, MCP tools are available in chat:
 | ---------------------------- | --------------------------------------- | --------- | ---- |
 | **claude-sonnet-4-20250514** | Complex security analysis, long context | Medium    | $$   |
 | **claude-opus-4-5**          | Deepest reasoning, architecture design  | Slow      | $$$  |
-| **gpt-4o**                   | General coding, function calling        | Medium    | $$   |
-| **gpt-4o**                   | Fast responses, balanced quality        | Fast      | $    |
+| **gpt-5**                   | General coding, function calling        | Medium    | $$   |
+| **gpt-5**                   | Fast responses, balanced quality        | Fast      | $    |
 | **cursor-small**             | Quick completions, simple tasks         | Very Fast | $    |
 
 ### Model-Specific Settings

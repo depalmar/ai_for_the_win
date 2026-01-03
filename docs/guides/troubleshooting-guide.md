@@ -194,8 +194,8 @@ pip install scikit-learn
 **Status:** ✅ **RESOLVED** - All tests now passing (21/21)
 
 **What was fixed:**
-- Updated LangChain ChatAnthropic model name to current API identifier (`claude-sonnet-4-5-20250929`)
-- Updated ChatOpenAI model to `gpt-4o` (from deprecated `gpt-4-turbo`)
+- Updated LangChain ChatAnthropic model name to current API identifier (`claude-sonnet-4-20250514`)
+- Updated ChatOpenAI model to `gpt-5` (from deprecated `gpt-4o`)
 - Updated ChatGoogleGenerativeAI model to `gemini-2.5-pro` (from deprecated `gemini-1.5-pro`)
 
 All agent tests now pass successfully. If you still see failures, ensure you have:
@@ -221,8 +221,8 @@ pip install chromadb
 **Status:** ✅ **RESOLVED** - All tests now passing (11/11)
 
 **What was fixed:**
-- Updated Anthropic SDK model name to current API identifier (`claude-sonnet-4-5-20250929`)
-- Updated OpenAI model to `gpt-4o` (from deprecated `gpt-4-turbo`)
+- Updated Anthropic SDK model name to current API identifier (`claude-sonnet-4-20250514`)
+- Updated OpenAI model to `gpt-5` (from deprecated `gpt-4o`)
 - Updated Google Gemini model to `gemini-2.5-pro` (from deprecated `gemini-1.5-pro`)
 
 All LLM provider detection now works correctly. If you still see "No LLM provider available":

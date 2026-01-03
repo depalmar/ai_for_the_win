@@ -143,7 +143,7 @@ def get_llm(
     elif provider == "openai":
         from langchain_openai import ChatOpenAI
         return ChatOpenAI(
-            model=model or "gpt-4o",
+            model=model or "gpt-5",
             temperature=temperature,
             max_tokens=max_tokens
         )
@@ -175,7 +175,7 @@ llm = get_llm()
 
 # Or specify explicitly
 llm = get_llm(provider="anthropic", model="claude-sonnet-4-20250514")
-llm = get_llm(provider="openai", model="gpt-4o")
+llm = get_llm(provider="openai", model="gpt-5")
 llm = get_llm(provider="google", model="gemini-2.0-flash")
 llm = get_llm(provider="ollama", model="llama3.1:8b")
 ```

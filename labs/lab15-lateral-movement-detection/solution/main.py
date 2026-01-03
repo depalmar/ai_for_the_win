@@ -816,7 +816,7 @@ Provide analysis in JSON format:
                 result_text = response.content[0].text
             elif provider == "openai":
                 response = client.chat.completions.create(
-                    model="gpt-4o",
+                    model="gpt-5",
                     messages=[{"role": "user", "content": prompt}],
                     response_format={"type": "json_object"},
                 )

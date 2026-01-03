@@ -81,7 +81,7 @@ PROVIDER_CONFIG = {
     ),
     "openai": ProviderConfig(
         env_key="OPENAI_API_KEY",
-        default_model="gpt-4o",
+        default_model="gpt-5",
         max_tokens_param="max_tokens",
         supports_extended_tokens=True,
     ),
@@ -300,6 +300,193 @@ def get_report_llm():
 def get_investigation_llm():
     """Get an LLM configured for full investigations (16384 tokens)."""
     return get_llm(task_type="full_investigation")
+
+
+# =============================================================================
+# DIRECT API SUPPORT (No LangChain required)
+# =============================================================================
+
+
+def query_llm(
+    prompt: str,
+    system_prompt: str = "You are a helpful security analyst assistant.",
+    task_type: TaskType = "log_analysis",
+    provider: Optional[str] = None,
+    model: Optional[str] = None,
+    temperature: float = 0.0,
+) -> str:
+    """
+    Query an LLM directly without LangChain.
+
+    Works with Anthropic, OpenAI, or Google APIs directly.
+    Auto-detects provider based on available API keys.
+
+    Args:
+        prompt: The user prompt to send.
+        system_prompt: System instructions for the model.
+        task_type: Type of task (affects token limits).
+        provider: LLM provider (auto-detected if None).
+        model: Model name (uses provider default if None).
+        temperature: Sampling temperature.
+
+    Returns:
+        The model's response text.
+
+    Example:
+        >>> response = query_llm("Analyze this log entry for threats...")
+        >>> print(response)
+    """
+    provider_name, config = get_provider_config(provider)
+    model_name = model or config.default_model
+    max_tokens = TOKEN_LIMITS.get(task_type, DEFAULT_MAX_TOKENS)
+
+    if provider_name == "anthropic":
+        try:
+            from anthropic import Anthropic
+
+            client = Anthropic()
+            response = client.messages.create(
+                model=model_name,
+                max_tokens=max_tokens,
+                temperature=temperature,
+                system=system_prompt,
+                messages=[{"role": "user", "content": prompt}],
+            )
+            return response.content[0].text
+        except ImportError:
+            raise ImportError("pip install anthropic")
+
+    elif provider_name == "openai":
+        try:
+            from openai import OpenAI
+
+            client = OpenAI()
+            response = client.chat.completions.create(
+                model=model_name,
+                max_tokens=max_tokens,
+                temperature=temperature,
+                messages=[
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": prompt},
+                ],
+            )
+            return response.choices[0].message.content
+        except ImportError:
+            raise ImportError("pip install openai")
+
+    elif provider_name == "google":
+        try:
+            import google.generativeai as genai
+
+            genai.configure(api_key=os.environ.get("GOOGLE_API_KEY"))
+            model_instance = genai.GenerativeModel(model_name)
+            response = model_instance.generate_content(
+                f"{system_prompt}\n\n{prompt}",
+                generation_config={"max_output_tokens": max_tokens, "temperature": temperature},
+            )
+            return response.text
+        except ImportError:
+            raise ImportError("pip install google-generativeai")
+
+    else:
+        raise ValueError(f"Direct API not supported for provider: {provider_name}")
+
+
+def get_client(provider: Optional[str] = None):
+    """
+    Get a raw API client for the detected/specified provider.
+
+    Returns:
+        Tuple of (provider_name, client_instance)
+
+    Example:
+        >>> provider, client = get_client()
+        >>> if provider == "anthropic":
+        ...     response = client.messages.create(...)
+    """
+    provider_name, config = get_provider_config(provider)
+
+    if provider_name == "anthropic":
+        from anthropic import Anthropic
+
+        return provider_name, Anthropic()
+    elif provider_name == "openai":
+        from openai import OpenAI
+
+        return provider_name, OpenAI()
+    elif provider_name == "google":
+        import google.generativeai as genai
+
+        genai.configure(api_key=os.environ.get("GOOGLE_API_KEY"))
+        return provider_name, genai
+    else:
+        raise ValueError(f"Unknown provider: {provider_name}")
+
+
+# =============================================================================
+# COLAB/NOTEBOOK HELPER - Copy this cell to notebooks for standalone use
+# =============================================================================
+
+NOTEBOOK_SETUP_CODE = '''
+# === LLM Setup (Provider-Agnostic) ===
+# This cell auto-detects your LLM provider based on API keys.
+# Set ONE of these in Colab secrets or environment:
+#   - ANTHROPIC_API_KEY (Claude)
+#   - OPENAI_API_KEY (GPT-4)
+#   - GOOGLE_API_KEY (Gemini)
+
+import os
+
+def setup_llm():
+    """Detect and configure LLM provider."""
+    providers = {
+        "anthropic": ("ANTHROPIC_API_KEY", "claude-sonnet-4-20250514"),
+        "openai": ("OPENAI_API_KEY", "gpt-5"),
+        "google": ("GOOGLE_API_KEY", "gemini-2.5-pro"),
+    }
+    
+    for name, (key, model) in providers.items():
+        if os.environ.get(key):
+            print(f"✅ Using {name.title()} ({model})")
+            return name, model
+    
+    raise ValueError("❌ No API key found. Set ANTHROPIC_API_KEY, OPENAI_API_KEY, or GOOGLE_API_KEY")
+
+def query_llm(prompt, system_prompt="You are a security analyst.", max_tokens=4096):
+    """Query the configured LLM provider."""
+    provider, model = setup_llm()
+    
+    if provider == "anthropic":
+        from anthropic import Anthropic
+        client = Anthropic()
+        response = client.messages.create(
+            model=model, max_tokens=max_tokens, system=system_prompt,
+            messages=[{"role": "user", "content": prompt}]
+        )
+        return response.content[0].text
+    
+    elif provider == "openai":
+        from openai import OpenAI
+        client = OpenAI()
+        response = client.chat.completions.create(
+            model=model, max_tokens=max_tokens,
+            messages=[{"role": "system", "content": system_prompt}, {"role": "user", "content": prompt}]
+        )
+        return response.choices[0].message.content
+    
+    elif provider == "google":
+        import google.generativeai as genai
+        genai.configure(api_key=os.environ.get("GOOGLE_API_KEY"))
+        model_instance = genai.GenerativeModel(model)
+        response = model_instance.generate_content(f"{system_prompt}\\n\\n{prompt}")
+        return response.text
+
+# Test the setup
+try:
+    provider, model = setup_llm()
+except ValueError as e:
+    print(e)
+'''
 
 
 # =============================================================================

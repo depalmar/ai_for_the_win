@@ -125,7 +125,7 @@ Your task: Analyze the log entry between <LOG> tags and return JSON."""
 
 def analyze_log(log_entry: str) -> dict:
     response = client.messages.create(
-        model="claude-sonnet-4-5-20250929",
+        model="claude-sonnet-4-20250514",
         system=SYSTEM_PROMPT,
         messages=[{
             "role": "user",

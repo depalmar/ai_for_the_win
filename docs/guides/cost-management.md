@@ -67,7 +67,7 @@ Cost = (Input Tokens × Input Price) + (Output Tokens × Output Price)
 ```python
 import tiktoken  # For OpenAI models
 
-def count_tokens(text: str, model: str = "gpt-4o") -> int:
+def count_tokens(text: str, model: str = "gpt-5") -> int:
     """Count tokens for a given text."""
     encoding = tiktoken.encoding_for_model(model)
     return len(encoding.encode(text))
@@ -225,7 +225,7 @@ tracker = UsageTracker()
 def analyze_with_tracking(client, prompt: str, tracker: UsageTracker) -> str:
     """Make API call with usage tracking."""
     response = client.messages.create(
-        model="claude-sonnet-4-5-20250929",
+        model="claude-sonnet-4-20250514",
         max_tokens=1024,
         messages=[{"role": "user", "content": prompt}]
     )
@@ -262,7 +262,7 @@ class BudgetLimitedClient:
             )
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-5-20250929",
+            model="claude-sonnet-4-20250514",
             max_tokens=1024,
             messages=[{"role": "user", "content": prompt}]
         )
@@ -355,7 +355,7 @@ Logs:
 {chr(10).join(f'{j}. {log}' for j, log in enumerate(batch))}"""
 
         response = client.messages.create(
-            model="claude-sonnet-4-5-20250929",
+            model="claude-sonnet-4-20250514",
             max_tokens=2048,
             messages=[{"role": "user", "content": prompt}]
         )
@@ -399,7 +399,7 @@ class CachedAnalyzer:
 
         self.cache_misses += 1
         response = self.client.messages.create(
-            model="claude-sonnet-4-5-20250929",
+            model="claude-sonnet-4-20250514",
             max_tokens=1024,
             messages=[{"role": "user", "content": text}]
         )
@@ -437,7 +437,7 @@ def smart_analyze(logs: list[str]) -> list[dict]:
         if "YES" in quick_response.content[0].text.upper():
             # Stage 2: Deep analysis only for suspicious logs
             detailed_response = client.messages.create(
-                model="claude-sonnet-4-5-20250929",  # $3/1M input
+                model="claude-sonnet-4-20250514",  # $3/1M input
                 max_tokens=500,
                 messages=[{"role": "user", "content": f"Analyze this suspicious log:\n{log}"}]
             )

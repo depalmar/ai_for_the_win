@@ -104,7 +104,7 @@ def get_llm():
     elif LLM_PROVIDER == "openai":
         from langchain_openai import ChatOpenAI
 
-        return ChatOpenAI(model="gpt-4o", temperature=0)
+        return ChatOpenAI(model="gpt-5", temperature=0)
     return None
 
 

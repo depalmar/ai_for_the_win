@@ -344,7 +344,7 @@ Only include TTPs clearly indicated by the text."""
                 result_text = response.content[0].text
             elif provider == "openai":
                 response = client.chat.completions.create(
-                    model="gpt-4o",
+                    model="gpt-5",
                     messages=[{"role": "user", "content": prompt}],
                     response_format={"type": "json_object"},
                 )
@@ -855,7 +855,7 @@ Create a concise profile including:
                 return response.content[0].text
             elif provider == "openai":
                 response = client.chat.completions.create(
-                    model="gpt-4o", messages=[{"role": "user", "content": prompt}]
+                    model="gpt-5", messages=[{"role": "user", "content": prompt}]
                 )
                 return response.choices[0].message.content
             elif provider == "google":

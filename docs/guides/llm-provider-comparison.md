@@ -267,7 +267,7 @@ import anthropic
 client = anthropic.Anthropic()
 
 response = client.messages.create(
-    model="claude-sonnet-4-5-20250929",
+    model="claude-sonnet-4-20250514",
     max_tokens=1024,
     messages=[{
         "role": "user",
@@ -302,7 +302,7 @@ from openai import OpenAI
 client = OpenAI()
 
 response = client.chat.completions.create(
-    model="gpt-4o",
+    model="gpt-5",
     messages=[{
         "role": "user",
         "content": "Analyze this log for security threats: {log_entry}"
@@ -455,7 +455,7 @@ def high_confidence_analysis(text: str) -> dict:
 from openai import OpenAI
 client = OpenAI()
 response = client.chat.completions.create(
-    model="gpt-4o",
+    model="gpt-5",
     messages=[{"role": "user", "content": prompt}]
 )
 result = response.choices[0].message.content
@@ -464,7 +464,7 @@ result = response.choices[0].message.content
 import anthropic
 client = anthropic.Anthropic()
 response = client.messages.create(
-    model="claude-sonnet-4-5-20250929",
+    model="claude-sonnet-4-20250514",
     max_tokens=1024,
     messages=[{"role": "user", "content": prompt}]
 )
@@ -476,7 +476,7 @@ result = response.content[0].text
 ```python
 # Claude
 response = client.messages.create(
-    model="claude-sonnet-4-5-20250929",
+    model="claude-sonnet-4-20250514",
     max_tokens=1024,
     messages=[{"role": "user", "content": prompt}]
 )
@@ -498,8 +498,8 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 def get_llm(provider: str = "claude"):
     """Get LLM instance by provider name."""
     providers = {
-        "claude": ChatAnthropic(model="claude-sonnet-4-5-20250929"),
-        "openai": ChatOpenAI(model="gpt-4o"),
+        "claude": ChatAnthropic(model="claude-sonnet-4-20250514"),
+        "openai": ChatOpenAI(model="gpt-5"),
         "gemini": ChatGoogleGenerativeAI(model="gemini-2.5-pro"),
     }
     return providers.get(provider)

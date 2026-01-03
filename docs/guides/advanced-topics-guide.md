@@ -603,7 +603,7 @@ with open("security_training.jsonl", "rb") as f:
 # Create fine-tuning job
 job = client.fine_tuning.jobs.create(
     training_file=training_file.id,
-    model="gpt-4o-mini-2024-07-18",  # Base model
+    model="gpt-5-mini",  # Base model
     hyperparameters={
         "n_epochs": 3,
         "batch_size": 4,
