@@ -8,7 +8,7 @@ Find your path based on your current role and goals. Each path is ordered for ma
 
 | Your Role | Your Goal | Jump To |
 |-----------|-----------|---------|
-| SOC Analyst (Tier 1-2) | Automate alert triage, reduce fatigue | [SOC Analyst Path](#-soc-analyst-path) |
+| AI Blue Team (SOC/IR) | Automate alert triage, reduce fatigue | [AI Blue Team Path](#-ai-blue-team-path) |
 | SOC Analyst (Tier 3) / IR | Faster investigations, AI-assisted response | [Incident Responder Path](#-incident-responder-path) |
 | Threat Hunter | Find unknowns, build detection | [Threat Hunter Path](#-threat-hunter-path) |
 | Detection Engineer | Better rules, ML-powered detection | [Detection Engineer Path](#-detection-engineer-path) |
@@ -20,7 +20,7 @@ Find your path based on your current role and goals. Each path is ordered for ma
 
 ---
 
-## 🔵 SOC Analyst Path
+## 🔵 AI Blue Team Path (SOC)
 
 **Goal**: Reduce alert fatigue, automate triage, get AI to do the boring stuff.
 
