@@ -815,15 +815,37 @@ Track your progress:
 
 Test your skills with capture-the-flag challenges! These are separate from labs and provide hands-on practice.
 
-| Challenge Category | Description | Difficulty |
-|--------------------|-------------|------------|
-| [Phishing Analysis](../ctf-challenges/phishing/) | Analyze suspicious emails | Beginner |
-| [Log Analysis](../ctf-challenges/log-analysis/) | Find threats in logs | Beginner-Intermediate |
-| [Malware Triage](../ctf-challenges/malware/) | Analyze malware samples | Intermediate |
-| [Threat Intel](../ctf-challenges/threat-intel/) | Extract and correlate IOCs | Intermediate |
-| [Incident Response](../ctf-challenges/incident-response/) | Respond to simulated incidents | Advanced |
+### Beginner Challenges (100 pts each)
 
-> 💡 **Tip**: Complete relevant labs before attempting CTF challenges. For example, do Lab 01 before Phishing CTFs.
+| Challenge | After Lab | Skills Tested |
+|-----------|-----------|---------------|
+| [Log Detective](../ctf-challenges/beginner/challenge-01/) | Lab 04 | Log analysis, pattern recognition |
+| [Phish Finder](../ctf-challenges/beginner/challenge-02/) | Lab 01 | Email classification, IOC extraction |
+| [Hidden IOC](../ctf-challenges/beginner/challenge-03/) | Lab 05 | Data parsing, threat intel |
+| [Malware Classifier](../ctf-challenges/beginner/challenge-04/) | Lab 02 | Feature engineering, ML |
+| [Prompt Injection 101](../ctf-challenges/beginner/challenge-05/) | Lab 20 | AI security, prompt attacks |
+
+### Intermediate Challenges (250 pts each)
+
+| Challenge | After Lab | Skills Tested |
+|-----------|-----------|---------------|
+| [C2 Hunter](../ctf-challenges/intermediate/challenge-01/) | Lab 14 | Beaconing, DNS tunneling |
+| [Memory Forensics](../ctf-challenges/intermediate/challenge-02/) | Lab 13 | Volatility, process analysis |
+| [Adversarial Samples](../ctf-challenges/intermediate/challenge-03/) | Lab 17 | ML evasion attacks |
+| [Agent Investigation](../ctf-challenges/intermediate/challenge-04/) | Lab 04b | ReAct pattern, tool use |
+| [Ransomware Response](../ctf-challenges/intermediate/challenge-05/) | Lab 11 | Incident analysis, recovery |
+
+### Advanced Challenges (500 pts each)
+
+| Challenge | After Lab | Skills Tested |
+|-----------|-----------|---------------|
+| [APT Attribution](../ctf-challenges/advanced/challenge-01/) | Lab 16 | TTP analysis, profiling |
+| [Model Poisoning](../ctf-challenges/advanced/challenge-02/) | Lab 17 | Data poisoning, defense |
+| [Cloud Compromise](../ctf-challenges/advanced/challenge-03/) | Lab 19 | Multi-cloud security |
+| [Zero-Day Detection](../ctf-challenges/advanced/challenge-04/) | Lab 03 | Anomaly detection |
+| [Full IR Scenario](../ctf-challenges/advanced/challenge-05/) | Lab 10 | Complete IR workflow |
+
+> 💡 **Tip**: Complete the recommended lab before attempting each CTF challenge for the best learning experience. Labs teach the concepts; CTFs test your skills!
 
 ---
 

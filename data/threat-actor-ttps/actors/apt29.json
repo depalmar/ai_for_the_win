@@ -270,7 +270,8 @@
   },
   "references": [
     "https://attack.mitre.org/groups/G0016/",
-    "https://www.fireeye.com/blog/threat-research/2020/12/evasive-attacker-leverages-solarwinds-supply-chain-compromises-with-sunburst-backdoor.html",
-    "https://www.microsoft.com/security/blog/2021/05/27/new-sophisticated-email-based-attack-from-nobelium/"
+    "https://www.cisa.gov/news-events/cybersecurity-advisories/aa21-116a",
+    "https://www.microsoft.com/security/blog/2021/05/27/new-sophisticated-email-based-attack-from-nobelium/",
+    "https://www.justice.gov/opa/pr/four-russian-government-employees-charged-two-historical-hacking-campaigns"
   ]
 }
