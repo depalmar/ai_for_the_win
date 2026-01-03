@@ -56,28 +56,28 @@ By completing this lab, you will:
 
 ### Timeline
 
-| Year | Milestone | Significance |
-|------|-----------|--------------|
-| **1989** | AIDS Trojan | First ransomware (floppy disk, symmetric encryption) |
-| **2005** | GPCode | First to use asymmetric (RSA) encryption |
-| **2013** | CryptoLocker | Bitcoin payments, professional operations |
-| **2016** | Locky | Mass email campaigns, macro-based delivery |
-| **2017** | WannaCry | Worm capabilities, global impact (SMB exploits) |
-| **2019** | Maze | Double extortion (encrypt + leak data) |
-| **2021** | REvil/Kaseya | Supply chain attacks, $70M ransom |
-| **2023+** | LockBit 3.0 | RaaS ecosystem, bug bounties, triple extortion |
+| Year      | Milestone    | Significance                                         |
+| --------- | ------------ | ---------------------------------------------------- |
+| **1989**  | AIDS Trojan  | First ransomware (floppy disk, symmetric encryption) |
+| **2005**  | GPCode       | First to use asymmetric (RSA) encryption             |
+| **2013**  | CryptoLocker | Bitcoin payments, professional operations            |
+| **2016**  | Locky        | Mass email campaigns, macro-based delivery           |
+| **2017**  | WannaCry     | Worm capabilities, global impact (SMB exploits)      |
+| **2019**  | Maze         | Double extortion (encrypt + leak data)               |
+| **2021**  | REvil/Kaseya | Supply chain attacks, $70M ransom                    |
+| **2023+** | LockBit 3.0  | RaaS ecosystem, bug bounties, triple extortion       |
 
 ### AI/LLM Evolution in Ransomware
 
 Modern ransomware groups are increasingly leveraging AI:
 
-| AI Use Case | How Attackers Use It | Defensive Implications |
-|-------------|---------------------|------------------------|
+| AI Use Case             | How Attackers Use It                                          | Defensive Implications                                    |
+| ----------------------- | ------------------------------------------------------------- | --------------------------------------------------------- |
 | **Phishing generation** | LLMs create convincing, personalized phishing emails at scale | Traditional detection struggles with AI-generated content |
-| **Code obfuscation** | AI generates polymorphic code to evade signatures | Need behavioral detection, not just signatures |
-| **Target research** | AI scrapes and analyzes victim organizations | Attackers arrive better prepared |
-| **Negotiation** | Chatbots handle ransom negotiations 24/7 | More professional criminal operations |
-| **Translation** | Instant localization of ransom notes | Global reach without language barriers |
+| **Code obfuscation**    | AI generates polymorphic code to evade signatures             | Need behavioral detection, not just signatures            |
+| **Target research**     | AI scrapes and analyzes victim organizations                  | Attackers arrive better prepared                          |
+| **Negotiation**         | Chatbots handle ransom negotiations 24/7                      | More professional criminal operations                     |
+| **Translation**         | Instant localization of ransom notes                          | Global reach without language barriers                    |
 
 > ⚠️ **Defender's Edge**: AI works both ways. The same capabilities that help attackers can power better detection (Labs 09-11).
 
@@ -116,15 +116,15 @@ Modern ransomware groups are increasingly leveraging AI:
 
 ### Current Active Threats (2024-2025)
 
-| Family | Characteristics | Notable TTPs |
-|--------|-----------------|--------------|
-| **LockBit 3.0** | Most prolific RaaS, bug bounty program | Fast encryption, StealBit exfiltration |
-| **BlackCat/ALPHV** | Rust-based, cross-platform | Configurable, triple extortion |
-| **Cl0p** | MOVEit exploits, data theft focus | Mass exploitation campaigns |
-| **Play** | Healthcare/critical infrastructure | Living-off-the-land techniques |
-| **Akira** | Enterprise targeting | VPN exploitation, Conti lineage |
-| **Royal/BlackSuit** | Government sector targeting | Callback phishing, BazarLoader |
-| **Rhysida** | Healthcare, education | PowerShell-heavy, PrintNightmare |
+| Family              | Characteristics                        | Notable TTPs                           |
+| ------------------- | -------------------------------------- | -------------------------------------- |
+| **LockBit 3.0**     | Most prolific RaaS, bug bounty program | Fast encryption, StealBit exfiltration |
+| **BlackCat/ALPHV**  | Rust-based, cross-platform             | Configurable, triple extortion         |
+| **Cl0p**            | MOVEit exploits, data theft focus      | Mass exploitation campaigns            |
+| **Play**            | Healthcare/critical infrastructure     | Living-off-the-land techniques         |
+| **Akira**           | Enterprise targeting                   | VPN exploitation, Conti lineage        |
+| **Royal/BlackSuit** | Government sector targeting            | Callback phishing, BazarLoader         |
+| **Rhysida**         | Healthcare, education                  | PowerShell-heavy, PrintNightmare       |
 
 ### Family Identification Markers
 
@@ -193,19 +193,19 @@ RANSOMWARE_SIGNATURES = {
 
 ### MITRE ATT&CK Mapping
 
-| Phase | Technique ID | Technique Name |
-|-------|--------------|----------------|
-| Initial Access | T1566 | Phishing |
-| Initial Access | T1190 | Exploit Public-Facing Application |
-| Execution | T1059.001 | PowerShell |
-| Persistence | T1053.005 | Scheduled Task |
-| Discovery | T1087 | Account Discovery |
-| Lateral Movement | T1021.002 | SMB/Windows Admin Shares |
-| Collection | T1560 | Archive Collected Data |
-| Exfiltration | T1567 | Exfiltration Over Web Service |
-| **Impact** | **T1486** | **Data Encrypted for Impact** |
-| **Impact** | **T1490** | **Inhibit System Recovery** |
-| Impact | T1489 | Service Stop |
+| Phase            | Technique ID | Technique Name                    |
+| ---------------- | ------------ | --------------------------------- |
+| Initial Access   | T1566        | Phishing                          |
+| Initial Access   | T1190        | Exploit Public-Facing Application |
+| Execution        | T1059.001    | PowerShell                        |
+| Persistence      | T1053.005    | Scheduled Task                    |
+| Discovery        | T1087        | Account Discovery                 |
+| Lateral Movement | T1021.002    | SMB/Windows Admin Shares          |
+| Collection       | T1560        | Archive Collected Data            |
+| Exfiltration     | T1567        | Exfiltration Over Web Service     |
+| **Impact**       | **T1486**    | **Data Encrypted for Impact**     |
+| **Impact**       | **T1490**    | **Inhibit System Recovery**       |
+| Impact           | T1489        | Service Stop                      |
 
 ---
 
@@ -221,14 +221,14 @@ FILE_INDICATORS = {
         ".lockbit", ".alphv", ".conti", ".royal",
         ".akira", ".play", ".rhysida", ".blacksuit"
     ],
-    
+
     # Ransom note filenames
     "ransom_notes": [
         "README.txt", "DECRYPT.txt", "HOW_TO_DECRYPT.txt",
         "RECOVER-FILES.txt", "!README!.txt", "_readme.txt",
         "RESTORE_FILES.txt", "YOUR_FILES.txt"
     ],
-    
+
     # Mass file operations (entropy change)
     "behavioral": [
         "Rapid file modifications (>100/min)",
@@ -250,7 +250,7 @@ PROCESS_INDICATORS = {
         "bcdedit /set {default} recoveryenabled no",
         "wbadmin delete catalog -quiet"
     ],
-    
+
     # Service disruption
     "service_stops": [
         "net stop \"SQL Server\"",
@@ -258,7 +258,7 @@ PROCESS_INDICATORS = {
         "sc config vss start= disabled",
         "taskkill /f /im sqlservr.exe"
     ],
-    
+
     # Encryption process patterns
     "encryption_behavior": [
         "High CPU usage from unknown process",
@@ -271,14 +271,14 @@ PROCESS_INDICATORS = {
 
 ### Windows Event Log Indicators
 
-| Event ID | Log | Indicator |
-|----------|-----|-----------|
-| 4688 | Security | Process creation (track PowerShell, cmd) |
-| 4663 | Security | File access auditing (mass access) |
-| 7045 | System | Service installation (persistence) |
-| 1102 | Security | Audit log cleared (defense evasion) |
-| 4624/4625 | Security | Logon events (lateral movement) |
-| 5140 | Security | Network share access |
+| Event ID  | Log      | Indicator                                |
+| --------- | -------- | ---------------------------------------- |
+| 4688      | Security | Process creation (track PowerShell, cmd) |
+| 4663      | Security | File access auditing (mass access)       |
+| 7045      | System   | Service installation (persistence)       |
+| 1102      | Security | Audit log cleared (defense evasion)      |
+| 4624/4625 | Security | Logon events (lateral movement)          |
+| 5140      | Security | Network share access                     |
 
 ---
 
@@ -316,11 +316,11 @@ PROCESS_INDICATORS = {
 
 ### Double and Triple Extortion
 
-| Type | Description | Pressure |
-|------|-------------|----------|
-| **Single** | Encrypt files only | "Pay or lose data" |
-| **Double** | Encrypt + exfiltrate data | "Pay or we leak your data" |
-| **Triple** | Encrypt + exfiltrate + DDoS/contact customers | "Pay or we attack more" |
+| Type       | Description                                   | Pressure                   |
+| ---------- | --------------------------------------------- | -------------------------- |
+| **Single** | Encrypt files only                            | "Pay or lose data"         |
+| **Double** | Encrypt + exfiltrate data                     | "Pay or we leak your data" |
+| **Triple** | Encrypt + exfiltrate + DDoS/contact customers | "Pay or we attack more"    |
 
 ### Response Decision Framework
 
@@ -388,7 +388,7 @@ Given these artifacts, identify the ransomware family:
 def identify_family(artifacts: dict) -> str:
     """
     Identify ransomware family from artifacts.
-    
+
     Args:
         artifacts: {
             "encrypted_extension": ".lockbit",
@@ -396,10 +396,10 @@ def identify_family(artifacts: dict) -> str:
             "note_content": "LockBit 3.0 ... contact us at ...",
             "processes": ["unknown_binary.exe"]
         }
-    
+
     Returns:
         Family name and confidence
-    
+
     TODO: Implement family identification logic
     """
     pass
@@ -429,7 +429,7 @@ Use an LLM to extract IOCs from a ransom note:
 def extract_iocs_from_note(note_content: str) -> dict:
     """
     Use LLM to extract indicators from ransom note.
-    
+
     Returns:
         {
             "onion_urls": [...],
@@ -493,24 +493,28 @@ lab11a-ransomware-fundamentals/
 ## 📚 Resources
 
 ### Free Resources
+
 - [No More Ransom Project](https://www.nomoreransom.org/) - Free decryptors
 - [CISA StopRansomware](https://www.cisa.gov/stopransomware) - Alerts and guidance
 - [ID Ransomware](https://id-ransomware.malwarehunterteam.com/) - Family identification
 - [Ransomware Overview (MITRE)](https://attack.mitre.org/techniques/T1486/)
 
 ### Purple Team & Detection Validation
+
 - [Atomic Red Team](https://github.com/redcanaryco/atomic-red-team) - Library of tests mapped to MITRE ATT&CK
 - [MITRE Caldera](https://caldera.mitre.org/) - Automated adversary emulation platform
 - [Atomic Red Team - Ransomware Tests](https://github.com/redcanaryco/atomic-red-team/tree/master/atomics/T1486) - Specific T1486 tests
 - [Purple Team Exercise Framework](https://github.com/scythe-io/purple-team-exercise-framework) - Structured exercises
 
 ### Threat Intelligence
+
 - [Mandiant Ransomware Reports](https://www.mandiant.com/)
 - [Microsoft Threat Intelligence](https://www.microsoft.com/en-us/security/blog/)
 - [Cisco Talos](https://blog.talosintelligence.com/)
 - [CrowdStrike Adversary Reports](https://www.crowdstrike.com/)
 
 ### SANS Resources
+
 - [FOR528: Ransomware for Incident Responders](https://www.sans.org/cyber-security-courses/ransomware-incident-responders/) - Dedicated ransomware course by **Ryan Chapman**
 - [GIAC GRIT](https://www.giac.org/certifications/response-industrial-defense-tactics-grit/) - Ransomware incident response certification
 - [Ryan Chapman's Ransomware Research](https://www.sans.org/profiles/ryan-chapman/) - SANS instructor, ransomware specialist
