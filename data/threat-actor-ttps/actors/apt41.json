@@ -1,0 +1,254 @@
+{
+  "id": "apt41",
+  "name": "APT41",
+  "aliases": ["Double Dragon", "Winnti Group", "Barium", "Wicked Panda", "Bronze Atlas", "Blackfly"],
+  "country": "China",
+  "attributed_to": "Chinese state-sponsored, also conducts financially-motivated operations",
+  "motivation": "espionage",
+  "secondary_motivation": "financial",
+  "active_since": "2012",
+  "sophistication": "advanced",
+  "description": "APT41 is a Chinese state-sponsored threat group notable for conducting both espionage and financially-motivated operations. Unique for dual mandate - state espionage during work hours and cybercrime for personal profit. Known for supply chain attacks and extensive use of rootkits.",
+  "ttps": [
+    {
+      "technique_id": "T1195.002",
+      "technique_name": "Compromise Software Supply Chain",
+      "tactic": "Initial Access",
+      "procedure": "Compromises software vendors and gaming companies to distribute malware through legitimate updates",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1190",
+      "technique_name": "Exploit Public-Facing Application",
+      "tactic": "Initial Access",
+      "procedure": "Exploits vulnerabilities in web applications, Citrix, and VPN devices",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1566.001",
+      "technique_name": "Spearphishing Attachment",
+      "tactic": "Initial Access",
+      "procedure": "Sends targeted phishing with malicious documents exploiting Office vulnerabilities",
+      "confidence": 0.85
+    },
+    {
+      "technique_id": "T1059.001",
+      "technique_name": "PowerShell",
+      "tactic": "Execution",
+      "procedure": "Uses PowerShell for initial execution and downloading additional payloads",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1059.003",
+      "technique_name": "Windows Command Shell",
+      "tactic": "Execution",
+      "procedure": "Executes commands via cmd.exe for reconnaissance and payload delivery",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1053.005",
+      "technique_name": "Scheduled Task",
+      "tactic": "Persistence",
+      "procedure": "Creates scheduled tasks for persistence with system-level privileges",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1543.003",
+      "technique_name": "Windows Service",
+      "tactic": "Persistence",
+      "procedure": "Installs malware as Windows services for persistence",
+      "confidence": 0.85
+    },
+    {
+      "technique_id": "T1547.006",
+      "technique_name": "Kernel Modules and Extensions",
+      "tactic": "Persistence",
+      "procedure": "Deploys rootkits for deep persistence and stealth",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1014",
+      "technique_name": "Rootkit",
+      "tactic": "Defense Evasion",
+      "procedure": "Uses sophisticated rootkits to hide presence from security tools",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1055",
+      "technique_name": "Process Injection",
+      "tactic": "Defense Evasion",
+      "procedure": "Injects malicious code into legitimate processes",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1553.002",
+      "technique_name": "Code Signing",
+      "tactic": "Defense Evasion",
+      "procedure": "Signs malware with stolen or fraudulently obtained code signing certificates",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1003.001",
+      "technique_name": "LSASS Memory",
+      "tactic": "Credential Access",
+      "procedure": "Dumps credentials from LSASS memory using custom tools",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1003.003",
+      "technique_name": "NTDS",
+      "tactic": "Credential Access",
+      "procedure": "Extracts NTDS.dit from domain controllers",
+      "confidence": 0.85
+    },
+    {
+      "technique_id": "T1087.002",
+      "technique_name": "Domain Account",
+      "tactic": "Discovery",
+      "procedure": "Enumerates Active Directory for high-value targets",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1046",
+      "technique_name": "Network Service Discovery",
+      "tactic": "Discovery",
+      "procedure": "Scans internal networks to identify services and vulnerabilities",
+      "confidence": 0.85
+    },
+    {
+      "technique_id": "T1021.002",
+      "technique_name": "SMB/Windows Admin Shares",
+      "tactic": "Lateral Movement",
+      "procedure": "Uses SMB for lateral movement with stolen credentials",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1021.001",
+      "technique_name": "Remote Desktop Protocol",
+      "tactic": "Lateral Movement",
+      "procedure": "Uses RDP with stolen credentials for lateral movement",
+      "confidence": 0.85
+    },
+    {
+      "technique_id": "T1560.001",
+      "technique_name": "Archive via Utility",
+      "tactic": "Collection",
+      "procedure": "Compresses collected data before exfiltration",
+      "confidence": 0.85
+    },
+    {
+      "technique_id": "T1071.001",
+      "technique_name": "Web Protocols",
+      "tactic": "Command and Control",
+      "procedure": "Uses HTTP/HTTPS for C2 with custom protocols",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1573.001",
+      "technique_name": "Symmetric Cryptography",
+      "tactic": "Command and Control",
+      "procedure": "Encrypts C2 traffic using AES or other symmetric algorithms",
+      "confidence": 0.85
+    },
+    {
+      "technique_id": "T1041",
+      "technique_name": "Exfiltration Over C2 Channel",
+      "tactic": "Exfiltration",
+      "procedure": "Exfiltrates data through C2 channel",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1486",
+      "technique_name": "Data Encrypted for Impact",
+      "tactic": "Impact",
+      "procedure": "Deploys ransomware in financially-motivated operations",
+      "confidence": 0.75
+    }
+  ],
+  "malware_families": [
+    "Winnti",
+    "ShadowPad",
+    "PlugX",
+    "POISONPLUG",
+    "Cobalt Strike",
+    "MESSAGETAP",
+    "CROSSWALK",
+    "KEYPLUG",
+    "DUSTPAN",
+    "DUSTTRAP"
+  ],
+  "tools": [
+    "Cobalt Strike",
+    "Mimikatz",
+    "Impacket",
+    "China Chopper",
+    "Acunetix",
+    "SQLMap"
+  ],
+  "target_sectors": [
+    "gaming",
+    "technology",
+    "telecommunications",
+    "healthcare",
+    "finance",
+    "education",
+    "travel",
+    "media"
+  ],
+  "target_regions": [
+    "Asia",
+    "North America",
+    "Europe",
+    "Global"
+  ],
+  "infrastructure": {
+    "c2_patterns": [
+      "Compromised legitimate websites",
+      "Cloud services",
+      "Custom DNS C2",
+      "Peer-to-peer C2 networks"
+    ],
+    "hosting_preferences": [
+      "Asian hosting providers",
+      "Compromised infrastructure",
+      "Cloud services"
+    ],
+    "sample_domains_defanged": [
+      "update[.]microsoftservices[.]dns[.]com",
+      "cdn-update[.]net",
+      "globalcdn[.]cloud"
+    ]
+  },
+  "notable_campaigns": [
+    "CCleaner supply chain compromise (2017)",
+    "ASUS Live Update supply chain (2019)",
+    "Video game industry targeting",
+    "COVID-19 research targeting (2020)",
+    "Citrix and Cisco exploitation campaigns"
+  ],
+  "detection_signatures": {
+    "yara_hints": [
+      "Winnti rootkit signatures",
+      "ShadowPad plugin patterns",
+      "PlugX characteristic structures"
+    ],
+    "sigma_hints": [
+      "Suspicious service installation",
+      "Rootkit driver loading",
+      "Code signing certificate abuse"
+    ]
+  },
+  "operational_notes": {
+    "unique_characteristics": [
+      "Operates both espionage and financially-motivated campaigns",
+      "Extensive use of rootkits and signed malware",
+      "Targets software supply chains repeatedly",
+      "Known to monetize access through ransomware and cryptomining"
+    ]
+  },
+  "references": [
+    "https://attack.mitre.org/groups/G0096/",
+    "https://www.fireeye.com/blog/threat-research/2019/08/apt41-dual-espionage-and-cyber-crime-operation.html",
+    "https://www.justice.gov/opa/pr/seven-international-cyber-defendants-including-apt41-actors-charged"
+  ]
+}

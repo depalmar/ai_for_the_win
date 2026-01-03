@@ -1,0 +1,276 @@
+{
+  "id": "apt29",
+  "name": "APT29",
+  "aliases": ["Cozy Bear", "The Dukes", "CozyDuke", "YTTRIUM", "Iron Hemlock", "Midnight Blizzard", "NOBELIUM", "UNC2452"],
+  "country": "Russia",
+  "attributed_to": "Russian Foreign Intelligence Service (SVR)",
+  "motivation": "espionage",
+  "active_since": "2008",
+  "sophistication": "expert",
+  "description": "APT29 is a highly sophisticated Russian state-sponsored threat group attributed to the SVR. Known for extremely stealthy operations, advanced tradecraft, and supply chain attacks. Responsible for the SolarWinds supply chain compromise (2020).",
+  "ttps": [
+    {
+      "technique_id": "T1195.002",
+      "technique_name": "Compromise Software Supply Chain",
+      "tactic": "Initial Access",
+      "procedure": "Compromises software build systems to distribute malware through legitimate software updates (SolarWinds)",
+      "confidence": 0.98
+    },
+    {
+      "technique_id": "T1566.001",
+      "technique_name": "Spearphishing Attachment",
+      "tactic": "Initial Access",
+      "procedure": "Sends highly targeted phishing emails with malicious attachments to specific individuals",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1199",
+      "technique_name": "Trusted Relationship",
+      "tactic": "Initial Access",
+      "procedure": "Exploits trusted relationships with MSPs and IT service providers for access",
+      "confidence": 0.85
+    },
+    {
+      "technique_id": "T1059.001",
+      "technique_name": "PowerShell",
+      "tactic": "Execution",
+      "procedure": "Uses heavily obfuscated PowerShell for execution and persistence",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1059.003",
+      "technique_name": "Windows Command Shell",
+      "tactic": "Execution",
+      "procedure": "Executes commands through cmd.exe, often via scheduled tasks",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1053.005",
+      "technique_name": "Scheduled Task",
+      "tactic": "Persistence",
+      "procedure": "Creates scheduled tasks with names mimicking legitimate Windows tasks",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1546.003",
+      "technique_name": "WMI Event Subscription",
+      "tactic": "Persistence",
+      "procedure": "Uses WMI event subscriptions for fileless persistence",
+      "confidence": 0.85
+    },
+    {
+      "technique_id": "T1574.002",
+      "technique_name": "DLL Side-Loading",
+      "tactic": "Persistence",
+      "procedure": "Side-loads malicious DLLs using legitimate signed applications",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1055",
+      "technique_name": "Process Injection",
+      "tactic": "Defense Evasion",
+      "procedure": "Injects code into legitimate processes to evade detection",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1027.002",
+      "technique_name": "Software Packing",
+      "tactic": "Defense Evasion",
+      "procedure": "Uses custom packers and crypters for malware obfuscation",
+      "confidence": 0.85
+    },
+    {
+      "technique_id": "T1027.005",
+      "technique_name": "Indicator Removal from Tools",
+      "tactic": "Defense Evasion",
+      "procedure": "Removes identifying information from tools before deployment",
+      "confidence": 0.80
+    },
+    {
+      "technique_id": "T1070.006",
+      "technique_name": "Timestomp",
+      "tactic": "Defense Evasion",
+      "procedure": "Modifies file timestamps to blend with legitimate files",
+      "confidence": 0.85
+    },
+    {
+      "technique_id": "T1556.001",
+      "technique_name": "Domain Controller Authentication",
+      "tactic": "Credential Access",
+      "procedure": "Modifies domain controller authentication mechanisms",
+      "confidence": 0.80
+    },
+    {
+      "technique_id": "T1558.003",
+      "technique_name": "Kerberoasting",
+      "tactic": "Credential Access",
+      "procedure": "Requests Kerberos service tickets for offline cracking",
+      "confidence": 0.85
+    },
+    {
+      "technique_id": "T1003.006",
+      "technique_name": "DCSync",
+      "tactic": "Credential Access",
+      "procedure": "Uses DCSync to replicate credentials from domain controllers",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1087.002",
+      "technique_name": "Domain Account",
+      "tactic": "Discovery",
+      "procedure": "Enumerates domain accounts, focusing on privileged accounts",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1069.002",
+      "technique_name": "Domain Groups",
+      "tactic": "Discovery",
+      "procedure": "Identifies domain admin and other privileged groups",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1021.002",
+      "technique_name": "SMB/Windows Admin Shares",
+      "tactic": "Lateral Movement",
+      "procedure": "Moves laterally using admin shares with stolen credentials",
+      "confidence": 0.85
+    },
+    {
+      "technique_id": "T1021.006",
+      "technique_name": "Windows Remote Management",
+      "tactic": "Lateral Movement",
+      "procedure": "Uses WinRM for remote command execution",
+      "confidence": 0.85
+    },
+    {
+      "technique_id": "T1114.002",
+      "technique_name": "Remote Email Collection",
+      "tactic": "Collection",
+      "procedure": "Accesses mailboxes using stolen credentials or OAuth tokens",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1071.001",
+      "technique_name": "Web Protocols",
+      "tactic": "Command and Control",
+      "procedure": "Uses HTTPS C2 with legitimate cloud services as fronts",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1102",
+      "technique_name": "Web Service",
+      "tactic": "Command and Control",
+      "procedure": "Uses legitimate web services (Dropbox, Google Drive) for C2",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1001.003",
+      "technique_name": "Protocol Impersonation",
+      "tactic": "Command and Control",
+      "procedure": "Mimics legitimate application protocols to blend with normal traffic",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1567.002",
+      "technique_name": "Exfiltration to Cloud Storage",
+      "tactic": "Exfiltration",
+      "procedure": "Exfiltrates data to cloud storage services",
+      "confidence": 0.85
+    }
+  ],
+  "malware_families": [
+    "SUNBURST",
+    "TEARDROP",
+    "RAINDROP",
+    "EnvyScout",
+    "BoomBox",
+    "NativeZone",
+    "VaporRage",
+    "WellMess",
+    "WellMail",
+    "SoreFang",
+    "MiniDuke",
+    "CozyDuke",
+    "SeaDuke",
+    "HammerDuke"
+  ],
+  "tools": [
+    "Cobalt Strike",
+    "Mimikatz",
+    "AdFind",
+    "Impacket",
+    "PowerSploit",
+    "BloodHound"
+  ],
+  "target_sectors": [
+    "government",
+    "think_tanks",
+    "healthcare",
+    "energy",
+    "technology",
+    "telecommunications",
+    "research_institutions",
+    "political_organizations"
+  ],
+  "target_regions": [
+    "North America",
+    "Europe",
+    "Asia",
+    "Global"
+  ],
+  "infrastructure": {
+    "c2_patterns": [
+      "Domain fronting via CDNs",
+      "Legitimate cloud services",
+      "Compromised legitimate infrastructure",
+      "DNS-based C2"
+    ],
+    "hosting_preferences": [
+      "Major cloud providers (AWS, Azure, GCP)",
+      "CDN services",
+      "Compromised websites"
+    ],
+    "sample_domains_defanged": [
+      "avsvmcloud[.]com",
+      "digitalcollege[.]org",
+      "freescanonline[.]com"
+    ]
+  },
+  "notable_campaigns": [
+    "SolarWinds supply chain attack (SUNBURST) - 2020",
+    "Democratic National Committee breach - 2016",
+    "COVID-19 vaccine research targeting - 2020",
+    "Microsoft 365 OAuth abuse campaigns - 2021-2024",
+    "European diplomatic targeting"
+  ],
+  "detection_signatures": {
+    "yara_hints": [
+      "SUNBURST DGA patterns",
+      "EnvyScout HTML smuggling artifacts",
+      "Characteristic string obfuscation"
+    ],
+    "sigma_hints": [
+      "SolarWinds Orion suspicious child process",
+      "Azure AD OAuth application consent",
+      "Scheduled task from unusual parent"
+    ]
+  },
+  "operational_notes": {
+    "stealth_techniques": [
+      "Operates during target business hours",
+      "Long dwell times (months to years)",
+      "Minimal footprint, manual operations",
+      "Uses legitimate admin tools"
+    ],
+    "evasion_focus": [
+      "Blends with legitimate IT activity",
+      "Avoids noisy scanning",
+      "Patient, targeted approach"
+    ]
+  },
+  "references": [
+    "https://attack.mitre.org/groups/G0016/",
+    "https://www.fireeye.com/blog/threat-research/2020/12/evasive-attacker-leverages-solarwinds-supply-chain-compromises-with-sunburst-backdoor.html",
+    "https://www.microsoft.com/security/blog/2021/05/27/new-sophisticated-email-based-attack-from-nobelium/"
+  ]
+}

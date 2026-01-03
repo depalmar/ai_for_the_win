@@ -1,0 +1,77 @@
+{
+  "observed_techniques": [
+    {
+      "incident": 1,
+      "technique_id": "T1566.001",
+      "technique_name": "Spearphishing Attachment",
+      "tactic": "Initial Access",
+      "evidence": "Malicious XLSM with macro sent to IT staff",
+      "confidence": "high"
+    },
+    {
+      "incident": 1,
+      "technique_id": "T1059.001",
+      "technique_name": "PowerShell",
+      "tactic": "Execution",
+      "evidence": "Encoded PowerShell download cradle in macro",
+      "confidence": "high"
+    },
+    {
+      "incident": 1,
+      "technique_id": "T1071.001",
+      "technique_name": "Web Protocols",
+      "tactic": "Command and Control",
+      "evidence": "HTTPS beaconing to C2 infrastructure",
+      "confidence": "high"
+    },
+    {
+      "incident": 2,
+      "technique_id": "T1078",
+      "technique_name": "Valid Accounts",
+      "tactic": "Initial Access",
+      "evidence": "Compromised VPN credentials used for access",
+      "confidence": "high"
+    },
+    {
+      "incident": 2,
+      "technique_id": "T1003.001",
+      "technique_name": "LSASS Memory",
+      "tactic": "Credential Access",
+      "evidence": "Mimikatz execution detected via Sysmon",
+      "confidence": "high"
+    },
+    {
+      "incident": 2,
+      "technique_id": "T1021.002",
+      "technique_name": "SMB/Windows Admin Shares",
+      "tactic": "Lateral Movement",
+      "evidence": "PsExec used to access file servers",
+      "confidence": "high"
+    },
+    {
+      "incident": 3,
+      "technique_id": "T1567.002",
+      "technique_name": "Exfiltration to Cloud Storage",
+      "tactic": "Exfiltration",
+      "evidence": "Large uploads to Mega.nz detected",
+      "confidence": "high"
+    },
+    {
+      "incident": 3,
+      "technique_id": "T1027",
+      "technique_name": "Obfuscated Files or Information",
+      "tactic": "Defense Evasion",
+      "evidence": "Base64 encoded payloads throughout attack",
+      "confidence": "medium"
+    },
+    {
+      "incident": 3,
+      "technique_id": "T1195.002",
+      "technique_name": "Compromise Software Supply Chain",
+      "tactic": "Initial Access",
+      "evidence": "Backdoored update mechanism discovered",
+      "confidence": "medium"
+    }
+  ],
+  "flag_hint": "The actor's name relates to cold weather and nighttime. Combine their ID number with their signature supply chain tool initials and first seen year."
+}

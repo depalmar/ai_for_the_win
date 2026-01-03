@@ -1,0 +1,286 @@
+{
+  "id": "lazarus",
+  "name": "Lazarus Group",
+  "aliases": ["HIDDEN COBRA", "Guardians of Peace", "APT38", "BlueNoroff", "Andariel", "Zinc", "Diamond Sleet", "Labyrinth Chollima"],
+  "country": "North Korea",
+  "attributed_to": "North Korean Reconnaissance General Bureau (RGB)",
+  "motivation": "financial",
+  "secondary_motivation": "espionage",
+  "active_since": "2009",
+  "sophistication": "advanced",
+  "description": "Lazarus Group is a North Korean state-sponsored threat group known for financial theft operations to fund the regime, destructive attacks, and espionage. Notable for the Sony Pictures attack, Bangladesh Bank heist, WannaCry ransomware, and extensive cryptocurrency theft operations.",
+  "ttps": [
+    {
+      "technique_id": "T1566.001",
+      "technique_name": "Spearphishing Attachment",
+      "tactic": "Initial Access",
+      "procedure": "Sends malicious documents with job offer themes targeting specific individuals",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1566.002",
+      "technique_name": "Spearphishing Link",
+      "tactic": "Initial Access",
+      "procedure": "Sends links to fake job portals or watering hole sites",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1189",
+      "technique_name": "Drive-by Compromise",
+      "tactic": "Initial Access",
+      "procedure": "Compromises websites frequented by targets for drive-by attacks",
+      "confidence": 0.85
+    },
+    {
+      "technique_id": "T1195.002",
+      "technique_name": "Compromise Software Supply Chain",
+      "tactic": "Initial Access",
+      "procedure": "Compromises cryptocurrency and financial software supply chains",
+      "confidence": 0.85
+    },
+    {
+      "technique_id": "T1059.001",
+      "technique_name": "PowerShell",
+      "tactic": "Execution",
+      "procedure": "Uses PowerShell for execution with heavy obfuscation",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1059.005",
+      "technique_name": "Visual Basic",
+      "tactic": "Execution",
+      "procedure": "Uses VBA macros in malicious documents for initial execution",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1059.007",
+      "technique_name": "JavaScript",
+      "tactic": "Execution",
+      "procedure": "Uses JavaScript for execution in watering hole attacks",
+      "confidence": 0.85
+    },
+    {
+      "technique_id": "T1053.005",
+      "technique_name": "Scheduled Task",
+      "tactic": "Persistence",
+      "procedure": "Creates scheduled tasks for persistent access",
+      "confidence": 0.85
+    },
+    {
+      "technique_id": "T1547.001",
+      "technique_name": "Registry Run Keys",
+      "tactic": "Persistence",
+      "procedure": "Adds malware to Run keys for persistence",
+      "confidence": 0.85
+    },
+    {
+      "technique_id": "T1027",
+      "technique_name": "Obfuscated Files or Information",
+      "tactic": "Defense Evasion",
+      "procedure": "Uses multiple layers of obfuscation and encryption",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1055",
+      "technique_name": "Process Injection",
+      "tactic": "Defense Evasion",
+      "procedure": "Injects malicious code into legitimate processes",
+      "confidence": 0.85
+    },
+    {
+      "technique_id": "T1070.004",
+      "technique_name": "File Deletion",
+      "tactic": "Defense Evasion",
+      "procedure": "Deletes tools and malware after use",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1003.001",
+      "technique_name": "LSASS Memory",
+      "tactic": "Credential Access",
+      "procedure": "Dumps credentials from memory using custom tools",
+      "confidence": 0.85
+    },
+    {
+      "technique_id": "T1555.003",
+      "technique_name": "Credentials from Web Browsers",
+      "tactic": "Credential Access",
+      "procedure": "Extracts credentials stored in browsers",
+      "confidence": 0.85
+    },
+    {
+      "technique_id": "T1087.001",
+      "technique_name": "Local Account",
+      "tactic": "Discovery",
+      "procedure": "Enumerates local accounts on compromised systems",
+      "confidence": 0.85
+    },
+    {
+      "technique_id": "T1083",
+      "technique_name": "File and Directory Discovery",
+      "tactic": "Discovery",
+      "procedure": "Searches for cryptocurrency wallets and financial data",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1021.001",
+      "technique_name": "Remote Desktop Protocol",
+      "tactic": "Lateral Movement",
+      "procedure": "Uses RDP for lateral movement",
+      "confidence": 0.80
+    },
+    {
+      "technique_id": "T1021.002",
+      "technique_name": "SMB/Windows Admin Shares",
+      "tactic": "Lateral Movement",
+      "procedure": "Uses admin shares for spreading across networks",
+      "confidence": 0.85
+    },
+    {
+      "technique_id": "T1560.001",
+      "technique_name": "Archive via Utility",
+      "tactic": "Collection",
+      "procedure": "Archives collected data before exfiltration",
+      "confidence": 0.85
+    },
+    {
+      "technique_id": "T1071.001",
+      "technique_name": "Web Protocols",
+      "tactic": "Command and Control",
+      "procedure": "Uses HTTP/HTTPS for C2 communications",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1071.004",
+      "technique_name": "DNS",
+      "tactic": "Command and Control",
+      "procedure": "Uses DNS for C2 in some operations",
+      "confidence": 0.75
+    },
+    {
+      "technique_id": "T1041",
+      "technique_name": "Exfiltration Over C2 Channel",
+      "tactic": "Exfiltration",
+      "procedure": "Exfiltrates stolen data and cryptocurrency through C2",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1486",
+      "technique_name": "Data Encrypted for Impact",
+      "tactic": "Impact",
+      "procedure": "Deploys ransomware (WannaCry, Hermes variants)",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1485",
+      "technique_name": "Data Destruction",
+      "tactic": "Impact",
+      "procedure": "Uses wipers to destroy data (Sony Pictures attack)",
+      "confidence": 0.85
+    },
+    {
+      "technique_id": "T1490",
+      "technique_name": "Inhibit System Recovery",
+      "tactic": "Impact",
+      "procedure": "Deletes backups and shadow copies before ransomware deployment",
+      "confidence": 0.90
+    }
+  ],
+  "malware_families": [
+    "FALLCHILL",
+    "HOPLIGHT",
+    "AppleJeus",
+    "BLINDINGCAN",
+    "DTrack",
+    "Manuscrypt",
+    "ELECTRICFISH",
+    "BADCALL",
+    "Destover",
+    "WannaCry",
+    "TrickBot (affiliate)",
+    "RATANKBA"
+  ],
+  "tools": [
+    "Mimikatz",
+    "PuTTY",
+    "WinSCP",
+    "Responder"
+  ],
+  "target_sectors": [
+    "cryptocurrency",
+    "finance",
+    "defense",
+    "entertainment",
+    "government",
+    "technology",
+    "energy",
+    "healthcare"
+  ],
+  "target_regions": [
+    "Global",
+    "South Korea",
+    "United States",
+    "Europe",
+    "Asia"
+  ],
+  "infrastructure": {
+    "c2_patterns": [
+      "Compromised websites",
+      "Custom HTTP/HTTPS C2",
+      "Domain generation algorithms",
+      "Tor hidden services"
+    ],
+    "hosting_preferences": [
+      "Compromised legitimate servers",
+      "Bulletproof hosting",
+      "VPS providers in multiple countries"
+    ],
+    "sample_domains_defanged": [
+      "blockchain[.]onlineservice[.]co[.]kr",
+      "cryptotrading[.]solutions",
+      "jobsearch[.]careers[.]net"
+    ]
+  },
+  "notable_campaigns": [
+    "Sony Pictures Entertainment attack (2014)",
+    "Bangladesh Bank SWIFT heist ($81M stolen) (2016)",
+    "WannaCry ransomware (2017)",
+    "AppleJeus cryptocurrency targeting",
+    "Ronin Network hack ($620M) (2022)",
+    "Horizon Bridge hack ($100M) (2022)"
+  ],
+  "detection_signatures": {
+    "yara_hints": [
+      "FALLCHILL beacon patterns",
+      "AppleJeus installer characteristics",
+      "WannaCry encryption routines"
+    ],
+    "sigma_hints": [
+      "SMB exploitation patterns (EternalBlue)",
+      "Cryptocurrency wallet access",
+      "SWIFT system reconnaissance"
+    ]
+  },
+  "operational_notes": {
+    "unique_characteristics": [
+      "Focus on cryptocurrency and financial theft",
+      "Willing to conduct destructive attacks",
+      "Long-term reconnaissance before financial theft",
+      "Uses legitimate trading and job portal themes"
+    ],
+    "financial_operations": {
+      "estimated_stolen": "$3+ billion in cryptocurrency",
+      "methods": [
+        "SWIFT network manipulation",
+        "Cryptocurrency exchange compromise",
+        "DeFi protocol exploitation",
+        "Social engineering of employees"
+      ]
+    }
+  },
+  "references": [
+    "https://attack.mitre.org/groups/G0032/",
+    "https://www.cisa.gov/news-events/cybersecurity-advisories/aa20-106a",
+    "https://www.fbi.gov/news/press-releases/fbi-cisa-and-treasury-release-advisory-on-north-korean-state-sponsored-actors-targeting-blockchain-companies"
+  ]
+}

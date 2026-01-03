@@ -1,25 +1,38 @@
-!!!!! YOUR FILES HAVE BEEN ENCRYPTED !!!!!
 
-All your important files have been encrypted with military-grade encryption.
-The only way to recover your files is to pay the ransom.
+===============================================================================
+                         YOUR FILES HAVE BEEN ENCRYPTED
+===============================================================================
 
-WHAT HAPPENED?
-Your network security was compromised. All documents, databases, and backups
-have been encrypted with RSA-2048 + AES-256.
+All your important files have been encrypted with military-grade AES-256.
 
-HOW TO RECOVER?
-1. Contact us at: darkoperator@protonmail.com
-2. Send $50,000 in Bitcoin to: 1FLbAcG9RdANrSOaMp3HfUyN2TtE3RqxRANSOM_HUNT3RcDef
-3. After payment confirmation, you will receive the decryption key
+To recover your files, you must pay 5 BTC to the following address:
+bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh
+
+After payment, contact us at: decryption-support@protonmail[.]com
+
+Include your unique ID: VIC-2024-ACME-4892
 
 WARNING:
-- Do not try to decrypt files yourself - they will be destroyed
-- Do not contact law enforcement - we will delete all keys
-- Do not try to negotiate - the price is final
-- You have 72 hours before the price doubles
+- Do NOT attempt to decrypt files yourself
+- Do NOT contact law enforcement
+- Do NOT rename encrypted files
+- Payment must be made within 72 hours or price doubles
 
-Your unique ID: VICTIM-2024-0115-XK7
+===============================================================================
+                              PROOF OF DECRYPTION
+===============================================================================
 
-We are professionals. Pay and your files will be restored.
+To prove we can decrypt your files, we will decrypt ONE file for free.
+Send a small file (< 1MB) to verify.
 
-==========================================================
+Your encryption key fingerprint: 7f4d2a9b3c8e1f05
+
+FLAG{R4NS0M_N0T3_4N4LYZ3D}
+
+===============================================================================
+                                 TIME REMAINING
+===============================================================================
+
+Hours until price increase: 68:42:15
+
+                    -- DarkLock Ransomware Collective --

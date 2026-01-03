@@ -1,69 +1,72 @@
-{
-  "emails": [
-    {
-      "id": 1,
-      "from": "hr@company.com",
-      "to": "employee@company.com",
-      "subject": "Updated PTO Policy",
-      "body": "Hi Team,\n\nPlease review the updated PTO policy effective January 1st. You can find the document in the HR portal.\n\nBest regards,\nHR Department",
-      "timestamp": "2024-01-10T09:00:00Z",
-      "headers": {
-        "X-Originating-IP": "10.0.0.50",
-        "SPF": "pass",
-        "DKIM": "pass"
-      }
-    },
-    {
-      "id": 2,
-      "from": "security@micros0ft.com",
-      "to": "user@company.com",
-      "subject": "URGENT: Your Account Will Be Suspended!!!",
-      "body": "Dear Valued Customer,\n\nWe have detected unusual activity on your Microsoft account. Your account will be SUSPENDED within 24 hours unless you verify your identity immediately!\n\nClick here to verify: https://micros0ft-secure.com/verify?id=RkxBR3tQSDFTSF9GMFVORH0=\n\nFailure to act will result in permanent account deletion.\n\nMicrosoft Security Team",
-      "timestamp": "2024-01-10T14:32:00Z",
-      "headers": {
-        "X-Originating-IP": "185.143.223.47",
-        "SPF": "fail",
-        "DKIM": "fail"
-      }
-    },
-    {
-      "id": 3,
-      "from": "newsletter@linkedin.com",
-      "to": "user@company.com",
-      "subject": "Your weekly job recommendations",
-      "body": "Hi,\n\nHere are some jobs we think you'd be great for:\n\n- Senior Security Engineer at TechCorp\n- Cloud Architect at CloudFirst\n- DevOps Lead at StartupXYZ\n\nView all recommendations in your LinkedIn feed.\n\nLinkedIn Team",
-      "timestamp": "2024-01-10T08:00:00Z",
-      "headers": {
-        "X-Originating-IP": "108.174.10.10",
-        "SPF": "pass",
-        "DKIM": "pass"
-      }
-    },
-    {
-      "id": 4,
-      "from": "it-support@company.com",
-      "to": "all-staff@company.com",
-      "subject": "Scheduled Maintenance Tonight",
-      "body": "Hello,\n\nPlease be advised that our email servers will undergo scheduled maintenance tonight from 11 PM to 2 AM EST.\n\nYou may experience brief interruptions during this window.\n\nThank you for your patience.\n\nIT Support",
-      "timestamp": "2024-01-10T16:00:00Z",
-      "headers": {
-        "X-Originating-IP": "10.0.0.25",
-        "SPF": "pass",
-        "DKIM": "pass"
-      }
-    },
-    {
-      "id": 5,
-      "from": "noreply@github.com",
-      "to": "developer@company.com",
-      "subject": "Security alert: new sign-in from Windows",
-      "body": "Hi developer,\n\nWe noticed a new sign-in to your GitHub account.\n\nDevice: Windows 10\nLocation: New York, NY, USA\nTime: January 10, 2024 at 10:15 AM EST\n\nIf this was you, you can ignore this email.\n\nIf this wasn't you, please secure your account.\n\nGitHub",
-      "timestamp": "2024-01-10T10:20:00Z",
-      "headers": {
-        "X-Originating-IP": "192.30.252.200",
-        "SPF": "pass",
-        "DKIM": "pass"
-      }
-    }
-  ]
-}
+[
+  {
+    "id": "email_001",
+    "from": "hr@company.com",
+    "to": "employee@company.com",
+    "subject": "Q4 Benefits Enrollment Open",
+    "body": "Dear Employee,\n\nThe Q4 benefits enrollment period is now open. Please review your options in the HR portal.\n\nBest regards,\nHR Team",
+    "timestamp": "2024-03-10T09:00:00Z",
+    "attachments": [],
+    "headers": {"x-originating-ip": "192.168.1.50", "spf": "pass", "dkim": "pass"}
+  },
+  {
+    "id": "email_002",
+    "from": "IT-Support@c0mpany.net",
+    "to": "employee@company.com",
+    "subject": "URGENT: Password Expires in 24 Hours",
+    "body": "Dear User,\n\nYour password will expire in 24 hours. Click here to update: hxxp://company-login[.]secure-update[.]ru/reset\n\nFailure to update will result in account lockout.\n\nIT Support",
+    "timestamp": "2024-03-10T10:30:00Z",
+    "attachments": [],
+    "headers": {"x-originating-ip": "185.143.223.89", "spf": "fail", "dkim": "none", "reply-to": "support-team@mail.ru"}
+  },
+  {
+    "id": "email_003",
+    "from": "newsletter@industry-news.com",
+    "to": "employee@company.com",
+    "subject": "Weekly Industry Digest",
+    "body": "This week in cybersecurity:\n- New ransomware variant discovered\n- Zero-day in popular CMS\n- Cloud security best practices\n\nRead more at industry-news.com",
+    "timestamp": "2024-03-10T11:00:00Z",
+    "attachments": [],
+    "headers": {"x-originating-ip": "104.21.55.123", "spf": "pass", "dkim": "pass"}
+  },
+  {
+    "id": "email_004",
+    "from": "accounting@vendor-partner.com",
+    "to": "finance@company.com",
+    "subject": "Invoice #INV-2024-0892 - Payment Required",
+    "body": "Please find attached invoice for services rendered.\n\nNote: Our banking details have changed. New wire transfer information is in the attached PDF.\n\nPayment due: NET 15",
+    "timestamp": "2024-03-10T14:00:00Z",
+    "attachments": [{"name": "Invoice_INV-2024-0892.pdf.exe", "size": 245760, "hash": "a1b2c3d4e5f6g7h8i9j0"}],
+    "headers": {"x-originating-ip": "45.33.32.200", "spf": "none", "dkim": "none", "reply-to": "payments@vendor-partner-support.xyz"}
+  },
+  {
+    "id": "email_005",
+    "from": "ceo@company.com",
+    "to": "employee@company.com",
+    "subject": "Team Meeting Tomorrow",
+    "body": "Hi team,\n\nReminder about our all-hands meeting tomorrow at 2pm in the main conference room.\n\nSee you there!\n- CEO",
+    "timestamp": "2024-03-10T15:30:00Z",
+    "attachments": [],
+    "headers": {"x-originating-ip": "192.168.1.5", "spf": "pass", "dkim": "pass"}
+  },
+  {
+    "id": "email_006",
+    "from": "security@m1cr0soft-alerts.com",
+    "to": "admin@company.com",
+    "subject": "Critical: Unusual Sign-in Activity Detected",
+    "body": "We detected unusual sign-in activity on your Microsoft 365 account.\n\nLocation: Moscow, Russia\nTime: 2024-03-10 03:24:00 UTC\n\nIf this wasn't you, secure your account immediately: hxxps://microsoft-365-security[.]com/verify\n\nFLAG{PH1SH1NG_D3T3CT3D_CHK_H34D3RS}",
+    "timestamp": "2024-03-10T16:00:00Z",
+    "attachments": [],
+    "headers": {"x-originating-ip": "91.234.99.42", "spf": "fail", "dkim": "fail", "reply-to": "no-reply@support-microsoft.ru"}
+  },
+  {
+    "id": "email_007",
+    "from": "shipping@amazon.com",
+    "to": "employee@company.com",
+    "subject": "Your Order Has Shipped",
+    "body": "Your order #123-4567890 has shipped and will arrive by March 15.\n\nTrack your package at amazon.com/orders\n\nThank you for shopping with us!",
+    "timestamp": "2024-03-10T17:00:00Z",
+    "attachments": [],
+    "headers": {"x-originating-ip": "54.239.28.85", "spf": "pass", "dkim": "pass"}
+  }
+]

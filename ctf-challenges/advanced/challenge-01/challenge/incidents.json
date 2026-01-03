@@ -1,0 +1,67 @@
+{
+  "incidents": [
+    {
+      "id": 1,
+      "name": "Spearphishing Campaign",
+      "date": "2024-02-15",
+      "description": "Targeted phishing campaign against IT staff",
+      "iocs": {
+        "domains": ["update-service.graphical-apps[.]com", "cdn.cloud-sync-service[.]net"],
+        "ips": ["185.220.101.42", "91.234.99.15"],
+        "hashes": {
+          "attachment": "a7b3c9d2e4f1g8h5i6j0k3l2m9n4o1p7",
+          "payload": "x1y2z3a4b5c6d7e8f9g0h1i2j3k4l5m6"
+        },
+        "email_sender": "it-updates@graph1cal-neutr1n0.com"
+      },
+      "artifacts": {
+        "malware_family": "GraphicalNeutrino",
+        "persistence": "Scheduled Task - GraphicalUpdater",
+        "c2_pattern": "HTTPS POST to /api/v2/sync every 60 seconds"
+      }
+    },
+    {
+      "id": 2,
+      "name": "Lateral Movement Phase",
+      "date": "2024-02-18",
+      "description": "Internal reconnaissance and credential harvesting",
+      "iocs": {
+        "tools_used": ["Mimikatz", "PsExec", "BloodHound"],
+        "compromised_accounts": ["svc_backup", "domain_admin"],
+        "accessed_systems": ["DC01", "FILESERVER01", "EXCHANGE01"]
+      },
+      "artifacts": {
+        "credential_dump": "LSASS dump via comsvcs.dll",
+        "movement_pattern": "Admin shares (C$, ADMIN$)",
+        "dwell_time": "72 hours"
+      }
+    },
+    {
+      "id": 3,
+      "name": "Data Exfiltration",
+      "date": "2024-02-21",
+      "description": "Staged data theft through encrypted channels",
+      "iocs": {
+        "exfil_domains": ["secure-backup.mega[.]nz", "cloud-archive[.]io"],
+        "data_volume": "4.7 GB",
+        "file_types": [".docx", ".xlsx", ".pdf", ".pst"]
+      },
+      "artifacts": {
+        "staging_location": "C:\\ProgramData\\Microsoft\\Crypto\\RSA\\",
+        "encryption": "AES-256 before exfil",
+        "timing": "Off-hours (02:00-04:00 UTC)"
+      }
+    }
+  ],
+  "attribution_analysis": {
+    "confidence": "high",
+    "matching_actor": "APT29 / Midnight Blizzard",
+    "key_indicators": [
+      "GraphicalNeutrino malware (unique to APT29)",
+      "Supply chain compromise methodology",
+      "Targeting profile matches government/think tank focus",
+      "C2 infrastructure overlaps with known APT29 domains"
+    ],
+    "flag": "FLAG{APT29_GN_2008}"
+  }
+}

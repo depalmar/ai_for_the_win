@@ -3,29 +3,35 @@
     {
       "id": "apt29",
       "name": "APT29 (Cozy Bear)",
-      "aliases": ["The Dukes", "CozyDuke", "YTTRIUM", "Iron Hemlock"],
+      "aliases": ["The Dukes", "CozyDuke", "YTTRIUM", "Iron Hemlock", "Midnight Blizzard"],
       "country": "Russia",
       "motivation": "espionage",
       "sophistication": "advanced",
+      "first_seen": "2008",
+      "last_active": "2025",
       "ttps": [
         {"technique_id": "T1566", "technique_name": "Phishing", "tactic": "Initial Access", "confidence": 0.9},
         {"technique_id": "T1059.001", "technique_name": "PowerShell", "tactic": "Execution", "confidence": 0.95},
         {"technique_id": "T1055", "technique_name": "Process Injection", "tactic": "Defense Evasion", "confidence": 0.85},
         {"technique_id": "T1003", "technique_name": "OS Credential Dumping", "tactic": "Credential Access", "confidence": 0.9},
         {"technique_id": "T1071", "technique_name": "Application Layer Protocol", "tactic": "Command and Control", "confidence": 0.9},
-        {"technique_id": "T1027", "technique_name": "Obfuscated Files", "tactic": "Defense Evasion", "confidence": 0.85}
+        {"technique_id": "T1027", "technique_name": "Obfuscated Files", "tactic": "Defense Evasion", "confidence": 0.85},
+        {"technique_id": "T1195.002", "technique_name": "Supply Chain Compromise", "tactic": "Initial Access", "confidence": 0.9}
       ],
-      "malware_families": ["WellMess", "WellMail", "SoreFang", "EnvyScout", "SUNBURST"],
-      "target_sectors": ["government", "think_tank", "healthcare", "energy", "research"],
-      "target_regions": ["North America", "Europe", "Asia"]
+      "malware_families": ["WellMess", "WellMail", "SoreFang", "EnvyScout", "SUNBURST", "GraphicalNeutrino"],
+      "target_sectors": ["government", "think_tank", "healthcare", "energy", "research", "technology"],
+      "target_regions": ["North America", "Europe", "Asia"],
+      "notable_campaigns": ["SolarWinds (2020)", "Microsoft OAuth Abuse (2023)", "TeamCity Exploitation (2024)"]
     },
     {
       "id": "apt41",
       "name": "APT41 (Double Dragon)",
-      "aliases": ["Winnti", "Barium", "Wicked Panda", "Bronze Atlas"],
+      "aliases": ["Winnti", "Barium", "Wicked Panda", "Bronze Atlas", "Earth Baku"],
       "country": "China",
       "motivation": "espionage",
       "sophistication": "advanced",
+      "first_seen": "2012",
+      "last_active": "2025",
       "ttps": [
         {"technique_id": "T1566", "technique_name": "Phishing", "tactic": "Initial Access", "confidence": 0.85},
         {"technique_id": "T1190", "technique_name": "Exploit Public-Facing Application", "tactic": "Initial Access", "confidence": 0.9},
@@ -34,17 +40,20 @@
         {"technique_id": "T1021", "technique_name": "Remote Services", "tactic": "Lateral Movement", "confidence": 0.9},
         {"technique_id": "T1055", "technique_name": "Process Injection", "tactic": "Defense Evasion", "confidence": 0.85}
       ],
-      "malware_families": ["ShadowPad", "Winnti", "PlugX", "Cobalt Strike", "POISONPLUG"],
+      "malware_families": ["ShadowPad", "Winnti", "PlugX", "Cobalt Strike", "POISONPLUG", "DUSTPAN"],
       "target_sectors": ["gaming", "technology", "telecommunications", "healthcare", "finance"],
-      "target_regions": ["Asia", "North America", "Europe"]
+      "target_regions": ["Asia", "North America", "Europe"],
+      "notable_campaigns": ["CCleaner Supply Chain (2017)", "Gaming Industry Attacks (2019-2023)"]
     },
     {
       "id": "fin7",
       "name": "FIN7 (Carbanak)",
-      "aliases": ["Carbanak Group", "Carbon Spider", "Anunak"],
+      "aliases": ["Carbanak Group", "Carbon Spider", "Anunak", "Sangria Tempest"],
       "country": "Russia",
       "motivation": "financial",
       "sophistication": "high",
+      "first_seen": "2013",
+      "last_active": "2025",
       "ttps": [
         {"technique_id": "T1566", "technique_name": "Phishing", "tactic": "Initial Access", "confidence": 0.95},
         {"technique_id": "T1059.001", "technique_name": "PowerShell", "tactic": "Execution", "confidence": 0.9},
@@ -53,17 +62,20 @@
         {"technique_id": "T1021", "technique_name": "Remote Services", "tactic": "Lateral Movement", "confidence": 0.85},
         {"technique_id": "T1041", "technique_name": "Exfiltration Over C2", "tactic": "Exfiltration", "confidence": 0.9}
       ],
-      "malware_families": ["Carbanak", "GRIFFON", "BOOSTWRITE", "PILLOWMINT", "BATELEUR"],
+      "malware_families": ["Carbanak", "GRIFFON", "BOOSTWRITE", "PILLOWMINT", "BATELEUR", "Lizar"],
       "target_sectors": ["retail", "hospitality", "finance", "restaurant"],
-      "target_regions": ["North America", "Europe"]
+      "target_regions": ["North America", "Europe"],
+      "notable_campaigns": ["Retail POS Attacks (2015-2018)", "REvil Partnership (2021)"]
     },
     {
       "id": "lazarus",
       "name": "Lazarus Group",
-      "aliases": ["HIDDEN COBRA", "Guardians of Peace", "APT38", "BlueNoroff"],
+      "aliases": ["HIDDEN COBRA", "Guardians of Peace", "APT38", "BlueNoroff", "Labyrinth Chollima"],
       "country": "North Korea",
       "motivation": "financial",
       "sophistication": "advanced",
+      "first_seen": "2009",
+      "last_active": "2025",
       "ttps": [
         {"technique_id": "T1566", "technique_name": "Phishing", "tactic": "Initial Access", "confidence": 0.9},
         {"technique_id": "T1189", "technique_name": "Drive-by Compromise", "tactic": "Initial Access", "confidence": 0.8},
@@ -72,17 +84,20 @@
         {"technique_id": "T1490", "technique_name": "Inhibit System Recovery", "tactic": "Impact", "confidence": 0.8},
         {"technique_id": "T1071", "technique_name": "Application Layer Protocol", "tactic": "Command and Control", "confidence": 0.9}
       ],
-      "malware_families": ["FALLCHILL", "HOPLIGHT", "AppleJeus", "BLINDINGCAN", "DTrack"],
-      "target_sectors": ["cryptocurrency", "finance", "entertainment", "defense"],
-      "target_regions": ["Global", "South Korea", "United States"]
+      "malware_families": ["FALLCHILL", "HOPLIGHT", "AppleJeus", "BLINDINGCAN", "DTrack", "KANDYKORN"],
+      "target_sectors": ["cryptocurrency", "finance", "entertainment", "defense", "blockchain"],
+      "target_regions": ["Global", "South Korea", "United States"],
+      "notable_campaigns": ["Sony Pictures (2014)", "Bangladesh Bank (2016)", "Ronin Network (2022)", "Atomic Wallet (2023)"]
     },
     {
       "id": "apt28",
       "name": "APT28 (Fancy Bear)",
-      "aliases": ["Sofacy", "Pawn Storm", "Sednit", "STRONTIUM"],
+      "aliases": ["Sofacy", "Pawn Storm", "Sednit", "STRONTIUM", "Forest Blizzard"],
       "country": "Russia",
       "motivation": "espionage",
       "sophistication": "advanced",
+      "first_seen": "2004",
+      "last_active": "2025",
       "ttps": [
         {"technique_id": "T1566", "technique_name": "Phishing", "tactic": "Initial Access", "confidence": 0.95},
         {"technique_id": "T1190", "technique_name": "Exploit Public-Facing Application", "tactic": "Initial Access", "confidence": 0.85},
@@ -91,9 +106,193 @@
         {"technique_id": "T1078", "technique_name": "Valid Accounts", "tactic": "Initial Access", "confidence": 0.85},
         {"technique_id": "T1027", "technique_name": "Obfuscated Files", "tactic": "Defense Evasion", "confidence": 0.9}
       ],
-      "malware_families": ["XAgent", "Zebrocy", "CHOPSTICK", "GAMEFISH", "SOURFACE"],
+      "malware_families": ["XAgent", "Zebrocy", "CHOPSTICK", "GAMEFISH", "SOURFACE", "Graphite"],
       "target_sectors": ["government", "military", "journalism", "political_organization"],
-      "target_regions": ["Europe", "North America", "Middle East"]
+      "target_regions": ["Europe", "North America", "Middle East"],
+      "notable_campaigns": ["DNC Breach (2016)", "Olympic Destroyer (2018)", "Ukraine Cyber Operations (2022-2025)"]
+    },
+    {
+      "id": "scattered_spider",
+      "name": "Scattered Spider",
+      "aliases": ["UNC3944", "0ktapus", "Muddled Libra", "Scatter Swine", "Starfraud"],
+      "country": "United States/United Kingdom",
+      "motivation": "financial",
+      "sophistication": "high",
+      "first_seen": "2022",
+      "last_active": "2025",
+      "ttps": [
+        {"technique_id": "T1566.004", "technique_name": "Spearphishing Voice", "tactic": "Initial Access", "confidence": 0.95},
+        {"technique_id": "T1598.001", "technique_name": "Spearphishing Service", "tactic": "Reconnaissance", "confidence": 0.9},
+        {"technique_id": "T1621", "technique_name": "Multi-Factor Authentication Request Generation", "tactic": "Credential Access", "confidence": 0.95},
+        {"technique_id": "T1078", "technique_name": "Valid Accounts", "tactic": "Initial Access", "confidence": 0.9},
+        {"technique_id": "T1219", "technique_name": "Remote Access Software", "tactic": "Command and Control", "confidence": 0.85},
+        {"technique_id": "T1486", "technique_name": "Data Encrypted for Impact", "tactic": "Impact", "confidence": 0.8}
+      ],
+      "malware_families": ["ALPHV/BlackCat", "AnyDesk", "TeamViewer", "Splashtop"],
+      "target_sectors": ["hospitality", "telecommunications", "technology", "gaming", "retail"],
+      "target_regions": ["North America", "Europe"],
+      "notable_campaigns": ["MGM Resorts (2023)", "Caesars Entertainment (2023)", "Okta Support Breach (2023)"]
+    },
+    {
+      "id": "volt_typhoon",
+      "name": "Volt Typhoon",
+      "aliases": ["BRONZE SILHOUETTE", "Vanguard Panda", "DEV-0391", "Insidious Taurus"],
+      "country": "China",
+      "motivation": "espionage",
+      "sophistication": "advanced",
+      "first_seen": "2021",
+      "last_active": "2025",
+      "ttps": [
+        {"technique_id": "T1190", "technique_name": "Exploit Public-Facing Application", "tactic": "Initial Access", "confidence": 0.9},
+        {"technique_id": "T1133", "technique_name": "External Remote Services", "tactic": "Initial Access", "confidence": 0.85},
+        {"technique_id": "T1218", "technique_name": "System Binary Proxy Execution", "tactic": "Defense Evasion", "confidence": 0.9},
+        {"technique_id": "T1003", "technique_name": "OS Credential Dumping", "tactic": "Credential Access", "confidence": 0.85},
+        {"technique_id": "T1021", "technique_name": "Remote Services", "tactic": "Lateral Movement", "confidence": 0.9},
+        {"technique_id": "T1027", "technique_name": "Obfuscated Files", "tactic": "Defense Evasion", "confidence": 0.8}
+      ],
+      "malware_families": ["Living-off-the-Land binaries (LOLBins)", "Custom webshells"],
+      "target_sectors": ["critical_infrastructure", "telecommunications", "utilities", "government", "transportation"],
+      "target_regions": ["United States", "Pacific Islands", "Guam"],
+      "notable_campaigns": ["US Critical Infrastructure (2023-2025)", "Pacific Island Telecommunications (2024)"]
+    },
+    {
+      "id": "alphv_blackcat",
+      "name": "ALPHV (BlackCat)",
+      "aliases": ["BlackCat", "Noberus", "UNC4466"],
+      "country": "Russia",
+      "motivation": "financial",
+      "sophistication": "high",
+      "first_seen": "2021",
+      "last_active": "2024",
+      "ttps": [
+        {"technique_id": "T1566", "technique_name": "Phishing", "tactic": "Initial Access", "confidence": 0.85},
+        {"technique_id": "T1078", "technique_name": "Valid Accounts", "tactic": "Initial Access", "confidence": 0.9},
+        {"technique_id": "T1059.001", "technique_name": "PowerShell", "tactic": "Execution", "confidence": 0.85},
+        {"technique_id": "T1486", "technique_name": "Data Encrypted for Impact", "tactic": "Impact", "confidence": 0.95},
+        {"technique_id": "T1567.002", "technique_name": "Exfiltration to Cloud Storage", "tactic": "Exfiltration", "confidence": 0.9},
+        {"technique_id": "T1490", "technique_name": "Inhibit System Recovery", "tactic": "Impact", "confidence": 0.9}
+      ],
+      "malware_families": ["BlackCat", "Sphynx", "ExMatter"],
+      "target_sectors": ["healthcare", "finance", "government", "manufacturing", "legal"],
+      "target_regions": ["Global"],
+      "notable_campaigns": ["Change Healthcare (2024)", "MGM Resorts (2023)", "Reddit (2023)"]
+    },
+    {
+      "id": "lockbit",
+      "name": "LockBit",
+      "aliases": ["ABCD Ransomware", "LockBit 2.0", "LockBit 3.0", "LockBit Black"],
+      "country": "Russia",
+      "motivation": "financial",
+      "sophistication": "high",
+      "first_seen": "2019",
+      "last_active": "2024",
+      "ttps": [
+        {"technique_id": "T1190", "technique_name": "Exploit Public-Facing Application", "tactic": "Initial Access", "confidence": 0.9},
+        {"technique_id": "T1078", "technique_name": "Valid Accounts", "tactic": "Initial Access", "confidence": 0.85},
+        {"technique_id": "T1059.001", "technique_name": "PowerShell", "tactic": "Execution", "confidence": 0.9},
+        {"technique_id": "T1486", "technique_name": "Data Encrypted for Impact", "tactic": "Impact", "confidence": 0.95},
+        {"technique_id": "T1490", "technique_name": "Inhibit System Recovery", "tactic": "Impact", "confidence": 0.95},
+        {"technique_id": "T1021", "technique_name": "Remote Services", "tactic": "Lateral Movement", "confidence": 0.85}
+      ],
+      "malware_families": ["LockBit", "StealBit"],
+      "target_sectors": ["healthcare", "education", "government", "manufacturing", "finance"],
+      "target_regions": ["Global"],
+      "notable_campaigns": ["Royal Mail UK (2023)", "Boeing (2023)", "ICBC (2023)"]
+    },
+    {
+      "id": "clop",
+      "name": "Cl0p",
+      "aliases": ["TA505", "FIN11", "Lace Tempest"],
+      "country": "Russia",
+      "motivation": "financial",
+      "sophistication": "high",
+      "first_seen": "2019",
+      "last_active": "2025",
+      "ttps": [
+        {"technique_id": "T1190", "technique_name": "Exploit Public-Facing Application", "tactic": "Initial Access", "confidence": 0.95},
+        {"technique_id": "T1059.001", "technique_name": "PowerShell", "tactic": "Execution", "confidence": 0.85},
+        {"technique_id": "T1486", "technique_name": "Data Encrypted for Impact", "tactic": "Impact", "confidence": 0.8},
+        {"technique_id": "T1567.002", "technique_name": "Exfiltration to Cloud Storage", "tactic": "Exfiltration", "confidence": 0.95},
+        {"technique_id": "T1490", "technique_name": "Inhibit System Recovery", "tactic": "Impact", "confidence": 0.85}
+      ],
+      "malware_families": ["Clop", "FlawedAmmyy", "SDBot", "TrueBot"],
+      "target_sectors": ["government", "finance", "healthcare", "education", "retail"],
+      "target_regions": ["Global"],
+      "notable_campaigns": ["MOVEit Exploitation (2023)", "GoAnywhere MFT (2023)", "Accellion FTA (2021)"]
+    },
+    {
+      "id": "rhysida",
+      "name": "Rhysida",
+      "aliases": ["Vice Society successor"],
+      "country": "Unknown",
+      "motivation": "financial",
+      "sophistication": "medium",
+      "first_seen": "2023",
+      "last_active": "2025",
+      "ttps": [
+        {"technique_id": "T1566", "technique_name": "Phishing", "tactic": "Initial Access", "confidence": 0.85},
+        {"technique_id": "T1078", "technique_name": "Valid Accounts", "tactic": "Initial Access", "confidence": 0.8},
+        {"technique_id": "T1059.001", "technique_name": "PowerShell", "tactic": "Execution", "confidence": 0.85},
+        {"technique_id": "T1486", "technique_name": "Data Encrypted for Impact", "tactic": "Impact", "confidence": 0.9},
+        {"technique_id": "T1021.001", "technique_name": "Remote Desktop Protocol", "tactic": "Lateral Movement", "confidence": 0.85}
+      ],
+      "malware_families": ["Rhysida"],
+      "target_sectors": ["healthcare", "education", "government", "manufacturing"],
+      "target_regions": ["Europe", "North America", "South America"],
+      "notable_campaigns": ["British Library (2023)", "Prospect Medical Holdings (2023)", "Chilean Army (2023)"]
+    },
+    {
+      "id": "akira",
+      "name": "Akira",
+      "aliases": [],
+      "country": "Unknown",
+      "motivation": "financial",
+      "sophistication": "medium",
+      "first_seen": "2023",
+      "last_active": "2025",
+      "ttps": [
+        {"technique_id": "T1133", "technique_name": "External Remote Services", "tactic": "Initial Access", "confidence": 0.9},
+        {"technique_id": "T1078", "technique_name": "Valid Accounts", "tactic": "Initial Access", "confidence": 0.85},
+        {"technique_id": "T1059.001", "technique_name": "PowerShell", "tactic": "Execution", "confidence": 0.8},
+        {"technique_id": "T1486", "technique_name": "Data Encrypted for Impact", "tactic": "Impact", "confidence": 0.9},
+        {"technique_id": "T1567.002", "technique_name": "Exfiltration to Cloud Storage", "tactic": "Exfiltration", "confidence": 0.85}
+      ],
+      "malware_families": ["Akira", "Megazord"],
+      "target_sectors": ["education", "finance", "manufacturing", "professional_services"],
+      "target_regions": ["North America", "Europe"],
+      "notable_campaigns": ["Stanford University (2023)", "Nissan Oceania (2023)"]
+    },
+    {
+      "id": "play",
+      "name": "Play",
+      "aliases": ["PlayCrypt"],
+      "country": "Unknown",
+      "motivation": "financial",
+      "sophistication": "medium",
+      "first_seen": "2022",
+      "last_active": "2025",
+      "ttps": [
+        {"technique_id": "T1190", "technique_name": "Exploit Public-Facing Application", "tactic": "Initial Access", "confidence": 0.9},
+        {"technique_id": "T1078", "technique_name": "Valid Accounts", "tactic": "Initial Access", "confidence": 0.85},
+        {"technique_id": "T1059.001", "technique_name": "PowerShell", "tactic": "Execution", "confidence": 0.85},
+        {"technique_id": "T1486", "technique_name": "Data Encrypted for Impact", "tactic": "Impact", "confidence": 0.9},
+        {"technique_id": "T1070", "technique_name": "Indicator Removal", "tactic": "Defense Evasion", "confidence": 0.8}
+      ],
+      "malware_families": ["Play"],
+      "target_sectors": ["government", "manufacturing", "technology", "telecommunications"],
+      "target_regions": ["Latin America", "Europe", "North America"],
+      "notable_campaigns": ["City of Oakland (2023)", "Arnold Clark (2022)"]
     }
-  ]
+  ],
+  "metadata": {
+    "version": "2.0",
+    "last_updated": "2026-01-03",
+    "sources": [
+      "MITRE ATT&CK",
+      "Mandiant",
+      "Microsoft Threat Intelligence",
+      "CrowdStrike",
+      "CISA Advisories"
+    ]
+  }
 }

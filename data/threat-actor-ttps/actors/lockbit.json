@@ -1,0 +1,254 @@
+{
+  "id": "lockbit",
+  "name": "LockBit",
+  "aliases": ["LockBit 3.0", "LockBit Black", "ABCD Ransomware"],
+  "country": "Russia",
+  "attributed_to": "Russian-speaking ransomware-as-a-service (RaaS) operation",
+  "motivation": "financial",
+  "active_since": "2019",
+  "sophistication": "advanced",
+  "description": "LockBit is one of the most prolific ransomware-as-a-service operations. Known for rapid encryption, double extortion tactics, and sophisticated affiliate program. LockBit 3.0 introduced a bug bounty program. Disrupted by law enforcement in February 2024 but continued operations.",
+  "ttps": [
+    {
+      "technique_id": "T1190",
+      "technique_name": "Exploit Public-Facing Application",
+      "tactic": "Initial Access",
+      "procedure": "Exploits vulnerabilities in VPNs, firewalls, and web applications for initial access",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1133",
+      "technique_name": "External Remote Services",
+      "tactic": "Initial Access",
+      "procedure": "Uses compromised RDP and VPN credentials obtained from IABs",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1566.001",
+      "technique_name": "Spearphishing Attachment",
+      "tactic": "Initial Access",
+      "procedure": "Sends phishing emails with malicious attachments",
+      "confidence": 0.80
+    },
+    {
+      "technique_id": "T1059.001",
+      "technique_name": "PowerShell",
+      "tactic": "Execution",
+      "procedure": "Uses PowerShell for payload delivery and disabling security tools",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1059.003",
+      "technique_name": "Windows Command Shell",
+      "tactic": "Execution",
+      "procedure": "Uses cmd.exe for executing batch scripts",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1053.005",
+      "technique_name": "Scheduled Task",
+      "tactic": "Persistence",
+      "procedure": "Creates scheduled tasks for persistence and spreading",
+      "confidence": 0.85
+    },
+    {
+      "technique_id": "T1543.003",
+      "technique_name": "Windows Service",
+      "tactic": "Persistence",
+      "procedure": "Installs ransomware as a service for persistence",
+      "confidence": 0.80
+    },
+    {
+      "technique_id": "T1562.001",
+      "technique_name": "Disable or Modify Tools",
+      "tactic": "Defense Evasion",
+      "procedure": "Disables Windows Defender and other security tools",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1070.001",
+      "technique_name": "Clear Windows Event Logs",
+      "tactic": "Defense Evasion",
+      "procedure": "Clears Windows event logs to hinder forensics",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1027",
+      "technique_name": "Obfuscated Files or Information",
+      "tactic": "Defense Evasion",
+      "procedure": "Uses obfuscated scripts and encrypted payloads",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1003.001",
+      "technique_name": "LSASS Memory",
+      "tactic": "Credential Access",
+      "procedure": "Dumps credentials using Mimikatz or custom tools",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1003.003",
+      "technique_name": "NTDS",
+      "tactic": "Credential Access",
+      "procedure": "Extracts Active Directory database for domain-wide access",
+      "confidence": 0.85
+    },
+    {
+      "technique_id": "T1087.002",
+      "technique_name": "Domain Account",
+      "tactic": "Discovery",
+      "procedure": "Enumerates domain accounts for high-value targets",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1083",
+      "technique_name": "File and Directory Discovery",
+      "tactic": "Discovery",
+      "procedure": "Searches for valuable data to exfiltrate",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1021.002",
+      "technique_name": "SMB/Windows Admin Shares",
+      "tactic": "Lateral Movement",
+      "procedure": "Uses SMB for lateral movement and ransomware deployment",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1021.001",
+      "technique_name": "Remote Desktop Protocol",
+      "tactic": "Lateral Movement",
+      "procedure": "Uses RDP for lateral movement with stolen credentials",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1570",
+      "technique_name": "Lateral Tool Transfer",
+      "tactic": "Lateral Movement",
+      "procedure": "Copies ransomware binary across network shares",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1560.001",
+      "technique_name": "Archive via Utility",
+      "tactic": "Collection",
+      "procedure": "Archives data before exfiltration using 7-Zip or WinRAR",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1567.002",
+      "technique_name": "Exfiltration to Cloud Storage",
+      "tactic": "Exfiltration",
+      "procedure": "Exfiltrates data to cloud storage (MEGA, cloud providers)",
+      "confidence": 0.90
+    },
+    {
+      "technique_id": "T1486",
+      "technique_name": "Data Encrypted for Impact",
+      "tactic": "Impact",
+      "procedure": "Encrypts files using AES-256 with RSA-protected keys",
+      "confidence": 0.98
+    },
+    {
+      "technique_id": "T1490",
+      "technique_name": "Inhibit System Recovery",
+      "tactic": "Impact",
+      "procedure": "Deletes shadow copies using vssadmin and WMIC",
+      "confidence": 0.95
+    },
+    {
+      "technique_id": "T1489",
+      "technique_name": "Service Stop",
+      "tactic": "Impact",
+      "procedure": "Stops database, backup, and security services before encryption",
+      "confidence": 0.95
+    }
+  ],
+  "malware_families": [
+    "LockBit",
+    "LockBit 2.0",
+    "LockBit 3.0 (LockBit Black)",
+    "StealBit"
+  ],
+  "tools": [
+    "Cobalt Strike",
+    "Mimikatz",
+    "PSExec",
+    "Advanced IP Scanner",
+    "Process Hacker",
+    "PCHunter",
+    "GMER"
+  ],
+  "target_sectors": [
+    "healthcare",
+    "manufacturing",
+    "technology",
+    "government",
+    "education",
+    "finance",
+    "legal",
+    "construction"
+  ],
+  "target_regions": [
+    "North America",
+    "Europe",
+    "Asia Pacific",
+    "Global"
+  ],
+  "infrastructure": {
+    "c2_patterns": [
+      "Tor hidden services for data leak site",
+      "Affiliate-provided C2",
+      "Cloud storage for exfiltration"
+    ],
+    "hosting_preferences": [
+      "Tor network",
+      "Bulletproof hosting",
+      "Cloud services"
+    ],
+    "sample_domains_defanged": [
+      "lockbitapt6vx57t3eeqjofwgcglmutr3a35nygvokja5uuccip4ykyd[.]onion"
+    ]
+  },
+  "notable_campaigns": [
+    "Royal Mail UK attack (2023)",
+    "Boeing data theft (2023)",
+    "ICBC ransomware attack (2023)",
+    "Fulton County, Georgia attack (2024)"
+  ],
+  "detection_signatures": {
+    "yara_hints": [
+      "LockBit 3.0 encryption routine",
+      "StealBit data exfiltration",
+      "Characteristic ransom note patterns"
+    ],
+    "sigma_hints": [
+      "VSS shadow copy deletion",
+      "bcdedit boot configuration changes",
+      "Mass file extension changes to .lockbit"
+    ]
+  },
+  "ransom_note_indicators": {
+    "extensions": [".lockbit", ".abcd", ".LockBit"],
+    "note_filenames": ["Restore-My-Files.txt", "[victim_id].README.txt"],
+    "contact_methods": ["Tor negotiation site", "Email (deprecated)"]
+  },
+  "operational_notes": {
+    "unique_characteristics": [
+      "Extremely fast encryption (claims fastest in market)",
+      "Bug bounty program for vulnerability reports",
+      "Strict affiliate rules (no CIS targeting)",
+      "Automated data exfiltration with StealBit",
+      "Aggressive marketing and public presence"
+    ],
+    "law_enforcement": {
+      "operation_cronos": "February 2024 disruption",
+      "impact": "Infrastructure seized, affiliates arrested, but operations continued"
+    }
+  },
+  "references": [
+    "https://www.cisa.gov/news-events/cybersecurity-advisories/aa23-165a",
+    "https://attack.mitre.org/software/S0372/",
+    "https://www.trendmicro.com/vinfo/us/security/news/ransomware-spotlight/ransomware-spotlight-lockbit"
+  ]
+}

@@ -82,14 +82,58 @@ python scripts/verify_flag.py beginner-01 "FLAG{your_answer}"
 
 ---
 
+## 🏆 Gamification
+
+### Ranks
+
+Progress through the ranks as you earn points:
+
+| Points | Rank | Badge |
+|--------|------|-------|
+| 0+ | Script Kiddie | 👶 |
+| 100+ | Security Intern | 📚 |
+| 300+ | Junior Analyst | 🔰 |
+| 750+ | Security Analyst | 🛡️ |
+| 1500+ | Senior Analyst | ⚔️ |
+| 2500+ | Threat Hunter | 🎯 |
+| 3500+ | Security Architect | 🏛️ |
+| 4250 | CISO Material | 👑 |
+
+### Achievements
+
+Unlock achievements for special accomplishments:
+
+| Achievement | Description | Points |
+|-------------|-------------|--------|
+| 🩸 First Blood | Capture your first flag | 50 |
+| 🌱 Rookie Analyst | Complete all beginner challenges | 200 |
+| ⚡ Speed Demon | Solve a challenge in under 10 minutes | 100 |
+| 🧠 Purist | Complete a challenge without hints | 75 |
+| 🔥 On Fire | 3 challenges in a row | 150 |
+| 🎯 Completionist | Capture all 15 flags | 1000 |
+
+### Specialization Badges
+
+Earn badges by mastering specific domains:
+
+- 📋 **Log Analyst** - Master of log analysis
+- 🎣 **Phishing Expert** - Spots phishing instantly
+- 🦠 **Malware Analyst** - Understands malware behavior
+- 🚨 **Incident Responder** - Cool under pressure
+- 🕵️ **Threat Intel Analyst** - Tracks adversaries
+- ☁️ **Cloud Defender** - Secures the cloud
+- 🤖 **ML Security Specialist** - Protects AI/ML systems
+
+---
+
 ## Scoreboard
 
 Track your progress:
 
 ```
 [ ] Beginner Challenges (500 pts)
-    [ ] 01 - Log Detective
-    [ ] 02 - Phish Finder
+    [ ] 01 - Log Detective (FLAG{BRUT3_F0RC3_4TT4CK_D3T3CT3D})
+    [ ] 02 - Phish Finder (FLAG{PH1SH1NG_D3T3CT3D_CHK_H34D3RS})
     [ ] 03 - Hidden IOC
     [ ] 04 - Malware Classifier
     [ ] 05 - Prompt Injection 101
@@ -99,16 +143,18 @@ Track your progress:
     [ ] 02 - Memory Forensics
     [ ] 03 - Adversarial Samples
     [ ] 04 - Agent Investigation
-    [ ] 05 - Ransomware Response
+    [ ] 05 - Ransomware Response (FLAG{R4NS0M_N0T3_4N4LYZ3D})
 
 [ ] Advanced Challenges (2500 pts)
-    [ ] 01 - APT Attribution
+    [ ] 01 - APT Attribution (FLAG{APT29_GN_2008})
     [ ] 02 - Model Poisoning
     [ ] 03 - Cloud Compromise
     [ ] 04 - Zero-Day Detection
     [ ] 05 - Full IR Scenario
 
 Total: _____ / 4250 points
+Achievements: _____ / 15 unlocked
+Current Rank: ____________
 ```
 
 ---

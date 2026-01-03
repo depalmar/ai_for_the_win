@@ -1,0 +1,48 @@
+{
+  "known_actors": [
+    {
+      "id": "storm_0558",
+      "name": "Storm-0558",
+      "aliases": ["STORM-0558"],
+      "origin": "China",
+      "motivation": "espionage",
+      "signature_tools": ["TokenForge", "MSA Key Abuse"],
+      "ttps": ["T1078", "T1550.001", "T1114.002"],
+      "targets": ["government", "diplomatic"],
+      "first_seen": "2023"
+    },
+    {
+      "id": "midnight_blizzard",
+      "name": "Midnight Blizzard",
+      "aliases": ["APT29", "Cozy Bear", "The Dukes"],
+      "origin": "Russia",
+      "motivation": "espionage",
+      "signature_tools": ["GraphicalNeutrino", "EnvyScout", "SUNBURST"],
+      "ttps": ["T1566", "T1195.002", "T1078"],
+      "targets": ["government", "technology", "think_tanks"],
+      "first_seen": "2008"
+    },
+    {
+      "id": "volt_typhoon",
+      "name": "Volt Typhoon",
+      "aliases": ["BRONZE SILHOUETTE", "Vanguard Panda"],
+      "origin": "China",
+      "motivation": "espionage",
+      "signature_tools": ["Living-off-the-Land", "Custom Webshells"],
+      "ttps": ["T1190", "T1218", "T1003"],
+      "targets": ["critical_infrastructure", "telecommunications"],
+      "first_seen": "2021"
+    },
+    {
+      "id": "scattered_spider",
+      "name": "Scattered Spider",
+      "aliases": ["UNC3944", "0ktapus", "Muddled Libra"],
+      "origin": "US/UK",
+      "motivation": "financial",
+      "signature_tools": ["Voice Phishing", "SIM Swapping", "MFA Fatigue"],
+      "ttps": ["T1566.004", "T1621", "T1219"],
+      "targets": ["hospitality", "telecommunications", "technology"],
+      "first_seen": "2022"
+    }
+  ]
+}

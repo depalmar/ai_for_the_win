@@ -1,0 +1,200 @@
+{
+  "achievements": [
+    {
+      "id": "first_flag",
+      "name": "First Blood",
+      "description": "Capture your first flag",
+      "icon": "🩸",
+      "points": 50,
+      "category": "milestone",
+      "requirement": {"flags_captured": 1}
+    },
+    {
+      "id": "beginner_complete",
+      "name": "Rookie Analyst",
+      "description": "Complete all beginner challenges",
+      "icon": "🌱",
+      "points": 200,
+      "category": "completion",
+      "requirement": {"category": "beginner", "all": true}
+    },
+    {
+      "id": "intermediate_complete",
+      "name": "Security Specialist",
+      "description": "Complete all intermediate challenges",
+      "icon": "⚡",
+      "points": 500,
+      "category": "completion",
+      "requirement": {"category": "intermediate", "all": true}
+    },
+    {
+      "id": "advanced_complete",
+      "name": "Elite Defender",
+      "description": "Complete all advanced challenges",
+      "icon": "🏆",
+      "points": 1000,
+      "category": "completion",
+      "requirement": {"category": "advanced", "all": true}
+    },
+    {
+      "id": "speed_demon",
+      "name": "Speed Demon",
+      "description": "Solve a challenge in under 10 minutes",
+      "icon": "⚡",
+      "points": 100,
+      "category": "skill",
+      "requirement": {"time_under_minutes": 10}
+    },
+    {
+      "id": "no_hints",
+      "name": "Purist",
+      "description": "Complete a challenge without using hints",
+      "icon": "🧠",
+      "points": 75,
+      "category": "skill",
+      "requirement": {"hints_used": 0}
+    },
+    {
+      "id": "streak_3",
+      "name": "On Fire",
+      "description": "Solve 3 challenges in a row",
+      "icon": "🔥",
+      "points": 150,
+      "category": "streak",
+      "requirement": {"consecutive": 3}
+    },
+    {
+      "id": "streak_5",
+      "name": "Unstoppable",
+      "description": "Solve 5 challenges in a row",
+      "icon": "💪",
+      "points": 300,
+      "category": "streak",
+      "requirement": {"consecutive": 5}
+    },
+    {
+      "id": "threat_hunter",
+      "name": "Threat Hunter",
+      "description": "Complete all threat intelligence challenges",
+      "icon": "🔍",
+      "points": 250,
+      "category": "specialization",
+      "requirement": {"tags": ["threat_intel"], "all": true}
+    },
+    {
+      "id": "ml_master",
+      "name": "ML Master",
+      "description": "Complete all machine learning challenges",
+      "icon": "🤖",
+      "points": 250,
+      "category": "specialization",
+      "requirement": {"tags": ["ml"], "all": true}
+    },
+    {
+      "id": "dfir_expert",
+      "name": "DFIR Expert",
+      "description": "Complete all digital forensics challenges",
+      "icon": "🔬",
+      "points": 250,
+      "category": "specialization",
+      "requirement": {"tags": ["dfir"], "all": true}
+    },
+    {
+      "id": "ai_whisperer",
+      "name": "AI Whisperer",
+      "description": "Use AI assistance effectively in 10 challenges",
+      "icon": "🗣️",
+      "points": 200,
+      "category": "skill",
+      "requirement": {"ai_assisted": 10}
+    },
+    {
+      "id": "perfectionist",
+      "name": "Perfectionist",
+      "description": "Get a perfect score on all challenges",
+      "icon": "💯",
+      "points": 500,
+      "category": "mastery",
+      "requirement": {"perfect_score": true, "all": true}
+    },
+    {
+      "id": "night_owl",
+      "name": "Night Owl",
+      "description": "Solve a challenge between midnight and 4 AM",
+      "icon": "🦉",
+      "points": 50,
+      "category": "fun",
+      "requirement": {"time_range": {"start": "00:00", "end": "04:00"}}
+    },
+    {
+      "id": "completionist",
+      "name": "Completionist",
+      "description": "Capture all 15 flags",
+      "icon": "🎯",
+      "points": 1000,
+      "category": "mastery",
+      "requirement": {"flags_captured": 15}
+    }
+  ],
+  "ranks": [
+    {"name": "Script Kiddie", "min_points": 0, "icon": "👶"},
+    {"name": "Security Intern", "min_points": 100, "icon": "📚"},
+    {"name": "Junior Analyst", "min_points": 300, "icon": "🔰"},
+    {"name": "Security Analyst", "min_points": 750, "icon": "🛡️"},
+    {"name": "Senior Analyst", "min_points": 1500, "icon": "⚔️"},
+    {"name": "Threat Hunter", "min_points": 2500, "icon": "🎯"},
+    {"name": "Security Architect", "min_points": 3500, "icon": "🏛️"},
+    {"name": "CISO Material", "min_points": 4250, "icon": "👑"}
+  ],
+  "badges": [
+    {
+      "id": "log_analyst",
+      "name": "Log Analyst",
+      "description": "Master of log analysis",
+      "icon": "📋",
+      "challenges": ["beginner-01", "intermediate-02"]
+    },
+    {
+      "id": "phishing_expert",
+      "name": "Phishing Expert",
+      "description": "Can spot a phish from a mile away",
+      "icon": "🎣",
+      "challenges": ["beginner-02", "beginner-05"]
+    },
+    {
+      "id": "malware_analyst",
+      "name": "Malware Analyst",
+      "description": "Understands malware behavior",
+      "icon": "🦠",
+      "challenges": ["beginner-04", "intermediate-02", "intermediate-03"]
+    },
+    {
+      "id": "incident_responder",
+      "name": "Incident Responder",
+      "description": "Cool under pressure during incidents",
+      "icon": "🚨",
+      "challenges": ["intermediate-05", "advanced-05"]
+    },
+    {
+      "id": "threat_intel_analyst",
+      "name": "Threat Intel Analyst",
+      "description": "Tracks adversaries like a pro",
+      "icon": "🕵️",
+      "challenges": ["beginner-03", "advanced-01"]
+    },
+    {
+      "id": "cloud_defender",
+      "name": "Cloud Defender",
+      "description": "Secures the cloud",
+      "icon": "☁️",
+      "challenges": ["advanced-03"]
+    },
+    {
+      "id": "ml_security",
+      "name": "ML Security Specialist",
+      "description": "Protects AI/ML systems",
+      "icon": "🤖",
+      "challenges": ["intermediate-03", "advanced-02", "advanced-04"]
+    }
+  ]
+}
