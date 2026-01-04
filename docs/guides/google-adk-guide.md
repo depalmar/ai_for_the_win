@@ -984,7 +984,7 @@ gcloud services enable \
 4. Configure:
    - **Name**: `security-analyst-agent`
    - **Region**: Choose your region
-   - **Model**: Gemini 2.0 Flash or Pro
+   - **Model**: Gemini 3 Flash or Pro
 
 **Step 3: Define Tools**
 

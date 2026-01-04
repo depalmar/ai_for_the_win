@@ -10,14 +10,19 @@
     "mitigation": "Update to FortiOS 7.4.3, 7.2.7, or 7.0.14. If patching is not immediately possible, disable SSL VPN."
   },
   {
-    "cve_id": "CVE-2024-3400",
-    "description": "A command injection vulnerability in the GlobalProtect feature of Palo Alto Networks PAN-OS software enables an unauthenticated attacker to execute arbitrary code with root privileges on the firewall.",
-    "cvss_score": 10.0,
+    "cve_id": "CVE-2024-47575",
+    "description": "A missing authentication vulnerability in Fortinet FortiManager fgfmd daemon allows a remote unauthenticated attacker to execute arbitrary code via specially crafted requests.",
+    "cvss_score": 9.8,
     "severity": "CRITICAL",
-    "affected_products": ["PAN-OS 11.1", "PAN-OS 11.0", "PAN-OS 10.2"],
-    "cwe": "CWE-77",
-    "published_date": "2024-04-12",
-    "mitigation": "Apply vendor hotfix immediately. Enable Threat Prevention signatures. Consider disabling GlobalProtect if not required."
+    "affected_products": [
+      "FortiManager 7.6.0",
+      "FortiManager 7.4.0-7.4.4",
+      "FortiManager 7.2.0-7.2.7",
+      "FortiManager 7.0.0-7.0.12"
+    ],
+    "cwe": "CWE-306",
+    "published_date": "2024-10-23",
+    "mitigation": "Update to patched FortiManager version. Restrict fgfmd access to known FortiGate IPs. Monitor for unauthorized device registrations."
   },
   {
     "cve_id": "CVE-2024-1709",
@@ -54,7 +59,11 @@
     "description": "Ivanti Connect Secure and Policy Secure authentication bypass vulnerability allows remote attackers to access restricted resources.",
     "cvss_score": 8.2,
     "severity": "HIGH",
-    "affected_products": ["Ivanti Connect Secure 9.x", "Ivanti Connect Secure 22.x", "Ivanti Policy Secure"],
+    "affected_products": [
+      "Ivanti Connect Secure 9.x",
+      "Ivanti Connect Secure 22.x",
+      "Ivanti Policy Secure"
+    ],
     "cwe": "CWE-287",
     "published_date": "2024-01-10",
     "mitigation": "Apply vendor patches. Implement additional network segmentation for VPN concentrators."

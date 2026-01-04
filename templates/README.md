@@ -95,7 +95,7 @@ Reusable prompt templates for common security AI tasks:
 
 Integration templates for common SIEM platforms:
 
-- **Splunk** - REST API client
+- **Elasticsearch** - REST API client
 - **Elasticsearch/OpenSearch** - Search and alerts
 - **Microsoft Sentinel** - KQL queries and incidents
 - **Generic Interface** - Abstract SIEM interface

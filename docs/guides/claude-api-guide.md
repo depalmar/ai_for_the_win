@@ -35,9 +35,9 @@ Claude (by Anthropic) excels at security-related tasks due to:
 
 | Model                 | Best For                         | Context | Cost                          |
 | --------------------- | -------------------------------- | ------- | ----------------------------- |
-| **Claude 3.5 Sonnet** | Daily development, code analysis | 200K    | $3/M input, $15/M output      |
-| **Claude 3 Opus**     | Complex reasoning, architecture  | 200K    | $15/M input, $75/M output     |
-| **Claude 3 Haiku**    | Quick tasks, high volume         | 200K    | $0.25/M input, $1.25/M output |
+| **Claude Sonnet 4.5** | Daily development, code analysis | 200K    | $3/M input, $15/M output      |
+| **Claude Opus 4.5**   | Complex reasoning, architecture  | 200K    | $15/M input, $75/M output     |
+| **Claude Haiku 4.5**  | Quick tasks, high volume         | 200K    | $0.25/M input, $1.25/M output |
 
 ---
 

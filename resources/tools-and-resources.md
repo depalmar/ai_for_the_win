@@ -386,12 +386,13 @@ Industry-recognized certifications for those who want to go deep:
 
 ### Commercial/Premium
 
-| Source              | Focus               | Link                                             |
-| ------------------- | ------------------- | ------------------------------------------------ |
-| **Recorded Future** | Threat intelligence | [recordedfuture.com](https://recordedfuture.com) |
-| **Mandiant**        | APT research        | [mandiant.com](https://mandiant.com)             |
-| **CrowdStrike**     | Threat actors       | [crowdstrike.com](https://crowdstrike.com)       |
-| **VirusTotal**      | File/URL analysis   | [virustotal.com](https://virustotal.com)         |
+| Source              | Focus                                      | Link                                                               |
+| ------------------- | ------------------------------------------ | ------------------------------------------------------------------ |
+| **CrowdStrike**     | Threat actors                              | [crowdstrike.com](https://crowdstrike.com)                         |
+| **Mandiant**        | APT research                               | [mandiant.com](https://mandiant.com)                               |
+| **Recorded Future** | Threat intelligence                        | [recordedfuture.com](https://recordedfuture.com)                   |
+| **Unit 42**         | Threat actors, ransomware, threat research | [unit42.paloaltonetworks.com](https://unit42.paloaltonetworks.com) |
+| **VirusTotal**      | File/URL analysis                          | [virustotal.com](https://virustotal.com)                           |
 
 ---
 

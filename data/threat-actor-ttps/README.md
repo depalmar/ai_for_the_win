@@ -35,7 +35,7 @@ threat-actor-ttps/
 │   ├── moveit.json            # Cl0p mass exploitation (2023)
 │   ├── kaseya.json            # REvil supply chain (2021)
 │   ├── change_healthcare.json # ALPHV healthcare attack (2024)
-│   ├── mgm_caesars.json       # Scattered Spider casino attacks (2023)
+│   ├── arup_deepfake_2024.json   # AI deepfake video conference BEC ($25M)
 │   └── ivanti_exploitation.json # Mass VPN exploitation (2024)
 └── attack-chains/    # Generic attack patterns (5 patterns)
     ├── double_extortion.json   # Modern ransomware playbook
@@ -143,7 +143,7 @@ CTF challenges can use this data for:
 - [MITRE ATT&CK Groups](https://attack.mitre.org/groups/)
 - [MITRE ATT&CK Software](https://attack.mitre.org/software/)
 - [CISA Advisories](https://www.cisa.gov/cybersecurity-advisories)
-- Public threat intelligence reports (Mandiant, CrowdStrike, Microsoft, etc.)
+- Public threat intelligence reports (CrowdStrike, Mandiant, Microsoft, Unit 42, etc.)
 
 ## Note on IOCs
 

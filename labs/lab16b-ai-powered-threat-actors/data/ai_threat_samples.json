@@ -168,7 +168,7 @@
         "AI-generated phishing lures",
         "Automated OSINT gathering"
       ],
-      "notable_campaigns": ["MGM Resorts 2023", "Caesars Entertainment 2023"],
+      "notable_campaigns": ["UK Retail Breaches 2025", "Qantas 2025"],
       "mitre_techniques": ["T1598.001", "T1566.002", "T1078"]
     },
     {

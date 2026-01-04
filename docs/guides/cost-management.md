@@ -2,6 +2,8 @@
 
 Master cost estimation, monitoring, and optimization for LLM-powered security tools.
 
+> **Pricing Disclaimer:** LLM pricing changes frequently. All estimates in this guide are approximate and for educational purposes. Verify current pricing at provider websites before budgeting. Last reviewed: January 2026.
+
 ---
 
 ## Table of Contents
@@ -21,6 +23,7 @@ Master cost estimation, monitoring, and optimization for LLM-powered security to
 ### What is a Token?
 
 Tokens are the units LLMs use to process text. Roughly:
+
 - **1 token ≈ 4 characters** (English)
 - **1 token ≈ 0.75 words**
 - **100 tokens ≈ 75 words**
@@ -36,6 +39,7 @@ Example token counts:
 ### Input vs Output Pricing
 
 Most providers charge differently for:
+
 - **Input tokens**: What you send (prompts, context, data)
 - **Output tokens**: What the model generates (analysis, responses)
 
@@ -51,16 +55,16 @@ Most providers charge differently for:
 Cost = (Input Tokens × Input Price) + (Output Tokens × Output Price)
 ```
 
-### Security Task Cost Estimates (2025 Pricing)
+### Security Task Cost Estimates (Approximate)
 
-| Task | Input Tokens | Output Tokens | Claude 3.5 | GPT-4o | Gemini 2.5 Pro |
-|------|-------------|---------------|------------|--------|----------------|
-| **Single log analysis** | ~500 | ~200 | $0.002 | $0.007 | $0.003 |
-| **Phishing email check** | ~700 | ~300 | $0.007 | $0.009 | $0.004 |
-| **IOC extraction (1 report)** | ~2,000 | ~500 | $0.014 | $0.020 | $0.008 |
-| **Threat intel summary** | ~5,000 | ~1,000 | $0.030 | $0.045 | $0.016 |
-| **Batch: 100 log lines** | ~50,000 | ~20,000 | $0.45 | $0.70 | $0.26 |
-| **Batch: 1000 emails** | ~700,000 | ~300,000 | $6.60 | $9.50 | $3.88 |
+| Task                          | Input Tokens | Output Tokens | Claude 4.5 | GPT-4o | Gemini 3 Pro |
+| ----------------------------- | ------------ | ------------- | ---------- | ------ | ------------ |
+| **Single log analysis**       | ~500         | ~200          | $0.002     | $0.007 | $0.003       |
+| **Phishing email check**      | ~700         | ~300          | $0.007     | $0.009 | $0.004       |
+| **IOC extraction (1 report)** | ~2,000       | ~500          | $0.014     | $0.020 | $0.008       |
+| **Threat intel summary**      | ~5,000       | ~1,000        | $0.030     | $0.045 | $0.016       |
+| **Batch: 100 log lines**      | ~50,000      | ~20,000       | $0.45      | $0.70  | $0.26        |
+| **Batch: 1000 emails**        | ~700,000     | ~300,000      | $6.60      | $9.50  | $3.88        |
 
 ### Token Counting Code
 
@@ -102,9 +106,9 @@ def estimate_project_cost(
     """
     # 2026 pricing per 1M tokens (updated January 2026)
     pricing = {
-        "claude": {"input": 3.00, "output": 15.00},  # Claude Sonnet 4
+        "claude": {"input": 3.00, "output": 15.00},  # Claude Sonnet 4.5
         "openai": {"input": 1.75, "output": 14.00},  # GPT-5.2
-        "gemini": {"input": 1.25, "output": 10.00},  # Gemini 2.5 Pro
+        "gemini": {"input": 2.00, "output": 12.00},  # Gemini 3 Pro
     }
 
     p = pricing[provider]
@@ -142,33 +146,33 @@ print(result)
 
 ### Current Pricing (January 2026)
 
-| Provider | Model | Input (per 1M) | Output (per 1M) | Best For |
-|----------|-------|----------------|-----------------|----------|
-| **Anthropic** | Claude Sonnet 4 | $3.00 | $15.00 | Long context, nuanced analysis |
-| **Anthropic** | Claude Haiku 4 | $0.25 | $1.25 | Fast, simple tasks |
-| **OpenAI** | GPT-5.2 | $1.75 | $14.00 | Complex reasoning, agentic tasks |
-| **OpenAI** | GPT-5 Mini | $0.25 | $2.00 | Budget-friendly |
-| **Google** | Gemini 2.5 Pro | $1.25 | $10.00 | Cost-effective, good quality |
-| **Google** | Gemini 2.0 Flash | $0.10 | $0.40 | Ultra-fast, very cheap |
+| Provider      | Model             | Input (per 1M) | Output (per 1M) | Best For                         |
+| ------------- | ----------------- | -------------- | --------------- | -------------------------------- |
+| **Anthropic** | Claude Sonnet 4.5 | $3.00          | $15.00          | Long context, nuanced analysis   |
+| **Anthropic** | Claude Haiku 4.5  | $0.25          | $1.25           | Fast, simple tasks               |
+| **OpenAI**    | GPT-5.2           | $1.75          | $14.00          | Complex reasoning, agentic tasks |
+| **OpenAI**    | GPT-5 Mini        | $0.25          | $2.00           | Budget-friendly                  |
+| **Google**    | Gemini 3 Pro      | $2.00          | $12.00          | Cost-effective, good quality     |
+| **Google**    | Gemini 3 Flash    | $0.50          | $3.00           | Ultra-fast, very cheap           |
 
 > **Note:** Prices subject to change. Check provider websites for latest pricing. Batch APIs typically offer 50% discounts.
 
 ### Free Tiers and Credits
 
-| Provider | Free Tier | Notes |
-|----------|-----------|-------|
-| **Anthropic** | $5 credit | New accounts only |
-| **OpenAI** | $5 credit | New accounts, expires in 3 months |
-| **Google AI Studio** | Free | Generous limits, rate-limited |
-| **Ollama** | Free forever | Local, no API costs |
+| Provider             | Free Tier    | Notes                             |
+| -------------------- | ------------ | --------------------------------- |
+| **Anthropic**        | $5 credit    | New accounts only                 |
+| **OpenAI**           | $5 credit    | New accounts, expires in 3 months |
+| **Google AI Studio** | Free         | Generous limits, rate-limited     |
+| **Ollama**           | Free forever | Local, no API costs               |
 
 ### Cost per Security Task by Provider
 
-| Task | Claude 3.5 | GPT-4o | Gemini 2.5 Pro | Claude Haiku |
-|------|------------|--------|----------------|--------------|
-| 1,000 log analyses | $4.50 | $7.00 | $2.60 | $0.38 |
-| 1,000 phishing checks | $6.60 | $9.50 | $3.88 | $0.55 |
-| 100 threat reports | $4.50 | $6.50 | $2.38 | $0.38 |
+| Task                  | Claude 4.5 | GPT-4o | Gemini 3 Pro | Claude Haiku 4.5 |
+| --------------------- | ---------- | ------ | ------------ | ---------------- |
+| 1,000 log analyses    | $4.50      | $7.00  | $2.60        | $0.38            |
+| 1,000 phishing checks | $6.60      | $9.50  | $3.88        | $0.55            |
+| 100 threat reports    | $4.50      | $6.50  | $2.38        | $0.38            |
 
 ---
 
@@ -482,28 +486,31 @@ Log: {log}"""
 ### Provider-Side Limits
 
 **Anthropic Console:**
+
 1. Go to console.anthropic.com → Settings → Limits
 2. Set monthly spend limit
 3. Enable email alerts at 50%, 80%, 100%
 
 **OpenAI:**
+
 1. Go to platform.openai.com → Settings → Limits
 2. Set hard limit and soft limit
 3. Configure notification thresholds
 
 **Google AI:**
+
 1. Go to Cloud Console → Billing → Budgets & alerts
 2. Create budget with email notifications
 
 ### Recommended Budget Settings for Labs
 
-| Learning Stage | Recommended Monthly Limit |
-|----------------|---------------------------|
-| Labs 00-03 | $0 (no API needed) |
-| Labs 04-06 | $5-10 |
-| Labs 07-10 | $10-20 |
-| Labs 11-20 | $20-50 |
-| Production pilot | $50-100 |
+| Learning Stage   | Recommended Monthly Limit |
+| ---------------- | ------------------------- |
+| Labs 00-03       | $0 (no API needed)        |
+| Labs 04-06       | $5-10                     |
+| Labs 07-10       | $10-20                    |
+| Labs 11-20       | $20-50                    |
+| Production pilot | $50-100                   |
 
 ---
 
@@ -516,20 +523,20 @@ Log: {log}"""
 curl -fsSL https://ollama.com/install.sh | sh
 
 # Pull security-capable models
-ollama pull llama3.1:8b      # Good balance
-ollama pull mistral:7b       # Fast
-ollama pull codellama:13b    # Code analysis
+ollama pull llama4:scout       # Good balance
+ollama pull ministral3:8b      # Fast
+ollama pull devstral2:24b      # Code analysis
 ```
 
 ### Cost Comparison: Local vs API
 
-| Factor | Local (Ollama) | API (Claude) |
-|--------|---------------|--------------|
-| **Per-token cost** | $0 | $3-15/1M |
-| **Hardware cost** | $0-2000 (GPU) | $0 |
-| **Speed** | Varies by hardware | Consistent |
-| **Quality** | Good for simple tasks | Best quality |
-| **Privacy** | Data stays local | Data sent to provider |
+| Factor             | Local (Ollama)        | API (Claude)          |
+| ------------------ | --------------------- | --------------------- |
+| **Per-token cost** | $0                    | $3-15/1M              |
+| **Hardware cost**  | $0-2000 (GPU)         | $0                    |
+| **Speed**          | Varies by hardware    | Consistent            |
+| **Quality**        | Good for simple tasks | Best quality          |
+| **Privacy**        | Data stays local      | Data sent to provider |
 
 ### When to Use Local
 
@@ -556,8 +563,8 @@ ollama pull codellama:13b    # Code analysis
 3. **Cache identical queries** - 30-50% savings on recurring patterns
 4. **Filter with cheap models first** - 70% savings on mixed workloads
 5. **$1 gets you approximately:**
-   - 333K input tokens (Claude 3.5 Sonnet)
-   - 67K output tokens (Claude 3.5 Sonnet)
+   - 333K input tokens (Claude Sonnet 4.5)
+   - 67K output tokens (Claude Sonnet 4.5)
    - ~2,000 simple log analyses
    - ~500 detailed threat reports
 
@@ -571,4 +578,4 @@ ollama pull codellama:13b    # Code analysis
 
 ---
 
-*Last updated: January 2025*
+_Last updated: January 2025_

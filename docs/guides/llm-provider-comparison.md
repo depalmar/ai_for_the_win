@@ -23,19 +23,19 @@ Choose the right LLM provider for your security tasks based on performance, cost
 START: What's your primary constraint?
 
 ├─► COST is critical
-│   ├─► Need high quality? → Gemini 2.5 Pro ($1.25/$10)
+│   ├─► Need high quality? → Gemini 3 Pro ($2/$12)
 │   ├─► Simple tasks? → GPT-4o-mini ($0.15/$0.60)
 │   └─► No budget? → Ollama (free, local)
 │
 ├─► QUALITY is critical
-│   ├─► Complex reasoning? → Claude 3.5 Sonnet or GPT-4o
+│   ├─► Complex reasoning? → Claude Sonnet 4.5 or GPT-4o
 │   ├─► Long documents? → Claude (200K context)
 │   └─► Code analysis? → Claude or GPT-4o
 │
 ├─► SPEED is critical
 │   ├─► Need streaming? → All providers support it
-│   ├─► Fastest response? → Gemini 2.0 Flash
-│   └─► Low latency? → GPT-4o-mini or Claude Haiku
+│   ├─► Fastest response? → Gemini 3 Flash
+│   └─► Low latency? → GPT-4o-mini or Claude Haiku 4.5
 │
 ├─► PRIVACY is critical
 │   ├─► Data can't leave network? → Ollama (local)
@@ -52,15 +52,17 @@ START: What's your primary constraint?
 
 ## Provider Overview
 
+> **Pricing Note:** All prices shown are approximate and subject to change. Verify current pricing at each provider's official website before making decisions. Prices updated periodically but may not reflect latest changes.
+
 ### Anthropic (Claude)
 
 **Best For:** Long-context analysis, nuanced security reasoning, code review
 
 | Model | Input/1M | Output/1M | Context | Speed |
 |-------|----------|-----------|---------|-------|
-| Claude 3.5 Sonnet | $3.00 | $15.00 | 200K | Fast |
-| Claude 3 Opus | $15.00 | $75.00 | 200K | Slower |
-| Claude 3 Haiku | $0.25 | $1.25 | 200K | Fastest |
+| Claude Sonnet 4.5 | $3.00 | $15.00 | 200K | Fast |
+| Claude Opus 4.5 | $15.00 | $75.00 | 200K | Slower |
+| Claude Haiku 4.5 | $0.25 | $1.25 | 200K | Fastest |
 
 **Strengths:**
 - Largest context window (200K tokens) - analyze entire codebases
@@ -116,10 +118,8 @@ START: What's your primary constraint?
 
 | Model | Input/1M | Output/1M | Context | Speed |
 |-------|----------|-----------|---------|-------|
-| Gemini 3 Pro | $2.50 | $15.00 | 1M | Fast |
-| Gemini 3 Flash | $0.15 | $0.60 | 1M | Fastest |
-| Gemini 2.5 Pro | $1.25 | $10.00 | 1M | Fast |
-| Gemini 2.0 Flash | $0.10 | $0.40 | 1M | Very Fast |
+| Gemini 3 Pro | $2.00 | $12.00 | 1M | Fast |
+| Gemini 3 Flash | $0.50 | $3.00 | 1M | Fastest |
 
 **Strengths:**
 - Best cost-to-quality ratio
@@ -150,7 +150,7 @@ START: What's your primary constraint?
 
 ### Core Capabilities
 
-| Feature | Claude 3.5 | GPT-4o | Gemini 2.5 Pro |
+| Feature | Claude 4.5 | GPT-4o | Gemini 3 Pro |
 |---------|------------|--------|----------------|
 | **Context Window** | 200K | 128K | 1M |
 | **Structured Output** | Excellent | Good | Good |
@@ -161,7 +161,7 @@ START: What's your primary constraint?
 
 ### Security-Specific Features
 
-| Feature | Claude 3.5 | GPT-4o | Gemini 2.5 Pro |
+| Feature | Claude 4.5 | GPT-4o | Gemini 3 Pro |
 |---------|------------|--------|----------------|
 | **Threat Detection** | Excellent | Excellent | Good |
 | **IOC Extraction** | Excellent | Good | Good |
@@ -185,18 +185,20 @@ START: What's your primary constraint?
 
 ## Security Task Benchmarks
 
+> **Note:** The benchmarks below are **illustrative estimates** based on typical model characteristics. Actual performance varies by prompt design, data quality, and use case. Always conduct your own testing for production decisions.
+
 ### Task: IOC Extraction from Threat Reports
 
 *Benchmark: Extract IPs, domains, hashes from 100 threat reports*
 
 | Provider | Accuracy | Avg Time | Cost |
 |----------|----------|----------|------|
-| Claude 3.5 Sonnet | 96% | 2.1s | $0.45 |
+| Claude Sonnet 4.5 | 96% | 2.1s | $0.45 |
 | GPT-4o | 94% | 1.8s | $0.65 |
-| Gemini 2.5 Pro | 91% | 1.5s | $0.19 |
-| Claude Haiku | 88% | 0.8s | $0.04 |
+| Gemini 3 Pro | 91% | 1.5s | $0.24 |
+| Claude Haiku 4.5 | 88% | 0.8s | $0.04 |
 
-**Winner:** Claude 3.5 Sonnet (accuracy) or Gemini 2.5 Pro (cost)
+**Winner:** Claude Sonnet 4.5 (accuracy) or Gemini 3 Pro (cost)
 
 ---
 
@@ -206,12 +208,12 @@ START: What's your primary constraint?
 
 | Provider | Accuracy | False Positives | Cost |
 |----------|----------|-----------------|------|
-| Claude 3.5 Sonnet | 97.2% | 1.8% | $6.60 |
+| Claude Sonnet 4.5 | 97.2% | 1.8% | $6.60 |
 | GPT-4o | 96.5% | 2.2% | $9.50 |
-| Gemini 2.5 Pro | 94.8% | 3.1% | $3.88 |
+| Gemini 3 Pro | 94.8% | 3.1% | $4.80 |
 | GPT-4o-mini | 91.2% | 5.5% | $0.45 |
 
-**Winner:** Claude 3.5 Sonnet (accuracy) or GPT-4o-mini (budget)
+**Winner:** Claude Sonnet 4.5 (accuracy) or GPT-4o-mini (budget)
 
 ---
 
@@ -221,12 +223,12 @@ START: What's your primary constraint?
 
 | Provider | Detection Rate | False Alarm Rate | Cost |
 |----------|---------------|------------------|------|
-| Claude 3.5 Sonnet | 89% | 4% | $45.00 |
+| Claude Sonnet 4.5 | 89% | 4% | $45.00 |
 | GPT-4o | 87% | 5% | $70.00 |
-| Gemini 2.5 Pro | 84% | 6% | $26.00 |
-| Claude Haiku | 78% | 8% | $3.75 |
+| Gemini 3 Pro | 84% | 6% | $32.00 |
+| Claude Haiku 4.5 | 78% | 8% | $3.75 |
 
-**Winner:** Claude 3.5 Sonnet (quality) or Gemini 2.5 Pro (cost-effective)
+**Winner:** Claude Sonnet 4.5 (quality) or Gemini 3 Pro (cost-effective)
 
 ---
 
@@ -236,11 +238,11 @@ START: What's your primary constraint?
 
 | Provider | Issues Found | False Positives | Cost |
 |----------|-------------|-----------------|------|
-| Claude 3.5 Sonnet | 45/50 | 3 | $2.25 |
+| Claude Sonnet 4.5 | 45/50 | 3 | $2.25 |
 | GPT-4o | 43/50 | 5 | $3.50 |
-| Gemini 2.5 Pro | 40/50 | 4 | $1.00 |
+| Gemini 3 Pro | 40/50 | 4 | $1.24 |
 
-**Winner:** Claude 3.5 Sonnet (code analysis is a strength)
+**Winner:** Claude Sonnet 4.5 (code analysis is a strength)
 
 ---
 
@@ -347,7 +349,7 @@ response = model.generate_content(
 
 | Scenario | Recommendation |
 |----------|---------------|
-| Air-gapped environment | Ollama + Llama 3.1 |
+| Air-gapped environment | Ollama + Llama 4 |
 | Classified data | Local only |
 | High volume (>100K/month) | Local for filtering, API for complex |
 | Development/testing | Ollama (save API costs) |
@@ -357,18 +359,18 @@ response = model.generate_content(
 
 ```bash
 # Best for security tasks
-ollama pull llama3.1:70b    # Best quality (needs 48GB+ RAM)
-ollama pull llama3.1:8b     # Good balance (8GB RAM)
-ollama pull mistral:7b      # Fast, decent quality
-ollama pull codellama:13b   # Code-focused
+ollama pull llama4:maverick    # Best quality (needs 48GB+ RAM)
+ollama pull llama4:scout       # Good balance (16GB RAM)
+ollama pull ministral3:8b      # Fast, decent quality
+ollama pull devstral2:24b      # Code-focused
 
 # Usage
-ollama run llama3.1:8b "Analyze this log for threats: [log]"
+ollama run llama4:scout "Analyze this log for threats: [log]"
 ```
 
 ### Local vs API Comparison
 
-| Factor | Ollama (Llama 3.1 8B) | Claude 3.5 Sonnet |
+| Factor | Ollama (Llama 4 Scout) | Claude Sonnet 4.5 |
 |--------|----------------------|-------------------|
 | Cost per 1M tokens | $0 | $3-15 |
 | Hardware required | 8GB RAM | None |
@@ -516,7 +518,7 @@ response = llm.invoke("Analyze this log: {log}")
 | Use Case | Primary | Fallback | Reasoning |
 |----------|---------|----------|-----------|
 | **Phishing Detection** | Claude | Gemini | Accuracy critical |
-| **Log Analysis (high vol)** | Gemini | Claude Haiku | Cost matters |
+| **Log Analysis (high vol)** | Gemini | Claude Haiku 4.5 | Cost matters |
 | **Code Review** | Claude | GPT-4o | Claude excels at code |
 | **Threat Intel** | Claude | GPT-4o | Long context needed |
 | **Real-time Alerting** | GPT-4o-mini | Gemini Flash | Speed critical |
@@ -533,4 +535,4 @@ response = llm.invoke("Analyze this log: {log}")
 
 ---
 
-*Last updated: January 2025*
+*Last updated: January 2026*

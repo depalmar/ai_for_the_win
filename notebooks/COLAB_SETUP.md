@@ -30,9 +30,9 @@ for key in ["ANTHROPIC_API_KEY", "OPENAI_API_KEY", "GOOGLE_API_KEY"]:
 def setup_llm():
     """Detect and configure LLM provider."""
     providers = {
-        "anthropic": ("ANTHROPIC_API_KEY", "claude-sonnet-4-20250514"),
+        "anthropic": ("ANTHROPIC_API_KEY", "claude-sonnet-4.5"),
         "openai": ("OPENAI_API_KEY", "gpt-5"),
-        "google": ("GOOGLE_API_KEY", "gemini-2.5-pro"),
+        "google": ("GOOGLE_API_KEY", "gemini-3-flash"),
     }
     
     for name, (key, model) in providers.items():
@@ -109,13 +109,47 @@ When running locally (not in Colab), you can either:
 2. **Use .env file** - Create `.env` with your keys
 3. **Use shared module** - `from shared.llm_config import query_llm`
 
+## Changing Models
+
+To use a different model, modify the `providers` dictionary in the `setup_llm()` function:
+
+```python
+providers = {
+    "anthropic": ("ANTHROPIC_API_KEY", "claude-sonnet-4.5"),  # Change model here
+    "openai": ("OPENAI_API_KEY", "gpt-5"),
+    "google": ("GOOGLE_API_KEY", "gemini-3-flash"),
+}
+```
+
+### Available Models (Jan 2026)
+
+**Anthropic Claude:**
+| Model | Best For | Cost |
+|-------|----------|------|
+| `claude-opus-4.5` | Most capable, complex analysis | $$$ |
+| `claude-sonnet-4.5` | Balanced performance (default) | $$ |
+| `claude-haiku-4.5` | Fast, simple tasks | $ |
+
+**OpenAI:**
+| Model | Best For | Cost |
+|-------|----------|------|
+| `gpt-5` | Most capable, 1M+ context (default) | $$ |
+| `gpt-5-mini` | Fast, cost-effective | $ |
+| `o3` | Advanced reasoning | $$$ |
+
+**Google Gemini:**
+| Model | Best For | Cost |
+|-------|----------|------|
+| `gemini-3-pro` | Most capable | $$ |
+| `gemini-3-flash` | Fast, free tier (default) | $ |
+
 ## Provider Comparison
 
-| Provider | Model | Speed | Cost | Best For |
-|----------|-------|-------|------|----------|
-| Anthropic | claude-sonnet-4-20250514 | Fast | $$ | Complex reasoning, code |
-| OpenAI | gpt-5 | Fast | $$ | General purpose |
-| Google | gemini-2.5-pro | Fast | $ | Long context, free tier |
+| Provider | Default Model | Speed | Cost | Best For |
+|----------|---------------|-------|------|----------|
+| Anthropic | claude-sonnet-4.5 | Fast | $$ | Complex reasoning, code |
+| OpenAI | gpt-5 | Fast | $$ | General purpose, 1M+ context |
+| Google | gemini-3-flash | Very Fast | $ | Long context, free tier |
 
 ## Troubleshooting
 

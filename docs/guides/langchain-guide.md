@@ -159,7 +159,7 @@ def get_llm(
     elif provider == "ollama":
         from langchain_ollama import ChatOllama
         return ChatOllama(
-            model=model or "llama3.1:8b",
+            model=model or "llama4:scout",
             temperature=temperature,
             num_predict=max_tokens
         )
@@ -177,7 +177,7 @@ llm = get_llm()
 llm = get_llm(provider="anthropic", model="claude-sonnet-4-20250514")
 llm = get_llm(provider="openai", model="gpt-5")
 llm = get_llm(provider="google", model="gemini-2.0-flash")
-llm = get_llm(provider="ollama", model="llama3.1:8b")
+llm = get_llm(provider="ollama", model="llama4:scout")
 ```
 
 ### Provider Comparison for Security Tasks

@@ -512,6 +512,7 @@ lab11a-ransomware-fundamentals/
 - [Microsoft Threat Intelligence](https://www.microsoft.com/en-us/security/blog/)
 - [Cisco Talos](https://blog.talosintelligence.com/)
 - [CrowdStrike Adversary Reports](https://www.crowdstrike.com/)
+- [Unit 42 Ransomware Threat Reports](https://unit42.paloaltonetworks.com/category/ransomware/)
 
 ### SANS Resources
 
