@@ -6,7 +6,10 @@ from pathlib import Path
 import pytest
 
 # Add labs to path
-sys.path.insert(0, str(Path(__file__).parent.parent / "labs" / "lab19a-cloud-security-fundamentals" / "solution"))
+sys.path.insert(
+    0,
+    str(Path(__file__).parent.parent / "labs" / "lab19a-cloud-security-fundamentals" / "solution"),
+)
 
 
 def test_solution_imports():
@@ -65,13 +68,7 @@ def test_iam_analyzer_overly_permissive():
 
     analyzer = IAMAnalyzer()
 
-    risky_policy = {
-        "Statement": [{
-            "Effect": "Allow",
-            "Action": "*",
-            "Resource": "*"
-        }]
-    }
+    risky_policy = {"Statement": [{"Effect": "Allow", "Action": "*", "Resource": "*"}]}
 
     findings = analyzer.check_overly_permissive(risky_policy)
 
@@ -86,11 +83,9 @@ def test_iam_analyzer_safe_policy():
     analyzer = IAMAnalyzer()
 
     safe_policy = {
-        "Statement": [{
-            "Effect": "Allow",
-            "Action": "s3:GetObject",
-            "Resource": "arn:aws:s3:::my-bucket/*"
-        }]
+        "Statement": [
+            {"Effect": "Allow", "Action": "s3:GetObject", "Resource": "arn:aws:s3:::my-bucket/*"}
+        ]
     }
 
     findings = analyzer.check_overly_permissive(safe_policy)

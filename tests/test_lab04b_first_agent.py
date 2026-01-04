@@ -6,7 +6,9 @@ from pathlib import Path
 import pytest
 
 # Add labs to path
-sys.path.insert(0, str(Path(__file__).parent.parent / "labs" / "lab04b-first-ai-agent" / "solution"))
+sys.path.insert(
+    0, str(Path(__file__).parent.parent / "labs" / "lab04b-first-ai-agent" / "solution")
+)
 
 
 def test_solution_imports():

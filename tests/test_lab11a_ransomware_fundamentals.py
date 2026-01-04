@@ -6,7 +6,9 @@ from pathlib import Path
 import pytest
 
 # Add labs to path
-sys.path.insert(0, str(Path(__file__).parent.parent / "labs" / "lab11a-ransomware-fundamentals" / "solution"))
+sys.path.insert(
+    0, str(Path(__file__).parent.parent / "labs" / "lab11a-ransomware-fundamentals" / "solution")
+)
 
 
 def test_solution_imports():
@@ -26,7 +28,9 @@ def test_ransomware_indicators_defined():
 
     assert len(RANSOMWARE_INDICATORS) > 0
     # Should include common ransomware extensions
-    extensions = [ind.indicator for ind in RANSOMWARE_INDICATORS if ind.indicator_type == "extension"]
+    extensions = [
+        ind.indicator for ind in RANSOMWARE_INDICATORS if ind.indicator_type == "extension"
+    ]
     assert any(".encrypted" in ext or ".locked" in ext for ext in extensions)
 
 
