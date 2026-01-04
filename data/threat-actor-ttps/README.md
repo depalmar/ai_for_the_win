@@ -143,7 +143,7 @@ CTF challenges can use this data for:
 - [MITRE ATT&CK Groups](https://attack.mitre.org/groups/)
 - [MITRE ATT&CK Software](https://attack.mitre.org/software/)
 - [CISA Advisories](https://www.cisa.gov/cybersecurity-advisories)
-- Public threat intelligence reports (Mandiant, CrowdStrike, Microsoft, Unit 42, etc.)
+- Public threat intelligence reports (CrowdStrike, Mandiant, Microsoft, Unit 42, etc.)
 
 ## Note on IOCs
 

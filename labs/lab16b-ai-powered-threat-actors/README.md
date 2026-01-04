@@ -1,6 +1,6 @@
 # Lab 16b: Understanding AI-Powered Threat Actors
 
-> **⚠️ Responsible Use Notice:** This lab is designed exclusively for defensive security education. The attack patterns, TTPs, and sample content are derived from publicly available threat intelligence (CISA, Mandiant, Unit 42, MITRE ATT&CK) to help security professionals recognize and defend against AI-powered threats. Do not use this material to conduct unauthorized attacks or social engineering. Always obtain proper authorization before security testing.
+> **⚠️ Responsible Use Notice:** This lab is designed exclusively for defensive security education. The attack patterns, TTPs, and sample content are derived from publicly available threat intelligence (CISA, MITRE ATT&CK, Mandiant, Unit 42) to help security professionals recognize and defend against AI-powered threats. Do not use this material to conduct unauthorized attacks or social engineering. Always obtain proper authorization before security testing.
 
 ## How Adversaries Leverage AI in Modern Attacks
 
