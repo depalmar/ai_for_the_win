@@ -1,0 +1,213 @@
+{
+  "id": "arup-deepfake-2024",
+  "name": "Arup Engineering Deepfake Video Conference Attack",
+  "threat_actors": ["unknown_bec_group"],
+  "classification": "ai_deepfake_bec",
+  "timeframe": {
+    "attack_date": "2024-01",
+    "discovery_date": "2024-01",
+    "public_disclosure": "2024-02-04"
+  },
+  "summary": "Sophisticated business email compromise (BEC) attack using AI-generated deepfake video to impersonate the CFO and other senior executives of Arup, a multinational engineering firm. Attackers conducted a fake video conference call where all participants except the victim were AI-generated deepfakes, convincing a finance employee to transfer HK$200 million (~$25.6M USD) across 15 transactions.",
+  "ai_technologies_used": [
+    {
+      "technology": "Deepfake Video Generation",
+      "description": "Real-time AI-generated video impersonating multiple executives simultaneously",
+      "sophistication": "advanced"
+    },
+    {
+      "technology": "Voice Cloning",
+      "description": "AI-synthesized voices matching known executives from public recordings",
+      "sophistication": "advanced"
+    },
+    {
+      "technology": "Real-time Rendering",
+      "description": "Live deepfake generation during video conference, not pre-recorded",
+      "sophistication": "expert"
+    }
+  ],
+  "attack_phases": [
+    {
+      "phase": 1,
+      "name": "Target Reconnaissance",
+      "techniques": ["T1591.004", "T1593.001", "T1593.002"],
+      "description": "Attackers researched target organization, identifying finance department employees and gathering publicly available video/audio of executives for deepfake training.",
+      "indicators": [
+        "Executive video content scraped from YouTube/LinkedIn",
+        "Company org chart research",
+        "Finance department targeting"
+      ]
+    },
+    {
+      "phase": 2,
+      "name": "Deepfake Model Training",
+      "techniques": ["T1588.001"],
+      "description": "AI models trained on publicly available video footage of CFO and other executives to generate convincing real-time deepfakes.",
+      "indicators": [
+        "Collection of public speaking videos",
+        "Conference presentation footage",
+        "Corporate video content"
+      ]
+    },
+    {
+      "phase": 3,
+      "name": "Phishing Lure",
+      "techniques": ["T1566.002", "T1566.004"],
+      "description": "Employee received message (likely via email or messaging platform) requesting attendance at an urgent video conference with CFO regarding confidential transactions.",
+      "indicators": [
+        "Urgent meeting request",
+        "Confidential transaction pretext",
+        "Request from apparent executive"
+      ]
+    },
+    {
+      "phase": 4,
+      "name": "Deepfake Video Conference",
+      "techniques": ["T1204.001", "T1656"],
+      "description": "Victim joined video call where multiple attendees appeared to be senior executives. All participants except the victim were AI-generated deepfakes. The fake CFO instructed the employee to make fund transfers.",
+      "indicators": [
+        "Multi-participant video call",
+        "All participants AI-generated except victim",
+        "Real-time deepfake interaction",
+        "Fund transfer instructions"
+      ],
+      "social_engineering_details": {
+        "method": "Video conference with deepfake executives",
+        "pretext": "Confidential business transaction requiring immediate transfers",
+        "success_factor": "Multiple convincing deepfakes created appearance of legitimate executive meeting",
+        "victim_quote": "Everyone looked real"
+      }
+    },
+    {
+      "phase": 5,
+      "name": "Financial Theft",
+      "techniques": ["T1657"],
+      "description": "Employee executed 15 separate transfers totaling HK$200 million to accounts controlled by attackers before fraud was discovered.",
+      "indicators": [
+        "Multiple wire transfers",
+        "Transfers to previously unknown accounts",
+        "Unusual transaction patterns"
+      ]
+    }
+  ],
+  "impact": {
+    "financial_loss": {
+      "amount_hkd": 200000000,
+      "amount_usd": 25600000,
+      "transactions": 15,
+      "recovery_status": "Investigation ongoing"
+    },
+    "organizational": {
+      "affected_department": "Finance",
+      "employees_targeted": 1,
+      "reputational_impact": "Significant media coverage"
+    }
+  },
+  "detection_opportunities": {
+    "pre_attack": [
+      "Monitor for executive impersonation attempts",
+      "Track unusual meeting invitations for sensitive topics",
+      "Alert on requests involving financial transactions via video"
+    ],
+    "during_attack": [
+      "Multi-person verification for large transfers",
+      "Callback verification using known phone numbers",
+      "Code word/passphrase systems for sensitive requests",
+      "AI deepfake detection tools for video calls"
+    ],
+    "post_attack": [
+      "Unusual wire transfer patterns",
+      "Transfers to new/unverified accounts",
+      "Transaction velocity anomalies"
+    ]
+  },
+  "mitre_attack_mapping": [
+    {
+      "technique_id": "T1566.002",
+      "technique_name": "Phishing: Spearphishing Link",
+      "tactic": "Initial Access",
+      "description": "Meeting invitation to join fraudulent video conference"
+    },
+    {
+      "technique_id": "T1566.004",
+      "technique_name": "Phishing: Spearphishing Voice",
+      "tactic": "Initial Access",
+      "description": "AI-generated voice used during video call"
+    },
+    {
+      "technique_id": "T1204.001",
+      "technique_name": "User Execution: Malicious Link",
+      "tactic": "Execution",
+      "description": "Victim joined attacker-controlled video conference"
+    },
+    {
+      "technique_id": "T1656",
+      "technique_name": "Impersonation",
+      "tactic": "Defense Evasion",
+      "description": "AI deepfake impersonation of multiple executives"
+    },
+    {
+      "technique_id": "T1657",
+      "technique_name": "Financial Theft",
+      "tactic": "Impact",
+      "description": "Wire transfer fraud totaling $25.6M"
+    }
+  ],
+  "lessons_learned": [
+    "AI deepfakes can now impersonate multiple people in real-time video calls",
+    "Single-person authorization is insufficient for large transactions",
+    "Callback verification must use pre-established contact methods",
+    "Employees need deepfake awareness training",
+    "Consider AI-powered deepfake detection for sensitive communications",
+    "Establish code words or passphrases for high-value requests",
+    "Video presence alone no longer confirms identity"
+  ],
+  "defensive_recommendations": [
+    {
+      "control": "Multi-Person Authorization",
+      "description": "Require multiple independent approvals for transfers over threshold",
+      "mitre_defend": "D3-MFA"
+    },
+    {
+      "control": "Out-of-Band Verification",
+      "description": "Verify requests via separate communication channel (phone callback to known number)",
+      "mitre_defend": "D3-OBV"
+    },
+    {
+      "control": "Deepfake Detection Tools",
+      "description": "Deploy AI-powered tools to detect synthetic video/audio in calls",
+      "mitre_defend": "D3-AVD"
+    },
+    {
+      "control": "Security Awareness Training",
+      "description": "Train employees on deepfake risks and verification procedures",
+      "mitre_defend": "D3-SAT"
+    }
+  ],
+  "references": [
+    {
+      "title": "Finance worker pays out $25 million after video call with deepfake 'chief financial officer'",
+      "source": "CNN",
+      "url": "https://www.cnn.com/2024/02/04/asia/deepfake-cfo-scam-hong-kong-intl-hnk/index.html",
+      "date": "2024-02-04"
+    },
+    {
+      "title": "Finance worker pays out $25m after video call with deepfake chief financial officer",
+      "source": "The Guardian",
+      "url": "https://www.theguardian.com/world/2024/feb/05/hong-kong-company-deepfake-video-conference-call-scam",
+      "date": "2024-02-05"
+    },
+    {
+      "title": "Hong Kong office loses HK$200 million after scammers stage deepfake video meeting",
+      "source": "South China Morning Post",
+      "url": "https://www.scmp.com/news/hong-kong/law-and-crime/article/3250851/everyone-looked-real-multinational-firms-hong-kong-office-loses-hk200-million-after-scammers-stage",
+      "date": "2024-02-04"
+    },
+    {
+      "title": "Statement on Hong Kong fraud case",
+      "source": "Arup (Company Statement)",
+      "url": "https://www.arup.com/news-and-events/arup-news/2024/statement-on-hong-kong-fraud-case",
+      "date": "2024-02"
+    }
+  ]
+}

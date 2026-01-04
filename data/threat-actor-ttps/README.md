@@ -35,7 +35,7 @@ threat-actor-ttps/
 │   ├── moveit.json            # Cl0p mass exploitation (2023)
 │   ├── kaseya.json            # REvil supply chain (2021)
 │   ├── change_healthcare.json # ALPHV healthcare attack (2024)
-│   ├── casino_social_engineering_2023.json  # Scattered Spider casino attacks (anonymized)
+│   ├── arup_deepfake_2024.json   # AI deepfake video conference BEC ($25M)
 │   └── ivanti_exploitation.json # Mass VPN exploitation (2024)
 └── attack-chains/    # Generic attack patterns (5 patterns)
     ├── double_extortion.json   # Modern ransomware playbook
