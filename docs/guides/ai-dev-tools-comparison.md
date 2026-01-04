@@ -27,39 +27,39 @@ The AI-assisted development landscape has evolved rapidly. This guide compares t
 
 ### Tool Categories
 
-| Category | Tools | Best For |
-|----------|-------|----------|
-| **AI-Native IDEs** | Cursor, Windsurf | Full development environment with deep AI integration |
-| **CLI Agents** | Claude Code, Aider, OpenHands | Terminal-based autonomous coding |
-| **IDE Extensions** | Continue.dev, GitHub Copilot, Amazon Q | Add AI to existing IDE workflows |
-| **Specialized Agents** | OpenHands, AutoGPT | Complex autonomous tasks |
+| Category               | Tools                                  | Best For                                              |
+| ---------------------- | -------------------------------------- | ----------------------------------------------------- |
+| **AI-Native IDEs**     | Cursor, Windsurf                       | Full development environment with deep AI integration |
+| **CLI Agents**         | Claude Code, Aider, OpenHands          | Terminal-based autonomous coding                      |
+| **IDE Extensions**     | Continue.dev, GitHub Copilot, Amazon Q | Add AI to existing IDE workflows                      |
+| **Specialized Agents** | OpenHands, AutoGPT                     | Complex autonomous tasks                              |
 
 ---
 
 ## Quick Comparison Matrix
 
-| Feature | Cursor | Claude Code | Windsurf | Aider | Continue.dev | Copilot |
-|---------|--------|-------------|----------|-------|--------------|---------|
-| **Type** | IDE | CLI Agent | IDE | CLI Agent | Extension | Extension |
-| **Base** | VS Code | Standalone | VS Code | Standalone | VS Code/JetBrains | VS Code/JetBrains |
-| **Agent Mode** | Yes | Yes | Yes | Yes | Limited | No |
-| **Multi-File Edit** | Yes | Yes | Yes | Yes | Yes | Limited |
-| **MCP Support** | Yes | Yes | Yes | No | Partial | No |
-| **Local LLMs** | Limited | No | Yes | Yes | Yes | No |
-| **Cost** | $20/mo | API costs | $15/mo | API costs | Free + API | $10/mo |
-| **Best Model** | Claude/GPT-4 | Claude | Claude/GPT-4 | Any | Any | GPT-4 |
-| **Offline** | No | No | Partial | Yes | Yes | No |
+| Feature             | Cursor       | Claude Code | Windsurf     | Aider      | Continue.dev      | Copilot           |
+| ------------------- | ------------ | ----------- | ------------ | ---------- | ----------------- | ----------------- |
+| **Type**            | IDE          | CLI Agent   | IDE          | CLI Agent  | Extension         | Extension         |
+| **Base**            | VS Code      | Standalone  | VS Code      | Standalone | VS Code/JetBrains | VS Code/JetBrains |
+| **Agent Mode**      | Yes          | Yes         | Yes          | Yes        | Limited           | No                |
+| **Multi-File Edit** | Yes          | Yes         | Yes          | Yes        | Yes               | Limited           |
+| **MCP Support**     | Yes          | Yes         | Yes          | No         | Partial           | No                |
+| **Local LLMs**      | Limited      | No          | Yes          | Yes        | Yes               | No                |
+| **Cost**            | $20/mo       | API costs   | $15/mo       | API costs  | Free + API        | $10/mo            |
+| **Best Model**      | Claude/GPT-4 | Claude      | Claude/GPT-4 | Any        | Any               | GPT-4             |
+| **Offline**         | No           | No          | Partial      | Yes        | Yes               | No                |
 
 ### Security Development Suitability
 
-| Tool | Malware Analysis | Detection Rules | DFIR Automation | Threat Intel |
-|------|------------------|-----------------|-----------------|--------------|
-| **Cursor** | Excellent | Excellent | Excellent | Good |
-| **Claude Code** | Excellent | Excellent | Excellent | Excellent |
-| **Windsurf** | Good | Good | Good | Good |
-| **Aider** | Good | Good | Excellent | Good |
-| **Continue.dev** | Good | Good | Good | Good |
-| **Copilot** | Limited | Good | Limited | Limited |
+| Tool             | Malware Analysis | Detection Rules | DFIR Automation | Threat Intel |
+| ---------------- | ---------------- | --------------- | --------------- | ------------ |
+| **Cursor**       | Excellent        | Excellent       | Excellent       | Good         |
+| **Claude Code**  | Excellent        | Excellent       | Excellent       | Excellent    |
+| **Windsurf**     | Good             | Good            | Good            | Good         |
+| **Aider**        | Good             | Good            | Excellent       | Good         |
+| **Continue.dev** | Good             | Good            | Good            | Good         |
+| **Copilot**      | Limited          | Good            | Limited         | Limited      |
 
 ---
 
@@ -234,10 +234,7 @@ brew install --cask windsurf
   "windsurf.model": "claude-sonnet-4-20250514",
   "windsurf.enableCascade": true,
   "windsurf.localModelPath": "/path/to/ollama",
-  "windsurf.privacy.excludePaths": [
-    "**/secrets/**",
-    "**/.env*"
-  ]
+  "windsurf.privacy.excludePaths": ["**/secrets/**", "**/.env*"]
 }
 ```
 
@@ -330,7 +327,7 @@ attribute-committer: false
 # Security-focused settings
 gitignore: true
 auto-lint: true
-lint-cmd: "bandit -r {fname}"
+lint-cmd: 'bandit -r {fname}'
 
 # Context files always included
 read:
@@ -379,8 +376,8 @@ Cons:
 export function modifyConfig(config: Config): Config {
   config.customCommands = [
     {
-      name: "security-review",
-      description: "Review selected code for security vulnerabilities",
+      name: 'security-review',
+      description: 'Review selected code for security vulnerabilities',
       prompt: `Review this code for security vulnerabilities:
 
 {{{ input }}}
@@ -396,11 +393,11 @@ Provide:
 - Severity rating (Critical/High/Medium/Low)
 - CWE classification
 - Remediation steps
-- MITRE ATT&CK mapping if applicable`
+- MITRE ATT&CK mapping if applicable`,
     },
     {
-      name: "gen-yara",
-      description: "Generate YARA rule from selection",
+      name: 'gen-yara',
+      description: 'Generate YARA rule from selection',
       prompt: `Generate a YARA rule based on this code/data:
 
 {{{ input }}}
@@ -410,8 +407,8 @@ Include:
 - Multiple string patterns (ascii, wide, hex)
 - Appropriate conditions
 - MITRE ATT&CK tags
-- Comments explaining the rule logic`
-    }
+- Comments explaining the rule logic`,
+    },
   ];
 
   return config;
@@ -452,14 +449,14 @@ Create `.continue/config.json`:
     "model": "starcoder2:3b"
   },
   "contextProviders": [
-    {"name": "code"},
-    {"name": "docs"},
-    {"name": "terminal"},
-    {"name": "codebase"}
+    { "name": "code" },
+    { "name": "docs" },
+    { "name": "terminal" },
+    { "name": "codebase" }
   ],
   "slashCommands": [
-    {"name": "security-review", "description": "Security code review"},
-    {"name": "gen-yara", "description": "Generate YARA rule"}
+    { "name": "security-review", "description": "Security code review" },
+    { "name": "gen-yara", "description": "Generate YARA rule" }
   ]
 }
 ```
@@ -702,16 +699,16 @@ START
 
 ### Recommendations by Use Case
 
-| Use Case | Primary Tool | Alternative |
-|----------|--------------|-------------|
-| **Full-time security development** | Cursor | Windsurf |
-| **Malware analysis** | Claude Code CLI | Cursor |
-| **Detection rule development** | Cursor | Aider |
-| **Incident response automation** | Claude Code CLI | OpenHands |
-| **Air-gapped environments** | Aider + Ollama | Continue.dev + Ollama |
-| **AWS security tooling** | Amazon Q | Cursor |
-| **Quick code assistance** | GitHub Copilot | Continue.dev |
-| **Complex autonomous tasks** | OpenHands | Claude Code CLI |
+| Use Case                           | Primary Tool    | Alternative           |
+| ---------------------------------- | --------------- | --------------------- |
+| **Full-time security development** | Cursor          | Windsurf              |
+| **Malware analysis**               | Claude Code CLI | Cursor                |
+| **Detection rule development**     | Cursor          | Aider                 |
+| **Incident response automation**   | Claude Code CLI | OpenHands             |
+| **Air-gapped environments**        | Aider + Ollama  | Continue.dev + Ollama |
+| **AWS security tooling**           | Amazon Q        | Cursor                |
+| **Quick code assistance**          | GitHub Copilot  | Continue.dev          |
+| **Complex autonomous tasks**       | OpenHands       | Claude Code CLI       |
 
 ### Tool Combinations
 
@@ -740,16 +737,16 @@ Recommended Combinations:
 
 ### Data Privacy
 
-| Tool | Data Handling | Local Option | Enterprise |
-|------|---------------|--------------|------------|
-| **Cursor** | Cloud processing | No | Yes |
-| **Claude Code** | Cloud processing | No | API controls |
-| **Windsurf** | Cloud + Local | Yes | Yes |
-| **Aider** | Your API choice | Yes (Ollama) | Self-managed |
-| **Continue.dev** | Your API choice | Yes (Ollama) | Self-managed |
-| **Copilot** | Cloud processing | No | Yes |
-| **Amazon Q** | AWS cloud | No | Yes |
-| **OpenHands** | Self-hosted | Yes | Self-managed |
+| Tool             | Data Handling    | Local Option | Enterprise   |
+| ---------------- | ---------------- | ------------ | ------------ |
+| **Cursor**       | Cloud processing | No           | Yes          |
+| **Claude Code**  | Cloud processing | No           | API controls |
+| **Windsurf**     | Cloud + Local    | Yes          | Yes          |
+| **Aider**        | Your API choice  | Yes (Ollama) | Self-managed |
+| **Continue.dev** | Your API choice  | Yes (Ollama) | Self-managed |
+| **Copilot**      | Cloud processing | No           | Yes          |
+| **Amazon Q**     | AWS cloud        | No           | Yes          |
+| **OpenHands**    | Self-hosted      | Yes          | Self-managed |
 
 ### Security Best Practices
 
@@ -785,6 +782,7 @@ aider --model ollama/codellama:13b
 **3. Review AI-Generated Security Code**
 
 Always verify:
+
 - Input validation logic
 - Authentication implementations
 - Cryptographic operations

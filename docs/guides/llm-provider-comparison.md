@@ -28,14 +28,14 @@ START: What's your primary constraint?
 │   └─► No budget? → Ollama (free, local)
 │
 ├─► QUALITY is critical
-│   ├─► Complex reasoning? → Claude 3.5 Sonnet or GPT-4o
+│   ├─► Complex reasoning? → Claude Sonnet 4.5 or GPT-4o
 │   ├─► Long documents? → Claude (200K context)
 │   └─► Code analysis? → Claude or GPT-4o
 │
 ├─► SPEED is critical
 │   ├─► Need streaming? → All providers support it
 │   ├─► Fastest response? → Gemini 2.0 Flash
-│   └─► Low latency? → GPT-4o-mini or Claude Haiku
+│   └─► Low latency? → GPT-4o-mini or Claude Haiku 4.5
 │
 ├─► PRIVACY is critical
 │   ├─► Data can't leave network? → Ollama (local)
@@ -60,9 +60,9 @@ START: What's your primary constraint?
 
 | Model | Input/1M | Output/1M | Context | Speed |
 |-------|----------|-----------|---------|-------|
-| Claude 3.5 Sonnet | $3.00 | $15.00 | 200K | Fast |
-| Claude 3 Opus | $15.00 | $75.00 | 200K | Slower |
-| Claude 3 Haiku | $0.25 | $1.25 | 200K | Fastest |
+| Claude Sonnet 4.5 | $3.00 | $15.00 | 200K | Fast |
+| Claude Opus 4.5 | $15.00 | $75.00 | 200K | Slower |
+| Claude Haiku 4.5 | $0.25 | $1.25 | 200K | Fastest |
 
 **Strengths:**
 - Largest context window (200K tokens) - analyze entire codebases
@@ -152,7 +152,7 @@ START: What's your primary constraint?
 
 ### Core Capabilities
 
-| Feature | Claude 3.5 | GPT-4o | Gemini 2.5 Pro |
+| Feature | Claude 4.5 | GPT-4o | Gemini 2.5 Pro |
 |---------|------------|--------|----------------|
 | **Context Window** | 200K | 128K | 1M |
 | **Structured Output** | Excellent | Good | Good |
@@ -163,7 +163,7 @@ START: What's your primary constraint?
 
 ### Security-Specific Features
 
-| Feature | Claude 3.5 | GPT-4o | Gemini 2.5 Pro |
+| Feature | Claude 4.5 | GPT-4o | Gemini 2.5 Pro |
 |---------|------------|--------|----------------|
 | **Threat Detection** | Excellent | Excellent | Good |
 | **IOC Extraction** | Excellent | Good | Good |
@@ -195,12 +195,12 @@ START: What's your primary constraint?
 
 | Provider | Accuracy | Avg Time | Cost |
 |----------|----------|----------|------|
-| Claude 3.5 Sonnet | 96% | 2.1s | $0.45 |
+| Claude Sonnet 4.5 | 96% | 2.1s | $0.45 |
 | GPT-4o | 94% | 1.8s | $0.65 |
 | Gemini 2.5 Pro | 91% | 1.5s | $0.19 |
-| Claude Haiku | 88% | 0.8s | $0.04 |
+| Claude Haiku 4.5 | 88% | 0.8s | $0.04 |
 
-**Winner:** Claude 3.5 Sonnet (accuracy) or Gemini 2.5 Pro (cost)
+**Winner:** Claude Sonnet 4.5 (accuracy) or Gemini 2.5 Pro (cost)
 
 ---
 
@@ -210,12 +210,12 @@ START: What's your primary constraint?
 
 | Provider | Accuracy | False Positives | Cost |
 |----------|----------|-----------------|------|
-| Claude 3.5 Sonnet | 97.2% | 1.8% | $6.60 |
+| Claude Sonnet 4.5 | 97.2% | 1.8% | $6.60 |
 | GPT-4o | 96.5% | 2.2% | $9.50 |
 | Gemini 2.5 Pro | 94.8% | 3.1% | $3.88 |
 | GPT-4o-mini | 91.2% | 5.5% | $0.45 |
 
-**Winner:** Claude 3.5 Sonnet (accuracy) or GPT-4o-mini (budget)
+**Winner:** Claude Sonnet 4.5 (accuracy) or GPT-4o-mini (budget)
 
 ---
 
@@ -225,12 +225,12 @@ START: What's your primary constraint?
 
 | Provider | Detection Rate | False Alarm Rate | Cost |
 |----------|---------------|------------------|------|
-| Claude 3.5 Sonnet | 89% | 4% | $45.00 |
+| Claude Sonnet 4.5 | 89% | 4% | $45.00 |
 | GPT-4o | 87% | 5% | $70.00 |
 | Gemini 2.5 Pro | 84% | 6% | $26.00 |
-| Claude Haiku | 78% | 8% | $3.75 |
+| Claude Haiku 4.5 | 78% | 8% | $3.75 |
 
-**Winner:** Claude 3.5 Sonnet (quality) or Gemini 2.5 Pro (cost-effective)
+**Winner:** Claude Sonnet 4.5 (quality) or Gemini 2.5 Pro (cost-effective)
 
 ---
 
@@ -240,11 +240,11 @@ START: What's your primary constraint?
 
 | Provider | Issues Found | False Positives | Cost |
 |----------|-------------|-----------------|------|
-| Claude 3.5 Sonnet | 45/50 | 3 | $2.25 |
+| Claude Sonnet 4.5 | 45/50 | 3 | $2.25 |
 | GPT-4o | 43/50 | 5 | $3.50 |
 | Gemini 2.5 Pro | 40/50 | 4 | $1.00 |
 
-**Winner:** Claude 3.5 Sonnet (code analysis is a strength)
+**Winner:** Claude Sonnet 4.5 (code analysis is a strength)
 
 ---
 
@@ -372,7 +372,7 @@ ollama run llama3.1:8b "Analyze this log for threats: [log]"
 
 ### Local vs API Comparison
 
-| Factor | Ollama (Llama 3.1 8B) | Claude 3.5 Sonnet |
+| Factor | Ollama (Llama 3.1 8B) | Claude Sonnet 4.5 |
 |--------|----------------------|-------------------|
 | Cost per 1M tokens | $0 | $3-15 |
 | Hardware required | 8GB RAM | None |
@@ -520,7 +520,7 @@ response = llm.invoke("Analyze this log: {log}")
 | Use Case | Primary | Fallback | Reasoning |
 |----------|---------|----------|-----------|
 | **Phishing Detection** | Claude | Gemini | Accuracy critical |
-| **Log Analysis (high vol)** | Gemini | Claude Haiku | Cost matters |
+| **Log Analysis (high vol)** | Gemini | Claude Haiku 4.5 | Cost matters |
 | **Code Review** | Claude | GPT-4o | Claude excels at code |
 | **Threat Intel** | Claude | GPT-4o | Long context needed |
 | **Real-time Alerting** | GPT-4o-mini | Gemini Flash | Speed critical |
@@ -537,4 +537,4 @@ response = llm.invoke("Analyze this log: {log}")
 
 ---
 
-*Last updated: January 2025*
+*Last updated: January 2026*

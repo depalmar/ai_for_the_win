@@ -55,7 +55,7 @@ Cost = (Input Tokens × Input Price) + (Output Tokens × Output Price)
 
 ### Security Task Cost Estimates (Approximate)
 
-| Task | Input Tokens | Output Tokens | Claude 3.5 | GPT-4o | Gemini 2.5 Pro |
+| Task | Input Tokens | Output Tokens | Claude 4.5 | GPT-4o | Gemini 2.5 Pro |
 |------|-------------|---------------|------------|--------|----------------|
 | **Single log analysis** | ~500 | ~200 | $0.002 | $0.007 | $0.003 |
 | **Phishing email check** | ~700 | ~300 | $0.007 | $0.009 | $0.004 |
@@ -104,7 +104,7 @@ def estimate_project_cost(
     """
     # 2026 pricing per 1M tokens (updated January 2026)
     pricing = {
-        "claude": {"input": 3.00, "output": 15.00},  # Claude Sonnet 4
+        "claude": {"input": 3.00, "output": 15.00},  # Claude Sonnet 4.5
         "openai": {"input": 1.75, "output": 14.00},  # GPT-5.2
         "gemini": {"input": 1.25, "output": 10.00},  # Gemini 2.5 Pro
     }
@@ -146,8 +146,8 @@ print(result)
 
 | Provider | Model | Input (per 1M) | Output (per 1M) | Best For |
 |----------|-------|----------------|-----------------|----------|
-| **Anthropic** | Claude Sonnet 4 | $3.00 | $15.00 | Long context, nuanced analysis |
-| **Anthropic** | Claude Haiku 4 | $0.25 | $1.25 | Fast, simple tasks |
+| **Anthropic** | Claude Sonnet 4.5 | $3.00 | $15.00 | Long context, nuanced analysis |
+| **Anthropic** | Claude Haiku 4.5 | $0.25 | $1.25 | Fast, simple tasks |
 | **OpenAI** | GPT-5.2 | $1.75 | $14.00 | Complex reasoning, agentic tasks |
 | **OpenAI** | GPT-5 Mini | $0.25 | $2.00 | Budget-friendly |
 | **Google** | Gemini 2.5 Pro | $1.25 | $10.00 | Cost-effective, good quality |
@@ -166,7 +166,7 @@ print(result)
 
 ### Cost per Security Task by Provider
 
-| Task | Claude 3.5 | GPT-4o | Gemini 2.5 Pro | Claude Haiku |
+| Task | Claude 4.5 | GPT-4o | Gemini 2.5 Pro | Claude Haiku 4.5 |
 |------|------------|--------|----------------|--------------|
 | 1,000 log analyses | $4.50 | $7.00 | $2.60 | $0.38 |
 | 1,000 phishing checks | $6.60 | $9.50 | $3.88 | $0.55 |
@@ -558,8 +558,8 @@ ollama pull codellama:13b    # Code analysis
 3. **Cache identical queries** - 30-50% savings on recurring patterns
 4. **Filter with cheap models first** - 70% savings on mixed workloads
 5. **$1 gets you approximately:**
-   - 333K input tokens (Claude 3.5 Sonnet)
-   - 67K output tokens (Claude 3.5 Sonnet)
+   - 333K input tokens (Claude Sonnet 4.5)
+   - 67K output tokens (Claude Sonnet 4.5)
    - ~2,000 simple log analyses
    - ~500 detailed threat reports
 

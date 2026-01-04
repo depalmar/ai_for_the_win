@@ -47,8 +47,8 @@ ANTHROPIC_API_KEY=sk-ant-api03-xxxxxxxxxxxxx
 ### Pricing (2025)
 | Model | Input | Output | Cost per Lab |
 |-------|-------|--------|--------------|
-| Claude Sonnet 4 | $3/1M tokens | $15/1M tokens | ~$0.10-0.50 |
-| Claude Haiku 3.5 | $0.25/1M | $1.25/1M | ~$0.01-0.05 |
+| Claude Sonnet 4.5 | $3/1M tokens | $15/1M tokens | ~$0.10-0.50 |
+| Claude Haiku 4.5 | $0.25/1M | $1.25/1M | ~$0.01-0.05 |
 
 **Tip**: Use Haiku for testing, Sonnet for final runs.
 
