@@ -74,7 +74,7 @@ python solution/main.py
 ### Ready for LLM-Powered Labs? (Labs 04+)
 
 ```bash
-1`# Configure API key (choose ONE provider)
+# Configure API key (choose ONE provider)
 cp .env.example .env
 echo "ANTHROPIC_API_KEY=your-key-here" >> .env  # Get from console.anthropic.com
 # OR use OpenAI/Google - see .env.example for all options
