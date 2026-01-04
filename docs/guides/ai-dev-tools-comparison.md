@@ -10,14 +10,16 @@ A comprehensive comparison of AI-powered development tools for security practiti
 2. [Quick Comparison Matrix](#quick-comparison-matrix)
 3. [Cursor](#cursor)
 4. [Claude Code CLI](#claude-code-cli)
-5. [Windsurf](#windsurf)
-6. [Aider](#aider)
-7. [Continue.dev](#continuedev)
-8. [GitHub Copilot](#github-copilot)
-9. [Amazon Q Developer](#amazon-q-developer)
-10. [OpenHands](#openhands)
-11. [Choosing the Right Tool](#choosing-the-right-tool)
-12. [Security Considerations](#security-considerations)
+5. [Gemini CLI](#gemini-cli)
+6. [OpenAI Codex CLI](#openai-codex-cli)
+7. [Windsurf](#windsurf)
+8. [Aider](#aider)
+9. [Continue.dev](#continuedev)
+10. [GitHub Copilot](#github-copilot)
+11. [Amazon Q Developer](#amazon-q-developer)
+12. [OpenHands](#openhands)
+13. [Choosing the Right Tool](#choosing-the-right-tool)
+14. [Security Considerations](#security-considerations)
 
 ---
 
@@ -27,28 +29,28 @@ The AI-assisted development landscape has evolved rapidly. This guide compares t
 
 ### Tool Categories
 
-| Category               | Tools                                  | Best For                                              |
-| ---------------------- | -------------------------------------- | ----------------------------------------------------- |
-| **AI-Native IDEs**     | Cursor, Windsurf                       | Full development environment with deep AI integration |
-| **CLI Agents**         | Claude Code, Aider, OpenHands          | Terminal-based autonomous coding                      |
-| **IDE Extensions**     | Continue.dev, GitHub Copilot, Amazon Q | Add AI to existing IDE workflows                      |
-| **Specialized Agents** | OpenHands, AutoGPT                     | Complex autonomous tasks                              |
+| Category               | Tools                                           | Best For                                              |
+| ---------------------- | ----------------------------------------------- | ----------------------------------------------------- |
+| **AI-Native IDEs**     | Cursor, Windsurf                                | Full development environment with deep AI integration |
+| **CLI Agents**         | Claude Code, Gemini CLI, Codex CLI, Aider       | Terminal-based autonomous coding                      |
+| **IDE Extensions**     | Continue.dev, GitHub Copilot, Amazon Q          | Add AI to existing IDE workflows                      |
+| **Specialized Agents** | OpenHands, AutoGPT                              | Complex autonomous tasks                              |
 
 ---
 
 ## Quick Comparison Matrix
 
-| Feature             | Cursor       | Claude Code | Windsurf     | Aider      | Continue.dev      | Copilot           |
-| ------------------- | ------------ | ----------- | ------------ | ---------- | ----------------- | ----------------- |
-| **Type**            | IDE          | CLI Agent   | IDE          | CLI Agent  | Extension         | Extension         |
-| **Base**            | VS Code      | Standalone  | VS Code      | Standalone | VS Code/JetBrains | VS Code/JetBrains |
-| **Agent Mode**      | Yes          | Yes         | Yes          | Yes        | Limited           | No                |
-| **Multi-File Edit** | Yes          | Yes         | Yes          | Yes        | Yes               | Limited           |
-| **MCP Support**     | Yes          | Yes         | Yes          | No         | Partial           | No                |
-| **Local LLMs**      | Limited      | No          | Yes          | Yes        | Yes               | No                |
-| **Cost**            | $20/mo       | API costs   | $15/mo       | API costs  | Free + API        | $10/mo            |
-| **Best Model**      | Claude/GPT-4 | Claude      | Claude/GPT-4 | Any        | Any               | GPT-4             |
-| **Offline**         | No           | No          | Partial      | Yes        | Yes               | No                |
+| Feature             | Cursor       | Claude Code | Gemini CLI   | Codex CLI  | Windsurf     | Aider      | Continue.dev      | Copilot           |
+| ------------------- | ------------ | ----------- | ------------ | ---------- | ------------ | ---------- | ----------------- | ----------------- |
+| **Type**            | IDE          | CLI Agent   | CLI Agent    | CLI Agent  | IDE          | CLI Agent  | Extension         | Extension         |
+| **Base**            | VS Code      | Standalone  | Standalone   | Standalone | VS Code      | Standalone | VS Code/JetBrains | VS Code/JetBrains |
+| **Agent Mode**      | Yes          | Yes         | Yes          | Yes        | Yes          | Yes        | Limited           | No                |
+| **Multi-File Edit** | Yes          | Yes         | Yes          | Yes        | Yes          | Yes        | Yes               | Limited           |
+| **MCP Support**     | Yes          | Yes         | Yes          | Yes        | Yes          | No         | Partial           | No                |
+| **Local LLMs**      | Limited      | No          | No           | No         | Yes          | Yes        | Yes               | No                |
+| **Cost**            | $20/mo       | API costs   | Free tier    | ChatGPT+   | $15/mo       | API costs  | Free + API        | $10/mo            |
+| **Best Model**      | Claude/GPT-5 | Claude 4.5  | Gemini 3     | GPT-5-Codex| Claude/GPT-5 | Any        | Any               | GPT-5             |
+| **Offline**         | No           | No          | No           | No         | Partial      | Yes        | Yes               | No                |
 
 ### Security Development Suitability
 
@@ -56,6 +58,8 @@ The AI-assisted development landscape has evolved rapidly. This guide compares t
 | ---------------- | ---------------- | --------------- | --------------- | ------------ |
 | **Cursor**       | Excellent        | Excellent       | Excellent       | Good         |
 | **Claude Code**  | Excellent        | Excellent       | Excellent       | Excellent    |
+| **Gemini CLI**   | Good             | Good            | Good            | Excellent    |
+| **Codex CLI**    | Good             | Good            | Good            | Good         |
 | **Windsurf**     | Good             | Good            | Good            | Good         |
 | **Aider**        | Good             | Good            | Excellent       | Good         |
 | **Continue.dev** | Good             | Good            | Good            | Good         |
@@ -167,6 +171,144 @@ claude
 ### Installation & Setup
 
 See [Claude Code CLI Guide](./claude-code-cli-guide.md)
+
+---
+
+## Gemini CLI
+
+### Overview
+
+Google's open-source command-line AI agent powered by Gemini models. Released in June 2025, it features a massive 1M token context window and native Google Search integration.
+
+### Key Features
+
+- **1M Token Context**: Analyze entire codebases, large log files, memory dumps
+- **Google Search Grounding**: Real-time threat intelligence lookups
+- **Open Source**: Apache 2.0 license, fully customizable
+- **Free Tier**: 1000 requests/day, 60/minute at no cost
+- **MCP Support**: Extend with Model Context Protocol servers
+- **Multimodal**: Supports code, images, and audio analysis
+
+### Security Development Strengths
+
+```
+Pros:
++ Largest context window (1M tokens) for analyzing huge files
++ Free tier generous enough for learning/development
++ Native Google Search for real-time threat intel
++ Open source - can inspect and modify
++ Shell command execution with approval mode
+
+Cons:
+- No local model support
+- Requires Google account or API key
+- Newer than Claude Code, smaller community
+- No offline mode
+```
+
+### Security Workflow Example
+
+```bash
+# Start Gemini CLI
+gemini
+
+# Interactive threat intel research
+> "Search for the latest IOCs associated with LockBit ransomware 
+> and generate detection rules for each indicator type"
+
+# Large file analysis
+gemini --file memory_dump.raw "Analyze this memory dump for signs of 
+process injection, credential theft, or persistence mechanisms"
+
+# With Google Search grounding
+gemini --search "What vulnerabilities are currently being exploited 
+in the wild for Cisco ASA devices? Generate Snort rules for detection"
+```
+
+### Installation & Setup
+
+See [Gemini CLI Guide](./gemini-cli-guide.md)
+
+---
+
+## OpenAI Codex CLI
+
+### Overview
+
+OpenAI's official command-line coding agent, built in Rust for speed and efficiency. Uses GPT-5-Codex models with support for image inputs and cloud tasks.
+
+### Key Features
+
+- **Built in Rust**: Fast and efficient terminal experience
+- **Image Input**: Attach screenshots or design specs to prompts
+- **Cloud Tasks**: Initiate tasks in cloud environments
+- **MCP Support**: Extend with Model Context Protocol
+- **Web Search**: Access real-time information for coding tasks
+- **Approval Modes**: Control over edits and command execution
+
+### Security Development Strengths
+
+```
+Pros:
++ Fast Rust-based implementation
++ Image input useful for analyzing screenshots/diagrams
++ Web search for current vulnerability info
++ Cloud task support for CI/CD integration
++ Included with ChatGPT Plus/Pro subscriptions
+
+Cons:
+- Requires ChatGPT subscription or API key
+- No local model support
+- Smaller context than Gemini CLI
+- Less security-focused than Claude Code
+```
+
+### Security Workflow Example
+
+```bash
+# Start Codex CLI
+codex
+
+# Code review with image context
+> /image attach architecture_diagram.png
+> "Review this architecture for security vulnerabilities and 
+> suggest hardening measures for each component"
+
+# Vulnerability research with web search
+> /search on
+> "Find recent CVEs affecting our tech stack (Python 3.11, 
+> FastAPI, PostgreSQL) and generate a remediation plan"
+
+# Generate security tests
+> "Create pytest security tests for the authentication module 
+> covering injection attacks, session management, and access control"
+```
+
+### Installation
+
+```bash
+# Using npm
+npm install -g @openai/codex
+
+# Using Homebrew (macOS)
+brew install --cask codex
+
+# Verify installation
+codex --version
+```
+
+### Configuration
+
+```bash
+# First run will prompt for authentication
+codex
+
+# Or set API key
+export OPENAI_API_KEY="your-api-key"
+
+# Model selection
+codex /model gpt-5-codex
+```
 
 ---
 
