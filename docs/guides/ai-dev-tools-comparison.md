@@ -15,11 +15,13 @@ A comprehensive comparison of AI-powered development tools for security practiti
 7. [Windsurf](#windsurf)
 8. [Aider](#aider)
 9. [Continue.dev](#continuedev)
-10. [GitHub Copilot](#github-copilot)
-11. [Amazon Q Developer](#amazon-q-developer)
-12. [OpenHands](#openhands)
-13. [Choosing the Right Tool](#choosing-the-right-tool)
-14. [Security Considerations](#security-considerations)
+10. [Tabnine](#tabnine)
+11. [JetBrains AI Assistant](#jetbrains-ai-assistant)
+12. [GitHub Copilot](#github-copilot)
+13. [Amazon Q Developer](#amazon-q-developer)
+14. [OpenHands](#openhands)
+15. [Choosing the Right Tool](#choosing-the-right-tool)
+16. [Security Considerations](#security-considerations)
 
 ---
 
@@ -29,28 +31,28 @@ The AI-assisted development landscape has evolved rapidly. This guide compares t
 
 ### Tool Categories
 
-| Category               | Tools                                           | Best For                                              |
-| ---------------------- | ----------------------------------------------- | ----------------------------------------------------- |
-| **AI-Native IDEs**     | Cursor, Windsurf                                | Full development environment with deep AI integration |
-| **CLI Agents**         | Claude Code, Gemini CLI, Codex CLI, Aider       | Terminal-based autonomous coding                      |
-| **IDE Extensions**     | Continue.dev, GitHub Copilot, Amazon Q          | Add AI to existing IDE workflows                      |
-| **Specialized Agents** | OpenHands, AutoGPT                              | Complex autonomous tasks                              |
+| Category               | Tools                                              | Best For                                              |
+| ---------------------- | -------------------------------------------------- | ----------------------------------------------------- |
+| **AI-Native IDEs**     | Cursor, Windsurf                                   | Full development environment with deep AI integration |
+| **CLI Agents**         | Claude Code, Gemini CLI, Codex CLI, Aider          | Terminal-based autonomous coding                      |
+| **IDE Extensions**     | Continue.dev, Tabnine, JetBrains AI, Copilot, Amazon Q | Add AI to existing IDE workflows                      |
+| **Specialized Agents** | OpenHands, AutoGPT                                 | Complex autonomous tasks                              |
 
 ---
 
 ## Quick Comparison Matrix
 
-| Feature             | Cursor       | Claude Code | Gemini CLI   | Codex CLI  | Windsurf     | Aider      | Continue.dev      | Copilot           |
-| ------------------- | ------------ | ----------- | ------------ | ---------- | ------------ | ---------- | ----------------- | ----------------- |
-| **Type**            | IDE          | CLI Agent   | CLI Agent    | CLI Agent  | IDE          | CLI Agent  | Extension         | Extension         |
-| **Base**            | VS Code      | Standalone  | Standalone   | Standalone | VS Code      | Standalone | VS Code/JetBrains | VS Code/JetBrains |
-| **Agent Mode**      | Yes          | Yes         | Yes          | Yes        | Yes          | Yes        | Limited           | No                |
-| **Multi-File Edit** | Yes          | Yes         | Yes          | Yes        | Yes          | Yes        | Yes               | Limited           |
-| **MCP Support**     | Yes          | Yes         | Yes          | Yes        | Yes          | No         | Partial           | No                |
-| **Local LLMs**      | Limited      | No          | No           | No         | Yes          | Yes        | Yes               | No                |
-| **Cost**            | $20/mo       | API costs   | Free tier    | ChatGPT+   | $15/mo       | API costs  | Free + API        | $10/mo            |
-| **Best Model**      | Claude/GPT-5 | Claude 4.5  | Gemini 3     | GPT-5-Codex| Claude/GPT-5 | Any        | Any               | GPT-5             |
-| **Offline**         | No           | No          | No           | No         | Partial      | Yes        | Yes               | No                |
+| Feature             | Cursor       | Claude Code | Gemini CLI | Codex CLI   | Windsurf     | Aider      | Continue.dev      | Tabnine           | JetBrains AI      | Copilot           |
+| ------------------- | ------------ | ----------- | ---------- | ----------- | ------------ | ---------- | ----------------- | ----------------- | ----------------- | ----------------- |
+| **Type**            | IDE          | CLI Agent   | CLI Agent  | CLI Agent   | IDE          | CLI Agent  | Extension         | Extension         | Plugin            | Extension         |
+| **Base**            | VS Code      | Standalone  | Standalone | Standalone  | VS Code      | Standalone | VS Code/JetBrains | VS Code/JetBrains | JetBrains IDEs    | VS Code/JetBrains |
+| **Agent Mode**      | Yes          | Yes         | Yes        | Yes         | Yes          | Yes        | Limited           | Limited           | Limited           | No                |
+| **Multi-File Edit** | Yes          | Yes         | Yes        | Yes         | Yes          | Yes        | Yes               | Yes               | Yes               | Limited           |
+| **MCP Support**     | Yes          | Yes         | Yes        | Yes         | Yes          | No         | Partial           | No                | No                | No                |
+| **Local LLMs**      | Limited      | No          | No         | No          | Yes          | Yes        | Yes               | Yes               | No                | No                |
+| **Cost**            | $20/mo       | API costs   | Free tier  | ChatGPT+    | $15/mo       | API costs  | Free + API        | $12/mo            | $10/mo            | $10/mo            |
+| **Best Model**      | Claude/GPT-5 | Claude 4.5  | Gemini 3   | GPT-5-Codex | Claude/GPT-5 | Any        | Any               | Any/Local         | JetBrains models  | GPT-5             |
+| **Offline**         | No           | No          | No         | No          | Partial      | Yes        | Yes               | Yes               | No                | No                |
 
 ### Security Development Suitability
 
@@ -63,6 +65,8 @@ The AI-assisted development landscape has evolved rapidly. This guide compares t
 | **Windsurf**     | Good             | Good            | Good            | Good         |
 | **Aider**        | Good             | Good            | Excellent       | Good         |
 | **Continue.dev** | Good             | Good            | Good            | Good         |
+| **Tabnine**      | Good             | Good            | Good            | Good         |
+| **JetBrains AI** | Limited          | Good            | Good            | Limited      |
 | **Copilot**      | Limited          | Good            | Limited         | Limited      |
 
 ---
@@ -213,15 +217,15 @@ Cons:
 gemini
 
 # Interactive threat intel research
-> "Search for the latest IOCs associated with LockBit ransomware 
+> "Search for the latest IOCs associated with LockBit ransomware
 > and generate detection rules for each indicator type"
 
 # Large file analysis
-gemini --file memory_dump.raw "Analyze this memory dump for signs of 
+gemini --file memory_dump.raw "Analyze this memory dump for signs of
 process injection, credential theft, or persistence mechanisms"
 
 # With Google Search grounding
-gemini --search "What vulnerabilities are currently being exploited 
+gemini --search "What vulnerabilities are currently being exploited
 in the wild for Cisco ASA devices? Generate Snort rules for detection"
 ```
 
@@ -271,16 +275,16 @@ codex
 
 # Code review with image context
 > /image attach architecture_diagram.png
-> "Review this architecture for security vulnerabilities and 
+> "Review this architecture for security vulnerabilities and
 > suggest hardening measures for each component"
 
 # Vulnerability research with web search
 > /search on
-> "Find recent CVEs affecting our tech stack (Python 3.11, 
+> "Find recent CVEs affecting our tech stack (Python 3.11,
 > FastAPI, PostgreSQL) and generate a remediation plan"
 
 # Generate security tests
-> "Create pytest security tests for the authentication module 
+> "Create pytest security tests for the authentication module
 > covering injection attacks, session management, and access control"
 ```
 
@@ -601,6 +605,193 @@ Create `.continue/config.json`:
     { "name": "gen-yara", "description": "Generate YARA rule" }
   ]
 }
+```
+
+---
+
+## Tabnine
+
+### Overview
+
+A privacy-focused AI coding assistant with strong support for local inference and air-gapped deployments. Particularly suited for security teams handling sensitive codebases.
+
+### Key Features
+
+- **Local Inference**: Run models entirely on-premises
+- **Air-Gapped Deployment**: Works in isolated environments
+- **Custom Model Training**: Train on your internal codebase
+- **Multi-IDE Support**: VS Code, JetBrains, Vim, Neovim
+- **Enterprise Security**: SOC 2 Type II certified
+
+### Security Development Strengths
+
+```
+Pros:
++ Privacy-first design - code never leaves your environment
++ Local inference for air-gapped/classified environments
++ Custom models trained on your security codebase
++ Enterprise compliance (SOC 2, GDPR ready)
++ Works offline with local models
+
+Cons:
+- Local models less capable than cloud models
+- Higher resource requirements for local inference
+- Limited agent/autonomous capabilities
+- Smaller context window than cloud alternatives
+```
+
+### Security Workflow Example
+
+```python
+# Tabnine excels at completing security-specific patterns
+# based on your codebase conventions
+
+# Type: "def validate_" and Tabnine suggests based on your patterns
+def validate_input(user_data: dict) -> dict:
+    """Validate and sanitize user input.
+    
+    Tabnine learns your validation patterns:
+    - SQL injection prevention
+    - XSS sanitization
+    - Path traversal checks
+    """
+    sanitized = {}
+    
+    # Tabnine completes based on your existing validators
+    for key, value in user_data.items():
+        if isinstance(value, str):
+            # Learned pattern: escape special characters
+            sanitized[key] = escape_sql_chars(value)
+            sanitized[key] = sanitize_html(sanitized[key])
+        else:
+            sanitized[key] = value
+    
+    return sanitized
+
+# Type: "class YARA" and get completions based on your rule patterns
+class YARAGenerator:
+    """Generate YARA rules - Tabnine learns your rule style."""
+    
+    def __init__(self, rule_name: str):
+        self.rule_name = rule_name
+        self.strings = []
+        self.conditions = []
+```
+
+### Installation
+
+```bash
+# VS Code
+# Install "Tabnine AI" from VS Code marketplace
+
+# JetBrains
+# Install from JetBrains Marketplace: Tabnine AI
+
+# Vim/Neovim
+# Follow instructions at tabnine.com/install
+```
+
+### Configuration (Enterprise/Local)
+
+```json
+// VS Code settings.json for local model
+{
+  "tabnine.experimentalAutoImports": true,
+  "tabnine.receiveBetaChannelUpdates": false,
+  
+  // Enterprise: Configure local model server
+  "tabnine.cloudHost": "https://your-tabnine-server.internal",
+  "tabnine.useLocalModel": true
+}
+```
+
+---
+
+## JetBrains AI Assistant
+
+### Overview
+
+Native AI assistant deeply integrated into JetBrains IDEs (IntelliJ IDEA, PyCharm, WebStorm, etc.). Leverages JetBrains' code analysis engine for context-aware assistance.
+
+### Key Features
+
+- **Deep IDE Integration**: Uses JetBrains' semantic understanding
+- **Smart Refactoring**: AI-powered code transformations
+- **Documentation Generation**: Auto-generate docs and comments
+- **Test Generation**: Create unit tests from code
+- **Commit Messages**: Generate meaningful commit descriptions
+
+### Security Development Strengths
+
+```
+Pros:
++ Excellent for PyCharm users (common in security)
++ Leverages JetBrains static analysis for better suggestions
++ Good for refactoring legacy security tools
++ Native experience - no context switching
++ Useful code explanations for reverse engineering
+
+Cons:
+- JetBrains ecosystem only
+- Additional subscription cost ($10/mo on top of IDE)
+- Less capable for security-specific tasks than Claude/GPT
+- No local model support
+- Limited agent capabilities
+```
+
+### Security Workflow Example
+
+```python
+# In PyCharm with JetBrains AI Assistant
+
+# 1. Select suspicious code and ask "Explain this code"
+def obfuscated_func(d):
+    import base64, subprocess
+    x = base64.b64decode(d).decode()
+    return subprocess.check_output(x, shell=True)
+
+# AI explains: "This function decodes a base64 string and 
+# executes it as a shell command - potential backdoor pattern"
+
+# 2. Use "Generate Tests" on security functions
+class InputValidator:
+    @staticmethod
+    def validate_sql_input(query: str) -> str:
+        """Sanitize SQL input to prevent injection."""
+        dangerous_chars = ["'", '"', ";", "--", "/*", "*/"]
+        for char in dangerous_chars:
+            query = query.replace(char, "")
+        return query
+
+# AI generates comprehensive test cases including edge cases
+
+# 3. Use "Generate Documentation" for security tools
+class ThreatIntelClient:
+    def query_ioc(self, indicator: str, indicator_type: str) -> dict:
+        # AI generates docstring with params, returns, raises, examples
+        pass
+```
+
+### Installation
+
+```
+1. Open any JetBrains IDE (PyCharm, IntelliJ, etc.)
+2. Go to Settings → Plugins
+3. Search "AI Assistant"
+4. Install and restart IDE
+5. Sign in with JetBrains account
+6. Subscribe to AI Assistant ($10/month)
+```
+
+### Configuration
+
+```
+Settings → Tools → AI Assistant
+
+- Enable/disable specific features
+- Configure keyboard shortcuts
+- Set context inclusion preferences
+- Manage privacy settings
 ```
 
 ---
