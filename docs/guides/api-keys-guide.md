@@ -99,8 +99,8 @@ GOOGLE_API_KEY=AIzaxxxxxxxxxxxxx
 ### Pricing (2025)
 | Model | Input | Output | Cost per Lab |
 |-------|-------|--------|--------------|
-| Gemini 2.0 Flash | Free tier / $0.10/1M | $0.40/1M | ~$0.01-0.10 |
-| Gemini 2.0 Pro | $1.25/1M | $5/1M | ~$0.05-0.25 |
+| Gemini 3 Flash | Free tier / $0.50/1M | $3.00/1M | ~$0.01-0.15 |
+| Gemini 3 Pro | $2.00/1M | $12.00/1M | ~$0.10-0.50 |
 
 **Best for**: Beginners on a budget - generous free tier!
 

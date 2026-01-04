@@ -99,7 +99,7 @@ gemini --help
 gemini auth login
 
 # This provides:
-# - Gemini 2.5 Pro with 1M context
+# - Gemini 3 Flash with 1M context
 # - 60 requests/minute
 # - 1,000 requests/day
 ```
@@ -151,8 +151,8 @@ gemini --model gemini-3-pro "Analyze this malware sample"
 # Use Gemini 3 Flash (faster, good for high-frequency tasks)
 gemini --model gemini-3-flash "Parse these logs"
 
-# Use Gemini 2.5 Pro (1M context, free tier default)
-gemini --model gemini-2.5-pro "Analyze this large codebase"
+# Use Gemini 3 Flash (1M context, free tier default)
+gemini --model gemini-3-flash "Analyze this large codebase"
 ```
 
 ---

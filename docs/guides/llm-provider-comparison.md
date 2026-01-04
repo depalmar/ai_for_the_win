@@ -23,7 +23,7 @@ Choose the right LLM provider for your security tasks based on performance, cost
 START: What's your primary constraint?
 
 ├─► COST is critical
-│   ├─► Need high quality? → Gemini 2.5 Pro ($1.25/$10)
+│   ├─► Need high quality? → Gemini 3 Pro ($2/$12)
 │   ├─► Simple tasks? → GPT-4o-mini ($0.15/$0.60)
 │   └─► No budget? → Ollama (free, local)
 │
@@ -34,7 +34,7 @@ START: What's your primary constraint?
 │
 ├─► SPEED is critical
 │   ├─► Need streaming? → All providers support it
-│   ├─► Fastest response? → Gemini 2.0 Flash
+│   ├─► Fastest response? → Gemini 3 Flash
 │   └─► Low latency? → GPT-4o-mini or Claude Haiku 4.5
 │
 ├─► PRIVACY is critical
@@ -118,10 +118,8 @@ START: What's your primary constraint?
 
 | Model | Input/1M | Output/1M | Context | Speed |
 |-------|----------|-----------|---------|-------|
-| Gemini 3 Pro | $2.50 | $15.00 | 1M | Fast |
-| Gemini 3 Flash | $0.15 | $0.60 | 1M | Fastest |
-| Gemini 2.5 Pro | $1.25 | $10.00 | 1M | Fast |
-| Gemini 2.0 Flash | $0.10 | $0.40 | 1M | Very Fast |
+| Gemini 3 Pro | $2.00 | $12.00 | 1M | Fast |
+| Gemini 3 Flash | $0.50 | $3.00 | 1M | Fastest |
 
 **Strengths:**
 - Best cost-to-quality ratio
@@ -152,7 +150,7 @@ START: What's your primary constraint?
 
 ### Core Capabilities
 
-| Feature | Claude 4.5 | GPT-4o | Gemini 2.5 Pro |
+| Feature | Claude 4.5 | GPT-4o | Gemini 3 Pro |
 |---------|------------|--------|----------------|
 | **Context Window** | 200K | 128K | 1M |
 | **Structured Output** | Excellent | Good | Good |
@@ -163,7 +161,7 @@ START: What's your primary constraint?
 
 ### Security-Specific Features
 
-| Feature | Claude 4.5 | GPT-4o | Gemini 2.5 Pro |
+| Feature | Claude 4.5 | GPT-4o | Gemini 3 Pro |
 |---------|------------|--------|----------------|
 | **Threat Detection** | Excellent | Excellent | Good |
 | **IOC Extraction** | Excellent | Good | Good |
@@ -197,10 +195,10 @@ START: What's your primary constraint?
 |----------|----------|----------|------|
 | Claude Sonnet 4.5 | 96% | 2.1s | $0.45 |
 | GPT-4o | 94% | 1.8s | $0.65 |
-| Gemini 2.5 Pro | 91% | 1.5s | $0.19 |
+| Gemini 3 Pro | 91% | 1.5s | $0.24 |
 | Claude Haiku 4.5 | 88% | 0.8s | $0.04 |
 
-**Winner:** Claude Sonnet 4.5 (accuracy) or Gemini 2.5 Pro (cost)
+**Winner:** Claude Sonnet 4.5 (accuracy) or Gemini 3 Pro (cost)
 
 ---
 
@@ -212,7 +210,7 @@ START: What's your primary constraint?
 |----------|----------|-----------------|------|
 | Claude Sonnet 4.5 | 97.2% | 1.8% | $6.60 |
 | GPT-4o | 96.5% | 2.2% | $9.50 |
-| Gemini 2.5 Pro | 94.8% | 3.1% | $3.88 |
+| Gemini 3 Pro | 94.8% | 3.1% | $4.80 |
 | GPT-4o-mini | 91.2% | 5.5% | $0.45 |
 
 **Winner:** Claude Sonnet 4.5 (accuracy) or GPT-4o-mini (budget)
@@ -227,10 +225,10 @@ START: What's your primary constraint?
 |----------|---------------|------------------|------|
 | Claude Sonnet 4.5 | 89% | 4% | $45.00 |
 | GPT-4o | 87% | 5% | $70.00 |
-| Gemini 2.5 Pro | 84% | 6% | $26.00 |
+| Gemini 3 Pro | 84% | 6% | $32.00 |
 | Claude Haiku 4.5 | 78% | 8% | $3.75 |
 
-**Winner:** Claude Sonnet 4.5 (quality) or Gemini 2.5 Pro (cost-effective)
+**Winner:** Claude Sonnet 4.5 (quality) or Gemini 3 Pro (cost-effective)
 
 ---
 
@@ -242,7 +240,7 @@ START: What's your primary constraint?
 |----------|-------------|-----------------|------|
 | Claude Sonnet 4.5 | 45/50 | 3 | $2.25 |
 | GPT-4o | 43/50 | 5 | $3.50 |
-| Gemini 2.5 Pro | 40/50 | 4 | $1.00 |
+| Gemini 3 Pro | 40/50 | 4 | $1.24 |
 
 **Winner:** Claude Sonnet 4.5 (code analysis is a strength)
 

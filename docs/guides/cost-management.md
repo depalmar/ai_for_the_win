@@ -55,7 +55,7 @@ Cost = (Input Tokens × Input Price) + (Output Tokens × Output Price)
 
 ### Security Task Cost Estimates (Approximate)
 
-| Task | Input Tokens | Output Tokens | Claude 4.5 | GPT-4o | Gemini 2.5 Pro |
+| Task | Input Tokens | Output Tokens | Claude 4.5 | GPT-4o | Gemini 3 Pro |
 |------|-------------|---------------|------------|--------|----------------|
 | **Single log analysis** | ~500 | ~200 | $0.002 | $0.007 | $0.003 |
 | **Phishing email check** | ~700 | ~300 | $0.007 | $0.009 | $0.004 |
@@ -106,7 +106,7 @@ def estimate_project_cost(
     pricing = {
         "claude": {"input": 3.00, "output": 15.00},  # Claude Sonnet 4.5
         "openai": {"input": 1.75, "output": 14.00},  # GPT-5.2
-        "gemini": {"input": 1.25, "output": 10.00},  # Gemini 2.5 Pro
+        "gemini": {"input": 2.00, "output": 12.00},  # Gemini 3 Pro
     }
 
     p = pricing[provider]
@@ -150,8 +150,8 @@ print(result)
 | **Anthropic** | Claude Haiku 4.5 | $0.25 | $1.25 | Fast, simple tasks |
 | **OpenAI** | GPT-5.2 | $1.75 | $14.00 | Complex reasoning, agentic tasks |
 | **OpenAI** | GPT-5 Mini | $0.25 | $2.00 | Budget-friendly |
-| **Google** | Gemini 2.5 Pro | $1.25 | $10.00 | Cost-effective, good quality |
-| **Google** | Gemini 2.0 Flash | $0.10 | $0.40 | Ultra-fast, very cheap |
+| **Google** | Gemini 3 Pro | $2.00 | $12.00 | Cost-effective, good quality |
+| **Google** | Gemini 3 Flash | $0.50 | $3.00 | Ultra-fast, very cheap |
 
 > **Note:** Prices subject to change. Check provider websites for latest pricing. Batch APIs typically offer 50% discounts.
 
@@ -166,7 +166,7 @@ print(result)
 
 ### Cost per Security Task by Provider
 
-| Task | Claude 4.5 | GPT-4o | Gemini 2.5 Pro | Claude Haiku 4.5 |
+| Task | Claude 4.5 | GPT-4o | Gemini 3 Pro | Claude Haiku 4.5 |
 |------|------------|--------|----------------|--------------|
 | 1,000 log analyses | $4.50 | $7.00 | $2.60 | $0.38 |
 | 1,000 phishing checks | $6.60 | $9.50 | $3.88 | $0.55 |
