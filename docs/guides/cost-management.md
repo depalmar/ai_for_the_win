@@ -2,6 +2,8 @@
 
 Master cost estimation, monitoring, and optimization for LLM-powered security tools.
 
+> **Pricing Disclaimer:** LLM pricing changes frequently. All estimates in this guide are approximate and for educational purposes. Verify current pricing at provider websites before budgeting. Last reviewed: January 2026.
+
 ---
 
 ## Table of Contents
@@ -51,7 +53,7 @@ Most providers charge differently for:
 Cost = (Input Tokens × Input Price) + (Output Tokens × Output Price)
 ```
 
-### Security Task Cost Estimates (2025 Pricing)
+### Security Task Cost Estimates (Approximate)
 
 | Task | Input Tokens | Output Tokens | Claude 3.5 | GPT-4o | Gemini 2.5 Pro |
 |------|-------------|---------------|------------|--------|----------------|

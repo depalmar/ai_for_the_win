@@ -135,7 +135,7 @@ Anthropic's official command-line tool for agentic coding with Claude.
 ```
 Pros:
 + Powerful agentic capabilities
-+ Best-in-class reasoning for security analysis
++ Strong reasoning capabilities for security analysis
 + Custom slash commands for security workflows
 + Hooks for automation
 + MCP servers for security tool integration
@@ -474,7 +474,7 @@ GitHub's AI coding assistant powered by OpenAI models.
 
 ### Key Features
 
-- **Code Completion**: Industry-leading autocomplete
+- **Code Completion**: Popular and well-regarded autocomplete
 - **Chat**: Ask questions about code
 - **Workspace Agent**: Project-wide understanding
 - **CLI Integration**: Terminal assistance
@@ -682,7 +682,7 @@ START
   ├─ Do you need a full IDE experience?
   │   ├─ YES → Do you want local model support?
   │   │          ├─ YES → Windsurf or Continue.dev
-  │   │          └─ NO → Cursor (best overall)
+  │   │          └─ NO → Cursor (popular choice)
   │   │
   │   └─ NO → Do you prefer terminal workflows?
   │            ├─ YES → Do you need git integration?

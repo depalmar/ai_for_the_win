@@ -53,10 +53,10 @@ Build, debug, and automate security workflows with Google's open-source AI agent
 
 ```bash
 # Install globally
-npm install -g @anthropic-ai/gemini-cli
+npm install -g @google/gemini-cli
 
 # Or use npx without installing
-npx @anthropic-ai/gemini-cli
+npx @google/gemini-cli
 ```
 
 ### Option 2: Direct Download

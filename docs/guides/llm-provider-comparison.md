@@ -52,6 +52,8 @@ START: What's your primary constraint?
 
 ## Provider Overview
 
+> **Pricing Note:** All prices shown are approximate and subject to change. Verify current pricing at each provider's official website before making decisions. Prices updated periodically but may not reflect latest changes.
+
 ### Anthropic (Claude)
 
 **Best For:** Long-context analysis, nuanced security reasoning, code review
@@ -184,6 +186,8 @@ START: What's your primary constraint?
 ---
 
 ## Security Task Benchmarks
+
+> **Note:** The benchmarks below are **illustrative estimates** based on typical model characteristics. Actual performance varies by prompt design, data quality, and use case. Always conduct your own testing for production decisions.
 
 ### Task: IOC Extraction from Threat Reports
 
