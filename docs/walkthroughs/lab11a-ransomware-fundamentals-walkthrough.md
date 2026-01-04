@@ -559,6 +559,7 @@ print(json.dumps(result, indent=2))
 - [CISA StopRansomware](https://www.cisa.gov/stopransomware)
 - [Mandiant Ransomware Reports](https://www.mandiant.com/)
 - [Microsoft Threat Intelligence](https://www.microsoft.com/security/blog/)
+- [Unit 42 Ransomware Research](https://unit42.paloaltonetworks.com/category/ransomware/)
 
 ### SANS Resources
 - [FOR528: Ransomware for Incident Responders](https://www.sans.org/cyber-security-courses/ransomware-incident-responders/)

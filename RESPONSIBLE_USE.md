@@ -42,6 +42,7 @@ The attack patterns, TTPs (Tactics, Techniques, and Procedures), and threat inte
 - [CISA Cybersecurity Advisories](https://www.cisa.gov/cybersecurity-advisories) - Public domain
 - [Mandiant Threat Intelligence](https://www.mandiant.com/resources) - Publicly published reports
 - [CrowdStrike Threat Reports](https://www.crowdstrike.com/resources/) - Publicly published reports
+- [Unit 42 Threat Research](https://unit42.paloaltonetworks.com/) - Publicly published reports
 - [Microsoft Security Blog](https://www.microsoft.com/security/blog/) - Publicly published content
 
 All synthetic samples (phishing emails, malware metadata, log entries) are artificially generated for educational purposes and do not represent real incidents or real individuals.
