@@ -32,7 +32,7 @@ def setup_llm():
     providers = {
         "anthropic": ("ANTHROPIC_API_KEY", "claude-sonnet-4-20250514"),
         "openai": ("OPENAI_API_KEY", "gpt-5"),
-        "google": ("GOOGLE_API_KEY", "gemini-2.5-pro"),
+        "google": ("GOOGLE_API_KEY", "gemini-3-flash"),
     }
     
     for name, (key, model) in providers.items():
@@ -114,8 +114,8 @@ When running locally (not in Colab), you can either:
 | Provider | Model | Speed | Cost | Best For |
 |----------|-------|-------|------|----------|
 | Anthropic | claude-sonnet-4-20250514 | Fast | $$ | Complex reasoning, code |
-| OpenAI | gpt-5 | Fast | $$ | General purpose |
-| Google | gemini-2.5-pro | Fast | $ | Long context, free tier |
+| OpenAI | gpt-5 | Fast | $$ | General purpose, 1M+ context |
+| Google | gemini-3-flash | Very Fast | $ | Long context, free tier |
 
 ## Troubleshooting
 
