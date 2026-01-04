@@ -260,12 +260,21 @@ def check_suspicious_sections(sections: list) -> list:
 
     # Known packer/suspicious section names
     suspicious_names = [
-        ".UPX", "UPX0", "UPX1", "UPX2",  # UPX packer
-        ".aspack", ".adata",  # ASPack
-        ".nsp", ".nsp0", ".nsp1",  # NSPack
+        ".UPX",
+        "UPX0",
+        "UPX1",
+        "UPX2",  # UPX packer
+        ".aspack",
+        ".adata",  # ASPack
+        ".nsp",
+        ".nsp0",
+        ".nsp1",  # NSPack
         ".packed",  # Generic packed
-        ".themida", ".winlice",  # Themida
-        ".vmp", ".vmp0", ".vmp1",  # VMProtect
+        ".themida",
+        ".winlice",  # Themida
+        ".vmp",
+        ".vmp0",
+        ".vmp1",  # VMProtect
         ".petite",  # Petite
     ]
 
@@ -276,20 +285,24 @@ def check_suspicious_sections(sections: list) -> list:
         # Check for packer indicators
         for sus_name in suspicious_names:
             if sus_name.lower() in name.lower():
-                suspicious.append({
-                    "section": name,
-                    "reason": f"Packer indicator: {sus_name}",
-                    "severity": "high",
-                })
+                suspicious.append(
+                    {
+                        "section": name,
+                        "reason": f"Packer indicator: {sus_name}",
+                        "severity": "high",
+                    }
+                )
                 break
 
         # Check for executable + writable (common in packed/malicious)
         if "EXECUTE" in chars and "WRITE" in chars:
-            suspicious.append({
-                "section": name,
-                "reason": "Section is both executable and writable",
-                "severity": "medium",
-            })
+            suspicious.append(
+                {
+                    "section": name,
+                    "reason": "Section is both executable and writable",
+                    "severity": "medium",
+                }
+            )
 
     return suspicious
 
@@ -515,7 +528,7 @@ def main():
    3. API imports show capabilities (injection, C2, persistence)
    4. Section analysis finds anomalies in structure
    5. Combine indicators for confidence scoring
-   
+
    Ready for Lab 07 (YARA Generator)!
     """
     )

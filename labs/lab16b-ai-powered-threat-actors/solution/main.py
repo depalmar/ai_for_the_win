@@ -341,6 +341,32 @@ class VishingDetector:
             "Who else is on your team?",
         ]
 
+    def analyze_call(
+        self,
+        request_type: str,
+        urgency_level: str,
+        callback_offered: bool,
+        verification_accepted: bool,
+        caller_claims: str = "",
+    ) -> Dict:
+        """
+        Simplified call analysis for testing.
+        Returns a dict with synthetic_probability.
+        """
+        result = self.analyze_call_context(
+            caller_claims=caller_claims,
+            request_type=request_type,
+            urgency_level=urgency_level,
+            callback_offered=callback_offered,
+            verification_accepted=verification_accepted,
+        )
+        return {
+            "synthetic_probability": result.synthetic_probability,
+            "confidence": result.confidence,
+            "indicators": [i.value for i in result.indicators],
+            "recommendations": result.recommendations,
+        }
+
     def analyze_call_context(
         self,
         caller_claims: str,

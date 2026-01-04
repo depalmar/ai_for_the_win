@@ -825,17 +825,15 @@ class TestTLSCertAnalyzer:
 
     def test_risk_score_capped(self, tls_analyzer):
         """Test that risk score is capped at 1.0."""
+        from datetime import timedelta
+
         # Certificate with many risk factors
         cert = {
             "subject": "CN=evil.com",
             "issuer": "CN=evil.com",  # Self-signed
             "subject_cn": "evil.com",
             "not_before": datetime.now().isoformat(),  # Recent
-            "not_after": (
-                datetime.now().replace(
-                    day=datetime.now().day + 30 if datetime.now().day < 28 else 1
-                )
-            ).isoformat(),  # Short
+            "not_after": (datetime.now() + timedelta(days=30)).isoformat(),  # Short validity
         }
 
         result = tls_analyzer.analyze_certificate(cert)
