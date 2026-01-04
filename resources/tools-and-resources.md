@@ -391,6 +391,7 @@ Industry-recognized certifications for those who want to go deep:
 | **Recorded Future** | Threat intelligence | [recordedfuture.com](https://recordedfuture.com) |
 | **Mandiant**        | APT research        | [mandiant.com](https://mandiant.com)             |
 | **CrowdStrike**     | Threat actors       | [crowdstrike.com](https://crowdstrike.com)       |
+| **Unit 42**         | Threat research     | [unit42.paloaltonetworks.com](https://unit42.paloaltonetworks.com) |
 | **VirusTotal**      | File/URL analysis   | [virustotal.com](https://virustotal.com)         |
 
 ---
