@@ -46,6 +46,7 @@ instructor>=1.0.0,<2.0.0
 # =============================================================================
 chromadb>=0.4.0,<2.0.0
 sentence-transformers>=2.2.0,<6.0.0
+tf-keras>=2.16.0  # Required for Keras 3 compatibility with transformers
 
 # Hugging Face ecosystem
 transformers>=4.36.0,<5.0.0
