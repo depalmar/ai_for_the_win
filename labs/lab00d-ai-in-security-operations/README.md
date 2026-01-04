@@ -1025,11 +1025,46 @@ These are guiding principles to consider, not universal rules:
 ## Resources
 
 ### Course Resources
+- [AI for Security Leaders Guide](../../docs/guides/ai-for-security-leaders.md) - Executive summary and decision frameworks
+- [Vendor Evaluation Template](../../templates/decisions/vendor-evaluation-template.md) - Generic criteria for evaluating AI tools
 - [LLM Provider Comparison Guide](../../docs/guides/llm-provider-comparison.md) - Choose the right provider
 - [API Keys Guide](../../docs/guides/api-keys-guide.md) - Setup and cost management
 - [Security Compliance Guide](../../docs/guides/security-compliance-guide.md) - Regulatory considerations
 - [Prompt Injection Defense Guide](../../docs/guides/prompt-injection-defense.md) - Protect your AI systems
 - [Security Fundamentals for Beginners](../../docs/guides/security-fundamentals-for-beginners.md) - SOC concepts for newcomers
+
+### Curated Resources for Leaders
+
+**Books (Strategic, Non-Technical):**
+| Book | Author | Why Read It |
+|------|--------|-------------|
+| *AI 2041: Ten Visions for Our Future* | Kai-Fu Lee & Chen Qiufan | Accessible AI futures from a former Google China president |
+| *The AI-First Company* | Ash Fontana | How organizations successfully adopt AI |
+| *Human + Machine* | Paul Daugherty & H. James Wilson | AI augmentation strategies from Accenture research |
+| *Prediction Machines* | Ajay Agrawal et al. | Economic framework for AI investment decisions |
+
+**Podcasts (Stay Current Without Deep Dives):**
+| Podcast | Focus | Episode Length |
+|---------|-------|----------------|
+| **Darknet Diaries** | Security stories (occasional AI episodes) | 45-60 min |
+| **Risky Business** | Security news with AI coverage | 60 min |
+| **a]6z Podcast** | Technology trends from a16z | 30-45 min |
+| **The CISO Series** | Leadership perspectives | 30-45 min |
+
+**Newsletters (Weekly AI Security Updates):**
+| Newsletter | Focus | Frequency |
+|------------|-------|-----------|
+| **tl;dr sec** | Security news including AI | Weekly |
+| **The AI Security Newsletter** | AI-specific security | Weekly |
+| **Morning Brew** | Business/tech (AI coverage) | Daily |
+
+**Conferences (Leadership-Appropriate Sessions):**
+| Conference | Best Sessions For Leaders |
+|------------|---------------------------|
+| **RSA Conference** | Executive track, keynotes |
+| **Black Hat** | Briefings (strategic), Business Hall |
+| **Gartner Security Summit** | Analyst sessions, peer roundtables |
+| **SANS Summits** | Leadership forums |
 
 ### SANS Resources (2025)
 
