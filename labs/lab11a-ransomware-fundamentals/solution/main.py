@@ -6,11 +6,142 @@ Complete implementation of ransomware family identification,
 MITRE ATT&CK mapping, and recovery decision framework.
 """
 
-import json
+import math
 import re
+from collections import Counter
 from dataclasses import dataclass
 from enum import Enum
 from typing import Dict, List, Optional
+
+# =============================================================================
+# Test-Compatible Functions
+# =============================================================================
+
+
+@dataclass
+class RansomwareIndicator:
+    """An indicator of ransomware activity."""
+
+    indicator_type: str  # extension, note_pattern, process
+    indicator: str
+    family: str
+    confidence: float
+
+
+# List of known ransomware indicators for detection
+RANSOMWARE_INDICATORS = [
+    RansomwareIndicator("extension", ".encrypted", "generic", 0.8),
+    RansomwareIndicator("extension", ".locked", "generic", 0.8),
+    RansomwareIndicator("extension", ".crypto", "generic", 0.7),
+    RansomwareIndicator("extension", ".crypt", "generic", 0.7),
+    RansomwareIndicator("extension", ".lockbit", "lockbit", 0.95),
+    RansomwareIndicator("extension", ".blackcat", "blackcat", 0.95),
+    RansomwareIndicator("extension", ".conti", "conti", 0.95),
+    RansomwareIndicator("extension", ".ryuk", "ryuk", 0.95),
+    RansomwareIndicator("extension", ".wannacry", "wannacry", 0.95),
+    RansomwareIndicator("extension", ".petya", "petya", 0.95),
+]
+
+
+def calculate_entropy(data: bytes) -> float:
+    """
+    Calculate Shannon entropy of binary data.
+    High entropy (>7.5) often indicates encrypted data.
+    """
+    if not data:
+        return 0.0
+
+    counter = Counter(data)
+    length = len(data)
+
+    entropy = 0.0
+    for count in counter.values():
+        probability = count / length
+        if probability > 0:
+            entropy -= probability * math.log2(probability)
+
+    return entropy
+
+
+def analyze_file_extension(filename: str) -> dict:
+    """
+    Analyze a filename for ransomware-related extensions.
+
+    Returns:
+        Dict with suspicious flag, probability, and matched indicators
+    """
+    filename_lower = filename.lower()
+
+    suspicious_extensions = [
+        ".encrypted", ".locked", ".crypto", ".crypt", ".enc",
+        ".lockbit", ".blackcat", ".conti", ".ryuk", ".petya",
+        ".locky", ".cerber", ".zepto", ".odin", ".thor",
+        ".aesir", ".zzzzz", ".micro", ".vvv", ".ccc",
+    ]
+
+    matched = []
+    for ext in suspicious_extensions:
+        if ext in filename_lower:
+            matched.append(ext)
+
+    # Check for double extensions (document.docx.encrypted)
+    has_double_extension = any(
+        filename_lower.endswith(ext) and "." in filename_lower[:-len(ext)]
+        for ext in suspicious_extensions
+    )
+
+    suspicious = len(matched) > 0 or has_double_extension
+    probability = 0.9 if has_double_extension else (0.7 if matched else 0.0)
+
+    return {
+        "suspicious": suspicious,
+        "ransomware_probability": probability,
+        "matched_extensions": matched,
+        "has_double_extension": has_double_extension,
+    }
+
+
+def check_ransom_note_patterns(text: str) -> dict:
+    """
+    Check text for common ransom note patterns.
+
+    Returns:
+        Dict with is_ransom_note flag, confidence, and matched patterns
+    """
+    text_lower = text.lower()
+
+    ransom_patterns = [
+        (r"your files have been encrypted", 0.9),
+        (r"all your files are encrypted", 0.9),
+        (r"to decrypt your files", 0.8),
+        (r"send.*btc", 0.7),
+        (r"bitcoin.*wallet", 0.7),
+        (r"pay.*ransom", 0.9),
+        (r"decrypt.*key", 0.6),
+        (r"files.*locked", 0.6),
+        (r"restore.*files", 0.5),
+        (r"personal.*id", 0.4),
+        (r"\.onion", 0.7),
+        (r"deadline|hours.*pay|days.*pay", 0.6),
+    ]
+
+    matched_patterns = []
+    total_confidence = 0.0
+
+    for pattern, weight in ransom_patterns:
+        if re.search(pattern, text_lower):
+            matched_patterns.append(pattern)
+            total_confidence += weight
+
+    # Normalize confidence to 0-1 range
+    confidence = min(total_confidence / 3.0, 1.0) if matched_patterns else 0.0
+
+    return {
+        "is_ransom_note": confidence > 0.5,
+        "confidence": confidence,
+        "matched_patterns": matched_patterns,
+    }
+
 
 # =============================================================================
 # Ransomware Family Database

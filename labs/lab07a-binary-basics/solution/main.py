@@ -33,6 +33,12 @@ class BinaryAnalysis:
     indicators: list
 
 
+# PE Header Signatures for binary identification
+PE_HEADER_SIGNATURES = {
+    "MZ": b"MZ",  # DOS header
+    "PE": b"PE\x00\x00",  # PE signature
+}
+
 SUSPICIOUS_APIS = {
     "injection": [
         "VirtualAlloc",
@@ -208,6 +214,118 @@ def analyze_sections(filepath: str) -> list:
         return sections
     except Exception as e:
         return [{"error": str(e)}]
+
+
+def analyze_pe_structure(headers: dict) -> dict:
+    """
+    Analyze PE structure from header information.
+
+    Args:
+        headers: Dict with machine, num_sections, timestamp, characteristics
+
+    Returns:
+        Analysis results with architecture and section info
+    """
+    machine_types = {
+        "0x14c": "x86 (32-bit)",
+        "0x8664": "x64 (64-bit)",
+        "0x1c0": "ARM",
+        "0xaa64": "ARM64",
+    }
+
+    machine = headers.get("machine", "unknown")
+    arch = machine_types.get(machine, f"Unknown ({machine})")
+
+    return {
+        "architecture": arch,
+        "sections": headers.get("num_sections", 0),
+        "timestamp": headers.get("timestamp", "unknown"),
+        "characteristics": headers.get("characteristics", []),
+        "is_executable": "EXECUTABLE_IMAGE" in headers.get("characteristics", []),
+        "is_dll": "DLL" in headers.get("characteristics", []),
+    }
+
+
+def check_suspicious_sections(sections: list) -> list:
+    """
+    Check sections for suspicious characteristics.
+
+    Args:
+        sections: List of section dicts with name and characteristics
+
+    Returns:
+        List of suspicious findings
+    """
+    suspicious = []
+
+    # Known packer/suspicious section names
+    suspicious_names = [
+        ".UPX", "UPX0", "UPX1", "UPX2",  # UPX packer
+        ".aspack", ".adata",  # ASPack
+        ".nsp", ".nsp0", ".nsp1",  # NSPack
+        ".packed",  # Generic packed
+        ".themida", ".winlice",  # Themida
+        ".vmp", ".vmp0", ".vmp1",  # VMProtect
+        ".petite",  # Petite
+    ]
+
+    for section in sections:
+        name = section.get("name", "")
+        chars = section.get("characteristics", [])
+
+        # Check for packer indicators
+        for sus_name in suspicious_names:
+            if sus_name.lower() in name.lower():
+                suspicious.append({
+                    "section": name,
+                    "reason": f"Packer indicator: {sus_name}",
+                    "severity": "high",
+                })
+                break
+
+        # Check for executable + writable (common in packed/malicious)
+        if "EXECUTE" in chars and "WRITE" in chars:
+            suspicious.append({
+                "section": name,
+                "reason": "Section is both executable and writable",
+                "severity": "medium",
+            })
+
+    return suspicious
+
+
+def detect_packers(sections: list) -> list:
+    """
+    Detect known packers from section names.
+
+    Args:
+        sections: List of section dicts with name field
+
+    Returns:
+        List of detected packer names
+    """
+    packers = []
+
+    packer_signatures = {
+        "UPX": [".UPX", "UPX0", "UPX1", "UPX2"],
+        "ASPack": [".aspack", ".adata"],
+        "NSPack": [".nsp", ".nsp0", ".nsp1"],
+        "Themida": [".themida", ".winlice"],
+        "VMProtect": [".vmp", ".vmp0", ".vmp1"],
+        "Petite": [".petite"],
+        "PECompact": [".pec", ".pec2"],
+    }
+
+    section_names = [s.get("name", "").lower() for s in sections]
+
+    for packer, signatures in packer_signatures.items():
+        for sig in signatures:
+            if any(sig.lower() in name for name in section_names):
+                if packer not in packers:
+                    packers.append(packer)
+                break
+
+    return packers
 
 
 def generate_indicators(analysis: BinaryAnalysis) -> list:

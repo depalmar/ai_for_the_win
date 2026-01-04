@@ -6,22 +6,139 @@ Complete implementation of Sigma rule creation, validation, and conversion.
 """
 
 import os
+import re
 import uuid
+from dataclasses import dataclass, field
 from datetime import datetime
-from typing import Optional
+from typing import Any, Optional
 
+import yaml
 from dotenv import load_dotenv
 
 load_dotenv()
 
 # Check for optional dependencies
 try:
-    from sigma.rule import SigmaRule
+    from sigma.rule import SigmaRule as PySigmaRule
 
     SIGMA_AVAILABLE = True
 except ImportError:
     SIGMA_AVAILABLE = False
-    print("Note: pysigma not installed. Run: pip install pysigma")
+
+
+# =============================================================================
+# Test-Compatible SigmaRule Dataclass
+# =============================================================================
+
+
+@dataclass
+class SigmaRule:
+    """Simple Sigma rule representation for testing."""
+
+    title: str
+    description: str
+    logsource: dict
+    detection: dict
+    level: str
+    id: str = field(default_factory=lambda: str(uuid.uuid4()))
+    status: str = "experimental"
+    author: str = "AI for the Win Labs"
+    tags: list = field(default_factory=list)
+    falsepositives: list = field(default_factory=list)
+
+
+def parse_sigma_rule(yaml_content: str) -> SigmaRule:
+    """
+    Parse a YAML Sigma rule into a SigmaRule object.
+
+    Args:
+        yaml_content: YAML string containing the Sigma rule
+
+    Returns:
+        SigmaRule object
+    """
+    data = yaml.safe_load(yaml_content)
+
+    return SigmaRule(
+        title=data.get("title", "Unknown"),
+        description=data.get("description", ""),
+        logsource=data.get("logsource", {}),
+        detection=data.get("detection", {}),
+        level=data.get("level", "medium"),
+        id=data.get("id", str(uuid.uuid4())),
+        status=data.get("status", "experimental"),
+        author=data.get("author", "Unknown"),
+        tags=data.get("tags", []),
+        falsepositives=data.get("falsepositives", []),
+    )
+
+
+def match_log_event(rule: SigmaRule, event: dict) -> bool:
+    """
+    Check if a log event matches a Sigma rule's detection logic.
+
+    This is a simplified matcher that handles basic field matching
+    and the |contains modifier.
+
+    Args:
+        rule: SigmaRule object
+        event: Dictionary representing a log event
+
+    Returns:
+        True if event matches, False otherwise
+    """
+    detection = rule.detection
+    condition = detection.get("condition", "selection")
+
+    # Get all selection blocks
+    selections = {}
+    for key, value in detection.items():
+        if key != "condition" and isinstance(value, dict):
+            selections[key] = value
+
+    def match_selection(selection: dict, event: dict) -> bool:
+        """Check if event matches a selection block."""
+        for field_spec, expected in selection.items():
+            # Handle modifiers like |contains
+            if "|" in field_spec:
+                field_name, modifier = field_spec.split("|", 1)
+            else:
+                field_name = field_spec
+                modifier = None
+
+            event_value = event.get(field_name)
+
+            if event_value is None:
+                return False
+
+            # Handle list of possible values
+            if isinstance(expected, list):
+                if modifier == "contains":
+                    if not any(str(exp).lower() in str(event_value).lower() for exp in expected):
+                        return False
+                else:
+                    if event_value not in expected:
+                        return False
+            else:
+                if modifier == "contains":
+                    if str(expected).lower() not in str(event_value).lower():
+                        return False
+                else:
+                    if event_value != expected:
+                        return False
+
+        return True
+
+    # Simple condition parsing - just check if "selection" matches
+    if "selection" in selections:
+        return match_selection(selections["selection"], event)
+
+    # Try to match any selection
+    for sel_name, sel_value in selections.items():
+        if match_selection(sel_value, event):
+            return True
+
+    return False
 
 try:
     from anthropic import Anthropic
@@ -352,7 +469,7 @@ def validate_sigma_rule(yaml_rule: str) -> dict:
         return result
 
     try:
-        rule = SigmaRule.from_yaml(yaml_rule)
+        rule = PySigmaRule.from_yaml(yaml_rule)
         result["valid"] = True
         result["rule_title"] = rule.title
 
@@ -385,7 +502,7 @@ def convert_to_siem(yaml_rule: str, backend: str = "splunk") -> str:
         return "# Conversion requires pySigma"
 
     try:
-        rule = SigmaRule.from_yaml(yaml_rule)
+        rule = PySigmaRule.from_yaml(yaml_rule)
 
         if backend == "splunk":
             try:

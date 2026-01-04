@@ -89,6 +89,23 @@ def check_domain_reputation(domain: str) -> dict:
         return {"reputation": "unknown", "category": "Not in database"}
 
 
+def get_system_info() -> dict:
+    """
+    Get basic system information.
+    Useful for security context in agent responses.
+    """
+    import platform
+    import socket
+
+    return {
+        "hostname": socket.gethostname(),
+        "platform": platform.system(),
+        "platform_release": platform.release(),
+        "python_version": platform.python_version(),
+        "architecture": platform.machine(),
+    }
+
+
 # =============================================================================
 # TOOL DEFINITIONS FOR CLAUDE
 # =============================================================================

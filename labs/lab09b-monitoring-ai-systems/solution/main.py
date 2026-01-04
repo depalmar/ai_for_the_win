@@ -38,6 +38,18 @@ class PredictionMetrics:
 
 
 @dataclass
+class AIMetrics:
+    """Track metrics for AI model calls (test-compatible version)."""
+
+    timestamp: str
+    model_name: str
+    latency_ms: float
+    tokens_used: int
+    cost_usd: float
+    success: bool
+
+
+@dataclass
 class ModelHealthMetrics:
     """Aggregate metrics for model health monitoring."""
 
@@ -304,6 +316,93 @@ class AIMonitor:
             "false_negatives": fn,
             "total_feedback": len(feedback_preds),
         }
+
+
+# =============================================================================
+# TEST-COMPATIBLE CLASSES
+# =============================================================================
+
+
+class MetricsCollector:
+    """Collect and summarize AI metrics (test-compatible version)."""
+
+    def __init__(self):
+        self.metrics: list[AIMetrics] = []
+
+    def record(
+        self,
+        model_name: str,
+        latency_ms: float,
+        tokens_used: int,
+        cost_usd: float,
+        success: bool,
+    ):
+        """Record a metric entry."""
+        self.metrics.append(
+            AIMetrics(
+                timestamp=datetime.now().isoformat(),
+                model_name=model_name,
+                latency_ms=latency_ms,
+                tokens_used=tokens_used,
+                cost_usd=cost_usd,
+                success=success,
+            )
+        )
+
+    def get_summary(self) -> dict:
+        """Get summary statistics."""
+        if not self.metrics:
+            return {
+                "total_calls": 0,
+                "success_rate": 0.0,
+                "avg_latency_ms": 0.0,
+                "total_tokens": 0,
+                "total_cost_usd": 0.0,
+            }
+
+        successes = sum(1 for m in self.metrics if m.success)
+        return {
+            "total_calls": len(self.metrics),
+            "success_rate": successes / len(self.metrics),
+            "avg_latency_ms": sum(m.latency_ms for m in self.metrics) / len(self.metrics),
+            "total_tokens": sum(m.tokens_used for m in self.metrics),
+            "total_cost_usd": sum(m.cost_usd for m in self.metrics),
+        }
+
+
+class PerformanceMonitor:
+    """Monitor performance thresholds (test-compatible version)."""
+
+    def __init__(self, latency_threshold_ms: float = 500.0, error_rate_threshold: float = 0.1):
+        self.latency_threshold_ms = latency_threshold_ms
+        self.error_rate_threshold = error_rate_threshold
+
+    def check_latency(self, latency_ms: float) -> list[str]:
+        """Check if latency exceeds threshold."""
+        alerts = []
+        if latency_ms > self.latency_threshold_ms:
+            alerts.append(
+                f"Latency alert: {latency_ms:.1f}ms exceeds threshold of {self.latency_threshold_ms:.1f}ms"
+            )
+        return alerts
+
+
+def create_dashboard_data(collector: MetricsCollector) -> dict:
+    """Create dashboard-ready data from metrics collector."""
+    summary = collector.get_summary()
+    return {
+        "summary": summary,
+        "recent_metrics": [
+            {
+                "timestamp": m.timestamp,
+                "model": m.model_name,
+                "latency_ms": m.latency_ms,
+                "success": m.success,
+            }
+            for m in collector.metrics[-10:]
+        ],
+        "alerts": [],
+    }
 
 
 # =============================================================================
