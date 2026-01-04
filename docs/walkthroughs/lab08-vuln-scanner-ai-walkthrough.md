@@ -224,7 +224,7 @@ class ThreatIntelEnricher:
         known_actors = {
             'CVE-2021-44228': ['APT41', 'Lazarus', 'Multiple'],
             'CVE-2023-22515': ['Storm-0062'],
-            'CVE-2024-3400': ['UTA0218']
+            'CVE-2024-47575': ['UNC5820']
         }
         return known_actors.get(cve_id, [])
 
@@ -399,34 +399,34 @@ for scored in scored_vulns[:3]:
 ### Expected Output
 ```
 ============================================================
-Recommendations for CVE-2024-3400
+Recommendations for CVE-2024-47575
 ============================================================
 
 ## 1. Immediate Actions
-- **Isolate affected devices**: If possible, temporarily remove Palo Alto firewalls running vulnerable PAN-OS versions from direct internet exposure
-- **Enable threat prevention**: Ensure Threat Prevention signatures are updated and enabled
-- **Monitor for exploitation**: Check logs for indicators of command injection attempts
+- **Isolate affected devices**: If possible, temporarily remove FortiManager from direct internet exposure
+- **Restrict fgfmd access**: Limit fgfmd daemon access to known FortiGate IP addresses only
+- **Monitor for exploitation**: Check logs for unauthorized device registration attempts
 
 ## 2. Remediation Steps
-1. Identify all Palo Alto devices running PAN-OS 10.2, 11.0, or 11.1
-2. Download the appropriate hotfix from Palo Alto support portal
+1. Identify all FortiManager devices running vulnerable versions (7.0.x, 7.2.x, 7.4.x, 7.6.0)
+2. Download the appropriate patch from Fortinet support portal
 3. Schedule maintenance window (critical - do within 24 hours)
-4. Apply hotfix following Palo Alto's upgrade procedures
+4. Apply patch following Fortinet's upgrade procedures
 5. Reboot device if required
 6. Verify version after upgrade
 
 ## 3. Compensating Controls
 If immediate patching isn't possible:
-- Disable GlobalProtect gateway/portal features temporarily
-- Implement strict IP allowlisting for management interfaces
-- Deploy virtual patching via IPS rules
-- Increase logging verbosity for affected services
+- Block fgfmd port (tcp/541) from untrusted networks
+- Implement strict IP allowlisting for FortiGate connections
+- Enable FortiManager local-in policies to restrict access
+- Increase logging verbosity for device registration events
 
 ## 4. Verification Steps
-- Run `show system info` to confirm patched version
+- Run `get system status` to confirm patched version
 - Review logs for any exploitation attempts during vulnerability window
 - Conduct vulnerability scan to confirm remediation
-- Test GlobalProtect functionality post-patch
+- Verify FortiGate device connections are functioning normally
 
 ## 5. Risk Acceptance Criteria
 Risk acceptance is NOT recommended for this vulnerability because:
