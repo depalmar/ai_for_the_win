@@ -1129,7 +1129,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
     </div>
   </div>
 
-  <h3 style="margin-top: 2rem; margin-bottom: 1rem;">All 30+ Labs (Including Bridge Labs)</h3>
+  <h3 style="margin-top: 2rem; margin-bottom: 1rem;">All 40 Labs (Including Bridge Labs)</h3>
 
   <!-- Lab Filter Tabs -->
   <div class="lab-filters">
