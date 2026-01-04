@@ -63,7 +63,9 @@ class CloudTrailParser:
             event_time=raw_event.get("eventTime", ""),
             event_name=raw_event.get("eventName", ""),
             event_source=raw_event.get("eventSource", ""),
-            user_identity=user_identity.get("userName", user_identity.get("principalId", "unknown")),
+            user_identity=user_identity.get(
+                "userName", user_identity.get("principalId", "unknown")
+            ),
             user_type=user_identity.get("type", "Unknown"),
             source_ip=raw_event.get("sourceIPAddress", ""),
             region=raw_event.get("awsRegion", ""),
@@ -159,6 +161,7 @@ class CloudThreatDetector:
     def get_severity(self, event_name: str) -> str:
         """Get severity level for an event."""
         return self.event_severity.get(event_name, "LOW")
+
 
 # =============================================================================
 # EXERCISE 1: Parse CloudTrail Events

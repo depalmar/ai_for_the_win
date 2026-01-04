@@ -73,10 +73,26 @@ def analyze_file_extension(filename: str) -> dict:
     filename_lower = filename.lower()
 
     suspicious_extensions = [
-        ".encrypted", ".locked", ".crypto", ".crypt", ".enc",
-        ".lockbit", ".blackcat", ".conti", ".ryuk", ".petya",
-        ".locky", ".cerber", ".zepto", ".odin", ".thor",
-        ".aesir", ".zzzzz", ".micro", ".vvv", ".ccc",
+        ".encrypted",
+        ".locked",
+        ".crypto",
+        ".crypt",
+        ".enc",
+        ".lockbit",
+        ".blackcat",
+        ".conti",
+        ".ryuk",
+        ".petya",
+        ".locky",
+        ".cerber",
+        ".zepto",
+        ".odin",
+        ".thor",
+        ".aesir",
+        ".zzzzz",
+        ".micro",
+        ".vvv",
+        ".ccc",
     ]
 
     matched = []
@@ -86,7 +102,7 @@ def analyze_file_extension(filename: str) -> dict:
 
     # Check for double extensions (document.docx.encrypted)
     has_double_extension = any(
-        filename_lower.endswith(ext) and "." in filename_lower[:-len(ext)]
+        filename_lower.endswith(ext) and "." in filename_lower[: -len(ext)]
         for ext in suspicious_extensions
     )
 

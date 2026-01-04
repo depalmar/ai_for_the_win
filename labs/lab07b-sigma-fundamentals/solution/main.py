@@ -140,6 +140,7 @@ def match_log_event(rule: SigmaRule, event: dict) -> bool:
 
     return False
 
+
 try:
     from anthropic import Anthropic
 
