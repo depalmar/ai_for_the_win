@@ -1,15 +1,15 @@
 {
-  "id": "mgm-caesars-2023",
-  "name": "MGM Resorts and Caesars Entertainment Attacks",
+  "id": "casino-social-engineering-2023",
+  "name": "Casino Industry Social Engineering Attacks (2023)",
   "threat_actors": ["scattered_spider", "alphv"],
   "classification": "ransomware_social_engineering",
   "timeframe": {
-    "caesars_attack": "2023-08-27",
-    "mgm_attack": "2023-09-10",
-    "mgm_discovery": "2023-09-10",
-    "mgm_restoration": "2023-09-20"
+    "company_b_attack": "2023-08-27",
+    "company_a_attack": "2023-09-10",
+    "company_a_discovery": "2023-09-10",
+    "company_a_restoration": "2023-09-20"
   },
-  "summary": "Scattered Spider (UNC3944) conducted highly sophisticated social engineering attacks against MGM Resorts and Caesars Entertainment, partnering with ALPHV/BlackCat for ransomware deployment. The attacks demonstrated the effectiveness of phone-based social engineering (vishing) against enterprise IT help desks.",
+  "summary": "Scattered Spider (UNC3944) conducted highly sophisticated social engineering attacks against major casino/hospitality companies, partnering with ALPHV/BlackCat for ransomware deployment. The attacks demonstrated the effectiveness of phone-based social engineering (vishing) against enterprise IT help desks.",
   "attack_phases": [
     {
       "phase": 1,
@@ -57,30 +57,30 @@
     },
     {
       "phase": 6,
-      "name": "Ransomware Deployment (MGM)",
+      "name": "Ransomware Deployment",
       "techniques": ["T1486", "T1490"],
-      "description": "ALPHV/BlackCat ransomware deployed across MGM infrastructure, encrypting over 100 ESXi hypervisors.",
+      "description": "ALPHV/BlackCat ransomware deployed across infrastructure, encrypting over 100 ESXi hypervisors.",
       "indicators": ["ESXi encryption", "VM destruction", "Ransomware deployment"]
     }
   ],
-  "mgm_impact": {
+  "company_a_impact": {
     "operational_disruption": {
       "duration_days": 10,
       "systems_affected": [
-        "Slot machines",
+        "Gaming systems",
         "Hotel room keys",
         "Reservation systems",
         "Website and mobile app",
         "Digital payment systems"
       ],
-      "properties_affected": "All MGM properties (Bellagio, MGM Grand, Mandalay Bay, etc.)"
+      "properties_affected": "All company properties"
     },
     "financial_impact": {
       "estimated_cost": "$100+ million",
       "ransom_paid": false
     }
   },
-  "caesars_impact": {
+  "company_b_impact": {
     "ransom_demanded": 30000000,
     "ransom_paid": 15000000,
     "data_stolen": "Driver's license and SSN for loyalty program members",
@@ -127,8 +127,6 @@
     "Casino/hospitality sector is high-value target"
   ],
   "references": [
-    "https://www.cisa.gov/news-events/cybersecurity-advisories/aa23-320a",
-    "https://www.sec.gov/ix?doc=/Archives/edgar/data/858339/000119312523236093/d557978d8k.htm",
-    "https://cloud.google.com/blog/topics/threat-intelligence/unc3944-targets-saas-applications"
+    "https://www.cisa.gov/news-events/cybersecurity-advisories/aa23-320a"
   ]
 }
