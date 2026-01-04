@@ -129,9 +129,7 @@ class SIEMInterface:
         elif siem_type == "sentinel":
             self.client = SentinelClient(**kwargs)
         else:
-            raise ValueError(
-                f"Unsupported SIEM type: {siem_type}. Supported: elastic, sentinel"
-            )
+            raise ValueError(f"Unsupported SIEM type: {siem_type}. Supported: elastic, sentinel")
 
     def search_events(self, query: str, time_range: str = "24h") -> List[Dict]:
         """Search for events across any SIEM."""
