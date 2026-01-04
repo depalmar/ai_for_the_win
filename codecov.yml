@@ -1,0 +1,56 @@
+# Codecov Configuration
+# https://docs.codecov.com/docs/codecovyml-reference
+
+coverage:
+  # Overall project coverage settings
+  status:
+    project:
+      default:
+        # Target coverage percentage for the project
+        target: 70%
+        # Allow coverage to drop by this amount without failing
+        threshold: 5%
+        # Only check coverage on changed files if there are changes
+        if_ci_failed: error
+
+    # Coverage requirements for changed code in PRs
+    patch:
+      default:
+        # New code should have higher coverage
+        target: 80%
+        threshold: 5%
+
+# Ignore certain paths from coverage analysis
+ignore:
+  - "tests/**/*"
+  - "scripts/**/*"
+  - "templates/**/*"
+  - "notebooks/**/*"
+  - "docs/**/*"
+  - "**/__pycache__/**"
+  - "**/conftest.py"
+
+# Comment settings for PRs
+comment:
+  # Post a comment on PRs with coverage information
+  layout: "reach,diff,flags,files"
+  behavior: default
+  require_changes: true
+  require_base: false
+  require_head: true
+
+# Flag management for different test types
+flags:
+  unit:
+    paths:
+      - labs/
+    carryforward: true
+
+# Parsers configuration
+parsers:
+  gcov:
+    branch_detection:
+      conditional: true
+      loop: true
+      method: false
+      macro: false

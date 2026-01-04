@@ -4,6 +4,10 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   validate:
     name: Validate PR
@@ -14,20 +18,20 @@ jobs:
           fetch-depth: 0
 
       - name: Free Disk Space
-        run: |
-          # Remove unnecessary pre-installed software to free up ~10GB
-          sudo rm -rf /usr/local/.ghcup
-          sudo rm -rf /opt/hostedtoolcache/CodeQL
-          sudo rm -rf /usr/local/lib/android
-          sudo rm -rf /usr/share/dotnet
-          sudo rm -rf /opt/ghc
-          sudo rm -rf /usr/local/share/boost
-          df -h
+        uses: ./.github/actions/free-disk-space
 
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
           python-version: '3.11'
+
+      - name: Cache pip packages
+        uses: actions/cache@v5
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
 
       - name: Install dependencies
         run: |
@@ -35,13 +39,17 @@ jobs:
           pip install -r requirements.txt
           pip install pytest
 
-      - name: Run quick tests
+      - name: Dependency Review
+        uses: actions/dependency-review-action@v4
+        with:
+          fail-on-severity: high
+
+      - name: Run quick tests (excluding API-dependent)
         run: |
-          # Run all lab tests (import errors fixed)
-          pytest tests/test_lab*.py -v --tb=short || true
+          # Run lab tests excluding those requiring API keys
+          pytest tests/test_lab*.py -v --tb=short -m "not requires_api"
         env:
           PYTHONPATH: ${{ github.workspace }}
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
 
       - name: Check for large files
         run: |
@@ -67,15 +75,7 @@ jobs:
       - uses: actions/checkout@v6
 
       - name: Free Disk Space
-        run: |
-          # Remove unnecessary pre-installed software to free up ~10GB
-          sudo rm -rf /usr/local/.ghcup
-          sudo rm -rf /opt/hostedtoolcache/CodeQL
-          sudo rm -rf /usr/local/lib/android
-          sudo rm -rf /usr/share/dotnet
-          sudo rm -rf /opt/ghc
-          sudo rm -rf /usr/local/share/boost
-          df -h
+        uses: ./.github/actions/free-disk-space
 
       - name: Set up Python
         uses: actions/setup-python@v6

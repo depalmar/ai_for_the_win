@@ -1,0 +1,29 @@
+name: 'Free Disk Space'
+description: 'Removes unnecessary pre-installed software to free up ~10GB of disk space on GitHub runners'
+author: 'AI for the Win'
+
+branding:
+  icon: 'hard-drive'
+  color: 'blue'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Free Disk Space
+      shell: bash
+      run: |
+        echo "::group::Freeing disk space..."
+        echo "Before cleanup:"
+        df -h /
+
+        # Remove unnecessary pre-installed software
+        sudo rm -rf /usr/local/.ghcup || true
+        sudo rm -rf /opt/hostedtoolcache/CodeQL || true
+        sudo rm -rf /usr/local/lib/android || true
+        sudo rm -rf /usr/share/dotnet || true
+        sudo rm -rf /opt/ghc || true
+        sudo rm -rf /usr/local/share/boost || true
+
+        echo "After cleanup:"
+        df -h /
+        echo "::endgroup::"

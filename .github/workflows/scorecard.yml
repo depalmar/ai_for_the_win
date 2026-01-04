@@ -1,0 +1,57 @@
+# OpenSSF Scorecard Workflow
+# Analyzes supply chain security and reports to GitHub Security tab
+# https://github.com/ossf/scorecard
+
+name: OpenSSF Scorecard
+
+on:
+  # Run on pushes to main to track security posture over time
+  push:
+    branches: [main]
+  # Run weekly to catch any changes
+  schedule:
+    - cron: '0 5 * * 1'  # Weekly Monday 5am UTC
+  workflow_dispatch:
+
+# Required permissions for Scorecard
+permissions:
+  # Required for Code Scanning alerts
+  security-events: write
+  # Required for OIDC token (publishing results)
+  id-token: write
+  # Required to read repository contents
+  contents: read
+  # Required for private repos (can be removed for public repos)
+  actions: read
+
+jobs:
+  analysis:
+    name: Scorecard Analysis
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Run Scorecard analysis
+        uses: ossf/scorecard-action@v2.4.0
+        with:
+          results_file: results.sarif
+          results_format: sarif
+          # Publish results to OpenSSF REST API for public repos
+          # Set to 'true' for public repos, 'false' for private
+          publish_results: true
+
+      - name: Upload SARIF results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: results.sarif
+
+      - name: Upload Scorecard results as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: scorecard-results
+          path: results.sarif
+          retention-days: 30
