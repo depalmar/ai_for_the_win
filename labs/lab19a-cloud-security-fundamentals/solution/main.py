@@ -6,8 +6,159 @@ Complete solution for cloud security log analysis exercises.
 """
 
 import json
+from dataclasses import dataclass
 from datetime import datetime
 from typing import Dict, List, Optional, Tuple
+
+
+# =============================================================================
+# TEST-COMPATIBLE CLASSES
+# =============================================================================
+
+
+@dataclass
+class CloudTrailEvent:
+    """Parsed CloudTrail event."""
+
+    event_time: str
+    event_name: str
+    event_source: str
+    user_identity: str
+    user_type: str
+    source_ip: str
+    region: str = ""
+    error_code: str = ""
+
+
+@dataclass
+class IAMFinding:
+    """IAM policy finding."""
+
+    severity: str
+    description: str
+    resource: str = ""
+
+
+class CloudTrailParser:
+    """Parse and analyze CloudTrail events."""
+
+    def __init__(self):
+        self.high_risk_events = {
+            "StopLogging",
+            "DeleteTrail",
+            "UpdateTrail",
+            "PutBucketPolicy",
+            "PutBucketAcl",
+            "CreateUser",
+            "CreateAccessKey",
+            "AttachUserPolicy",
+            "AttachRolePolicy",
+        }
+
+    def parse_event(self, raw_event: Dict) -> CloudTrailEvent:
+        """Parse a raw CloudTrail event into structured format."""
+        user_identity = raw_event.get("userIdentity", {})
+
+        return CloudTrailEvent(
+            event_time=raw_event.get("eventTime", ""),
+            event_name=raw_event.get("eventName", ""),
+            event_source=raw_event.get("eventSource", ""),
+            user_identity=user_identity.get("userName", user_identity.get("principalId", "unknown")),
+            user_type=user_identity.get("type", "Unknown"),
+            source_ip=raw_event.get("sourceIPAddress", ""),
+            region=raw_event.get("awsRegion", ""),
+            error_code=raw_event.get("errorCode", ""),
+        )
+
+    def is_high_risk(self, event: CloudTrailEvent) -> bool:
+        """Check if event is high risk."""
+        return event.event_name in self.high_risk_events
+
+
+class IAMAnalyzer:
+    """Analyze IAM policies for security issues."""
+
+    def check_overly_permissive(self, policy: Dict) -> List[IAMFinding]:
+        """Check for overly permissive policy statements."""
+        findings = []
+
+        for statement in policy.get("Statement", []):
+            if statement.get("Effect") != "Allow":
+                continue
+
+            action = statement.get("Action", "")
+            resource = statement.get("Resource", "")
+
+            # Check for admin access
+            if action == "*" and resource == "*":
+                findings.append(
+                    IAMFinding(
+                        severity="CRITICAL",
+                        description="Policy grants full admin access (Action: *, Resource: *)",
+                        resource=str(resource),
+                    )
+                )
+            elif action == "*":
+                findings.append(
+                    IAMFinding(
+                        severity="HIGH",
+                        description="Policy grants all actions",
+                        resource=str(resource),
+                    )
+                )
+            elif resource == "*":
+                findings.append(
+                    IAMFinding(
+                        severity="MEDIUM",
+                        description="Policy applies to all resources",
+                        resource=str(resource),
+                    )
+                )
+
+        return findings
+
+
+class CloudThreatDetector:
+    """Detect and classify cloud security threats."""
+
+    def __init__(self):
+        self.event_tactics = {
+            # Defense Evasion
+            "StopLogging": "DEFENSE_EVASION",
+            "DeleteTrail": "DEFENSE_EVASION",
+            "UpdateTrail": "DEFENSE_EVASION",
+            # Persistence
+            "CreateUser": "PERSISTENCE",
+            "CreateAccessKey": "PERSISTENCE",
+            "CreateLoginProfile": "PERSISTENCE",
+            # Privilege Escalation
+            "AttachUserPolicy": "PRIVILEGE_ESCALATION",
+            "AttachRolePolicy": "PRIVILEGE_ESCALATION",
+            "PutUserPolicy": "PRIVILEGE_ESCALATION",
+            # Exfiltration
+            "PutBucketPolicy": "EXFILTRATION",
+            "PutBucketAcl": "EXFILTRATION",
+        }
+
+        self.event_severity = {
+            "StopLogging": "CRITICAL",
+            "DeleteTrail": "CRITICAL",
+            "PutBucketPolicy": "CRITICAL",
+            "PutBucketAcl": "CRITICAL",
+            "CreateAccessKey": "HIGH",
+            "CreateUser": "HIGH",
+            "AttachUserPolicy": "HIGH",
+            "AttachRolePolicy": "HIGH",
+            "UpdateTrail": "MEDIUM",
+        }
+
+    def classify_event(self, event_name: str) -> str:
+        """Classify an event by MITRE ATT&CK tactic."""
+        return self.event_tactics.get(event_name, "UNKNOWN")
+
+    def get_severity(self, event_name: str) -> str:
+        """Get severity level for an event."""
+        return self.event_severity.get(event_name, "LOW")
 
 # =============================================================================
 # EXERCISE 1: Parse CloudTrail Events

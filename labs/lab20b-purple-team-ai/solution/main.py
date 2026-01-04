@@ -81,10 +81,10 @@ class DetectionRule:
 
     rule_id: str
     name: str
-    description: str
     techniques: List[str]
-    log_sources: List[str]
-    false_positive_rate: str
+    description: str = ""
+    log_sources: List[str] = field(default_factory=list)
+    false_positive_rate: str = "low"
     enabled: bool = True
 
 
@@ -108,12 +108,12 @@ class PurpleTeamFinding:
     title: str
     severity: FindingSeverity
     technique_id: str
-    technique_name: str
-    description: str
-    attack_executed: str
     detection_result: str
-    evidence: List[str]
-    recommendations: List[str]
+    recommendations: List[str] = field(default_factory=list)
+    technique_name: str = ""
+    description: str = ""
+    attack_executed: str = ""
+    evidence: List[str] = field(default_factory=list)
 
 
 @dataclass
@@ -536,11 +536,19 @@ class PurpleTeamReporter:
     def generate_report(
         self,
         exercise_name: str,
-        threat_scenario: str,
         findings: List[PurpleTeamFinding],
-        scope: str,
-    ) -> PurpleTeamReport:
-        """Generate a complete purple team report."""
+        threat_scenario: str = "",
+        scope: str = "",
+    ) -> Dict:
+        """
+        Generate a complete purple team report.
+
+        Returns a dict for test compatibility with keys:
+        - detection_rate: percentage of tests that detected the attack
+        - critical_gaps: list of undetected high/critical findings
+        - findings: sorted list of findings
+        - etc.
+        """
         total_tests = len(findings)
         detected = sum(1 for f in findings if f.detection_result == "detected")
         detection_rate = (detected / total_tests * 100) if total_tests else 0
@@ -558,19 +566,20 @@ class PurpleTeamReporter:
             exercise_name, detection_rate, critical_gaps, overall_score
         )
 
-        return PurpleTeamReport(
-            title=f"Purple Team Report: {exercise_name}",
-            exercise_date=datetime.now().strftime("%Y-%m-%d"),
-            executive_summary=exec_summary,
-            scope=scope,
-            threat_scenario=threat_scenario,
-            findings=sorted(findings, key=lambda f: f.severity.value),
-            overall_score=overall_score,
-            detection_rate=detection_rate,
-            critical_gaps=critical_gaps,
-            recommendations=recommendations,
-            appendix=self._generate_appendix(findings),
-        )
+        # Return dict for test compatibility
+        return {
+            "title": f"Purple Team Report: {exercise_name}",
+            "exercise_date": datetime.now().strftime("%Y-%m-%d"),
+            "executive_summary": exec_summary,
+            "scope": scope,
+            "threat_scenario": threat_scenario,
+            "findings": sorted(findings, key=lambda f: f.severity.value),
+            "overall_score": overall_score,
+            "detection_rate": detection_rate,
+            "critical_gaps": critical_gaps,
+            "recommendations": recommendations,
+            "appendix": self._generate_appendix(findings),
+        }
 
     def _generate_executive_summary(
         self, exercise_name: str, detection_rate: float, critical_gaps: List[str], score: float
