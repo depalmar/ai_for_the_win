@@ -38,12 +38,15 @@ You may NOT use these materials to:
 
 The attack patterns, TTPs (Tactics, Techniques, and Procedures), and threat intelligence in this repository are derived from publicly available sources including:
 
+**Foundational Sources:**
 - [MITRE ATT&CK Framework](https://attack.mitre.org/) - Licensed under CC BY 4.0
 - [CISA Cybersecurity Advisories](https://www.cisa.gov/cybersecurity-advisories) - Public domain
-- [Mandiant Threat Intelligence](https://www.mandiant.com/resources) - Publicly published reports
+
+**Threat Intelligence Vendors** (alphabetical):
 - [CrowdStrike Threat Reports](https://www.crowdstrike.com/resources/) - Publicly published reports
-- [Unit 42 Threat Research](https://unit42.paloaltonetworks.com/) - Publicly published reports
+- [Mandiant Threat Intelligence](https://www.mandiant.com/resources) - Publicly published reports
 - [Microsoft Security Blog](https://www.microsoft.com/security/blog/) - Publicly published content
+- [Unit 42 Threat Research](https://unit42.paloaltonetworks.com/) - Publicly published reports
 
 All synthetic samples (phishing emails, malware metadata, log entries) are artificially generated for educational purposes and do not represent real incidents or real individuals.
 
