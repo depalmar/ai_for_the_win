@@ -13,7 +13,6 @@ You will need to adapt them to your specific environment and
 consult official vendor documentation for production use.
 
 Supported pattern examples:
-    - Splunk REST API
     - Elasticsearch/OpenSearch
     - Microsoft Sentinel/Log Analytics
 """
@@ -25,68 +24,6 @@ from datetime import datetime, timedelta
 from typing import Any, Dict, List, Optional
 
 import requests
-
-# =============================================================================
-# Splunk Integration
-# =============================================================================
-
-
-class SplunkClient:
-    """Example Splunk REST API client pattern. NOT VERIFIED - adapt for your environment."""
-
-    def __init__(
-        self,
-        host: str = None,
-        port: int = 8089,
-        username: str = None,
-        password: str = None,
-        token: str = None,
-    ):
-        self.host = host or os.getenv("SPLUNK_HOST", "localhost")
-        self.port = port
-        self.username = username or os.getenv("SPLUNK_USERNAME")
-        self.password = password or os.getenv("SPLUNK_PASSWORD")
-        self.token = token or os.getenv("SPLUNK_TOKEN")
-        self.base_url = f"https://{self.host}:{self.port}"
-        self.session = requests.Session()
-        self.session.verify = False  # Disable SSL verification for dev
-
-    def search(
-        self,
-        query: str,
-        earliest: str = "-24h",
-        latest: str = "now",
-        max_results: int = 100,
-    ) -> List[Dict]:
-        """Execute a Splunk search."""
-        # Create search job
-        search_url = f"{self.base_url}/services/search/jobs"
-        data = {
-            "search": f"search {query}",
-            "earliest_time": earliest,
-            "latest_time": latest,
-            "output_mode": "json",
-        }
-
-        headers = {"Authorization": f"Bearer {self.token}"} if self.token else {}
-        auth = (self.username, self.password) if not self.token else None
-
-        # In production, implement proper job polling
-        # This is a simplified example
-        print(f"Splunk Query: {query}")
-        print("Note: Implement actual Splunk API integration")
-
-        return []
-
-    def get_alerts(self, count: int = 50) -> List[Dict]:
-        """Get recent notable events/alerts."""
-        query = """
-        | from datamodel:"Risk"."All_Risk"
-        | stats count by risk_object, risk_object_type, risk_score
-        | sort -risk_score
-        """
-        return self.search(query)
-
 
 # =============================================================================
 # Elastic/OpenSearch Integration
@@ -187,22 +124,18 @@ class SIEMInterface:
     def __init__(self, siem_type: str, **kwargs):
         self.siem_type = siem_type
 
-        if siem_type == "splunk":
-            self.client = SplunkClient(**kwargs)
-        elif siem_type == "elastic":
+        if siem_type == "elastic":
             self.client = ElasticClient(**kwargs)
         elif siem_type == "sentinel":
             self.client = SentinelClient(**kwargs)
         else:
             raise ValueError(
-                f"Unsupported SIEM type: {siem_type}. Supported: splunk, elastic, sentinel"
+                f"Unsupported SIEM type: {siem_type}. Supported: elastic, sentinel"
             )
 
     def search_events(self, query: str, time_range: str = "24h") -> List[Dict]:
         """Search for events across any SIEM."""
-        if self.siem_type == "splunk":
-            return self.client.search(query, earliest=f"-{time_range}")
-        elif self.siem_type == "elastic":
+        if self.siem_type == "elastic":
             es_query = {"query_string": {"query": query}}
             return self.client.search("*", es_query)
         elif self.siem_type == "sentinel":
@@ -210,9 +143,7 @@ class SIEMInterface:
 
     def get_alerts(self, severity: str = None) -> List[Dict]:
         """Get security alerts from any SIEM."""
-        if self.siem_type == "splunk":
-            return self.client.get_alerts()
-        elif self.siem_type == "elastic":
+        if self.siem_type == "elastic":
             return self.client.search_security_alerts(severity=severity)
         elif self.siem_type == "sentinel":
             return self.client.get_incidents()
@@ -236,13 +167,11 @@ def main():
     # alerts = siem.get_alerts(severity="high")
 
     print("\nExample pattern templates:")
-    print("  - Splunk REST API (SplunkClient)")
     print("  - Elasticsearch/OpenSearch (ElasticClient)")
     print("  - Microsoft Sentinel (SentinelClient)")
     print("  - Generic interface (SIEMInterface)")
 
     print("\nExample environment variables:")
-    print("  SPLUNK_HOST, SPLUNK_TOKEN")
     print("  ELASTIC_HOST, ELASTIC_API_KEY")
     print("  SENTINEL_WORKSPACE_ID, AZURE_* credentials")
 
