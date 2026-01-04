@@ -1,15 +1,62 @@
 #!/usr/bin/env python3
 """Pytest configuration and shared fixtures for AI Security Labs tests."""
 
+import importlib.util
 import os
 import sys
 from pathlib import Path
+from typing import Any
 
 import pytest
 
-# Add labs directory to path
+# Labs directory path
 LABS_DIR = Path(__file__).parent.parent / "labs"
-sys.path.insert(0, str(LABS_DIR))
+
+# Module cache for imported lab modules (keyed by full path to avoid conflicts)
+_lab_module_cache: dict[str, Any] = {}
+
+
+def import_lab_module(lab_name: str, module_name: str = "main", subdir: str = "solution") -> Any:
+    """
+    Import a module from a specific lab's directory, bypassing Python's module cache.
+
+    This solves the problem where multiple test files trying to `from main import ...`
+    all get the same cached module, even after manipulating sys.path.
+
+    Args:
+        lab_name: The lab directory name (e.g., "lab00f-hello-world-ml")
+        module_name: The module to import (default: "main")
+        subdir: The subdirectory within the lab (default: "solution")
+
+    Returns:
+        The imported module object
+
+    Example:
+        lab = import_lab_module("lab00f-hello-world-ml")
+        features = lab.extract_features("test message")
+    """
+    module_path = LABS_DIR / lab_name / subdir / f"{module_name}.py"
+
+    if not module_path.exists():
+        raise FileNotFoundError(f"Module not found: {module_path}")
+
+    # Use full path as cache key to handle same module name in different labs
+    cache_key = str(module_path)
+
+    if cache_key not in _lab_module_cache:
+        # Create a unique module name to avoid conflicts with Python's sys.modules
+        unique_name = f"_lab_test_{lab_name.replace('-', '_')}_{module_name}"
+
+        spec = importlib.util.spec_from_file_location(unique_name, module_path)
+        if spec is None or spec.loader is None:
+            raise ImportError(f"Cannot load module spec from {module_path}")
+
+        module = importlib.util.module_from_spec(spec)
+        # Don't add to sys.modules to avoid pollution
+        spec.loader.exec_module(module)
+        _lab_module_cache[cache_key] = module
+
+    return _lab_module_cache[cache_key]
 
 
 def pytest_configure(config):
@@ -19,6 +66,47 @@ def pytest_configure(config):
     )
     config.addinivalue_line("markers", "slow: Tests that take a long time to run")
     config.addinivalue_line("markers", "integration: Integration tests")
+
+
+def pytest_runtest_setup(item):
+    """
+    Reset sys.path and clear 'main' module cache before each test.
+
+    Problem: All test files call sys.path.insert() at module load time during pytest
+    collection. By the time tests run, sys.path contains ALL lab directories.
+    When tests do 'from main import X', Python may find the wrong main.py.
+
+    Solution: Before each test, remove all lab solution directories from sys.path,
+    then add only the correct lab's directory based on the test file name.
+    """
+    # Remove 'main' from module cache
+    if "main" in sys.modules:
+        del sys.modules["main"]
+
+    # Remove all lab solution directories from sys.path
+    labs_str = str(LABS_DIR)
+    sys.path[:] = [p for p in sys.path if labs_str not in p or "solution" not in p]
+
+    # Determine which lab this test belongs to from the test file name
+    # e.g., test_lab00f_hello_world_ml.py -> lab00f-hello-world-ml
+    test_file = Path(item.fspath).stem  # e.g., "test_lab00f_hello_world_ml"
+    if test_file.startswith("test_lab"):
+        # Extract lab identifier: test_lab00f_hello_world_ml -> lab00f_hello_world_ml
+        lab_part = test_file[5:]  # Remove "test_"
+
+        # Convert underscores to hyphens and find matching lab directory
+        lab_name_pattern = lab_part.replace("_", "-")
+
+        # Find the actual lab directory (handles naming variations)
+        for lab_dir in LABS_DIR.iterdir():
+            if lab_dir.is_dir() and lab_dir.name.startswith(lab_name_pattern.split("-")[0]):
+                # Check if this is likely the right lab
+                lab_normalized = lab_dir.name.replace("-", "_")
+                if lab_normalized.startswith(lab_part.split("_")[0]):
+                    solution_dir = lab_dir / "solution"
+                    if solution_dir.exists():
+                        sys.path.insert(0, str(solution_dir))
+                        break
 
 
 def pytest_collection_modifyitems(config, items):
