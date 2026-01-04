@@ -17,7 +17,7 @@
 
 > **Responsible Use:** This material is for defensive security education only. Do not use techniques described here for unauthorized access or attacks. See [RESPONSIBLE_USE.md](./RESPONSIBLE_USE.md).
 
-A hands-on training program for security practitioners who want to build AI-powered tools for threat detection, incident response, and security automation. **30+ labs** (including 8 intro labs and 10 bridge labs), **4 capstone projects**, **15 CTF challenges**. Includes **sample datasets** and **solution walkthroughs**. Designed for **vibe coding** with AI assistants like Cursor, Claude Code, and Copilot.
+A hands-on training program for security practitioners who want to build AI-powered tools for threat detection, incident response, and security automation. **40 labs** (including 8 intro labs and 10 bridge labs), **4 capstone projects**, **15 CTF challenges**. Includes **sample datasets** and **solution walkthroughs**. Designed for **vibe coding** with AI assistants like Cursor, Claude Code, and Copilot.
 
 ---
 
@@ -428,7 +428,7 @@ High Confidence (Attributed to FIN7/Carbanak) based on:
 
 ```
 ai_for_the_win/
-├── labs/                          # 30+ hands-on labs
+├── labs/                          # 40 hands-on labs
 │   ├── lab00-environment-setup/  # Setup guide for beginners
 │   ├── lab00a-python-security-fundamentals/ # Python basics for security
 │   ├── lab00b-ml-concepts-primer/ # ML theory before coding
