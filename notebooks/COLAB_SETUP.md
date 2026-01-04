@@ -30,7 +30,7 @@ for key in ["ANTHROPIC_API_KEY", "OPENAI_API_KEY", "GOOGLE_API_KEY"]:
 def setup_llm():
     """Detect and configure LLM provider."""
     providers = {
-        "anthropic": ("ANTHROPIC_API_KEY", "claude-sonnet-4-20250514"),
+        "anthropic": ("ANTHROPIC_API_KEY", "claude-sonnet-4.5"),
         "openai": ("OPENAI_API_KEY", "gpt-5"),
         "google": ("GOOGLE_API_KEY", "gemini-3-flash"),
     }
@@ -113,7 +113,7 @@ When running locally (not in Colab), you can either:
 
 | Provider | Model | Speed | Cost | Best For |
 |----------|-------|-------|------|----------|
-| Anthropic | claude-sonnet-4-20250514 | Fast | $$ | Complex reasoning, code |
+| Anthropic | claude-sonnet-4.5 | Fast | $$ | Complex reasoning, code |
 | OpenAI | gpt-5 | Fast | $$ | General purpose, 1M+ context |
 | Google | gemini-3-flash | Very Fast | $ | Long context, free tier |
 
