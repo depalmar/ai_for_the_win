@@ -1,34 +1,40 @@
 # AI for the Win - Cursor Rules
+
 # Security AI Training Program
 
 ## Project Context
 
 This is a hands-on training program for security practitioners building AI-powered tools.
-It contains 24 labs (including 4 intro labs), 4 capstone projects, and 15 CTF challenges
+It contains 40+ labs (including 8 intro labs and 12 bridge labs), 4 capstone projects, and 15 CTF challenges
 covering threat detection, incident response, and security automation.
 
 ## Lab Structure
 
 Labs follow this pattern:
-```
+
 labXX-topic-name/
-├── README.md          # Objectives, instructions, hints
-├── starter/           # Starter code with TODOs
-│   └── main.py
-├── solution/          # Reference implementation
-│   └── main.py
-├── data/              # Sample datasets
+├── README.md # Objectives, instructions, hints
+├── starter/ # Starter code with TODOs
+│ └── main.py
+├── solution/ # Reference implementation
+│ └── main.py
+├── data/ # Sample datasets
 └── tests/
-    └── test_*.py
-```
+└── test\_\*.py
 
 ## Lab Progression
 
-- **Labs 00a-00d**: Intro (Python, ML concepts, prompting) - no API keys needed
+- **Labs 00a-00g**: Intro (Python, ML concepts, prompting, visualization, APIs) - no API keys needed
 - **Labs 01-03**: ML foundations (classification, clustering, anomaly detection) - no API keys
-- **Labs 04-07**: LLM basics (prompts, RAG, code generation) - requires API key
-- **Labs 08-10**: Advanced (agents, pipelines, copilots)
-- **Labs 11-20**: Expert (DFIR, forensics, C2 detection, adversarial ML)
+- **Lab 03b**: Bridge lab - ML vs LLM decision making
+- **Labs 04-07**: LLM basics (prompts, agents, RAG, code generation) - requires API key
+- **Labs 04b, 06a, 07a, 07b**: Bridge labs (first agent, embeddings, binary basics, Sigma)
+- **Labs 08-10**: Advanced (vuln scanner, pipelines, copilots)
+- **Labs 09b, 10a**: Bridge labs (monitoring AI, DFIR fundamentals)
+- **Labs 11-16**: Expert DFIR (ransomware, memory forensics, C2, lateral movement, threat actors)
+- **Labs 11a, 16b**: Bridge labs (ransomware fundamentals, AI-powered threat actors)
+- **Labs 17-20**: Expert AI Security (adversarial ML, fine-tuning, cloud security, LLM red teaming)
+- **Labs 17a, 19a, 20b**: Bridge labs (ML security intro, cloud fundamentals, purple team AI)
 
 ## Code Style Requirements
 
@@ -51,6 +57,7 @@ labXX-topic-name/
 ## Multi-Provider LLM Support
 
 All LLM labs support multiple providers. Use environment variables:
+
 - `ANTHROPIC_API_KEY` - Claude (recommended)
 - `OPENAI_API_KEY` - GPT-4
 - `GOOGLE_API_KEY` - Gemini
@@ -58,21 +65,22 @@ All LLM labs support multiple providers. Use environment variables:
 
 ## Preferred Libraries
 
-| Purpose | Library |
-|---------|---------|
-| LLM Operations | langchain, langchain-anthropic, langchain-openai, litellm |
-| Structured Output | instructor, pydantic |
-| Vector DB | chromadb, sentence-transformers |
-| HTTP Client | httpx (async), requests |
-| Data Validation | pydantic v2 |
-| Logging | loguru or rich |
-| Security Tools | yara-python, pefile |
-| UI | gradio, streamlit |
-| Testing | pytest, pytest-cov |
+| Purpose           | Library                                                   |
+| ----------------- | --------------------------------------------------------- |
+| LLM Operations    | langchain, langchain-anthropic, langchain-openai, litellm |
+| Structured Output | instructor, pydantic                                      |
+| Vector DB         | chromadb, sentence-transformers                           |
+| HTTP Client       | httpx (async), requests                                   |
+| Data Validation   | pydantic v2                                               |
+| Logging           | loguru or rich                                            |
+| Security Tools    | yara-python, pefile                                       |
+| UI                | gradio, streamlit                                         |
+| Testing           | pytest, pytest-cov                                        |
 
 ## Output Formatting
 
 When analyzing security data:
+
 - Include MITRE ATT&CK IDs when relevant (e.g., T1059.001)
 - Reference CVE IDs for vulnerabilities
 - Use CWE classifications for code weaknesses
@@ -82,6 +90,7 @@ When analyzing security data:
 ## Analysis Guidelines
 
 When analyzing potentially malicious code:
+
 - Explain what the code does in detail
 - Identify malicious capabilities
 - Map to MITRE ATT&CK techniques
@@ -97,39 +106,41 @@ When analyzing potentially malicious code:
 
 ## File Organization
 
-```
-labs/                    # 24 hands-on labs with starter/solution code
-capstone-projects/       # 4 comprehensive projects
-templates/               # Reusable agent, prompt, and visualization templates
-resources/               # Tools, datasets, cheatsheets
-mcp-servers/             # MCP server implementations
-docs/guides/             # Troubleshooting and configuration guides
-notebooks/               # Jupyter notebooks (Colab-ready)
-shared/                  # Shared utilities (llm_config, ioc_utils)
-tests/                   # Test files for all labs
-```
+labs/ # 40+ hands-on labs with starter/solution code
+capstone-projects/ # 4 comprehensive projects
+templates/ # Reusable agent, prompt, and visualization templates
+resources/ # Tools, datasets, cheatsheets
+mcp-servers/ # MCP server implementations
+docs/guides/ # Troubleshooting and configuration guides
+notebooks/ # Jupyter notebooks (Colab-ready)
+shared/ # Shared utilities (llm_config, ioc_utils)
+tests/ # Test files for all labs
 
 ## Common Commands
 
-```bash
 # Verify setup
+
 python scripts/verify_setup.py
 
 # Run all tests
+
 pytest tests/ -v
 
 # Run specific lab test
+
 pytest tests/test_lab01_phishing_classifier.py -v
 
 # Format code
+
 black . && isort .
 
 # Security scan
+
 bandit -r labs/ -ll
 
 # Run a lab solution
+
 python labs/lab01-phishing-classifier/solution/main.py
-```
 
 ## Response Guidelines
 
