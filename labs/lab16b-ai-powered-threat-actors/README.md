@@ -1,5 +1,7 @@
 # Lab 16b: Understanding AI-Powered Threat Actors
 
+> **⚠️ Responsible Use Notice:** This lab is designed exclusively for defensive security education. The attack patterns, TTPs, and sample content are derived from publicly available threat intelligence (CISA, Mandiant, MITRE ATT&CK) to help security professionals recognize and defend against AI-powered threats. Do not use this material to conduct unauthorized attacks or social engineering. Always obtain proper authorization before security testing.
+
 ## How Adversaries Leverage AI in Modern Attacks
 
 ```
@@ -87,23 +89,23 @@ Threat actors have rapidly adopted AI tools to enhance their operations:
 
 ### Attack Categories
 
-| Category | AI Enhancement | Detection Difficulty |
-|----------|---------------|---------------------|
-| **Phishing** | Personalized, grammatically perfect, context-aware | High |
-| **Vishing** | Voice cloning, real-time conversation | Very High |
-| **Malware** | Polymorphic variants, evasion-aware | High |
-| **Social Engineering** | Deep research, synthetic personas | Very High |
-| **Reconnaissance** | Automated OSINT, correlation | Medium |
-| **Credential Attacks** | Smart password generation | Medium |
+| Category               | AI Enhancement                                     | Detection Difficulty |
+| ---------------------- | -------------------------------------------------- | -------------------- |
+| **Phishing**           | Personalized, grammatically perfect, context-aware | High                 |
+| **Vishing**            | Voice cloning, real-time conversation              | Very High            |
+| **Malware**            | Polymorphic variants, evasion-aware                | High                 |
+| **Social Engineering** | Deep research, synthetic personas                  | Very High            |
+| **Reconnaissance**     | Automated OSINT, correlation                       | Medium               |
+| **Credential Attacks** | Smart password generation                          | Medium               |
 
 ### Known AI-Enabled Attack Groups
 
-| Group | AI Capabilities | Notable Campaigns |
-|-------|----------------|-------------------|
-| **FIN7/Carbanak** | AI-generated business emails | Financial sector BEC |
-| **Scattered Spider** | Voice cloning for helpdesk attacks | UK Retail Breaches 2025 |
-| **Various APTs** | LLM-assisted code development | Multiple campaigns |
-| **Cybercrime Groups** | Deepfake CEO fraud | Wire transfer fraud |
+| Group                 | AI Capabilities                    | Notable Campaigns       |
+| --------------------- | ---------------------------------- | ----------------------- |
+| **FIN7/Carbanak**     | AI-generated business emails       | Financial sector BEC    |
+| **Scattered Spider**  | Voice cloning for helpdesk attacks | UK Retail Breaches 2025 |
+| **Various APTs**      | LLM-assisted code development      | Multiple campaigns      |
+| **Cybercrime Groups** | Deepfake CEO fraud                 | Wire transfer fraud     |
 
 ---
 
@@ -133,7 +135,7 @@ import math
 @dataclass
 class PhishingAnalysis:
     """Results of AI-generated content analysis."""
-    
+
     text: str
     ai_probability: float  # 0.0-1.0
     indicators: List[str]
@@ -144,11 +146,11 @@ class PhishingAnalysis:
 class AIPhishingDetector:
     """
     Detect AI-generated phishing content.
-    
+
     This detector looks for patterns common in AI-generated text
     that may indicate automated phishing campaigns.
     """
-    
+
     def __init__(self):
         # Patterns that suggest AI generation
         self.ai_indicators = {
@@ -158,7 +160,7 @@ class AIPhishingDetector:
             "unusual_formality": self._check_formality,
             "statistical_anomalies": self._check_statistical_anomalies,
         }
-        
+
         # Common AI phishing phrases
         self.ai_phrases = [
             "I hope this email finds you well",
@@ -169,7 +171,7 @@ class AIPhishingDetector:
             "I trust this message finds you",
             "Thank you for your prompt attention",
         ]
-        
+
         # Urgency patterns common in AI phishing
         self.urgency_patterns = [
             r"urgent.*action.*required",
@@ -179,31 +181,31 @@ class AIPhishingDetector:
             r"account.*suspend",
             r"verify.*immediately",
         ]
-    
+
     def analyze(self, email_text: str, metadata: Optional[Dict] = None) -> PhishingAnalysis:
         """
         Analyze email for AI-generated phishing indicators.
-        
+
         Args:
             email_text: The email body text
             metadata: Optional email metadata (sender, headers, etc.)
-            
+
         Returns:
             PhishingAnalysis with probability and indicators
         """
         indicators = []
         scores = []
-        
+
         # Run all indicator checks
         for name, check_func in self.ai_indicators.items():
             score, indicator = check_func(email_text)
             if indicator:
                 indicators.append(indicator)
             scores.append(score)
-        
+
         # Calculate overall AI probability
         ai_probability = sum(scores) / len(scores) if scores else 0.0
-        
+
         # Determine confidence
         if ai_probability > 0.8:
             confidence = "high"
@@ -211,10 +213,10 @@ class AIPhishingDetector:
             confidence = "medium"
         else:
             confidence = "low"
-        
+
         # Generate recommendations
         recommendations = self._generate_recommendations(ai_probability, indicators)
-        
+
         return PhishingAnalysis(
             text=email_text[:200] + "..." if len(email_text) > 200 else email_text,
             ai_probability=ai_probability,
@@ -222,7 +224,7 @@ class AIPhishingDetector:
             confidence=confidence,
             recommendations=recommendations,
         )
-    
+
     def _check_perfect_grammar(self, text: str) -> tuple[float, Optional[str]]:
         """Check for suspiciously perfect grammar."""
         # AI text often lacks common human errors
@@ -232,90 +234,90 @@ class AIPhishingDetector:
             r"\s{2,}",  # Multiple spaces
             r"[a-z]\.[A-Z]",  # Missing space after period
         ]
-        
+
         error_count = sum(1 for p in human_errors if re.search(p, text))
-        
+
         # Suspiciously perfect if no errors in long text
         if len(text) > 500 and error_count == 0:
             return 0.7, "Suspiciously perfect grammar (no typical human errors)"
         elif len(text) > 200 and error_count == 0:
             return 0.4, "Very clean text (minimal human errors)"
-        
+
         return 0.1, None
-    
+
     def _check_generic_urgency(self, text: str) -> tuple[float, Optional[str]]:
         """Check for generic urgency patterns."""
         text_lower = text.lower()
         matches = []
-        
+
         for pattern in self.urgency_patterns:
             if re.search(pattern, text_lower):
                 matches.append(pattern)
-        
+
         if len(matches) >= 3:
             return 0.9, f"Multiple urgency patterns detected ({len(matches)} found)"
         elif len(matches) >= 2:
             return 0.6, "Generic urgency language detected"
         elif len(matches) == 1:
             return 0.3, None
-        
+
         return 0.1, None
-    
+
     def _check_template_patterns(self, text: str) -> tuple[float, Optional[str]]:
         """Check for common AI template patterns."""
         text_lower = text.lower()
         matches = sum(1 for phrase in self.ai_phrases if phrase.lower() in text_lower)
-        
+
         if matches >= 3:
             return 0.8, f"Multiple AI-common phrases detected ({matches} found)"
         elif matches >= 2:
             return 0.5, "Template-like language patterns"
-        
+
         return 0.2, None
-    
+
     def _check_formality(self, text: str) -> tuple[float, Optional[str]]:
         """Check for unusual formality consistency."""
         # AI often maintains unnaturally consistent formality
         formal_words = ["therefore", "consequently", "furthermore", "regarding", "pertaining"]
         informal_words = ["gonna", "wanna", "kinda", "stuff", "things"]
-        
+
         formal_count = sum(1 for w in formal_words if w in text.lower())
         informal_count = sum(1 for w in informal_words if w in text.lower())
-        
+
         # Pure formal with no informal in business context is suspicious
         if formal_count >= 3 and informal_count == 0:
             return 0.5, "Unnaturally consistent formal tone"
-        
+
         return 0.2, None
-    
+
     def _check_statistical_anomalies(self, text: str) -> tuple[float, Optional[str]]:
         """Check for statistical patterns common in AI text."""
         words = text.split()
         if len(words) < 50:
             return 0.2, None
-        
+
         # Check sentence length variance (AI tends to be consistent)
         sentences = re.split(r'[.!?]+', text)
         sentences = [s.strip() for s in sentences if s.strip()]
-        
+
         if len(sentences) >= 5:
             lengths = [len(s.split()) for s in sentences]
             avg_len = sum(lengths) / len(lengths)
             variance = sum((l - avg_len) ** 2 for l in lengths) / len(lengths)
             std_dev = math.sqrt(variance)
-            
+
             # Very consistent sentence lengths suggest AI
             if std_dev < 3 and avg_len > 10:
                 return 0.6, "Unusually consistent sentence structure"
-        
+
         return 0.2, None
-    
+
     def _generate_recommendations(
         self, probability: float, indicators: List[str]
     ) -> List[str]:
         """Generate actionable recommendations."""
         recommendations = []
-        
+
         if probability > 0.7:
             recommendations.extend([
                 "HIGH RISK: Treat as likely AI-generated phishing",
@@ -332,7 +334,7 @@ class AIPhishingDetector:
             ])
         else:
             recommendations.append("LOW RISK: Standard vigilance recommended")
-        
+
         return recommendations
 
 
@@ -361,7 +363,7 @@ from enum import Enum
 
 class DeepfakeIndicator(Enum):
     """Indicators of synthetic voice."""
-    
+
     UNNATURAL_PAUSES = "unnatural_pauses"
     BREATHING_ANOMALIES = "breathing_anomalies"
     EMOTION_INCONSISTENCY = "emotion_inconsistency"
@@ -374,7 +376,7 @@ class DeepfakeIndicator(Enum):
 @dataclass
 class VoiceAnalysis:
     """Analysis of potential voice deepfake."""
-    
+
     synthetic_probability: float
     indicators: List[DeepfakeIndicator]
     confidence: str
@@ -385,11 +387,11 @@ class VoiceAnalysis:
 class VishingDetector:
     """
     Framework for detecting AI-powered vishing attacks.
-    
+
     Focuses on behavioral and contextual indicators since
     audio analysis requires specialized tools.
     """
-    
+
     def __init__(self):
         # High-risk scenarios for voice cloning
         self.high_risk_scenarios = [
@@ -399,7 +401,7 @@ class VishingDetector:
             "emergency_access_request",
             "vendor_payment_change",
         ]
-        
+
         # Questions that expose AI limitations
         self.challenge_questions = [
             "What did we discuss in our last meeting?",
@@ -408,7 +410,7 @@ class VishingDetector:
             "Tell me about your weekend plans",
             "What floor is your office on?",
         ]
-    
+
     def analyze_call_context(
         self,
         caller_claims: str,
@@ -419,45 +421,45 @@ class VishingDetector:
     ) -> VoiceAnalysis:
         """
         Analyze call context for vishing indicators.
-        
+
         Args:
             caller_claims: Who the caller claims to be
             request_type: What they're requesting
             urgency_level: How urgent they claim it is
             callback_offered: Did they offer a callback number?
             verification_accepted: Did they accept verification?
-            
+
         Returns:
             VoiceAnalysis with risk assessment
         """
         indicators = []
         risk_score = 0.0
-        
+
         # Check for high-risk request types
         if request_type in self.high_risk_scenarios:
             risk_score += 0.3
             indicators.append(DeepfakeIndicator.CONTEXT_CONFUSION)
-        
+
         # Urgency is a major red flag
         if urgency_level in ["critical", "emergency", "immediate"]:
             risk_score += 0.25
-        
+
         # Refusing callback is suspicious
         if not callback_offered:
             risk_score += 0.2
             indicators.append(DeepfakeIndicator.RESPONSE_LATENCY)
-        
+
         # Refusing verification is very suspicious
         if not verification_accepted:
             risk_score += 0.25
-        
+
         # Determine confidence
         confidence = "high" if risk_score > 0.6 else "medium" if risk_score > 0.3 else "low"
-        
+
         recommendations = self._generate_vishing_recommendations(
             risk_score, caller_claims, request_type
         )
-        
+
         return VoiceAnalysis(
             synthetic_probability=min(risk_score, 1.0),
             indicators=indicators,
@@ -469,11 +471,11 @@ class VishingDetector:
             },
             recommendations=recommendations,
         )
-    
+
     def get_verification_protocol(self, caller_claims: str) -> List[str]:
         """
         Get verification steps based on claimed identity.
-        
+
         Returns protocol to verify caller is legitimate.
         """
         base_protocol = [
@@ -482,29 +484,29 @@ class VishingDetector:
             "3. Call back using a known-good number from company directory",
             "4. Use a pre-established code word if available",
         ]
-        
+
         if "executive" in caller_claims.lower() or "ceo" in caller_claims.lower():
             base_protocol.extend([
                 "5. EXECUTIVE CLAIM: Contact their assistant directly",
                 "6. Verify through secondary channel (Slack, Teams, etc.)",
                 "7. Involve your manager before taking any action",
             ])
-        
+
         if "it" in caller_claims.lower() or "helpdesk" in caller_claims.lower():
             base_protocol.extend([
                 "5. IT CLAIM: Check if ticket exists for this request",
                 "6. Verify caller's employee ID and department",
                 "7. Never provide credentials over the phone",
             ])
-        
+
         return base_protocol
-    
+
     def _generate_vishing_recommendations(
         self, risk_score: float, caller_claims: str, request_type: str
     ) -> List[str]:
         """Generate recommendations based on risk."""
         recs = []
-        
+
         if risk_score > 0.6:
             recs.extend([
                 "⚠️ HIGH RISK: Likely vishing attempt",
@@ -521,7 +523,7 @@ class VishingDetector:
             ])
         else:
             recs.append("✅ LOWER RISK: Follow standard verification procedures")
-        
+
         return recs
 
 
@@ -580,7 +582,7 @@ from enum import Enum
 
 class AIEnhancement(Enum):
     """Types of AI enhancement in malware."""
-    
+
     POLYMORPHIC_CODE = "polymorphic_code"
     EVASION_OPTIMIZATION = "evasion_optimization"
     PAYLOAD_GENERATION = "payload_generation"
@@ -592,7 +594,7 @@ class AIEnhancement(Enum):
 @dataclass
 class MalwareAIIndicators:
     """Indicators of AI-assisted malware development."""
-    
+
     sample_hash: str
     ai_enhancements: List[AIEnhancement]
     variant_count: int
@@ -604,14 +606,14 @@ class MalwareAIIndicators:
 class AIMalwareAnalyzer:
     """
     Analyze malware samples for AI-assisted development indicators.
-    
+
     AI-generated malware often shows:
     - Rapid variant generation
     - Sophisticated string obfuscation
     - Intelligent anti-analysis
     - Adaptive behavior
     """
-    
+
     def __init__(self):
         # Indicators of AI-assisted development
         self.ai_indicators = {
@@ -621,7 +623,7 @@ class AIMalwareAnalyzer:
             "generated_strings": "Strings that appear LLM-generated (convincing but generic)",
             "optimized_evasion": "Evasion techniques that seem systematically tested",
         }
-        
+
         # Known AI-assisted malware families
         self.ai_families = {
             "BlackMamba": {
@@ -635,14 +637,14 @@ class AIMalwareAnalyzer:
                 "first_seen": "2023",
             },
         }
-    
+
     def analyze_variant_patterns(
         self,
         samples: List[Dict],
     ) -> Dict[str, any]:
         """
         Analyze multiple samples for AI-generated variant patterns.
-        
+
         AI-generated variants often show:
         - Similar structure, different implementation
         - Consistent functionality with varying signatures
@@ -650,42 +652,42 @@ class AIMalwareAnalyzer:
         """
         if len(samples) < 2:
             return {"error": "Need multiple samples for variant analysis"}
-        
+
         analysis = {
             "total_samples": len(samples),
             "variant_clusters": [],
             "ai_probability": 0.0,
             "indicators": [],
         }
-        
+
         # Check for systematic variation patterns
         # (Simplified - real analysis would compare code structure)
-        
+
         unique_hashes = set(s.get("hash", "") for s in samples)
         common_functions = self._find_common_functions(samples)
-        
+
         if len(unique_hashes) > 10 and len(common_functions) > 5:
             analysis["ai_probability"] = 0.7
             analysis["indicators"].append(
                 "High variant count with common functionality suggests automated generation"
             )
-        
+
         return analysis
-    
+
     def _find_common_functions(self, samples: List[Dict]) -> Set[str]:
         """Find functions common across samples."""
         if not samples:
             return set()
-        
+
         # Get functions from first sample
         common = set(samples[0].get("functions", []))
-        
+
         # Intersect with all other samples
         for sample in samples[1:]:
             common &= set(sample.get("functions", []))
-        
+
         return common
-    
+
     def get_detection_strategies(
         self,
         enhancement_type: AIEnhancement
@@ -713,7 +715,7 @@ class AIMalwareAnalyzer:
                 "Require out-of-band verification for sensitive requests",
             ],
         }
-        
+
         return strategies.get(enhancement_type, [
             "Monitor for unusual patterns",
             "Implement behavioral detection",
@@ -779,7 +781,7 @@ class ThreatLevel(Enum):
 @dataclass
 class AIThreatActor:
     """Profile of a threat actor's AI capabilities."""
-    
+
     name: str
     aliases: List[str]
     ai_capabilities: List[str]
@@ -793,7 +795,7 @@ class AIThreatActor:
 @dataclass
 class AIThreatReport:
     """Structured AI threat intelligence report."""
-    
+
     title: str
     tlp: str  # Traffic Light Protocol
     report_date: str
@@ -808,14 +810,14 @@ class AIThreatReport:
 class AIThreatIntelGenerator:
     """
     Generate threat intelligence about AI-powered attacks.
-    
+
     Use AI to help analyze and summarize AI-related threats.
     """
-    
+
     def __init__(self, llm=None):
         self.llm = llm
         self.threat_db = self._load_threat_database()
-    
+
     def _load_threat_database(self) -> Dict:
         """Load known AI threat patterns."""
         return {
@@ -868,7 +870,7 @@ class AIThreatIntelGenerator:
                 },
             ],
         }
-    
+
     def generate_threat_brief(
         self,
         threat_type: str,
@@ -876,17 +878,17 @@ class AIThreatIntelGenerator:
     ) -> AIThreatReport:
         """
         Generate a threat intelligence brief about AI threats.
-        
+
         Args:
             threat_type: Type of AI threat to brief on
             recent_incidents: Recent incident data to include
-            
+
         Returns:
             Structured threat intelligence report
         """
         # Get base threat info
         threat_info = self.threat_db.get(threat_type, {})
-        
+
         # Build report
         report = AIThreatReport(
             title=f"AI Threat Brief: {threat_type.replace('_', ' ').title()}",
@@ -899,9 +901,9 @@ class AIThreatIntelGenerator:
             mitigations=self._extract_mitigations(threat_info),
             references=self._get_references(threat_type),
         )
-        
+
         return report
-    
+
     def _generate_executive_summary(
         self, threat_type: str, threat_info: List[Dict]
     ) -> str:
@@ -932,7 +934,7 @@ class AIThreatIntelGenerator:
             ),
         }
         return summaries.get(threat_type, "AI-powered threats require adaptive defenses.")
-    
+
     def _extract_techniques(self, threat_info: List[Dict]) -> List[str]:
         """Extract observed techniques."""
         techniques = []
@@ -940,7 +942,7 @@ class AIThreatIntelGenerator:
             if "description" in item:
                 techniques.append(item["description"])
         return techniques
-    
+
     def _extract_indicators(self, threat_info: List[Dict]) -> List[Dict]:
         """Extract indicators of compromise/activity."""
         indicators = []
@@ -948,14 +950,14 @@ class AIThreatIntelGenerator:
             for ind in item.get("indicators", []):
                 indicators.append({"type": "behavioral", "value": ind})
         return indicators
-    
+
     def _extract_mitigations(self, threat_info: List[Dict]) -> List[str]:
         """Extract mitigation recommendations."""
         mitigations = []
         for item in threat_info:
             mitigations.extend(item.get("mitigations", []))
         return list(set(mitigations))  # Deduplicate
-    
+
     def _get_references(self, threat_type: str) -> List[str]:
         """Get relevant references."""
         references = {
@@ -1003,26 +1005,26 @@ Develop threat hunting queries and procedures specifically for AI-powered attack
 
 ### Industry Research
 
-| Resource | Description | Link |
-|----------|-------------|------|
-| MITRE ATLAS | Adversarial ML Threat Matrix | [atlas.mitre.org](https://atlas.mitre.org) |
-| AI Village | DEF CON AI security research | [aivillage.org](https://aivillage.org) |
+| Resource    | Description                  | Link                                                              |
+| ----------- | ---------------------------- | ----------------------------------------------------------------- |
+| MITRE ATLAS | Adversarial ML Threat Matrix | [atlas.mitre.org](https://atlas.mitre.org)                        |
+| AI Village  | DEF CON AI security research | [aivillage.org](https://aivillage.org)                            |
 | NIST AI RMF | AI Risk Management Framework | [nist.gov](https://www.nist.gov/itl/ai-risk-management-framework) |
 
 ### Threat Intelligence
 
-| Source | Focus | Link |
-|--------|-------|------|
-| **Google TAG** | AI-enabled threat actors | [blog.google/threat-analysis-group](https://blog.google/threat-analysis-group/) |
-| **Microsoft Security** | Deepfake and AI threats | [microsoft.com/security/blog](https://www.microsoft.com/security/blog/) |
-| **Recorded Future** | AI threat landscape | [recordedfuture.com](https://www.recordedfuture.com) |
+| Source                 | Focus                    | Link                                                                            |
+| ---------------------- | ------------------------ | ------------------------------------------------------------------------------- |
+| **Google TAG**         | AI-enabled threat actors | [blog.google/threat-analysis-group](https://blog.google/threat-analysis-group/) |
+| **Microsoft Security** | Deepfake and AI threats  | [microsoft.com/security/blog](https://www.microsoft.com/security/blog/)         |
+| **Recorded Future**    | AI threat landscape      | [recordedfuture.com](https://www.recordedfuture.com)                            |
 
 ### SANS Resources
 
-| Resource | Description |
-|----------|-------------|
+| Resource   | Description                                      |
+| ---------- | ------------------------------------------------ |
 | **SEC595** | Applied Data Science and AI/ML for Cybersecurity |
-| **FOR578** | Cyber Threat Intelligence |
+| **FOR578** | Cyber Threat Intelligence                        |
 
 ---
 
