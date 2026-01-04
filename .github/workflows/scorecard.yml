@@ -10,7 +10,7 @@ on:
     branches: [main]
   # Run weekly to catch any changes
   schedule:
-    - cron: '0 5 * * 1'  # Weekly Monday 5am UTC
+    - cron: '0 5 * * 1' # Weekly Monday 5am UTC
   workflow_dispatch:
 
 # Required permissions for Scorecard

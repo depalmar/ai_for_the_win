@@ -1,11 +1,12 @@
 """
-Lab 06b: Embeddings & Vectors Explained (Solution)
+Lab 06a: Embeddings & Vectors Explained (Solution)
 
 A complete semantic search system for security applications.
 """
 
 import numpy as np
 from sklearn.decomposition import PCA
+from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
 try:
@@ -14,6 +15,21 @@ try:
     HAVE_TRANSFORMERS = True
 except ImportError:
     HAVE_TRANSFORMERS = False
+
+
+# Security documents for testing (required by tests)
+SECURITY_DOCUMENTS = [
+    "Malware detected: Trojan.GenericKD virus found in system32 folder",
+    "Successful login from authorized user at normal business hours",
+    "Ransomware attack encrypting files with .locked extension",
+    "Normal system update completed successfully",
+    "Phishing email detected with malicious attachment",
+    "User accessed approved cloud storage service",
+    "Command and control beacon detected calling external server",
+    "Routine backup operation completed without errors",
+    "Credential dumping tool Mimikatz detected in memory",
+    "Standard antivirus scan completed with no threats found",
+]
 
 
 THREAT_DESCRIPTIONS = [
@@ -37,6 +53,60 @@ IOC_SAMPLES = [
     {"type": "ip", "value": "192.168.1.100", "description": "Internal pivot point"},
     {"type": "ip", "value": "45.33.32.156", "description": "External C2 IP"},
 ]
+
+
+def create_tfidf_embeddings(documents: list) -> tuple:
+    """Create TF-IDF embeddings for documents.
+
+    Args:
+        documents: List of document strings
+
+    Returns:
+        Tuple of (vectorizer, embeddings matrix)
+    """
+    vectorizer = TfidfVectorizer(stop_words="english")
+    embeddings = vectorizer.fit_transform(documents)
+    return vectorizer, embeddings.toarray()
+
+
+def calculate_similarity_matrix(embeddings: np.ndarray) -> np.ndarray:
+    """Calculate pairwise cosine similarity matrix.
+
+    Args:
+        embeddings: Document embeddings matrix
+
+    Returns:
+        Similarity matrix
+    """
+    return cosine_similarity(embeddings)
+
+
+def similarity_search(
+    query: str, vectorizer: TfidfVectorizer, embeddings: np.ndarray, documents: list, top_k: int = 5
+) -> list:
+    """Search for similar documents using TF-IDF.
+
+    Args:
+        query: Search query string
+        vectorizer: Fitted TF-IDF vectorizer
+        embeddings: Document embeddings
+        documents: Original documents
+        top_k: Number of results to return
+
+    Returns:
+        List of (index, similarity, document) tuples
+    """
+    query_vec = vectorizer.transform([query]).toarray()
+    similarities = cosine_similarity(query_vec, embeddings)[0]
+
+    # Get top k indices
+    top_indices = np.argsort(similarities)[::-1][:top_k]
+
+    results = []
+    for idx in top_indices:
+        results.append((idx, similarities[idx], documents[idx]))
+
+    return results
 
 
 def create_embedding(text: str, model) -> np.ndarray:
