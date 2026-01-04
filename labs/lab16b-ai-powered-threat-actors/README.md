@@ -101,7 +101,7 @@ Threat actors have rapidly adopted AI tools to enhance their operations:
 | Group | AI Capabilities | Notable Campaigns |
 |-------|----------------|-------------------|
 | **FIN7/Carbanak** | AI-generated business emails | Financial sector BEC |
-| **Scattered Spider** | Voice cloning for helpdesk attacks | MGM/Caesars 2023 |
+| **Scattered Spider** | Voice cloning for helpdesk attacks | UK Retail Breaches 2025 |
 | **Various APTs** | LLM-assisted code development | Multiple campaigns |
 | **Cybercrime Groups** | Deepfake CEO fraud | Wire transfer fraud |
 
