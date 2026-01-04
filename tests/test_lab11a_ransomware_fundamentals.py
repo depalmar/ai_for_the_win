@@ -14,11 +14,11 @@ sys.path.insert(
 def test_solution_imports():
     """Test that solution imports without errors."""
     from main import (
-        RansomwareIndicator,
         RANSOMWARE_INDICATORS,
+        RansomwareIndicator,
         analyze_file_extension,
-        check_ransom_note_patterns,
         calculate_entropy,
+        check_ransom_note_patterns,
     )
 
 

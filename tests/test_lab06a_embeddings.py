@@ -15,9 +15,9 @@ def test_solution_imports():
     """Test that solution imports without errors."""
     from main import (
         SECURITY_DOCUMENTS,
+        calculate_similarity_matrix,
         create_tfidf_embeddings,
         similarity_search,
-        calculate_similarity_matrix,
     )
 
 

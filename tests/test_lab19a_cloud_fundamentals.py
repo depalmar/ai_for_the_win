@@ -15,10 +15,10 @@ sys.path.insert(
 def test_solution_imports():
     """Test that solution imports without errors."""
     from main import (
-        CloudTrailParser,
-        IAMAnalyzer,
         CloudThreatDetector,
         CloudTrailEvent,
+        CloudTrailParser,
+        IAMAnalyzer,
     )
 
 

@@ -14,10 +14,10 @@ sys.path.insert(
 def test_solution_imports():
     """Test that solution imports without errors."""
     from main import (
-        SigmaRule,
-        parse_sigma_rule,
-        match_log_event,
         SAMPLE_RULES,
+        SigmaRule,
+        match_log_event,
+        parse_sigma_rule,
     )
 
 

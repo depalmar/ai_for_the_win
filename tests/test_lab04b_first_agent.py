@@ -14,10 +14,10 @@ sys.path.insert(
 def test_solution_imports():
     """Test that solution imports without errors."""
     from main import (
-        check_ip_reputation,
-        check_hash_reputation,
-        get_system_info,
         TOOLS,
+        check_hash_reputation,
+        check_ip_reputation,
+        get_system_info,
     )
 
 
