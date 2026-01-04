@@ -13,21 +13,19 @@ on:
     - cron: '0 5 * * 1'  # Weekly Monday 5am UTC
   workflow_dispatch:
 
-# Required permissions for Scorecard
-permissions:
-  # Required for Code Scanning alerts
-  security-events: write
-  # Required for OIDC token (publishing results)
-  id-token: write
-  # Required to read repository contents
-  contents: read
-  # Required for private repos (can be removed for public repos)
-  actions: read
+# Declare no permissions at workflow level (required for Scorecard publishing)
+permissions: {}
 
 jobs:
   analysis:
     name: Scorecard Analysis
     runs-on: ubuntu-latest
+    # Permissions must be at job level for Scorecard publish_results
+    permissions:
+      security-events: write
+      id-token: write
+      contents: read
+      actions: read
 
     steps:
       - name: Checkout repository
