@@ -54,43 +54,6 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
   display: flex !important;
 }
 
-/* Light theme override */
-[data-theme="light"] {
-  --primary: #4f46e5;
-  --secondary: #059669;
-  --bg-dark: #f8fafc;
-  --bg-card: #ffffff;
-  --bg-card-hover: #f1f5f9;
-  --text: #1e293b;
-  --text-muted: #64748b;
-  --border: #e2e8f0;
-}
-
-[data-theme="light"] .sticky-nav {
-  background: rgba(248, 250, 252, 0.95);
-}
-
-[data-theme="light"] .terminal-demo {
-  background: #1e293b;
-}
-
-/* Theme toggle button */
-.theme-toggle {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 0.4rem 0.8rem;
-  cursor: pointer;
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  transition: all 0.2s;
-  margin-left: 0.5rem;
-}
-
-.theme-toggle:hover {
-  border-color: var(--primary);
-  color: var(--primary);
-}
 
 /* Sticky Navigation */
 .sticky-nav {
@@ -896,9 +859,6 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
           <img src="https://img.shields.io/github/stars/depalmar/ai_for_the_win?style=social" alt="GitHub stars">
         </a>
       </span>
-      <button class="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark mode">
-        <span id="theme-icon">☀️</span>
-      </button>
     </div>
   </div>
 </nav>
@@ -938,7 +898,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
 
   <div class="stats">
     <div class="stat">
-      <div class="stat-number">30+</div>
+      <div class="stat-number">40+</div>
       <div class="stat-label">Hands-On Labs</div>
     </div>
     <div class="stat">
@@ -1127,9 +1087,12 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
         <span><span class="nav-lab dfir" style="width: 16px; height: 16px; display: inline-flex; font-size: 0.6rem;">&#8226;</span> DFIR/Expert</span>
       </span>
     </div>
+    <p style="text-align: center; margin-top: 0.75rem; font-size: 0.8rem; color: var(--text-muted);">
+      <em>Bridge labs (03b, 04b, 06a, 07a, 07b, 09b, 10a, 11a, etc.) shown in the grid below</em>
+    </p>
   </div>
 
-  <h3 style="margin-top: 2rem; margin-bottom: 1rem;">All 40 Labs (Including Bridge Labs)</h3>
+<h3 style="margin-top: 2rem; margin-bottom: 1rem;">All 40+ Labs (Including Bridge Labs)</h3>
 
   <!-- Lab Filter Tabs -->
   <div class="lab-filters">
@@ -1284,6 +1247,17 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
         <span class="difficulty difficulty-2">&#9733;&#9733;&#9734; Intermediate</span>
       </div>
     </a>
+    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab04b-first-ai-agent" class="lab-card" data-category="llm">
+      <div class="lab-header">
+        <span class="lab-number llm">04b</span>
+        <span class="lab-title">First AI Agent</span>
+      </div>
+      <p class="lab-desc">Tool calling, ReAct basics, agent loops</p>
+      <div class="lab-meta">
+        <span>&#128337; ~2 hrs</span>
+        <span class="difficulty difficulty-2">&#9733;&#9733;&#9734; Intermediate</span>
+      </div>
+    </a>
     <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab05-threat-intel-agent" class="lab-card" data-category="llm">
       <div class="lab-header">
         <span class="lab-number llm">05</span>
@@ -1292,6 +1266,17 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
       <p class="lab-desc">ReAct pattern, LangChain, autonomous investigation</p>
       <div class="lab-meta">
         <span>&#128337; ~3 hrs</span>
+        <span class="difficulty difficulty-2">&#9733;&#9733;&#9734; Intermediate</span>
+      </div>
+    </a>
+    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab06a-embeddings-vectors" class="lab-card" data-category="llm">
+      <div class="lab-header">
+        <span class="lab-number llm">06a</span>
+        <span class="lab-title">Embeddings & Vectors</span>
+      </div>
+      <p class="lab-desc">Deep dive into embeddings for RAG</p>
+      <div class="lab-meta">
+        <span>&#128337; ~2 hrs</span>
         <span class="difficulty difficulty-2">&#9733;&#9733;&#9734; Intermediate</span>
       </div>
     </a>
@@ -1306,12 +1291,12 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
         <span class="difficulty difficulty-2">&#9733;&#9733;&#9734; Intermediate</span>
       </div>
     </a>
-    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab06a-embeddings-vectors" class="lab-card" data-category="llm">
+    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab07a-binary-basics" class="lab-card" data-category="llm">
       <div class="lab-header">
-        <span class="lab-number llm">06b</span>
-        <span class="lab-title">Embeddings & Vectors</span>
+        <span class="lab-number llm">07a</span>
+        <span class="lab-title">Binary Basics</span>
       </div>
-      <p class="lab-desc">Deep dive into embeddings for RAG</p>
+      <p class="lab-desc">PE files, headers, sections for YARA</p>
       <div class="lab-meta">
         <span>&#128337; ~2 hrs</span>
         <span class="difficulty difficulty-2">&#9733;&#9733;&#9734; Intermediate</span>
@@ -1328,12 +1313,12 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
         <span class="difficulty difficulty-2">&#9733;&#9733;&#9734; Intermediate</span>
       </div>
     </a>
-    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab07a-binary-basics" class="lab-card" data-category="llm">
+    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab07b-sigma-fundamentals" class="lab-card" data-category="llm">
       <div class="lab-header">
-        <span class="lab-number llm">07a</span>
-        <span class="lab-title">Binary Basics</span>
+        <span class="lab-number llm">07b</span>
+        <span class="lab-title">Sigma Fundamentals</span>
       </div>
-      <p class="lab-desc">PE files, headers, sections for YARA</p>
+      <p class="lab-desc">Sigma rule syntax, SIEM queries, LLM generation</p>
       <div class="lab-meta">
         <span>&#128337; ~2 hrs</span>
         <span class="difficulty difficulty-2">&#9733;&#9733;&#9734; Intermediate</span>
@@ -1361,6 +1346,28 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
         <span class="difficulty difficulty-3">&#9733;&#9733;&#9733; Advanced</span>
       </div>
     </a>
+    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab09b-monitoring-ai-systems" class="lab-card" data-category="advanced">
+      <div class="lab-header">
+        <span class="lab-number advanced">09b</span>
+        <span class="lab-title">Monitoring AI Systems</span>
+      </div>
+      <p class="lab-desc">Observability, drift detection, logging</p>
+      <div class="lab-meta">
+        <span>&#128337; ~2 hrs</span>
+        <span class="difficulty difficulty-2">&#9733;&#9733;&#9734; Intermediate</span>
+      </div>
+    </a>
+    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab10a-dfir-fundamentals" class="lab-card" data-category="advanced">
+      <div class="lab-header">
+        <span class="lab-number advanced">10a</span>
+        <span class="lab-title">DFIR Fundamentals</span>
+      </div>
+      <p class="lab-desc">IR lifecycle, Windows artifacts, ATT&CK</p>
+      <div class="lab-meta">
+        <span>&#128337; ~2 hrs</span>
+        <span class="difficulty difficulty-2">&#9733;&#9733;&#9734; Intermediate</span>
+      </div>
+    </a>
     <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab10-ir-copilot" class="lab-card" data-category="advanced">
       <div class="lab-header">
         <span class="lab-number advanced">10</span>
@@ -1372,12 +1379,12 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
         <span class="difficulty difficulty-2">&#9733;&#9733;&#9734; Intermediate</span>
       </div>
     </a>
-    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab10a-dfir-fundamentals" class="lab-card" data-category="dfir">
+    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab11a-ransomware-fundamentals" class="lab-card" data-category="dfir">
       <div class="lab-header">
-        <span class="lab-number dfir">10b</span>
-        <span class="lab-title">DFIR Fundamentals</span>
+        <span class="lab-number dfir">11a</span>
+        <span class="lab-title">Ransomware Fundamentals</span>
       </div>
-      <p class="lab-desc">IR lifecycle, Windows artifacts, ATT&CK</p>
+      <p class="lab-desc">Evolution, families, indicators, recovery</p>
       <div class="lab-meta">
         <span>&#128337; ~2 hrs</span>
         <span class="difficulty difficulty-2">&#9733;&#9733;&#9734; Intermediate</span>
@@ -1449,15 +1456,15 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
         <span class="difficulty difficulty-3">&#9733;&#9733;&#9733; Advanced</span>
       </div>
     </a>
-    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab17-adversarial-ml" class="lab-card" data-category="dfir">
+    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab16b-ai-powered-threat-actors" class="lab-card" data-category="dfir">
       <div class="lab-header">
-        <span class="lab-number dfir">17</span>
-        <span class="lab-title">Adversarial ML</span>
+        <span class="lab-number dfir">16b</span>
+        <span class="lab-title">AI-Powered Threat Actors</span>
       </div>
-      <p class="lab-desc">Evasion attacks, poisoning, defenses</p>
+      <p class="lab-desc">Deepfakes, AI phishing, detecting AI attacks</p>
       <div class="lab-meta">
-        <span>&#128337; ~6 hrs</span>
-        <span class="difficulty difficulty-3">&#9733;&#9733;&#9733; Advanced</span>
+        <span>&#128337; ~2 hrs</span>
+        <span class="difficulty difficulty-2">&#9733;&#9733;&#9734; Intermediate</span>
       </div>
     </a>
     <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab17a-ml-security-intro" class="lab-card" data-category="dfir">
@@ -1469,6 +1476,17 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
       <div class="lab-meta">
         <span>&#128337; ~1 hr</span>
         <span class="difficulty difficulty-2">&#9733;&#9733;&#9734; Intermediate</span>
+      </div>
+    </a>
+    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab17-adversarial-ml" class="lab-card" data-category="dfir">
+      <div class="lab-header">
+        <span class="lab-number dfir">17</span>
+        <span class="lab-title">Adversarial ML</span>
+      </div>
+      <p class="lab-desc">Evasion attacks, poisoning, defenses</p>
+      <div class="lab-meta">
+        <span>&#128337; ~6 hrs</span>
+        <span class="difficulty difficulty-3">&#9733;&#9733;&#9733; Advanced</span>
       </div>
     </a>
     <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab18-fine-tuning-security" class="lab-card" data-category="dfir">
@@ -1515,6 +1533,17 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
         <span class="difficulty difficulty-3">&#9733;&#9733;&#9733; Advanced</span>
       </div>
     </a>
+    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab20b-purple-team-ai" class="lab-card" data-category="dfir">
+      <div class="lab-header">
+        <span class="lab-number dfir">20b</span>
+        <span class="lab-title">Purple Team AI</span>
+      </div>
+      <p class="lab-desc">AI attack simulation, detection validation</p>
+      <div class="lab-meta">
+        <span>&#128337; ~3 hrs</span>
+        <span class="difficulty difficulty-3">&#9733;&#9733;&#9733; Advanced</span>
+      </div>
+    </a>
   </div>
 
   <div class="cta-buttons" style="margin-top: 2rem;">
@@ -1540,31 +1569,6 @@ function filterLabs(category) {
     }
   });
 }
-
-// Theme toggle functionality
-function toggleTheme() {
-  const html = document.documentElement;
-  const icon = document.getElementById('theme-icon');
-  if (html.dataset.theme === 'light') {
-    html.dataset.theme = 'dark';
-    icon.textContent = '☀️';
-    localStorage.setItem('theme', 'dark');
-  } else {
-    html.dataset.theme = 'light';
-    icon.textContent = '🌙';
-    localStorage.setItem('theme', 'light');
-  }
-}
-
-// Load saved theme preference on page load
-(function() {
-  const saved = localStorage.getItem('theme');
-  if (saved === 'light') {
-    document.documentElement.dataset.theme = 'light';
-    const icon = document.getElementById('theme-icon');
-    if (icon) icon.textContent = '🌙';
-  }
-})();
 
 // Remove theme attribution footer
 (function() {
@@ -1622,6 +1626,21 @@ function toggleTheme() {
           <div class="path-lab-item">
             <span class="path-lab-num intro">00d</span>
             <span class="path-lab-name">AI in Security Ops</span>
+            <span class="path-time">~1 hr</span>
+          </div>
+          <div class="path-lab-item">
+            <span class="path-lab-num intro">00e</span>
+            <span class="path-lab-name">Visualization & Stats</span>
+            <span class="path-time">~2 hrs</span>
+          </div>
+          <div class="path-lab-item">
+            <span class="path-lab-num intro">00f</span>
+            <span class="path-lab-name">Hello World ML</span>
+            <span class="path-time">~1 hr</span>
+          </div>
+          <div class="path-lab-item">
+            <span class="path-lab-num intro">00g</span>
+            <span class="path-lab-name">Working with APIs</span>
             <span class="path-time">~1 hr</span>
           </div>
         </div>
@@ -1851,7 +1870,7 @@ function toggleTheme() {
       <a href="https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab01_phishing_classifier.ipynb" target="_blank" style="display: inline-block;"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open Lab 01"></a>
       <a href="https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab04_llm_log_analysis.ipynb" target="_blank" style="display: inline-block;"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open Lab 04"></a>
     </div>
-    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem;">📓 <a href="https://github.com/depalmar/ai_for_the_win/tree/main/notebooks" style="color: var(--primary);">All 23 lab notebooks</a> available for Colab</p>
+    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem;">📓 <a href="https://github.com/depalmar/ai_for_the_win/tree/main/notebooks" style="color: var(--primary);">All 35 lab notebooks</a> available for Colab</p>
   </div>
 
   <div class="quick-start" style="margin-bottom: 1.5rem;">
@@ -1929,6 +1948,16 @@ python labs/lab01-phishing-classifier/solution/main.py</code></pre>
       <p>Setup and cost management</p>
     </div>
     <div class="feature">
+      <div class="feature-icon">&#128736;</div>
+      <h3><a href="https://github.com/depalmar/ai_for_the_win/blob/main/docs/guides/troubleshooting-guide.md">Troubleshooting</a></h3>
+      <p>Fix common issues and errors</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">&#128214;</div>
+      <h3><a href="https://github.com/depalmar/ai_for_the_win/tree/main/docs/walkthroughs">Lab Walkthroughs</a></h3>
+      <p>Step-by-step solutions for each lab</p>
+    </div>
+    <div class="feature">
       <div class="feature-icon">&#128211;</div>
       <h3><a href="https://github.com/depalmar/ai_for_the_win/blob/main/docs/guides/jupyter-basics-guide.md">Jupyter Basics</a></h3>
       <p>Local notebook setup guide</p>
@@ -1937,6 +1966,11 @@ python labs/lab01-phishing-classifier/solution/main.py</code></pre>
       <div class="feature-icon">☁️</div>
       <h3><a href="https://github.com/depalmar/ai_for_the_win/blob/main/docs/guides/colab-guide.md">Google Colab Guide</a></h3>
       <p>Zero-setup browser notebooks</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">&#128187;</div>
+      <h3><a href="https://github.com/depalmar/ai_for_the_win/tree/main/docs/guides">All 28 Guides</a></h3>
+      <p>Tools, APIs, dev setup, and more</p>
     </div>
   </div>
 </div>

@@ -81,10 +81,10 @@ Learn to apply Large Language Models to security problems.
 |---|-----|-------|-------------------|
 | 04 | [LLM Log Analysis](./lab04-llm-log-analysis/) | Prompt engineering | Structured outputs, IOC extraction |
 | 04b | [Your First AI Agent](./lab04b-first-ai-agent/) | **NEW! Bridge lab** | Tool calling, ReAct basics |
+| 06a | [Embeddings & Vectors](./lab06a-embeddings-vectors/) | **NEW! Bridge lab** | How embeddings work, semantic search |
 | 06 | [Security RAG](./lab06-security-rag/) | Vector search + LLM | Embeddings, ChromaDB, retrieval |
-| 06b | [Embeddings & Vectors](./lab06a-embeddings-vectors/) | **NEW! Bridge lab** | How embeddings work, semantic search |
-| 07 | [YARA Generator](./lab07-yara-generator/) | AI code generation | Binary analysis, rule generation |
 | 07a | [Binary Analysis Basics](./lab07a-binary-basics/) | **NEW! Bridge lab** | PE structure, entropy, imports |
+| 07 | [YARA Generator](./lab07-yara-generator/) | AI code generation | Binary analysis, rule generation |
 
 **Progression:**
 ```
