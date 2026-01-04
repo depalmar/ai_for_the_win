@@ -349,7 +349,7 @@ response = model.generate_content(
 
 | Scenario | Recommendation |
 |----------|---------------|
-| Air-gapped environment | Ollama + Llama 3.1 |
+| Air-gapped environment | Ollama + Llama 4 |
 | Classified data | Local only |
 | High volume (>100K/month) | Local for filtering, API for complex |
 | Development/testing | Ollama (save API costs) |
@@ -359,18 +359,18 @@ response = model.generate_content(
 
 ```bash
 # Best for security tasks
-ollama pull llama3.1:70b    # Best quality (needs 48GB+ RAM)
-ollama pull llama3.1:8b     # Good balance (8GB RAM)
-ollama pull mistral:7b      # Fast, decent quality
-ollama pull codellama:13b   # Code-focused
+ollama pull llama4:maverick    # Best quality (needs 48GB+ RAM)
+ollama pull llama4:scout       # Good balance (16GB RAM)
+ollama pull ministral3:8b      # Fast, decent quality
+ollama pull devstral2:24b      # Code-focused
 
 # Usage
-ollama run llama3.1:8b "Analyze this log for threats: [log]"
+ollama run llama4:scout "Analyze this log for threats: [log]"
 ```
 
 ### Local vs API Comparison
 
-| Factor | Ollama (Llama 3.1 8B) | Claude Sonnet 4.5 |
+| Factor | Ollama (Llama 4 Scout) | Claude Sonnet 4.5 |
 |--------|----------------------|-------------------|
 | Cost per 1M tokens | $0 | $3-15 |
 | Hardware required | 8GB RAM | None |

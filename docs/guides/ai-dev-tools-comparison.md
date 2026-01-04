@@ -441,7 +441,7 @@ Create `.continue/config.json`:
     {
       "title": "Local Llama",
       "provider": "ollama",
-      "model": "codellama:13b"
+      "model": "devstral2:24b"
     }
   ],
   "tabAutocompleteModel": {
@@ -773,7 +773,7 @@ All tools support exclusion patterns:
 
 ```bash
 # Aider with Ollama
-aider --model ollama/codellama:13b
+aider --model ollama/devstral2:24b
 
 # Continue.dev with local model
 # Configure in .continue/config.json

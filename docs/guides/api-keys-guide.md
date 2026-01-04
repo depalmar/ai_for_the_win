@@ -13,7 +13,7 @@ Labs 04-20 use Large Language Models (LLMs) like Claude, GPT-4, or Gemini. This 
 | **Anthropic (Claude)** | $5 free | Best reasoning, coding | `claude-sonnet-4-20250514` |
 | **OpenAI (GPT)** | $5 free (new accounts) | Widely supported | `gpt-5` |
 | **Google (Gemini)** | Free tier (generous) | Budget-friendly | `gemini-2.0-flash` |
-| **Ollama** | Completely free | Privacy, offline use | `llama3.2`, `mistral` |
+| **Ollama** | Completely free | Privacy, offline use | `llama4:scout`, `ministral3:8b` |
 
 **Recommendation**: Start with **Anthropic Claude** - it has the best reasoning for security tasks and $5 free credits.
 
@@ -120,21 +120,21 @@ curl -fsSL https://ollama.ai/install.sh | sh
 
 ### Step 2: Pull a Model
 ```bash
-# Lightweight and fast
-ollama pull llama3.2
+# Best balance of quality and speed
+ollama pull llama4:scout
 
-# Better reasoning
-ollama pull mistral
+# Fast inference
+ollama pull ministral3:8b
 
 # Coding-focused
-ollama pull codellama
+ollama pull devstral2:24b
 ```
 
 ### Step 3: Configure the Labs
 No API key needed! Set in `.env`:
 ```
 LLM_PROVIDER=ollama
-OLLAMA_MODEL=llama3.2
+OLLAMA_MODEL=llama4:scout
 ```
 
 ### Requirements

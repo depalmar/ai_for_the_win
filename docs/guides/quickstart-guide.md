@@ -282,12 +282,12 @@ python test_setup.py
 ollama serve
 
 # In another terminal, pull a model
-ollama pull llama3.1:8b
+ollama pull llama4:scout
 
 # Test local LLM
 python -c "
 import ollama
-response = ollama.chat(model='llama3.1:8b', messages=[
+response = ollama.chat(model='llama4:scout', messages=[
     {'role': 'user', 'content': 'What is a SQL injection?'}
 ])
 print(response['message']['content'][:200])

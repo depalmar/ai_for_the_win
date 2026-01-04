@@ -175,17 +175,17 @@ response = client.chat.completions.create(
 curl -fsSL https://ollama.com/install.sh | sh
 
 # Pull security-relevant models
-ollama pull llama3.1:70b      # General purpose
-ollama pull codellama:34b     # Code generation
-ollama pull mistral:7b        # Fast inference
-ollama pull deepseek-coder:33b # Code analysis
+ollama pull llama4:maverick    # General purpose (large)
+ollama pull llama4:scout       # General purpose (balanced)
+ollama pull devstral2:24b      # Code generation
+ollama pull ministral3:8b      # Fast inference
 
 # Run local server
 ollama serve
 
 # Use in Python
 import ollama
-response = ollama.chat(model='llama3.1:70b', messages=[...])
+response = ollama.chat(model='llama4:scout', messages=[...])
 ```
 
 ---
@@ -736,7 +736,7 @@ fi
 if command -v ollama &> /dev/null; then
     echo "✅ Ollama detected"
     echo "   Pulling recommended models..."
-    ollama pull llama3.1:8b
+    ollama pull llama4:scout
 else
     echo "⚠️  Ollama not found. Install from https://ollama.com"
 fi
