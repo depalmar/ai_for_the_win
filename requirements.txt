@@ -35,7 +35,7 @@ torch>=2.0.0,<3.0.0
 # These packages MUST use compatible versions
 langchain>=1.0.0,<2.0.0
 langchain-anthropic>=1.0.0,<2.0.0
-langchain-openai>=0.3.0,<2.0.0
+langchain-openai>=1.0.0,<2.0.0  # v1.x required for langchain 1.x compatibility
 langchain-google-genai>=2.0.0,<3.0.0
 langchain-community>=0.3.0,<1.0.0
 langgraph>=1.0.0,<2.0.0
