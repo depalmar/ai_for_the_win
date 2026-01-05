@@ -9,7 +9,7 @@
 [![CI](https://github.com/depalmar/ai_for_the_win/actions/workflows/ci.yml/badge.svg)](https://github.com/depalmar/ai_for_the_win/actions/workflows/ci.yml)
 [![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/depalmar/ai_for_the_win/badge)](https://scorecard.dev/viewer/?uri=github.com/depalmar/ai_for_the_win)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
-[![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc/4.0/)
+[![License: Dual](https://img.shields.io/badge/License-Dual%20(MIT%20%2B%20CC%20BY--NC--SA)-blue.svg)](./LICENSE)
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab01_phishing_classifier.ipynb)
 [![Docker](https://img.shields.io/badge/Docker-Ready-blue?logo=docker)](./Dockerfile)
 
@@ -559,7 +559,14 @@ Ways to contribute:
 
 ## License
 
-This project is licensed under the **Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0)** - see the [LICENSE](./LICENSE) file for details. For commercial licensing inquiries, please contact the author.
+This project uses a **dual license model**:
+
+| Content Type | License | Commercial Use |
+|--------------|---------|----------------|
+| Documentation, labs, prose | CC BY-NC-SA 4.0 | Requires commercial license |
+| Code samples and scripts | MIT | Permitted |
+
+See the [LICENSE](./LICENSE) file for full details. For commercial licensing inquiries, please [contact the author](https://linkedin.com/in/depalmar).
 
 ---
 

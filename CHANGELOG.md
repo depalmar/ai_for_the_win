@@ -5,18 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.1] - 2026-01-05
+
+### Changed
+- **License Update**: Switched to dual licensing model
+  - Educational content (docs, labs, prose): CC BY-NC-SA 4.0
+  - Code samples and scripts: MIT License
+- Added ShareAlike requirement for derivative content
+- Added clear definitions for personal vs. commercial use
+- Added commercial licensing pathway for organizations
+
 ## [1.3.0] - 2026-01-03
 
 ### Added
 - **New Labs**
   - Lab 16b: AI-Powered Threat Actors - Detect AI-generated phishing, vishing, and malware
   - Lab 20b: AI-Assisted Purple Team - Attack simulation and detection gap analysis
-  
+
 - **Threat Actor Database** (`data/threat-actor-ttps/`)
   - 8 new threat actor profiles: Scattered Spider, Volt Typhoon, ALPHV/BlackCat, LockBit, Cl0p, Rhysida, Akira, Play
   - Campaign data: SolarWinds, Colonial Pipeline, MOVEit, MGM/Caesars, Log4Shell, Kaseya
   - Attack chain templates: Double extortion, supply chain, BEC fraud, insider threat
-  
+
 - **CTF Gamification System**
   - 15 achievements (First Blood, Speed Demon, Completionist, etc.)
   - 8 ranks from Script Kiddie to CISO Material

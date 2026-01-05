@@ -910,8 +910,8 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
       <div class="stat-label">Learning Paths</div>
     </div>
     <div class="stat">
-      <div class="stat-number">CC BY-NC</div>
-      <div class="stat-label">Licensed</div>
+      <div class="stat-number">Dual License</div>
+      <div class="stat-label">MIT + CC BY-NC-SA</div>
     </div>
   </div>
 
@@ -1988,7 +1988,7 @@ python labs/lab01-phishing-classifier/solution/main.py</code></pre>
 </div>
 
 <p style="text-align: center; color: var(--text-muted); font-size: 0.85rem;">
-  MIT License | Built for security practitioners | Created by <a href="https://www.linkedin.com/in/raymond-depalma" style="color: var(--text-muted); text-decoration: underline;">Raymond DePalma</a>
+  Dual License (MIT + CC BY-NC-SA 4.0) | Built for security practitioners | Created by <a href="https://www.linkedin.com/in/raymond-depalma" style="color: var(--text-muted); text-decoration: underline;">Raymond DePalma</a>
 </p>
 
 <p style="text-align: center; color: var(--text-muted); font-size: 0.75rem; margin-top: 1rem; max-width: 600px; margin-left: auto; margin-right: auto;">

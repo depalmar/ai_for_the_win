@@ -90,7 +90,7 @@ When sharing or adapting these materials, you must:
 1. Provide appropriate credit to the original author (Raymond DePalma)
 2. Link to the original repository
 3. Indicate if changes were made
-4. Maintain the same license (CC BY-NC 4.0) for derivatives
+4. Maintain the same license (CC BY-NC-SA 4.0) for derivative content; code is MIT licensed
 
 ## Updates to This Policy
 

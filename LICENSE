@@ -1,39 +1,165 @@
-Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)
+# License
+
+## AI for the Win - Educational Security Training Content
+
+Copyright © 2025-2026 Raymond DePalma. All rights reserved.
+
+---
+
+## Dual Licensing Model
+
+This project is available under **two licensing options** depending on your use case:
+
+| Use Type | License | Cost |
+|----------|---------|------|
+| Personal learning & non-commercial use | CC BY-NC-SA 4.0 | Free |
+| Organizational or commercial use | Commercial License | Contact author |
+
+---
+
+## Free License: Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+
+The educational content (documentation, lab instructions, explanations, and prose) in this repository is licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
+
+### You ARE free to:
+
+- **Share** — Copy and redistribute the material in any medium or format
+- **Adapt** — Remix, transform, and build upon the material
+
+### Under these terms:
+
+- **Attribution** — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
+
+- **NonCommercial** — You may not use the material for commercial purposes (see definitions below).
+
+- **ShareAlike** — If you remix, transform, or build upon the material, you must distribute your contributions under the same license as the original.
+
+- **No additional restrictions** — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.
+
+---
+
+## Code License: MIT License
+
+All code samples, scripts, and executable files in this repository are licensed under the MIT License:
+
+```
+MIT License
 
 Copyright (c) 2025-2026 Raymond DePalma
 
-This work is licensed under the Creative Commons Attribution-NonCommercial 4.0
-International License. To view a copy of this license, visit:
-https://creativecommons.org/licenses/by-nc/4.0/
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-You are free to:
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-- Share — copy and redistribute the material in any medium or format
-- Adapt — remix, transform, and build upon the material
-
-Under the following terms:
-
-- Attribution — You must give appropriate credit, provide a link to the license,
-  and indicate if changes were made. You may do so in any reasonable manner, but
-  not in any way that suggests the licensor endorses you or your use.
-
-- NonCommercial — You may not use the material for commercial purposes.
-
-No additional restrictions — You may not apply legal terms or technological
-measures that legally restrict others from doing anything the license permits.
-
----
-
-DISCLAIMER: This training material is intended for educational purposes and
-authorized security testing only. Users are responsible for ensuring compliance
-with all applicable laws and obtaining proper authorization before using any
-offensive techniques described in this material.
-
-This is a personal project created and maintained on personal time. It is not
-affiliated with, endorsed by, or sponsored by any employer, organization, or
-vendor. All tool and platform references are for educational purposes only and
-do not constitute endorsement or recommendation.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
 
 ---
 
-For commercial licensing inquiries, please contact the author.
+## Definitions: Personal vs. Commercial Use
+
+### ✅ PERMITTED under Free License (Personal/Non-Commercial Use):
+
+- Individual self-study and skill development
+- Personal portfolio projects and learning exercises
+- Academic coursework (as a student)
+- Personal blogs or write-ups with attribution
+- Contributing improvements back to this project
+- Sharing with peers for non-commercial educational purposes
+
+### ❌ REQUIRES Commercial License:
+
+- **Paid training programs** — Workshops, bootcamps, courses, or seminars (live or recorded) where fees are charged
+- **Organizational training** — Internal corporate training, employee onboarding, or professional development programs, regardless of whether the organization is for-profit or non-profit
+- **Consulting engagements** — Using materials in client deliverables or billable work
+- **Bundled products** — Including in paid products, subscriptions, or services
+- **Institutional deployment** — Use by universities, training providers, or educational institutions in formal curricula
+- **Resale or redistribution** — Selling, sublicensing, or redistributing for monetary compensation
+- **AI/ML training** — Using content to train commercial AI models or services
+
+### Gray Areas (Contact for Clarification):
+
+- Conference presentations using substantial portions of the material
+- Free community workshops hosted by commercial entities
+- Government or military training programs
+
+---
+
+## Commercial Licensing
+
+Organizations wishing to use this material for training, courses, or other commercial purposes must obtain a commercial license.
+
+**Commercial licensing inquiries:** [Contact the author](https://linkedin.com/in/depalmar)
+
+Commercial licenses include:
+
+- Rights to use in organizational training programs
+- Rights to create derivative training materials
+- Optional: Support and customization services
+- Optional: Early access to new content
+
+---
+
+## Attribution Requirements
+
+When using this material under the free license, you must include:
+
+1. Credit to "Raymond DePalma" or "AI for the Win"
+2. A link to the original repository
+3. A link to the CC BY-NC-SA 4.0 license
+4. Indication of any modifications made
+
+**Example attribution:**
+
+> Based on "AI for the Win" by Raymond DePalma (https://github.com/depalmar/ai_for_the_win), licensed under CC BY-NC-SA 4.0. [Modified from original / Used with modifications / Used as-is].
+
+---
+
+## Enforcement
+
+Violations of this license may result in:
+
+- DMCA takedown notices for infringing content
+- Termination of license rights
+- Legal action for copyright infringement
+
+If you believe you've encountered unauthorized use of this material, please contact the author.
+
+If you're unsure whether your use case requires a commercial license, please reach out—most questions can be resolved with a quick conversation.
+
+---
+
+## Disclaimer
+
+This training material is intended for **educational purposes and authorized security testing only**. Users are responsible for:
+
+- Ensuring compliance with all applicable laws
+- Obtaining proper authorization before using any offensive techniques
+- Using skills ethically and responsibly
+
+**This is a personal project** created and maintained on personal time. It is not affiliated with, endorsed by, or sponsored by any employer, organization, or vendor. All tool and platform references are for educational purposes only and do not constitute endorsement or recommendation.
+
+---
+
+## Summary
+
+| Content Type | License | Commercial Use |
+|--------------|---------|----------------|
+| Documentation, labs, prose | CC BY-NC-SA 4.0 | Requires commercial license |
+| Code samples and scripts | MIT | Permitted |
+
+---
+
+*Last updated: January 2026*
