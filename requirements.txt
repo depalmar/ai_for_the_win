@@ -6,6 +6,16 @@
 #
 # Install with: pip install -r requirements.txt
 # Verify setup: python scripts/verify_setup.py
+#
+# TROUBLESHOOTING:
+# If you get dependency errors, try these in order:
+#   1. pip install --upgrade pip setuptools wheel
+#   2. pip install -r requirements.txt
+#
+# Or use uv for faster, more reliable resolution:
+#   pip install uv && uv pip install -r requirements.txt
+#
+# Last updated: January 2026
 
 # =============================================================================
 # CORE ML/AI LIBRARIES
@@ -15,49 +25,54 @@ pandas>=2.0.0,<3.0.0
 scikit-learn>=1.3.0,<2.0.0
 scipy>=1.11.0,<2.0.0
 
-# Deep Learning
+# Deep Learning (PyTorch only - no TensorFlow to avoid conflicts)
 torch>=2.0.0,<3.0.0
 
 # =============================================================================
 # LLM FRAMEWORKS & ORCHESTRATION
 # =============================================================================
-# LangChain ecosystem (primary framework)
-# NOTE: More specific version bounds to speed up dependency resolution
-langchain>=0.3.0,<2.0.0
-langchain-anthropic>=0.3.0,<2.0.0
-langchain-openai>=0.2.0,<2.0.0
-langchain-google-genai>=2.0.0,<5.0.0
+# LangChain ecosystem - TIGHTLY PINNED to 1.x series (Jan 2026 stable)
+# These packages MUST use compatible versions
+langchain>=1.0.0,<2.0.0
+langchain-anthropic>=1.0.0,<2.0.0
+langchain-openai>=0.3.0,<2.0.0
+langchain-google-genai>=2.0.0,<3.0.0
 langchain-community>=0.3.0,<1.0.0
-langgraph>=0.2.0,<2.0.0
+langgraph>=0.2.0,<1.0.0
 
-# Direct LLM SDKs (for low-level access)
-anthropic>=0.18.0,<1.0.0
-openai>=1.12.0,<3.0.0
-google-generativeai>=0.4.0,<1.0.0
+# Direct LLM SDKs - updated to Jan 2026 versions
+anthropic>=0.70.0,<1.0.0
+openai>=1.50.0,<2.0.0
+google-generativeai>=0.8.0,<1.0.0
 
 # Unified LLM API (supports 100+ providers)
-litellm>=1.0.0,<2.0.0
+litellm>=1.50.0,<2.0.0
 
 # Structured outputs from LLMs
-instructor>=1.0.0,<2.0.0
+instructor>=1.5.0,<2.0.0
 
 # =============================================================================
 # EMBEDDINGS & VECTOR DATABASES
 # =============================================================================
-chromadb>=0.4.0,<2.0.0
-sentence-transformers>=2.2.0,<6.0.0
-tf-keras>=2.16.0  # Required for Keras 3 compatibility with transformers
+# Tightly constrained to avoid cross-package conflicts
+chromadb>=1.0.0,<2.0.0
+sentence-transformers>=5.0.0,<6.0.0
 
-# Hugging Face ecosystem
-transformers>=4.36.0,<5.0.0
-huggingface-hub>=0.20.0,<2.0.0
+# Hugging Face ecosystem - match sentence-transformers requirements
+transformers>=4.40.0,<5.0.0
+huggingface-hub>=0.25.0,<1.0.0
+
+# NOTE: tf-keras REMOVED - it pulls TensorFlow which conflicts with PyTorch
+# If you specifically need Keras 3, install separately: pip install tf-keras
 
 # =============================================================================
 # NLP & TEXT PROCESSING
 # =============================================================================
 nltk>=3.8.0,<4.0.0
-tiktoken>=0.5.0,<1.0.0
-spacy>=3.7.0,<4.0.0
+tiktoken>=0.7.0,<1.0.0
+# spacy - COMMENTED OUT due to frequent numpy/scipy conflicts
+# Uncomment if needed for specific labs: pip install spacy
+# spacy>=3.7.0,<4.0.0
 
 # =============================================================================
 # SECURITY TOOLS
@@ -71,38 +86,43 @@ pefile>=2023.2.7
 requests>=2.31.0,<3.0.0
 python-dotenv>=1.0.0,<2.0.0
 aiohttp>=3.9.0,<4.0.0
-httpx>=0.26.0,<1.0.0
+httpx>=0.27.0,<1.0.0
 
 # Web frameworks
-fastapi>=0.104.0,<1.0.0
-uvicorn>=0.24.0,<1.0.0
+fastapi>=0.110.0,<1.0.0
+uvicorn>=0.27.0,<1.0.0
 
 # UI frameworks
-streamlit>=1.28.0,<2.0.0
-gradio>=6.1.0,<7.0.0  # Updated to v6.1.0 to fix 13 security vulnerabilities (CVE fixes)
+streamlit>=1.35.0,<2.0.0
+gradio>=5.0.0,<7.0.0
 
 # =============================================================================
-# DOCUMENT PROCESSING
+# DOCUMENT PROCESSING (lightweight only)
 # =============================================================================
-pypdf>=3.17.0,<7.0.0
+pypdf>=4.0.0,<5.0.0
 docx2txt>=0.8
-unstructured>=0.12.0,<1.0.0
+
+# NOTE: unstructured REMOVED - notorious for 100+ transitive dependencies
+# causing pip resolution failures. Install separately if needed:
+# pip install "unstructured[all-docs]"
 
 # =============================================================================
 # CLI & VISUALIZATION
 # =============================================================================
-rich>=13.6.0,<14.0.0
-typer>=0.9.0,<1.0.0
+rich>=13.7.0,<14.0.0
+typer>=0.12.0,<1.0.0
 matplotlib>=3.8.0,<4.0.0
 seaborn>=0.13.0,<1.0.0
-plotly>=5.18.0,<7.0.0
+plotly>=5.20.0,<6.0.0
 networkx>=3.2.0,<4.0.0
-kaleido>=0.2.1,<2.0.0
+
+# NOTE: kaleido has Windows installation issues - install separately if needed:
+# pip install kaleido
 
 # =============================================================================
 # JUPYTER & INTERACTIVE
 # =============================================================================
-jupyter>=1.0.0
+notebook>=7.0.0,<8.0.0
 ipywidgets>=8.1.0,<9.0.0
 tqdm>=4.66.0,<5.0.0
 
@@ -115,31 +135,39 @@ pyyaml>=6.0.0,<7.0.0
 # =============================================================================
 # TESTING & CODE QUALITY
 # =============================================================================
-pytest>=7.4.0,<10.0.0
-pytest-cov>=4.1.0,<8.0.0
-pytest-asyncio>=0.21.0,<2.0.0
-black>=23.11.0
-flake8>=6.1.0
-mypy>=1.7.0
+pytest>=8.0.0,<9.0.0
+pytest-cov>=4.1.0,<6.0.0
+pytest-asyncio>=0.23.0,<1.0.0
+black>=24.0.0,<25.0.0
+flake8>=7.0.0,<8.0.0
+mypy>=1.8.0,<2.0.0
 isort>=5.13.0,<6.0.0
 bandit>=1.7.0,<2.0.0
 
 # =============================================================================
-# OPTIONAL: ADVANCED AI TOOLS
+# OPTIONAL PACKAGES - Install separately to avoid dependency conflicts
 # =============================================================================
-# Multi-agent frameworks (uncomment if needed)
-# crewai>=0.1.0
-# autogen>=0.2.0
-
-# Memory systems
-# mem0ai>=0.0.10
-
-# Prompt optimization
-# dspy-ai>=2.0.0
-
-# =============================================================================
-# OPTIONAL: NETWORK & SECURITY ANALYSIS
-# =============================================================================
-# python-nmap>=0.7.1
-# redis>=5.0.0
-# celery>=5.3.0
+# These are commented out because they significantly increase resolution time
+# or have known compatibility issues. Install individually as needed:
+#
+# Heavy NLP:
+#   pip install "spacy>=3.7.0"
+#
+# Document processing (100+ dependencies):
+#   pip install "unstructured[all-docs]"
+#
+# TensorFlow/Keras (conflicts with PyTorch):
+#   pip install tf-keras
+#
+# Plotly export (Windows issues):
+#   pip install kaleido
+#
+# Multi-agent frameworks:
+#   pip install crewai
+#   pip install autogen
+#
+# Memory systems:
+#   pip install mem0ai
+#
+# Prompt optimization:
+#   pip install dspy-ai

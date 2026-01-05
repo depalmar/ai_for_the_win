@@ -9,6 +9,8 @@
 #
 # Or install everything at once:
 #   pip install -r requirements.txt
+#
+# Last updated: January 2026
 
 # =============================================================================
 # INCLUDE CORE DEPENDENCIES
@@ -23,40 +25,41 @@ torch>=2.0.0,<3.0.0
 # =============================================================================
 # LLM FRAMEWORKS & ORCHESTRATION
 # =============================================================================
-# LangChain ecosystem (primary framework)
-langchain>=0.3.0,<2.0.0
-langchain-anthropic>=0.3.0,<2.0.0
-langchain-openai>=0.2.0,<2.0.0
-langchain-google-genai>=2.0.0,<5.0.0
+# LangChain ecosystem - TIGHTLY PINNED to 1.x series (Jan 2026 stable)
+langchain>=1.0.0,<2.0.0
+langchain-anthropic>=1.0.0,<2.0.0
+langchain-openai>=0.3.0,<2.0.0
+langchain-google-genai>=2.0.0,<3.0.0
 langchain-community>=0.3.0,<1.0.0
-langgraph>=0.2.0,<2.0.0
+langgraph>=0.2.0,<1.0.0
 
-# Direct LLM SDKs (for low-level access)
-anthropic>=0.18.0,<1.0.0
-openai>=1.12.0,<3.0.0
-google-generativeai>=0.4.0,<1.0.0
+# Direct LLM SDKs - updated to Jan 2026 versions
+anthropic>=0.70.0,<1.0.0
+openai>=1.50.0,<2.0.0
+google-generativeai>=0.8.0,<1.0.0
 
 # Unified LLM API (supports 100+ providers)
-litellm>=1.0.0,<2.0.0
+litellm>=1.50.0,<2.0.0
 
 # Structured outputs from LLMs
-instructor>=1.0.0,<2.0.0
+instructor>=1.5.0,<2.0.0
 
 # =============================================================================
 # EMBEDDINGS & VECTOR DATABASES
 # =============================================================================
-chromadb>=0.4.0,<2.0.0
-sentence-transformers>=2.2.0,<6.0.0
+chromadb>=1.0.0,<2.0.0
+sentence-transformers>=5.0.0,<6.0.0
 
 # Hugging Face ecosystem
-transformers>=4.36.0,<5.0.0
-huggingface-hub>=0.20.0,<2.0.0
+transformers>=4.40.0,<5.0.0
+huggingface-hub>=0.25.0,<1.0.0
 
 # =============================================================================
 # ADDITIONAL NLP
 # =============================================================================
-tiktoken>=0.5.0,<1.0.0
-spacy>=3.7.0,<4.0.0
+tiktoken>=0.7.0,<1.0.0
+# spacy commented out - install separately if needed: pip install spacy
+# spacy>=3.7.0,<4.0.0
 
 # =============================================================================
 # SECURITY TOOLS (Advanced Labs)
@@ -68,31 +71,31 @@ pefile>=2023.2.7
 # WEB FRAMEWORKS (for demos and APIs)
 # =============================================================================
 aiohttp>=3.9.0,<4.0.0
-httpx>=0.26.0,<1.0.0
-fastapi>=0.104.0,<1.0.0
-uvicorn>=0.24.0,<1.0.0
-streamlit>=1.28.0,<2.0.0
-gradio>=6.1.0,<7.0.0
+httpx>=0.27.0,<1.0.0
+fastapi>=0.110.0,<1.0.0
+uvicorn>=0.27.0,<1.0.0
+streamlit>=1.35.0,<2.0.0
+gradio>=5.0.0,<7.0.0
 
 # =============================================================================
-# DOCUMENT PROCESSING
+# DOCUMENT PROCESSING (lightweight only)
 # =============================================================================
-pypdf>=3.17.0,<7.0.0
+pypdf>=4.0.0,<5.0.0
 docx2txt>=0.8
-unstructured>=0.12.0,<1.0.0
+# unstructured removed - install separately if needed
 
 # =============================================================================
 # ADDITIONAL VISUALIZATION
 # =============================================================================
-plotly>=5.18.0,<7.0.0
+plotly>=5.20.0,<6.0.0
 networkx>=3.2.0,<4.0.0
-kaleido>=0.2.1,<2.0.0
-typer>=0.9.0,<1.0.0
+typer>=0.12.0,<1.0.0
+# kaleido removed - install separately if needed (Windows issues)
 
 # =============================================================================
 # ADDITIONAL TESTING
 # =============================================================================
-pytest-asyncio>=0.21.0,<2.0.0
-flake8>=6.1.0
-mypy>=1.7.0
+pytest-asyncio>=0.23.0,<1.0.0
+flake8>=7.0.0,<8.0.0
+mypy>=1.8.0,<2.0.0
 bandit>=1.7.0,<2.0.0
