@@ -31,7 +31,7 @@ langchain-anthropic>=1.0.0,<2.0.0
 langchain-openai>=0.3.0,<2.0.0
 langchain-google-genai>=2.0.0,<3.0.0
 langchain-community>=0.3.0,<1.0.0
-langgraph>=0.2.0,<1.0.0
+langgraph>=1.0.0,<2.0.0
 
 # Direct LLM SDKs - updated to Jan 2026 versions
 anthropic>=0.70.0,<1.0.0
