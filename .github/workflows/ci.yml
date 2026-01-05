@@ -76,27 +76,16 @@ jobs:
         run: |
           # Run lab tests excluding those requiring API keys
           # Use -m "not requires_api" to skip tests marked with @pytest.mark.requires_api
-          pytest tests/test_lab*.py -v --tb=short -m "not requires_api" || echo "::warning::Some tests failed. Review test output above."
+          pytest tests/test_lab*.py -v --tb=short -m "not requires_api"
         env:
           PYTHONPATH: ${{ github.workspace }}
-        continue-on-error: true # Don't block CI - tests need marker cleanup
-
-      - name: Run API-dependent tests (if key available)
-        if: matrix.python-version == '3.11' && env.ANTHROPIC_API_KEY != ''
-        run: |
-          pytest tests/test_lab*.py -v --tb=short -m "requires_api"
-        env:
-          PYTHONPATH: ${{ github.workspace }}
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        continue-on-error: true # Don't fail CI if API tests fail
 
       - name: Run tests with coverage
         run: |
-          pytest tests/test_lab*.py --cov=labs --cov-report=xml --cov-report=term-missing -m "not requires_api" || true
+          pytest tests/test_lab*.py --cov=labs --cov-report=xml --cov-report=term-missing -m "not requires_api"
         env:
           PYTHONPATH: ${{ github.workspace }}
         if: matrix.python-version == '3.11'
-        continue-on-error: true
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v5

@@ -7,7 +7,7 @@
 ### Build AI-Powered Security Tools | Hands-On Learning
 
 [![CI](https://github.com/depalmar/ai_for_the_win/actions/workflows/ci.yml/badge.svg)](https://github.com/depalmar/ai_for_the_win/actions/workflows/ci.yml)
-[![Tests](https://img.shields.io/badge/tests-839%2F839%20passing-brightgreen)](https://github.com/depalmar/ai_for_the_win/actions/workflows/ci.yml)
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/depalmar/ai_for_the_win/badge)](https://scorecard.dev/viewer/?uri=github.com/depalmar/ai_for_the_win)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc/4.0/)
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab01_phishing_classifier.ipynb)
