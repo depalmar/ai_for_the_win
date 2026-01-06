@@ -1,8 +1,9 @@
 # AI for the Win - Dependencies
 # Security AI Training Program
 #
-# REQUIREMENTS: Python 3.10 or higher
-# (Python 3.9 is no longer supported due to Gradio 6.x security requirements)
+# REQUIREMENTS: Python 3.10, 3.11, or 3.12 (tested and supported)
+# Python 3.13 may work but is not fully tested
+# Python 3.14 is NOT YET supported - PyTorch lacks 3.14 wheels (as of Jan 2026)
 #
 # Install with: pip install -r requirements.txt
 # Verify setup: python scripts/verify_setup.py
