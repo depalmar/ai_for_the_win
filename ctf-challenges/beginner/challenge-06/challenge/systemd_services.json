@@ -1,0 +1,80 @@
+[
+  {
+    "filename": "/etc/systemd/system/nginx.service",
+    "unit": {
+      "description": "A high performance web server and reverse proxy server",
+      "after": "network.target"
+    },
+    "service": {
+      "type": "forking",
+      "exec_start": "/usr/sbin/nginx",
+      "exec_reload": "/bin/kill -s HUP $MAINPID",
+      "exec_stop": "/bin/kill -s QUIT $MAINPID"
+    },
+    "install": {
+      "wanted_by": "multi-user.target"
+    }
+  },
+  {
+    "filename": "/etc/systemd/system/mysql.service",
+    "unit": {
+      "description": "MySQL Community Server",
+      "after": "network.target"
+    },
+    "service": {
+      "type": "forking",
+      "exec_start": "/usr/bin/mysqld_safe",
+      "pid_file": "/var/run/mysqld/mysqld.pid"
+    },
+    "install": {
+      "wanted_by": "multi-user.target"
+    }
+  },
+  {
+    "filename": "/etc/systemd/system/system-update.service",
+    "unit": {
+      "description": "FLAG{L1NUX_P3RS1ST3NC3_HUNT3D}",
+      "after": "network-online.target",
+      "wants": "network-online.target"
+    },
+    "service": {
+      "type": "simple",
+      "exec_start": "/usr/local/bin/system-update",
+      "restart": "always",
+      "restart_sec": "60"
+    },
+    "install": {
+      "wanted_by": "multi-user.target"
+    }
+  },
+  {
+    "filename": "/etc/systemd/system/redis.service",
+    "unit": {
+      "description": "Redis In-Memory Data Store",
+      "after": "network.target"
+    },
+    "service": {
+      "type": "simple",
+      "exec_start": "/usr/bin/redis-server /etc/redis/redis.conf",
+      "exec_stop": "/usr/bin/redis-cli shutdown"
+    },
+    "install": {
+      "wanted_by": "multi-user.target"
+    }
+  },
+  {
+    "filename": "/etc/systemd/system/docker.service",
+    "unit": {
+      "description": "Docker Application Container Engine",
+      "after": "network-online.target firewalld.service containerd.service"
+    },
+    "service": {
+      "type": "notify",
+      "exec_start": "/usr/bin/dockerd -H fd://",
+      "exec_reload": "/bin/kill -s HUP $MAINPID"
+    },
+    "install": {
+      "wanted_by": "multi-user.target"
+    }
+  }
+]

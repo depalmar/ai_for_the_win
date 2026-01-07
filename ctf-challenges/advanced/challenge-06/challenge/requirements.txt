@@ -1,0 +1,44 @@
+# Project Dependencies
+# Last updated: 2024-02-15
+
+# Web framework
+flask==3.0.0
+werkzeug==3.0.1
+
+# Database
+sqlalchemy==2.0.25
+psycopg2-binary==2.9.9
+
+# HTTP client
+requests==2.31.0
+urllib3==2.1.0
+
+# Data processing
+pandas==2.2.0
+numpy==1.26.3
+
+# Security
+cryptography==42.0.0
+pyjwt==2.8.0
+
+# Utilities
+python-dotenv==1.0.0
+pyyaml==6.0.1
+
+# CLI
+click==8.1.7
+rich==13.7.0
+
+# Testing
+pytest==7.4.4
+pytest-cov==4.1.0
+
+# Type checking
+mypy==1.8.0
+
+# Formatting
+black==24.1.0
+isort==5.13.2
+
+# Typosquatted package (malicious)
+reqeusts==1.0.0

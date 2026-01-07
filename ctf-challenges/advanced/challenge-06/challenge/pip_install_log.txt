@@ -1,0 +1,54 @@
+Collecting flask==3.0.0
+  Downloading Flask-3.0.0-py3-none-any.whl (99 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 99.7/99.7 kB 2.5 MB/s eta 0:00:00
+Collecting werkzeug==3.0.1
+  Downloading Werkzeug-3.0.1-py3-none-any.whl (226 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 226.7/226.7 kB 5.1 MB/s eta 0:00:00
+Collecting sqlalchemy==2.0.25
+  Downloading SQLAlchemy-2.0.25-cp311-cp311-linux_x86_64.whl (2.1 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 8.2 MB/s eta 0:00:00
+Collecting requests==2.31.0
+  Downloading requests-2.31.0-py3-none-any.whl (62 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 62.6/62.6 kB 3.1 MB/s eta 0:00:00
+Collecting pandas==2.2.0
+  Downloading pandas-2.2.0-cp311-cp311-linux_x86_64.whl (13.0 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 13.0/13.0 MB 12.5 MB/s eta 0:00:00
+Collecting numpy==1.26.3
+  Downloading numpy-1.26.3-cp311-cp311-linux_x86_64.whl (18.3 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 18.3/18.3 MB 15.2 MB/s eta 0:00:00
+Collecting cryptography==42.0.0
+  Downloading cryptography-42.0.0-cp39-abi3-linux_x86_64.whl (4.5 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.5/4.5 MB 9.8 MB/s eta 0:00:00
+Collecting pyjwt==2.8.0
+  Downloading PyJWT-2.8.0-py3-none-any.whl (22 kB)
+Collecting python-dotenv==1.0.0
+  Downloading python_dotenv-1.0.0-py3-none-any.whl (19 kB)
+Collecting pyyaml==6.0.1
+  Downloading PyYAML-6.0.1-cp311-cp311-linux_x86_64.whl (253 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 253.5/253.5 kB 6.2 MB/s eta 0:00:00
+Collecting click==8.1.7
+  Downloading click-8.1.7-py3-none-any.whl (97 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 97.9/97.9 kB 4.1 MB/s eta 0:00:00
+Collecting rich==13.7.0
+  Downloading rich-13.7.0-py3-none-any.whl (240 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 240.6/240.6 kB 5.8 MB/s eta 0:00:00
+Collecting pytest==7.4.4
+  Downloading pytest-7.4.4-py3-none-any.whl (325 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 325.2/325.2 kB 7.1 MB/s eta 0:00:00
+Collecting reqeusts==1.0.0
+  Downloading reqeusts-1.0.0.tar.gz (2.1 kB)
+  Preparing metadata (setup.py) ... done
+  WARNING: This package has a post-install script that will execute code.
+Building wheels for collected packages: reqeusts
+  Building wheel for reqeusts (setup.py) ... done
+  Created wheel for reqeusts: filename=reqeusts-1.0.0-py3-none-any.whl size=1578 sha256=a1b2c3d4...
+  Stored in directory: /root/.cache/pip/wheels/...
+Successfully built reqeusts
+Installing collected packages: pyyaml, pyjwt, python-dotenv, numpy, click, werkzeug, urllib3,
+    sqlalchemy, rich, requests, reqeusts, pytest, pandas, flask, cryptography
+Successfully installed click-8.1.7 cryptography-42.0.0 flask-3.0.0 numpy-1.26.3 pandas-2.2.0
+    pyjwt-2.8.0 pytest-7.4.4 python-dotenv-1.0.0 pyyaml-6.0.1 reqeusts-1.0.0 requests-2.31.0
+    rich-13.7.0 sqlalchemy-2.0.25 urllib3-2.1.0 werkzeug-3.0.1
+
+[notice] A new release of pip is available: 23.3.1 -> 24.0
+[notice] To update, run: pip install --upgrade pip
