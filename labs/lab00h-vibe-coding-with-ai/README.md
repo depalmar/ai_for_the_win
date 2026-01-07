@@ -94,7 +94,6 @@ Claude Code has advanced features that make it especially powerful for security 
 **Custom Skills** - This course includes pre-built skills for security tasks:
 ```bash
 /ioc-extractor      # Extract IOCs from text or logs
-/xql-detect         # Generate Cortex XDR detection queries
 /sigma-convert      # Convert Sigma rules to various formats
 /threat-hunt        # Build threat hunting queries
 /log-parser         # Parse common log formats
@@ -250,7 +249,7 @@ If you're using Claude Code with this course's custom skills, try these:
 1. Paste some sample log data or describe a threat scenario
 2. Use `/ioc-extractor` to pull out indicators
 3. Use `/threat-hunt` to build a detection query
-4. Use `/xql-detect` if you work with Cortex XDR
+4. Use `/sigma-convert` to create platform-specific rules
 
 > **Note**: Custom skills are defined in your Claude Code configuration. Run `/README` to see all available skills for this course.
 
