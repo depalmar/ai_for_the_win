@@ -3,22 +3,22 @@
 
 # Web framework
 flask==3.0.0
-werkzeug==3.0.1
+werkzeug==3.1.4
 
 # Database
 sqlalchemy==2.0.25
 psycopg2-binary==2.9.9
 
 # HTTP client
-requests==2.31.0
-urllib3==2.1.0
+requests==2.32.4
+urllib3==2.6.3
 
 # Data processing
 pandas==2.2.0
 numpy==1.26.3
 
 # Security
-cryptography==42.0.0
+cryptography==44.0.1
 pyjwt==2.8.0
 
 # Utilities
@@ -37,7 +37,7 @@ pytest-cov==4.1.0
 mypy==1.8.0
 
 # Formatting
-black==24.1.0
+black==24.3.0
 isort==5.13.2
 
 # Utility
