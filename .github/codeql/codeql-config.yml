@@ -11,4 +11,3 @@ paths-ignore:
 query-filters:
   - exclude:
       id: py/clear-text-logging-sensitive-data
-      tags contain: security
