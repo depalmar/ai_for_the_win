@@ -15,6 +15,7 @@ By the end of this lab, you will be able to:
 3. **Iterate and refine** AI-generated code through conversation
 4. **Understand the code** AI generates (not just copy-paste blindly)
 5. **Apply vibe coding** techniques to accelerate your learning in subsequent labs
+6. **Use Claude Code's advanced features** including slash commands, custom skills, and MCP servers
 
 ## Time Estimate
 
@@ -75,6 +76,52 @@ claude
 - Can read, write, and edit files
 - Understands project context
 - Great for security-focused development
+
+**Claude Code Power Features:**
+
+Claude Code has advanced features that make it especially powerful for security work:
+
+**Slash Commands** - Quick actions you can invoke:
+```bash
+/help          # Get help with Claude Code
+/clear         # Clear conversation history
+/compact       # Summarize conversation to save context
+/init          # Initialize CLAUDE.md project instructions
+/memory        # Edit persistent memory across sessions
+/mcp           # Configure Model Context Protocol servers
+```
+
+**Custom Skills** - This course includes pre-built skills for security tasks:
+```bash
+/ioc-extractor      # Extract IOCs from text or logs
+/xql-detect         # Generate Cortex XDR detection queries
+/sigma-convert      # Convert Sigma rules to various formats
+/threat-hunt        # Build threat hunting queries
+/log-parser         # Parse common log formats
+/dfir-analyze       # Analyze DFIR datasets
+```
+
+**MCP (Model Context Protocol)** - Connect Claude to external tools:
+```bash
+# Example: Enable Brave Search for threat intel research
+/mcp
+
+# MCP servers can provide:
+# - Web search for threat intelligence
+# - Database queries for log analysis
+# - API integrations for enrichment
+```
+
+**Memory & Context** - Claude remembers across sessions:
+```bash
+# Store investigation context
+/memory add "Current incident: Ransomware on WORKSTATION01"
+
+# View stored memories
+/memory
+```
+
+> **Pro Tip**: Run `/help` in Claude Code to see all available commands and features!
 
 ### Option B: Cursor IDE
 
@@ -183,6 +230,29 @@ Ask your AI assistant:
 ```
 Explain this code line by line. Are there any security concerns I should be aware of?
 ```
+
+### Exercise 4: Using Claude Code Skills (Optional)
+
+If you're using Claude Code with this course's custom skills, try these:
+
+```bash
+# Extract IOCs from sample log data
+/ioc-extractor
+
+# Generate a threat hunting query
+/threat-hunt
+
+# Parse a log file
+/log-parser
+```
+
+**Try this workflow:**
+1. Paste some sample log data or describe a threat scenario
+2. Use `/ioc-extractor` to pull out indicators
+3. Use `/threat-hunt` to build a detection query
+4. Use `/xql-detect` if you work with Cortex XDR
+
+> **Note**: Custom skills are defined in your Claude Code configuration. Run `/README` to see all available skills for this course.
 
 ---
 
