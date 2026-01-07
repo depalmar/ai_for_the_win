@@ -353,14 +353,20 @@ def analyze_password(password: str) -> dict:
 
 
 def get_strength_label(score: int) -> str:
-    """Convert numeric score to strength label."""
+    """Convert numeric score to strength label.
+
+    Thresholds are calibrated to maximum achievable score of 75:
+    - Length: max 30 points
+    - Character variety: max 30 points
+    - Entropy bonus: max 15 points
+    """
     if score < 20:
         return "Very Weak"
-    elif score < 40:
+    elif score < 35:
         return "Weak"
-    elif score < 60:
+    elif score < 50:
         return "Fair"
-    elif score < 80:
+    elif score < 65:
         return "Strong"
     else:
         return "Very Strong"
