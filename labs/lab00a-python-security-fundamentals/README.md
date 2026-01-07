@@ -1245,3 +1245,9 @@ import os             # Environment variables
 import pandas as pd   # Data analysis
 from typing import List, Dict, Optional  # Type hints
 ```
+
+---
+
+**Next Lab:** [Lab 00b: ML Concepts Primer](../lab00b-ml-concepts-primer/) - Understand machine learning concepts before coding
+
+Or jump to: [Lab 01: Phishing Classifier](../lab01-phishing-classifier/) - Build your first ML security tool

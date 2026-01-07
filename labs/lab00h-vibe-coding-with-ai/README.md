@@ -463,3 +463,9 @@ Now that you're equipped with vibe coding skills, you'll use them throughout the
 ---
 
 *Remember: AI is your copilot, not your autopilot. Stay in control, understand your code, and enjoy the accelerated learning journey!*
+
+---
+
+**Next Lab:** [Lab 00i: CTF Fundamentals](../lab00i-ctf-fundamentals/) - Learn the CTF mindset before tackling security challenges
+
+Or jump to: [Lab 01: Phishing Classifier](../lab01-phishing-classifier/) - Build your first ML security tool with AI assistance

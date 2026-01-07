@@ -1144,3 +1144,9 @@ These are guiding principles to consider, not universal rules:
 ---
 
 *Last updated: January 2026*
+
+---
+
+**Next Lab:** [Lab 00e: Visualization & Statistics](../lab00e-visualization-stats/) - Master data visualization and statistical analysis for security data
+
+Or jump to: [Lab 01: Phishing Classifier](../lab01-phishing-classifier/) - Build your first ML security tool

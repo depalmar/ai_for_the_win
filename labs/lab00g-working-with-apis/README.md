@@ -627,4 +627,10 @@ Now that you can work with APIs:
 - **Lab 05**: Build an agent with threat intel API tools
 - **Lab 06**: Implement RAG with embedding APIs
 
-You're ready for LLM-powered security tools! 🚀
+You're ready for LLM-powered security tools!
+
+---
+
+**Next Lab:** [Lab 00h: Vibe Coding with AI](../lab00h-vibe-coding-with-ai/) - Learn to collaborate with AI assistants for faster development
+
+Or jump to: [Lab 01: Phishing Classifier](../lab01-phishing-classifier/) - Build your first ML security tool

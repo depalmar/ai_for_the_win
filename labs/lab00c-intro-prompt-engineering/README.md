@@ -750,4 +750,6 @@ without worrying about API keys or code syntax.
 
 ---
 
-Happy prompting! 🔐🤖
+**Next Lab:** [Lab 00d: AI in Security Operations](../lab00d-ai-in-security-operations/) - See how AI fits into SOC workflows
+
+Or jump to: [Lab 01: Phishing Classifier](../lab01-phishing-classifier/) - Build your first ML security tool

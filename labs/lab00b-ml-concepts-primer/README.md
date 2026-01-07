@@ -841,3 +841,9 @@ You now understand the concepts! Time to code:
 - [Scikit-learn Tutorials](https://scikit-learn.org/stable/tutorial/) - Hands-on Python ML
 - [MITRE ATLAS](https://atlas.mitre.org/) - Adversarial ML threats
 - [Malware Data Science Book](https://nostarch.com/malwaredatascience) - Security-focused ML
+
+---
+
+**Next Lab:** [Lab 00c: Intro Prompt Engineering](../lab00c-intro-prompt-engineering/) - Learn to communicate effectively with AI
+
+Or jump to: [Lab 01: Phishing Classifier](../lab01-phishing-classifier/) - Build your first ML security tool

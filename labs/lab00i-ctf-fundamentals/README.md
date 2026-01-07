@@ -393,6 +393,14 @@ Good luck, and happy hunting!
 
 ---
 
+**You've completed the intro labs!** You're now ready for the main course:
+
+**Next Lab:** [Lab 01: Phishing Classifier](../lab01-phishing-classifier/) - Build your first ML security tool
+
+Or explore: [CTF Challenges](../../ctf/) - Test your skills with capture-the-flag challenges
+
+---
+
 ## Quick Reference Card
 
 ```

@@ -151,6 +151,17 @@ High Confidence: FIN7/Carbanak
 
 ---
 
+## 🚀 START HERE
+
+| New to this? | Start with |
+|--------------|------------|
+| **Complete beginner** | [Lab 00a: Python Fundamentals](./labs/lab00a-python-security-fundamentals/) |
+| **Know Python** | [Lab 00f: Hello World ML](./labs/lab00f-hello-world-ml/) |
+| **Ready for hands-on** | [Lab 01: Phishing Classifier](./labs/lab01-phishing-classifier/) |
+| **Want challenges** | [CTF Challenges](./ctf/) - 18 capture-the-flag security puzzles |
+
+---
+
 ## 📚 Learning Paths
 
 ### Recommended Progression

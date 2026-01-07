@@ -291,4 +291,10 @@ Now that you understand the ML workflow:
 - **Lab 02**: Learn unsupervised learning (clustering) for malware
 - **Lab 03**: Detect anomalies in network traffic
 
-You're ready! 🚀
+You're ready!
+
+---
+
+**Next Lab:** [Lab 00g: Working with APIs](../lab00g-working-with-apis/) - Learn to make HTTP requests and work with security APIs
+
+Or jump to: [Lab 01: Phishing Classifier](../lab01-phishing-classifier/) - Apply your ML skills to a real security problem

@@ -462,3 +462,9 @@ demo.launch()
 - [Gradio Documentation](https://gradio.app/docs/)
 - [Pandas Visualization Guide](https://pandas.pydata.org/docs/user_guide/visualization.html)
 - [Security Data Visualization Best Practices](https://www.sans.org/white-papers/)
+
+---
+
+**Next Lab:** [Lab 00f: Hello World ML](../lab00f-hello-world-ml/) - Build your first machine learning model
+
+Or jump to: [Lab 01: Phishing Classifier](../lab01-phishing-classifier/) - Apply ML to real security problems
