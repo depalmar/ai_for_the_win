@@ -1,0 +1,11 @@
+# Dependency Review Configuration
+# https://github.com/actions/dependency-review-action
+
+# Fail on high severity vulnerabilities
+fail-on-severity: high
+
+# Allow vulnerabilities in CTF challenge files
+# These intentionally contain vulnerable dependencies for educational purposes
+allow-ghsas:
+  # cryptography NULL pointer dereference - used in supply chain CTF challenge
+  - GHSA-6vqw-3v5j-54x4
