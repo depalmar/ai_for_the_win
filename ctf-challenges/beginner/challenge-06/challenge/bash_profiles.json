@@ -1,0 +1,17 @@
+[
+  {
+    "user": "root",
+    "file": "/root/.bashrc",
+    "content": "# ~/.bashrc: executed by bash(1) for non-login shells.\n\n# If not running interactively, don't do anything\ncase $- in\n    *i*) ;;\n      *) return;;\nesac\n\n# History settings\nHISTCONTROL=ignoreboth\nHISTSIZE=1000\nHISTFILESIZE=2000\n\n# Aliases\nalias ll='ls -alF'\nalias la='ls -A'\nalias l='ls -CF'\nalias grep='grep --color=auto'\n\n# Custom prompt\nPS1='\\[\\033[01;31m\\]\\u@\\h\\[\\033[00m\\]:\\[\\033[01;34m\\]\\w\\[\\033[00m\\]\\$ '\n\nexport PATH=$PATH:/usr/local/bin\n"
+  },
+  {
+    "user": "ubuntu",
+    "file": "/home/ubuntu/.bashrc",
+    "content": "# ~/.bashrc: executed by bash(1) for non-login shells.\n\n# If not running interactively, don't do anything\ncase $- in\n    *i*) ;;\n      *) return;;\nesac\n\n# History settings\nHISTCONTROL=ignoreboth\nHISTSIZE=1000\nHISTFILESIZE=2000\n\n# Aliases\nalias ll='ls -alF'\nalias la='ls -A'\nalias l='ls -CF'\n\n# Enable color support\nif [ -x /usr/bin/dircolors ]; then\n    test -r ~/.dircolors && eval \"$(dircolors -b ~/.dircolors)\" || eval \"$(dircolors -b)\"\n    alias ls='ls --color=auto'\n    alias grep='grep --color=auto'\nfi\n\n# Custom functions\nfunction extract() {\n    if [ -f $1 ] ; then\n        case $1 in\n            *.tar.bz2)   tar xjf $1   ;;\n            *.tar.gz)    tar xzf $1   ;;\n            *.bz2)       bunzip2 $1   ;;\n            *.rar)       unrar x $1   ;;\n            *.gz)        gunzip $1    ;;\n            *.tar)       tar xf $1    ;;\n            *.tbz2)      tar xjf $1   ;;\n            *.tgz)       tar xzf $1   ;;\n            *.zip)       unzip $1     ;;\n            *.Z)         uncompress $1;;\n            *.7z)        7z x $1      ;;\n            *)           echo \"'$1' cannot be extracted\" ;;\n        esac\n    else\n        echo \"'$1' is not a valid file\"\n    fi\n}\n"
+  },
+  {
+    "user": "www-data",
+    "file": "/var/www/.bashrc",
+    "content": "# Minimal bashrc for www-data\nexport PATH=/usr/local/bin:/usr/bin:/bin\n"
+  }
+]

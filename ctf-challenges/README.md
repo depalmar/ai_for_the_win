@@ -9,12 +9,12 @@ Capture The Flag challenges to test your AI-powered security skills.
 |                                                                             |
 |   BEGINNER              INTERMEDIATE            ADVANCED                    |
 |   ┌──────────┐          ┌──────────┐           ┌──────────┐                |
-|   │ 5 Flags  │          │ 5 Flags  │           │ 5 Flags  │                |
+|   │ 6 Flags  │          │ 6 Flags  │           │ 6 Flags  │                |
 |   │ 100 pts  │          │ 250 pts  │           │ 500 pts  │                |
 |   │ each     │          │ each     │           │ each     │                |
 |   └──────────┘          └──────────┘           └──────────┘                |
 |                                                                             |
-|   Total: 15 challenges | 4250 points possible                              |
+|   Total: 18 challenges | 5100 points possible                              |
 |                                                                             |
 +-----------------------------------------------------------------------------+
 ```
@@ -59,6 +59,7 @@ python scripts/verify_flag.py beginner-01 "FLAG{your_answer}"
 | 03 | [Hidden IOC](./beginner/challenge-03/) | Threat Intel | Data parsing, regex |
 | 04 | [Malware Classifier](./beginner/challenge-04/) | ML | Feature engineering, model training |
 | 05 | [Prompt Injection 101](./beginner/challenge-05/) | AI Security | Understanding prompt attacks |
+| 06 | [Linux Persistence Hunter](./beginner/challenge-06/) | Linux DFIR | Persistence mechanisms, system forensics |
 
 ## Intermediate Challenges (250 pts each)
 
@@ -69,6 +70,7 @@ python scripts/verify_flag.py beginner-01 "FLAG{your_answer}"
 | 03 | [Adversarial Samples](./intermediate/challenge-03/) | ML Security | Evasion attacks |
 | 04 | [Agent Investigation](./intermediate/challenge-04/) | AI Agents | ReAct pattern, tool use |
 | 05 | [Ransomware Response](./intermediate/challenge-05/) | IR | Incident analysis, LLM assistance |
+| 06 | [Web Shell Detective](./intermediate/challenge-06/) | Web Security | Apache logs, web shell detection |
 
 ## Advanced Challenges (500 pts each)
 
@@ -79,6 +81,7 @@ python scripts/verify_flag.py beginner-01 "FLAG{your_answer}"
 | 03 | [Cloud Compromise](./advanced/challenge-03/) | Cloud Security | Multi-cloud, lateral movement |
 | 04 | [Zero-Day Detection](./advanced/challenge-04/) | Detection | Anomaly detection, unknown threats |
 | 05 | [Full IR Scenario](./advanced/challenge-05/) | DFIR | Complete incident response |
+| 06 | [Supply Chain Detective](./advanced/challenge-06/) | Supply Chain | Dependency analysis, typosquatting |
 
 ---
 
@@ -97,7 +100,7 @@ Progress through the ranks as you earn points:
 | 1500+ | Senior Analyst | ⚔️ |
 | 2500+ | Threat Hunter | 🎯 |
 | 3500+ | Security Architect | 🏛️ |
-| 4250 | CISO Material | 👑 |
+| 5100 | CISO Material | 👑 |
 
 ### Achievements
 
@@ -110,7 +113,7 @@ Unlock achievements for special accomplishments:
 | ⚡ Speed Demon | Solve a challenge in under 10 minutes | 100 |
 | 🧠 Purist | Complete a challenge without hints | 75 |
 | 🔥 On Fire | 3 challenges in a row | 150 |
-| 🎯 Completionist | Capture all 15 flags | 1000 |
+| 🎯 Completionist | Capture all 18 flags | 1000 |
 
 ### Specialization Badges
 
@@ -131,28 +134,31 @@ Earn badges by mastering specific domains:
 Track your progress:
 
 ```
-[ ] Beginner Challenges (500 pts)
-    [ ] 01 - Log Detective (FLAG{BRUT3_F0RC3_4TT4CK_D3T3CT3D})
-    [ ] 02 - Phish Finder (FLAG{PH1SH1NG_D3T3CT3D_CHK_H34D3RS})
+[ ] Beginner Challenges (600 pts)
+    [ ] 01 - Log Detective
+    [ ] 02 - Phish Finder
     [ ] 03 - Hidden IOC
     [ ] 04 - Malware Classifier
     [ ] 05 - Prompt Injection 101
+    [ ] 06 - Linux Persistence Hunter
 
-[ ] Intermediate Challenges (1250 pts)
+[ ] Intermediate Challenges (1500 pts)
     [ ] 01 - C2 Hunter
     [ ] 02 - Memory Forensics
     [ ] 03 - Adversarial Samples
     [ ] 04 - Agent Investigation
-    [ ] 05 - Ransomware Response (FLAG{R4NS0M_N0T3_4N4LYZ3D})
+    [ ] 05 - Ransomware Response
+    [ ] 06 - Web Shell Detective
 
-[ ] Advanced Challenges (2500 pts)
-    [ ] 01 - APT Attribution (FLAG{APT29_GN_2008})
+[ ] Advanced Challenges (3000 pts)
+    [ ] 01 - APT Attribution
     [ ] 02 - Model Poisoning
     [ ] 03 - Cloud Compromise
     [ ] 04 - Zero-Day Detection
     [ ] 05 - Full IR Scenario
+    [ ] 06 - Supply Chain Detective
 
-Total: _____ / 4250 points
+Total: _____ / 5100 points
 Achievements: _____ / 15 unlocked
 Current Rank: ____________
 ```
@@ -211,6 +217,7 @@ Complete these labs before attempting CTF challenges for the best experience:
 | Hidden IOC | [Lab 05: Threat Intel Agent](../labs/lab05-threat-intel-agent/) | Learn IOC extraction and correlation |
 | Malware Classifier | [Lab 02: Malware Clustering](../labs/lab02-malware-clustering/) | Understand feature engineering for malware |
 | Prompt Injection 101 | [Lab 20: LLM Red Teaming](../labs/lab20-llm-red-teaming/) | Learn prompt injection fundamentals |
+| Linux Persistence Hunter | [Lab 00i: CTF Fundamentals](../labs/lab00i-ctf-fundamentals/) | Learn CTF mindset and systematic searching |
 
 ### Intermediate Challenges
 
@@ -221,6 +228,7 @@ Complete these labs before attempting CTF challenges for the best experience:
 | Adversarial Samples | [Lab 17: Adversarial ML](../labs/lab17-adversarial-ml/) | Understand ML evasion techniques |
 | Agent Investigation | [Lab 04b: First AI Agent](../labs/lab04b-first-ai-agent/) | Learn ReAct pattern and tool calling |
 | Ransomware Response | [Lab 11: Ransomware Detection](../labs/lab11-ransomware-detection/) | Master ransomware analysis techniques |
+| Web Shell Detective | [Lab 00i: CTF Fundamentals](../labs/lab00i-ctf-fundamentals/) | Learn decoding and log analysis techniques |
 
 ### Advanced Challenges
 
@@ -231,6 +239,7 @@ Complete these labs before attempting CTF challenges for the best experience:
 | Cloud Compromise | [Lab 19: Cloud Security AI](../labs/lab19-cloud-security-ai/) | Multi-cloud security monitoring |
 | Zero-Day Detection | [Lab 03: Anomaly Detection](../labs/lab03-anomaly-detection/) | Build anomaly detection systems |
 | Full IR Scenario | [Lab 10: IR Copilot](../labs/lab10-ir-copilot/) | Complete incident response workflow |
+| Supply Chain Detective | [Lab 00i: CTF Fundamentals](../labs/lab00i-ctf-fundamentals/) | Learn package security and dependency analysis |
 
 ---
 

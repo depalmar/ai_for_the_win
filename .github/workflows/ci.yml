@@ -18,6 +18,8 @@ jobs:
   lint:
     name: Lint
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
 
@@ -47,6 +49,8 @@ jobs:
   test:
     name: Test
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     strategy:
       matrix:
         python-version: ['3.10', '3.11', '3.12']
@@ -101,6 +105,8 @@ jobs:
   security:
     name: Security Scan
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
 
@@ -130,6 +136,8 @@ jobs:
   docs:
     name: Documentation Check
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
 
@@ -152,6 +160,8 @@ jobs:
   integration:
     name: Integration Tests
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     # Only run on push to main/develop or if API key is configured
     if: github.event_name == 'push'
     steps:

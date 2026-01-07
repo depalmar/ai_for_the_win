@@ -1,0 +1,27 @@
+{
+  "name": "project-frontend",
+  "version": "1.0.0",
+  "description": "Frontend application",
+  "main": "index.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "lint": "eslint src/"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.21.2",
+    "axios": "^1.6.5",
+    "lodash": "^4.17.21",
+    "moment": "^2.30.1"
+  },
+  "devDependencies": {
+    "react-scripts": "5.0.1",
+    "eslint": "^8.56.0",
+    "prettier": "^3.2.4",
+    "@types/react": "^18.2.48",
+    "typescript": "^5.3.3"
+  }
+}

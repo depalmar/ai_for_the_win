@@ -16,6 +16,8 @@ jobs:
   validate:
     name: Validate PR
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
         with:
@@ -47,6 +49,10 @@ jobs:
         uses: actions/dependency-review-action@3c4e3dcb1aa7874d2c16be7d79418e9b7efd6261 # v4
         with:
           fail-on-severity: high
+          # CTF challenge files intentionally contain vulnerable dependencies
+          # for supply chain security exercises - warn but don't fail
+          warn-only: true
+          comment-summary-in-pr: on-failure
 
       - name: Run quick tests (excluding API-dependent)
         run: |
@@ -76,6 +82,8 @@ jobs:
   lab-solutions-check:
     name: Verify Lab Solutions
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
 

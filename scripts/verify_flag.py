@@ -49,6 +49,12 @@ CHALLENGES = {
         "title": "Prompt Injection 101",
         "category": "LLM Security",
     },
+    "beginner-06": {
+        "hash": "e1f3a5c7b9d1e3f5a7c9b1d3e5f7a9c1b3d5e7f9a1c3b5d7e9f1a3c5b7d9e1f3",  # FLAG{L1NUX_P3RS1ST3NC3_HUNT3D}
+        "points": 100,
+        "title": "Linux Persistence Hunter",
+        "category": "Linux DFIR",
+    },
     # Intermediate Challenges (250 pts each)
     "intermediate-01": {
         "hash": "e3f5a7c9b1d3e5f7a9c1b3d5e7f9a1c3b5d7e9f1a3c5b7d9e1f3a5c7b9d1e3f5",  # FLAG{C2_HUNT3R}
@@ -79,6 +85,12 @@ CHALLENGES = {
         "points": 250,
         "title": "Ransomware Response",
         "category": "Incident Response",
+    },
+    "intermediate-06": {
+        "hash": "d8e0f2a4c6b8d0e2f4a6c8b0d2e4f6a8c0b2d4e6f8a0c2b4d6e8f0a2c4b6d8e1",  # FLAG{W3B_SHELL_DETECTED}
+        "points": 250,
+        "title": "Web Shell Detective",
+        "category": "Web Security",
     },
     # Advanced Challenges (500 pts each)
     "advanced-01": {
@@ -111,6 +123,12 @@ CHALLENGES = {
         "title": "Full IR Scenario",
         "category": "Incident Response",
     },
+    "advanced-06": {
+        "hash": "e9f1a3c5b7d9e1f3a5c7b9d1e3f5a7c9b1d3e5f7a9c1b3d5e7f9a1c3b5d7e9f2",  # FLAG{SUPPLY_CHA1N_ATT4CK}
+        "points": 500,
+        "title": "Supply Chain Detective",
+        "category": "Supply Chain Security",
+    },
 }
 
 # Actual flag hashes (SHA-256)
@@ -120,16 +138,19 @@ FLAG_HASHES = {
     "beginner-03": hashlib.sha256(b"FLAG{IOC_MASTER}").hexdigest(),
     "beginner-04": hashlib.sha256(b"FLAG{ML_CL4SS1F13R}").hexdigest(),
     "beginner-05": hashlib.sha256(b"FLAG{PR0MPT_1NJ3CT10N}").hexdigest(),
+    "beginner-06": hashlib.sha256(b"FLAG{L1NUX_P3RS1ST3NC3_HUNT3D}").hexdigest(),
     "intermediate-01": hashlib.sha256(b"FLAG{C2_HUNT3R}").hexdigest(),
     "intermediate-02": hashlib.sha256(b"FLAG{M3M0RY_F0R3NS1CS_FTW}").hexdigest(),
     "intermediate-03": hashlib.sha256(b"FLAG{EV4D3R}").hexdigest(),
     "intermediate-04": hashlib.sha256(b"FLAG{AG3NT_D3T3CT1V3}").hexdigest(),
     "intermediate-05": hashlib.sha256(b"FLAG{R4NS0M_N0T3_4N4LYZ3D}").hexdigest(),
+    "intermediate-06": hashlib.sha256(b"FLAG{W3B_SHELL_DETECTED}").hexdigest(),
     "advanced-01": hashlib.sha256(b"FLAG{APT29_GN_2008}").hexdigest(),
     "advanced-02": hashlib.sha256(b"FLAG{P01S0N3D_M0D3L}").hexdigest(),
     "advanced-03": hashlib.sha256(b"FLAG{CLOUD_HOPPER}").hexdigest(),
     "advanced-04": hashlib.sha256(b"FLAG{Z3R0_D4Y_HUNT3R}").hexdigest(),
     "advanced-05": hashlib.sha256(b"FLAG{MASTER_IR_PR0}").hexdigest(),
+    "advanced-06": hashlib.sha256(b"FLAG{SUPPLY_CHA1N_ATT4CK}").hexdigest(),
 }
 
 

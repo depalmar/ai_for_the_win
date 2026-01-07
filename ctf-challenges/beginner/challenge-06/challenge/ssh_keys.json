@@ -1,0 +1,47 @@
+[
+  {
+    "user": "root",
+    "authorized_keys": [
+      {
+        "type": "ssh-rsa",
+        "key": "AAAAB3NzaC1yc2EAAAADAQABAAABgQC7...[truncated]",
+        "comment": "admin@management-server"
+      },
+      {
+        "type": "ssh-ed25519",
+        "key": "AAAAC3NzaC1lZDI1NTE5AAAAI...[truncated]",
+        "comment": "deploy@ci-server"
+      }
+    ]
+  },
+  {
+    "user": "ubuntu",
+    "authorized_keys": [
+      {
+        "type": "ssh-rsa",
+        "key": "AAAAB3NzaC1yc2EAAAADAQABAAACAQDf...[truncated]",
+        "comment": "ubuntu@laptop"
+      },
+      {
+        "type": "ssh-ed25519",
+        "key": "AAAAC3NzaC1lZDI1NTE5AAAAIKxJ...[truncated]",
+        "comment": "admin@workstation"
+      },
+      {
+        "type": "ssh-rsa",
+        "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQC...[truncated]",
+        "comment": "support@vendor-access",
+        "added": "2024-02-15T03:24:00Z",
+        "from_ip": "185.143.223.89"
+      }
+    ]
+  },
+  {
+    "user": "www-data",
+    "authorized_keys": []
+  },
+  {
+    "user": "mysql",
+    "authorized_keys": []
+  }
+]
