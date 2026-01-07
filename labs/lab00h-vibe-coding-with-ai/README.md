@@ -96,7 +96,6 @@ Claude Code has advanced features that make it especially powerful for security 
 /ioc-extractor      # Extract IOCs from text or logs
 /sigma-create       # Create Sigma detection rules
 /sigma-convert      # Convert Sigma rules to various formats
-/threat-hunt        # Build threat hunting queries
 /log-parser         # Parse common log formats
 /dfir-analyze       # Analyze DFIR datasets
 ```
@@ -239,17 +238,17 @@ If you're using Claude Code with this course's custom skills, try these:
 # Extract IOCs from sample log data
 /ioc-extractor
 
-# Generate a threat hunting query
-/threat-hunt
-
 # Parse a log file
 /log-parser
+
+# Create a Sigma detection rule
+/sigma-create
 ```
 
 **Try this workflow:**
 1. Paste some sample log data or describe a threat scenario
 2. Use `/ioc-extractor` to pull out indicators
-3. Use `/threat-hunt` to build a detection query
+3. Use `/log-parser` to structure the data
 4. Use `/sigma-create` to generate a Sigma detection rule
 
 > **Note**: Custom skills are defined in your Claude Code configuration. Run `/README` to see all available skills for this course.
