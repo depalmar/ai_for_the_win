@@ -1,6 +1,8 @@
-# Lab 06a: Embeddings & Vectors Explained
+# Lab 06a: Embeddings & Vectors Explained [Bridge Lab]
 
 **Difficulty:** 🟡 Intermediate | **Time:** 45-60 min | **Prerequisites:** Lab 04
+
+> **Bridge Lab:** This lab explains how vectors and embeddings work before building a RAG system in Lab 06.
 
 Understand how AI "understands" meaning through vector representations.
 

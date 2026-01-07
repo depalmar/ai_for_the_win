@@ -1,4 +1,6 @@
-# Lab 09b: Monitoring AI Security Systems
+# Lab 09b: Monitoring AI Security Systems [Bridge Lab]
+
+> **Bridge Lab:** This lab teaches production observability for AI systems before moving to the DFIR section.
 
 Learn to monitor AI systems in production: logging, metrics, drift detection, and alerting.
 

@@ -240,9 +240,21 @@ llm = setup_llm(provider="ollama")     # Local Llama
 
 ### Prerequisites
 
-1. **Python 3.10+** installed
+1. **Python 3.10-3.12** installed (3.13+ not yet supported by PyTorch)
 2. **Virtual environment** set up
 3. **API keys** configured (see [Setup Guide](../docs/guides/dev-environment-setup.md))
+
+### System Requirements
+
+| Requirement | Minimum | Recommended |
+|-------------|---------|-------------|
+| **RAM** | 8 GB | 16 GB (for local LLMs/embeddings) |
+| **Disk Space** | 5 GB | 20 GB (with models/datasets) |
+| **GPU** | Not required | CUDA-capable (for fine-tuning labs) |
+| **OS** | Windows 10, macOS 10.15, Ubuntu 20.04 | Latest versions |
+| **Internet** | Required for API labs | Stable connection |
+
+> **Note:** Labs 00-03 (ML only) have minimal requirements. LLM labs (04+) benefit from more RAM for embeddings.
 
 ### Running a Lab
 
@@ -274,11 +286,11 @@ labXX-topic-name/
 │   └── main.py
 ├── solution/           # Reference implementation
 │   └── main.py
-├── data/               # Sample datasets
-│   └── *.csv
-└── tests/              # Unit tests (optional)
-    └── test_*.py
+└── data/               # Sample datasets (most labs)
+    └── *.csv
 ```
+
+> **Note:** Test coverage is provided at the repository level in `tests/` rather than per-lab. Run `pytest tests/test_labXX*.py` to test specific labs.
 
 ---
 

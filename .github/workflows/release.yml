@@ -9,14 +9,18 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: false # Don't cancel releases in progress
 
+# Restrict permissions at workflow level (OpenSSF Scorecard requirement)
+permissions:
+  contents: read
+
 jobs:
   release:
     name: Create Release
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: write  # Override for release creation
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
         with:
           fetch-depth: 0
 
@@ -24,12 +28,12 @@ jobs:
         uses: ./.github/actions/free-disk-space
 
       - name: Set up Python
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548 # v6
         with:
           python-version: '3.11'
 
       - name: Cache pip packages
-        uses: actions/cache@v5
+        uses: actions/cache@9255dc7a253b0ccc959486e2bca901246202afeb # v5
         with:
           path: ~/.cache/pip
           key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
@@ -64,7 +68,7 @@ jobs:
           cat changelog.txt
 
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@a06a81a03ee405af7f2048a818ed3f03bbf83c7b # v2
         with:
           body_path: changelog.txt
           draft: false

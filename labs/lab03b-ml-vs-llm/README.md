@@ -1,6 +1,8 @@
-# Lab 03b: ML vs LLM - When to Use Which?
+# Lab 03b: ML vs LLM - When to Use Which? [Bridge Lab]
 
 **Difficulty:** 🟡 Intermediate | **Time:** 45-60 min | **Prerequisites:** Labs 01-03, API key
+
+> **Bridge Lab:** This lab connects the ML foundations (Labs 01-03) with the LLM section (Labs 04+). Complete this before moving to LLM-focused labs.
 
 Solve the same security problem with both ML and LLM, then compare results.
 

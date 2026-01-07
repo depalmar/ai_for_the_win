@@ -1,6 +1,8 @@
-# Lab 10a: DFIR Fundamentals
+# Lab 10a: DFIR Fundamentals [Bridge Lab]
 
 **Difficulty:** 🟡 Intermediate | **Time:** 60-90 min | **Prerequisites:** Labs 01-10
+
+> **Bridge Lab:** This lab introduces incident response concepts and artifacts before the advanced DFIR labs (11-16).
 
 Essential incident response concepts before diving into advanced DFIR labs.
 

@@ -1,6 +1,8 @@
-# Lab 11a: Ransomware Fundamentals
+# Lab 11a: Ransomware Fundamentals [Bridge Lab]
 
 **Difficulty:** 🟡 Intermediate | **Time:** 45-60 min | **Prerequisites:** Lab 10a (DFIR), Lab 04
+
+> **Bridge Lab:** This lab covers ransomware families, attack lifecycle, and indicators before building detection in Lab 11.
 
 Understand ransomware attacks before building detection systems.
 
