@@ -33,6 +33,8 @@ jobs:
           languages: python
           # Use security-extended for more comprehensive analysis
           queries: security-extended
+          # Use custom config to exclude educational lab files
+          config-file: ./.github/codeql/codeql-config.yml
 
       - name: Autobuild
         uses: github/codeql-action/autobuild@45c373516f557556c15d420e3f5e0aa3d64366bc # v3

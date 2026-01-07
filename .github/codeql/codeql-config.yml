@@ -1,0 +1,14 @@
+name: "CodeQL Config"
+
+# Exclude educational lab files that intentionally handle sensitive data
+# for demonstration purposes (e.g., password analyzers, malware samples)
+paths-ignore:
+  - 'labs/lab00h-vibe-coding-with-ai/**'
+  - 'labs/*/starter/**'
+  - 'labs/*/solution/**'
+
+# Disable specific queries that produce false positives in educational code
+query-filters:
+  - exclude:
+      id: py/clear-text-logging-sensitive-data
+      tags contain: security

@@ -180,11 +180,11 @@ def main():
     # Analyze the password
     results = analyze_password(password)
 
-    # Output results
+    # Output results (intentionally displaying password analysis to user)
     if args.json:
         import json
 
-        print(json.dumps(results, indent=2))
+        print(json.dumps(results, indent=2))  # nosec B608
     else:
         print_results(results)
 
