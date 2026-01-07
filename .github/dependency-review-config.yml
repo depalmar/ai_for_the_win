@@ -6,6 +6,12 @@ fail-on-severity: high
 
 # Allow vulnerabilities in CTF challenge files
 # These intentionally contain vulnerable dependencies for educational purposes
+# The Supply Chain Detective challenge (advanced-06) uses outdated packages
+# that participants must identify as part of the security exercise
 allow-ghsas:
-  # cryptography NULL pointer dereference - used in supply chain CTF challenge
+  # cryptography NULL pointer dereference
   - GHSA-6vqw-3v5j-54x4
+  # urllib3 unbounded decompression chain
+  - GHSA-gm62-xv2j-4w53
+  # urllib3 streaming API compressed data handling
+  - GHSA-2xpw-w6gg-jr37
