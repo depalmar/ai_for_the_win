@@ -80,7 +80,7 @@ gradio>=6.1.0,<7.0.0  # v6.1.0 minimum required for CVE security fixes
 # =============================================================================
 # DOCUMENT PROCESSING (lightweight only)
 # =============================================================================
-pypdf>=4.0.0,<5.0.0
+pypdf>=5.1.0,<7.0.0  # v5.1.0 minimum required for CVE fixes (RAM exhaustion, infinite loops)
 docx2txt>=0.8
 # unstructured removed - install separately if needed
 
