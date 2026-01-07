@@ -185,50 +185,56 @@ High Confidence: FIN7/Carbanak
 <td align="center"><a href="./labs/lab00e-visualization-stats/"><img src="https://img.shields.io/badge/00e-Stats-555?style=for-the-badge" alt="Lab 00e"/></a></td>
 <td align="center"><a href="./labs/lab00f-hello-world-ml/"><img src="https://img.shields.io/badge/00f-Hello_ML-555?style=for-the-badge" alt="Lab 00f"/></a></td>
 <td align="center"><a href="./labs/lab00g-working-with-apis/"><img src="https://img.shields.io/badge/00g-APIs-555?style=for-the-badge" alt="Lab 00g"/></a></td>
+<td align="center"><a href="./labs/lab00h-vibe-coding-with-ai/"><img src="https://img.shields.io/badge/00h-Vibe_Code-555?style=for-the-badge" alt="Lab 00h"/></a></td>
 <td align="center"><a href="./labs/lab01-phishing-classifier/"><img src="https://img.shields.io/badge/01-Phishing-10b981?style=for-the-badge" alt="Lab 01"/></a></td>
-<td align="center"><a href="./labs/lab02-malware-clustering/"><img src="https://img.shields.io/badge/02-Malware-10b981?style=for-the-badge" alt="Lab 02"/></a></td>
 </tr>
 <tr>
+<td align="center"><a href="./labs/lab02-malware-clustering/"><img src="https://img.shields.io/badge/02-Malware-10b981?style=for-the-badge" alt="Lab 02"/></a></td>
 <td align="center"><a href="./labs/lab03-anomaly-detection/"><img src="https://img.shields.io/badge/03-Anomaly-10b981?style=for-the-badge" alt="Lab 03"/></a></td>
 <td align="center"><a href="./labs/lab03b-ml-vs-llm/"><img src="https://img.shields.io/badge/03b-ML_vs_LLM-10b981?style=for-the-badge" alt="Lab 03b"/></a></td>
 <td align="center"><a href="./labs/lab04-llm-log-analysis/"><img src="https://img.shields.io/badge/04-Logs-6366f1?style=for-the-badge" alt="Lab 04"/></a></td>
-<td align="center"><a href="./labs/lab04b-first-ai-agent/"><img src="https://img.shields.io/badge/04b-Agent-6366f1?style=for-the-badge" alt="Lab 04b"/></a></td>
-<td align="center"><a href="./labs/lab05-threat-intel-agent/"><img src="https://img.shields.io/badge/05-Intel-6366f1?style=for-the-badge" alt="Lab 05"/></a></td>
 </tr>
 <tr>
+<td align="center"><a href="./labs/lab04b-first-ai-agent/"><img src="https://img.shields.io/badge/04b-Agent-6366f1?style=for-the-badge" alt="Lab 04b"/></a></td>
+<td align="center"><a href="./labs/lab05-threat-intel-agent/"><img src="https://img.shields.io/badge/05-Intel-6366f1?style=for-the-badge" alt="Lab 05"/></a></td>
 <td align="center"><a href="./labs/lab06a-embeddings-vectors/"><img src="https://img.shields.io/badge/06a-Vectors-6366f1?style=for-the-badge" alt="Lab 06a"/></a></td>
 <td align="center"><a href="./labs/lab06-security-rag/"><img src="https://img.shields.io/badge/06-RAG-6366f1?style=for-the-badge" alt="Lab 06"/></a></td>
 <td align="center"><a href="./labs/lab07a-binary-basics/"><img src="https://img.shields.io/badge/07a-Binary-6366f1?style=for-the-badge" alt="Lab 07a"/></a></td>
-<td align="center"><a href="./labs/lab07-yara-generator/"><img src="https://img.shields.io/badge/07-YARA-6366f1?style=for-the-badge" alt="Lab 07"/></a></td>
-<td align="center"><a href="./labs/lab07b-sigma-fundamentals/"><img src="https://img.shields.io/badge/07b-Sigma-6366f1?style=for-the-badge" alt="Lab 07b"/></a></td>
 </tr>
 <tr>
+<td align="center"><a href="./labs/lab07-yara-generator/"><img src="https://img.shields.io/badge/07-YARA-6366f1?style=for-the-badge" alt="Lab 07"/></a></td>
+<td align="center"><a href="./labs/lab07b-sigma-fundamentals/"><img src="https://img.shields.io/badge/07b-Sigma-6366f1?style=for-the-badge" alt="Lab 07b"/></a></td>
 <td align="center"><a href="./labs/lab08-vuln-scanner-ai/"><img src="https://img.shields.io/badge/08-Vuln-f59e0b?style=for-the-badge" alt="Lab 08"/></a></td>
 <td align="center"><a href="./labs/lab09-detection-pipeline/"><img src="https://img.shields.io/badge/09-Pipeline-f59e0b?style=for-the-badge" alt="Lab 09"/></a></td>
 <td align="center"><a href="./labs/lab09b-monitoring-ai-systems/"><img src="https://img.shields.io/badge/09b-Monitor-f59e0b?style=for-the-badge" alt="Lab 09b"/></a></td>
-<td align="center"><a href="./labs/lab10a-dfir-fundamentals/"><img src="https://img.shields.io/badge/10a-DFIR-f59e0b?style=for-the-badge" alt="Lab 10a"/></a></td>
-<td align="center"><a href="./labs/lab10-ir-copilot/"><img src="https://img.shields.io/badge/10-IR_Bot-f59e0b?style=for-the-badge" alt="Lab 10"/></a></td>
 </tr>
 <tr>
+<td align="center"><a href="./labs/lab10a-dfir-fundamentals/"><img src="https://img.shields.io/badge/10a-DFIR-f59e0b?style=for-the-badge" alt="Lab 10a"/></a></td>
+<td align="center"><a href="./labs/lab10-ir-copilot/"><img src="https://img.shields.io/badge/10-IR_Bot-f59e0b?style=for-the-badge" alt="Lab 10"/></a></td>
 <td align="center"><a href="./labs/lab11a-ransomware-fundamentals/"><img src="https://img.shields.io/badge/11a-Ransom_Fund-ef4444?style=for-the-badge" alt="Lab 11a"/></a></td>
 <td align="center"><a href="./labs/lab11-ransomware-detection/"><img src="https://img.shields.io/badge/11-Ransom-ef4444?style=for-the-badge" alt="Lab 11"/></a></td>
 <td align="center"><a href="./labs/lab12-ransomware-simulation/"><img src="https://img.shields.io/badge/12-Purple-ef4444?style=for-the-badge" alt="Lab 12"/></a></td>
-<td align="center"><a href="./labs/lab13-memory-forensics-ai/"><img src="https://img.shields.io/badge/13-Memory-ef4444?style=for-the-badge" alt="Lab 13"/></a></td>
-<td align="center"><a href="./labs/lab14-c2-traffic-analysis/"><img src="https://img.shields.io/badge/14-C2-ef4444?style=for-the-badge" alt="Lab 14"/></a></td>
 </tr>
 <tr>
+<td align="center"><a href="./labs/lab13-memory-forensics-ai/"><img src="https://img.shields.io/badge/13-Memory-ef4444?style=for-the-badge" alt="Lab 13"/></a></td>
+<td align="center"><a href="./labs/lab14-c2-traffic-analysis/"><img src="https://img.shields.io/badge/14-C2-ef4444?style=for-the-badge" alt="Lab 14"/></a></td>
 <td align="center"><a href="./labs/lab15-lateral-movement-detection/"><img src="https://img.shields.io/badge/15-Lateral-ef4444?style=for-the-badge" alt="Lab 15"/></a></td>
 <td align="center"><a href="./labs/lab16-threat-actor-profiling/"><img src="https://img.shields.io/badge/16-Actors-ef4444?style=for-the-badge" alt="Lab 16"/></a></td>
 <td align="center"><a href="./labs/lab16b-ai-powered-threat-actors/"><img src="https://img.shields.io/badge/16b-AI_Threat-ef4444?style=for-the-badge" alt="Lab 16b"/></a></td>
-<td align="center"><a href="./labs/lab17a-ml-security-intro/"><img src="https://img.shields.io/badge/17a-MLSec-ef4444?style=for-the-badge" alt="Lab 17a"/></a></td>
-<td align="center"><a href="./labs/lab17-adversarial-ml/"><img src="https://img.shields.io/badge/17-AdvML-ef4444?style=for-the-badge" alt="Lab 17"/></a></td>
 </tr>
 <tr>
+<td align="center"><a href="./labs/lab17a-ml-security-intro/"><img src="https://img.shields.io/badge/17a-MLSec-ef4444?style=for-the-badge" alt="Lab 17a"/></a></td>
+<td align="center"><a href="./labs/lab17-adversarial-ml/"><img src="https://img.shields.io/badge/17-AdvML-ef4444?style=for-the-badge" alt="Lab 17"/></a></td>
 <td align="center"><a href="./labs/lab18-fine-tuning-security/"><img src="https://img.shields.io/badge/18-Tuning-ef4444?style=for-the-badge" alt="Lab 18"/></a></td>
 <td align="center"><a href="./labs/lab19a-cloud-security-fundamentals/"><img src="https://img.shields.io/badge/19a-CloudFund-ef4444?style=for-the-badge" alt="Lab 19a"/></a></td>
 <td align="center"><a href="./labs/lab19-cloud-security-ai/"><img src="https://img.shields.io/badge/19-Cloud-ef4444?style=for-the-badge" alt="Lab 19"/></a></td>
+</tr>
+<tr>
 <td align="center"><a href="./labs/lab20-llm-red-teaming/"><img src="https://img.shields.io/badge/20-RedTeam-ef4444?style=for-the-badge" alt="Lab 20"/></a></td>
 <td align="center"><a href="./labs/lab20b-purple-team-ai/"><img src="https://img.shields.io/badge/20b-PurpleAI-ef4444?style=for-the-badge" alt="Lab 20b"/></a></td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
 </table>
 
@@ -237,7 +243,7 @@ High Confidence: FIN7/Carbanak
 <details>
 <summary><strong>📋 Detailed Lab Descriptions</strong></summary>
 
-### ⚪ Intro Labs (00a-00g) — Setup & Foundations, no API keys
+### ⚪ Intro Labs (00a-00h) — Setup & Foundations, no API keys
 
 | Lab | Topic | Description |
 |-----|-------|-------------|
@@ -249,6 +255,7 @@ High Confidence: FIN7/Carbanak
 | [00e](./labs/lab00e-visualization-stats/) | Stats | Matplotlib, Seaborn for dashboards |
 | [00f](./labs/lab00f-hello-world-ml/) | Hello ML | Your first ML model end-to-end |
 | [00g](./labs/lab00g-working-with-apis/) | APIs | REST APIs, authentication, rate limiting |
+| [00h](./labs/lab00h-vibe-coding-with-ai/) | Vibe Coding | AI assistants for accelerated learning |
 
 ### 🟢 ML Labs (01-03) — Machine Learning, no API keys
 

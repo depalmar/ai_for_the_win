@@ -23,6 +23,7 @@ Follow this progression for the best learning experience. Labs build on each oth
 | 00e | [Visualization & Statistics](./lab00e-visualization-stats/) | Data viz | Plotly, Gradio, statistics, dashboards |
 | 00f | [Hello World ML](./lab00f-hello-world-ml/) | First classifier | 4-step ML workflow, accuracy, precision, recall |
 | 00g | [Working with APIs](./lab00g-working-with-apis/) | HTTP & REST | requests library, JSON, API keys, rate limiting |
+| 00h | [Vibe Coding with AI](./lab00h-vibe-coding-with-ai/) | AI assistants | Claude Code, Cursor, Copilot, accelerated learning |
 
 **Who should do these:**
 - No Python experience → Start with **00a**
@@ -32,6 +33,7 @@ Follow this progression for the best learning experience. Labs build on each oth
 - Need visualization skills → Do **00e** (Plotly, Gradio, dashboards)
 - **New! First ML model** → Do **00f** before Lab 01 (simpler intro)
 - **New! API skills** → Do **00g** before Labs 04-07 (LLM APIs)
+- **New! Accelerate your learning** → Do **00h** to use AI assistants throughout the course
 - Comfortable with all → Skip to Lab 01
 
 ```
@@ -789,6 +791,7 @@ Track your progress:
 - [ ] Lab 00e: Visualization & Statistics
 - [ ] Lab 00f: Hello World ML (NEW - first classifier!)
 - [ ] Lab 00g: Working with APIs (NEW - HTTP/JSON skills)
+- [ ] Lab 00h: Vibe Coding with AI (NEW - AI-assisted development)
 
 **Core Labs**
 - [ ] Lab 01: Phishing Classifier
