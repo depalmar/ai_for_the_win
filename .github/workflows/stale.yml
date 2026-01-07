@@ -7,12 +7,17 @@ on:
   workflow_dispatch:
 
 permissions:
+  contents: read
   issues: write
   pull-requests: write
 
 jobs:
   stale:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+      pull-requests: write
     steps:
       - uses: actions/stale@997185467fa4f803885201cee163a9f38240193d # v10
         with:
