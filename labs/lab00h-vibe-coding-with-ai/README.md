@@ -454,6 +454,111 @@ Before moving on, ensure you can:
 
 ---
 
+## Part 7: Vibe Coding the Other Labs
+
+Here's how to apply vibe coding techniques to specific labs in this course:
+
+### Lab 01: Phishing Email Classifier
+
+```
+Build a phishing email classifier that:
+- Extracts features from email headers and body (sender domain, suspicious keywords, URL count)
+- Uses TF-IDF vectorization on email text
+- Trains a Random Forest classifier
+- Returns probability scores for phishing vs legitimate
+
+Use pandas for data handling, scikit-learn for ML.
+Include a function to explain which features triggered the classification.
+```
+
+### Lab 02: Malware Clustering
+
+```
+Create a malware clustering tool that:
+- Reads PE file metadata (imports, sections, entropy)
+- Extracts behavioral features from sandbox reports (JSON format)
+- Uses K-Means and DBSCAN clustering to group similar samples
+- Visualizes clusters with t-SNE or UMAP
+
+Focus on feature engineering - what makes malware samples similar?
+```
+
+### Lab 03: Anomaly Detection
+
+```
+Build a network anomaly detector that:
+- Parses NetFlow or connection logs (CSV format)
+- Establishes baseline behavior using rolling statistics
+- Detects anomalies using Isolation Forest
+- Flags connections that deviate from normal patterns
+
+Include time-based features (hour of day, day of week).
+Output should explain WHY each connection is anomalous.
+```
+
+### Lab 04: LLM Log Analysis
+
+```
+Create a log analysis tool using an LLM that:
+- Reads log files (Apache, Windows Event, syslog formats)
+- Summarizes key events in natural language
+- Identifies potential security incidents
+- Extracts IOCs (IPs, domains, hashes) from the logs
+
+Use structured prompts with few-shot examples.
+Include confidence scores and cite specific log lines.
+```
+
+### Tips for Any Lab
+
+| Lab Phase | Vibe Coding Approach |
+|-----------|---------------------|
+| **Starting** | "Scaffold a solution for [lab goal] with placeholder functions" |
+| **Stuck on ML** | "Explain [algorithm] and when to use it for [security use case]" |
+| **Debugging** | "This error occurs: [error]. Here's my code: [code]. Why?" |
+| **Improving** | "How can I make this more efficient / accurate / readable?" |
+| **Understanding** | "Explain this code like I'm new to [pandas/sklearn/etc]" |
+
+---
+
+## Part 8: Prompt Library & Resources
+
+### Course Prompt Library
+
+This course includes a curated prompt library for security tasks:
+
+📚 **[Security Prompts Library](../../resources/prompt-library/security-prompts.md)** - 15+ prompt templates including:
+- Log analysis with anti-hallucination techniques
+- Threat detection with verification steps
+- IOC extraction patterns
+- Incident summarization
+- MITRE ATT&CK mapping
+
+> **Important:** The prompt library includes guidance on preventing AI hallucinations - critical for security work where accuracy matters.
+
+### Building Your Prompt Journal
+
+Create a personal `prompt-journal.md` to track what works:
+
+```markdown
+# My Security Prompt Journal
+
+## Log Analysis
+- **What worked:** "Parse this Apache log and identify..."
+- **What failed:** Asking for analysis without providing log format
+
+## Detection Rules
+- **What worked:** Including MITRE ATT&CK references
+- **What failed:** Asking for "all" detections (too broad)
+
+## Lessons Learned
+- Always specify output format (JSON, CSV, table)
+- Include sample data for complex parsing tasks
+- Ask for confidence scores on classifications
+```
+
+---
+
 ## What's Next?
 
 Now that you're equipped with vibe coding skills, you'll use them throughout the remaining labs. In **Lab 01: Phishing Email Classifier**, you'll combine prompt engineering with your new AI-assisted workflow to build your first real security ML tool.

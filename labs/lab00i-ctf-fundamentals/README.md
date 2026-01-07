@@ -268,13 +268,13 @@ print(decoded)  # FLAG{HEX_TRAFFIC!!}
 **Flag:** `FLAG{HEX_TRAFFIC!!}`
 </details>
 
-## Using AI for CTFs
+## Using AI for CTFs (Vibe Coding Approach)
 
-AI assistants can help with CTF challenges, but use them strategically:
+AI assistants can help with CTF challenges, but use them strategically. This builds on skills from [Lab 00h: Vibe Coding](../lab00h-vibe-coding-with-ai/).
 
-### Effective AI Prompts
+### Effective AI Prompts for CTFs
 
-**Good prompt:**
+**Pattern Analysis Prompt:**
 ```
 I have this log data from a CTF challenge. I need to find a flag
 in format FLAG{...}. Can you help me analyze it for:
@@ -286,10 +286,55 @@ Here's the data:
 [paste data]
 ```
 
+**Script Generation Prompt:**
+```
+Write a Python script that:
+1. Reads this JSON file with security events
+2. Searches all string fields for "FLAG{" pattern
+3. Decodes any Base64 or hex strings and checks for flags
+4. Outputs any flags found with their location
+
+Use regex for pattern matching. Handle nested JSON.
+```
+
+**Decoding Prompt:**
+```
+This CTF challenge contains encoded data. Please:
+1. Identify the encoding type (base64, hex, rot13, etc.)
+2. Decode it step by step
+3. Check if the result contains a flag
+
+Data: [paste encoded string]
+```
+
 **Less effective prompt:**
 ```
 Solve this CTF for me
 [paste data]
+```
+
+### CTF-Specific Vibe Coding Examples
+
+**Finding hidden data across files:**
+```
+Write a Python script that recursively searches all JSON and CSV
+files in a directory for strings matching FLAG{...} pattern.
+Include partial matches like "FLAG" without the braces.
+Output the file path and line number for each match.
+```
+
+**Extracting IOCs for CTF clues:**
+```
+Extract all IPs, domains, and URLs from this log file.
+Group them by frequency.
+Check if any IP octets spell out ASCII characters (like 70.76.65.71 = FLAG).
+```
+
+**Timeline reconstruction:**
+```
+Parse these log entries and create a timeline.
+Identify the first and last action by the suspicious user.
+Look for any timestamps or user IDs that could encode flag characters.
 ```
 
 ### When AI Helps Most
@@ -299,6 +344,7 @@ Solve this CTF for me
 - Correlating information from multiple sources
 - Explaining what techniques might apply
 - Writing quick scripts to extract data
+- Parsing complex formats (nested JSON, mixed logs)
 
 ### When to Think Manually
 
@@ -306,6 +352,7 @@ Solve this CTF for me
 - Making creative leaps
 - Recognizing domain-specific clues (security jargon, tool names)
 - Deciding which approach to try first
+- Interpreting subtle hints in challenge descriptions
 
 ## CTF Strategy Checklist
 
