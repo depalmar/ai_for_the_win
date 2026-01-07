@@ -47,14 +47,14 @@ One email has a sender domain that looks like a legitimate company but has a sub
 <details>
 <summary>Hint 2 (costs 20 pts)</summary>
 
-The phishing URL contains encoded data - try decoding the path parameter.
+Check the email headers - SPF and DKIM failures are strong phishing indicators.
 
 </details>
 
 <details>
 <summary>Hint 3 (costs 30 pts)</summary>
 
-Base64 decode the 'id' parameter in the malicious link to reveal the flag.
+The flag is hidden in the body of the phishing email. Look for the FLAG{...} format.
 
 </details>
 

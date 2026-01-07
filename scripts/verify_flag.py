@@ -26,7 +26,7 @@ CHALLENGES = {
         "category": "Log Analysis",
     },
     "beginner-02": {
-        "hash": "a3c5e7f9b1d3e5c7a9b1d3f5e7c9a1b3d5f7e9c1a3b5d7f9e1c3a5b7d9f1e3c5",  # FLAG{PH1SH_F0UND}
+        "hash": "a3c5e7f9b1d3e5c7a9b1d3f5e7c9a1b3d5f7e9c1a3b5d7f9e1c3a5b7d9f1e3c5",  # FLAG{PH1SH1NG_D3T3CT3D_CHK_H34D3RS}
         "points": 100,
         "title": "Phish Finder",
         "category": "Email Analysis",
@@ -75,14 +75,14 @@ CHALLENGES = {
         "category": "AI Agents",
     },
     "intermediate-05": {
-        "hash": "c7d9e1f3a5c7b9d1e3f5a7c9b1d3e5f7a9c1b3d5e7f9a1c3b5d7e9f1a3c5b7d9",  # FLAG{RANSOM_HUNT3R}
+        "hash": "c7d9e1f3a5c7b9d1e3f5a7c9b1d3e5f7a9c1b3d5e7f9a1c3b5d7e9f1a3c5b7d9",  # FLAG{R4NS0M_N0T3_4N4LYZ3D}
         "points": 250,
         "title": "Ransomware Response",
         "category": "Incident Response",
     },
     # Advanced Challenges (500 pts each)
     "advanced-01": {
-        "hash": "d8e0f2a4c6b8d0e2f4a6c8b0d2e4f6a8c0b2d4e6f8a0c2b4d6e8f0a2c4b6d8e0",  # FLAG{APT_ATTR1BUT10N}
+        "hash": "d8e0f2a4c6b8d0e2f4a6c8b0d2e4f6a8c0b2d4e6f8a0c2b4d6e8f0a2c4b6d8e0",  # FLAG{APT29_GN_2008}
         "points": 500,
         "title": "APT Attribution",
         "category": "Threat Intelligence",
@@ -116,7 +116,7 @@ CHALLENGES = {
 # Actual flag hashes (SHA-256)
 FLAG_HASHES = {
     "beginner-01": hashlib.sha256(b"FLAG{backup_admin_156_02}").hexdigest(),
-    "beginner-02": hashlib.sha256(b"FLAG{PH1SH_F0UND}").hexdigest(),
+    "beginner-02": hashlib.sha256(b"FLAG{PH1SH1NG_D3T3CT3D_CHK_H34D3RS}").hexdigest(),
     "beginner-03": hashlib.sha256(b"FLAG{IOC_MASTER}").hexdigest(),
     "beginner-04": hashlib.sha256(b"FLAG{ML_CL4SS1F13R}").hexdigest(),
     "beginner-05": hashlib.sha256(b"FLAG{PR0MPT_1NJ3CT10N}").hexdigest(),
@@ -124,8 +124,8 @@ FLAG_HASHES = {
     "intermediate-02": hashlib.sha256(b"FLAG{M3M0RY_F0R3NS1CS_FTW}").hexdigest(),
     "intermediate-03": hashlib.sha256(b"FLAG{EV4D3R}").hexdigest(),
     "intermediate-04": hashlib.sha256(b"FLAG{AG3NT_D3T3CT1V3}").hexdigest(),
-    "intermediate-05": hashlib.sha256(b"FLAG{RANSOM_HUNT3R}").hexdigest(),
-    "advanced-01": hashlib.sha256(b"FLAG{APT_ATTR1BUT10N}").hexdigest(),
+    "intermediate-05": hashlib.sha256(b"FLAG{R4NS0M_N0T3_4N4LYZ3D}").hexdigest(),
+    "advanced-01": hashlib.sha256(b"FLAG{APT29_GN_2008}").hexdigest(),
     "advanced-02": hashlib.sha256(b"FLAG{P01S0N3D_M0D3L}").hexdigest(),
     "advanced-03": hashlib.sha256(b"FLAG{CLOUD_HOPPER}").hexdigest(),
     "advanced-04": hashlib.sha256(b"FLAG{Z3R0_D4Y_HUNT3R}").hexdigest(),
