@@ -1,6 +1,8 @@
-# Lab 07a: Binary Analysis Basics
+# Lab 07a: Binary Analysis Basics [Bridge Lab]
 
 **Difficulty:** 🟡 Intermediate | **Time:** 45-60 min | **Prerequisites:** Lab 00a
+
+> **Bridge Lab:** This lab covers PE file structure and binary analysis fundamentals before the YARA Generator in Lab 07.
 
 Essential binary/malware analysis concepts before building YARA rules.
 

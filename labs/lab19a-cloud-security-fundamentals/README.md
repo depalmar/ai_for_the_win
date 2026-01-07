@@ -1,6 +1,8 @@
-# Lab 19a: Cloud Security Fundamentals
+# Lab 19a: Cloud Security Fundamentals [Bridge Lab]
 
 **Difficulty:** 🟡 Intermediate | **Time:** 60-90 min | **Prerequisites:** Lab 04, basic networking
+
+> **Bridge Lab:** This lab covers AWS/Azure/GCP security fundamentals before building AI-powered cloud detection in Lab 19.
 
 Understanding cloud infrastructure and security before diving into AI-powered cloud detection.
 

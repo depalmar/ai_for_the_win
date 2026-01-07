@@ -1,6 +1,8 @@
-# Lab 17a: ML Security Foundations
+# Lab 17a: ML Security Foundations [Bridge Lab]
 
 **Difficulty:** 🟠 Advanced | **Time:** 45-60 min | **Prerequisites:** Labs 01-03
+
+> **Bridge Lab:** This lab explains ML threat models and attack taxonomy before Lab 17's adversarial ML attacks.
 
 Understanding the threat landscape for machine learning systems before diving into adversarial ML.
 

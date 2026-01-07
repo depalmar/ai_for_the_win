@@ -14,7 +14,7 @@ title: AI for the Win
   --bg-card: #161b22;
   --bg-card-hover: #1c2128;
   --text: #c9d1d9;
-  --text-muted: #8b949e;
+  --text-muted: #9ca3af;
   --border: #30363d;
 }
 
@@ -246,6 +246,16 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
   font-size: 0.9rem;
   color: var(--text-muted);
   margin: 0;
+}
+
+.feature h3 a {
+  color: #818cf8;
+  text-decoration: none;
+}
+
+.feature h3 a:hover {
+  color: #a5b4fc;
+  text-decoration: underline;
 }
 
 /* Prerequisites Checklist */
@@ -864,7 +874,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
 </nav>
 
 <div class="hero">
-  <img src="assets/images/logo.png" alt="AI for the Win Logo" width="120" height="120" style="margin-bottom: 1rem;">
+  <img src="assets/images/logo.png" alt="AI for the Win - Security AI Training Platform Logo" width="120" height="120" style="margin-bottom: 1rem;">
   <h1>AI for the Win</h1>
   <p class="tagline">Build AI-Powered Security Tools | Hands-On Learning</p>
 
@@ -881,19 +891,18 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
       <span class="terminal-dot green"></span>
     </div>
     <div class="terminal-line">python labs/lab01-phishing-classifier/solution/main.py</div>
-    <div class="terminal-line output"></div>
     <div class="terminal-line output">[+] Trained on 1,000 labeled emails</div>
     <div class="terminal-line output">[+] Model: Random Forest with TF-IDF features</div>
-    <div class="terminal-line output"></div>
+    <div class="terminal-line output">&nbsp;</div>
     <div class="terminal-line output">Testing on new emails...</div>
-    <div class="terminal-line output">  "Dear user, your account will be suspended" → 🚨 PHISHING (94%)</div>
-    <div class="terminal-line output">  "Q3 revenue report attached"               → ✅ LEGIT (91%)</div>
-    <div class="terminal-line output">  "Coinbase: verify identity immediately"    → 🚨 PHISHING (97%)</div>
-    <div class="terminal-line output"></div>
+    <div class="terminal-line output">"Dear user, your account will be suspended" → 🚨 PHISHING (94%)</div>
+    <div class="terminal-line output">"Q3 revenue report attached" → ✅ LEGIT (91%)</div>
+    <div class="terminal-line output">"Coinbase: verify identity immediately" → 🚨 PHISHING (97%)</div>
+    <div class="terminal-line output">&nbsp;</div>
     <div class="terminal-line output">Top phishing indicators learned:</div>
-    <div class="terminal-line output">  1. urgency_score  (+0.34) ← "immediately", "suspend", "verify"</div>
-    <div class="terminal-line output">  2. url_mismatch   (+0.28) ← display text ≠ actual link</div>
-    <div class="terminal-line output">  3. sender_anomaly (+0.19) ← domain doesn't match brand<span class="typing"></span></div>
+    <div class="terminal-line output">1. urgency_score (+0.34) ← "immediately", "suspend", "verify"</div>
+    <div class="terminal-line output">2. url_mismatch (+0.28) ← display text ≠ actual link</div>
+    <div class="terminal-line output">3. sender_anomaly (+0.19) ← domain doesn't match brand<span class="typing"></span></div>
   </div>
 
   <div class="stats">
@@ -902,7 +911,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
       <div class="stat-label">Hands-On Labs</div>
     </div>
     <div class="stat">
-      <div class="stat-number">839</div>
+      <div class="stat-number">1000+</div>
       <div class="stat-label">Tests Passing</div>
     </div>
     <div class="stat">
@@ -1095,12 +1104,12 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
 <h3 style="margin-top: 2rem; margin-bottom: 1rem;">All 40+ Labs (Including Bridge Labs)</h3>
 
   <!-- Lab Filter Tabs -->
-  <div class="lab-filters">
-    <button class="filter-btn active" data-filter="all" onclick="filterLabs('all')">All Labs</button>
-    <button class="filter-btn" data-filter="ml" onclick="filterLabs('ml')">ML (No API)</button>
-    <button class="filter-btn" data-filter="llm" onclick="filterLabs('llm')">LLM</button>
-    <button class="filter-btn" data-filter="advanced" onclick="filterLabs('advanced')">Advanced</button>
-    <button class="filter-btn" data-filter="dfir" onclick="filterLabs('dfir')">DFIR/Expert</button>
+  <div class="lab-filters" role="group" aria-label="Filter labs by category">
+    <button class="filter-btn active" data-filter="all" onclick="filterLabs('all')" aria-pressed="true" aria-label="Show all labs">All Labs</button>
+    <button class="filter-btn" data-filter="ml" onclick="filterLabs('ml')" aria-pressed="false" aria-label="Show ML labs that require no API">ML (No API)</button>
+    <button class="filter-btn" data-filter="llm" onclick="filterLabs('llm')" aria-pressed="false" aria-label="Show LLM labs">LLM</button>
+    <button class="filter-btn" data-filter="advanced" onclick="filterLabs('advanced')" aria-pressed="false" aria-label="Show advanced labs">Advanced</button>
+    <button class="filter-btn" data-filter="dfir" onclick="filterLabs('dfir')" aria-pressed="false" aria-label="Show DFIR and expert labs">DFIR/Expert</button>
   </div>
 
   <div class="lab-grid" id="labGrid">
@@ -1189,6 +1198,17 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
       <p class="lab-desc">HTTP basics, requests, JSON parsing</p>
       <div class="lab-meta">
         <span>&#128337; ~1 hr</span>
+        <span class="difficulty difficulty-1">&#9733;&#9734;&#9734; Beginner</span>
+      </div>
+    </a>
+    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab00h-vibe-coding-with-ai" class="lab-card" data-category="intro">
+      <div class="lab-header">
+        <span class="lab-number">00h</span>
+        <span class="lab-title">Vibe Coding with AI</span>
+      </div>
+      <p class="lab-desc">AI coding assistants, Claude Code, Cursor, Copilot</p>
+      <div class="lab-meta">
+        <span>&#128337; ~45 min</span>
         <span class="difficulty difficulty-1">&#9733;&#9734;&#9734; Beginner</span>
       </div>
     </a>
@@ -1557,8 +1577,12 @@ function filterLabs(category) {
   const cards = document.querySelectorAll('.lab-card');
   const buttons = document.querySelectorAll('.filter-btn');
 
-  buttons.forEach(btn => btn.classList.remove('active'));
+  buttons.forEach(btn => {
+    btn.classList.remove('active');
+    btn.setAttribute('aria-pressed', 'false');
+  });
   event.target.classList.add('active');
+  event.target.setAttribute('aria-pressed', 'true');
 
   cards.forEach(card => {
     if (category === 'all' || card.dataset.category === category ||
@@ -1866,9 +1890,15 @@ function filterLabs(category) {
   <div class="quick-start" style="margin-bottom: 1.5rem;">
     <h3 style="margin-top: 0; color: var(--secondary);">🚀 Option 1: Zero Setup (Colab)</h3>
     <p style="color: var(--text-muted); margin-bottom: 1rem;">Run labs directly in your browser — no installation needed!</p>
-    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-      <a href="https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab01_phishing_classifier.ipynb" target="_blank" style="display: inline-block;"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open Lab 01"></a>
-      <a href="https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab04_llm_log_analysis.ipynb" target="_blank" style="display: inline-block;"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open Lab 04"></a>
+    <div style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: center;">
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <span style="color: var(--text); font-size: 0.85rem;">Lab 01 (ML):</span>
+        <a href="https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab01_phishing_classifier.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open Lab 01 in Colab"></a>
+      </div>
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <span style="color: var(--text); font-size: 0.85rem;">Lab 04 (LLM):</span>
+        <a href="https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab04_llm_log_analysis.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open Lab 04 in Colab"></a>
+      </div>
     </div>
     <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem;">📓 <a href="https://github.com/depalmar/ai_for_the_win/tree/main/notebooks" style="color: var(--primary);">All 35 lab notebooks</a> available for Colab</p>
   </div>
@@ -1911,7 +1941,7 @@ python labs/lab01-phishing-classifier/solution/main.py</code></pre>
     </details>
     <details class="faq-item">
       <summary>How long does it take to complete all labs?</summary>
-      <div class="faq-content">The full course is approximately 40-89 hours depending on AI assistance level. With AI coding tools, most labs take 50-70% less time. Focus on your role's learning path first (~5-18 hours) for immediate value.</div>
+      <div class="faq-content">The full course is approximately 40-89 hours depending on AI assistance level and prior experience. With AI coding tools (Cursor, Claude Code), most labs take 50-70% less time. Time estimates are approximate and vary by background. Focus on your role's learning path first (~5-18 hours) for immediate value.</div>
     </details>
     <details class="faq-item">
       <summary>What if I get stuck on a lab?</summary>
@@ -1988,9 +2018,9 @@ python labs/lab01-phishing-classifier/solution/main.py</code></pre>
 </div>
 
 <p style="text-align: center; color: var(--text-muted); font-size: 0.85rem;">
-  Dual License (MIT + CC BY-NC-SA 4.0) | Built for security practitioners | Created by <a href="https://www.linkedin.com/in/raymond-depalma" style="color: var(--text-muted); text-decoration: underline;">Raymond DePalma</a>
+  Dual License (MIT + CC BY-NC-SA 4.0) &nbsp;|&nbsp; Built for security practitioners &nbsp;|&nbsp; Created by&nbsp;<a href="https://www.linkedin.com/in/raymond-depalma" style="color: var(--text-muted); text-decoration: underline;">Raymond DePalma</a>
 </p>
 
-<p style="text-align: center; color: var(--text-muted); font-size: 0.75rem; margin-top: 1rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+<p style="text-align: center; color: var(--text-muted); font-size: 0.8rem; margin-top: 1rem; max-width: 700px; margin-left: auto; margin-right: auto; line-height: 1.5;">
   <em>Disclaimer: This is a personal educational project created on personal time. It is not affiliated with, endorsed by, or sponsored by any employer or vendor. All tool references are for educational purposes only.</em>
 </p>

@@ -1,4 +1,6 @@
-# Lab 04b: Your First AI Agent
+# Lab 04b: Your First AI Agent [Bridge Lab]
+
+> **Bridge Lab:** This lab introduces agent concepts and tool calling before the full Threat Intel Agent in Lab 05.
 
 A gentle introduction to AI agents before diving into the full threat intelligence agent in Lab 05.
 

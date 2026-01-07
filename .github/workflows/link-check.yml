@@ -23,17 +23,22 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+# Restrict permissions to minimum required (OpenSSF Scorecard requirement)
+permissions:
+  contents: read
+  issues: write  # Required for creating issues on failure
+
 jobs:
   link-check:
     name: Check Links
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
 
       - name: Check links
         continue-on-error: true
-        uses: lycheeverse/lychee-action@v2.0.2
+        uses: lycheeverse/lychee-action@7cd0af4c74a61395d455af97419279d86aafaede # v2.0.2
         with:
           args: >-
             --verbose
@@ -58,7 +63,7 @@ jobs:
 
       - name: Create Issue on Failure
         if: failure()
-        uses: peter-evans/create-issue-from-file@v5
+        uses: peter-evans/create-issue-from-file@e8ef132d6df98ed982188e460ebb3b5d4ef3a9cd # v5
         with:
           title: Link Check Report
           content-filepath: ./lychee/out.md

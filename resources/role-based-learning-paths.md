@@ -6,21 +6,23 @@ Find your path based on your current role and goals. Each path is ordered for ma
 
 ## Find Your Path
 
-| Your Role | Your Goal | Jump To |
-|-----------|-----------|---------|
-| AI Blue Team (SOC/IR) | Automate alert triage, reduce fatigue | [AI Blue Team Path](#-ai-blue-team-path) |
-| SOC Analyst (Tier 3) / IR | Faster investigations, AI-assisted response | [Incident Responder Path](#-incident-responder-path) |
-| Threat Hunter | Find unknowns, build detection | [Threat Hunter Path](#-threat-hunter-path) |
-| Detection Engineer | Better rules, ML-powered detection | [Detection Engineer Path](#-detection-engineer-path) |
-| Threat Intel Analyst | Process reports faster, automate IOC extraction | [Threat Intel Path](#-threat-intel-analyst-path) |
-| Red Teamer / Pentester | Understand AI defenses, adversarial ML | [AI Red Team Path](#-ai-red-team-path) |
-| Security Engineer | Build AI-powered tools and pipelines | [Security Engineer Path](#-security-engineer-path) |
-| Manager / Leader | Understand capabilities, make informed decisions | [Leadership Path](#-leadership-path) |
-| Career Changer | Break into security with AI skills | [Career Changer Path](#-career-changer-path) |
+| Your Role | Your Goal | Est. Duration | Jump To |
+|-----------|-----------|---------------|---------|
+| AI Blue Team (SOC/IR) | Automate alert triage, reduce fatigue | ~8-12 hrs | [AI Blue Team Path](#-ai-blue-team-path) |
+| SOC Analyst (Tier 3) / IR | Faster investigations, AI-assisted response | ~12-16 hrs | [Incident Responder Path](#-incident-responder-path) |
+| Threat Hunter | Find unknowns, build detection | ~10-14 hrs | [Threat Hunter Path](#-threat-hunter-path) |
+| Detection Engineer | Better rules, ML-powered detection | ~10-14 hrs | [Detection Engineer Path](#-detection-engineer-path) |
+| Threat Intel Analyst | Process reports faster, automate IOC extraction | ~10-14 hrs | [Threat Intel Path](#-threat-intel-analyst-path) |
+| Red Teamer / Pentester | Understand AI defenses, adversarial ML | ~8-12 hrs | [AI Red Team Path](#-ai-red-team-path) |
+| Security Engineer | Build AI-powered tools and pipelines | ~20-30 hrs | [Security Engineer Path](#-security-engineer-path) |
+| Manager / Leader | Understand capabilities, make informed decisions | ~4-6 hrs | [Leadership Path](#-leadership-path) |
+| Career Changer | Break into security with AI skills | ~40-60 hrs | [Career Changer Path](#-career-changer-path) |
 
 ---
 
 ## 🔵 AI Blue Team Path (SOC)
+
+**Estimated Duration:** 8-12 hours
 
 **Goal**: Reduce alert fatigue, automate triage, get AI to do the boring stuff.
 
@@ -56,6 +58,8 @@ Environment → Python Basics → ML Basics → Log Analysis → RAG → IR Copi
 ---
 
 ## 🟣 Incident Responder Path
+
+**Estimated Duration:** 12-16 hours
 
 **Goal**: Faster investigations, automated evidence collection, AI-assisted analysis.
 
@@ -95,6 +99,8 @@ Lab 00  00a     00b    00c        Lab 04        Lab 10       Lab 11         Lab 
 
 ## 🟢 Threat Hunter Path
 
+**Estimated Duration:** 10-14 hours
+
 **Goal**: Find what rules miss, detect unknown threats, build hypotheses faster.
 
 **Your Day Today**: Manual log queries, gut-feel hunting, hoping to get lucky.
@@ -131,6 +137,8 @@ Lab 00  00a          Lab 03           Lab 02       Lab 14         Lab 15        
 ---
 
 ## 🟡 Detection Engineer Path
+
+**Estimated Duration:** 10-14 hours
 
 **Goal**: Better detection rules, ML-powered detection, fewer false positives.
 
@@ -169,6 +177,8 @@ Lab 00  00a        00b         Lab 01        Lab 03     Lab 07         Lab 09
 
 ## 🟠 Threat Intel Analyst Path
 
+**Estimated Duration:** 10-14 hours
+
 **Goal**: Process reports faster, automate IOC extraction, generate intel products.
 
 **Your Day Today**: Reading PDFs, manually extracting IOCs, writing reports from scratch.
@@ -206,6 +216,8 @@ Lab 00  00a       00c        Lab 04          Lab 05          Lab 06     Lab 16
 
 ## 🔴 AI Red Team Path
 
+**Estimated Duration:** 8-12 hours
+
 **Goal**: Understand AI defenses, exploit ML systems, test LLM guardrails.
 
 **Your Day Today**: Traditional attacks, maybe using AI for recon or phishing.
@@ -241,6 +253,8 @@ Lab 00  00a        00b           Lab 03             Lab 17           Lab 20
 ---
 
 ## ⚙️ Security Engineer Path
+
+**Estimated Duration:** 20-30 hours
 
 **Goal**: Build production AI security tools, integrate ML into existing systems.
 
@@ -279,6 +293,8 @@ After completing this path, tackle a [capstone project](../capstone-projects/) t
 
 ## 👔 Leadership Path
 
+**Estimated Duration:** 4-6 hours
+
 **Goal**: Understand AI capabilities, make informed decisions, avoid vendor hype.
 
 **Your Day Today**: Evaluating tools, setting strategy, managing teams.
@@ -309,6 +325,8 @@ AI in Security Ops → ML Concepts → Prompt Basics → Try One Lab
 ---
 
 ## 🚀 Career Changer Path
+
+**Estimated Duration:** 40-60 hours (complete curriculum)
 
 **Goal**: Break into security with AI skills as a differentiator.
 
