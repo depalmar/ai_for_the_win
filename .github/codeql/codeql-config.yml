@@ -2,10 +2,12 @@ name: "CodeQL Config"
 
 # Exclude educational lab files that intentionally handle sensitive data
 # for demonstration purposes (e.g., password analyzers, malware samples)
+# Also exclude CTF challenge files containing simulated attack artifacts
 paths-ignore:
   - 'labs/lab00h-vibe-coding-with-ai/**'
   - 'labs/*/starter/**'
   - 'labs/*/solution/**'
+  - 'ctf-challenges/**/challenge/**'
 
 # Disable specific queries that produce false positives in educational code
 query-filters:

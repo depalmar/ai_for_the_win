@@ -1212,6 +1212,17 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
         <span class="difficulty difficulty-1">&#9733;&#9734;&#9734; Beginner</span>
       </div>
     </a>
+    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab00i-ctf-fundamentals" class="lab-card" data-category="intro">
+      <div class="lab-header">
+        <span class="lab-number">00i</span>
+        <span class="lab-title">CTF Fundamentals</span>
+      </div>
+      <p class="lab-desc">CTF mindset, encoding, flag hunting techniques</p>
+      <div class="lab-meta">
+        <span>&#128337; ~45 min</span>
+        <span class="difficulty difficulty-1">&#9733;&#9734;&#9734; Beginner</span>
+      </div>
+    </a>
     <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab01-phishing-classifier" class="lab-card" data-category="ml">
       <div class="lab-header">
         <span class="lab-number ml">01</span>

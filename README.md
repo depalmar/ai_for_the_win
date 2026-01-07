@@ -13,7 +13,7 @@
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab01_phishing_classifier.ipynb)
 [![Docker](https://img.shields.io/badge/Docker-Ready-blue?logo=docker)](./Dockerfile)
 
-A hands-on training program for security practitioners who want to build AI-powered tools for threat detection, incident response, and security automation. **40+ labs** (including 8 intro labs and 12 bridge labs), **4 capstone projects**, **15 CTF challenges**. Includes **sample datasets** and **solution walkthroughs**. Designed for **vibe coding** with AI assistants like Cursor, Claude Code, and Copilot.
+A hands-on training program for security practitioners who want to build AI-powered tools for threat detection, incident response, and security automation. **40+ labs** (including 9 intro labs and 12 bridge labs), **4 capstone projects**, **18 CTF challenges**. Includes **sample datasets** and **solution walkthroughs**. Designed for **vibe coding** with AI assistants like Cursor, Claude Code, and Copilot.
 
 ---
 
@@ -147,7 +147,7 @@ High Confidence: FIN7/Carbanak
 | **Blue Team / SOC** | Lab 01 | Detection → triage → incident response |
 | **Security engineer** | Lab 01 | Pipelines → automation → deployment |
 
-**40+ labs** | **4 capstone projects** | **15 CTF challenges** | **1000+ tests**
+**40+ labs** | **4 capstone projects** | **18 CTF challenges** | **1000+ tests**
 
 ---
 
@@ -186,9 +186,10 @@ High Confidence: FIN7/Carbanak
 <td align="center"><a href="./labs/lab00f-hello-world-ml/"><img src="https://img.shields.io/badge/00f-Hello_ML-555?style=for-the-badge" alt="Lab 00f"/></a></td>
 <td align="center"><a href="./labs/lab00g-working-with-apis/"><img src="https://img.shields.io/badge/00g-APIs-555?style=for-the-badge" alt="Lab 00g"/></a></td>
 <td align="center"><a href="./labs/lab00h-vibe-coding-with-ai/"><img src="https://img.shields.io/badge/00h-Vibe_Code-555?style=for-the-badge" alt="Lab 00h"/></a></td>
-<td align="center"><a href="./labs/lab01-phishing-classifier/"><img src="https://img.shields.io/badge/01-Phishing-10b981?style=for-the-badge" alt="Lab 01"/></a></td>
+<td align="center"><a href="./labs/lab00i-ctf-fundamentals/"><img src="https://img.shields.io/badge/00i-CTF_Fund-555?style=for-the-badge" alt="Lab 00i"/></a></td>
 </tr>
 <tr>
+<td align="center"><a href="./labs/lab01-phishing-classifier/"><img src="https://img.shields.io/badge/01-Phishing-10b981?style=for-the-badge" alt="Lab 01"/></a></td>
 <td align="center"><a href="./labs/lab02-malware-clustering/"><img src="https://img.shields.io/badge/02-Malware-10b981?style=for-the-badge" alt="Lab 02"/></a></td>
 <td align="center"><a href="./labs/lab03-anomaly-detection/"><img src="https://img.shields.io/badge/03-Anomaly-10b981?style=for-the-badge" alt="Lab 03"/></a></td>
 <td align="center"><a href="./labs/lab03b-ml-vs-llm/"><img src="https://img.shields.io/badge/03b-ML_vs_LLM-10b981?style=for-the-badge" alt="Lab 03b"/></a></td>
@@ -243,7 +244,7 @@ High Confidence: FIN7/Carbanak
 <details>
 <summary><strong>📋 Detailed Lab Descriptions</strong></summary>
 
-### ⚪ Intro Labs (00a-00h) — Setup & Foundations, no API keys
+### ⚪ Intro Labs (00a-00i) — Setup & Foundations, no API keys
 
 | Lab | Topic | Description |
 |-----|-------|-------------|
@@ -256,6 +257,7 @@ High Confidence: FIN7/Carbanak
 | [00f](./labs/lab00f-hello-world-ml/) | Hello ML | Your first ML model end-to-end |
 | [00g](./labs/lab00g-working-with-apis/) | APIs | REST APIs, authentication, rate limiting |
 | [00h](./labs/lab00h-vibe-coding-with-ai/) | Vibe Coding | AI assistants for accelerated learning |
+| [00i](./labs/lab00i-ctf-fundamentals/) | CTF Fundamentals | CTF mindset, encoding, flag hunting |
 
 ### 🟢 ML Labs (01-03) — Machine Learning, no API keys
 
@@ -448,14 +450,15 @@ See [LICENSE](./LICENSE) for details. For commercial licensing, [contact the aut
 
 ### Antivirus Blocking Sample Files
 
-Some labs include sample malware metadata, IOC patterns, or analysis artifacts that may trigger antivirus software. If you encounter issues:
+Some labs and CTF challenges include sample malware metadata, IOC patterns, or simulated attack artifacts that may trigger antivirus software. **These files contain analysis data for educational purposes, not actual malware.**
 
-1. **Add an exception** for the repository directory in your AV software
-2. **Files that may trigger AV:**
-   - `labs/lab07-yara-generator/data/sample_malware_info.json` - Malware metadata for YARA rule generation
-   - `notebooks/lab13_memory_forensics.ipynb` - Memory forensics patterns
-   - Any file in `data/malware/` directories
-3. **These files contain analysis data, not actual malware** - they're safe for educational use
+**Paths to exclude in your antivirus software:**
+- `ai_for_the_win/` - The entire repository (recommended)
+- `ctf-challenges/**/challenge/` - CTF challenge files with simulated web shells, persistence mechanisms
+- `labs/lab07-yara-generator/data/` - Malware metadata for YARA rule generation
+- `data/malware/` - Sample malware analysis artifacts
+
+Add folder exclusions for these paths in your AV settings if files are being quarantined.
 
 ### Accessibility
 
