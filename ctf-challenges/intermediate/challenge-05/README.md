@@ -43,21 +43,21 @@ Ransomware incidents require rapid analysis to:
 <details>
 <summary>Hint 1 (costs 25 pts)</summary>
 
-The ransom note contains more than just demands - look for hidden data in the formatting.
+The ransom note contains more than just demands - look carefully at all the text.
 
 </details>
 
 <details>
 <summary>Hint 2 (costs 50 pts)</summary>
 
-The Bitcoin address in the ransom note has unusual characters - some letters don't belong.
+Ransomware authors sometimes leave artifacts or signatures in their notes - scroll through the entire document.
 
 </details>
 
 <details>
 <summary>Hint 3 (costs 75 pts)</summary>
 
-Extract uppercase letters from the Bitcoin address: FLAG{RANSOM_HUNT3R}
+The flag is hidden in plain sight within the ransom note text itself.
 
 </details>
 
