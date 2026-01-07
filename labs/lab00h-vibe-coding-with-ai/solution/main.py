@@ -17,29 +17,86 @@ from typing import Optional
 
 # Common passwords to check against
 COMMON_PASSWORDS = {
-    "password", "123456", "password123", "admin", "letmein",
-    "welcome", "monkey", "dragon", "master", "qwerty",
-    "login", "abc123", "111111", "admin123", "root",
-    "passw0rd", "p@ssword", "password1", "12345678", "123456789",
-    "1234567890", "sunshine", "princess", "football", "iloveyou",
-    "trustno1", "batman", "access", "shadow", "ashley",
-    "michael", "ninja", "mustang", "password!", "hello",
+    "password",
+    "123456",
+    "password123",
+    "admin",
+    "letmein",
+    "welcome",
+    "monkey",
+    "dragon",
+    "master",
+    "qwerty",
+    "login",
+    "abc123",
+    "111111",
+    "admin123",
+    "root",
+    "passw0rd",
+    "p@ssword",
+    "password1",
+    "12345678",
+    "123456789",
+    "1234567890",
+    "sunshine",
+    "princess",
+    "football",
+    "iloveyou",
+    "trustno1",
+    "batman",
+    "access",
+    "shadow",
+    "ashley",
+    "michael",
+    "ninja",
+    "mustang",
+    "password!",
+    "hello",
 }
 
 # Keyboard patterns to detect
 KEYBOARD_PATTERNS = [
-    "qwerty", "qwertyuiop", "asdf", "asdfgh", "zxcv", "zxcvbn",
-    "qazwsx", "1qaz", "2wsx", "3edc", "4rfv",
-    "1234", "12345", "123456", "4321", "54321",
-    "0987", "09876", "7890", "6789",
-    "abcd", "bcde", "cdef", "defg",
-    "!@#$", "@#$%",
+    "qwerty",
+    "qwertyuiop",
+    "asdf",
+    "asdfgh",
+    "zxcv",
+    "zxcvbn",
+    "qazwsx",
+    "1qaz",
+    "2wsx",
+    "3edc",
+    "4rfv",
+    "1234",
+    "12345",
+    "123456",
+    "4321",
+    "54321",
+    "0987",
+    "09876",
+    "7890",
+    "6789",
+    "abcd",
+    "bcde",
+    "cdef",
+    "defg",
+    "!@#$",
+    "@#$%",
 ]
 
 # Common character substitutions
 SUBSTITUTIONS = {
-    '@': 'a', '4': 'a', '3': 'e', '1': 'i', '!': 'i', 'l': 'i',
-    '0': 'o', '$': 's', '5': 's', '7': 't', '+': 't',
+    "@": "a",
+    "4": "a",
+    "3": "e",
+    "1": "i",
+    "!": "i",
+    "l": "i",
+    "0": "o",
+    "$": "s",
+    "5": "s",
+    "7": "t",
+    "+": "t",
 }
 
 
@@ -81,9 +138,9 @@ def check_character_variety(password: str) -> tuple[int, list[str]]:
     feedback = []
 
     checks = [
-        (r'[a-z]', "lowercase letters", 5),
-        (r'[A-Z]', "uppercase letters", 10),
-        (r'[0-9]', "numbers", 5),
+        (r"[a-z]", "lowercase letters", 5),
+        (r"[A-Z]", "uppercase letters", 10),
+        (r"[0-9]", "numbers", 5),
         (r'[!@#$%^&*()_+\-=\[\]{};\':"\\|,.<>\/?]', "special characters", 10),
     ]
 
@@ -114,7 +171,10 @@ def check_common_passwords(password: str) -> tuple[int, str]:
 
     # Check normalized version (with substitutions)
     if normalized in COMMON_PASSWORDS:
-        return -30, "This password is a common password with simple substitutions. Be more creative!"
+        return (
+            -30,
+            "This password is a common password with simple substitutions. Be more creative!",
+        )
 
     # Check if password contains a common password
     for common in COMMON_PASSWORDS:
@@ -145,20 +205,48 @@ def check_patterns(password: str) -> tuple[int, list[str]]:
             break  # Only penalize once for keyboard patterns
 
     # Check for repeated characters (3 or more in a row)
-    if re.search(r'(.)\1{2,}', password):
+    if re.search(r"(.)\1{2,}", password):
         penalty -= 10
-        repeated = re.findall(r'(.)\1{2,}', password)
+        repeated = re.findall(r"(.)\1{2,}", password)
         feedback.append(f"Avoid repeated characters like '{''.join(repeated[0]*3)}'.")
 
     # Check for sequential numbers
-    for seq in ['0123', '1234', '2345', '3456', '4567', '5678', '6789', '9876', '8765', '7654', '6543', '5432', '4321', '3210']:
+    for seq in [
+        "0123",
+        "1234",
+        "2345",
+        "3456",
+        "4567",
+        "5678",
+        "6789",
+        "9876",
+        "8765",
+        "7654",
+        "6543",
+        "5432",
+        "4321",
+        "3210",
+    ]:
         if seq in password:
             penalty -= 10
             feedback.append("Avoid sequential numbers.")
             break
 
     # Check for sequential letters
-    for seq in ['abcd', 'bcde', 'cdef', 'defg', 'efgh', 'fghi', 'ghij', 'dcba', 'edcb', 'fedc', 'gfed', 'hgfe']:
+    for seq in [
+        "abcd",
+        "bcde",
+        "cdef",
+        "defg",
+        "efgh",
+        "fghi",
+        "ghij",
+        "dcba",
+        "edcb",
+        "fedc",
+        "gfed",
+        "hgfe",
+    ]:
         if seq in lower_password:
             penalty -= 10
             feedback.append("Avoid sequential letters.")
@@ -177,11 +265,11 @@ def check_entropy(password: str) -> tuple[int, str]:
         tuple: (bonus_points, feedback_message)
     """
     charset_size = 0
-    if re.search(r'[a-z]', password):
+    if re.search(r"[a-z]", password):
         charset_size += 26
-    if re.search(r'[A-Z]', password):
+    if re.search(r"[A-Z]", password):
         charset_size += 26
-    if re.search(r'[0-9]', password):
+    if re.search(r"[0-9]", password):
         charset_size += 10
     if re.search(r'[!@#$%^&*()_+\-=\[\]{};\':"\\|,.<>\/?]', password):
         charset_size += 32
@@ -190,6 +278,7 @@ def check_entropy(password: str) -> tuple[int, str]:
         return 0, "Unable to calculate entropy."
 
     import math
+
     entropy = len(password) * math.log2(charset_size)
 
     if entropy < 28:
@@ -216,33 +305,33 @@ def analyze_password(password: str) -> dict:
     # Length check
     length_score, length_feedback = check_length(password)
     score += length_score
-    details['length'] = {'score': length_score, 'feedback': length_feedback}
+    details["length"] = {"score": length_score, "feedback": length_feedback}
     if length_score < 20:
         all_feedback.append(length_feedback)
 
     # Character variety check
     variety_score, variety_feedback = check_character_variety(password)
     score += variety_score
-    details['variety'] = {'score': variety_score, 'feedback': variety_feedback}
+    details["variety"] = {"score": variety_score, "feedback": variety_feedback}
     all_feedback.extend(variety_feedback)
 
     # Common password check
     common_score, common_feedback = check_common_passwords(password)
     score += common_score
-    details['common'] = {'score': common_score, 'feedback': common_feedback}
+    details["common"] = {"score": common_score, "feedback": common_feedback}
     if common_feedback:
         all_feedback.append(common_feedback)
 
     # Pattern check
     pattern_score, pattern_feedback = check_patterns(password)
     score += pattern_score
-    details['patterns'] = {'score': pattern_score, 'feedback': pattern_feedback}
+    details["patterns"] = {"score": pattern_score, "feedback": pattern_feedback}
     all_feedback.extend(pattern_feedback)
 
     # Entropy bonus
     entropy_score, entropy_feedback = check_entropy(password)
     score += entropy_score
-    details['entropy'] = {'score': entropy_score, 'feedback': entropy_feedback}
+    details["entropy"] = {"score": entropy_score, "feedback": entropy_feedback}
 
     # Ensure score is within bounds
     score = max(0, min(100, score))
@@ -255,11 +344,11 @@ def analyze_password(password: str) -> dict:
         all_feedback.append("Great password! No obvious weaknesses detected.")
 
     return {
-        'score': score,
-        'strength': strength,
-        'feedback': all_feedback,
-        'details': details,
-        'length': len(password),
+        "score": score,
+        "strength": strength,
+        "feedback": all_feedback,
+        "details": details,
+        "length": len(password),
     }
 
 
@@ -281,10 +370,10 @@ def get_strength_color(strength: str) -> str:
     """Get ANSI color code for strength level."""
     colors = {
         "Very Weak": "\033[91m",  # Red
-        "Weak": "\033[93m",       # Yellow
-        "Fair": "\033[33m",       # Orange
-        "Strong": "\033[92m",     # Green
-        "Very Strong": "\033[96m", # Cyan
+        "Weak": "\033[93m",  # Yellow
+        "Fair": "\033[33m",  # Orange
+        "Strong": "\033[92m",  # Green
+        "Very Strong": "\033[96m",  # Cyan
     }
     return colors.get(strength, "\033[0m")
 
@@ -294,7 +383,7 @@ def print_results(results: dict, use_color: bool = True) -> None:
     reset = "\033[0m" if use_color else ""
     bold = "\033[1m" if use_color else ""
 
-    strength = results['strength']
+    strength = results["strength"]
     color = get_strength_color(strength) if use_color else ""
 
     # Header
@@ -307,20 +396,20 @@ def print_results(results: dict, use_color: bool = True) -> None:
     print(f"Length: {results['length']} characters")
 
     # Progress bar
-    filled = int(results['score'] / 5)
+    filled = int(results["score"] / 5)
     bar = "█" * filled + "░" * (20 - filled)
     print(f"\n[{color}{bar}{reset}]")
 
     # Feedback
     print(f"\n{bold}Feedback:{reset}")
-    for item in results['feedback']:
+    for item in results["feedback"]:
         prefix = "✓" if "Great" in item or "Excellent" in item else "→"
         print(f"  {prefix} {item}")
 
     # Detailed breakdown
     print(f"\n{bold}Score Breakdown:{reset}")
-    for check, data in results['details'].items():
-        score_str = f"+{data['score']}" if data['score'] >= 0 else str(data['score'])
+    for check, data in results["details"].items():
+        score_str = f"+{data['score']}" if data["score"] >= 0 else str(data["score"])
         print(f"  {check.capitalize()}: {score_str} points")
 
     print()
@@ -336,23 +425,13 @@ Examples:
   %(prog)s "MyP@ssw0rd123"
   echo "secretpassword" | %(prog)s
   %(prog)s --json "TestPassword"
-        """
+        """,
     )
     parser.add_argument(
-        "password",
-        nargs="?",
-        help="Password to analyze (or read from stdin if not provided)"
+        "password", nargs="?", help="Password to analyze (or read from stdin if not provided)"
     )
-    parser.add_argument(
-        "--json",
-        action="store_true",
-        help="Output results as JSON"
-    )
-    parser.add_argument(
-        "--no-color",
-        action="store_true",
-        help="Disable colored output"
-    )
+    parser.add_argument("--json", action="store_true", help="Output results as JSON")
+    parser.add_argument("--no-color", action="store_true", help="Disable colored output")
 
     args = parser.parse_args()
 
@@ -364,6 +443,7 @@ Examples:
     else:
         # Interactive mode - hide input
         import getpass
+
         password = getpass.getpass("Enter password to analyze: ")
 
     if not password:
@@ -380,7 +460,7 @@ Examples:
         print_results(results, use_color=not args.no_color)
 
     # Exit with appropriate code
-    sys.exit(0 if results['score'] >= 60 else 1)
+    sys.exit(0 if results["score"] >= 60 else 1)
 
 
 if __name__ == "__main__":

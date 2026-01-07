@@ -18,16 +18,36 @@ import sys
 
 # Common passwords to check against (expand this list or load from file)
 COMMON_PASSWORDS = [
-    "password", "123456", "password123", "admin", "letmein",
-    "welcome", "monkey", "dragon", "master", "qwerty",
-    "login", "abc123", "111111", "admin123", "root",
+    "password",
+    "123456",
+    "password123",
+    "admin",
+    "letmein",
+    "welcome",
+    "monkey",
+    "dragon",
+    "master",
+    "qwerty",
+    "login",
+    "abc123",
+    "111111",
+    "admin123",
+    "root",
     # TODO: Add more common passwords or load from a file
 ]
 
 # Keyboard patterns to detect
 KEYBOARD_PATTERNS = [
-    "qwerty", "asdf", "zxcv", "qazwsx", "1qaz", "2wsx",
-    "1234", "4321", "0987", "7890",
+    "qwerty",
+    "asdf",
+    "zxcv",
+    "qazwsx",
+    "1qaz",
+    "2wsx",
+    "1234",
+    "4321",
+    "0987",
+    "7890",
     # TODO: Add more keyboard walk patterns
 ]
 
@@ -142,20 +162,10 @@ def main():
         description="Analyze password strength and provide improvement suggestions"
     )
     parser.add_argument(
-        "password",
-        nargs="?",
-        help="Password to analyze (or read from stdin if not provided)"
+        "password", nargs="?", help="Password to analyze (or read from stdin if not provided)"
     )
-    parser.add_argument(
-        "--json",
-        action="store_true",
-        help="Output results as JSON"
-    )
-    parser.add_argument(
-        "--no-color",
-        action="store_true",
-        help="Disable colored output"
-    )
+    parser.add_argument("--json", action="store_true", help="Output results as JSON")
+    parser.add_argument("--no-color", action="store_true", help="Disable colored output")
 
     args = parser.parse_args()
 
@@ -173,6 +183,7 @@ def main():
     # Output results
     if args.json:
         import json
+
         print(json.dumps(results, indent=2))
     else:
         print_results(results)
