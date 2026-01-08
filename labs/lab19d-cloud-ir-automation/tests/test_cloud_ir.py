@@ -336,7 +336,7 @@ class TestEvidenceIntegrity:
         content = b"This is test evidence content"
 
         hashes = {
-            "md5": hashlib.md5(content).hexdigest(),
+            "md5": hashlib.md5(content, usedforsecurity=False).hexdigest(),
             "sha256": hashlib.sha256(content).hexdigest(),
             "sha512": hashlib.sha512(content).hexdigest(),
         }

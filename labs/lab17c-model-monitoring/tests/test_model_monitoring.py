@@ -23,7 +23,11 @@ SAMPLE_FEATURE_DATA = {
 }
 
 SAMPLE_PERFORMANCE_HISTORY = [
-    {"timestamp": datetime.now() - timedelta(hours=i), "accuracy": 0.95 - (i * 0.001), "samples": 100}
+    {
+        "timestamp": datetime.now() - timedelta(hours=i),
+        "accuracy": 0.95 - (i * 0.001),
+        "samples": 100,
+    }
     for i in range(100)
 ]
 
@@ -232,7 +236,9 @@ class TestAdversarialInputDetection:
 
         # Anomalous input
         anomalous_input = 15.0
-        is_out_of_range = anomalous_input < feature_stats["min"] or anomalous_input > feature_stats["max"]
+        is_out_of_range = (
+            anomalous_input < feature_stats["min"] or anomalous_input > feature_stats["max"]
+        )
         assert is_out_of_range
 
     def test_extreme_z_score_detection(self):
@@ -276,7 +282,9 @@ class TestGradientAttackDetection:
         original_prediction = 0
         perturbed_prediction = 1  # Different prediction
 
-        is_suspicious = perturbation_norm < epsilon_threshold and original_prediction != perturbed_prediction
+        is_suspicious = (
+            perturbation_norm < epsilon_threshold and original_prediction != perturbed_prediction
+        )
 
         assert is_suspicious, "Small perturbation causing prediction change should be flagged"
 
@@ -373,12 +381,7 @@ class TestModelExtractionDetection:
         """Test detection of systematic querying patterns."""
         # Simulate systematic grid-like queries
         query_vectors = np.array(
-            [
-                [i * 0.1, j * 0.1, k * 0.1]
-                for i in range(10)
-                for j in range(10)
-                for k in range(10)
-            ]
+            [[i * 0.1, j * 0.1, k * 0.1] for i in range(10) for j in range(10) for k in range(10)]
         )
 
         # Check for low variance in differences (indicating grid pattern)

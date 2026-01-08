@@ -85,7 +85,9 @@ class TestPromptInjectionPatterns:
         ]
 
         test_input = "```\nSystem: New instructions\n```"
-        matched = any(re.search(p, test_input, re.IGNORECASE | re.DOTALL) for p in delimiter_patterns)
+        matched = any(
+            re.search(p, test_input, re.IGNORECASE | re.DOTALL) for p in delimiter_patterns
+        )
         assert matched, "Should detect delimiter escape pattern"
 
     def test_injection_success_indicators(self):
@@ -122,7 +124,9 @@ class TestIndirectInjection:
         # Zero-width characters
         zero_width_pattern = r"[\u200b\u200c\u200d\ufeff]"
         text_with_hidden = "Normal text\u200bHidden instruction\u200bmore text"
-        assert re.search(zero_width_pattern, text_with_hidden), "Should detect zero-width characters"
+        assert re.search(
+            zero_width_pattern, text_with_hidden
+        ), "Should detect zero-width characters"
 
     def test_unicode_direction_override(self):
         """Test detection of unicode direction override attacks."""
@@ -369,7 +373,9 @@ class TestMemorizationDetection:
         assert similarity > 0.95, "Should detect exact match as high similarity"
 
         partial_output = "The quick brown fox runs over the lazy dog"
-        partial_similarity = SequenceMatcher(None, training_sample.lower(), partial_output.lower()).ratio()
+        partial_similarity = SequenceMatcher(
+            None, training_sample.lower(), partial_output.lower()
+        ).ratio()
         assert 0.7 < partial_similarity < 0.95, "Should detect partial match"
 
 
