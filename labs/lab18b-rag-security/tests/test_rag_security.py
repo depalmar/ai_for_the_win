@@ -245,7 +245,8 @@ class TestContextSanitization:
     def test_html_comment_removal(self):
         """Test removal of HTML comments that may contain instructions."""
         content = "Normal content <!-- secret instruction --> more content"
-        sanitized = re.sub(r"<!--.*?-->", "", content)
+        # Use re.DOTALL to match comments containing newlines
+        sanitized = re.sub(r"<!--[\s\S]*?-->", "", content)
 
         assert "<!-- secret instruction -->" not in sanitized
         assert sanitized == "Normal content  more content"
@@ -253,8 +254,9 @@ class TestContextSanitization:
     def test_script_tag_removal(self):
         """Test removal of script tags."""
         content = "Content <script>alert('xss')</script> more"
+        # Use \s* before > to handle </script > variations
         sanitized = re.sub(
-            r"<script.*?</script>", "[SCRIPT REMOVED]", content, flags=re.IGNORECASE | re.DOTALL
+            r"<script[\s\S]*?</script\s*>", "[SCRIPT REMOVED]", content, flags=re.IGNORECASE
         )
 
         assert "<script>" not in sanitized
