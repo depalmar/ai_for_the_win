@@ -6,9 +6,10 @@ for security vulnerabilities including prompt injection, jailbreaking,
 data extraction, and output manipulation.
 """
 
-import pytest
 import re
 from unittest.mock import MagicMock, patch
+
+import pytest
 
 # =============================================================================
 # Sample Data for Testing

@@ -54,7 +54,15 @@ class ValidationResult:
 class XQLValidator:
     """Validates XQL query syntax and best practices."""
 
-    # Valid XQL stages
+    # Pre-compiled regex patterns for performance (avoid recompilation in loops)
+    # See: Architectural Review Section 2.1.2 - Regex Compilation Optimization
+    STAGE_PATTERN: re.Pattern[str] = re.compile(r"\|\s*(?P<stage>[a-z_]+)", re.IGNORECASE)
+    FUNCTION_PATTERN: re.Pattern[str] = re.compile(
+        r"(?P<func>[a-zA-Z_][\w\.]*)\s*\(", re.IGNORECASE
+    )
+    LIMIT_PATTERN: re.Pattern[str] = re.compile(r"limit\s+(\d+)", re.IGNORECASE)
+
+    # Valid XQL stages (including target, window for materialization/windowing)
     VALID_STAGES = {
         "dataset",
         "filter",
@@ -73,6 +81,10 @@ class XQLValidator:
         "bin",
         "iploc",
         "view",
+        # Added per architectural review - essential for detection chaining
+        "target",  # Materialize results into dataset
+        "window",  # Windowed aggregations
+        "getrole",  # User role enrichment
     }
 
     # Valid datasets
@@ -145,6 +157,9 @@ class XQLValidator:
         "arraysort",
         "arrayreverse",
         "arrayslice",
+        # Added per architectural review - essential for multi-value field handling
+        "array_contains",  # Check membership in array fields
+        "array_distinct",  # Get unique values from array
         # Math functions
         "add",
         "subtract",
