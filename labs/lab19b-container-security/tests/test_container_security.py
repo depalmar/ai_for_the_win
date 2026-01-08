@@ -20,18 +20,29 @@ from unittest.mock import MagicMock, patch
 # =============================================================================
 
 SAMPLE_VULNERABILITIES = [
-    {"vuln_id": "CVE-2024-0001", "severity": "CRITICAL", "pkg_name": "openssl", "fixed_version": "1.1.1k"},
+    {
+        "vuln_id": "CVE-2024-0001",
+        "severity": "CRITICAL",
+        "pkg_name": "openssl",
+        "fixed_version": "1.1.1k",
+    },
     {"vuln_id": "CVE-2024-0002", "severity": "HIGH", "pkg_name": "curl", "fixed_version": "7.79.0"},
     {"vuln_id": "CVE-2024-0003", "severity": "MEDIUM", "pkg_name": "bash", "fixed_version": None},
     {"vuln_id": "CVE-2024-0004", "severity": "LOW", "pkg_name": "tar", "fixed_version": "1.34"},
 ]
 
 SUSPICIOUS_PROCESSES = [
-    "nc", "ncat", "netcat",
-    "nmap", "masscan",
-    "tcpdump", "wireshark",
-    "curl", "wget",
-    "gcc", "make",
+    "nc",
+    "ncat",
+    "netcat",
+    "nmap",
+    "masscan",
+    "tcpdump",
+    "wireshark",
+    "curl",
+    "wget",
+    "gcc",
+    "make",
 ]
 
 SAMPLE_K8S_AUDIT_EVENT = {
@@ -75,13 +86,15 @@ class TestVulnerabilityParsing:
         vulnerabilities = []
         for result in trivy_result.get("Results", []):
             for vuln in result.get("Vulnerabilities", []):
-                vulnerabilities.append({
-                    "target": result.get("Target"),
-                    "vuln_id": vuln.get("VulnerabilityID"),
-                    "pkg_name": vuln.get("PkgName"),
-                    "severity": vuln.get("Severity"),
-                    "fixed_version": vuln.get("FixedVersion"),
-                })
+                vulnerabilities.append(
+                    {
+                        "target": result.get("Target"),
+                        "vuln_id": vuln.get("VulnerabilityID"),
+                        "pkg_name": vuln.get("PkgName"),
+                        "severity": vuln.get("Severity"),
+                        "fixed_version": vuln.get("FixedVersion"),
+                    }
+                )
 
         assert len(vulnerabilities) == 1
         assert vulnerabilities[0]["vuln_id"] == "CVE-2024-0001"
@@ -136,7 +149,9 @@ class TestRiskScoring:
         severity_weights = {"CRITICAL": 10, "HIGH": 7, "MEDIUM": 4, "LOW": 1}
         base_score = sum(severity_weights[v["severity"]] for v in vulnerabilities)
 
-        critical_unfixed = [v for v in vulnerabilities if v["severity"] == "CRITICAL" and v["fixed_version"] is None]
+        critical_unfixed = [
+            v for v in vulnerabilities if v["severity"] == "CRITICAL" and v["fixed_version"] is None
+        ]
 
         risk_score = base_score
         if critical_unfixed:
@@ -184,11 +199,13 @@ class TestSupplyChainAnalysis:
         for idx, command in enumerate(layer_commands):
             for pattern in suspicious_patterns:
                 if re.search(pattern, command, re.IGNORECASE):
-                    findings.append({
-                        "layer": idx,
-                        "pattern": pattern,
-                        "command": command,
-                    })
+                    findings.append(
+                        {
+                            "layer": idx,
+                            "pattern": pattern,
+                            "command": command,
+                        }
+                    )
 
         assert len(findings) == 2  # curl|sh and chmod 777
 
@@ -222,7 +239,9 @@ class TestProcessAnomalyDetection:
         """Test flagging of suspicious processes."""
         running_processes = ["nginx", "python", "nc", "curl"]
 
-        suspicious_found = [p for p in running_processes if p.lower() in [s.lower() for s in SUSPICIOUS_PROCESSES]]
+        suspicious_found = [
+            p for p in running_processes if p.lower() in [s.lower() for s in SUSPICIOUS_PROCESSES]
+        ]
 
         assert len(suspicious_found) == 2
         assert "nc" in suspicious_found
@@ -436,8 +455,10 @@ class TestRBACViolationDetection:
         ]
 
         sensitive_access = [
-            e for e in audit_events
-            if e["resource"] in sensitive_resources and e["verb"] in ["create", "update", "patch", "delete"]
+            e
+            for e in audit_events
+            if e["resource"] in sensitive_resources
+            and e["verb"] in ["create", "update", "patch", "delete"]
         ]
 
         assert len(sensitive_access) == 1
@@ -455,7 +476,8 @@ class TestRBACViolationDetection:
         ]
 
         priv_esc_events = [
-            e for e in audit_events
+            e
+            for e in audit_events
             if e["resource"] in priv_esc_resources and e["verb"] in priv_esc_verbs
         ]
 
@@ -522,7 +544,8 @@ class TestContainerDetectionRules:
         ]
 
         docker_socket_access = [
-            e for e in file_access_events
+            e
+            for e in file_access_events
             if "/var/run/docker.sock" in e["path"] or "/run/docker.sock" in e["path"]
         ]
 
@@ -542,8 +565,7 @@ class TestContainerDetectionRules:
         ]
 
         reverse_shell_events = [
-            e for e in process_events
-            if any(pattern(e) for pattern in reverse_shell_patterns)
+            e for e in process_events if any(pattern(e) for pattern in reverse_shell_patterns)
         ]
 
         assert len(reverse_shell_events) == 1
@@ -559,8 +581,7 @@ class TestContainerDetectionRules:
         ]
 
         sensitive_access = [
-            e for e in file_access_events
-            if any(sp in e["path"] for sp in sensitive_paths)
+            e for e in file_access_events if any(sp in e["path"] for sp in sensitive_paths)
         ]
 
         assert len(sensitive_access) == 2
