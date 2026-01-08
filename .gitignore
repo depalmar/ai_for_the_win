@@ -115,3 +115,10 @@ malware/
 !data/malware/
 !samples/.gitkeep
 .claude/settings.local.json
+
+# XQL content (hidden for now)
+docs/guides/xql-guide.md
+templates/xql/
+tools/xql_validator/
+labs/lab21-xql-threat-hunting/
+tests/test_xql_validator.py
