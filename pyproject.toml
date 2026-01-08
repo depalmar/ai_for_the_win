@@ -1,5 +1,59 @@
 [project]
+name = "ai-for-the-win"
+version = "1.6.0"
+description = "Hands-on AI/ML training for security practitioners - DFIR, threat detection, and security automation"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "AI for the Win Contributors"}
+]
+keywords = [
+    "security",
+    "dfir",
+    "threat-detection",
+    "machine-learning",
+    "llm",
+    "incident-response",
+    "malware-analysis",
+    "soc",
+    "xdr",
+    "cortex"
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Information Technology",
+    "Intended Audience :: Developers",
+    "Topic :: Security",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
 requires-python = ">=3.10,<3.14"
+
+[project.urls]
+Homepage = "https://github.com/ai-for-the-win"
+Documentation = "https://ai-for-the-win.github.io"
+Repository = "https://github.com/ai-for-the-win/ai-for-the-win"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "mypy>=1.0.0",
+    "ruff>=0.1.0",
+]
+docs = [
+    "mkdocs>=1.5.0",
+    "mkdocs-material>=9.0.0",
+]
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
 
 [tool.black]
 line-length = 100
@@ -8,3 +62,27 @@ target-version = ['py310', 'py311', 'py312']
 [tool.isort]
 profile = "black"
 line_length = 100
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+select = ["E", "F", "W", "I", "N", "S", "B"]
+ignore = ["E501", "S101"]
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests", "labs"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short"
+markers = [
+    "slow: marks tests as slow",
+    "integration: marks tests requiring external services",
+    "requires_api: marks tests requiring API keys",
+]

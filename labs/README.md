@@ -133,6 +133,10 @@ Deep dive into incident response, threat simulation, and offensive security anal
 | # | Lab | Topic | What You'll Learn |
 |---|-----|-------|-------------------|
 | 10a | [DFIR Fundamentals](./lab10a-dfir-fundamentals/) | **Bridge lab** | IR lifecycle, artifacts, ATT&CK mapping |
+| 10b | [Windows Event Log Analysis](./lab10b-windows-event-log-analysis/) | **NEW!** | Event IDs, lateral movement, credential theft |
+| 10c | [Windows Registry Forensics](./lab10c-windows-registry-forensics/) | **NEW!** | Persistence hunting, forensic artifacts |
+| 10d | [Live Response](./lab10d-live-response/) | **NEW!** | Collection techniques, triage checklist |
+| 21 | [XQL Threat Hunting](./lab21-xql-threat-hunting/) | **NEW!** | Cortex XDR queries, detection rules |
 | 11a | [Ransomware Fundamentals](./lab11a-ransomware-fundamentals/) | **NEW! Bridge lab** | Evolution, families, indicators, recovery |
 | 11 | [Ransomware Detection](./lab11-ransomware-detection/) | Behavioral detection | Entropy, TTPs, response |
 | 12 | [Purple Team](./lab12-ransomware-simulation/) | Adversary emulation | Safe simulation, gap analysis |
@@ -810,6 +814,10 @@ Track your progress:
 - [ ] Lab 09b: Monitoring AI Systems (NEW - production observability)
 - [ ] Lab 10: IR Copilot
 - [ ] Lab 10a: DFIR Fundamentals (IR lifecycle prep)
+- [ ] Lab 10b: Windows Event Log Analysis (NEW)
+- [ ] Lab 10c: Windows Registry Forensics (NEW)
+- [ ] Lab 10d: Live Response (NEW)
+- [ ] Lab 21: XQL Threat Hunting (NEW - Cortex XDR)
 - [ ] Lab 11a: Ransomware Fundamentals (NEW - bridge lab)
 - [ ] Lab 11: Ransomware Detection
 - [ ] Lab 12: Ransomware Simulation
@@ -834,33 +842,12 @@ Test your skills with capture-the-flag challenges! These are separate from labs 
 
 | Challenge | After Lab | Skills Tested |
 |-----------|-----------|---------------|
-| [Log Detective](../ctf-challenges/beginner/challenge-01/) | Lab 04 | Log analysis, pattern recognition |
-| [Phish Finder](../ctf-challenges/beginner/challenge-02/) | Lab 01 | Email classification, IOC extraction |
-| [Hidden IOC](../ctf-challenges/beginner/challenge-03/) | Lab 05 | Data parsing, threat intel |
-| [Malware Classifier](../ctf-challenges/beginner/challenge-04/) | Lab 02 | Feature engineering, ML |
-| [Prompt Injection 101](../ctf-challenges/beginner/challenge-05/) | Lab 20 | AI security, prompt attacks |
-
-### Intermediate Challenges (250 pts each)
-
-| Challenge | After Lab | Skills Tested |
-|-----------|-----------|---------------|
-| [C2 Hunter](../ctf-challenges/intermediate/challenge-01/) | Lab 14 | Beaconing, DNS tunneling |
-| [Memory Forensics](../ctf-challenges/intermediate/challenge-02/) | Lab 13 | Volatility, process analysis |
-| [Adversarial Samples](../ctf-challenges/intermediate/challenge-03/) | Lab 17 | ML evasion attacks |
-| [Agent Investigation](../ctf-challenges/intermediate/challenge-04/) | Lab 04b | ReAct pattern, tool use |
-| [Ransomware Response](../ctf-challenges/intermediate/challenge-05/) | Lab 11 | Incident analysis, recovery |
-
-### Advanced Challenges (500 pts each)
-
-| Challenge | After Lab | Skills Tested |
-|-----------|-----------|---------------|
-| [APT Attribution](../ctf-challenges/advanced/challenge-01/) | Lab 16 | TTP analysis, profiling |
-| [Model Poisoning](../ctf-challenges/advanced/challenge-02/) | Lab 17 | Data poisoning, defense |
-| [Cloud Compromise](../ctf-challenges/advanced/challenge-03/) | Lab 19 | Multi-cloud security |
-| [Zero-Day Detection](../ctf-challenges/advanced/challenge-04/) | Lab 03 | Anomaly detection |
-| [Full IR Scenario](../ctf-challenges/advanced/challenge-05/) | Lab 10 | Complete IR workflow |
+| [Log Detective](../ctf/beginner/01-log-detective/) | Lab 04 | Log analysis, pattern recognition |
+| [Phish Finder](../ctf/beginner/02-phish-finder/) | Lab 01 | Email classification, IOC extraction |
 
 > 💡 **Tip**: Complete the recommended lab before attempting each CTF challenge for the best learning experience. Labs teach the concepts; CTFs test your skills!
+
+> 📝 **More challenges coming soon!** Intermediate and advanced CTF challenges are in development.
 
 ---
 

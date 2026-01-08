@@ -1,0 +1,84 @@
+{
+  "emails": [
+    {
+      "id": 1,
+      "timestamp": "2025-01-07T08:00:00Z",
+      "from": "it-support@company.com",
+      "to": "employee@company.com",
+      "subject": "Weekly IT Newsletter",
+      "body": "Hello team, here's your weekly IT update. Remember to keep your software updated.",
+      "links": ["https://intranet.company.com/newsletter"],
+      "attachments": []
+    },
+    {
+      "id": 2,
+      "timestamp": "2025-01-07T09:15:00Z",
+      "from": "admin@c0mpany-secure.com",
+      "to": "employee@company.com",
+      "subject": "URGENT: Password Expires in 24 Hours!",
+      "body": "Your password will expire soon! Click the link below immediately to avoid losing access to your account.",
+      "links": ["https://flag.c0mpany-secure.com/reset?token=abc123"],
+      "attachments": []
+    },
+    {
+      "id": 3,
+      "timestamp": "2025-01-07T10:30:00Z",
+      "from": "hr@company.com",
+      "to": "employee@company.com",
+      "subject": "Holiday Schedule 2025",
+      "body": "Please find attached the holiday schedule for 2025. Plan your time off accordingly.",
+      "links": ["https://hr.company.com/calendar/2025"],
+      "attachments": ["holiday_schedule_2025.pdf"]
+    },
+    {
+      "id": 4,
+      "timestamp": "2025-01-07T11:45:00Z",
+      "from": "helpdesk@cornpany.com",
+      "to": "employee@company.com",
+      "subject": "Action Required: Verify Your Account",
+      "body": "We detected unusual activity on your account. Please verify your identity by clicking the link below within 1 hour.",
+      "links": ["https://ph1sh.cornpany.com/verify?id=12345"],
+      "attachments": []
+    },
+    {
+      "id": 5,
+      "timestamp": "2025-01-07T12:00:00Z",
+      "from": "team@company.com",
+      "to": "all-staff@company.com",
+      "subject": "Team Building Event Next Friday",
+      "body": "Join us for our quarterly team building event! RSVP on the intranet.",
+      "links": ["https://events.company.com/rsvp/tb-2025q1"],
+      "attachments": []
+    },
+    {
+      "id": 6,
+      "timestamp": "2025-01-07T14:20:00Z",
+      "from": "security@company-verify.net",
+      "to": "employee@company.com",
+      "subject": "Your Account Has Been Compromised!",
+      "body": "ALERT: Suspicious login detected from Russia. Click immediately to secure your account or it will be suspended.",
+      "links": ["https://f0und.company-verify.net/secure?session=xyz789"],
+      "attachments": []
+    },
+    {
+      "id": 7,
+      "timestamp": "2025-01-07T15:00:00Z",
+      "from": "finance@company.com",
+      "to": "employee@company.com",
+      "subject": "Expense Report Approved",
+      "body": "Your expense report #12345 has been approved. Payment will be processed within 5 business days.",
+      "links": ["https://finance.company.com/expenses/12345"],
+      "attachments": ["expense_report_12345.pdf"]
+    },
+    {
+      "id": 8,
+      "timestamp": "2025-01-07T16:30:00Z",
+      "from": "ceo@c0mpany.biz",
+      "to": "employee@company.com",
+      "subject": "Confidential: Wire Transfer Needed",
+      "body": "I need you to process an urgent wire transfer. This is confidential, don't tell anyone. Reply for details.",
+      "links": ["https://1t.c0mpany.biz/transfer"],
+      "attachments": []
+    }
+  ]
+}

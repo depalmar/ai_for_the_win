@@ -77,6 +77,18 @@ logs/
 .DS_Store
 Thumbs.db
 
+# Windows artifacts
+nul
+NUL
+docs;*
+*.stackdump
+
+# Python caching (additional)
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+*.lprof
+
 # Security - Never commit these
 *.pem
 *.key

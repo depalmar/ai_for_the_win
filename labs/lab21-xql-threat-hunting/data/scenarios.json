@@ -1,0 +1,182 @@
+{
+  "scenarios": [
+    {
+      "id": 1,
+      "name": "Operation Midnight Heist - Initial Access",
+      "description": "A finance department employee received an email with a malicious macro document. After enabling macros, encoded PowerShell commands were executed to establish a foothold. Hunt for evidence of this initial compromise.",
+      "attack_context": "The attacker used a spear-phishing email disguised as an invoice. The macro launched PowerShell with Base64-encoded commands to download a second-stage payload.",
+      "expected_techniques": ["T1566.001", "T1059.001"],
+      "severity": "high",
+      "hunt_objectives": [
+        "Find PowerShell processes with encoded commands (-enc, -encodedcommand)",
+        "Identify the parent process (likely WINWORD.EXE or EXCEL.EXE)",
+        "Capture the encoded payload for decoding"
+      ],
+      "query_hints": {
+        "process_filter": "actor_process_image_name ~= \"powershell\\.exe|pwsh\\.exe\"",
+        "command_patterns": "\"-enc|-encodedcommand|frombase64|downloadstring\"",
+        "parent_context": "causality_actor_process_image_name ~= \"winword|excel|outlook\""
+      }
+    },
+    {
+      "id": 2,
+      "name": "Operation Midnight Heist - Credential Theft",
+      "description": "After gaining initial access, the attacker deployed Mimikatz to dump credentials from LSASS memory. Hunt for credential dumping activity that occurred shortly after the PowerShell execution.",
+      "attack_context": "The attacker used the classic 'sekurlsa::logonpasswords' command to extract plaintext credentials and NTLM hashes from memory.",
+      "expected_techniques": ["T1003.001", "T1003.002"],
+      "severity": "critical",
+      "hunt_objectives": [
+        "Find processes with Mimikatz command patterns",
+        "Detect procdump.exe targeting lsass.exe",
+        "Identify comsvcs.dll MiniDump abuse"
+      ],
+      "query_hints": {
+        "mimikatz_patterns": "sekurlsa|lsadump|privilege::debug|mimikatz",
+        "procdump_lsass": "actor_process_image_name ~= \"procdump\" and actor_process_command_line ~= \"lsass\"",
+        "comsvcs_dump": "actor_process_command_line ~= \"comsvcs\" and actor_process_command_line ~= \"minidump\""
+      }
+    },
+    {
+      "id": 3,
+      "name": "Operation Midnight Heist - Lateral Movement",
+      "description": "With domain admin credentials in hand, the attacker moved laterally to the file server using PsExec and administrative shares. Hunt for evidence of lateral movement between the initial victim and other systems.",
+      "attack_context": "The attacker used PsExec to remotely execute commands on FILESRV01, then accessed C$ and ADMIN$ shares to deploy additional tools.",
+      "expected_techniques": ["T1021.002", "T1570", "T1047"],
+      "severity": "high",
+      "hunt_objectives": [
+        "Find PsExec or similar remote execution tools",
+        "Detect access to administrative shares (ADMIN$, C$, IPC$)",
+        "Identify WMI-based remote execution"
+      ],
+      "query_hints": {
+        "psexec_tools": "actor_process_image_name ~= \"psexec|paexec|remcom|csexec\"",
+        "admin_shares": "actor_process_command_line ~= \"\\\\\\\\.*\\\\admin\\$|\\\\\\\\.*\\\\c\\$|\\\\\\\\.*\\\\ipc\\$\"",
+        "wmi_remote": "actor_process_image_name ~= \"wmic\" and actor_process_command_line ~= \"/node:\""
+      }
+    },
+    {
+      "id": 4,
+      "name": "Operation Midnight Heist - Persistence",
+      "description": "To maintain access, the attacker created scheduled tasks and modified registry run keys on the file server. Hunt for persistence mechanisms established after the lateral movement.",
+      "attack_context": "A scheduled task named 'SystemHealthCheck' was created to run a malicious PowerShell script every 4 hours. Additionally, a registry run key was added for backup persistence.",
+      "expected_techniques": ["T1053.005", "T1547.001"],
+      "severity": "medium",
+      "hunt_objectives": [
+        "Find schtasks.exe creating new scheduled tasks",
+        "Detect registry modifications to Run/RunOnce keys",
+        "Identify persistence locations with unusual executables"
+      ],
+      "query_hints": {
+        "schtasks_create": "actor_process_image_name ~= \"schtasks\" and actor_process_command_line ~= \"/create\"",
+        "run_keys": "action_registry_key_name ~= \"CurrentVersion\\\\\\\\Run|RunOnce\"",
+        "exclude_legitimate": "actor_process_image_name not in (\"msiexec.exe\", \"setup.exe\")"
+      }
+    },
+    {
+      "id": 5,
+      "name": "Operation Midnight Heist - Defense Evasion",
+      "description": "Before deploying ransomware, the attacker disabled Windows Defender and cleared security event logs to cover their tracks. Hunt for evidence of security tool tampering.",
+      "attack_context": "PowerShell commands disabled real-time monitoring, and wevtutil was used to clear the Security and System event logs.",
+      "expected_techniques": ["T1562.001", "T1070.001"],
+      "severity": "high",
+      "hunt_objectives": [
+        "Find PowerShell commands disabling Defender (Set-MpPreference)",
+        "Detect service manipulation (sc stop/delete WinDefend)",
+        "Identify event log clearing (wevtutil cl, Clear-EventLog)"
+      ],
+      "query_hints": {
+        "defender_disable": "actor_process_command_line ~= \"Set-MpPreference.*-Disable|DisableRealtimeMonitoring\"",
+        "service_stop": "actor_process_command_line ~= \"sc stop WinDefend|sc delete WinDefend\"",
+        "log_clear": "actor_process_command_line ~= \"wevtutil.*cl|Clear-EventLog\""
+      }
+    },
+    {
+      "id": 6,
+      "name": "Operation Midnight Heist - Data Exfiltration",
+      "description": "The attacker identified and staged sensitive financial documents before exfiltrating them using certutil to encode and upload files. Hunt for data staging and exfiltration activity.",
+      "attack_context": "Files were collected from the finance share, Base64-encoded using certutil, and uploaded to an external server using curl.",
+      "expected_techniques": ["T1005", "T1560.001", "T1048"],
+      "severity": "high",
+      "hunt_objectives": [
+        "Find certutil encode/decode operations",
+        "Detect file archiving (rar, 7z, zip) on sensitive directories",
+        "Identify outbound connections from LOLBins with unusual destinations"
+      ],
+      "query_hints": {
+        "certutil_encode": "actor_process_image_name ~= \"certutil\" and actor_process_command_line ~= \"encode|decode|urlcache\"",
+        "archive_creation": "actor_process_command_line ~= \"\\.(rar|7z|zip)\" and actor_process_command_line ~= \"finance|confidential|sensitive\"",
+        "lolbin_network": "actor_process_image_name in (\"certutil.exe\", \"curl.exe\", \"bitsadmin.exe\")"
+      }
+    },
+    {
+      "id": 7,
+      "name": "Operation Midnight Heist - Ransomware Deployment",
+      "description": "The attack culminated with ransomware deployment. Before encryption, shadow copies were deleted and system recovery was disabled. Hunt for ransomware preparation indicators.",
+      "attack_context": "VSSAdmin deleted all shadow copies, BCDEdit disabled Windows recovery, and a ransom note was dropped before encryption began.",
+      "expected_techniques": ["T1486", "T1490", "T1489"],
+      "severity": "critical",
+      "hunt_objectives": [
+        "Find vssadmin shadow copy deletion",
+        "Detect bcdedit recovery disable commands",
+        "Identify rapid file modification patterns (encryption indicator)"
+      ],
+      "query_hints": {
+        "shadow_delete": "actor_process_image_name ~= \"vssadmin\" and actor_process_command_line ~= \"delete shadows\"",
+        "wmic_shadow": "actor_process_image_name ~= \"wmic\" and actor_process_command_line ~= \"shadowcopy delete\"",
+        "bcdedit_recovery": "actor_process_image_name ~= \"bcdedit\" and actor_process_command_line ~= \"recoveryenabled.*no\""
+      }
+    },
+    {
+      "id": 8,
+      "name": "APT Scenario - DCSync Attack",
+      "description": "An advanced threat actor with domain admin privileges performed a DCSync attack to replicate domain credentials directly from the domain controller without touching LSASS.",
+      "attack_context": "Using Mimikatz's lsadump::dcsync command, the attacker replicated the krbtgt hash and all domain admin credentials directly via the Directory Replication Service (DRS) protocol.",
+      "expected_techniques": ["T1003.006"],
+      "severity": "critical",
+      "hunt_objectives": [
+        "Find Mimikatz DCSync command patterns",
+        "Detect unusual DRS replication requests (requires network telemetry)",
+        "Identify processes making DRSUAPI calls from non-DC systems"
+      ],
+      "query_hints": {
+        "dcsync_command": "actor_process_command_line ~= \"dcsync|drsuapi|dsgetncchanges|lsadump::dcsync\"",
+        "target_dc": "Look for connections to port 445/389 targeting domain controllers",
+        "non_dc_source": "agent_hostname not in ('DC01', 'DC02') performing replication"
+      }
+    }
+  ],
+  "attack_chain_summary": {
+    "name": "Operation Midnight Heist",
+    "stages": [
+      "Initial Access via Phishing (Scenario 1)",
+      "Credential Dumping (Scenario 2)",
+      "Lateral Movement (Scenario 3)",
+      "Persistence (Scenario 4)",
+      "Defense Evasion (Scenario 5)",
+      "Data Exfiltration (Scenario 6)",
+      "Ransomware Impact (Scenario 7)"
+    ],
+    "total_techniques": 16,
+    "estimated_dwell_time": "4-6 hours"
+  },
+  "expected_query_components": {
+    "required": [
+      "config case_sensitive = false",
+      "dataset = xdr_data",
+      "filter event_type = ENUM."
+    ],
+    "recommended": [
+      "timestamp_diff(current_time(), _time, \"DAY\")",
+      "limit",
+      "fields",
+      "sort desc _time"
+    ],
+    "field_naming": {
+      "actor_process": "The process performing the action",
+      "action_process": "The process being created/targeted",
+      "causality_actor": "Root cause/parent process chain",
+      "agent_hostname": "Endpoint name",
+      "agent_ip_addresses": "Endpoint IP addresses (array)"
+    }
+  }
+}
