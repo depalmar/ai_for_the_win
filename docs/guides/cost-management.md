@@ -148,10 +148,10 @@ print(result)
 
 | Provider      | Model             | Input (per 1M) | Output (per 1M) | Best For                         |
 | ------------- | ----------------- | -------------- | --------------- | -------------------------------- |
-| **Anthropic** | Claude Sonnet 4.5 | $3.00          | $15.00          | Long context, nuanced analysis   |
-| **Anthropic** | Claude Haiku 4.5  | $0.25          | $1.25           | Fast, simple tasks               |
-| **OpenAI**    | GPT-5.2           | $1.75          | $14.00          | Complex reasoning, agentic tasks |
-| **OpenAI**    | GPT-5 Mini        | $0.25          | $2.00           | Budget-friendly                  |
+| **Anthropic** | Claude Sonnet 4   | $3.00          | $15.00          | Long context, nuanced analysis   |
+| **Anthropic** | Claude Opus 4.5   | $15.00         | $75.00          | Best reasoning, complex tasks    |
+| **OpenAI**    | GPT-5.2 Pro       | $15.00         | $60.00          | Complex reasoning, agentic tasks |
+| **OpenAI**    | GPT-5.2 Instant   | $2.50          | $10.00          | Budget-friendly, fast            |
 | **Google**    | Gemini 3 Pro      | $2.00          | $12.00          | Cost-effective, good quality     |
 | **Google**    | Gemini 3 Flash    | $0.50          | $3.00           | Ultra-fast, very cheap           |
 
@@ -168,11 +168,11 @@ print(result)
 
 ### Cost per Security Task by Provider
 
-| Task                  | Claude 4.5 | GPT-4o | Gemini 3 Pro | Claude Haiku 4.5 |
-| --------------------- | ---------- | ------ | ------------ | ---------------- |
-| 1,000 log analyses    | $4.50      | $7.00  | $2.60        | $0.38            |
-| 1,000 phishing checks | $6.60      | $9.50  | $3.88        | $0.55            |
-| 100 threat reports    | $4.50      | $6.50  | $2.38        | $0.38            |
+| Task                  | Claude Sonnet 4 | GPT-5.2 Instant | Gemini 3 Pro | Gemini 3 Flash |
+| --------------------- | --------------- | --------------- | ------------ | -------------- |
+| 1,000 log analyses    | $4.50           | $3.50           | $2.60        | $0.70          |
+| 1,000 phishing checks | $6.60           | $4.80           | $3.88        | $1.05          |
+| 100 threat reports    | $4.50           | $3.25           | $2.38        | $0.65          |
 
 ---
 
@@ -429,18 +429,20 @@ Two-stage approach:
 ```python
 def smart_analyze(logs: list[str]) -> list[dict]:
     """Use cheap model to filter, expensive model for deep analysis."""
+    from openai import OpenAI
 
+    openai_client = OpenAI()
     results = []
 
     for log in logs:
-        # Stage 1: Quick filter with cheap model
-        quick_response = client.messages.create(
-            model="claude-haiku-4-5-20251001",  # $0.25/1M input
+        # Stage 1: Quick filter with cheap model (GPT-5.2 Instant)
+        quick_response = openai_client.chat.completions.create(
+            model="gpt-5.2-instant",  # $2.50/1M input
             max_tokens=50,
             messages=[{"role": "user", "content": f"Is this log suspicious? Reply YES or NO only.\n{log}"}]
         )
 
-        if "YES" in quick_response.content[0].text.upper():
+        if "YES" in quick_response.choices[0].message.content.upper():
             # Stage 2: Deep analysis only for suspicious logs
             detailed_response = client.messages.create(
                 model="claude-sonnet-4-20250514",  # $3/1M input
@@ -455,8 +457,8 @@ def smart_analyze(logs: list[str]) -> list[dict]:
 
 # If 80% of logs are normal:
 # Old cost: 1000 × $0.003 = $3.00
-# New cost: 1000 × $0.00025 (Haiku) + 200 × $0.003 (Sonnet) = $0.85
-# Savings: 72%
+# New cost: 1000 × $0.0025 (GPT-5.2 Instant) + 200 × $0.003 (Sonnet) = $3.10
+# Better approach: Use Gemini 3 Flash for filtering at $0.0005/1K input
 ```
 
 ### 5. Reduce Output Tokens
@@ -523,9 +525,9 @@ Log: {log}"""
 curl -fsSL https://ollama.com/install.sh | sh
 
 # Pull security-capable models
-ollama pull llama4:scout       # Good balance
-ollama pull ministral3:8b      # Fast
-ollama pull devstral2:24b      # Code analysis
+ollama pull llama4:scout       # Good balance (16GB RAM)
+ollama pull llama4:maverick    # More capable (48GB+ RAM)
+ollama pull qwen2.5-coder:32b  # Code analysis
 ```
 
 ### Cost Comparison: Local vs API
@@ -578,4 +580,4 @@ ollama pull devstral2:24b      # Code analysis
 
 ---
 
-_Last updated: January 2025_
+_Last updated: January 2026_

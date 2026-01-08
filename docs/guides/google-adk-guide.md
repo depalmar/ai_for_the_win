@@ -116,7 +116,7 @@ from google.adk.models import Gemini
 # Create simple agent
 agent = Agent(
     name="test-agent",
-    model=Gemini(model="gemini-2.0-flash-exp"),
+    model=Gemini(model="gemini-3-flash"),
     system_instruction="You are a helpful security assistant."
 )
 
@@ -140,7 +140,7 @@ from google.adk.models import Gemini
 # Basic agent definition
 security_analyst = Agent(
     name="security_analyst",
-    model=Gemini(model="gemini-2.0-flash-exp"),
+    model=Gemini(model="gemini-3-flash"),
     system_instruction="""You are a senior security analyst.
     Analyze threats, identify indicators of compromise, and
     provide actionable recommendations. Always reference
@@ -311,7 +311,7 @@ mitre_tool = FunctionTool(
 # Create agent
 threat_intel_agent = Agent(
     name="ThreatIntelAgent",
-    model=Gemini(model="gemini-2.0-flash-exp"),
+    model=Gemini(model="gemini-3-flash"),
     system_instruction="""You are an expert threat intelligence analyst.
 
     Your responsibilities:
@@ -526,20 +526,20 @@ from google.adk.models import Gemini
 # Specialized agents
 triage_agent = Agent(
     name="TriageAgent",
-    model=Gemini(model="gemini-2.0-flash-exp"),
+    model=Gemini(model="gemini-3-flash"),
     system_instruction="Quickly categorize and prioritize security alerts. Output: priority (critical/high/medium/low), category, initial assessment."
 )
 
 analysis_agent = Agent(
     name="AnalysisAgent",
-    model=Gemini(model="gemini-2.0-flash-exp"),
+    model=Gemini(model="gemini-3-flash"),
     system_instruction="Perform deep analysis on security incidents. Correlate IOCs, identify attack patterns, map to MITRE ATT&CK.",
     tools=[vt_tool, mitre_tool]
 )
 
 response_agent = Agent(
     name="ResponseAgent",
-    model=Gemini(model="gemini-2.0-flash-exp"),
+    model=Gemini(model="gemini-3-flash"),
     system_instruction="Generate incident response recommendations. Include containment, eradication, and recovery steps."
 )
 
@@ -563,21 +563,21 @@ import asyncio
 # Specialized analyzers
 malware_analyst = Agent(
     name="MalwareAnalyst",
-    model=Gemini(model="gemini-2.0-flash-exp"),
+    model=Gemini(model="gemini-3-flash"),
     system_instruction="Analyze potential malware samples. Focus on capabilities, persistence, and C2.",
     tools=[yara_tool, vt_tool]
 )
 
 network_analyst = Agent(
     name="NetworkAnalyst",
-    model=Gemini(model="gemini-2.0-flash-exp"),
+    model=Gemini(model="gemini-3-flash"),
     system_instruction="Analyze network traffic and connections. Identify C2, data exfiltration, lateral movement.",
     tools=[abuseipdb_tool]
 )
 
 forensic_analyst = Agent(
     name="ForensicAnalyst",
-    model=Gemini(model="gemini-2.0-flash-exp"),
+    model=Gemini(model="gemini-3-flash"),
     system_instruction="Analyze system artifacts. Focus on timeline, persistence mechanisms, user activity."
 )
 
@@ -619,7 +619,7 @@ workers = {
 # Supervisor agent that coordinates workers
 supervisor = Supervisor(
     name="IncidentCommander",
-    model=Gemini(model="gemini-2.0-flash-exp"),
+    model=Gemini(model="gemini-3-flash"),
     workers=workers,
     system_instruction="""You are an incident commander coordinating a security response.
 
@@ -672,7 +672,7 @@ def enrich_alert(alert_id: str) -> dict:
 
 soc_agent = Agent(
     name="SOCAnalyst",
-    model=Gemini(model="gemini-2.0-flash-exp"),
+    model=Gemini(model="gemini-3-flash"),
     system_instruction="""You are a Tier 2 SOC Analyst responsible for:
 
     1. Alert Triage: Analyze incoming alerts, determine true/false positives
@@ -708,7 +708,7 @@ soc_agent = Agent(
 ```python
 threat_hunter = Agent(
     name="ThreatHunter",
-    model=Gemini(model="gemini-2.0-flash-exp"),
+    model=Gemini(model="gemini-3-flash"),
     system_instruction="""You are an advanced threat hunter specializing in:
 
     1. Hypothesis-Driven Hunting
@@ -745,7 +745,7 @@ threat_hunter = Agent(
 ```python
 malware_re_agent = Agent(
     name="MalwareReverseEngineer",
-    model=Gemini(model="gemini-2.0-flash-exp"),
+    model=Gemini(model="gemini-3-flash"),
     system_instruction="""You are a malware reverse engineer providing:
 
     1. Static Analysis
@@ -801,7 +801,7 @@ memory = ConversationMemory(
 
 agent = Agent(
     name="AnalystWithMemory",
-    model=Gemini(model="gemini-2.0-flash-exp"),
+    model=Gemini(model="gemini-3-flash"),
     system_instruction="You are a security analyst...",
     memory=memory
 )
@@ -828,7 +828,7 @@ knowledge = KnowledgeMemory(
 
 agent = Agent(
     name="KnowledgeableAnalyst",
-    model=Gemini(model="gemini-2.0-flash-exp"),
+    model=Gemini(model="gemini-3-flash"),
     system_instruction="Use your knowledge base to answer security questions...",
     memory=knowledge
 )
@@ -1107,7 +1107,7 @@ from google.adk.middleware import RateLimiter
 
 agent = Agent(
     name="RateLimitedAgent",
-    model=Gemini(model="gemini-2.0-flash-exp"),
+    model=Gemini(model="gemini-3-flash"),
     middleware=[
         RateLimiter(requests_per_minute=60)
     ]
@@ -1152,7 +1152,7 @@ tracer = Tracer(
 
 agent = Agent(
     name="TracedAgent",
-    model=Gemini(model="gemini-2.0-flash-exp"),
+    model=Gemini(model="gemini-3-flash"),
     tracer=tracer
 )
 ```
@@ -1200,7 +1200,7 @@ from google.adk.llms import Gemini
 
 agent = Agent(
     name="security_analyst",
-    model=Gemini("gemini-2.0-flash"),
+    model=Gemini("gemini-3-flash"),
     system_instruction="You are a security analyst."
 )
 response = agent.run("Analyze this IP: 192.168.1.100")
@@ -1234,7 +1234,7 @@ result = team.run("Analyze alert and recommend actions")
 
 ### Tips
 
-1. Use `gemini-2.0-flash` for speed, `gemini-pro` for complex tasks
+1. Use `gemini-3-flash` for speed, `gemini-3-pro` for complex tasks
 2. Define clear Pydantic schemas for tools and outputs
 3. Add callbacks for logging and auditing
 4. Wrap in try/except for production

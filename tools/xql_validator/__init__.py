@@ -1,4 +1,4 @@
-"""XQL Query Validator - Syntax checker for Cortex XDR XQL queries."""
+"""XQL Query Validator - Syntax checker for Cortex XSIAM/XDR XQL queries."""
 
 from .ai_providers import (
     AIProvider,

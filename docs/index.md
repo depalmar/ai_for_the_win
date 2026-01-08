@@ -907,7 +907,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
 
   <div class="stats">
     <div class="stat">
-      <div class="stat-number">45+</div>
+      <div class="stat-number">50+</div>
       <div class="stat-label">Hands-On Labs</div>
     </div>
     <div class="stat">
@@ -1014,7 +1014,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
     </div>
     <div class="feature">
       <div class="feature-icon">&#128300;</div>
-      <h3>839 Tests</h3>
+      <h3>1000+ Tests</h3>
       <p>Every lab has comprehensive tests. Know your code works before deploying. 100% pass rate.</p>
     </div>
   </div>
@@ -1085,6 +1085,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
           <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab18-fine-tuning-security" class="nav-lab dfir" title="Lab 18: Fine-Tuning (~8 hrs)">18</a>
           <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab19-cloud-security-ai" class="nav-lab dfir" title="Lab 19: Cloud Security AI (~5 hrs)">19</a>
           <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab20-llm-red-teaming" class="nav-lab dfir" title="Lab 20: LLM Red Teaming (~6 hrs)">20</a>
+          <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab21-xql-threat-hunting" class="nav-lab dfir" title="Lab 21: XQL Threat Hunting (~4 hrs)">21</a>
         </div>
       </div>
     </div>
@@ -1101,7 +1102,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
     </p>
   </div>
 
-<h3 style="margin-top: 2rem; margin-bottom: 1rem;">All 45+ Labs (Including Bridge Labs)</h3>
+<h3 style="margin-top: 2rem; margin-bottom: 1rem;">All 50+ Labs (Including Bridge Labs)</h3>
 
   <!-- Lab Filter Tabs -->
   <div class="lab-filters" role="group" aria-label="Filter labs by category">
@@ -1410,6 +1411,39 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
         <span class="difficulty difficulty-2">&#9733;&#9733;&#9734; Intermediate</span>
       </div>
     </a>
+    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab10b-windows-event-log-analysis" class="lab-card" data-category="dfir">
+      <div class="lab-header">
+        <span class="lab-number dfir">10b</span>
+        <span class="lab-title">Windows Event Logs</span>
+      </div>
+      <p class="lab-desc">Event log parsing, security event detection</p>
+      <div class="lab-meta">
+        <span>&#128337; ~3 hrs</span>
+        <span class="difficulty difficulty-2">&#9733;&#9733;&#9734; Intermediate</span>
+      </div>
+    </a>
+    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab10c-windows-registry-forensics" class="lab-card" data-category="dfir">
+      <div class="lab-header">
+        <span class="lab-number dfir">10c</span>
+        <span class="lab-title">Registry Forensics</span>
+      </div>
+      <p class="lab-desc">Registry analysis, persistence detection</p>
+      <div class="lab-meta">
+        <span>&#128337; ~3 hrs</span>
+        <span class="difficulty difficulty-2">&#9733;&#9733;&#9734; Intermediate</span>
+      </div>
+    </a>
+    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab10d-live-response" class="lab-card" data-category="dfir">
+      <div class="lab-header">
+        <span class="lab-number dfir">10d</span>
+        <span class="lab-title">Live Response</span>
+      </div>
+      <p class="lab-desc">Live IR, triage procedures, evidence collection</p>
+      <div class="lab-meta">
+        <span>&#128337; ~4 hrs</span>
+        <span class="difficulty difficulty-3">&#9733;&#9733;&#9733; Advanced</span>
+      </div>
+    </a>
     <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab11a-ransomware-fundamentals" class="lab-card" data-category="dfir">
       <div class="lab-header">
         <span class="lab-number dfir">11a</span>
@@ -1520,6 +1554,28 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
         <span class="difficulty difficulty-3">&#9733;&#9733;&#9733; Advanced</span>
       </div>
     </a>
+    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab17b-llm-security-testing" class="lab-card" data-category="dfir">
+      <div class="lab-header">
+        <span class="lab-number dfir">17b</span>
+        <span class="lab-title">LLM Security Testing</span>
+      </div>
+      <p class="lab-desc">Prompt injection, jailbreak testing</p>
+      <div class="lab-meta">
+        <span>&#128337; ~3 hrs</span>
+        <span class="difficulty difficulty-3">&#9733;&#9733;&#9733; Advanced</span>
+      </div>
+    </a>
+    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab17c-model-monitoring" class="lab-card" data-category="dfir">
+      <div class="lab-header">
+        <span class="lab-number dfir">17c</span>
+        <span class="lab-title">Model Monitoring</span>
+      </div>
+      <p class="lab-desc">Drift detection, adversarial input detection</p>
+      <div class="lab-meta">
+        <span>&#128337; ~3 hrs</span>
+        <span class="difficulty difficulty-3">&#9733;&#9733;&#9733; Advanced</span>
+      </div>
+    </a>
     <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab18-fine-tuning-security" class="lab-card" data-category="dfir">
       <div class="lab-header">
         <span class="lab-number dfir">18</span>
@@ -1529,6 +1585,17 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
       <div class="lab-meta">
         <span>&#128337; ~8 hrs</span>
         <span class="difficulty difficulty-3">&#9733;&#9733;&#9733; Expert</span>
+      </div>
+    </a>
+    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab18b-rag-security" class="lab-card" data-category="dfir">
+      <div class="lab-header">
+        <span class="lab-number dfir">18b</span>
+        <span class="lab-title">RAG Security</span>
+      </div>
+      <p class="lab-desc">KB poisoning, context sanitization</p>
+      <div class="lab-meta">
+        <span>&#128337; ~3 hrs</span>
+        <span class="difficulty difficulty-3">&#9733;&#9733;&#9733; Advanced</span>
       </div>
     </a>
     <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab19a-cloud-security-fundamentals" class="lab-card" data-category="dfir">
@@ -1553,6 +1620,39 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
         <span class="difficulty difficulty-3">&#9733;&#9733;&#9733; Advanced</span>
       </div>
     </a>
+    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab19b-container-security" class="lab-card" data-category="dfir">
+      <div class="lab-header">
+        <span class="lab-number dfir">19b</span>
+        <span class="lab-title">Container Security</span>
+      </div>
+      <p class="lab-desc">Kubernetes, runtime detection, image scanning</p>
+      <div class="lab-meta">
+        <span>&#128337; ~4 hrs</span>
+        <span class="difficulty difficulty-3">&#9733;&#9733;&#9733; Advanced</span>
+      </div>
+    </a>
+    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab19c-serverless-security" class="lab-card" data-category="dfir">
+      <div class="lab-header">
+        <span class="lab-number dfir">19c</span>
+        <span class="lab-title">Serverless Security</span>
+      </div>
+      <p class="lab-desc">Lambda, event injection, cold start attacks</p>
+      <div class="lab-meta">
+        <span>&#128337; ~3 hrs</span>
+        <span class="difficulty difficulty-3">&#9733;&#9733;&#9733; Advanced</span>
+      </div>
+    </a>
+    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab19d-cloud-ir-automation" class="lab-card" data-category="dfir">
+      <div class="lab-header">
+        <span class="lab-number dfir">19d</span>
+        <span class="lab-title">Cloud IR Automation</span>
+      </div>
+      <p class="lab-desc">Automated containment, evidence collection</p>
+      <div class="lab-meta">
+        <span>&#128337; ~4 hrs</span>
+        <span class="difficulty difficulty-3">&#9733;&#9733;&#9733; Advanced</span>
+      </div>
+    </a>
     <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab20-llm-red-teaming" class="lab-card" data-category="dfir">
       <div class="lab-header">
         <span class="lab-number dfir">20</span>
@@ -1572,6 +1672,17 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
       <p class="lab-desc">AI attack simulation, detection validation</p>
       <div class="lab-meta">
         <span>&#128337; ~3 hrs</span>
+        <span class="difficulty difficulty-3">&#9733;&#9733;&#9733; Advanced</span>
+      </div>
+    </a>
+    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab21-xql-threat-hunting" class="lab-card" data-category="dfir">
+      <div class="lab-header">
+        <span class="lab-number dfir">21</span>
+        <span class="lab-title">XQL Threat Hunting</span>
+      </div>
+      <p class="lab-desc">Cortex XSIAM/XDR query language for hunting</p>
+      <div class="lab-meta">
+        <span>&#128337; ~4 hrs</span>
         <span class="difficulty difficulty-3">&#9733;&#9733;&#9733; Advanced</span>
       </div>
     </a>
@@ -1783,7 +1894,7 @@ function filterLabs(category) {
         <span class="path-toggle">&#9660;</span>
       </summary>
       <div class="path-content">
-        <p class="path-desc">Advanced techniques: threat actor profiling, adversarial ML, fine-tuning, and red teaming.</p>
+        <p class="path-desc">Advanced techniques: threat actor profiling, adversarial ML, cloud/container security, and red teaming.</p>
         <div class="path-labs-list">
           <div class="path-lab-item">
             <span class="path-lab-num dfir">16</span>
@@ -1796,6 +1907,11 @@ function filterLabs(category) {
             <span class="path-time">~6 hrs</span>
           </div>
           <div class="path-lab-item">
+            <span class="path-lab-num dfir">17b</span>
+            <span class="path-lab-name">LLM Security Testing</span>
+            <span class="path-time">~3 hrs</span>
+          </div>
+          <div class="path-lab-item">
             <span class="path-lab-num dfir">18</span>
             <span class="path-lab-name">Fine-Tuning</span>
             <span class="path-time">~8 hrs</span>
@@ -1806,12 +1922,22 @@ function filterLabs(category) {
             <span class="path-time">~5 hrs</span>
           </div>
           <div class="path-lab-item">
+            <span class="path-lab-num dfir">19b</span>
+            <span class="path-lab-name">Container Security</span>
+            <span class="path-time">~4 hrs</span>
+          </div>
+          <div class="path-lab-item">
             <span class="path-lab-num dfir">20</span>
             <span class="path-lab-name">LLM Red Teaming</span>
             <span class="path-time">~6 hrs</span>
           </div>
+          <div class="path-lab-item">
+            <span class="path-lab-num dfir">21</span>
+            <span class="path-lab-name">XQL Threat Hunting</span>
+            <span class="path-time">~4 hrs</span>
+          </div>
         </div>
-        <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted);">Total: ~30 hours | Cost: ~$10-20</p>
+        <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted);">Total: ~41 hours | Cost: ~$15-30</p>
       </div>
     </details>
 
@@ -1911,22 +2037,27 @@ function filterLabs(category) {
         <a href="https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab04_llm_log_analysis.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open Lab 04 in Colab"></a>
       </div>
     </div>
-    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem;">📓 <a href="https://github.com/depalmar/ai_for_the_win/tree/main/notebooks" style="color: var(--primary);">All 35 lab notebooks</a> available for Colab</p>
+    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem;">📓 <a href="https://github.com/depalmar/ai_for_the_win/tree/main/notebooks" style="color: var(--primary);">All 50+ lab notebooks</a> available for Colab</p>
   </div>
 
   <div class="quick-start" style="margin-bottom: 1.5rem;">
-    <h3 style="margin-top: 0; color: var(--secondary);">💻 Option 2: Local Setup</h3>
-<pre><code># Clone and setup
-git clone https://github.com/depalmar/ai_for_the_win.git
+    <h3 style="margin-top: 0; color: var(--secondary);">🐳 Option 2: Docker (Recommended)</h3>
+    <p style="color: var(--text-muted); margin-bottom: 1rem;">One-command setup with all services pre-configured:</p>
+<pre><code>git clone https://github.com/depalmar/ai_for_the_win.git
+cd ai_for_the_win/docker
+docker compose up -d
+# Access Jupyter Lab at http://localhost:8888 (token: aiforthewin)</code></pre>
+    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.75rem;">📦 Includes: Jupyter, Elasticsearch, Kibana, PostgreSQL, Redis, MinIO, Ollama, ChromaDB</p>
+  </div>
+
+  <div class="quick-start" style="margin-bottom: 1.5rem;">
+    <h3 style="margin-top: 0; color: var(--secondary);">💻 Option 3: Local Setup</h3>
+<pre><code>git clone https://github.com/depalmar/ai_for_the_win.git
 cd ai_for_the_win
 python -m venv venv
 source venv/bin/activate  # Win: venv\Scripts\activate
 pip install -r requirements.txt
-
-# Run Lab 01 (no API key needed!)
-
 python labs/lab01-phishing-classifier/solution/main.py</code></pre>
-
   </div>
 
   <div class="cta-buttons">
@@ -1944,7 +2075,7 @@ python labs/lab01-phishing-classifier/solution/main.py</code></pre>
     </details>
     <details class="faq-item">
       <summary>Which LLM provider should I use?</summary>
-      <div class="faq-content">We recommend Anthropic Claude for best reasoning on security tasks. But all labs support OpenAI GPT-4, Google Gemini, and Ollama (free, local). You only need one.</div>
+      <div class="faq-content">We recommend Anthropic Claude (Sonnet 4/Opus 4.5) for best reasoning on security tasks. All labs support OpenAI GPT-5.2, Google Gemini 3, and Ollama (free, local). You only need one provider.</div>
     </details>
     <details class="faq-item">
       <summary>Can I run everything locally without API costs?</summary>
@@ -1959,8 +2090,8 @@ python labs/lab01-phishing-classifier/solution/main.py</code></pre>
       <div class="faq-content">Every lab includes complete solution code, step-by-step hints, and a Colab notebook you can run in your browser. Check GitHub Discussions for community help or open an issue.</div>
     </details>
     <details class="faq-item">
-      <summary>Are the labs production-ready?</summary>
-      <div class="faq-content">The solutions demonstrate core concepts. For production use, you'd add error handling, logging, and scale considerations. Lab 09 (Detection Pipeline) shows production architecture patterns.</div>
+      <summary>Can I use this commercially?</summary>
+      <div class="faq-content">The documentation and labs are licensed CC BY-NC-SA 4.0 (non-commercial). Code samples are MIT licensed. For commercial use, contact the author for licensing options. The solutions demonstrate core concepts—for production, you'd add error handling, logging, and scale considerations.</div>
     </details>
     <details class="faq-item">
       <summary>How is this different from other ML courses?</summary>

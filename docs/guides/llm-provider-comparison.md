@@ -24,18 +24,18 @@ START: What's your primary constraint?
 
 ├─► COST is critical
 │   ├─► Need high quality? → Gemini 3 Pro ($2/$12)
-│   ├─► Simple tasks? → GPT-4o-mini ($0.15/$0.60)
+│   ├─► Simple tasks? → GPT-5.2 Instant ($2.50/$10)
 │   └─► No budget? → Ollama (free, local)
 │
 ├─► QUALITY is critical
-│   ├─► Complex reasoning? → Claude Sonnet 4.5 or GPT-4o
+│   ├─► Complex reasoning? → Claude Opus 4.5 or GPT-5.2 Pro
 │   ├─► Long documents? → Claude (200K context)
-│   └─► Code analysis? → Claude or GPT-4o
+│   └─► Code analysis? → Claude or GPT-5.2
 │
 ├─► SPEED is critical
 │   ├─► Need streaming? → All providers support it
 │   ├─► Fastest response? → Gemini 3 Flash
-│   └─► Low latency? → GPT-4o-mini or Claude Haiku 4.5
+│   └─► Low latency? → GPT-5.2 Instant or Gemini 3 Flash
 │
 ├─► PRIVACY is critical
 │   ├─► Data can't leave network? → Ollama (local)
@@ -60,9 +60,8 @@ START: What's your primary constraint?
 
 | Model | Input/1M | Output/1M | Context | Speed |
 |-------|----------|-----------|---------|-------|
-| Claude Sonnet 4.5 | $3.00 | $15.00 | 200K | Fast |
+| Claude Sonnet 4 | $3.00 | $15.00 | 200K | Fast |
 | Claude Opus 4.5 | $15.00 | $75.00 | 200K | Slower |
-| Claude Haiku 4.5 | $0.25 | $1.25 | 200K | Fastest |
 
 **Strengths:**
 - Largest context window (200K tokens) - analyze entire codebases
@@ -83,15 +82,15 @@ START: What's your primary constraint?
 
 ---
 
-### OpenAI (GPT-4)
+### OpenAI (GPT-5.2)
 
 **Best For:** Complex reasoning, broad knowledge, tool use
 
 | Model | Input/1M | Output/1M | Context | Speed |
 |-------|----------|-----------|---------|-------|
-| GPT-4o | $5.00 | $20.00 | 128K | Fast |
-| GPT-4o-mini | $0.15 | $0.60 | 128K | Fastest |
-| GPT-4 Turbo | $10.00 | $30.00 | 128K | Medium |
+| GPT-5.2 Pro | $15.00 | $60.00 | 128K | Medium |
+| GPT-5.2 Thinking | $10.00 | $40.00 | 128K | Fast |
+| GPT-5.2 Instant | $2.50 | $10.00 | 128K | Fastest |
 
 **Strengths:**
 - Most mature ecosystem (tools, integrations)
@@ -150,8 +149,8 @@ START: What's your primary constraint?
 
 ### Core Capabilities
 
-| Feature | Claude 4.5 | GPT-4o | Gemini 3 Pro |
-|---------|------------|--------|----------------|
+| Feature | Claude | GPT-5.2 | Gemini 3 Pro |
+|---------|--------|---------|--------------|
 | **Context Window** | 200K | 128K | 1M |
 | **Structured Output** | Excellent | Good | Good |
 | **Code Analysis** | Excellent | Excellent | Good |
@@ -161,8 +160,8 @@ START: What's your primary constraint?
 
 ### Security-Specific Features
 
-| Feature | Claude 4.5 | GPT-4o | Gemini 3 Pro |
-|---------|------------|--------|----------------|
+| Feature | Claude | GPT-5.2 | Gemini 3 Pro |
+|---------|--------|---------|--------------|
 | **Threat Detection** | Excellent | Excellent | Good |
 | **IOC Extraction** | Excellent | Good | Good |
 | **Log Analysis** | Excellent | Good | Excellent |
@@ -193,12 +192,12 @@ START: What's your primary constraint?
 
 | Provider | Accuracy | Avg Time | Cost |
 |----------|----------|----------|------|
-| Claude Sonnet 4.5 | 96% | 2.1s | $0.45 |
-| GPT-4o | 94% | 1.8s | $0.65 |
+| Claude Sonnet 4 | 96% | 2.1s | $0.45 |
+| GPT-5.2 Thinking | 94% | 1.8s | $0.65 |
 | Gemini 3 Pro | 91% | 1.5s | $0.24 |
-| Claude Haiku 4.5 | 88% | 0.8s | $0.04 |
+| GPT-5.2 Instant | 88% | 0.8s | $0.15 |
 
-**Winner:** Claude Sonnet 4.5 (accuracy) or Gemini 3 Pro (cost)
+**Winner:** Claude Sonnet 4 (accuracy) or Gemini 3 Pro (cost)
 
 ---
 
@@ -208,12 +207,12 @@ START: What's your primary constraint?
 
 | Provider | Accuracy | False Positives | Cost |
 |----------|----------|-----------------|------|
-| Claude Sonnet 4.5 | 97.2% | 1.8% | $6.60 |
-| GPT-4o | 96.5% | 2.2% | $9.50 |
+| Claude Sonnet 4 | 97.2% | 1.8% | $6.60 |
+| GPT-5.2 Pro | 96.5% | 2.2% | $9.50 |
 | Gemini 3 Pro | 94.8% | 3.1% | $4.80 |
-| GPT-4o-mini | 91.2% | 5.5% | $0.45 |
+| GPT-5.2 Instant | 91.2% | 5.5% | $1.50 |
 
-**Winner:** Claude Sonnet 4.5 (accuracy) or GPT-4o-mini (budget)
+**Winner:** Claude Sonnet 4 (accuracy) or GPT-5.2 Instant (budget)
 
 ---
 
@@ -223,12 +222,12 @@ START: What's your primary constraint?
 
 | Provider | Detection Rate | False Alarm Rate | Cost |
 |----------|---------------|------------------|------|
-| Claude Sonnet 4.5 | 89% | 4% | $45.00 |
-| GPT-4o | 87% | 5% | $70.00 |
+| Claude Sonnet 4 | 89% | 4% | $45.00 |
+| GPT-5.2 Pro | 87% | 5% | $70.00 |
 | Gemini 3 Pro | 84% | 6% | $32.00 |
-| Claude Haiku 4.5 | 78% | 8% | $3.75 |
+| GPT-5.2 Instant | 78% | 8% | $12.50 |
 
-**Winner:** Claude Sonnet 4.5 (quality) or Gemini 3 Pro (cost-effective)
+**Winner:** Claude Sonnet 4 (quality) or Gemini 3 Pro (cost-effective)
 
 ---
 
@@ -238,11 +237,11 @@ START: What's your primary constraint?
 
 | Provider | Issues Found | False Positives | Cost |
 |----------|-------------|-----------------|------|
-| Claude Sonnet 4.5 | 45/50 | 3 | $2.25 |
-| GPT-4o | 43/50 | 5 | $3.50 |
+| Claude Sonnet 4 | 45/50 | 3 | $2.25 |
+| GPT-5.2 Pro | 43/50 | 5 | $3.50 |
 | Gemini 3 Pro | 40/50 | 4 | $1.24 |
 
-**Winner:** Claude Sonnet 4.5 (code analysis is a strength)
+**Winner:** Claude Sonnet 4 (code analysis is a strength)
 
 ---
 
@@ -283,7 +282,7 @@ response = client.messages.create(
 
 ---
 
-### OpenAI GPT-4: When to Choose
+### OpenAI GPT-5.2: When to Choose
 
 **Choose OpenAI when:**
 - Need mature ecosystem and integrations
@@ -334,7 +333,7 @@ response = client.chat.completions.create(
 import google.generativeai as genai
 
 genai.configure(api_key=os.environ["GOOGLE_API_KEY"])
-model = genai.GenerativeModel("gemini-2.5-pro")
+model = genai.GenerativeModel("gemini-3-pro")
 
 response = model.generate_content(
     "Analyze these logs for anomalies: {logs}"
@@ -361,8 +360,7 @@ response = model.generate_content(
 # Best for security tasks
 ollama pull llama4:maverick    # Best quality (needs 48GB+ RAM)
 ollama pull llama4:scout       # Good balance (16GB RAM)
-ollama pull ministral3:8b      # Fast, decent quality
-ollama pull devstral2:24b      # Code-focused
+ollama pull qwen2.5-coder:32b  # Code-focused
 
 # Usage
 ollama run llama4:scout "Analyze this log for threats: [log]"
@@ -390,7 +388,7 @@ def analyze_security_event(event: dict) -> dict:
     """Use cheap model for triage, expensive for deep analysis."""
 
     # Tier 1: Quick triage with local/cheap model
-    severity = quick_triage(event)  # Ollama or Haiku
+    severity = quick_triage(event)  # Ollama or GPT-5.2 Instant
 
     if severity == "LOW":
         return {"severity": "LOW", "action": "Log only"}
@@ -485,7 +483,7 @@ response = client.messages.create(
 result = response.content[0].text
 
 # Gemini (equivalent)
-model = genai.GenerativeModel("gemini-2.5-pro")
+model = genai.GenerativeModel("gemini-3-pro")
 response = model.generate_content(prompt)
 result = response.text
 ```
@@ -518,11 +516,11 @@ response = llm.invoke("Analyze this log: {log}")
 | Use Case | Primary | Fallback | Reasoning |
 |----------|---------|----------|-----------|
 | **Phishing Detection** | Claude | Gemini | Accuracy critical |
-| **Log Analysis (high vol)** | Gemini | Claude Haiku 4.5 | Cost matters |
-| **Code Review** | Claude | GPT-4o | Claude excels at code |
-| **Threat Intel** | Claude | GPT-4o | Long context needed |
-| **Real-time Alerting** | GPT-4o-mini | Gemini Flash | Speed critical |
-| **Compliance Reports** | Claude | GPT-4o | Instruction following |
+| **Log Analysis (high vol)** | Gemini | GPT-5.2 Instant | Cost matters |
+| **Code Review** | Claude | GPT-5.2 | Claude excels at code |
+| **Threat Intel** | Claude | GPT-5.2 | Long context needed |
+| **Real-time Alerting** | GPT-5.2 Instant | Gemini Flash | Speed critical |
+| **Compliance Reports** | Claude | GPT-5.2 | Instruction following |
 | **Air-gapped** | Ollama | N/A | Only option |
 
 ---

@@ -2,7 +2,7 @@
 
 **Cost**: Free to start (all providers have free tiers)
 
-Labs 04-20 use Large Language Models (LLMs) like Claude, GPT-4, or Gemini. This guide shows you how to get API keys and manage costs.
+Labs 04-21 use Large Language Models (LLMs) like Claude, GPT-5.2, or Gemini 3. This guide shows you how to get API keys and manage costs.
 
 ---
 
@@ -11,9 +11,9 @@ Labs 04-20 use Large Language Models (LLMs) like Claude, GPT-4, or Gemini. This 
 | Provider | Free Credits | Best For | Recommended Model |
 |----------|--------------|----------|-------------------|
 | **Anthropic (Claude)** | $5 free | Best reasoning, coding | `claude-sonnet-4-20250514` |
-| **OpenAI (GPT)** | $5 free (new accounts) | Widely supported | `gpt-5` |
-| **Google (Gemini)** | Free tier (generous) | Budget-friendly | `gemini-2.0-flash` |
-| **Ollama** | Completely free | Privacy, offline use | `llama4:scout`, `ministral3:8b` |
+| **OpenAI (GPT)** | $5 free (new accounts) | Widely supported | `gpt-5.2` |
+| **Google (Gemini)** | Free tier (generous) | Budget-friendly | `gemini-3-flash` |
+| **Ollama** | Completely free | Privacy, offline use | `llama4:scout`, `llama4:maverick` |
 
 **Recommendation**: Start with **Anthropic Claude** - it has the best reasoning for security tasks and $5 free credits.
 
@@ -44,17 +44,17 @@ Edit `.env` and add your key:
 ANTHROPIC_API_KEY=sk-ant-api03-xxxxxxxxxxxxx
 ```
 
-### Pricing (2025)
+### Pricing (2026)
 | Model | Input | Output | Cost per Lab |
 |-------|-------|--------|--------------|
-| Claude Sonnet 4.5 | $3/1M tokens | $15/1M tokens | ~$0.10-0.50 |
-| Claude Haiku 4.5 | $0.25/1M | $1.25/1M | ~$0.01-0.05 |
+| Claude Opus 4.5 | $15/1M tokens | $75/1M tokens | ~$0.50-2.00 |
+| Claude Sonnet 4 | $3/1M tokens | $15/1M tokens | ~$0.10-0.50 |
 
-**Tip**: Use Haiku for testing, Sonnet for final runs.
+**Tip**: Use Sonnet for testing, Opus 4.5 for complex reasoning tasks.
 
 ---
 
-## Option 2: OpenAI (GPT-4)
+## Option 2: OpenAI (GPT-5.2)
 
 ### Step 1: Create an Account
 1. Go to [platform.openai.com](https://platform.openai.com/)
@@ -71,11 +71,11 @@ ANTHROPIC_API_KEY=sk-ant-api03-xxxxxxxxxxxxx
 OPENAI_API_KEY=sk-xxxxxxxxxxxxx
 ```
 
-### Pricing (2025)
+### Pricing (2026)
 | Model | Input | Output | Cost per Lab |
 |-------|-------|--------|--------------|
-| GPT-4o | $2.50/1M | $10/1M | ~$0.10-0.40 |
-| GPT-4o-mini | $0.15/1M | $0.60/1M | ~$0.01-0.05 |
+| GPT-5.2 Pro | $15/1M | $60/1M | ~$0.50-2.00 |
+| GPT-5.2 Instant | $2.50/1M | $10/1M | ~$0.10-0.40 |
 
 ---
 
@@ -96,7 +96,7 @@ OPENAI_API_KEY=sk-xxxxxxxxxxxxx
 GOOGLE_API_KEY=AIzaxxxxxxxxxxxxx
 ```
 
-### Pricing (2025)
+### Pricing (2026)
 | Model | Input | Output | Cost per Lab |
 |-------|-------|--------|--------------|
 | Gemini 3 Flash | Free tier / $0.50/1M | $3.00/1M | ~$0.01-0.15 |
@@ -120,14 +120,14 @@ curl -fsSL https://ollama.ai/install.sh | sh
 
 ### Step 2: Pull a Model
 ```bash
-# Best balance of quality and speed
+# Best balance of quality and speed (17B with 16 experts)
 ollama pull llama4:scout
 
-# Fast inference
-ollama pull ministral3:8b
+# More capable variant (17B with 128 experts)
+ollama pull llama4:maverick
 
 # Coding-focused
-ollama pull devstral2:24b
+ollama pull qwen2.5-coder:32b
 ```
 
 ### Step 3: Configure the Labs
@@ -162,7 +162,7 @@ OLLAMA_MODEL=llama4:scout
 ### Cost-Saving Tips
 
 1. **Start with free Labs 01-03** - no API needed, learn ML foundations
-2. **Use cheaper models for testing** - Haiku, GPT-4o-mini, Gemini Flash
+2. **Use cheaper models for testing** - Sonnet 4, GPT-5.2 Instant, Gemini 3 Flash
 3. **Switch to full models for final runs**
 4. **Run Ollama locally** for unlimited experimentation
 5. **Cache responses** - avoid re-running the same prompts
