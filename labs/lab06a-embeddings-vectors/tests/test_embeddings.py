@@ -4,9 +4,9 @@
 import numpy as np
 import pytest
 
-# Try to import from solution
+# Import from solution module
 try:
-    from labs.lab06a_embeddings_vectors.solution.main import (
+    from solution.main import (
         IOC_SAMPLES,
         SECURITY_DOCUMENTS,
         THREAT_DESCRIPTIONS,
@@ -15,17 +15,7 @@ try:
         similarity_search,
     )
 except ImportError:
-    try:
-        from solution.main import (
-            IOC_SAMPLES,
-            SECURITY_DOCUMENTS,
-            THREAT_DESCRIPTIONS,
-            calculate_similarity_matrix,
-            create_tfidf_embeddings,
-            similarity_search,
-        )
-    except ImportError:
-        pytest.skip("Solution module not available", allow_module_level=True)
+    pytest.skip("Solution module not available", allow_module_level=True)
 
 
 # =============================================================================

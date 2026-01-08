@@ -5,9 +5,9 @@ import numpy as np
 import pandas as pd
 import pytest
 
-# Try to import from solution
+# Import from solution module
 try:
-    from labs.lab03_anomaly_detection.solution.main import (
+    from solution.main import (
         engineer_network_features,
         evaluate_detector,
         find_optimal_threshold,
@@ -18,19 +18,7 @@ try:
         train_local_outlier_factor,
     )
 except ImportError:
-    try:
-        from solution.main import (
-            engineer_network_features,
-            evaluate_detector,
-            find_optimal_threshold,
-            iqr_baseline,
-            prepare_features,
-            statistical_baseline,
-            train_isolation_forest,
-            train_local_outlier_factor,
-        )
-    except ImportError:
-        pytest.skip("Solution module not available", allow_module_level=True)
+    pytest.skip("Solution module not available", allow_module_level=True)
 
 
 # =============================================================================

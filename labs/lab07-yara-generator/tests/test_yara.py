@@ -3,13 +3,12 @@
 
 import os
 import tempfile
-from pathlib import Path
 
 import pytest
 
-# Try to import from solution
+# Import from solution module
 try:
-    from labs.lab07_yara_generator.solution.main import (
+    from solution.main import (
         MalwareSampleAnalyzer,
         SampleAnalyzer,
         YARAGenerator,
@@ -18,17 +17,7 @@ try:
         validate_yara_rule,
     )
 except ImportError:
-    try:
-        from solution.main import (
-            MalwareSampleAnalyzer,
-            SampleAnalyzer,
-            YARAGenerator,
-            YARAPatternExtractor,
-            YARARuleBuilder,
-            validate_yara_rule,
-        )
-    except ImportError:
-        pytest.skip("Solution module not available", allow_module_level=True)
+    pytest.skip("Solution module not available", allow_module_level=True)
 
 
 # =============================================================================

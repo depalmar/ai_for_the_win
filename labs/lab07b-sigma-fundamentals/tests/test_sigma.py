@@ -1,14 +1,12 @@
 #!/usr/bin/env python3
 """Tests for Lab 07b: Sigma Rule Fundamentals."""
 
-import uuid
-
 import pytest
 import yaml
 
-# Try to import from solution
+# Import from solution module
 try:
-    from labs.lab07b_sigma_fundamentals.solution.main import (
+    from solution.main import (
         SigmaRule,
         create_credential_dump_chain_rule,
         create_encoded_powershell_rule,
@@ -18,18 +16,7 @@ try:
         validate_sigma_rule,
     )
 except ImportError:
-    try:
-        from solution.main import (
-            SigmaRule,
-            create_credential_dump_chain_rule,
-            create_encoded_powershell_rule,
-            create_mimikatz_rule,
-            match_log_event,
-            parse_sigma_rule,
-            validate_sigma_rule,
-        )
-    except ImportError:
-        pytest.skip("Solution module not available", allow_module_level=True)
+    pytest.skip("Solution module not available", allow_module_level=True)
 
 
 # =============================================================================
@@ -295,20 +282,9 @@ class TestIntegration:
         rule_yaml = create_mimikatz_rule()
         rule = parse_sigma_rule(rule_yaml)
 
-        # Malicious event (should match)
-        malicious_event = {
-            "Image": "C:\\Temp\\mimikatz.exe",
-            "CommandLine": "mimikatz.exe sekurlsa::logonpasswords",
-        }
-
-        # The rule uses endswith, so we need to check if it would match
-        # For our simple matcher, we'll check the cmdline
-        test_event = {
-            "CommandLine": "sekurlsa::logonpasswords",
-        }
-
-        # This should match the cmdline selection
-        # (Our simple matcher handles |contains)
+        # Verify rule was created and parsed successfully
+        assert rule is not None
+        assert "Mimikatz" in rule.title
 
     def test_rule_library(self):
         """Test that all rules in library are valid YAML."""
