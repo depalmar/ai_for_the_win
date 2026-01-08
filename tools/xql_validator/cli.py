@@ -8,7 +8,7 @@ import argparse
 import sys
 from pathlib import Path
 
-from .validator import XQLValidator, Severity, validate_file, validate_query
+from .validator import Severity, XQLValidator, validate_file, validate_query
 
 
 def main():

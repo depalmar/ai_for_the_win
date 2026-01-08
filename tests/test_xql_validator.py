@@ -1,13 +1,14 @@
 """Tests for XQL Query Validator."""
 
-import pytest
 import sys
 from pathlib import Path
+
+import pytest
 
 # Add tools directory to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from tools.xql_validator import XQLValidator, validate_query, validate_file
+from tools.xql_validator import XQLValidator, validate_file, validate_query
 from tools.xql_validator.validator import Severity, ValidationIssue
 
 
