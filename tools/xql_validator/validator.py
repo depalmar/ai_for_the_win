@@ -135,6 +135,7 @@ class XQLValidator:
         "json_extract",
         "json_extract_scalar",
         "json_extract_array",
+        "json_object",  # Create JSON objects
         "parse_timestamp",
         "to_string",
         "to_number",
@@ -186,6 +187,8 @@ class XQLValidator:
         "stddev",
         "variance",
         "percentile",
+        # Added per architectural review
+        "approx_distinct",  # Approximate distinct count for large datasets
         # Time functions
         "now",
         "current_time",
@@ -201,6 +204,9 @@ class XQLValidator:
         "iploc",
         "ip_to_int",
         "int_to_ip",
+        # Added per architectural review - essential for network detection
+        "incidr6",  # IPv6 CIDR matching
+        "incidrlist",  # Check IP against list of CIDRs
         # Conditional functions
         "if",
         "case",
@@ -399,20 +405,8 @@ class XQLValidator:
                     )
                 )
 
-        # Check for unclosed parentheses
-        open_parens = line.count("(") - line.count("\\(")
-        close_parens = line.count(")") - line.count("\\)")
-        if open_parens != close_parens:
-            self.issues.append(
-                ValidationIssue(
-                    line=line_num,
-                    column=0,
-                    severity=Severity.ERROR,
-                    code="E002",
-                    message="Mismatched parentheses",
-                    category=Category.SYNTAX,
-                )
-            )
+        # Note: Parentheses balance is checked at query level, not per-line,
+        # because XQL queries often span multiple lines with grouped conditions
 
         # Check for unclosed quotes (improved detection)
         in_string = False
@@ -468,9 +462,101 @@ class XQLValidator:
                     )
                 )
 
+    def _check_parentheses_balance(self, query: str):
+        """Check that parentheses are balanced across the entire query."""
+        # Remove comments and string literals before checking
+        # This prevents false positives from parentheses inside strings/comments
+        clean_query = ""
+        in_string = False
+        quote_char = None
+        i = 0
+        lines = query.split("\n")
+
+        for line_num, line in enumerate(lines, 1):
+            for i, char in enumerate(line):
+                # Skip comments
+                if not in_string and i < len(line) - 1 and line[i : i + 2] == "//":
+                    break
+
+                # Track string state
+                if char in ('"', "'") and (i == 0 or line[i - 1] != "\\"):
+                    if not in_string:
+                        in_string = True
+                        quote_char = char
+                    elif char == quote_char:
+                        in_string = False
+                        quote_char = None
+                    continue
+
+                # Only count parentheses outside strings
+                if not in_string and char in "()":
+                    clean_query += char
+
+        # Count balance
+        paren_count = 0
+        first_unmatched_line = None
+
+        for line_num, line in enumerate(lines, 1):
+            in_string = False
+            quote_char = None
+
+            for i, char in enumerate(line):
+                # Skip comments
+                if not in_string and i < len(line) - 1 and line[i : i + 2] == "//":
+                    break
+
+                # Track string state
+                if char in ('"', "'") and (i == 0 or line[i - 1] != "\\"):
+                    if not in_string:
+                        in_string = True
+                        quote_char = char
+                    elif char == quote_char:
+                        in_string = False
+                        quote_char = None
+                    continue
+
+                if not in_string:
+                    if char == "(":
+                        paren_count += 1
+                        if first_unmatched_line is None:
+                            first_unmatched_line = line_num
+                    elif char == ")":
+                        paren_count -= 1
+                        if paren_count == 0:
+                            first_unmatched_line = None
+                        elif paren_count < 0:
+                            # More closing than opening
+                            self.issues.append(
+                                ValidationIssue(
+                                    line=line_num,
+                                    column=i,
+                                    severity=Severity.ERROR,
+                                    code="E002",
+                                    message="Unexpected closing parenthesis",
+                                    category=Category.SYNTAX,
+                                )
+                            )
+                            return  # Stop after first error
+
+        if paren_count > 0:
+            self.issues.append(
+                ValidationIssue(
+                    line=first_unmatched_line or 1,
+                    column=0,
+                    severity=Severity.ERROR,
+                    code="E002",
+                    message=f"Unclosed parenthesis ({paren_count} opening without matching close)",
+                    category=Category.SYNTAX,
+                )
+            )
+
     def _check_query_structure(self, query: str):
         """Check overall query structure."""
         query_lower = query.lower()
+
+        # Check parentheses balance across entire query (not per-line)
+        # This handles multi-line filter conditions correctly
+        self._check_parentheses_balance(query)
 
         # Check for dataset declaration
         if "dataset" not in query_lower and "preset" not in query_lower:
@@ -492,7 +578,7 @@ class XQLValidator:
             r"timestamp_diff",
             r"now\s*\(\)",
             r"duration\s*\(",
-            r"config\s+timeframe",
+            r"timeframe\s*=",  # config timeframe = 7d
             r"days_ago",
             r"hours_ago",
         ]
@@ -505,7 +591,7 @@ class XQLValidator:
                     severity=Severity.INFO,
                     code="I001",
                     message="Query may benefit from time filtering",
-                    suggestion="Add time filter to improve performance",
+                    suggestion="Add 'config timeframe = 7d' (simpler than timestamp_diff)",
                     category=Category.PERFORMANCE,
                 )
             )
@@ -524,8 +610,8 @@ class XQLValidator:
                 )
             )
 
-        # Check for very large limits
-        limit_match = re.search(r"limit\s+(\d+)", query_lower)
+        # Check for very large limits (uses pre-compiled LIMIT_PATTERN)
+        limit_match = self.LIMIT_PATTERN.search(query_lower)
         if limit_match:
             limit_val = int(limit_match.group(1))
             if limit_val > 10000:
@@ -689,22 +775,350 @@ def validate_file(
     return not has_problems, all_issues
 
 
-if __name__ == "__main__":
-    # Example usage
-    test_query = """
-config case_sensitive = false
-| dataset = xdr_data
-| filter event_type = ENUM.PROCESS
-| filter actor_process_image_name = "powershell.exe"
-| filter length(actor_process_command_line) > 100
-| fields _time, agent_hostname, actor_process_command_line
-| sort desc _time
-| limit 100
+def validate_directory(
+    dir_path: str | Path, pattern: str = "*.xql", strict: bool = False
+) -> tuple[bool, dict[str, list[ValidationIssue]]]:
     """
+    Validate all XQL files in a directory.
 
-    is_valid, issues = validate_query(test_query)
-    print(f"Valid: {is_valid}")
-    validator = XQLValidator()
-    validator.issues = issues
-    print(validator.format_issues(show_category=True))
-    print("\nStats:", validator.get_stats())
+    Args:
+        dir_path: Path to directory containing XQL files
+        pattern: Glob pattern for XQL files
+        strict: If True, treat warnings as errors
+
+    Returns:
+        Tuple of (all_valid, {filename: issues})
+    """
+    path = Path(dir_path)
+    if not path.is_dir():
+        return False, {
+            str(dir_path): [
+                ValidationIssue(
+                    line=0,
+                    column=0,
+                    severity=Severity.ERROR,
+                    code="E998",
+                    message=f"Not a directory: {dir_path}",
+                )
+            ]
+        }
+
+    results: dict[str, list[ValidationIssue]] = {}
+    all_valid = True
+
+    for xql_file in path.rglob(pattern):
+        is_valid, issues = validate_file(xql_file, strict)
+        results[str(xql_file)] = issues
+        if not is_valid:
+            all_valid = False
+
+    return all_valid, results
+
+
+# =============================================================================
+# CLI Interface
+# =============================================================================
+
+
+def _format_rich_output(
+    issues: list[ValidationIssue], file_path: str | None = None, show_stats: bool = True
+) -> None:
+    """Format and print issues using rich for colored output."""
+    try:
+        from rich import box
+        from rich.console import Console
+        from rich.panel import Panel
+        from rich.table import Table
+
+        console = Console()
+    except ImportError:
+        # Fallback to plain text if rich not available
+        validator = XQLValidator()
+        validator.issues = issues
+        print(validator.format_issues(show_category=True))
+        return
+
+    if not issues:
+        console.print("[bold green]No issues found.[/bold green]")
+        return
+
+    # Create severity icons with colors
+    severity_styles = {
+        Severity.ERROR: ("[bold red]X[/bold red]", "red"),
+        Severity.WARNING: ("[bold yellow]![/bold yellow]", "yellow"),
+        Severity.INFO: ("[bold blue]i[/bold blue]", "blue"),
+        Severity.STYLE: ("[dim]*[/dim]", "dim"),
+    }
+
+    # Group issues by severity for summary
+    by_severity = {s: [] for s in Severity}
+    for issue in issues:
+        by_severity[issue.severity].append(issue)
+
+    # Print header
+    title = f"Validation Results: {file_path}" if file_path else "Validation Results"
+    console.print(f"\n[bold]{title}[/bold]\n")
+
+    # Create issues table
+    table = Table(box=box.ROUNDED, show_header=True, header_style="bold")
+    table.add_column("", width=3)
+    table.add_column("Line", justify="right", width=6)
+    table.add_column("Code", width=6)
+    table.add_column("Category", width=12)
+    table.add_column("Message")
+    table.add_column("Suggestion", style="dim")
+
+    for issue in sorted(issues, key=lambda x: (x.severity.value, x.line)):
+        icon, style = severity_styles.get(issue.severity, ("?", "white"))
+        table.add_row(
+            icon,
+            str(issue.line),
+            f"[{style}]{issue.code}[/{style}]",
+            issue.category.value,
+            issue.message,
+            issue.suggestion or "",
+        )
+
+    console.print(table)
+
+    # Print summary
+    if show_stats:
+        summary_parts = []
+        if by_severity[Severity.ERROR]:
+            summary_parts.append(f"[bold red]{len(by_severity[Severity.ERROR])} errors[/bold red]")
+        if by_severity[Severity.WARNING]:
+            summary_parts.append(
+                f"[bold yellow]{len(by_severity[Severity.WARNING])} warnings[/bold yellow]"
+            )
+        if by_severity[Severity.INFO]:
+            summary_parts.append(f"[blue]{len(by_severity[Severity.INFO])} info[/blue]")
+        if by_severity[Severity.STYLE]:
+            summary_parts.append(f"[dim]{len(by_severity[Severity.STYLE])} style[/dim]")
+
+        console.print(f"\n[bold]Summary:[/bold] {', '.join(summary_parts)}")
+
+
+def _format_json_output(issues: list[ValidationIssue], file_path: str | None = None) -> str:
+    """Format issues as JSON for CI/CD integration."""
+    import json
+
+    return json.dumps(
+        {
+            "file": file_path,
+            "valid": not any(i.severity == Severity.ERROR for i in issues),
+            "issue_count": len(issues),
+            "issues": [
+                {
+                    "line": i.line,
+                    "column": i.column,
+                    "severity": i.severity.value,
+                    "code": i.code,
+                    "category": i.category.value,
+                    "message": i.message,
+                    "suggestion": i.suggestion,
+                }
+                for i in issues
+            ],
+            "summary": {
+                "errors": sum(1 for i in issues if i.severity == Severity.ERROR),
+                "warnings": sum(1 for i in issues if i.severity == Severity.WARNING),
+                "info": sum(1 for i in issues if i.severity == Severity.INFO),
+                "style": sum(1 for i in issues if i.severity == Severity.STYLE),
+            },
+        },
+        indent=2,
+    )
+
+
+def main() -> int:
+    """
+    CLI entry point for the XQL validator.
+
+    Returns:
+        Exit code: 0=success, 1=errors found, 2=warnings only (strict mode)
+    """
+    import argparse
+    import sys
+
+    parser = argparse.ArgumentParser(
+        prog="xql-validator",
+        description="Validate Cortex XDR XQL queries for syntax and best practices",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Exit Codes:
+  0  All queries valid (no errors)
+  1  Errors found (syntax violations)
+  2  Warnings found (strict mode only)
+
+Examples:
+  %(prog)s query.xql                    Validate a single file
+  %(prog)s queries/ --recursive         Validate all .xql files in directory
+  %(prog)s -c "| dataset = xdr_data"    Validate inline query
+  %(prog)s query.xql --format json      Output as JSON for CI/CD
+  %(prog)s query.xql --strict           Treat warnings as errors
+        """,
+    )
+
+    # Input options
+    input_group = parser.add_mutually_exclusive_group(required=True)
+    input_group.add_argument("path", nargs="?", help="XQL file or directory to validate")
+    input_group.add_argument(
+        "-c", "--command", metavar="QUERY", help="Validate an inline XQL query string"
+    )
+
+    # Validation options
+    parser.add_argument(
+        "-s", "--strict", action="store_true", help="Treat warnings as errors (exit code 2)"
+    )
+    parser.add_argument(
+        "-r",
+        "--recursive",
+        action="store_true",
+        help="Recursively search directories for .xql files",
+    )
+    parser.add_argument(
+        "--pattern", default="*.xql", help="Glob pattern for XQL files (default: *.xql)"
+    )
+
+    # Output options
+    parser.add_argument(
+        "-f",
+        "--format",
+        choices=["text", "json", "html", "quiet"],
+        default="text",
+        help="Output format (default: text)",
+    )
+    parser.add_argument(
+        "-o", "--output", metavar="FILE", help="Output file path (required for html format)"
+    )
+    parser.add_argument("--no-color", action="store_true", help="Disable colored output")
+    parser.add_argument(
+        "-v",
+        "--verbose",
+        action="store_true",
+        help="Show additional details including style issues",
+    )
+
+    args = parser.parse_args()
+
+    # Handle inline query
+    if args.command:
+        is_valid, issues = validate_query(args.command, strict=args.strict)
+
+        if args.format == "json":
+            print(_format_json_output(issues, "<inline>"))
+        elif args.format == "html":
+            from .html_report import generate_html_report
+
+            html_content = generate_html_report(args.command, issues, "<inline>")
+            if args.output:
+                Path(args.output).write_text(html_content, encoding="utf-8")
+                print(f"HTML report written to: {args.output}")
+            else:
+                print(html_content)
+        elif args.format == "quiet":
+            pass  # No output in quiet mode
+        else:
+            if args.no_color:
+                validator = XQLValidator()
+                validator.issues = issues
+                print(validator.format_issues(show_category=True))
+            else:
+                _format_rich_output(issues, "<inline>")
+
+        if not is_valid:
+            return 1
+        if args.strict and any(i.severity == Severity.WARNING for i in issues):
+            return 2
+        return 0
+
+    # Handle file/directory input
+    path = Path(args.path)
+
+    if path.is_dir():
+        if not args.recursive:
+            # Only immediate children
+            pattern = args.pattern
+        else:
+            pattern = f"**/{args.pattern}"
+
+        all_valid, results = validate_directory(path, pattern, args.strict)
+
+        if args.format == "json":
+            import json
+
+            output = {
+                "valid": all_valid,
+                "files_checked": len(results),
+                "files": {fp: _format_json_output(issues, fp) for fp, issues in results.items()},
+            }
+            print(json.dumps(output, indent=2))
+        elif args.format == "quiet":
+            pass
+        else:
+            total_errors = 0
+            total_warnings = 0
+            for file_path, issues in results.items():
+                if issues:
+                    if args.no_color:
+                        print(f"\n=== {file_path} ===")
+                        validator = XQLValidator()
+                        validator.issues = issues
+                        print(validator.format_issues(show_category=True))
+                    else:
+                        _format_rich_output(issues, file_path, show_stats=False)
+                    total_errors += sum(1 for i in issues if i.severity == Severity.ERROR)
+                    total_warnings += sum(1 for i in issues if i.severity == Severity.WARNING)
+
+            # Final summary
+            print(f"\n{'='*60}")
+            print(f"Checked {len(results)} file(s)")
+            if total_errors:
+                print(f"  Errors:   {total_errors}")
+            if total_warnings:
+                print(f"  Warnings: {total_warnings}")
+            if not total_errors and not total_warnings:
+                print("  All files valid!")
+
+        if not all_valid:
+            return 1
+        return 0
+
+    elif path.is_file():
+        is_valid, issues = validate_file(path, strict=args.strict)
+
+        if args.format == "json":
+            print(_format_json_output(issues, str(path)))
+        elif args.format == "html":
+            from .html_report import generate_html_report
+
+            query_content = path.read_text(encoding="utf-8")
+            html_content = generate_html_report(query_content, issues, str(path))
+            output_file = args.output or f"{path.stem}_report.html"
+            Path(output_file).write_text(html_content, encoding="utf-8")
+            print(f"HTML report written to: {output_file}")
+        elif args.format == "quiet":
+            pass
+        else:
+            if args.no_color:
+                validator = XQLValidator()
+                validator.issues = issues
+                print(validator.format_issues(show_category=True))
+            else:
+                _format_rich_output(issues, str(path))
+
+        if not is_valid:
+            return 1
+        if args.strict and any(i.severity == Severity.WARNING for i in issues):
+            return 2
+        return 0
+
+    else:
+        print(f"Error: Path not found: {args.path}", file=sys.stderr)
+        return 1
+
+
+if __name__ == "__main__":
+    import sys
+
+    sys.exit(main())
