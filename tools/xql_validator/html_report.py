@@ -17,8 +17,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Optional
 
-from .validator import ValidationIssue, Severity, Category, XQLValidator, validate_query
-
+from .validator import Category, Severity, ValidationIssue, XQLValidator, validate_query
 
 # Stage descriptions for automatic documentation
 STAGE_DESCRIPTIONS = {
@@ -109,22 +108,41 @@ def analyze_query_stages(query: str) -> list[dict]:
     Returns a list of stage information with descriptions.
     """
     stages = []
-    known_stages = {'dataset', 'filter', 'alter', 'comp', 'fields', 'sort', 'limit',
-                    'dedup', 'join', 'union', 'config', 'target', 'window', 'preset',
-                    'call', 'arrayexpand', 'bin', 'iploc', 'view', 'getrole'}
+    known_stages = {
+        "dataset",
+        "filter",
+        "alter",
+        "comp",
+        "fields",
+        "sort",
+        "limit",
+        "dedup",
+        "join",
+        "union",
+        "config",
+        "target",
+        "window",
+        "preset",
+        "call",
+        "arrayexpand",
+        "bin",
+        "iploc",
+        "view",
+        "getrole",
+    }
 
     # Parse stages from query - handle multi-line content properly
-    lines = query.split('\n')
+    lines = query.split("\n")
     current_stage = None
     stage_content = []
 
     for line in lines:
         stripped = line.strip()
-        if not stripped or stripped.startswith('//'):
+        if not stripped or stripped.startswith("//"):
             continue
 
         # Check for stage start (must start with | or be the first stage keyword)
-        stage_match = re.match(r'\|\s*(\w+)\s*(.*)', stripped)
+        stage_match = re.match(r"\|\s*(\w+)\s*(.*)", stripped)
         if stage_match:
             stage_name = stage_match.group(1).lower()
             stage_value = stage_match.group(2).strip()
@@ -134,53 +152,65 @@ def analyze_query_stages(query: str) -> list[dict]:
                 # Save previous stage
                 if current_stage:
                     # Join content and clean up extra whitespace
-                    content = ' '.join(stage_content)
+                    content = " ".join(stage_content)
                     # Add pipe prefix for display (except for config)
                     if current_stage != "config" and not content.startswith("|"):
                         content = "| " + content
                     # Truncate very long content for display
                     if len(content) > 500:
                         content = content[:500] + "..."
-                    stages.append({
-                        "stage_type": current_stage,
-                        "content": content,
-                        **STAGE_DESCRIPTIONS.get(current_stage, {
-                            "name": current_stage.title(),
-                            "icon": "▶️",
-                            "description": f"Executes {current_stage} operation",
-                            "detail": ""
-                        })
-                    })
+                    stages.append(
+                        {
+                            "stage_type": current_stage,
+                            "content": content,
+                            **STAGE_DESCRIPTIONS.get(
+                                current_stage,
+                                {
+                                    "name": current_stage.title(),
+                                    "icon": "▶️",
+                                    "description": f"Executes {current_stage} operation",
+                                    "detail": "",
+                                },
+                            ),
+                        }
+                    )
 
                 current_stage = stage_name
                 # Keep the full expression including = for display
                 # e.g., "= xdr_data" shows as "dataset = xdr_data"
-                stage_content = [f"{stage_name} {stage_value}".strip()] if stage_value else [stage_name]
+                stage_content = (
+                    [f"{stage_name} {stage_value}".strip()] if stage_value else [stage_name]
+                )
             elif current_stage:
                 # Continuation of current stage
                 stage_content.append(stripped)
         elif current_stage:
             # Check for non-pipe stage start (like config or first dataset)
-            first_stage_match = re.match(r'(\w+)\s*=\s*(.*)', stripped)
+            first_stage_match = re.match(r"(\w+)\s*=\s*(.*)", stripped)
             if first_stage_match and first_stage_match.group(1).lower() in known_stages:
                 # Save previous stage first
                 if stage_content:
-                    content = ' '.join(stage_content)
+                    content = " ".join(stage_content)
                     # Add pipe prefix for display (except for config)
                     if current_stage != "config" and not content.startswith("|"):
                         content = "| " + content
                     if len(content) > 500:
                         content = content[:500] + "..."
-                    stages.append({
-                        "stage_type": current_stage,
-                        "content": content,
-                        **STAGE_DESCRIPTIONS.get(current_stage, {
-                            "name": current_stage.title(),
-                            "icon": "▶️",
-                            "description": f"Executes {current_stage} operation",
-                            "detail": ""
-                        })
-                    })
+                    stages.append(
+                        {
+                            "stage_type": current_stage,
+                            "content": content,
+                            **STAGE_DESCRIPTIONS.get(
+                                current_stage,
+                                {
+                                    "name": current_stage.title(),
+                                    "icon": "▶️",
+                                    "description": f"Executes {current_stage} operation",
+                                    "detail": "",
+                                },
+                            ),
+                        }
+                    )
                 current_stage = first_stage_match.group(1).lower()
                 # Keep full expression for display
                 stage_content = [f"{current_stage} = {first_stage_match.group(2).strip()}"]
@@ -189,7 +219,7 @@ def analyze_query_stages(query: str) -> list[dict]:
                 stage_content.append(stripped)
         else:
             # Check for first stage without pipe
-            first_stage_match = re.match(r'(\w+)\s*=\s*(.*)', stripped)
+            first_stage_match = re.match(r"(\w+)\s*=\s*(.*)", stripped)
             if first_stage_match and first_stage_match.group(1).lower() in known_stages:
                 current_stage = first_stage_match.group(1).lower()
                 # Keep full expression for display
@@ -197,23 +227,28 @@ def analyze_query_stages(query: str) -> list[dict]:
 
     # Don't forget the last stage
     if current_stage:
-        content = ' '.join(stage_content)
+        content = " ".join(stage_content)
         # Add pipe prefix for display (except for config which doesn't use pipe)
         if current_stage != "config" and not content.startswith("|"):
             content = "| " + content
         # Increase truncation limit to show more content
         if len(content) > 500:
             content = content[:500] + "..."
-        stages.append({
-            "stage_type": current_stage,
-            "content": content,
-            **STAGE_DESCRIPTIONS.get(current_stage, {
-                "name": current_stage.title(),
-                "icon": "▶️",
-                "description": f"Executes {current_stage} operation",
-                "detail": ""
-            })
-        })
+        stages.append(
+            {
+                "stage_type": current_stage,
+                "content": content,
+                **STAGE_DESCRIPTIONS.get(
+                    current_stage,
+                    {
+                        "name": current_stage.title(),
+                        "icon": "▶️",
+                        "description": f"Executes {current_stage} operation",
+                        "detail": "",
+                    },
+                ),
+            }
+        )
 
     return stages
 
@@ -223,7 +258,7 @@ def generate_annotated_query(query: str) -> str:
     Generate an annotated version of the query with inline comments.
     Provides context-aware explanations for each stage.
     """
-    lines = query.split('\n')
+    lines = query.split("\n")
     annotated = []
     filter_count = 0
 
@@ -231,12 +266,12 @@ def generate_annotated_query(query: str) -> str:
         stripped = line.strip()
 
         # Skip existing comments and empty lines
-        if stripped.startswith('//') or not stripped:
+        if stripped.startswith("//") or not stripped:
             annotated.append(line)
             continue
 
         # Check for stage keywords
-        stage_match = re.match(r'\|?\s*(\w+)\s*[=:]?\s*(.*)', stripped)
+        stage_match = re.match(r"\|?\s*(\w+)\s*[=:]?\s*(.*)", stripped)
         if stage_match:
             stage = stage_match.group(1).lower()
             content = stage_match.group(2).strip()
@@ -244,7 +279,9 @@ def generate_annotated_query(query: str) -> str:
             # Generate context-aware comments
             if stage == "config":
                 if "case_sensitive" in content.lower():
-                    annotated.append("// CONFIG: Enable case-insensitive matching for regex patterns")
+                    annotated.append(
+                        "// CONFIG: Enable case-insensitive matching for regex patterns"
+                    )
                 elif "timeframe" in content.lower():
                     annotated.append("// CONFIG: Set the time window for the query")
                 else:
@@ -252,7 +289,9 @@ def generate_annotated_query(query: str) -> str:
 
             elif stage == "dataset":
                 if "xdr_data" in content:
-                    annotated.append("// DATA SOURCE: Query endpoint telemetry (processes, files, network, registry)")
+                    annotated.append(
+                        "// DATA SOURCE: Query endpoint telemetry (processes, files, network, registry)"
+                    )
                 elif "panw_ngfw" in content:
                     annotated.append("// DATA SOURCE: Query firewall traffic logs")
                 elif "cloud_audit" in content:
@@ -264,33 +303,49 @@ def generate_annotated_query(query: str) -> str:
                 filter_count += 1
                 # Analyze filter content
                 if "event_type" in content.lower():
-                    event_type = re.search(r'ENUM\.(\w+)', content)
+                    event_type = re.search(r"ENUM\.(\w+)", content)
                     if event_type:
-                        annotated.append(f"// FILTER #{filter_count}: Select only {event_type.group(1)} events")
+                        annotated.append(
+                            f"// FILTER #{filter_count}: Select only {event_type.group(1)} events"
+                        )
                     else:
                         annotated.append(f"// FILTER #{filter_count}: Filter by event type")
                 elif "days_ago" in content.lower() or "_time" in content.lower():
-                    annotated.append(f"// FILTER #{filter_count}: Limit to recent time window (performance optimization)")
+                    annotated.append(
+                        f"// FILTER #{filter_count}: Limit to recent time window (performance optimization)"
+                    )
                 elif "command_line" in content.lower() or "image_name" in content.lower():
-                    annotated.append(f"// FILTER #{filter_count}: Match suspicious process patterns (detection logic)")
+                    annotated.append(
+                        f"// FILTER #{filter_count}: Match suspicious process patterns (detection logic)"
+                    )
                 elif "~=" in content or "contains" in content.lower():
-                    annotated.append(f"// FILTER #{filter_count}: Pattern matching for threat indicators")
+                    annotated.append(
+                        f"// FILTER #{filter_count}: Pattern matching for threat indicators"
+                    )
                 else:
-                    annotated.append(f"// FILTER #{filter_count}: Apply condition to narrow results")
+                    annotated.append(
+                        f"// FILTER #{filter_count}: Apply condition to narrow results"
+                    )
 
             elif stage == "alter":
                 if "timestamp_diff" in content.lower() or "days_ago" in content.lower():
-                    annotated.append("// TRANSFORM: Time filtering (prefer 'config timeframe = 7d' for simplicity)")
+                    annotated.append(
+                        "// TRANSFORM: Time filtering (prefer 'config timeframe = 7d' for simplicity)"
+                    )
                 elif "extract" in content.lower():
                     annotated.append("// TRANSFORM: Extract substring or pattern from field")
                 elif "if(" in content.lower() or "case(" in content.lower():
-                    annotated.append("// TRANSFORM: Apply conditional logic to create derived field")
+                    annotated.append(
+                        "// TRANSFORM: Apply conditional logic to create derived field"
+                    )
                 else:
                     annotated.append("// TRANSFORM: Create computed field for analysis")
 
             elif stage == "comp":
                 if "count()" in content.lower():
-                    annotated.append("// AGGREGATE: Count occurrences - useful for threshold-based detection")
+                    annotated.append(
+                        "// AGGREGATE: Count occurrences - useful for threshold-based detection"
+                    )
                 elif "sum(" in content.lower() or "avg(" in content.lower():
                     annotated.append("// AGGREGATE: Calculate statistical metrics")
                 else:
@@ -306,9 +361,11 @@ def generate_annotated_query(query: str) -> str:
                     annotated.append("// ORDER: Arrange results for analysis")
 
             elif stage == "limit":
-                limit_val = re.search(r'(\d+)', content)
+                limit_val = re.search(r"(\d+)", content)
                 if limit_val:
-                    annotated.append(f"// LIMIT: Return top {limit_val.group(1)} results (prevents UI overload)")
+                    annotated.append(
+                        f"// LIMIT: Return top {limit_val.group(1)} results (prevents UI overload)"
+                    )
                 else:
                     annotated.append("// LIMIT: Cap result count for performance")
 
@@ -322,11 +379,13 @@ def generate_annotated_query(query: str) -> str:
                 annotated.append("// MATERIALIZE: Save results for detection chaining or later use")
 
             elif stage == "window":
-                annotated.append("// WINDOW: Apply sliding window analytics for time-series detection")
+                annotated.append(
+                    "// WINDOW: Apply sliding window analytics for time-series detection"
+                )
 
         annotated.append(line)
 
-    return '\n'.join(annotated)
+    return "\n".join(annotated)
 
 
 def explain_filter_condition(condition: str) -> str:
@@ -364,6 +423,7 @@ def explain_filter_condition(condition: str) -> str:
 @dataclass
 class DetectionMetadata:
     """Metadata extracted from XQL detection rule."""
+
     title: str = ""
     description: str = ""
     mitre_techniques: list[str] = None
@@ -736,26 +796,26 @@ def extract_metadata(query: str) -> DetectionMetadata:
     metadata = DetectionMetadata()
 
     # Extract title
-    title_match = re.search(r'//\s*(?:Title|Detection):\s*(.+)', query, re.IGNORECASE)
+    title_match = re.search(r"//\s*(?:Title|Detection):\s*(.+)", query, re.IGNORECASE)
     if title_match:
         metadata.title = title_match.group(1).strip()
 
     # Extract description
-    desc_match = re.search(r'//\s*(?:Description|Desc):\s*(.+)', query, re.IGNORECASE)
+    desc_match = re.search(r"//\s*(?:Description|Desc):\s*(.+)", query, re.IGNORECASE)
     if desc_match:
         metadata.description = desc_match.group(1).strip()
 
     # Extract MITRE techniques
-    mitre_matches = re.findall(r'T\d{4}(?:\.\d{3})?', query)
+    mitre_matches = re.findall(r"T\d{4}(?:\.\d{3})?", query)
     metadata.mitre_techniques = list(set(mitre_matches))
 
     # Extract severity
-    severity_match = re.search(r'//\s*Severity:\s*(\w+)', query, re.IGNORECASE)
+    severity_match = re.search(r"//\s*Severity:\s*(\w+)", query, re.IGNORECASE)
     if severity_match:
         metadata.severity = severity_match.group(1).strip()
 
     # Extract author
-    author_match = re.search(r'//\s*Author:\s*(.+)', query, re.IGNORECASE)
+    author_match = re.search(r"//\s*Author:\s*(.+)", query, re.IGNORECASE)
     if author_match:
         metadata.author = author_match.group(1).strip()
 
@@ -779,7 +839,9 @@ def analyze_query_purpose(query: str) -> dict:
     if "lsass" in query_lower or "sekurlsa" in query_lower or "mimikatz" in query_lower:
         purpose["category"] = "Credential Dumping Detection"
         purpose["description"] = "This query detects attempts to dump credentials from memory."
-        purpose["query_explanation"] = """This query searches for process execution events that indicate credential dumping attempts targeting LSASS (Local Security Authority Subsystem Service). It looks for:
+        purpose[
+            "query_explanation"
+        ] = """This query searches for process execution events that indicate credential dumping attempts targeting LSASS (Local Security Authority Subsystem Service). It looks for:
 
 1. **Procdump targeting LSASS** - Microsoft's procdump.exe utility being used to create a memory dump of lsass.exe
 2. **Comsvcs.dll MiniDump** - Using rundll32.exe to call the MiniDump export from comsvcs.dll, a known technique to dump LSASS memory
@@ -787,7 +849,9 @@ def analyze_query_purpose(query: str) -> dict:
 
 The query filters on process images and command-line arguments to identify these specific attack patterns."""
 
-        purpose["threat_explanation"] = """**What is LSASS?**
+        purpose[
+            "threat_explanation"
+        ] = """**What is LSASS?**
 LSASS (Local Security Authority Subsystem Service) is a Windows process that handles user authentication and stores credentials in memory. It contains password hashes, Kerberos tickets, and other sensitive authentication data.
 
 **Why attackers target LSASS:**
@@ -816,7 +880,7 @@ config case_sensitive = false timeframe = 24h
 | filter agent_hostname = "<HOSTNAME>"
 | fields _time, actor_effective_username, action_login_type, logon_session_id, action_remote_ip, action_status
 | sort desc _time
-| limit 100"""
+| limit 100""",
             },
             {
                 "step": "Check for lateral movement from this host",
@@ -830,7 +894,7 @@ config case_sensitive = false timeframe = 1h
 | filter action_remote_port in (445, 135, 3389, 5985, 5986)
 | fields _time, action_remote_ip, action_remote_port, actor_process_image_name
 | dedup action_remote_ip
-| limit 50"""
+| limit 50""",
             },
             {
                 "step": "Review authentication logs for compromised accounts (summary)",
@@ -842,7 +906,7 @@ config case_sensitive = false timeframe = 24h
 | filter event_type = ENUM.LOGIN
 | filter actor_effective_username = "<USERNAME>"
 | comp count() as login_count by agent_hostname, action_login_type, action_status
-| sort desc login_count"""
+| sort desc login_count""",
             },
             {
                 "step": "Review authentication logs for compromised accounts (details)",
@@ -856,7 +920,7 @@ config case_sensitive = false timeframe = 24h
 | filter agent_hostname = "<HOSTNAME_FROM_STEP1>"
 | fields _time, agent_hostname, action_login_type, action_status, action_remote_ip, logon_session_id
 | sort desc _time
-| limit 100"""
+| limit 100""",
             },
             {
                 "step": "Check for persistence mechanisms created",
@@ -869,7 +933,7 @@ config case_sensitive = false timeframe = 2h
 | filter event_type in (ENUM.REGISTRY, ENUM.FILE)
 | filter registry_key_name ~= "(?i)(Run|Services|Scheduled)"
     or action_file_path ~= "(?i)(startup|tasks)"
-| fields _time, event_type, registry_key_name, action_file_path"""
+| fields _time, event_type, registry_key_name, action_file_path""",
             },
         ]
         purpose["related_queries"] = [
@@ -885,7 +949,7 @@ config case_sensitive = false timeframe = 24h
 | filter actor_effective_username != "SYSTEM"
 | comp count() as logins by agent_hostname, actor_effective_username
 | filter logins > 10
-| sort desc logins"""
+| sort desc logins""",
             },
             {
                 "name": "Kerberoasting Detection",
@@ -896,7 +960,7 @@ config case_sensitive = false timeframe = 7d
 | dataset = xdr_data
 | filter event_type = ENUM.PROCESS
 | filter actor_process_command_line ~= "(?i)(kerberoast|invoke-kerberoast|rubeus.*kerberoast)"
-| fields _time, agent_hostname, actor_process_command_line"""
+| fields _time, agent_hostname, actor_process_command_line""",
             },
         ]
 
@@ -915,7 +979,7 @@ config case_sensitive = false timeframe = 24h
 | filter actor_process_image_name ~= "powershell"
 | filter actor_process_command_line ~= "(?i)(-enc|-encodedcommand)"
 | fields _time, actor_process_command_line
-| limit 10"""
+| limit 10""",
             },
             {
                 "step": "Identify parent process chain",
@@ -928,7 +992,7 @@ config case_sensitive = false timeframe = 24h
 | filter actor_process_image_name ~= "powershell"
 | fields _time, causality_actor_process_image_name, causality_actor_process_command_line,
     actor_process_image_name, actor_process_command_line
-| limit 20"""
+| limit 20""",
             },
             {
                 "step": "Check for network connections from PowerShell",
@@ -941,7 +1005,7 @@ config case_sensitive = false timeframe = 1h
 | filter agent_hostname = "<HOSTNAME>"
 | filter actor_process_image_name ~= "powershell"
 | fields _time, action_remote_ip, action_remote_port, action_external_hostname
-| dedup action_remote_ip"""
+| dedup action_remote_ip""",
             },
             {
                 "step": "Look for file downloads or writes",
@@ -954,7 +1018,7 @@ config case_sensitive = false timeframe = 1h
 | filter agent_hostname = "<HOSTNAME>"
 | filter actor_process_image_name ~= "powershell"
 | filter action_file_extension in ("exe", "dll", "ps1", "bat", "vbs")
-| fields _time, action_file_path, action_file_name"""
+| fields _time, action_file_path, action_file_name""",
             },
         ]
         purpose["related_queries"] = [
@@ -968,13 +1032,15 @@ config case_sensitive = false timeframe = 24h
 | filter agent_hostname = "<HOSTNAME>"
 | filter event_type = ENUM.SCRIPT_EXECUTION
 | fields _time, actor_process_image_name, action_script_content
-| limit 50"""
+| limit 50""",
             },
         ]
 
     elif any(x in query_lower for x in ["certutil", "mshta", "rundll32", "regsvr32", "bitsadmin"]):
         purpose["category"] = "LOLBin Detection"
-        purpose["description"] = "This query detects abuse of legitimate Windows binaries (Living off the Land)."
+        purpose["description"] = (
+            "This query detects abuse of legitimate Windows binaries (Living off the Land)."
+        )
         purpose["next_steps"] = [
             {
                 "step": "Analyze full command-line arguments",
@@ -986,7 +1052,7 @@ config case_sensitive = false timeframe = 24h
 | filter agent_hostname = "<HOSTNAME>"
 | filter actor_process_image_name in ("certutil.exe", "mshta.exe", "rundll32.exe", "regsvr32.exe", "bitsadmin.exe")
 | fields _time, actor_process_image_name, actor_process_command_line
-| limit 50"""
+| limit 50""",
             },
             {
                 "step": "Check network connections from LOLBins",
@@ -999,7 +1065,7 @@ config case_sensitive = false timeframe = 1h
 | filter agent_hostname = "<HOSTNAME>"
 | filter actor_process_image_name in ("certutil.exe", "mshta.exe", "rundll32.exe", "bitsadmin.exe")
 | fields _time, actor_process_image_name, action_remote_ip, action_external_hostname
-| dedup action_remote_ip"""
+| dedup action_remote_ip""",
             },
             {
                 "step": "Identify files created or modified",
@@ -1011,7 +1077,7 @@ config case_sensitive = false timeframe = 1h
 | filter event_type = ENUM.FILE
 | filter agent_hostname = "<HOSTNAME>"
 | filter actor_process_image_name in ("certutil.exe", "mshta.exe", "rundll32.exe", "bitsadmin.exe")
-| fields _time, actor_process_image_name, action_file_path, action_file_name"""
+| fields _time, actor_process_image_name, action_file_path, action_file_name""",
             },
             {
                 "step": "Review parent process chain",
@@ -1022,7 +1088,7 @@ config case_sensitive = false timeframe = 24h
 | filter agent_hostname = "<HOSTNAME>"
 | filter actor_process_image_name in ("certutil.exe", "mshta.exe", "rundll32.exe", "regsvr32.exe")
 | fields _time, causality_actor_process_image_name, causality_actor_process_command_line,
-    actor_process_image_name, actor_process_command_line"""
+    actor_process_image_name, actor_process_command_line""",
             },
         ]
         purpose["related_queries"] = [
@@ -1036,7 +1102,7 @@ config case_sensitive = false timeframe = 1h
 | filter event_type = ENUM.PROCESS
 | filter agent_hostname = "<HOSTNAME>"
 | filter causality_actor_process_image_name in ("certutil.exe", "mshta.exe", "rundll32.exe")
-| fields _time, actor_process_image_name, actor_process_command_line"""
+| fields _time, actor_process_image_name, actor_process_command_line""",
             },
         ]
 
@@ -1054,7 +1120,7 @@ config case_sensitive = false timeframe = 24h
 | filter event_type = ENUM.REGISTRY
 | filter agent_hostname = "<HOSTNAME>"
 | filter registry_key_name ~= "(?i)\\\\Run"
-| fields _time, registry_key_name, action_registry_data, actor_process_image_name"""
+| fields _time, registry_key_name, action_registry_data, actor_process_image_name""",
             },
             {
                 "step": "Check if the persistence executable exists",
@@ -1066,7 +1132,7 @@ config case_sensitive = false timeframe = 7d
 | filter event_type = ENUM.FILE
 | filter agent_hostname = "<HOSTNAME>"
 | filter action_file_path = "<EXECUTABLE_PATH>"
-| fields _time, action_file_path, action_file_sha256, action_file_size"""
+| fields _time, action_file_path, action_file_sha256, action_file_size""",
             },
             {
                 "step": "Review what process made the registry change",
@@ -1079,7 +1145,7 @@ config case_sensitive = false timeframe = 24h
 | filter agent_hostname = "<HOSTNAME>"
 | filter registry_key_name ~= "(?i)\\\\Run"
 | fields _time, actor_process_image_name, actor_process_command_line,
-    causality_actor_process_image_name"""
+    causality_actor_process_image_name""",
             },
         ]
         purpose["related_queries"] = [
@@ -1094,13 +1160,15 @@ config case_sensitive = false timeframe = 24h
 | filter event_type in (ENUM.REGISTRY, ENUM.FILE)
 | filter registry_key_name ~= "(?i)(Run|Services|Winlogon|Startup)"
     or action_file_path ~= "(?i)(startup|schedtasks)"
-| fields _time, event_type, registry_key_name, action_file_path, actor_process_image_name"""
+| fields _time, event_type, registry_key_name, action_file_path, actor_process_image_name""",
             },
         ]
 
     elif "schtasks" in query_lower or "scheduled" in query_lower:
         purpose["category"] = "Scheduled Task Detection"
-        purpose["description"] = "This query detects creation of scheduled tasks for persistence or execution."
+        purpose["description"] = (
+            "This query detects creation of scheduled tasks for persistence or execution."
+        )
         purpose["next_steps"] = [
             {
                 "step": "Get full scheduled task creation details",
@@ -1112,7 +1180,7 @@ config case_sensitive = false timeframe = 24h
 | filter agent_hostname = "<HOSTNAME>"
 | filter actor_process_image_name ~= "schtasks"
 | filter actor_process_command_line ~= "(?i)/create"
-| fields _time, actor_process_command_line, actor_effective_username"""
+| fields _time, actor_process_command_line, actor_effective_username""",
             },
             {
                 "step": "Check what the scheduled task executes",
@@ -1124,7 +1192,7 @@ config case_sensitive = false timeframe = 24h
 | filter agent_hostname = "<HOSTNAME>"
 | filter actor_process_image_name ~= "schtasks"
 | alter task_action = extract(actor_process_command_line, "/tr\\s+[\"']?([^\"']+)[\"']?")
-| fields _time, task_action, actor_process_command_line"""
+| fields _time, task_action, actor_process_command_line""",
             },
             {
                 "step": "Look for task execution",
@@ -1136,7 +1204,7 @@ config case_sensitive = false timeframe = 1h
 | filter event_type = ENUM.PROCESS
 | filter agent_hostname = "<HOSTNAME>"
 | filter causality_actor_process_image_name ~= "taskeng|taskhostw"
-| fields _time, actor_process_image_name, actor_process_command_line"""
+| fields _time, actor_process_image_name, actor_process_command_line""",
             },
         ]
         purpose["related_queries"] = []
@@ -1154,7 +1222,7 @@ config case_sensitive = false timeframe = 24h
 | dataset = xdr_data
 | filter agent_hostname = "<HOSTNAME>"
 | filter actor_process_image_name ~= "(?i)(screenconnect|anydesk|teamviewer)"
-| fields _time, actor_process_image_name, action_remote_ip, actor_effective_username"""
+| fields _time, actor_process_image_name, action_remote_ip, actor_effective_username""",
             },
             {
                 "step": "Check what processes RMM spawned",
@@ -1166,7 +1234,7 @@ config case_sensitive = false timeframe = 1h
 | filter event_type = ENUM.PROCESS
 | filter agent_hostname = "<HOSTNAME>"
 | filter causality_actor_process_image_name ~= "(?i)(screenconnect|anydesk|teamviewer)"
-| fields _time, actor_process_image_name, actor_process_command_line"""
+| fields _time, actor_process_image_name, actor_process_command_line""",
             },
             {
                 "step": "Look for file transfers via RMM",
@@ -1179,14 +1247,18 @@ config case_sensitive = false timeframe = 1h
 | filter agent_hostname = "<HOSTNAME>"
 | filter actor_process_image_name ~= "(?i)(screenconnect|anydesk|teamviewer)"
 | filter action_file_extension in ("exe", "dll", "ps1", "bat", "zip", "7z")
-| fields _time, action_file_path, action_file_name"""
+| fields _time, action_file_path, action_file_name""",
             },
         ]
         purpose["related_queries"] = []
 
-    elif "vssadmin" in query_lower or "shadowcopy" in query_lower or "recoveryenabled" in query_lower:
+    elif (
+        "vssadmin" in query_lower or "shadowcopy" in query_lower or "recoveryenabled" in query_lower
+    ):
         purpose["category"] = "Ransomware Indicator"
-        purpose["description"] = "This query detects shadow copy deletion, a common ransomware precursor."
+        purpose["description"] = (
+            "This query detects shadow copy deletion, a common ransomware precursor."
+        )
         purpose["next_steps"] = [
             {
                 "step": "CRITICAL: Get full context of shadow copy deletion",
@@ -1199,7 +1271,7 @@ config case_sensitive = false timeframe = 1h
 | filter actor_process_image_name in ("vssadmin.exe", "wmic.exe", "bcdedit.exe")
 | filter actor_process_command_line ~= "(?i)(delete|shadows|recoveryenabled)"
 | fields _time, actor_process_image_name, actor_process_command_line, actor_effective_username,
-    causality_actor_process_image_name"""
+    causality_actor_process_image_name""",
             },
             {
                 "step": "Check for mass file encryption activity",
@@ -1212,7 +1284,7 @@ config case_sensitive = false timeframe = 1h
 | filter agent_hostname = "<HOSTNAME>"
 | filter action_file_extension ~= "(?i)(encrypted|locked|crypt|ransom)"
 | comp count() as file_count by action_file_extension
-| sort desc file_count"""
+| sort desc file_count""",
             },
             {
                 "step": "Look for ransom notes",
@@ -1224,7 +1296,7 @@ config case_sensitive = false timeframe = 1h
 | filter event_type = ENUM.FILE
 | filter agent_hostname = "<HOSTNAME>"
 | filter action_file_name ~= "(?i)(readme|decrypt|ransom|recover|restore).*\\.txt"
-| fields _time, action_file_path, actor_process_image_name"""
+| fields _time, action_file_path, actor_process_image_name""",
             },
             {
                 "step": "Check for lateral movement attempts",
@@ -1238,7 +1310,7 @@ config case_sensitive = false timeframe = 1h
 | filter action_remote_port in (445, 135)
 | comp count() as conn_count by action_remote_ip
 | filter conn_count > 5
-| sort desc conn_count"""
+| sort desc conn_count""",
             },
         ]
         purpose["related_queries"] = [
@@ -1252,7 +1324,7 @@ config case_sensitive = false timeframe = 1h
 | filter event_type = ENUM.FILE
 | comp count() as file_changes by agent_hostname
 | filter file_changes > 1000
-| sort desc file_changes"""
+| sort desc file_changes""",
             },
         ]
 
@@ -1268,7 +1340,7 @@ config case_sensitive = false timeframe = 24h
 | dataset = xdr_data
 | comp count() as event_count by event_type, agent_hostname
 | sort desc event_count
-| limit 50"""
+| limit 50""",
             },
             {
                 "step": "Correlate with other security telemetry",
@@ -1279,7 +1351,7 @@ config case_sensitive = false timeframe = 1h
 | filter agent_hostname = "<HOSTNAME>"
 | fields _time, event_type, actor_process_image_name, actor_process_command_line
 | sort asc _time
-| limit 100"""
+| limit 100""",
             },
         ]
         purpose["related_queries"] = []
@@ -1305,13 +1377,15 @@ def build_pipeline_html(query: str) -> str:
         name = stage.get("name", stage.get("name", "Unknown")).upper()
         desc = stage.get("description", "")
 
-        pipeline_items.append(f'''
+        pipeline_items.append(
+            f"""
             <div class="pipeline-stage" data-stage="{i}">
                 <span class="icon">{icon}</span>
                 <span class="stage-name">{name}</span>
                 <span class="stage-desc">{html.escape(desc)}</span>
             </div>
-        ''')
+        """
+        )
 
     # Build detail sections (shown when clicking on stages)
     detail_sections = []
@@ -1324,16 +1398,18 @@ def build_pipeline_html(query: str) -> str:
         if stage.get("name") == "filter" and content:
             explanation = explain_filter_condition(content)
 
-        detail_sections.append(f'''
+        detail_sections.append(
+            f"""
             <div class="pipeline-detail" id="stage-detail-{i}">
                 <h4>{stage.get("icon", "▶️")} {stage.get("name", "Stage").title()}</h4>
                 <p>{html.escape(detail)}</p>
                 {f'<div class="content">{html.escape(content)}</div>' if content else ''}
                 {f'<div class="explanation">{html.escape(explanation)}</div>' if explanation else ''}
             </div>
-        ''')
+        """
+        )
 
-    return f'''
+    return f"""
         <h3>Query Pipeline</h3>
         <p style="color: var(--text-secondary); margin-bottom: 15px;">
             Click on each stage to see details about what it does.
@@ -1342,7 +1418,7 @@ def build_pipeline_html(query: str) -> str:
             {"".join(pipeline_items)}
         </div>
         {"".join(detail_sections)}
-    '''
+    """
 
 
 def simple_markdown_to_html(text: str) -> str:
@@ -1354,10 +1430,10 @@ def simple_markdown_to_html(text: str) -> str:
     text = html.escape(text)
 
     # Convert **bold** to <strong>
-    text = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', text)
+    text = re.sub(r"\*\*([^*]+)\*\*", r"<strong>\1</strong>", text)
 
     # Convert numbered lists (1. item)
-    lines = text.split('\n')
+    lines = text.split("\n")
     result = []
     in_list = False
     list_type = None
@@ -1366,45 +1442,45 @@ def simple_markdown_to_html(text: str) -> str:
         stripped = line.strip()
 
         # Check for numbered list
-        num_match = re.match(r'^(\d+)\.\s+(.+)$', stripped)
+        num_match = re.match(r"^(\d+)\.\s+(.+)$", stripped)
         # Check for bullet list
-        bullet_match = re.match(r'^[-*]\s+(.+)$', stripped)
+        bullet_match = re.match(r"^[-*]\s+(.+)$", stripped)
 
         if num_match:
-            if not in_list or list_type != 'ol':
+            if not in_list or list_type != "ol":
                 if in_list:
-                    result.append(f'</{list_type}>')
-                result.append('<ol>')
+                    result.append(f"</{list_type}>")
+                result.append("<ol>")
                 in_list = True
-                list_type = 'ol'
-            result.append(f'<li>{num_match.group(2)}</li>')
+                list_type = "ol"
+            result.append(f"<li>{num_match.group(2)}</li>")
         elif bullet_match:
-            if not in_list or list_type != 'ul':
+            if not in_list or list_type != "ul":
                 if in_list:
-                    result.append(f'</{list_type}>')
-                result.append('<ul>')
+                    result.append(f"</{list_type}>")
+                result.append("<ul>")
                 in_list = True
-                list_type = 'ul'
-            result.append(f'<li>{bullet_match.group(1)}</li>')
+                list_type = "ul"
+            result.append(f"<li>{bullet_match.group(1)}</li>")
         else:
             if in_list:
-                result.append(f'</{list_type}>')
+                result.append(f"</{list_type}>")
                 in_list = False
                 list_type = None
             if stripped:
-                result.append(f'{stripped}<br>')
+                result.append(f"{stripped}<br>")
             else:
-                result.append('<br>')
+                result.append("<br>")
 
     if in_list:
-        result.append(f'</{list_type}>')
+        result.append(f"</{list_type}>")
 
-    return '\n'.join(result)
+    return "\n".join(result)
 
 
 def syntax_highlight_query(query: str) -> str:
     """Apply syntax highlighting to XQL query."""
-    lines = query.split('\n')
+    lines = query.split("\n")
     highlighted = []
 
     for line in lines:
@@ -1414,7 +1490,7 @@ def syntax_highlight_query(query: str) -> str:
             continue
 
         # Comments
-        if line.strip().startswith('//'):
+        if line.strip().startswith("//"):
             highlighted.append(f'<span class="comment">{html.escape(line)}</span>')
             continue
 
@@ -1426,49 +1502,60 @@ def syntax_highlight_query(query: str) -> str:
         last_end = 0
 
         # Highlight stage keywords with pipe
-        for match in re.finditer(r'(\|\s*)(dataset|filter|alter|comp|fields|sort|limit|dedup|join|union|config|target|window)(\s+|\s*$)', escaped, re.IGNORECASE):
-            parts.append(escaped[last_end:match.start()])
-            parts.append(f'{match.group(1)}<span class="stage-keyword">{match.group(2)}</span>{match.group(3)}')
+        for match in re.finditer(
+            r"(\|\s*)(dataset|filter|alter|comp|fields|sort|limit|dedup|join|union|config|target|window)(\s+|\s*$)",
+            escaped,
+            re.IGNORECASE,
+        ):
+            parts.append(escaped[last_end : match.start()])
+            parts.append(
+                f'{match.group(1)}<span class="stage-keyword">{match.group(2)}</span>{match.group(3)}'
+            )
             last_end = match.end()
         parts.append(escaped[last_end:])
-        result = ''.join(parts)
+        result = "".join(parts)
 
         # Highlight functions (word followed by parenthesis)
-        result = re.sub(r'\b([a-zA-Z_]\w*)\s*\(', r'<span class="function">\1</span>(', result)
+        result = re.sub(r"\b([a-zA-Z_]\w*)\s*\(", r'<span class="function">\1</span>(', result)
 
         # Highlight strings
-        result = re.sub(r'(&quot;[^&]*&quot;)', r'<span class="string">\1</span>', result)
+        result = re.sub(r"(&quot;[^&]*&quot;)", r'<span class="string">\1</span>', result)
 
         # Highlight logical operators (word boundaries to avoid false matches)
-        for op in ['and', 'or', 'not', 'in', 'contains']:
-            result = re.sub(rf'(?<![a-zA-Z_])\b({op})\b(?![a-zA-Z_])', r'<span class="operator">\1</span>', result, flags=re.IGNORECASE)
+        for op in ["and", "or", "not", "in", "contains"]:
+            result = re.sub(
+                rf"(?<![a-zA-Z_])\b({op})\b(?![a-zA-Z_])",
+                r'<span class="operator">\1</span>',
+                result,
+                flags=re.IGNORECASE,
+            )
 
         # Highlight comparison operators
         # Process multi-char operators first, use unique placeholders to avoid double-wrapping
         operator_map = [
-            ('&lt;=', '___LE___'),
-            ('&gt;=', '___GE___'),
-            ('~=', '___REGEX___'),
-            ('!=', '___NE___'),
-            ('&lt;', '___LT___'),
-            ('&gt;', '___GT___'),
+            ("&lt;=", "___LE___"),
+            ("&gt;=", "___GE___"),
+            ("~=", "___REGEX___"),
+            ("!=", "___NE___"),
+            ("&lt;", "___LT___"),
+            ("&gt;", "___GT___"),
         ]
 
         for op, placeholder in operator_map:
             result = result.replace(op, placeholder)
 
         # Replace standalone = (surrounded by spaces)
-        result = re.sub(r'(\s)(=)(\s)', r'\1___EQ___\3', result)
+        result = re.sub(r"(\s)(=)(\s)", r"\1___EQ___\3", result)
 
         # Now convert placeholders to spans
         placeholder_to_span = {
-            '___LE___': '<span class="operator">&lt;=</span>',
-            '___GE___': '<span class="operator">&gt;=</span>',
-            '___REGEX___': '<span class="operator">~=</span>',
-            '___NE___': '<span class="operator">!=</span>',
-            '___LT___': '<span class="operator">&lt;</span>',
-            '___GT___': '<span class="operator">&gt;</span>',
-            '___EQ___': '<span class="operator">=</span>',
+            "___LE___": '<span class="operator">&lt;=</span>',
+            "___GE___": '<span class="operator">&gt;=</span>',
+            "___REGEX___": '<span class="operator">~=</span>',
+            "___NE___": '<span class="operator">!=</span>',
+            "___LT___": '<span class="operator">&lt;</span>',
+            "___GT___": '<span class="operator">&gt;</span>',
+            "___EQ___": '<span class="operator">=</span>',
         }
 
         for placeholder, span in placeholder_to_span.items():
@@ -1476,14 +1563,14 @@ def syntax_highlight_query(query: str) -> str:
 
         highlighted.append(result)
 
-    return '\n'.join(highlighted)
+    return "\n".join(highlighted)
 
 
 def generate_html_report(
     query: str,
     issues: list[ValidationIssue],
     file_path: Optional[str] = None,
-    include_guidance: bool = True
+    include_guidance: bool = True,
 ) -> str:
     """Generate a comprehensive HTML report for an XQL query."""
 
@@ -1499,45 +1586,50 @@ def generate_html_report(
             if tech_info:
                 # Build detection tips with XQL code blocks
                 tips_items = []
-                for tip_item in tech_info.get('detection_tips', []):
+                for tip_item in tech_info.get("detection_tips", []):
                     if isinstance(tip_item, dict):
-                        tip_text = html.escape(tip_item.get('tip', ''))
-                        xql_code = tip_item.get('xql', '')
+                        tip_text = html.escape(tip_item.get("tip", ""))
+                        xql_code = tip_item.get("xql", "")
                         if xql_code:
-                            tips_items.append(f'''<li>
+                            tips_items.append(
+                                f"""<li>
                                 <span class="tip-text">{tip_text}</span>
                                 <details class="xql-example">
                                     <summary>Show XQL Example</summary>
                                     <pre class="xql-code">{html.escape(xql_code.strip())}</pre>
                                     <button class="copy-btn" onclick="copyXQL(this)">Copy</button>
                                 </details>
-                            </li>''')
+                            </li>"""
+                            )
                         else:
-                            tips_items.append(f'<li>{tip_text}</li>')
+                            tips_items.append(f"<li>{tip_text}</li>")
                     else:
-                        tips_items.append(f'<li>{html.escape(str(tip_item))}</li>')
+                        tips_items.append(f"<li>{html.escape(str(tip_item))}</li>")
 
                 # Build FP tuning with XQL code blocks
                 fp_items = []
-                for fp_item in tech_info.get('fp_tuning', []):
+                for fp_item in tech_info.get("fp_tuning", []):
                     if isinstance(fp_item, dict):
-                        fp_text = html.escape(fp_item.get('tip', ''))
-                        xql_code = fp_item.get('xql', '')
+                        fp_text = html.escape(fp_item.get("tip", ""))
+                        xql_code = fp_item.get("xql", "")
                         if xql_code:
-                            fp_items.append(f'''<li>
+                            fp_items.append(
+                                f"""<li>
                                 <span class="tip-text">{fp_text}</span>
                                 <details class="xql-example">
                                     <summary>Show XQL Tuning</summary>
                                     <pre class="xql-code">{html.escape(xql_code.strip())}</pre>
                                     <button class="copy-btn" onclick="copyXQL(this)">Copy</button>
                                 </details>
-                            </li>''')
+                            </li>"""
+                            )
                         else:
-                            fp_items.append(f'<li>{fp_text}</li>')
+                            fp_items.append(f"<li>{fp_text}</li>")
                     else:
-                        fp_items.append(f'<li>{html.escape(str(fp_item))}</li>')
+                        fp_items.append(f"<li>{html.escape(str(fp_item))}</li>")
 
-                mitre_items.append(f"""
+                mitre_items.append(
+                    f"""
                 <div class="mitre-technique">
                     <h4><a href="https://attack.mitre.org/techniques/{tech_id.replace('.', '/')}" target="_blank">{tech_id}: {tech_info.get('name', 'Unknown')}</a></h4>
                     <p><strong>Tactic:</strong> {tech_info.get('tactic', 'N/A')}</p>
@@ -1557,14 +1649,17 @@ def generate_html_report(
                         </ul>
                     </div>
                 </div>
-                """)
+                """
+                )
             else:
-                mitre_items.append(f"""
+                mitre_items.append(
+                    f"""
                 <div class="mitre-technique">
                     <h4><a href="https://attack.mitre.org/techniques/{tech_id.replace('.', '/')}" target="_blank">{tech_id}</a></h4>
                     <p>View on MITRE ATT&CK for details.</p>
                 </div>
-                """)
+                """
+                )
         mitre_html = "<div class='mitre-section'>" + "".join(mitre_items) + "</div>"
 
     # Build issues HTML
@@ -1573,9 +1668,12 @@ def generate_html_report(
         issue_rows = []
         for issue in sorted(issues, key=lambda x: (x.severity.value, x.line)):
             severity_class = issue.severity.value
-            icon = {"error": "X", "warning": "!", "info": "i", "style": "*"}.get(severity_class, "?")
+            icon = {"error": "X", "warning": "!", "info": "i", "style": "*"}.get(
+                severity_class, "?"
+            )
 
-            issue_rows.append(f"""
+            issue_rows.append(
+                f"""
             <tr class="issue-{severity_class}">
                 <td class="icon">{icon}</td>
                 <td>{issue.line}</td>
@@ -1584,7 +1682,8 @@ def generate_html_report(
                 <td>{html.escape(issue.message)}</td>
                 <td class="suggestion">{html.escape(issue.suggestion or '')}</td>
             </tr>
-            """)
+            """
+            )
 
         issues_html = f"""
         <div class="issues-section">
@@ -1619,21 +1718,23 @@ def generate_html_report(
         steps_items = []
         for i, step_item in enumerate(purpose["next_steps"], 1):
             if isinstance(step_item, dict):
-                step_text = html.escape(step_item.get('step', ''))
-                xql_code = step_item.get('xql', '')
+                step_text = html.escape(step_item.get("step", ""))
+                xql_code = step_item.get("xql", "")
                 if xql_code:
-                    steps_items.append(f'''<li>
+                    steps_items.append(
+                        f"""<li>
                         <span class="step-text">{step_text}</span>
                         <details class="xql-example" open>
                             <summary>XQL Query</summary>
                             <pre class="xql-code">{html.escape(xql_code.strip())}</pre>
                             <button class="copy-btn" onclick="copyXQL(this)">Copy</button>
                         </details>
-                    </li>''')
+                    </li>"""
+                    )
                 else:
-                    steps_items.append(f'<li>{step_text}</li>')
+                    steps_items.append(f"<li>{step_text}</li>")
             else:
-                steps_items.append(f'<li>{html.escape(str(step_item))}</li>')
+                steps_items.append(f"<li>{html.escape(str(step_item))}</li>")
 
         next_steps_html = f"""
         <div class="next-steps">
@@ -1649,21 +1750,23 @@ def generate_html_report(
         query_items = []
         for q_item in purpose["related_queries"]:
             if isinstance(q_item, dict):
-                q_name = html.escape(q_item.get('name', ''))
-                xql_code = q_item.get('xql', '')
+                q_name = html.escape(q_item.get("name", ""))
+                xql_code = q_item.get("xql", "")
                 if xql_code:
-                    query_items.append(f'''<li>
+                    query_items.append(
+                        f"""<li>
                         <span class="query-name">{q_name}</span>
                         <details class="xql-example">
                             <summary>Show Query</summary>
                             <pre class="xql-code">{html.escape(xql_code.strip())}</pre>
                             <button class="copy-btn" onclick="copyXQL(this)">Copy</button>
                         </details>
-                    </li>''')
+                    </li>"""
+                    )
                 else:
-                    query_items.append(f'<li>{q_name}</li>')
+                    query_items.append(f"<li>{q_name}</li>")
             else:
-                query_items.append(f'<li>{html.escape(str(q_item))}</li>')
+                query_items.append(f"<li>{html.escape(str(q_item))}</li>")
 
         related_html = f"""
         <div class="related-queries">
@@ -2442,9 +2545,7 @@ def generate_html_report(
 
 
 def generate_report_file(
-    query: str,
-    output_path: str | Path,
-    include_guidance: bool = True
+    query: str, output_path: str | Path, include_guidance: bool = True
 ) -> tuple[bool, str]:
     """
     Generate an HTML report file for an XQL query.

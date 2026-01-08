@@ -279,16 +279,20 @@ class TestValidateDirectory:
         from tools.xql_validator.validator import validate_directory
 
         # Create test files
-        (tmp_path / "valid.xql").write_text("""
+        (tmp_path / "valid.xql").write_text(
+            """
 | dataset = xdr_data
 | filter event_type = ENUM.PROCESS
 | limit 100
-        """)
-        (tmp_path / "another.xql").write_text("""
+        """
+        )
+        (tmp_path / "another.xql").write_text(
+            """
 | dataset = xdr_data
 | filter event_type = ENUM.NETWORK
 | limit 50
-        """)
+        """
+        )
 
         all_valid, results = validate_directory(tmp_path)
         assert len(results) == 2
@@ -307,13 +311,23 @@ class TestCLIOutput:
 
     def test_json_output_format(self):
         """Test JSON output structure."""
-        from tools.xql_validator.validator import _format_json_output, ValidationIssue, Severity, Category
         import json
+
+        from tools.xql_validator.validator import (
+            Category,
+            Severity,
+            ValidationIssue,
+            _format_json_output,
+        )
 
         issues = [
             ValidationIssue(
-                line=1, column=0, severity=Severity.ERROR,
-                code="E001", message="Test error", category=Category.SYNTAX
+                line=1,
+                column=0,
+                severity=Severity.ERROR,
+                code="E001",
+                message="Test error",
+                category=Category.SYNTAX,
             )
         ]
 
@@ -327,8 +341,9 @@ class TestCLIOutput:
 
     def test_json_output_valid_query(self):
         """Test JSON output for valid query."""
-        from tools.xql_validator.validator import _format_json_output
         import json
+
+        from tools.xql_validator.validator import _format_json_output
 
         output = _format_json_output([], "test.xql")
         parsed = json.loads(output)
@@ -343,7 +358,7 @@ class TestHTMLReport:
     def test_html_report_generation(self):
         """Test basic HTML report generation."""
         from tools.xql_validator.html_report import generate_html_report
-        from tools.xql_validator.validator import ValidationIssue, Severity, Category
+        from tools.xql_validator.validator import Category, Severity, ValidationIssue
 
         query = """
 // Title: Test Detection
@@ -354,8 +369,12 @@ class TestHTMLReport:
         """
         issues = [
             ValidationIssue(
-                line=1, column=0, severity=Severity.INFO,
-                code="I001", message="Test info", category=Category.PERFORMANCE
+                line=1,
+                column=0,
+                severity=Severity.INFO,
+                code="I001",
+                message="Test info",
+                category=Category.PERFORMANCE,
             )
         ]
 

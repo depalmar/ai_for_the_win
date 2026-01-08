@@ -14,16 +14,17 @@ Providers:
 - Gemini (Google API)
 """
 
-import os
 import json
+import os
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
-from typing import Optional
 from enum import Enum
+from typing import Optional
 
 
 class AIProvider(Enum):
     """Supported AI providers."""
+
     CLAUDE = "claude"
     GPT = "gpt"
     GEMINI = "gemini"
@@ -32,6 +33,7 @@ class AIProvider(Enum):
 @dataclass
 class AIResponse:
     """Response from an AI provider."""
+
     query_explanation: str = ""
     threat_explanation: str = ""
     detection_tips: list[dict] = None
@@ -197,7 +199,7 @@ Respond ONLY with the JSON object, no other text."""
                 related_queries=data.get("related_queries", []),
                 raw_response=response_text,
                 provider=provider,
-                model=model
+                model=model,
             )
         except json.JSONDecodeError:
             # Return partial response with raw text
@@ -205,7 +207,7 @@ Respond ONLY with the JSON object, no other text."""
                 query_explanation=response_text,
                 raw_response=response_text,
                 provider=provider,
-                model=model
+                model=model,
             )
 
 
@@ -217,7 +219,7 @@ class ClaudeProvider(BaseAIProvider):
     def __init__(self, api_key: Optional[str] = None, model: Optional[str] = None):
         super().__init__(
             api_key=api_key or os.environ.get("ANTHROPIC_API_KEY"),
-            model=model or self.DEFAULT_MODEL
+            model=model or self.DEFAULT_MODEL,
         )
 
     def analyze_query(self, query: str, metadata: dict) -> AIResponse:
@@ -225,9 +227,7 @@ class ClaudeProvider(BaseAIProvider):
         try:
             import anthropic
         except ImportError:
-            raise ImportError(
-                "anthropic package required. Install with: pip install anthropic"
-            )
+            raise ImportError("anthropic package required. Install with: pip install anthropic")
 
         if not self.api_key:
             raise ValueError(
@@ -239,11 +239,7 @@ class ClaudeProvider(BaseAIProvider):
         prompt = self._build_prompt(query, metadata)
 
         message = client.messages.create(
-            model=self.model,
-            max_tokens=4096,
-            messages=[
-                {"role": "user", "content": prompt}
-            ]
+            model=self.model, max_tokens=4096, messages=[{"role": "user", "content": prompt}]
         )
 
         response_text = message.content[0].text
@@ -257,8 +253,7 @@ class GPTProvider(BaseAIProvider):
 
     def __init__(self, api_key: Optional[str] = None, model: Optional[str] = None):
         super().__init__(
-            api_key=api_key or os.environ.get("OPENAI_API_KEY"),
-            model=model or self.DEFAULT_MODEL
+            api_key=api_key or os.environ.get("OPENAI_API_KEY"), model=model or self.DEFAULT_MODEL
         )
 
     def analyze_query(self, query: str, metadata: dict) -> AIResponse:
@@ -266,9 +261,7 @@ class GPTProvider(BaseAIProvider):
         try:
             import openai
         except ImportError:
-            raise ImportError(
-                "openai package required. Install with: pip install openai"
-            )
+            raise ImportError("openai package required. Install with: pip install openai")
 
         if not self.api_key:
             raise ValueError(
@@ -284,12 +277,12 @@ class GPTProvider(BaseAIProvider):
             messages=[
                 {
                     "role": "system",
-                    "content": "You are a Cortex XDR security analyst expert. Respond only with valid JSON."
+                    "content": "You are a Cortex XDR security analyst expert. Respond only with valid JSON.",
                 },
-                {"role": "user", "content": prompt}
+                {"role": "user", "content": prompt},
             ],
             max_tokens=4096,
-            temperature=0.7
+            temperature=0.7,
         )
 
         response_text = response.choices[0].message.content
@@ -303,8 +296,7 @@ class GeminiProvider(BaseAIProvider):
 
     def __init__(self, api_key: Optional[str] = None, model: Optional[str] = None):
         super().__init__(
-            api_key=api_key or os.environ.get("GOOGLE_API_KEY"),
-            model=model or self.DEFAULT_MODEL
+            api_key=api_key or os.environ.get("GOOGLE_API_KEY"), model=model or self.DEFAULT_MODEL
         )
 
     def analyze_query(self, query: str, metadata: dict) -> AIResponse:
@@ -362,19 +354,13 @@ def get_provider(provider: str | AIProvider, **kwargs) -> BaseAIProvider:
     provider_class = providers.get(provider.lower())
     if not provider_class:
         raise ValueError(
-            f"Unknown provider: {provider}. "
-            f"Supported: {', '.join(providers.keys())}"
+            f"Unknown provider: {provider}. " f"Supported: {', '.join(providers.keys())}"
         )
 
     return provider_class(**kwargs)
 
 
-def analyze_with_ai(
-    query: str,
-    metadata: dict,
-    provider: str = "claude",
-    **kwargs
-) -> AIResponse:
+def analyze_with_ai(query: str, metadata: dict, provider: str = "claude", **kwargs) -> AIResponse:
     """
     Convenience function to analyze a query with AI.
 
@@ -403,12 +389,9 @@ def analyze_with_ai(
 # Integration with HTML Report Generator
 # =============================================================================
 
+
 def enrich_report_with_ai(
-    query: str,
-    metadata: dict,
-    provider: str = "claude",
-    fallback_to_static: bool = True,
-    **kwargs
+    query: str, metadata: dict, provider: str = "claude", fallback_to_static: bool = True, **kwargs
 ) -> dict:
     """
     Enrich report data with AI-generated content.
@@ -471,7 +454,7 @@ config case_sensitive = false
     metadata = {
         "title": "LSASS Memory Dump Detection",
         "severity": "Critical",
-        "mitre_techniques": ["T1003.001"]
+        "mitre_techniques": ["T1003.001"],
     }
 
     # Check which provider is available

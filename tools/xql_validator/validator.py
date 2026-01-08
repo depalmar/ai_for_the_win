@@ -470,12 +470,12 @@ class XQLValidator:
         in_string = False
         quote_char = None
         i = 0
-        lines = query.split('\n')
+        lines = query.split("\n")
 
         for line_num, line in enumerate(lines, 1):
             for i, char in enumerate(line):
                 # Skip comments
-                if not in_string and i < len(line) - 1 and line[i:i+2] == "//":
+                if not in_string and i < len(line) - 1 and line[i : i + 2] == "//":
                     break
 
                 # Track string state
@@ -502,7 +502,7 @@ class XQLValidator:
 
             for i, char in enumerate(line):
                 # Skip comments
-                if not in_string and i < len(line) - 1 and line[i:i+2] == "//":
+                if not in_string and i < len(line) - 1 and line[i : i + 2] == "//":
                     break
 
                 # Track string state
@@ -791,10 +791,17 @@ def validate_directory(
     """
     path = Path(dir_path)
     if not path.is_dir():
-        return False, {str(dir_path): [ValidationIssue(
-            line=0, column=0, severity=Severity.ERROR,
-            code="E998", message=f"Not a directory: {dir_path}"
-        )]}
+        return False, {
+            str(dir_path): [
+                ValidationIssue(
+                    line=0,
+                    column=0,
+                    severity=Severity.ERROR,
+                    code="E998",
+                    message=f"Not a directory: {dir_path}",
+                )
+            ]
+        }
 
     results: dict[str, list[ValidationIssue]] = {}
     all_valid = True
@@ -812,17 +819,17 @@ def validate_directory(
 # CLI Interface
 # =============================================================================
 
+
 def _format_rich_output(
-    issues: list[ValidationIssue],
-    file_path: str | None = None,
-    show_stats: bool = True
+    issues: list[ValidationIssue], file_path: str | None = None, show_stats: bool = True
 ) -> None:
     """Format and print issues using rich for colored output."""
     try:
-        from rich.console import Console
-        from rich.table import Table
-        from rich.panel import Panel
         from rich import box
+        from rich.console import Console
+        from rich.panel import Panel
+        from rich.table import Table
+
         console = Console()
     except ImportError:
         # Fallback to plain text if rich not available
@@ -869,7 +876,7 @@ def _format_rich_output(
             f"[{style}]{issue.code}[/{style}]",
             issue.category.value,
             issue.message,
-            issue.suggestion or ""
+            issue.suggestion or "",
         )
 
     console.print(table)
@@ -880,7 +887,9 @@ def _format_rich_output(
         if by_severity[Severity.ERROR]:
             summary_parts.append(f"[bold red]{len(by_severity[Severity.ERROR])} errors[/bold red]")
         if by_severity[Severity.WARNING]:
-            summary_parts.append(f"[bold yellow]{len(by_severity[Severity.WARNING])} warnings[/bold yellow]")
+            summary_parts.append(
+                f"[bold yellow]{len(by_severity[Severity.WARNING])} warnings[/bold yellow]"
+            )
         if by_severity[Severity.INFO]:
             summary_parts.append(f"[blue]{len(by_severity[Severity.INFO])} info[/blue]")
         if by_severity[Severity.STYLE]:
@@ -889,36 +898,36 @@ def _format_rich_output(
         console.print(f"\n[bold]Summary:[/bold] {', '.join(summary_parts)}")
 
 
-def _format_json_output(
-    issues: list[ValidationIssue],
-    file_path: str | None = None
-) -> str:
+def _format_json_output(issues: list[ValidationIssue], file_path: str | None = None) -> str:
     """Format issues as JSON for CI/CD integration."""
     import json
 
-    return json.dumps({
-        "file": file_path,
-        "valid": not any(i.severity == Severity.ERROR for i in issues),
-        "issue_count": len(issues),
-        "issues": [
-            {
-                "line": i.line,
-                "column": i.column,
-                "severity": i.severity.value,
-                "code": i.code,
-                "category": i.category.value,
-                "message": i.message,
-                "suggestion": i.suggestion
-            }
-            for i in issues
-        ],
-        "summary": {
-            "errors": sum(1 for i in issues if i.severity == Severity.ERROR),
-            "warnings": sum(1 for i in issues if i.severity == Severity.WARNING),
-            "info": sum(1 for i in issues if i.severity == Severity.INFO),
-            "style": sum(1 for i in issues if i.severity == Severity.STYLE),
-        }
-    }, indent=2)
+    return json.dumps(
+        {
+            "file": file_path,
+            "valid": not any(i.severity == Severity.ERROR for i in issues),
+            "issue_count": len(issues),
+            "issues": [
+                {
+                    "line": i.line,
+                    "column": i.column,
+                    "severity": i.severity.value,
+                    "code": i.code,
+                    "category": i.category.value,
+                    "message": i.message,
+                    "suggestion": i.suggestion,
+                }
+                for i in issues
+            ],
+            "summary": {
+                "errors": sum(1 for i in issues if i.severity == Severity.ERROR),
+                "warnings": sum(1 for i in issues if i.severity == Severity.WARNING),
+                "info": sum(1 for i in issues if i.severity == Severity.INFO),
+                "style": sum(1 for i in issues if i.severity == Severity.STYLE),
+            },
+        },
+        indent=2,
+    )
 
 
 def main() -> int:
@@ -947,60 +956,47 @@ Examples:
   %(prog)s -c "| dataset = xdr_data"    Validate inline query
   %(prog)s query.xql --format json      Output as JSON for CI/CD
   %(prog)s query.xql --strict           Treat warnings as errors
-        """
+        """,
     )
 
     # Input options
     input_group = parser.add_mutually_exclusive_group(required=True)
+    input_group.add_argument("path", nargs="?", help="XQL file or directory to validate")
     input_group.add_argument(
-        "path",
-        nargs="?",
-        help="XQL file or directory to validate"
-    )
-    input_group.add_argument(
-        "-c", "--command",
-        metavar="QUERY",
-        help="Validate an inline XQL query string"
+        "-c", "--command", metavar="QUERY", help="Validate an inline XQL query string"
     )
 
     # Validation options
     parser.add_argument(
-        "-s", "--strict",
-        action="store_true",
-        help="Treat warnings as errors (exit code 2)"
+        "-s", "--strict", action="store_true", help="Treat warnings as errors (exit code 2)"
     )
     parser.add_argument(
-        "-r", "--recursive",
+        "-r",
+        "--recursive",
         action="store_true",
-        help="Recursively search directories for .xql files"
+        help="Recursively search directories for .xql files",
     )
     parser.add_argument(
-        "--pattern",
-        default="*.xql",
-        help="Glob pattern for XQL files (default: *.xql)"
+        "--pattern", default="*.xql", help="Glob pattern for XQL files (default: *.xql)"
     )
 
     # Output options
     parser.add_argument(
-        "-f", "--format",
+        "-f",
+        "--format",
         choices=["text", "json", "html", "quiet"],
         default="text",
-        help="Output format (default: text)"
+        help="Output format (default: text)",
     )
     parser.add_argument(
-        "-o", "--output",
-        metavar="FILE",
-        help="Output file path (required for html format)"
+        "-o", "--output", metavar="FILE", help="Output file path (required for html format)"
     )
+    parser.add_argument("--no-color", action="store_true", help="Disable colored output")
     parser.add_argument(
-        "--no-color",
+        "-v",
+        "--verbose",
         action="store_true",
-        help="Disable colored output"
-    )
-    parser.add_argument(
-        "-v", "--verbose",
-        action="store_true",
-        help="Show additional details including style issues"
+        help="Show additional details including style issues",
     )
 
     args = parser.parse_args()
@@ -1013,6 +1009,7 @@ Examples:
             print(_format_json_output(issues, "<inline>"))
         elif args.format == "html":
             from .html_report import generate_html_report
+
             html_content = generate_html_report(args.command, issues, "<inline>")
             if args.output:
                 Path(args.output).write_text(html_content, encoding="utf-8")
@@ -1049,13 +1046,11 @@ Examples:
 
         if args.format == "json":
             import json
+
             output = {
                 "valid": all_valid,
                 "files_checked": len(results),
-                "files": {
-                    fp: _format_json_output(issues, fp)
-                    for fp, issues in results.items()
-                }
+                "files": {fp: _format_json_output(issues, fp) for fp, issues in results.items()},
             }
             print(json.dumps(output, indent=2))
         elif args.format == "quiet":
@@ -1096,6 +1091,7 @@ Examples:
             print(_format_json_output(issues, str(path)))
         elif args.format == "html":
             from .html_report import generate_html_report
+
             query_content = path.read_text(encoding="utf-8")
             html_content = generate_html_report(query_content, issues, str(path))
             output_file = args.output or f"{path.stem}_report.html"
@@ -1124,4 +1120,5 @@ Examples:
 
 if __name__ == "__main__":
     import sys
+
     sys.exit(main())
