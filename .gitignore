@@ -116,7 +116,6 @@ malware/
 !samples/.gitkeep
 .claude/settings.local.json
 
-# XQL content (hidden for now)
 docs/guides/xql-guide.md
 templates/xql/
 tools/xql_validator/
