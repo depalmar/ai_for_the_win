@@ -436,7 +436,10 @@ class XQLValidator:
             )
 
         # Check for case sensitivity in filters
-        if re.search(r'["\'][A-Z].*["\']', line) and "config case_sensitive" not in self._current_query.lower():
+        if (
+            re.search(r'["\'][A-Z].*["\']', line)
+            and "config case_sensitive" not in self._current_query.lower()
+        ):
             if "filter" in line.lower() and "~=" in line:
                 self.issues.append(
                     ValidationIssue(
@@ -578,8 +581,7 @@ class XQLValidator:
             "warning_count": sum(1 for i in self.issues if i.severity == Severity.WARNING),
             "info_count": sum(1 for i in self.issues if i.severity == Severity.INFO),
             "issues_by_category": {
-                cat.value: sum(1 for i in self.issues if i.category == cat)
-                for cat in Category
+                cat.value: sum(1 for i in self.issues if i.category == cat) for cat in Category
             },
         }
 
@@ -624,7 +626,9 @@ def validate_query(query: str, strict: bool = False) -> tuple[bool, list[Validat
     return not has_problems, issues
 
 
-def validate_file(file_path: str | Path, strict: bool = False) -> tuple[bool, list[ValidationIssue]]:
+def validate_file(
+    file_path: str | Path, strict: bool = False
+) -> tuple[bool, list[ValidationIssue]]:
     """
     Validate XQL queries in a file.
 
