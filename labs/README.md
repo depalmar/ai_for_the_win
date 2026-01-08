@@ -845,9 +845,27 @@ Test your skills with capture-the-flag challenges! These are separate from labs 
 | [Log Detective](../ctf/beginner/01-log-detective/) | Lab 04 | Log analysis, pattern recognition |
 | [Phish Finder](../ctf/beginner/02-phish-finder/) | Lab 01 | Email classification, IOC extraction |
 
-> 💡 **Tip**: Complete the recommended lab before attempting each CTF challenge for the best learning experience. Labs teach the concepts; CTFs test your skills!
+### Intermediate Challenges (250 pts each)
 
-> 📝 **More challenges coming soon!** Intermediate and advanced CTF challenges are in development.
+| Challenge | After Lab | Skills Tested |
+|-----------|-----------|---------------|
+| [C2 Hunter](../ctf/intermediate/01-c2-hunter/) | Lab 14 | Beaconing, DNS tunneling |
+| [Memory Forensics](../ctf/intermediate/02-memory-forensics/) | Lab 13 | Process injection, shellcode |
+| [Adversarial Samples](../ctf/intermediate/03-adversarial-samples/) | Lab 17 | ML evasion, PE analysis |
+| [Agent Investigation](../ctf/intermediate/04-agent-investigation/) | Lab 05 | Prompt injection, ReAct debugging |
+| [Ransomware Response](../ctf/intermediate/05-ransomware-response/) | Lab 11 | Crypto weakness, key recovery |
+
+### Advanced Challenges (500 pts each)
+
+| Challenge | After Lab | Skills Tested |
+|-----------|-----------|---------------|
+| [APT Attribution](../ctf/advanced/01-apt-attribution/) | Lab 16 | TTP mapping, actor profiling |
+| [Model Poisoning](../ctf/advanced/02-model-poisoning/) | Lab 17 | Backdoor detection, data poisoning |
+| [Cloud Compromise](../ctf/advanced/03-cloud-compromise/) | Lab 19 | Multi-cloud forensics |
+| [Zero-Day Hunt](../ctf/advanced/04-zero-day-hunt/) | Lab 03 | Behavioral anomaly detection |
+| [Full IR Scenario](../ctf/advanced/05-full-ir-scenario/) | Lab 10 | Complete IR lifecycle |
+
+> 💡 **Tip**: Complete the recommended lab before attempting each CTF challenge for the best learning experience. Labs teach the concepts; CTFs test your skills!
 
 ---
 
