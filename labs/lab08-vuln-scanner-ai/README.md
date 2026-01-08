@@ -341,9 +341,8 @@ lab08-vuln-scanner-ai/
 ├── solution/
 │   └── main.py
 ├── data/
-│   ├── sample_nessus.csv
-│   ├── sample_nuclei.json
-│   └── asset_inventory.json
+│   ├── sample_scan_results.json  # Vulnerability scan results
+│   └── asset_inventory.json      # Asset metadata
 └── reports/
     └── sample_report.md
 ```
