@@ -2075,7 +2075,7 @@ python labs/lab01-phishing-classifier/solution/main.py</code></pre>
     </details>
     <details class="faq-item">
       <summary>Which LLM provider should I use?</summary>
-      <div class="faq-content">We recommend Anthropic Claude (Sonnet/Opus) for best reasoning on security tasks. All labs support OpenAI GPT-4/5, Google Gemini, and Ollama (free, local). You only need one provider.</div>
+      <div class="faq-content">We recommend Anthropic Claude (Sonnet 4/Opus 4.5) for best reasoning on security tasks. All labs support OpenAI GPT-5.2, Google Gemini 3, and Ollama (free, local). You only need one provider.</div>
     </details>
     <details class="faq-item">
       <summary>Can I run everything locally without API costs?</summary>
