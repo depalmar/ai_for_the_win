@@ -139,7 +139,9 @@ class TestSimilaritySearch:
     def test_similarity_search_returns_results(self):
         """Test similarity search returns results."""
         vectorizer, embeddings = create_tfidf_embeddings(SECURITY_DOCUMENTS)
-        results = similarity_search("malware virus", vectorizer, embeddings, SECURITY_DOCUMENTS, top_k=3)
+        results = similarity_search(
+            "malware virus", vectorizer, embeddings, SECURITY_DOCUMENTS, top_k=3
+        )
 
         assert len(results) <= 3
         assert len(results) > 0
@@ -147,7 +149,9 @@ class TestSimilaritySearch:
     def test_search_result_structure(self):
         """Test search result structure."""
         vectorizer, embeddings = create_tfidf_embeddings(SECURITY_DOCUMENTS)
-        results = similarity_search("ransomware attack", vectorizer, embeddings, SECURITY_DOCUMENTS, top_k=5)
+        results = similarity_search(
+            "ransomware attack", vectorizer, embeddings, SECURITY_DOCUMENTS, top_k=5
+        )
 
         # Each result should be a tuple of (index, similarity, document)
         for result in results:
@@ -162,7 +166,9 @@ class TestSimilaritySearch:
         vectorizer, embeddings = create_tfidf_embeddings(SECURITY_DOCUMENTS)
 
         # Search for ransomware
-        results = similarity_search("ransomware encrypt", vectorizer, embeddings, SECURITY_DOCUMENTS, top_k=3)
+        results = similarity_search(
+            "ransomware encrypt", vectorizer, embeddings, SECURITY_DOCUMENTS, top_k=3
+        )
 
         # Top result should contain ransomware-related terms
         if len(results) > 0:
@@ -173,7 +179,9 @@ class TestSimilaritySearch:
     def test_search_with_malware_query(self):
         """Test search with malware-related query."""
         vectorizer, embeddings = create_tfidf_embeddings(SECURITY_DOCUMENTS)
-        results = similarity_search("malware trojan virus", vectorizer, embeddings, SECURITY_DOCUMENTS, top_k=3)
+        results = similarity_search(
+            "malware trojan virus", vectorizer, embeddings, SECURITY_DOCUMENTS, top_k=3
+        )
 
         assert len(results) > 0
 
@@ -227,7 +235,9 @@ class TestSecurityUseCases:
         vectorizer, embeddings = create_tfidf_embeddings(THREAT_DESCRIPTIONS)
 
         # Search for similar threats
-        results = similarity_search("credential stealing", vectorizer, embeddings, THREAT_DESCRIPTIONS, top_k=3)
+        results = similarity_search(
+            "credential stealing", vectorizer, embeddings, THREAT_DESCRIPTIONS, top_k=3
+        )
 
         assert len(results) > 0
 
@@ -248,7 +258,9 @@ class TestSecurityUseCases:
         ioc_descriptions = [ioc["description"] for ioc in IOC_SAMPLES]
         vectorizer, embeddings = create_tfidf_embeddings(ioc_descriptions)
 
-        results = similarity_search("command and control", vectorizer, embeddings, ioc_descriptions, top_k=2)
+        results = similarity_search(
+            "command and control", vectorizer, embeddings, ioc_descriptions, top_k=2
+        )
 
         assert len(results) > 0
 
@@ -270,7 +282,9 @@ class TestIntegration:
         sim_matrix = calculate_similarity_matrix(embeddings)
 
         # 3. Perform search
-        results = similarity_search("malware detection", vectorizer, embeddings, SECURITY_DOCUMENTS, top_k=5)
+        results = similarity_search(
+            "malware detection", vectorizer, embeddings, SECURITY_DOCUMENTS, top_k=5
+        )
 
         # Verify all steps completed
         assert embeddings.shape[0] == len(SECURITY_DOCUMENTS)

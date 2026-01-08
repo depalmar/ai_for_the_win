@@ -110,7 +110,9 @@ class TestQueryPatterns:
 
     def test_config_timeframe_pattern(self):
         """Test config timeframe pattern."""
-        config_pattern = 'config timeframe between "2025-01-01 00:00:00 +0000" and "2025-01-07 23:59:59 +0000"'
+        config_pattern = (
+            'config timeframe between "2025-01-01 00:00:00 +0000" and "2025-01-07 23:59:59 +0000"'
+        )
 
         assert "config timeframe between" in config_pattern
 
@@ -202,7 +204,7 @@ class TestXQLSyntax:
         filters = [
             'filter actor_process_image_name ~= "powershell\\.exe"',
             'filter actor_process_command_line contains "-enc"',
-            'filter event_type = ENUM.PROCESS',
+            "filter event_type = ENUM.PROCESS",
             'filter actor_process_image_name in ("cmd.exe", "powershell.exe")',
         ]
 
@@ -274,7 +276,9 @@ class TestIntegration:
         ]
 
         # This is a pattern check, actual implementation should have all
-        sample_query = "config case_sensitive = false | dataset = xdr_data | filter event_type = ENUM.PROCESS"
+        sample_query = (
+            "config case_sensitive = false | dataset = xdr_data | filter event_type = ENUM.PROCESS"
+        )
 
         for component in ["config", "dataset", "ENUM", "filter"]:
             assert component in sample_query

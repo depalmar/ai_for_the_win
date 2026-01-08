@@ -63,9 +63,7 @@ class TestToolDefinitions:
             "description": "Look up threat intelligence for a domain",
             "parameters": {
                 "type": "object",
-                "properties": {
-                    "domain": {"type": "string", "description": "Domain to look up"}
-                },
+                "properties": {"domain": {"type": "string", "description": "Domain to look up"}},
                 "required": ["domain"],
             },
         }
@@ -79,7 +77,9 @@ class TestToolDefinitions:
             "description": "Look up file hash in threat intelligence databases",
             "parameters": {
                 "type": "object",
-                "properties": {"hash": {"type": "string", "description": "File hash (MD5/SHA1/SHA256)"}},
+                "properties": {
+                    "hash": {"type": "string", "description": "File hash (MD5/SHA1/SHA256)"}
+                },
                 "required": ["hash"],
             },
         }
@@ -184,7 +184,9 @@ class TestMemorySystem:
                 {"ioc": "185.143.223.47", "result": "malicious", "tags": ["c2"]},
                 {"ioc": "evil-c2.com", "result": "malicious", "tags": ["phishing"]},
             ],
-            "correlations": [{"iocs": ["185.143.223.47", "evil-c2.com"], "relationship": "same_campaign"}],
+            "correlations": [
+                {"iocs": ["185.143.223.47", "evil-c2.com"], "relationship": "same_campaign"}
+            ],
         }
 
         assert "iocs_processed" in working_memory
@@ -289,7 +291,12 @@ class TestIntegration:
     def test_agent_tool_selection(self):
         """Test agent selects appropriate tools."""
         # Given IOC types, agent should select correct tools
-        tool_mappings = {"ip": "ip_lookup", "domain": "domain_lookup", "hash": "hash_lookup", "url": "url_lookup"}
+        tool_mappings = {
+            "ip": "ip_lookup",
+            "domain": "domain_lookup",
+            "hash": "hash_lookup",
+            "url": "url_lookup",
+        }
 
         for ioc in SAMPLE_IOCS:
             ioc_type = ioc["type"]
