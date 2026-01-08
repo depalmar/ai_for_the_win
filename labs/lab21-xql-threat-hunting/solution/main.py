@@ -239,7 +239,11 @@ ATTACK_PATTERNS = {
     },
     "T1547.001": {
         "name": "Registry Run Keys",
-        "keywords": ["currentversion\\run", "runonce", "hklm\\software\\microsoft\\windows\\currentversion"],
+        "keywords": [
+            "currentversion\\run",
+            "runonce",
+            "hklm\\software\\microsoft\\windows\\currentversion",
+        ],
     },
     "T1053.005": {
         "name": "Scheduled Task",
@@ -293,12 +297,14 @@ def map_to_attack(query: str) -> List[Dict[str, str]]:
             else:
                 confidence = "low"
 
-            matches.append({
-                "id": technique_id,
-                "name": info["name"],
-                "confidence": confidence,
-                "matched_keywords": keyword_matches,
-            })
+            matches.append(
+                {
+                    "id": technique_id,
+                    "name": info["name"],
+                    "confidence": confidence,
+                    "matched_keywords": keyword_matches,
+                }
+            )
 
     # Sort by confidence (high first) and number of matches
     confidence_order = {"high": 0, "medium": 1, "low": 2}
