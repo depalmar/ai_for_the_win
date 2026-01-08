@@ -131,8 +131,7 @@ class TestInvocationAnomalyDetection:
         threshold_multiplier = 5
 
         spikes = [
-            i for i, count in enumerate(error_counts)
-            if count > rolling_avg * threshold_multiplier
+            i for i, count in enumerate(error_counts) if count > rolling_avg * threshold_multiplier
         ]
 
         assert len(spikes) == 1
@@ -146,8 +145,7 @@ class TestInvocationAnomalyDetection:
         std_duration = np.std(durations)
 
         anomalies = [
-            i for i, d in enumerate(durations)
-            if abs(d - mean_duration) > 2 * std_duration
+            i for i, d in enumerate(durations) if abs(d - mean_duration) > 2 * std_duration
         ]
 
         assert len(anomalies) >= 1
@@ -155,16 +153,24 @@ class TestInvocationAnomalyDetection:
 
     def test_invocation_count_aggregation(self):
         """Test aggregation of invocation counts."""
-        logs = pd.DataFrame({
-            "hour": [datetime(2024, 1, 15, 10), datetime(2024, 1, 15, 10), datetime(2024, 1, 15, 11)],
-            "request_id": ["req1", "req2", "req3"],
-            "duration": [100, 150, 200],
-        })
+        logs = pd.DataFrame(
+            {
+                "hour": [
+                    datetime(2024, 1, 15, 10),
+                    datetime(2024, 1, 15, 10),
+                    datetime(2024, 1, 15, 11),
+                ],
+                "request_id": ["req1", "req2", "req3"],
+                "duration": [100, 150, 200],
+            }
+        )
 
-        hourly_stats = logs.groupby("hour").agg({
-            "duration": ["mean", "max"],
-            "request_id": "count",
-        })
+        hourly_stats = logs.groupby("hour").agg(
+            {
+                "duration": ["mean", "max"],
+                "request_id": "count",
+            }
+        )
 
         assert hourly_stats.loc[datetime(2024, 1, 15, 10), ("request_id", "count")] == 2
         assert hourly_stats.loc[datetime(2024, 1, 15, 11), ("request_id", "count")] == 1
@@ -208,10 +214,7 @@ class TestColdStartAnalysis:
         hourly_cold_rates = [0.1, 0.12, 0.08, 0.5, 0.11, 0.09]  # Unusual at index 3
 
         avg_rate = np.mean(hourly_cold_rates)
-        suspicious_hours = [
-            i for i, rate in enumerate(hourly_cold_rates)
-            if rate > avg_rate * 3
-        ]
+        suspicious_hours = [i for i, rate in enumerate(hourly_cold_rates) if rate > avg_rate * 3]
 
         assert len(suspicious_hours) >= 1
         assert 3 in suspicious_hours
@@ -342,17 +345,21 @@ class TestAPIGatewayLogAnalysis:
 
     def test_enumeration_attempt_detection(self):
         """Test detection of path enumeration attempts."""
-        logs = pd.DataFrame({
-            "source_ip": ["1.2.3.4"] * 25 + ["5.6.7.8"] * 5,
-            "path": [f"/path/{i}" for i in range(25)] + ["/api/v1"] * 5,
-            "status": [404] * 20 + [200] * 10,
-        })
+        logs = pd.DataFrame(
+            {
+                "source_ip": ["1.2.3.4"] * 25 + ["5.6.7.8"] * 5,
+                "path": [f"/path/{i}" for i in range(25)] + ["/api/v1"] * 5,
+                "status": [404] * 20 + [200] * 10,
+            }
+        )
 
         # Group by source IP
-        grouped = logs.groupby("source_ip").agg({
-            "path": "nunique",
-            "status": lambda x: (x == 404).sum(),
-        })
+        grouped = logs.groupby("source_ip").agg(
+            {
+                "path": "nunique",
+                "status": lambda x: (x == 404).sum(),
+            }
+        )
 
         threshold = 15
         enumeration_ips = grouped[
@@ -375,10 +382,7 @@ class TestEventSourceValidation:
             {"eventSource": "unknown:source"},
         ]
 
-        invalid_sources = [
-            e for e in events
-            if e["eventSource"] not in allowed_sources
-        ]
+        invalid_sources = [e for e in events if e["eventSource"] not in allowed_sources]
 
         assert len(invalid_sources) == 1
         assert invalid_sources[0]["eventSource"] == "unknown:source"
@@ -438,7 +442,14 @@ class TestFunctionPermissionAnalysis:
         """Test detection of overprivileged functions."""
         function = {
             "name": "my-function",
-            "permissions": ["s3:*", "dynamodb:*", "iam:CreateUser", "ec2:*", "lambda:*", "kms:Decrypt"],
+            "permissions": [
+                "s3:*",
+                "dynamodb:*",
+                "iam:CreateUser",
+                "ec2:*",
+                "lambda:*",
+                "kms:Decrypt",
+            ],
         }
 
         high_permissions = SENSITIVE_PERMISSIONS["high"]
@@ -450,7 +461,9 @@ class TestFunctionPermissionAnalysis:
         for perm in function["permissions"]:
             if perm in critical_permissions:
                 has_critical = True
-            if perm in high_permissions or any(hp.replace("*", "") in perm for hp in high_permissions):
+            if perm in high_permissions or any(
+                hp.replace("*", "") in perm for hp in high_permissions
+            ):
                 high_count += 1
 
         is_overprivileged = has_critical or high_count > 5
@@ -459,7 +472,12 @@ class TestFunctionPermissionAnalysis:
 
     def test_permission_categorization(self):
         """Test categorization of permissions by sensitivity."""
-        permissions = ["s3:GetObject", "iam:*", "logs:PutLogEvents", "secretsmanager:GetSecretValue"]
+        permissions = [
+            "s3:GetObject",
+            "iam:*",
+            "logs:PutLogEvents",
+            "secretsmanager:GetSecretValue",
+        ]
 
         categorized = {
             "critical": [],
@@ -505,10 +523,12 @@ class TestCrossAccountAccessDetection:
             if match:
                 target_account = match.group(1)
                 if target_account != our_account:
-                    cross_account.append({
-                        "arn": arn,
-                        "target_account": target_account,
-                    })
+                    cross_account.append(
+                        {
+                            "arn": arn,
+                            "target_account": target_account,
+                        }
+                    )
 
         assert len(cross_account) == 1
         assert cross_account[0]["target_account"] == "987654321098"
@@ -528,10 +548,7 @@ class TestSecretAccessMonitoring:
             {"event_name": "ListBuckets", "function": "func3"},
         ]
 
-        secret_events = [
-            e for e in events
-            if e["event_name"] in secret_access_events
-        ]
+        secret_events = [e for e in events if e["event_name"] in secret_access_events]
 
         assert len(secret_events) == 2
         assert all(e["event_name"] in secret_access_events for e in secret_events)
@@ -546,9 +563,11 @@ class TestSecretAccessMonitoring:
         ]
 
         df = pd.DataFrame(events)
-        summary = df.groupby("function").agg({
-            "secret_name": ["count", "nunique"],
-        })
+        summary = df.groupby("function").agg(
+            {
+                "secret_name": ["count", "nunique"],
+            }
+        )
 
         assert summary.loc["func1", ("secret_name", "count")] == 3
         assert summary.loc["func1", ("secret_name", "nunique")] == 2
@@ -599,11 +618,13 @@ class TestEventPoisoningDetection:
             if field in payload:
                 actual_type = type(payload[field]).__name__
                 if actual_type != expected_type:
-                    mismatches.append({
-                        "field": field,
-                        "expected": expected_type,
-                        "actual": actual_type,
-                    })
+                    mismatches.append(
+                        {
+                            "field": field,
+                            "expected": expected_type,
+                            "actual": actual_type,
+                        }
+                    )
 
         assert len(mismatches) == 1
         assert mismatches[0]["field"] == "age"
@@ -617,10 +638,7 @@ class TestEventPoisoningDetection:
             {"data": "x" * 50000},
         ]
 
-        oversized = [
-            p for p in payloads
-            if len(json.dumps(p)) > max_size
-        ]
+        oversized = [p for p in payloads if len(json.dumps(p)) > max_size]
 
         assert len(oversized) == 1
 
@@ -644,12 +662,14 @@ class TestDependencyConfusionDetection:
             if pkg in public_registry:
                 public_version = public_registry[pkg]
                 if public_version != internal_version:
-                    findings.append({
-                        "package": pkg,
-                        "internal_version": internal_version,
-                        "public_version": public_version,
-                        "risk": "dependency_confusion",
-                    })
+                    findings.append(
+                        {
+                            "package": pkg,
+                            "internal_version": internal_version,
+                            "public_version": public_version,
+                            "risk": "dependency_confusion",
+                        }
+                    )
 
         assert len(findings) == 1
         assert findings[0]["package"] == "my-internal-lib"

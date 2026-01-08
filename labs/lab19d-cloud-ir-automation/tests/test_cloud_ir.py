@@ -88,7 +88,13 @@ class TestEC2Isolation:
             "timestamp": datetime.utcnow().isoformat(),
         }
 
-        required_fields = ["status", "instance_id", "original_security_groups", "isolation_sg", "timestamp"]
+        required_fields = [
+            "status",
+            "instance_id",
+            "original_security_groups",
+            "isolation_sg",
+            "timestamp",
+        ]
         for field in required_fields:
             assert field in result
 
@@ -278,8 +284,16 @@ class TestDiskSnapshotCollection:
             "instance_id": "i-1234567890abcdef0",
             "case_id": "IR-2024-001",
             "snapshots": [
-                {"snapshot_id": "snap-abc123", "volume_id": "vol-abc123", "device_name": "/dev/sda1"},
-                {"snapshot_id": "snap-def456", "volume_id": "vol-def456", "device_name": "/dev/sdb"},
+                {
+                    "snapshot_id": "snap-abc123",
+                    "volume_id": "vol-abc123",
+                    "device_name": "/dev/sda1",
+                },
+                {
+                    "snapshot_id": "snap-def456",
+                    "volume_id": "vol-def456",
+                    "device_name": "/dev/sdb",
+                },
             ],
             "timestamp": datetime.utcnow().isoformat(),
         }
@@ -474,11 +488,13 @@ class TestEventBridgeIntegration:
                 "severity": "$.detail.severity",
                 "type": "$.detail.type",
             },
-            "InputTemplate": json.dumps({
-                "alert_id": "<findingId>",
-                "severity": "<severity>",
-                "alert_type": "<type>",
-            }),
+            "InputTemplate": json.dumps(
+                {
+                    "alert_id": "<findingId>",
+                    "severity": "<severity>",
+                    "alert_type": "<type>",
+                }
+            ),
         }
 
         assert "findingId" in input_transformer["InputPathsMap"]
@@ -508,7 +524,12 @@ class TestMultiCloudOrchestration:
 
         assert identify_cloud("i-1234567890abcdef0") == "aws"
         assert identify_cloud("projects/my-project/zones/us-central1-a/instances/vm1") == "gcp"
-        assert identify_cloud("/subscriptions/sub-id/resourceGroups/rg/providers/Microsoft.Compute/virtualMachines/vm1") == "azure"
+        assert (
+            identify_cloud(
+                "/subscriptions/sub-id/resourceGroups/rg/providers/Microsoft.Compute/virtualMachines/vm1"
+            )
+            == "azure"
+        )
 
     def test_parallel_containment_result(self):
         """Test parallel containment result structure."""
@@ -707,6 +728,7 @@ class TestAlertValidation:
         resource_id = "i-1234567890abcdef0"
 
         import re
+
         assert re.match(ec2_pattern, resource_id) is not None
 
 
