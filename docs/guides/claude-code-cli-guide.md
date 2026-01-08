@@ -483,7 +483,7 @@ Analyze the code at `$ARGUMENTS` for security vulnerabilities:
 
 **IOC Extractor** (`.claude/commands/extract-iocs.md`):
 
-```markdown
+````markdown
 # IOC Extractor Command
 
 Extract Indicators of Compromise from the specified file or text.
@@ -529,6 +529,7 @@ Output JSON format:
   "mitre_mappings": []
 }
 ```
+````
 
 **YARA Generator** (`.claude/commands/gen-yara.md`):
 
