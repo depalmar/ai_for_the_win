@@ -106,6 +106,32 @@ config case_sensitive = false
         assert len(errors) > 0
         assert any("invalidstage" in i.message.lower() for i in errors)
 
+    def test_valid_target_stage(self):
+        """Test that target stage is recognized as valid."""
+        query = """
+| dataset = xdr_data
+| filter event_type = ENUM.PROCESS
+| target suspicious_ips
+| limit 100
+        """
+        is_valid, issues = validate_query(query)
+        errors = [i for i in issues if i.severity == Severity.ERROR]
+        stage_errors = [e for e in errors if "target" in e.message.lower()]
+        assert len(stage_errors) == 0
+
+    def test_valid_window_stage(self):
+        """Test that window stage is recognized as valid."""
+        query = """
+| dataset = xdr_data
+| filter event_type = ENUM.NETWORK
+| window count() as conn_count by agent_hostname
+| limit 100
+        """
+        is_valid, issues = validate_query(query)
+        errors = [i for i in issues if i.severity == Severity.ERROR]
+        stage_errors = [e for e in errors if "window" in e.message.lower()]
+        assert len(stage_errors) == 0
+
     def test_unclosed_parenthesis(self):
         """Test detection of unclosed parenthesis."""
         query = """
@@ -243,6 +269,157 @@ class TestValidateFile:
         is_valid, issues = validate_file(xql_file)
         # Should validate both queries
         assert is_valid or len(issues) > 0
+
+
+class TestValidateDirectory:
+    """Test directory validation functionality."""
+
+    def test_validate_directory(self, tmp_path):
+        """Test validation of a directory with XQL files."""
+        from tools.xql_validator.validator import validate_directory
+
+        # Create test files
+        (tmp_path / "valid.xql").write_text("""
+| dataset = xdr_data
+| filter event_type = ENUM.PROCESS
+| limit 100
+        """)
+        (tmp_path / "another.xql").write_text("""
+| dataset = xdr_data
+| filter event_type = ENUM.NETWORK
+| limit 50
+        """)
+
+        all_valid, results = validate_directory(tmp_path)
+        assert len(results) == 2
+        assert all_valid or len(results) > 0
+
+    def test_validate_nonexistent_directory(self, tmp_path):
+        """Test handling of non-existent directory."""
+        from tools.xql_validator.validator import validate_directory
+
+        all_valid, results = validate_directory(tmp_path / "nonexistent")
+        assert not all_valid
+
+
+class TestCLIOutput:
+    """Test CLI output formatting."""
+
+    def test_json_output_format(self):
+        """Test JSON output structure."""
+        from tools.xql_validator.validator import _format_json_output, ValidationIssue, Severity, Category
+        import json
+
+        issues = [
+            ValidationIssue(
+                line=1, column=0, severity=Severity.ERROR,
+                code="E001", message="Test error", category=Category.SYNTAX
+            )
+        ]
+
+        output = _format_json_output(issues, "test.xql")
+        parsed = json.loads(output)
+
+        assert parsed["file"] == "test.xql"
+        assert parsed["valid"] is False
+        assert parsed["issue_count"] == 1
+        assert parsed["summary"]["errors"] == 1
+
+    def test_json_output_valid_query(self):
+        """Test JSON output for valid query."""
+        from tools.xql_validator.validator import _format_json_output
+        import json
+
+        output = _format_json_output([], "test.xql")
+        parsed = json.loads(output)
+
+        assert parsed["valid"] is True
+        assert parsed["issue_count"] == 0
+
+
+class TestHTMLReport:
+    """Test HTML report generation."""
+
+    def test_html_report_generation(self):
+        """Test basic HTML report generation."""
+        from tools.xql_validator.html_report import generate_html_report
+        from tools.xql_validator.validator import ValidationIssue, Severity, Category
+
+        query = """
+// Title: Test Detection
+// MITRE ATT&CK: T1059.001
+| dataset = xdr_data
+| filter event_type = ENUM.PROCESS
+| limit 100
+        """
+        issues = [
+            ValidationIssue(
+                line=1, column=0, severity=Severity.INFO,
+                code="I001", message="Test info", category=Category.PERFORMANCE
+            )
+        ]
+
+        html = generate_html_report(query, issues, "test.xql")
+
+        assert "<!DOCTYPE html>" in html
+        assert "Test Detection" in html
+        assert "T1059.001" in html
+        assert "Test info" in html
+
+    def test_html_report_with_mitre_mapping(self):
+        """Test HTML report includes MITRE ATT&CK guidance."""
+        from tools.xql_validator.html_report import generate_html_report
+
+        query = """
+// Title: LSASS Detection
+// MITRE ATT&CK: T1003.001
+| dataset = xdr_data
+| filter actor_process_command_line contains "lsass"
+| limit 100
+        """
+
+        html = generate_html_report(query, [], include_guidance=True)
+
+        assert "T1003.001" in html
+        assert "LSASS" in html or "Credential" in html
+
+    def test_html_report_next_steps(self):
+        """Test HTML report includes investigation next steps."""
+        from tools.xql_validator.html_report import analyze_query_purpose
+
+        query = """
+| dataset = xdr_data
+| filter actor_process_command_line contains "mimikatz"
+| limit 100
+        """
+
+        purpose = analyze_query_purpose(query)
+
+        assert purpose["category"] == "Credential Dumping Detection"
+        assert len(purpose["next_steps"]) > 0
+
+    def test_metadata_extraction(self):
+        """Test extraction of detection metadata from comments."""
+        from tools.xql_validator.html_report import extract_metadata
+
+        query = """
+// Title: My Detection Rule
+// Description: Detects suspicious activity
+// MITRE ATT&CK: T1059.001, T1003.001
+// Severity: High
+// Author: Security Team
+| dataset = xdr_data
+| limit 100
+        """
+
+        metadata = extract_metadata(query)
+
+        assert metadata.title == "My Detection Rule"
+        assert metadata.description == "Detects suspicious activity"
+        assert "T1059.001" in metadata.mitre_techniques
+        assert "T1003.001" in metadata.mitre_techniques
+        assert metadata.severity == "High"
+        assert metadata.author == "Security Team"
 
 
 class TestValidateQuery:
