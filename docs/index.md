@@ -907,7 +907,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
 
   <div class="stats">
     <div class="stat">
-      <div class="stat-number">40+</div>
+      <div class="stat-number">45+</div>
       <div class="stat-label">Hands-On Labs</div>
     </div>
     <div class="stat">
@@ -1101,7 +1101,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
     </p>
   </div>
 
-<h3 style="margin-top: 2rem; margin-bottom: 1rem;">All 40+ Labs (Including Bridge Labs)</h3>
+<h3 style="margin-top: 2rem; margin-bottom: 1rem;">All 45+ Labs (Including Bridge Labs)</h3>
 
   <!-- Lab Filter Tabs -->
   <div class="lab-filters" role="group" aria-label="Filter labs by category">
