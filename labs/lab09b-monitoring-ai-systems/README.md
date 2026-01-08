@@ -100,7 +100,7 @@ class PredictionMetrics:
     human_feedback: Optional[str] = None  # "correct", "incorrect", None
 
 
-@dataclass  
+@dataclass
 class ModelHealthMetrics:
     """Aggregate metrics for model health monitoring."""
     total_predictions: int = 0
@@ -109,7 +109,7 @@ class ModelHealthMetrics:
     avg_confidence: float = 0.0
     low_confidence_count: int = 0  # Below threshold
     predictions_by_class: dict = field(default_factory=dict)
-    
+
     # Drift detection
     confidence_history: list = field(default_factory=list)
     latency_history: list = field(default_factory=list)
@@ -135,13 +135,13 @@ class ModelHealthMetrics:
 ```python
 class AIMonitor:
     """Monitor AI system health and performance."""
-    
+
     def __init__(self, model_name: str, confidence_threshold: float = 0.7):
         self.model_name = model_name
         self.confidence_threshold = confidence_threshold
         self.metrics = ModelHealthMetrics()
         self.predictions: list[PredictionMetrics] = []
-        
+
     def log_prediction(
         self,
         input_data: str,
@@ -151,7 +151,7 @@ class AIMonitor:
         tokens_used: int = 0
     ) -> PredictionMetrics:
         """Log a prediction and update metrics."""
-        
+
         # Create prediction record
         pred = PredictionMetrics(
             timestamp=datetime.now(),
@@ -162,27 +162,27 @@ class AIMonitor:
             latency_ms=latency_ms,
             tokens_used=tokens_used
         )
-        
+
         # Update aggregate metrics
         self.metrics.total_predictions += 1
         self._update_rolling_averages(confidence, latency_ms)
-        
+
         # Track class distribution
         self.metrics.predictions_by_class[prediction] = \
             self.metrics.predictions_by_class.get(prediction, 0) + 1
-        
+
         # Check for low confidence
         if confidence < self.confidence_threshold:
             self.metrics.low_confidence_count += 1
             logger.warning(
                 f"Low confidence prediction: {confidence:.2f} for class '{prediction}'"
             )
-        
+
         # Store for drift detection
         self.metrics.confidence_history.append(confidence)
         self.metrics.latency_history.append(latency_ms)
         self.predictions.append(pred)
-        
+
         # Log structured data
         logger.info(json.dumps({
             "event": "prediction",
@@ -192,13 +192,13 @@ class AIMonitor:
             "latency_ms": latency_ms,
             "tokens": tokens_used
         }))
-        
+
         return pred
-    
+
     def _update_rolling_averages(self, confidence: float, latency_ms: float):
         """Update rolling averages using exponential smoothing."""
         alpha = 0.1  # Smoothing factor
-        
+
         if self.metrics.total_predictions == 1:
             self.metrics.avg_confidence = confidence
             self.metrics.avg_latency_ms = latency_ms
@@ -209,7 +209,7 @@ class AIMonitor:
             self.metrics.avg_latency_ms = (
                 alpha * latency_ms + (1 - alpha) * self.metrics.avg_latency_ms
             )
-    
+
     def log_error(self, error: Exception, input_data: str):
         """Log an error during prediction."""
         self.metrics.total_errors += 1
@@ -219,7 +219,7 @@ class AIMonitor:
             "error": str(error),
             "input_hash": str(hash(input_data))[:12]
         }))
-    
+
     def log_human_feedback(self, prediction_idx: int, feedback: str):
         """Log human feedback on a prediction (correct/incorrect)."""
         if 0 <= prediction_idx < len(self.predictions):
@@ -238,21 +238,21 @@ class AIMonitor:
 def detect_confidence_drift(self, window_size: int = 100) -> dict:
     """
     Detect if model confidence is drifting.
-    
+
     Compares recent confidence scores to historical baseline.
     """
     if len(self.metrics.confidence_history) < window_size * 2:
         return {"drift_detected": False, "reason": "Insufficient data"}
-    
+
     # Compare recent window to older baseline
     recent = self.metrics.confidence_history[-window_size:]
     baseline = self.metrics.confidence_history[-window_size*2:-window_size]
-    
+
     recent_avg = sum(recent) / len(recent)
     baseline_avg = sum(baseline) / len(baseline)
-    
+
     drift_pct = (recent_avg - baseline_avg) / baseline_avg * 100
-    
+
     result = {
         "drift_detected": abs(drift_pct) > 10,  # >10% change
         "recent_avg_confidence": round(recent_avg, 3),
@@ -260,39 +260,39 @@ def detect_confidence_drift(self, window_size: int = 100) -> dict:
         "drift_percentage": round(drift_pct, 2),
         "direction": "increasing" if drift_pct > 0 else "decreasing"
     }
-    
+
     if result["drift_detected"]:
         logger.warning(f"Confidence drift detected: {drift_pct:.1f}%")
-    
+
     return result
 
 
 def detect_class_drift(self, baseline_distribution: dict) -> dict:
     """
     Detect if prediction class distribution is drifting.
-    
+
     Compares current distribution to expected baseline.
     """
     total = sum(self.metrics.predictions_by_class.values())
     if total == 0:
         return {"drift_detected": False, "reason": "No predictions yet"}
-    
+
     current_dist = {
-        k: v / total 
+        k: v / total
         for k, v in self.metrics.predictions_by_class.items()
     }
-    
+
     # Calculate distribution shift
     max_shift = 0
     shifted_class = None
-    
+
     for cls, expected_pct in baseline_distribution.items():
         current_pct = current_dist.get(cls, 0)
         shift = abs(current_pct - expected_pct)
         if shift > max_shift:
             max_shift = shift
             shifted_class = cls
-    
+
     result = {
         "drift_detected": max_shift > 0.2,  # >20% shift in any class
         "max_shift_percentage": round(max_shift * 100, 2),
@@ -300,12 +300,12 @@ def detect_class_drift(self, baseline_distribution: dict) -> dict:
         "current_distribution": {k: round(v, 3) for k, v in current_dist.items()},
         "baseline_distribution": baseline_distribution
     }
-    
+
     if result["drift_detected"]:
         logger.warning(
             f"Class distribution drift detected: {shifted_class} shifted by {max_shift*100:.1f}%"
         )
-    
+
     return result
 ```
 
@@ -314,17 +314,17 @@ def detect_class_drift(self, baseline_distribution: dict) -> dict:
 ```python
 def get_health_status(self) -> dict:
     """Get overall system health status."""
-    
+
     error_rate = (
-        self.metrics.total_errors / self.metrics.total_predictions 
+        self.metrics.total_errors / self.metrics.total_predictions
         if self.metrics.total_predictions > 0 else 0
     )
-    
+
     low_conf_rate = (
         self.metrics.low_confidence_count / self.metrics.total_predictions
         if self.metrics.total_predictions > 0 else 0
     )
-    
+
     # Determine overall status
     if error_rate > 0.05:  # >5% errors
         status = "unhealthy"
@@ -332,7 +332,7 @@ def get_health_status(self) -> dict:
         status = "degraded"
     else:
         status = "healthy"
-    
+
     return {
         "status": status,
         "model": self.model_name,
@@ -359,7 +359,7 @@ def mock_phishing_classifier(email_text: str) -> tuple[str, float]:
     """Mock classifier for demonstration."""
     # Simulate model behavior
     time.sleep(random.uniform(0.1, 0.3))  # Simulate latency
-    
+
     if "urgent" in email_text.lower() or "click here" in email_text.lower():
         return "phishing", random.uniform(0.75, 0.95)
     elif "meeting" in email_text.lower() or "report" in email_text.lower():
@@ -374,7 +374,7 @@ def main():
         model_name="phishing-classifier-v1",
         confidence_threshold=0.7
     )
-    
+
     # Sample emails
     test_emails = [
         "URGENT: Click here to verify your account immediately!",
@@ -386,18 +386,18 @@ def main():
         "Team standup notes from today's meeting",
         "URGENT: Wire transfer required immediately",
     ]
-    
+
     # Process emails with monitoring
     print("\n" + "="*60)
     print("Processing emails with monitoring...")
     print("="*60 + "\n")
-    
+
     for email in test_emails:
         try:
             start_time = time.time()
             prediction, confidence = mock_phishing_classifier(email)
             latency_ms = (time.time() - start_time) * 1000
-            
+
             monitor.log_prediction(
                 input_data=email,
                 prediction=prediction,
@@ -405,28 +405,28 @@ def main():
                 latency_ms=latency_ms,
                 tokens_used=len(email.split()) * 2  # Rough estimate
             )
-            
+
             print(f"Email: {email[:50]}...")
             print(f"  → {prediction} (confidence: {confidence:.2f})")
             print()
-            
+
         except Exception as e:
             monitor.log_error(e, email)
-    
+
     # Check drift
     print("\n" + "="*60)
     print("Drift Detection")
     print("="*60)
-    
+
     baseline_dist = {"phishing": 0.3, "legitimate": 0.7}
     class_drift = monitor.detect_class_drift(baseline_dist)
     print(f"Class drift: {json.dumps(class_drift, indent=2)}")
-    
+
     # Health status
     print("\n" + "="*60)
     print("Health Status")
     print("="*60)
-    
+
     health = monitor.get_health_status()
     print(json.dumps(health, indent=2))
 
@@ -494,7 +494,7 @@ def export_prometheus_metrics(self) -> str:
 |-------------------|----------|
 | Build an IR assistant | [Lab 10: IR Copilot](../lab10-ir-copilot/) |
 | Learn about adversarial attacks | [Lab 17: Adversarial ML](../lab17-adversarial-ml/) |
-| Deploy to production | See [Production Deployment Guide](../../docs/guides/production-deployment.md) |
+| Review security compliance | [Security Compliance Guide](../../docs/guides/security-compliance-guide.md) |
 
 ---
 
