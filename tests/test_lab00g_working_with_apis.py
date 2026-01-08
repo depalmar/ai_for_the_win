@@ -41,7 +41,7 @@ def test_get_api_key():
     del os.environ["TEST_KEY_12345"]
 
 
-@pytest.mark.integration
+@pytest.mark.requires_api
 def test_basic_get_request():
     """Test basic GET request (requires internet)."""
     from main import basic_get_request
@@ -51,7 +51,7 @@ def test_basic_get_request():
     assert "origin" in result
 
 
-@pytest.mark.integration
+@pytest.mark.requires_api
 def test_safe_request_handles_errors():
     """Test that safe_request handles errors gracefully."""
     from main import safe_request

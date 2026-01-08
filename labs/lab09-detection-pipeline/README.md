@@ -475,9 +475,7 @@ lab09-detection-pipeline/
 ├── solution/
 │   └── main.py
 ├── data/
-│   ├── sample_events.json
-│   ├── attack_scenario.json
-│   └── baseline_events.json
+│   └── sample_events.json        # Security events for testing
 ├── models/
 │   └── isolation_forest.pkl
 └── playbooks/

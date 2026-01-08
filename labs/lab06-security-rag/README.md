@@ -338,13 +338,10 @@ lab06-security-rag/
 ├── solution/
 │   └── main.py
 ├── data/
-│   ├── cves/
-│   │   └── sample_cves.json
-│   ├── mitre/
-│   │   └── attack_techniques.json
+│   ├── sample_cves.json          # CVE vulnerability data
+│   ├── mitre_techniques.json     # MITRE ATT&CK techniques
 │   └── playbooks/
-│       ├── ransomware_response.md
-│       └── phishing_response.md
+│       └── ransomware_response.md
 └── tests/
     └── test_rag.py
 ```
