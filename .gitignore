@@ -114,3 +114,4 @@ samples/
 malware/
 !data/malware/
 !samples/.gitkeep
+.claude/settings.local.json
