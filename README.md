@@ -137,46 +137,15 @@ High Confidence: FIN7/Carbanak
 
 ---
 
-## 🎯 Is This For You?
+## 🚀 Pick Your Starting Point
 
-| Your Background | Start Here | What You'll Learn |
-|-----------------|------------|-------------------|
-| **Complete beginner** (no Python) | Lab 00a | Python → ML → LLMs for security |
-| **Know Python**, new to ML | Lab 00b | ML fundamentals → security classifiers |
-| **Know Python & ML**, want LLMs | Lab 04 | Prompt engineering → agents → RAG |
-| **Blue Team / SOC** | Lab 01 | Detection → triage → incident response |
-| **Security engineer** | Lab 01 | Pipelines → automation → deployment |
+| Your Background | Start Here | Next Steps |
+|-----------------|------------|------------|
+| **New to AI/ML?** | [Lab 01: Phishing Classifier](./labs/lab01-phishing-classifier/) | → Lab 02 → Lab 03 |
+| **Know Python, want LLM tools?** | [Lab 04: LLM Log Analysis](./labs/lab04-llm-log-analysis/) | → Lab 05 → Lab 06 |
+| **Want DFIR focus?** | [Lab 11: Ransomware Detection](./labs/lab11-ransomware-detection/) | → Lab 13 → Lab 14 |
 
-**50+ labs** | **4 capstone projects** | **18 CTF challenges** | **1000+ tests**
-
----
-
-## 🚀 START HERE
-
-| New to this? | Start with |
-|--------------|------------|
-| **Complete beginner** | [Lab 00a: Python Fundamentals](./labs/lab00a-python-security-fundamentals/) |
-| **Know Python** | [Lab 00f: Hello World ML](./labs/lab00f-hello-world-ml/) |
-| **Ready for hands-on** | [Lab 01: Phishing Classifier](./labs/lab01-phishing-classifier/) |
-| **Want challenges** | [CTF Challenges](./ctf/) - 18 capture-the-flag security puzzles |
-
----
-
-## 📚 Learning Paths
-
-### Recommended Progression
-
-| Path | Labs | Focus |
-|------|------|-------|
-| **Foundations** | 00a → 00b → 01 → 02 → 03 | Python, ML basics, no API keys |
-| **LLM Security** | 04 → 04b → 05 → 06 → 07 | Prompts, agents, RAG, YARA |
-| **Detection Engineering** | 08 → 09 → 09b | Pipelines, monitoring |
-| **DFIR** | 10 → 11 → 12 → 13 | IR, ransomware, forensics |
-| **Advanced** | 14 → 15 → 16 → 17 → 18 → 19 → 20 | C2, lateral movement, adversarial ML |
-
-**💡 Pro Tip**: Labs 01-03 are FREE (no API keys). LLM labs (04+) cost ~$5-25 total using free tiers.
-
-📚 **Complete paths by role**: See [Role-Based Learning Paths](./resources/role-based-learning-paths.md)
+**💡 Tip**: Labs 01-03 are FREE (no API keys). LLM labs (04+) need an API key (~$5-25 total).
 
 ---
 

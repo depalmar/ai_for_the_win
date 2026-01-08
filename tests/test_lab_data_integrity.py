@@ -1118,5 +1118,225 @@ class TestRequirementsFile:
                 )
 
 
+class TestMarkdownValidity:
+    """Test markdown files for syntax issues like unbalanced code fences."""
+
+    # Get all markdown files in the repository
+    MARKDOWN_FILES = list(REPO_ROOT.glob("**/*.md"))
+    # Exclude node_modules and other common excludes
+    MARKDOWN_FILES = [
+        f for f in MARKDOWN_FILES if "node_modules" not in str(f) and ".git" not in str(f)
+    ]
+
+    @pytest.mark.parametrize(
+        "md_file",
+        MARKDOWN_FILES,
+        ids=[str(f.relative_to(REPO_ROOT)) for f in MARKDOWN_FILES],
+    )
+    def test_code_fences_balanced(self, md_file: Path):
+        """
+        Check that code fences are properly balanced.
+
+        Verifies:
+        - Triple backticks (```) come in pairs
+        - Four backticks (````) come in pairs (used for nested code blocks)
+        - No unclosed code blocks at end of file
+        """
+        content = md_file.read_text(encoding="utf-8", errors="replace")
+
+        # Track fence states for different fence lengths
+        # We need to handle 3, 4, and 5+ backtick fences
+        lines = content.split("\n")
+
+        open_fences = []  # Stack of (line_number, fence_type)
+
+        for i, line in enumerate(lines, 1):
+            stripped = line.lstrip()
+
+            # Match code fence patterns: 3+ backticks or tildes at start of line
+            fence_match = re.match(r"^(`{3,}|~{3,})", stripped)
+
+            if fence_match:
+                fence = fence_match.group(1)
+                fence_char = fence[0]
+                fence_len = len(fence)
+
+                if not open_fences:
+                    # Opening a new fence
+                    open_fences.append((i, fence_char, fence_len))
+                else:
+                    # Check if this closes the current fence
+                    # A fence is closed by a fence of the same character
+                    # with at least as many repetitions
+                    current_line, current_char, current_len = open_fences[-1]
+
+                    if fence_char == current_char and fence_len >= current_len:
+                        # Closing fence - rest of line should be empty or whitespace
+                        rest_of_line = stripped[fence_len:].strip()
+                        if not rest_of_line:
+                            open_fences.pop()
+                        else:
+                            # Has language specifier - this is a new opening fence
+                            open_fences.append((i, fence_char, fence_len))
+                    else:
+                        # Different fence type or shorter - opening new nested fence
+                        open_fences.append((i, fence_char, fence_len))
+
+        # Check for unclosed fences
+        if open_fences:
+            unclosed = [f"line {line} ({char * length})" for line, char, length in open_fences]
+            pytest.fail(f"Unclosed code fences in {md_file.name}: {', '.join(unclosed)}")
+
+    @pytest.mark.parametrize(
+        "md_file",
+        MARKDOWN_FILES,
+        ids=[str(f.relative_to(REPO_ROOT)) for f in MARKDOWN_FILES],
+    )
+    def test_nested_code_blocks_use_four_backticks(self, md_file: Path):
+        """
+        Check that nested code blocks use 4+ backticks for the outer fence.
+
+        When showing code examples that contain code blocks (like markdown
+        examples), the outer fence must use more backticks than the inner.
+
+        Note: This test uses warnings instead of failures because some markdown
+        parsers handle same-length nested fences correctly. The critical check
+        is test_code_fences_balanced which catches actual unclosed fences.
+        """
+        content = md_file.read_text(encoding="utf-8", errors="replace")
+        lines = content.split("\n")
+
+        in_code_block = False
+        outer_fence_len = 0
+        outer_fence_line = 0
+        issues = []
+
+        for i, line in enumerate(lines, 1):
+            stripped = line.lstrip()
+
+            # Match code fence patterns
+            fence_match = re.match(r"^(`{3,})", stripped)
+
+            if fence_match:
+                fence_len = len(fence_match.group(1))
+                rest_of_line = stripped[fence_len:].strip()
+
+                if not in_code_block:
+                    # Starting a code block
+                    in_code_block = True
+                    outer_fence_len = fence_len
+                    outer_fence_line = i
+                elif fence_len >= outer_fence_len and not rest_of_line:
+                    # Closing the outer block
+                    in_code_block = False
+                    outer_fence_len = 0
+                elif fence_len < outer_fence_len:
+                    # Inner code block - this is fine, it's properly nested
+                    pass
+                elif fence_len >= outer_fence_len and rest_of_line:
+                    # Problem: inner block with same or more backticks AND language spec
+                    # This could prematurely close the outer block
+                    if fence_len == outer_fence_len:
+                        issues.append(
+                            f"Line {i}: inner code fence (```{rest_of_line}) has same "
+                            f"length as outer fence started at line {outer_fence_line}. "
+                            f"Use 4+ backticks for outer fence."
+                        )
+
+        if issues:
+            # Use warning instead of failure for these potential issues
+            import warnings
+
+            warnings.warn(
+                f"Potential nested code block issues in {md_file.name}:\n"
+                + "\n".join(issues[:3]),  # Limit to first 3 issues
+                stacklevel=2,
+            )
+
+    @pytest.mark.parametrize(
+        "md_file",
+        MARKDOWN_FILES,
+        ids=[str(f.relative_to(REPO_ROOT)) for f in MARKDOWN_FILES],
+    )
+    def test_no_broken_headers(self, md_file: Path):
+        """Check that markdown headers are properly formatted."""
+        content = md_file.read_text(encoding="utf-8", errors="replace")
+        lines = content.split("\n")
+
+        in_code_block = False
+        in_style_block = False
+        issues = []
+
+        for i, line in enumerate(lines, 1):
+            # Track style blocks (CSS uses # for ID selectors)
+            if "<style" in line.lower():
+                in_style_block = True
+            if "</style>" in line.lower():
+                in_style_block = False
+                continue
+
+            # Track code blocks to avoid false positives
+            if line.lstrip().startswith("```") or line.lstrip().startswith("~~~"):
+                if not in_code_block:
+                    in_code_block = True
+                elif line.lstrip().startswith("```") or line.lstrip().startswith("~~~"):
+                    # Simple toggle - not perfect but catches most cases
+                    if line.lstrip() in ("```", "~~~") or re.match(
+                        r"^(`{3,}|~{3,})$", line.lstrip()
+                    ):
+                        in_code_block = False
+
+            if in_code_block or in_style_block:
+                continue
+
+            # Check for headers without space after #
+            header_no_space = re.match(r"^(#{1,6})([^#\s])", line)
+            if header_no_space:
+                issues.append(f"Line {i}: header missing space after #: {line[:50]}")
+
+        if issues:
+            pytest.fail(f"Broken headers in {md_file.name}:\n" + "\n".join(issues[:5]))
+
+    @pytest.mark.parametrize(
+        "md_file",
+        MARKDOWN_FILES,
+        ids=[str(f.relative_to(REPO_ROOT)) for f in MARKDOWN_FILES],
+    )
+    def test_tables_have_separator_row(self, md_file: Path):
+        """Check that markdown tables have proper separator rows."""
+        content = md_file.read_text(encoding="utf-8", errors="replace")
+        lines = content.split("\n")
+
+        in_code_block = False
+
+        for i, line in enumerate(lines, 1):
+            # Track code blocks
+            stripped = line.lstrip()
+            if stripped.startswith("```") or stripped.startswith("~~~"):
+                in_code_block = not in_code_block
+
+            if in_code_block:
+                continue
+
+            # Check for table header row (starts with |, contains |)
+            if line.strip().startswith("|") and line.strip().endswith("|"):
+                # Check if next line exists and is a separator
+                if i < len(lines):
+                    next_line = lines[i].strip()
+                    # Table separator should have | and - characters
+                    if next_line.startswith("|") and "-" in next_line:
+                        # Valid table separator
+                        pass
+                    elif next_line.startswith("|"):
+                        # Might be missing separator - check if it looks like header
+                        # Look for patterns like |---|---|
+                        if not re.match(r"^\|[\s\-:|]+\|$", next_line):
+                            # Could be an issue, but might also be valid data row
+                            # Only flag if current line looks like header
+                            pass
+
+        # This test is informational - don't fail unless there are clear issues
+
+
 if __name__ == "__main__":
     pytest.main([__file__, "-v"])

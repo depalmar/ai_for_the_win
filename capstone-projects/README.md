@@ -206,7 +206,7 @@ Sandbox:     CAPE/Cuckoo integration (optional)
 
 ### Sample Output
 
-```markdown
+````markdown
 # Malware Analysis Report
 
 ## Sample: suspicious.exe
@@ -242,7 +242,7 @@ rule CobaltStrike_Beacon_Sample {
     ...
 }
 ```
-```
+````
 
 ---
 
@@ -373,4 +373,3 @@ capstone-project-name/
 ---
 
 Good luck! 🚀
-
