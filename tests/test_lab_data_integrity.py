@@ -534,5 +534,449 @@ class TestCrossLabConsistency:
                 assert starter.exists(), f"Lab {name} has solution/ but no starter/"
 
 
+class TestReadmeCompleteness:
+    """Tests to verify README files have required sections."""
+
+    # Each tuple: (list of acceptable patterns, section name for error)
+    REQUIRED_SECTIONS = [
+        # Objectives section - many variations are acceptable
+        (["## objectives", "## 🎯 objectives", "## learning objectives",
+          "## what you'll learn", "## what you will learn", "## goals",
+          "## 🎯 learning objectives"], "objectives/learning goals"),
+    ]
+
+    # Files section is recommended but not required (some labs don't have data files)
+    RECOMMENDED_SECTIONS = [
+        (["## files", "## 📁 files", "## directory structure", "## structure"], "files"),
+        (["## getting started", "## 🚀 getting started", "## setup"], "getting started"),
+        (["## prerequisites", "## 📋 prerequisites", "## requirements"], "prerequisites"),
+    ]
+
+    @pytest.mark.parametrize("lab_dir", ALL_LABS, ids=[l.name for l in ALL_LABS])
+    def test_readme_has_required_sections(self, lab_dir: Path):
+        """README should have required sections like Objectives/Learning Goals."""
+        readme = lab_dir / "README.md"
+        if not readme.exists():
+            pytest.skip(f"No README in {lab_dir.name}")
+
+        content = readme.read_text(encoding="utf-8")
+        content_lower = content.lower()
+
+        missing_sections = []
+        for patterns, name in self.REQUIRED_SECTIONS:
+            found = any(pattern in content_lower for pattern in patterns)
+            if not found:
+                missing_sections.append(name)
+
+        if missing_sections:
+            pytest.fail(f"README in {lab_dir.name} missing required sections: {missing_sections}")
+
+    @pytest.mark.parametrize("lab_dir", ALL_LABS, ids=[l.name for l in ALL_LABS])
+    def test_readme_has_description(self, lab_dir: Path):
+        """README should have a description after the title."""
+        readme = lab_dir / "README.md"
+        if not readme.exists():
+            pytest.skip(f"No README in {lab_dir.name}")
+
+        content = readme.read_text(encoding="utf-8")
+        lines = content.strip().split("\n")
+
+        # First non-empty line should be a title (# heading)
+        title_found = False
+        description_found = False
+
+        for line in lines:
+            line = line.strip()
+            if not line:
+                continue
+            if line.startswith("# ") and not title_found:
+                title_found = True
+                continue
+            if title_found and not line.startswith("#"):
+                # Found description text after title
+                if len(line) > 20:
+                    description_found = True
+                    break
+
+        assert description_found, f"README in {lab_dir.name} may be missing a description after the title"
+
+
+class TestFunctionParity:
+    """Tests to verify starter and solution have matching function signatures."""
+
+    @pytest.mark.parametrize("lab_dir", ALL_LABS, ids=[l.name for l in ALL_LABS])
+    def test_starter_solution_function_parity(self, lab_dir: Path):
+        """Starter and solution main.py should have same top-level function names."""
+        starter_main = lab_dir / "starter" / "main.py"
+        solution_main = lab_dir / "solution" / "main.py"
+
+        if not starter_main.exists() or not solution_main.exists():
+            pytest.skip(f"No starter/solution main.py pair in {lab_dir.name}")
+
+        def extract_functions(filepath: Path) -> set[str]:
+            """Extract top-level function names from a Python file."""
+            try:
+                content = filepath.read_text(encoding="utf-8")
+                tree = ast.parse(content)
+                return {
+                    node.name
+                    for node in ast.walk(tree)
+                    if isinstance(node, ast.FunctionDef)
+                    and not node.name.startswith("_")
+                }
+            except SyntaxError:
+                return set()
+
+        starter_funcs = extract_functions(starter_main)
+        solution_funcs = extract_functions(solution_main)
+
+        if not starter_funcs:
+            pytest.skip(f"No functions found in {lab_dir.name} starter")
+
+        # All starter functions should exist in solution
+        missing_in_solution = starter_funcs - solution_funcs
+
+        if missing_in_solution:
+            pytest.fail(
+                f"Lab {lab_dir.name}: Functions in starter but not solution: {missing_in_solution}"
+            )
+
+
+class TestNotebookOutputs:
+    """Tests to verify notebook outputs are cleared."""
+
+    @pytest.mark.parametrize("lab_dir", ALL_LABS, ids=[l.name for l in ALL_LABS])
+    def test_notebook_outputs_cleared(self, lab_dir: Path):
+        """Notebooks should have cleared outputs for clean distribution."""
+        notebooks_dir = REPO_ROOT / "notebooks"
+        if not notebooks_dir.exists():
+            pytest.skip("No notebooks directory")
+
+        # Find notebooks matching this lab
+        lab_name = lab_dir.name
+        lab_match = re.match(r"(lab\d+[a-z]?)", lab_name)
+        if not lab_match:
+            pytest.skip(f"Cannot extract lab number from {lab_name}")
+
+        lab_prefix = lab_match.group(1).replace("-", "_")
+        matching_notebooks = list(notebooks_dir.glob(f"{lab_prefix}*.ipynb"))
+
+        if not matching_notebooks:
+            pytest.skip(f"No notebooks found for {lab_name}")
+
+        for notebook_path in matching_notebooks:
+            try:
+                content = notebook_path.read_text(encoding="utf-8")
+                data = json.loads(content)
+
+                cells_with_output = 0
+                total_code_cells = 0
+
+                for cell in data.get("cells", []):
+                    if cell.get("cell_type") == "code":
+                        total_code_cells += 1
+                        outputs = cell.get("outputs", [])
+                        if outputs:
+                            cells_with_output += 1
+
+                # Allow up to 20% of cells to have outputs (for demo purposes)
+                if total_code_cells > 0:
+                    output_ratio = cells_with_output / total_code_cells
+                    if output_ratio > 0.2:
+                        pytest.fail(
+                            f"Notebook {notebook_path.name} has outputs in {cells_with_output}/{total_code_cells} cells. "
+                            f"Consider clearing outputs before committing."
+                        )
+            except (json.JSONDecodeError, KeyError):
+                pass  # Invalid notebook handled by other tests
+
+
+class TestDataFileSizes:
+    """Tests to verify data files are appropriately sized for Git."""
+
+    MAX_FILE_SIZE_MB = 10  # 10MB limit for Git
+
+    @pytest.mark.parametrize("lab_dir", ALL_LABS, ids=[l.name for l in ALL_LABS])
+    def test_data_files_under_size_limit(self, lab_dir: Path):
+        """Data files should be under 10MB for Git compatibility."""
+        data_dir = lab_dir / "data"
+        if not data_dir.exists():
+            pytest.skip(f"No data directory in {lab_dir.name}")
+
+        oversized_files = []
+        for file_path in data_dir.rglob("*"):
+            if file_path.is_file():
+                size_mb = file_path.stat().st_size / (1024 * 1024)
+                if size_mb > self.MAX_FILE_SIZE_MB:
+                    oversized_files.append(f"{file_path.name}: {size_mb:.1f}MB")
+
+        if oversized_files:
+            pytest.fail(
+                f"Lab {lab_dir.name} has oversized data files (>{self.MAX_FILE_SIZE_MB}MB):\n"
+                + "\n".join(oversized_files)
+            )
+
+    @pytest.mark.parametrize("lab_dir", ALL_LABS, ids=[l.name for l in ALL_LABS])
+    def test_no_binary_data_without_gitlfs(self, lab_dir: Path):
+        """Large binary files should use Git LFS or be documented."""
+        data_dir = lab_dir / "data"
+        if not data_dir.exists():
+            pytest.skip(f"No data directory in {lab_dir.name}")
+
+        BINARY_EXTENSIONS = {".pkl", ".pickle", ".h5", ".hdf5", ".parquet", ".zip", ".tar", ".gz"}
+        LARGE_THRESHOLD_MB = 5
+
+        large_binaries = []
+        for file_path in data_dir.rglob("*"):
+            if file_path.is_file() and file_path.suffix.lower() in BINARY_EXTENSIONS:
+                size_mb = file_path.stat().st_size / (1024 * 1024)
+                if size_mb > LARGE_THRESHOLD_MB:
+                    large_binaries.append(f"{file_path.name}: {size_mb:.1f}MB")
+
+        if large_binaries:
+            pytest.fail(
+                f"Lab {lab_dir.name} has large binary files that should use Git LFS:\n"
+                + "\n".join(large_binaries)
+            )
+
+
+class TestReadmeLinks:
+    """Tests to verify internal file references in README exist."""
+
+    @pytest.mark.parametrize("lab_dir", ALL_LABS, ids=[l.name for l in ALL_LABS])
+    def test_readme_internal_links_valid(self, lab_dir: Path):
+        """Internal file links in README should point to existing files."""
+        readme = lab_dir / "README.md"
+        if not readme.exists():
+            pytest.skip(f"No README in {lab_dir.name}")
+
+        content = readme.read_text(encoding="utf-8")
+
+        # Find markdown links: [text](path)
+        link_pattern = re.compile(r"\[([^\]]+)\]\(([^)]+)\)")
+        links = link_pattern.findall(content)
+
+        broken_links = []
+        for text, href in links:
+            # Skip external links
+            if href.startswith(("http://", "https://", "mailto:", "#")):
+                continue
+
+            # Check if it's a relative file path
+            if not href.startswith("/"):
+                target_path = lab_dir / href
+                if not target_path.exists():
+                    broken_links.append(f"[{text}]({href})")
+
+        if broken_links:
+            pytest.fail(
+                f"README in {lab_dir.name} has broken internal links:\n"
+                + "\n".join(broken_links[:10])
+            )
+
+
+class TestSensitiveData:
+    """Tests to verify no sensitive data in code or configs."""
+
+    SENSITIVE_PATTERNS = [
+        (r"api[_-]?key\s*=\s*['\"][^'\"]{10,}['\"]", "API key"),
+        (r"secret[_-]?key\s*=\s*['\"][^'\"]{10,}['\"]", "Secret key"),
+        (r"password\s*=\s*['\"][^'\"]{5,}['\"]", "Hardcoded password"),
+        (r"aws_access_key_id\s*=\s*['\"]AK[A-Z0-9]{18}['\"]", "AWS access key"),
+        (r"sk-[a-zA-Z0-9]{48}", "OpenAI API key"),
+        (r"sk-ant-[a-zA-Z0-9-]{40,}", "Anthropic API key"),
+        (r"ghp_[a-zA-Z0-9]{36}", "GitHub personal access token"),
+    ]
+
+    @pytest.mark.parametrize("lab_dir", ALL_LABS, ids=[l.name for l in ALL_LABS])
+    def test_no_hardcoded_secrets(self, lab_dir: Path):
+        """Code files should not contain hardcoded secrets."""
+        sensitive_findings = []
+
+        # Check Python files
+        for py_file in lab_dir.rglob("*.py"):
+            # Skip test files - they may have example patterns
+            if "test_" in py_file.name:
+                continue
+
+            try:
+                content = py_file.read_text(encoding="utf-8")
+
+                for pattern, description in self.SENSITIVE_PATTERNS:
+                    matches = re.findall(pattern, content, re.IGNORECASE)
+                    if matches:
+                        # Check it's not in a comment or docstring
+                        for match in matches:
+                            # Simple check - if it looks like a real key
+                            if "your_" not in match.lower() and "example" not in match.lower():
+                                sensitive_findings.append(
+                                    f"{py_file.name}: Possible {description}"
+                                )
+            except (OSError, UnicodeDecodeError):
+                continue
+
+        if sensitive_findings:
+            pytest.fail(
+                f"Lab {lab_dir.name} may contain sensitive data:\n"
+                + "\n".join(sensitive_findings[:5])
+            )
+
+    @pytest.mark.parametrize("lab_dir", ALL_LABS, ids=[l.name for l in ALL_LABS])
+    def test_no_env_files_committed(self, lab_dir: Path):
+        """Actual .env files should not be committed (only .env.example)."""
+        env_files = list(lab_dir.rglob(".env"))
+
+        # Filter out .env.example, .env.template, etc.
+        actual_env_files = [
+            f for f in env_files
+            if f.name == ".env" and "example" not in str(f).lower()
+        ]
+
+        if actual_env_files:
+            pytest.fail(
+                f"Lab {lab_dir.name} has .env files that should not be committed:\n"
+                + "\n".join(str(f) for f in actual_env_files)
+            )
+
+
+class TestImportsResolvable:
+    """Tests to verify solution code imports are resolvable."""
+
+    # Standard library modules that are always available
+    STDLIB_MODULES = {
+        "os", "sys", "re", "json", "ast", "csv", "datetime", "time", "math",
+        "random", "collections", "itertools", "functools", "pathlib", "typing",
+        "dataclasses", "enum", "abc", "io", "copy", "hashlib", "base64",
+        "urllib", "http", "logging", "argparse", "configparser", "tempfile",
+        "shutil", "glob", "pickle", "sqlite3", "subprocess", "threading",
+        "multiprocessing", "socket", "struct", "textwrap", "string", "unittest",
+        "traceback", "warnings", "contextlib", "concurrent", "asyncio",
+        "uuid", "secrets", "hmac", "binascii", "html", "xml", "zipfile",
+    }
+
+    # Common third-party packages that we expect to be available
+    EXPECTED_PACKAGES = {
+        # Data science
+        "numpy", "pandas", "sklearn", "scipy", "matplotlib", "seaborn",
+        # AI/ML
+        "anthropic", "openai", "transformers", "torch", "tensorflow", "keras",
+        # LangChain ecosystem
+        "langchain", "langchain_core", "langchain_community", "langchain_openai",
+        "langchain_anthropic", "langchain_google_genai", "langgraph",
+        # Utilities
+        "requests", "pytest", "yaml", "pyyaml", "dotenv", "python_dotenv",
+        "pydantic", "rich", "tqdm", "click", "typer",
+        # Visualization
+        "plotly", "networkx", "bokeh", "altair",
+        # NLP/ML
+        "nltk", "spacy", "gensim", "xgboost", "lightgbm", "catboost", "joblib",
+        # Security specific
+        "yara", "volatility", "scapy", "dpkt", "pyshark",
+        # Vector stores and embeddings
+        "chromadb", "faiss", "pinecone", "qdrant_client", "sentence_transformers",
+        # Others
+        "aiohttp", "httpx", "bs4", "lxml", "pillow", "PIL",
+    }
+
+    @pytest.mark.parametrize("lab_dir", ALL_LABS, ids=[l.name for l in ALL_LABS])
+    def test_solution_imports_valid(self, lab_dir: Path):
+        """Solution code should import valid/expected modules."""
+        solution_dir = lab_dir / "solution"
+        if not solution_dir.exists():
+            pytest.skip(f"No solution directory in {lab_dir.name}")
+
+        py_files = list(solution_dir.glob("*.py"))
+        if not py_files:
+            pytest.skip(f"No Python files in {lab_dir.name} solution")
+
+        unknown_imports = set()
+
+        for py_file in py_files:
+            try:
+                content = py_file.read_text(encoding="utf-8")
+                tree = ast.parse(content)
+
+                for node in ast.walk(tree):
+                    if isinstance(node, ast.Import):
+                        for alias in node.names:
+                            module = alias.name.split(".")[0]
+                            if module not in self.STDLIB_MODULES and module not in self.EXPECTED_PACKAGES:
+                                # Check if it's a local module
+                                local_module = solution_dir / f"{module}.py"
+                                if not local_module.exists():
+                                    unknown_imports.add(module)
+
+                    elif isinstance(node, ast.ImportFrom):
+                        if node.module:
+                            module = node.module.split(".")[0]
+                            if module not in self.STDLIB_MODULES and module not in self.EXPECTED_PACKAGES:
+                                local_module = solution_dir / f"{module}.py"
+                                if not local_module.exists():
+                                    unknown_imports.add(module)
+
+            except SyntaxError:
+                pass  # Handled by other tests
+
+        # Don't fail, just warn about potentially missing packages
+        if unknown_imports:
+            # Only fail if there are many unknown imports (likely a problem)
+            if len(unknown_imports) > 5:
+                pytest.fail(
+                    f"Lab {lab_dir.name} has many unknown imports: {unknown_imports}"
+                )
+
+
+class TestRequirementsFile:
+    """Tests to verify requirements files exist where needed."""
+
+    @pytest.mark.parametrize("lab_dir", ALL_LABS, ids=[l.name for l in ALL_LABS])
+    def test_lab_with_imports_has_requirements(self, lab_dir: Path):
+        """Labs with third-party imports should document requirements."""
+        solution_dir = lab_dir / "solution"
+        if not solution_dir.exists():
+            pytest.skip(f"No solution directory in {lab_dir.name}")
+
+        # Check for any third-party imports
+        third_party_imports = set()
+        STDLIB = TestImportsResolvable.STDLIB_MODULES
+
+        for py_file in solution_dir.glob("*.py"):
+            try:
+                content = py_file.read_text(encoding="utf-8")
+                tree = ast.parse(content)
+
+                for node in ast.walk(tree):
+                    if isinstance(node, ast.Import):
+                        for alias in node.names:
+                            module = alias.name.split(".")[0]
+                            if module not in STDLIB:
+                                third_party_imports.add(module)
+                    elif isinstance(node, ast.ImportFrom):
+                        if node.module:
+                            module = node.module.split(".")[0]
+                            if module not in STDLIB:
+                                third_party_imports.add(module)
+            except SyntaxError:
+                pass
+
+        if not third_party_imports:
+            pytest.skip(f"No third-party imports in {lab_dir.name}")
+
+        # Check for requirements file (lab-level or repo-level)
+        lab_requirements = lab_dir / "requirements.txt"
+        repo_requirements = REPO_ROOT / "requirements.txt"
+
+        has_requirements = lab_requirements.exists() or repo_requirements.exists()
+
+        # This is a soft check - just ensure we have SOME requirements file
+        if not has_requirements:
+            # Only fail for labs with many third-party imports
+            if len(third_party_imports) > 3:
+                pytest.fail(
+                    f"Lab {lab_dir.name} uses {len(third_party_imports)} third-party packages "
+                    f"but has no requirements.txt: {third_party_imports}"
+                )
+
+
 if __name__ == "__main__":
     pytest.main([__file__, "-v"])
