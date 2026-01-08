@@ -1,0 +1,25 @@
+timestamp,src_ip,dst_ip,attack_type,severity,description,mitre_technique
+2024-01-15 08:00:08,192.168.1.100,185.143.223.47,c2,high,Command and Control beacon to known malicious IP,T1071.001
+2024-01-15 08:00:20,192.168.1.100,185.143.223.47,c2,high,Command and Control beacon - regular interval pattern,T1071.001
+2024-01-15 08:00:30,192.168.1.100,91.234.99.100,exfiltration,critical,Large data transfer to external IP - 5MB outbound,T1041
+2024-01-15 08:00:40,192.168.1.100,185.143.223.47,c2,high,Command and Control beacon - encrypted channel,T1071.001
+2024-01-15 08:00:50,192.168.1.100,192.168.1.101,lateral_movement,high,SMB connection to internal host - potential lateral movement,T1021.002
+2024-01-15 08:00:55,192.168.1.100,192.168.1.102,lateral_movement,high,SMB connection to internal host - potential lateral movement,T1021.002
+2024-01-15 08:01:00,192.168.1.100,185.143.223.47,c2,high,Command and Control beacon - consistent payload size,T1071.001
+2024-01-15 08:01:10,192.168.1.100,192.168.1.103,lateral_movement,high,SMB connection to internal host - credential reuse suspected,T1021.002
+2024-01-15 08:01:20,192.168.1.100,185.143.223.47,c2,high,Command and Control beacon - jitter detected,T1071.001
+2024-01-15 08:01:30,192.168.1.100,91.234.99.100,exfiltration,critical,Large data transfer to external IP - 10MB outbound,T1041
+2024-01-15 08:01:40,192.168.1.100,185.143.223.47,c2,high,Command and Control beacon - HTTPS traffic,T1071.001
+2024-01-15 08:01:50,192.168.1.100,192.168.1.104,lateral_movement,high,SMB connection to internal host - expanding footprint,T1021.002
+2024-01-15 08:02:00,192.168.1.100,185.143.223.47,c2,high,Command and Control beacon - heartbeat pattern,T1071.001
+2024-01-15 08:02:10,192.168.1.100,192.168.1.105,lateral_movement,high,SMB connection to internal host - admin share access,T1021.002
+2024-01-15 08:02:20,192.168.1.100,185.143.223.47,c2,high,Command and Control beacon - data staging suspected,T1071.001
+2024-01-15 08:02:30,192.168.1.100,91.234.99.100,exfiltration,critical,Large data transfer to external IP - 15MB outbound,T1041
+2024-01-15 08:02:40,192.168.1.100,185.143.223.47,c2,high,Command and Control beacon - encrypted payload,T1071.001
+2024-01-15 08:02:50,192.168.1.100,192.168.1.106,scan,medium,NetBIOS/SMB enumeration - port 139 probe,T1046
+2024-01-15 08:02:51,192.168.1.100,192.168.1.107,scan,medium,NetBIOS/SMB enumeration - port 139 probe (no response),T1046
+2024-01-15 08:02:52,192.168.1.100,192.168.1.108,scan,medium,NetBIOS/SMB enumeration - port 139 probe,T1046
+2024-01-15 08:02:53,192.168.1.100,192.168.1.109,scan,medium,NetBIOS/SMB enumeration - port 139 probe (no response),T1046
+2024-01-15 08:02:54,192.168.1.100,192.168.1.110,scan,medium,NetBIOS/SMB enumeration - port 139 probe,T1046
+2024-01-15 08:03:00,192.168.1.100,185.143.223.47,c2,high,Command and Control beacon - exfil command received,T1071.001
+2024-01-15 08:03:15,192.168.1.100,185.143.223.47,c2,high,Command and Control beacon - final check-in,T1071.001
