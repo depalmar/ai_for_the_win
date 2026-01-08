@@ -13,7 +13,7 @@
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab01_phishing_classifier.ipynb)
 [![Docker](https://img.shields.io/badge/Docker-Ready-blue?logo=docker)](./Dockerfile)
 
-A hands-on training program for security practitioners who want to build AI-powered tools for threat detection, incident response, and security automation. **40+ labs** (including 9 intro labs and 12 bridge labs), **4 capstone projects**, **18 CTF challenges**. Includes **sample datasets** and **solution walkthroughs**. Designed for **vibe coding** with AI assistants like Cursor, Claude Code, and Copilot.
+A hands-on training program for security practitioners who want to build AI-powered tools for threat detection, incident response, and security automation. **45+ labs** (including 9 intro labs and 12 bridge labs), **4 capstone projects**, **18 CTF challenges**. Includes **sample datasets**, **solution walkthroughs**, and **Docker lab environment**. Designed for **vibe coding** with AI assistants like Cursor, Claude Code, and Copilot.
 
 ---
 
@@ -133,7 +133,7 @@ High Confidence: FIN7/Carbanak
 
 [![Open Lab 04 in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab04_llm_log_analysis.ipynb) ← LLM-powered (needs API key)
 
-> All 40+ notebooks are in [`notebooks/`](./notebooks/) — open any `.ipynb` in Colab
+> All 45+ notebooks are in [`notebooks/`](./notebooks/) — open any `.ipynb` in Colab
 
 ---
 
@@ -147,7 +147,7 @@ High Confidence: FIN7/Carbanak
 | **Blue Team / SOC** | Lab 01 | Detection → triage → incident response |
 | **Security engineer** | Lab 01 | Pipelines → automation → deployment |
 
-**40+ labs** | **4 capstone projects** | **18 CTF challenges** | **1000+ tests**
+**45+ labs** | **4 capstone projects** | **18 CTF challenges** | **1000+ tests**
 
 ---
 
@@ -237,14 +237,21 @@ High Confidence: FIN7/Carbanak
 <tr>
 <td align="center"><a href="./labs/lab17a-ml-security-intro/"><img src="https://img.shields.io/badge/17a-MLSec-ef4444?style=for-the-badge" alt="Lab 17a"/></a></td>
 <td align="center"><a href="./labs/lab17-adversarial-ml/"><img src="https://img.shields.io/badge/17-AdvML-ef4444?style=for-the-badge" alt="Lab 17"/></a></td>
+<td align="center"><a href="./labs/lab17b-llm-security-testing/"><img src="https://img.shields.io/badge/17b-LLMSec-ef4444?style=for-the-badge" alt="Lab 17b"/></a></td>
+<td align="center"><a href="./labs/lab17c-model-monitoring/"><img src="https://img.shields.io/badge/17c-Monitor-ef4444?style=for-the-badge" alt="Lab 17c"/></a></td>
 <td align="center"><a href="./labs/lab18-fine-tuning-security/"><img src="https://img.shields.io/badge/18-Tuning-ef4444?style=for-the-badge" alt="Lab 18"/></a></td>
-<td align="center"><a href="./labs/lab19a-cloud-security-fundamentals/"><img src="https://img.shields.io/badge/19a-CloudFund-ef4444?style=for-the-badge" alt="Lab 19a"/></a></td>
-<td align="center"><a href="./labs/lab19-cloud-security-ai/"><img src="https://img.shields.io/badge/19-Cloud-ef4444?style=for-the-badge" alt="Lab 19"/></a></td>
 </tr>
 <tr>
+<td align="center"><a href="./labs/lab18b-rag-security/"><img src="https://img.shields.io/badge/18b-RAGSec-ef4444?style=for-the-badge" alt="Lab 18b"/></a></td>
+<td align="center"><a href="./labs/lab19a-cloud-security-fundamentals/"><img src="https://img.shields.io/badge/19a-CloudFund-ef4444?style=for-the-badge" alt="Lab 19a"/></a></td>
+<td align="center"><a href="./labs/lab19-cloud-security-ai/"><img src="https://img.shields.io/badge/19-Cloud-ef4444?style=for-the-badge" alt="Lab 19"/></a></td>
+<td align="center"><a href="./labs/lab19b-container-security/"><img src="https://img.shields.io/badge/19b-Container-ef4444?style=for-the-badge" alt="Lab 19b"/></a></td>
+<td align="center"><a href="./labs/lab19c-serverless-security/"><img src="https://img.shields.io/badge/19c-Serverless-ef4444?style=for-the-badge" alt="Lab 19c"/></a></td>
+</tr>
+<tr>
+<td align="center"><a href="./labs/lab19d-cloud-ir-automation/"><img src="https://img.shields.io/badge/19d-CloudIR-ef4444?style=for-the-badge" alt="Lab 19d"/></a></td>
 <td align="center"><a href="./labs/lab20-llm-red-teaming/"><img src="https://img.shields.io/badge/20-RedTeam-ef4444?style=for-the-badge" alt="Lab 20"/></a></td>
 <td align="center"><a href="./labs/lab20b-purple-team-ai/"><img src="https://img.shields.io/badge/20b-PurpleAI-ef4444?style=for-the-badge" alt="Lab 20b"/></a></td>
-<td></td>
 <td></td>
 <td></td>
 </tr>
@@ -316,9 +323,15 @@ High Confidence: FIN7/Carbanak
 | [16b](./labs/lab16b-ai-powered-threat-actors/) | AI Threat | Deepfakes, AI-generated phishing |
 | [17a](./labs/lab17a-ml-security-intro/) | MLSec | Data poisoning, model security |
 | [17](./labs/lab17-adversarial-ml/) | Adv ML | Evasion attacks, robust defenses |
+| [17b](./labs/lab17b-llm-security-testing/) | LLM Security | Prompt injection testing, jailbreaks |
+| [17c](./labs/lab17c-model-monitoring/) | Model Monitor | Drift detection, adversarial inputs |
 | [18](./labs/lab18-fine-tuning-security/) | Tuning | LoRA, custom embeddings |
+| [18b](./labs/lab18b-rag-security/) | RAG Security | KB poisoning, context sanitization |
 | [19a](./labs/lab19a-cloud-security-fundamentals/) | Cloud Fund | Shared responsibility, IAM |
 | [19](./labs/lab19-cloud-security-ai/) | Cloud | AWS/Azure/GCP, CloudTrail |
+| [19b](./labs/lab19b-container-security/) | Container | Kubernetes, runtime detection |
+| [19c](./labs/lab19c-serverless-security/) | Serverless | Lambda, event injection |
+| [19d](./labs/lab19d-cloud-ir-automation/) | Cloud IR | Automated containment, evidence |
 | [20](./labs/lab20-llm-red-teaming/) | Red Team | Prompt injection, jailbreaks |
 | [20b](./labs/lab20b-purple-team-ai/) | Purple AI | Automated attack simulation |
 
@@ -394,13 +407,31 @@ python scripts/verify_setup.py
 
 > You only need ONE LLM provider. All labs support multiple providers.
 
+### Docker Lab Environment (New!)
+
+One-command setup with all services pre-configured:
+
+```bash
+cd docker
+docker compose up -d
+
+# Access services:
+# - Jupyter Lab: http://localhost:8888 (token: aiforthewin)
+# - Kibana: http://localhost:5601
+# - MinIO: http://localhost:9001 (minioadmin/minioadmin)
+```
+
+Includes: Jupyter Lab, Elasticsearch, Kibana, PostgreSQL, Redis, MinIO, Ollama (local LLMs), ChromaDB (vectors).
+
+See [`docker/README.md`](./docker/README.md) for full details.
+
 ### Running Tests
 
 ```bash
 pytest tests/ -v                    # All tests
 pytest tests/test_lab01*.py -v     # Single lab
 pytest tests/ --cov=labs           # With coverage
-docker-compose run test            # In Docker
+docker compose run test            # In Docker
 ```
 
 ---
