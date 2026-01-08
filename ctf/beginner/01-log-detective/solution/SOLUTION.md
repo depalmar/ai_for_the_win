@@ -8,7 +8,7 @@
 
 2. **Find the encoded data** - In `system.log`, line 14:
    ```
-   2025-01-07 23:45:00 DEBUG internal_check: status=ok marker=RkxBR3tMMGdfRDNUM0NUMFY0fQ==
+   2025-01-07 23:45:00 DEBUG internal_check: status=ok marker=RkxBR3tMMEdfRDNUM0NUMVYzfQ==
    ```
 
    The `marker` field contains a base64-encoded string.
@@ -16,7 +16,7 @@
 3. **Decode the flag**:
    ```python
    import base64
-   encoded = "RkxBR3tMMGdfRDNUM0NUMFY0fQ=="
+   encoded = "RkxBR3tMMEdfRDNUM0NUMVYzfQ=="
    decoded = base64.b64decode(encoded).decode()
    print(decoded)  # FLAG{L0G_D3T3CT1V3}
    ```

@@ -36,6 +36,7 @@ env/
 *.swo
 *~
 .cursor/
+.claude/settings.local.json
 
 # Jupyter
 .ipynb_checkpoints/
@@ -80,7 +81,6 @@ Thumbs.db
 # Windows artifacts
 nul
 NUL
-docs;*
 *.stackdump
 
 # Python caching (additional)

@@ -103,9 +103,12 @@ services:
       - lab-network
 
   # Ollama for local LLM inference (AI security labs)
+  # Use: docker compose --profile gpu up -d (for GPU support)
+  # Or:  docker compose up -d ollama-cpu (for CPU-only)
   ollama:
     image: ollama/ollama:latest
     container_name: lab-ollama
+    profiles: [gpu]
     ports:
       - "11434:11434"
     volumes:
@@ -119,6 +122,17 @@ services:
             - driver: nvidia
               count: all
               capabilities: [gpu]
+
+  # Ollama CPU-only version (default, no GPU required)
+  ollama-cpu:
+    image: ollama/ollama:latest
+    container_name: lab-ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama-models:/root/.ollama
+    networks:
+      - lab-network
 
   # ChromaDB for vector storage (RAG labs)
   chromadb:
