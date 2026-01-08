@@ -254,9 +254,9 @@ class TestContextSanitization:
     def test_script_tag_removal(self):
         """Test removal of script tags."""
         content = "Content <script>alert('xss')</script> more"
-        # Use \s* before > to handle </script > variations
+        # Use [^>]* to handle malformed tags like </script \n bar>
         sanitized = re.sub(
-            r"<script[\s\S]*?</script\s*>", "[SCRIPT REMOVED]", content, flags=re.IGNORECASE
+            r"<script[\s\S]*?</script[^>]*>", "[SCRIPT REMOVED]", content, flags=re.IGNORECASE
         )
 
         assert "<script>" not in sanitized
