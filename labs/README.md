@@ -873,6 +873,8 @@ Test your skills with capture-the-flag challenges! These are separate from labs 
 
 > 💡 **Tip**: Complete the recommended lab before attempting each CTF challenge for the best learning experience. Labs teach the concepts; CTFs test your skills!
 
+> 📝 **More challenges coming soon!** Intermediate and advanced CTF challenges are in development.
+
 ---
 
 ## 🤝 Contributing
