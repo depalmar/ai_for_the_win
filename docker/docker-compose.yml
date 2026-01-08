@@ -1,0 +1,145 @@
+version: '3.8'
+
+services:
+  # Main Jupyter Lab environment for labs
+  jupyter:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ai-security-labs
+    ports:
+      - "8888:8888"
+    volumes:
+      - ../labs:/home/jovyan/labs:ro
+      - ../notebooks:/home/jovyan/notebooks
+      - ../data:/home/jovyan/data
+      - ../templates:/home/jovyan/templates:ro
+      - ../tools:/home/jovyan/tools:ro
+      - lab-work:/home/jovyan/work
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+      - GRANT_SUDO=yes
+      - JUPYTER_TOKEN=aiforthewin
+    networks:
+      - lab-network
+    depends_on:
+      - elasticsearch
+
+  # Elasticsearch for log analysis labs
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.0
+    container_name: lab-elasticsearch
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ports:
+      - "9200:9200"
+    volumes:
+      - es-data:/usr/share/elasticsearch/data
+    networks:
+      - lab-network
+    healthcheck:
+      test: ["CMD-SHELL", "curl -s http://localhost:9200/_cluster/health | grep -q 'status.*green\\|yellow'"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  # Kibana for visualization
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.11.0
+    container_name: lab-kibana
+    ports:
+      - "5601:5601"
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    networks:
+      - lab-network
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+
+  # Redis for caching and queuing
+  redis:
+    image: redis:7-alpine
+    container_name: lab-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - lab-network
+
+  # MinIO for S3-compatible object storage (cloud labs)
+  minio:
+    image: minio/minio:latest
+    container_name: lab-minio
+    command: server /data --console-address ":9001"
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      - MINIO_ROOT_USER=minioadmin
+      - MINIO_ROOT_PASSWORD=minioadmin123
+    volumes:
+      - minio-data:/data
+    networks:
+      - lab-network
+
+  # PostgreSQL for structured data labs
+  postgres:
+    image: postgres:15-alpine
+    container_name: lab-postgres
+    environment:
+      - POSTGRES_USER=labuser
+      - POSTGRES_PASSWORD=labpassword
+      - POSTGRES_DB=security_labs
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+      - ./init-db:/docker-entrypoint-initdb.d:ro
+    networks:
+      - lab-network
+
+  # Ollama for local LLM inference (AI security labs)
+  ollama:
+    image: ollama/ollama:latest
+    container_name: lab-ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama-models:/root/.ollama
+    networks:
+      - lab-network
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+  # ChromaDB for vector storage (RAG labs)
+  chromadb:
+    image: chromadb/chroma:latest
+    container_name: lab-chromadb
+    ports:
+      - "8000:8000"
+    volumes:
+      - chroma-data:/chroma/chroma
+    networks:
+      - lab-network
+
+networks:
+  lab-network:
+    driver: bridge
+
+volumes:
+  lab-work:
+  es-data:
+  redis-data:
+  minio-data:
+  pg-data:
+  ollama-models:
+  chroma-data:

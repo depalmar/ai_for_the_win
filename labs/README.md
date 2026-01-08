@@ -146,9 +146,15 @@ Deep dive into incident response, threat simulation, and offensive security anal
 | 16 | [Threat Actor Profiling](./lab16-threat-actor-profiling/) | Attribution | TTP analysis, clustering, actor profiles |
 | 17a | [ML Security Intro](./lab17a-ml-security-intro/) | **NEW! Bridge lab** | ML threat models, attack taxonomy |
 | 17 | [Adversarial ML](./lab17-adversarial-ml/) | Attack/Defense | Evasion, poisoning, robust ML defenses |
+| 17b | [LLM Security Testing](./lab17b-llm-security-testing/) | **NEW!** | Prompt injection, jailbreaks, data extraction |
+| 17c | [Model Monitoring](./lab17c-model-monitoring/) | **NEW!** | Drift detection, adversarial detection |
 | 18 | [Fine-Tuning for Security](./lab18-fine-tuning-security/) | Custom models | LoRA, security embeddings, deployment |
+| 18b | [RAG Security](./lab18b-rag-security/) | **NEW!** | KB poisoning, context sanitization |
 | 19a | [Cloud Security Fundamentals](./lab19a-cloud-security-fundamentals/) | **NEW! Bridge lab** | AWS/Azure/GCP basics, IAM, CloudTrail |
 | 19 | [Cloud Security AI](./lab19-cloud-security-ai/) | Multi-cloud | CloudTrail, AWS/Azure/GCP threat detection |
+| 19b | [Container Security](./lab19b-container-security/) | **NEW!** | Kubernetes, runtime detection, escapes |
+| 19c | [Serverless Security](./lab19c-serverless-security/) | **NEW!** | Lambda analysis, event injection, IAM |
+| 19d | [Cloud IR Automation](./lab19d-cloud-ir-automation/) | **NEW!** | Automated containment, evidence collection |
 | 20 | [LLM Red Teaming](./lab20-llm-red-teaming/) | Offensive AI Security | Prompt injection, jailbreaking, agentic attacks |
 
 **Progression:**
