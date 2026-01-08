@@ -1,6 +1,6 @@
 # AI for the Win - Roadmap
 
-> Last updated: January 2026 | Current version: 1.7.0
+> Last updated: January 2026 | Current version: 1.8.0
 
 ## Vision
 
@@ -8,33 +8,36 @@ Build the most comprehensive, hands-on AI/ML training program for security pract
 
 ---
 
-## Current Status (v1.7.0)
+## Current Status (v1.8.0)
 
 ### Completed
-- 25+ hands-on labs covering ML, LLM, DFIR, and adversarial techniques
-- XQL reference guide and templates
-- CTF beginner challenges
+- 30+ hands-on labs covering ML, LLM, DFIR, Cloud, and adversarial techniques
+- XQL reference guide, templates, and validation tool
+- 15 CTF challenges (Beginner, Intermediate, Advanced)
 - Multi-provider LLM support (Anthropic, OpenAI, Gemini, Ollama)
 - Comprehensive documentation
+- Docker Compose lab environment with Jupyter, Elasticsearch, Ollama
+- Cloud-Native Security Track (Labs 19b-d)
+- AI/ML Security Track (Labs 17b-c, 18b)
 
 ### In Progress
-- Intermediate/Advanced CTF challenges
 - Additional DFIR deep-dives
 - XQL query library expansion
+- Test coverage improvements
 
 ---
 
 ## Short-Term (Q1 2026)
 
 ### CTF Challenge Expansion
-- [ ] **Intermediate Challenges** (5 challenges)
+- [x] **Intermediate Challenges** (5 challenges) ✓ v1.3.0
   - C2 Hunter - Beaconing detection, DNS tunneling
   - Memory Forensics - Process injection, credential dumping
   - Adversarial Samples - ML evasion techniques
   - Agent Investigation - ReAct debugging
   - Ransomware Response - Full IR scenario
 
-- [ ] **Advanced Challenges** (5 challenges)
+- [x] **Advanced Challenges** (5 challenges) ✓ v1.3.0
   - APT Attribution - Multi-stage attack correlation
   - Model Poisoning - Training data attacks
   - Cloud Compromise - AWS/Azure/GCP scenarios
@@ -42,8 +45,8 @@ Build the most comprehensive, hands-on AI/ML training program for security pract
   - Full IR Scenario - End-to-end incident response
 
 ### XQL Tools
-- [ ] Build query validation tool (Python-based syntax checker)
-- [ ] Create XQL cheat sheet (quick reference card)
+- [x] Build query validation tool (Python-based syntax checker) ✓ v1.8.0
+- [x] Create XQL cheat sheet (quick reference card) ✓ v1.7.0
 
 ### Testing & Quality
 - [ ] Achieve 80%+ test coverage across all labs
@@ -56,22 +59,23 @@ Build the most comprehensive, hands-on AI/ML training program for security pract
 
 ### New Lab Tracks
 
-#### Cloud-Native Security Track
-- [ ] **Lab 19b: Container Security** - Kubernetes threat detection, pod security, runtime analysis
-- [ ] **Lab 19c: Serverless Security** - Lambda/Functions analysis, cold start attacks
-- [ ] **Lab 19d: Cloud IR Automation** - Automated containment, evidence preservation
+#### Cloud-Native Security Track ✓ Completed v1.8.0
+- [x] **Lab 19b: Container Security** - Kubernetes threat detection, pod security, runtime analysis
+- [x] **Lab 19c: Serverless Security** - Lambda/Functions analysis, event injection detection
+- [x] **Lab 19d: Cloud IR Automation** - Automated containment, evidence preservation
 
-#### AI/ML Security Track
-- [ ] **Lab 17b: LLM Security Testing** - Automated red team for AI applications
-- [ ] **Lab 17c: Model Monitoring** - Drift detection, adversarial input detection
-- [ ] **Lab 18b: RAG Security** - Data poisoning, prompt leakage, extraction attacks
+#### AI/ML Security Track ✓ Completed v1.8.0
+- [x] **Lab 17b: LLM Security Testing** - Automated red team for AI applications
+- [x] **Lab 17c: Model Monitoring** - Drift detection, adversarial input detection
+- [x] **Lab 18b: RAG Security** - Data poisoning, prompt leakage, extraction attacks
 
 ### Infrastructure
-- [ ] **Docker Compose Lab Environment**
-  - Full lab stack in containers
-  - Pre-configured Jupyter environments
-  - Sample data generation scripts
-  - One-command setup: `docker-compose up`
+- [x] **Docker Compose Lab Environment** ✓ v1.8.0
+  - Full lab stack in containers (Jupyter, Elasticsearch, Kibana, Redis, PostgreSQL)
+  - Pre-configured Jupyter environments with security tools
+  - Ollama for local LLM inference (GPU and CPU-only options)
+  - ChromaDB for vector storage (RAG labs)
+  - One-command setup: `docker compose up -d`
 
 - [ ] **Progress Tracking**
   - Lab completion badges
@@ -145,10 +149,10 @@ Build the most comprehensive, hands-on AI/ML training program for security pract
 
 | Metric | Current | Q2 2026 Target |
 |--------|---------|----------------|
-| Labs | 25+ | 30+ |
-| CTF Challenges | 2 | 12 |
-| Test Coverage | ~60% | 80% |
-| XQL Templates | 15 | 30 |
+| Labs | 30+ | 35+ |
+| CTF Challenges | 15 | 20 |
+| Test Coverage | ~70% | 80% |
+| XQL Templates | 25+ | 40 |
 
 ---
 
