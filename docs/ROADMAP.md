@@ -4,7 +4,7 @@
 
 ## Vision
 
-Build the most comprehensive, hands-on AI/ML training program for security practitioners, with deep integration into Palo Alto Networks Cortex XDR/XSIAM ecosystem.
+Build the most comprehensive, hands-on AI/ML training program for security practitioners - vendor-agnostic, practical, and community-driven.
 
 ---
 
@@ -41,11 +41,9 @@ Build the most comprehensive, hands-on AI/ML training program for security pract
   - Zero-Day Hunt - Behavioral anomaly detection
   - Full IR Scenario - End-to-end incident response
 
-### XQL Enhancements
-- [ ] Add XSIAM-specific query templates
-- [ ] Create XQL cheat sheet (quick reference card)
-- [ ] Add correlation rule examples
+### XQL Tools
 - [ ] Build query validation tool (Python-based syntax checker)
+- [ ] Create XQL cheat sheet (quick reference card)
 
 ### Testing & Quality
 - [ ] Achieve 80%+ test coverage across all labs
@@ -58,32 +56,27 @@ Build the most comprehensive, hands-on AI/ML training program for security pract
 
 ### New Lab Tracks
 
-#### Cortex Integration Track
-- [ ] **Lab 22: XSIAM Data Ingestion** - Parsing, normalization, custom parsers
-- [ ] **Lab 23: Cortex SOAR Playbooks** - Automation with XSOAR
-- [ ] **Lab 24: Custom BIOC Rules** - Behavioral IOC development
-- [ ] **Lab 25: XQL Analytics Dashboard** - Building operational dashboards
-
 #### Cloud-Native Security Track
-- [ ] **Lab 19b: Container Security** - Kubernetes threat detection
-- [ ] **Lab 19c: Serverless Security** - Lambda/Functions analysis
-- [ ] **Lab 19d: Cloud IR Automation** - Automated containment
+- [ ] **Lab 19b: Container Security** - Kubernetes threat detection, pod security, runtime analysis
+- [ ] **Lab 19c: Serverless Security** - Lambda/Functions analysis, cold start attacks
+- [ ] **Lab 19d: Cloud IR Automation** - Automated containment, evidence preservation
 
 #### AI/ML Security Track
-- [ ] **Lab 17b: LLM Security Testing** - Automated red team for AI
-- [ ] **Lab 17c: Model Monitoring** - Drift detection, adversarial inputs
-- [ ] **Lab 18b: RAG Security** - Poisoning, extraction attacks
+- [ ] **Lab 17b: LLM Security Testing** - Automated red team for AI applications
+- [ ] **Lab 17c: Model Monitoring** - Drift detection, adversarial input detection
+- [ ] **Lab 18b: RAG Security** - Data poisoning, prompt leakage, extraction attacks
 
-### Infrastructure Improvements
-- [ ] **Interactive Lab Environment**
-  - Docker-compose for full lab stack
+### Infrastructure
+- [ ] **Docker Compose Lab Environment**
+  - Full lab stack in containers
   - Pre-configured Jupyter environments
   - Sample data generation scripts
+  - One-command setup: `docker-compose up`
 
-- [ ] **Progress Tracking System**
-  - User accounts (optional)
+- [ ] **Progress Tracking**
   - Lab completion badges
   - Skill assessments
+  - Learning path recommendations
 
 ### Documentation
 - [ ] Video walkthroughs for complex labs
@@ -99,11 +92,6 @@ Build the most comprehensive, hands-on AI/ML training program for security pract
   - Browser-based code execution
   - Integrated scoring system
   - Team competitions
-
-- [ ] **Enterprise Features**
-  - Custom lab deployment
-  - Progress analytics
-  - Team management
 
 ### Content Expansion
 - [ ] **Threat Actor Simulations**
@@ -125,7 +113,7 @@ Build the most comprehensive, hands-on AI/ML training program for security pract
 
 ## Technical Debt & Maintenance
 
-### Immediate (This Sprint)
+### Immediate
 - [x] Fix Black formatting in test files
 - [ ] Fix CodeQL workflow permissions (TokenPermissionsID)
 - [ ] Pin GitHub Actions dependencies (PinnedDependenciesID)
@@ -134,7 +122,6 @@ Build the most comprehensive, hands-on AI/ML training program for security pract
 - [ ] Keep dependencies updated (monthly review)
 - [ ] Update LLM model references as new versions release
 - [ ] Refresh threat actor data quarterly
-- [ ] Review XQL syntax against Cortex updates
 
 ---
 
@@ -147,10 +134,10 @@ Build the most comprehensive, hands-on AI/ML training program for security pract
 - Translate documentation
 
 ### Help Wanted
-- XSIAM-specific content (requires access)
 - Video tutorial creation
 - Localization (non-English)
 - Accessibility improvements
+- Docker environment testing
 
 ---
 
@@ -158,11 +145,10 @@ Build the most comprehensive, hands-on AI/ML training program for security pract
 
 | Metric | Current | Q2 2026 Target |
 |--------|---------|----------------|
-| Labs | 25+ | 35+ |
-| CTF Challenges | 2 | 15 |
+| Labs | 25+ | 30+ |
+| CTF Challenges | 2 | 12 |
 | Test Coverage | ~60% | 80% |
-| XQL Templates | 15 | 50 |
-| Documentation Pages | 30+ | 50+ |
+| XQL Templates | 15 | 30 |
 
 ---
 
