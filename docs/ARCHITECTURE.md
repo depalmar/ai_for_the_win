@@ -13,8 +13,8 @@ This document provides a comprehensive overview of the AI for the Win training p
 ├──────────────────────────────────────────────────────────────────────────────┤
 │                                                                               │
 │  ┌─────────────┐    ┌─────────────┐    ┌─────────────┐    ┌─────────────┐   │
-│  │   INTRO     │───▶│  FOUNDATION │───▶│  LLM TOOLS  │───▶│  ADVANCED   │   │
-│  │  Labs 01-c │    │  Labs 01-03 │    │  Labs 04-07 │    │  Labs 08-20 │   │
+│  │ FOUNDATION  │───▶│ ML BASICS   │───▶│ LLM TOOLS   │───▶│  ADVANCED   │   │
+│  │  Labs 00-09 │    │  Labs 10-13 │    │  Labs 14-24 │    │  Labs 25-50 │   │
 │  └─────────────┘    └─────────────┘    └─────────────┘    └─────────────┘   │
 │        │                  │                  │                  │            │
 │        ▼                  ▼                  ▼                  ▼            │
@@ -36,38 +36,46 @@ This document provides a comprehensive overview of the AI for the Win training p
 
 ```mermaid
 flowchart TB
-    subgraph intro [🎯 Intro Labs]
-        A00[00 Setup] --> A00a[01 Python]
-        A00a --> A00b[04 ML Concepts]
-        A00b --> A00c[02 Prompts]
-        A00c --> A00d[05 AI in SOC]
+    subgraph foundation [Foundation Labs 00-09]
+        A00[00 Setup] --> A01[01 Python]
+        A01 --> A02[02 Prompts]
+        A02 --> A03[03 Vibe Code]
+        A03 --> A04[04 ML Concepts]
+        A04 --> A05[05 AI in SOC]
+        A05 --> A06[06 Stats]
+        A06 --> A07[07 Hello ML]
+        A07 --> A08[08 APIs]
+        A08 --> A09[09 CTF Fund]
     end
 
-    subgraph ml [🔬 ML Basics - No API Key]
-        B01[01 Phishing] --> B02[02 Malware]
-        B02 --> B03[03 Anomaly]
+    subgraph ml [ML Basics 10-13 - No API Key]
+        B10[10 Phishing] --> B11[11 Malware]
+        B11 --> B12[12 Anomaly]
+        B12 --> B13[13 ML vs LLM]
     end
 
-    subgraph llm [🤖 LLM Tools - API Required]
-        C04[04 Logs] --> C05[05 Agent]
-        C05 --> C06[06 RAG]
-        C06 --> C07[07 YARA]
+    subgraph llm [LLM Tools 14-24 - API Required]
+        C14[14 First Agent] --> C15[15 LLM Logs]
+        C15 --> C16[16 Threat Intel]
+        C16 --> C17[17 Embeddings]
+        C17 --> C18[18 RAG]
+        C18 --> C19[19-24 Detection]
     end
 
-    subgraph adv [⚡ Advanced]
-        D08[08 Vuln] --> D09[09 Pipeline]
-        D09 --> D10[10 IR Copilot]
+    subgraph dfir [DFIR 25-35]
+        D25[25-29 IR Fundamentals]
+        D30[30-35 Ransomware/Forensics]
     end
 
-    subgraph expert [🔴 Expert]
-        E11[11-15 DFIR]
-        E16[16-20 AI Security]
+    subgraph advanced [Advanced 36-50]
+        E36[36-43 Threat Actors/ML Security]
+        E44[44-50 Cloud/Red Team]
     end
 
-    intro --> ml
+    foundation --> ml
     ml --> llm
-    llm --> adv
-    adv --> expert
+    llm --> dfir
+    dfir --> advanced
 ```
 
 ### Technology Stack
@@ -123,17 +131,15 @@ flowchart TB
 
 ```
 ai_for_the_win/
-├── labs/                          # 24 hands-on labs (core content)
+├── labs/                          # 50+ hands-on labs (core content)
+│   ├── lab00-environment-setup/
 │   ├── lab01-python-security-fundamentals/
-│   ├── lab04-ml-concepts-primer/
-│   ├── lab02-intro-prompt-engineering/
-│   ├── lab05-ai-in-security-operations/
 │   ├── lab10-phishing-classifier/
 │   │   ├── README.md              # Lab instructions
 │   │   ├── starter/               # Starting code templates
 │   │   ├── solution/              # Reference implementations
 │   │   └── data/                  # Lab-specific data
-│   └── ... (labs 02-20)
+│   └── ... (labs 00-50)
 │
 ├── notebooks/                     # Jupyter notebooks (Colab-ready)
 │   └── lab10_phishing_classifier.ipynb ...
@@ -622,8 +628,9 @@ See [CONTRIBUTING.md](../CONTRIBUTING.md) for:
 
 ## Version History
 
-| Version | Date    | Changes                             |
-| ------- | ------- | ----------------------------------- |
-| 1.0     | 2024-01 | Initial 10 labs                     |
-| 2.0     | 2024-06 | Added labs 11-16, capstones         |
-| 3.0     | 2024-12 | Added labs 17-19, CTF, integrations |
+| Version | Date    | Changes                                    |
+| ------- | ------- | ------------------------------------------ |
+| 1.0     | 2024-01 | Initial release with foundational content  |
+| 2.0     | 2024-06 | Added ML and LLM labs, capstones           |
+| 3.0     | 2024-12 | Added DFIR labs, CTF challenges            |
+| 4.0     | 2025-01 | Expanded to 50+ labs, renumbered for flow  |

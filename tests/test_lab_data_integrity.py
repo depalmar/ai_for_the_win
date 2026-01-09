@@ -1476,6 +1476,64 @@ class TestLabCategoryConsistency:
             unique_errors = list(set(errors))
             pytest.fail("README lab numbers don't match actual labs:\n" + "\n".join(unique_errors))
 
+    def test_ctf_prerequisite_labs_exist(self):
+        """Verify CTF prerequisite lab numbers reference actual labs."""
+        ctf_readme = REPO_ROOT / "ctf" / "README.md"
+        if not ctf_readme.exists():
+            pytest.skip("ctf/README.md not found")
+
+        content = ctf_readme.read_text(encoding="utf-8")
+
+        # Get actual lab numbers
+        actual_lab_nums = set()
+        for lab_dir in LABS_DIR.iterdir():
+            if lab_dir.is_dir() and lab_dir.name.startswith("lab"):
+                match = re.match(r"lab(\d+)", lab_dir.name)
+                if match:
+                    actual_lab_nums.add(int(match.group(1)))
+
+        # Find all "Lab XX" references in prerequisite column
+        # Pattern matches "Lab 10" or "Lab 10, 40" style references
+        errors = []
+        lab_refs = re.findall(r"Lab (\d+)", content)
+        for lab_num_str in lab_refs:
+            lab_num = int(lab_num_str)
+            if lab_num not in actual_lab_nums:
+                errors.append(f"CTF README references Lab {lab_num} but it doesn't exist")
+
+        if errors:
+            unique_errors = list(set(errors))
+            pytest.fail("CTF README has invalid lab references:\n" + "\n".join(unique_errors))
+
+    def test_architecture_doc_lab_count(self):
+        """Verify ARCHITECTURE.md has correct lab count."""
+        arch_doc = REPO_ROOT / "docs" / "ARCHITECTURE.md"
+        if not arch_doc.exists():
+            pytest.skip("docs/ARCHITECTURE.md not found")
+
+        content = arch_doc.read_text(encoding="utf-8")
+
+        # Count actual labs
+        actual_lab_count = sum(
+            1
+            for lab_dir in LABS_DIR.iterdir()
+            if lab_dir.is_dir() and lab_dir.name.startswith("lab")
+        )
+
+        # Check for outdated lab counts like "24 hands-on labs"
+        outdated_counts = re.findall(r"(\d+)\s*(?:hands-on\s+)?labs", content, re.I)
+        errors = []
+        for count_str in outdated_counts:
+            count = int(count_str)
+            # Allow "50+" style references but flag specific wrong counts
+            if count < actual_lab_count - 5:  # Allow some margin
+                errors.append(
+                    f"ARCHITECTURE.md says '{count} labs' but there are {actual_lab_count}"
+                )
+
+        if errors:
+            pytest.fail("ARCHITECTURE.md has outdated lab counts:\n" + "\n".join(errors))
+
 
 if __name__ == "__main__":
     pytest.main([__file__, "-v"])
