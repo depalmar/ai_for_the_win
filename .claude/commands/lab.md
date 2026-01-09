@@ -30,28 +30,47 @@ When the user invokes this command:
 
 3. **Lab Listing** (no args):
    ```
-   ## Foundation (00-09)
+   ## Foundation & Setup (00-09)
    - lab00: Environment Setup
    - lab01: Python Security Fundamentals
    - lab02: Prompt Engineering
    - lab03: Vibe Coding with AI
    - lab04: ML Concepts Primer
-   ...
+   - lab05: AI in Security Operations
+   - lab06: Visualization & Stats
+   - lab07: Hello World ML
+   - lab08: Working with APIs
+   - lab09: CTF Fundamentals
 
    ## ML Foundations (10-13)
    - lab10: Phishing Classifier
    - lab11: Malware Clustering
    - lab12: Anomaly Detection
    - lab13: ML vs LLM
-   ...
 
-   ## LLM Basics (14-18)
+   ## LLM Basics & Detection (14-21)
    - lab14: First AI Agent
    - lab15: LLM Log Analysis
    - lab16: Threat Intel Agent
    - lab17: Embeddings & Vectors
    - lab18: Security RAG
-   ...
+   - lab19: Binary Basics
+   - lab20: Sigma Fundamentals
+   - lab21: YARA Generator
+
+   ## Advanced Pipelines (22-29)
+   - lab22: Vuln Scanner AI
+   - lab23: Detection Pipeline
+   - lab24: Monitoring AI Systems
+   - lab25: DFIR Fundamentals
+   - lab26: Windows Event Log Analysis
+   - lab27: Windows Registry Forensics
+   - lab28: Live Response
+   - lab29: IR Copilot
+
+   ## Expert DFIR, Cloud, Red Team (30-50)
+   - lab30-50: Advanced topics including ransomware, memory forensics,
+     C2 analysis, adversarial ML, cloud security, and LLM red teaming
    ```
 
 4. **Lab Details** (with number):
@@ -76,13 +95,11 @@ When the user invokes this command:
 
 | Range | Category | API Required |
 |-------|----------|--------------|
-| 00-09 | Foundation | No |
+| 00-09 | Foundation & Setup | No |
 | 10-13 | ML Foundations | No |
-| 14-18 | LLM Basics | Yes |
-| 19-24 | Detection Engineering | Yes |
-| 25-35 | DFIR | Yes |
-| 36-43 | Advanced Threats | Yes |
-| 44-50 | Cloud & Red Team | Yes |
+| 14-21 | LLM Basics & Detection | Yes |
+| 22-29 | Advanced Pipelines | Yes |
+| 30-50 | Expert DFIR, Cloud, Red Team | Yes |
 
 ## Example Output
 

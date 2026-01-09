@@ -34,15 +34,17 @@ IMPORTANT: Preserve the learning experience!
 
 ## Lab Progression
 
-- **Labs 01-02**: Intro (Python, ML concepts, prompting) - no API keys
-- **Labs 01-03**: ML foundations - no API keys
-- **Labs 04-07**: LLM basics - requires API key
-- **Labs 08-10**: Advanced (agents, pipelines, copilots)
-- **Labs 11-20**: Expert (DFIR, forensics, adversarial ML)
+| Range | Category | API Required |
+|-------|----------|--------------|
+| 00-09 | Foundation & Setup | No |
+| 10-13 | ML Foundations | No |
+| 14-21 | LLM Basics & Detection | Yes |
+| 22-29 | Advanced Pipelines | Yes |
+| 30-50 | Expert DFIR, Cloud, Red Team | Yes |
 
 ## Cross-References
 
 When answering questions, reference relevant labs:
-- "See Lab 04 for LLM prompting basics"
-- "Lab 06 covers RAG implementation"
-- "This pattern is used in Lab 11"
+- "See Lab 02 for prompt engineering basics"
+- "Lab 18 covers RAG implementation"
+- "This pattern is used in Lab 31"
