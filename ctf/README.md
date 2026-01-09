@@ -12,37 +12,37 @@ FLAG{some_text_here}
 ## Challenge Tiers
 
 ### Beginner Challenges (100 pts each)
-For those who have completed the foundational labs (01-09).
+For those who have completed the foundational labs (00-09).
 
 | Challenge | Prerequisite Labs | Difficulty | API Key |
 |-----------|-------------------|------------|---------|
-| [01: Log Detective](beginner/01-log-detective/) | Lab 04 | Easy | Optional |
-| [02: Phish Finder](beginner/02-phish-finder/) | Lab 01 | Easy | No |
-| [03: Hidden IOC](beginner/03-hidden-ioc/) | Lab 01, 05 | Easy | Optional |
-| [04: Malware Classifier](beginner/04-malware-classifier/) | Lab 02 | Easy | No |
-| [05: Prompt Injection](beginner/05-prompt-injection/) | Lab 02 | Easy | No |
+| [01: Log Detective](beginner/01-log-detective/) | Lab 15 | Easy | Optional |
+| [02: Phish Finder](beginner/02-phish-finder/) | Lab 10 | Easy | No |
+| [03: Hidden IOC](beginner/03-hidden-ioc/) | Lab 16 | Easy | Optional |
+| [04: Malware Classifier](beginner/04-malware-classifier/) | Lab 11 | Easy | No |
+| [05: Prompt Injection](beginner/05-prompt-injection/) | Lab 14, 40 | Easy | No |
 
 ### Intermediate Challenges (250 pts each)
 For those who have completed multiple core labs.
 
 | Challenge | Prerequisite Labs | Difficulty | API Key |
 |-----------|-------------------|------------|---------|
-| [01: C2 Hunter](intermediate/01-c2-hunter/) | Lab 04, 14 | Medium | Optional |
-| [02: Memory Forensics](intermediate/02-memory-forensics/) | Lab 13 | Medium | No |
-| [03: Adversarial Samples](intermediate/03-adversarial-samples/) | Lab 17 | Medium | No |
-| [04: Agent Investigation](intermediate/04-agent-investigation/) | Lab 05 | Medium | Optional |
-| [05: Ransomware Response](intermediate/05-ransomware-response/) | Lab 11 | Medium | No |
+| [01: C2 Hunter](intermediate/01-c2-hunter/) | Lab 34 | Medium | Optional |
+| [02: Memory Forensics](intermediate/02-memory-forensics/) | Lab 33 | Medium | No |
+| [03: Adversarial Samples](intermediate/03-adversarial-samples/) | Lab 39 | Medium | No |
+| [04: Agent Investigation](intermediate/04-agent-investigation/) | Lab 16 | Medium | Optional |
+| [05: Ransomware Response](intermediate/05-ransomware-response/) | Lab 31 | Medium | No |
 
 ### Advanced Challenges (500 pts each)
 For those ready for real-world complexity.
 
 | Challenge | Prerequisite Labs | Difficulty | API Key |
 |-----------|-------------------|------------|---------|
-| [01: APT Attribution](advanced/01-apt-attribution/) | Lab 16 | Hard | Optional |
-| [02: Model Poisoning](advanced/02-model-poisoning/) | Lab 17 | Hard | No |
-| [03: Cloud Compromise](advanced/03-cloud-compromise/) | Lab 19 | Hard | Optional |
-| [04: Zero-Day Hunt](advanced/04-zero-day-hunt/) | Lab 03 | Hard | No |
-| [05: Full IR Scenario](advanced/05-full-ir-scenario/) | Lab 10 | Hard | Optional |
+| [01: APT Attribution](advanced/01-apt-attribution/) | Lab 36 | Hard | Optional |
+| [02: Model Poisoning](advanced/02-model-poisoning/) | Lab 39 | Hard | No |
+| [03: Cloud Compromise](advanced/03-cloud-compromise/) | Lab 45 | Hard | Optional |
+| [04: Zero-Day Hunt](advanced/04-zero-day-hunt/) | Lab 12 | Hard | No |
+| [05: Full IR Scenario](advanced/05-full-ir-scenario/) | Lab 29 | Hard | Optional |
 
 ## Quick Stats
 
