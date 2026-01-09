@@ -172,11 +172,11 @@ High Confidence: FIN7/Carbanak
 <td align="center"><a href="./labs/lab10-phishing-classifier/"><img src="https://img.shields.io/badge/01-Phishing-10b981?style=for-the-badge" alt="Lab 29"/></a></td>
 <td align="center"><a href="./labs/lab11-malware-clustering/"><img src="https://img.shields.io/badge/02-Malware-10b981?style=for-the-badge" alt="Lab 31"/></a></td>
 <td align="center"><a href="./labs/lab12-anomaly-detection/"><img src="https://img.shields.io/badge/03-Anomaly-10b981?style=for-the-badge" alt="Lab 32"/></a></td>
-<td align="center"><a href="./labs/lab33-ml-vs-llm/"><img src="https://img.shields.io/badge/03b-ML_vs_LLM-10b981?style=for-the-badge" alt="Lab 33"/></a></td>
+<td align="center"><a href="./labs/lab13-ml-vs-llm/"><img src="https://img.shields.io/badge/03b-ML_vs_LLM-10b981?style=for-the-badge" alt="Lab 13"/></a></td>
 <td align="center"><a href="./labs/lab15-llm-log-analysis/"><img src="https://img.shields.io/badge/04-Logs-6366f1?style=for-the-badge" alt="Lab 35"/></a></td>
 </tr>
 <tr>
-<td align="center"><a href="./labs/lab34-first-ai-agent/"><img src="https://img.shields.io/badge/04b-Agent-6366f1?style=for-the-badge" alt="Lab 34"/></a></td>
+<td align="center"><a href="./labs/lab14-first-ai-agent/"><img src="https://img.shields.io/badge/04b-Agent-6366f1?style=for-the-badge" alt="Lab 14"/></a></td>
 <td align="center"><a href="./labs/lab16-threat-intel-agent/"><img src="https://img.shields.io/badge/05-Intel-6366f1?style=for-the-badge" alt="Lab 36"/></a></td>
 <td align="center"><a href="./labs/lab17-embeddings-vectors/"><img src="https://img.shields.io/badge/06a-Vectors-6366f1?style=for-the-badge" alt="Lab 39"/></a></td>
 <td align="center"><a href="./labs/lab18-security-rag/"><img src="https://img.shields.io/badge/06-RAG-6366f1?style=for-the-badge" alt="Lab 42"/></a></td>
@@ -260,14 +260,14 @@ High Confidence: FIN7/Carbanak
 | [01](./labs/lab10-phishing-classifier/) | Phishing | TF-IDF, Random Forest, classification |
 | [02](./labs/lab11-malware-clustering/) | Malware | K-Means, DBSCAN, clustering binaries |
 | [03](./labs/lab12-anomaly-detection/) | Anomaly | Isolation Forest, LOF, baselines |
-| [03b](./labs/lab33-ml-vs-llm/) | ML vs LLM | When to use each, cost tradeoffs |
+| [03b](./labs/lab13-ml-vs-llm/) | ML vs LLM | When to use each, cost tradeoffs |
 
 ### 🟣 LLM Labs (04-07) — Language Models & Agents
 
 | Lab | Topic | Description |
 |-----|-------|-------------|
 | [04](./labs/lab15-llm-log-analysis/) | Logs | Prompt engineering, IOC extraction |
-| [04b](./labs/lab34-first-ai-agent/) | Agent | ReAct pattern, tool calling basics |
+| [04b](./labs/lab14-first-ai-agent/) | Agent | ReAct pattern, tool calling basics |
 | [05](./labs/lab16-threat-intel-agent/) | Intel | LangChain, autonomous investigation |
 | [06a](./labs/lab17-embeddings-vectors/) | Vectors | Embeddings, similarity search |
 | [06](./labs/lab18-security-rag/) | RAG | ChromaDB, retrieval-augmented Q&A |
