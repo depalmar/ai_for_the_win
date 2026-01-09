@@ -16,6 +16,7 @@ Follow this progression for the best learning experience. Labs build on each oth
 
 | # | Lab | Topic | What You'll Learn |
 |---|-----|-------|-------------------|
+| 00 | [Environment Setup](./lab00-environment-setup/) | Setup | Python, venv, API keys, tools installation |
 | 01 | [Python for Security](./lab01-python-security-fundamentals/) | Python basics | Variables, files, APIs, security examples |
 | 02 | [Intro to Prompt Engineering](./lab02-intro-prompt-engineering/) | LLM prompting | Prompt design, hallucination detection, AI Studio |
 | 03 | [Vibe Coding with AI](./lab03-vibe-coding-with-ai/) | AI assistants | Claude Code, Cursor, Copilot, accelerated learning |
@@ -24,16 +25,19 @@ Follow this progression for the best learning experience. Labs build on each oth
 | 06 | [Visualization & Statistics](./lab06-visualization-stats/) | Data viz | Plotly, Gradio, statistics, dashboards |
 | 07 | [Hello World ML](./lab07-hello-world-ml/) | First classifier | 4-step ML workflow, accuracy, precision, recall |
 | 08 | [Working with APIs](./lab08-working-with-apis/) | HTTP & REST | requests library, JSON, API keys, rate limiting |
+| 09 | [CTF Fundamentals](./lab09-ctf-fundamentals/) | CTF skills | Flag formats, encoding, systematic approaches |
 
 **Who should do these:**
+- Brand new to everything → Start with **Lab 00** (environment setup)
 - No Python experience → Start with **Lab 01**
 - Python OK, new to ML → Start with **Lab 04** then **Lab 07**
 - Want to use LLMs effectively → Do **Lab 02** (highly recommended!)
 - Want SOC/operational context → Do **Lab 05** (conceptual, no coding)
 - Need visualization skills → Do **Lab 06** (Plotly, Gradio, dashboards)
-- **New! First ML model** → Do **Lab 07** before Lab 10 (simpler intro)
-- **New! API skills** → Do **Lab 08** before Labs 14-18 (LLM APIs)
-- **New! Accelerate your learning** → Do **Lab 03** to use AI assistants throughout the course
+- First ML model → Do **Lab 07** before Lab 10 (simpler intro)
+- API skills → Do **Lab 08** before Labs 14-18 (LLM APIs)
+- CTF practice → Do **Lab 09** to learn challenge-solving approaches
+- Accelerate your learning → Do **Lab 03** to use AI assistants throughout the course
 - Comfortable with all → Skip to Lab 10
 
 ```
@@ -787,6 +791,7 @@ data_path = Path(__file__).parent.parent / "data" / "file.csv"
 Track your progress:
 
 **Prerequisites (Optional but Recommended)**
+- [ ] Lab 00: Environment Setup
 - [ ] Lab 01: Python for Security Fundamentals
 - [ ] Lab 02: Intro to Prompt Engineering
 - [ ] Lab 03: Vibe Coding with AI
@@ -795,6 +800,7 @@ Track your progress:
 - [ ] Lab 06: Visualization & Statistics
 - [ ] Lab 07: Hello World ML (first classifier!)
 - [ ] Lab 08: Working with APIs (HTTP/JSON skills)
+- [ ] Lab 09: CTF Fundamentals
 
 **Core Labs**
 - [ ] Lab 10: Phishing Classifier
