@@ -43,7 +43,7 @@ langgraph>=1.0.0,<2.0.0
 
 # Direct LLM SDKs - updated to Jan 2026 versions
 anthropic>=0.70.0,<1.0.0
-openai>=1.50.0,<2.0.0
+openai>=1.50.0,<3.0.0
 google-generativeai>=0.8.0,<1.0.0
 
 # Unified LLM API (supports 100+ providers)
