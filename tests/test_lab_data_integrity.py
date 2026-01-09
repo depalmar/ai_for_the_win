@@ -1433,6 +1433,49 @@ class TestLabCategoryConsistency:
         if errors:
             pytest.fail("Outdated category ranges found:\n" + "\n".join(errors))
 
+    def test_readme_lab_numbers_match_actual_labs(self):
+        """Verify lab numbers in README.md match actual lab directories."""
+        readme = REPO_ROOT / "README.md"
+        if not readme.exists():
+            pytest.skip("README.md not found")
+
+        content = readme.read_text(encoding="utf-8")
+
+        # Get actual lab numbers from directory names
+        actual_lab_nums = set()
+        for lab_dir in LABS_DIR.iterdir():
+            if lab_dir.is_dir() and lab_dir.name.startswith("lab"):
+                match = re.match(r"lab(\d+)", lab_dir.name)
+                if match:
+                    actual_lab_nums.add(int(match.group(1)))
+
+        errors = []
+
+        # Check "Detailed Lab Descriptions" table - pattern: "| Lab XX |" or "| **XX** |"
+        # This table should have lab numbers in first column
+        table_lab_refs = re.findall(r"\|\s*\*?\*?(\d{1,2})\*?\*?\s*\|.*\|.*\|", content)
+        for lab_num_str in table_lab_refs:
+            lab_num = int(lab_num_str)
+            # Only check if it looks like a lab number (0-99 range)
+            if 0 <= lab_num <= 99 and lab_num not in actual_lab_nums:
+                errors.append(
+                    f"README table references lab {lab_num:02d} but no lab{lab_num:02d}-* directory exists"
+                )
+
+        # Check for lab directory path references like "labs/labXX-"
+        path_refs = re.findall(r"labs/lab(\d+)-", content)
+        for lab_num_str in path_refs:
+            lab_num = int(lab_num_str)
+            if lab_num not in actual_lab_nums:
+                errors.append(
+                    f"README references path labs/lab{lab_num:02d}-* but directory doesn't exist"
+                )
+
+        if errors:
+            # Dedupe and report
+            unique_errors = list(set(errors))
+            pytest.fail("README lab numbers don't match actual labs:\n" + "\n".join(unique_errors))
+
 
 if __name__ == "__main__":
     pytest.main([__file__, "-v"])
