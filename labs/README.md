@@ -12,43 +12,43 @@ Follow this progression for the best learning experience. Labs build on each oth
 
 ### 🎯 Getting Started: Prerequisites
 
-**New to Python, ML, or LLMs?** Start here before Lab 29.
+**New to Python, ML, or LLMs?** Start here before Lab 10.
 
 | # | Lab | Topic | What You'll Learn |
 |---|-----|-------|-------------------|
 | 01 | [Python for Security](./lab01-python-security-fundamentals/) | Python basics | Variables, files, APIs, security examples |
-| 04 | [ML Concepts Primer](./lab04-ml-concepts-primer/) | ML theory | Supervised/unsupervised, features, evaluation |
 | 02 | [Intro to Prompt Engineering](./lab02-intro-prompt-engineering/) | LLM prompting | Prompt design, hallucination detection, AI Studio |
+| 03 | [Vibe Coding with AI](./lab03-vibe-coding-with-ai/) | AI assistants | Claude Code, Cursor, Copilot, accelerated learning |
+| 04 | [ML Concepts Primer](./lab04-ml-concepts-primer/) | ML theory | Supervised/unsupervised, features, evaluation |
 | 05 | [AI in Security Operations](./lab05-ai-in-security-operations/) | SOC integration | Where AI fits, human-in-the-loop, compliance |
 | 06 | [Visualization & Statistics](./lab06-visualization-stats/) | Data viz | Plotly, Gradio, statistics, dashboards |
 | 07 | [Hello World ML](./lab07-hello-world-ml/) | First classifier | 4-step ML workflow, accuracy, precision, recall |
 | 08 | [Working with APIs](./lab08-working-with-apis/) | HTTP & REST | requests library, JSON, API keys, rate limiting |
-| 03 | [Vibe Coding with AI](./lab03-vibe-coding-with-ai/) | AI assistants | Claude Code, Cursor, Copilot, accelerated learning |
 
 **Who should do these:**
-- No Python experience → Start with **01**
-- Python OK, new to ML → Start with **04** then **07**
-- Want to use LLMs effectively → Do **02** (highly recommended!)
-- Want SOC/operational context → Do **05** (conceptual, no coding)
-- Need visualization skills → Do **06** (Plotly, Gradio, dashboards)
-- **New! First ML model** → Do **07** before Lab 29 (simpler intro)
-- **New! API skills** → Do **08** before Labs 04-07 (LLM APIs)
-- **New! Accelerate your learning** → Do **03** to use AI assistants throughout the course
-- Comfortable with all → Skip to Lab 29
+- No Python experience → Start with **Lab 01**
+- Python OK, new to ML → Start with **Lab 04** then **Lab 07**
+- Want to use LLMs effectively → Do **Lab 02** (highly recommended!)
+- Want SOC/operational context → Do **Lab 05** (conceptual, no coding)
+- Need visualization skills → Do **Lab 06** (Plotly, Gradio, dashboards)
+- **New! First ML model** → Do **Lab 07** before Lab 10 (simpler intro)
+- **New! API skills** → Do **Lab 08** before Labs 14-18 (LLM APIs)
+- **New! Accelerate your learning** → Do **Lab 03** to use AI assistants throughout the course
+- Comfortable with all → Skip to Lab 10
 
 ```
-Lab 29 (Python) → Lab 35 (ML) → Lab 21 (First ML) → Lab 29 (Phishing)
+Lab 01 (Python) → Lab 04 (ML) → Lab 07 (First ML) → Lab 10 (Phishing)
      ↓                 ↓                 ↓                   ↓
  "Learn Python    "Understand       "Build your         "Build real
   basics"          ML theory"        FIRST model"        classifier"
 
-Lab 31 (Prompts) → Lab 22 (APIs) → Lab 35 (LLM Log Analysis)
+Lab 02 (Prompts) → Lab 08 (APIs) → Lab 15 (LLM Log Analysis)
      ↓                  ↓                   ↓
  "Master LLM        "HTTP & JSON       "Use LLMs
   prompting"         skills"            for security"
 ```
 
-> 💡 **Pro Tip:** Even experienced developers should do **Lab 31** and **Lab 36** - prompt engineering and SOC context are critical for real-world deployment!
+> 💡 **Pro Tip:** Even experienced developers should do **Lab 02** and **Lab 05** - prompt engineering and SOC context are critical for real-world deployment!
 
 ---
 
@@ -58,20 +58,20 @@ Start here if you're new to ML for security. These labs teach core concepts.
 
 | # | Lab | Topic | What You'll Learn |
 |---|-----|-------|-------------------|
-| 01 | [Phishing Classifier](./lab10-phishing-classifier/) | Text classification | TF-IDF, Random Forest, precision/recall |
-| 02 | [Malware Clustering](./lab11-malware-clustering/) | Unsupervised learning | K-Means, t-SNE, PE file features |
-| 03 | [Anomaly Detection](./lab12-anomaly-detection/) | Outlier detection | Isolation Forest, network features |
-| 03b | [ML vs LLM Decision](./lab33-ml-vs-llm/) | **NEW! Bridge lab** | When to use ML vs LLM, hybrid systems |
+| 10 | [Phishing Classifier](./lab10-phishing-classifier/) | Text classification | TF-IDF, Random Forest, precision/recall |
+| 11 | [Malware Clustering](./lab11-malware-clustering/) | Unsupervised learning | K-Means, t-SNE, PE file features |
+| 12 | [Anomaly Detection](./lab12-anomaly-detection/) | Outlier detection | Isolation Forest, network features |
+| 13 | [ML vs LLM Decision](./lab13-ml-vs-llm/) | **Bridge lab** | When to use ML vs LLM, hybrid systems |
 
 **Progression:**
 ```
-Lab 29 (Text ML) → Lab 31 (Clustering) → Lab 32 (Anomaly) → Lab 33 (ML vs LLM)
+Lab 10 (Text ML) → Lab 11 (Clustering) → Lab 12 (Anomaly) → Lab 13 (ML vs LLM)
      ↓                  ↓                      ↓                   ↓
  "Classify           "Group              "Find unusual        "When to use
   emails"            malware"             traffic"             ML vs LLM?"
 ```
 
-**Bridge to LLMs:** Lab 33 is the critical bridge between ML and LLM sections. It teaches you when to use each approach and how to combine them effectively.
+**Bridge to LLMs:** Lab 13 is the critical bridge between ML and LLM sections. It teaches you when to use each approach and how to combine them effectively.
 
 ---
 
@@ -81,24 +81,26 @@ Learn to apply Large Language Models to security problems.
 
 | # | Lab | Topic | What You'll Learn |
 |---|-----|-------|-------------------|
-| 04 | [LLM Log Analysis](./lab15-llm-log-analysis/) | Prompt engineering | Structured outputs, IOC extraction |
-| 04b | [Your First AI Agent](./lab34-first-ai-agent/) | **NEW! Bridge lab** | Tool calling, ReAct basics |
-| 06a | [Embeddings & Vectors](./lab17-embeddings-vectors/) | **NEW! Bridge lab** | How embeddings work, semantic search |
-| 06 | [Security RAG](./lab18-security-rag/) | Vector search + LLM | Embeddings, ChromaDB, retrieval |
-| 07a | [Binary Analysis Basics](./lab45-binary-basics/) | **NEW! Bridge lab** | PE structure, entropy, imports |
-| 07 | [YARA Generator](./lab21-yara-generator/) | AI code generation | Binary analysis, rule generation |
+| 14 | [Your First AI Agent](./lab14-first-ai-agent/) | **Bridge lab** | Tool calling, ReAct basics |
+| 15 | [LLM Log Analysis](./lab15-llm-log-analysis/) | Prompt engineering | Structured outputs, IOC extraction |
+| 16 | [Threat Intel Agent](./lab16-threat-intel-agent/) | AI agents | Full ReAct pattern, tools, memory |
+| 17 | [Embeddings & Vectors](./lab17-embeddings-vectors/) | **Bridge lab** | How embeddings work, semantic search |
+| 18 | [Security RAG](./lab18-security-rag/) | Vector search + LLM | Embeddings, ChromaDB, retrieval |
+| 19 | [Binary Analysis Basics](./lab19-binary-basics/) | **Bridge lab** | PE structure, entropy, imports |
+| 20 | [Sigma Fundamentals](./lab20-sigma-fundamentals/) | Detection rules | Sigma syntax, converters |
+| 21 | [YARA Generator](./lab21-yara-generator/) | AI code generation | Binary analysis, rule generation |
 
 **Progression:**
 ```
-Lab 35 (Prompts) → Lab 34 (First Agent) → Lab 39 (Embeddings) → Lab 42 (RAG) → Lab 21 (YARA)
-     ↓                   ↓                        ↓                    ↓              ↓
- "Parse logs       "Simple tool           "How vectors        "Build RAG      "Generate
-  with LLM"         calling"               work"               system"         YARA rules"
+Lab 14 (First Agent) → Lab 15 (Log Analysis) → Lab 16 (Threat Intel) → Lab 17 (Embeddings) → Lab 18 (RAG) → Lab 21 (YARA)
+        ↓                      ↓                      ↓                       ↓                   ↓              ↓
+   "Simple tools"       "Parse logs"          "Full agent"          "How vectors        "Build RAG      "Generate
+                                                                     work"               system"         YARA rules"
 ```
 
-**Bridge to Full Agents:** Lab 34 teaches basic tool calling. This prepares you for Lab 36's full ReAct agent with memory and multiple tools.
+**Bridge to Full Agents:** Lab 14 teaches basic tool calling. This prepares you for Lab 16's full ReAct agent with memory and multiple tools.
 
-> ⚠️ **Note about Lab 36**: Despite its number, Lab 36 is in the "Advanced" section below because it builds on concepts from Labs 04-07. Do Lab 34 first if agents feel complex!
+> ⚠️ **Note about Lab 16**: Despite its number, Lab 16 (Threat Intel Agent) is more advanced because it builds on concepts from Labs 14-15. Do Lab 14 first if agents feel complex!
 
 ---
 
@@ -106,22 +108,19 @@ Lab 35 (Prompts) → Lab 34 (First Agent) → Lab 39 (Embeddings) → Lab 42 (RA
 
 Build AI agents and multi-stage pipelines.
 
-> 💡 **Why is Lab 36 here?** Lab 36 is numbered "05" but lives in the Advanced section because it requires understanding tool calling (Lab 34), RAG (Lab 42), and prompt engineering (Lab 35). The numbering is historical - follow the progression below, not the numbers!
-
 | # | Lab | Topic | What You'll Learn |
 |---|-----|-------|-------------------|
-| 05 | [Threat Intel Agent](./lab16-threat-intel-agent/) | AI agents | Full ReAct pattern, tools, memory |
-| 08 | [Vuln Scanner AI](./lab22-vuln-scanner-ai/) | Risk prioritization | CVSS, business context |
-| 09 | [Detection Pipeline](./lab23-detection-pipeline/) | ML + LLM pipeline | Multi-stage detection |
-| 09b | [Monitoring AI Systems](./lab24-monitoring-ai-systems/) | **NEW! Bridge lab** | Observability, drift detection, logging |
-| 10 | [IR Copilot](./lab29-ir-copilot/) | Conversational AI | Orchestration, confirmation |
+| 22 | [Vuln Scanner AI](./lab22-vuln-scanner-ai/) | Risk prioritization | CVSS, business context |
+| 23 | [Detection Pipeline](./lab23-detection-pipeline/) | ML + LLM pipeline | Multi-stage detection |
+| 24 | [Monitoring AI Systems](./lab24-monitoring-ai-systems/) | **Bridge lab** | Observability, drift detection, logging |
+| 29 | [IR Copilot](./lab29-ir-copilot/) | Conversational AI | Orchestration, confirmation |
 
 **Progression:**
 ```
-Lab 34 (First Agent) → Lab 36 (Full Agent) → Lab 22 (Vuln) → Lab 23 (Pipeline) → Lab 24 (Monitoring)
-        ↓                       ↓                  ↓                ↓                    ↓
-   "Simple tools"        "ReAct + memory"    "Prioritize      "Combine           "Monitor
-                                              risks"           ML + LLM"          in prod"
+Lab 14 (First Agent) → Lab 16 (Full Agent) → Lab 22 (Vuln) → Lab 23 (Pipeline) → Lab 24 (Monitoring) → Lab 29 (IR)
+        ↓                       ↓                  ↓                ↓                    ↓                  ↓
+   "Simple tools"        "ReAct + memory"    "Prioritize      "Combine           "Monitor          "Conversational
+                                              risks"           ML + LLM"          in prod"           IR assistant"
 ```
 
 ---
@@ -132,49 +131,44 @@ Deep dive into incident response, threat simulation, and offensive security anal
 
 | # | Lab | Topic | What You'll Learn |
 |---|-----|-------|-------------------|
-| 10a | [DFIR Fundamentals](./lab25-dfir-fundamentals/) | **Bridge lab** | IR lifecycle, artifacts, ATT&CK mapping |
-| 10b | [Windows Event Log Analysis](./lab26-windows-event-log-analysis/) | **NEW!** | Event IDs, lateral movement, credential theft |
-| 10c | [Windows Registry Forensics](./lab27-windows-registry-forensics/) | **NEW!** | Persistence hunting, forensic artifacts |
-| 10d | [Live Response](./lab28-live-response/) | **NEW!** | Collection techniques, triage checklist |
-| 11a | [Ransomware Fundamentals](./lab30-ransomware-fundamentals/) | **NEW! Bridge lab** | Evolution, families, indicators, recovery |
-| 11 | [Ransomware Detection](./lab31-ransomware-detection/) | Behavioral detection | Entropy, TTPs, response |
-| 12 | [Purple Team](./lab32-ransomware-simulation/) | Adversary emulation | Safe simulation, gap analysis |
-| 13 | [Memory Forensics AI](./lab33-memory-forensics-ai/) | Memory analysis | Volatility3, process injection, credential dumping |
-| 14 | [C2 Traffic Analysis](./lab34-c2-traffic-analysis/) | Network forensics | Beaconing, DNS tunneling, encrypted C2 |
-| 15 | [Lateral Movement Detection](./lab35-lateral-movement-detection/) | Attack detection | Auth anomalies, remote execution, graph analysis |
-| 16 | [Threat Actor Profiling](./lab36-threat-actor-profiling/) | Attribution | TTP analysis, clustering, actor profiles |
-| 17a | [ML Security Intro](./lab38-ml-security-intro/) | **NEW! Bridge lab** | ML threat models, attack taxonomy |
-| 17 | [Adversarial ML](./lab39-adversarial-ml/) | Attack/Defense | Evasion, poisoning, robust ML defenses |
-| 17b | [LLM Security Testing](./lab40-llm-security-testing/) | **NEW!** | Prompt injection, jailbreaks, data extraction |
-| 17c | [Model Monitoring](./lab41-model-monitoring/) | **NEW!** | Drift detection, adversarial detection |
-| 18 | [Fine-Tuning for Security](./lab42-fine-tuning-security/) | Custom models | LoRA, security embeddings, deployment |
-| 18b | [RAG Security](./lab43-rag-security/) | **NEW!** | KB poisoning, context sanitization |
-| 19a | [Cloud Security Fundamentals](./lab44-cloud-security-fundamentals/) | **NEW! Bridge lab** | AWS/Azure/GCP basics, IAM, CloudTrail |
-| 19 | [Cloud Security AI](./lab45-cloud-security-ai/) | Multi-cloud | CloudTrail, AWS/Azure/GCP threat detection |
-| 19b | [Container Security](./lab46-container-security/) | **NEW!** | Kubernetes, runtime detection, escapes |
-| 19c | [Serverless Security](./lab47-serverless-security/) | **NEW!** | Lambda analysis, event injection, IAM |
-| 19d | [Cloud IR Automation](./lab48-cloud-ir-automation/) | **NEW!** | Automated containment, evidence collection |
-| 20 | [LLM Red Teaming](./lab49-llm-red-teaming/) | Offensive AI Security | Prompt injection, jailbreaking, agentic attacks |
+| 25 | [DFIR Fundamentals](./lab25-dfir-fundamentals/) | **Bridge lab** | IR lifecycle, artifacts, ATT&CK mapping |
+| 26 | [Windows Event Log Analysis](./lab26-windows-event-log-analysis/) | Windows forensics | Event IDs, lateral movement, credential theft |
+| 27 | [Windows Registry Forensics](./lab27-windows-registry-forensics/) | Registry analysis | Persistence hunting, forensic artifacts |
+| 28 | [Live Response](./lab28-live-response/) | Triage | Collection techniques, triage checklist |
+| 30 | [Ransomware Fundamentals](./lab30-ransomware-fundamentals/) | **Bridge lab** | Evolution, families, indicators, recovery |
+| 31 | [Ransomware Detection](./lab31-ransomware-detection/) | Behavioral detection | Entropy, TTPs, response |
+| 32 | [Purple Team](./lab32-ransomware-simulation/) | Adversary emulation | Safe simulation, gap analysis |
+| 33 | [Memory Forensics AI](./lab33-memory-forensics-ai/) | Memory analysis | Volatility3, process injection, credential dumping |
+| 34 | [C2 Traffic Analysis](./lab34-c2-traffic-analysis/) | Network forensics | Beaconing, DNS tunneling, encrypted C2 |
+| 35 | [Lateral Movement Detection](./lab35-lateral-movement-detection/) | Attack detection | Auth anomalies, remote execution, graph analysis |
+| 36 | [Threat Actor Profiling](./lab36-threat-actor-profiling/) | Attribution | TTP analysis, clustering, actor profiles |
+| 37 | [AI-Powered Threats](./lab37-ai-powered-threat-actors/) | Emerging threats | AI-generated phishing, deepfakes |
+| 38 | [ML Security Intro](./lab38-ml-security-intro/) | **Bridge lab** | ML threat models, attack taxonomy |
+| 39 | [Adversarial ML](./lab39-adversarial-ml/) | Attack/Defense | Evasion, poisoning, robust ML defenses |
+| 40 | [LLM Security Testing](./lab40-llm-security-testing/) | LLM security | Prompt injection, jailbreaks, data extraction |
+| 41 | [Model Monitoring](./lab41-model-monitoring/) | Production ML | Drift detection, adversarial detection |
+| 42 | [Fine-Tuning for Security](./lab42-fine-tuning-security/) | Custom models | LoRA, security embeddings, deployment |
+| 43 | [RAG Security](./lab43-rag-security/) | RAG hardening | KB poisoning, context sanitization |
+| 44 | [Cloud Security Fundamentals](./lab44-cloud-security-fundamentals/) | **Bridge lab** | AWS/Azure/GCP basics, IAM, CloudTrail |
+| 45 | [Cloud Security AI](./lab45-cloud-security-ai/) | Multi-cloud | CloudTrail, AWS/Azure/GCP threat detection |
+| 46 | [Container Security](./lab46-container-security/) | Kubernetes | Runtime detection, container escapes |
+| 47 | [Serverless Security](./lab47-serverless-security/) | Lambda/Functions | Event injection, IAM analysis |
+| 48 | [Cloud IR Automation](./lab48-cloud-ir-automation/) | Automation | Automated containment, evidence collection |
+| 49 | [LLM Red Teaming](./lab49-llm-red-teaming/) | Offensive AI | Prompt injection, jailbreaking, agentic attacks |
+| 50 | [Purple Team AI](./lab50-purple-team-ai/) | Full exercise | Attack simulation, detection validation |
 
 **Progression:**
 ```
-Lab 25 (DFIR Fundamentals) → Lab 30 (Ransomware Basics) → Lab 31 (Detection) → Lab 32 (Purple Team) → Lab 33 (Memory)
-     ↓                           ↓                     ↓                      ↓
- "Learn IR              "Detect              "Validate              "Analyze
-  lifecycle"             ransomware"          detections"            memory dumps"
+Lab 25 (DFIR) → Lab 26-28 (Windows) → Lab 30-32 (Ransomware) → Lab 33 (Memory) → Lab 34-36 (Network/Attribution)
+     ↓                  ↓                      ↓                      ↓                      ↓
+ "IR lifecycle"   "Windows forensics"   "Ransomware response"   "Memory analysis"   "Network forensics"
 
-Lab 34 (C2 Traffic) → Lab 35 (Lateral Movement) → Lab 36 (Attribution) → Lab 39 (Adversarial)
-     ↓                      ↓                          ↓                      ↓
- "Detect C2            "Track attacker           "Profile             "Attack/defend
-  communications"        movement"                threat actors"        ML models"
-
-Lab 42 (Fine-Tuning) → Lab 44 (Cloud Fundamentals) → Lab 45 (Cloud Security AI) → Lab 49 (LLM Red Team)
-     ↓                          ↓                           ↓                          ↓
- "Build custom            "Learn cloud                 "AI-powered              "Attack AI
-  security models"         security basics"             cloud detection"          systems"
+Lab 38-41 (ML Security) → Lab 42-43 (Custom Models) → Lab 44-48 (Cloud) → Lab 49-50 (Red Team)
+        ↓                          ↓                        ↓                     ↓
+   "Attack/defend ML"      "Fine-tune & secure"      "Cloud detection"    "Offensive AI"
 ```
 
-**Bridge from Core:** Labs 11-20 build on detection skills from Labs 09-10 and apply them to advanced DFIR, adversarial ML, and cloud security scenarios. Lab 39 teaches how to attack and defend ML models. Lab 44 introduces cloud security fundamentals for those new to AWS/Azure/GCP. Labs 18-19 cover custom model training and multi-cloud security. Lab 49 focuses on offensive security for LLM applications - prompt injection, jailbreaking, and exploiting agentic AI systems.
+**Bridge from Core:** Labs 25-50 build on detection skills from Labs 22-24 and apply them to advanced DFIR, adversarial ML, and cloud security scenarios. Lab 39 teaches how to attack and defend ML models. Lab 44 introduces cloud security fundamentals for those new to AWS/Azure/GCP. Labs 42-43 cover custom model training and RAG security. Lab 49 focuses on offensive security for LLM applications - prompt injection, jailbreaking, and exploiting agentic AI systems.
 
 ---
 
@@ -184,17 +178,17 @@ Choose based on your objectives:
 
 | Your Goal | Labs | Prerequisites |
 |-----------|------|---------------|
-| **"I'm completely new"** | 01 → 04 → 02 → 01 | Nothing! |
-| **"I know Python, new to ML"** | 04 → 02 → 01 → 02 | Python basics |
-| **"I know ML, teach me LLMs"** | 02 → 04 → 06 → 05 | ML experience |
-| **"I want to build agents"** | 04 → 05 → 10 | API key |
-| **"SOC/Detection focus"** | 01 → 03 → 09 → 11 → 15 | Python + ML basics |
-| **"DFIR specialist"** | 04 → 05 → 11 → 13 → 14 | Security background |
-| **"Red Team/Offensive"** | 12 → 14 → 15 → 16 → 20 | Security experience |
-| **"Threat Intel Analyst"** | 05 → 06 → 14 → 16 | TI fundamentals |
-| **"ML Security/Adversarial"** | 01 → 02 → 09 → 17 → 20 | ML fundamentals |
-| **"LLM Security/Red Team"** | 04 → 05 → 17 → 20 | LLM + security basics |
-| **"Complete everything"** | All 24 labs | Dedication |
+| **"I'm completely new"** | 01 → 04 → 07 → 10 | Nothing! |
+| **"I know Python, new to ML"** | 04 → 07 → 10 → 11 | Python basics |
+| **"I know ML, teach me LLMs"** | 02 → 14 → 15 → 16 | ML experience |
+| **"I want to build agents"** | 14 → 16 → 29 | API key |
+| **"SOC/Detection focus"** | 10 → 12 → 23 → 31 → 35 | Python + ML basics |
+| **"DFIR specialist"** | 25 → 26 → 31 → 33 → 34 | Security background |
+| **"Red Team/Offensive"** | 32 → 34 → 35 → 36 → 49 | Security experience |
+| **"Threat Intel Analyst"** | 16 → 18 → 34 → 36 | TI fundamentals |
+| **"ML Security/Adversarial"** | 10 → 11 → 23 → 39 → 49 | ML fundamentals |
+| **"LLM Security/Red Team"** | 15 → 16 → 40 → 49 | LLM + security basics |
+| **"Complete everything"** | All 50 labs | Dedication |
 
 ---
 
@@ -214,7 +208,7 @@ python scripts/launcher.py
 
 ## 🔄 Workflow Orchestration
 
-Labs 09-12 use workflow orchestration for multi-stage pipelines:
+Labs 22-29 use workflow orchestration for multi-stage pipelines:
 
 ```python
 # Example from Lab 23: Detection Pipeline
@@ -265,7 +259,7 @@ llm = setup_llm(provider="ollama")     # Local Llama
 | **OS** | Windows 10, macOS 10.15, Ubuntu 20.04 | Latest versions |
 | **Internet** | Required for API labs | Stable connection |
 
-> **Note:** Labs 00-03 (ML only) have minimal requirements. LLM labs (04+) benefit from more RAM for embeddings.
+> **Note:** Labs 00-13 (foundation + ML) have minimal requirements. LLM labs (14+) benefit from more RAM for embeddings.
 
 ### Running a Lab
 
@@ -312,7 +306,7 @@ labXX-topic-name/
 Build core ML skills for security:
 
 ```
-Lab 29 → Lab 31 → Lab 32
+Lab 10 → Lab 11 → Lab 12
    ↓        ↓        ↓
  Text    Clustering  Anomaly
   ML                Detection
@@ -323,7 +317,7 @@ Lab 29 → Lab 31 → Lab 32
 Master LLMs for security applications:
 
 ```
-Lab 35 → Lab 36 → Lab 42 → Lab 21
+Lab 15 → Lab 16 → Lab 18 → Lab 21
    ↓        ↓        ↓        ↓
   Log     Agents    RAG     YARA
 Analysis            Docs   Generation
@@ -344,7 +338,7 @@ Scanner  Pipeline  Copilot
 
 ## 🏆 Lab Summaries
 
-### Lab 29: Phishing Email Classifier
+### Lab 10: Phishing Email Classifier
 
 **Build a machine learning classifier to detect phishing emails.**
 
@@ -360,7 +354,7 @@ Key files:
 
 ---
 
-### Lab 31: Malware Sample Clustering
+### Lab 11: Malware Sample Clustering
 
 **Use unsupervised learning to cluster malware samples by characteristics.**
 
@@ -377,7 +371,7 @@ Key concepts:
 
 ---
 
-### Lab 32: Network Anomaly Detection
+### Lab 12: Network Anomaly Detection
 
 **Build an anomaly detection system for network traffic.**
 
@@ -395,7 +389,7 @@ Attack types detected:
 
 ---
 
-### Lab 35: LLM-Powered Log Analysis
+### Lab 15: LLM-Powered Log Analysis
 
 **Use Large Language Models to analyze and explain security logs.**
 
@@ -413,7 +407,7 @@ Key capabilities:
 
 ---
 
-### Lab 36: Threat Intelligence Agent
+### Lab 16: Threat Intelligence Agent
 
 **Build an AI agent that autonomously gathers and correlates threat intel.**
 
@@ -431,7 +425,7 @@ Agent capabilities:
 
 ---
 
-### Lab 42: Security RAG System
+### Lab 18: Security RAG System
 
 **Build a Retrieval-Augmented Generation system for security documentation.**
 
@@ -793,48 +787,57 @@ data_path = Path(__file__).parent.parent / "data" / "file.csv"
 Track your progress:
 
 **Prerequisites (Optional but Recommended)**
-- [ ] Lab 29: Python for Security Fundamentals
-- [ ] Lab 35: ML Concepts Primer
-- [ ] Lab 31: Intro to Prompt Engineering
-- [ ] Lab 36: AI in Security Operations (conceptual)
-- [ ] Lab 42: Visualization & Statistics
-- [ ] Lab 21: Hello World ML (NEW - first classifier!)
-- [ ] Lab 22: Working with APIs (NEW - HTTP/JSON skills)
-- [ ] Lab 32: Vibe Coding with AI (NEW - AI-assisted development)
+- [ ] Lab 01: Python for Security Fundamentals
+- [ ] Lab 02: Intro to Prompt Engineering
+- [ ] Lab 03: Vibe Coding with AI
+- [ ] Lab 04: ML Concepts Primer
+- [ ] Lab 05: AI in Security Operations (conceptual)
+- [ ] Lab 06: Visualization & Statistics
+- [ ] Lab 07: Hello World ML (first classifier!)
+- [ ] Lab 08: Working with APIs (HTTP/JSON skills)
 
 **Core Labs**
-- [ ] Lab 29: Phishing Classifier
-- [ ] Lab 31: Malware Clustering
-- [ ] Lab 32: Anomaly Detection
-- [ ] Lab 33: ML vs LLM Decision (bridge lab)
-- [ ] Lab 35: LLM Log Analysis
-- [ ] Lab 34: Your First AI Agent (NEW - bridge lab)
-- [ ] Lab 39: Embeddings & Vectors (how vectors work)
-- [ ] Lab 45: Binary Analysis Basics (PE fundamentals)
-- [ ] Lab 36: Threat Intel Agent
-- [ ] Lab 42: Security RAG
+- [ ] Lab 10: Phishing Classifier
+- [ ] Lab 11: Malware Clustering
+- [ ] Lab 12: Anomaly Detection
+- [ ] Lab 13: ML vs LLM Decision (bridge lab)
+- [ ] Lab 14: Your First AI Agent (bridge lab)
+- [ ] Lab 15: LLM Log Analysis
+- [ ] Lab 16: Threat Intel Agent
+- [ ] Lab 17: Embeddings & Vectors
+- [ ] Lab 18: Security RAG
+- [ ] Lab 19: Binary Analysis Basics
+- [ ] Lab 20: Sigma Fundamentals
 - [ ] Lab 21: YARA Generator
 - [ ] Lab 22: Vuln Scanner AI
 - [ ] Lab 23: Detection Pipeline
-- [ ] Lab 24: Monitoring AI Systems (NEW - production observability)
+- [ ] Lab 24: Monitoring AI Systems
+- [ ] Lab 25: DFIR Fundamentals
+- [ ] Lab 26: Windows Event Log Analysis
+- [ ] Lab 27: Windows Registry Forensics
+- [ ] Lab 28: Live Response
 - [ ] Lab 29: IR Copilot
-- [ ] Lab 25: DFIR Fundamentals (IR lifecycle prep)
-- [ ] Lab 26: Windows Event Log Analysis (NEW)
-- [ ] Lab 27: Windows Registry Forensics (NEW)
-- [ ] Lab 28: Live Response (NEW)
-- [ ] Lab 30: Ransomware Fundamentals (NEW - bridge lab)
+- [ ] Lab 30: Ransomware Fundamentals
 - [ ] Lab 31: Ransomware Detection
 - [ ] Lab 32: Ransomware Simulation
 - [ ] Lab 33: Memory Forensics AI
 - [ ] Lab 34: C2 Traffic Analysis
 - [ ] Lab 35: Lateral Movement Detection
 - [ ] Lab 36: Threat Actor Profiling
-- [ ] Lab 38: ML Security Intro (threat models for ML)
+- [ ] Lab 37: AI-Powered Threats
+- [ ] Lab 38: ML Security Intro
 - [ ] Lab 39: Adversarial ML
+- [ ] Lab 40: LLM Security Testing
+- [ ] Lab 41: Model Monitoring
 - [ ] Lab 42: Fine-Tuning for Security
-- [ ] Lab 44: Cloud Security Fundamentals (NEW - cloud basics)
+- [ ] Lab 43: RAG Security
+- [ ] Lab 44: Cloud Security Fundamentals
 - [ ] Lab 45: Cloud Security AI
+- [ ] Lab 46: Container Security
+- [ ] Lab 47: Serverless Security
+- [ ] Lab 48: Cloud IR Automation
 - [ ] Lab 49: LLM Red Teaming
+- [ ] Lab 50: Purple Team AI
 
 ---
 
@@ -846,8 +849,8 @@ Test your skills with capture-the-flag challenges! These are separate from labs 
 
 | Challenge | After Lab | Skills Tested |
 |-----------|-----------|---------------|
-| [Log Detective](../ctf/beginner/01-log-detective/) | Lab 35 | Log analysis, pattern recognition |
-| [Phish Finder](../ctf/beginner/02-phish-finder/) | Lab 29 | Email classification, IOC extraction |
+| [Log Detective](../ctf/beginner/01-log-detective/) | Lab 15 | Log analysis, pattern recognition |
+| [Phish Finder](../ctf/beginner/02-phish-finder/) | Lab 10 | Email classification, IOC extraction |
 
 ### Intermediate Challenges (250 pts each)
 
@@ -856,7 +859,7 @@ Test your skills with capture-the-flag challenges! These are separate from labs 
 | [C2 Hunter](../ctf/intermediate/01-c2-hunter/) | Lab 34 | Beaconing, DNS tunneling |
 | [Memory Forensics](../ctf/intermediate/02-memory-forensics/) | Lab 33 | Process injection, shellcode |
 | [Adversarial Samples](../ctf/intermediate/03-adversarial-samples/) | Lab 39 | ML evasion, PE analysis |
-| [Agent Investigation](../ctf/intermediate/04-agent-investigation/) | Lab 36 | Prompt injection, ReAct debugging |
+| [Agent Investigation](../ctf/intermediate/04-agent-investigation/) | Lab 16 | Prompt injection, ReAct debugging |
 | [Ransomware Response](../ctf/intermediate/05-ransomware-response/) | Lab 31 | Crypto weakness, key recovery |
 
 ### Advanced Challenges (500 pts each)
@@ -866,7 +869,7 @@ Test your skills with capture-the-flag challenges! These are separate from labs 
 | [APT Attribution](../ctf/advanced/01-apt-attribution/) | Lab 36 | TTP mapping, actor profiling |
 | [Model Poisoning](../ctf/advanced/02-model-poisoning/) | Lab 39 | Backdoor detection, data poisoning |
 | [Cloud Compromise](../ctf/advanced/03-cloud-compromise/) | Lab 45 | Multi-cloud forensics |
-| [Zero-Day Hunt](../ctf/advanced/04-zero-day-hunt/) | Lab 32 | Behavioral anomaly detection |
+| [Zero-Day Hunt](../ctf/advanced/04-zero-day-hunt/) | Lab 12 | Behavioral anomaly detection |
 | [Full IR Scenario](../ctf/advanced/05-full-ir-scenario/) | Lab 29 | Complete IR lifecycle |
 
 > 💡 **Tip**: Complete the recommended lab before attempting each CTF challenge for the best learning experience. Labs teach the concepts; CTFs test your skills!
