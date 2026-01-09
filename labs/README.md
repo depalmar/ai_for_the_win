@@ -172,7 +172,7 @@ Lab 38-41 (ML Security) → Lab 42-43 (Custom Models) → Lab 44-48 (Cloud) → 
    "Attack/defend ML"      "Fine-tune & secure"      "Cloud detection"    "Offensive AI"
 ```
 
-**Bridge from Core:** Labs 25-50 build on detection skills from Labs 22-24 and apply them to advanced DFIR, adversarial ML, and cloud security scenarios. Lab 39 teaches how to attack and defend ML models. Lab 44 introduces cloud security fundamentals for those new to AWS/Azure/GCP. Labs 42-43 cover custom model training and RAG security. Lab 49 focuses on offensive security for LLM applications - prompt injection, jailbreaking, and exploiting agentic AI systems.
+**Bridge from Core:** Labs 25-50 build on detection skills from Labs 19-24 and apply them to advanced DFIR, adversarial ML, and cloud security scenarios. Lab 39 teaches how to attack and defend ML models. Lab 44 introduces cloud security fundamentals for those new to AWS/Azure/GCP. Labs 42-43 cover custom model training and RAG security. Lab 49 focuses on offensive security for LLM applications - prompt injection, jailbreaking, and exploiting agentic AI systems.
 
 ---
 
