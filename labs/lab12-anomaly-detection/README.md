@@ -1,6 +1,6 @@
 # Lab 32: Network Anomaly Detection
 
-**Difficulty:** 🟢 Beginner | **Time:** 45-60 min | **Prerequisites:** Labs 01-02
+**Difficulty:** 🟢 Beginner | **Time:** 45-60 min | **Prerequisites:** Labs 10-11
 
 Build an anomaly detection system to identify malicious network activity.
 
@@ -28,7 +28,7 @@ By completing this lab, you will:
 
 ## 📋 Prerequisites
 
-- Completed Labs 01-02
+- Completed Labs 10-11
 - Basic understanding of network protocols
 - Familiarity with unsupervised learning
 

@@ -6,11 +6,11 @@ Step-by-step guide to comparing ML and LLM approaches for the same security task
 
 ## 🌉 This is a BRIDGE LAB
 
-**Purpose:** This lab bridges the ML track (Labs 01-03) with the LLM track (Labs 04+).
+**Purpose:** This lab bridges the ML track (Labs 10-12) with the LLM track (Labs 14+).
 
 | Coming From | What You Know | Going To | What You'll Learn |
 |-------------|--------------|----------|-------------------|
-| Labs 01-03 | Training ML models with scikit-learn | Labs 04+ | Calling LLMs via API with prompts |
+| Labs 10-12 | Training ML models with scikit-learn | Labs 14+ | Calling LLMs via API with prompts |
 
 **Why it matters:** Many security teams wonder "Should we use ML or LLM?" This lab answers that question hands-on.
 
@@ -26,7 +26,7 @@ This walkthrough guides you through:
 
 **Difficulty:** Intermediate
 **Time:** 45-60 minutes
-**Prerequisites:** Labs 01-03 (ML), API key for LLM (optional - simulated mode available)
+**Prerequisites:** Labs 10-12 (ML), API key for LLM (optional - simulated mode available)
 
 ---
 

@@ -1,8 +1,8 @@
 # Lab 25: DFIR Fundamentals [Bridge Lab]
 
-**Difficulty:** 🟡 Intermediate | **Time:** 60-90 min | **Prerequisites:** Labs 01-10
+**Difficulty:** 🟡 Intermediate | **Time:** 60-90 min | **Prerequisites:** Labs 00-24
 
-> **Bridge Lab:** This lab introduces incident response concepts and artifacts before the advanced DFIR labs (11-16).
+> **Bridge Lab:** This lab introduces incident response concepts and artifacts before the advanced DFIR labs (26-35).
 
 Essential incident response concepts before diving into advanced DFIR labs.
 
@@ -15,11 +15,11 @@ By the end of this lab, you will:
 - Identify common attack artifacts (processes, files, network, registry)
 - Map findings to MITRE ATT&CK techniques
 - Build an artifact analysis toolkit
-- Be prepared for Labs 11-16 (DFIR deep dives)
+- Be prepared for Labs 26-35 (DFIR deep dives)
 
 ## Prerequisites
 
-- Completed Labs 01-10 (ML + LLM foundations)
+- Completed Labs 00-24 (Foundation + ML + LLM)
 - Basic understanding of operating systems (Windows/Linux)
 
 ## Time Required

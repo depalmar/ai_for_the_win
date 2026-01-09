@@ -1,6 +1,6 @@
 # Lab 23: Multi-Stage Threat Detection Pipeline
 
-**Difficulty:** 🟠 Advanced | **Time:** 90-120 min | **Prerequisites:** Labs 03b, 05, 06
+**Difficulty:** 🟠 Advanced | **Time:** 90-120 min | **Prerequisites:** Labs 13, 15-18
 
 Build an end-to-end threat detection pipeline combining ML and LLM components.
 
@@ -26,7 +26,7 @@ By completing this lab, you will:
 
 ## 📋 Prerequisites
 
-- Completed Labs 01-08
+- Completed Labs 10-22
 - Strong Python skills
 - Understanding of detection engineering
 

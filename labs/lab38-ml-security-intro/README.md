@@ -1,6 +1,6 @@
 # Lab 38: ML Security Foundations [Bridge Lab]
 
-**Difficulty:** 🟠 Advanced | **Time:** 45-60 min | **Prerequisites:** Labs 01-03
+**Difficulty:** 🟠 Advanced | **Time:** 45-60 min | **Prerequisites:** Labs 10-13
 
 > **Bridge Lab:** This lab explains ML threat models and attack taxonomy before Lab 39's adversarial ML attacks.
 
@@ -19,7 +19,7 @@ By the end of this lab, you will:
 
 ## Prerequisites
 
-- Completed Labs 01-03 (ML fundamentals)
+- Completed Labs 10-13 (ML fundamentals)
 - Understanding of how classifiers work
 
 ## Time Required

@@ -24,7 +24,7 @@ By completing this lab, you will:
 
 ## 📋 Prerequisites
 
-- Completed Labs 01-03
+- Completed Labs 10-14
 - Anthropic API key or Ollama installed
 - Basic understanding of Windows Event Logs
 

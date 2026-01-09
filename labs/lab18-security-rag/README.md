@@ -26,7 +26,7 @@ By completing this lab, you will:
 
 ## 📋 Prerequisites
 
-- Completed Labs 04-05
+- Completed Labs 14-17
 - Anthropic or OpenAI API key
 - Understanding of embeddings and vector search
 
