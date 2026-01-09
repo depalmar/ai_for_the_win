@@ -1085,7 +1085,6 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
           <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab18-fine-tuning-security" class="nav-lab dfir" title="Lab 18: Fine-Tuning (~8 hrs)">18</a>
           <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab19-cloud-security-ai" class="nav-lab dfir" title="Lab 19: Cloud Security AI (~5 hrs)">19</a>
           <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab20-llm-red-teaming" class="nav-lab dfir" title="Lab 20: LLM Red Teaming (~6 hrs)">20</a>
-          <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab21-xql-threat-hunting" class="nav-lab dfir" title="Lab 21: XQL Threat Hunting (~4 hrs)">21</a>
         </div>
       </div>
     </div>
@@ -1675,17 +1674,6 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
         <span class="difficulty difficulty-3">&#9733;&#9733;&#9733; Advanced</span>
       </div>
     </a>
-    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab21-xql-threat-hunting" class="lab-card" data-category="dfir">
-      <div class="lab-header">
-        <span class="lab-number dfir">21</span>
-        <span class="lab-title">XQL Threat Hunting</span>
-      </div>
-      <p class="lab-desc">Cortex XSIAM/XDR query language for hunting</p>
-      <div class="lab-meta">
-        <span>&#128337; ~4 hrs</span>
-        <span class="difficulty difficulty-3">&#9733;&#9733;&#9733; Advanced</span>
-      </div>
-    </a>
   </div>
 
   <div class="cta-buttons" style="margin-top: 2rem;">
@@ -1931,13 +1919,8 @@ function filterLabs(category) {
             <span class="path-lab-name">LLM Red Teaming</span>
             <span class="path-time">~6 hrs</span>
           </div>
-          <div class="path-lab-item">
-            <span class="path-lab-num dfir">21</span>
-            <span class="path-lab-name">XQL Threat Hunting</span>
-            <span class="path-time">~4 hrs</span>
-          </div>
         </div>
-        <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted);">Total: ~41 hours | Cost: ~$15-30</p>
+        <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted);">Total: ~37 hours | Cost: ~$15-30</p>
       </div>
     </details>
 

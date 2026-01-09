@@ -136,7 +136,6 @@ Deep dive into incident response, threat simulation, and offensive security anal
 | 10b | [Windows Event Log Analysis](./lab10b-windows-event-log-analysis/) | **NEW!** | Event IDs, lateral movement, credential theft |
 | 10c | [Windows Registry Forensics](./lab10c-windows-registry-forensics/) | **NEW!** | Persistence hunting, forensic artifacts |
 | 10d | [Live Response](./lab10d-live-response/) | **NEW!** | Collection techniques, triage checklist |
-| 21 | [XQL Threat Hunting](./lab21-xql-threat-hunting/) | **NEW!** | Cortex XDR queries, detection rules |
 | 11a | [Ransomware Fundamentals](./lab11a-ransomware-fundamentals/) | **NEW! Bridge lab** | Evolution, families, indicators, recovery |
 | 11 | [Ransomware Detection](./lab11-ransomware-detection/) | Behavioral detection | Entropy, TTPs, response |
 | 12 | [Purple Team](./lab12-ransomware-simulation/) | Adversary emulation | Safe simulation, gap analysis |
@@ -823,7 +822,6 @@ Track your progress:
 - [ ] Lab 10b: Windows Event Log Analysis (NEW)
 - [ ] Lab 10c: Windows Registry Forensics (NEW)
 - [ ] Lab 10d: Live Response (NEW)
-- [ ] Lab 21: XQL Threat Hunting (NEW - Cortex XDR)
 - [ ] Lab 11a: Ransomware Fundamentals (NEW - bridge lab)
 - [ ] Lab 11: Ransomware Detection
 - [ ] Lab 12: Ransomware Simulation

@@ -70,7 +70,6 @@ When the user invokes this command:
 | 04-07 | LLM Basics | Yes |
 | 08-10 | Advanced Agents | Yes |
 | 11-20 | Expert DFIR | Yes |
-| 21+ | XQL/Threat Hunting | No |
 
 ## Example Output
 
