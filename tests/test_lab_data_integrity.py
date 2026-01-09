@@ -1342,5 +1342,97 @@ class TestMarkdownValidity:
         # This test is informational - don't fail unless there are clear issues
 
 
+class TestLabCategoryConsistency:
+    """Tests to verify lab category ranges are consistent across documentation."""
+
+    # Canonical lab category definitions - update here when ranges change
+    CANONICAL_CATEGORIES = {
+        "Foundation": (0, 9),
+        "ML Foundations": (10, 13),
+        "LLM Basics": (14, 18),
+        "Detection Engineering": (19, 24),
+        "DFIR": (25, 35),
+        "Advanced Threats": (36, 43),
+        "Cloud & Red Team": (44, 50),
+    }
+
+    # Files that should reference lab category ranges
+    CATEGORY_DOCS = [
+        REPO_ROOT / ".claude" / "commands" / "lab.md",
+        REPO_ROOT / "README.md",
+        REPO_ROOT / "labs" / "README.md",
+        REPO_ROOT / "docs" / "index.md",
+    ]
+
+    def test_lab_category_ranges_are_documented(self):
+        """Verify canonical category ranges are defined."""
+        # Ensure we have all expected categories
+        expected = {
+            "Foundation",
+            "ML Foundations",
+            "LLM Basics",
+            "Detection Engineering",
+            "DFIR",
+            "Advanced Threats",
+            "Cloud & Red Team",
+        }
+        assert set(self.CANONICAL_CATEGORIES.keys()) == expected
+
+    def test_category_ranges_are_contiguous(self):
+        """Verify lab ranges don't have gaps or overlaps."""
+        ranges = sorted(self.CANONICAL_CATEGORIES.values())
+        for i, (start, end) in enumerate(ranges):
+            assert start <= end, f"Invalid range: {start}-{end}"
+            if i > 0:
+                prev_end = ranges[i - 1][1]
+                assert (
+                    start == prev_end + 1
+                ), f"Gap or overlap between {ranges[i-1]} and {(start, end)}"
+
+    def test_lab_navigator_has_correct_ranges(self):
+        """Verify .claude/commands/lab.md has correct category ranges."""
+        lab_md = REPO_ROOT / ".claude" / "commands" / "lab.md"
+        if not lab_md.exists():
+            pytest.skip("lab.md not found")
+
+        content = lab_md.read_text(encoding="utf-8")
+
+        # Check the Lab Categories table
+        errors = []
+        for category, (start, end) in self.CANONICAL_CATEGORIES.items():
+            expected_range = f"{start:02d}-{end:02d}"
+            # Also check without leading zeros
+            alt_range = f"{start}-{end}"
+
+            if expected_range not in content and alt_range not in content:
+                errors.append(f"Category '{category}' should have range {start}-{end}")
+
+        if errors:
+            pytest.fail("lab.md has incorrect category ranges:\n" + "\n".join(errors))
+
+    def test_no_outdated_category_ranges(self):
+        """Check for outdated category range references in documentation."""
+        # Known outdated patterns that should not appear
+        # These match category definitions like "| 14-21 | LLM" not prose references
+        outdated_patterns = [
+            (r"\|\s*14-21\s*\|", "14-21 should be 14-18 (LLM Basics)"),
+            (r"\|\s*22-24\s*\|.*Agent", "22-24 Agents should be 19-24 (Detection Engineering)"),
+            (r"DFIR\s*\(25-50\)", "DFIR range should be 25-35, not 25-50"),
+        ]
+
+        errors = []
+        for doc_file in self.CATEGORY_DOCS:
+            if not doc_file.exists():
+                continue
+
+            content = doc_file.read_text(encoding="utf-8")
+            for pattern, message in outdated_patterns:
+                if re.search(pattern, content, re.IGNORECASE):
+                    errors.append(f"{doc_file.name}: {message}")
+
+        if errors:
+            pytest.fail("Outdated category ranges found:\n" + "\n".join(errors))
+
+
 if __name__ == "__main__":
     pytest.main([__file__, "-v"])

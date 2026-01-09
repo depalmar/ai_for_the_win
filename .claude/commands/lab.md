@@ -30,20 +30,27 @@ When the user invokes this command:
 
 3. **Lab Listing** (no args):
    ```
-   ## Prerequisites (00-09)
+   ## Foundation (00-09)
    - lab00: Environment Setup
    - lab01: Python Security Fundamentals
+   - lab02: Prompt Engineering
+   - lab03: Vibe Coding with AI
    - lab04: ML Concepts Primer
    ...
 
    ## ML Foundations (10-13)
    - lab10: Phishing Classifier
    - lab11: Malware Clustering
+   - lab12: Anomaly Detection
+   - lab13: ML vs LLM
    ...
 
-   ## LLM Basics (14-21)
+   ## LLM Basics (14-18)
    - lab14: First AI Agent
    - lab15: LLM Log Analysis
+   - lab16: Threat Intel Agent
+   - lab17: Embeddings & Vectors
+   - lab18: Security RAG
    ...
    ```
 
@@ -69,11 +76,13 @@ When the user invokes this command:
 
 | Range | Category | API Required |
 |-------|----------|--------------|
-| 00-09 | Prerequisites/Fundamentals | No |
+| 00-09 | Foundation | No |
 | 10-13 | ML Foundations | No |
-| 14-21 | LLM Basics | Yes |
-| 22-24 | Advanced Agents | Yes |
-| 25-50 | Expert DFIR/Cloud/Red Team | Yes |
+| 14-18 | LLM Basics | Yes |
+| 19-24 | Detection Engineering | Yes |
+| 25-35 | DFIR | Yes |
+| 36-43 | Advanced Threats | Yes |
+| 44-50 | Cloud & Red Team | Yes |
 
 ## Example Output
 
