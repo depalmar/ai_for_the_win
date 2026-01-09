@@ -56,7 +56,7 @@ Phishing emails remain one of the most common attack vectors. Key indicators inc
 
 ## 🧠 Key Concepts
 
-> **Want the full theory?** See [Lab 35: ML Concepts Primer](../lab04-ml-concepts-primer/) for detailed explanations, diagrams, and exercises.
+> **Want the full theory?** See [Lab 04: ML Concepts Primer](../lab04-ml-concepts-primer/) for detailed explanations, diagrams, and exercises.
 
 ### TF-IDF (Term Frequency-Inverse Document Frequency)
 

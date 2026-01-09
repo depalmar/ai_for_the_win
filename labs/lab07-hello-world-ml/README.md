@@ -1,6 +1,6 @@
-# Lab 21: Hello World ML
+# Lab 07: Hello World ML
 
-**Difficulty:** 🟢 Beginner | **Time:** 30-45 min | **Prerequisites:** Lab 29, 04
+**Difficulty:** 🟢 Beginner | **Time:** 30-45 min | **Prerequisites:** Lab 01, 04
 
 Your first machine learning model - a simple spam detector in under 50 lines of code.
 
@@ -12,12 +12,12 @@ By the end of this lab, you will:
 - Understand the 4-step ML workflow: Load → Train → Predict → Evaluate
 - Build a working classifier with scikit-learn
 - Know what accuracy, precision, and recall mean
-- Have confidence to tackle Lab 29
+- Have confidence to tackle Lab 10
 
 ## Prerequisites
 
-- Completed Lab 29 (Python basics) OR comfortable with Python
-- Completed Lab 35 (ML concepts) OR understand supervised learning basics
+- Completed Lab 01 (Python basics) OR comfortable with Python
+- Completed Lab 04 (ML concepts) OR understand supervised learning basics
 
 ## Time Required
 
@@ -288,13 +288,13 @@ Which words are most predictive of spam? Try different word lists.
 Now that you understand the ML workflow:
 
 - **Lab 10**: Build a more sophisticated phishing classifier with TF-IDF
-- **Lab 31**: Learn unsupervised learning (clustering) for malware
-- **Lab 32**: Detect anomalies in network traffic
+- **Lab 11**: Learn unsupervised learning (clustering) for malware
+- **Lab 12**: Detect anomalies in network traffic
 
 You're ready!
 
 ---
 
-**Next Lab:** [Lab 22: Working with APIs](../lab08-working-with-apis/) - Learn to make HTTP requests and work with security APIs
+**Next Lab:** [Lab 08: Working with APIs](../lab08-working-with-apis/) - Learn to make HTTP requests and work with security APIs
 
 Or jump to: [Lab 10: Phishing Classifier](../lab10-phishing-classifier/) - Apply your ML skills to a real security problem

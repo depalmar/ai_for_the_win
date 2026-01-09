@@ -623,14 +623,14 @@ def check_ip_abuseipdb(ip_address, api_key):
 
 Now that you can work with APIs:
 
-- **Lab 35**: Use LLM APIs for log analysis
-- **Lab 36**: Build an agent with threat intel API tools
-- **Lab 42**: Implement RAG with embedding APIs
+- **Lab 15**: Use LLM APIs for log analysis
+- **Lab 16**: Build an agent with threat intel API tools
+- **Lab 18**: Implement RAG with embedding APIs
 
 You're ready for LLM-powered security tools!
 
 ---
 
-**Next Lab:** [Lab 32: Vibe Coding with AI](../lab03-vibe-coding-with-ai/) - Learn to collaborate with AI assistants for faster development
+**Next Lab:** [Lab 03: Vibe Coding with AI](../lab03-vibe-coding-with-ai/) - Learn to collaborate with AI assistants for faster development
 
 Or jump to: [Lab 10: Phishing Classifier](../lab10-phishing-classifier/) - Build your first ML security tool

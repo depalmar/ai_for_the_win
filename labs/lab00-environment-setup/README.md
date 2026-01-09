@@ -817,9 +817,9 @@ Once your environment is set up:
 
 | Your Background | Next Lab |
 |-----------------|----------|
-| New to Python | [Lab 29: Python Basics](../lab01-python-security-fundamentals/) |
-| Know Python, new to ML | [Lab 35: ML Concepts](../lab04-ml-concepts-primer/) |
-| Know ML, new to LLMs | [Lab 31: Prompt Engineering](../lab02-intro-prompt-engineering/) |
+| New to Python | [Lab 01: Python for Security](../lab01-python-security-fundamentals/) |
+| Know Python, new to ML | [Lab 04: ML Concepts Primer](../lab04-ml-concepts-primer/) |
+| Know ML, new to LLMs | [Lab 02: Intro to Prompt Engineering](../lab02-intro-prompt-engineering/) |
 | Ready to build! | [Lab 10: Phishing Classifier](../lab10-phishing-classifier/) |
 
 ---

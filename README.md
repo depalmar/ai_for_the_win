@@ -142,7 +142,7 @@ High Confidence: FIN7/Carbanak
 | Your Background | Start Here | Next Steps |
 |-----------------|------------|------------|
 | **New to AI/ML?** | [Lab 10: Phishing Classifier](./labs/lab10-phishing-classifier/) | → Lab 11 → Lab 12 |
-| **Know Python, want LLM tools?** | [Lab 35: LLM Log Analysis](./labs/lab15-llm-log-analysis/) | → Lab 36 → Lab 42 |
+| **Know Python, want LLM tools?** | [Lab 15: LLM Log Analysis](./labs/lab15-llm-log-analysis/) | → Lab 16 → Lab 18 |
 | **Want DFIR focus?** | [Lab 31: Ransomware Detection](./labs/lab31-ransomware-detection/) | → Lab 33 → Lab 34 |
 
 **💡 Tip**: Labs 01-03 are FREE (no API keys). LLM labs (04+) need an API key (~$5-25 total).

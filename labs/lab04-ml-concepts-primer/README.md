@@ -844,6 +844,6 @@ You now understand the concepts! Time to code:
 
 ---
 
-**Next Lab:** [Lab 31: Intro Prompt Engineering](../lab02-intro-prompt-engineering/) - Learn to communicate effectively with AI
+**Next Lab:** [Lab 02: Intro Prompt Engineering](../lab02-intro-prompt-engineering/) - Learn to communicate effectively with AI
 
 Or jump to: [Lab 10: Phishing Classifier](../lab10-phishing-classifier/) - Build your first ML security tool

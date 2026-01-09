@@ -295,7 +295,7 @@ def semantic_search(query, documents, model, top_k=3):
 
 Now that you understand embeddings:
 
-- **Lab 42**: Build a full RAG system with ChromaDB
+- **Lab 18**: Build a full RAG system with ChromaDB
 - **Lab 21**: Use embeddings to find similar malware patterns
 - **Lab 36**: Use embeddings for threat actor clustering
 

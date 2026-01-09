@@ -1,4 +1,4 @@
-# Lab 31: Introduction to Prompt Engineering
+# Lab 02: Introduction to Prompt Engineering
 
 Learn the fundamentals of prompting Large Language Models (LLMs) for security tasks. This hands-on introduction uses **free playground tools** - no API keys or coding required!
 
@@ -744,12 +744,12 @@ without worrying about API keys or code syntax.
 5. **Practice iteratively**: Refine prompts based on results
 
 **Ready for more?**
-- **Labs 01-03**: Build ML foundations (no API keys)
-- **Lab 35**: Apply prompting to real log analysis (API key needed)
-- **Lab 21**: Master advanced prompting techniques
+- **Labs 10-12**: Build ML foundations (no API keys)
+- **Lab 15**: Apply prompting to real log analysis (API key needed)
+- **Lab 21**: Master YARA rule generation
 
 ---
 
-**Next Lab:** [Lab 36: AI in Security Operations](../lab05-ai-in-security-operations/) - See how AI fits into SOC workflows
+**Next Lab:** [Lab 05: AI in Security Operations](../lab05-ai-in-security-operations/) - See how AI fits into SOC workflows
 
 Or jump to: [Lab 10: Phishing Classifier](../lab10-phishing-classifier/) - Build your first ML security tool

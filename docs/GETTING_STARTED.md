@@ -37,7 +37,7 @@ AI assistants are your best friends for learning. Use them to:
 | **Debug errors** | "I'm getting this error: [paste error]. My code is: [paste code]. What's wrong?" |
 | **Explain concepts** | "Explain TF-IDF like I'm a beginner. Why is it used for phishing detection?" |
 | **Review your code** | "Review this code for bugs and improvements: [paste code]" |
-| **Get unstuck** | "I'm stuck on Lab 29. I understand X but don't know how to do Y." |
+| **Get unstuck** | "I'm stuck on Lab 10. I understand X but don't know how to do Y." |
 
 **Recommended AI tools:**
 - **[Claude.ai](https://claude.ai)** - Great for explanations and debugging (free tier)
@@ -134,8 +134,8 @@ If you're new to ML/AI for security, follow this order:
 ```
 Phase 1: Foundation Labs
 ┌──────────────────────────────────────────────────────────────────────────────┐
-│  (Optional)      (Optional)      Lab 29          Lab 31          Lab 32     │
-│  Lab 31         Lab 36         Phishing    ──► Malware     ──► Anomaly    │
+│  (Optional)      (Optional)      Lab 10          Lab 11          Lab 12     │
+│  Lab 02         Lab 05         Phishing    ──► Malware     ──► Anomaly    │
 │  Intro to        AI in SOC       Classifier      Clustering      Detection  │
 │  Prompting       (conceptual)                                               │
 │  💰 FREE         💰 FREE         Learn: Text     Learn: PE       Learn:     │
@@ -144,7 +144,7 @@ Phase 1: Foundation Labs
 
 Phase 2: LLM Introduction
 ┌─────────────────────────────────────────────────────────────┐
-│  Lab 35          Lab 42                                     │
+│  Lab 15          Lab 18                                     │
 │  Log         ──► Security                                   │
 │  Analysis        RAG                                        │
 │                                                             │
@@ -156,38 +156,38 @@ Phase 2: LLM Introduction
 ```
 
 **Why this order?**
-- **Lab 31 (optional)**: Get hands-on with LLMs using free playgrounds - no API keys needed! Learn prompting basics and hallucination detection.
-- **Lab 36 (optional)**: Understand where AI fits in SOC workflows - conceptual, no coding. Covers human-in-the-loop, AI as attack surface, and compliance.
-- **Lab 29**: Teaches text classification (emails → phishing/not) - your first ML model
-- **Lab 31**: Builds on 01 with unsupervised learning (no labels needed)
-- **Lab 32**: Applies anomaly detection to network data
-- **Lab 35**: Introduces LLMs for log analysis with API integration
-- **Lab 42**: Shows how to give LLMs context with RAG (retrieval-augmented generation)
+- **Lab 02 (optional)**: Get hands-on with LLMs using free playgrounds - no API keys needed! Learn prompting basics and hallucination detection.
+- **Lab 05 (optional)**: Understand where AI fits in SOC workflows - conceptual, no coding. Covers human-in-the-loop, AI as attack surface, and compliance.
+- **Lab 10**: Teaches text classification (emails → phishing/not) - your first ML model
+- **Lab 11**: Builds on Lab 10 with unsupervised learning (no labels needed)
+- **Lab 12**: Applies anomaly detection to network data
+- **Lab 15**: Introduces LLMs for log analysis with API integration
+- **Lab 18**: Shows how to give LLMs context with RAG (retrieval-augmented generation)
 
 ### Path B: Know ML, New to LLMs
 
 Skip the ML foundations and dive into LLM-powered security tools:
 
 ```
-(Optional)   Lab 35 ──► Lab 42 ──► Lab 36 ──► Lab 21
-Lab 31        │          │          │          │
+(Optional)   Lab 15 ──► Lab 18 ──► Lab 16 ──► Lab 21
+Lab 02        │          │          │          │
 Intro LLMs     ▼          ▼          ▼          ▼
-& Prompting  Prompts    RAG       Agents    Advanced
-(FREE)                                       Prompting
+& Prompting  Log        RAG       Threat    YARA
+(FREE)       Analysis             Intel     Generator
 ```
 
-Start with Lab 31 if you've never used LLMs before - it's optional but recommended for understanding prompt engineering basics.
+Start with Lab 02 if you've never used LLMs before - it's optional but recommended for understanding prompt engineering basics.
 
 ### Path C: Know LLMs, Want Security Focus
 
 Jump straight to advanced security applications:
 
 ```
-Lab 36 ──► Lab 23 ──► Lab 29 ──► Lab 31
+Lab 16 ──► Lab 23 ──► Lab 29 ──► Lab 31
   │          │          │          │
   ▼          ▼          ▼          ▼
 Threat    Detection    IR       Ransomware
-Intel     Pipeline   Copilot   Response
+Intel     Pipeline   Copilot   Detection
 ```
 
 ### Path D: DFIR Specialist
@@ -195,7 +195,7 @@ Intel     Pipeline   Copilot   Response
 Focus on incident response and forensics:
 
 ```
-Lab 32 ──► Lab 35 ──► Lab 23 ──► Lab 31 ──► Lab 32
+Lab 12 ──► Lab 15 ──► Lab 23 ──► Lab 31 ──► Lab 32
   │          │          │          │          │
   ▼          ▼          ▼          ▼          ▼
 Anomaly   Log       Pipeline  Ransomware  Purple
@@ -206,12 +206,12 @@ Detect   Analysis            Detection    Team
 
 ## Your First Lab
 
-### Option 1: Start with LLM Basics (Lab 31) - FREE, No API Keys
+### Option 1: Start with LLM Basics (Lab 02) - FREE, No API Keys
 
 Want to get hands-on with LLMs before diving into ML? Start here:
 
 ```bash
-# Navigate to Lab 31
+# Navigate to Lab 02
 cd labs/lab02-intro-prompt-engineering
 
 # Open README.md and follow along with free AI playgrounds
@@ -219,12 +219,12 @@ cd labs/lab02-intro-prompt-engineering
 
 This lab uses free tools (Google AI Studio, Claude.ai, Poe) - no API keys or setup required!
 
-### Option 2: Start with ML Foundations (Lab 29)
+### Option 2: Start with ML Foundations (Lab 10)
 
-Ready to build your first ML model? Let's run Lab 29 to make sure everything works:
+Ready to build your first ML model? Let's run Lab 10 to make sure everything works:
 
 ```bash
-# Navigate to Lab 29
+# Navigate to Lab 10
 cd labs/lab10-phishing-classifier
 
 # Run the solution to verify setup
