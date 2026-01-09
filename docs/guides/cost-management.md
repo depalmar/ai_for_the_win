@@ -508,10 +508,10 @@ Log: {log}"""
 
 | Learning Stage   | Recommended Monthly Limit |
 | ---------------- | ------------------------- |
-| Labs 00-03       | $0 (no API needed)        |
-| Labs 04-06       | $5-10                     |
-| Labs 07-10       | $10-20                    |
-| Labs 11-20       | $20-50                    |
+| Labs 00-13       | $0 (no API needed)        |
+| Labs 14-24       | $5-15                     |
+| Labs 25-35       | $10-25                    |
+| Labs 36-50       | $20-50                    |
 | Production pilot | $50-100                   |
 
 ---

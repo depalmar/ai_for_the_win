@@ -1,8 +1,8 @@
 # Lab 33: ML vs LLM - When to Use Which? [Bridge Lab]
 
-**Difficulty:** 🟡 Intermediate | **Time:** 45-60 min | **Prerequisites:** Labs 01-03, API key
+**Difficulty:** 🟡 Intermediate | **Time:** 45-60 min | **Prerequisites:** Labs 10-12, API key
 
-> **Bridge Lab:** This lab connects the ML foundations (Labs 01-03) with the LLM section (Labs 04+). Complete this before moving to LLM-focused labs.
+> **Bridge Lab:** This lab connects the ML foundations (Labs 10-12) with the LLM section (Labs 14+). Complete this before moving to LLM-focused labs.
 
 Solve the same security problem with both ML and LLM, then compare results.
 
@@ -18,7 +18,7 @@ By the end of this lab, you will:
 
 ## Prerequisites
 
-- Completed Labs 01-03 (ML foundations)
+- Completed Labs 10-12 (ML foundations)
 - API key for LLM provider (Anthropic, OpenAI, or Google)
 
 ## Time Required

@@ -20,9 +20,9 @@
 ### Quick Decision
 
 ```
-Structured data (logs, flows, metrics) → Use ML (Labs 01-03)
-Unstructured text (reports, emails)   → Use LLM (Labs 04-07)
-Both / need reasoning                 → Use Hybrid or Agents (Lab 23, 05)
+Structured data (logs, flows, metrics) → Use ML (Labs 10-13)
+Unstructured text (reports, emails)   → Use LLM (Labs 14-18)
+Both / need reasoning                 → Use Hybrid or Agents (Labs 13, 14, 23)
 ```
 
 ### Cost Comparison
@@ -39,10 +39,11 @@ Both / need reasoning                 → Use Hybrid or Agents (Lab 23, 05)
 
 Each lab tells you what's next. Just follow the path:
 
-- **Labs 01-03**: ML fundamentals (no API key needed)
-- **Labs 04-07**: LLM basics (needs API key)
-- **Labs 08-10**: Pipelines and automation
-- **Labs 11+**: DFIR and advanced topics
+- **Labs 00-09**: Foundation (no API key needed)
+- **Labs 10-13**: ML fundamentals (no API key needed)
+- **Labs 14-18**: LLM basics (needs API key)
+- **Labs 19-24**: Detection engineering and automation
+- **Labs 25+**: DFIR and advanced topics
 
 ---
 

@@ -15,7 +15,7 @@ By the end of this lab, you will:
 
 ## Estimated Time
 
-3-4 hours (take your time! This covers everything you need for Labs 01-10)
+3-4 hours (take your time! This covers everything you need for Labs 00-18)
 
 ## Prerequisites
 
@@ -595,7 +595,7 @@ for ioc_type, values in iocs.items():
 
 ## Part 4: Essential Python for ML Labs
 
-These concepts are used heavily in Labs 01-10. Master them here!
+These concepts are used heavily in Labs 00-18. Master them here!
 
 ### 4.1 List Comprehensions - Concise Loops
 
@@ -679,7 +679,7 @@ min_val, max_val, avg = get_stats([1, 2, 3, 4, 5])
 
 ### 4.3 Pandas Basics - Data Analysis Powerhouse
 
-Labs 01-03 use pandas heavily for data manipulation. Here's what you need to know:
+Labs 10-13 use pandas heavily for data manipulation. Here's what you need to know:
 
 ```python
 import pandas as pd

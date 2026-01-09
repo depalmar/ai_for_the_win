@@ -26,7 +26,7 @@
 |--------|---------|
 | **Time** | 2.5-3 hours (with AI assistance) |
 | **Difficulty** | Expert |
-| **Prerequisites** | Labs 01-05, Python, ML fundamentals |
+| **Prerequisites** | Labs 10-18, Python, ML fundamentals |
 | **Skills** | Fine-tuning, embeddings, model evaluation |
 
 ---

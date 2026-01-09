@@ -24,7 +24,7 @@ By completing this lab, you will:
 
 ## 📋 Prerequisites
 
-- Completed Labs 01-02 (malware analysis basics)
+- Completed Labs 10-11 (malware analysis basics)
 - YARA installed (`pip install yara-python`)
 - LLM API access
 

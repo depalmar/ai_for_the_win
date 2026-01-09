@@ -193,7 +193,7 @@ except Exception as e:
 
 ## Lab-Specific Tips
 
-### Labs 01-03 (ML Basics)
+### Labs 00-13 (Foundation + ML)
 
 No API keys needed! These work out of the box:
 
@@ -204,7 +204,7 @@ import pandas as pd
 import numpy as np
 ```
 
-### Labs 04-07 (LLM Basics)
+### Labs 14-18 (LLM Basics)
 
 Set up your API key first:
 
@@ -218,7 +218,7 @@ os.environ["ANTHROPIC_API_KEY"] = userdata.get('ANTHROPIC_API_KEY')
 os.environ["OPENAI_API_KEY"] = userdata.get('OPENAI_API_KEY')
 ```
 
-### Labs 08-10 (Advanced)
+### Labs 19-35 (Detection + DFIR)
 
 May need additional packages:
 
@@ -226,7 +226,7 @@ May need additional packages:
 !pip install -q langgraph instructor gradio
 ```
 
-### Labs 11-20 (Expert)
+### Labs 36-50 (Advanced)
 
 Consider using GPU runtime:
 

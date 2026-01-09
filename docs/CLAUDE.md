@@ -66,11 +66,12 @@ labXX-topic-name/
 ```
 
 ### Lab Progression
-- **Labs 01-02**: Intro (Python, ML concepts, prompting) - no API keys needed
-- **Labs 01-03**: ML foundations (classification, clustering, anomaly detection) - no API keys needed
-- **Labs 04-07**: LLM basics (prompts, RAG, code generation) - requires API key
-- **Labs 08-10**: Advanced (agents, pipelines, copilots)
-- **Labs 11-19**: Expert (DFIR, forensics, C2 detection, adversarial ML)
+- **Labs 00-09**: Foundation (Python, ML concepts, prompting) - no API keys needed
+- **Labs 10-13**: ML foundations (classification, clustering, anomaly detection) - no API keys needed
+- **Labs 14-18**: LLM basics (prompts, RAG, agents) - requires API key
+- **Labs 19-24**: Detection engineering (pipelines, monitoring)
+- **Labs 25-35**: DFIR (forensics, ransomware, C2 detection)
+- **Labs 36-50**: Advanced (adversarial ML, cloud security, red team)
 
 ### Multi-Provider LLM Support
 All LLM labs support multiple providers via environment variables:

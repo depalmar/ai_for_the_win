@@ -24,7 +24,7 @@ By completing this lab, you will:
 
 ## 📋 Prerequisites
 
-- Completed Labs 04-06
+- Completed Labs 14-21
 - Understanding of CVEs and CVSS
 - Basic networking knowledge
 

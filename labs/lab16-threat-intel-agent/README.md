@@ -26,7 +26,7 @@ By completing this lab, you will:
 
 ## 📋 Prerequisites
 
-- Completed Labs 01-04
+- Completed Labs 14-15
 - Anthropic or OpenAI API key
 - Basic understanding of threat intelligence concepts
 

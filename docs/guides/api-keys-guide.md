@@ -2,7 +2,7 @@
 
 **Cost**: Free to start (all providers have free tiers)
 
-Labs 04-21 use Large Language Models (LLMs) like Claude, GPT-5.2, or Gemini 3. This guide shows you how to get API keys and manage costs.
+Labs 14-50 use Large Language Models (LLMs) like Claude, GPT-5.2, or Gemini 3. This guide shows you how to get API keys and manage costs.
 
 ---
 
@@ -161,7 +161,7 @@ OLLAMA_MODEL=llama4:scout
 
 ### Cost-Saving Tips
 
-1. **Start with free Labs 01-03** - no API needed, learn ML foundations
+1. **Start with free Labs 00-13** - no API needed, learn foundations and ML
 2. **Use cheaper models for testing** - Sonnet 4, GPT-5.2 Instant, Gemini 3 Flash
 3. **Switch to full models for final runs**
 4. **Run Ollama locally** for unlimited experimentation
@@ -171,11 +171,11 @@ OLLAMA_MODEL=llama4:scout
 
 | Lab Range | Estimated Cost | Notes |
 |-----------|---------------|-------|
-| Labs 01-03 | $0 | ML only, no LLM |
-| Labs 04-07 | $0.50-2 | Basic LLM use |
-| Labs 08-10 | $1-4 | More LLM calls |
-| Labs 11-15 | $2-5 | Complex analysis |
-| Labs 16-20 | $3-8 | Advanced features |
+| Labs 00-13 | $0 | Foundation + ML, no LLM |
+| Labs 14-18 | $0.50-2 | Basic LLM use |
+| Labs 19-24 | $1-4 | Detection engineering |
+| Labs 25-35 | $2-5 | DFIR |
+| Labs 36-50 | $3-8 | Advanced features |
 
 **Total for all LLM labs**: ~$15-30 with paid APIs, or **$0 with Ollama**
 
