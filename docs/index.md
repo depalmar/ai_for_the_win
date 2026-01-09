@@ -1041,7 +1041,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
       <div class="nav-stage">
         <div class="nav-stage-label">ML Basics</div>
         <div class="nav-labs">
-          <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab10-phishing-classifier" class="nav-lab ml" title="Lab 29: Phishing Classifier (~2 hrs)">01</a>
+          <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab10-phishing-classifier" class="nav-lab ml" title="Lab 10: Phishing Classifier (~2 hrs)">10</a>
           <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab11-malware-clustering" class="nav-lab ml" title="Lab 31: Malware Clustering (~2 hrs)">02</a>
           <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab12-anomaly-detection" class="nav-lab ml" title="Lab 32: Anomaly Detection (~2 hrs)">03</a>
         </div>

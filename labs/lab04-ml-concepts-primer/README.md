@@ -810,7 +810,7 @@ What's wrong with each approach?
 
 You now understand the concepts! Time to code:
 
-- **Lab 29**: Phishing Classifier - Build your first ML security tool
+- **Lab 10**: Phishing Classifier - Build your first ML security tool
 - **Lab 31**: Malware Clustering - Unsupervised learning in practice
 - **Lab 32**: Anomaly Detection - Find the needle in the haystack
 
@@ -846,4 +846,4 @@ You now understand the concepts! Time to code:
 
 **Next Lab:** [Lab 31: Intro Prompt Engineering](../lab02-intro-prompt-engineering/) - Learn to communicate effectively with AI
 
-Or jump to: [Lab 29: Phishing Classifier](../lab10-phishing-classifier/) - Build your first ML security tool
+Or jump to: [Lab 10: Phishing Classifier](../lab10-phishing-classifier/) - Build your first ML security tool

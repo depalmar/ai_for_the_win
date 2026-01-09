@@ -633,4 +633,4 @@ You're ready for LLM-powered security tools!
 
 **Next Lab:** [Lab 32: Vibe Coding with AI](../lab03-vibe-coding-with-ai/) - Learn to collaborate with AI assistants for faster development
 
-Or jump to: [Lab 29: Phishing Classifier](../lab10-phishing-classifier/) - Build your first ML security tool
+Or jump to: [Lab 10: Phishing Classifier](../lab10-phishing-classifier/) - Build your first ML security tool

@@ -19,7 +19,7 @@ A hands-on training program for security practitioners who want to build AI-powe
 
 ## 🎬 What You'll Build
 
-**Lab 29 - Phishing Classifier** catches what rules miss:
+**Lab 10 - Phishing Classifier** catches what rules miss:
 
 ```text
 $ python labs/lab10-phishing-classifier/solution/main.py
@@ -129,7 +129,7 @@ High Confidence: FIN7/Carbanak
 
 **No installation needed** — click and run in your browser:
 
-[![Open Lab 29 in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab10_phishing_classifier.ipynb) ← ML basics (no API key)
+[![Open Lab 10 in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab10_phishing_classifier.ipynb) ← ML basics (no API key)
 
 [![Open Lab 35 in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab15_llm_log_analysis.ipynb) ← LLM-powered (needs API key)
 
@@ -141,7 +141,7 @@ High Confidence: FIN7/Carbanak
 
 | Your Background | Start Here | Next Steps |
 |-----------------|------------|------------|
-| **New to AI/ML?** | [Lab 29: Phishing Classifier](./labs/lab10-phishing-classifier/) | → Lab 31 → Lab 32 |
+| **New to AI/ML?** | [Lab 10: Phishing Classifier](./labs/lab10-phishing-classifier/) | → Lab 11 → Lab 12 |
 | **Know Python, want LLM tools?** | [Lab 35: LLM Log Analysis](./labs/lab15-llm-log-analysis/) | → Lab 36 → Lab 42 |
 | **Want DFIR focus?** | [Lab 31: Ransomware Detection](./labs/lab31-ransomware-detection/) | → Lab 33 → Lab 34 |
 

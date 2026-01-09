@@ -1,4 +1,4 @@
-# Lab 23: CTF Fundamentals
+# Lab 09: CTF Fundamentals
 
 **Time:** 45-60 minutes
 **Prerequisites:** Labs 01-02 recommended
@@ -395,7 +395,7 @@ Good luck, and happy hunting!
 
 **You've completed the intro labs!** You're now ready for the main course:
 
-**Next Lab:** [Lab 29: Phishing Classifier](../lab10-phishing-classifier/) - Build your first ML security tool
+**Next Lab:** [Lab 10: Phishing Classifier](../lab10-phishing-classifier/) - Build your first ML security tool
 
 Or explore: [CTF Challenges](../../ctf/) - Test your skills with capture-the-flag challenges
 

@@ -1014,7 +1014,7 @@ These are guiding principles to consider, not universal rules:
 
 | If you want to... | Go to... |
 |-------------------|----------|
-| Learn ML fundamentals | [Lab 29: Phishing Classifier](../lab10-phishing-classifier/) |
+| Learn ML fundamentals | [Lab 10: Phishing Classifier](../lab10-phishing-classifier/) |
 | Learn LLM basics | [Lab 31: Intro Prompt Engineering](../lab02-intro-prompt-engineering/) |
 | Build detection pipeline | [Lab 23: Detection Pipeline](../lab23-detection-pipeline/) |
 | Create IR assistant | [Lab 29: IR Copilot](../lab29-ir-copilot/) |
@@ -1149,4 +1149,4 @@ These are guiding principles to consider, not universal rules:
 
 **Next Lab:** [Lab 42: Visualization & Statistics](../lab06-visualization-stats/) - Master data visualization and statistical analysis for security data
 
-Or jump to: [Lab 29: Phishing Classifier](../lab10-phishing-classifier/) - Build your first ML security tool
+Or jump to: [Lab 10: Phishing Classifier](../lab10-phishing-classifier/) - Build your first ML security tool

@@ -1,4 +1,4 @@
-# Lab 49: Sigma Rule Fundamentals
+# Lab 20: Sigma Rule Fundamentals
 
 **Difficulty:** 🟡 Intermediate | **Time:** 45-60 min | **Prerequisites:** Lab 35, Lab 21
 

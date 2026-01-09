@@ -2,7 +2,7 @@
 
 **Difficulty:** Easy
 **Points:** 100
-**Prerequisite:** Lab 29 (Phishing Classifier)
+**Prerequisite:** Lab 10 (Phishing Classifier)
 **API Key:** No
 
 ## Challenge Description

@@ -49,7 +49,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - **New Lab**
-  - Lab 23: CTF Fundamentals - Bridge lab teaching CTF mindset, flag formats, encoding techniques, and systematic approaches to security challenges
+  - Lab 09: CTF Fundamentals - Bridge lab teaching CTF mindset, flag formats, encoding techniques, and systematic approaches to security challenges
 
 - **New CTF Challenges**
   - Intermediate-06: Insider Threat - Detect data exfiltration via DNS tunneling and cloud storage
@@ -59,7 +59,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Enhanced Vibe Coding Guidance**
   - Part 7: Vibe Coding the Other Labs - Example prompts for Labs 01-04
   - Part 8: Prompt Library & Resources - Links to security prompts library
-  - CTF-specific vibe coding examples in Lab 23
+  - CTF-specific vibe coding examples in Lab 09
 
 ### Changed
 - Improved OpenSSF Scorecard compliance with job-level permissions
@@ -123,7 +123,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Lab walkthroughs for all labs
 - SANS resource references
 - Cloud security fundamentals (Lab 44)
-- Sigma rule fundamentals (Lab 49)
+- Sigma rule fundamentals (Lab 20)
 - Ransomware fundamentals (Lab 30)
 
 ### Changed

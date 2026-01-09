@@ -752,4 +752,4 @@ without worrying about API keys or code syntax.
 
 **Next Lab:** [Lab 36: AI in Security Operations](../lab05-ai-in-security-operations/) - See how AI fits into SOC workflows
 
-Or jump to: [Lab 29: Phishing Classifier](../lab10-phishing-classifier/) - Build your first ML security tool
+Or jump to: [Lab 10: Phishing Classifier](../lab10-phishing-classifier/) - Build your first ML security tool

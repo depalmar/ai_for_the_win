@@ -467,4 +467,4 @@ demo.launch()
 
 **Next Lab:** [Lab 21: Hello World ML](../lab07-hello-world-ml/) - Build your first machine learning model
 
-Or jump to: [Lab 29: Phishing Classifier](../lab10-phishing-classifier/) - Apply ML to real security problems
+Or jump to: [Lab 10: Phishing Classifier](../lab10-phishing-classifier/) - Apply ML to real security problems

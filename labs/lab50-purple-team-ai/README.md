@@ -54,7 +54,7 @@ By completing this lab, you will:
 
 ## 📋 Prerequisites
 
-- Completed Lab 49 (Sigma Fundamentals)
+- Completed Lab 20 (Sigma Fundamentals)
 - Completed Lab 23 (Detection Pipeline)
 - Understanding of MITRE ATT&CK framework
 - Basic knowledge of red team operations
@@ -968,6 +968,6 @@ You've successfully completed this lab when you can:
 
 ## 🔗 Next Steps
 
-- **Lab 49**: Sigma Fundamentals - Detection rule creation
+- **Lab 20**: Sigma Fundamentals - Detection rule creation
 - **Lab 23**: Detection Pipeline - Building detection systems
 - **Lab 39**: Adversarial ML - Understanding ML evasion

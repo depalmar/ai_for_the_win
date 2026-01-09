@@ -820,7 +820,7 @@ Once your environment is set up:
 | New to Python | [Lab 29: Python Basics](../lab01-python-security-fundamentals/) |
 | Know Python, new to ML | [Lab 35: ML Concepts](../lab04-ml-concepts-primer/) |
 | Know ML, new to LLMs | [Lab 31: Prompt Engineering](../lab02-intro-prompt-engineering/) |
-| Ready to build! | [Lab 29: Phishing Classifier](../lab10-phishing-classifier/) |
+| Ready to build! | [Lab 10: Phishing Classifier](../lab10-phishing-classifier/) |
 
 ---
 

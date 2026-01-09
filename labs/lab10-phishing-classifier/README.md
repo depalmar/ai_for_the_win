@@ -1,4 +1,4 @@
-# Lab 29: Phishing Email Classifier
+# Lab 10: Phishing Email Classifier
 
 Build a machine learning classifier to detect phishing emails.
 
