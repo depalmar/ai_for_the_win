@@ -371,10 +371,14 @@ class TestNotebooks:
         # Look for matching notebook by lab prefix
         matching_notebooks = list(notebooks_dir.glob(f"{lab_prefix}*.ipynb"))
 
-        # Skip setup/fundamentals labs that may not have notebooks
-        if "environment-setup" in lab_name or "fundamentals" in lab_name:
+        # Skip setup/fundamentals/conceptual labs that may not have notebooks
+        if (
+            "environment-setup" in lab_name
+            or "fundamentals" in lab_name
+            or "vibe-coding" in lab_name
+        ):
             if not matching_notebooks:
-                pytest.skip(f"Lab {lab_name} is a setup/fundamentals lab")
+                pytest.skip(f"Lab {lab_name} is a setup/fundamentals/conceptual lab")
 
         # Not all labs require notebooks - only fail if it's a main lab (lab01+)
         if not matching_notebooks and lab_name.startswith("lab0") and "lab00" not in lab_name:
@@ -620,11 +624,11 @@ class TestFunctionParity:
     # Labs where starter/solution intentionally have different function structures
     # (e.g., solution combines functions, uses different patterns, etc.)
     ALLOWED_DIVERGENCE = {
-        "lab00c-intro-prompt-engineering",  # Exercise functions vs solution patterns
-        "lab01-phishing-classifier",  # Different function organization
-        "lab15-lateral-movement-detection",  # Solution uses different approach
-        "lab19-cloud-security-ai",  # Solution uses different parsing
-        "lab20b-purple-team-ai",  # Solution has different scoring
+        "lab02-intro-prompt-engineering",  # Exercise functions vs solution patterns
+        "lab10-phishing-classifier",  # Different function organization
+        "lab35-lateral-movement-detection",  # Solution uses different approach
+        "lab45-cloud-security-ai",  # Solution uses different parsing
+        "lab50-purple-team-ai",  # Solution has different scoring
     }
 
     @pytest.mark.parametrize("lab_dir", ALL_LABS, ids=[lab.name for lab in ALL_LABS])
