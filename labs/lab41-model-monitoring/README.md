@@ -968,43 +968,6 @@ class MLSecurityAlertSystem:
         pass
 ```
 
-### Exercise 4.2: XQL Detection Rules
-
-```xql
-config case_sensitive = false
-
-// Detect high-volume API queries suggesting extraction
-| dataset = api_logs
-| filter endpoint contains "/model/predict"
-| comp count() as query_count by user_id, _time = bin(1h)
-| filter query_count > 1000
-| sort desc query_count
-| limit 100
-```
-
-```xql
-config case_sensitive = false
-
-// Detect drift alerts from ML monitoring
-| dataset = ml_monitoring_logs
-| filter event_type = "drift_detected"
-| filter severity in ("HIGH", "CRITICAL")
-| fields _time, model_name, feature_name, drift_score, alert_details
-| sort desc _time
-| limit 100
-```
-
-```xql
-config case_sensitive = false
-
-// Detect adversarial input patterns
-| dataset = llm_input_logs
-| filter risk_score >= 30
-| fields _time, user_id, input_preview, risk_score, detected_patterns
-| sort desc risk_score
-| limit 100
-```
-
 ## Exercises
 
 ### Exercise 1: Drift Detection Setup

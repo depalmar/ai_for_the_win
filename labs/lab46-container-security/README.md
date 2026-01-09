@@ -520,35 +520,6 @@ def analyze_pod_security(pods_df):
   tags: [container, filesystem]
 ```
 
-### Exercise 4.2: XQL Detection for Container Events
-
-```xql
-config case_sensitive = false
-
-// Detect privileged container launches
-| preset = cloud_audit
-| filter provider = "kubernetes"
-| filter operation_name = "create"
-| filter json_extract(request_body, "$.spec.containers[*].securityContext.privileged") = "true"
-| fields _time, cluster_name, namespace, resource_name, user_identity_name, source_ip
-| sort desc _time
-| limit 100
-```
-
-```xql
-config case_sensitive = false
-
-// Detect container escape attempts - host path mounts
-| preset = cloud_audit
-| filter provider = "kubernetes"
-| filter operation_name in ("create", "update")
-| filter resource_type = "pods"
-| filter json_extract(request_body, "$.spec.volumes[*].hostPath") != null
-| fields _time, cluster_name, namespace, resource_name, user_identity_name
-| sort desc _time
-| limit 100
-```
-
 ## Part 5: Incident Response Scenario
 
 ### Scenario: Compromised Container Investigation

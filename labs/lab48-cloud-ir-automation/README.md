@@ -859,23 +859,7 @@ class MultiCloudIROrchestrator:
 
 ## Part 4: Detection-to-Response Pipeline
 
-### Exercise 4.1: XQL Alert to Automation
-
-```xql
-config case_sensitive = false
-
-// Detect compromised credential usage and trigger automation
-| preset = cloud_audit
-| filter provider = "aws"
-| filter operation_status = "success"
-| filter user_identity_type = "IAMUser"
-| filter source_ip not in ("10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16")
-| filter operation_name in ("GetSecretValue", "AssumeRole", "CreateAccessKey")
-| comp count() as action_count by user_identity_name, source_ip, _time = bin(5m)
-| filter action_count > 10
-| sort desc action_count
-| limit 100
-```
+### Exercise 4.1: Alert to Automation
 
 ```python
 def handle_xdr_alert(alert):

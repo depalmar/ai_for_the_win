@@ -129,17 +129,6 @@ Timeline Pattern:
 2. 7045 (Service installed) - PSEXESVC or random name
 3. 4688 (Process created) - cmd.exe or powershell.exe
 4. 4624 Type 3 repeated to additional hosts
-
-XQL Query:
-config case_sensitive = false
-| dataset = xdr_data
-| filter event_type = ENUM.EVENT_LOG
-| alter days_ago = timestamp_diff(current_time(), _time, "DAY")
-| filter days_ago <= 7
-| filter event_id in (4624, 7045)
-| fields _time, agent_hostname, event_id, actor_effective_username,
-         action_evtlog_message
-| sort asc _time
 ```
 
 ### Pattern 2: Kerberoasting Attack
@@ -149,18 +138,6 @@ Timeline Pattern:
 1. 4769 (Service Ticket Requested) with RC4 encryption (0x17)
 2. Multiple 4769 events from same source in short time
 3. Targets: service accounts with SPNs
-
-XQL Query:
-config case_sensitive = false
-| dataset = xdr_data
-| filter event_type = ENUM.EVENT_LOG
-| alter days_ago = timestamp_diff(current_time(), _time, "DAY")
-| filter days_ago <= 7
-| filter event_id = 4769
-| filter action_evtlog_message contains "0x17"  // RC4 encryption
-| comp count() as ticket_count by agent_hostname, actor_effective_username
-| filter ticket_count >= 5
-| sort desc ticket_count
 ```
 
 ### Pattern 3: Credential Dumping (LSASS Access)
@@ -170,17 +147,6 @@ Timeline Pattern:
 1. 4688 (Process Created) - rundll32.exe, procdump.exe, or unknown binary
 2. 4663 (Object Access) - LSASS process accessed
 3. 4658 (Handle Closed) - Handle to LSASS closed
-
-XQL Query:
-config case_sensitive = false
-| dataset = xdr_data
-| filter event_type = ENUM.EVENT_LOG
-| alter days_ago = timestamp_diff(current_time(), _time, "DAY")
-| filter days_ago <= 7
-| filter event_id = 4663
-| filter action_evtlog_message contains "lsass.exe"
-| fields _time, agent_hostname, actor_effective_username, action_evtlog_message
-| sort desc _time
 ```
 
 ### Pattern 4: Pass-the-Hash
@@ -206,16 +172,6 @@ Timeline Pattern:
 2. Task runs as SYSTEM or privileged account
 3. Action contains suspicious path or encoded command
 4. 4688 (Process Created) when task executes
-
-XQL Query:
-config case_sensitive = false
-| dataset = xdr_data
-| filter event_type = ENUM.EVENT_LOG
-| alter days_ago = timestamp_diff(current_time(), _time, "DAY")
-| filter days_ago <= 7
-| filter event_id in (4698, 4699, 4700, 4701, 4702)
-| fields _time, agent_hostname, event_id, action_evtlog_message
-| sort asc _time
 ```
 
 ---

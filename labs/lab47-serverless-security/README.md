@@ -657,53 +657,6 @@ def detect_event_poisoning(events_df, baseline_schema):
     return pd.DataFrame(poisoning_indicators)
 ```
 
-## Part 5: Detection Engineering
-
-### XQL Detection Rules for Serverless
-
-```xql
-config case_sensitive = false
-
-// Detect excessive Lambda errors
-| preset = cloud_audit
-| filter provider = "aws" and service = "lambda"
-| filter operation_status = "failure"
-| comp count() as error_count by function_name, _time = bin(1h)
-| filter error_count > 100
-| sort desc error_count
-| limit 100
-```
-
-```xql
-config case_sensitive = false
-
-// Detect Lambda accessing secrets at unusual times
-| preset = cloud_audit
-| filter provider = "aws"
-| filter service in ("secretsmanager", "ssm")
-| filter operation_name in ("GetSecretValue", "GetParameter")
-| filter user_identity_type = "AssumedRole"
-| filter timestamp_extract("HOUR", _time) not between 6 and 22
-| fields _time, function_name, secret_name, source_ip
-| sort desc _time
-| limit 100
-```
-
-```xql
-config case_sensitive = false
-
-// Detect potential SSRF attempts via Lambda
-| preset = cloud_audit
-| filter provider = "aws" and service = "ec2"
-| filter operation_name = "DescribeInstances"
-| filter user_identity_type = "AssumedRole"
-| filter user_identity_arn contains ":function:"
-| comp count() as api_count by user_identity_arn, _time = bin(1h)
-| filter api_count > 50
-| sort desc api_count
-| limit 100
-```
-
 ## Exercises
 
 ### Exercise 1: Log Analysis

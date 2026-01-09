@@ -1171,44 +1171,6 @@ class RAGSecurityMonitor:
         return recommendations
 ```
 
-### Exercise 4.2: XQL Detection Rules for RAG
-
-```xql
-config case_sensitive = false
-
-// Detect high-volume RAG queries suggesting enumeration
-| dataset = rag_access_logs
-| filter event_type = "retrieval"
-| comp count() as query_count by user_id, _time = bin(1h)
-| filter query_count > 500
-| sort desc query_count
-| limit 100
-```
-
-```xql
-config case_sensitive = false
-
-// Detect injection attempts in retrieved contexts
-| dataset = rag_security_logs
-| filter event_type = "sanitization"
-| filter risk_level in ("HIGH", "CRITICAL")
-| fields _time, doc_id, modifications, risk_level, user_id
-| sort desc _time
-| limit 100
-```
-
-```xql
-config case_sensitive = false
-
-// Detect sensitive data exposure in RAG
-| dataset = rag_security_logs
-| filter event_type = "sensitive_data"
-| filter findings contains "secret"
-| fields _time, doc_id, findings, accessed_by
-| sort desc _time
-| limit 100
-```
-
 ## Exercises
 
 ### Exercise 1: Knowledge Base Security
