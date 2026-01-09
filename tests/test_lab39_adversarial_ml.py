@@ -20,7 +20,7 @@ for key in list(sys.modules.keys()):
 sys.path = [p for p in sys.path if "/labs/lab" not in p]
 
 # Add this lab's path
-lab_path = str(Path(__file__).parent.parent / "labs" / "lab17-adversarial-ml" / "solution")
+lab_path = str(Path(__file__).parent.parent / "labs" / "lab39-adversarial-ml" / "solution")
 sys.path.insert(0, lab_path)
 
 from main import (

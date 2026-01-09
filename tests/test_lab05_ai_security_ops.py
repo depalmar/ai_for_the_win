@@ -16,7 +16,7 @@ sys.path = [p for p in sys.path if "/labs/lab" not in p and "\\labs\\lab" not in
 
 # Add this lab's path
 lab_path = str(
-    Path(__file__).parent.parent / "labs" / "lab00d-ai-in-security-operations" / "solution"
+    Path(__file__).parent.parent / "labs" / "lab05-ai-in-security-operations" / "solution"
 )
 sys.path.insert(0, lab_path)
 
