@@ -5,7 +5,6 @@ import json
 import sys
 from dataclasses import asdict
 from pathlib import Path
-from unittest.mock import Mock, patch
 
 import pytest
 
@@ -21,7 +20,7 @@ sys.path = [p for p in sys.path if "/labs/lab" not in p]
 lab_path = str(Path(__file__).parent.parent / "labs" / "lab49-llm-red-teaming" / "solution")
 sys.path.insert(0, lab_path)
 
-from main import (
+from main import (  # noqa: E402
     InjectionAttempt,
     InjectionDetector,
     RedTeamFramework,
@@ -42,7 +41,7 @@ def sample_injection_samples():
     data_path = (
         Path(__file__).parent.parent
         / "labs"
-        / "lab20-llm-red-teaming"
+        / "lab49-llm-red-teaming"
         / "data"
         / "injection_samples.json"
     )
@@ -813,7 +812,7 @@ class TestRedTeamFramework:
         assert len(results) > 0
 
         # Should include tests from multiple categories
-        categories_tested = set(r.category for r in results)
+        categories_tested = {r.category for r in results}
         assert len(categories_tested) >= 3
 
     def test_analyze_results_empty(self, red_team_framework):
@@ -838,7 +837,7 @@ class TestRedTeamFramework:
         results = red_team_framework.run_all_tests()
         analysis = red_team_framework.analyze_results(results)
 
-        for category, stats in analysis["category_stats"].items():
+        for _category, stats in analysis["category_stats"].items():
             assert "total" in stats
             assert "successful_attacks" in stats
             assert "success_rate" in stats
@@ -945,13 +944,7 @@ class TestIntegration:
                 if result.detected or result.confidence > 0:
                     detected_extractions += 1
 
-        # Should detect at least some samples in each category
-        # The patterns may not catch all variants
-        total_injections = sum(1 for s in samples if s["type"] == "prompt_injection")
-        total_jailbreaks = sum(1 for s in samples if s["type"] == "jailbreak")
-        total_extractions = sum(1 for s in samples if s["type"] == "data_extraction")
-
-        # At least some should be detected
+        # At least some samples should be detected (patterns may not catch all variants)
         assert detected_injections > 0 or detected_jailbreaks > 0 or detected_extractions > 0
 
     def test_secure_app_blocks_critical_attacks(self, secure_app, sample_injection_samples):
@@ -1007,7 +1000,7 @@ class TestHelperFunctions:
         """Test that load_sample_payloads includes various types."""
         payloads = load_sample_payloads()
 
-        types = set(p["type"] for p in payloads)
+        types = {p["type"] for p in payloads}
         assert "benign" in types
         assert "prompt_injection" in types or "jailbreak" in types or "data_extraction" in types
 
