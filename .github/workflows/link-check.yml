@@ -66,7 +66,7 @@ jobs:
 
       - name: Create Issue on Failure
         if: failure()
-        uses: peter-evans/create-issue-from-file@e8ef132d6df98ed982188e460ebb3b5d4ef3a9cd # v5
+        uses: peter-evans/create-issue-from-file@fca9117c27cdc29c6c4db3b86c48e4115a786710 # v5
         with:
           title: Link Check Report
           content-filepath: ./lychee/out.md
