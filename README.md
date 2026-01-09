@@ -226,7 +226,7 @@ High Confidence: FIN7/Carbanak
 </tr>
 <tr>
 <td align="center"><a href="./labs/lab20b-purple-team-ai/"><img src="https://img.shields.io/badge/20b-PurpleAI-ef4444?style=for-the-badge" alt="Lab 20b"/></a></td>
-<td align="center"><a href="./labs/lab21-xql-threat-hunting/"><img src="https://img.shields.io/badge/21-XQL-ef4444?style=for-the-badge" alt="Lab 21"/></a></td>
+<td></td>
 <td></td>
 <td></td>
 <td></td>
@@ -313,7 +313,6 @@ High Confidence: FIN7/Carbanak
 | [19d](./labs/lab19d-cloud-ir-automation/) | Cloud IR | Automated containment, evidence |
 | [20](./labs/lab20-llm-red-teaming/) | Red Team | Prompt injection, jailbreaks |
 | [20b](./labs/lab20b-purple-team-ai/) | Purple AI | Automated attack simulation |
-| [21](./labs/lab21-xql-threat-hunting/) | XQL | Cortex XSIAM/XDR threat hunting queries |
 
 </details>
 

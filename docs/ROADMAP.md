@@ -12,7 +12,6 @@ Build the most comprehensive, hands-on AI/ML training program for security pract
 
 ### Completed
 - 30+ hands-on labs covering ML, LLM, DFIR, Cloud, and adversarial techniques
-- XQL reference guide, templates, and validation tool
 - 15 CTF challenges (Beginner, Intermediate, Advanced)
 - Multi-provider LLM support (Anthropic, OpenAI, Gemini, Ollama)
 - Comprehensive documentation
@@ -22,7 +21,6 @@ Build the most comprehensive, hands-on AI/ML training program for security pract
 
 ### In Progress
 - Additional DFIR deep-dives
-- XQL query library expansion
 - Test coverage improvements
 
 ---
@@ -43,10 +41,6 @@ Build the most comprehensive, hands-on AI/ML training program for security pract
   - Cloud Compromise - AWS/Azure/GCP scenarios
   - Zero-Day Hunt - Behavioral anomaly detection
   - Full IR Scenario - End-to-end incident response
-
-### XQL Tools
-- [x] Build query validation tool (Python-based syntax checker) ✓ v1.8.0
-- [x] Create XQL cheat sheet (quick reference card) ✓ v1.7.0
 
 ### Testing & Quality
 - [ ] Achieve 80%+ test coverage across all labs
@@ -134,7 +128,6 @@ Build the most comprehensive, hands-on AI/ML training program for security pract
 ### Good First Issues
 - Add test cases for existing labs
 - Improve lab README documentation
-- Create additional XQL query examples
 - Translate documentation
 
 ### Help Wanted
@@ -152,7 +145,6 @@ Build the most comprehensive, hands-on AI/ML training program for security pract
 | Labs | 30+ | 35+ |
 | CTF Challenges | 15 | 20 |
 | Test Coverage | ~70% | 80% |
-| XQL Templates | 25+ | 40 |
 
 ---
 

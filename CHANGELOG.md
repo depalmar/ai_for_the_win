@@ -26,42 +26,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Ollama for local LLM inference
   - ChromaDB for vector storage (RAG labs)
 
-- **Enhanced XQL Validator** (`tools/xql_validator/`)
-  - Security pattern detection (template injection, command injection)
-  - Performance anti-pattern detection
-  - Issue categorization (syntax, security, performance, best_practice)
-  - Strict mode option
-  - Statistics tracking
-
 ### Changed
 - Updated labs README with new tracks and labs
-- Improved XQL validation with more comprehensive rules
 
 ## [1.7.0] - 2026-01-07
 
 ### Added
-- **XQL Reference Guide** (`docs/guides/xql-guide.md`)
-  - Comprehensive Cortex XDR XQL syntax reference
-  - Verified against official documentation
-  - Includes datasets, functions, NGFW queries
-
-- **XQL Templates** (`templates/xql/`)
-  - Detection rules for credential access, persistence, lateral movement
-  - Threat hunting queries for process, network, and ransomware analysis
-
 - **New DFIR Labs**
   - Lab 10b: Windows Event Log Analysis - Event IDs, lateral movement patterns, credential theft detection
   - Lab 10c: Windows Registry Forensics - Persistence hunting, UserAssist, ShimCache, MRU artifacts
   - Lab 10d: Live Response - Collection techniques, order of volatility, triage checklist
 
-- **New XQL Lab**
-  - Lab 21: XQL Threat Hunting - Cortex XDR queries with realistic attack scenarios ("Operation Midnight Heist")
-
 - **Test Coverage**
-  - Added test files for labs 00b, 02, 03, 04, 05, 06a, 07, 07b, 10a, 21
+  - Added test files for labs 00b, 02, 03, 04, 05, 06a, 07, 07b, 10a
 
 ### Changed
-- Updated labs README with new DFIR and XQL labs
+- Updated labs README with new DFIR labs
 - Fixed CTF challenge directory paths
 - Improved CTF beginner challenge descriptions
 
