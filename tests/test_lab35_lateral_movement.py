@@ -21,7 +21,7 @@ sys.path = [p for p in sys.path if "/labs/lab" not in p]
 
 # Add this lab's path
 lab_path = str(
-    Path(__file__).parent.parent / "labs" / "lab15-lateral-movement-detection" / "solution"
+    Path(__file__).parent.parent / "labs" / "lab35-lateral-movement-detection" / "solution"
 )
 sys.path.insert(0, lab_path)
 
