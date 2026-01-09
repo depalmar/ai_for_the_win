@@ -2,7 +2,7 @@
 
 **Difficulty:** Easy
 **Points:** 100
-**Prerequisite:** Lab 04 (LLM Log Analysis)
+**Prerequisite:** Lab 35 (LLM Log Analysis)
 **API Key:** Optional (can be solved manually)
 
 ## Challenge Description

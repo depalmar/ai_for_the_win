@@ -212,34 +212,34 @@ Complete these labs before attempting CTF challenges for the best experience:
 
 | CTF Challenge | Recommended Labs | Why |
 |---------------|------------------|-----|
-| Log Detective | [Lab 04: LLM Log Analysis](../labs/lab04-llm-log-analysis/) | Learn log parsing and pattern recognition |
-| Phish Finder | [Lab 01: Phishing Classifier](../labs/lab01-phishing-classifier/) | Understand email classification techniques |
-| Hidden IOC | [Lab 05: Threat Intel Agent](../labs/lab05-threat-intel-agent/) | Learn IOC extraction and correlation |
-| Malware Classifier | [Lab 02: Malware Clustering](../labs/lab02-malware-clustering/) | Understand feature engineering for malware |
-| Prompt Injection 101 | [Lab 20: LLM Red Teaming](../labs/lab20-llm-red-teaming/) | Learn prompt injection fundamentals |
-| Linux Persistence Hunter | [Lab 00i: CTF Fundamentals](../labs/lab00i-ctf-fundamentals/) | Learn CTF mindset and systematic searching |
+| Log Detective | [Lab 04: LLM Log Analysis](../labs/lab15-llm-log-analysis/) | Learn log parsing and pattern recognition |
+| Phish Finder | [Lab 01: Phishing Classifier](../labs/lab10-phishing-classifier/) | Understand email classification techniques |
+| Hidden IOC | [Lab 05: Threat Intel Agent](../labs/lab16-threat-intel-agent/) | Learn IOC extraction and correlation |
+| Malware Classifier | [Lab 02: Malware Clustering](../labs/lab11-malware-clustering/) | Understand feature engineering for malware |
+| Prompt Injection 101 | [Lab 20: LLM Red Teaming](../labs/lab49-llm-red-teaming/) | Learn prompt injection fundamentals |
+| Linux Persistence Hunter | [Lab 09: CTF Fundamentals](../labs/lab09-ctf-fundamentals/) | Learn CTF mindset and systematic searching |
 
 ### Intermediate Challenges
 
 | CTF Challenge | Recommended Labs | Why |
 |---------------|------------------|-----|
-| C2 Hunter | [Lab 14: C2 Traffic Analysis](../labs/lab14-c2-traffic-analysis/) | Master beaconing detection and DNS analysis |
-| Memory Forensics | [Lab 13: Memory Forensics AI](../labs/lab13-memory-forensics-ai/) | Learn Volatility and memory artifact analysis |
-| Adversarial Samples | [Lab 17: Adversarial ML](../labs/lab17-adversarial-ml/) | Understand ML evasion techniques |
-| Agent Investigation | [Lab 04b: First AI Agent](../labs/lab04b-first-ai-agent/) | Learn ReAct pattern and tool calling |
-| Ransomware Response | [Lab 11: Ransomware Detection](../labs/lab11-ransomware-detection/) | Master ransomware analysis techniques |
-| Web Shell Detective | [Lab 00i: CTF Fundamentals](../labs/lab00i-ctf-fundamentals/) | Learn decoding and log analysis techniques |
+| C2 Hunter | [Lab 14: C2 Traffic Analysis](../labs/lab34-c2-traffic-analysis/) | Master beaconing detection and DNS analysis |
+| Memory Forensics | [Lab 13: Memory Forensics AI](../labs/lab33-memory-forensics-ai/) | Learn Volatility and memory artifact analysis |
+| Adversarial Samples | [Lab 17: Adversarial ML](../labs/lab39-adversarial-ml/) | Understand ML evasion techniques |
+| Agent Investigation | [Lab 04b: First AI Agent](../labs/lab14-first-ai-agent/) | Learn ReAct pattern and tool calling |
+| Ransomware Response | [Lab 11: Ransomware Detection](../labs/lab31-ransomware-detection/) | Master ransomware analysis techniques |
+| Web Shell Detective | [Lab 09: CTF Fundamentals](../labs/lab09-ctf-fundamentals/) | Learn decoding and log analysis techniques |
 
 ### Advanced Challenges
 
 | CTF Challenge | Recommended Labs | Why |
 |---------------|------------------|-----|
-| APT Attribution | [Lab 16: Threat Actor Profiling](../labs/lab16-threat-actor-profiling/) | Learn TTP analysis and attribution |
-| Model Poisoning | [Lab 17: Adversarial ML](../labs/lab17-adversarial-ml/) | Understand data poisoning attacks |
-| Cloud Compromise | [Lab 19: Cloud Security AI](../labs/lab19-cloud-security-ai/) | Multi-cloud security monitoring |
-| Zero-Day Detection | [Lab 03: Anomaly Detection](../labs/lab03-anomaly-detection/) | Build anomaly detection systems |
-| Full IR Scenario | [Lab 10: IR Copilot](../labs/lab10-ir-copilot/) | Complete incident response workflow |
-| Supply Chain Detective | [Lab 00i: CTF Fundamentals](../labs/lab00i-ctf-fundamentals/) | Learn package security and dependency analysis |
+| APT Attribution | [Lab 16: Threat Actor Profiling](../labs/lab36-threat-actor-profiling/) | Learn TTP analysis and attribution |
+| Model Poisoning | [Lab 17: Adversarial ML](../labs/lab39-adversarial-ml/) | Understand data poisoning attacks |
+| Cloud Compromise | [Lab 19: Cloud Security AI](../labs/lab45-cloud-security-ai/) | Multi-cloud security monitoring |
+| Zero-Day Detection | [Lab 03: Anomaly Detection](../labs/lab12-anomaly-detection/) | Build anomaly detection systems |
+| Full IR Scenario | [Lab 10: IR Copilot](../labs/lab29-ir-copilot/) | Complete incident response workflow |
+| Supply Chain Detective | [Lab 09: CTF Fundamentals](../labs/lab09-ctf-fundamentals/) | Learn package security and dependency analysis |
 
 ---
 

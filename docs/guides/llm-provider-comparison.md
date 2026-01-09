@@ -529,7 +529,7 @@ response = llm.invoke("Analyze this log: {log}")
 
 - [Cost Management Guide](./cost-management.md) - Optimize your spend
 - [Error Handling Guide](./error-handling-guide.md) - Handle API failures gracefully
-- [Lab 04: Log Analysis](../../labs/lab04-llm-log-analysis/) - Apply these concepts
+- [Lab 04: Log Analysis](../../labs/lab15-llm-log-analysis/) - Apply these concepts
 
 ---
 

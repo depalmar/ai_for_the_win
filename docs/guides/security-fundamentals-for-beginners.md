@@ -385,7 +385,7 @@ CEF:0|Security|Firewall|1.0|BLOCK|Blocked connection|5|src=192.168.1.100 dst=10.
 | **Log Analysis** | Labs 04, 09 - Parse and analyze security logs |
 | **Threat Types** | Labs 01-03 - Detect phishing, malware, anomalies |
 | **IR Process** | Labs 10, 10b, 11 - Build IR copilots and tools |
-| **SOC Workflow** | Lab 00d, 09, 10 - Understand where AI fits |
+| **SOC Workflow** | Lab 05, 09, 10 - Understand where AI fits |
 
 ---
 
@@ -429,7 +429,7 @@ These reference posters are gold - download and print them:
 
 ### In This Course
 
-- **Lab 00d**: AI in Security Operations - conceptual overview
+- **Lab 05**: AI in Security Operations - conceptual overview
 - **Lab 10a**: DFIR Fundamentals - incident response basics
 - **Glossary**: [security-to-ai-glossary.md](../../resources/security-to-ai-glossary.md) - AI terms explained for security folks
 
@@ -439,7 +439,7 @@ These reference posters are gold - download and print them:
 
 Now that you understand the basics:
 
-1. **Lab 00d**: Read about AI's role in security operations
+1. **Lab 05**: Read about AI's role in security operations
 2. **Lab 01**: Build your first security ML tool (phishing classifier)
 3. **Lab 04**: Use LLMs to analyze security logs
 

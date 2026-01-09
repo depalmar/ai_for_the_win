@@ -784,8 +784,8 @@ def rate_limited_tool_call(tool_func: Callable, *args, **kwargs):
 
 ## Related Resources
 
-- [Lab 05: Threat Intel Agent](../labs/lab05-threat-intel-agent/) - Build a ReAct agent
-- [Lab 10: IR Copilot](../labs/lab10-ir-copilot/) - Agent with human-in-the-loop
+- [Lab 05: Threat Intel Agent](../labs/lab16-threat-intel-agent/) - Build a ReAct agent
+- [Lab 10: IR Copilot](../labs/lab29-ir-copilot/) - Agent with human-in-the-loop
 - [LangChain Guide](../setup/guides/langchain-guide.md) - Comprehensive LangChain/LangGraph guide
 - [Security Agent Template](../templates/agents/security_agent_template.py) - Reusable agent code
 - [Workshop 7: Multi-Agent](../setup/guides/workshops-guide.md#workshop-7-multi-agent-security-systems) - Hands-on multi-agent lab

@@ -2,7 +2,7 @@
 
 **Difficulty:** Advanced
 **Points:** 500
-**Prerequisite:** Lab 16 (Threat Actor Profiling)
+**Prerequisite:** Lab 36 (Threat Actor Profiling)
 **Time Estimate:** 90-120 minutes
 
 ## Challenge Description

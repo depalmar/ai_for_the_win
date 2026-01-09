@@ -34,7 +34,7 @@ IMPORTANT: Preserve the learning experience!
 
 ## Lab Progression
 
-- **Labs 00a-00c**: Intro (Python, ML concepts, prompting) - no API keys
+- **Labs 01-02**: Intro (Python, ML concepts, prompting) - no API keys
 - **Labs 01-03**: ML foundations - no API keys
 - **Labs 04-07**: LLM basics - requires API key
 - **Labs 08-10**: Advanced (agents, pipelines, copilots)

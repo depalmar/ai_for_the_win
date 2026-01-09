@@ -26,7 +26,7 @@ cp .env.example .env
 python -c "from anthropic import Anthropic; print('Ready!')"
 
 # 6. Run your first lab
-python labs/lab01-phishing-classifier/solution/main.py
+python labs/lab10-phishing-classifier/solution/main.py
 ```
 
 ### 🐳 Docker Quick Start (Alternative)
@@ -49,8 +49,8 @@ Run labs directly in your browser - no local setup required:
 
 | Lab | Open in Colab |
 |-----|---------------|
-| Lab 01: Phishing Classifier | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab01_phishing_classifier.ipynb) |
-| Lab 02: Malware Clustering | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab02_malware_clustering.ipynb) |
+| Lab 01: Phishing Classifier | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab10_phishing_classifier.ipynb) |
+| Lab 02: Malware Clustering | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab11_malware_clustering.ipynb) |
 | All 24 labs available | [Browse notebooks →](../../notebooks/) |
 
 ---

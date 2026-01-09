@@ -2,7 +2,7 @@
 
 **Difficulty:** Advanced
 **Points:** 500
-**Prerequisite:** Lab 10 (IR Copilot)
+**Prerequisite:** Lab 29 (IR Copilot)
 **Time Estimate:** 120-180 minutes
 
 ## Challenge Description

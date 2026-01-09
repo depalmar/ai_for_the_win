@@ -2,7 +2,7 @@
 
 **Difficulty:** Intermediate
 **Points:** 250
-**Prerequisite:** Lab 17 (Adversarial ML)
+**Prerequisite:** Lab 39 (Adversarial ML)
 **Time Estimate:** 45-60 minutes
 
 ## Challenge Description

@@ -2,7 +2,7 @@
 
 **Difficulty:** Intermediate
 **Points:** 250
-**Prerequisite:** Lab 14 (C2 Traffic Analysis)
+**Prerequisite:** Lab 34 (C2 Traffic Analysis)
 **Time Estimate:** 45-60 minutes
 
 ## Challenge Description

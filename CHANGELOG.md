@@ -9,14 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - **Cloud-Native Security Track**
-  - Lab 19b: Container Security - Image analysis, runtime detection, Kubernetes audit logs, container escape detection
-  - Lab 19c: Serverless Security - Function log analysis, event injection detection, IAM permission analysis
-  - Lab 19d: Cloud IR Automation - Automated containment, evidence collection, Step Functions orchestration
+  - Lab 46: Container Security - Image analysis, runtime detection, Kubernetes audit logs, container escape detection
+  - Lab 47: Serverless Security - Function log analysis, event injection detection, IAM permission analysis
+  - Lab 48: Cloud IR Automation - Automated containment, evidence collection, Step Functions orchestration
 
 - **AI Security Track**
-  - Lab 17b: LLM Security Testing - Prompt injection testing, jailbreak evaluation, data extraction tests
-  - Lab 17c: Model Monitoring - Data drift detection, adversarial input detection, model extraction monitoring
-  - Lab 18b: RAG Security - Knowledge base poisoning detection, context sanitization, access control
+  - Lab 40: LLM Security Testing - Prompt injection testing, jailbreak evaluation, data extraction tests
+  - Lab 41: Model Monitoring - Data drift detection, adversarial input detection, model extraction monitoring
+  - Lab 43: RAG Security - Knowledge base poisoning detection, context sanitization, access control
 
 - **Docker Lab Environment** (`docker/`)
   - One-command setup with `docker compose up -d`
@@ -33,12 +33,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - **New DFIR Labs**
-  - Lab 10b: Windows Event Log Analysis - Event IDs, lateral movement patterns, credential theft detection
-  - Lab 10c: Windows Registry Forensics - Persistence hunting, UserAssist, ShimCache, MRU artifacts
-  - Lab 10d: Live Response - Collection techniques, order of volatility, triage checklist
+  - Lab 26: Windows Event Log Analysis - Event IDs, lateral movement patterns, credential theft detection
+  - Lab 27: Windows Registry Forensics - Persistence hunting, UserAssist, ShimCache, MRU artifacts
+  - Lab 28: Live Response - Collection techniques, order of volatility, triage checklist
 
 - **Test Coverage**
-  - Added test files for labs 00b, 02, 03, 04, 05, 06a, 07, 07b, 10a
+  - Added test files for labs 04, 02, 03, 04, 05, 06a, 07, 07b, 10a
 
 ### Changed
 - Updated labs README with new DFIR labs
@@ -49,7 +49,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - **New Lab**
-  - Lab 00i: CTF Fundamentals - Bridge lab teaching CTF mindset, flag formats, encoding techniques, and systematic approaches to security challenges
+  - Lab 09: CTF Fundamentals - Bridge lab teaching CTF mindset, flag formats, encoding techniques, and systematic approaches to security challenges
 
 - **New CTF Challenges**
   - Intermediate-06: Insider Threat - Detect data exfiltration via DNS tunneling and cloud storage
@@ -59,7 +59,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Enhanced Vibe Coding Guidance**
   - Part 7: Vibe Coding the Other Labs - Example prompts for Labs 01-04
   - Part 8: Prompt Library & Resources - Links to security prompts library
-  - CTF-specific vibe coding examples in Lab 00i
+  - CTF-specific vibe coding examples in Lab 09
 
 ### Changed
 - Improved OpenSSF Scorecard compliance with job-level permissions
@@ -83,8 +83,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - **New Labs**
-  - Lab 16b: AI-Powered Threat Actors - Detect AI-generated phishing, vishing, and malware
-  - Lab 20b: AI-Assisted Purple Team - Attack simulation and detection gap analysis
+  - Lab 37: AI-Powered Threat Actors - Detect AI-generated phishing, vishing, and malware
+  - Lab 50: AI-Assisted Purple Team - Attack simulation and detection gap analysis
 
 - **Threat Actor Database** (`data/threat-actor-ttps/`)
   - 8 new threat actor profiles: Scattered Spider, Volt Typhoon, ALPHV/BlackCat, LockBit, Cl0p, Rhysida, Akira, Play
@@ -108,7 +108,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Improved data documentation with usage examples
 
 ### Fixed
-- Black formatting issues in lab16b and lab20b
+- Black formatting issues in lab37 and lab50
 - Stale PR cleanup
 
 ## [1.2.0] - 2026-01-03
@@ -122,9 +122,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Lab walkthroughs for all labs
 - SANS resource references
-- Cloud security fundamentals (Lab 19a)
-- Sigma rule fundamentals (Lab 07b)
-- Ransomware fundamentals (Lab 11a)
+- Cloud security fundamentals (Lab 44)
+- Sigma rule fundamentals (Lab 20)
+- Ransomware fundamentals (Lab 30)
 
 ### Changed
 - LLM provider agnostic configuration

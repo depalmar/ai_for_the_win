@@ -14,7 +14,7 @@ This document provides a comprehensive overview of the AI for the Win training p
 │                                                                               │
 │  ┌─────────────┐    ┌─────────────┐    ┌─────────────┐    ┌─────────────┐   │
 │  │   INTRO     │───▶│  FOUNDATION │───▶│  LLM TOOLS  │───▶│  ADVANCED   │   │
-│  │  Labs 00a-c │    │  Labs 01-03 │    │  Labs 04-07 │    │  Labs 08-20 │   │
+│  │  Labs 01-c │    │  Labs 01-03 │    │  Labs 04-07 │    │  Labs 08-20 │   │
 │  └─────────────┘    └─────────────┘    └─────────────┘    └─────────────┘   │
 │        │                  │                  │                  │            │
 │        ▼                  ▼                  ▼                  ▼            │
@@ -37,10 +37,10 @@ This document provides a comprehensive overview of the AI for the Win training p
 ```mermaid
 flowchart TB
     subgraph intro [🎯 Intro Labs]
-        A00[00 Setup] --> A00a[00a Python]
-        A00a --> A00b[00b ML Concepts]
-        A00b --> A00c[00c Prompts]
-        A00c --> A00d[00d AI in SOC]
+        A00[00 Setup] --> A00a[01 Python]
+        A00a --> A00b[04 ML Concepts]
+        A00b --> A00c[02 Prompts]
+        A00c --> A00d[05 AI in SOC]
     end
 
     subgraph ml [🔬 ML Basics - No API Key]
@@ -124,11 +124,11 @@ flowchart TB
 ```
 ai_for_the_win/
 ├── labs/                          # 24 hands-on labs (core content)
-│   ├── lab00a-python-security-fundamentals/
-│   ├── lab00b-ml-concepts-primer/
-│   ├── lab00c-intro-prompt-engineering/
-│   ├── lab00d-ai-in-security-operations/
-│   ├── lab01-phishing-classifier/
+│   ├── lab01-python-security-fundamentals/
+│   ├── lab04-ml-concepts-primer/
+│   ├── lab02-intro-prompt-engineering/
+│   ├── lab05-ai-in-security-operations/
+│   ├── lab10-phishing-classifier/
 │   │   ├── README.md              # Lab instructions
 │   │   ├── starter/               # Starting code templates
 │   │   ├── solution/              # Reference implementations
@@ -136,7 +136,7 @@ ai_for_the_win/
 │   └── ... (labs 02-20)
 │
 ├── notebooks/                     # Jupyter notebooks (Colab-ready)
-│   └── lab01_phishing_classifier.ipynb ...
+│   └── lab10_phishing_classifier.ipynb ...
 │
 ├── docs/                          # All documentation
 │   ├── guides/                    # Setup, tools, and how-to guides
@@ -458,17 +458,17 @@ def test_full_pipeline():
 
 ```
                     ┌─────────────────┐
-                    │   Lab 00a       │
+                    │   Lab 01       │
                     │ Python Basics   │
                     └────────┬────────┘
                              │
                     ┌────────▼────────┐
-                    │   Lab 00b       │
+                    │   Lab 04       │
                     │  ML Concepts    │
                     └────────┬────────┘
                              │
                     ┌────────▼────────┐
-                    │   Lab 00c       │
+                    │   Lab 02       │
                     │Prompt Engineer  │
                     └────────┬────────┘
                              │

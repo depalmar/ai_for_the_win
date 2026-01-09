@@ -119,5 +119,5 @@ malware/
 docs/guides/xql-guide.md
 templates/xql/
 tools/xql_validator/
-labs/lab21-xql-threat-hunting/
+labs/lab99-xql-threat-hunting/
 tests/test_xql_validator.py

@@ -129,7 +129,7 @@ Each lab has a notebook in the `notebooks/` folder. Here's how to use them:
 ### Step 1: Open the Notebook
 ```bash
 cd ai_for_the_win
-jupyter notebook notebooks/lab01_phishing_classifier.ipynb
+jupyter notebook notebooks/lab10_phishing_classifier.ipynb
 ```
 
 ### Step 2: Read the Introduction
@@ -294,6 +294,6 @@ Colab runs in the cloud - free GPU included!
 ## Next Steps
 
 Now that you know Jupyter basics:
-- Open `notebooks/lab01_phishing_classifier.ipynb` and work through it
+- Open `notebooks/lab10_phishing_classifier.ipynb` and work through it
 - Experiment by modifying code and rerunning cells
 - Try the exercises at the end of each notebook

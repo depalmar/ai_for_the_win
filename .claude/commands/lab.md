@@ -6,7 +6,7 @@ Navigate, explore, and run labs in the AI for the Win training program.
 
 ```
 /lab                    # List all labs with status
-/lab <number>           # Show lab details (e.g., /lab 05)
+/lab <number>           # Show lab details (e.g., /Lab 36)
 /lab <number> start     # Open lab starter code
 /lab <number> solution  # Show solution
 /lab <number> test      # Run lab tests
@@ -30,16 +30,20 @@ When the user invokes this command:
 
 3. **Lab Listing** (no args):
    ```
-   ## Intro Labs (00a-00i)
-   - lab00a: Python Security Fundamentals
-   - lab00b: ML Concepts Primer
+   ## Prerequisites (00-09)
+   - lab00: Environment Setup
+   - lab01: Python Security Fundamentals
+   - lab04: ML Concepts Primer
    ...
 
-   ## ML Foundations (01-03)
-   - lab01: Phishing Classifier
+   ## ML Foundations (10-13)
+   - lab10: Phishing Classifier
+   - lab11: Malware Clustering
    ...
 
-   ## LLM Basics (04-07)
+   ## LLM Basics (14-21)
+   - lab14: First AI Agent
+   - lab15: LLM Log Analysis
    ...
    ```
 
@@ -65,28 +69,28 @@ When the user invokes this command:
 
 | Range | Category | API Required |
 |-------|----------|--------------|
-| 00a-00i | Intro/Fundamentals | No |
-| 01-03 | ML Foundations | No |
-| 04-07 | LLM Basics | Yes |
-| 08-10 | Advanced Agents | Yes |
-| 11-20 | Expert DFIR | Yes |
+| 00-09 | Prerequisites/Fundamentals | No |
+| 10-13 | ML Foundations | No |
+| 14-21 | LLM Basics | Yes |
+| 22-24 | Advanced Agents | Yes |
+| 25-50 | Expert DFIR/Cloud/Red Team | Yes |
 
 ## Example Output
 
 ```
-## Lab 05: Threat Intelligence Agent
+## Lab 16: Threat Intelligence Agent
 
 **Objectives:**
 - Build an agent that queries threat intel APIs
 - Implement tool calling for IOC enrichment
 - Create structured threat reports
 
-**Prerequisites:** Lab 04 (LLM basics), API key configured
+**Prerequisites:** Lab 15 (LLM Log Analysis), API key configured
 
 **Files:**
-- Starter: labs/lab05-threat-intel-agent/starter/main.py
-- Solution: labs/lab05-threat-intel-agent/solution/main.py
-- Tests: tests/test_lab05_threat_intel.py
+- Starter: labs/lab16-threat-intel-agent/starter/main.py
+- Solution: labs/lab16-threat-intel-agent/solution/main.py
+- Tests: tests/test_lab16_threat_intel.py
 
-**Run:** pytest tests/test_lab05_threat_intel.py -v
+**Run:** pytest tests/test_lab16_threat_intel.py -v
 ```

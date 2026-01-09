@@ -6,7 +6,7 @@ This folder contains screenshots for the README and documentation.
 
 | Filename | Description | Where to Capture |
 |----------|-------------|------------------|
-| `lab01-terminal.png` | Lab 01 phishing classifier output | Run `python labs/lab01-phishing-classifier/solution/main.py` |
+| `lab01-terminal.png` | Lab 01 phishing classifier output | Run `python labs/lab10-phishing-classifier/solution/main.py` |
 | `lab04-output.png` | LLM log analysis results | Run Lab 04 with API key |
 | `jupyter-notebook.png` | Notebook interface | Open any `.ipynb` in Jupyter |
 | `test-output.png` | Pytest results (all green) | Run `pytest tests/ -v` |

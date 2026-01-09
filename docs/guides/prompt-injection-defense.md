@@ -574,8 +574,8 @@ Analyze the DATA and return JSON:"""
 | If you want to... | Go to... |
 |-------------------|----------|
 | Parse LLM outputs safely | [Structured Output Guide](./structured-output-parsing.md) |
-| Understand AI risks | [Lab 00d](../../labs/lab00d-ai-in-security-operations/) |
-| Build log analyzer | [Lab 04](../../labs/lab04-llm-log-analysis/) |
+| Understand AI risks | [Lab 05](../../labs/lab05-ai-in-security-operations/) |
+| Build log analyzer | [Lab 04](../../labs/lab15-llm-log-analysis/) |
 | Test LLM outputs | [LLM Evaluation Guide](./llm-evaluation-testing.md) |
 
 ---

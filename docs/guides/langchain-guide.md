@@ -131,7 +131,7 @@ def get_llm(
             provider = "google"
         else:
             provider = "ollama"  # Fallback to local
-    
+
     if provider == "anthropic":
         from langchain_anthropic import ChatAnthropic
         return ChatAnthropic(
@@ -139,7 +139,7 @@ def get_llm(
             temperature=temperature,
             max_tokens=max_tokens
         )
-    
+
     elif provider == "openai":
         from langchain_openai import ChatOpenAI
         return ChatOpenAI(
@@ -147,7 +147,7 @@ def get_llm(
             temperature=temperature,
             max_tokens=max_tokens
         )
-    
+
     elif provider == "google":
         from langchain_google_genai import ChatGoogleGenerativeAI
         return ChatGoogleGenerativeAI(
@@ -155,7 +155,7 @@ def get_llm(
             temperature=temperature,
             max_output_tokens=max_tokens
         )
-    
+
     elif provider == "ollama":
         from langchain_ollama import ChatOllama
         return ChatOllama(
@@ -163,7 +163,7 @@ def get_llm(
             temperature=temperature,
             num_predict=max_tokens
         )
-    
+
     raise ValueError(f"Unknown provider: {provider}")
 ```
 
@@ -324,7 +324,7 @@ from langchain_core.prompts import ChatPromptTemplate
 
 log_analysis_prompt = ChatPromptTemplate.from_messages([
     ("system", """You are a security analyst reviewing system logs.
-    
+
 For each log entry, determine:
 1. Event type (authentication, network, file, process, etc.)
 2. Severity (info, low, medium, high, critical)
@@ -523,7 +523,7 @@ def lookup_ip(ip_address: str) -> str:
     """
     Look up threat intelligence for an IP address.
     Returns reputation data and geolocation.
-    
+
     Args:
         ip_address: IPv4 or IPv6 address to look up
     """
@@ -549,7 +549,7 @@ Reports: {data['totalReports']} in last 90 days
 def lookup_hash(file_hash: str) -> str:
     """
     Look up a file hash in VirusTotal.
-    
+
     Args:
         file_hash: MD5, SHA1, or SHA256 hash
     """
@@ -560,7 +560,7 @@ def lookup_hash(file_hash: str) -> str:
         )
         if response.status_code == 404:
             return f"Hash {file_hash} not found in VirusTotal"
-        
+
         data = response.json()["data"]["attributes"]
         stats = data["last_analysis_stats"]
         return f"""
@@ -576,7 +576,7 @@ Names: {', '.join(data.get('names', [])[:3])}
 def search_mitre_attack(technique_id: str) -> str:
     """
     Search MITRE ATT&CK for a technique.
-    
+
     Args:
         technique_id: MITRE technique ID (e.g., T1566, T1059.001)
     """
@@ -729,46 +729,46 @@ class TriageState(TypedDict):
 def classify_alert(state: TriageState) -> TriageState:
     """Classify alert severity using LLM."""
     alert = state["alert"]
-    
+
     prompt = f"""Classify this security alert:
-    
+
 {alert}
 
 Severity options: low, medium, high, critical
 
 Respond with just the severity level."""
-    
+
     response = llm.invoke(prompt)
     severity = response.content.strip().lower()
-    
+
     return {"severity": severity}
 
 def extract_iocs(state: TriageState) -> TriageState:
     """Extract IOCs from alert."""
     alert = state["alert"]
-    
+
     # Use the IOC extraction chain from earlier
     iocs = ioc_chain.invoke({"text": str(alert)})
-    
+
     return {"iocs": iocs}
 
 def enrich_iocs(state: TriageState) -> TriageState:
     """Enrich IOCs with threat intelligence."""
     iocs = state["iocs"]
     enrichment = {}
-    
+
     for ip in iocs.get("ips", []):
         try:
             enrichment[ip] = lookup_ip.invoke(ip)
         except:
             enrichment[ip] = "Lookup failed"
-    
+
     for hash_val in iocs.get("hashes", []):
         try:
             enrichment[hash_val] = lookup_hash.invoke(hash_val)
         except:
             enrichment[hash_val] = "Lookup failed"
-    
+
     return {"enrichment": enrichment}
 
 def generate_recommendation(state: TriageState) -> TriageState:
@@ -780,9 +780,9 @@ IOCs Found: {state['iocs']}
 Enrichment Data: {state['enrichment']}
 
 Provide a recommended response action. Be specific and actionable."""
-    
+
     response = llm.invoke(prompt)
-    
+
     return {"recommendation": response.content}
 
 def should_enrich(state: TriageState) -> Literal["enrich", "recommend"]:
@@ -849,24 +849,24 @@ class InvestigationState(TypedDict):
 def network_analyst(state: InvestigationState) -> InvestigationState:
     """Network analysis specialist."""
     prompt = f"""You are a network security analyst.
-    
+
 Analyze the network aspects of this incident:
 {state['incident']}
 
 Focus on: traffic patterns, C2 indicators, lateral movement, data exfiltration."""
-    
+
     response = llm.invoke(prompt)
     return {"network_findings": response.content}
 
 def endpoint_analyst(state: InvestigationState) -> InvestigationState:
     """Endpoint analysis specialist."""
     prompt = f"""You are an endpoint security analyst.
-    
+
 Analyze the endpoint aspects of this incident:
 {state['incident']}
 
 Focus on: process execution, file modifications, persistence mechanisms, credential access."""
-    
+
     response = llm.invoke(prompt)
     return {"endpoint_findings": response.content}
 
@@ -874,18 +874,18 @@ def threat_intel_analyst(state: InvestigationState) -> InvestigationState:
     """Threat intelligence specialist."""
     # Use RAG to query threat intel
     query = f"What threat actors or campaigns match: {state['incident']}"
-    
+
     try:
         intel = rag_chain.invoke(query)
     except:
         intel = "No matching threat intelligence found."
-    
+
     return {"threat_intel": intel}
 
 def lead_analyst(state: InvestigationState) -> InvestigationState:
     """Synthesize findings into final report."""
     prompt = f"""You are the lead security analyst.
-    
+
 Synthesize these specialist findings into a cohesive incident report:
 
 NETWORK ANALYSIS:
@@ -903,7 +903,7 @@ Provide:
 3. Impact Assessment
 4. Attribution (if possible)
 5. Recommended Actions"""
-    
+
     response = llm.invoke(prompt)
     return {"final_report": response.content}
 
@@ -947,7 +947,7 @@ class SecurityAlert(BaseModel):
     destination_ip: Optional[str] = Field(default=None, description="Destination IP")
     description: str = Field(description="Brief description of the alert")
     recommended_action: str = Field(description="Recommended response action")
-    
+
     @field_validator("source_ip", "destination_ip", mode="before")
     @classmethod
     def validate_ip(cls, v):
@@ -1020,11 +1020,11 @@ def sanitize_input(text: str) -> str:
         r"system:",
         r"<\|.*\|>",  # Special tokens
     ]
-    
+
     sanitized = text
     for pattern in patterns:
         sanitized = re.sub(pattern, "[FILTERED]", sanitized, flags=re.IGNORECASE)
-    
+
     return sanitized
 
 # Use in chains
@@ -1039,21 +1039,21 @@ def safe_chain(chain, inputs: dict) -> str:
 def validate_iocs(iocs: dict) -> dict:
     """Validate extracted IOCs are real, not hallucinated."""
     import ipaddress
-    
+
     validated = {"ips": [], "domains": [], "hashes": [], "urls": []}
-    
+
     for ip in iocs.get("ips", []):
         try:
             ipaddress.ip_address(ip)
             validated["ips"].append(ip)
         except ValueError:
             pass  # Invalid IP, skip
-    
+
     for domain in iocs.get("domains", []):
         # Basic domain validation
         if re.match(r'^[a-zA-Z0-9][a-zA-Z0-9-_.]+\.[a-zA-Z]{2,}$', domain):
             validated["domains"].append(domain)
-    
+
     for hash_val in iocs.get("hashes", []):
         # Validate hash format
         if re.match(r'^[a-fA-F0-9]{32}$', hash_val):  # MD5
@@ -1062,7 +1062,7 @@ def validate_iocs(iocs: dict) -> dict:
             validated["hashes"].append(hash_val)
         elif re.match(r'^[a-fA-F0-9]{64}$', hash_val):  # SHA256
             validated["hashes"].append(hash_val)
-    
+
     return validated
 ```
 
@@ -1077,7 +1077,7 @@ class RateLimitedLLM:
         self.llm = llm
         self.min_interval = 60 / requests_per_minute
         self.last_call = 0
-    
+
     @retry(
         stop=stop_after_attempt(3),
         wait=wait_exponential(multiplier=1, min=2, max=60)
@@ -1087,7 +1087,7 @@ class RateLimitedLLM:
         elapsed = time.time() - self.last_call
         if elapsed < self.min_interval:
             time.sleep(self.min_interval - elapsed)
-        
+
         self.last_call = time.time()
         return self.llm.invoke(*args, **kwargs)
 
@@ -1113,7 +1113,7 @@ def audit_llm_call(func):
     """Decorator to log all LLM interactions."""
     def wrapper(*args, **kwargs):
         start_time = datetime.now()
-        
+
         # Log input
         logging.info(json.dumps({
             "event": "llm_call_start",
@@ -1121,10 +1121,10 @@ def audit_llm_call(func):
             "timestamp": start_time.isoformat(),
             "input_preview": str(args)[:500]  # Truncate for privacy
         }))
-        
+
         try:
             result = func(*args, **kwargs)
-            
+
             # Log success
             logging.info(json.dumps({
                 "event": "llm_call_success",
@@ -1132,7 +1132,7 @@ def audit_llm_call(func):
                 "duration_ms": (datetime.now() - start_time).total_seconds() * 1000,
                 "output_preview": str(result)[:500]
             }))
-            
+
             return result
         except Exception as e:
             # Log failure
@@ -1142,7 +1142,7 @@ def audit_llm_call(func):
                 "error": str(e)
             }))
             raise
-    
+
     return wrapper
 ```
 
@@ -1159,18 +1159,18 @@ from unittest.mock import Mock, patch
 def test_ioc_extraction_chain():
     """Test IOC extraction with known input."""
     test_input = "Malicious IP: 192.168.1.100 contacted evil.com"
-    
+
     result = ioc_chain.invoke({"text": test_input})
-    
+
     assert "192.168.1.100" in result.get("ips", [])
     assert "evil.com" in result.get("domains", [])
 
 def test_ioc_extraction_no_hallucination():
     """Ensure chain doesn't invent IOCs."""
     test_input = "This is a normal log with no indicators."
-    
+
     result = ioc_chain.invoke({"text": test_input})
-    
+
     assert result.get("ips", []) == []
     assert result.get("hashes", []) == []
 
@@ -1178,7 +1178,7 @@ def test_ioc_extraction_no_hallucination():
 def test_chain_with_mock(mock_llm):
     """Test chain with mocked LLM."""
     mock_llm.return_value.invoke.return_value.content = '{"ips": ["10.0.0.1"]}'
-    
+
     # Test your chain logic without actual API calls
     pass
 ```
@@ -1197,19 +1197,19 @@ def ioc_accuracy(run, example):
     """Check if extracted IOCs match expected."""
     predicted = run.outputs.get("iocs", {})
     expected = example.outputs.get("iocs", {})
-    
+
     # Calculate precision/recall
     predicted_ips = set(predicted.get("ips", []))
     expected_ips = set(expected.get("ips", []))
-    
+
     if not expected_ips:
         return {"score": 1.0 if not predicted_ips else 0.0}
-    
+
     recall = len(predicted_ips & expected_ips) / len(expected_ips)
     precision = len(predicted_ips & expected_ips) / len(predicted_ips) if predicted_ips else 0
-    
+
     f1 = 2 * precision * recall / (precision + recall) if (precision + recall) > 0 else 0
-    
+
     return {"score": f1}
 
 # Run evaluation
@@ -1350,10 +1350,10 @@ os.environ["LANGCHAIN_PROJECT"] = "security-production"
 - [LangServe](https://python.langchain.com/docs/langserve)
 
 ### Course Labs Using LangChain
-- [Lab 04: LLM Log Analysis](../../labs/lab04-llm-log-analysis/) - Chains, prompts
-- [Lab 05: Threat Intel Agent](../../labs/lab05-threat-intel-agent/) - Agents, tools
-- [Lab 06: Security RAG](../../labs/lab06-security-rag/) - RAG, embeddings
-- [Lab 10: IR Copilot](../../labs/lab10-ir-copilot/) - Memory, conversation
+- [Lab 04: LLM Log Analysis](../../labs/lab15-llm-log-analysis/) - Chains, prompts
+- [Lab 05: Threat Intel Agent](../../labs/lab16-threat-intel-agent/) - Agents, tools
+- [Lab 06: Security RAG](../../labs/lab18-security-rag/) - RAG, embeddings
+- [Lab 10: IR Copilot](../../labs/lab29-ir-copilot/) - Memory, conversation
 
 ### Related Guides
 - [Structured Output Parsing](./structured-output-parsing.md)

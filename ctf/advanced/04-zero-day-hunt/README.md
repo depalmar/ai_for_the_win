@@ -2,7 +2,7 @@
 
 **Difficulty:** Advanced
 **Points:** 500
-**Prerequisite:** Lab 03 (Anomaly Detection)
+**Prerequisite:** Lab 32 (Anomaly Detection)
 **Time Estimate:** 90-120 minutes
 
 ## Challenge Description
