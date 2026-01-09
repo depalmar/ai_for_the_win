@@ -510,10 +510,10 @@ This opens a browser window. Navigate to `notebooks/` and click any `.ipynb` fil
 
 ## Step 9: Test Run a Lab
 
-Let's make sure everything works by running Lab 01:
+Let's make sure everything works by running Lab 29:
 
 ```bash
-cd labs/lab01-phishing-classifier
+cd labs/lab10-phishing-classifier
 python solution/main.py
 ```
 
@@ -534,7 +534,7 @@ source venv/bin/activate        # macOS/Linux
 venv\Scripts\activate           # Windows
 
 # 3. Work on labs!
-cd labs/lab01-phishing-classifier
+cd labs/lab10-phishing-classifier
 python solution/main.py
 
 # 4. Or run notebooks
@@ -817,10 +817,10 @@ Once your environment is set up:
 
 | Your Background | Next Lab |
 |-----------------|----------|
-| New to Python | [Lab 00a: Python Basics](../lab00a-python-security-fundamentals/) |
-| Know Python, new to ML | [Lab 00b: ML Concepts](../lab00b-ml-concepts-primer/) |
-| Know ML, new to LLMs | [Lab 00c: Prompt Engineering](../lab00c-intro-prompt-engineering/) |
-| Ready to build! | [Lab 01: Phishing Classifier](../lab01-phishing-classifier/) |
+| New to Python | [Lab 29: Python Basics](../lab01-python-security-fundamentals/) |
+| Know Python, new to ML | [Lab 35: ML Concepts](../lab04-ml-concepts-primer/) |
+| Know ML, new to LLMs | [Lab 31: Prompt Engineering](../lab02-intro-prompt-engineering/) |
+| Ready to build! | [Lab 29: Phishing Classifier](../lab10-phishing-classifier/) |
 
 ---
 
@@ -835,4 +835,4 @@ Stuck? Here's where to get help:
 
 ---
 
-**You're all set!** Head to [Lab 00a](../lab00a-python-security-fundamentals/) if you're new to Python, or [Lab 01](../lab01-phishing-classifier/) if you're ready to build your first security ML tool.
+**You're all set!** Head to [Lab 29](../lab01-python-security-fundamentals/) if you're new to Python, or [Lab 29](../lab10-phishing-classifier/) if you're ready to build your first security ML tool.

@@ -2,7 +2,7 @@
 
 **Difficulty:** Advanced
 **Points:** 500
-**Prerequisite:** Lab 19 (Cloud Security AI)
+**Prerequisite:** Lab 45 (Cloud Security AI)
 **Time Estimate:** 90-120 minutes
 
 ## Challenge Description

@@ -2,7 +2,7 @@
 
 **Difficulty:** Intermediate
 **Points:** 250
-**Prerequisite:** Lab 13 (Memory Forensics AI)
+**Prerequisite:** Lab 33 (Memory Forensics AI)
 **Time Estimate:** 45-60 minutes
 
 ## Challenge Description
@@ -62,7 +62,7 @@ The shellcode contains XOR-encoded strings. The key is a single byte that appear
 
 ## Tools You Might Use
 
-- Volatility 3 (or concepts from Lab 13)
+- Volatility 3 (or concepts from Lab 33)
 - Python for analysis
 - Hex editors
 - XOR brute-force scripts

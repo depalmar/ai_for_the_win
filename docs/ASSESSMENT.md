@@ -49,7 +49,7 @@ The AI for the Win repository demonstrates **excellent quality** across all asse
 
 **What's Working:**
 
-- Lab progression is logical (00a → 00d → 01 → 20)
+- Lab progression is logical (01 → 05 → 01 → 20)
 - Each lab follows consistent pattern: README, starter/, solution/, data/
 - Cross-references between docs are accurate and up-to-date
 - Clear prerequisite chains documented in `labs/README.md`

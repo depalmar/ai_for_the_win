@@ -2,7 +2,7 @@
 
 **Difficulty:** Intermediate
 **Points:** 250
-**Prerequisite:** Lab 05 (Threat Intel Agent)
+**Prerequisite:** Lab 36 (Threat Intel Agent)
 **Time Estimate:** 45-60 minutes
 
 ## Challenge Description

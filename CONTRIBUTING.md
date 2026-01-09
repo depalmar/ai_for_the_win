@@ -244,7 +244,7 @@ pytest
 pytest --cov=labs --cov-report=html
 
 # Run specific lab tests
-pytest labs/lab01-phishing-classifier/tests/
+pytest labs/lab10-phishing-classifier/tests/
 ```
 
 ### Writing Tests

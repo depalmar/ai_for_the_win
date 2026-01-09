@@ -73,9 +73,9 @@ Develop security practitioners who can architect, build, and deploy AI-powered t
   - Computer Vision basics (malware visualization, CAPTCHA breaking)
 
 - **Hands-On Labs**
-  - [Lab 01](../labs/lab01-phishing-classifier/): Build a simple phishing email classifier
-  - [Lab 02](../labs/lab02-malware-clustering/): Create a malware family clustering model
-  - [Lab 03](../labs/lab03-anomaly-detection/): Train a basic network anomaly detector
+  - [Lab 29](../labs/lab10-phishing-classifier/): Build a simple phishing email classifier
+  - [Lab 31](../labs/lab11-malware-clustering/): Create a malware family clustering model
+  - [Lab 32](../labs/lab12-anomaly-detection/): Train a basic network anomaly detector
 
 #### Module 1.2: LLM Architecture & Security Implications
 
@@ -120,7 +120,7 @@ Develop security practitioners who can architect, build, and deploy AI-powered t
 
 #### Module 2.2: Vulnerability Discovery with AI
 
-> **Related Labs**: [Lab 08 - Vulnerability Scanner AI](../labs/lab08-vuln-scanner-ai/)
+> **Related Labs**: [Lab 22 - Vulnerability Scanner AI](../labs/lab22-vuln-scanner-ai/)
 
 - **Techniques**
 
@@ -155,8 +155,8 @@ Develop security practitioners who can architect, build, and deploy AI-powered t
   - Prompt injection and jailbreaking
 
 - **Hands-On Labs**
-  - [Lab 17 - Adversarial ML](../labs/lab17-adversarial-ml/): Craft adversarial samples to evade malware detection
-  - [Lab 20 - LLM Red Teaming](../labs/lab20-llm-red-teaming/): Prompt injection, jailbreaking, agentic exploits
+  - [Lab 39 - Adversarial ML](../labs/lab39-adversarial-ml/): Craft adversarial samples to evade malware detection
+  - [Lab 49 - LLM Red Teaming](../labs/lab49-llm-red-teaming/): Prompt injection, jailbreaking, agentic exploits
   - Perform model extraction on a black-box classifier
 
 #### Module 2.5: LLM Red Teaming
@@ -176,7 +176,7 @@ Develop security practitioners who can architect, build, and deploy AI-powered t
   - Tool sandboxing for agents
 
 - **Hands-On Labs**
-  - [Lab 20 - LLM Red Teaming](../labs/lab20-llm-red-teaming/): Complete offensive AI security lab
+  - [Lab 49 - LLM Red Teaming](../labs/lab49-llm-red-teaming/): Complete offensive AI security lab
 
 #### Module 2.6: Social Engineering with AI
 
@@ -197,7 +197,7 @@ Develop security practitioners who can architect, build, and deploy AI-powered t
 
 #### Module 3.1: AI-Powered Threat Detection
 
-> **Related Labs**: [Lab 04 - LLM Log Analysis](../labs/lab04-llm-log-analysis/) | [Lab 09 - Detection Pipeline](../labs/lab09-detection-pipeline/)
+> **Related Labs**: [Lab 35 - LLM Log Analysis](../labs/lab15-llm-log-analysis/) | [Lab 23 - Detection Pipeline](../labs/lab23-detection-pipeline/)
 
 - **Detection Engineering**
 
@@ -243,7 +243,7 @@ class ThreatDetectionPipeline:
 
 #### Module 3.2: Automated Incident Response
 
-> **Related Labs**: [Lab 10 - IR Copilot](../labs/lab10-ir-copilot/)
+> **Related Labs**: [Lab 29 - IR Copilot](../labs/lab29-ir-copilot/)
 
 - **Response Orchestration**
 
@@ -299,7 +299,7 @@ class ForensicAnalysisAgent:
 
 #### Module 3.4: Malware Analysis with AI
 
-> **Related Labs**: [Lab 07 - YARA Generator](../labs/lab07-yara-generator/)
+> **Related Labs**: [Lab 21 - YARA Generator](../labs/lab21-yara-generator/)
 
 - **Static Analysis**
 
@@ -323,7 +323,7 @@ class ForensicAnalysisAgent:
 
 #### Module 3.5: Threat Intelligence with AI
 
-> **Related Labs**: [Lab 05 - Threat Intel Agent](../labs/lab05-threat-intel-agent/) | [Lab 06 - Security RAG](../labs/lab06-security-rag/)
+> **Related Labs**: [Lab 36 - Threat Intel Agent](../labs/lab16-threat-intel-agent/) | [Lab 42 - Security RAG](../labs/lab18-security-rag/)
 
 - **Capabilities**
 
@@ -361,7 +361,7 @@ class ThreatIntelProcessor:
 
 #### Module 3.6: Ransomware Detection & Response
 
-> **Related Labs**: [Lab 11 - Ransomware Detection](../labs/lab11-ransomware-detection/) | [Lab 12 - Ransomware Simulation](../labs/lab12-ransomware-simulation/)
+> **Related Labs**: [Lab 31 - Ransomware Detection](../labs/lab31-ransomware-detection/) | [Lab 32 - Ransomware Simulation](../labs/lab32-ransomware-simulation/)
 
 - **DFIR Capabilities**
 

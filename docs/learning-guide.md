@@ -22,7 +22,7 @@
 ```
 Structured data (logs, flows, metrics) → Use ML (Labs 01-03)
 Unstructured text (reports, emails)   → Use LLM (Labs 04-07)
-Both / need reasoning                 → Use Hybrid or Agents (Lab 09, 05)
+Both / need reasoning                 → Use Hybrid or Agents (Lab 23, 05)
 ```
 
 ### Cost Comparison

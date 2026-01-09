@@ -13,7 +13,7 @@ pytest -m "not slow"
 pytest -m "not requires_api"
 
 # Run specific lab tests
-pytest tests/test_lab01_phishing_classifier.py -v
+pytest tests/test_lab10_phishing_classifier.py -v
 
 # With coverage
 pytest tests/ --cov=labs --cov-report=html

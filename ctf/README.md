@@ -12,15 +12,15 @@ FLAG{some_text_here}
 ## Challenge Tiers
 
 ### Beginner Challenges (100 pts each)
-For those who have completed the foundational labs (00a-00i).
+For those who have completed the foundational labs (01-09).
 
 | Challenge | Prerequisite Labs | Difficulty | API Key |
 |-----------|-------------------|------------|---------|
 | [01: Log Detective](beginner/01-log-detective/) | Lab 04 | Easy | Optional |
 | [02: Phish Finder](beginner/02-phish-finder/) | Lab 01 | Easy | No |
-| [03: Hidden IOC](beginner/03-hidden-ioc/) | Lab 00a, 05 | Easy | Optional |
+| [03: Hidden IOC](beginner/03-hidden-ioc/) | Lab 01, 05 | Easy | Optional |
 | [04: Malware Classifier](beginner/04-malware-classifier/) | Lab 02 | Easy | No |
-| [05: Prompt Injection](beginner/05-prompt-injection/) | Lab 00c | Easy | No |
+| [05: Prompt Injection](beginner/05-prompt-injection/) | Lab 02 | Easy | No |
 
 ### Intermediate Challenges (250 pts each)
 For those who have completed multiple core labs.
@@ -81,7 +81,7 @@ Beginner 01-05 → Intermediate 01-05 → Advanced 01-05
 
 ## Getting Help
 
-- Review [Lab 00i: CTF Fundamentals](../labs/lab00i-ctf-fundamentals/) for CTF strategies
+- Review [Lab 09: CTF Fundamentals](../labs/lab09-ctf-fundamentals/) for CTF strategies
 - Review the prerequisite labs before attempting challenges
 - Use AI assistants to help with decoding and analysis
 - Check challenge hints (costs points but teaches concepts)

@@ -91,7 +91,7 @@ I'm a beginner, so please avoid jargon or explain it when you use it.
 #### When You're Stuck on Implementation
 
 ```
-I'm trying to extract IP addresses from log files in Lab 00a.
+I'm trying to extract IP addresses from log files in Lab 01.
 
 Goal: Find all IPv4 addresses in a string of text.
 
@@ -106,7 +106,7 @@ Can you:
 #### When You Want Code Review
 
 ```
-Here's my solution for the IOC extractor in Lab 00a.
+Here's my solution for the IOC extractor in Lab 01.
 
 [paste your code]
 

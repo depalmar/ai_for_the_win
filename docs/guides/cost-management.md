@@ -576,7 +576,7 @@ ollama pull qwen2.5-coder:32b  # Code analysis
 
 - [LLM Provider Comparison Guide](./llm-provider-comparison.md) - Detailed provider selection
 - [Error Handling Guide](./error-handling-guide.md) - Handle rate limits gracefully
-- [Lab 04: Log Analysis](../../labs/lab04-llm-log-analysis/) - Apply cost management in practice
+- [Lab 04: Log Analysis](../../labs/lab15-llm-log-analysis/) - Apply cost management in practice
 
 ---
 

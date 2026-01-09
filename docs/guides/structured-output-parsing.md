@@ -563,10 +563,10 @@ JSON:"""
 
 | If you want to... | Go to... |
 |-------------------|----------|
-| Learn prompt engineering | [Lab 00c](../../labs/lab00c-intro-prompt-engineering/) |
+| Learn prompt engineering | [Lab 02](../../labs/lab02-intro-prompt-engineering/) |
 | Handle API errors | [Error Handling Guide](./error-handling-guide.md) |
-| Apply to log analysis | [Lab 04](../../labs/lab04-llm-log-analysis/) |
-| Understand LLM limitations | [Lab 00d](../../labs/lab00d-ai-in-security-operations/) |
+| Apply to log analysis | [Lab 04](../../labs/lab15-llm-log-analysis/) |
+| Understand LLM limitations | [Lab 05](../../labs/lab05-ai-in-security-operations/) |
 
 ---
 

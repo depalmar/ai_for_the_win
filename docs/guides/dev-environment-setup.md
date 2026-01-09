@@ -797,8 +797,8 @@ ai-security-training/
 │   └── models/            # Trained models
 │
 ├── labs/                   # Lab exercises
-│   ├── lab01_phishing_classifier/
-│   ├── lab02_malware_clustering/
+│   ├── lab10_phishing_classifier/
+│   ├── lab11_malware_clustering/
 │   └── ...
 │
 ├── notebooks/              # Jupyter notebooks

@@ -784,10 +784,10 @@ results = collection.query(query_texts=["search query"], n_results=5)
 
 | If you want to...           | Go to...                                                    |
 | --------------------------- | ----------------------------------------------------------- |
-| Build a RAG system          | [Lab 06](../../labs/lab06-security-rag/)                    |
+| Build a RAG system          | [Lab 06](../../labs/lab18-security-rag/)                    |
 | Parse LLM outputs           | [Structured Output Guide](./structured-output-parsing.md)   |
 | Test your system            | [LLM Evaluation Guide](./llm-evaluation-testing.md)         |
-| Understand vectors visually | [Lab 02 - Clustering](../../labs/lab02-malware-clustering/) |
+| Understand vectors visually | [Lab 02 - Clustering](../../labs/lab11-malware-clustering/) |
 
 ---
 

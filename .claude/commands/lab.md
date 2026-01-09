@@ -6,7 +6,7 @@ Navigate, explore, and run labs in the AI for the Win training program.
 
 ```
 /lab                    # List all labs with status
-/lab <number>           # Show lab details (e.g., /lab 05)
+/lab <number>           # Show lab details (e.g., /Lab 36)
 /lab <number> start     # Open lab starter code
 /lab <number> solution  # Show solution
 /lab <number> test      # Run lab tests
@@ -30,13 +30,13 @@ When the user invokes this command:
 
 3. **Lab Listing** (no args):
    ```
-   ## Intro Labs (00a-00i)
-   - lab00a: Python Security Fundamentals
-   - lab00b: ML Concepts Primer
+   ## Intro Labs (01-09)
+   - lab10: Python Security Fundamentals
+   - lab35: ML Concepts Primer
    ...
 
    ## ML Foundations (01-03)
-   - lab01: Phishing Classifier
+   - lab10: Phishing Classifier
    ...
 
    ## LLM Basics (04-07)
@@ -65,7 +65,7 @@ When the user invokes this command:
 
 | Range | Category | API Required |
 |-------|----------|--------------|
-| 00a-00i | Intro/Fundamentals | No |
+| 01-09 | Intro/Fundamentals | No |
 | 01-03 | ML Foundations | No |
 | 04-07 | LLM Basics | Yes |
 | 08-10 | Advanced Agents | Yes |
@@ -74,19 +74,19 @@ When the user invokes this command:
 ## Example Output
 
 ```
-## Lab 05: Threat Intelligence Agent
+## Lab 36: Threat Intelligence Agent
 
 **Objectives:**
 - Build an agent that queries threat intel APIs
 - Implement tool calling for IOC enrichment
 - Create structured threat reports
 
-**Prerequisites:** Lab 04 (LLM basics), API key configured
+**Prerequisites:** Lab 35 (LLM basics), API key configured
 
 **Files:**
-- Starter: labs/lab05-threat-intel-agent/starter/main.py
-- Solution: labs/lab05-threat-intel-agent/solution/main.py
-- Tests: tests/test_lab05_threat_intel.py
+- Starter: labs/lab16-threat-intel-agent/starter/main.py
+- Solution: labs/lab16-threat-intel-agent/solution/main.py
+- Tests: tests/test_lab36_threat_intel.py
 
-**Run:** pytest tests/test_lab05_threat_intel.py -v
+**Run:** pytest tests/test_lab36_threat_intel.py -v
 ```

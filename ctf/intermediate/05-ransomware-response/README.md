@@ -2,7 +2,7 @@
 
 **Difficulty:** Intermediate
 **Points:** 250
-**Prerequisite:** Lab 11 (Ransomware Detection)
+**Prerequisite:** Lab 31 (Ransomware Detection)
 **Time Estimate:** 60-90 minutes
 
 ## Challenge Description

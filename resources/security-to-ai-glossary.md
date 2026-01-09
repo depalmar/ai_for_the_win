@@ -518,6 +518,6 @@ tools = [
 ## Next Steps
 
 Now that you speak the language:
-- [Lab 00b: ML Concepts Primer](../labs/lab00b-ml-concepts-primer/) - Deeper dive into ML concepts
-- [Lab 01: Phishing Classifier](../labs/lab01-phishing-classifier/) - Build your first model
-- [Lab 04: Log Analysis](../labs/lab04-llm-log-analysis/) - Start using LLMs
+- [Lab 04: ML Concepts Primer](../labs/lab04-ml-concepts-primer/) - Deeper dive into ML concepts
+- [Lab 01: Phishing Classifier](../labs/lab10-phishing-classifier/) - Build your first model
+- [Lab 04: Log Analysis](../labs/lab15-llm-log-analysis/) - Start using LLMs

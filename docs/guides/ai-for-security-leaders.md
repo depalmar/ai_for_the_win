@@ -233,9 +233,9 @@ Before investing in AI, ensure these foundations are in place:
 
 | Skill                   | Who Needs It                 | How to Develop              |
 | ----------------------- | ---------------------------- | --------------------------- |
-| **Prompt engineering**  | All analysts                 | Labs 00c, 04 in this course |
-| **ML fundamentals**     | Senior analysts, engineers   | Labs 00b, 01-03             |
-| **AI tool evaluation**  | Managers, architects         | Lab 00d, this guide         |
+| **Prompt engineering**  | All analysts                 | Labs 02, 04 in this course |
+| **ML fundamentals**     | Senior analysts, engineers   | Labs 04, 01-03             |
+| **AI tool evaluation**  | Managers, architects         | Lab 05, this guide         |
 | **AI security testing** | Red team, security engineers | Labs 17, 20                 |
 
 ### Team Structure Considerations
@@ -261,10 +261,10 @@ Before investing in AI, ensure these foundations are in place:
 
 | Resource                                                                            | What You'll Learn                | Time      |
 | ----------------------------------------------------------------------------------- | -------------------------------- | --------- |
-| [Lab 00d: AI in Security Operations](../../labs/lab00d-ai-in-security-operations/)  | Comprehensive strategic overview | 1-2 hours |
-| [Lab 00b: ML Concepts Primer](../../labs/lab00b-ml-concepts-primer/)                | What ML can/can't do             | 1-2 hours |
-| [Lab 00c: Intro to Prompt Engineering](../../labs/lab00c-intro-prompt-engineering/) | How LLMs work                    | 1-2 hours |
-| [Lab 04: LLM Log Analysis](../../labs/lab04-llm-log-analysis/)                      | Hands-on LLM experience          | 2-3 hours |
+| [Lab 05: AI in Security Operations](../../labs/lab05-ai-in-security-operations/)  | Comprehensive strategic overview | 1-2 hours |
+| [Lab 04: ML Concepts Primer](../../labs/lab04-ml-concepts-primer/)                | What ML can/can't do             | 1-2 hours |
+| [Lab 02: Intro to Prompt Engineering](../../labs/lab02-intro-prompt-engineering/) | How LLMs work                    | 1-2 hours |
+| [Lab 04: LLM Log Analysis](../../labs/lab15-llm-log-analysis/)                      | Hands-on LLM experience          | 2-3 hours |
 | [Security Compliance Guide](./security-compliance-guide.md)                         | SOC 2, GDPR, NIST mapping        | Reference |
 | [Cost Management Guide](./cost-management.md)                                       | Budget planning                  | Reference |
 
@@ -327,7 +327,7 @@ Before investing in AI, ensure these foundations are in place:
 ## Next Steps
 
 1. **Assess your readiness** using the checklist above
-2. **Complete Lab 00d** for a deeper strategic understanding
+2. **Complete Lab 05** for a deeper strategic understanding
 3. **Try Lab 04** for hands-on LLM experience (2-3 hours)
 4. **Evaluate one specific use case** using the decision framework
 5. **Pilot small**, measure results, then expand

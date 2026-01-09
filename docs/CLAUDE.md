@@ -22,7 +22,7 @@ python scripts/verify_setup.py
 pytest tests/ -v
 
 # Run specific lab tests
-pytest tests/test_lab01_phishing_classifier.py -v
+pytest tests/test_lab10_phishing_classifier.py -v
 
 # Run tests with coverage
 pytest tests/ --cov=labs --cov-report=html
@@ -38,7 +38,7 @@ flake8 .
 bandit -r labs/
 
 # Run a lab solution
-python labs/lab01-phishing-classifier/solution/main.py
+python labs/lab10-phishing-classifier/solution/main.py
 
 # Launch demos
 python scripts/launcher.py
@@ -66,7 +66,7 @@ labXX-topic-name/
 ```
 
 ### Lab Progression
-- **Labs 00a-00c**: Intro (Python, ML concepts, prompting) - no API keys needed
+- **Labs 01-02**: Intro (Python, ML concepts, prompting) - no API keys needed
 - **Labs 01-03**: ML foundations (classification, clustering, anomaly detection) - no API keys needed
 - **Labs 04-07**: LLM basics (prompts, RAG, code generation) - requires API key
 - **Labs 08-10**: Advanced (agents, pipelines, copilots)

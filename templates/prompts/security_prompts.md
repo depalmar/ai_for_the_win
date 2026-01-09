@@ -83,7 +83,7 @@ Return JSON with these fields (null if not present):
 {
   "timestamp": "exact timestamp from log or null",
   "source_ip": "exact IP from log or null",
-  "destination_ip": "exact IP from log or null", 
+  "destination_ip": "exact IP from log or null",
   "user": "exact username from log or null",
   "action": "exact action from log or null",
   "status": "success/failure as stated, or null",
@@ -96,7 +96,7 @@ DO NOT add IPs, users, or details not explicitly in the log text.
 ### Threat Detection with Verification
 
 ```
-Analyze these logs for security threats. 
+Analyze these logs for security threats.
 
 CRITICAL INSTRUCTIONS:
 1. Only identify threats you can PROVE from the log data
@@ -117,7 +117,7 @@ For each finding, provide:
 
 ## Finding [N]
 - **Classification**: CONFIRMED THREAT / POSSIBLE THREAT / SUSPICIOUS / BENIGN
-- **Confidence**: [1-10] 
+- **Confidence**: [1-10]
 - **Evidence**: [Quote exact log lines]
 - **Reasoning**: [Why this is suspicious]
 - **MITRE ATT&CK**: [Only if clearly applicable, otherwise "Needs verification"]
@@ -220,14 +220,14 @@ TRIAGE ANALYSIS:
 - **Data quality**: [Is the alert data complete? What's missing?]
 
 ## True Positive Likelihood
-- **Estimate**: [X]% 
+- **Estimate**: [X]%
 - **Reasoning**: [Why this percentage - be specific]
 - **Factors increasing TP likelihood**: [List]
 - **Factors decreasing TP likelihood**: [List]
 
 ## Priority Score: [1-10]
 - 1-3: Low - investigate within 24 hours
-- 4-6: Medium - investigate within 4 hours  
+- 4-6: Medium - investigate within 4 hours
 - 7-9: High - investigate within 1 hour
 - 10: Critical - immediate response
 
@@ -249,7 +249,7 @@ TRIAGE ANALYSIS:
 ### Incident Summary (Executive-Safe)
 
 ```
-Create an executive summary of this security incident. 
+Create an executive summary of this security incident.
 
 STRICT REQUIREMENTS:
 - Use only facts from the provided data
@@ -259,7 +259,7 @@ STRICT REQUIREMENTS:
 
 INCIDENT DATA:
 Timeline: {timeline}
-Affected Systems: {systems}  
+Affected Systems: {systems}
 Confirmed IOCs: {iocs}
 Actions Taken: {actions}
 
@@ -327,17 +327,17 @@ rule [MalwareName]_[Confidence] {
         confidence = "[Low/Medium/High]"
         false_positive_risk = "[Low/Medium/High]"
         reference = "[Source of indicators]"
-        
+
         // IMPORTANT: This rule was AI-generated and should be:
         // 1. Tested against clean file corpus before deployment
         // 2. Reviewed by malware analyst
         // 3. Monitored for false positives in first 7 days
-        
+
     strings:
         // Only strings from provided data
         $s1 = "[exact string from data]"
         $s2 = "[exact string from data]"
-        
+
     condition:
         // Conservative condition to reduce false positives
         [condition logic]
@@ -419,7 +419,7 @@ if llm_result["malicious"]:
     # Verify against actual threat intel
     vt_result = virustotal.check(suspicious_ip)
     abuse_result = abuseipdb.check(suspicious_ip)
-    
+
     if vt_result.malicious or abuse_result.confidence > 80:
         queue_for_review(suspicious_ip, llm_result, vt_result)
 ```
@@ -506,7 +506,7 @@ Include these in your prompts:
 
 ## See Also
 
-- [Lab 00c: Prompt Engineering](../../labs/lab00c-intro-prompt-engineering/) - Hands-on prompting basics
+- [Lab 02: Prompt Engineering](../../labs/lab02-intro-prompt-engineering/) - Hands-on prompting basics
 - [Structured Output Parsing](../../docs/guides/structured-output-parsing.md) - Reliable JSON from LLMs
 - [LLM Evaluation & Testing](../../docs/guides/llm-evaluation-testing.md) - Measuring LLM accuracy
 - [Prompt Injection Defense](../../docs/guides/prompt-injection-defense.md) - Security for LLM inputs

@@ -2,7 +2,7 @@
 
 **Difficulty:** Advanced
 **Points:** 500
-**Prerequisite:** Lab 17 (Adversarial ML)
+**Prerequisite:** Lab 39 (Adversarial ML)
 **Time Estimate:** 90-120 minutes
 
 ## Challenge Description
