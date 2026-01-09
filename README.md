@@ -17,7 +17,7 @@ A hands-on training program for security practitioners who want to build AI-powe
 
 ---
 
-## 🎬 What You'll Build
+## What You'll Build
 
 **Lab 10 - Phishing Classifier** catches what rules miss:
 
@@ -28,46 +28,46 @@ $ python labs/lab10-phishing-classifier/solution/main.py
 [+] Model: Random Forest + TF-IDF (847 features)
 [+] Accuracy: 96.2% | Precision: 94.1% | Recall: 97.8%
 
-📬 Scanning inbox (4 new emails)...
+Scanning inbox (4 new emails)...
 
   From: security@amaz0n-verify.com
   Subj: "Your account will be suspended in 24 hours"
-  ──→ 🚨 PHISHING (98.2%)  [urgency + spoofed domain]
+  --> PHISHING (98.2%)  [urgency + spoofed domain]
 
   From: sarah.jones@company.com
   Subj: "Q3 budget report attached"
-  ──→ ✅ LEGIT (94.6%)
+  --> LEGIT (94.6%)
 
   From: helpdesk@paypa1.com
   Subj: "Click here to verify your identity"
-  ──→ 🚨 PHISHING (96.7%)  [link mismatch + typosquat]
+  --> PHISHING (96.7%)  [link mismatch + typosquat]
 
   From: it-dept@company.com
   Subj: "Password expires in 7 days - reset here"
-  ──→ ⚠️  SUSPICIOUS (67.3%)  [needs review]
+  --> SUSPICIOUS (67.3%)  [needs review]
 
-📊 Top features that caught phishing:
+Top features that caught phishing:
    urgency_words: +0.34  (suspend, verify, immediately)
-   url_mismatch:  +0.28  (display ≠ actual link)
+   url_mismatch:  +0.28  (display != actual link)
    domain_spoof:  +0.22  (amaz0n, paypa1)
 ```
 
 **Lab 35 - LLM Log Analysis** finds attacks in noise:
 
 ```text
-┌──────────────────────────────────────────────────────┐
-│ Lab 35: LLM-Powered Security Log Analysis - SOLUTION │
-└──────────────────────────────────────────────────────┘
++------------------------------------------------------+
+| Lab 35: LLM-Powered Security Log Analysis - SOLUTION |
++------------------------------------------------------+
 Security Log Analysis Pipeline
 
 Step 1: Initializing LLM...
   LLM initialized: READY
 Step 2: Parsing log entries...
-  Parsing entry 1/5... ✓
-  Parsing entry 2/5... ✓
-  Parsing entry 3/5... ✓
-  Parsing entry 4/5... ✓
-  Parsing entry 5/5... ✓
+  Parsing entry 1/5... Done
+  Parsing entry 2/5... Done
+  Parsing entry 3/5... Done
+  Parsing entry 4/5... Done
+  Parsing entry 5/5... Done
   Parsed 5 log entries
 Step 3: Analyzing for threats...
   Found 2 threats
@@ -77,13 +77,13 @@ Step 4: Extracting IOCs...
 Step 5: Generating incident report...
   Report generated
 
-════════════════════════════════════════════════════════════════
+================================================================
                         INCIDENT REPORT
-════════════════════════════════════════════════════════════════
+================================================================
 
-┌──────────────────────────────────────────────────────────────┐
-│                    Executive Summary                          │
-└──────────────────────────────────────────────────────────────┘
++--------------------------------------------------------------+
+|                    Executive Summary                          |
++--------------------------------------------------------------+
 A critical security incident involving multi-stage attack behavior
 was detected on WORKSTATION01 involving user 'jsmith'. The attack
 progression includes initial PowerShell execution downloading a
@@ -91,9 +91,9 @@ payload from a suspicious external domain, followed by system
 discovery commands, and culminating in persistence establishment
 via Registry Run keys and Scheduled Tasks.
 
-┌──────────────────────────────────────────────────────────────┐
-│                        Timeline                               │
-└──────────────────────────────────────────────────────────────┘
++--------------------------------------------------------------+
+|                        Timeline                               |
++--------------------------------------------------------------+
  1  2025-01-15 03:22:10 - PowerShell downloaded payload from
                           hxxp://evil-c2[.]com/payload.ps1
  2  2025-01-15 03:22:15 - Discovery commands executed
@@ -103,129 +103,129 @@ via Registry Run keys and Scheduled Tasks.
  4  2025-01-15 03:23:00 - Registry persistence: HKCU Run keys
  5  2025-01-15 03:25:00 - Scheduled Task: SecurityUpdate created
 
-┌──────────────────────────────────────────────────────────────┐
-│                    MITRE ATT&CK Mapping                       │
-└──────────────────────────────────────────────────────────────┘
++--------------------------------------------------------------+
+|                    MITRE ATT&CK Mapping                       |
++--------------------------------------------------------------+
   Technique ID   Technique Name                    Evidence
- ─────────────────────────────────────────────────────────────
+ -------------------------------------------------------------
   T1059.001      PowerShell                        DownloadString, IEX
   T1082          System Information Discovery      whoami, hostname
   T1547.001      Registry Run Keys                 HKCU\...\Run
   T1053.005      Scheduled Task                    SecurityUpdate
   T1105          Ingress Tool Transfer             DownloadString
 
-┌──────────────────────────────────────────────────────────────┐
-│                   Attribution Analysis                        │
-└──────────────────────────────────────────────────────────────┘
++--------------------------------------------------------------+
+|                   Attribution Analysis                        |
++--------------------------------------------------------------+
 High Confidence: FIN7/Carbanak
-• Tooling matches known campaigns (PowerShell obfuscation)
-• Infrastructure historically associated with FIN7
-• TTP sequence is signature behavior pattern
+* Tooling matches known campaigns (PowerShell obfuscation)
+* Infrastructure historically associated with FIN7
+* TTP sequence is signature behavior pattern
 ```
 
 ---
 
-## ⚡ Start in 60 Seconds
+## Start in 60 Seconds
 
-**No installation needed** — click and run in your browser:
+**No installation needed** -- click and run in your browser:
 
-[![Open Lab 10 in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab10_phishing_classifier.ipynb) ← ML basics (no API key)
+[![Open Lab 10 in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab10_phishing_classifier.ipynb) <- ML basics (no API key)
 
-[![Open Lab 35 in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab15_llm_log_analysis.ipynb) ← LLM-powered (needs API key)
+[![Open Lab 35 in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab15_llm_log_analysis.ipynb) <- LLM-powered (needs API key)
 
-> All 50+ notebooks are in [`notebooks/`](./notebooks/) — open any `.ipynb` in Colab
+> All 50+ notebooks are in [`notebooks/`](./notebooks/) -- open any `.ipynb` in Colab
 
 ---
 
-## 🚀 Pick Your Starting Point
+## Pick Your Starting Point
 
 | Your Background | Start Here | Next Steps |
 |-----------------|------------|------------|
-| **New to AI/ML?** | [Lab 10: Phishing Classifier](./labs/lab10-phishing-classifier/) | → Lab 11 → Lab 12 |
-| **Know Python, want LLM tools?** | [Lab 15: LLM Log Analysis](./labs/lab15-llm-log-analysis/) | → Lab 16 → Lab 18 |
-| **Want DFIR focus?** | [Lab 31: Ransomware Detection](./labs/lab31-ransomware-detection/) | → Lab 33 → Lab 34 |
+| **New to AI/ML?** | [Lab 10: Phishing Classifier](./labs/lab10-phishing-classifier/) | -> Lab 11 -> Lab 12 |
+| **Know Python, want LLM tools?** | [Lab 15: LLM Log Analysis](./labs/lab15-llm-log-analysis/) | -> Lab 16 -> Lab 18 |
+| **Want DFIR focus?** | [Lab 31: Ransomware Detection](./labs/lab31-ransomware-detection/) | -> Lab 33 -> Lab 34 |
 
-**💡 Tip**: Labs 01-03 are FREE (no API keys). LLM labs (04+) need an API key (~$5-25 total).
+**Tip**: Labs 00-13 are FREE (no API keys). LLM labs (14+) need an API key (~$5-25 total).
 
 ---
 
-## 🗺️ Lab Navigator
+## Lab Navigator
 
-**Click any lab to explore** — Your learning journey from setup to expert:
+**Click any lab to explore** -- Your learning journey from setup to expert:
 
 <table border="1" cellspacing="0" cellpadding="8">
 <tr>
 <td align="center"><a href="./labs/lab00-environment-setup/"><img src="https://img.shields.io/badge/00-Setup-555?style=for-the-badge" alt="Lab 00"/></a></td>
-<td align="center"><a href="./labs/lab01-python-security-fundamentals/"><img src="https://img.shields.io/badge/01-Python-555?style=for-the-badge" alt="Lab 29"/></a></td>
-<td align="center"><a href="./labs/lab04-ml-concepts-primer/"><img src="https://img.shields.io/badge/04-ML_Intro-555?style=for-the-badge" alt="Lab 35"/></a></td>
-<td align="center"><a href="./labs/lab02-intro-prompt-engineering/"><img src="https://img.shields.io/badge/02-Prompts-555?style=for-the-badge" alt="Lab 31"/></a></td>
-<td align="center"><a href="./labs/lab05-ai-in-security-operations/"><img src="https://img.shields.io/badge/05-AI_SOC-555?style=for-the-badge" alt="Lab 36"/></a></td>
+<td align="center"><a href="./labs/lab01-python-security-fundamentals/"><img src="https://img.shields.io/badge/01-Python-555?style=for-the-badge" alt="Lab 01"/></a></td>
+<td align="center"><a href="./labs/lab04-ml-concepts-primer/"><img src="https://img.shields.io/badge/04-ML_Intro-555?style=for-the-badge" alt="Lab 04"/></a></td>
+<td align="center"><a href="./labs/lab02-intro-prompt-engineering/"><img src="https://img.shields.io/badge/02-Prompts-555?style=for-the-badge" alt="Lab 02"/></a></td>
+<td align="center"><a href="./labs/lab05-ai-in-security-operations/"><img src="https://img.shields.io/badge/05-AI_SOC-555?style=for-the-badge" alt="Lab 05"/></a></td>
 </tr>
 <tr>
-<td align="center"><a href="./labs/lab06-visualization-stats/"><img src="https://img.shields.io/badge/06-Stats-555?style=for-the-badge" alt="Lab 42"/></a></td>
-<td align="center"><a href="./labs/lab07-hello-world-ml/"><img src="https://img.shields.io/badge/07-Hello_ML-555?style=for-the-badge" alt="Lab 21"/></a></td>
-<td align="center"><a href="./labs/lab08-working-with-apis/"><img src="https://img.shields.io/badge/08-APIs-555?style=for-the-badge" alt="Lab 22"/></a></td>
-<td align="center"><a href="./labs/lab03-vibe-coding-with-ai/"><img src="https://img.shields.io/badge/03-Vibe_Code-555?style=for-the-badge" alt="Lab 32"/></a></td>
-<td align="center"><a href="./labs/lab09-ctf-fundamentals/"><img src="https://img.shields.io/badge/09-CTF_Fund-555?style=for-the-badge" alt="Lab 23"/></a></td>
+<td align="center"><a href="./labs/lab06-visualization-stats/"><img src="https://img.shields.io/badge/06-Stats-555?style=for-the-badge" alt="Lab 06"/></a></td>
+<td align="center"><a href="./labs/lab07-hello-world-ml/"><img src="https://img.shields.io/badge/07-Hello_ML-555?style=for-the-badge" alt="Lab 07"/></a></td>
+<td align="center"><a href="./labs/lab08-working-with-apis/"><img src="https://img.shields.io/badge/08-APIs-555?style=for-the-badge" alt="Lab 08"/></a></td>
+<td align="center"><a href="./labs/lab03-vibe-coding-with-ai/"><img src="https://img.shields.io/badge/03-Vibe_Code-555?style=for-the-badge" alt="Lab 03"/></a></td>
+<td align="center"><a href="./labs/lab09-ctf-fundamentals/"><img src="https://img.shields.io/badge/09-CTF_Fund-555?style=for-the-badge" alt="Lab 09"/></a></td>
 </tr>
 <tr>
-<td align="center"><a href="./labs/lab10-phishing-classifier/"><img src="https://img.shields.io/badge/01-Phishing-10b981?style=for-the-badge" alt="Lab 29"/></a></td>
-<td align="center"><a href="./labs/lab11-malware-clustering/"><img src="https://img.shields.io/badge/02-Malware-10b981?style=for-the-badge" alt="Lab 31"/></a></td>
-<td align="center"><a href="./labs/lab12-anomaly-detection/"><img src="https://img.shields.io/badge/03-Anomaly-10b981?style=for-the-badge" alt="Lab 32"/></a></td>
-<td align="center"><a href="./labs/lab13-ml-vs-llm/"><img src="https://img.shields.io/badge/03b-ML_vs_LLM-10b981?style=for-the-badge" alt="Lab 13"/></a></td>
-<td align="center"><a href="./labs/lab15-llm-log-analysis/"><img src="https://img.shields.io/badge/04-Logs-6366f1?style=for-the-badge" alt="Lab 35"/></a></td>
+<td align="center"><a href="./labs/lab10-phishing-classifier/"><img src="https://img.shields.io/badge/10-Phishing-10b981?style=for-the-badge" alt="Lab 10"/></a></td>
+<td align="center"><a href="./labs/lab11-malware-clustering/"><img src="https://img.shields.io/badge/11-Malware-10b981?style=for-the-badge" alt="Lab 11"/></a></td>
+<td align="center"><a href="./labs/lab12-anomaly-detection/"><img src="https://img.shields.io/badge/12-Anomaly-10b981?style=for-the-badge" alt="Lab 12"/></a></td>
+<td align="center"><a href="./labs/lab13-ml-vs-llm/"><img src="https://img.shields.io/badge/13-ML_vs_LLM-10b981?style=for-the-badge" alt="Lab 13"/></a></td>
+<td align="center"><a href="./labs/lab15-llm-log-analysis/"><img src="https://img.shields.io/badge/15-Logs-6366f1?style=for-the-badge" alt="Lab 15"/></a></td>
 </tr>
 <tr>
-<td align="center"><a href="./labs/lab14-first-ai-agent/"><img src="https://img.shields.io/badge/04b-Agent-6366f1?style=for-the-badge" alt="Lab 14"/></a></td>
-<td align="center"><a href="./labs/lab16-threat-intel-agent/"><img src="https://img.shields.io/badge/05-Intel-6366f1?style=for-the-badge" alt="Lab 36"/></a></td>
-<td align="center"><a href="./labs/lab17-embeddings-vectors/"><img src="https://img.shields.io/badge/06a-Vectors-6366f1?style=for-the-badge" alt="Lab 39"/></a></td>
-<td align="center"><a href="./labs/lab18-security-rag/"><img src="https://img.shields.io/badge/06-RAG-6366f1?style=for-the-badge" alt="Lab 42"/></a></td>
-<td align="center"><a href="./labs/lab45-binary-basics/"><img src="https://img.shields.io/badge/07a-Binary-6366f1?style=for-the-badge" alt="Lab 45"/></a></td>
+<td align="center"><a href="./labs/lab14-first-ai-agent/"><img src="https://img.shields.io/badge/14-Agent-6366f1?style=for-the-badge" alt="Lab 14"/></a></td>
+<td align="center"><a href="./labs/lab16-threat-intel-agent/"><img src="https://img.shields.io/badge/16-Intel-6366f1?style=for-the-badge" alt="Lab 16"/></a></td>
+<td align="center"><a href="./labs/lab17-embeddings-vectors/"><img src="https://img.shields.io/badge/17-Vectors-6366f1?style=for-the-badge" alt="Lab 17"/></a></td>
+<td align="center"><a href="./labs/lab18-security-rag/"><img src="https://img.shields.io/badge/18-RAG-6366f1?style=for-the-badge" alt="Lab 18"/></a></td>
+<td align="center"><a href="./labs/lab19-binary-basics/"><img src="https://img.shields.io/badge/19-Binary-6366f1?style=for-the-badge" alt="Lab 19"/></a></td>
 </tr>
 <tr>
-<td align="center"><a href="./labs/lab21-yara-generator/"><img src="https://img.shields.io/badge/07-YARA-6366f1?style=for-the-badge" alt="Lab 21"/></a></td>
-<td align="center"><a href="./labs/lab20-sigma-fundamentals/"><img src="https://img.shields.io/badge/07b-Sigma-6366f1?style=for-the-badge" alt="Lab 49"/></a></td>
-<td align="center"><a href="./labs/lab22-vuln-scanner-ai/"><img src="https://img.shields.io/badge/08-Vuln-f59e0b?style=for-the-badge" alt="Lab 22"/></a></td>
-<td align="center"><a href="./labs/lab23-detection-pipeline/"><img src="https://img.shields.io/badge/09-Pipeline-f59e0b?style=for-the-badge" alt="Lab 23"/></a></td>
-<td align="center"><a href="./labs/lab24-monitoring-ai-systems/"><img src="https://img.shields.io/badge/09b-Monitor-f59e0b?style=for-the-badge" alt="Lab 24"/></a></td>
+<td align="center"><a href="./labs/lab21-yara-generator/"><img src="https://img.shields.io/badge/21-YARA-6366f1?style=for-the-badge" alt="Lab 21"/></a></td>
+<td align="center"><a href="./labs/lab20-sigma-fundamentals/"><img src="https://img.shields.io/badge/20-Sigma-6366f1?style=for-the-badge" alt="Lab 20"/></a></td>
+<td align="center"><a href="./labs/lab22-vuln-scanner-ai/"><img src="https://img.shields.io/badge/22-Vuln-f59e0b?style=for-the-badge" alt="Lab 22"/></a></td>
+<td align="center"><a href="./labs/lab23-detection-pipeline/"><img src="https://img.shields.io/badge/23-Pipeline-f59e0b?style=for-the-badge" alt="Lab 23"/></a></td>
+<td align="center"><a href="./labs/lab24-monitoring-ai-systems/"><img src="https://img.shields.io/badge/24-Monitor-f59e0b?style=for-the-badge" alt="Lab 24"/></a></td>
 </tr>
 <tr>
-<td align="center"><a href="./labs/lab25-dfir-fundamentals/"><img src="https://img.shields.io/badge/10a-DFIR-f59e0b?style=for-the-badge" alt="Lab 25"/></a></td>
-<td align="center"><a href="./labs/lab29-ir-copilot/"><img src="https://img.shields.io/badge/10-IR_Bot-f59e0b?style=for-the-badge" alt="Lab 29"/></a></td>
-<td align="center"><a href="./labs/lab26-windows-event-log-analysis/"><img src="https://img.shields.io/badge/10b-WinLogs-f59e0b?style=for-the-badge" alt="Lab 26"/></a></td>
-<td align="center"><a href="./labs/lab27-windows-registry-forensics/"><img src="https://img.shields.io/badge/10c-Registry-f59e0b?style=for-the-badge" alt="Lab 27"/></a></td>
-<td align="center"><a href="./labs/lab28-live-response/"><img src="https://img.shields.io/badge/10d-LiveIR-f59e0b?style=for-the-badge" alt="Lab 28"/></a></td>
+<td align="center"><a href="./labs/lab25-dfir-fundamentals/"><img src="https://img.shields.io/badge/25-DFIR-f59e0b?style=for-the-badge" alt="Lab 25"/></a></td>
+<td align="center"><a href="./labs/lab29-ir-copilot/"><img src="https://img.shields.io/badge/29-IR_Bot-f59e0b?style=for-the-badge" alt="Lab 29"/></a></td>
+<td align="center"><a href="./labs/lab26-windows-event-log-analysis/"><img src="https://img.shields.io/badge/26-WinLogs-f59e0b?style=for-the-badge" alt="Lab 26"/></a></td>
+<td align="center"><a href="./labs/lab27-windows-registry-forensics/"><img src="https://img.shields.io/badge/27-Registry-f59e0b?style=for-the-badge" alt="Lab 27"/></a></td>
+<td align="center"><a href="./labs/lab28-live-response/"><img src="https://img.shields.io/badge/28-LiveIR-f59e0b?style=for-the-badge" alt="Lab 28"/></a></td>
 </tr>
 <tr>
-<td align="center"><a href="./labs/lab30-ransomware-fundamentals/"><img src="https://img.shields.io/badge/11a-Ransom_Fund-ef4444?style=for-the-badge" alt="Lab 30"/></a></td>
-<td align="center"><a href="./labs/lab31-ransomware-detection/"><img src="https://img.shields.io/badge/11-Ransom-ef4444?style=for-the-badge" alt="Lab 31"/></a></td>
-<td align="center"><a href="./labs/lab32-ransomware-simulation/"><img src="https://img.shields.io/badge/12-Purple-ef4444?style=for-the-badge" alt="Lab 32"/></a></td>
-<td align="center"><a href="./labs/lab33-memory-forensics-ai/"><img src="https://img.shields.io/badge/13-Memory-ef4444?style=for-the-badge" alt="Lab 33"/></a></td>
-<td align="center"><a href="./labs/lab34-c2-traffic-analysis/"><img src="https://img.shields.io/badge/14-C2-ef4444?style=for-the-badge" alt="Lab 34"/></a></td>
+<td align="center"><a href="./labs/lab30-ransomware-fundamentals/"><img src="https://img.shields.io/badge/30-Ransom_Fund-ef4444?style=for-the-badge" alt="Lab 30"/></a></td>
+<td align="center"><a href="./labs/lab31-ransomware-detection/"><img src="https://img.shields.io/badge/31-Ransom-ef4444?style=for-the-badge" alt="Lab 31"/></a></td>
+<td align="center"><a href="./labs/lab32-ransomware-simulation/"><img src="https://img.shields.io/badge/32-Purple-ef4444?style=for-the-badge" alt="Lab 32"/></a></td>
+<td align="center"><a href="./labs/lab33-memory-forensics-ai/"><img src="https://img.shields.io/badge/33-Memory-ef4444?style=for-the-badge" alt="Lab 33"/></a></td>
+<td align="center"><a href="./labs/lab34-c2-traffic-analysis/"><img src="https://img.shields.io/badge/34-C2-ef4444?style=for-the-badge" alt="Lab 34"/></a></td>
 </tr>
 <tr>
-<td align="center"><a href="./labs/lab35-lateral-movement-detection/"><img src="https://img.shields.io/badge/15-Lateral-ef4444?style=for-the-badge" alt="Lab 35"/></a></td>
-<td align="center"><a href="./labs/lab36-threat-actor-profiling/"><img src="https://img.shields.io/badge/16-Actors-ef4444?style=for-the-badge" alt="Lab 36"/></a></td>
-<td align="center"><a href="./labs/lab37-ai-powered-threat-actors/"><img src="https://img.shields.io/badge/16b-AI_Threat-ef4444?style=for-the-badge" alt="Lab 37"/></a></td>
-<td align="center"><a href="./labs/lab38-ml-security-intro/"><img src="https://img.shields.io/badge/17a-MLSec-ef4444?style=for-the-badge" alt="Lab 38"/></a></td>
-<td align="center"><a href="./labs/lab39-adversarial-ml/"><img src="https://img.shields.io/badge/17-AdvML-ef4444?style=for-the-badge" alt="Lab 39"/></a></td>
+<td align="center"><a href="./labs/lab35-lateral-movement-detection/"><img src="https://img.shields.io/badge/35-Lateral-ef4444?style=for-the-badge" alt="Lab 35"/></a></td>
+<td align="center"><a href="./labs/lab36-threat-actor-profiling/"><img src="https://img.shields.io/badge/36-Actors-ef4444?style=for-the-badge" alt="Lab 36"/></a></td>
+<td align="center"><a href="./labs/lab37-ai-powered-threat-actors/"><img src="https://img.shields.io/badge/37-AI_Threat-ef4444?style=for-the-badge" alt="Lab 37"/></a></td>
+<td align="center"><a href="./labs/lab38-ml-security-intro/"><img src="https://img.shields.io/badge/38-MLSec-ef4444?style=for-the-badge" alt="Lab 38"/></a></td>
+<td align="center"><a href="./labs/lab39-adversarial-ml/"><img src="https://img.shields.io/badge/39-AdvML-ef4444?style=for-the-badge" alt="Lab 39"/></a></td>
 </tr>
 <tr>
-<td align="center"><a href="./labs/lab40-llm-security-testing/"><img src="https://img.shields.io/badge/17b-LLMSec-ef4444?style=for-the-badge" alt="Lab 40"/></a></td>
-<td align="center"><a href="./labs/lab41-model-monitoring/"><img src="https://img.shields.io/badge/17c-Monitor-ef4444?style=for-the-badge" alt="Lab 41"/></a></td>
-<td align="center"><a href="./labs/lab42-fine-tuning-security/"><img src="https://img.shields.io/badge/18-Tuning-ef4444?style=for-the-badge" alt="Lab 42"/></a></td>
-<td align="center"><a href="./labs/lab43-rag-security/"><img src="https://img.shields.io/badge/18b-RAGSec-ef4444?style=for-the-badge" alt="Lab 43"/></a></td>
-<td align="center"><a href="./labs/lab44-cloud-security-fundamentals/"><img src="https://img.shields.io/badge/19a-CloudFund-ef4444?style=for-the-badge" alt="Lab 44"/></a></td>
+<td align="center"><a href="./labs/lab40-llm-security-testing/"><img src="https://img.shields.io/badge/40-LLMSec-ef4444?style=for-the-badge" alt="Lab 40"/></a></td>
+<td align="center"><a href="./labs/lab41-model-monitoring/"><img src="https://img.shields.io/badge/41-Monitor-ef4444?style=for-the-badge" alt="Lab 41"/></a></td>
+<td align="center"><a href="./labs/lab42-fine-tuning-security/"><img src="https://img.shields.io/badge/42-Tuning-ef4444?style=for-the-badge" alt="Lab 42"/></a></td>
+<td align="center"><a href="./labs/lab43-rag-security/"><img src="https://img.shields.io/badge/43-RAGSec-ef4444?style=for-the-badge" alt="Lab 43"/></a></td>
+<td align="center"><a href="./labs/lab44-cloud-security-fundamentals/"><img src="https://img.shields.io/badge/44-CloudFund-ef4444?style=for-the-badge" alt="Lab 44"/></a></td>
 </tr>
 <tr>
-<td align="center"><a href="./labs/lab45-cloud-security-ai/"><img src="https://img.shields.io/badge/19-Cloud-ef4444?style=for-the-badge" alt="Lab 45"/></a></td>
-<td align="center"><a href="./labs/lab46-container-security/"><img src="https://img.shields.io/badge/19b-Container-ef4444?style=for-the-badge" alt="Lab 46"/></a></td>
-<td align="center"><a href="./labs/lab47-serverless-security/"><img src="https://img.shields.io/badge/19c-Serverless-ef4444?style=for-the-badge" alt="Lab 47"/></a></td>
-<td align="center"><a href="./labs/lab48-cloud-ir-automation/"><img src="https://img.shields.io/badge/19d-CloudIR-ef4444?style=for-the-badge" alt="Lab 48"/></a></td>
-<td align="center"><a href="./labs/lab49-llm-red-teaming/"><img src="https://img.shields.io/badge/20-RedTeam-ef4444?style=for-the-badge" alt="Lab 49"/></a></td>
+<td align="center"><a href="./labs/lab45-cloud-security-ai/"><img src="https://img.shields.io/badge/45-Cloud-ef4444?style=for-the-badge" alt="Lab 45"/></a></td>
+<td align="center"><a href="./labs/lab46-container-security/"><img src="https://img.shields.io/badge/46-Container-ef4444?style=for-the-badge" alt="Lab 46"/></a></td>
+<td align="center"><a href="./labs/lab47-serverless-security/"><img src="https://img.shields.io/badge/47-Serverless-ef4444?style=for-the-badge" alt="Lab 47"/></a></td>
+<td align="center"><a href="./labs/lab48-cloud-ir-automation/"><img src="https://img.shields.io/badge/48-CloudIR-ef4444?style=for-the-badge" alt="Lab 48"/></a></td>
+<td align="center"><a href="./labs/lab49-llm-red-teaming/"><img src="https://img.shields.io/badge/49-RedTeam-ef4444?style=for-the-badge" alt="Lab 49"/></a></td>
 </tr>
 <tr>
-<td align="center"><a href="./labs/lab50-purple-team-ai/"><img src="https://img.shields.io/badge/20b-PurpleAI-ef4444?style=for-the-badge" alt="Lab 50"/></a></td>
+<td align="center"><a href="./labs/lab50-purple-team-ai/"><img src="https://img.shields.io/badge/50-PurpleAI-ef4444?style=for-the-badge" alt="Lab 50"/></a></td>
 <td></td>
 <td></td>
 <td></td>
@@ -233,92 +233,92 @@ High Confidence: FIN7/Carbanak
 </tr>
 </table>
 
-**Legend:** ⬜ Intro (Free) · 🟢 ML (Free) · 🟣 LLM · 🟠 Advanced · 🔴 Expert DFIR
+**Legend:** White Intro (Free) - Green ML (Free) - Purple LLM - Orange Advanced - Red Expert DFIR
 
 <details>
-<summary><strong>📋 Detailed Lab Descriptions</strong></summary>
+<summary><strong>Detailed Lab Descriptions</strong></summary>
 
-### ⚪ Intro Labs (01-09) — Setup & Foundations, no API keys
+### Foundation Labs (00-09) -- Setup & Foundations, no API keys
 
 | Lab | Topic | Description |
 |-----|-------|-------------|
 | [00](./labs/lab00-environment-setup/) | Setup | Environment configuration |
 | [01](./labs/lab01-python-security-fundamentals/) | Python | Security-focused Python basics |
-| [04](./labs/lab04-ml-concepts-primer/) | ML Intro | Supervised/unsupervised, features, evaluation |
 | [02](./labs/lab02-intro-prompt-engineering/) | Prompts | LLM basics with free playgrounds |
+| [03](./labs/lab03-vibe-coding-with-ai/) | Vibe Coding | AI assistants for accelerated learning |
+| [04](./labs/lab04-ml-concepts-primer/) | ML Intro | Supervised/unsupervised, features, evaluation |
 | [05](./labs/lab05-ai-in-security-operations/) | AI in SOC | Where AI fits, human-in-the-loop |
 | [06](./labs/lab06-visualization-stats/) | Stats | Matplotlib, Seaborn for dashboards |
 | [07](./labs/lab07-hello-world-ml/) | Hello ML | Your first ML model end-to-end |
 | [08](./labs/lab08-working-with-apis/) | APIs | REST APIs, authentication, rate limiting |
-| [03](./labs/lab03-vibe-coding-with-ai/) | Vibe Coding | AI assistants for accelerated learning |
 | [09](./labs/lab09-ctf-fundamentals/) | CTF Fundamentals | CTF mindset, encoding, flag hunting |
 
-### 🟢 ML Labs (01-03) — Machine Learning, no API keys
+### ML Labs (10-13) -- Machine Learning, no API keys
 
 | Lab | Topic | Description |
 |-----|-------|-------------|
-| [01](./labs/lab10-phishing-classifier/) | Phishing | TF-IDF, Random Forest, classification |
-| [02](./labs/lab11-malware-clustering/) | Malware | K-Means, DBSCAN, clustering binaries |
-| [03](./labs/lab12-anomaly-detection/) | Anomaly | Isolation Forest, LOF, baselines |
-| [03b](./labs/lab13-ml-vs-llm/) | ML vs LLM | When to use each, cost tradeoffs |
+| [10](./labs/lab10-phishing-classifier/) | Phishing | TF-IDF, Random Forest, classification |
+| [11](./labs/lab11-malware-clustering/) | Malware | K-Means, DBSCAN, clustering binaries |
+| [12](./labs/lab12-anomaly-detection/) | Anomaly | Isolation Forest, LOF, baselines |
+| [13](./labs/lab13-ml-vs-llm/) | ML vs LLM | When to use each, cost tradeoffs |
 
-### 🟣 LLM Labs (04-07) — Language Models & Agents
-
-| Lab | Topic | Description |
-|-----|-------|-------------|
-| [04](./labs/lab15-llm-log-analysis/) | Logs | Prompt engineering, IOC extraction |
-| [04b](./labs/lab14-first-ai-agent/) | Agent | ReAct pattern, tool calling basics |
-| [05](./labs/lab16-threat-intel-agent/) | Intel | LangChain, autonomous investigation |
-| [06a](./labs/lab17-embeddings-vectors/) | Vectors | Embeddings, similarity search |
-| [06](./labs/lab18-security-rag/) | RAG | ChromaDB, retrieval-augmented Q&A |
-| [07a](./labs/lab45-binary-basics/) | Binary | PE structure, entropy analysis |
-| [07](./labs/lab21-yara-generator/) | YARA | AI-assisted rule generation |
-| [07b](./labs/lab20-sigma-fundamentals/) | Sigma | Log-based detection rules |
-
-### 🟠 Advanced Labs (08-10) — Pipelines & Automation
+### LLM Labs (14-18) -- Language Models & Agents
 
 | Lab | Topic | Description |
 |-----|-------|-------------|
-| [08](./labs/lab22-vuln-scanner-ai/) | Vuln | CVSS, risk prioritization |
-| [09](./labs/lab23-detection-pipeline/) | Pipeline | ML filtering + LLM enrichment |
-| [09b](./labs/lab24-monitoring-ai-systems/) | Monitor | Observability, cost tracking |
-| [10a](./labs/lab25-dfir-fundamentals/) | DFIR | Forensics basics, evidence collection |
-| [10](./labs/lab29-ir-copilot/) | IR Bot | Conversational IR, playbook execution |
-| [10b](./labs/lab26-windows-event-log-analysis/) | Windows Logs | Event log parsing, detection |
-| [10c](./labs/lab27-windows-registry-forensics/) | Registry | Registry forensics, persistence |
-| [10d](./labs/lab28-live-response/) | Live IR | Live response, triage procedures |
+| [14](./labs/lab14-first-ai-agent/) | Agent | ReAct pattern, tool calling basics |
+| [15](./labs/lab15-llm-log-analysis/) | Logs | Prompt engineering, IOC extraction |
+| [16](./labs/lab16-threat-intel-agent/) | Intel | LangChain, autonomous investigation |
+| [17](./labs/lab17-embeddings-vectors/) | Vectors | Embeddings, similarity search |
+| [18](./labs/lab18-security-rag/) | RAG | ChromaDB, retrieval-augmented Q&A |
 
-### 🔴 Expert Labs (11-21) — DFIR, Adversarial, Cloud
+### Detection & DFIR Labs (19-35) -- Pipelines, Automation & Forensics
 
 | Lab | Topic | Description |
 |-----|-------|-------------|
-| [11a](./labs/lab30-ransomware-fundamentals/) | Ransom Fund | Ransomware families, attack lifecycle |
-| [11](./labs/lab31-ransomware-detection/) | Ransom | Entropy, behavioral detection |
-| [12](./labs/lab32-ransomware-simulation/) | Purple | Safe adversary emulation |
-| [13](./labs/lab33-memory-forensics-ai/) | Memory | Volatility3, process injection |
-| [14](./labs/lab34-c2-traffic-analysis/) | C2 | Beaconing, DNS tunneling, JA3 |
-| [15](./labs/lab35-lateral-movement-detection/) | Lateral | Auth anomalies, graph paths |
-| [16](./labs/lab36-threat-actor-profiling/) | Actors | TTP extraction, attribution |
-| [16b](./labs/lab37-ai-powered-threat-actors/) | AI Threat | Deepfakes, AI-generated phishing |
-| [17a](./labs/lab38-ml-security-intro/) | MLSec | Data poisoning, model security |
-| [17](./labs/lab39-adversarial-ml/) | Adv ML | Evasion attacks, robust defenses |
-| [17b](./labs/lab40-llm-security-testing/) | LLM Security | Prompt injection testing, jailbreaks |
-| [17c](./labs/lab41-model-monitoring/) | Model Monitor | Drift detection, adversarial inputs |
-| [18](./labs/lab42-fine-tuning-security/) | Tuning | LoRA, custom embeddings |
-| [18b](./labs/lab43-rag-security/) | RAG Security | KB poisoning, context sanitization |
-| [19a](./labs/lab44-cloud-security-fundamentals/) | Cloud Fund | Shared responsibility, IAM |
-| [19](./labs/lab45-cloud-security-ai/) | Cloud | AWS/Azure/GCP, CloudTrail |
-| [19b](./labs/lab46-container-security/) | Container | Kubernetes, runtime detection |
-| [19c](./labs/lab47-serverless-security/) | Serverless | Lambda, event injection |
-| [19d](./labs/lab48-cloud-ir-automation/) | Cloud IR | Automated containment, evidence |
-| [20](./labs/lab49-llm-red-teaming/) | Red Team | Prompt injection, jailbreaks |
-| [20b](./labs/lab50-purple-team-ai/) | Purple AI | Automated attack simulation |
+| [19](./labs/lab19-binary-basics/) | Binary | PE structure, entropy analysis |
+| [20](./labs/lab20-sigma-fundamentals/) | Sigma | Log-based detection rules |
+| [21](./labs/lab21-yara-generator/) | YARA | AI-assisted rule generation |
+| [22](./labs/lab22-vuln-scanner-ai/) | Vuln | CVSS, risk prioritization |
+| [23](./labs/lab23-detection-pipeline/) | Pipeline | ML filtering + LLM enrichment |
+| [24](./labs/lab24-monitoring-ai-systems/) | Monitor | Observability, cost tracking |
+| [25](./labs/lab25-dfir-fundamentals/) | DFIR | Forensics basics, evidence collection |
+| [26](./labs/lab26-windows-event-log-analysis/) | Windows Logs | Event log parsing, detection |
+| [27](./labs/lab27-windows-registry-forensics/) | Registry | Registry forensics, persistence |
+| [28](./labs/lab28-live-response/) | Live IR | Live response, triage procedures |
+| [29](./labs/lab29-ir-copilot/) | IR Bot | Conversational IR, playbook execution |
+| [30](./labs/lab30-ransomware-fundamentals/) | Ransom Fund | Ransomware families, attack lifecycle |
+| [31](./labs/lab31-ransomware-detection/) | Ransom | Entropy, behavioral detection |
+| [32](./labs/lab32-ransomware-simulation/) | Purple | Safe adversary emulation |
+| [33](./labs/lab33-memory-forensics-ai/) | Memory | Volatility3, process injection |
+| [34](./labs/lab34-c2-traffic-analysis/) | C2 | Beaconing, DNS tunneling, JA3 |
+| [35](./labs/lab35-lateral-movement-detection/) | Lateral | Auth anomalies, graph paths |
+
+### Expert Labs (36-50) -- Adversarial, Cloud & Advanced
+
+| Lab | Topic | Description |
+|-----|-------|-------------|
+| [36](./labs/lab36-threat-actor-profiling/) | Actors | TTP extraction, attribution |
+| [37](./labs/lab37-ai-powered-threat-actors/) | AI Threat | Deepfakes, AI-generated phishing |
+| [38](./labs/lab38-ml-security-intro/) | MLSec | Data poisoning, model security |
+| [39](./labs/lab39-adversarial-ml/) | Adv ML | Evasion attacks, robust defenses |
+| [40](./labs/lab40-llm-security-testing/) | LLM Security | Prompt injection testing, jailbreaks |
+| [41](./labs/lab41-model-monitoring/) | Model Monitor | Drift detection, adversarial inputs |
+| [42](./labs/lab42-fine-tuning-security/) | Tuning | LoRA, custom embeddings |
+| [43](./labs/lab43-rag-security/) | RAG Security | KB poisoning, context sanitization |
+| [44](./labs/lab44-cloud-security-fundamentals/) | Cloud Fund | Shared responsibility, IAM |
+| [45](./labs/lab45-cloud-security-ai/) | Cloud | AWS/Azure/GCP, CloudTrail |
+| [46](./labs/lab46-container-security/) | Container | Kubernetes, runtime detection |
+| [47](./labs/lab47-serverless-security/) | Serverless | Lambda, event injection |
+| [48](./labs/lab48-cloud-ir-automation/) | Cloud IR | Automated containment, evidence |
+| [49](./labs/lab49-llm-red-teaming/) | Red Team | Prompt injection, jailbreaks |
+| [50](./labs/lab50-purple-team-ai/) | Purple AI | Automated attack simulation |
 
 </details>
 
 ---
 
-## 🏗️ Capstone Projects
+## Capstone Projects
 
 | Project | Difficulty | Focus |
 |---------|------------|-------|
@@ -331,7 +331,7 @@ Each includes starter code, requirements, and evaluation criteria. See [`capston
 
 ---
 
-## 🛠️ Local Setup
+## Local Setup
 
 ### System Requirements
 
@@ -343,7 +343,7 @@ Each includes starter code, requirements, and evaluation criteria. See [`capston
 | **Editor** | Any | VS Code, Cursor, PyCharm |
 | **Git** | Required | - |
 | **Docker** | Optional | For containerized labs |
-| **API Key** | Labs 04+ only | Free tiers available |
+| **API Key** | Labs 14+ only | Free tiers available |
 
 ### Installation
 
@@ -363,7 +363,7 @@ pip install -r requirements.txt
 cd labs/lab00-environment-setup
 ```
 
-### API Keys (for Labs 04+)
+### API Keys (for Labs 14+)
 
 ```bash
 # Copy example env
@@ -415,7 +415,7 @@ docker compose run test            # In Docker
 
 ---
 
-## 📖 Resources
+## Resources
 
 | Resource | Description |
 |----------|-------------|
@@ -442,7 +442,7 @@ docker compose run test            # In Docker
 
 ---
 
-## 👤 Author
+## Author
 
 Created by **Raymond DePalma**
 
@@ -484,7 +484,7 @@ Add folder exclusions for these paths in your AV settings if files are being qua
 ### Accessibility
 
 This project aims to be accessible to all learners:
-- Lab difficulty indicators use both color AND text labels (e.g., "🟢 Beginner")
+- Lab difficulty indicators use both color AND text labels (e.g., "Beginner")
 - All code examples include descriptive comments
 - Documentation uses high-contrast text
 
