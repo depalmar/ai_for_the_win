@@ -161,3 +161,29 @@ Files that reference lab ranges:
 - docs/index.md (GitHub Pages)
 - docs/ARCHITECTURE.md
 - ctf/README.md (prerequisites)
+
+### Security Platform References (Conservative Approach)
+
+**IMPORTANT: This project focuses on open-source security tooling to ensure complete independence and legal protection.**
+
+#### Current Policy:
+- **Primary focus**: Elasticsearch, OpenSearch, Sigma, YARA, MITRE ATT&CK
+- **Implementation**: All labs use open-source tools only
+- **References**: Educational links to vendor blogs/docs are acceptable if publicly available
+- **Documentation**: All sources must be listed in [docs/SOURCES.md](SOURCES.md)
+
+#### Prohibited Content:
+- Proprietary platform implementations or architectures
+- Internal/confidential vendor information
+- Unreleased features or products
+- Content that could create employment/IP conflicts
+
+#### Adding New Platform References:
+Before adding any commercial security platform content:
+1. Verify information is from **publicly available documentation**
+2. Document source URL in docs/SOURCES.md
+3. Ensure no employment/IP conflicts
+4. Consider legal review if applicable
+5. Focus on educational value, not product promotion
+
+See [LICENSE](../LICENSE) for full employment and IP disclaimer.
