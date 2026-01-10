@@ -3,10 +3,9 @@
 
 import json
 import sys
-from dataclasses import asdict
 from datetime import datetime, timedelta
 from pathlib import Path
-from unittest.mock import Mock, patch
+from unittest.mock import patch
 
 import pytest
 
@@ -22,8 +21,7 @@ sys.path = [p for p in sys.path if "/labs/lab" not in p]
 lab_path = str(Path(__file__).parent.parent / "labs" / "lab45-cloud-security-ai" / "solution")
 sys.path.insert(0, lab_path)
 
-from main import (
-    AzureSentinelAnalyzer,
+from main import (  # noqa: E402
     CloudEvent,
     CloudSecurityReport,
     CloudThreat,
@@ -176,65 +174,6 @@ def reconnaissance_events():
 
 
 @pytest.fixture
-def sample_azure_incidents():
-    """Create sample Azure Sentinel incidents."""
-    return [
-        {
-            "id": "/subscriptions/xxx/resourceGroups/rg1/providers/Microsoft.SecurityInsights/incidents/inc-001",
-            "name": "inc-001",
-            "properties": {
-                "title": "Impossible travel activity",
-                "description": "User signed in from two geographically distant locations",
-                "severity": "High",
-                "status": "New",
-                "createdTimeUtc": "2024-01-15T14:00:00Z",
-                "relatedAlerts": ["alert-001"],
-                "relatedEntities": [
-                    {"type": "Account", "name": "admin@contoso.com"},
-                    {"type": "IP", "address": "185.234.72.19"},
-                ],
-            },
-        },
-        {
-            "id": "/subscriptions/xxx/resourceGroups/rg1/providers/Microsoft.SecurityInsights/incidents/inc-002",
-            "name": "inc-002",
-            "properties": {
-                "title": "Suspicious sign-in from unfamiliar location",
-                "description": "Sign-in detected from a country not in the user's pattern",
-                "severity": "Medium",
-                "status": "New",
-                "createdTimeUtc": "2024-01-15T15:30:00Z",
-                "relatedAlerts": ["alert-003"],
-                "relatedEntities": [
-                    {"type": "Account", "name": "jsmith@contoso.com"},
-                ],
-            },
-        },
-    ]
-
-
-@pytest.fixture
-def cryptomining_azure_incident():
-    """Create Azure incident for cryptomining detection."""
-    return [
-        {
-            "name": "inc-crypto-001",
-            "properties": {
-                "title": "Potential cryptomining activity detected",
-                "description": "Unusual CPU usage pattern consistent with cryptomining",
-                "severity": "High",
-                "status": "InProgress",
-                "createdTimeUtc": "2024-01-15T16:00:00Z",
-                "relatedAlerts": ["alert-004"],
-                "relatedEntities": [
-                    {"type": "Host", "name": "vm-compromised-01"},
-                ],
-            },
-        },
-    ]
-
-
-@pytest.fixture
 def sample_gcp_findings():
     """Create sample GCP Security Command Center findings."""
     return [
@@ -258,11 +197,10 @@ def sample_gcp_findings():
 
 
 @pytest.fixture
-def multi_cloud_data(sample_cloudtrail_events, sample_azure_incidents, sample_gcp_findings):
+def multi_cloud_data(sample_cloudtrail_events, sample_gcp_findings):
     """Create multi-cloud data structure."""
     return {
         "aws": {"events": sample_cloudtrail_events},
-        "azure": {"incidents": sample_azure_incidents, "activity_logs": []},
         "gcp": {"findings": sample_gcp_findings},
     }
 
@@ -271,12 +209,6 @@ def multi_cloud_data(sample_cloudtrail_events, sample_azure_incidents, sample_gc
 def cloudtrail_analyzer():
     """Create CloudTrailAnalyzer instance."""
     return CloudTrailAnalyzer()
-
-
-@pytest.fixture
-def azure_analyzer():
-    """Create AzureSentinelAnalyzer instance."""
-    return AzureSentinelAnalyzer()
 
 
 @pytest.fixture
@@ -325,14 +257,14 @@ class TestCloudEvent:
         event = CloudEvent(
             event_id="test-002",
             timestamp="2024-01-15T10:00:00Z",
-            cloud_provider="azure",
-            event_type="Microsoft.Compute",
+            cloud_provider="gcp",
+            event_type="compute.instances.insert",
             source_ip="10.0.0.1",
             user_identity="service-account",
             resource="vm",
             action="write",
             result="success",
-            region="eastus",
+            region="us-east1",
             raw_data=raw,
         )
 
@@ -367,12 +299,12 @@ class TestCloudThreat:
     def test_cloud_threat_with_full_data(self):
         """Test CloudThreat with all fields populated."""
         threat = CloudThreat(
-            threat_id="AZR-0001",
+            threat_id="GCP-0001",
             timestamp="2024-01-15T14:00:00Z",
-            cloud_provider="azure",
-            threat_type="Identity - Impossible Travel",
+            cloud_provider="gcp",
+            threat_type="Identity - Unusual Access",
             severity="high",
-            affected_resources=["vm-01", "storage-account-01"],
+            affected_resources=["vm-01", "bucket-01"],
             indicators=["Unusual location", "Multiple IPs"],
             mitre_techniques=["T1078", "T1110"],
             recommendation="Review user activity and reset credentials",
@@ -664,135 +596,6 @@ class TestCloudTrailAnalyzer:
 
 
 # =============================================================================
-# AzureSentinelAnalyzer Tests
-# =============================================================================
-
-
-class TestAzureSentinelAnalyzer:
-    """Tests for AzureSentinelAnalyzer."""
-
-    def test_analyzer_initialization(self, azure_analyzer):
-        """Test analyzer initialization."""
-        assert azure_analyzer is not None
-        assert azure_analyzer.incidents == []
-        assert azure_analyzer.activity_logs == []
-
-    def test_parse_incident(self, azure_analyzer):
-        """Test parsing an Azure incident."""
-        raw_incident = {
-            "name": "inc-001",
-            "id": "/subscriptions/xxx/incidents/inc-001",
-            "properties": {
-                "title": "Suspicious activity detected",
-                "severity": "High",
-                "status": "New",
-                "createdTimeUtc": "2024-01-15T14:00:00Z",
-                "relatedAlerts": ["alert-001"],
-                "relatedEntities": [{"type": "Account", "name": "user@contoso.com"}],
-            },
-        }
-
-        incident = azure_analyzer.parse_incident(raw_incident)
-
-        assert incident["id"] == "inc-001"
-        assert incident["title"] == "Suspicious activity detected"
-        assert incident["severity"] == "High"
-        assert incident["status"] == "New"
-        assert len(incident["alerts"]) == 1
-
-    def test_load_incidents(self, azure_analyzer, sample_azure_incidents, capsys):
-        """Test loading Azure incidents."""
-        azure_analyzer.load_incidents(sample_azure_incidents)
-
-        assert len(azure_analyzer.incidents) == 2
-
-        captured = capsys.readouterr()
-        assert "Loaded 2 Azure incidents" in captured.out
-
-    def test_load_activity_logs(self, azure_analyzer):
-        """Test loading Azure activity logs."""
-        logs = [
-            {"operationName": "Microsoft.Compute/virtualMachines/write"},
-            {"operationName": "Microsoft.Authorization/roleAssignments/write"},
-        ]
-
-        azure_analyzer.load_activity_logs(logs)
-
-        assert len(azure_analyzer.activity_logs) == 2
-
-    def test_detect_identity_threats_impossible_travel(
-        self, azure_analyzer, sample_azure_incidents
-    ):
-        """Test detection of impossible travel incidents."""
-        azure_analyzer.load_incidents(sample_azure_incidents)
-
-        threats = azure_analyzer.detect_identity_threats()
-
-        impossible_travel_threats = [t for t in threats if "Impossible Travel" in t.threat_type]
-        assert len(impossible_travel_threats) >= 1
-        threat = impossible_travel_threats[0]
-        assert threat.cloud_provider == "azure"
-        assert "T1078" in threat.mitre_techniques
-
-    def test_detect_identity_threats_suspicious_signin(
-        self, azure_analyzer, sample_azure_incidents
-    ):
-        """Test detection of suspicious sign-in incidents."""
-        azure_analyzer.load_incidents(sample_azure_incidents)
-
-        threats = azure_analyzer.detect_identity_threats()
-
-        signin_threats = [t for t in threats if "Suspicious Sign-in" in t.threat_type]
-        assert len(signin_threats) >= 1
-
-    def test_detect_resource_threats_cryptomining(
-        self, azure_analyzer, cryptomining_azure_incident
-    ):
-        """Test detection of cryptomining activity."""
-        azure_analyzer.load_incidents(cryptomining_azure_incident)
-
-        threats = azure_analyzer.detect_resource_threats()
-
-        assert len(threats) >= 1
-        threat = threats[0]
-        assert "Cryptomining" in threat.threat_type
-        assert threat.severity == "high"
-        assert "T1496" in threat.mitre_techniques
-
-    def test_correlate_incidents(self, azure_analyzer, sample_azure_incidents):
-        """Test incident correlation."""
-        azure_analyzer.load_incidents(sample_azure_incidents)
-
-        # Currently returns empty list (placeholder)
-        correlated = azure_analyzer.correlate_incidents()
-        assert isinstance(correlated, list)
-
-    def test_analyze_full(self, azure_analyzer, sample_azure_incidents):
-        """Test full Azure analysis."""
-        azure_analyzer.load_incidents(sample_azure_incidents)
-
-        threats = azure_analyzer.analyze()
-
-        assert len(threats) >= 2  # At least impossible travel and suspicious signin
-
-    def test_threat_id_generation(self, azure_analyzer):
-        """Test Azure threat ID generation."""
-        id1 = azure_analyzer._generate_threat_id()
-        id2 = azure_analyzer._generate_threat_id()
-
-        assert id1 != id2
-        assert id1.startswith("AZR-")
-        assert id2.startswith("AZR-")
-
-    def test_high_risk_operations_defined(self, azure_analyzer):
-        """Test that high risk operations are defined."""
-        assert (
-            "Microsoft.Authorization/roleAssignments/write" in azure_analyzer.HIGH_RISK_OPERATIONS
-        )
-        assert "Microsoft.KeyVault/vaults/secrets/read" in azure_analyzer.HIGH_RISK_OPERATIONS
-
-
-# =============================================================================
 # GCPSecurityAnalyzer Tests
 # =============================================================================
 
@@ -864,7 +667,6 @@ class TestMultiCloudAnalyzer:
         """Test analyzer initialization."""
         assert multi_cloud_analyzer is not None
         assert multi_cloud_analyzer.aws_analyzer is not None
-        assert multi_cloud_analyzer.azure_analyzer is not None
         assert multi_cloud_analyzer.gcp_analyzer is not None
         assert multi_cloud_analyzer.llm is None  # Not initialized until needed
 
@@ -873,7 +675,6 @@ class TestMultiCloudAnalyzer:
         multi_cloud_analyzer.load_cloud_data(multi_cloud_data)
 
         assert len(multi_cloud_analyzer.aws_analyzer.events) == 2
-        assert len(multi_cloud_analyzer.azure_analyzer.incidents) == 2
         assert len(multi_cloud_analyzer.gcp_analyzer.findings) == 2
 
     def test_load_cloud_data_partial(self, multi_cloud_analyzer):
@@ -883,7 +684,6 @@ class TestMultiCloudAnalyzer:
         multi_cloud_analyzer.load_cloud_data(data)
 
         assert len(multi_cloud_analyzer.aws_analyzer.events) == 1
-        assert len(multi_cloud_analyzer.azure_analyzer.incidents) == 0
 
     def test_correlate_cross_cloud_same_ip(self, multi_cloud_analyzer):
         """Test cross-cloud correlation by IP address."""
@@ -897,10 +697,10 @@ class TestMultiCloudAnalyzer:
                 indicators=["Source IP: 185.234.72.19"],
             ),
             CloudThreat(
-                threat_id="AZR-0001",
+                threat_id="GCP-0001",
                 timestamp="2024-01-15T10:05:00Z",
-                cloud_provider="azure",
-                threat_type="Test Azure Threat",
+                cloud_provider="gcp",
+                threat_type="Test GCP Threat",
                 severity="high",
                 indicators=["IP: 185.234.72.19"],
             ),
@@ -926,10 +726,10 @@ class TestMultiCloudAnalyzer:
                 indicators=["Source IP: 10.0.0.1"],
             ),
             CloudThreat(
-                threat_id="AZR-0001",
+                threat_id="GCP-0001",
                 timestamp="2024-01-15T10:05:00Z",
-                cloud_provider="azure",
-                threat_type="Test Azure Threat",
+                cloud_provider="gcp",
+                threat_type="Test GCP Threat",
                 severity="high",
                 indicators=["IP: 192.168.1.1"],
             ),
@@ -1057,32 +857,12 @@ class TestMultiCloudAnalyzer:
                     }
                 ]
             },
-            "azure": {
-                "incidents": [
-                    {
-                        "name": "inc-001",
-                        "properties": {
-                            "title": "Impossible travel activity",
-                            "severity": "High",
-                            "status": "New",
-                            "createdTimeUtc": "2024-01-15T10:05:00Z",
-                            "relatedAlerts": [],
-                            "relatedEntities": [{"type": "IP", "address": "185.234.72.19"}],
-                        },
-                    }
-                ],
-                "activity_logs": [],
-            },
         }
 
         multi_cloud_analyzer.load_cloud_data(data)
         report = multi_cloud_analyzer.analyze_all()
 
-        # Check for cross-cloud correlation
-        multi_cloud_threats = [
-            t for t in report.threats_detected if t.cloud_provider == "multi-cloud"
-        ]
-        # Note: Correlation is by IP in indicators, which may or may not match
+        # Check that analysis completed successfully
         assert report is not None
 
     def test_generate_report(self, multi_cloud_analyzer):
@@ -1097,12 +877,12 @@ class TestMultiCloudAnalyzer:
                 indicators=["Indicator 1", "Indicator 2"],
             ),
             CloudThreat(
-                threat_id="AZR-0001",
+                threat_id="GCP-0001",
                 timestamp="2024-01-15T10:05:00Z",
-                cloud_provider="azure",
-                threat_type="Test Azure Threat",
+                cloud_provider="gcp",
+                threat_type="Test GCP Threat",
                 severity="high",
-                indicators=["Azure Indicator"],
+                indicators=["GCP Indicator"],
             ),
         ]
 
@@ -1110,7 +890,7 @@ class TestMultiCloudAnalyzer:
 
         assert "MULTI-CLOUD SECURITY REPORT" in report
         assert "AWS" in report.upper()
-        assert "AZURE" in report.upper()
+        assert "GCP" in report.upper()
         assert "Total Threats: 2" in report
 
     @pytest.mark.requires_api
@@ -1214,8 +994,6 @@ class TestIntegration:
 
     def test_full_pipeline_with_real_data_files(self):
         """Test pipeline with data files from lab."""
-        import os
-
         data_dir = Path(__file__).parent.parent / "labs" / "lab19-cloud-security-ai" / "data"
 
         if not data_dir.exists():
@@ -1227,11 +1005,6 @@ class TestIntegration:
         if cloudtrail_file.exists():
             with open(cloudtrail_file, "r") as f:
                 cloud_data["aws"] = json.load(f)
-
-        azure_file = data_dir / "azure_incidents.json"
-        if azure_file.exists():
-            with open(azure_file, "r") as f:
-                cloud_data["azure"] = json.load(f)
 
         if not cloud_data:
             pytest.skip("No data files found")
@@ -1269,13 +1042,6 @@ class TestEdgeCases:
         threats = cloudtrail_analyzer.analyze()
         assert isinstance(threats, list)
 
-    def test_empty_azure_incidents(self, azure_analyzer):
-        """Test Azure analysis with no incidents."""
-        azure_analyzer.load_incidents([])
-
-        threats = azure_analyzer.analyze()
-        assert threats == []
-
     def test_empty_gcp_findings(self, gcp_analyzer):
         """Test GCP analysis with no findings."""
         gcp_analyzer.load_findings([])
@@ -1303,7 +1069,7 @@ class TestEdgeCases:
     def test_reconnaissance_with_invalid_timestamps(self, cloudtrail_analyzer):
         """Test reconnaissance detection with invalid timestamps."""
         events = []
-        for i in range(12):
+        for _ in range(12):
             events.append(
                 {
                     "eventTime": "invalid-timestamp",
