@@ -1722,6 +1722,96 @@ class TestLabCategoryConsistency:
         if errors:
             pytest.fail("README Lab Navigator legend uses outdated terms:\n" + "\n".join(errors))
 
+    def test_no_old_lab_numbering_in_docs(self):
+        """Verify documentation doesn't reference old lab numbering scheme.
+
+        Old scheme used suffixed numbers like:
+        - Lab 09b (should be Lab 24)
+        - Lab 10a (should be Lab 25)
+        - Lab 10b (should be Lab 26)
+        - Lab 10c (should be Lab 27)
+        - Lab 10d (should be Lab 28)
+        - Lab 11a (should be Lab 30)
+        - Lab 16b (should be Lab 37)
+        - Lab 17a (should be Lab 38)
+        - Lab 17b (should be Lab 40)
+        - Lab 17c (should be Lab 41)
+        - Lab 18b (should be Lab 43)
+        - Lab 19a (should be Lab 44)
+        - Lab 19b (should be Lab 46)
+        - Lab 19c (should be Lab 47)
+        - Lab 19d (should be Lab 48)
+        - Lab 20b (should be Lab 50)
+        """
+        # Old numbering patterns that should not appear
+        # Exclude hex colors (10b981), hashes, and intentional examples in test files
+        old_patterns = [
+            r"Lab 09b(?!\d|981)",  # Not followed by digit or "981" (hex color)
+            r"Lab 10a(?!\d)",
+            r"Lab 10b(?!\d|981)",  # Exclude 10b981 (color)
+            r"Lab 10c(?!\d)",
+            r"Lab 10d(?!\d)",
+            r"Lab 11a(?!\d)",
+            r"Lab 16b(?!\d)",
+            r"Lab 17a(?!\d)",
+            r"Lab 17b(?!\d)",
+            r"Lab 17c(?!\d)",
+            r"Lab 18b(?!\d)",
+            r"Lab 19a(?!\d)",
+            r"Lab 19b(?!\d)",
+            r"Lab 19c(?!\d)",
+            r"Lab 19d(?!\d)",
+            r"Lab 20b(?!\d)",
+            r"Labs 10a-10c",  # Range reference
+        ]
+
+        # Files to check (exclude this test file and CLAUDE.md which documents the mistake)
+        docs_to_check = [
+            REPO_ROOT / "docs" / "walkthroughs",
+            REPO_ROOT / "docs" / "guides",
+            REPO_ROOT / "docs" / "ROADMAP.md",
+            REPO_ROOT / "docs" / "lab-prerequisites.md",
+            REPO_ROOT / "data" / "README.md",
+            REPO_ROOT / "labs",
+        ]
+
+        errors = []
+        for doc_path in docs_to_check:
+            if not doc_path.exists():
+                continue
+
+            # Get all markdown files
+            if doc_path.is_dir():
+                md_files = list(doc_path.rglob("*.md"))
+            else:
+                md_files = [doc_path]
+
+            for md_file in md_files:
+                # Skip test files
+                if "test_" in md_file.name or md_file.name == "CLAUDE.md":
+                    continue
+
+                try:
+                    content = md_file.read_text(encoding="utf-8")
+
+                    for pattern in old_patterns:
+                        matches = re.finditer(pattern, content, re.IGNORECASE)
+                        for match in matches:
+                            # Get line number
+                            line_num = content[: match.start()].count("\n") + 1
+                            errors.append(
+                                f"{md_file.relative_to(REPO_ROOT)}:{line_num}: "
+                                f"Found old lab numbering '{match.group()}'"
+                            )
+                except (OSError, UnicodeDecodeError):
+                    continue
+
+        if errors:
+            pytest.fail(
+                "Found old lab numbering in documentation:\n"
+                + "\n".join(errors[:30])  # Limit output
+            )
+
 
 if __name__ == "__main__":
     pytest.main([__file__, "-v"])
