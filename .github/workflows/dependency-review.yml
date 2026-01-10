@@ -1,0 +1,31 @@
+# Dependency Review Workflow
+# Scans PRs for vulnerable dependencies before they're merged
+# https://github.com/actions/dependency-review-action
+
+name: Dependency Review
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  dependency-review:
+    name: Review Dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
+
+      - name: Dependency Review
+        uses: actions/dependency-review-action@da24556b548a50705dd671f47852072ea4c105d9 # v4.6.0
+        with:
+          # Fail on high and critical vulnerabilities
+          fail-on-severity: high
+          # Block copyleft licenses that would require open-sourcing derivative works
+          deny-licenses: GPL-3.0, AGPL-3.0
+          # Comment on PR with results
+          comment-summary-in-pr: always

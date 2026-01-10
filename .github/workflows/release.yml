@@ -67,10 +67,19 @@ jobs:
 
           cat changelog.txt
 
+      - name: Generate SBOM (Software Bill of Materials)
+        uses: anchore/sbom-action@e11c554f704a0b820cbf8c51673f6945e0731532 # v0.18.0
+        with:
+          artifact-name: sbom-${{ github.ref_name }}.spdx.json
+          output-file: sbom.spdx.json
+          format: spdx-json
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@a06a81a03ee405af7f2048a818ed3f03bbf83c7b # v2
         with:
           body_path: changelog.txt
+          files: |
+            sbom.spdx.json
           draft: false
           prerelease: ${{ contains(github.ref, '-rc') || contains(github.ref, '-beta') || contains(github.ref, '-alpha') }}
         env:
