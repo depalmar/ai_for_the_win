@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-AI for the Win is a hands-on training program for security practitioners building AI-powered tools. It contains 24 labs (including 4 intro labs), 4 capstone projects, and 15 CTF challenges covering threat detection, incident response, and security automation.
+AI for the Win is a hands-on training program for security practitioners building AI-powered tools. It contains 50+ labs, 4 capstone projects, and 15 CTF challenges covering threat detection, incident response, and security automation.
 
 ## Common Commands
 
@@ -105,7 +105,7 @@ pytest -m "not requires_api"   # Skip tests requiring API keys
 
 ## Important Directories
 
-- `labs/` - 24 hands-on labs with starter/solution code
+- `labs/` - 50+ hands-on labs with starter/solution code
 - `capstone-projects/` - 4 comprehensive projects
 - `templates/` - Reusable agent, prompt, and visualization templates
 - `resources/` - Tools, datasets, cheatsheets
@@ -122,6 +122,25 @@ When adding or modifying labs:
 - Update the legend if category ranges change
 - Legend format: `Grey Foundation (00-09, Free) | Green ML Foundations (10-13, Free) | Purple LLM Basics (14-18) | Orange Detection/DFIR (19-29) | Red Advanced/Cloud (30-50)`
 - Run `pytest tests/test_lab_data_integrity.py::TestLabCategoryConsistency -v` to verify
+
+### GitHub Pages Lab Navigator (docs/index.md)
+The docs/index.md file powers the GitHub Pages site at https://depalmar.github.io/ai_for_the_win/#labs
+
+**Critical: Lab card display numbers MUST match folder numbers**
+- Each lab card has a display number (`<span class="lab-number ...">XX</span>`)
+- This display number MUST match the lab folder number in the href
+- Example: `labs/lab23-detection-pipeline` must show display number `23`, not `09`
+
+When adding or modifying labs in docs/index.md:
+1. **Display number must match folder number**: lab23-* shows "23", lab24-* shows "24"
+2. **Order labs sequentially**: 00, 01, 02... through 50
+3. **Update category colors**: intro (grey), ml (green), llm (purple), advanced (orange), dfir (red)
+4. **Run tests**: `pytest tests/test_lab_data_integrity.py::TestLabCategoryConsistency::test_index_md_lab_card_display_numbers_match_folder -v`
+
+Common mistakes to avoid:
+- Using old numbering scheme (09, 09b, 10, 10a) instead of actual folder numbers (23, 24, 25, 26)
+- Mixing lab folder numbers with display numbers
+- Forgetting to update both the href path AND the display number when renumbering
 
 ### Lab Category Ranges (Canonical)
 Keep these in sync across all documentation:

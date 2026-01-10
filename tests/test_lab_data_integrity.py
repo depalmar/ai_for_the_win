@@ -1559,6 +1559,66 @@ class TestLabCategoryConsistency:
         if errors:
             pytest.fail("docs/index.md has outdated lab numbering:\n" + "\n".join(errors))
 
+    def test_index_md_lab_card_display_numbers_match_folder(self):
+        """Verify docs/index.md lab card display numbers match actual lab folder numbers.
+
+        The Lab Navigator on GitHub Pages (docs/index.md) has lab cards that show
+        a display number (like 23, 24, 25) in the UI. This display number MUST
+        match the actual lab folder number in the href (lab23-*, lab24-*, etc.).
+
+        Old incorrect pattern: lab23-detection-pipeline showing display "09"
+        Correct pattern: lab23-detection-pipeline showing display "23"
+        """
+        index_md = REPO_ROOT / "docs" / "index.md"
+        if not index_md.exists():
+            pytest.skip("docs/index.md not found")
+
+        content = index_md.read_text(encoding="utf-8")
+
+        # Find the lab-grid section
+        if 'class="lab-grid"' not in content:
+            pytest.skip("No lab-grid found in docs/index.md")
+
+        errors = []
+
+        # Extract lab card info: href path and display number
+        # Pattern for lab card: <a href="...labs/labXX-..." class="lab-card"...>
+        #   followed by: <span class="lab-number ...">DISPLAY</span>
+        lab_card_pattern = re.compile(
+            r'<a href="[^"]*labs/lab(\d+)-[^"]*"[^>]*class="lab-card"[^>]*>.*?'
+            r'<span class="lab-number[^"]*">(\d+[a-z]?)</span>',
+            re.DOTALL,
+        )
+
+        matches = lab_card_pattern.findall(content)
+
+        if not matches:
+            pytest.skip("No lab cards found in docs/index.md")
+
+        for folder_num, display_num in matches:
+            folder_num_int = int(folder_num)
+            # Display number should match folder number (ignore letter suffixes like "b")
+            display_num_clean = display_num.rstrip("abcdefghijklmnopqrstuvwxyz")
+            try:
+                display_num_int = int(display_num_clean)
+            except ValueError:
+                errors.append(
+                    f"Lab card for lab{folder_num:0>2} has invalid display number: {display_num}"
+                )
+                continue
+
+            if folder_num_int != display_num_int:
+                errors.append(
+                    f"Lab card mismatch: lab{folder_num:0>2}-* folder shows display '{display_num}' "
+                    f"(should show '{folder_num_int}')"
+                )
+
+        if errors:
+            pytest.fail(
+                "docs/index.md lab cards have mismatched display numbers:\n"
+                + "\n".join(errors[:20])  # Limit to first 20 errors
+            )
+
     def test_readme_lab_navigator_sequential_order(self):
         """Verify README Lab Navigator displays labs in sequential order.
 
