@@ -112,3 +112,33 @@ pytest -m "not requires_api"   # Skip tests requiring API keys
 - `mcp-servers/` - MCP server implementations
 - `docs/guides/` - Troubleshooting and configuration guides
 - `notebooks/` - Jupyter notebooks (Colab-ready)
+
+## Documentation Maintenance
+
+### Lab Navigator (README.md)
+When adding or modifying labs:
+- The Lab Navigator table in README.md must display labs in **sequential order** (00, 01, 02, 03...)
+- Never scramble lab order (e.g., 00, 01, 04, 02 is wrong)
+- Update the legend if category ranges change
+- Legend format: `Grey Foundation (00-09, Free) | Green ML Foundations (10-13, Free) | Purple LLM Basics (14-18) | Orange Detection/DFIR (19-29) | Red Advanced/Cloud (30-50)`
+- Run `pytest tests/test_lab_data_integrity.py::TestLabCategoryConsistency -v` to verify
+
+### Lab Category Ranges (Canonical)
+Keep these in sync across all documentation:
+| Category | Range | API Required |
+|----------|-------|--------------|
+| Foundation | 00-09 | No |
+| ML Foundations | 10-13 | No |
+| LLM Basics | 14-18 | Yes |
+| Detection Engineering | 19-24 | Yes |
+| DFIR | 25-35 | Yes |
+| Advanced Threats | 36-43 | Yes |
+| Cloud & Red Team | 44-50 | Yes |
+
+Files that reference lab ranges:
+- README.md (Lab Navigator table and legend)
+- labs/README.md
+- .claude/commands/lab.md
+- docs/index.md (GitHub Pages)
+- docs/ARCHITECTURE.md
+- ctf/README.md (prerequisites)
