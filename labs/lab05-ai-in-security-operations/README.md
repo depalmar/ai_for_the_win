@@ -64,9 +64,9 @@ A **Security Operations Center (SOC)** is a team responsible for monitoring and 
 
 | Tool Type | Purpose | Examples |
 |-----------|---------|----------|
-| **SIEM** | Collect and correlate logs | Splunk, Elastic, Microsoft Sentinel |
-| **EDR** | Monitor endpoints for threats | CrowdStrike, Microsoft Defender, SentinelOne |
-| **SOAR** | Automate response workflows | Splunk SOAR, Swimlane, Tines |
+| **SIEM** | Collect and correlate logs | Elasticsearch, OpenSearch |
+| **EDR** | Monitor endpoints for threats | Wazuh, OSSEC |
+| **SOAR** | Automate response workflows | Shuffle, TheHive, Tines |
 | **Threat Intel** | Track known threats and IOCs | MISP, VirusTotal, threat feeds |
 
 ### Key Terms
@@ -96,12 +96,12 @@ SOC Reality Check (2025 Industry Data):
 │  KEY CHALLENGES (2025 surveys):                                         │
 │  • 40% of alerts never investigated (Prophet Security/Radiant, 2025)   │
 │  • 73% cite false positives as top challenge (SANS Detection Survey)   │
-│  • 52% of SOC teams report being overworked (Splunk State of Security) │
-│  • 52% considering leaving cybersecurity due to stress (Splunk, 2025)  │
-│  • 59% say tool maintenance is primary inefficiency (Splunk, 2025)     │
+│  • 52% of SOC teams report being overworked (industry surveys, 2025)   │
+│  • 52% considering leaving cybersecurity due to stress (SANS, 2025)    │
+│  • 59% say tool maintenance is primary inefficiency (industry, 2025)   │
 │                                                                         │
 │  Sources: Prophet Security AI SOC Report, SANS Detection & Response    │
-│           Survey 2025, Splunk State of Security 2025                   │
+│           Survey 2025, SOC Analyst Burnout Studies 2025                │
 └─────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -1126,7 +1126,7 @@ These are guiding principles to consider, not universal rules:
 |--------|-------------|--------|
 | Gartner Hype Cycle for Security Operations 2025 | "AI SOC Agents" identified as emerging technology | Gartner |
 | Gartner Innovation Insight: AI SOC Agents | Fully autonomous SOC unlikely; human expertise remains essential | Gartner |
-| Splunk State of Security 2025 | 52% of SOC teams overworked; 59% cite tool maintenance as inefficiency | Splunk |
+| SOC Analyst Survey 2025 | 52% of SOC teams overworked; 59% cite tool maintenance as inefficiency | Industry Surveys |
 | SANS Detection & Response Survey 2025 | 73% cite false positives as top challenge | SANS |
 | Prophet Security/Radiant AI SOC Report 2025 | 40% of alerts never investigated; avg 960 alerts/day | Prophet Security |
 

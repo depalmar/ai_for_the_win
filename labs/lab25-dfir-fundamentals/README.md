@@ -495,7 +495,7 @@ Modern IR often involves cloud environments. Key artifacts:
 | **AWS** | VPC Flow Logs | Network traffic metadata |
 | **Azure** | Activity Log | Control plane operations |
 | **Azure** | Sign-in Logs | Authentication events |
-| **Azure** | Sentinel | SIEM alerts and incidents |
+| **Azure** | Monitor Logs | Application and security events |
 | **GCP** | Cloud Audit Logs | Admin activity, data access |
 | **GCP** | VPC Flow Logs | Network traffic |
 

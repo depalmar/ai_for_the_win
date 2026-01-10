@@ -2,7 +2,7 @@
 
 ## Overview
 
-Build AI-powered cloud security monitoring for AWS, Azure, and GCP using CloudTrail analysis, Sentinel integration, and multi-cloud threat detection.
+Build AI-powered cloud security monitoring for AWS, Azure, and GCP using CloudTrail analysis, Monitor integration, and multi-cloud threat detection.
 
 **Time:** 4-5 hours
 **Difficulty:** Expert
@@ -198,7 +198,7 @@ Focus on AWS-specific threats like:
 
 ---
 
-## Task 2: Azure Sentinel Integration
+## Task 2: Azure Monitor Integration
 
 ### AI-Enhanced Azure Security
 
@@ -207,7 +207,7 @@ from azure.identity import DefaultAzureCredential
 from azure.monitor.query import LogsQueryClient
 from datetime import timedelta
 
-class AzureSentinelAnalyzer:
+class AzureMonitorAnalyzer:
     def __init__(self, workspace_id: str):
         self.workspace_id = workspace_id
         self.credential = DefaultAzureCredential()
@@ -321,8 +321,8 @@ Consider Azure-specific threats:
 
         return response.content[0].text
 
-# Azure Sentinel analysis
-# azure_analyzer = AzureSentinelAnalyzer("your-workspace-id")
+# Azure Monitor analysis
+# azure_analyzer = AzureMonitorAnalyzer("your-workspace-id")
 # alerts = azure_analyzer.get_security_alerts()
 # signin_anomalies = azure_analyzer.get_signin_anomalies()
 # analysis = azure_analyzer.analyze_with_ai(alerts, signin_anomalies)
@@ -655,7 +655,7 @@ class CloudSecurityPipeline:
         self.multi_cloud = MultiCloudSecurityAnalyzer()
         # Initialize cloud-specific analyzers as needed
         # self.aws = AWSCloudTrailAnalyzer()
-        # self.azure = AzureSentinelAnalyzer(workspace_id)
+        # self.azure = AzureMonitorAnalyzer(workspace_id)
         # self.gcp = GCPSecurityAnalyzer(org_id)
 
     def run_full_analysis(self) -> dict:

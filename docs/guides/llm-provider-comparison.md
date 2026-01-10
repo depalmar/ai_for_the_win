@@ -106,7 +106,7 @@ START: What's your primary constraint?
 **Security Use Cases:**
 - Complex threat hunting queries
 - Multi-step incident analysis
-- Integration with existing tools (Splunk, etc.)
+- Integration with existing tools (Elasticsearch, etc.)
 - Automated reasoning chains
 
 ---

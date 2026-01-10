@@ -9,7 +9,7 @@
 |                                                                             |
 |   ┌─────────────┐    ┌─────────────┐    ┌─────────────┐                    |
 |   │     AWS     │    │    Azure    │    │     GCP     │                    |
-|   │ CloudTrail  │    │  Sentinel   │    │   SCC       │                    |
+|   │ CloudTrail  │    │  Monitor    │    │   SCC       │                    |
 |   │ GuardDuty   │    │  Defender   │    │   Chronicle │                    |
 |   └──────┬──────┘    └──────┬──────┘    └──────┬──────┘                    |
 |          |                  |                  |                            |
@@ -302,18 +302,18 @@ Respond in JSON format."""
 
 ## Part 2: Azure Security with AI
 
-### 2.1 Azure Sentinel Integration
+### 2.1 Azure Monitor Integration
 
 ```python
 """
-AI-powered Azure Sentinel analysis
+AI-powered Azure Monitor security log analysis
 """
 from azure.identity import DefaultAzureCredential
 from azure.monitor.query import LogsQueryClient
 from datetime import timedelta
 
-class AzureSentinelAnalyzer:
-    """Analyze Azure Sentinel incidents with AI"""
+class AzureMonitorAnalyzer:
+    """Analyze Azure Monitor security logs with AI"""
 
     def __init__(self, workspace_id: str):
         self.credential = DefaultAzureCredential()
@@ -366,9 +366,9 @@ class AzureSentinelAnalyzer:
         return self.query_security_events(query)
 
     def analyze_incident(self, incident: dict) -> dict:
-        """Analyze Sentinel incident with AI"""
+        """Analyze Azure Monitor security incident with AI"""
 
-        prompt = f"""Analyze this Azure Sentinel security incident.
+        prompt = f"""Analyze this Azure Monitor security incident.
 
 Incident:
 ```json
@@ -399,7 +399,7 @@ Respond in JSON format."""
     def generate_hunting_query(self, description: str) -> str:
         """Generate KQL hunting query from description"""
 
-        prompt = f"""Generate a KQL (Kusto Query Language) query for Azure Sentinel:
+        prompt = f"""Generate a KQL (Kusto Query Language) query for Azure Monitor:
 
 "{description}"
 
@@ -739,7 +739,7 @@ Automate CIS benchmark checks across all cloud providers.
 ## Resources
 
 - [AWS Security Hub](https://aws.amazon.com/security-hub/)
-- [Azure Sentinel](https://azure.microsoft.com/en-us/services/microsoft-sentinel/)
+- [Azure Monitor](https://azure.microsoft.com/en-us/products/monitor/)
 - [GCP Security Command Center](https://cloud.google.com/security-command-center)
 - [Cloud Security Alliance](https://cloudsecurityalliance.org/)
 

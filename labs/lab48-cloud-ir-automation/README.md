@@ -6,7 +6,7 @@ Build automated incident response workflows for cloud environments using infrast
 
 **Difficulty**: Advanced
 **Duration**: 120-150 minutes
-**Prerequisites**: Labs 19, 19b, 19c, understanding of IaC concepts
+**Prerequisites**: Labs 19, 46, 47, understanding of IaC concepts
 
 ## Learning Objectives
 

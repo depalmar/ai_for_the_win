@@ -238,7 +238,7 @@ gemini "Extract all IOCs (IPs, domains, hashes, emails) from this threat report"
 cat ttp_data.json | gemini "Map these behaviors to MITRE ATT&CK and suggest threat actor attribution"
 
 # Threat hunting queries
-gemini "Generate Splunk/Elastic queries to hunt for this technique: T1059.001"
+gemini "Generate Elasticsearch/Elastic queries to hunt for this technique: T1059.001"
 ```
 
 ### Incident Response

@@ -1,4 +1,4 @@
-"""Tests for Lab 06a: Embeddings & Vectors."""
+"""Tests for Lab 17: Embeddings & Vectors."""
 
 import sys
 from pathlib import Path
@@ -7,7 +7,7 @@ import pytest
 
 # Add labs to path
 sys.path.insert(
-    0, str(Path(__file__).parent.parent / "labs" / "lab06a-embeddings-vectors" / "solution")
+    0, str(Path(__file__).parent.parent / "labs" / "lab17-embeddings-vectors" / "solution")
 )
 
 

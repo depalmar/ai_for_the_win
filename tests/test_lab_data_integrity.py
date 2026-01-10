@@ -1559,6 +1559,428 @@ class TestLabCategoryConsistency:
         if errors:
             pytest.fail("docs/index.md has outdated lab numbering:\n" + "\n".join(errors))
 
+    def test_index_md_lab_card_display_numbers_match_folder(self):
+        """Verify docs/index.md lab card display numbers match actual lab folder numbers.
+
+        The Lab Navigator on GitHub Pages (docs/index.md) has lab cards that show
+        a display number (like 23, 24, 25) in the UI. This display number MUST
+        match the actual lab folder number in the href (lab23-*, lab24-*, etc.).
+
+        Old incorrect pattern: lab23-detection-pipeline showing display "09"
+        Correct pattern: lab23-detection-pipeline showing display "23"
+        """
+        index_md = REPO_ROOT / "docs" / "index.md"
+        if not index_md.exists():
+            pytest.skip("docs/index.md not found")
+
+        content = index_md.read_text(encoding="utf-8")
+
+        # Find the lab-grid section
+        if 'class="lab-grid"' not in content:
+            pytest.skip("No lab-grid found in docs/index.md")
+
+        errors = []
+
+        # Extract lab card info: href path and display number
+        # Pattern for lab card: <a href="...labs/labXX-..." class="lab-card"...>
+        #   followed by: <span class="lab-number ...">DISPLAY</span>
+        lab_card_pattern = re.compile(
+            r'<a href="[^"]*labs/lab(\d+)-[^"]*"[^>]*class="lab-card"[^>]*>.*?'
+            r'<span class="lab-number[^"]*">(\d+[a-z]?)</span>',
+            re.DOTALL,
+        )
+
+        matches = lab_card_pattern.findall(content)
+
+        if not matches:
+            pytest.skip("No lab cards found in docs/index.md")
+
+        for folder_num, display_num in matches:
+            folder_num_int = int(folder_num)
+            # Display number should match folder number (ignore letter suffixes like "b")
+            display_num_clean = display_num.rstrip("abcdefghijklmnopqrstuvwxyz")
+            try:
+                display_num_int = int(display_num_clean)
+            except ValueError:
+                errors.append(
+                    f"Lab card for lab{folder_num:0>2} has invalid display number: {display_num}"
+                )
+                continue
+
+            if folder_num_int != display_num_int:
+                errors.append(
+                    f"Lab card mismatch: lab{folder_num:0>2}-* folder shows display '{display_num}' "
+                    f"(should show '{folder_num_int}')"
+                )
+
+        if errors:
+            pytest.fail(
+                "docs/index.md lab cards have mismatched display numbers:\n"
+                + "\n".join(errors[:20])  # Limit to first 20 errors
+            )
+
+    def test_readme_lab_navigator_sequential_order(self):
+        """Verify README Lab Navigator displays labs in sequential order.
+
+        The Lab Navigator table should show labs 00, 01, 02, 03... in order,
+        not jumbled like 00, 01, 04, 02, 05... which is confusing for users.
+        """
+        readme = REPO_ROOT / "README.md"
+        if not readme.exists():
+            pytest.skip("README.md not found")
+
+        content = readme.read_text(encoding="utf-8")
+
+        # Find the Lab Navigator section
+        if "## Lab Navigator" not in content:
+            pytest.skip("No Lab Navigator section in README.md")
+
+        # Extract lab numbers from the table in order of appearance
+        # Pattern matches badge URLs like: /badge/00-Setup-555
+        navigator_section = content.split("## Lab Navigator")[1]
+        # Limit to just the table (ends at **Legend:** or </table>)
+        if "**Legend:**" in navigator_section:
+            navigator_section = navigator_section.split("**Legend:**")[0]
+
+        # Extract all lab numbers from badge URLs
+        lab_numbers = re.findall(r"/badge/(\d+)-", navigator_section)
+        lab_numbers = [int(n) for n in lab_numbers]
+
+        if not lab_numbers:
+            pytest.skip("No lab badges found in Lab Navigator")
+
+        # Check that labs appear in sequential order
+        errors = []
+        prev_num = -1
+        for i, num in enumerate(lab_numbers):
+            if num < prev_num:
+                errors.append(f"Lab {num:02d} appears after Lab {prev_num:02d} (position {i+1})")
+            prev_num = num
+
+        # Also check for non-sequential jumps (like going 00, 01, 04 instead of 00, 01, 02)
+        for i in range(1, len(lab_numbers)):
+            if lab_numbers[i] > lab_numbers[i - 1] + 1:
+                # Check if this is a category break (which is OK)
+                # Allow breaks at: 10, 14, 19, 25, 30, 36, 44
+                category_breaks = {10, 14, 19, 25, 30, 36, 44}
+                if lab_numbers[i] not in category_breaks:
+                    # Check if intermediate labs exist
+                    missing = []
+                    for n in range(lab_numbers[i - 1] + 1, lab_numbers[i]):
+                        lab_exists = any(
+                            d.name.startswith(f"lab{n:02d}")
+                            for d in LABS_DIR.iterdir()
+                            if d.is_dir()
+                        )
+                        if lab_exists:
+                            missing.append(n)
+                    if missing:
+                        errors.append(
+                            f"Lab Navigator skips labs {missing} between "
+                            f"{lab_numbers[i-1]:02d} and {lab_numbers[i]:02d}"
+                        )
+
+        if errors:
+            pytest.fail(
+                "README Lab Navigator is not in sequential order:\n" + "\n".join(errors[:10])
+            )
+
+    def test_readme_lab_navigator_legend_uses_correct_categories(self):
+        """Verify Lab Navigator legend uses correct category names."""
+        readme = REPO_ROOT / "README.md"
+        if not readme.exists():
+            pytest.skip("README.md not found")
+
+        content = readme.read_text(encoding="utf-8")
+
+        if "## Lab Navigator" not in content:
+            pytest.skip("No Lab Navigator section in README.md")
+
+        navigator_section = content.split("## Lab Navigator")[1].split("##")[0]
+
+        # Check for legend line
+        legend_match = re.search(r"\*\*Legend:\*\*.*", navigator_section)
+        if not legend_match:
+            pytest.skip("No Legend found in Lab Navigator")
+
+        legend = legend_match.group(0)
+
+        # Check for outdated category names
+        # Note: Escape parentheses in regex patterns to match literal text
+        outdated_terms = [
+            ("Expert DFIR", "Use 'DFIR' instead of 'Expert DFIR'"),
+            ("Expert AI", "Use 'Advanced Threats' or 'AI Security' instead"),
+            (r"Intro \(Free\)", "Use 'Foundation' with lab range"),
+            (r"White Intro", "Use 'Foundation (00-09)' instead of 'White Intro'"),
+        ]
+
+        errors = []
+        for term, suggestion in outdated_terms:
+            if re.search(term, legend, re.IGNORECASE):
+                errors.append(f"Legend uses outdated term '{term}': {suggestion}")
+
+        if errors:
+            pytest.fail("README Lab Navigator legend uses outdated terms:\n" + "\n".join(errors))
+
+
+class TestLegalCompliance:
+    """Ensure compliance with open-source tooling policy.
+
+    These tests enforce the open-source-first approach documented in LICENSE
+    to maintain platform independence and transparency.
+    """
+
+    def test_open_source_siem_policy_compliance(self):
+        """Verify documentation maintains open-source SIEM tool focus.
+
+        Per LICENSE: This project focuses on open-source security tooling
+        (Elasticsearch, OpenSearch) to ensure platform independence and
+        verifiable public sources.
+
+        Approved tools: Elasticsearch, OpenSearch
+        External references: Only if citing public documentation/blogs
+        """
+        # Proprietary SIEM platforms (maintain open-source focus)
+        proprietary_siems = [
+            (r"Splunk(?!\.com/en_us/blog)", "Splunk"),  # Allow blog URLs
+            (r"(?:Microsoft\s+)?Sentinel(?!\s+KQL)", "Microsoft Sentinel"),  # KQL is OK
+            (r"Azure\s+Sentinel", "Azure Sentinel"),
+            (r"IBM\s+QRadar", "IBM QRadar"),
+            (r"QRadar", "QRadar"),
+        ]
+
+        # Files to check (documentation and code)
+        # Note: CLAUDE.md is excluded as it documents the policy itself
+        files_to_check = [
+            REPO_ROOT / "README.md",
+            REPO_ROOT / "labs" / "README.md",
+            REPO_ROOT / "docs" / "index.md",
+        ]
+
+        # Also check all lab READMEs
+        if LABS_DIR.exists():
+            files_to_check.extend(LABS_DIR.glob("*/README.md"))
+
+        # Also check walkthroughs and guides
+        walkthroughs_dir = REPO_ROOT / "docs" / "walkthroughs"
+        if walkthroughs_dir.exists():
+            files_to_check.extend(walkthroughs_dir.glob("*.md"))
+
+        guides_dir = REPO_ROOT / "docs" / "guides"
+        if guides_dir.exists():
+            files_to_check.extend(guides_dir.glob("*.md"))
+
+        errors = []
+
+        for file_path in files_to_check:
+            if not file_path.exists():
+                continue
+
+            content = file_path.read_text(encoding="utf-8")
+            rel_path = file_path.relative_to(REPO_ROOT)
+
+            for pattern, name in proprietary_siems:
+                matches = list(re.finditer(pattern, content, re.IGNORECASE))
+                if matches:
+                    for match in matches[:3]:  # Limit to first 3 per file
+                        line_num = content[: match.start()].count("\n") + 1
+                        errors.append(
+                            f"{rel_path}:{line_num} - Found '{name}' "
+                            f"(policy: use Elasticsearch/OpenSearch)"
+                        )
+
+        if errors:
+            pytest.fail(
+                "Documentation contains proprietary SIEM references (open-source policy):\n"
+                + "\n".join(errors[:20])  # Limit to first 20 errors
+                + "\n\nPer LICENSE: This project maintains open-source tool focus."
+            )
+
+    def test_open_source_edr_policy_compliance(self):
+        """Verify documentation maintains open-source EDR tool focus.
+
+        Per LICENSE: This project uses open-source endpoint security tools
+        to ensure platform independence and verifiable public sources.
+
+        Approved tools: Wazuh, OSSEC
+        External references: Only if citing public documentation/blogs
+        """
+        # Proprietary EDR/XDR platforms (maintain open-source focus)
+        proprietary_edrs = [
+            (r"CrowdStrike", "CrowdStrike"),
+            (r"Cortex\s+XDR", "Cortex XDR"),
+            (r"XSIAM", "XSIAM"),
+            (r"Palo\s+Alto(?:\s+Networks)?(?:\s+XDR)?", "Palo Alto Networks"),
+            (r"Carbon\s+Black", "Carbon Black"),
+            (r"SentinelOne", "SentinelOne"),
+            (r"Microsoft\s+Defender(?:\s+for\s+Endpoint)?", "Microsoft Defender"),
+            (r"Defender\s+for\s+Endpoint", "Defender for Endpoint"),
+        ]
+
+        # Files to check
+        # Note: CLAUDE.md is excluded as it documents the policy itself
+        files_to_check = [
+            REPO_ROOT / "README.md",
+            REPO_ROOT / "labs" / "README.md",
+            REPO_ROOT / "docs" / "index.md",
+            REPO_ROOT / "docs" / "SOURCES.md",
+        ]
+
+        # Also check all lab READMEs
+        if LABS_DIR.exists():
+            files_to_check.extend(LABS_DIR.glob("*/README.md"))
+
+        # Also check walkthroughs and guides
+        walkthroughs_dir = REPO_ROOT / "docs" / "walkthroughs"
+        if walkthroughs_dir.exists():
+            files_to_check.extend(walkthroughs_dir.glob("*.md"))
+
+        guides_dir = REPO_ROOT / "docs" / "guides"
+        if guides_dir.exists():
+            files_to_check.extend(guides_dir.glob("*.md"))
+
+        errors = []
+
+        for file_path in files_to_check:
+            if not file_path.exists():
+                continue
+
+            content = file_path.read_text(encoding="utf-8")
+            rel_path = file_path.relative_to(REPO_ROOT)
+
+            for pattern, name in proprietary_edrs:
+                matches = list(re.finditer(pattern, content, re.IGNORECASE))
+                if matches:
+                    for match in matches[:3]:  # Limit to first 3 per file
+                        line_num = content[: match.start()].count("\n") + 1
+                        errors.append(
+                            f"{rel_path}:{line_num} - Found '{name}' " f"(policy: use Wazuh/OSSEC)"
+                        )
+
+        if errors:
+            pytest.fail(
+                "Documentation contains proprietary EDR references (open-source policy):\n"
+                + "\n".join(errors[:20])  # Limit to first 20 errors
+                + "\n\nPer LICENSE: This project maintains open-source tool focus."
+            )
+
+    def test_open_source_query_language_compliance(self):
+        """Verify code uses open-source query languages.
+
+        Per LICENSE: This project uses open-source query languages to ensure
+        platform independence and public verifiability.
+
+        Approved: EQL (Elasticsearch), ES|QL, KQL (Kibana), Sigma
+        """
+        # Proprietary query languages
+        proprietary_languages = [
+            (r"SPL\s+query", "SPL (Splunk Processing Language)"),
+            (r"Splunk\s+query", "Splunk query language"),
+            (r"XQL\s+query", "XQL (Cortex XDR Query Language)"),
+            (r"XQL\s+detection", "XQL detection"),
+            (r"xql_query", "XQL query variable"),
+        ]
+
+        # Check lab solution and starter code
+        files_to_check = []
+        if LABS_DIR.exists():
+            files_to_check.extend(LABS_DIR.glob("*/solution/*.py"))
+            files_to_check.extend(LABS_DIR.glob("*/starter/*.py"))
+            files_to_check.extend(LABS_DIR.glob("*/README.md"))
+
+        errors = []
+
+        for file_path in files_to_check:
+            if not file_path.exists():
+                continue
+
+            content = file_path.read_text(encoding="utf-8")
+            rel_path = file_path.relative_to(REPO_ROOT)
+
+            for pattern, name in proprietary_languages:
+                matches = list(re.finditer(pattern, content, re.IGNORECASE))
+                if matches:
+                    for match in matches[:3]:  # Limit to first 3 per file
+                        line_num = content[: match.start()].count("\n") + 1
+                        errors.append(
+                            f"{rel_path}:{line_num} - Found '{name}' " f"(policy: use EQL/ES|QL)"
+                        )
+
+        if errors:
+            pytest.fail(
+                "Code contains proprietary query languages (open-source policy):\n"
+                + "\n".join(errors[:20])  # Limit to first 20 errors
+                + "\n\nPer LICENSE: This project uses open-source query languages."
+            )
+
+    def test_sources_md_exists_and_valid(self):
+        """Verify SOURCES.md exists and documents open-source tooling.
+
+        Per LICENSE: All external sources must be documented in SOURCES.md
+        with public documentation links.
+        """
+        sources_md = REPO_ROOT / "docs" / "SOURCES.md"
+
+        assert sources_md.exists(), "docs/SOURCES.md is missing (required by LICENSE disclaimer)"
+
+        content = sources_md.read_text(encoding="utf-8")
+
+        # Verify key sections exist
+        required_sections = [
+            "Open-Source Security Tools",
+            "Elasticsearch",
+            "OpenSearch",
+            "Sigma",
+            "YARA",
+            "MITRE ATT&CK",
+            "publicly available",
+        ]
+
+        missing = []
+        for section in required_sections:
+            if section not in content:
+                missing.append(section)
+
+        if missing:
+            pytest.fail(
+                f"docs/SOURCES.md is missing required sections: {', '.join(missing)}\n"
+                "See LICENSE for source documentation requirements."
+            )
+
+    def test_license_has_employment_disclaimer(self):
+        """Verify LICENSE contains Employment and IP Disclaimer section.
+
+        This is critical legal protection for independent work.
+        """
+        license_file = REPO_ROOT / "LICENSE"
+
+        assert license_file.exists(), "LICENSE file is missing"
+
+        content = license_file.read_text(encoding="utf-8")
+
+        # Verify critical sections exist
+        required_sections = [
+            "Employment and Intellectual Property Disclaimer",
+            "created entirely on personal time",
+            "publicly available information",
+            "Source Material Declaration",
+            "Explicit Exclusions",
+            "California Labor Code Section 2870",
+            "Independent Work Certification",
+        ]
+
+        missing = []
+        for section in required_sections:
+            if section not in content:
+                missing.append(section)
+
+        if missing:
+            pytest.fail(
+                "LICENSE is missing required employment protection sections:\n"
+                + "\n".join(f"  - {s}" for s in missing)
+                + "\n\nThese sections are required for legal protection."
+            )
+
 
 if __name__ == "__main__":
     pytest.main([__file__, "-v"])

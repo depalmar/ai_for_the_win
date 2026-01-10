@@ -157,15 +157,15 @@ High Confidence: FIN7/Carbanak
 <tr>
 <td align="center"><a href="./labs/lab00-environment-setup/"><img src="https://img.shields.io/badge/00-Setup-555?style=for-the-badge" alt="Lab 00"/></a></td>
 <td align="center"><a href="./labs/lab01-python-security-fundamentals/"><img src="https://img.shields.io/badge/01-Python-555?style=for-the-badge" alt="Lab 01"/></a></td>
-<td align="center"><a href="./labs/lab04-ml-concepts-primer/"><img src="https://img.shields.io/badge/04-ML_Intro-555?style=for-the-badge" alt="Lab 04"/></a></td>
 <td align="center"><a href="./labs/lab02-intro-prompt-engineering/"><img src="https://img.shields.io/badge/02-Prompts-555?style=for-the-badge" alt="Lab 02"/></a></td>
-<td align="center"><a href="./labs/lab05-ai-in-security-operations/"><img src="https://img.shields.io/badge/05-AI_SOC-555?style=for-the-badge" alt="Lab 05"/></a></td>
+<td align="center"><a href="./labs/lab03-vibe-coding-with-ai/"><img src="https://img.shields.io/badge/03-Vibe_Code-555?style=for-the-badge" alt="Lab 03"/></a></td>
+<td align="center"><a href="./labs/lab04-ml-concepts-primer/"><img src="https://img.shields.io/badge/04-ML_Intro-555?style=for-the-badge" alt="Lab 04"/></a></td>
 </tr>
 <tr>
+<td align="center"><a href="./labs/lab05-ai-in-security-operations/"><img src="https://img.shields.io/badge/05-AI_SOC-555?style=for-the-badge" alt="Lab 05"/></a></td>
 <td align="center"><a href="./labs/lab06-visualization-stats/"><img src="https://img.shields.io/badge/06-Stats-555?style=for-the-badge" alt="Lab 06"/></a></td>
 <td align="center"><a href="./labs/lab07-hello-world-ml/"><img src="https://img.shields.io/badge/07-Hello_ML-555?style=for-the-badge" alt="Lab 07"/></a></td>
 <td align="center"><a href="./labs/lab08-working-with-apis/"><img src="https://img.shields.io/badge/08-APIs-555?style=for-the-badge" alt="Lab 08"/></a></td>
-<td align="center"><a href="./labs/lab03-vibe-coding-with-ai/"><img src="https://img.shields.io/badge/03-Vibe_Code-555?style=for-the-badge" alt="Lab 03"/></a></td>
 <td align="center"><a href="./labs/lab09-ctf-fundamentals/"><img src="https://img.shields.io/badge/09-CTF_Fund-555?style=for-the-badge" alt="Lab 09"/></a></td>
 </tr>
 <tr>
@@ -173,28 +173,28 @@ High Confidence: FIN7/Carbanak
 <td align="center"><a href="./labs/lab11-malware-clustering/"><img src="https://img.shields.io/badge/11-Malware-10b981?style=for-the-badge" alt="Lab 11"/></a></td>
 <td align="center"><a href="./labs/lab12-anomaly-detection/"><img src="https://img.shields.io/badge/12-Anomaly-10b981?style=for-the-badge" alt="Lab 12"/></a></td>
 <td align="center"><a href="./labs/lab13-ml-vs-llm/"><img src="https://img.shields.io/badge/13-ML_vs_LLM-10b981?style=for-the-badge" alt="Lab 13"/></a></td>
-<td align="center"><a href="./labs/lab15-llm-log-analysis/"><img src="https://img.shields.io/badge/15-Logs-6366f1?style=for-the-badge" alt="Lab 15"/></a></td>
+<td align="center"><a href="./labs/lab14-first-ai-agent/"><img src="https://img.shields.io/badge/14-Agent-6366f1?style=for-the-badge" alt="Lab 14"/></a></td>
 </tr>
 <tr>
-<td align="center"><a href="./labs/lab14-first-ai-agent/"><img src="https://img.shields.io/badge/14-Agent-6366f1?style=for-the-badge" alt="Lab 14"/></a></td>
+<td align="center"><a href="./labs/lab15-llm-log-analysis/"><img src="https://img.shields.io/badge/15-Logs-6366f1?style=for-the-badge" alt="Lab 15"/></a></td>
 <td align="center"><a href="./labs/lab16-threat-intel-agent/"><img src="https://img.shields.io/badge/16-Intel-6366f1?style=for-the-badge" alt="Lab 16"/></a></td>
 <td align="center"><a href="./labs/lab17-embeddings-vectors/"><img src="https://img.shields.io/badge/17-Vectors-6366f1?style=for-the-badge" alt="Lab 17"/></a></td>
 <td align="center"><a href="./labs/lab18-security-rag/"><img src="https://img.shields.io/badge/18-RAG-6366f1?style=for-the-badge" alt="Lab 18"/></a></td>
-<td align="center"><a href="./labs/lab19-binary-basics/"><img src="https://img.shields.io/badge/19-Binary-6366f1?style=for-the-badge" alt="Lab 19"/></a></td>
+<td align="center"><a href="./labs/lab19-binary-basics/"><img src="https://img.shields.io/badge/19-Binary-f59e0b?style=for-the-badge" alt="Lab 19"/></a></td>
 </tr>
 <tr>
-<td align="center"><a href="./labs/lab21-yara-generator/"><img src="https://img.shields.io/badge/21-YARA-6366f1?style=for-the-badge" alt="Lab 21"/></a></td>
-<td align="center"><a href="./labs/lab20-sigma-fundamentals/"><img src="https://img.shields.io/badge/20-Sigma-6366f1?style=for-the-badge" alt="Lab 20"/></a></td>
+<td align="center"><a href="./labs/lab20-sigma-fundamentals/"><img src="https://img.shields.io/badge/20-Sigma-f59e0b?style=for-the-badge" alt="Lab 20"/></a></td>
+<td align="center"><a href="./labs/lab21-yara-generator/"><img src="https://img.shields.io/badge/21-YARA-f59e0b?style=for-the-badge" alt="Lab 21"/></a></td>
 <td align="center"><a href="./labs/lab22-vuln-scanner-ai/"><img src="https://img.shields.io/badge/22-Vuln-f59e0b?style=for-the-badge" alt="Lab 22"/></a></td>
 <td align="center"><a href="./labs/lab23-detection-pipeline/"><img src="https://img.shields.io/badge/23-Pipeline-f59e0b?style=for-the-badge" alt="Lab 23"/></a></td>
 <td align="center"><a href="./labs/lab24-monitoring-ai-systems/"><img src="https://img.shields.io/badge/24-Monitor-f59e0b?style=for-the-badge" alt="Lab 24"/></a></td>
 </tr>
 <tr>
 <td align="center"><a href="./labs/lab25-dfir-fundamentals/"><img src="https://img.shields.io/badge/25-DFIR-f59e0b?style=for-the-badge" alt="Lab 25"/></a></td>
-<td align="center"><a href="./labs/lab29-ir-copilot/"><img src="https://img.shields.io/badge/29-IR_Bot-f59e0b?style=for-the-badge" alt="Lab 29"/></a></td>
 <td align="center"><a href="./labs/lab26-windows-event-log-analysis/"><img src="https://img.shields.io/badge/26-WinLogs-f59e0b?style=for-the-badge" alt="Lab 26"/></a></td>
 <td align="center"><a href="./labs/lab27-windows-registry-forensics/"><img src="https://img.shields.io/badge/27-Registry-f59e0b?style=for-the-badge" alt="Lab 27"/></a></td>
 <td align="center"><a href="./labs/lab28-live-response/"><img src="https://img.shields.io/badge/28-LiveIR-f59e0b?style=for-the-badge" alt="Lab 28"/></a></td>
+<td align="center"><a href="./labs/lab29-ir-copilot/"><img src="https://img.shields.io/badge/29-IR_Bot-f59e0b?style=for-the-badge" alt="Lab 29"/></a></td>
 </tr>
 <tr>
 <td align="center"><a href="./labs/lab30-ransomware-fundamentals/"><img src="https://img.shields.io/badge/30-Ransom_Fund-ef4444?style=for-the-badge" alt="Lab 30"/></a></td>
@@ -233,7 +233,7 @@ High Confidence: FIN7/Carbanak
 </tr>
 </table>
 
-**Legend:** White Intro (Free) - Green ML (Free) - Purple LLM - Orange Advanced - Red Expert DFIR
+**Legend:** Grey Foundation (00-09, Free) | Green ML Foundations (10-13, Free) | Purple LLM Basics (14-18) | Orange Detection/DFIR (19-29) | Red Advanced/Cloud (30-50)
 
 <details>
 <summary><strong>Detailed Lab Descriptions</strong></summary>
@@ -345,7 +345,26 @@ Each includes starter code, requirements, and evaluation criteria. See [`capston
 | **Docker** | Optional | For containerized labs |
 | **API Key** | Labs 14+ only | Free tiers available |
 
-### Installation
+### Option 1: Docker (Easiest!)
+
+One-command setup with all services pre-configured:
+
+```bash
+git clone https://github.com/depalmar/ai_for_the_win.git
+cd ai_for_the_win/docker
+docker compose up -d
+
+# Access services:
+# - Jupyter Lab: http://localhost:8888 (token: aiforthewin)
+# - Kibana: http://localhost:5601
+# - MinIO: http://localhost:9001 (minioadmin/minioadmin)
+```
+
+Includes: Jupyter Lab, Elasticsearch, Kibana, PostgreSQL, Redis, MinIO, Ollama (local LLMs), ChromaDB (vectors).
+
+See [`docker/README.md`](./docker/README.md) for full details.
+
+### Option 2: Local Python Installation
 
 ```bash
 # 1. Clone the repository
@@ -385,24 +404,6 @@ python scripts/verify_setup.py
 | `VIRUSTOTAL_API_KEY` | VirusTotal | Optional |
 
 > You only need ONE LLM provider. All labs support multiple providers.
-
-### Docker Lab Environment (New!)
-
-One-command setup with all services pre-configured:
-
-```bash
-cd docker
-docker compose up -d
-
-# Access services:
-# - Jupyter Lab: http://localhost:8888 (token: aiforthewin)
-# - Kibana: http://localhost:5601
-# - MinIO: http://localhost:9001 (minioadmin/minioadmin)
-```
-
-Includes: Jupyter Lab, Elasticsearch, Kibana, PostgreSQL, Redis, MinIO, Ollama (local LLMs), ChromaDB (vectors).
-
-See [`docker/README.md`](./docker/README.md) for full details.
 
 ### Running Tests
 
