@@ -25,9 +25,7 @@ jobs:
         with:
           # Fail on high and critical vulnerabilities
           fail-on-severity: high
-          # Also check for license issues
+          # Block copyleft licenses that would require open-sourcing derivative works
           deny-licenses: GPL-3.0, AGPL-3.0
           # Comment on PR with results
           comment-summary-in-pr: always
-          # Allow some licenses commonly used in security tools
-          allow-licenses: MIT, Apache-2.0, BSD-2-Clause, BSD-3-Clause, ISC, CC-BY-4.0, CC-BY-NC-SA-4.0, CC0-1.0, Unlicense, WTFPL
