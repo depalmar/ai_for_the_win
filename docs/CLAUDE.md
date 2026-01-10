@@ -95,6 +95,66 @@ All LLM labs support multiple providers via environment variables:
 - Type hints for function parameters and returns
 - PEP 8 style guidelines
 
+## Pre-Commit Workflow
+
+**CRITICAL: Always run formatting and lint checks BEFORE committing**
+
+This project uses pre-commit hooks that will block commits with formatting/lint issues. To avoid CI failures:
+
+### Required Checks Before Every Commit
+
+```bash
+# 1. Format Python code with Black
+black tests/ labs/ scripts/ --check
+
+# 2. Sort imports with isort
+isort tests/ labs/ scripts/ --check-only
+
+# 3. Check for linting issues with flake8
+# (Note: flake8 may not be installed in all environments, pre-commit will run it)
+
+# 4. Run pre-commit hooks manually (recommended)
+git add <files>
+# Pre-commit hooks run automatically on git commit
+# If hooks fail, they will block the commit and show errors
+```
+
+### Auto-Fixing Format Issues
+
+If checks fail, auto-fix them:
+
+```bash
+# Auto-format with Black
+black tests/ labs/ scripts/
+
+# Auto-sort imports
+isort tests/ labs/ scripts/
+
+# Re-stage fixed files
+git add <files>
+
+# Commit (hooks will re-run)
+git commit -m "your message"
+```
+
+### Common Lint Errors to Avoid
+
+- **F541**: f-string without placeholders - remove `f` prefix from strings like `f"text"` → `"text"`
+- **E501**: Line too long - keep lines under 100 characters
+- **F401**: Unused imports - remove unused imports
+- **E302/E305**: Expected blank lines - follow PEP 8 spacing
+
+### Claude Code Instructions
+
+When making code changes:
+
+1. **BEFORE committing**: Run `black <file>` on all modified Python files
+2. **BEFORE committing**: Check for obvious lint issues (unused f-strings, long lines)
+3. **When commit fails**: Read the pre-commit hook error output carefully
+4. **Auto-fix**: Use `black` and `isort` to auto-fix formatting
+5. **Manual fix**: Address flake8 errors that can't be auto-fixed (F541, F401, etc.)
+6. **Never skip hooks**: Do not use `git commit --no-verify` unless explicitly requested
+
 ## Test Markers
 
 ```bash
