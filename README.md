@@ -129,9 +129,16 @@ High Confidence: FIN7/Carbanak
 
 **No installation needed** -- click and run in your browser:
 
-[![Open Lab 10 in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab10_phishing_classifier.ipynb) <- ML basics (no API key)
+**Beginner (No API key):**
+[![Open Lab 02 in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab02_prompt_engineering.ipynb) Prompt Engineering basics
 
-[![Open Lab 35 in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab15_llm_log_analysis.ipynb) <- LLM-powered (needs API key)
+[![Open Lab 07 in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab07_hello_world_ml.ipynb) Your first ML model
+
+**Intermediate (No API key):**
+[![Open Lab 10 in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab10_phishing_classifier.ipynb) ML phishing detection
+
+**Advanced (API key required):**
+[![Open Lab 15 in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab15_llm_log_analysis.ipynb) LLM-powered log analysis
 
 > All 50+ notebooks are in [`notebooks/`](./notebooks/) -- open any `.ipynb` in Colab
 
@@ -141,6 +148,7 @@ High Confidence: FIN7/Carbanak
 
 | Your Background | Start Here | Next Steps |
 |-----------------|------------|------------|
+| **Completely new to AI?** | [Lab 02: Prompt Engineering](./labs/lab02-intro-prompt-engineering/) | -> Lab 07 -> Lab 10 |
 | **New to AI/ML?** | [Lab 10: Phishing Classifier](./labs/lab10-phishing-classifier/) | -> Lab 11 -> Lab 12 |
 | **Know Python, want LLM tools?** | [Lab 15: LLM Log Analysis](./labs/lab15-llm-log-analysis/) | -> Lab 16 -> Lab 18 |
 | **Want DFIR focus?** | [Lab 31: Ransomware Detection](./labs/lab31-ransomware-detection/) | -> Lab 33 -> Lab 34 |
