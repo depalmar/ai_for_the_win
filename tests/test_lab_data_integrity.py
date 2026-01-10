@@ -1534,6 +1534,31 @@ class TestLabCategoryConsistency:
         if errors:
             pytest.fail("ARCHITECTURE.md has outdated lab counts:\n" + "\n".join(errors))
 
+    def test_index_md_lab_numbering(self):
+        """Verify docs/index.md uses correct lab numbering (GitHub Pages site)."""
+        index_md = REPO_ROOT / "docs" / "index.md"
+        if not index_md.exists():
+            pytest.skip("docs/index.md not found")
+
+        content = index_md.read_text(encoding="utf-8")
+
+        # Known incorrect patterns that indicate old lab numbering
+        # Old scheme: Labs 01-03 (ML), Labs 04-07 (LLM)
+        # New scheme: Labs 00-13 (Foundation+ML no API), Labs 14+ (LLM API required)
+        incorrect_patterns = [
+            (r"Labs 01-0[23]", "Labs 01-03 should be Labs 00-13 or Labs 10-13"),
+            (r"Labs 04-0[567]", "Labs 04-07 should be Labs 14-18"),
+            (r"Labs 08-10", "Labs 08-10 should be Labs 19-24"),
+        ]
+
+        errors = []
+        for pattern, message in incorrect_patterns:
+            if re.search(pattern, content):
+                errors.append(f"docs/index.md: {message}")
+
+        if errors:
+            pytest.fail("docs/index.md has outdated lab numbering:\n" + "\n".join(errors))
+
 
 if __name__ == "__main__":
     pytest.main([__file__, "-v"])
