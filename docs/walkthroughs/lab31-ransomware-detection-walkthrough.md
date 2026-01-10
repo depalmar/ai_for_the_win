@@ -426,7 +426,7 @@ class RansomwareResponder:
             return True
 
         # In production, call EDR API
-        # Example: CrowdStrike, Carbon Black, SentinelOne
+        # Example: Wazuh, Wazuh, MonitorOne
         self.log_action('network_isolation', hostname, 'REQUIRES_EDR_API')
         return False
 

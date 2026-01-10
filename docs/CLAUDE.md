@@ -103,6 +103,62 @@ pytest -m "not integration"    # Skip integration tests
 pytest -m "not requires_api"   # Skip tests requiring API keys
 ```
 
+## Legal Compliance Testing
+
+**CRITICAL: Run legal compliance tests before any PR merge**
+
+```bash
+# Run all legal compliance tests
+pytest tests/test_lab_data_integrity.py::TestLegalCompliance -v
+
+# Specific compliance checks
+pytest tests/test_lab_data_integrity.py::TestLegalCompliance::test_no_competitor_siem_references_in_documentation -v
+pytest tests/test_lab_data_integrity.py::TestLegalCompliance::test_no_competitor_edr_xdr_references_in_documentation -v
+pytest tests/test_lab_data_integrity.py::TestLegalCompliance::test_no_proprietary_query_languages_in_code -v
+pytest tests/test_lab_data_integrity.py::TestLegalCompliance::test_sources_md_exists_and_valid -v
+pytest tests/test_lab_data_integrity.py::TestLegalCompliance::test_license_has_employment_disclaimer -v
+```
+
+These tests enforce the open-source-first policy documented in LICENSE:
+- **No competitor SIEM references**: Splunk, Microsoft Sentinel, Azure Sentinel, IBM QRadar
+- **No competitor EDR/XDR references**: CrowdStrike, Cortex XDR, XSIAM, Palo Alto, Carbon Black, SentinelOne, Microsoft Defender
+- **No proprietary query languages**: SPL, XQL (use EQL/ES|QL instead)
+- **Required files exist**: LICENSE with employment disclaimer, docs/SOURCES.md
+
+**Approved open-source alternatives:**
+- **SIEM**: Elasticsearch, OpenSearch
+- **EDR**: Wazuh, OSSEC
+- **SOAR**: Shuffle, TheHive, Tines
+- **Query Languages**: EQL, ES|QL, KQL (Kibana), Sigma
+
+### Adding New Platform References
+
+Before adding ANY security platform content:
+
+1. **Verify it's open-source** or based on publicly available documentation only
+2. **Run legal compliance tests** to ensure no violations
+3. **Update docs/SOURCES.md** with public documentation URL
+4. **Get approval** if adding commercial platform (even with public docs)
+5. **Commit changes** only after all tests pass
+
+Example workflow:
+```bash
+# 1. Make your changes
+vim labs/labXX-example/README.md
+
+# 2. Run legal compliance tests
+pytest tests/test_lab_data_integrity.py::TestLegalCompliance -v
+
+# 3. If test fails, fix violations
+# Replace competitor references with open-source alternatives
+
+# 4. Re-run tests until they pass
+pytest tests/test_lab_data_integrity.py::TestLegalCompliance -v
+
+# 5. Only then commit
+git add . && git commit -m "Add feature (legal compliance verified)"
+```
+
 ## Important Directories
 
 - `labs/` - 50+ hands-on labs with starter/solution code

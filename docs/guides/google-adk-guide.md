@@ -478,18 +478,18 @@ yara_tool = FunctionTool(
 ```python
 from google.adk.tools import FunctionTool
 
-def convert_sigma_rule(sigma_yaml: str, target: str = "splunk") -> dict:
+def convert_sigma_rule(sigma_yaml: str, target: str = "elasticsearch") -> dict:
     """Convert Sigma rule to target SIEM format."""
     try:
         from sigma.rule import SigmaRule
-        from sigma.backends.splunk import SplunkBackend
+        from sigma.backends.elasticsearch import ElasticsearchBackend
         from sigma.backends.elasticsearch import ElasticsearchBackend
         from sigma.pipelines.sysmon import sysmon_pipeline
 
         rule = SigmaRule.from_yaml(sigma_yaml)
 
-        if target == "splunk":
-            backend = SplunkBackend(pipeline=sysmon_pipeline())
+        if target == "elasticsearch":
+            backend = ElasticsearchBackend(pipeline=sysmon_pipeline())
         elif target == "elasticsearch":
             backend = ElasticsearchBackend(pipeline=sysmon_pipeline())
         else:
@@ -507,7 +507,7 @@ def convert_sigma_rule(sigma_yaml: str, target: str = "splunk") -> dict:
 
 sigma_tool = FunctionTool(
     function=convert_sigma_rule,
-    description="Convert Sigma detection rules to SIEM query formats (Splunk, Elasticsearch)"
+    description="Convert Sigma detection rules to SIEM query formats (Elasticsearch, Elasticsearch)"
 )
 ```
 
@@ -657,7 +657,7 @@ from google.adk.memory import ConversationMemory
 # SOC tools
 def query_siem(query: str, time_range: str = "24h") -> dict:
     """Query SIEM for security events."""
-    # Implementation - connect to Splunk/Elastic/etc.
+    # Implementation - connect to Elasticsearch/Elastic/etc.
     return {"results": [], "count": 0}
 
 def create_ticket(title: str, severity: str, description: str) -> dict:

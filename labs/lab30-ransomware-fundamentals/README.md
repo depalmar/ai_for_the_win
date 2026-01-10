@@ -513,8 +513,8 @@ lab30-ransomware-fundamentals/
 - [Mandiant Ransomware Reports](https://www.mandiant.com/)
 - [Microsoft Threat Intelligence](https://www.microsoft.com/en-us/security/blog/)
 - [Cisco Talos](https://blog.talosintelligence.com/)
-- [CrowdStrike Adversary Reports](https://www.crowdstrike.com/)
-- [Unit 42 Ransomware Threat Reports](https://unit42.paloaltonetworks.com/category/ransomware/)
+- [CISA Ransomware Guides](https://www.cisa.gov/stopransomware)
+- [MITRE ATT&CK - Ransomware](https://attack.mitre.org/)
 
 ### SANS Resources
 

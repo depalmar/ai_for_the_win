@@ -1590,7 +1590,7 @@ class AIIncidentResponder:
 
     def _log_incident(self, incident: AISecurityIncident):
         """Log incident to SIEM."""
-        # Implementation: Send to Splunk, Elastic, etc.
+        # Implementation: Send to Elasticsearch, Elastic, etc.
         pass
 
     def _block_session(self, session_id: str):

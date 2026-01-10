@@ -21,6 +21,16 @@ This document lists all external sources, tools, frameworks, and documentation u
   - [OpenSearch Documentation](https://opensearch.org/docs/latest/)
   - License: Apache 2.0
 
+### Endpoint Detection and Response (EDR)
+
+- **[Wazuh](https://github.com/wazuh/wazuh)** - Open-source security platform for threat detection, incident response
+  - [Wazuh Documentation](https://documentation.wazuh.com/)
+  - License: GPL-2.0
+
+- **[OSSEC](https://github.com/ossec/ossec-hids)** - Host-based intrusion detection system
+  - [OSSEC Documentation](https://www.ossec.net/docs/)
+  - License: GPL-2.0
+
 ### Detection Engineering
 
 - **[Sigma](https://github.com/SigmaHQ/sigma)** - Generic signature format for SIEM systems
@@ -30,6 +40,16 @@ This document lists all external sources, tools, frameworks, and documentation u
 - **[YARA](https://github.com/VirusTotal/yara)** - Pattern matching tool for malware research
   - [YARA Documentation](https://yara.readthedocs.io/)
   - License: BSD-3-Clause
+
+### Security Orchestration, Automation and Response (SOAR)
+
+- **[Shuffle](https://github.com/Shuffle/Shuffle)** - Open-source SOAR platform
+  - [Shuffle Documentation](https://shuffler.io/docs/)
+  - License: AGPL-3.0
+
+- **[TheHive](https://github.com/TheHive-Project/TheHive)** - Scalable security incident response platform
+  - [TheHive Documentation](https://docs.thehive-project.org/)
+  - License: AGPL-3.0
 
 ### Threat Intelligence and Frameworks
 

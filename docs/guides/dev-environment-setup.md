@@ -450,7 +450,7 @@ for match in matches:
 git clone https://github.com/SigmaHQ/sigma.git
 
 # Install pySigma
-pip install pysigma pysigma-backend-elasticsearch pysigma-backend-splunk
+pip install pysigma pysigma-backend-elasticsearch pysigma-backend-elasticsearch
 ```
 
 ### MISP

@@ -333,8 +333,8 @@ class CloudTrailAnalyzer:
         return threats
 
 
-class AzureSentinelAnalyzer:
-    """Analyze Azure Sentinel incidents and logs."""
+class AzureMonitorAnalyzer:
+    """Analyze Azure Monitor incidents and logs."""
 
     HIGH_RISK_OPERATIONS = [
         "Microsoft.Authorization/roleAssignments/write",
@@ -354,7 +354,7 @@ class AzureSentinelAnalyzer:
         return f"AZR-{self._threat_counter:04d}"
 
     def parse_incident(self, raw_incident: dict) -> dict:
-        """Parse Azure Sentinel incident."""
+        """Parse Azure Monitor incident."""
         return {
             "id": raw_incident.get("name", raw_incident.get("id", "")),
             "title": raw_incident.get("properties", {}).get("title", ""),
@@ -366,7 +366,7 @@ class AzureSentinelAnalyzer:
         }
 
     def load_incidents(self, incidents: List[dict]):
-        """Load Azure Sentinel incidents."""
+        """Load Azure Monitor incidents."""
         for raw in incidents:
             self.incidents.append(self.parse_incident(raw))
         print(f"  Loaded {len(self.incidents)} Azure incidents")
@@ -391,7 +391,7 @@ class AzureSentinelAnalyzer:
                         cloud_provider="azure",
                         threat_type="Identity - Impossible Travel",
                         severity=incident.get("severity", "medium"),
-                        indicators=[f"Sentinel incident: {incident.get('title')}"],
+                        indicators=[f"Monitor incident: {incident.get('title')}"],
                         mitre_techniques=["T1078"],
                         recommendation="Verify user location and reset credentials if suspicious",
                     )
@@ -406,7 +406,7 @@ class AzureSentinelAnalyzer:
                         cloud_provider="azure",
                         threat_type="Identity - Suspicious Sign-in",
                         severity=incident.get("severity", "medium"),
-                        indicators=[f"Sentinel incident: {incident.get('title')}"],
+                        indicators=[f"Monitor incident: {incident.get('title')}"],
                         mitre_techniques=["T1078", "T1110"],
                         recommendation="Review sign-in logs and enforce MFA",
                     )
@@ -429,7 +429,7 @@ class AzureSentinelAnalyzer:
                         cloud_provider="azure",
                         threat_type="Resource Abuse - Cryptomining",
                         severity="high",
-                        indicators=[f"Sentinel incident: {incident.get('title')}"],
+                        indicators=[f"Monitor incident: {incident.get('title')}"],
                         mitre_techniques=["T1496"],
                         recommendation="Terminate affected resources and investigate access",
                     )
@@ -495,7 +495,7 @@ class MultiCloudAnalyzer:
 
     def __init__(self, llm_provider: str = "auto"):
         self.aws_analyzer = CloudTrailAnalyzer()
-        self.azure_analyzer = AzureSentinelAnalyzer()
+        self.azure_analyzer = AzureMonitorAnalyzer()
         self.gcp_analyzer = GCPSecurityAnalyzer()
         self.llm = None
         self.llm_provider = llm_provider
