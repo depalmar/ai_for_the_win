@@ -54,14 +54,14 @@ Build the most comprehensive, hands-on AI/ML training program for security pract
 ### New Lab Tracks
 
 #### Cloud-Native Security Track ✓ Completed v1.8.0
-- [x] **Lab 19b: Container Security** - Kubernetes threat detection, pod security, runtime analysis
-- [x] **Lab 19c: Serverless Security** - Lambda/Functions analysis, event injection detection
-- [x] **Lab 19d: Cloud IR Automation** - Automated containment, evidence preservation
+- [x] **Lab 46: Container Security** - Kubernetes threat detection, pod security, runtime analysis
+- [x] **Lab 47: Serverless Security** - Lambda/Functions analysis, event injection detection
+- [x] **Lab 48: Cloud IR Automation** - Automated containment, evidence preservation
 
 #### AI/ML Security Track ✓ Completed v1.8.0
-- [x] **Lab 17b: LLM Security Testing** - Automated red team for AI applications
-- [x] **Lab 17c: Model Monitoring** - Drift detection, adversarial input detection
-- [x] **Lab 18b: RAG Security** - Data poisoning, prompt leakage, extraction attacks
+- [x] **Lab 40: LLM Security Testing** - Automated red team for AI applications
+- [x] **Lab 41: Model Monitoring** - Drift detection, adversarial input detection
+- [x] **Lab 43: RAG Security** - Data poisoning, prompt leakage, extraction attacks
 
 ### Infrastructure
 - [x] **Docker Compose Lab Environment** ✓ v1.8.0

@@ -1,4 +1,4 @@
-# Lab 20b: AI-Assisted Purple Team - Solution Walkthrough
+# Lab 50: AI-Assisted Purple Team - Solution Walkthrough
 
 ## Overview
 
