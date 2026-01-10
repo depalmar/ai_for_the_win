@@ -1559,6 +1559,109 @@ class TestLabCategoryConsistency:
         if errors:
             pytest.fail("docs/index.md has outdated lab numbering:\n" + "\n".join(errors))
 
+    def test_readme_lab_navigator_sequential_order(self):
+        """Verify README Lab Navigator displays labs in sequential order.
+
+        The Lab Navigator table should show labs 00, 01, 02, 03... in order,
+        not jumbled like 00, 01, 04, 02, 05... which is confusing for users.
+        """
+        readme = REPO_ROOT / "README.md"
+        if not readme.exists():
+            pytest.skip("README.md not found")
+
+        content = readme.read_text(encoding="utf-8")
+
+        # Find the Lab Navigator section
+        if "## Lab Navigator" not in content:
+            pytest.skip("No Lab Navigator section in README.md")
+
+        # Extract lab numbers from the table in order of appearance
+        # Pattern matches badge URLs like: /badge/00-Setup-555
+        navigator_section = content.split("## Lab Navigator")[1]
+        # Limit to just the table (ends at **Legend:** or </table>)
+        if "**Legend:**" in navigator_section:
+            navigator_section = navigator_section.split("**Legend:**")[0]
+
+        # Extract all lab numbers from badge URLs
+        lab_numbers = re.findall(r"/badge/(\d+)-", navigator_section)
+        lab_numbers = [int(n) for n in lab_numbers]
+
+        if not lab_numbers:
+            pytest.skip("No lab badges found in Lab Navigator")
+
+        # Check that labs appear in sequential order
+        errors = []
+        prev_num = -1
+        for i, num in enumerate(lab_numbers):
+            if num < prev_num:
+                errors.append(f"Lab {num:02d} appears after Lab {prev_num:02d} (position {i+1})")
+            prev_num = num
+
+        # Also check for non-sequential jumps (like going 00, 01, 04 instead of 00, 01, 02)
+        for i in range(1, len(lab_numbers)):
+            if lab_numbers[i] > lab_numbers[i - 1] + 1:
+                # Check if this is a category break (which is OK)
+                # Allow breaks at: 10, 14, 19, 25, 30, 36, 44
+                category_breaks = {10, 14, 19, 25, 30, 36, 44}
+                if lab_numbers[i] not in category_breaks:
+                    # Check if intermediate labs exist
+                    missing = []
+                    for n in range(lab_numbers[i - 1] + 1, lab_numbers[i]):
+                        lab_exists = any(
+                            d.name.startswith(f"lab{n:02d}")
+                            for d in LABS_DIR.iterdir()
+                            if d.is_dir()
+                        )
+                        if lab_exists:
+                            missing.append(n)
+                    if missing:
+                        errors.append(
+                            f"Lab Navigator skips labs {missing} between "
+                            f"{lab_numbers[i-1]:02d} and {lab_numbers[i]:02d}"
+                        )
+
+        if errors:
+            pytest.fail(
+                "README Lab Navigator is not in sequential order:\n" + "\n".join(errors[:10])
+            )
+
+    def test_readme_lab_navigator_legend_uses_correct_categories(self):
+        """Verify Lab Navigator legend uses correct category names."""
+        readme = REPO_ROOT / "README.md"
+        if not readme.exists():
+            pytest.skip("README.md not found")
+
+        content = readme.read_text(encoding="utf-8")
+
+        if "## Lab Navigator" not in content:
+            pytest.skip("No Lab Navigator section in README.md")
+
+        navigator_section = content.split("## Lab Navigator")[1].split("##")[0]
+
+        # Check for legend line
+        legend_match = re.search(r"\*\*Legend:\*\*.*", navigator_section)
+        if not legend_match:
+            pytest.skip("No Legend found in Lab Navigator")
+
+        legend = legend_match.group(0)
+
+        # Check for outdated category names
+        # Note: Escape parentheses in regex patterns to match literal text
+        outdated_terms = [
+            ("Expert DFIR", "Use 'DFIR' instead of 'Expert DFIR'"),
+            ("Expert AI", "Use 'Advanced Threats' or 'AI Security' instead"),
+            (r"Intro \(Free\)", "Use 'Foundation' with lab range"),
+            (r"White Intro", "Use 'Foundation (00-09)' instead of 'White Intro'"),
+        ]
+
+        errors = []
+        for term, suggestion in outdated_terms:
+            if re.search(term, legend, re.IGNORECASE):
+                errors.append(f"Legend uses outdated term '{term}': {suggestion}")
+
+        if errors:
+            pytest.fail("README Lab Navigator legend uses outdated terms:\n" + "\n".join(errors))
+
 
 if __name__ == "__main__":
     pytest.main([__file__, "-v"])
