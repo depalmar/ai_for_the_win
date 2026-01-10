@@ -483,15 +483,15 @@ def convert_sigma_rule(sigma_yaml: str, target: str = "elasticsearch") -> dict:
     try:
         from sigma.rule import SigmaRule
         from sigma.backends.elasticsearch import ElasticsearchBackend
-        from sigma.backends.elasticsearch import ElasticsearchBackend
+        from sigma.backends.opensearch import OpenSearchBackend
         from sigma.pipelines.sysmon import sysmon_pipeline
 
         rule = SigmaRule.from_yaml(sigma_yaml)
 
         if target == "elasticsearch":
             backend = ElasticsearchBackend(pipeline=sysmon_pipeline())
-        elif target == "elasticsearch":
-            backend = ElasticsearchBackend(pipeline=sysmon_pipeline())
+        elif target == "opensearch":
+            backend = OpenSearchBackend(pipeline=sysmon_pipeline())
         else:
             return {"error": f"Unsupported target: {target}"}
 
@@ -507,7 +507,7 @@ def convert_sigma_rule(sigma_yaml: str, target: str = "elasticsearch") -> dict:
 
 sigma_tool = FunctionTool(
     function=convert_sigma_rule,
-    description="Convert Sigma detection rules to SIEM query formats (Elasticsearch, Elasticsearch)"
+    description="Convert Sigma detection rules to SIEM query formats (Elasticsearch, OpenSearch)"
 )
 ```
 

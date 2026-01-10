@@ -302,14 +302,13 @@ from sigma.pipelines.elasticsearch import ecs_windows
 
 def validate_and_convert(yaml_rule: str) -> dict:
     """
-    Validate a Sigma rule and convert to SIEM queries.
+    Validate a Sigma rule and convert to Elasticsearch query.
 
     Returns:
         {
             "valid": bool,
             "errors": list,
-            "elasticsearch": str,
-            "opensearch": str
+            "elasticsearch": str
         }
     """
     result = {"valid": False, "errors": [], "elasticsearch": None}
