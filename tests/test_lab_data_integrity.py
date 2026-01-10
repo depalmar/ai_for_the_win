@@ -1646,10 +1646,11 @@ class TestLabCategoryConsistency:
         legend = legend_match.group(0)
 
         # Check for outdated category names
+        # Note: Escape parentheses in regex patterns to match literal text
         outdated_terms = [
             ("Expert DFIR", "Use 'DFIR' instead of 'Expert DFIR'"),
             ("Expert AI", "Use 'Advanced Threats' or 'AI Security' instead"),
-            ("Intro (Free)", "Use 'Foundation' with lab range"),
+            (r"Intro \(Free\)", "Use 'Foundation' with lab range"),
             (r"White Intro", "Use 'Foundation (00-09)' instead of 'White Intro'"),
         ]
 
