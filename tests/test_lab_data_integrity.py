@@ -1724,25 +1724,24 @@ class TestLabCategoryConsistency:
 
 
 class TestLegalCompliance:
-    """Ensure legal compliance with employment protection policies.
+    """Ensure compliance with open-source tooling policy.
 
-    These tests enforce the conservative open-source-first approach
-    documented in LICENSE and docs/CLAUDE.md to protect against
-    employment/IP conflicts.
+    These tests enforce the open-source-first approach documented in LICENSE
+    to maintain platform independence and transparency.
     """
 
-    def test_no_competitor_siem_references_in_documentation(self):
-        """Verify documentation doesn't reference competitor SIEM platforms.
+    def test_open_source_siem_policy_compliance(self):
+        """Verify documentation maintains open-source SIEM tool focus.
 
-        Per LICENSE Employment & IP Disclaimer: This project focuses on
-        open-source security tooling (Elasticsearch, OpenSearch) to ensure
-        complete independence from proprietary vendor implementations.
+        Per LICENSE: This project focuses on open-source security tooling
+        (Elasticsearch, OpenSearch) to ensure platform independence and
+        verifiable public sources.
 
-        Allowed: Elasticsearch, OpenSearch, Elastic (as company name in URLs)
-        Prohibited: Splunk, Microsoft Sentinel, Azure Sentinel, IBM QRadar
+        Approved tools: Elasticsearch, OpenSearch
+        External references: Only if citing public documentation/blogs
         """
-        # Competitor SIEM platforms to detect
-        competitor_siems = [
+        # Proprietary SIEM platforms (maintain open-source focus)
+        proprietary_siems = [
             (r"Splunk(?!\.com/en_us/blog)", "Splunk"),  # Allow blog URLs
             (r"(?:Microsoft\s+)?Sentinel(?!\s+KQL)", "Microsoft Sentinel"),  # KQL is OK
             (r"Azure\s+Sentinel", "Azure Sentinel"),
@@ -1780,35 +1779,34 @@ class TestLegalCompliance:
             content = file_path.read_text(encoding="utf-8")
             rel_path = file_path.relative_to(REPO_ROOT)
 
-            for pattern, name in competitor_siems:
+            for pattern, name in proprietary_siems:
                 matches = list(re.finditer(pattern, content, re.IGNORECASE))
                 if matches:
                     for match in matches[:3]:  # Limit to first 3 per file
                         line_num = content[: match.start()].count("\n") + 1
                         errors.append(
-                            f"{rel_path}:{line_num} - Found '{name}' reference "
-                            f"(use Elasticsearch/OpenSearch instead)"
+                            f"{rel_path}:{line_num} - Found '{name}' "
+                            f"(policy: use Elasticsearch/OpenSearch)"
                         )
 
         if errors:
             pytest.fail(
-                "Found competitor SIEM platform references (violates open-source policy):\n"
+                "Documentation contains proprietary SIEM references (open-source policy):\n"
                 + "\n".join(errors[:20])  # Limit to first 20 errors
-                + "\n\nSee LICENSE 'Employment and IP Disclaimer' section."
+                + "\n\nPer LICENSE: This project maintains open-source tool focus."
             )
 
-    def test_no_competitor_edr_xdr_references_in_documentation(self):
-        """Verify documentation doesn't reference competitor EDR/XDR platforms.
+    def test_open_source_edr_policy_compliance(self):
+        """Verify documentation maintains open-source EDR tool focus.
 
-        Per LICENSE Employment & IP Disclaimer: This project does NOT contain
-        proprietary vendor implementations to avoid employment/IP conflicts.
+        Per LICENSE: This project uses open-source endpoint security tools
+        to ensure platform independence and verifiable public sources.
 
-        Allowed: Wazuh (open-source), OSSEC (open-source)
-        Prohibited: CrowdStrike, Cortex XDR, XSIAM, Palo Alto XDR, Carbon Black,
-                   SentinelOne, Microsoft Defender
+        Approved tools: Wazuh, OSSEC
+        External references: Only if citing public documentation/blogs
         """
-        # Competitor EDR/XDR platforms to detect
-        competitor_edrs = [
+        # Proprietary EDR/XDR platforms (maintain open-source focus)
+        proprietary_edrs = [
             (r"CrowdStrike", "CrowdStrike"),
             (r"Cortex\s+XDR", "Cortex XDR"),
             (r"XSIAM", "XSIAM"),
@@ -1850,30 +1848,30 @@ class TestLegalCompliance:
             content = file_path.read_text(encoding="utf-8")
             rel_path = file_path.relative_to(REPO_ROOT)
 
-            for pattern, name in competitor_edrs:
+            for pattern, name in proprietary_edrs:
                 matches = list(re.finditer(pattern, content, re.IGNORECASE))
                 if matches:
                     for match in matches[:3]:  # Limit to first 3 per file
                         line_num = content[: match.start()].count("\n") + 1
                         errors.append(
-                            f"{rel_path}:{line_num} - Found '{name}' reference "
-                            f"(use Wazuh/OSSEC instead)"
+                            f"{rel_path}:{line_num} - Found '{name}' "
+                            f"(policy: use Wazuh/OSSEC)"
                         )
 
         if errors:
             pytest.fail(
-                "Found competitor EDR/XDR platform references (violates open-source policy):\n"
+                "Documentation contains proprietary EDR references (open-source policy):\n"
                 + "\n".join(errors[:20])  # Limit to first 20 errors
-                + "\n\nSee LICENSE 'Employment and IP Disclaimer' section."
+                + "\n\nPer LICENSE: This project maintains open-source tool focus."
             )
 
-    def test_no_proprietary_query_languages_in_code(self):
-        """Verify code doesn't use proprietary query languages.
+    def test_open_source_query_language_compliance(self):
+        """Verify code uses open-source query languages.
 
-        Per LICENSE: Focus on open-source tooling only.
+        Per LICENSE: This project uses open-source query languages to ensure
+        platform independence and public verifiability.
 
-        Allowed: EQL (Elasticsearch), ES|QL, KQL (Kibana), Sigma (open-source)
-        Prohibited: SPL (Splunk), XQL (Cortex XDR), Microsoft Sentinel KQL
+        Approved: EQL (Elasticsearch), ES|QL, KQL (Kibana), Sigma
         """
         # Proprietary query languages
         proprietary_languages = [
@@ -1906,15 +1904,15 @@ class TestLegalCompliance:
                     for match in matches[:3]:  # Limit to first 3 per file
                         line_num = content[: match.start()].count("\n") + 1
                         errors.append(
-                            f"{rel_path}:{line_num} - Found '{name}' reference "
-                            f"(use EQL/ES|QL instead)"
+                            f"{rel_path}:{line_num} - Found '{name}' "
+                            f"(policy: use EQL/ES|QL)"
                         )
 
         if errors:
             pytest.fail(
-                "Found proprietary query language references (violates open-source policy):\n"
+                "Code contains proprietary query languages (open-source policy):\n"
                 + "\n".join(errors[:20])  # Limit to first 20 errors
-                + "\n\nSee LICENSE 'Employment and IP Disclaimer' section."
+                + "\n\nPer LICENSE: This project uses open-source query languages."
             )
 
     def test_sources_md_exists_and_valid(self):
