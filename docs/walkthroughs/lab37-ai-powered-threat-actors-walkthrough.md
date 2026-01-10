@@ -1,4 +1,4 @@
-# Lab 16b: AI-Powered Threat Actors - Solution Walkthrough
+# Lab 37: AI-Powered Threat Actors - Solution Walkthrough
 
 ## Overview
 
@@ -575,4 +575,4 @@ for mitigation in report.mitigations:
 
 - **Lab 17**: Adversarial ML - Attack and defend ML models
 - **Lab 20**: LLM Red Teaming - Offensive security for LLM systems
-- **Lab 20b**: AI-Assisted Purple Team - Collaborative AI exercises
+- **Lab 50**: AI-Assisted Purple Team - Collaborative AI exercises

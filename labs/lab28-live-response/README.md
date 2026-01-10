@@ -1,6 +1,6 @@
 # Lab 28: Live Response Techniques [Deep Dive]
 
-**Difficulty:** Intermediate-Advanced | **Time:** 90 min | **Prerequisites:** Labs 10a-10c
+**Difficulty:** Intermediate-Advanced | **Time:** 90 min | **Prerequisites:** Labs 25-27
 
 Master live response techniques for active incident investigation without taking systems offline.
 
@@ -15,7 +15,7 @@ By the end of this lab, you will:
 
 ## Prerequisites
 
-- Completed Labs 10a-10c (DFIR series)
+- Completed Labs 25-27 (DFIR series)
 - PowerShell experience (intermediate)
 - Understanding of Windows internals
 
