@@ -1,9 +1,9 @@
-# Test Lab 00f: Hello World ML
+# Test Lab 07: Hello World ML
 import numpy as np
 from sklearn.linear_model import LogisticRegression
 
 print("=" * 50)
-print("Testing Lab 00f: Hello World ML")
+print("Testing Lab 07: Hello World ML")
 print("=" * 50)
 
 # Sample data
@@ -58,4 +58,4 @@ train_preds = model.predict(X)
 accuracy = (train_preds == y).mean()
 print(f"\nTraining accuracy: {accuracy:.1%}")
 
-print("\n[PASS] Lab 00f: PASSED")
+print("\n[PASS] Lab 07: PASSED")

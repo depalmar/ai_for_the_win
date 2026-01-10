@@ -24,7 +24,7 @@ def import_lab_module(lab_name: str, module_name: str = "main", subdir: str = "s
     all get the same cached module, even after manipulating sys.path.
 
     Args:
-        lab_name: The lab directory name (e.g., "lab00f-hello-world-ml")
+        lab_name: The lab directory name (e.g., "lab07-hello-world-ml")
         module_name: The module to import (default: "main")
         subdir: The subdirectory within the lab (default: "solution")
 
@@ -32,7 +32,7 @@ def import_lab_module(lab_name: str, module_name: str = "main", subdir: str = "s
         The imported module object
 
     Example:
-        lab = import_lab_module("lab00f-hello-world-ml")
+        lab = import_lab_module("lab07-hello-world-ml")
         features = lab.extract_features("test message")
     """
     module_path = LABS_DIR / lab_name / subdir / f"{module_name}.py"
@@ -88,10 +88,10 @@ def pytest_runtest_setup(item):
     sys.path[:] = [p for p in sys.path if labs_str not in p or "solution" not in p]
 
     # Determine which lab this test belongs to from the test file name
-    # e.g., test_lab00f_hello_world_ml.py -> lab00f-hello-world-ml
-    test_file = Path(item.fspath).stem  # e.g., "test_lab00f_hello_world_ml"
+    # e.g., test_lab07_hello_world_ml.py -> lab07-hello-world-ml
+    test_file = Path(item.fspath).stem  # e.g., "test_lab07_hello_world_ml"
     if test_file.startswith("test_lab"):
-        # Extract lab identifier: test_lab00f_hello_world_ml -> lab00f_hello_world_ml
+        # Extract lab identifier: test_lab07_hello_world_ml -> lab07_hello_world_ml
         lab_part = test_file[5:]  # Remove "test_"
 
         # Convert underscores to hyphens and find matching lab directory
