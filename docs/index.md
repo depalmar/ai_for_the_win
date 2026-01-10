@@ -1373,7 +1373,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
     </a>
     <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab23-detection-pipeline" class="lab-card" data-category="advanced">
       <div class="lab-header">
-        <span class="lab-number advanced">09</span>
+        <span class="lab-number advanced">23</span>
         <span class="lab-title">Detection Pipeline</span>
       </div>
       <p class="lab-desc">Multi-stage ML + LLM architecture</p>
@@ -1384,7 +1384,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
     </a>
     <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab24-monitoring-ai-systems" class="lab-card" data-category="advanced">
       <div class="lab-header">
-        <span class="lab-number advanced">09b</span>
+        <span class="lab-number advanced">24</span>
         <span class="lab-title">Monitoring AI Systems</span>
       </div>
       <p class="lab-desc">Observability, drift detection, logging</p>
@@ -1395,7 +1395,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
     </a>
     <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab25-dfir-fundamentals" class="lab-card" data-category="advanced">
       <div class="lab-header">
-        <span class="lab-number advanced">10a</span>
+        <span class="lab-number advanced">25</span>
         <span class="lab-title">DFIR Fundamentals</span>
       </div>
       <p class="lab-desc">IR lifecycle, Windows artifacts, ATT&CK</p>
@@ -1406,7 +1406,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
     </a>
     <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab29-ir-copilot" class="lab-card" data-category="advanced">
       <div class="lab-header">
-        <span class="lab-number advanced">10</span>
+        <span class="lab-number advanced">29</span>
         <span class="lab-title">IR Copilot</span>
       </div>
       <p class="lab-desc">Conversational IR assistant, playbooks</p>
@@ -1417,7 +1417,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
     </a>
     <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab26-windows-event-log-analysis" class="lab-card" data-category="dfir">
       <div class="lab-header">
-        <span class="lab-number dfir">10b</span>
+        <span class="lab-number dfir">26</span>
         <span class="lab-title">Windows Event Logs</span>
       </div>
       <p class="lab-desc">Event log parsing, security event detection</p>
@@ -1428,7 +1428,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
     </a>
     <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab27-windows-registry-forensics" class="lab-card" data-category="dfir">
       <div class="lab-header">
-        <span class="lab-number dfir">10c</span>
+        <span class="lab-number dfir">27</span>
         <span class="lab-title">Registry Forensics</span>
       </div>
       <p class="lab-desc">Registry analysis, persistence detection</p>
@@ -1439,7 +1439,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
     </a>
     <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab28-live-response" class="lab-card" data-category="dfir">
       <div class="lab-header">
-        <span class="lab-number dfir">10d</span>
+        <span class="lab-number dfir">28</span>
         <span class="lab-title">Live Response</span>
       </div>
       <p class="lab-desc">Live IR, triage procedures, evidence collection</p>
@@ -1450,7 +1450,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
     </a>
     <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab30-ransomware-fundamentals" class="lab-card" data-category="dfir">
       <div class="lab-header">
-        <span class="lab-number dfir">11a</span>
+        <span class="lab-number dfir">30</span>
         <span class="lab-title">Ransomware Fundamentals</span>
       </div>
       <p class="lab-desc">Evolution, families, indicators, recovery</p>
@@ -1461,7 +1461,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
     </a>
     <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab31-ransomware-detection" class="lab-card" data-category="dfir">
       <div class="lab-header">
-        <span class="lab-number dfir">11</span>
+        <span class="lab-number dfir">31</span>
         <span class="lab-title">Ransomware Detection</span>
       </div>
       <p class="lab-desc">Entropy analysis, behavioral detection</p>
@@ -1472,7 +1472,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
     </a>
     <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab32-ransomware-simulation" class="lab-card" data-category="dfir">
       <div class="lab-header">
-        <span class="lab-number dfir">12</span>
+        <span class="lab-number dfir">32</span>
         <span class="lab-title">Purple Team Sim</span>
       </div>
       <p class="lab-desc">Safe adversary emulation, gap analysis</p>
@@ -1483,7 +1483,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
     </a>
     <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab33-memory-forensics-ai" class="lab-card" data-category="dfir">
       <div class="lab-header">
-        <span class="lab-number dfir">13</span>
+        <span class="lab-number dfir">33</span>
         <span class="lab-title">Memory Forensics AI</span>
       </div>
       <p class="lab-desc">Volatility3, process injection, credentials</p>
@@ -1494,7 +1494,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
     </a>
     <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab34-c2-traffic-analysis" class="lab-card" data-category="dfir">
       <div class="lab-header">
-        <span class="lab-number dfir">14</span>
+        <span class="lab-number dfir">34</span>
         <span class="lab-title">C2 Traffic Analysis</span>
       </div>
       <p class="lab-desc">Beaconing, DNS tunneling, JA3</p>
@@ -1505,7 +1505,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
     </a>
     <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab35-lateral-movement-detection" class="lab-card" data-category="dfir">
       <div class="lab-header">
-        <span class="lab-number dfir">15</span>
+        <span class="lab-number dfir">35</span>
         <span class="lab-title">Lateral Movement</span>
       </div>
       <p class="lab-desc">Auth anomalies, attack path graphs</p>
@@ -1516,7 +1516,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
     </a>
     <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab36-threat-actor-profiling" class="lab-card" data-category="dfir">
       <div class="lab-header">
-        <span class="lab-number dfir">16</span>
+        <span class="lab-number dfir">36</span>
         <span class="lab-title">Threat Actor Profiling</span>
       </div>
       <p class="lab-desc">TTP extraction, campaign clustering</p>
@@ -1527,7 +1527,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
     </a>
     <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab37-ai-powered-threat-actors" class="lab-card" data-category="dfir">
       <div class="lab-header">
-        <span class="lab-number dfir">16b</span>
+        <span class="lab-number dfir">37</span>
         <span class="lab-title">AI-Powered Threat Actors</span>
       </div>
       <p class="lab-desc">Deepfakes, AI phishing, detecting AI attacks</p>
@@ -1538,7 +1538,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
     </a>
     <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab38-ml-security-intro" class="lab-card" data-category="dfir">
       <div class="lab-header">
-        <span class="lab-number dfir">17a</span>
+        <span class="lab-number dfir">38</span>
         <span class="lab-title">ML Security Intro</span>
       </div>
       <p class="lab-desc">ML threat models, attack taxonomy</p>
@@ -1549,7 +1549,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
     </a>
     <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab39-adversarial-ml" class="lab-card" data-category="dfir">
       <div class="lab-header">
-        <span class="lab-number dfir">17</span>
+        <span class="lab-number dfir">39</span>
         <span class="lab-title">Adversarial ML</span>
       </div>
       <p class="lab-desc">Evasion attacks, poisoning, defenses</p>
@@ -1560,7 +1560,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
     </a>
     <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab40-llm-security-testing" class="lab-card" data-category="dfir">
       <div class="lab-header">
-        <span class="lab-number dfir">17b</span>
+        <span class="lab-number dfir">40</span>
         <span class="lab-title">LLM Security Testing</span>
       </div>
       <p class="lab-desc">Prompt injection, jailbreak testing</p>
@@ -1571,7 +1571,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
     </a>
     <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab41-model-monitoring" class="lab-card" data-category="dfir">
       <div class="lab-header">
-        <span class="lab-number dfir">17c</span>
+        <span class="lab-number dfir">41</span>
         <span class="lab-title">Model Monitoring</span>
       </div>
       <p class="lab-desc">Drift detection, adversarial input detection</p>
@@ -1582,7 +1582,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
     </a>
     <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab42-fine-tuning-security" class="lab-card" data-category="dfir">
       <div class="lab-header">
-        <span class="lab-number dfir">18</span>
+        <span class="lab-number dfir">42</span>
         <span class="lab-title">Fine-Tuning</span>
       </div>
       <p class="lab-desc">Custom embeddings, LoRA, deployment</p>
@@ -1593,7 +1593,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
     </a>
     <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab43-rag-security" class="lab-card" data-category="dfir">
       <div class="lab-header">
-        <span class="lab-number dfir">18b</span>
+        <span class="lab-number dfir">43</span>
         <span class="lab-title">RAG Security</span>
       </div>
       <p class="lab-desc">KB poisoning, context sanitization</p>
@@ -1604,7 +1604,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
     </a>
     <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab44-cloud-security-fundamentals" class="lab-card" data-category="dfir">
       <div class="lab-header">
-        <span class="lab-number dfir">19a</span>
+        <span class="lab-number dfir">44</span>
         <span class="lab-title">Cloud Security Basics</span>
       </div>
       <p class="lab-desc">AWS/Azure/GCP fundamentals, IAM, logs</p>
@@ -1615,7 +1615,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
     </a>
     <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab45-cloud-security-ai" class="lab-card" data-category="dfir">
       <div class="lab-header">
-        <span class="lab-number dfir">19</span>
+        <span class="lab-number dfir">45</span>
         <span class="lab-title">Cloud Security AI</span>
       </div>
       <p class="lab-desc">AI-powered CloudTrail analysis</p>
@@ -1626,7 +1626,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
     </a>
     <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab46-container-security" class="lab-card" data-category="dfir">
       <div class="lab-header">
-        <span class="lab-number dfir">19b</span>
+        <span class="lab-number dfir">46</span>
         <span class="lab-title">Container Security</span>
       </div>
       <p class="lab-desc">Kubernetes, runtime detection, image scanning</p>
@@ -1637,7 +1637,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
     </a>
     <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab47-serverless-security" class="lab-card" data-category="dfir">
       <div class="lab-header">
-        <span class="lab-number dfir">19c</span>
+        <span class="lab-number dfir">47</span>
         <span class="lab-title">Serverless Security</span>
       </div>
       <p class="lab-desc">Lambda, event injection, cold start attacks</p>
@@ -1648,7 +1648,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
     </a>
     <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab48-cloud-ir-automation" class="lab-card" data-category="dfir">
       <div class="lab-header">
-        <span class="lab-number dfir">19d</span>
+        <span class="lab-number dfir">48</span>
         <span class="lab-title">Cloud IR Automation</span>
       </div>
       <p class="lab-desc">Automated containment, evidence collection</p>
@@ -1659,7 +1659,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
     </a>
     <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab49-llm-red-teaming" class="lab-card" data-category="dfir">
       <div class="lab-header">
-        <span class="lab-number dfir">20</span>
+        <span class="lab-number dfir">49</span>
         <span class="lab-title">LLM Red Teaming</span>
       </div>
       <p class="lab-desc">Prompt injection, jailbreaks, guardrails</p>
@@ -1670,7 +1670,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
     </a>
     <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab50-purple-team-ai" class="lab-card" data-category="dfir">
       <div class="lab-header">
-        <span class="lab-number dfir">20b</span>
+        <span class="lab-number dfir">50</span>
         <span class="lab-title">Purple Team AI</span>
       </div>
       <p class="lab-desc">AI attack simulation, detection validation</p>
