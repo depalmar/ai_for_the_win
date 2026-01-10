@@ -1005,7 +1005,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
     <div class="feature">
       <div class="feature-icon">&#128176;</div>
       <h3>Start Free</h3>
-      <p>Labs 01-03 need no API key. Learn ML foundations before spending on LLM APIs. Ollama option for $0 total.</p>
+      <p>Labs 00-13 need no API key. Learn ML foundations before spending on LLM APIs. Ollama option for $0 total.</p>
     </div>
     <div class="feature">
       <div class="feature-icon">&#127891;</div>
@@ -2054,7 +2054,7 @@ python labs/lab10-phishing-classifier/solution/main.py</code></pre>
   <div class="faq">
     <details class="faq-item">
       <summary>Do I need prior ML/AI experience?</summary>
-      <div class="faq-content">No. Labs 01-02 cover Python basics, ML concepts, and prompt engineering from scratch. The Security-to-AI Glossary translates ML jargon into security terms you already know.</div>
+      <div class="faq-content">No. Labs 00-09 cover Python basics, ML concepts, and prompt engineering from scratch. The Security-to-AI Glossary translates ML jargon into security terms you already know.</div>
     </details>
     <details class="faq-item">
       <summary>Which LLM provider should I use?</summary>
@@ -2062,7 +2062,7 @@ python labs/lab10-phishing-classifier/solution/main.py</code></pre>
     </details>
     <details class="faq-item">
       <summary>Can I run everything locally without API costs?</summary>
-      <div class="faq-content">Yes! Use Ollama to run models locally for free. Labs 01-03 don't need any API at all. You can complete the entire course for $0 if you use local models.</div>
+      <div class="faq-content">Yes! Use Ollama to run models locally for free. Labs 00-13 don't need any API at all. You can complete the entire course for $0 if you use local models.</div>
     </details>
     <details class="faq-item">
       <summary>How long does it take to complete all labs?</summary>
