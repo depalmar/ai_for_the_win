@@ -1854,8 +1854,7 @@ class TestLegalCompliance:
                     for match in matches[:3]:  # Limit to first 3 per file
                         line_num = content[: match.start()].count("\n") + 1
                         errors.append(
-                            f"{rel_path}:{line_num} - Found '{name}' "
-                            f"(policy: use Wazuh/OSSEC)"
+                            f"{rel_path}:{line_num} - Found '{name}' " f"(policy: use Wazuh/OSSEC)"
                         )
 
         if errors:
@@ -1904,8 +1903,7 @@ class TestLegalCompliance:
                     for match in matches[:3]:  # Limit to first 3 per file
                         line_num = content[: match.start()].count("\n") + 1
                         errors.append(
-                            f"{rel_path}:{line_num} - Found '{name}' "
-                            f"(policy: use EQL/ES|QL)"
+                            f"{rel_path}:{line_num} - Found '{name}' " f"(policy: use EQL/ES|QL)"
                         )
 
         if errors:
@@ -1978,7 +1976,7 @@ class TestLegalCompliance:
 
         if missing:
             pytest.fail(
-                f"LICENSE is missing required employment protection sections:\n"
+                "LICENSE is missing required employment protection sections:\n"
                 + "\n".join(f"  - {s}" for s in missing)
                 + "\n\nThese sections are required for legal protection."
             )
