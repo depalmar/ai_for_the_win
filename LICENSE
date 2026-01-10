@@ -153,6 +153,51 @@ This training material is intended for **educational purposes and authorized sec
 
 ---
 
+## Employment and Intellectual Property Disclaimer
+
+**This project was created entirely on personal time using only publicly available information.** No employer resources, confidential information, proprietary data, trade secrets, or internal tools were used in creating this content.
+
+### Source Material Declaration
+
+All content in this repository is based exclusively on:
+
+- **Publicly available documentation** — Official vendor documentation, marketing materials, and public resources
+- **Open-source tools and frameworks** — Elasticsearch, OpenSearch, Sigma, YARA, MITRE ATT&CK, NIST frameworks
+- **Published industry knowledge** — White papers, conference presentations, blogs, and publicly available training materials
+- **Personal expertise** — Skills and knowledge developed through publicly available education and training
+- **Community resources** — Open-source projects, public GitHub repositories, and community-contributed content
+
+### Explicit Exclusions
+
+This project does **NOT** contain, reference, or derive from:
+
+- Confidential employer information or internal documentation
+- Proprietary architectures, implementations, or designs
+- Internal tools, platforms, or unreleased features
+- Customer data, configurations, or case studies
+- Trade secrets or non-public intellectual property
+- Employer-specific methodologies or processes
+
+### Product References
+
+All security product and platform references are for **educational purposes only** and are based solely on publicly available information. This project currently focuses on open-source tooling (Elasticsearch, OpenSearch) to ensure complete independence from proprietary vendor implementations.
+
+References to commercial security platforms may be added in the future only if:
+1. Based entirely on publicly available vendor documentation
+2. Cleared by appropriate legal review
+3. Clearly documented in [SOURCES.md](docs/SOURCES.md)
+
+### Independent Work Certification
+
+This is an independent educational project created under the protections of California Labor Code Section 2870 and similar laws in other jurisdictions. It:
+
+- Was developed entirely on personal time
+- Does not relate to the employer's business or actual or demonstrably anticipated research or development
+- Does not result from any work performed using employer equipment, supplies, facilities, or trade secret information
+- Serves the public interest by advancing cybersecurity education
+
+---
+
 ## Summary
 
 | Content Type | License | Commercial Use |

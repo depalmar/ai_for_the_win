@@ -1,4 +1,4 @@
-# Lab 17a: ML Security Foundations Walkthrough
+# Lab 38: ML Security Foundations Walkthrough
 
 Step-by-step guide to understanding ML threats and defenses.
 

@@ -1,4 +1,4 @@
-# Lab 19a Walkthrough: Cloud Security Fundamentals
+# Lab 44 Walkthrough: Cloud Security Fundamentals
 
 Step-by-step guide to understanding cloud security concepts before Lab 19.
 
@@ -152,7 +152,7 @@ After completing this lab, you should understand:
 
 ## Resources
 
-- [Lab 19a README](../../labs/lab44-cloud-security-fundamentals/)
+- [Lab 44 README](../../labs/lab44-cloud-security-fundamentals/)
 - [AWS Security Best Practices](https://docs.aws.amazon.com/security/)
 - [Azure Security Documentation](https://docs.microsoft.com/en-us/azure/security/)
 - [GCP Security Best Practices](https://cloud.google.com/security/best-practices)

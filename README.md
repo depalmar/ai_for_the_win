@@ -353,7 +353,26 @@ Each includes starter code, requirements, and evaluation criteria. See [`capston
 | **Docker** | Optional | For containerized labs |
 | **API Key** | Labs 14+ only | Free tiers available |
 
-### Installation
+### Option 1: Docker (Easiest!)
+
+One-command setup with all services pre-configured:
+
+```bash
+git clone https://github.com/depalmar/ai_for_the_win.git
+cd ai_for_the_win/docker
+docker compose up -d
+
+# Access services:
+# - Jupyter Lab: http://localhost:8888 (token: aiforthewin)
+# - Kibana: http://localhost:5601
+# - MinIO: http://localhost:9001 (minioadmin/minioadmin)
+```
+
+Includes: Jupyter Lab, Elasticsearch, Kibana, PostgreSQL, Redis, MinIO, Ollama (local LLMs), ChromaDB (vectors).
+
+See [`docker/README.md`](./docker/README.md) for full details.
+
+### Option 2: Local Python Installation
 
 ```bash
 # 1. Clone the repository
@@ -393,24 +412,6 @@ python scripts/verify_setup.py
 | `VIRUSTOTAL_API_KEY` | VirusTotal | Optional |
 
 > You only need ONE LLM provider. All labs support multiple providers.
-
-### Docker Lab Environment (New!)
-
-One-command setup with all services pre-configured:
-
-```bash
-cd docker
-docker compose up -d
-
-# Access services:
-# - Jupyter Lab: http://localhost:8888 (token: aiforthewin)
-# - Kibana: http://localhost:5601
-# - MinIO: http://localhost:9001 (minioadmin/minioadmin)
-```
-
-Includes: Jupyter Lab, Elasticsearch, Kibana, PostgreSQL, Redis, MinIO, Ollama (local LLMs), ChromaDB (vectors).
-
-See [`docker/README.md`](./docker/README.md) for full details.
 
 ### Running Tests
 

@@ -280,7 +280,7 @@ Before investing in AI, ensure these foundations are in place:
 
 - SANS Detection & Response Survey (annual) — SOC challenges and trends
 - Gartner Hype Cycle for Security Operations — Technology maturity assessment
-- Splunk State of Security Report — Practitioner insights
+- Elasticsearch State of Security Report — Practitioner insights
 
 **Books for Leaders:**
 

@@ -33,14 +33,14 @@ By completing this lab, you will:
 ### Why Sigma Matters
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                     ONE SIGMA RULE                              │
-│                           ↓                                     │
-│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────────┐   │
-│  │ Splunk   │  │ Elastic  │  │ QRadar   │  │ Sentinel     │   │
-│  │ SPL      │  │ KQL/EQL  │  │ AQL      │  │ KQL          │   │
-│  └──────────┘  └──────────┘  └──────────┘  └──────────────┘   │
-└─────────────────────────────────────────────────────────────────┘
+┌───────────────────────────────────────────────────────────────┐
+│                     ONE SIGMA RULE                            │
+│                           ↓                                   │
+│  ┌────────────┐  ┌────────────┐  ┌────────────┐  ┌─────────┐ │
+│  │Elasticsearch│  │ OpenSearch │  │   Wazuh    │  │  SIEM   │ │
+│  │   EQL      │  │  KQL/EQL   │  │   Rules    │  │Queries  │ │
+│  └────────────┘  └────────────┘  └────────────┘  └─────────┘ │
+└───────────────────────────────────────────────────────────────┘
 ```
 
 Write once, deploy everywhere. No more manually translating detection logic!
@@ -294,34 +294,33 @@ print(rule)
 Validate your rules with pySigma:
 
 ```python
-# pip install pysigma pysigma-backend-splunk
+# pip install pysigma pysigma-backend-elasticsearch
 
 from sigma.rule import SigmaRule
-from sigma.backends.splunk import SplunkBackend
-from sigma.pipelines.splunk import splunk_windows_pipeline
+from sigma.backends.elasticsearch import LuceneBackend
+from sigma.pipelines.elasticsearch import ecs_windows
 
 def validate_and_convert(yaml_rule: str) -> dict:
     """
-    Validate a Sigma rule and convert to SIEM queries.
+    Validate a Sigma rule and convert to Elasticsearch query.
 
     Returns:
         {
             "valid": bool,
             "errors": list,
-            "splunk": str,
-            "elastic": str
+            "elasticsearch": str
         }
     """
-    result = {"valid": False, "errors": [], "splunk": None}
+    result = {"valid": False, "errors": [], "elasticsearch": None}
 
     try:
         # Parse rule
         rule = SigmaRule.from_yaml(yaml_rule)
         result["valid"] = True
 
-        # Convert to Splunk
-        backend = SplunkBackend(processing_pipeline=splunk_windows_pipeline())
-        result["splunk"] = backend.convert_rule(rule)[0]
+        # Convert to Elasticsearch
+        backend = LuceneBackend(processing_pipeline=ecs_windows())
+        result["elasticsearch"] = backend.convert_rule(rule)[0]
 
     except Exception as e:
         result["errors"].append(str(e))

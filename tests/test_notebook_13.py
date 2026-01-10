@@ -1,4 +1,4 @@
-# Test Lab 03b: ML vs LLM Comparison
+# Test Lab 13: ML vs LLM Comparison
 import time
 
 import numpy as np
@@ -7,7 +7,7 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score
 from sklearn.model_selection import train_test_split
 
 print("=" * 50)
-print("Testing Lab 03b: ML vs LLM Comparison")
+print("Testing Lab 13: ML vs LLM Comparison")
 print("=" * 50)
 
 # Sample security logs
@@ -183,4 +183,4 @@ print(f"Test logs: {len(test_logs)}")
 print(f"LLM calls needed: {llm_calls} ({llm_calls/len(test_logs):.0%} of logs)")
 print(f"Cost savings: {(1 - llm_calls/len(test_logs)):.0%}")
 
-print("\n[PASS] Lab 03b: PASSED")
+print("\n[PASS] Lab 13: PASSED")

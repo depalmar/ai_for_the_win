@@ -964,7 +964,7 @@ class MLSecurityAlertSystem:
 
     def _send_to_siem(self, event: Dict, config: Dict):
         """Send event to SIEM."""
-        # Implementation depends on SIEM type (Splunk, Elastic, etc.)
+        # Implementation depends on SIEM type (Elasticsearch, OpenSearch, etc.)
         pass
 ```
 

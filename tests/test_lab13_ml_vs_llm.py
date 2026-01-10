@@ -1,4 +1,4 @@
-"""Tests for Lab 03b: ML vs LLM Decision Lab."""
+"""Tests for Lab 13: ML vs LLM Decision Lab."""
 
 import sys
 from pathlib import Path
@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 
 # Add labs to path
-sys.path.insert(0, str(Path(__file__).parent.parent / "labs" / "lab03b-ml-vs-llm" / "solution"))
+sys.path.insert(0, str(Path(__file__).parent.parent / "labs" / "lab13-ml-vs-llm" / "solution"))
 
 
 def test_solution_imports():

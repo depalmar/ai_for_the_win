@@ -1,4 +1,4 @@
-# Lab 09b Walkthrough: Monitoring AI Security Systems
+# Lab 24 Walkthrough: Monitoring AI Security Systems
 
 ## Overview
 
@@ -649,7 +649,7 @@ def should_retrain(self, accuracy_threshold: float = 0.9) -> bool:
 |------|-----------------|
 | Build IR assistant | [Lab 10: IR Copilot](./lab29-ir-copilot-walkthrough.md) |
 | Learn adversarial attacks | [Lab 17: Adversarial ML](./lab39-adversarial-ml-walkthrough.md) |
-| DFIR fundamentals | [Lab 10a: DFIR Fundamentals](./lab25-dfir-fundamentals-walkthrough.md) |
+| DFIR fundamentals | [Lab 25: DFIR Fundamentals](./lab25-dfir-fundamentals-walkthrough.md) |
 
 ---
 

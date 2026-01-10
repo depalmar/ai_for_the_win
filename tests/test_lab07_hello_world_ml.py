@@ -1,4 +1,4 @@
-"""Tests for Lab 00f: Hello World ML."""
+"""Tests for Lab 07: Hello World ML."""
 
 import sys
 from pathlib import Path
@@ -6,9 +6,7 @@ from pathlib import Path
 import pytest
 
 # Add labs to path
-sys.path.insert(
-    0, str(Path(__file__).parent.parent / "labs" / "lab00f-hello-world-ml" / "solution")
-)
+sys.path.insert(0, str(Path(__file__).parent.parent / "labs" / "lab07-hello-world-ml" / "solution"))
 
 
 def test_solution_runs():

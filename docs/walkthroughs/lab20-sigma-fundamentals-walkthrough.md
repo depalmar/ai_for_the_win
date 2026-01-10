@@ -19,20 +19,20 @@ WITHOUT SIGMA:
 │                                                                 │
 │  "Detect encoded PowerShell"                                    │
 │      ↓                                                          │
-│  Splunk:   index=windows sourcetype=WinEventLog:Security...    │
+│  Elasticsearch:   index=windows sourcetype=WinEventLog:Security...    │
 │  Elastic:  event.code:4688 AND process.command_line:*-enc*     │
-│  Sentinel: SecurityEvent | where CommandLine contains "-enc"   │
-│  QRadar:   SELECT * FROM events WHERE LOGSOURCETYPENAME...     │
+│  Monitor: SecurityEvent | where CommandLine contains "-enc"   │
+│  Elasticsearch:   SELECT * FROM events WHERE LOGSOURCETYPENAME...     │
 └─────────────────────────────────────────────────────────────────┘
 
 WITH SIGMA:
 ┌─────────────────────────────────────────────────────────────────┐
 │  One Sigma rule → Automatically converts to any SIEM            │
 │                                                                 │
-│  encoded_powershell.yml  ──→  Splunk SPL                       │
+│  encoded_powershell.yml  ──→  Elasticsearch EQL                       │
 │                          ──→  Elastic KQL                       │
-│                          ──→  Sentinel KQL                      │
-│                          ──→  QRadar AQL                        │
+│                          ──→  Monitor KQL                      │
+│                          ──→  Elasticsearch AQL                        │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -43,7 +43,7 @@ WITH SIGMA:
 | **Logsource** | What type of logs to search (process_creation, network, etc.) |
 | **Detection** | The actual matching logic |
 | **Condition** | How detection elements combine (and, or, not) |
-| **Backend** | Target SIEM format (Splunk, Elastic, etc.) |
+| **Backend** | Target SIEM format (Elasticsearch, Elastic, etc.) |
 | **Pipeline** | Field name mappings for specific SIEMs |
 
 ---
@@ -346,11 +346,11 @@ tags:
 ### Using pySigma
 
 ```python
-# pip install pysigma pysigma-backend-splunk pysigma-backend-elasticsearch
+# pip install pysigma pysigma-backend-elasticsearch pysigma-backend-elasticsearch
 
 from sigma.rule import SigmaRule
-from sigma.backends.splunk import SplunkBackend
-from sigma.pipelines.splunk import splunk_windows_pipeline
+from sigma.backends.elasticsearch import ElasticsearchBackend
+from sigma.pipelines.elasticsearch import elasticsearch_windows_pipeline
 
 def validate_rule(yaml_content: str) -> dict:
     """Validate a Sigma rule and return any errors."""
@@ -372,10 +372,10 @@ def validate_rule(yaml_content: str) -> dict:
     return result
 
 
-def convert_to_splunk(yaml_content: str) -> str:
-    """Convert Sigma rule to Splunk SPL query."""
+def convert_to_elasticsearch(yaml_content: str) -> str:
+    """Convert Sigma rule to Elasticsearch EQL query."""
     rule = SigmaRule.from_yaml(yaml_content)
-    backend = SplunkBackend(processing_pipeline=splunk_windows_pipeline())
+    backend = ElasticsearchBackend(processing_pipeline=elasticsearch_windows_pipeline())
     queries = backend.convert_rule(rule)
     return queries[0] if queries else ""
 
@@ -401,7 +401,7 @@ detection:
     condition: selection
 ```
 
-**Splunk SPL:**
+**Elasticsearch EQL:**
 ```spl
 Image="*\\powershell.exe" CommandLine="*-enc*"
 ```
@@ -420,9 +420,9 @@ Field 'Image' not mapped in pipeline
 
 **Solution:** Use the correct pipeline for your SIEM:
 ```python
-# For Windows logs in Splunk
-from sigma.pipelines.splunk import splunk_windows_pipeline
-backend = SplunkBackend(processing_pipeline=splunk_windows_pipeline())
+# For Windows logs in Elasticsearch
+from sigma.pipelines.elasticsearch import elasticsearch_windows_pipeline
+backend = ElasticsearchBackend(processing_pipeline=elasticsearch_windows_pipeline())
 
 # For Windows logs in Elastic
 from sigma.pipelines.elasticsearch import ecs_windows_pipeline

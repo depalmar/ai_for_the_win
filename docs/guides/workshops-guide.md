@@ -470,7 +470,7 @@ scenarios = [
     "Detect lateral movement using PsExec or similar tools"
 ]
 
-# TODO: Generate Sigma rules and convert to Splunk queries
+# TODO: Generate Sigma rules and convert to Elasticsearch queries
 ```
 
 ### Exercise 3.3: Rule Validation (15 min)

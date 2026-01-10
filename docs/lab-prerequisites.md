@@ -13,7 +13,7 @@ Quick guide to help you pick the right starting point.
 | **Know Python, want LLMs** | Lab 08 | 04 → 04b → 05 |
 | **Know ML, want LLMs** | Lab 03b | 04 → 04b → 05 |
 | **Security analyst, want AI tools** | Lab 04 | 05 → 06 → 09 |
-| **Want DFIR focus** | Lab 10a | 11a → 11 → 13 |
+| **Want DFIR focus** | Lab 25 | 11a → 11 → 13 |
 
 ---
 
@@ -25,8 +25,8 @@ These labs help you transition between major topics:
 |------------|-----------------|-------------|
 | **Lab 03b** | ML → LLM | If Lab 04 feels like a big jump from Labs 01-03 |
 | **Lab 04b** | Single tasks → Agents | Before Lab 05 if tool calling is new |
-| **Lab 10a** | General → DFIR | Before Lab 11 if DFIR concepts are new |
-| **Lab 11a** | General → Ransomware | Before Lab 11 for ransomware background |
+| **Lab 25** | General → DFIR | Before Lab 11 if DFIR concepts are new |
+| **Lab 30** | General → Ransomware | Before Lab 11 for ransomware background |
 
 ---
 

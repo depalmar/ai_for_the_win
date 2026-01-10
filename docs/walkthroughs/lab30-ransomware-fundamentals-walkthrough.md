@@ -1,4 +1,4 @@
-# Lab 11a Walkthrough: Ransomware Fundamentals
+# Lab 30 Walkthrough: Ransomware Fundamentals
 
 ## Overview
 

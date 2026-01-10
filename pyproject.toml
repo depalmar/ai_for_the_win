@@ -1,6 +1,6 @@
 [project]
 name = "ai-for-the-win"
-version = "1.8.0"
+version = "1.9.0"
 description = "Hands-on AI/ML training for security practitioners - DFIR, threat detection, and security automation"
 readme = "README.md"
 license = {text = "MIT"}

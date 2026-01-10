@@ -283,8 +283,8 @@ class CloudTrailAnalyzer:
         return threats
 
 
-class AzureSentinelAnalyzer:
-    """Analyze Azure Sentinel incidents and logs."""
+class AzureMonitorAnalyzer:
+    """Analyze Azure Monitor incidents and logs."""
 
     # High-risk Azure activities
     HIGH_RISK_OPERATIONS = [
@@ -301,7 +301,7 @@ class AzureSentinelAnalyzer:
 
     def parse_incident(self, raw_incident: dict) -> dict:
         """
-        Parse Azure Sentinel incident.
+        Parse Azure Monitor incident.
 
         TODO: Implement incident parsing
         - Extract incident details
@@ -309,13 +309,13 @@ class AzureSentinelAnalyzer:
         - Map to threat categories
 
         Args:
-            raw_incident: Raw Sentinel incident
+            raw_incident: Raw Monitor incident
 
         Returns:
             Parsed incident dict
         """
         # TODO: Ask your AI assistant:
-        # "Write Python code to parse an Azure Sentinel incident dictionary.
+        # "Write Python code to parse an Azure Monitor incident dictionary.
         # Extract incident ID, title, severity, status, created/updated times,
         # related alerts, and entities (accounts, hosts, IPs). Map the incident
         # classification to threat categories. Return a structured dict with
@@ -326,7 +326,7 @@ class AzureSentinelAnalyzer:
 
     def load_incidents(self, incidents: List[dict]):
         """
-        Load Azure Sentinel incidents.
+        Load Azure Monitor incidents.
 
         TODO: Implement incident loading
 
@@ -334,7 +334,7 @@ class AzureSentinelAnalyzer:
             incidents: Raw incidents
         """
         # TODO: Ask your AI assistant:
-        # "Write Python code to load a list of raw Azure Sentinel incidents.
+        # "Write Python code to load a list of raw Azure Monitor incidents.
         # For each incident, call self.parse_incident() and append the parsed
         # result to self.incidents list."
         #
@@ -416,7 +416,7 @@ class AzureSentinelAnalyzer:
             Correlated threats
         """
         # TODO: Ask your AI assistant:
-        # "Write Python code to correlate Azure Sentinel incidents from self.incidents.
+        # "Write Python code to correlate Azure Monitor incidents from self.incidents.
         # Group incidents by shared entities (users, IPs, resources), identify attack
         # chains based on timestamps and MITRE technique progression, and calculate
         # composite risk scores for correlated incident groups. Return CloudThreat
@@ -489,7 +489,7 @@ class MultiCloudAnalyzer:
     def __init__(self, llm_provider: str = "auto"):
         """Initialize multi-cloud analyzer."""
         self.aws_analyzer = CloudTrailAnalyzer()
-        self.azure_analyzer = AzureSentinelAnalyzer()
+        self.azure_analyzer = AzureMonitorAnalyzer()
         self.gcp_analyzer = GCPSecurityAnalyzer()
         self.llm = None
         self.llm_provider = llm_provider
@@ -727,8 +727,8 @@ def main():
         print("TODO: Implement detection methods")
 
     # Task 2: Azure Analysis
-    print("\n--- Task 2: Azure Sentinel Analysis ---")
-    azure_analyzer = AzureSentinelAnalyzer()
+    print("\n--- Task 2: Azure Monitor Analysis ---")
+    azure_analyzer = AzureMonitorAnalyzer()
     azure_analyzer.load_incidents(cloud_data["azure"].get("incidents", []))
 
     azure_threats = azure_analyzer.analyze()

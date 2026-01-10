@@ -76,7 +76,7 @@
 |------|-------|
 | **Security basics** | [Security Fundamentals for Beginners](./guides/security-fundamentals-for-beginners.md) |
 | **Using AI to learn** | [Using AI for Learning](./guides/using-ai-for-learning.md) |
-| **Cloud security basics** | [Lab 19a: Cloud Security Fundamentals](../labs/lab44-cloud-security-fundamentals/) |
+| **Cloud security basics** | [Lab 44: Cloud Security Fundamentals](../labs/lab44-cloud-security-fundamentals/) |
 
 ---
 

@@ -228,7 +228,7 @@ copilot = IRCopilot()
 # SIEM Query Tool
 def query_siem(query: str) -> str:
     """Query SIEM for logs matching criteria."""
-    # In production, integrate with Splunk/Elastic/etc.
+    # In production, integrate with Elasticsearch/Elastic/etc.
 
     # Simulated response
     if "failed login" in query.lower():
@@ -260,7 +260,7 @@ def query_siem(query: str) -> str:
 copilot.register_tool(
     "query_siem",
     query_siem,
-    "Search SIEM for security events. Supports SPL-like queries."
+    "Search SIEM for security events. Supports EQL-like queries."
 )
 
 # Threat Intelligence Lookup

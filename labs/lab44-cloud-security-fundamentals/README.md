@@ -148,7 +148,7 @@ Modern security increasingly involves cloud infrastructure:
 |---------|----------|------------------|
 | **Entra ID** (Azure AD) | Identity | Users, groups, SSO |
 | **Activity Log** | Logging | Control plane audit |
-| **Sentinel** | SIEM | Full security analytics |
+| **Monitor Logs** | Logging | Application and security logs |
 | **Defender for Cloud** | Detection | CSPM + threat detection |
 | **Virtual Network** | Network | Network isolation |
 | **Key Vault** | Secrets | Credential management |

@@ -332,12 +332,12 @@ Injecting code into another process:
 ```
 1. DLL Injection
    - Force target to load malicious DLL
-   
+
 2. Process Hollowing
    - Start legitimate process suspended
    - Replace its memory with malicious code
    - Resume execution
-   
+
 3. Thread Injection
    - Create new thread in target process
    - Thread executes malicious code
@@ -415,6 +415,6 @@ netstat -ano
 ## Learn More
 
 - Lab 13: Memory Forensics AI
-- Lab 10a: DFIR Fundamentals
+- Lab 25: DFIR Fundamentals
 - [Windows Internals Book](https://docs.microsoft.com/en-us/sysinternals/resources/windows-internals) (Microsoft)
 - [Sysinternals Tools](https://docs.microsoft.com/en-us/sysinternals/) (Process Explorer, Autoruns, etc.)

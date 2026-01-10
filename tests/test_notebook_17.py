@@ -1,10 +1,10 @@
-# Test Lab 06a: Embeddings & Vectors (using TF-IDF as alternative)
+# Test Lab 17: Embeddings & Vectors (using TF-IDF as alternative)
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
 print("=" * 50)
-print("Testing Lab 06a: Embeddings & Vectors")
+print("Testing Lab 17: Embeddings & Vectors")
 print("=" * 50)
 print("(Using TF-IDF as alternative to sentence-transformers)")
 
@@ -80,5 +80,5 @@ if cross_sim < min(threat_internal_sim, benign_internal_sim):
 else:
     print("[!] Groups overlap - may need better features")
 
-print("\n[PASS] Lab 06a: PASSED")
+print("\n[PASS] Lab 17: PASSED")
 print("\nNote: In Colab, use sentence-transformers for better semantic embeddings.")

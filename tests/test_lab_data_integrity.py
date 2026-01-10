@@ -1723,5 +1723,264 @@ class TestLabCategoryConsistency:
             pytest.fail("README Lab Navigator legend uses outdated terms:\n" + "\n".join(errors))
 
 
+class TestLegalCompliance:
+    """Ensure compliance with open-source tooling policy.
+
+    These tests enforce the open-source-first approach documented in LICENSE
+    to maintain platform independence and transparency.
+    """
+
+    def test_open_source_siem_policy_compliance(self):
+        """Verify documentation maintains open-source SIEM tool focus.
+
+        Per LICENSE: This project focuses on open-source security tooling
+        (Elasticsearch, OpenSearch) to ensure platform independence and
+        verifiable public sources.
+
+        Approved tools: Elasticsearch, OpenSearch
+        External references: Only if citing public documentation/blogs
+        """
+        # Proprietary SIEM platforms (maintain open-source focus)
+        proprietary_siems = [
+            (r"Splunk(?!\.com/en_us/blog)", "Splunk"),  # Allow blog URLs
+            (r"(?:Microsoft\s+)?Sentinel(?!\s+KQL)", "Microsoft Sentinel"),  # KQL is OK
+            (r"Azure\s+Sentinel", "Azure Sentinel"),
+            (r"IBM\s+QRadar", "IBM QRadar"),
+            (r"QRadar", "QRadar"),
+        ]
+
+        # Files to check (documentation and code)
+        # Note: CLAUDE.md is excluded as it documents the policy itself
+        files_to_check = [
+            REPO_ROOT / "README.md",
+            REPO_ROOT / "labs" / "README.md",
+            REPO_ROOT / "docs" / "index.md",
+        ]
+
+        # Also check all lab READMEs
+        if LABS_DIR.exists():
+            files_to_check.extend(LABS_DIR.glob("*/README.md"))
+
+        # Also check walkthroughs and guides
+        walkthroughs_dir = REPO_ROOT / "docs" / "walkthroughs"
+        if walkthroughs_dir.exists():
+            files_to_check.extend(walkthroughs_dir.glob("*.md"))
+
+        guides_dir = REPO_ROOT / "docs" / "guides"
+        if guides_dir.exists():
+            files_to_check.extend(guides_dir.glob("*.md"))
+
+        errors = []
+
+        for file_path in files_to_check:
+            if not file_path.exists():
+                continue
+
+            content = file_path.read_text(encoding="utf-8")
+            rel_path = file_path.relative_to(REPO_ROOT)
+
+            for pattern, name in proprietary_siems:
+                matches = list(re.finditer(pattern, content, re.IGNORECASE))
+                if matches:
+                    for match in matches[:3]:  # Limit to first 3 per file
+                        line_num = content[: match.start()].count("\n") + 1
+                        errors.append(
+                            f"{rel_path}:{line_num} - Found '{name}' "
+                            f"(policy: use Elasticsearch/OpenSearch)"
+                        )
+
+        if errors:
+            pytest.fail(
+                "Documentation contains proprietary SIEM references (open-source policy):\n"
+                + "\n".join(errors[:20])  # Limit to first 20 errors
+                + "\n\nPer LICENSE: This project maintains open-source tool focus."
+            )
+
+    def test_open_source_edr_policy_compliance(self):
+        """Verify documentation maintains open-source EDR tool focus.
+
+        Per LICENSE: This project uses open-source endpoint security tools
+        to ensure platform independence and verifiable public sources.
+
+        Approved tools: Wazuh, OSSEC
+        External references: Only if citing public documentation/blogs
+        """
+        # Proprietary EDR/XDR platforms (maintain open-source focus)
+        proprietary_edrs = [
+            (r"CrowdStrike", "CrowdStrike"),
+            (r"Cortex\s+XDR", "Cortex XDR"),
+            (r"XSIAM", "XSIAM"),
+            (r"Palo\s+Alto(?:\s+Networks)?(?:\s+XDR)?", "Palo Alto Networks"),
+            (r"Carbon\s+Black", "Carbon Black"),
+            (r"SentinelOne", "SentinelOne"),
+            (r"Microsoft\s+Defender(?:\s+for\s+Endpoint)?", "Microsoft Defender"),
+            (r"Defender\s+for\s+Endpoint", "Defender for Endpoint"),
+        ]
+
+        # Files to check
+        # Note: CLAUDE.md is excluded as it documents the policy itself
+        files_to_check = [
+            REPO_ROOT / "README.md",
+            REPO_ROOT / "labs" / "README.md",
+            REPO_ROOT / "docs" / "index.md",
+            REPO_ROOT / "docs" / "SOURCES.md",
+        ]
+
+        # Also check all lab READMEs
+        if LABS_DIR.exists():
+            files_to_check.extend(LABS_DIR.glob("*/README.md"))
+
+        # Also check walkthroughs and guides
+        walkthroughs_dir = REPO_ROOT / "docs" / "walkthroughs"
+        if walkthroughs_dir.exists():
+            files_to_check.extend(walkthroughs_dir.glob("*.md"))
+
+        guides_dir = REPO_ROOT / "docs" / "guides"
+        if guides_dir.exists():
+            files_to_check.extend(guides_dir.glob("*.md"))
+
+        errors = []
+
+        for file_path in files_to_check:
+            if not file_path.exists():
+                continue
+
+            content = file_path.read_text(encoding="utf-8")
+            rel_path = file_path.relative_to(REPO_ROOT)
+
+            for pattern, name in proprietary_edrs:
+                matches = list(re.finditer(pattern, content, re.IGNORECASE))
+                if matches:
+                    for match in matches[:3]:  # Limit to first 3 per file
+                        line_num = content[: match.start()].count("\n") + 1
+                        errors.append(
+                            f"{rel_path}:{line_num} - Found '{name}' " f"(policy: use Wazuh/OSSEC)"
+                        )
+
+        if errors:
+            pytest.fail(
+                "Documentation contains proprietary EDR references (open-source policy):\n"
+                + "\n".join(errors[:20])  # Limit to first 20 errors
+                + "\n\nPer LICENSE: This project maintains open-source tool focus."
+            )
+
+    def test_open_source_query_language_compliance(self):
+        """Verify code uses open-source query languages.
+
+        Per LICENSE: This project uses open-source query languages to ensure
+        platform independence and public verifiability.
+
+        Approved: EQL (Elasticsearch), ES|QL, KQL (Kibana), Sigma
+        """
+        # Proprietary query languages
+        proprietary_languages = [
+            (r"SPL\s+query", "SPL (Splunk Processing Language)"),
+            (r"Splunk\s+query", "Splunk query language"),
+            (r"XQL\s+query", "XQL (Cortex XDR Query Language)"),
+            (r"XQL\s+detection", "XQL detection"),
+            (r"xql_query", "XQL query variable"),
+        ]
+
+        # Check lab solution and starter code
+        files_to_check = []
+        if LABS_DIR.exists():
+            files_to_check.extend(LABS_DIR.glob("*/solution/*.py"))
+            files_to_check.extend(LABS_DIR.glob("*/starter/*.py"))
+            files_to_check.extend(LABS_DIR.glob("*/README.md"))
+
+        errors = []
+
+        for file_path in files_to_check:
+            if not file_path.exists():
+                continue
+
+            content = file_path.read_text(encoding="utf-8")
+            rel_path = file_path.relative_to(REPO_ROOT)
+
+            for pattern, name in proprietary_languages:
+                matches = list(re.finditer(pattern, content, re.IGNORECASE))
+                if matches:
+                    for match in matches[:3]:  # Limit to first 3 per file
+                        line_num = content[: match.start()].count("\n") + 1
+                        errors.append(
+                            f"{rel_path}:{line_num} - Found '{name}' " f"(policy: use EQL/ES|QL)"
+                        )
+
+        if errors:
+            pytest.fail(
+                "Code contains proprietary query languages (open-source policy):\n"
+                + "\n".join(errors[:20])  # Limit to first 20 errors
+                + "\n\nPer LICENSE: This project uses open-source query languages."
+            )
+
+    def test_sources_md_exists_and_valid(self):
+        """Verify SOURCES.md exists and documents open-source tooling.
+
+        Per LICENSE: All external sources must be documented in SOURCES.md
+        with public documentation links.
+        """
+        sources_md = REPO_ROOT / "docs" / "SOURCES.md"
+
+        assert sources_md.exists(), "docs/SOURCES.md is missing (required by LICENSE disclaimer)"
+
+        content = sources_md.read_text(encoding="utf-8")
+
+        # Verify key sections exist
+        required_sections = [
+            "Open-Source Security Tools",
+            "Elasticsearch",
+            "OpenSearch",
+            "Sigma",
+            "YARA",
+            "MITRE ATT&CK",
+            "publicly available",
+        ]
+
+        missing = []
+        for section in required_sections:
+            if section not in content:
+                missing.append(section)
+
+        if missing:
+            pytest.fail(
+                f"docs/SOURCES.md is missing required sections: {', '.join(missing)}\n"
+                "See LICENSE for source documentation requirements."
+            )
+
+    def test_license_has_employment_disclaimer(self):
+        """Verify LICENSE contains Employment and IP Disclaimer section.
+
+        This is critical legal protection for independent work.
+        """
+        license_file = REPO_ROOT / "LICENSE"
+
+        assert license_file.exists(), "LICENSE file is missing"
+
+        content = license_file.read_text(encoding="utf-8")
+
+        # Verify critical sections exist
+        required_sections = [
+            "Employment and Intellectual Property Disclaimer",
+            "created entirely on personal time",
+            "publicly available information",
+            "Source Material Declaration",
+            "Explicit Exclusions",
+            "California Labor Code Section 2870",
+            "Independent Work Certification",
+        ]
+
+        missing = []
+        for section in required_sections:
+            if section not in content:
+                missing.append(section)
+
+        if missing:
+            pytest.fail(
+                "LICENSE is missing required employment protection sections:\n"
+                + "\n".join(f"  - {s}" for s in missing)
+                + "\n\nThese sections are required for legal protection."
+            )
+
+
 if __name__ == "__main__":
     pytest.main([__file__, "-v"])

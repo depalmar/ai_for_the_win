@@ -245,7 +245,7 @@ Security tools generate **logs** - records of what happened on systems and netwo
 | **Authentication Logs** | Login attempts (success/failure) | Windows Security, SSH, Active Directory |
 | **Firewall Logs** | Network connections allowed/blocked | Cisco, Fortinet, iptables |
 | **Proxy Logs** | Web traffic (URLs visited) | Zscaler, Squid, Blue Coat |
-| **Endpoint Logs** | Process execution, file changes | CrowdStrike, Carbon Black, Sysmon |
+| **Endpoint Logs** | Process execution, file changes | Wazuh, Wazuh, Sysmon |
 | **DNS Logs** | Domain name lookups | DNS server, Zeek |
 | **Email Logs** | Email metadata, attachments | Exchange, Proofpoint |
 
@@ -325,7 +325,7 @@ CEF:0|Security|Firewall|1.0|BLOCK|Blocked connection|5|src=192.168.1.100 dst=10.
 | **Forensics** | Investigate what happened and how |
 | **Chain of Custody** | Document who handled evidence and when |
 
-**Lab Connection**: Lab 10a (DFIR Fundamentals) covers this in depth.
+**Lab Connection**: Lab 25 (DFIR Fundamentals) covers this in depth.
 
 ---
 
@@ -335,11 +335,11 @@ CEF:0|Security|Firewall|1.0|BLOCK|Blocked connection|5|src=192.168.1.100 dst=10.
 
 | Category | Purpose | Examples |
 |----------|---------|----------|
-| **SIEM** | Collect and analyze logs | Splunk, Elastic, Microsoft Sentinel, IBM QRadar |
-| **EDR** | Monitor endpoints (computers) | CrowdStrike, SentinelOne, Carbon Black |
+| **SIEM** | Collect and analyze logs | Elasticsearch, Elastic, Azure Monitor, IBM Elasticsearch |
+| **EDR** | Monitor endpoints (computers) | Wazuh, MonitorOne, Wazuh |
 | **Firewall** | Block/allow network traffic | Cisco, Fortinet, Check Point |
 | **IDS/IPS** | Detect/prevent intrusions | Snort, Suricata, Zeek |
-| **SOAR** | Automate response | Splunk SOAR, Swimlane, Tines |
+| **SOAR** | Automate response | Elasticsearch SOAR, Swimlane, Tines |
 | **Sandbox** | Safely run suspicious files | Any.Run, Joe Sandbox, Cuckoo |
 | **Threat Intel** | Information about threats | VirusTotal, MISP, ThreatFox |
 
@@ -430,7 +430,7 @@ These reference posters are gold - download and print them:
 ### In This Course
 
 - **Lab 05**: AI in Security Operations - conceptual overview
-- **Lab 10a**: DFIR Fundamentals - incident response basics
+- **Lab 25**: DFIR Fundamentals - incident response basics
 - **Glossary**: [security-to-ai-glossary.md](../../resources/security-to-ai-glossary.md) - AI terms explained for security folks
 
 ---

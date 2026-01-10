@@ -740,7 +740,7 @@ Prompts to use:
 - Execution from temp directories
 Include references to MITRE ATT&CK T1059.001"
 
-"Convert this Sigma rule to a Splunk query"
+"Convert this Sigma rule to a Elasticsearch query"
 
 "Generate a YARA rule from these strings: [paste strings]"
 ```
