@@ -72,28 +72,29 @@ class ProviderConfig:
     supports_extended_tokens: bool = True
 
 
+# Model defaults updated January 2026 - verify with web search before updating
 PROVIDER_CONFIG = {
     "anthropic": ProviderConfig(
         env_key="ANTHROPIC_API_KEY",
-        default_model="claude-sonnet-4-20250514",
+        default_model="claude-sonnet-4-5",  # Latest Sonnet (Sep 2025)
         max_tokens_param="max_tokens",
         supports_extended_tokens=True,
     ),
     "openai": ProviderConfig(
         env_key="OPENAI_API_KEY",
-        default_model="gpt-5",
+        default_model="gpt-5",  # GPT-5.2 available but gpt-5 more stable
         max_tokens_param="max_tokens",
         supports_extended_tokens=True,
     ),
     "google": ProviderConfig(
         env_key="GOOGLE_API_KEY",
-        default_model="gemini-2.5-pro",
+        default_model="gemini-3-flash",  # Default Gemini model (late 2025)
         max_tokens_param="max_output_tokens",
         supports_extended_tokens=True,
     ),
     "ollama": ProviderConfig(
         env_key="",  # No API key needed
-        default_model="llama3.1:8b",
+        default_model="llama3.3:70b",  # Latest Llama (Dec 2024)
         max_tokens_param="num_predict",
         supports_extended_tokens=False,
     ),
@@ -444,18 +445,18 @@ def setup_llm():
         "openai": ("OPENAI_API_KEY", "gpt-5"),
         "google": ("GOOGLE_API_KEY", "gemini-2.5-pro"),
     }
-    
+
     for name, (key, model) in providers.items():
         if os.environ.get(key):
             print(f"✅ Using {name.title()} ({model})")
             return name, model
-    
+
     raise ValueError("❌ No API key found. Set ANTHROPIC_API_KEY, OPENAI_API_KEY, or GOOGLE_API_KEY")
 
 def query_llm(prompt, system_prompt="You are a security analyst.", max_tokens=4096):
     """Query the configured LLM provider."""
     provider, model = setup_llm()
-    
+
     if provider == "anthropic":
         from anthropic import Anthropic
         client = Anthropic()
@@ -464,7 +465,7 @@ def query_llm(prompt, system_prompt="You are a security analyst.", max_tokens=40
             messages=[{"role": "user", "content": prompt}]
         )
         return response.content[0].text
-    
+
     elif provider == "openai":
         from openai import OpenAI
         client = OpenAI()
@@ -473,7 +474,7 @@ def query_llm(prompt, system_prompt="You are a security analyst.", max_tokens=40
             messages=[{"role": "system", "content": system_prompt}, {"role": "user", "content": prompt}]
         )
         return response.choices[0].message.content
-    
+
     elif provider == "google":
         import google.generativeai as genai
         genai.configure(api_key=os.environ.get("GOOGLE_API_KEY"))

@@ -7,10 +7,10 @@ Update AI model references across the curriculum to current versions.
 **IMPORTANT: Web search for latest model info before updating.**
 
 1. Search for current model versions:
-   - `"Claude API models 2025 2026 latest"` - Anthropic
-   - `"GPT-4o o1 models 2025 OpenAI"` - OpenAI
-   - `"Gemini 2.0 models 2025 Google"` - Google
-   - `"Llama 3.3 models 2025 Meta"` - Meta
+   - `"Claude API models 2026 latest sonnet opus"` - Anthropic
+   - `"GPT-5 models 2026 OpenAI latest"` - OpenAI
+   - `"Gemini 3 models 2026 Google latest"` - Google
+   - `"Llama 3.3 models 2026 Meta"` - Meta
 
 2. Update the reference file first:
    ```
@@ -32,28 +32,31 @@ Update AI model references across the curriculum to current versions.
 
 ## Current Model Guide (January 2026)
 
+**IMPORTANT**: Always web search before updating - models change rapidly!
+
 ### Anthropic Claude
 | Model | Use Case |
 |-------|----------|
-| claude-opus-4 | Most capable, complex reasoning |
-| claude-sonnet-4 | Balanced performance/cost |
-| claude-3-5-sonnet | Previous gen, still good |
-| claude-3-5-haiku | Fast, affordable |
+| claude-sonnet-4-5 | Best for coding/agents (Sep 2025) |
+| claude-opus-4-5 | Most intelligent, complex reasoning |
+| claude-haiku-4-5 | Fast, affordable (Oct 2025) |
+| claude-sonnet-4 | Previous gen, still excellent |
 
 ### OpenAI GPT
 | Model | Use Case |
 |-------|----------|
+| gpt-5.2 | Latest, 90%+ ARC-AGI (Dec 2025) |
+| gpt-5 | General purpose |
+| gpt-5.2-codex | Agentic coding |
 | o1-pro | Advanced reasoning |
-| o1 / o1-mini | Reasoning tasks |
-| gpt-4o | General purpose |
-| gpt-4o-mini | Fast, affordable |
 
 ### Google Gemini
 | Model | Use Case |
 |-------|----------|
-| gemini-2.0-flash | Fast, multimodal |
-| gemini-1.5-pro | Long context (1M tokens) |
-| gemini-1.5-flash | Fast general purpose |
+| gemini-3-flash | Default, 78% SWE-bench |
+| gemini-3-pro | Complex reasoning, 1M context |
+| gemini-2.5-pro | Production stable |
+| gemini-2.5-flash | Fast general purpose |
 
 ### Meta Llama (Open Source)
 | Model | Use Case |

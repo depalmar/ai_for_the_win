@@ -14,11 +14,18 @@ import sys
 from pathlib import Path
 
 # Current model versions (update these when new models release)
-# Last updated: January 2026
+# Last updated: January 2026 (via web search)
+# IMPORTANT: Always verify with web search before updating - AI model landscape changes rapidly
 CURRENT_MODELS = {
-    # Anthropic Claude
+    # Anthropic Claude - https://platform.claude.com/docs/en/about-claude/models/overview
     "claude": {
-        "current": ["claude-3-5-sonnet", "claude-3-5-haiku", "claude-opus-4", "claude-sonnet-4"],
+        "current": [
+            "claude-sonnet-4-5",
+            "claude-opus-4-5",
+            "claude-haiku-4-5",
+            "claude-sonnet-4",
+            "claude-opus-4",
+        ],
         "outdated": [
             "claude-2",
             "claude-instant",
@@ -26,19 +33,19 @@ CURRENT_MODELS = {
             "claude-3-sonnet",
             "claude-3-haiku",
         ],
-        "note": "Claude 3.5 Sonnet is current workhorse; Claude 4 (Opus/Sonnet) released late 2025",
+        "note": "Claude 4.5 series (Sonnet/Opus/Haiku) released late 2025; Claude 3 series deprecated",
     },
-    # OpenAI GPT
+    # OpenAI GPT - https://openai.com/gpt-5/
     "gpt": {
-        "current": ["gpt-4o", "gpt-4-turbo", "gpt-4o-mini", "o1", "o1-mini", "o1-pro"],
+        "current": ["gpt-5.2", "gpt-5", "gpt-5.2-codex", "o1", "o1-pro"],
         "outdated": ["gpt-3.5-turbo", "gpt-4-0314", "gpt-4-0613", "text-davinci"],
-        "note": "GPT-4o is current default; o1 series for reasoning",
+        "note": "GPT-5.2 released Dec 2025; GPT-4 series being phased out",
     },
-    # Google Gemini
+    # Google Gemini - https://ai.google.dev/gemini-api/docs/models
     "gemini": {
-        "current": ["gemini-2.0", "gemini-1.5-pro", "gemini-1.5-flash", "gemini-2.0-flash"],
+        "current": ["gemini-3-pro", "gemini-3-flash", "gemini-2.5-pro", "gemini-2.5-flash"],
         "outdated": ["gemini-pro", "gemini-1.0", "bard", "palm"],
-        "note": "Gemini 2.0 released Dec 2024; 1.5 Pro still widely used",
+        "note": "Gemini 3 released late 2025; Gemini 3 Flash is default",
     },
     # Meta Llama
     "llama": {
