@@ -1,6 +1,6 @@
 # Lab 16: Build a Threat Intelligence AI Agent
 
-**Difficulty:** 🟡 Intermediate | **Time:** 60-90 min | **Prerequisites:** Lab 15, API key
+**Difficulty:** 🟡 Intermediate | **Time:** 60-90 min | **Prerequisites:** Lab 35, API key
 
 Create an AI agent that gathers, correlates, and reports on threat intelligence.
 
@@ -479,7 +479,7 @@ def generate_threat_report(
 ## 📁 Files
 
 ```
-lab16-threat-intel-agent/
+Lab 36-threat-intel-agent/
 ├── README.md
 ├── starter/
 │   ├── main.py
@@ -639,6 +639,6 @@ def _execute_tool(self, tool_name: str, args: dict) -> str:
 
 ---
 
-> **Stuck?** See the [Lab 36 Walkthrough](../../docs/walkthroughs/lab16-threat-intel-agent-walkthrough.md) for step-by-step guidance.
+> **Stuck?** See the [Lab 36 Walkthrough](../../docs/walkthroughs/Lab 36-threat-intel-agent-walkthrough.md) for step-by-step guidance.
 
-**Next Lab**: [Lab 42 - RAG for Security Docs](../lab18-security-rag/)
+**Next Lab**: [Lab 42 - RAG for Security Docs](../Lab 42-security-rag/)

@@ -164,6 +164,30 @@ class TestNotebookLinks:
                         )
                         break
 
+    def test_notebook_next_lab_references_valid(self):
+        """Next Lab references should use valid lab numbers (not old format like 00a, 03b)."""
+        notebooks_dir = PROJECT_ROOT / "notebooks"
+
+        # Old format patterns that should NOT appear
+        old_format_pattern = re.compile(r"\bLab\s*(\d{2}[a-z])\b", re.IGNORECASE)
+
+        # Valid lab numbers (current format)
+        existing_labs = {
+            int(re.search(r"lab(\d+)", d.name).group(1))
+            for d in (PROJECT_ROOT / "labs").iterdir()
+            if d.is_dir() and d.name.startswith("lab")
+        }
+
+        for notebook in notebooks_dir.glob("lab*.ipynb"):
+            content = notebook.read_text(encoding="utf-8")
+
+            # Check for old format references
+            old_refs = old_format_pattern.findall(content)
+            assert not old_refs, (
+                f"{notebook.name}: Contains old lab format references: {old_refs}. "
+                f"Update to new numbering (e.g., Lab 01, Lab 10, etc.)"
+            )
+
 
 class TestCTFChallenges:
     """Test CTF challenge consistency."""

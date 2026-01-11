@@ -1,6 +1,6 @@
 # Lab 08: Working with APIs
 
-**Difficulty:** 🟢 Beginner | **Time:** 30-45 min | **Prerequisites:** Lab 01
+**Difficulty:** 🟢 Beginner | **Time:** 30-45 min | **Prerequisites:** Lab 29
 
 Learn to make HTTP requests, handle JSON responses, and work with security APIs.
 
@@ -17,7 +17,7 @@ By the end of this lab, you will:
 
 ## Prerequisites
 
-- Completed Lab 01 (Python basics)
+- Completed Lab 29 (Python basics)
 - Basic understanding of web concepts (URLs, HTTP)
 
 ## Time Required
@@ -475,7 +475,7 @@ Complete the starter code to build a security API client.
 ### File: `starter/main.py`
 
 ```bash
-python labs/lab08-working-with-apis/starter/main.py
+python labs/Lab 22-working-with-apis/starter/main.py
 ```
 
 ### TODOs
@@ -623,14 +623,14 @@ def check_ip_abuseipdb(ip_address, api_key):
 
 Now that you can work with APIs:
 
-- **Lab 15**: Use LLM APIs for log analysis
-- **Lab 16**: Build an agent with threat intel API tools
-- **Lab 18**: Implement RAG with embedding APIs
+- **Lab 35**: Use LLM APIs for log analysis
+- **Lab 36**: Build an agent with threat intel API tools
+- **Lab 42**: Implement RAG with embedding APIs
 
 You're ready for LLM-powered security tools!
 
 ---
 
-**Next Lab:** [Lab 09: CTF Fundamentals](../lab09-ctf-fundamentals/) - Learn security CTF skills and methodology
+**Next Lab:** [Lab 23: CTF Fundamentals](../Lab 23-ctf-fundamentals/) - Learn security CTF skills and methodology
 
-Or jump to: [Lab 10: Phishing Classifier](../lab10-phishing-classifier/) - Build your first ML security tool
+Or jump to: [Lab 29: Phishing Classifier](../Lab 29-phishing-classifier/) - Build your first ML security tool

@@ -580,7 +580,7 @@ When you're ready to build production security tools, these guides will help:
 | [Structured Output Parsing](../../docs/guides/structured-output-parsing.md) | Parse LLM JSON reliably |
 | [Prompt Injection Defense](../../docs/guides/prompt-injection-defense.md) | Protect against adversarial inputs |
 | [LLM Evaluation & Testing](../../docs/guides/llm-evaluation-testing.md) | Build test suites for LLM tools |
-| [AI in Security Operations](../lab05-ai-in-security-operations/) | Understand real-world limitations |
+| [AI in Security Operations](../Lab 36-ai-in-security-operations/) | Understand real-world limitations |
 
 ---
 
@@ -745,11 +745,11 @@ without worrying about API keys or code syntax.
 
 **Ready for more?**
 - **Labs 10-12**: Build ML foundations (no API keys)
-- **Lab 15**: Apply prompting to real log analysis (API key needed)
+- **Lab 35**: Apply prompting to real log analysis (API key needed)
 - **Lab 21**: Master YARA rule generation
 
 ---
 
-**Next Lab:** [Lab 05: AI in Security Operations](../lab05-ai-in-security-operations/) - See how AI fits into SOC workflows
+**Next Lab:** [Lab 36: AI in Security Operations](../Lab 36-ai-in-security-operations/) - See how AI fits into SOC workflows
 
-Or jump to: [Lab 10: Phishing Classifier](../lab10-phishing-classifier/) - Build your first ML security tool
+Or jump to: [Lab 29: Phishing Classifier](../Lab 29-phishing-classifier/) - Build your first ML security tool

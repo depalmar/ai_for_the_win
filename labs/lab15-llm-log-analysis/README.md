@@ -350,7 +350,7 @@ def analyze_security_incident(log_data: str) -> str:
 ## 📁 Files
 
 ```
-lab15-llm-log-analysis/
+Lab 35-llm-log-analysis/
 ├── README.md
 ├── starter/
 │   └── main.py
@@ -556,6 +556,6 @@ Did you guess any MITRE techniques? If so, mark as "possible".
 
 ---
 
-> **Stuck?** See the [Lab 35 Walkthrough](../../docs/walkthroughs/lab15-llm-log-analysis-walkthrough.md) for step-by-step guidance.
+> **Stuck?** See the [Lab 35 Walkthrough](../../docs/walkthroughs/Lab 35-llm-log-analysis-walkthrough.md) for step-by-step guidance.
 
-**Next Lab**: [Lab 36 - Threat Intelligence Agent](../lab16-threat-intel-agent/)
+**Next Lab**: [Lab 36 - Threat Intelligence Agent](../Lab 36-threat-intel-agent/)

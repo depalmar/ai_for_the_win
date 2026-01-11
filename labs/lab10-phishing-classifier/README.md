@@ -56,7 +56,7 @@ Phishing emails remain one of the most common attack vectors. Key indicators inc
 
 ## 🧠 Key Concepts
 
-> **Want the full theory?** See [Lab 04: ML Concepts Primer](../lab04-ml-concepts-primer/) for detailed explanations, diagrams, and exercises.
+> **Want the full theory?** See [Lab 35: ML Concepts Primer](../Lab 35-ml-concepts-primer/) for detailed explanations, diagrams, and exercises.
 
 ### TF-IDF (Term Frequency-Inverse Document Frequency)
 
@@ -284,7 +284,7 @@ for email in test_emails:
 ## 📁 Files
 
 ```
-lab10-phishing-classifier/
+Lab 29-phishing-classifier/
 ├── README.md           # This file
 ├── starter/
 │   └── main.py         # Starter code with TODOs
@@ -394,6 +394,6 @@ Record your observations:
 
 ---
 
-> **Stuck?** See the [Lab 10 Walkthrough](../../docs/walkthroughs/lab10-phishing-classifier-walkthrough.md) for step-by-step guidance.
+> **Stuck?** See the [Lab 29 Walkthrough](../../docs/walkthroughs/Lab 29-phishing-classifier-walkthrough.md) for step-by-step guidance.
 
-**Next Lab**: [Lab 11 - Malware Clustering](../lab11-malware-clustering/)
+**Next Lab**: [Lab 31 - Malware Clustering](../Lab 31-malware-clustering/)

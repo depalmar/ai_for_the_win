@@ -216,7 +216,7 @@ def evaluate_detector(y_true: np.ndarray, scores: np.ndarray) -> dict:
 ## 📁 Files
 
 ```
-lab12-anomaly-detection/
+Lab 32-anomaly-detection/
 ├── README.md
 ├── starter/
 │   └── main.py
@@ -314,6 +314,6 @@ optimal_threshold = thresholds[optimal_idx]
 
 ---
 
-> **Stuck?** See the [Lab 12 Walkthrough](../../docs/walkthroughs/lab12-anomaly-detection-walkthrough.md) for step-by-step guidance.
+> **Stuck?** See the [Lab 32 Walkthrough](../../docs/walkthroughs/Lab 32-anomaly-detection-walkthrough.md) for step-by-step guidance.
 
-**Next Lab**: [Lab 13 - ML vs LLM](../lab13-ml-vs-llm/)
+**Next Lab**: [Lab 33 - ML vs LLM](../Lab 33-ml-vs-llm/)

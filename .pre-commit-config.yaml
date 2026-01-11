@@ -47,6 +47,8 @@ repos:
         args: ['--maxkb=1000']
       - id: check-merge-conflict
       - id: detect-private-key
+        # Exclude educational security labs that contain example private keys
+        exclude: notebooks/lab49_llm_red_teaming\.ipynb
 
   # Markdown linting
   - repo: https://github.com/igorshubovych/markdownlint-cli

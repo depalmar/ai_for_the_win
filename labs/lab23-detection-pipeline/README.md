@@ -557,7 +557,7 @@ tags:
 
 Export rules to your SIEM using [pySigma](https://github.com/SigmaHQ/pySigma).
 
-> 🌉 **Want to learn more about Sigma?** Complete [Lab 20: Sigma Rule Fundamentals](../lab20-sigma-fundamentals/) first.
+> 🌉 **Want to learn more about Sigma?** Complete [Lab 49: Sigma Rule Fundamentals](../Lab 49-sigma-fundamentals/) first.
 
 ---
 

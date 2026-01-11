@@ -1,6 +1,6 @@
 # Lab 06: Visualization & Statistics for Security
 
-**Difficulty:** 🟢 Beginner | **Time:** 45-60 min | **Prerequisites:** Lab 01
+**Difficulty:** 🟢 Beginner | **Time:** 45-60 min | **Prerequisites:** Lab 29
 
 Master interactive data visualization and statistical analysis for security data using Plotly and Python.
 
@@ -285,7 +285,7 @@ arr[0:3, 1:4]               # Slice rows and columns
 ## Lab Structure
 
 ```
-lab06-visualization-stats/
+Lab 42-visualization-stats/
 ├── README.md           # This file
 ├── starter/
 │   └── main.py         # Exercises with TODOs
@@ -316,10 +316,10 @@ Combine multiple visualizations into a SOC dashboard.
 
 ```bash
 # Run the starter code
-python labs/lab06-visualization-stats/starter/main.py
+python labs/Lab 42-visualization-stats/starter/main.py
 
 # Run the solution
-python labs/lab06-visualization-stats/solution/main.py
+python labs/Lab 42-visualization-stats/solution/main.py
 ```
 
 ## Key Libraries
@@ -465,6 +465,6 @@ demo.launch()
 
 ---
 
-**Next Lab:** [Lab 07: Hello World ML](../lab07-hello-world-ml/) - Build your first machine learning model
+**Next Lab:** [Lab 21: Hello World ML](../Lab 21-hello-world-ml/) - Build your first machine learning model
 
-Or jump to: [Lab 10: Phishing Classifier](../lab10-phishing-classifier/) - Apply ML to real security problems
+Or jump to: [Lab 29: Phishing Classifier](../Lab 29-phishing-classifier/) - Apply ML to real security problems
