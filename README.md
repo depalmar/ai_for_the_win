@@ -130,15 +130,18 @@ High Confidence: FIN7/Carbanak
 **No installation needed** -- click and run in your browser:
 
 **Beginner (No API key):**
-[![Open Lab 02 in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab02_prompt_engineering.ipynb) Prompt Engineering basics
 
-[![Open Lab 07 in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab07_hello_world_ml.ipynb) Your first ML model
+[![Lab 02](https://img.shields.io/badge/Lab_02-Open_in_Colab-F9AB00?logo=googlecolab&logoColor=white)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab02_prompt_engineering.ipynb) Prompt Engineering basics
+
+[![Lab 07](https://img.shields.io/badge/Lab_07-Open_in_Colab-F9AB00?logo=googlecolab&logoColor=white)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab07_hello_world_ml.ipynb) Your first ML model
 
 **Intermediate (No API key):**
-[![Open Lab 10 in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab10_phishing_classifier.ipynb) ML phishing detection
+
+[![Lab 10](https://img.shields.io/badge/Lab_10-Open_in_Colab-F9AB00?logo=googlecolab&logoColor=white)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab10_phishing_classifier.ipynb) ML phishing detection
 
 **Advanced (API key required):**
-[![Open Lab 15 in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab15_llm_log_analysis.ipynb) LLM-powered log analysis
+
+[![Lab 15](https://img.shields.io/badge/Lab_15-Open_in_Colab-F9AB00?logo=googlecolab&logoColor=white)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab15_llm_log_analysis.ipynb) LLM-powered log analysis
 
 > All 50+ notebooks are in [`notebooks/`](./notebooks/) -- open any `.ipynb` in Colab
 
