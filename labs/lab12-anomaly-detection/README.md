@@ -216,7 +216,7 @@ def evaluate_detector(y_true: np.ndarray, scores: np.ndarray) -> dict:
 ## 📁 Files
 
 ```
-Lab 32-anomaly-detection/
+lab12-anomaly-detection/
 ├── README.md
 ├── starter/
 │   └── main.py

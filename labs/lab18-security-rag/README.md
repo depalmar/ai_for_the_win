@@ -329,7 +329,7 @@ def evaluate_rag_system(rag: SecurityRAG, test_cases: List[dict]) -> dict:
 ## 📁 Files
 
 ```
-Lab 42-security-rag/
+lab18-security-rag/
 ├── README.md
 ├── starter/
 │   ├── main.py

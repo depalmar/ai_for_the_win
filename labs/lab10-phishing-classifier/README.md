@@ -284,7 +284,7 @@ for email in test_emails:
 ## 📁 Files
 
 ```
-Lab 29-phishing-classifier/
+lab10-phishing-classifier/
 ├── README.md           # This file
 ├── starter/
 │   └── main.py         # Starter code with TODOs

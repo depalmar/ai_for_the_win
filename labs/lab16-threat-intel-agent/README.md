@@ -479,7 +479,7 @@ def generate_threat_report(
 ## 📁 Files
 
 ```
-Lab 36-threat-intel-agent/
+lab16-threat-intel-agent/
 ├── README.md
 ├── starter/
 │   ├── main.py

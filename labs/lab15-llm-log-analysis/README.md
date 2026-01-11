@@ -350,7 +350,7 @@ def analyze_security_incident(log_data: str) -> str:
 ## 📁 Files
 
 ```
-Lab 35-llm-log-analysis/
+lab15-llm-log-analysis/
 ├── README.md
 ├── starter/
 │   └── main.py
