@@ -8,10 +8,10 @@ We take the security of AI for the Win seriously. If you discover a security vul
 
 **Please DO NOT open a public issue for security vulnerabilities.**
 
-Instead, please report security vulnerabilities by:
+Instead, please report security vulnerabilities through one of these channels:
 
-1. **Email**: Send details to the repository owner via GitHub
-2. **GitHub Security Advisories**: Use the "Security" tab → "Report a vulnerability"
+1. **[GitHub Security Advisories](https://github.com/depalmar/ai_for_the_win/security/advisories/new)** (Preferred) - Use GitHub's private vulnerability reporting
+2. **Email**: [depalma.raymond@gmail.com](mailto:depalma.raymond@gmail.com) - For sensitive disclosures
 
 ### What to Include
 
@@ -139,9 +139,10 @@ We appreciate security researchers who help keep this project secure. Contributo
 
 ## Contact
 
-- **GitHub Issues**: For general bugs (non-security)
-- **GitHub Security**: For vulnerability reports
-- **Email**: Contact via GitHub profile
+- **Security vulnerabilities**: [Report via GitHub Security Advisories](https://github.com/depalmar/ai_for_the_win/security/advisories/new)
+- **Security email**: [depalma.raymond@gmail.com](mailto:depalma.raymond@gmail.com)
+- **General bugs**: [GitHub Issues](https://github.com/depalmar/ai_for_the_win/issues)
+- **Questions**: [GitHub Discussions](https://github.com/depalmar/ai_for_the_win/discussions)
 
 ## License
 
@@ -149,4 +150,4 @@ This security policy is licensed under CC BY 4.0.
 
 ---
 
-**Last Updated**: December 2025
+**Last Updated**: January 2026

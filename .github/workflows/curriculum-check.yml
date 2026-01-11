@@ -24,17 +24,23 @@ on:
         default: 'false'
         type: boolean
 
+# Restrict permissions to minimum required (OpenSSF Scorecard requirement)
+permissions:
+  contents: read
+
 jobs:
   curriculum-tests:
     name: Curriculum Integrity Tests
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v4
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548 # v5
         with:
           python-version: '3.11'
 
@@ -51,7 +57,7 @@ jobs:
 
       - name: Upload test report
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v4
         with:
           name: curriculum-report
           path: curriculum-report.html
@@ -60,15 +66,17 @@ jobs:
   link-check:
     name: Link Validation
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     # Only run on schedule or manual trigger with full_check
     if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && github.event.inputs.full_check == 'true')
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v4
 
       - name: Check markdown links
-        uses: gaurav-nelson/github-action-markdown-link-check@v1
+        uses: gaurav-nelson/github-action-markdown-link-check@d53a906aa6b22b8979d33bc86170567e619495ec # v1.0.15
         with:
           use-quiet-mode: 'yes'
           config-file: '.github/mlc-config.json'
@@ -77,12 +85,14 @@ jobs:
   notify-on-failure:
     name: Notify on Failure
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
     needs: [curriculum-tests]
     if: failure() && github.event_name == 'schedule'
 
     steps:
       - name: Create issue on failure
-        uses: actions/github-script@v7
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7
         with:
           script: |
             const title = `Curriculum Check Failed - ${new Date().toISOString().split('T')[0]}`;
