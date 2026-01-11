@@ -75,12 +75,12 @@ Threat actors have rapidly adopted AI tools to enhance their operations:
 │  ──────────         ──────────             ──────────          ─────        │
 │  • Basic chatbot    • LLM-powered          • Deepfake          • Autonomous │
 │    phishing           phishing               voice/video         attack     │
-│  • Simple text      • AI code              • AI malware          chains    │
-│    generation         assistance             development       • AI vs AI   │
-│  • Automated        • Synthetic            • Automated           warfare   │
-│    reconnaissance     identities             reconnaissance    • Adaptive   │
-│                     • Voice cloning        • Real-time           evasion   │
-│                                              adaptation                     │
+│  • Simple text      • AI code              • AI-guided           chains    │
+│    generation         assistance             malware (APT28)   • AI vs AI   │
+│  • Automated        • Synthetic            • 80-90% autonomous   warfare   │
+│    reconnaissance     identities             campaigns         • Adaptive   │
+│                     • Voice cloning        • Real-time LLM       evasion   │
+│                     • WormGPT tools          queries                        │
 │                                                                             │
 │  SOPHISTICATION: ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━▶     │
 │                                                                             │
@@ -98,14 +98,20 @@ Threat actors have rapidly adopted AI tools to enhance their operations:
 | **Reconnaissance**     | Automated OSINT, correlation                       | Medium               |
 | **Credential Attacks** | Smart password generation                          | Medium               |
 
-### Known AI-Enabled Attack Groups
+### Known AI-Enabled Attack Groups (2025-2026)
 
-| Group                 | AI Capabilities                    | Notable Campaigns       |
-| --------------------- | ---------------------------------- | ----------------------- |
-| **FIN7/Carbanak**     | AI-generated business emails       | Financial sector BEC    |
-| **Scattered Spider**  | Voice cloning for helpdesk attacks | UK Retail Breaches 2025 |
-| **Various APTs**      | LLM-assisted code development      | Multiple campaigns      |
-| **Cybercrime Groups** | Deepfake CEO fraud                 | Wire transfer fraud     |
+| Group | AI Capabilities | Notable Campaigns |
+| ----- | --------------- | ----------------- |
+| **APT28 (Fancy Bear)** | AI-guided malware (real-time LLM queries) | Ukraine infrastructure attacks (Jul 2025) |
+| **APT42 (Iran)** | LLM for phishing, recon (30%+ of Gemini abuse) | Defense/policy targeting |
+| **Scattered Spider** | Voice cloning, deepfake video calls | UK/US retail breaches 2025 |
+| **Funksec** | WormGPT integration, AI phishing templates | RaaS with AI tooling |
+| **Lazarus (DPRK)** | AI-generated cover letters, fake personas | Crypto developer recruitment |
+| **Unknown (Anthropic case)** | First AI-orchestrated campaign (80-90% autonomous) | Espionage (Sept 2025) |
+
+> **Key Trend (2025):** Nation-state actors (57+ groups per Google) now routinely use AI for reconnaissance, phishing content, and code assistance. APT28's real-time LLM malware guidance represents a significant evolution.
+
+See also: [Threat Landscape 2025-2026 Reference](../../docs/guides/threat-landscape-2025.md)
 
 ---
 
