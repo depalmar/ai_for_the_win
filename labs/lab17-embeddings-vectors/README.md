@@ -1,4 +1,4 @@
-# Lab 39: Embeddings & Vectors Explained [Bridge Lab]
+# Lab 17: Embeddings & Vectors Explained [Bridge Lab]
 
 **Difficulty:** 🟡 Intermediate | **Time:** 45-60 min | **Prerequisites:** Lab 35
 

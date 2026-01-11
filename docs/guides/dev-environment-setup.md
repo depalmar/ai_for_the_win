@@ -247,21 +247,21 @@ transformers>=4.35.0
 sentence-transformers>=2.2.0
 
 # LLM Frameworks
-langchain>=0.1.0
-langchain-community>=0.0.10
-langchain-anthropic>=0.1.0
-langchain-openai>=0.0.5
-llamaindex>=0.9.0
+langchain>=0.3.0
+langchain-community>=0.3.0
+langchain-anthropic>=0.3.0
+langchain-openai>=0.2.0
+llamaindex>=0.11.0
 
 # Vector Databases
-chromadb>=0.4.0
-pinecone-client>=2.2.0
-weaviate-client>=3.25.0
+chromadb>=0.5.0
+pinecone-client>=3.0.0
+weaviate-client>=4.0.0
 
 # API Clients
-openai>=1.6.0
-anthropic>=0.8.0
-ollama>=0.1.0
+openai>=1.50.0
+anthropic>=0.40.0
+ollama>=0.3.0
 
 # Security Tools
 pefile>=2023.2.7

@@ -298,3 +298,106 @@ Before adding any commercial security platform content:
 5. Focus on educational value, not product promotion
 
 See [LICENSE](../LICENSE) for full employment and IP disclaimer.
+
+## Knowledge Base
+
+Claude Code has access to security domain knowledge in `.claude/knowledge/`:
+
+| File | Purpose |
+|------|---------|
+| `mitre-attack.md` | MITRE ATT&CK tactics, techniques, detection queries |
+| `sigma-rules.md` | Sigma rule syntax, modifiers, conversion patterns |
+| `log-formats.md` | Common log format parsing (Windows, Linux, Web, Firewall) |
+| `ioc-patterns.md` | IOC regex patterns, extraction, defanging |
+
+### Using Knowledge Base
+
+When working on security analysis tasks, reference these files for:
+- **Threat mapping**: Map findings to MITRE ATT&CK techniques
+- **Detection rules**: Write Sigma rules with correct syntax
+- **Log parsing**: Extract fields from common log formats
+- **IOC extraction**: Use validated regex patterns for IOCs
+
+### Available Claude Code Skills
+
+These built-in skills are available for security analysis:
+
+| Skill | Usage | Description |
+|-------|-------|-------------|
+| `/ioc-extractor` | Extract IOCs from text | Extracts IPs, domains, hashes, URLs |
+| `/threat-intel` | Enrich IOCs | Query threat intel sources |
+| `/sigma-convert` | Convert Sigma rules | Sigma to XQL/Splunk/etc. |
+| `/xql-library` | XQL query templates | Pre-built Cortex XDR queries |
+| `/xql-detect` | Generate XQL queries | Create detection rules |
+| `/threat-hunt` | Threat hunting | Build hunting queries |
+| `/dfir-analyze` | DFIR analysis | Create analysis notebooks |
+| `/timeline-viz` | Event timelines | Visualize security events |
+| `/log-parser` | Parse logs | Templates for common formats |
+| `/security-check` | Code security review | Audit code for vulnerabilities |
+
+### Custom Project Commands
+
+| Command | Usage | Description |
+|---------|-------|-------------|
+| `/lab` | Navigate labs | List, view, start, test labs |
+| `/ctf` | CTF challenges | Browse, solve, get hints |
+| `/verify-setup` | Environment check | Verify Python, packages, APIs |
+| `/curriculum-check` | Validate curriculum | Check links, models, packages |
+
+## Curriculum Maintenance
+
+### Automated Checks
+
+The curriculum is validated by:
+1. **Pytest tests**: `pytest tests/test_curriculum_integrity.py -v`
+2. **GitHub Action**: Runs weekly and on content changes
+3. **Manual command**: `/curriculum-check`
+
+### When to Use Web Search
+
+**Proactively use web search** to keep content current when:
+
+1. **Checking model versions** (monthly or on user request):
+   - Search: "Anthropic Claude latest models [year]"
+   - Search: "OpenAI GPT latest models [year]"
+   - Update `shared/llm_config.py` if models are outdated
+
+2. **Checking package versions** (quarterly):
+   - Search: "anthropic python package latest version pypi"
+   - Search: "langchain latest version"
+   - Update version pins in guides if 2+ major versions behind
+
+3. **Before major releases**:
+   - Run `/curriculum-check models`
+   - Run `/curriculum-check packages`
+
+### Auto-Update Workflow
+
+When outdated content is found:
+
+```bash
+# 1. Run curriculum tests
+pytest tests/test_curriculum_integrity.py -v
+
+# 2. Fix any failures
+# - Update model names in shared/llm_config.py
+# - Update version pins in docs/guides/*.md
+# - Fix broken references in labs/
+
+# 3. Re-run tests
+pytest tests/test_curriculum_integrity.py -v
+
+# 4. Commit with clear message
+git add -A
+git commit -m "chore: curriculum update - models and packages"
+```
+
+### Key Files to Monitor
+
+| File | Update Frequency | Check For |
+|------|------------------|-----------|
+| `shared/llm_config.py` | Monthly | Model names, defaults |
+| `docs/guides/dev-environment-setup.md` | Quarterly | Package versions |
+| `docs/guides/quickstart-guide.md` | Quarterly | Package versions |
+| `docs/guides/llm-provider-comparison.md` | Monthly | Model capabilities, pricing |
+| `ctf-challenges/achievements.json` | On challenge add | Flag counts |

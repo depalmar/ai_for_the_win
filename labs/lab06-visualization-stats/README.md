@@ -1,6 +1,6 @@
-# Lab 42: Visualization & Statistics for Security
+# Lab 06: Visualization & Statistics for Security
 
-**Difficulty:** 🟢 Beginner | **Time:** 45-60 min | **Prerequisites:** Lab 29
+**Difficulty:** 🟢 Beginner | **Time:** 45-60 min | **Prerequisites:** Lab 01
 
 Master interactive data visualization and statistical analysis for security data using Plotly and Python.
 

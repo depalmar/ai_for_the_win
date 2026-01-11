@@ -1,6 +1,6 @@
-# Lab 22: Working with APIs
+# Lab 08: Working with APIs
 
-**Difficulty:** 🟢 Beginner | **Time:** 30-45 min | **Prerequisites:** Lab 29
+**Difficulty:** 🟢 Beginner | **Time:** 30-45 min | **Prerequisites:** Lab 01
 
 Learn to make HTTP requests, handle JSON responses, and work with security APIs.
 
@@ -17,7 +17,7 @@ By the end of this lab, you will:
 
 ## Prerequisites
 
-- Completed Lab 29 (Python basics)
+- Completed Lab 01 (Python basics)
 - Basic understanding of web concepts (URLs, HTTP)
 
 ## Time Required
@@ -631,6 +631,6 @@ You're ready for LLM-powered security tools!
 
 ---
 
-**Next Lab:** [Lab 03: Vibe Coding with AI](../lab03-vibe-coding-with-ai/) - Learn to collaborate with AI assistants for faster development
+**Next Lab:** [Lab 09: CTF Fundamentals](../lab09-ctf-fundamentals/) - Learn security CTF skills and methodology
 
 Or jump to: [Lab 10: Phishing Classifier](../lab10-phishing-classifier/) - Build your first ML security tool

@@ -1,4 +1,4 @@
-# Lab 45: Binary Analysis Basics [Bridge Lab]
+# Lab 19: Binary Analysis Basics [Bridge Lab]
 
 **Difficulty:** 🟡 Intermediate | **Time:** 45-60 min | **Prerequisites:** Lab 29
 

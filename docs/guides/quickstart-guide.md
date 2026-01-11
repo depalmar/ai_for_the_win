@@ -169,10 +169,10 @@ pip install --upgrade pip
 # Create requirements.txt
 cat << 'EOF' > requirements.txt
 # LLM Frameworks
-langchain>=0.1.0
-langchain-anthropic>=0.1.0
-langchain-community>=0.0.10
-anthropic>=0.8.0
+langchain>=0.3.0
+langchain-anthropic>=0.3.0
+langchain-community>=0.3.0
+anthropic>=0.40.0
 
 # Vector Database
 chromadb>=0.4.0

@@ -394,6 +394,6 @@ Record your observations:
 
 ---
 
-> **Stuck?** See the [Lab 29 Walkthrough](../../docs/walkthroughs/lab10-phishing-classifier-walkthrough.md) for step-by-step guidance.
+> **Stuck?** See the [Lab 10 Walkthrough](../../docs/walkthroughs/lab10-phishing-classifier-walkthrough.md) for step-by-step guidance.
 
-**Next Lab**: [Lab 31 - Malware Clustering](../lab11-malware-clustering/)
+**Next Lab**: [Lab 11 - Malware Clustering](../lab11-malware-clustering/)

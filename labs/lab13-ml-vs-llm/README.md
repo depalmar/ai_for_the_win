@@ -1,4 +1,4 @@
-# Lab 33: ML vs LLM - When to Use Which? [Bridge Lab]
+# Lab 13: ML vs LLM - When to Use Which? [Bridge Lab]
 
 **Difficulty:** 🟡 Intermediate | **Time:** 45-60 min | **Prerequisites:** Labs 10-12, API key
 

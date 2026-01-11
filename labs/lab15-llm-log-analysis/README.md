@@ -1,4 +1,4 @@
-# Lab 35: LLM-Powered Security Log Analysis
+# Lab 15: LLM-Powered Security Log Analysis
 
 Use Large Language Models to analyze, correlate, and explain security logs.
 

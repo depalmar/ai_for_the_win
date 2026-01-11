@@ -129,11 +129,11 @@
     {
       "id": "completionist",
       "name": "Completionist",
-      "description": "Capture all 15 flags",
+      "description": "Capture all 18 flags",
       "icon": "🎯",
       "points": 1000,
       "category": "mastery",
-      "requirement": {"flags_captured": 15}
+      "requirement": {"flags_captured": 18}
     }
   ],
   "ranks": [

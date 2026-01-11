@@ -1,4 +1,4 @@
-# Lab 32: Network Anomaly Detection
+# Lab 12: Network Anomaly Detection
 
 **Difficulty:** 🟢 Beginner | **Time:** 45-60 min | **Prerequisites:** Labs 10-11
 
@@ -314,6 +314,6 @@ optimal_threshold = thresholds[optimal_idx]
 
 ---
 
-> **Stuck?** See the [Lab 32 Walkthrough](../../docs/walkthroughs/lab12-anomaly-detection-walkthrough.md) for step-by-step guidance.
+> **Stuck?** See the [Lab 12 Walkthrough](../../docs/walkthroughs/lab12-anomaly-detection-walkthrough.md) for step-by-step guidance.
 
-**Next Lab**: [Lab 35 - LLM Log Analysis](../lab15-llm-log-analysis/)
+**Next Lab**: [Lab 13 - ML vs LLM](../lab13-ml-vs-llm/)

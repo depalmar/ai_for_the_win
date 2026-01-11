@@ -1,4 +1,4 @@
-# Lab 36: AI in Security Operations
+# Lab 05: AI in Security Operations
 
 Understanding where AI fits in your security workflow, its limitations, and the risks it introduces.
 

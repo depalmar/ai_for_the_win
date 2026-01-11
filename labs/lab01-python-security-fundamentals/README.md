@@ -1,4 +1,4 @@
-# Lab 29: Python for Security Fundamentals
+# Lab 01: Python for Security Fundamentals
 
 **Difficulty: ⭐️ Easy | Time: 3-4 hours | No Prerequisites**
 

@@ -1,4 +1,4 @@
-# Lab 42: RAG System for Security Documentation
+# Lab 18: RAG System for Security Documentation
 
 **Difficulty:** 🟡 Intermediate | **Time:** 60-90 min | **Prerequisites:** Lab 39, API key
 

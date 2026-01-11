@@ -1,4 +1,4 @@
-# Lab 35: Machine Learning Concepts for Security
+# Lab 04: Machine Learning Concepts for Security
 
 Understand machine learning fundamentals before writing code. This lab explains **what** ML does and **why** it works, using security examples.
 

@@ -1,6 +1,6 @@
-# Lab 34: Your First AI Agent [Bridge Lab]
+# Lab 14: Your First AI Agent [Bridge Lab]
 
-> **Bridge Lab:** This lab introduces agent concepts and tool calling before the full Threat Intel Agent in Lab 36.
+> **Bridge Lab:** This lab introduces agent concepts and tool calling before the full Threat Intel Agent in Lab 15.
 
 A gentle introduction to AI agents before diving into the full threat intelligence agent in Lab 36.
 

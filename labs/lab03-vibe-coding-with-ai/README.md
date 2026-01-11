@@ -1,4 +1,4 @@
-# Lab 32: Vibe Coding with AI Assistants
+# Lab 03: Vibe Coding with AI Assistants
 
 ## Overview
 
