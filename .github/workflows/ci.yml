@@ -157,6 +157,36 @@ jobs:
           done
           echo "All lab READMEs present"
 
+  threat-intel:
+    name: Threat Intel Freshness
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
+
+      - name: Set up Python
+        uses: actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548 # v6
+        with:
+          python-version: '3.11'
+
+      - name: Check threat intel freshness
+        run: python scripts/check_threat_intel_freshness.py
+
+      - name: Warn if threat intel files are old
+        run: |
+          # Check if threat-landscape file was modified in last 90 days
+          if [ -f "docs/guides/threat-landscape-2025.md" ]; then
+            last_modified=$(git log -1 --format="%ct" -- docs/guides/threat-landscape-2025.md)
+            now=$(date +%s)
+            age_days=$(( (now - last_modified) / 86400 ))
+            if [ $age_days -gt 90 ]; then
+              echo "::warning::Threat landscape guide is $age_days days old - consider updating with /update-threat-intel"
+            else
+              echo "Threat landscape guide updated $age_days days ago"
+            fi
+          fi
+
   integration:
     name: Integration Tests
     runs-on: ubuntu-latest
