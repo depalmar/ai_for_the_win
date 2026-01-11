@@ -67,7 +67,9 @@ By completing this lab, you will:
 | **2017**  | WannaCry     | Worm capabilities, global impact (SMB exploits)      |
 | **2019**  | Maze         | Double extortion (encrypt + leak data)               |
 | **2021**  | REvil/Kaseya | Supply chain attacks, $70M ransom                    |
-| **2023+** | LockBit 3.0  | RaaS ecosystem, bug bounties, triple extortion       |
+| **2023**  | LockBit 3.0  | RaaS ecosystem, bug bounties, triple extortion       |
+| **2024**  | BlackCat/ALPHV | $22M Change Healthcare breach, 100M+ affected     |
+| **2025**  | Post-disruption | 85 groups active, AI integration, $1.8M avg demand |
 
 ### AI/LLM Evolution in Ransomware
 
@@ -116,37 +118,67 @@ Modern ransomware groups are increasingly leveraging AI:
 
 ## 🎭 Major Ransomware Families
 
-### Current Active Threats (2024-2025)
+### Current Active Threats (2025-2026)
 
-| Family              | Characteristics                        | Notable TTPs                           |
-| ------------------- | -------------------------------------- | -------------------------------------- |
-| **LockBit 3.0**     | Most prolific RaaS, bug bounty program | Fast encryption, StealBit exfiltration |
-| **BlackCat/ALPHV**  | Rust-based, cross-platform             | Configurable, triple extortion         |
-| **Cl0p**            | MOVEit exploits, data theft focus      | Mass exploitation campaigns            |
-| **Play**            | Healthcare/critical infrastructure     | Living-off-the-land techniques         |
-| **Akira**           | Enterprise targeting                   | VPN exploitation, Conti lineage        |
-| **Royal/BlackSuit** | Government sector targeting            | Callback phishing, BazarLoader         |
-| **Rhysida**         | Healthcare, education                  | PowerShell-heavy, PrintNightmare       |
+> **Post-LockBit/BlackCat Fragmentation:** Law enforcement disruptions in 2024 led to 85 active extortion groups (45 new in 2025). Average ransom: $1.8M. Average incident cost: $5.08M.
+
+| Family | Status | Characteristics | Notable TTPs |
+| ------ | ------ | --------------- | ------------ |
+| **RansomHub** | Rising | ALPHV successor, 80% affiliate share | BlackCat affiliates, aggressive recruiting |
+| **Qilin** | Rising | IAB partnerships, business-like ops | VPN credential purchases, high volume |
+| **DragonForce** | Cartel | Multi-platform (Win/Linux/ESXi/NAS) | BYOVD, LockBit/Conti code reuse |
+| **LockBit** | Diminished | Resurged Sept 2025, sanctions limiting | Fast encryption, critical infrastructure threats |
+| **Funksec** | Emerging | AI/LLM integration (WormGPT) | AI-generated phishing, chatbot negotiations |
+| **Play** | Active | Healthcare/critical infrastructure | Living-off-the-land, ProxyNotShell |
+| **Akira** | Active | Enterprise, VMware targeting | VPN exploitation, Conti lineage |
+
+### Key 2025-2026 Tactics
+
+| Tactic | Description | Defense |
+| ------ | ----------- | ------- |
+| **Multi-Layer Extortion** | Encrypt + leak + DDoS + notify regulators | Incident response planning, legal prep |
+| **BYOVD** | Bring Your Own Vulnerable Driver for EDR bypass | Driver blocklists, behavioral detection |
+| **AI Integration** | LLM phishing, automated negotiation | AI-based email filtering |
+| **Cross-Platform** | Single attack hits Windows, Linux, ESXi, NAS | Unified security across all platforms |
+| **IAB Partnerships** | Purchase initial access from brokers | Credential monitoring, MFA everywhere |
+
+See also: [Threat Landscape 2025-2026 Reference](../../docs/guides/threat-landscape-2025.md)
 
 ### Family Identification Markers
 
 ```python
-# Common ransomware indicators
+# Common ransomware indicators (2025-2026)
 RANSOMWARE_SIGNATURES = {
+    "ransomhub": {
+        "extensions": [".ransomhub", ".[victim_id]"],
+        "note_files": ["README.txt", "HOW_TO_RESTORE.txt"],
+        "lineage": "ALPHV/BlackCat successor",
+    },
+    "qilin": {
+        "extensions": [".qilin", ".agenda"],
+        "note_files": ["README-RECOVER.txt"],
+        "c2_pattern": "Cobalt Strike, Sliver",
+    },
+    "dragonforce": {
+        "extensions": [".dragonforce", ".locked"],
+        "note_files": ["readme.txt"],
+        "techniques": ["BYOVD", "cross-platform"],
+    },
     "lockbit": {
         "extensions": [".lockbit", ".abcd", ".LockBit"],
         "note_files": ["Restore-My-Files.txt"],
         "registry_keys": ["HKCU\\Software\\LockBit"],
+        "status": "Diminished post-2024 takedown",
     },
-    "blackcat": {
-        "extensions": [".alphv", ".[random]"],  # Unique per victim
-        "note_files": ["RECOVER-[victim]-FILES.txt"],
-        "processes": ["rust-based binary"],
+    "akira": {
+        "extensions": [".akira"],
+        "note_files": ["akira_readme.txt"],
+        "c2_pattern": "VPN exploitation, Conti lineage",
     },
-    "conti": {
-        "extensions": [".CONTI"],
-        "note_files": ["readme.txt", "CONTI_README.txt"],
-        "c2_pattern": "cobalt_strike_beacon",
+    "play": {
+        "extensions": [".play", ".PLAY"],
+        "note_files": ["ReadMe.txt"],
+        "techniques": ["LOLBins", "ProxyNotShell"],
     },
 }
 ```
@@ -217,11 +249,12 @@ RANSOMWARE_SIGNATURES = {
 
 ```python
 FILE_INDICATORS = {
-    # Encrypted file extensions
+    # Encrypted file extensions (2025-2026 families)
     "suspicious_extensions": [
         ".locked", ".encrypted", ".enc", ".crypted",
-        ".lockbit", ".alphv", ".conti", ".royal",
-        ".akira", ".play", ".rhysida", ".blacksuit"
+        ".ransomhub", ".qilin", ".dragonforce",  # Rising 2025
+        ".lockbit", ".akira", ".play", ".rhysida",  # Active
+        ".alphv", ".conti", ".royal", ".blacksuit"  # Legacy
     ],
 
     # Ransom note filenames
