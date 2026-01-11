@@ -31,6 +31,7 @@ docs/guides/threat-landscape-*.md       - Search: ALL threat intel topics
 | C2 Frameworks | `"C2 frameworks 2025 Sliver Havoc Mythic Cobalt Strike"` |
 | LLM Security | `"LLM security threats 2025 prompt injection OWASP"` |
 | AI Attacks | `"AI-powered cyber attacks 2025 APT28 autonomous"` |
+| AI Models | `"Claude API models 2025 2026"`, `"GPT-4o o1 models 2025"`, `"Gemini 2.0 models 2025"` |
 
 ### Why This Matters
 
@@ -52,6 +53,7 @@ Before saving edits:
 | Command | Purpose |
 |---------|---------|
 | `/update-threat-intel` | Full threat intel update with searches |
+| `/update-ai-models` | Update AI model references with searches |
 | `/ctf` | CTF challenge navigation |
 | `/lab` | Lab navigation |
 
@@ -60,6 +62,8 @@ Before saving edits:
 Always run before committing:
 ```bash
 python -m pytest tests/test_curriculum_integrity.py -v
+python scripts/check_threat_intel_freshness.py
+python scripts/check_ai_model_freshness.py
 ```
 
 ## Key Reference Files
@@ -70,6 +74,8 @@ python -m pytest tests/test_curriculum_integrity.py -v
 | `docs/LAB_DEPENDENCY_GRAPH.md` | Prerequisites + threat mapping |
 | `labs/lab30-*/README.md` | Ransomware families |
 | `labs/lab37-*/README.md` | AI threat actors |
+| `scripts/check_threat_intel_freshness.py` | Validates threat intel dates |
+| `scripts/check_ai_model_freshness.py` | Validates AI model versions |
 
 ## MCP Servers Available
 

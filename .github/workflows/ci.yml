@@ -173,6 +173,10 @@ jobs:
       - name: Check threat intel freshness
         run: python scripts/check_threat_intel_freshness.py
 
+      - name: Check AI model references
+        run: python scripts/check_ai_model_freshness.py
+        continue-on-error: true  # Warn but don't fail
+
       - name: Warn if threat intel files are old
         run: |
           # Check if threat-landscape file was modified in last 90 days
