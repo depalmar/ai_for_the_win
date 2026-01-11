@@ -25,7 +25,7 @@
 - **Optional**: Social media mention or LinkedIn post
 
 ### Apply Here:
-Fill out the [Academic License Application](https://forms.gle/YOUR-FORM-ID) (2-minute form)
+[Contact via LinkedIn](https://www.linkedin.com/in/raymond-depalma/) or [email](mailto:depalma.raymond@gmail.com) with your institution name
 
 **Typical approval time**: 1-2 weeks
 
@@ -222,7 +222,7 @@ Interested in being featured?
 Review the options above and select the best fit.
 
 ### Step 2: Submit Application
-- **Academic**: Fill out [Academic License Form](https://forms.gle/YOUR-FORM-ID)
+- **Academic**: [Contact via LinkedIn](https://www.linkedin.com/in/raymond-depalma/) or [email](mailto:depalma.raymond@gmail.com)
 - **Corporate/Training**: [Email me directly](mailto:depalma.raymond@gmail.com) or [LinkedIn message](https://www.linkedin.com/in/raymond-depalma/)
 
 ### Step 3: License Agreement
