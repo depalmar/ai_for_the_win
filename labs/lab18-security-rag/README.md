@@ -446,6 +446,6 @@ Question: {question}
 
 ---
 
-> **Stuck?** See the [Lab 42 Walkthrough](../../docs/walkthroughs/Lab 42-security-rag-walkthrough.md) for step-by-step guidance.
+> **Stuck?** See the [Lab 18 Walkthrough](../../docs/walkthroughs/lab18-security-rag-walkthrough.md) for step-by-step guidance.
 
 **Next Lab**: [Lab 21 - YARA Rule Generator](../lab21-yara-generator/)

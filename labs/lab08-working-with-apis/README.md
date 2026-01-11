@@ -631,6 +631,6 @@ You're ready for LLM-powered security tools!
 
 ---
 
-**Next Lab:** [Lab 23: CTF Fundamentals](../Lab 23-ctf-fundamentals/) - Learn security CTF skills and methodology
+**Next Lab:** [Lab 09: CTF Fundamentals](../lab09-ctf-fundamentals/) - Learn security CTF skills and methodology
 
-Or jump to: [Lab 01: Phishing Classifier](../Lab 01-phishing-classifier/) - Build your first ML security tool
+Or jump to: [Lab 10: Phishing Classifier](../lab10-phishing-classifier/) - Build your first ML security tool

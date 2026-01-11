@@ -401,9 +401,9 @@ Now that you understand the basics, here's how Lab 36 builds on this:
 
 | If you want to... | Go to... |
 |-------------------|----------|
-| Build a full threat intel agent | [Lab 36: Threat Intel Agent](../Lab 36-threat-intel-agent/) |
-| Learn about embeddings first | [Lab 39: Embeddings & Vectors](../Lab 39-embeddings-vectors/) |
-| Build a RAG system | [Lab 42: Security RAG](../Lab 42-security-rag/) |
+| Build a full threat intel agent | [Lab 16: Threat Intel Agent](../lab16-threat-intel-agent/) |
+| Learn about embeddings first | [Lab 17: Embeddings & Vectors](../lab17-embeddings-vectors/) |
+| Build a RAG system | [Lab 18: Security RAG](../lab18-security-rag/) |
 
 ---
 

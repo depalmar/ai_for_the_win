@@ -639,6 +639,6 @@ def _execute_tool(self, tool_name: str, args: dict) -> str:
 
 ---
 
-> **Stuck?** See the [Lab 36 Walkthrough](../../docs/walkthroughs/Lab 36-threat-intel-agent-walkthrough.md) for step-by-step guidance.
+> **Stuck?** See the [Lab 16 Walkthrough](../../docs/walkthroughs/lab16-threat-intel-agent-walkthrough.md) for step-by-step guidance.
 
-**Next Lab**: [Lab 42 - RAG for Security Docs](../Lab 42-security-rag/)
+**Next Lab**: [Lab 18 - RAG for Security Docs](../lab18-security-rag/)

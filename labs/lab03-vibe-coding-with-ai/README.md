@@ -466,6 +466,6 @@ Now that you're equipped with vibe coding skills, you'll use them throughout the
 
 ---
 
-**Next Lab:** [Lab 23: CTF Fundamentals](../Lab 23-ctf-fundamentals/) - Learn the CTF mindset before tackling security challenges
+**Next Lab:** [Lab 09: CTF Fundamentals](../lab09-ctf-fundamentals/) - Learn the CTF mindset before tackling security challenges
 
-Or jump to: [Lab 29: Phishing Classifier](../Lab 29-phishing-classifier/) - Build your first ML security tool with AI assistance
+Or jump to: [Lab 10: Phishing Classifier](../lab10-phishing-classifier/) - Build your first ML security tool with AI assistance

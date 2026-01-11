@@ -295,6 +295,6 @@ You're ready!
 
 ---
 
-**Next Lab:** [Lab 22: Working with APIs](../Lab 22-working-with-apis/) - Learn to make HTTP requests and work with security APIs
+**Next Lab:** [Lab 08: Working with APIs](../lab08-working-with-apis/) - Learn to make HTTP requests and work with security APIs
 
-Or jump to: [Lab 01: Phishing Classifier](../Lab 01-phishing-classifier/) - Apply your ML skills to a real security problem
+Or jump to: [Lab 10: Phishing Classifier](../lab10-phishing-classifier/) - Apply your ML skills to a real security problem

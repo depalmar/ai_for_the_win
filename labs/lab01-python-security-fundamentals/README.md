@@ -1160,8 +1160,8 @@ Create a script that:
 ## What's Next?
 
 You're ready for:
-- **Lab 35**: ML Concepts Primer - understand machine learning before coding
-- **Lab 29**: Phishing Classifier - your first ML security tool
+- **Lab 04**: ML Concepts Primer - understand machine learning before coding
+- **Lab 10**: Phishing Classifier - your first ML security tool
 
 ---
 
@@ -1248,6 +1248,6 @@ from typing import List, Dict, Optional  # Type hints
 
 ---
 
-**Next Lab:** [Lab 35: ML Concepts Primer](../Lab 35-ml-concepts-primer/) - Understand machine learning concepts before coding
+**Next Lab:** [Lab 04: ML Concepts Primer](../lab04-ml-concepts-primer/) - Understand machine learning concepts before coding
 
-Or jump to: [Lab 29: Phishing Classifier](../Lab 29-phishing-classifier/) - Build your first ML security tool
+Or jump to: [Lab 10: Phishing Classifier](../lab10-phishing-classifier/) - Build your first ML security tool
