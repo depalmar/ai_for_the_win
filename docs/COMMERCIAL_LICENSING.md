@@ -27,7 +27,7 @@
 ### Apply Here:
 Fill out the [Academic License Application](https://forms.gle/YOUR-FORM-ID) (2-minute form)
 
-**Typical approval time**: 1-3 business days
+**Typical approval time**: 1-2 weeks
 
 ---
 
@@ -38,23 +38,20 @@ Fill out the [Academic License Application](https://forms.gle/YOUR-FORM-ID) (2-m
 | Company Size | Annual License | What's Included |
 |--------------|----------------|-----------------|
 | **Startup** (1-50 employees) | **$3,000/year** | All labs, quarterly updates, email support |
-| **Small Business** (51-200) | **$6,000/year** | Above + 2 customization requests/year |
-| **Mid-Market** (201-500) | **$12,000/year** | Above + monthly office hours |
-| **Enterprise** (500+) | **$25,000+/year** | Above + dedicated support, on-site training option |
+| **Small Business** (51-200) | **$6,000/year** | Above + priority email support |
+| **Mid-Market** (201-500) | **$12,000/year** | Above + early access to new content |
+| **Enterprise** (500+) | **$25,000+/year** | Above + custom branding rights |
 
 ### What's Included:
 - ✅ All 50+ labs, capstone projects, and CTF challenges
 - ✅ Docker environment and datasets
 - ✅ Quarterly content updates (new threats, TTPs, AI models)
 - ✅ Right to modify for internal use
-- ✅ Email support (response within 2 business days)
+- ✅ Email support (response within 3-5 business days)
 - ✅ Usage analytics and ROI tracking guidance
 
 ### Optional Add-Ons:
-- **Priority Support**: $2,000/year (4-hour response time)
-- **Custom Lab Development**: $8,000-20,000 per lab
-- **Live Training Delivery**: $12,000/day (virtual or on-site)
-- **Consulting**: $300/hour for customization support
+- **Priority Support**: $1,500/year (48-72 hour response, dedicated email thread)
 
 [Request Corporate Quote](https://www.linkedin.com/in/raymond-depalma/)
 
@@ -78,14 +75,12 @@ Fill out the [Academic License Application](https://forms.gle/YOUR-FORM-ID) (2-m
   - Social media shoutouts
   - Joint blog posts/case studies
 - ✅ Quarterly content updates
-- ✅ Guest lecture opportunities (virtual)
 - ✅ Certification co-branding option
 - ✅ Priority support
 
 ### Attribution Requirements:
 - Display: "Based on AI for the Win by Raymond DePalma"
 - Link to repository in course materials
-- Optional: "In partnership with Raymond DePalma"
 
 [Apply for Training Provider License](https://www.linkedin.com/in/raymond-depalma/)
 
@@ -135,8 +130,7 @@ Fill out the [Academic License Application](https://forms.gle/YOUR-FORM-ID) (2-m
 | Student learning on your own | Personal Use | **FREE** (no license needed) |
 | Company training 75 security analysts | 🏢 Corporate (51-200) | **$6,000/year** |
 | Cybersecurity bootcamp with 30 students | 🚀 Training Provider | **$8,000/year** |
-| Conference workshop (one-time) | 🏢 Corporate or Custom | Contact for quote |
-| Consulting engagement using materials | 🏢 Corporate or Custom | Contact for quote |
+| Conference workshop (one-time) | 🏢 Corporate | Contact for quote |
 | YouTube course with ads/sponsorships | 🚀 Training Provider | **$8,000-25,000** based on subscribers |
 
 ---
@@ -189,7 +183,7 @@ Fill out the [Academic License Application](https://forms.gle/YOUR-FORM-ID) (2-m
 **Great!** Translation falls under derivative works (CC BY-NC-SA 4.0):
 - Personal/academic use: Free with attribution
 - Commercial use: Requires commercial license
-- Contact me - we may offer translation partnerships
+- Reach out if you're interested - translations help the community!
 
 ### Do you offer multi-year discounts?
 
@@ -207,26 +201,21 @@ Fill out the [Academic License Application](https://forms.gle/YOUR-FORM-ID) (2-m
 
 ---
 
-## 🤝 Partnership Opportunities
+## 🤝 Attribution & Promotion
 
-Interested in deeper collaboration?
+Interested in being featured?
 
-### Content Partnership:
-- Co-create labs for specific tools/platforms
-- Joint webinars and conference presentations
-- Case study development
+### For Licensees:
+- **Case studies**: Share how you're using the curriculum (with your permission)
+- **Logo placement**: Training Provider licensees can be listed on the partners page
+- **Social amplification**: We'll share your success stories
 
-### Technology Partnership:
-- Integration with your security platform
-- Custom labs using your APIs/tools
-- Developer relations collaboration
+### For Contributors:
+- **Pull requests welcome**: Improvements, bug fixes, and new content
+- **Credit given**: Contributors are acknowledged in release notes
+- **Community recognition**: Active contributors featured in README
 
-### Training Partnership:
-- Certified instructor program
-- Revenue sharing for joint courses
-- Regional exclusive partnerships
-
-[Discuss Partnership Opportunities](https://www.linkedin.com/in/raymond-depalma/)
+[Contribute on GitHub](https://github.com/depalmar/ai_for_the_win)
 
 ---
 
@@ -237,10 +226,10 @@ Review the options above and select the best fit.
 
 ### Step 2: Submit Application
 - **Academic**: Fill out [Academic License Form](https://forms.gle/YOUR-FORM-ID)
-- **Corporate/Training**: [Email me directly](mailto:your-email@example.com) or [LinkedIn message](https://www.linkedin.com/in/raymond-depalma/)
+- **Corporate/Training**: [Email me directly](mailto:depalma.raymond@gmail.com) or [LinkedIn message](https://www.linkedin.com/in/raymond-depalma/)
 
 ### Step 3: License Agreement
-You'll receive a license agreement via email within 2-3 business days.
+You'll receive a license agreement via email (typically within 1-2 weeks).
 
 ### Step 4: Payment
 Once agreement is signed, you'll receive an invoice with payment instructions.
@@ -258,10 +247,10 @@ Upon payment confirmation, you receive:
 
 **For licensing inquiries**:
 - **LinkedIn**: [Raymond DePalma](https://www.linkedin.com/in/raymond-depalma/)
-- **Email**: your-email@example.com
+- **Email**: depalma.raymond@gmail.com
 - **GitHub Discussions**: [Ask a question](https://github.com/depalmar/ai_for_the_win/discussions)
 
-**Average response time**: 1-2 business days
+**Response time**: Best effort, typically within one week
 
 ---
 
@@ -291,10 +280,9 @@ Used by security professionals at:
 - [Testimonials coming soon - first licensees will be featured here]
 
 ### Expert Support
-- Email support included (2 business day response)
+- Email support included (3-5 business day response)
 - Community access via GitHub Discussions
-- Custom lab development available
-- Live training delivery options
+- Self-service lab development guides included
 
 ---
 

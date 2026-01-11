@@ -488,14 +488,7 @@ Need a license for:
 - **Corporate training** programs (internal employee training)
 - **Bootcamps & courses** (paid training programs)
 - **Consulting** engagements using materials
-- **Universities** (formal curricula)
-
-**Pricing**:
-- Corporate: $3,000-25,000/year (based on company size)
-- Training providers: $8,000-25,000/year
-- Academic: FREE with attribution requirements
-
-**[View Commercial Licensing Options →](./docs/COMMERCIAL_LICENSING.md)**
+- **Universities** (formal curricula - FREE with attribution)
 
 For licensing inquiries: [Contact Raymond DePalma](https://www.linkedin.com/in/raymond-depalma/)
 
