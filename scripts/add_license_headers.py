@@ -221,7 +221,7 @@ def process_files(dry_run: bool = False, verbose: bool = False) -> Dict[str, Lis
 
         if modified:
             results["modified"].append(f"{rel_path}: {message}")
-            print(f"  {'[DRY RUN] ' if dry_run else ''}✓ {rel_path}")
+            print(f"  {'[DRY RUN] ' if dry_run else ''}+ {rel_path}")
         elif verbose:
             results["skipped"].append(f"{rel_path}: {message}")
             print(f"  - {rel_path}: {message}")
@@ -237,7 +237,7 @@ def process_files(dry_run: bool = False, verbose: bool = False) -> Dict[str, Lis
 
         if modified:
             results["modified"].append(f"{rel_path}: {message}")
-            print(f"  {'[DRY RUN] ' if dry_run else ''}✓ {rel_path}")
+            print(f"  {'[DRY RUN] ' if dry_run else ''}+ {rel_path}")
         elif verbose:
             results["skipped"].append(f"{rel_path}: {message}")
             print(f"  - {rel_path}: {message}")
@@ -253,7 +253,7 @@ def process_files(dry_run: bool = False, verbose: bool = False) -> Dict[str, Lis
 
         if modified:
             results["modified"].append(f"{rel_path}: {message}")
-            print(f"  {'[DRY RUN] ' if dry_run else ''}✓ {rel_path}")
+            print(f"  {'[DRY RUN] ' if dry_run else ''}+ {rel_path}")
         elif verbose:
             results["skipped"].append(f"{rel_path}: {message}")
             print(f"  - {rel_path}: {message}")
@@ -271,7 +271,7 @@ def process_files(dry_run: bool = False, verbose: bool = False) -> Dict[str, Lis
 
         if modified:
             results["modified"].append(f"{rel_path}: {message}")
-            print(f"  {'[DRY RUN] ' if dry_run else ''}✓ {rel_path}")
+            print(f"  {'[DRY RUN] ' if dry_run else ''}+ {rel_path}")
         elif verbose:
             results["skipped"].append(f"{rel_path}: {message}")
             print(f"  - {rel_path}: {message}")
@@ -303,7 +303,7 @@ def main():
     print("=" * 70)
 
     if args.dry_run:
-        print("\n⚠️  DRY RUN MODE - No files will be modified\n")
+        print("\n[!] DRY RUN MODE - No files will be modified\n")
 
     results = process_files(dry_run=args.dry_run, verbose=args.verbose)
 
@@ -318,12 +318,12 @@ def main():
     if results["errors"]:
         print("\nErrors:")
         for error in results["errors"]:
-            print(f"  ❌ {error}")
+            print(f"  [X] {error}")
 
     if args.dry_run and results["modified"]:
-        print("\n💡 Run without --dry-run to apply changes")
+        print("\n[!] Run without --dry-run to apply changes")
 
-    print("\n✅ Done!")
+    print("\n[OK] Done!")
 
 
 if __name__ == "__main__":
