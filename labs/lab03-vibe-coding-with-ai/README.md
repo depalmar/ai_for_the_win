@@ -6,6 +6,19 @@ Welcome to the world of **vibe coding** - a modern approach to software developm
 
 > **What is Vibe Coding?** It's a development style where you work alongside AI assistants, describing what you want to build in natural language and iteratively refining the output. Think of it as pair programming with an infinitely patient, knowledgeable partner.
 
+### The Rise of Vibe Coding
+
+The term "vibe coding" was coined by **Andrej Karpathy** (former Tesla AI Director, OpenAI founding member) in February 2025. It quickly became a cultural phenomenon, being named **Collins Dictionary's Word of the Year 2025**.
+
+**Key statistics:**
+- **Y Combinator Winter 2025**: 25% of startup companies had codebases that were 95% AI-generated
+- **Industry adoption**: Over 84% of developers now integrate AI tools into their workflows
+- **Productivity gains**: Studies show 10x faster prototyping with AI assistance
+
+**The critical insight:** Vibe coding doesn't mean "letting AI write everything." The best developers use AI to accelerate their work while maintaining full understanding and control. As Simon Willison (Django co-creator) puts it:
+
+> *"I won't commit any code to my repository if I couldn't explain exactly what it does to somebody else."*
+
 ## Learning Objectives
 
 By the end of this lab, you will be able to:
@@ -101,15 +114,31 @@ Claude Code has advanced features that make it especially powerful for security 
 ```
 
 **MCP (Model Context Protocol)** - Connect Claude to external tools:
+
+MCP is an **industry-standard protocol** (adopted by OpenAI, Microsoft, Google in 2025) that lets AI assistants connect to external tools and data sources. Think of it as "USB for AI."
+
 ```bash
-# Example: Enable Brave Search for threat intel research
+# Configure MCP servers
 /mcp
 
-# MCP servers can provide:
-# - Web search for threat intelligence
-# - Database queries for log analysis
-# - API integrations for enrichment
+# This course includes MCP servers for:
+# - Brave Search: Threat intelligence research
+# - VirusTotal: Hash/IP/domain lookups
+# - Memory: Persist investigation context
 ```
+
+**Available MCP capabilities:**
+- **75+ connectors** in Claude's official directory
+- **Web search** for threat intelligence research
+- **Database queries** for log analysis
+- **API integrations** for enrichment (VirusTotal, Shodan, etc.)
+- **File system access** for processing local logs
+
+**Security considerations for MCP:**
+- MCP servers can access external systems - only enable trusted servers
+- Prompt injection attacks can flow through MCP (data → AI → action)
+- Review what permissions each MCP server requires before enabling
+- In enterprise settings, use allowlists for approved MCP servers
 
 **Memory & Context** - Claude remembers across sessions:
 ```bash
@@ -410,16 +439,24 @@ AI doesn't replace learning - it accelerates it. You still need to understand wh
 
 ---
 
-## Tools Quick Reference
+## Tools Quick Reference (2025)
 
-| Tool | Best For | Cost |
-|------|----------|------|
-| **Claude Code** | Terminal-based development, file operations | API usage |
-| **Cursor** | Full IDE experience, large projects | Free tier + paid |
-| **GitHub Copilot** | Inline suggestions, existing VS Code users | $10-19/month |
-| **Continue.dev** | Open source, local models | Free |
-| **Ollama** | Offline, privacy-focused | Free |
-| **Codeium** | Free alternative to Copilot | Free |
+| Tool | Best For | Cost | Rating |
+|------|----------|------|--------|
+| **Cursor** | Flow-state coding, large projects | Free / $20/mo Pro | 4.9/5 |
+| **Claude Code** | Complex reasoning, 50k+ LOC repos | API usage (~$0.003/1k tokens) | Handles large codebases 75% of time |
+| **GitHub Copilot** | Microsoft ecosystem, inline suggestions | $10-19/month | Pioneer, most mature |
+| **Windsurf** | Codeium's agentic IDE | Free tier + paid | Rising competitor |
+| **Continue.dev** | Open source, local models | Free | Privacy-focused |
+| **Ollama** | Offline, air-gapped environments | Free | Best for sensitive work |
+
+**How to choose:**
+- **Cursor**: Best for "flow state" coding - fast, inline edits while you type
+- **Claude Code**: Best for "delegation" - tell it to refactor a module and it executes a plan
+- **Copilot**: Best if you're already in the Microsoft/GitHub ecosystem
+- **Local (Ollama)**: Best for classified/sensitive work where data can't leave your machine
+
+> **Pro tip**: Many developers use multiple tools - Cursor for writing, Claude Code for thinking through complex problems.
 
 ---
 
@@ -466,6 +503,6 @@ Now that you're equipped with vibe coding skills, you'll use them throughout the
 
 ---
 
-**Next Lab:** [Lab 09: CTF Fundamentals](../lab09-ctf-fundamentals/) - Learn the CTF mindset before tackling security challenges
+**Next Lab:** [Lab 07: Hello World ML](../lab07-hello-world-ml/) - Build your first machine learning model with AI assistance
 
-Or jump to: [Lab 10: Phishing Classifier](../lab10-phishing-classifier/) - Build your first ML security tool with AI assistance
+Or jump to: [Lab 10: Phishing Classifier](../lab10-phishing-classifier/) - Build your first ML security tool

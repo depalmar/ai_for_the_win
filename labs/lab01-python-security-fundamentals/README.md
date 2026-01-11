@@ -217,6 +217,326 @@ if risk >= 7:
     print("HIGH RISK - Investigate immediately")
 ```
 
+### 1.8 Modules and Libraries - Reusing Code from Others
+
+**Modules** are Python files containing functions and variables you can reuse. **Libraries** (also called packages) are collections of related modules. Instead of writing everything from scratch, you can import and use code that others have written.
+
+#### Why Modules Matter
+
+```python
+# WITHOUT modules: You'd need to write your own hash functions
+def calculate_md5(data):
+    # ... hundreds of lines of cryptographic code ...
+    pass
+
+# WITH modules: Just import and use
+import hashlib
+hash_value = hashlib.md5(b"data").hexdigest()  # One line!
+```
+
+Python comes with a **standard library** (built-in modules you can always use) and a massive ecosystem of **third-party packages** you can install.
+
+#### Basic Import Syntax
+
+```python
+# Import entire module
+import json
+data = json.loads('{"key": "value"}')  # Use as module.function()
+
+# Import specific functions
+from json import loads, dumps
+data = loads('{"key": "value"}')  # Use function directly (no module. prefix)
+
+# Import with alias (shorthand)
+import pandas as pd  # Common convention
+df = pd.DataFrame({"col": [1, 2, 3]})
+
+# Import everything (NOT RECOMMENDED - pollutes namespace)
+from json import *  # BAD PRACTICE - you don't know what you're importing
+```
+
+#### Standard Library - Always Available
+
+These modules come with Python (no installation needed):
+
+```python
+# json - Work with JSON data (APIs, config files)
+import json
+data = json.loads('{"ip": "1.2.3.4"}')  # Parse JSON string
+json_str = json.dumps({"ip": "1.2.3.4"})  # Convert to JSON string
+
+# csv - Read and write CSV files (logs, datasets)
+import csv
+with open("alerts.csv") as f:
+    reader = csv.DictReader(f)
+    for row in reader:
+        print(row["severity"])
+
+# re - Regular expressions (pattern matching for IOCs, logs)
+import re
+ips = re.findall(r'\d+\.\d+\.\d+\.\d+', text)  # Find all IPs
+
+# os - Operating system operations (files, paths, environment)
+import os
+api_key = os.getenv("API_KEY")  # Get environment variable
+os.path.exists("file.txt")  # Check if file exists
+
+# pathlib - Modern file path operations
+from pathlib import Path
+log_dir = Path("logs")
+log_files = list(log_dir.glob("*.log"))  # Find all .log files
+
+# datetime - Work with dates and times (timestamp parsing)
+from datetime import datetime
+now = datetime.now()
+timestamp = datetime.fromisoformat("2024-01-15T10:30:00")
+
+# hashlib - Cryptographic hashing (file hashes, IOCs)
+import hashlib
+file_hash = hashlib.sha256(b"file content").hexdigest()
+
+# base64 - Encode/decode base64 (obfuscated payloads, API auth)
+import base64
+encoded = base64.b64encode(b"data")  # Common in malware analysis
+
+# collections - Specialized data structures
+from collections import Counter, defaultdict
+# Counter: Count occurrences
+ips = ["1.1.1.1", "2.2.2.2", "1.1.1.1", "1.1.1.1"]
+counts = Counter(ips)  # Counter({'1.1.1.1': 3, '2.2.2.2': 1})
+
+# defaultdict: Dictionary with default values (no KeyError)
+ip_count = defaultdict(int)  # Default value is 0
+for ip in ips:
+    ip_count[ip] += 1  # Works even if ip not in dict yet
+
+# typing - Type hints for better code documentation
+from typing import List, Dict, Optional
+def process_alerts(alerts: List[Dict]) -> Optional[str]:
+    """Takes list of dicts, returns string or None."""
+    pass
+```
+
+#### Third-Party Packages - Install with pip
+
+These are NOT included with Python - you must install them first:
+
+```bash
+# Install a package (run in terminal, not in Python)
+pip install requests
+pip install pandas
+pip install scikit-learn
+
+# Install specific version
+pip install requests==2.28.0
+
+# Install from requirements.txt (common in projects)
+pip install -r requirements.txt
+```
+
+**Common Security Packages:**
+
+```python
+# requests - Make HTTP requests (APIs, web scraping)
+import requests
+response = requests.get("https://api.virustotal.com/...")
+data = response.json()
+
+# pandas - Data analysis (process large datasets, logs)
+import pandas as pd
+df = pd.read_csv("alerts.csv")
+high_risk = df[df["risk_score"] > 7]
+
+# numpy - Numerical operations (ML features, statistics)
+import numpy as np
+mean_score = np.mean([1, 2, 3, 4, 5])
+
+# scikit-learn - Machine learning (Labs 10-13)
+from sklearn.ensemble import RandomForestClassifier
+model = RandomForestClassifier()
+
+# pyyaml - Work with YAML files (Sigma rules, config)
+import yaml
+with open("config.yaml") as f:
+    config = yaml.safe_load(f)
+
+# python-dotenv - Load environment variables from .env files
+from dotenv import load_dotenv
+load_dotenv()  # Loads .env file
+api_key = os.getenv("API_KEY")
+```
+
+#### Security-Focused Example
+
+```python
+# Analyze log files using standard library + third-party packages
+import re  # Standard library - pattern matching
+import json  # Standard library - parse JSON logs
+from pathlib import Path  # Standard library - file operations
+from collections import Counter  # Standard library - count occurrences
+import pandas as pd  # Third-party - data analysis (pip install pandas)
+
+def analyze_failed_logins(log_file: str) -> dict:
+    """
+    Parse authentication logs and identify suspicious activity.
+
+    Uses multiple modules to accomplish the task efficiently.
+    """
+    # Read log file (pathlib)
+    log_path = Path(log_file)
+    if not log_path.exists():
+        return {"error": "Log file not found"}
+
+    # Parse logs
+    failed_attempts = []
+    ip_pattern = r'\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b'  # re module
+
+    with open(log_path) as f:
+        for line in f:
+            if "FAILED" in line or "authentication failure" in line:
+                # Extract IP addresses (re module)
+                ips = re.findall(ip_pattern, line)
+                if ips:
+                    failed_attempts.extend(ips)
+
+    # Count occurrences (collections.Counter)
+    ip_counts = Counter(failed_attempts)
+
+    # Identify IPs with > 5 failures
+    suspicious_ips = {ip: count for ip, count in ip_counts.items() if count > 5}
+
+    return {
+        "total_failures": len(failed_attempts),
+        "unique_ips": len(ip_counts),
+        "suspicious_ips": suspicious_ips
+    }
+
+# Example usage
+results = analyze_failed_logins("auth.log")
+print(json.dumps(results, indent=2))  # Pretty print (json module)
+```
+
+#### Import Best Practices
+
+```python
+# ✅ GOOD: Import at the top of your file
+import json
+import re
+from pathlib import Path
+
+def process_logs():
+    # Your code here
+    pass
+
+# ❌ BAD: Import inside functions (slower, harder to track dependencies)
+def process_logs():
+    import json  # Don't do this unless you have a specific reason
+    pass
+
+# ✅ GOOD: Use standard aliases
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+# ❌ BAD: Non-standard aliases (confusing for others)
+import pandas as p  # Everyone expects "pd"
+
+# ✅ GOOD: Import specific functions when you only need a few
+from datetime import datetime, timedelta
+
+# ❌ BAD: Import everything with *
+from os import *  # What did you import? No one knows!
+
+# ✅ GOOD: Group imports by type
+# Standard library imports
+import json
+import re
+from pathlib import Path
+
+# Third-party imports
+import pandas as pd
+import requests
+
+# Local imports (your own modules)
+from myproject.utils import helper_function
+```
+
+#### Common Import Errors and Fixes
+
+```python
+# ModuleNotFoundError: No module named 'requests'
+# Fix: Install it with pip
+# Terminal: pip install requests
+
+# ImportError: cannot import name 'loads' from 'json'
+# Fix: Check spelling, check the module actually has that function
+from json import loads  # Correct spelling
+
+# AttributeError: module 'json' has no attribute 'load'
+# Fix: You probably did "from json import *" or have a file named json.py
+# Solution: Rename your json.py file (it's shadowing the real json module)
+```
+
+#### Creating Your Own Modules
+
+You can create your own modules to organize code:
+
+```python
+# File: security_utils.py
+"""Custom security utilities."""
+
+def is_private_ip(ip: str) -> bool:
+    """Check if IP is in private range."""
+    octets = [int(x) for x in ip.split(".")]
+    if octets[0] == 10:
+        return True
+    if octets[0] == 172 and 16 <= octets[1] <= 31:
+        return True
+    if octets[0] == 192 and octets[1] == 168:
+        return True
+    return False
+
+def calculate_risk(failed_logins: int, is_admin: bool) -> float:
+    """Calculate risk score."""
+    score = failed_logins * 0.2
+    if is_admin:
+        score *= 1.5
+    return min(score, 10.0)
+```
+
+```python
+# File: main.py (in same directory)
+"""Main analysis script."""
+
+# Import your own module
+import security_utils
+
+# Use functions from your module
+if security_utils.is_private_ip("192.168.1.1"):
+    print("Internal IP")
+
+risk = security_utils.calculate_risk(failed_logins=5, is_admin=True)
+print(f"Risk score: {risk}")
+```
+
+#### Quick Reference - Common Modules
+
+| Module | Type | What It Does | Example Use Case |
+|--------|------|--------------|------------------|
+| `json` | Standard | Parse/create JSON | API responses, config files |
+| `csv` | Standard | Read/write CSV | Log files, datasets |
+| `re` | Standard | Regular expressions | Extract IPs, parse logs |
+| `os` | Standard | OS operations | Environment variables, file checks |
+| `pathlib` | Standard | File paths | Navigate directories, find files |
+| `datetime` | Standard | Date/time handling | Parse timestamps, calculate time deltas |
+| `hashlib` | Standard | Cryptographic hashing | File hashes, IOC analysis |
+| `collections` | Standard | Specialized data structures | Count items, default dictionaries |
+| `requests` | Third-party | HTTP requests | Call APIs, fetch threat intel |
+| `pandas` | Third-party | Data analysis | Process large datasets, filter/group data |
+| `scikit-learn` | Third-party | Machine learning | Build classifiers, detect anomalies |
+
+> 💡 **Pro Tip**: When you see `import something` in lab code and don't recognize it, search "[module name] python docs" to learn what it does. The official Python documentation is your best friend!
+
 ---
 
 ## Part 2: Working with Files
@@ -1248,6 +1568,6 @@ from typing import List, Dict, Optional  # Type hints
 
 ---
 
-**Next Lab:** [Lab 04: ML Concepts Primer](../lab04-ml-concepts-primer/) - Understand machine learning concepts before coding
+**Next Lab:** [Lab 02: Intro to Prompt Engineering](../lab02-intro-prompt-engineering/) - Learn to communicate effectively with AI
 
 Or jump to: [Lab 10: Phishing Classifier](../lab10-phishing-classifier/) - Build your first ML security tool

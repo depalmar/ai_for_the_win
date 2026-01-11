@@ -200,12 +200,35 @@ This is an independent educational project created under the protections of Cali
 
 ---
 
+## Trademark Notice
+
+**"AI for the Win"** and the associated logo are trademarks of Raymond DePalma.
+
+### Permitted Trademark Use:
+
+- Referencing this project by name with proper attribution
+- Linking to this repository
+- Academic citations and references
+- Personal portfolio mentions
+
+### Prohibited Trademark Use:
+
+- Using "AI for the Win" in the name of competing training programs, courses, or products
+- Implying endorsement or affiliation without permission
+- Modifying the logo or using it in a way that suggests official affiliation
+- Using the name in a way that causes confusion about the source of training materials
+
+For trademark licensing inquiries, [contact the author](https://www.linkedin.com/in/raymond-depalma/).
+
+---
+
 ## Summary
 
 | Content Type | License | Commercial Use |
 |--------------|---------|----------------|
 | Documentation, labs, prose | CC BY-NC-SA 4.0 | Requires commercial license |
 | Code samples and scripts | MIT | Permitted |
+| Trademark "AI for the Win" | Reserved | See Trademark Notice above |
 
 ---
 

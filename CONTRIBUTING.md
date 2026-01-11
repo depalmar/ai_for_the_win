@@ -17,6 +17,39 @@ Thank you for your interest in contributing to the AI Security Training Program!
 └─────────────────────────────────────────────────────────────┘
 ```
 
+## Licensing of Contributions
+
+**By submitting a contribution to this project, you agree that:**
+
+1. **You retain copyright** to your contributions
+2. **You grant Raymond DePalma** a perpetual, worldwide, non-exclusive, royalty-free, irrevocable license to use, modify, and distribute your contribution under the project's dual license model
+3. **Your contribution does not violate** any third-party intellectual property rights, employment agreements, or confidentiality obligations
+4. **You have the authority** to make the contribution and grant these rights
+
+### What License Applies to My Contribution?
+
+| Contribution Type | License Applied | Example |
+|-------------------|-----------------|---------|
+| **Code** (Python, scripts, configs) | MIT License | `solution/main.py`, `scripts/`, `tests/` |
+| **Educational Content** (documentation, lab instructions, explanations) | CC BY-NC-SA 4.0 | Lab `README.md`, `/docs/guides/`, prose |
+| **Data** (datasets, sample files) | CC BY-NC-SA 4.0 | `data/`, sample logs, test datasets |
+
+**All contributors will be recognized** in the project README and release notes for significant contributions.
+
+### Corporate/Employer Contributions
+
+If you are contributing as part of your employment or under contract:
+
+- Ensure you have explicit permission from your employer
+- Confirm your contribution does not include proprietary information
+- Consider having your employer sign a [Corporate Contributor License Agreement](https://en.wikipedia.org/wiki/Contributor_License_Agreement) if making substantial contributions
+
+### Questions About Licensing?
+
+If you're unsure whether your contribution requires employer approval or have licensing questions, please open a discussion before submitting your PR.
+
+---
+
 ## Code of Conduct
 
 - Be respectful and inclusive

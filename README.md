@@ -467,12 +467,42 @@ Contributions welcome! Please read [CONTRIBUTING.md](./CONTRIBUTING.md) first.
 
 ## License
 
-| Content Type | License | Commercial Use |
-|--------------|---------|----------------|
-| Documentation, labs, prose | CC BY-NC-SA 4.0 | Requires commercial license |
-| Code samples and scripts | MIT | Permitted |
+**AI for the Win** is dual-licensed for maximum flexibility:
 
-See [LICENSE](./LICENSE) for details. For commercial licensing, [contact the author](https://www.linkedin.com/in/raymond-depalma/).
+| Content Type | License | Personal Use | Commercial Use |
+|--------------|---------|--------------|----------------|
+| Educational content, labs, docs | [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) | ✅ **FREE** | Requires license |
+| Code samples and scripts | [MIT](https://opensource.org/licenses/MIT) | ✅ **FREE** | ✅ **FREE** |
+
+### Personal Use (FREE)
+- Individual learning and skill development
+- Academic coursework (as a student)
+- Personal portfolio projects
+- Contributing back to this project
+
+### Commercial Use (License Required)
+Need a license for:
+- **Corporate training** programs (internal employee training)
+- **Bootcamps & courses** (paid training programs)
+- **Consulting** engagements using materials
+- **Universities** (formal curricula)
+
+**Pricing**:
+- Corporate: $3,000-25,000/year (based on company size)
+- Training providers: $8,000-25,000/year
+- Academic: FREE with attribution requirements
+
+**[View Commercial Licensing Options →](./docs/COMMERCIAL_LICENSING.md)**
+
+For licensing inquiries: [Contact Raymond DePalma](https://www.linkedin.com/in/raymond-depalma/)
+
+---
+
+### Trademark Notice
+
+**"AI for the Win"** is a trademark of Raymond DePalma. You may reference this project by name with attribution, but may not use it in competing training programs or in ways that suggest official affiliation.
+
+See [LICENSE](./LICENSE) for complete terms.
 
 ---
 
