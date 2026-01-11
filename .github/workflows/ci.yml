@@ -80,6 +80,13 @@ jobs:
           pip install -r requirements.txt
           pip install pytest pytest-cov
 
+      - name: Run validation tests (no API required)
+        run: |
+          # Run validation tests that don't require API keys
+          pytest tests/test_no_private_content.py tests/test_curriculum_integrity.py tests/test_lab_naming_consistency.py tests/test_lab_content_freshness.py -v --tb=short
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+
       - name: Run tests (excluding API-dependent tests)
         run: |
           # Run lab tests excluding those requiring API keys
