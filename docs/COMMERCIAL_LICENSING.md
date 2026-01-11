@@ -47,11 +47,11 @@ Fill out the [Academic License Application](https://forms.gle/YOUR-FORM-ID) (2-m
 - ✅ Docker environment and datasets
 - ✅ Quarterly content updates (new threats, TTPs, AI models)
 - ✅ Right to modify for internal use
-- ✅ Email support (response within 3-5 business days)
+- ✅ Email support (best effort, typically within one week)
 - ✅ Usage analytics and ROI tracking guidance
 
 ### Optional Add-Ons:
-- **Priority Support**: $1,500/year (48-72 hour response, dedicated email thread)
+- **Priority Support**: $1,500/year (faster response times, dedicated email thread)
 
 [Request Corporate Quote](https://www.linkedin.com/in/raymond-depalma/)
 
