@@ -10,7 +10,7 @@
 #
 # TROUBLESHOOTING:
 # If you get dependency errors, try these in order:
-#   1. pip install --upgrade pip setuptools wheel
+#   1. pip install --upgrade pip "setuptools>=78.1.1" wheel
 #   2. pip install -r requirements.txt
 #
 # Or use uv for faster, more reliable resolution:
@@ -86,8 +86,12 @@ pefile>=2023.2.7
 # =============================================================================
 requests>=2.31.0,<3.0.0
 python-dotenv>=1.0.0,<2.0.0
-aiohttp>=3.9.0,<4.0.0
+aiohttp>=3.13.3,<4.0.0  # v3.13.3 minimum required for CVE fixes (8 CVEs in 3.13.2)
 httpx>=0.27.0,<1.0.0
+
+# Security constraints for transitive dependencies (OpenSSF Scorecard compliance)
+urllib3>=2.6.3,<3.0.0  # CVE-2025-50182, CVE-2025-66418, CVE-2026-21441
+werkzeug>=3.1.5,<4.0.0  # CVE-2024-34069, CVE-2024-49766, CVE-2026-21860
 
 # Web frameworks
 fastapi>=0.110.0,<1.0.0
