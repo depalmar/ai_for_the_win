@@ -6,7 +6,7 @@ Analyze security threats unique to serverless environments including function vu
 
 **Difficulty**: Intermediate
 **Duration**: 90-120 minutes
-**Prerequisites**: Lab 45 (Cloud Fundamentals), basic serverless knowledge
+**Prerequisites**: Lab 44 (Cloud Security Fundamentals), Lab 46 (Container Security), basic serverless knowledge
 
 ## Learning Objectives
 

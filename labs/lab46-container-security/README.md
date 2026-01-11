@@ -6,7 +6,7 @@ Analyze container security threats including image vulnerabilities, runtime atta
 
 **Difficulty**: Intermediate
 **Duration**: 90-120 minutes
-**Prerequisites**: Lab 45 (Cloud Fundamentals), basic Docker/Kubernetes knowledge
+**Prerequisites**: Lab 44 (Cloud Security Fundamentals), Lab 45 (Cloud Security AI), basic Docker/Kubernetes knowledge
 
 ## Learning Objectives
 

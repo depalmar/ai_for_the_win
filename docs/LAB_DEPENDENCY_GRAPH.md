@@ -2,6 +2,21 @@
 
 This document shows the prerequisite relationships between labs in the AI for the Win curriculum.
 
+## Current Threat Landscape (2025-2026)
+
+This curriculum addresses the most critical AI/ML security threats identified by OWASP, NIST, and industry research:
+
+| Threat | Labs Covering | Priority |
+|--------|---------------|----------|
+| **Prompt Injection** (OWASP #1) | Labs 40, 49 | Critical |
+| **RAG Poisoning** | Labs 18, 43 | Critical |
+| **Data/Model Poisoning** | Labs 39, 41 | High |
+| **AI-Powered Threat Actors** | Lab 37 | High |
+| **Adversarial ML Attacks** | Labs 38, 39 | High |
+| **Agentic AI Exploits** | Labs 14, 16, 49 | High |
+| **Model Extraction/Theft** | Labs 39, 41 | Medium |
+| **Supply Chain Attacks** | Labs 40, 46 | Medium |
+
 ## Visual Overview
 
 ```mermaid
@@ -64,7 +79,7 @@ flowchart TD
         L39[Lab 39: Adversarial ML]
         L40[Lab 40: LLM Security Testing]
         L41[Lab 41: Model Monitoring]
-        L42[Lab 42: Fine Tuning]
+        L42[Lab 42: Fine Tuning Security]
         L43[Lab 43: RAG Security]
     end
 
@@ -99,17 +114,19 @@ flowchart TD
     %% LLM Track
     L08 --> L14
     L08 --> L15
-    L13 --> L15
+    L14 --> L16
     L15 --> L16
-    L16 --> L17
+    L15 --> L17
     L17 --> L18
 
-    %% Detection Track
+    %% Detection Track (updated - no circular deps)
     L01 --> L19
-    L15 --> L20
+    L01 --> L20
+    L08 --> L20
     L20 --> L21
     L21 --> L22
     L22 --> L23
+    L15 --> L24
     L23 --> L24
 
     %% DFIR Track
@@ -126,22 +143,35 @@ flowchart TD
     L35 --> L36
     L36 --> L37
 
-    %% AI Security Track
+    %% AI Security Track (updated with correct deps)
     L07 --> L38
+    L10 --> L39
+    L13 --> L39
+    L23 --> L39
     L38 --> L39
-    L39 --> L40
+    L38 --> L40
+    L38 --> L41
     L40 --> L41
     L18 --> L42
     L18 --> L43
+    L38 --> L43
+    L40 --> L43
 
-    %% Cloud Track
+    %% Cloud Track (updated)
     L08 --> L44
     L44 --> L45
+    L44 --> L46
     L45 --> L46
+    L44 --> L47
     L46 --> L47
+    L25 --> L48
+    L44 --> L48
+    L46 --> L48
     L47 --> L48
 
-    %% Advanced Track
+    %% Advanced Track (updated)
+    L02 --> L49
+    L14 --> L49
     L40 --> L49
     L49 --> L50
 ```
@@ -149,61 +179,95 @@ flowchart TD
 ## Learning Paths
 
 ### Beginner Path (Start Here!)
+
 ```
 Lab 00 → Lab 01 → Lab 02 → Lab 07 → Lab 10
 ```
 
 ### ML-Focused Path
+
 ```
 Lab 01 → Lab 04 → Lab 07 → Lab 10 → Lab 11 → Lab 12 → Lab 13
 ```
 
 ### LLM-Focused Path
+
 ```
 Lab 01 → Lab 08 → Lab 14 → Lab 15 → Lab 16 → Lab 17 → Lab 18
 ```
 
 ### Detection Engineering Path
+
 ```
-Lab 01 → Lab 19 → Lab 20 → Lab 21 → Lab 22 → Lab 23 → Lab 24
+Lab 01 → Lab 08 → Lab 20 → Lab 21 → Lab 22 → Lab 23 → Lab 24
 ```
 
 ### DFIR Path
+
 ```
-Lab 01 → Lab 25 → Lab 29 → Lab 30 → Lab 31 → Lab 32 → Lab 33 → Lab 34 → Lab 35
+Lab 01 → Lab 25 → Lab 30 → Lab 31 → Lab 32 → Lab 33 → Lab 34 → Lab 35
 ```
 
-### AI Security Path
+### AI Security Path (Critical for 2025 Threats)
+
 ```
 Lab 07 → Lab 38 → Lab 39 → Lab 40 → Lab 41 → Lab 49 → Lab 50
+              ↓
+         Lab 18 → Lab 43 (RAG Security)
 ```
 
 ### Cloud Security Path
+
 ```
 Lab 08 → Lab 44 → Lab 45 → Lab 46 → Lab 47 → Lab 48
+                     ↑
+                Lab 25 (DFIR Fundamentals for Cloud IR)
 ```
 
 ## Prerequisites Quick Reference
 
-| Lab | Prerequisites |
-|-----|---------------|
-| 00 | None |
-| 01 | Lab 00 |
-| 02-09 | Lab 01 |
-| 10 | Lab 07 |
-| 11-12 | Previous lab |
-| 13 | Lab 12 |
-| 14-15 | Lab 08 |
-| 16-18 | Previous lab |
-| 19 | Lab 01 |
-| 20-24 | Previous lab |
-| 25 | Lab 01 |
-| 29-35 | Previous lab |
-| 36-37 | Previous lab |
-| 38 | Lab 07 |
-| 39-41 | Previous lab |
-| 42-43 | Lab 18 |
-| 44 | Lab 08 |
-| 45-48 | Previous lab |
-| 49 | Lab 40 |
-| 50 | Lab 49 |
+| Lab | Prerequisites | Topic |
+|-----|---------------|-------|
+| 00 | None | Environment Setup |
+| 01 | Lab 00 | Python Basics |
+| 02-09 | Lab 01 | Foundations |
+| 10 | Lab 07 | Phishing Classifier |
+| 11-12 | Previous lab | ML Security |
+| 13 | Lab 12 | ML vs LLM Bridge |
+| 14 | Lab 08 | First AI Agent |
+| 15 | Lab 08 | LLM Log Analysis |
+| 16 | Labs 14, 15 | Threat Intel Agent |
+| 17 | Lab 15 | Embeddings & Vectors |
+| 18 | Lab 17 | Security RAG |
+| 19 | Lab 01 | Binary Basics |
+| 20 | Labs 01, 08 | Sigma Fundamentals |
+| 21-23 | Previous lab | Detection Engineering |
+| 24 | Labs 15, 23 | Monitoring AI |
+| 25 | Lab 01 | DFIR Fundamentals |
+| 26-29 | Lab 25 | DFIR Deep Dives |
+| 30 | Lab 25 | Ransomware Fundamentals |
+| 31-35 | Previous lab | Ransomware/Threats |
+| 36-37 | Previous lab | Threat Intelligence |
+| 38 | Lab 07 | ML Security Intro |
+| 39 | Labs 10-13, 23, 38 | Adversarial ML |
+| 40 | Lab 38 | LLM Security Testing |
+| 41 | Labs 38, 40 | Model Monitoring |
+| 42 | Lab 18 | Fine-Tuning Security |
+| 43 | Labs 18, 38, 40 | RAG Security |
+| 44 | Lab 08 | Cloud Fundamentals |
+| 45 | Lab 44 | Cloud Security AI |
+| 46 | Labs 44, 45 | Container Security |
+| 47 | Labs 44, 46 | Serverless Security |
+| 48 | Labs 25, 44, 46, 47 | Cloud IR Automation |
+| 49 | Labs 02, 14-18, 40 | LLM Red Teaming |
+| 50 | Lab 49 | Purple Team AI |
+
+## Skill Progression Logic
+
+The curriculum follows a logical skill progression:
+
+1. **Foundations First**: Python, APIs, and basic ML concepts enable all subsequent labs
+2. **Build Before Break**: Learn to build ML/LLM systems (Labs 10-18) before attacking them (Labs 38-43)
+3. **Detect Before Respond**: Detection engineering (Labs 19-24) before incident response (Labs 25-35)
+4. **Defense Informs Offense**: Understanding defenses (Labs 38-43) before red teaming (Labs 49-50)
+5. **Cross-Domain Integration**: Cloud IR (Lab 48) requires both DFIR (Lab 25) and Cloud (Labs 44-47)

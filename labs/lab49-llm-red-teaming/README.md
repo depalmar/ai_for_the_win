@@ -72,7 +72,7 @@
 |--------|---------|
 | **Time** | 2-2.5 hours (with AI assistance) |
 | **Difficulty** | Expert |
-| **Prerequisites** | Labs 14-18 (LLM fundamentals), Lab 31 (Prompt Engineering) |
+| **Prerequisites** | Labs 14-18 (LLM fundamentals), Lab 02 (Prompt Engineering), Lab 40 (LLM Security Testing) |
 | **Skills** | Offensive security, LLM architecture, prompt design |
 
 ---

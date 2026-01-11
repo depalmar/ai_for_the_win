@@ -12,7 +12,7 @@ Learn to monitor AI systems in production: logging, metrics, drift detection, an
 |---|---|
 | **Difficulty** | Intermediate |
 | **Time** | 60-90 minutes |
-| **Prerequisites** | Lab 23 (LLM Log Analysis), Lab 23 (Detection Pipeline) recommended |
+| **Prerequisites** | Lab 15 (LLM Log Analysis), Lab 23 (Detection Pipeline) recommended |
 | **API Keys Required** | Yes (any LLM provider) |
 
 ## Learning Objectives
@@ -25,7 +25,7 @@ By the end of this lab, you will understand:
 4. Logging strategies for AI-powered security tools
 5. Building alerts for AI system health
 
-> 🎯 **Bridge Lab**: This lab bridges building AI systems (Labs 04-10) and running them reliably in production. Essential before deploying any AI security tool.
+> 🎯 **Bridge Lab**: This lab bridges building AI systems (Labs 10-18) and running them reliably in production. Essential before deploying any AI security tool.
 
 ---
 

@@ -1,6 +1,6 @@
 # Lab 20: Sigma Rule Fundamentals
 
-**Difficulty:** 🟡 Intermediate | **Time:** 45-60 min | **Prerequisites:** Lab 15, Lab 21
+**Difficulty:** 🟡 Intermediate | **Time:** 45-60 min | **Prerequisites:** Lab 01, Lab 08 (for LLM generation)
 
 Learn to create, test, and generate Sigma detection rules for log-based threat detection.
 

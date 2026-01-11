@@ -1,8 +1,8 @@
 # Lab 14: Your First AI Agent [Bridge Lab]
 
-> **Bridge Lab:** This lab introduces agent concepts and tool calling before the full Threat Intel Agent in Lab 08.
+> **Bridge Lab:** This lab introduces agent concepts and tool calling before the full Threat Intel Agent in Lab 16.
 
-A gentle introduction to AI agents before diving into the full threat intelligence agent in Lab 36.
+A gentle introduction to AI agents before diving into the full threat intelligence agent in Lab 16.
 
 ---
 
@@ -12,7 +12,7 @@ A gentle introduction to AI agents before diving into the full threat intelligen
 |---|---|
 | **Difficulty** | Beginner-Intermediate |
 | **Time** | 45-60 minutes |
-| **Prerequisites** | Lab 08 (LLM Log Analysis) |
+| **Prerequisites** | Lab 08 (Working with APIs) |
 | **API Keys Required** | Yes (Anthropic, OpenAI, or Google) |
 
 ## Learning Objectives
@@ -25,7 +25,7 @@ By the end of this lab, you will understand:
 4. The ReAct pattern (Reason + Act) at a basic level
 5. When agents are useful vs. overkill
 
-> 🎯 **Bridge Lab**: This lab bridges Lab 08 (single LLM calls) and Lab 36 (full ReAct agent with memory and multiple tools). If Lab 36 feels too complex, start here.
+> 🎯 **Bridge Lab**: This lab bridges Lab 08 (single LLM calls) and Lab 16 (full ReAct agent with memory and multiple tools). If Lab 16 feels too complex, start here.
 
 ---
 

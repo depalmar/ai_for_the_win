@@ -1,6 +1,6 @@
 # Lab 25: DFIR Fundamentals [Bridge Lab]
 
-**Difficulty:** 🟡 Intermediate | **Time:** 60-90 min | **Prerequisites:** Labs 00-24
+**Difficulty:** 🟡 Intermediate | **Time:** 60-90 min | **Prerequisites:** Labs 00-01
 
 > **Bridge Lab:** This lab introduces incident response concepts and artifacts before the advanced DFIR labs (26-35).
 
@@ -19,7 +19,7 @@ By the end of this lab, you will:
 
 ## Prerequisites
 
-- Completed Labs 00-24 (Foundation + ML + LLM)
+- Completed Labs 00-01 (Environment + Python Fundamentals)
 - Basic understanding of operating systems (Windows/Linux)
 
 ## Time Required
