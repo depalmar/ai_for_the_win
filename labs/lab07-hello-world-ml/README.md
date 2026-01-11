@@ -17,7 +17,7 @@ By the end of this lab, you will:
 ## Prerequisites
 
 - Completed Lab 01 (Python basics) OR comfortable with Python
-- Completed Lab 35 (ML concepts) OR understand supervised learning basics
+- Completed Lab 15 (ML concepts) OR understand supervised learning basics
 
 ## Time Required
 
@@ -139,7 +139,7 @@ Complete the starter code to build a working spam classifier.
 
 ```bash
 # Run the starter code
-python labs/Lab 21-hello-world-ml/starter/main.py
+python labs/lab07-hello-world-ml/starter/main.py
 ```
 
 ### TODOs
@@ -289,7 +289,7 @@ Now that you understand the ML workflow:
 
 - **Lab 01**: Build a more sophisticated phishing classifier with TF-IDF
 - **Lab 31**: Learn unsupervised learning (clustering) for malware
-- **Lab 32**: Detect anomalies in network traffic
+- **Lab 12**: Detect anomalies in network traffic
 
 You're ready!
 

@@ -311,8 +311,8 @@ START: What's your constraint?
 
 You now understand when to use ML vs LLM:
 
-- **Lab 35**: Deep dive into LLM log analysis
-- **Lab 36**: Build agents that combine ML + LLM
+- **Lab 15**: Deep dive into LLM log analysis
+- **Lab 16**: Build agents that combine ML + LLM
 - **Lab 23**: Production hybrid detection pipeline
 
 Choose your path wisely! 🎯

@@ -358,15 +358,15 @@ Before attempting CTF challenges, ensure you've completed relevant labs:
 
 | CTF Challenge | Required Lab(s) | API Key Needed |
 |---------------|-----------------|----------------|
-| Beginner-01: Log Detective | Lab 35 | Yes |
-| Beginner-02: Phish Finder | Lab 29 | No |
-| Beginner-03: Hidden IOC | Lab 29, Lab 36 | Yes |
+| Beginner-01: Log Detective | Lab 15 | Yes |
+| Beginner-02: Phish Finder | Lab 10 | No |
+| Beginner-03: Hidden IOC | Lab 10, Lab 16 | Yes |
 | Beginner-04: Malware Classifier | Lab 31 | No |
 | Beginner-05: Prompt Injection | Lab 31 | No |
-| Intermediate-01: C2 Hunter | Lab 35 | Yes |
+| Intermediate-01: C2 Hunter | Lab 15 | Yes |
 | Intermediate-02: Memory Forensics | Lab 25 | No |
 | Intermediate-03: Adversarial ML | Lab 38 | No |
-| Intermediate-04: Agent Investigation | Lab 36 | Yes |
+| Intermediate-04: Agent Investigation | Lab 16 | Yes |
 | Intermediate-05: Ransomware Response | Lab 25 | No |
 
 ## Summary

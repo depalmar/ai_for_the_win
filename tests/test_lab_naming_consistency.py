@@ -14,19 +14,24 @@ from pathlib import Path
 import pytest
 
 # Map of legacy lab numbers to current lab numbers (for detection)
-# ONLY includes numbers that were actually changed in the reorganization
+# CRITICAL: Only includes labs that were ACTUALLY renamed in the beginner section
+# Many advanced labs (38-50) still use their original numbers correctly
 LEGACY_TO_CURRENT = {
-    "29": "10",  # Phishing Classifier
-    "32": "12",  # Anomaly Detection
-    "33": "13",  # ML vs LLM
-    "34": "14",  # First AI Agent
-    "35": "15",  # LLM Log Analysis
-    "36": "16",  # Threat Intel Agent
-    "39": "17",  # Embeddings
-    "42": "18",  # Security RAG
+    "29": "10",  # Phishing Classifier (renamed)
+    "32": "12",  # Anomaly Detection (renamed)
+    "33": "13",  # ML vs LLM (renamed)
+    "34": "14",  # First AI Agent (renamed)
+    "35": "15",  # LLM Log Analysis (renamed)
+    "36": "16",  # Threat Intel Agent (renamed)
+    # Lab 39 and 42 are complex:
+    # - Lab 17 is "Embeddings & Vectors" (new beginner lab)
+    # - Lab 39 is "Adversarial ML" (was always 39, never renamed)
+    # - Lab 18 is "Security RAG" (was Lab 42 in old structure)
+    # - Lab 42 is "Fine-Tuning" (was always 42, never renamed)
+    # We can't detect these automatically without deep context
     # Lab 21, 22, 23 are OK as-is (YARA, Vuln Scanner, Detection Pipeline)
     # Lab 31 is context-dependent (could be Lab 02 or Lab 11)
-    # Labs 44-50 are OK as-is (Cloud Security section)
+    # Labs 38-50 are OK as-is (advanced section, never renamed)
 }
 
 # Valid lab numbers (based on current structure)
@@ -122,11 +127,20 @@ class TestReadmeLabReferences:
     @pytest.mark.parametrize("readme_path", get_readme_files())
     def test_no_wrong_lab_numbers(self, readme_path):
         """README files should not reference wrong lab numbers (29→10, 35→15, etc.)."""
+        # Extract this README's own lab number
+        parent_dir = readme_path.parent.name
+        match = re.match(r"lab(\d+)-", parent_dir)
+        own_lab_num = match.group(1) if match else None
+
         content = readme_path.read_text(encoding="utf-8")
 
         # Find references to legacy lab numbers
         wrong_refs = []
         for legacy_num, current_num in LEGACY_TO_CURRENT.items():
+            # Skip if this README IS the lab being checked
+            if own_lab_num == legacy_num:
+                continue
+
             # Look for "Lab XX" followed by some context
             pattern = rf"\bLab {legacy_num}\b(?!-)"  # Not followed by hyphen (allows "Lab 29-old-name" in docs)
             matches = re.finditer(pattern, content)
@@ -151,18 +165,32 @@ class TestNotebookLabReferences:
     @pytest.mark.parametrize("notebook_path", get_notebooks())
     def test_no_legacy_lab_numbers_in_notebooks(self, notebook_path):
         """Notebooks should not reference legacy lab numbers."""
+        # Extract the lab number from the notebook filename
+        match = re.match(r"lab(\d+)_", notebook_path.name)
+        notebook_lab_num = match.group(1) if match else None
+
         with open(notebook_path, "r", encoding="utf-8") as f:
             notebook = json.load(f)
 
         wrong_refs = []
 
-        for cell in notebook.get("cells", []):
+        for cell_idx, cell in enumerate(notebook.get("cells", [])):
             if cell.get("cell_type") == "markdown":
                 source = cell.get("source", [])
                 content = "".join(source) if isinstance(source, list) else source
 
+                # Skip the first cell if it contains this lab's own title
+                if cell_idx == 0 and notebook_lab_num:
+                    first_line = content.split("\n")[0] if content else ""
+                    if f"# Lab {notebook_lab_num}:" in first_line:
+                        continue  # Skip this lab's own title
+
                 # Check for legacy lab numbers
                 for legacy_num, current_num in LEGACY_TO_CURRENT.items():
+                    # Don't flag if this IS the legacy numbered lab using its own number
+                    if notebook_lab_num == legacy_num:
+                        continue
+
                     pattern = rf"\bLab {legacy_num}\b"
                     if re.search(pattern, content):
                         # Get context

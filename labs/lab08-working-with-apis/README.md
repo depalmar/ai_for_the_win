@@ -475,7 +475,7 @@ Complete the starter code to build a security API client.
 ### File: `starter/main.py`
 
 ```bash
-python labs/Lab 22-working-with-apis/starter/main.py
+python labs/lab08-working-with-apis/starter/main.py
 ```
 
 ### TODOs
@@ -623,8 +623,8 @@ def check_ip_abuseipdb(ip_address, api_key):
 
 Now that you can work with APIs:
 
-- **Lab 35**: Use LLM APIs for log analysis
-- **Lab 36**: Build an agent with threat intel API tools
+- **Lab 15**: Use LLM APIs for log analysis
+- **Lab 16**: Build an agent with threat intel API tools
 - **Lab 42**: Implement RAG with embedding APIs
 
 You're ready for LLM-powered security tools!

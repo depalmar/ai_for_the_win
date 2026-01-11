@@ -223,7 +223,7 @@ Why this pattern is used:
 - Can suggest investigation steps
 - Assists with timeline generation
 
-**Example:** Lab 42 (Security RAG) + Lab 29 (IR Copilot)
+**Example:** Lab 42 (Security RAG) + Lab 10 (IR Copilot)
 
 #### Stage 4: Response
 **Common Approach:** Human decision with AI assistance
@@ -1017,7 +1017,7 @@ These are guiding principles to consider, not universal rules:
 | Learn ML fundamentals | [Lab 10: Phishing Classifier](../lab10-phishing-classifier/) |
 | Learn LLM basics | [Lab 02: Intro Prompt Engineering](../lab02-intro-prompt-engineering/) |
 | Build detection pipeline | [Lab 23: Detection Pipeline](../lab23-detection-pipeline/) |
-| Create IR assistant | [Lab 29: IR Copilot](../lab29-ir-copilot/) |
+| Create IR assistant | [Lab 10: IR Copilot](../lab29-ir-copilot/) |
 | Understand compliance | [Security Compliance Guide](../../docs/guides/security-compliance-guide.md) |
 
 ---

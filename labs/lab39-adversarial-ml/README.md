@@ -793,7 +793,7 @@ class RobustMalwareClassifier:
 ## Part 6: Exercises
 
 ### Exercise 1: Implement FGSM Attack
-Create an FGSM attack against the phishing classifier from Lab 29.
+Create an FGSM attack against the phishing classifier from Lab 10.
 
 ```python
 # Your implementation here
@@ -824,7 +824,7 @@ def exercise_2_poisoning():
 ```
 
 ### Exercise 3: Build Robust Classifier
-Implement adversarial training for the anomaly detector from Lab 32.
+Implement adversarial training for the anomaly detector from Lab 12.
 
 ```python
 def exercise_3_robust_training():

@@ -351,7 +351,7 @@ def test_rule_against_logs(rule_yaml: str, logs: list) -> list:
 ## 📁 Files
 
 ```
-Lab 49-sigma-fundamentals/
+lab20-sigma-fundamentals/
 ├── README.md
 ├── starter/
 │   └── main.py          # Exercises with TODOs

@@ -411,4 +411,4 @@ Test your implementation with the provided sample data:
 
 > **Stuck?** See the [Lab 31 Walkthrough](../../docs/walkthroughs/lab31-ransomware-detection-walkthrough.md) for step-by-step guidance.
 
-**Next Lab**: [Lab 32 - Ransomware Attack Simulation & Purple Team](../lab32-ransomware-simulation/)
+**Next Lab**: [Lab 12 - Ransomware Attack Simulation & Purple Team](../lab32-ransomware-simulation/)

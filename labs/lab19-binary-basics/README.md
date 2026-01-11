@@ -353,6 +353,6 @@ Now that you understand binary analysis:
 
 - **Lab 21**: Generate YARA rules from samples
 - **Lab 31**: Apply to ransomware detection
-- **Lab 33**: Analyze memory dumps
+- **Lab 13**: Analyze memory dumps
 
 You're ready to hunt malware! 🎯

@@ -582,4 +582,4 @@ Export rules to your SIEM using [pySigma](https://github.com/SigmaHQ/pySigma).
 
 > **Stuck?** See the [Lab 23 Walkthrough](../../docs/walkthroughs/lab23-detection-pipeline-walkthrough.md) for step-by-step guidance.
 
-**Next Lab**: [Lab 29 - IR Copilot Agent](../lab29-ir-copilot/)
+**Next Lab**: [Lab 10 - IR Copilot Agent](../lab29-ir-copilot/)

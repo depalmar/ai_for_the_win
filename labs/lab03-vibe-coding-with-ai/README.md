@@ -456,7 +456,7 @@ Before moving on, ensure you can:
 
 ## What's Next?
 
-Now that you're equipped with vibe coding skills, you'll use them throughout the remaining labs. In **Lab 29: Phishing Email Classifier**, you'll combine prompt engineering with your new AI-assisted workflow to build your first real security ML tool.
+Now that you're equipped with vibe coding skills, you'll use them throughout the remaining labs. In **Lab 10: Phishing Email Classifier**, you'll combine prompt engineering with your new AI-assisted workflow to build your first real security ML tool.
 
 **Pro Tip:** Keep a "prompt journal" - save effective prompts that worked well for security tasks. You'll build a personal library of patterns.
 

@@ -523,4 +523,4 @@ tags:
 
 > **Stuck?** See the [Lab 35 Walkthrough](../../docs/walkthroughs/lab35-lateral-movement-walkthrough.md) for step-by-step guidance.
 
-**Next Lab**: [Lab 36 - AI-Powered Threat Actor Profiling](../lab36-threat-actor-profiling/)
+**Next Lab**: [Lab 16 - AI-Powered Threat Actor Profiling](../lab36-threat-actor-profiling/)

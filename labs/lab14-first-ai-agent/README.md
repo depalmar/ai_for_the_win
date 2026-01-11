@@ -371,11 +371,11 @@ The agent should answer from its training data without using tools. Verify this 
 
 ---
 
-## Part 5: Comparing to Lab 36
+## Part 5: Comparing to Lab 16
 
-Now that you understand the basics, here's how Lab 36 builds on this:
+Now that you understand the basics, here's how Lab 16 builds on this:
 
-| This Lab (04b) | Lab 36 (Threat Intel Agent) |
+| This Lab (04b) | Lab 16 (Threat Intel Agent) |
 |----------------|----------------------------|
 | 2 simple tools | 5+ tools (VirusTotal, MISP, etc.) |
 | No memory | Conversation memory |
@@ -384,7 +384,7 @@ Now that you understand the basics, here's how Lab 36 builds on this:
 | Simulated data | Real API integrations |
 | ~100 lines | ~500+ lines |
 
-**When you're ready**: Move to Lab 36 to build a full-featured threat intelligence agent!
+**When you're ready**: Move to Lab 16 to build a full-featured threat intelligence agent!
 
 ---
 

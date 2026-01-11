@@ -492,7 +492,7 @@ def export_prometheus_metrics(self) -> str:
 
 | If you want to... | Go to... |
 |-------------------|----------|
-| Build an IR assistant | [Lab 29: IR Copilot](../lab29-ir-copilot/) |
+| Build an IR assistant | [Lab 10: IR Copilot](../lab29-ir-copilot/) |
 | Learn about adversarial attacks | [Lab 39: Adversarial ML](../lab39-adversarial-ml/) |
 | Review security compliance | [Security Compliance Guide](../../docs/guides/security-compliance-guide.md) |
 

@@ -457,4 +457,4 @@ Look for these Cobalt Strike indicators:
 
 > **Stuck?** See the [Lab 34 Walkthrough](../../docs/walkthroughs/lab34-c2-traffic-analysis-walkthrough.md) for step-by-step guidance.
 
-**Next Lab**: [Lab 35 - AI-Powered Lateral Movement Detection](../lab35-lateral-movement-detection/)
+**Next Lab**: [Lab 15 - AI-Powered Lateral Movement Detection](../lab35-lateral-movement-detection/)

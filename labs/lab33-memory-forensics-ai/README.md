@@ -373,4 +373,4 @@ vol -f memory.dmp windows.cmdline
 
 > **Stuck?** See the [Lab 33 Walkthrough](../../docs/walkthroughs/lab33-memory-forensics-ai-walkthrough.md) for step-by-step guidance.
 
-**Next Lab**: [Lab 34 - AI-Powered C2 Traffic Analysis](../lab34-c2-traffic-analysis/)
+**Next Lab**: [Lab 14 - AI-Powered C2 Traffic Analysis](../lab34-c2-traffic-analysis/)

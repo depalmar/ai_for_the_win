@@ -600,7 +600,7 @@ When you're ready to build production security tools, these guides will help:
 └────────────────────────────────────────────────────────────┘
                           ↓
 ┌────────────────────────────────────────────────────────────┐
-│  THEN: Lab 35                                               │
+│  THEN: Lab 15                                               │
 │  LLM Log Analysis (first API key needed, build on Lab 31) │
 └────────────────────────────────────────────────────────────┘
                           ↓
@@ -681,7 +681,7 @@ EXAMPLE:
 ## Preview: From UI to API
 
 Everything you've learned in this lab using web UIs translates directly to code.
-When you reach Lab 35, you'll use the exact same prompts - just via Python.
+When you reach Lab 15, you'll use the exact same prompts - just via Python.
 
 **What you typed in Google AI Studio:**
 ```
@@ -690,7 +690,7 @@ You are a security analyst. Analyze this log entry for security concerns:
 192.168.1.100 - - [15/Jan/2024:10:30:00 +0000] "GET /admin/config.php HTTP/1.1" 200 5432
 ```
 
-**The EXACT same thing as Python code (Lab 35+):**
+**The EXACT same thing as Python code (Lab 15+):**
 
 ```python
 # Using Anthropic Claude API

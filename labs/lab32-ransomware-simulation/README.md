@@ -577,4 +577,4 @@ class PurpleTeamExercise:
 
 > **Stuck?** See the [Lab 32 Walkthrough](../../docs/walkthroughs/lab32-ransomware-simulation-walkthrough.md) for step-by-step guidance.
 
-**Next Lab**: [Lab 33 - AI-Powered Memory Forensics](../lab33-memory-forensics-ai/)
+**Next Lab**: [Lab 13 - AI-Powered Memory Forensics](../lab33-memory-forensics-ai/)

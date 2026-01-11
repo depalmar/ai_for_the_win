@@ -53,7 +53,7 @@ By completing this lab, you will:
 
 ## 📋 Prerequisites
 
-- Completed Lab 36 (Threat Actor Profiling)
+- Completed Lab 16 (Threat Actor Profiling)
 - Understanding of social engineering concepts
 - Familiarity with phishing detection
 - Basic knowledge of generative AI

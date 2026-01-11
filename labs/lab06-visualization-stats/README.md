@@ -285,7 +285,7 @@ arr[0:3, 1:4]               # Slice rows and columns
 ## Lab Structure
 
 ```
-Lab 42-visualization-stats/
+lab06-visualization-stats/
 ├── README.md           # This file
 ├── starter/
 │   └── main.py         # Exercises with TODOs
@@ -316,10 +316,10 @@ Combine multiple visualizations into a SOC dashboard.
 
 ```bash
 # Run the starter code
-python labs/Lab 42-visualization-stats/starter/main.py
+python labs/lab06-visualization-stats/starter/main.py
 
 # Run the solution
-python labs/Lab 42-visualization-stats/solution/main.py
+python labs/lab06-visualization-stats/solution/main.py
 ```
 
 ## Key Libraries
@@ -346,7 +346,7 @@ from scipy import stats              # Statistical functions
 After completing this lab:
 - **Lab 01**: Apply visualizations to phishing classification
 - **Lab 31**: Visualize malware clustering results
-- **Lab 32**: Create anomaly detection dashboards
+- **Lab 12**: Create anomaly detection dashboards
 
 ---
 
