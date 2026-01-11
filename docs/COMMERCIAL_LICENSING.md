@@ -50,9 +50,6 @@ Fill out the [Academic License Application](https://forms.gle/YOUR-FORM-ID) (2-m
 - ✅ Email support (best effort, typically within one week)
 - ✅ Usage analytics and ROI tracking guidance
 
-### Optional Add-Ons:
-- **Priority Support**: $1,500/year (faster response times, dedicated email thread)
-
 [Request Corporate Quote](https://www.linkedin.com/in/raymond-depalma/)
 
 ---
