@@ -1,6 +1,6 @@
 # Lab 30: Ransomware Fundamentals [Bridge Lab]
 
-**Difficulty:** 🟡 Intermediate | **Time:** 45-60 min | **Prerequisites:** Lab 25 (DFIR), Lab 35
+**Difficulty:** 🟡 Intermediate | **Time:** 45-60 min | **Prerequisites:** Lab 25 (DFIR), Lab 25
 
 > **Bridge Lab:** This lab covers ransomware families, attack lifecycle, and indicators before building detection in Lab 31.
 

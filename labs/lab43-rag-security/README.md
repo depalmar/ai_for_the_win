@@ -6,7 +6,7 @@ Analyze security vulnerabilities in Retrieval-Augmented Generation (RAG) systems
 
 **Difficulty**: Intermediate
 **Duration**: 90-120 minutes
-**Prerequisites**: Lab 39 (ML Security), Lab 42 (RAG Fundamentals), Lab 40 (LLM Testing)
+**Prerequisites**: Lab 18 (ML Security), Lab 42 (RAG Fundamentals), Lab 40 (LLM Testing)
 
 ## Learning Objectives
 

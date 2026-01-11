@@ -1,6 +1,6 @@
 # Lab 44: Cloud Security Fundamentals [Bridge Lab]
 
-**Difficulty:** 🟡 Intermediate | **Time:** 60-90 min | **Prerequisites:** Lab 35, basic networking
+**Difficulty:** 🟡 Intermediate | **Time:** 60-90 min | **Prerequisites:** Lab 08, basic networking
 
 > **Bridge Lab:** This lab covers AWS/Azure/GCP security fundamentals before building AI-powered cloud detection in Lab 45.
 
@@ -28,7 +28,7 @@ By the end of this lab, you will:
 
 ## 📋 Prerequisites
 
-- Completed Lab 35 (LLM Log Analysis)
+- Completed Lab 08 (LLM Log Analysis)
 - Basic understanding of networking (IP, ports, HTTP)
 - No cloud accounts required (we use sample data)
 

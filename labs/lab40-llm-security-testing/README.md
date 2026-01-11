@@ -6,7 +6,7 @@ Learn systematic approaches to testing Large Language Models for security vulner
 
 **Difficulty**: Intermediate
 **Duration**: 90-120 minutes
-**Prerequisites**: Lab 39 (ML Security Fundamentals), basic LLM knowledge
+**Prerequisites**: Lab 38 (ML Security Fundamentals), basic LLM knowledge
 
 ## Learning Objectives
 

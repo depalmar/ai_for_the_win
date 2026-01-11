@@ -1,6 +1,6 @@
 # Lab 17: Embeddings & Vectors Explained [Bridge Lab]
 
-**Difficulty:** 🟡 Intermediate | **Time:** 45-60 min | **Prerequisites:** Lab 35
+**Difficulty:** 🟡 Intermediate | **Time:** 45-60 min | **Prerequisites:** Lab 15
 
 > **Bridge Lab:** This lab explains how vectors and embeddings work before building a RAG system in Lab 42.
 
@@ -19,7 +19,7 @@ By the end of this lab, you will:
 
 ## Prerequisites
 
-- Completed Lab 35 (basic LLM understanding)
+- Completed Lab 15 (basic LLM understanding)
 - API key for embeddings (OpenAI, Anthropic, or use free sentence-transformers)
 
 ## Time Required

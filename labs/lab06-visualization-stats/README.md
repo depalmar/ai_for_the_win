@@ -1,6 +1,6 @@
 # Lab 06: Visualization & Statistics for Security
 
-**Difficulty:** 🟢 Beginner | **Time:** 45-60 min | **Prerequisites:** Lab 29
+**Difficulty:** 🟢 Beginner | **Time:** 45-60 min | **Prerequisites:** Lab 01
 
 Master interactive data visualization and statistical analysis for security data using Plotly and Python.
 
@@ -16,7 +16,7 @@ By the end of this lab, you will be able to:
 
 ## Prerequisites
 
-- Basic Python knowledge (Lab 29)
+- Basic Python knowledge (Lab 01)
 - No API keys required
 - ~30 minutes to complete
 
@@ -344,7 +344,7 @@ from scipy import stats              # Statistical functions
 ## Next Steps
 
 After completing this lab:
-- **Lab 29**: Apply visualizations to phishing classification
+- **Lab 01**: Apply visualizations to phishing classification
 - **Lab 31**: Visualize malware clustering results
 - **Lab 32**: Create anomaly detection dashboards
 
@@ -467,4 +467,4 @@ demo.launch()
 
 **Next Lab:** [Lab 21: Hello World ML](../Lab 21-hello-world-ml/) - Build your first machine learning model
 
-Or jump to: [Lab 29: Phishing Classifier](../Lab 29-phishing-classifier/) - Apply ML to real security problems
+Or jump to: [Lab 01: Phishing Classifier](../Lab 01-phishing-classifier/) - Apply ML to real security problems

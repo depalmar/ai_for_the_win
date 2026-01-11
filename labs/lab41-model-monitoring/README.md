@@ -6,7 +6,7 @@ Build production monitoring systems for ML models to detect drift, adversarial a
 
 **Difficulty**: Intermediate
 **Duration**: 90-120 minutes
-**Prerequisites**: Lab 39 (ML Security Fundamentals), Lab 40 (LLM Testing), basic MLOps knowledge
+**Prerequisites**: Lab 40 (ML Security Fundamentals), Lab 40 (LLM Testing), basic MLOps knowledge
 
 ## Learning Objectives
 

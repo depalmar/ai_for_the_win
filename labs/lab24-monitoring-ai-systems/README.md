@@ -12,7 +12,7 @@ Learn to monitor AI systems in production: logging, metrics, drift detection, an
 |---|---|
 | **Difficulty** | Intermediate |
 | **Time** | 60-90 minutes |
-| **Prerequisites** | Lab 35 (LLM Log Analysis), Lab 23 (Detection Pipeline) recommended |
+| **Prerequisites** | Lab 23 (LLM Log Analysis), Lab 23 (Detection Pipeline) recommended |
 | **API Keys Required** | Yes (any LLM provider) |
 
 ## Learning Objectives

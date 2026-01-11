@@ -1,6 +1,6 @@
 # Lab 16: Build a Threat Intelligence AI Agent
 
-**Difficulty:** 🟡 Intermediate | **Time:** 60-90 min | **Prerequisites:** Lab 35, API key
+**Difficulty:** 🟡 Intermediate | **Time:** 60-90 min | **Prerequisites:** Lab 15, API key
 
 Create an AI agent that gathers, correlates, and reports on threat intelligence.
 

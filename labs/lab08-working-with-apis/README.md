@@ -1,6 +1,6 @@
 # Lab 08: Working with APIs
 
-**Difficulty:** 🟢 Beginner | **Time:** 30-45 min | **Prerequisites:** Lab 29
+**Difficulty:** 🟢 Beginner | **Time:** 30-45 min | **Prerequisites:** Lab 01
 
 Learn to make HTTP requests, handle JSON responses, and work with security APIs.
 
@@ -17,7 +17,7 @@ By the end of this lab, you will:
 
 ## Prerequisites
 
-- Completed Lab 29 (Python basics)
+- Completed Lab 01 (Python basics)
 - Basic understanding of web concepts (URLs, HTTP)
 
 ## Time Required
@@ -633,4 +633,4 @@ You're ready for LLM-powered security tools!
 
 **Next Lab:** [Lab 23: CTF Fundamentals](../Lab 23-ctf-fundamentals/) - Learn security CTF skills and methodology
 
-Or jump to: [Lab 29: Phishing Classifier](../Lab 29-phishing-classifier/) - Build your first ML security tool
+Or jump to: [Lab 01: Phishing Classifier](../Lab 01-phishing-classifier/) - Build your first ML security tool

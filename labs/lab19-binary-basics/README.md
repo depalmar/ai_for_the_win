@@ -1,6 +1,6 @@
 # Lab 19: Binary Analysis Basics [Bridge Lab]
 
-**Difficulty:** 🟡 Intermediate | **Time:** 45-60 min | **Prerequisites:** Lab 29
+**Difficulty:** 🟡 Intermediate | **Time:** 45-60 min | **Prerequisites:** Lab 01
 
 > **Bridge Lab:** This lab covers PE file structure and binary analysis fundamentals before the YARA Generator in Lab 21.
 
@@ -19,7 +19,7 @@ By the end of this lab, you will:
 
 ## Prerequisites
 
-- Python basics (Lab 29)
+- Python basics (Lab 01)
 - No special tools required (we'll use Python libraries)
 
 ## Time Required
