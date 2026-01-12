@@ -100,9 +100,12 @@ credentials/
 # Private documentation - Never commit these
 *_PRIVATE.md
 *_INTERNAL.md
+*_DRAFT.md
+*.draft
 CURRICULUM_REVIEW_REPORT.md
 TODO_PRIVATE.md
 NOTES_PRIVATE.md
+docs/COMMERCIAL_LICENSING.md.draft
 
 # Large files
 *.zip
