@@ -2,6 +2,8 @@
 
 Build an AI system that detects ransomware behavior, analyzes samples, and automates incident response.
 
+> **Updated January 2025**: Covers 2024-2025 ransomware families including RansomHub, Qilin, DragonForce, and emerging AI-assisted ransomware techniques.
+
 ## 🎯 Learning Objectives
 
 By completing this lab, you will:
