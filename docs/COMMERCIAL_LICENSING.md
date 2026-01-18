@@ -56,7 +56,7 @@
 
 ## 🚀 Training Provider License
 
-**For bootcamps, training companies, and course creators**
+**For bootcamps, training companies, and course creators who want to use this content in their programs**
 
 | Program Type | License Fee | Duration |
 |--------------|-------------|----------|
@@ -124,9 +124,9 @@
 | Professor teaching university course | 🎓 Academic | **FREE** with attribution |
 | Student learning on your own | Personal Use | **FREE** (no license needed) |
 | Company training 50 security analysts | 🏢 Corporate (26-75 users) | **$6,000/year** |
-| Cybersecurity bootcamp with 30 students | 🚀 Training Provider | **$8,000/year** |
+| Bootcamp wants to use this content | 🚀 Training Provider | **$8,000/year** |
 | Conference workshop (one-time) | 🏢 Corporate | Contact for quote |
-| YouTube course with ads/sponsorships | 🚀 Training Provider | **$8,000-25,000** based on reach |
+| Online course creator with paid subscribers | 🚀 Training Provider | **$8,000-25,000** based on reach |
 
 ---
 
