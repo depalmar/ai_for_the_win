@@ -20,7 +20,6 @@
   - Course syllabus
   - Learning management system (LMS)
   - Course materials/slides
-- **Annual Report**: Brief usage report (enrollment numbers, feedback)
 - **Link**: Provide link to [GitHub repository](https://github.com/depalmar/ai_for_the_win)
 - **Optional**: Social media mention or LinkedIn post
 
@@ -37,15 +36,15 @@
 
 | Company Size | Annual License | What's Included |
 |--------------|----------------|-----------------|
-| **Startup** (1-50 employees) | **$3,000/year** | All labs, quarterly updates, email support |
-| **Small Business** (51-200) | **$6,000/year** | Above + priority email support |
-| **Mid-Market** (201-500) | **$12,000/year** | Above + early access to new content |
-| **Enterprise** (500+) | **$25,000+/year** | Above + custom branding rights |
+| **Startup** (1-50 employees) | **$3,000/year** | All labs, weekly updates, email support |
+| **Small Business** (51-200) | **$6,000/year** | All labs, weekly updates, email support |
+| **Mid-Market** (201-500) | **$12,000/year** | All labs, weekly updates, email support |
+| **Large Organization** (500+) | **Contact** | Custom pricing based on team size |
 
 ### What's Included:
 - ✅ All 50+ labs, capstone projects, and CTF challenges
 - ✅ Docker environment and datasets
-- ✅ Quarterly content updates (new threats, TTPs, AI models)
+- ✅ Weekly content updates (new threats, TTPs, AI models)
 - ✅ Right to modify for internal use
 - ✅ Email support for technical questions (best effort, evenings/weekends)
 
@@ -68,9 +67,9 @@
 
 ### What's Included:
 - ✅ All course materials with modification rights
-- ✅ Quarterly content updates
+- ✅ Weekly content updates
 - ✅ Attribution as "Powered by AI for the Win" partner
-- ✅ Direct email support (best effort, evenings/weekends)
+- ✅ Email support (best effort, evenings/weekends)
 
 **Note**: This is a content license only. All training delivery, student support, and certification is your responsibility.
 
@@ -159,20 +158,17 @@
 - Must maintain attribution and license notices
 - Must comply with CC BY-NC-SA 4.0 ShareAlike terms for any modifications
 
-### What's included in "quarterly updates"?
+### What's included in updates?
 
 - New threat actor TTPs (APT groups, ransomware families)
 - Updated AI model references (Claude, GPT, Gemini versions)
 - New detection techniques and tools
 - Bug fixes and improvements
-- Additional labs (as we create them)
+- Additional labs as they're created
 
 ### Can I white-label this for my brand?
 
-**No.** Attribution to the original work is required. However:
-- Training Provider licenses include co-branding options
-- You can add your branding alongside attribution
-- Custom enterprise licenses may have different terms
+**No.** Attribution to the original work is required. You can add your branding alongside the required attribution.
 
 ### What if I want to translate this into another language?
 
@@ -190,10 +186,8 @@
 
 ### What payment methods do you accept?
 
-- Credit card (via Stripe)
-- Bank transfer / ACH
-- Purchase order (for government/enterprise)
-- PayPal for smaller licenses
+- PayPal
+- Other methods available on request (contact to discuss)
 
 ---
 
@@ -203,8 +197,7 @@ Interested in being featured?
 
 ### For Licensees:
 - **Case studies**: Share how you're using the curriculum (with your permission)
-- **Logo placement**: Training Provider licensees can be listed on the partners page
-- **Social amplification**: We'll share your success stories
+- **Success stories**: May be featured on the repository with your approval
 
 ### For Contributors:
 - **Pull requests welcome**: Improvements, bug fixes, and new content
@@ -233,9 +226,8 @@ Once agreement is signed, you'll receive an invoice with payment instructions.
 ### Step 5: Access
 Upon payment confirmation, you receive:
 - Official license certificate (PDF)
-- Priority support contact information
-- Access to licensee-only resources (if applicable)
-- Logo files for co-branding (Training Provider licenses)
+- Direct email support contact
+- Full access to all materials
 
 ---
 
@@ -266,7 +258,7 @@ Upon payment confirmation, you receive:
 - Production-ready environment - no months of curriculum development needed
 
 ### Always Current
-- **Quarterly updates** with latest threat actor TTPs
+- **Weekly updates** with latest threat actor TTPs
 - Updated AI model references (Claude, GPT, Gemini)
 - New detection techniques as they emerge
 - Current 2025-2026 ransomware families and APT groups
