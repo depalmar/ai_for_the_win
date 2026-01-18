@@ -196,7 +196,7 @@
   "cursor.cpp.disabledLanguages": [],
 
   // Privacy & Security - CRITICAL for security training projects
-  "cursor.privacyMode": false,
+  "cursor.privacyMode": true,
   "cursor.enableTelemetry": false,
 
   // Exclude sensitive paths from AI indexing
