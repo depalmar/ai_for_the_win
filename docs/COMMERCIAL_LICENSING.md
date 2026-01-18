@@ -34,12 +34,12 @@
 
 **For companies using internally for employee training or professional development**
 
-| Company Size | Annual License | What's Included |
-|--------------|----------------|-----------------|
-| **Startup** (1-50 employees) | **$3,000/year** | All labs, weekly updates, email support |
-| **Small Business** (51-200) | **$6,000/year** | All labs, weekly updates, email support |
-| **Mid-Market** (201-500) | **$12,000/year** | All labs, weekly updates, email support |
-| **Large Organization** (500+) | **Contact** | Custom pricing based on team size |
+| Team Size (users) | Annual License | What's Included |
+|-------------------|----------------|-----------------|
+| **1-25 users** | **$3,000/year** | All labs, weekly updates, email support |
+| **26-75 users** | **$6,000/year** | All labs, weekly updates, email support |
+| **76-200 users** | **$12,000/year** | All labs, weekly updates, email support |
+| **200+ users** | **Contact** | Custom pricing based on team size |
 
 ### What's Included:
 - ✅ All 50+ labs, capstone projects, and CTF challenges
@@ -123,10 +123,10 @@
 |---------------|--------------|----------------|
 | Professor teaching university course | 🎓 Academic | **FREE** with attribution |
 | Student learning on your own | Personal Use | **FREE** (no license needed) |
-| Company training 75 security analysts | 🏢 Corporate (51-200) | **$6,000/year** |
+| Company training 50 security analysts | 🏢 Corporate (26-75 users) | **$6,000/year** |
 | Cybersecurity bootcamp with 30 students | 🚀 Training Provider | **$8,000/year** |
 | Conference workshop (one-time) | 🏢 Corporate | Contact for quote |
-| YouTube course with ads/sponsorships | 🚀 Training Provider | **$8,000-25,000** based on subscribers |
+| YouTube course with ads/sponsorships | 🚀 Training Provider | **$8,000-25,000** based on reach |
 
 ---
 
