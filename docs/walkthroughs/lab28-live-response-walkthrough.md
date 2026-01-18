@@ -313,7 +313,8 @@ def triage_analysis(collection_path: str) -> Dict:
         # Check for external connections from unusual processes
         external = df[~df['RemoteAddress'].str.startswith('10.', na=True)]
         for _, conn in external.iterrows():
-            if conn['ProcessName'] in SUSPICIOUS_PROCESSES:
+            proc_name = str(conn['ProcessName']).lower()
+            if proc_name in SUSPICIOUS_PROCESSES:
                 findings['critical'].append({
                     'type': 'suspicious_process_network',
                     'details': f"{conn['ProcessName']} has external connection",

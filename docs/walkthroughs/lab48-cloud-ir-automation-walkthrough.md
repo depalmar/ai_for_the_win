@@ -433,6 +433,37 @@ def create_chain_of_custody(case_id: str, evidence_items: list, s3_bucket: str) 
       ],
       "Next": "CollectEvidence"
     },
+    "HighResponse": {
+      "Type": "Parallel",
+      "Branches": [
+        {
+          "StartAt": "RestrictNetworkAccess",
+          "States": {
+            "RestrictNetworkAccess": {
+              "Type": "Task",
+              "Resource": "arn:aws:lambda:region:account:function:ir-restrict-network",
+              "End": true
+            }
+          }
+        },
+        {
+          "StartAt": "CreateSnapshots",
+          "States": {
+            "CreateSnapshots": {
+              "Type": "Task",
+              "Resource": "arn:aws:lambda:region:account:function:ir-snapshot",
+              "End": true
+            }
+          }
+        }
+      ],
+      "Next": "CollectEvidence"
+    },
+    "StandardResponse": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:region:account:function:ir-log-incident",
+      "Next": "CollectEvidence"
+    },
     "CollectEvidence": {
       "Type": "Task",
       "Resource": "arn:aws:lambda:region:account:function:ir-collect-evidence",
