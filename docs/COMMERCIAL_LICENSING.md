@@ -47,7 +47,7 @@
 - ✅ Docker environment and datasets
 - ✅ Quarterly content updates (new threats, TTPs, AI models)
 - ✅ Right to modify for internal use
-- ✅ Email support (best effort, typically within one week)
+- ✅ Email support (best effort, evenings/weekends)
 - ✅ Usage analytics and ROI tracking guidance
 
 [Request Corporate Quote](https://www.linkedin.com/in/raymond-depalma/)
@@ -73,7 +73,7 @@
   - Joint blog posts/case studies
 - ✅ Quarterly content updates
 - ✅ Certification co-branding option
-- ✅ Priority support
+- ✅ Direct email support
 
 ### Attribution Requirements:
 - Display: "Based on AI for the Win by Raymond DePalma"
@@ -247,7 +247,7 @@ Upon payment confirmation, you receive:
 - **Email**: depalma.raymond@gmail.com
 - **GitHub Discussions**: [Ask a question](https://github.com/depalmar/ai_for_the_win/discussions)
 
-**Response time**: Best effort, typically within one week
+**Response time**: Best effort, evenings and weekends (this is a passion project alongside my full-time role)
 
 ---
 
@@ -276,10 +276,11 @@ Upon payment confirmation, you receive:
 Used by security professionals at:
 - [Testimonials coming soon - first licensees will be featured here]
 
-### Expert Support
-- Email support included (3-5 business day response)
-- Community access via GitHub Discussions
+### Community & Support
+- Email support included (best effort, evenings/weekends)
+- Active GitHub Discussions community
 - Self-service lab development guides included
+- This is a passion project - you're supporting an independent creator
 
 ---
 
