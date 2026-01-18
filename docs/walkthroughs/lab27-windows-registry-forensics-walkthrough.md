@@ -78,11 +78,11 @@ PERSISTENCE_LOCATIONS = {
 }
 
 SUSPICIOUS_PATHS = [
-    r'\users\public\\',
-    r'\appdata\local\temp\\',
-    r'\windows\temp\\',
-    r'\programdata\\',
-    r'\downloads\\',
+    '\\users\\public\\',
+    '\\appdata\\local\\temp\\',
+    '\\windows\\temp\\',
+    '\\programdata\\',
+    '\\downloads\\',
 ]
 
 def scan_persistence_locations(hive_path: str = None) -> List[Dict]:
