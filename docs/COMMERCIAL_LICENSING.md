@@ -47,8 +47,9 @@
 - ✅ Docker environment and datasets
 - ✅ Quarterly content updates (new threats, TTPs, AI models)
 - ✅ Right to modify for internal use
-- ✅ Email support (best effort, evenings/weekends)
-- ✅ Usage analytics and ROI tracking guidance
+- ✅ Email support for technical questions (best effort, evenings/weekends)
+
+**Note**: This is self-paced content for your team to use independently. No instructor-led training or live support included.
 
 [Request Corporate Quote](https://www.linkedin.com/in/raymond-depalma/)
 
@@ -67,13 +68,11 @@
 
 ### What's Included:
 - ✅ All course materials with modification rights
-- ✅ Co-marketing opportunities:
-  - Your logo on our "Powered by AI for the Win" partners page
-  - Social media shoutouts
-  - Joint blog posts/case studies
 - ✅ Quarterly content updates
-- ✅ Certification co-branding option
-- ✅ Direct email support
+- ✅ Attribution as "Powered by AI for the Win" partner
+- ✅ Direct email support (best effort, evenings/weekends)
+
+**Note**: This is a content license only. All training delivery, student support, and certification is your responsibility.
 
 ### Attribution Requirements:
 - Display: "Based on AI for the Win by Raymond DePalma"
@@ -259,10 +258,10 @@ Upon payment confirmation, you receive:
 - **18 CTF challenges** for skill validation
 - Production-ready Docker environment with all dependencies
 
-### Cost-Effective Team Training
-- Train your entire security team for one annual license fee
+### Cost-Effective Self-Paced Training
+- License content for your entire team with one annual fee
 - Self-paced learning fits into busy schedules
-- No travel costs or time away from work
+- No travel costs, no scheduling conflicts
 - Unlimited access for continuous skill development
 - Production-ready environment - no months of curriculum development needed
 
