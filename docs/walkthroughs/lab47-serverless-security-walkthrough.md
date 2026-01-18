@@ -232,6 +232,7 @@ def analyze_function_permissions(functions_df: pd.DataFrame,
             'role_name': role_name,
             'critical_permissions': [],
             'high_permissions': [],
+            'medium_permissions': [],
             'is_overprivileged': False
         }
 
