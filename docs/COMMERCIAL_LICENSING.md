@@ -81,27 +81,6 @@
 
 ---
 
-## 🌟 Attribution Discount Program
-
-**Get 30% off any license** with enhanced attribution:
-
-### Premium Attribution (30% discount):
-- Include "Created with AI for the Win by Raymond DePalma" in course title or prominent placement
-- Feature my logo on course landing page
-- Link to repository in all marketing materials
-- Social media announcement tagging @raymond-depalma
-
-### Standard Attribution (15% discount):
-- Credit on every training slide/page footer
-- Link in course description
-- One social media post
-
-**Example**:
-- Small business normally $6,000/year → **$4,200/year** with Premium Attribution
-- Bootcamp normally $15,000 → **$10,500** with Premium Attribution
-
----
-
 ## 🎯 Non-Profit & Government
 
 ### Non-Profit Organizations:
@@ -198,8 +177,6 @@ Interested in being featured?
 
 ### For Contributors:
 - **Pull requests welcome**: Improvements, bug fixes, and new content
-- **Credit given**: Contributors are acknowledged in release notes
-- **Community recognition**: Active contributors featured in README
 
 [Contribute on GitHub](https://github.com/depalmar/ai_for_the_win)
 
