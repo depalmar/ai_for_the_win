@@ -1,8 +1,8 @@
 # Ruff configuration for AI for the Win
 # https://docs.astral.sh/ruff/configuration/
 
-# Target Python 3.11
-target-version = "py311"
+# Target Python 3.10 (matches requires-python = ">=3.10,<3.14" in pyproject.toml)
+target-version = "py310"
 
 # Line length to match Black
 line-length = 100
