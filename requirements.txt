@@ -5,6 +5,22 @@
 # Python 3.13 may work but is not fully tested
 # Python 3.14 is NOT YET supported - PyTorch lacks 3.14 wheels (as of Jan 2026)
 #
+# =============================================================================
+# RECOMMENDED: Use pip extras for selective LLM provider installation
+# =============================================================================
+#
+#   pip install -e .                  # Core only (Labs 00-13)
+#   pip install -e ".[ollama]"        # + Ollama (FREE, local)
+#   pip install -e ".[anthropic]"     # + Claude (best quality)
+#   pip install -e ".[google]"        # + Gemini (budget-friendly)
+#   pip install -e ".[openai]"        # + GPT (wide ecosystem)
+#   pip install -e ".[all-llm]"       # + All providers
+#
+# This file installs EVERYTHING (all providers). Use for CI/CD or if you
+# want all options available. For selective install, use pyproject.toml extras.
+#
+# =============================================================================
+#
 # Install with: pip install -r requirements.txt
 # Verify setup: python scripts/verify_setup.py
 #

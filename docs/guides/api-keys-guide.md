@@ -1,38 +1,46 @@
 # API Keys Guide: Getting Started with LLM Providers
 
-**Cost**: Free to start (all providers have free tiers)
+**Cost**: Free to start (Ollama is completely free, cloud providers have free tiers)
 
-Labs 14-50 use Large Language Models (LLMs) like Claude, GPT-5.2, or Gemini 3. This guide shows you how to get API keys and manage costs.
+Labs 14-50 use Large Language Models (LLMs) like Claude, GPT-5.2, Gemini 3, or local models via Ollama. This guide shows you how to set up your chosen provider.
 
 ---
 
 ## Quick Start: Which Provider Should I Choose?
 
-| Provider | Free Credits | Best For | Recommended Model |
-|----------|--------------|----------|-------------------|
-| **Anthropic (Claude)** | $5 free | Best reasoning, coding | `claude-sonnet-4-20250514` |
-| **OpenAI (GPT)** | $5 free (new accounts) | Widely supported | `gpt-5.2` |
-| **Google (Gemini)** | Free tier (generous) | Budget-friendly | `gemini-3-flash` |
-| **Ollama** | Completely free | Privacy, offline use | `llama4:scout`, `llama4:maverick` |
+| Provider | Install Command | Cost | Best For |
+|----------|----------------|------|----------|
+| **Ollama** (local) | `pip install -e ".[ollama]"` | **FREE** | Privacy, offline, no API key needed |
+| **Anthropic (Claude)** | `pip install -e ".[anthropic]"` | $5 free credits | Best reasoning, coding |
+| **Google (Gemini)** | `pip install -e ".[google]"` | Generous free tier | Budget-friendly |
+| **OpenAI (GPT)** | `pip install -e ".[openai]"` | $5 free credits | Wide ecosystem |
+| **All providers** | `pip install -e ".[all-llm]"` | Varies | CI/CD, power users |
 
-**Recommendation**: Start with **Anthropic Claude** - it has the best reasoning for security tasks and $5 free credits.
+**Recommendation**:
+- **Budget/Privacy**: Start with **Ollama** - completely free, runs locally, no API key needed
+- **Best Quality**: Use **Anthropic Claude** - best reasoning for security tasks
 
 ---
 
-## Option 1: Anthropic (Claude) - Recommended
+## Option 2: Anthropic (Claude) - Best Quality
 
-### Step 1: Create an Account
+### Step 1: Install Anthropic Support
+```bash
+pip install -e ".[anthropic]"
+```
+
+### Step 2: Create an Account
 1. Go to [console.anthropic.com](https://console.anthropic.com/)
 2. Sign up with email or Google
 3. Verify your email
 
-### Step 2: Get Your API Key
+### Step 3: Get Your API Key
 1. Click on **API Keys** in the left sidebar
 2. Click **Create Key**
 3. Give it a name like "ai-security-labs"
 4. Copy the key - you won't see it again!
 
-### Step 3: Add to Your Project
+### Step 4: Add to Your Project
 Create a `.env` file in the project root:
 ```bash
 # In the ai_for_the_win folder
@@ -54,19 +62,24 @@ ANTHROPIC_API_KEY=sk-ant-api03-xxxxxxxxxxxxx
 
 ---
 
-## Option 2: OpenAI (GPT-5.2)
+## Option 3: OpenAI (GPT-5.2)
 
-### Step 1: Create an Account
+### Step 1: Install OpenAI Support
+```bash
+pip install -e ".[openai]"
+```
+
+### Step 2: Create an Account
 1. Go to [platform.openai.com](https://platform.openai.com/)
 2. Sign up and verify your phone number
 3. Add a payment method (required, but free credits cover initial use)
 
-### Step 2: Get Your API Key
+### Step 3: Get Your API Key
 1. Go to [platform.openai.com/api-keys](https://platform.openai.com/api-keys)
 2. Click **Create new secret key**
 3. Copy and save it immediately
 
-### Step 3: Add to Your Project
+### Step 4: Add to Your Project
 ```
 OPENAI_API_KEY=sk-xxxxxxxxxxxxx
 ```
@@ -79,19 +92,24 @@ OPENAI_API_KEY=sk-xxxxxxxxxxxxx
 
 ---
 
-## Option 3: Google (Gemini) - Most Budget-Friendly
+## Option 4: Google (Gemini) - Most Budget-Friendly
 
-### Step 1: Create an Account
+### Step 1: Install Google Support
+```bash
+pip install -e ".[google]"
+```
+
+### Step 2: Create an Account
 1. Go to [aistudio.google.com](https://aistudio.google.com/)
 2. Sign in with your Google account
 3. Accept the terms
 
-### Step 2: Get Your API Key
+### Step 3: Get Your API Key
 1. Click **Get API Key** in the top right
 2. Click **Create API Key**
 3. Copy the key
 
-### Step 3: Add to Your Project
+### Step 4: Add to Your Project
 ```
 GOOGLE_API_KEY=AIzaxxxxxxxxxxxxx
 ```
@@ -106,11 +124,16 @@ GOOGLE_API_KEY=AIzaxxxxxxxxxxxxx
 
 ---
 
-## Option 4: Ollama (Free, Local, Private)
+## Option 1: Ollama (Free, Local, Private) - Recommended for Beginners
 
-Run models on your own machine - completely free and private.
+Run models on your own machine - **completely free** and private. No API keys, no usage limits, no costs.
 
-### Step 1: Install Ollama
+### Step 1: Install Ollama Python Support
+```bash
+pip install -e ".[ollama]"
+```
+
+### Step 2: Install Ollama Runtime
 **Windows/macOS**: Download from [ollama.ai](https://ollama.ai/)
 
 **Linux**:
@@ -118,20 +141,32 @@ Run models on your own machine - completely free and private.
 curl -fsSL https://ollama.ai/install.sh | sh
 ```
 
-### Step 2: Pull a Model
+### Step 3: Pull a Model
 ```bash
-# Best balance of quality and speed (17B with 16 experts)
+# Recommended: Llama 3.3 - best balance of quality/speed (70B)
+ollama pull llama3.3
+
+# Multimodal reasoning (images + text, 109B MoE)
 ollama pull llama4:scout
 
-# More capable variant (17B with 128 experts)
-ollama pull llama4:maverick
+# Advanced reasoning (great for complex analysis)
+ollama pull deepseek-r1
 
 # Coding-focused
 ollama pull qwen2.5-coder:32b
 ```
 
-### Step 3: Configure the Labs
-No API key needed! Set in `.env`:
+**Model RAM requirements:**
+| Model | RAM Needed | Best For |
+|-------|------------|----------|
+| `llama3.3` | 40GB+ | Best overall quality |
+| `llama3.3:8b` | 8GB | Good quality, runs anywhere |
+| `llama4:scout` | 64GB+ | Multimodal (images) |
+| `deepseek-r1` | 16GB+ | Complex reasoning |
+| `qwen2.5-coder:7b` | 8GB | Code analysis |
+
+### Step 4: Configure the Labs
+No API key needed! Optionally set in `.env`:
 ```
 LLM_PROVIDER=ollama
 OLLAMA_MODEL=llama4:scout
@@ -141,6 +176,12 @@ OLLAMA_MODEL=llama4:scout
 - 8GB RAM minimum (16GB recommended)
 - 10-20GB disk space per model
 - GPU optional but speeds things up significantly
+
+### Why Choose Ollama?
+- **Free forever** - no API costs, no usage limits
+- **Private** - your data never leaves your machine
+- **Offline** - works without internet after model download
+- **Fast iteration** - no rate limits, experiment freely
 
 ---
 

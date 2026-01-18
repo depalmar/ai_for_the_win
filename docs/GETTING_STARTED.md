@@ -50,7 +50,43 @@ See the full guide on [Using AI for Learning](../labs/lab00-environment-setup/RE
 
 ---
 
-## Quick Setup (5 minutes)
+## Option A: Docker Setup (Recommended - 2 minutes)
+
+**One command** gets you a complete environment with Jupyter, Ollama (free local LLM), Elasticsearch, and all dependencies pre-installed.
+
+```bash
+# Clone and start
+git clone https://github.com/depalmar/ai_for_the_win.git
+cd ai_for_the_win/docker
+docker compose up -d jupyter ollama-cpu chromadb
+
+# Access Jupyter Lab
+# Open http://localhost:8888 (token: aiforthewin)
+```
+
+**What you get:**
+| Service | URL | Description |
+|---------|-----|-------------|
+| Jupyter Lab | http://localhost:8888 | Main lab environment (token: `aiforthewin`) |
+| Ollama | http://localhost:11434 | Free local LLM - no API keys needed |
+| ChromaDB | http://localhost:8000 | Vector database for RAG labs |
+
+**Pull a model and start learning:**
+```bash
+# Recommended: Good quality, moderate RAM (8GB)
+docker exec lab-ollama ollama pull llama3.3:8b
+
+# Or for best quality (requires 40GB+ RAM)
+docker exec lab-ollama ollama pull llama3.3
+```
+
+See [docker/README.md](../docker/README.md) for full Docker documentation, GPU setup, and additional services (Elasticsearch, Kibana, etc.).
+
+---
+
+## Option B: Local Python Setup (5 minutes)
+
+If you prefer a local Python installation instead of Docker:
 
 ### Step 1: Clone and Enter
 
@@ -71,13 +107,45 @@ source venv/bin/activate      # Linux/Mac
 .\venv\Scripts\activate       # Windows
 ```
 
-### Step 3: Install Dependencies
+### Step 3: Install Core Dependencies
 
 ```bash
-pip install -r requirements.txt
+# Install core packages (ML foundations - works for Labs 00-13)
+pip install -e .
 ```
 
-### Step 4: Configure API Keys
+### Step 4: Choose Your LLM Provider
+
+For Labs 14+, you need ONE LLM provider. **Choose based on your needs:**
+
+| Provider | Install Command | Cost | Best For |
+|----------|----------------|------|----------|
+| **Ollama** (local) | `pip install -e ".[ollama]"` | **FREE** | Privacy, offline, no API key |
+| **Anthropic** (Claude) | `pip install -e ".[anthropic]"` | $5 free credits | Best quality, recommended |
+| **Google** (Gemini) | `pip install -e ".[google]"` | Generous free tier | Budget-friendly |
+| **OpenAI** (GPT) | `pip install -e ".[openai]"` | $5 free credits | Wide ecosystem |
+| **All providers** | `pip install -e ".[all-llm]"` | Varies | CI/CD, power users |
+
+**Quick start with Ollama (free, local):**
+```bash
+# Install Ollama support
+pip install -e ".[ollama]"
+
+# Install Ollama itself (one-time)
+# Windows/Mac: Download from https://ollama.ai
+# Linux: curl -fsSL https://ollama.ai/install.sh | sh
+
+# Pull a model (8B version runs on 8GB RAM)
+ollama pull llama3.3:8b
+```
+
+**Or use a cloud provider:**
+```bash
+# Example: Install Anthropic Claude support
+pip install -e ".[anthropic]"
+```
+
+### Step 5: Configure API Keys (skip if using Ollama)
 
 ```bash
 # Copy example environment file
@@ -111,7 +179,7 @@ nano .env   # or use any editor
 - `VIRUSTOTAL_API_KEY`
 - `ABUSEIPDB_API_KEY`
 
-### Step 5: Verify Setup
+### Step 6: Verify Setup
 
 ```bash
 python scripts/verify_setup.py
@@ -120,7 +188,7 @@ python scripts/verify_setup.py
 This will check:
 - Python version (3.10+ required)
 - Required packages installed
-- API keys configured
+- LLM provider configured (Ollama or API key)
 - Sample data accessible
 
 ---
