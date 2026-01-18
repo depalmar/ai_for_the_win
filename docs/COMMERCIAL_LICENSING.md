@@ -26,7 +26,7 @@
 ### Apply Here:
 [Contact via LinkedIn](https://www.linkedin.com/in/raymond-depalma/) or [email](mailto:depalma.raymond@gmail.com) with your institution name
 
-**Typical approval time**: 1-2 weeks
+**Typical approval time**: 2-4 weeks
 
 ---
 
@@ -46,7 +46,7 @@
 - ✅ Docker environment and datasets
 - ✅ Regular content updates (new threats, TTPs, AI models)
 - ✅ Right to modify for internal use
-- ✅ Email support for technical questions (best effort, evenings/weekends)
+- ✅ Email support for technical questions (best effort, no guaranteed response time)
 
 **Note**: This is self-paced content for your team to use independently. No instructor-led training or live support included.
 
@@ -68,8 +68,8 @@
 ### What's Included:
 - ✅ All course materials with modification rights
 - ✅ Regular content updates
-- ✅ Attribution as "Powered by AI for the Win" partner
-- ✅ Email support (best effort, evenings/weekends)
+- ✅ Right to use "Based on AI for the Win" attribution
+- ✅ Email support (best effort, no guaranteed response time)
 
 **Note**: This is a content license only. All training delivery, student support, and certification is your responsibility.
 
@@ -179,10 +179,7 @@
 
 ### Do you offer multi-year discounts?
 
-**Yes!**
-- 2-year commitment: 10% discount
-- 3-year commitment: 20% discount
-- Available for Corporate and Training Provider licenses
+Not at this time. All licenses are annual and renew each year.
 
 ### What payment methods do you accept?
 
@@ -218,7 +215,7 @@ Review the options above and select the best fit.
 - **Corporate/Training**: [Email me directly](mailto:depalma.raymond@gmail.com) or [LinkedIn message](https://www.linkedin.com/in/raymond-depalma/)
 
 ### Step 3: License Agreement
-You'll receive a license agreement via email (typically within 1-2 weeks).
+You'll receive a license agreement via email (typically within 2-4 weeks).
 
 ### Step 4: Payment
 Once agreement is signed, you'll receive an invoice with payment instructions.
@@ -268,8 +265,8 @@ Used by security professionals at:
 - [Testimonials coming soon - first licensees will be featured here]
 
 ### Community & Support
-- Email support included (best effort, evenings/weekends)
-- Active GitHub Discussions community
+- Email support included (best effort, no guaranteed response time)
+- GitHub Discussions for community Q&A
 - Self-service lab development guides included
 - This is a passion project - you're supporting an independent creator
 
