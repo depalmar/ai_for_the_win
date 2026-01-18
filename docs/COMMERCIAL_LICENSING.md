@@ -36,15 +36,15 @@
 
 | Team Size (users) | Annual License | What's Included |
 |-------------------|----------------|-----------------|
-| **1-25 users** | **$3,000/year** | All labs, weekly updates, email support |
-| **26-75 users** | **$6,000/year** | All labs, weekly updates, email support |
-| **76-200 users** | **$12,000/year** | All labs, weekly updates, email support |
+| **1-25 users** | **$3,000/year** | All labs, regular updates, email support |
+| **26-75 users** | **$6,000/year** | All labs, regular updates, email support |
+| **76-200 users** | **$12,000/year** | All labs, regular updates, email support |
 | **200+ users** | **Contact** | Custom pricing based on team size |
 
 ### What's Included:
 - ✅ All 50+ labs, capstone projects, and CTF challenges
 - ✅ Docker environment and datasets
-- ✅ Weekly content updates (new threats, TTPs, AI models)
+- ✅ Regular content updates (new threats, TTPs, AI models)
 - ✅ Right to modify for internal use
 - ✅ Email support for technical questions (best effort, evenings/weekends)
 
@@ -67,7 +67,7 @@
 
 ### What's Included:
 - ✅ All course materials with modification rights
-- ✅ Weekly content updates
+- ✅ Regular content updates
 - ✅ Attribution as "Powered by AI for the Win" partner
 - ✅ Email support (best effort, evenings/weekends)
 
@@ -257,11 +257,11 @@ Upon payment confirmation, you receive:
 - Unlimited access for continuous skill development
 - Production-ready environment - no months of curriculum development needed
 
-### Always Current
-- **Weekly updates** with latest threat actor TTPs
+### Actively Maintained
+- **Regular updates** as new threats emerge
 - Updated AI model references (Claude, GPT, Gemini)
-- New detection techniques as they emerge
-- Current 2025-2026 ransomware families and APT groups
+- New detection techniques and tools
+- New labs added over time
 
 ### Proven Results
 Used by security professionals at:
