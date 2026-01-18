@@ -73,15 +73,12 @@ def check_required_packages():
     print_header("Checking Required Packages")
 
     packages = {
-        # Core ML
+        # Core ML (Labs 00-13: ML foundations, no LLM required)
         "numpy": "NumPy (numerical computing)",
         "pandas": "Pandas (data manipulation)",
         "sklearn": "scikit-learn (machine learning)",
-        # LLM Frameworks
+        # LLM Frameworks (base)
         "langchain": "LangChain (LLM orchestration)",
-        "langchain_anthropic": "LangChain Anthropic (Claude)",
-        "langchain_openai": "LangChain OpenAI (GPT)",
-        "langchain_google_genai": "LangChain Google (Gemini)",
         "langchain_community": "LangChain Community (Tools/Integrations)",
         # Vector DB
         "chromadb": "ChromaDB (vector database)",
@@ -110,7 +107,7 @@ def check_required_packages():
 
     if missing:
         print_warning(f"\nMissing packages: {', '.join(missing)}")
-        print_warning("Run: pip install -r requirements.txt")
+        print_warning("Run: pip install -e .")
 
     return all_ok
 
@@ -134,9 +131,41 @@ def check_optional_packages():
             print_warning(f"{description} - not installed (optional)")
 
 
-def check_api_keys():
-    """Check that API keys are configured"""
-    print_header("Checking API Keys")
+def check_llm_providers():
+    """Check which LLM providers are installed (at least one needed for LLM labs)"""
+    print_header("Checking LLM Provider Packages")
+
+    # LLM provider packages - install with: pip install -e ".[provider]"
+    providers = {
+        "langchain_ollama": ("Ollama (local)", 'pip install -e ".[ollama]"'),
+        "langchain_anthropic": ("Anthropic Claude", 'pip install -e ".[anthropic]"'),
+        "langchain_openai": ("OpenAI GPT", 'pip install -e ".[openai]"'),
+        "langchain_google_genai": ("Google Gemini", 'pip install -e ".[google]"'),
+    }
+
+    installed_providers = []
+
+    for package, (description, install_cmd) in providers.items():
+        try:
+            __import__(package)
+            print_success(f"{description} - installed")
+            installed_providers.append(package)
+        except ImportError:
+            print_warning(f"{description} - not installed ({install_cmd})")
+
+    if not installed_providers:
+        print_warning("\nNo LLM providers installed!")
+        print_warning("Install at least one for LLM labs (14+):")
+        print_warning('  pip install -e ".[ollama]"   # FREE, local, recommended')
+        print_warning('  pip install -e ".[anthropic]" # Claude (best quality)')
+        return False
+
+    return True
+
+
+def check_api_keys(ollama_available=False):
+    """Check that API keys are configured (or Ollama is available)"""
+    print_header("Checking LLM Configuration")
 
     # Load .env if exists
     try:
@@ -146,7 +175,7 @@ def check_api_keys():
     except ImportError:
         pass
 
-    required_keys = {
+    cloud_keys = {
         "ANTHROPIC_API_KEY": "Anthropic (Claude)",
         "OPENAI_API_KEY": "OpenAI (GPT)",
         "GOOGLE_API_KEY": "Google (Gemini)",
@@ -158,21 +187,35 @@ def check_api_keys():
         "SHODAN_API_KEY": "Shodan",
     }
 
-    has_llm_key = False
+    has_cloud_key = False
 
-    for key, provider in required_keys.items():
+    # Check Ollama first (recommended, free)
+    if ollama_available:
+        print_success("Ollama available - FREE local LLM, no API key needed!")
+    else:
+        print_warning("Ollama not available (optional - install from https://ollama.ai)")
+
+    print("\nCloud LLM API keys (optional if using Ollama):")
+    for key, provider in cloud_keys.items():
         value = os.getenv(key, "")
         if value and len(value) > 10:
             print_success(f"{provider} API key configured")
-            has_llm_key = True
+            has_cloud_key = True
         else:
             print_warning(f"{provider} API key not set")
 
-    if not has_llm_key:
-        print_error("\nNo LLM API key found! At least one is required for LLM labs.")
-        print_warning("Set ANTHROPIC_API_KEY, OPENAI_API_KEY, or GOOGLE_API_KEY in .env")
+    # Pass if EITHER Ollama is available OR a cloud API key is set
+    has_llm_provider = ollama_available or has_cloud_key
 
-    print("\nOptional API keys:")
+    if not has_llm_provider:
+        print_error("\nNo LLM provider configured!")
+        print_warning("For LLM labs (14+), you need ONE of these options:")
+        print_warning("  1. Install Ollama (FREE): https://ollama.ai")
+        print_warning("  2. Set a cloud API key in .env file")
+    else:
+        print_success("\nLLM provider configured - ready for LLM labs!")
+
+    print("\nOptional threat intel API keys:")
     for key, provider in optional_keys.items():
         value = os.getenv(key, "")
         if value and len(value) > 5:
@@ -180,7 +223,7 @@ def check_api_keys():
         else:
             print_warning(f"{provider} API key not set (optional)")
 
-    return has_llm_key
+    return has_llm_provider
 
 
 def check_data_files():
@@ -277,31 +320,44 @@ def check_lab00a_structure():
     return all_ok
 
 
-def check_ollama():
+def check_ollama(verbose=True):
     """Check if Ollama is available for local models"""
-    print_header("Checking Local Model Support")
+    if verbose:
+        print_header("Checking Ollama (Local LLM)")
 
     import subprocess
 
     try:
         result = subprocess.run(["ollama", "list"], capture_output=True, text=True, timeout=5)
         if result.returncode == 0:
-            print_success("Ollama installed and running")
+            if verbose:
+                print_success("Ollama installed and running")
             models = result.stdout.strip().split("\n")[1:]  # Skip header
             if models and models[0]:
-                print_success(f"Available models: {len(models)}")
+                if verbose:
+                    print_success(f"Available models: {len(models)}")
+                    for model in models[:3]:  # Show first 3
+                        model_name = model.split()[0] if model.split() else model
+                        print_success(f"  - {model_name}")
+                    if len(models) > 3:
+                        print_success(f"  ... and {len(models) - 3} more")
             else:
-                print_warning("No models installed. Run: ollama pull llama3.1")
+                if verbose:
+                    print_warning("No models installed yet.")
+                    print_warning("Run: ollama pull llama3.3:8b  (recommended, 8GB RAM)")
             return True
         else:
-            print_warning("Ollama installed but not running. Run: ollama serve")
+            if verbose:
+                print_warning("Ollama installed but not running. Run: ollama serve")
             return False
     except FileNotFoundError:
-        print_warning("Ollama not installed (optional - for local models)")
-        print_warning("Install from: https://ollama.com")
+        if verbose:
+            print_warning("Ollama not installed")
+            print_warning("Install from: https://ollama.ai (FREE, recommended)")
         return False
     except subprocess.TimeoutExpired:
-        print_warning("Ollama not responding")
+        if verbose:
+            print_warning("Ollama not responding")
         return False
 
 
@@ -366,18 +422,21 @@ def main():
         print("AI for the Win - Setup Verification")
         print("=" * 60)
 
+    # Check Ollama first (needed for API keys check)
+    ollama_available = check_ollama(verbose=True)
+
     results = {
         "Python Version": check_python_version(),
         "Required Packages": check_required_packages(),
-        "API Keys": check_api_keys(),
+        "LLM Providers": check_llm_providers(),
+        "LLM Configuration": check_api_keys(ollama_available=ollama_available),
         "Sample Data": check_data_files(),
         "Lab 00a Structure": check_lab00a_structure(),
         "CTF Infrastructure": check_ctf_infrastructure(),
     }
 
-    # Optional checks
+    # Optional packages (PyTorch, transformers, etc.)
     check_optional_packages()
-    check_ollama()
 
     print_summary(results)
 
