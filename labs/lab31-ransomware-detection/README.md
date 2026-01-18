@@ -76,6 +76,7 @@ By completing this lab, you will:
 Build an ML model to detect ransomware-like file system behavior.
 
 **Behavioral Indicators**:
+
 - Rapid file enumeration
 - High-entropy file writes (encrypted content)
 - Mass file extension changes
