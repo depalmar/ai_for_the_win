@@ -1,0 +1,88 @@
+# Ruff configuration for AI for the Win
+# https://docs.astral.sh/ruff/configuration/
+
+# Target Python 3.11
+target-version = "py311"
+
+# Line length to match Black
+line-length = 100
+
+# Exclude common directories
+exclude = [
+    ".git",
+    ".venv",
+    "venv",
+    "__pycache__",
+    ".pytest_cache",
+    "*.egg-info",
+    "build",
+    "dist",
+    "chroma_db",
+    "mlruns",
+    "wandb",
+]
+
+[lint]
+# Start with a reasonable set of rules for a training curriculum
+select = [
+    "E",      # pycodestyle errors
+    "W",      # pycodestyle warnings
+    "F",      # Pyflakes
+    "I",      # isort
+    "B",      # flake8-bugbear
+    "C4",     # flake8-comprehensions
+    "UP",     # pyupgrade
+    "S",      # flake8-bandit (security)
+    "SIM",    # flake8-simplify
+    "TCH",    # flake8-type-checking
+    "RUF",    # Ruff-specific rules
+]
+
+ignore = [
+    "E501",   # Line too long (handled by formatter)
+    "S101",   # Use of assert (fine in tests and labs)
+    "S311",   # Random not for crypto (fine for ML training)
+    "S105",   # Hardcoded password (false positives in security labs)
+    "S106",   # Hardcoded password argument
+    "S108",   # Probable insecure temp file (labs demonstrate this)
+    "B008",   # Function call in default arg (common in FastAPI)
+    "B904",   # Raise from within except (too pedantic for training)
+]
+
+# Allow autofix for all enabled rules
+fixable = ["ALL"]
+unfixable = []
+
+[lint.per-file-ignores]
+# Tests can use assert, magic values, etc.
+"tests/**/*.py" = ["S101", "PLR2004", "ANN"]
+
+# Lab solutions may have intentional security issues for teaching
+"labs/**/solution/*.py" = ["S", "ANN", "D"]
+"labs/**/starter/*.py" = ["S", "ANN", "D"]
+
+# Notebooks are more relaxed
+"*.ipynb" = ["E402", "T201", "ANN", "D"]
+
+# CTF challenges intentionally have security issues
+"ctf-challenges/**/*.py" = ["S", "ANN"]
+
+# Scripts can use print
+"scripts/**/*.py" = ["T201"]
+
+[lint.isort]
+# Match Black's import style
+known-first-party = ["labs", "scripts", "tests"]
+force-single-line = false
+lines-after-imports = 2
+
+[lint.flake8-bandit]
+# Adjust security checks for training context
+check-typed-exception = false
+
+[format]
+# Match Black style
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"

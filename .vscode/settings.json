@@ -127,7 +127,7 @@
     "*.py": "${capture}.cpython-*.pyc, ${capture}.pyi",
     "requirements.txt": "requirements-*.txt",
     "README.md": "CONTRIBUTING.md, LICENSE, SECURITY.md, CHANGELOG.md, CLAUDE.md",
-    "pyproject.toml": "pytest.ini, .pre-commit-config.yaml, .flake8, setup.py, setup.cfg",
+    "pyproject.toml": "pytest.ini, .pre-commit-config.yaml, .flake8, setup.py, setup.cfg, ruff.toml",
     "docker-compose.yml": "Dockerfile, .dockerignore"
   },
 
