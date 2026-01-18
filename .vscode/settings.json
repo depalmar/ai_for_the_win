@@ -36,8 +36,10 @@
   // =============================================================================
   // PYTHON SETTINGS
   // =============================================================================
-  // Cross-platform: VS Code auto-detects, but we hint common locations
-  "python.defaultInterpreterPath": "${workspaceFolder}/venv/bin/python",
+  // Cross-platform: VS Code/Cursor auto-detects the venv. These are fallback hints.
+  // Windows: venv/Scripts/python.exe, Unix: venv/bin/python
+  // The IDE typically auto-detects, so this is just a hint for manual selection.
+  "python.defaultInterpreterPath": "${workspaceFolder}/venv/Scripts/python.exe",
   "python.terminal.activateEnvironment": true,
   "python.analysis.typeCheckingMode": "basic",
   "python.analysis.autoImportCompletions": true,
@@ -193,7 +195,11 @@
   "cursor.chat.alwaysShowSuggestion": true,
   "cursor.cpp.disabledLanguages": [],
 
-  // Privacy & Security - exclude sensitive paths from AI context
+  // Privacy & Security - CRITICAL for security training projects
+  "cursor.privacyMode": false,
+  "cursor.enableTelemetry": false,
+
+  // Exclude sensitive paths from AI indexing
   "cursor.excludeFromIndexing": [
     "**/venv/**",
     "**/.venv/**",
@@ -205,12 +211,26 @@
     "**/*.pem",
     "**/*.key",
     "**/samples/malware/**",
-    "**/memory_dumps/**"
+    "**/memory_dumps/**",
+    "**/forensic_images/**",
+    "**/evidence/**"
+  ],
+
+  // Exclude sensitive paths from AI context (different from indexing)
+  "cursor.excludeFromContext": [
+    "**/.env*",
+    "**/secrets/**",
+    "**/credentials/**",
+    "**/*.pem",
+    "**/*.key",
+    "**/config/production.*"
   ],
 
   // Performance optimization
   "cursor.maxContextLines": 8000,
   "cursor.autocomplete.debounceMs": 150,
+  "cursor.codebaseIndex.maxFileSize": 1000000,
+  "cursor.codebaseIndex.maxFiles": 10000,
 
   // =============================================================================
   // WORKSPACE SPECIFIC ASSOCIATIONS
