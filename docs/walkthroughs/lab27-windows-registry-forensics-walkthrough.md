@@ -215,13 +215,26 @@ def decode_userassist(hive_path: str) -> List[Dict]:
 
                     # Parse binary data for run count and timestamps
                     data = value.value()
-                    if len(data) >= 16:
+                    if len(data) >= 68:
                         run_count = int.from_bytes(data[4:8], 'little')
+
+                        # Parse FILETIME (bytes 60-68) - 100ns intervals since 1601
+                        filetime = int.from_bytes(data[60:68], 'little')
+                        if filetime > 0:
+                            # Convert FILETIME to datetime
+                            epoch_diff = 116444736000000000  # 1601 to 1970
+                            timestamp = datetime.utcfromtimestamp(
+                                (filetime - epoch_diff) / 10000000
+                            )
+                            last_run = timestamp.isoformat() + 'Z'
+                        else:
+                            last_run = None
 
                         results.append({
                             'encoded_path': encoded_name,
                             'decoded_path': decoded_name,
                             'run_count': run_count,
+                            'last_run': last_run,
                             'guid': guid
                         })
 
