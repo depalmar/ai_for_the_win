@@ -143,12 +143,18 @@ def detect_brute_force(events: list, threshold: int = 5, window_minutes: int = 5
                 }
 
                 # Check for subsequent success = CRITICAL
+                # Must verify success occurred AFTER the failed attempts
                 for success in successful_logons:
                     if (success.get('target_user') == target_user and
                         success.get('source_ip') == source_ip):
-                        attack['severity'] = 'CRITICAL'
-                        attack['success_time'] = success['timestamp']
-                        break
+                        success_time = datetime.fromisoformat(
+                            success['timestamp'].replace('Z', '+00:00')
+                        )
+                        # Only flag if success came after the brute force attempts
+                        if success_time > last_time:
+                            attack['severity'] = 'CRITICAL'
+                            attack['success_time'] = success['timestamp']
+                            break
 
                 attacks.append(attack)
 
