@@ -62,7 +62,7 @@ unfixable = []
 "labs/**/starter/*.py" = ["S", "ANN", "D"]
 
 # Notebooks are more relaxed
-"*.ipynb" = ["E402", "T201", "ANN", "D"]
+"**/*.ipynb" = ["E402", "T201", "ANN", "D"]
 
 # CTF challenges intentionally have security issues
 "ctf-challenges/**/*.py" = ["S", "ANN"]
