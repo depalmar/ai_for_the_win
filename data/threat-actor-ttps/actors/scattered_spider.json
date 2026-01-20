@@ -1,6 +1,7 @@
 {
   "id": "scattered_spider",
   "name": "Scattered Spider",
+  "data_disclaimer": "All information in this profile is derived exclusively from publicly available sources including government advisories (CISA, FBI), vendor threat reports, court documents, and news reporting. No non-public or proprietary incident data is included.",
   "aliases": ["Roasted 0ktapus", "UNC3944", "Octo Tempest", "Star Fraud", "0ktapus"],
   "country": "United States/United Kingdom",
   "attributed_to": "Loosely organized cybercriminal group, primarily young adults (16-22 years old)",

@@ -1,6 +1,7 @@
 {
   "id": "alphv",
   "name": "ALPHV",
+  "data_disclaimer": "All information in this profile is derived exclusively from publicly available sources including government advisories (CISA, FBI), vendor threat reports, court documents, and news reporting. No non-public or proprietary incident data is included.",
   "aliases": ["BlackCat", "Noberus", "ALPHV BlackCat"],
   "country": "Russia",
   "attributed_to": "Russian-speaking ransomware-as-a-service operation, believed to include former DarkSide/BlackMatter members",

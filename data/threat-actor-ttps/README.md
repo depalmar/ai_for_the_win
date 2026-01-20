@@ -1,5 +1,7 @@
 # Threat Actor TTP Database
 
+> **Data Disclaimer**: All threat intelligence in this database is derived **exclusively from publicly available sources** including government advisories (CISA, FBI, NSA, NCSC), vendor threat reports, academic research, court documents, and news reporting. **No non-public, proprietary, or confidential incident data is included.** This data is provided for educational purposes only.
+
 This directory contains comprehensive threat actor profiles, campaign data, and attack chain templates based on documented TTPs from MITRE ATT&CK and public threat intelligence reports.
 
 ## Purpose

@@ -1,6 +1,7 @@
 {
   "id": "identity-compromise",
   "name": "Identity Provider and Cloud Compromise",
+  "data_disclaimer": "All information is derived exclusively from publicly available sources including government advisories, vendor threat reports, and news reporting. No non-public incident data is included.",
   "description": "Modern attack pattern targeting identity providers (Okta, Azure AD/Entra ID, Google Workspace) and cloud infrastructure. Increasingly used by sophisticated actors who understand that compromising identity = compromising everything.",
   "typical_actors": ["Scattered Spider", "APT29", "LAPSUS$"],
   "notable_examples": ["MGM Resorts", "Okta breach", "Microsoft token theft"],

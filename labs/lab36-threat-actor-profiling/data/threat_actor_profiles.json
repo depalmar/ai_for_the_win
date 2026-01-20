@@ -1,4 +1,5 @@
 {
+  "data_disclaimer": "All threat actor information is derived exclusively from publicly available sources including government advisories (CISA, FBI, NSA), vendor threat reports, academic research, court documents, and news reporting. No non-public or proprietary incident data is included.",
   "actors": [
     {
       "id": "apt29",
