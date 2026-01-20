@@ -42,7 +42,8 @@ credentials/
 # =============================================================================
 # Security-Sensitive Directories
 # =============================================================================
-samples/malware/
+samples/
+malware/
 memory_dumps/
 forensic_images/
 evidence/
