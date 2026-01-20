@@ -62,7 +62,7 @@ class TestLabDirectoryNaming:
 
     @pytest.mark.parametrize("lab_dir", get_lab_dirs())
     def test_lab_directory_naming_convention(self, lab_dir):
-        """Lab directories should be named labXX-name (lowercase, hyphen, no space)."""
+        """Lab directories should be named labXX-name or labXXa-name (lowercase, hyphen)."""
         dir_name = lab_dir.name
 
         # Should start with "lab" (lowercase)
@@ -72,7 +72,8 @@ class TestLabDirectoryNaming:
         assert not dir_name.startswith("Lab"), f"{dir_name} should use lowercase 'lab', not 'Lab'"
 
         # Should not have space after number
-        match = re.match(r"lab(\d+)(.)", dir_name)
+        # Allow bridge labs with letter suffix: lab03b-ml-vs-llm, lab00a-python-fundamentals
+        match = re.match(r"lab(\d+[a-z]?)(.)", dir_name)
         if match:
             separator = match.group(2)
             assert (

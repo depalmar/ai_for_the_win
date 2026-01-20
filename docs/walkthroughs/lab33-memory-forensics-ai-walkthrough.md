@@ -255,10 +255,10 @@ class InjectionDetector:
 
         # Look for suspicious DLLs
         suspicious_paths = [
-            r'\temp\\',
-            r'\appdata\\local\\temp',
-            r'\users\\public',
-            r'\\.\pipe\\',
+            '\\temp\\',
+            '\\appdata\\local\\temp',
+            '\\users\\public',
+            '\\\\.\\pipe\\',
         ]
 
         for pid, dlls in dlls_by_process.items():

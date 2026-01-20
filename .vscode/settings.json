@@ -1,0 +1,258 @@
+{
+  // =============================================================================
+  // WORKBENCH LAYOUT - Compact & Efficient
+  // =============================================================================
+  "workbench.activityBar.location": "top",
+  "workbench.editor.wrapTabs": true,
+  "workbench.editor.tabSizing": "shrink",
+  "workbench.editor.pinnedTabSizing": "compact",
+  "workbench.editor.highlightModifiedTabs": true,
+  "workbench.panel.defaultLocation": "right",
+  "workbench.sideBar.location": "right",
+  "explorer.openEditors.visible": 10,
+  "window.menuBarVisibility": "compact",
+
+  // =============================================================================
+  // EDITOR SETTINGS
+  // =============================================================================
+  "editor.fontSize": 14,
+  "editor.tabSize": 4,
+  "editor.insertSpaces": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": false,
+  "editor.rulers": [100],
+  "editor.wordWrap": "off",
+  "editor.minimap.enabled": false,
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": true,
+  "editor.stickyScroll.enabled": true,
+  "editor.linkedEditing": true,
+  "editor.suggest.showStatusBar": true,
+  "editor.inlineSuggest.enabled": true,
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+
+  // =============================================================================
+  // PYTHON SETTINGS
+  // =============================================================================
+  // Cross-platform: VS Code/Cursor auto-detects the venv. These are fallback hints.
+  // Windows: venv/Scripts/python.exe, Unix: venv/bin/python
+  // The IDE typically auto-detects, so this is just a hint for manual selection.
+  "python.defaultInterpreterPath": "${workspaceFolder}/venv/Scripts/python.exe",
+  "python.terminal.activateEnvironment": true,
+  "python.analysis.typeCheckingMode": "basic",
+  "python.analysis.autoImportCompletions": true,
+  "python.analysis.inlayHints.functionReturnTypes": true,
+  "python.analysis.inlayHints.variableTypes": false,
+  "python.analysis.diagnosticSeverityOverrides": {
+    "reportMissingImports": "warning",
+    "reportMissingModuleSource": "none"
+  },
+
+  // Formatting
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    }
+  },
+
+  // Black formatter
+  "black-formatter.args": ["--line-length", "100"],
+
+  // isort for imports
+  "isort.args": ["--profile", "black", "--line-length", "100"],
+
+  // =============================================================================
+  // JUPYTER NOTEBOOKS
+  // =============================================================================
+  "[jupyter]": {
+    "files.insertFinalNewline": false
+  },
+  "notebook.cellToolbarLocation": {
+    "default": "right",
+    "jupyter-notebook": "left"
+  },
+  "notebook.output.scrolling": true,
+  "notebook.output.textLineLimit": 50,
+  "jupyter.askForKernelRestart": false,
+  "jupyter.interactiveWindow.textEditor.executeSelection": true,
+
+  // =============================================================================
+  // JSON & YAML
+  // =============================================================================
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "editor.tabSize": 2
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "editor.tabSize": 2
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "editor.tabSize": 2
+  },
+
+  // =============================================================================
+  // MARKDOWN
+  // =============================================================================
+  "[markdown]": {
+    "editor.wordWrap": "on",
+    "editor.quickSuggestions": {
+      "comments": "off",
+      "strings": "off",
+      "other": "off"
+    },
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  // =============================================================================
+  // TESTING (PYTEST)
+  // =============================================================================
+  "python.testing.pytestEnabled": true,
+  "python.testing.unittestEnabled": false,
+  "python.testing.pytestArgs": ["tests", "-v", "--tb=short"],
+  "testing.automaticallyOpenPeekView": "failureVisible",
+
+  // =============================================================================
+  // FILE EXPLORER
+  // =============================================================================
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.expand": false,
+  "explorer.fileNesting.patterns": {
+    "*.py": "${capture}.cpython-*.pyc, ${capture}.pyi",
+    "requirements.txt": "requirements-*.txt",
+    "README.md": "CONTRIBUTING.md, LICENSE, SECURITY.md, CHANGELOG.md, CLAUDE.md",
+    "pyproject.toml": "pytest.ini, .pre-commit-config.yaml, .flake8, setup.py, setup.cfg, ruff.toml",
+    "docker-compose.yml": "Dockerfile, .dockerignore"
+  },
+
+  // Hide clutter
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/*.pyc": true,
+    "**/.pytest_cache": true,
+    "**/.ipynb_checkpoints": true,
+    "**/htmlcov": true,
+    "**/.coverage": true,
+    "**/*.egg-info": true,
+    "**/chroma_db": true,
+    "**/mlruns": true,
+    "**/wandb": true
+  },
+
+  // Search exclusions
+  "search.exclude": {
+    "**/__pycache__": true,
+    "**/venv": true,
+    "**/.venv": true,
+    "**/node_modules": true,
+    "**/*.pyc": true,
+    "**/htmlcov": true,
+    "**/chroma_db": true
+  },
+
+  // =============================================================================
+  // TERMINAL (Cross-platform)
+  // =============================================================================
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "terminal.integrated.defaultProfile.linux": "bash",
+  "terminal.integrated.defaultProfile.osx": "zsh",
+  "terminal.integrated.env.windows": {
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "terminal.integrated.env.linux": {
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "terminal.integrated.env.osx": {
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "terminal.integrated.scrollback": 10000,
+
+  // =============================================================================
+  // GIT
+  // =============================================================================
+  "git.autofetch": true,
+  "git.confirmSync": false,
+  "git.enableSmartCommit": true,
+  "git.suggestSmartCommit": false,
+
+  // =============================================================================
+  // SECURITY LINTING
+  // =============================================================================
+  "flake8.args": ["--max-line-length=100"],
+  "mypy-type-checker.args": ["--ignore-missing-imports"],
+
+  // =============================================================================
+  // CURSOR AI SPECIFIC
+  // =============================================================================
+  "cursor.chat.alwaysShowSuggestion": true,
+  "cursor.cpp.disabledLanguages": [],
+
+  // Privacy & Security - CRITICAL for security training projects
+  "cursor.privacyMode": true,
+  "cursor.enableTelemetry": false,
+
+  // Exclude sensitive paths from AI indexing
+  "cursor.excludeFromIndexing": [
+    "**/venv/**",
+    "**/.venv/**",
+    "**/__pycache__/**",
+    "**/*.pyc",
+    "**/.env*",
+    "**/secrets/**",
+    "**/credentials/**",
+    "**/*.pem",
+    "**/*.key",
+    "**/samples/malware/**",
+    "**/memory_dumps/**",
+    "**/forensic_images/**",
+    "**/evidence/**"
+  ],
+
+  // Exclude sensitive paths from AI context (different from indexing)
+  "cursor.excludeFromContext": [
+    "**/.env*",
+    "**/secrets/**",
+    "**/credentials/**",
+    "**/*.pem",
+    "**/*.key",
+    "**/config/production.*"
+  ],
+
+  // Performance optimization
+  "cursor.maxContextLines": 8000,
+  "cursor.autocomplete.debounceMs": 150,
+  "cursor.codebaseIndex.maxFileSize": 1000000,
+  "cursor.codebaseIndex.maxFiles": 10000,
+
+  // =============================================================================
+  // WORKSPACE SPECIFIC ASSOCIATIONS
+  // =============================================================================
+  "files.associations": {
+    "*.yar": "yara",
+    "*.yara": "yara",
+    "*.ipynb": "jupyter-notebook"
+  },
+
+  // =============================================================================
+  // ERROR LENS (if installed)
+  // =============================================================================
+  "errorLens.enabled": true,
+  "errorLens.enabledDiagnosticLevels": ["error", "warning"],
+  "errorLens.excludeBySource": ["Pylance(reportGeneralTypeIssues)"],
+  "cursorpyright.analysis.autoImportCompletions": true,
+  "cursorpyright.analysis.diagnosticSeverityOverrides": {
+    "reportMissingImports": "warning",
+    "reportMissingModuleSource": "none"
+  },
+  "cursorpyright.analysis.inlayHints.functionReturnTypes": true,
+  "cursorpyright.analysis.inlayHints.variableTypes": false,
+  "cursorpyright.analysis.typeCheckingMode": "basic"
+}

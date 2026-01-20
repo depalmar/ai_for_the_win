@@ -11,9 +11,9 @@ import requests
 from requests.exceptions import HTTPError, RequestException, Timeout
 
 
-def basic_get_request(url: str) -> dict | None:
+def basic_get_request(url: str, timeout: int = 10) -> dict | None:
     """Make a GET request and return JSON response."""
-    response = requests.get(url)
+    response = requests.get(url, timeout=timeout)
     if response.status_code == 200:
         return response.json()
     return None
