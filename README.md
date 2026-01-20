@@ -470,27 +470,27 @@ Contributions welcome! Please read [CONTRIBUTING.md](./CONTRIBUTING.md) first.
 
 ## License
 
-**AI for the Win** is dual-licensed for educational and personal use:
+**AI for the Win** is dual-licensed for maximum flexibility:
 
 | Content Type | License | Personal Use | Commercial Use |
 |--------------|---------|--------------|----------------|
-| Educational content, labs, docs | [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) | ✅ **FREE** | ❌ Not permitted |
+| Educational content, labs, docs | [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) | ✅ **FREE** | Requires license |
 | Code samples and scripts | [MIT](https://opensource.org/licenses/MIT) | ✅ **FREE** | ✅ **FREE** |
 
-### Permitted Use (FREE)
+### Personal Use (FREE)
 - Individual learning and skill development
 - Academic coursework (as a student)
-- Academic research and teaching (with attribution)
 - Personal portfolio projects
 - Contributing back to this project
 
-### Not Permitted
-- Corporate training programs
-- Paid bootcamps or courses
-- Consulting engagements using these materials
-- Any commercial use of educational content without explicit written permission
+### Commercial Use (License Required)
+Need a license for:
+- **Corporate training** programs (internal employee training)
+- **Bootcamps & courses** (paid training programs)
+- **Consulting** engagements using materials
+- **Universities** (formal curricula - FREE with attribution)
 
-**Note**: This is a personal educational project. Contact me if you're interested in using this content in a professional or commercial context.
+**[View Commercial Licensing Options](docs/COMMERCIAL_LICENSING.md)** | [Contact Raymond DePalma](https://www.linkedin.com/in/raymond-depalma/)
 
 ---
 
