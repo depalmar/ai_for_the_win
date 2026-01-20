@@ -41,13 +41,12 @@ jobs:
 
       - name: Check links
         continue-on-error: true
-        uses: lycheeverse/lychee-action@7cd0af4c74a61395d455af97419279d86aafaede # v2.0.2
+        uses: lycheeverse/lychee-action@a8c4c7cb88f0c7386610c35eb25108e448569cb0 # v2.7.0
         with:
           args: >-
             --verbose
             --no-progress
             --accept 200,204,206,301,302,304
-            --exclude-mail
             --exclude '^https://console\.anthropic\.com'
             --exclude '^https://platform\.openai\.com'
             --exclude '^https://aistudio\.google\.com'
