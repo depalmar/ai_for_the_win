@@ -73,7 +73,7 @@ class TestSampleAnalysis:
         assert len(strings) > 0
         # Should find our test strings
         string_values = [s.lower() for s in strings]
-        assert any("evil" in s for s in string_values)
+        assert any("malware" in s for s in string_values)
 
     def test_extract_hex_patterns(self, sample_analyzer, sample_pe_file):
         """Test hex pattern extraction."""
