@@ -4,6 +4,8 @@
 
 Learn systematic approaches to testing Large Language Models for security vulnerabilities including prompt injection, jailbreaking, data extraction, and output manipulation.
 
+> **Updated January 2025**: Based on OWASP LLM Top 10 (2025 edition) and current Claude/GPT-5/Gemini 3 security research. Includes 2025 agentic AI attack vectors.
+
 **Difficulty**: Intermediate
 **Duration**: 90-120 minutes
 **Prerequisites**: Lab 38 (ML Security Fundamentals), basic LLM knowledge
