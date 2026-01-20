@@ -168,7 +168,7 @@ from datasets import Dataset
 import torch
 
 class SecurityLoRATrainer:
-    def __init__(self, base_model: str = "mistralai/Mistral-7B-v0.1"):
+    def __init__(self, base_model: str = "mistralai/Mistral-7B-Instruct-v0.3"):
         self.base_model = base_model
         self.tokenizer = None
         self.model = None
@@ -318,7 +318,7 @@ class SecurityLoRATrainer:
         return response.split("### Response:")[-1].strip()
 
 # Fine-tune model
-trainer = SecurityLoRATrainer("mistralai/Mistral-7B-v0.1")
+trainer = SecurityLoRATrainer("mistralai/Mistral-7B-Instruct-v0.3")
 trainer.setup_model(load_in_4bit=True)
 trainer.apply_lora(r=16, alpha=32)
 

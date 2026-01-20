@@ -33,17 +33,15 @@ classifiers = [
 requires-python = ">=3.10,<3.14"
 
 dependencies = [
-    # Core data science
+    # Core data science (Labs 00-13: ML foundations, no LLM required)
     "pandas>=2.0.0",
     "numpy>=1.24.0",
     "scikit-learn>=1.3.0",
 
-    # LLM frameworks (LangChain 1.0+)
+    # LLM framework base (provider packages are optional - see [project.optional-dependencies])
     "langchain>=1.0.0",
     "langchain-core>=0.3.0",
-    "langchain-anthropic>=0.3.0",
-    "langchain-openai>=0.3.0",
-    "langchain-google-genai>=2.0.0",
+    "langchain-community>=0.3.0,<1.0.0",
     "langgraph>=0.2.0",
 
     # Vector databases and embeddings
@@ -70,6 +68,53 @@ Documentation = "https://ai-for-the-win.github.io"
 Repository = "https://github.com/ai-for-the-win/ai-for-the-win"
 
 [project.optional-dependencies]
+# =============================================================================
+# LLM PROVIDERS - Install only what you need
+# =============================================================================
+# Usage: pip install -e ".[provider]"
+#   pip install -e ".[ollama]"     # Free, local - no API key needed
+#   pip install -e ".[anthropic]"  # Claude (recommended for quality)
+#   pip install -e ".[openai]"     # GPT
+#   pip install -e ".[google]"     # Gemini (free tier available)
+
+# Local LLM - FREE, no API key required
+ollama = [
+    "langchain-ollama>=1.0.0,<2.0.0",
+]
+
+# Anthropic Claude - Best for security analysis
+anthropic = [
+    "anthropic>=0.70.0,<1.0.0",
+    "langchain-anthropic>=1.0.0,<2.0.0",
+]
+
+# OpenAI GPT - Widely supported ecosystem
+openai = [
+    "openai>=1.50.0,<3.0.0",
+    "langchain-openai>=1.0.0,<2.0.0",
+]
+
+# Google Gemini - Cost-effective, generous free tier
+google = [
+    "google-generativeai>=0.8.0,<1.0.0",
+    "langchain-google-genai>=4.0.0,<5.0.0",
+]
+
+# All LLM providers - for CI/CD or users who want everything
+all-llm = [
+    "anthropic>=0.70.0,<1.0.0",
+    "langchain-anthropic>=1.0.0,<2.0.0",
+    "openai>=1.50.0,<3.0.0",
+    "langchain-openai>=1.0.0,<2.0.0",
+    "google-generativeai>=0.8.0,<1.0.0",
+    "langchain-google-genai>=4.0.0,<5.0.0",
+    "langchain-ollama>=1.0.0,<2.0.0",
+    "litellm>=1.50.0,<2.0.0",
+]
+
+# =============================================================================
+# DEVELOPMENT & DOCS
+# =============================================================================
 dev = [
     "pytest>=7.0.0",
     "pytest-cov>=4.0.0",

@@ -31,7 +31,8 @@ env/
 
 # IDE
 .idea/
-.vscode/
+.vscode/*
+!.vscode/settings.json
 *.swp
 *.swo
 *~
@@ -105,7 +106,6 @@ credentials/
 CURRICULUM_REVIEW_REPORT.md
 TODO_PRIVATE.md
 NOTES_PRIVATE.md
-docs/COMMERCIAL_LICENSING.md.draft
 
 # Large files
 *.zip
