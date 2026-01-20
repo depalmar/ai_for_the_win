@@ -47,7 +47,6 @@ jobs:
             --verbose
             --no-progress
             --accept 200,204,206,301,302,304
-            --exclude-mail
             --exclude '^https://console\.anthropic\.com'
             --exclude '^https://platform\.openai\.com'
             --exclude '^https://aistudio\.google\.com'
