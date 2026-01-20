@@ -1,5 +1,7 @@
 # AI for the Win - Security Labs Environment
-FROM jupyter/scipy-notebook:python-3.11
+# Pin base image with specific tag for reproducibility (OpenSSF Scorecard)
+# Note: Jupyter images moved to quay.io as of Oct 2023
+FROM quay.io/jupyter/scipy-notebook:2024-12-09
 
 LABEL maintainer="AI for the Win"
 LABEL description="Security-focused data science and ML environment"
@@ -32,9 +34,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 USER ${NB_UID}
 
-# Install Python packages for security labs
+# Install Python packages for security labs (pin pip first for reproducibility)
 COPY requirements.txt /tmp/requirements.txt
-RUN pip install --no-cache-dir -r /tmp/requirements.txt
+RUN pip install pip==24.3.1 && pip install --no-cache-dir -r /tmp/requirements.txt
 
 # Install additional ML/AI packages (versions pinned for reproducibility)
 RUN pip install --no-cache-dir \

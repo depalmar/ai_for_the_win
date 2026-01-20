@@ -135,6 +135,8 @@ jobs:
 
       - name: Check dependencies for vulnerabilities
         run: |
+          # Pin pip and install deps for safety check
+          python -m pip install pip==24.3.1
           pip install -r requirements.txt
           # Run safety check - fail on HIGH/CRITICAL vulnerabilities only
           safety check --full-report --ignore 70612 2>/dev/null || echo "::warning::Some dependencies have known vulnerabilities. Review the report above."

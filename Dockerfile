@@ -4,7 +4,8 @@
 # =============================================================================
 # Base Stage
 # =============================================================================
-FROM python:3.11-slim as base
+# Pin base image with SHA256 digest for reproducibility (OpenSSF Scorecard)
+FROM python:3.11-slim@sha256:7ad180fdf785219c4a23124e53745fbd683bd6e23d0885e3554aff59eddbc377 as base
 
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE=1 \
@@ -44,8 +45,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Copy requirements
 COPY requirements.txt .
 
-# Install Python dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+# Install Python dependencies (pin pip first for reproducibility)
+RUN pip install pip==24.3.1 && pip install --no-cache-dir -r requirements.txt
 
 # Install development tools (versions pinned for reproducibility)
 RUN pip install --no-cache-dir \
@@ -74,8 +75,8 @@ FROM base as production
 # Copy requirements
 COPY requirements.txt .
 
-# Install Python dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+# Install Python dependencies (pin pip first for reproducibility)
+RUN pip install pip==24.3.1 && pip install --no-cache-dir -r requirements.txt
 
 # Copy application code
 COPY --chown=appuser:appuser . .
