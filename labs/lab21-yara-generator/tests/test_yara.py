@@ -34,7 +34,7 @@ def sample_pe_file():
         content += b"\x00" * 100
         # Add some suspicious strings
         content += b"This is malware test\x00"
-        content += b"http://evil-domain.com/c2\x00"
+        content += b"malware_callback_server_endpoint\x00"
         content += b"cmd.exe /c whoami\x00"
         content += b"CreateRemoteThread\x00"
         content += b"VirtualAllocEx\x00"
@@ -147,7 +147,7 @@ class TestRuleBuilding:
         patterns = {
             "strings": [
                 {"value": "malicious_string", "name": "s1"},
-                {"value": "evil.com", "name": "s2"},
+                {"value": "c2_callback_test", "name": "s2"},
             ],
             "hex_patterns": ["4D 5A 90 00"],
         }
@@ -161,7 +161,7 @@ class TestRuleBuilding:
 
         assert "rule Test_Malware" in rule
         assert "malicious_string" in rule
-        assert "evil.com" in rule
+        assert "c2_callback_test" in rule
         assert "description" in rule
         assert "condition" in rule
 
