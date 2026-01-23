@@ -68,7 +68,7 @@ jobs:
           cat changelog.txt
 
       - name: Generate SBOM (Software Bill of Materials)
-        uses: anchore/sbom-action@e11c554f704a0b820cbf8c51673f6945e0731532 # v0.18.0
+        uses: anchore/sbom-action@62ad5284b8ced813296287a0b63906cb364b73ee # v0.18.0
         with:
           artifact-name: sbom-${{ github.ref_name }}.spdx.json
           output-file: sbom.spdx.json
