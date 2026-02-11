@@ -18,7 +18,7 @@ pandas==2.2.0
 numpy==1.26.3
 
 # Security
-cryptography==44.0.1
+cryptography==46.0.5
 pyjwt==2.8.0
 
 # Utilities
