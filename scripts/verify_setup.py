@@ -437,7 +437,7 @@ def print_summary(results):
             console.print(
                 Panel.fit(
                     "[bold green]All checks passed! You're ready to start.[/bold green]\n\n"
-                    "Next step: cd labs/lab01-phishing-classifier",
+                    "Next step: cd labs/lab01-python-security-fundamentals",
                     title="Ready!",
                 )
             )
@@ -457,7 +457,7 @@ def print_summary(results):
 
         if all_passed:
             print("\nAll checks passed! You're ready to start.")
-            print("Next step: cd labs/lab01-phishing-classifier")
+            print("Next step: cd labs/lab01-python-security-fundamentals")
         else:
             print("\nSome checks failed. Review the issues above.")
 
