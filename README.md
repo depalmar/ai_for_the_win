@@ -358,40 +358,59 @@ Each includes starter code, requirements, and evaluation criteria. See [`capston
 
 ### Option 1: Docker (Easiest!)
 
-One-command setup with all services pre-configured:
-
 ```bash
 git clone https://github.com/depalmar/ai_for_the_win.git
 cd ai_for_the_win/docker
+
+# Start Jupyter only (fastest — enough for most labs)
+docker compose up -d jupyter
+
+# Or start everything (requires 8GB+ RAM)
 docker compose up -d
 
-# Access services:
-# - Jupyter Lab: http://localhost:8888 (token: aiforthewin)
-# - Kibana: http://localhost:5601
-# - MinIO: http://localhost:9001 (minioadmin/minioadmin)
+# Access Jupyter Lab: http://localhost:8888 (token: aiforthewin)
 ```
 
-Includes: Jupyter Lab, Elasticsearch, Kibana, PostgreSQL, Redis, MinIO, Ollama (local LLMs), ChromaDB (vectors).
-
-See [`docker/README.md`](./docker/README.md) for full details.
+Available services: Jupyter Lab, Elasticsearch, Kibana, PostgreSQL, Redis, MinIO, Ollama (local LLMs), ChromaDB (vectors). Start only what you need — see [`docker/README.md`](./docker/README.md) for service profiles.
 
 ### Option 2: Local Python Installation
+
+> **Python 3.10, 3.11, or 3.12 required.** Python 3.13 is experimental. Python 3.14 is **not supported** — it causes `resolution-too-deep` errors because PyTorch, LangChain, and other packages lack 3.14 wheels. Check with `python --version` before proceeding.
 
 ```bash
 # 1. Clone the repository
 git clone https://github.com/depalmar/ai_for_the_win.git
 cd ai_for_the_win
 
-# 2. Create virtual environment
+# 2. Create virtual environment (use python3.12 if you have multiple versions)
 python -m venv venv
 source venv/bin/activate  # Windows: .\venv\Scripts\activate
 
-# 3. Install dependencies
-pip install -r requirements.txt
+# 3. Install dependencies (pick ONE)
+pip install -r requirements.txt           # Everything (all providers)
+pip install -e ".[anthropic]"             # Core + Claude (recommended)
+pip install -e ".[ollama]"                # Core + Ollama (free, local)
+pip install -e "."                        # Core only (Labs 00-13, no LLM)
 
-# 4. Start with Lab 00 (no API key needed)
+# 4. Verify setup
+python scripts/verify_setup.py
+
+# 5. Start with Lab 00 (no API key needed)
 cd labs/lab00-environment-setup
 ```
+
+<details>
+<summary><strong>Dependency install failing?</strong></summary>
+
+If `pip install` hangs or fails with `resolution-too-deep`:
+
+1. **Check Python version** — must be 3.10-3.12 (`python --version`)
+2. **Try `uv`** (faster resolver): `pip install uv && uv pip install -r requirements.txt`
+3. **Install selectively**: `pip install -e ".[anthropic]"` instead of the full `requirements.txt`
+
+See [Troubleshooting Guide](./docs/guides/troubleshooting-guide.md) for details.
+
+</details>
 
 ### API Keys (for Labs 14+)
 

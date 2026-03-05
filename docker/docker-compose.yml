@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   # Main Jupyter Lab environment for labs
   jupyter:
@@ -14,7 +12,7 @@ services:
       - ../notebooks:/home/jovyan/notebooks
       - ../data:/home/jovyan/data
       - ../templates:/home/jovyan/templates:ro
-      - ../tools:/home/jovyan/tools:ro
+      - ../shared:/home/jovyan/shared:ro
       - lab-work:/home/jovyan/work
     environment:
       - JUPYTER_ENABLE_LAB=yes
@@ -22,8 +20,6 @@ services:
       - JUPYTER_TOKEN=aiforthewin
     networks:
       - lab-network
-    depends_on:
-      - elasticsearch
 
   # Elasticsearch for log analysis labs
   elasticsearch:
@@ -107,7 +103,7 @@ services:
   # Or:  docker compose up -d ollama-cpu (for CPU-only)
   ollama:
     image: ollama/ollama:latest
-    container_name: lab-ollama
+    container_name: lab-ollama-gpu
     profiles: [gpu]
     ports:
       - "11434:11434"

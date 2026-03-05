@@ -1,153 +1,60 @@
 # Security Policy
 
+## Supported Versions
+
+| Version | Supported          |
+|---------|--------------------|
+| 1.9.x   | :white_check_mark: |
+| < 1.9   | :x:                |
+
 ## Reporting a Vulnerability
 
-We take the security of AI for the Win seriously. If you discover a security vulnerability, please follow these steps:
+If you discover a security vulnerability in this project, please report it responsibly.
 
 ### How to Report
 
-**Please DO NOT open a public issue for security vulnerabilities.**
+1. **DO NOT** open a public GitHub issue for security vulnerabilities.
+2. Email [Raymond DePalma](https://www.linkedin.com/in/raymond-depalma/) via LinkedIn with:
+   - Description of the vulnerability
+   - Steps to reproduce
+   - Potential impact
+   - Suggested fix (if any)
 
-Instead, please report security vulnerabilities through one of these channels:
+### What to Expect
 
-1. **[GitHub Security Advisories](https://github.com/depalmar/ai_for_the_win/security/advisories/new)** (Preferred) - Use GitHub's private vulnerability reporting
-2. **Email**: [depalma.raymond@gmail.com](mailto:depalma.raymond@gmail.com) - For sensitive disclosures
+- **Acknowledgment** within 48 hours
+- **Assessment** within 7 days
+- **Fix or mitigation** within 30 days for confirmed vulnerabilities
+- Credit in the changelog (unless you prefer anonymity)
 
-### What to Include
+### Scope
 
-When reporting a vulnerability, please include:
+**In scope:**
+- Code in `shared/`, `scripts/`, `mcp-servers/`
+- GitHub Actions workflows
+- Docker configurations
+- Dependency vulnerabilities in `requirements.txt` and `pyproject.toml`
 
-- **Description**: Clear description of the vulnerability
-- **Impact**: Potential impact and attack scenarios
-- **Reproduction Steps**: Detailed steps to reproduce the issue
-- **Proof of Concept**: Code snippets or screenshots (if applicable)
-- **Suggested Fix**: If you have recommendations (optional)
-- **Environment**: OS, Python version, affected components
+**Out of scope (intentional for training):**
+- Vulnerabilities in `ctf-challenges/` — these are intentional for educational exercises
+- Vulnerable dependencies in `labs/*/data/` sample files
+- IOCs (Indicators of Compromise) in lab data — these are defanged/fictional
 
-### Response Timeline
+## Security Practices
 
-- **Initial Response**: Within 48 hours
-- **Status Update**: Within 7 days
-- **Fix Timeline**: Depends on severity
-  - Critical: 1-3 days
-  - High: 1-2 weeks
-  - Medium: 2-4 weeks
-  - Low: Best effort
+This project follows these security practices:
 
-## Security Best Practices for Users
+- **Dependency scanning**: Dependabot alerts enabled, reviewed weekly
+- **Code scanning**: CodeQL analysis on every PR
+- **OpenSSF Scorecard**: Monitored via GitHub Actions
+- **Pinned dependencies**: GitHub Actions use SHA-pinned versions; Docker images use digest pins
+- **Secrets**: No hardcoded secrets; `.env.example` templates only
+- **SBOM**: Software Bill of Materials generated on each release
 
-### API Keys and Secrets
+## Dependencies
 
-This project requires API keys for various services (Anthropic Claude, OpenAI, etc.). **Never commit API keys to the repository.**
-
-**Proper handling:**
-- Use `.env` files (see `.env.example`)
-- Add `.env` to `.gitignore` (already configured)
-- Use environment variables in production
-- Rotate keys regularly
-
-### Lab Exercises
-
-Many labs involve security tools and techniques:
-
-1. **Sandboxed Environment**: Run labs in isolated environments
-2. **Malware Samples**: Use only the provided synthetic samples
-3. **Network Scanning**: Only scan your own networks/systems
-4. **Ethical Use**: Follow responsible disclosure practices
-5. **Legal Compliance**: Ensure you have authorization for any testing
-
-### Docker Security
-
-If using Docker containers:
-- Keep base images updated
-- Don't run containers as root (configured in Dockerfile)
-- Review Docker Compose configurations
-- Scan images for vulnerabilities: `docker scan`
-
-## Supported Versions
-
-| Version | Supported          | Notes |
-| ------- | ------------------ | ----- |
-| main    | :white_check_mark: | Latest development version |
-| v1.x    | :white_check_mark: | Current stable release |
-| < 1.0   | :x:                | No longer supported |
-
-## Security Features
-
-### Dependency Scanning
-
-- **Dependabot**: Automated dependency updates
-- **Safety Check**: Python package vulnerability scanning (in CI)
-- **Bandit**: Static security analysis for Python code
-
-### Code Security
-
-- **Pre-commit Hooks**: Automated security checks (`.pre-commit-config.yaml`)
-- **Secret Scanning**: GitHub secret detection (enable in Settings)
-- **CodeQL Analysis**: Automated code scanning (see `.github/workflows/codeql.yml`)
-
-### CI/CD Security
-
-All pull requests are automatically scanned for:
-- Known vulnerabilities in dependencies
-- Security anti-patterns in code
-- Potential secrets in commits
-- Syntax errors in lab solutions
-
-## Known Security Considerations
-
-### Training Data
-
-This repository contains:
-- Synthetic malware samples (JSON representations, not actual malware)
-- Sample phishing emails (for training purposes)
-- Mock security logs and events
-
-**These are for educational purposes only and should not be used maliciously.**
-
-### API Usage
-
-Labs make API calls to external services:
-- Rate limiting is implemented
-- API keys should use least-privilege access
-- Monitor API usage for unexpected patterns
-
-### LLM Security
-
-When working with LLM labs:
-- Be aware of prompt injection risks
-- Validate and sanitize all inputs
-- Don't send sensitive data to external LLMs
-- Review LLM outputs before executing code
-
-## Responsible Disclosure
-
-We follow coordinated vulnerability disclosure:
-
-1. **Private Disclosure**: Report to maintainers first
-2. **Acknowledgment**: We'll acknowledge receipt within 48 hours
-3. **Investigation**: We'll investigate and develop a fix
-4. **Coordination**: We'll work with you on disclosure timing
-5. **Public Disclosure**: After fix is released and users have time to update
-6. **Credit**: Reporter will be credited (unless they prefer anonymity)
-
-## Security Hall of Fame
-
-We appreciate security researchers who help keep this project secure. Contributors who responsibly disclose vulnerabilities will be acknowledged here (with permission):
-
-- *No vulnerabilities reported yet*
-
-## Contact
-
-- **Security vulnerabilities**: [Report via GitHub Security Advisories](https://github.com/depalmar/ai_for_the_win/security/advisories/new)
-- **Security email**: [depalma.raymond@gmail.com](mailto:depalma.raymond@gmail.com)
-- **General bugs**: [GitHub Issues](https://github.com/depalmar/ai_for_the_win/issues)
-- **Questions**: [GitHub Discussions](https://github.com/depalmar/ai_for_the_win/discussions)
-
-## License
-
-This security policy is licensed under CC BY 4.0.
-
----
-
-**Last Updated**: January 2026
+We monitor dependencies via:
+- GitHub Dependabot (automated PRs for vulnerable dependencies)
+- `safety check` in CI pipeline
+- `bandit` static analysis for Python security issues
+- OpenSSF Scorecard for supply chain security

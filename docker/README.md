@@ -5,13 +5,22 @@ One-command setup for the AI Security Labs environment.
 ## Quick Start
 
 ```bash
-# Start all services
+# Start Jupyter only (fastest, enough for most labs)
+docker compose up -d jupyter
+
+# Or start Jupyter + specific services you need
+docker compose up -d jupyter redis chromadb    # For AI/RAG labs
+docker compose up -d jupyter elasticsearch kibana  # For log analysis labs
+
+# Or start everything (requires 8GB+ RAM)
 docker compose up -d
 
 # Access Jupyter Lab
 open http://localhost:8888
 # Token: aiforthewin
 ```
+
+> **Tip:** Starting just `jupyter` is the fastest way to get going. Add services as you need them for specific labs. Running all services at once requires significant memory.
 
 ## Services
 
@@ -125,10 +134,10 @@ docker compose up -d
 
 | Container Path | Host Path | Description |
 |---------------|-----------|-------------|
-| /home/jovyan/labs | ./labs | Lab materials (read-only) |
-| /home/jovyan/notebooks | ./notebooks | Your notebooks |
-| /home/jovyan/data | ./data | Sample datasets |
-| /home/jovyan/tools | ./tools | Custom tools |
+| /home/jovyan/labs | ../labs | Lab materials (read-only) |
+| /home/jovyan/notebooks | ../notebooks | Your notebooks |
+| /home/jovyan/data | ../data | Sample datasets |
+| /home/jovyan/shared | ../shared | Shared utilities (llm_config, ioc_utils) |
 | /home/jovyan/work | Docker volume | Working directory |
 
 ## GPU Support

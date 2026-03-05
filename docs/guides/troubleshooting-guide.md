@@ -122,6 +122,54 @@ ModuleNotFoundError: No module named 'anthropic'
    pip install -r requirements.txt
    ```
 
+### Dependency Resolution Too Deep (Python 3.14)
+
+**Symptoms:**
+```
+× Dependency resolution exceeded maximum depth
+╰─> Pip cannot resolve the current dependencies as the dependency graph
+    is too complex for pip to solve efficiently.
+```
+
+Also look for `cp314` in the error output — this confirms you're on Python 3.14.
+
+**Root cause:** Python 3.14 is too new. Many packages (PyTorch, LangChain, etc.) don't have pre-built 3.14 wheels yet, which forces pip to explore thousands of version combinations until it gives up.
+
+**Solutions (in order of preference):**
+
+1. **Use Python 3.10, 3.11, or 3.12 (recommended):**
+   ```bash
+   # macOS with pyenv
+   pyenv install 3.12.8
+   pyenv local 3.12.8
+   python -m venv venv && source venv/bin/activate
+   pip install -r requirements.txt
+
+   # macOS with Homebrew
+   brew install python@3.12
+   python3.12 -m venv venv && source venv/bin/activate
+   pip install -r requirements.txt
+   ```
+
+2. **Use `uv` instead of pip (much faster resolver):**
+   ```bash
+   pip install uv
+   uv pip install -r requirements.txt
+   ```
+
+3. **Install only what you need (lighter dependency graph):**
+   ```bash
+   pip install -e "."                  # Core only (Labs 00-13, no LLM)
+   pip install -e ".[anthropic]"       # Core + Claude (Labs 00-18)
+   pip install -e ".[ollama]"          # Core + Ollama (free, local)
+   ```
+
+4. **Check your Python version:**
+   ```bash
+   python --version
+   python scripts/verify_setup.py      # Will warn about unsupported versions
+   ```
+
 ### Dependency Conflicts
 
 **Symptoms:**
@@ -139,9 +187,10 @@ ERROR: pip's dependency resolver does not currently take into account...
    pip install -r requirements.txt
    ```
 
-2. **Try pip with legacy resolver:**
+2. **Use `uv` for more reliable resolution:**
    ```bash
-   pip install --use-deprecated=legacy-resolver -r requirements.txt
+   pip install uv
+   uv pip install -r requirements.txt
    ```
 
 ### Python Version Issues

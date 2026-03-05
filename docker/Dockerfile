@@ -1,7 +1,7 @@
 # AI for the Win - Security Labs Environment
-# Pin base image with specific tag for reproducibility (OpenSSF Scorecard)
+# Pin base image with SHA256 digest for reproducibility (OpenSSF Scorecard)
 # Note: Jupyter images moved to quay.io as of Oct 2023
-FROM quay.io/jupyter/scipy-notebook:2024-12-09
+FROM quay.io/jupyter/scipy-notebook:2024-12-09@sha256:210513fd13a22a9477d48d61c09d49affd82a2fe2ee53b2bde9de67238db9890
 
 LABEL maintainer="AI for the Win"
 LABEL description="Security-focused data science and ML environment"
@@ -103,7 +103,7 @@ WORKDIR /home/jovyan
 RUN mkdir -p work/outputs work/models work/cache
 
 # Set environment variables
-ENV PYTHONPATH="${PYTHONPATH}:/home/jovyan/tools"
+ENV PYTHONPATH="${PYTHONPATH}:/home/jovyan/shared"
 ENV JUPYTER_ENABLE_LAB=yes
 
 # Expose Jupyter port
