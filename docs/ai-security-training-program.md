@@ -1,7 +1,7 @@
 # AI Development Training Program: Offensive Security & DFIR
 
 [![24 Weeks](https://img.shields.io/badge/Duration-24%20Weeks-blue.svg)]()
-[![24 Labs](https://img.shields.io/badge/Labs-24-green.svg)]()
+[![50+ Labs](https://img.shields.io/badge/Labs-50%2B-green.svg)]()
 [![4 Capstones](https://img.shields.io/badge/Capstones-4-orange.svg)]()
 
 ## 🎯 Program Mission
@@ -49,7 +49,7 @@ Develop security practitioners who can architect, build, and deploy AI-powered t
 
 | Resource | Description |
 |----------|-------------|
-| [Labs](../labs/) | 24 hands-on implementation labs |
+| [Labs](../labs/) | 50+ hands-on implementation labs |
 | [Capstone Projects](../capstone-projects/) | 4 comprehensive final projects |
 | [Templates](../templates/) | Reusable agent and integration templates |
 | [Setup Guide](./guides/dev-environment-setup.md) | Development environment setup |
@@ -73,9 +73,9 @@ Develop security practitioners who can architect, build, and deploy AI-powered t
   - Computer Vision basics (malware visualization, CAPTCHA breaking)
 
 - **Hands-On Labs**
-  - [Lab 29](../labs/lab10-phishing-classifier/): Build a simple phishing email classifier
-  - [Lab 31](../labs/lab11-malware-clustering/): Create a malware family clustering model
-  - [Lab 32](../labs/lab12-anomaly-detection/): Train a basic network anomaly detector
+  - [Lab 10](../labs/lab10-phishing-classifier/): Build a simple phishing email classifier
+  - [Lab 11](../labs/lab11-malware-clustering/): Create a malware family clustering model
+  - [Lab 12](../labs/lab12-anomaly-detection/): Train a basic network anomaly detector
 
 #### Module 1.2: LLM Architecture & Security Implications
 
@@ -197,7 +197,7 @@ Develop security practitioners who can architect, build, and deploy AI-powered t
 
 #### Module 3.1: AI-Powered Threat Detection
 
-> **Related Labs**: [Lab 35 - LLM Log Analysis](../labs/lab15-llm-log-analysis/) | [Lab 23 - Detection Pipeline](../labs/lab23-detection-pipeline/)
+> **Related Labs**: [Lab 15 - LLM Log Analysis](../labs/lab15-llm-log-analysis/) | [Lab 23 - Detection Pipeline](../labs/lab23-detection-pipeline/)
 
 - **Detection Engineering**
 
@@ -323,7 +323,7 @@ class ForensicAnalysisAgent:
 
 #### Module 3.5: Threat Intelligence with AI
 
-> **Related Labs**: [Lab 36 - Threat Intel Agent](../labs/lab16-threat-intel-agent/) | [Lab 42 - Security RAG](../labs/lab18-security-rag/)
+> **Related Labs**: [Lab 16 - Threat Intel Agent](../labs/lab16-threat-intel-agent/) | [Lab 18 - Security RAG](../labs/lab18-security-rag/)
 
 - **Capabilities**
 
