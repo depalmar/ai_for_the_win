@@ -39,16 +39,17 @@ COPY requirements.txt /tmp/requirements.txt
 RUN pip install pip==24.3.1 && pip install --no-cache-dir -r /tmp/requirements.txt
 
 # Install additional ML/AI packages (versions pinned for reproducibility)
+# Note: chromadb must be >=1.0.0 to avoid tokenizers conflict with transformers
 RUN pip install --no-cache-dir \
-    torch==2.5.1 \
-    transformers==4.47.1 \
-    sentence-transformers==3.3.1 \
-    langchain==0.3.14 \
-    langchain-community==0.3.14 \
-    openai==1.58.1 \
-    anthropic==0.42.0 \
-    chromadb==0.5.23 \
-    ollama==0.4.5 \
+    torch==2.6.0 \
+    transformers==4.48.3 \
+    sentence-transformers==5.0.0 \
+    langchain==1.0.0 \
+    langchain-community==0.3.20 \
+    openai==1.66.3 \
+    anthropic==0.49.0 \
+    chromadb==1.0.12 \
+    ollama==0.4.7 \
     faiss-cpu==1.9.0.post1
 
 # Install security-specific packages (versions pinned for reproducibility)
