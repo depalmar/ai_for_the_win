@@ -45,7 +45,7 @@ RUN pip install --no-cache-dir \
     transformers==4.48.3 \
     sentence-transformers==5.0.0 \
     langchain==1.0.0 \
-    langchain-community==0.3.20 \
+    langchain-community==0.4.1 \
     openai==1.66.3 \
     anthropic==0.49.0 \
     chromadb==1.0.12 \
