@@ -34,7 +34,7 @@ def print_header(text):
 
 def print_success(text):
     if RICH_AVAILABLE:
-        console.print(f"[green]✓[/green] {text}")
+        console.print(f"[green][OK][/green] {text}")
     else:
         print(f"[OK] {text}")
 
@@ -48,24 +48,48 @@ def print_warning(text):
 
 def print_error(text):
     if RICH_AVAILABLE:
-        console.print(f"[red]✗[/red] {text}")
+        console.print(f"[red][FAIL][/red] {text}")
     else:
         print(f"[FAIL] {text}")
 
 
 def check_python_version():
-    """Check Python version is 3.10+"""
+    """Check Python version is 3.10-3.13.
+
+    Returns:
+        True if version is supported (3.10-3.13), False otherwise.
+        Prints warnings for 3.13 (experimental) and errors for 3.14+.
+    """
     print_header("Checking Python Version")
 
     version = sys.version_info
     version_str = f"{version.major}.{version.minor}.{version.micro}"
 
-    if version.major >= 3 and version.minor >= 10:
-        print_success(f"Python {version_str} (3.10+ required)")
-        return True
-    else:
-        print_error(f"Python {version_str} - requires 3.10+")
+    if version.major < 3 or version.minor < 10:
+        print_error(f"Python {version_str} — requires 3.10+")
         return False
+
+    if version.minor >= 14:
+        print_error(f"Python {version_str} — NOT SUPPORTED")
+        print_error(
+            "Python 3.14 causes 'resolution-too-deep' errors because many packages "
+            "(PyTorch, LangChain, etc.) lack 3.14 wheels."
+        )
+        print_error("Please use Python 3.10, 3.11, or 3.12.")
+        print_warning("Workaround: pip install uv && uv pip install -r requirements.txt")
+        print_warning('Or install only what you need: pip install -e ".[anthropic]"')
+        return False
+
+    if version.minor == 13:
+        print_warning(
+            f"Python {version_str} — experimental support. "
+            "Some packages may not have 3.13 wheels yet."
+        )
+        print_warning("Recommended: Python 3.10, 3.11, or 3.12")
+        return True
+
+    print_success(f"Python {version_str} (3.10-3.12 supported)")
+    return True
 
 
 def check_required_packages():
@@ -132,10 +156,11 @@ def check_optional_packages():
 
 
 def check_llm_providers():
-    """Check which LLM providers are installed (at least one needed for LLM labs)
+    """Check which LLM providers are installed (at least one needed for LLM labs).
 
     Returns:
-        set: Names of installed provider packages (e.g., {'langchain_ollama', 'langchain_anthropic'})
+        set: Names of installed provider packages
+            (e.g., {'langchain_ollama', 'langchain_anthropic'}).
     """
     print_header("Checking LLM Provider Packages")
 
@@ -263,10 +288,10 @@ def check_data_files():
     project_root = Path(__file__).parent.parent
 
     data_paths = [
-        ("labs/lab00a-python-security-fundamentals/data", "Lab 00a data"),
-        ("labs/lab01-phishing-classifier/data", "Lab 01 data"),
-        ("labs/lab02-malware-clustering/data", "Lab 02 data"),
-        ("labs/lab03-anomaly-detection/data", "Lab 03 data"),
+        ("labs/lab01-python-security-fundamentals/data", "Lab 01 data"),
+        ("labs/lab10-phishing-classifier/data", "Lab 10 data"),
+        ("labs/lab11-malware-clustering/data", "Lab 11 data"),
+        ("labs/lab12-anomaly-detection/data", "Lab 12 data"),
     ]
 
     all_ok = True
@@ -320,12 +345,12 @@ def check_ctf_infrastructure():
     return all_ok
 
 
-def check_lab00a_structure():
-    """Check Lab 00a has proper structure"""
-    print_header("Checking Lab 00a Structure")
+def check_lab01_structure():
+    """Check Lab 01 has proper structure."""
+    print_header("Checking Lab 01 Structure")
 
     project_root = Path(__file__).parent.parent
-    lab00a = project_root / "labs" / "lab00a-python-security-fundamentals"
+    lab01 = project_root / "labs" / "lab01-python-security-fundamentals"
 
     all_ok = True
     required_components = [
@@ -335,16 +360,16 @@ def check_lab00a_structure():
     ]
 
     for component, description in required_components:
-        path = lab00a / component
+        path = lab01 / component
         if path.exists():
             files = list(path.glob("*"))
             if files:
-                print_success(f"Lab 00a {description}: {len(files)} files")
+                print_success(f"Lab 01 {description}: {len(files)} files")
             else:
-                print_warning(f"Lab 00a {description}: directory empty")
+                print_warning(f"Lab 01 {description}: directory empty")
                 all_ok = False
         else:
-            print_warning(f"Lab 00a {description}: not found")
+            print_warning(f"Lab 01 {description}: not found")
             all_ok = False
 
     return all_ok
@@ -466,7 +491,7 @@ def main():
             ollama_available=ollama_available, installed_providers=installed_providers
         ),
         "Sample Data": check_data_files(),
-        "Lab 00a Structure": check_lab00a_structure(),
+        "Lab 01 Structure": check_lab01_structure(),
         "CTF Infrastructure": check_ctf_infrastructure(),
     }
 

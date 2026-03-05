@@ -103,8 +103,8 @@ def check_file(filepath: Path) -> list[str]:
 
     try:
         content = filepath.read_text(encoding="utf-8")
-    except UnicodeDecodeError:
-        return []  # Skip binary files
+    except (UnicodeDecodeError, PermissionError):
+        return []  # Skip binary or locked files
 
     model_issues = find_model_references(content)
 

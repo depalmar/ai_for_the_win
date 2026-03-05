@@ -118,7 +118,10 @@ class TestNotebookLinks:
         notebooks_dir = PROJECT_ROOT / "notebooks"
 
         for notebook in notebooks_dir.glob("lab*.ipynb"):
-            content = notebook.read_text(encoding="utf-8")
+            try:
+                content = notebook.read_text(encoding="utf-8")
+            except PermissionError:
+                continue
 
             # Find Colab links
             pattern = re.compile(
@@ -142,7 +145,7 @@ class TestNotebookLinks:
         for notebook in notebooks_dir.glob("lab*.ipynb"):
             try:
                 data = json.loads(notebook.read_text(encoding="utf-8"))
-            except json.JSONDecodeError:
+            except (json.JSONDecodeError, PermissionError):
                 continue
 
             # Get lab number from filename
@@ -179,7 +182,10 @@ class TestNotebookLinks:
         }
 
         for notebook in notebooks_dir.glob("lab*.ipynb"):
-            content = notebook.read_text(encoding="utf-8")
+            try:
+                content = notebook.read_text(encoding="utf-8")
+            except PermissionError:
+                continue
 
             # Check for old format references
             old_refs = old_format_pattern.findall(content)

@@ -3,7 +3,11 @@
 #
 # REQUIREMENTS: Python 3.10, 3.11, or 3.12 (tested and supported)
 # Python 3.13 may work but is not fully tested
-# Python 3.14 is NOT YET supported - PyTorch lacks 3.14 wheels (as of Jan 2026)
+#
+# !! Python 3.14 is NOT SUPPORTED !!
+# You WILL get "resolution-too-deep" errors on 3.14 because PyTorch,
+# LangChain, and many other packages lack 3.14 wheels.
+# Check your version: python --version
 #
 # =============================================================================
 # RECOMMENDED: Use pip extras for selective LLM provider installation
@@ -25,12 +29,13 @@
 # Verify setup: python scripts/verify_setup.py
 #
 # TROUBLESHOOTING:
-# If you get dependency errors, try these in order:
-#   1. pip install --upgrade pip "setuptools>=78.1.1" wheel
-#   2. pip install -r requirements.txt
-#
-# Or use uv for faster, more reliable resolution:
-#   pip install uv && uv pip install -r requirements.txt
+# "resolution-too-deep" or slow install? Try in order:
+#   1. Confirm Python 3.10-3.12: python --version
+#   2. pip install --upgrade pip "setuptools>=78.1.1" wheel
+#   3. pip install -r requirements.txt
+#   4. Still failing? Use uv (much faster resolver):
+#      pip install uv && uv pip install -r requirements.txt
+#   5. Or install selectively: pip install -e ".[anthropic]"
 #
 # Last updated: January 2026
 
