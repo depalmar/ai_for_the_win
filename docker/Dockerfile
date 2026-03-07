@@ -63,7 +63,7 @@ RUN pip install --no-cache-dir \
     angr==9.2.133 \
     volatility3==2.11.0 \
     oletools==0.60.2 \
-    python-magic==0.4.27 \
+    python-magic==0.4.27
 
 # Install visualization packages (versions pinned for reproducibility)
 RUN pip install --no-cache-dir \
