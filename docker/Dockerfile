@@ -1,7 +1,7 @@
 # AI for the Win - Security Labs Environment
 # Pin base image with SHA256 digest for reproducibility (OpenSSF Scorecard)
 # Note: Jupyter images moved to quay.io as of Oct 2023
-FROM quay.io/jupyter/scipy-notebook:2024-12-09@sha256:210513fd13a22a9477d48d61c09d49affd82a2fe2ee53b2bde9de67238db9890
+FROM quay.io/jupyter/scipy-notebook:2024-12-09@sha256:6a5a75172a2fabfdca3396b0f8facd7d3a7c889d41254bd091570610480ab91b
 
 LABEL maintainer="AI for the Win"
 LABEL description="Security-focused data science and ML environment"
@@ -53,16 +53,17 @@ RUN pip install --no-cache-dir \
     faiss-cpu==1.9.0.post1
 
 # Install security-specific packages (versions pinned for reproducibility)
+# NOTE: ssdeep is temporarily excluded due reproducible metadata/build failures.
+# Track re-introduction in a dedicated follow-up once a stable build path is validated.
 RUN pip install --no-cache-dir \
     yara-python==4.5.1 \
     pefile==2024.8.26 \
     capstone==5.0.3 \
-    unicorn==2.1.1 \
+    unicorn==2.0.1.post1 \
     angr==9.2.133 \
     volatility3==2.11.0 \
     oletools==0.60.2 \
     python-magic==0.4.27 \
-    ssdeep==3.4
 
 # Install visualization packages (versions pinned for reproducibility)
 RUN pip install --no-cache-dir \
