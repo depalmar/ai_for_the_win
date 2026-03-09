@@ -91,6 +91,41 @@ ValueError: ANTHROPIC_API_KEY not found
    load_dotenv()
    ```
 
+### "No LLM provider configured"
+
+**Symptoms:**
+```
+ValueError: No LLM provider configured. Add ANTHROPIC_API_KEY, OPENAI_API_KEY, GOOGLE_API_KEY,
+or run Ollama locally on http://localhost:11434.
+```
+
+**Why this happens:**
+- Newer notebook setup cells auto-detect providers in this order:
+  `ANTHROPIC_API_KEY` → `OPENAI_API_KEY` → `GOOGLE_API_KEY` → local Ollama.
+- If none are available, notebook initialization fails fast with this error.
+
+**Solutions:**
+
+1. **Set one cloud API key (fastest path):**
+   ```bash
+   export ANTHROPIC_API_KEY="sk-ant-..."
+   # or OPENAI_API_KEY / GOOGLE_API_KEY
+   ```
+
+2. **Use local Ollama instead of cloud keys:**
+   ```bash
+   # Verify Ollama server is up
+   curl http://localhost:11434/api/tags
+   ```
+   If this fails, start/install Ollama first.
+
+3. **Optionally pin a local model for notebooks:**
+   ```bash
+   export OLLAMA_MODEL="llama3.2:3b"
+   ```
+
+4. **Re-run the notebook setup cell** after updating keys or starting Ollama.
+
 ---
 
 ## Installation Problems

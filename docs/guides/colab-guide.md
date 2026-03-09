@@ -53,6 +53,12 @@ print(f"LangChain version: {langchain.__version__}")
 
 ### Setting Up API Keys (Labs 04+)
 
+> ✅ LLM notebook setup cells are provider-agnostic and auto-detect in this order:
+> `ANTHROPIC_API_KEY` → `OPENAI_API_KEY` → `GOOGLE_API_KEY` → local Ollama (`localhost:11434`).
+>
+> ℹ️ In Google Colab, you should expect to use a cloud API key. The Ollama fallback is mainly for local
+> Jupyter/VS Code runs of the same notebook files.
+
 **Option 1: Colab Secrets (Recommended)**
 
 1. Click the 🔑 key icon in the left sidebar
@@ -189,6 +195,24 @@ except Exception as e:
     print("Make sure you added the secret and enabled notebook access")
 ```
 
+### "No LLM provider configured"
+
+If a notebook shows:
+
+```
+No LLM provider configured. Add ANTHROPIC_API_KEY, OPENAI_API_KEY, GOOGLE_API_KEY,
+or run Ollama locally on http://localhost:11434
+```
+
+Use this checklist:
+1. Confirm at least one secret is present in Colab (`ANTHROPIC_API_KEY`, `OPENAI_API_KEY`, or `GOOGLE_API_KEY`)
+2. Re-run the setup cell after adding/updating secrets
+3. If running locally (not Colab), verify Ollama is running:
+   ```bash
+   curl http://localhost:11434/api/tags
+   ```
+4. (Optional) Set `OLLAMA_MODEL` before running the setup cell to use a specific local model
+
 ---
 
 ## Lab-Specific Tips
@@ -206,7 +230,7 @@ import numpy as np
 
 ### Labs 14-18 (LLM Basics)
 
-Set up your API key first:
+In Colab, set up your API key first:
 
 ```python
 from google.colab import userdata
@@ -217,6 +241,9 @@ os.environ["ANTHROPIC_API_KEY"] = userdata.get('ANTHROPIC_API_KEY')
 # OR
 os.environ["OPENAI_API_KEY"] = userdata.get('OPENAI_API_KEY')
 ```
+
+If you run these notebook files locally instead of in Colab, the same setup cell can also use
+local Ollama when no cloud key is present.
 
 ### Labs 19-35 (Detection + DFIR)
 
@@ -269,6 +296,6 @@ assert torch.cuda.is_available(), "Enable GPU: Runtime → Change runtime type �
 
 1. **Start with Lab 01** (no API key needed): [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab10_phishing_classifier.ipynb)
 
-2. **Get an API key** when you reach Lab 04: [API Keys Guide](./api-keys-guide.md)
+2. **Get an API key** when you reach Lab 04 in Colab: [API Keys Guide](./api-keys-guide.md)
 
 3. **Join discussions**: [GitHub Discussions](https://github.com/depalmar/ai_for_the_win/discussions)
