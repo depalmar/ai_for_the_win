@@ -3,7 +3,7 @@
 
 # Web framework
 flask==3.1.3
-werkzeug==3.1.5
+werkzeug==3.1.6
 
 # Database
 sqlalchemy==2.0.25
