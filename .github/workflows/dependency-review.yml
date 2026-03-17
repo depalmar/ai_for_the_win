@@ -25,8 +25,8 @@ jobs:
         with:
           # Fail on high and critical vulnerabilities
           fail-on-severity: high
-          # NOTE: `deny-licenses` is deprecated in dependency-review-action and may be
-          # removed in a future major release. Keep vulnerability checks enabled and
-          # rely on dedicated license policy tooling/workflows for enforcement.
+          # Enforce copyleft denylist until a dedicated replacement policy is added.
+          # NOTE: `deny-licenses` is deprecated upstream; track migration before v5.
+          deny-licenses: GPL-3.0, AGPL-3.0
           # Comment on PR with results
           comment-summary-in-pr: always
