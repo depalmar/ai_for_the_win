@@ -25,7 +25,8 @@ jobs:
         with:
           # Fail on high and critical vulnerabilities
           fail-on-severity: high
-          # Block copyleft licenses that would require open-sourcing derivative works
+          # Enforce copyleft denylist until a dedicated replacement policy is added.
+          # NOTE: `deny-licenses` is deprecated upstream; track migration before v5.
           deny-licenses: GPL-3.0, AGPL-3.0
           # Comment on PR with results
           comment-summary-in-pr: always
