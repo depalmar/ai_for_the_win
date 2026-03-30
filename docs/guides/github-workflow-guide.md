@@ -555,6 +555,47 @@ Closes #
 
 ## ⚡ GitHub Actions for Security
 
+### Repository Workflow: Dependency Review (Current Policy)
+
+This repository runs `.github/workflows/dependency-review.yml` on pull requests to `main`.
+
+Current behavior:
+
+- Uses `actions/dependency-review-action` (pinned SHA for `v4.6.0`)
+- Fails the check on `high` and `critical` vulnerabilities (`fail-on-severity: high`)
+- Denies copyleft licenses `GPL-3.0` and `AGPL-3.0` via `deny-licenses`
+- Posts a summary comment in the pull request (`comment-summary-in-pr: always`)
+
+```yaml
+name: Dependency Review
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  dependency-review:
+    steps:
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
+      - uses: actions/dependency-review-action@3c4e3dcb1aa7874d2c16be7d79418e9b7efd6261 # v4.6.0
+        with:
+          fail-on-severity: high
+          deny-licenses: GPL-3.0, AGPL-3.0
+          comment-summary-in-pr: always
+```
+
+> Note: `deny-licenses` is marked deprecated upstream. Keep this control in place until a dedicated
+> replacement policy is implemented and validated.
+
+#### Troubleshooting
+
+- **PR fails with vulnerability findings**  
+  Open the Dependency Review step summary and remove/upgrade newly introduced vulnerable packages.
+- **PR fails with blocked license**  
+  Confirm the package license metadata and switch to an approved alternative when possible.
+- **Workflow suddenly fails after upstream action changes**  
+  Verify pinned SHAs in workflow files and re-test on a small dependency-only PR.
+
 ### Basic CI Workflow
 
 Create `.github/workflows/ci.yml`:

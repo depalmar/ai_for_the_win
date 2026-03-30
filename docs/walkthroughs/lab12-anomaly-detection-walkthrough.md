@@ -594,7 +594,8 @@ df['simulated_time'] = pd.date_range(
 
 # Get anomaly scores from Isolation Forest
 df['anomaly_score'] = -iso_forest.score_samples(X_scaled)
-df['is_anomaly'] = predictions == 1
+df['iso_pred'] = iso_pred
+df['is_anomaly'] = df['iso_pred'] == -1
 ```
 
 ### Multi-Panel Attack Timeline
@@ -607,20 +608,45 @@ fig = make_subplots(rows=3, cols=1, subplot_titles=[
 ])
 
 # Panel 1: Traffic volume
-fig.add_trace(go.Scatter(x=time, y=bytes, name='Bytes'), row=1, col=1)
+fig.add_trace(
+    go.Scatter(
+        x=df['simulated_time'],
+        y=df['bytes_sent'] + df['bytes_recv'],
+        name='Bytes'
+    ),
+    row=1,
+    col=1
+)
 
 # Panel 2: Anomaly scores with threshold
-fig.add_trace(go.Scatter(x=time, y=scores, name='Anomaly Score'), row=2, col=1)
+fig.add_trace(
+    go.Scatter(
+        x=df['simulated_time'],
+        y=df['anomaly_score'],
+        name='Anomaly Score'
+    ),
+    row=2,
+    col=1
+)
 fig.add_hline(y=threshold, line_dash='dash', line_color='red', row=2, col=1)
 
 # Panel 3: Attack events by type
 for attack_type in attack_types:
     events = anomalies[anomalies['attack_type'] == attack_type]
     fig.add_trace(go.Scatter(
-        x=events['time'], y=[attack_type] * len(events),
+        x=events['simulated_time'], y=[attack_type] * len(events),
         mode='markers', name=attack_type
     ), row=3, col=1)
 ```
+
+### Common Pitfalls (and Fixes)
+
+- `NameError: X_test_scaled is not defined`  
+  Use `X_scaled` in the timeline section. The notebook fits `iso_forest` on `X_scaled`.
+- `NameError: predictions is not defined`  
+  Use `iso_pred` (the raw Isolation Forest output), then derive `is_anomaly` with `== -1`.
+- `NameError: time`, `bytes`, or `scores`  
+  Use dataframe-backed columns (`df['simulated_time']`, `df['bytes_sent'] + df['bytes_recv']`, and `df['anomaly_score']`).
 
 ### Security Insight
 
