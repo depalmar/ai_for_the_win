@@ -580,90 +580,37 @@ docker --version
 docker compose version
 ```
 
-**Security Lab Docker Compose:**
+**Security Lab Docker Compose (repo-accurate commands):**
 
-```yaml
-# docker-compose.yml
-version: '3.8'
+```bash
+# From the repository root
+cd docker
 
-services:
-  jupyter:
-    image: jupyter/scipy-notebook:latest
-    ports:
-      - '8888:8888'
-    volumes:
-      - ./notebooks:/home/jovyan/work
-    environment:
-      - JUPYTER_ENABLE_LAB=yes
+# Fastest start (enough for most labs)
+docker compose up -d jupyter
 
-  chromadb:
-    image: chromadb/chroma:latest
-    ports:
-      - '8000:8000'
-    volumes:
-      - chroma_data:/chroma/chroma
+# Add only what you need
+docker compose up -d jupyter elasticsearch kibana      # Log analysis
+docker compose up -d jupyter minio postgres            # Cloud labs
+docker compose up -d jupyter ollama-cpu chromadb redis # Local LLM + RAG
 
-  ollama:
-    image: ollama/ollama:latest
-    ports:
-      - '11434:11434'
-    volumes:
-      - ollama_data:/root/.ollama
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: all
-              capabilities: [gpu]
-
-  elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.0
-    environment:
-      - discovery.type=single-node
-      - xpack.security.enabled=false
-    ports:
-      - '9200:9200'
-    volumes:
-      - es_data:/usr/share/elasticsearch/data
-
-  misp:
-    image: coolacid/misp-docker:core-latest
-    ports:
-      - '443:443'
-      - '80:80'
-    environment:
-      - MISP_ADMIN_EMAIL=admin@admin.test
-      - MISP_ADMIN_PASSPHRASE=admin
-
-volumes:
-  chroma_data:
-  ollama_data:
-  es_data:
+# GPU Ollama profile (NVIDIA runtime required)
+docker compose --profile gpu up -d jupyter ollama
 ```
+
+> The canonical service definitions live in `docker/docker-compose.yml`. Prefer linking to that file instead of copying large YAML blocks into guides.
 
 ### Environment Variables
 
-Create `.env.example`:
+Project `.env.example` includes:
 
 ```bash
-# AI API Keys
-ANTHROPIC_API_KEY=sk-ant-...
-OPENAI_API_KEY=sk-...
-
-# Security Tool APIs
-VIRUSTOTAL_API_KEY=...
-SHODAN_API_KEY=...
-MISP_API_KEY=...
-MISP_URL=https://your-misp.com
-
-# Vector Database
-PINECONE_API_KEY=...
-PINECONE_ENVIRONMENT=...
-
-# Logging
-LOG_LEVEL=INFO
-LOG_FORMAT=json
+ANTHROPIC_API_KEY=
+OPENAI_API_KEY=
+GOOGLE_API_KEY=
+VIRUSTOTAL_API_KEY=
+ABUSEIPDB_API_KEY=
+SHODAN_API_KEY=
 ```
 
 Copy and configure:

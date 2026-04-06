@@ -6,9 +6,10 @@ Common issues and solutions for the AI for the Win security training labs.
 
 1. [API Key Issues](#api-key-issues)
 2. [Installation Problems](#installation-problems)
-3. [Lab-Specific Issues](#lab-specific-issues)
-4. [Performance Problems](#performance-problems)
-5. [Docker Issues](#docker-issues)
+3. [Setup Verification](#setup-verification-scriptsverify_setuppy)
+4. [Lab-Specific Issues](#lab-specific-issues)
+5. [Performance Problems](#performance-problems)
+6. [Docker Issues](#docker-issues)
 
 ---
 
@@ -217,6 +218,61 @@ TypeError: 'type' object is not subscriptable
 
 ---
 
+## Setup Verification (`scripts/verify_setup.py`)
+
+### "No usable LLM provider!"
+
+**Symptoms:**
+```text
+[FAIL] No usable LLM provider!
+You need BOTH a package AND its configuration
+```
+
+**What this means:** The verifier checks complete provider stacks, not just API keys:
+- **Ollama** needs `langchain_ollama` installed **and** the Ollama runtime running
+- **Anthropic/OpenAI/Google** need provider package installed **and** API key set
+
+**Solutions:**
+
+1. **Install at least one provider package:**
+   ```bash
+   pip install -e ".[ollama]"     # Local, no API key
+   pip install -e ".[anthropic]"  # Claude
+   pip install -e ".[openai]"     # GPT
+   pip install -e ".[google]"     # Gemini
+   ```
+
+2. **Configure the provider you installed:**
+   ```bash
+   # Local provider
+   ollama serve
+
+   # Cloud providers (set one or more)
+   export ANTHROPIC_API_KEY="..."
+   export OPENAI_API_KEY="..."
+   export GOOGLE_API_KEY="..."
+   ```
+
+3. **Re-run setup verification:**
+   ```bash
+   python scripts/verify_setup.py
+   ```
+
+> Optional keys (`VIRUSTOTAL_API_KEY`, `ABUSEIPDB_API_KEY`, `SHODAN_API_KEY`) do not block lab setup.
+
+### Python 3.14 Fails Verification
+
+**Symptoms:**
+```text
+[FAIL] Python 3.14.x — NOT SUPPORTED
+```
+
+**Root cause:** `pyproject.toml` requires `<3.14`, and many transitive dependencies still lack stable 3.14 wheels.
+
+**Fix:** Use Python 3.10-3.12 (3.13 is experimental) and recreate your virtual environment.
+
+---
+
 ## Lab-Specific Issues
 
 ### Lab 01: Phishing Classifier
@@ -342,7 +398,7 @@ Killed (out of memory)
 ```bash
 # Clean Docker cache
 docker builder prune
-docker-compose build --no-cache
+docker compose build --no-cache
 ```
 
 ### Container Can't Access API Key
@@ -351,14 +407,21 @@ docker-compose build --no-cache
 
 **Solution:** Pass via environment:
 ```bash
-docker-compose run -e ANTHROPIC_API_KEY=$ANTHROPIC_API_KEY dev
+docker compose run --rm \
+  -e ANTHROPIC_API_KEY="$ANTHROPIC_API_KEY" \
+  -e OPENAI_API_KEY="$OPENAI_API_KEY" \
+  -e GOOGLE_API_KEY="$GOOGLE_API_KEY" \
+  jupyter python scripts/verify_setup.py
 ```
 
-Or use .env file:
+Or add provider keys directly to the `jupyter` service in `docker/docker-compose.yml`:
 ```yaml
-# docker-compose.yml
-env_file:
-  - .env
+services:
+  jupyter:
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
 ```
 
 ### Port Already in Use
@@ -370,7 +433,11 @@ env_file:
 # Find process using port
 lsof -i :8888
 # Kill it or use different port
-docker-compose run -p 8889:8888 notebook
+# then update docker/docker-compose.yml:
+# ports:
+#   - "8889:8888"
+# and restart:
+docker compose down && docker compose up -d
 ```
 
 ---
@@ -391,60 +458,21 @@ If these solutions don't resolve your issue:
 
 ---
 
-## Quick Diagnostic Script
+## Quick Diagnostic Commands
 
-Run this to check your environment:
+Use the built-in verifier first:
 
-```python
-#!/usr/bin/env python3
-"""Diagnostic script for AI for the Win labs."""
-
-import sys
-import os
-
-def check_python():
-    version = sys.version_info
-    ok = version >= (3, 10)
-    print(f"[{'OK' if ok else 'FAIL'}] Python: {version.major}.{version.minor}.{version.micro}")
-    return ok
-
-def check_api_key():
-    key = os.environ.get("ANTHROPIC_API_KEY", "")
-    ok = key.startswith("sk-ant-")
-    print(f"[{'OK' if ok else 'FAIL'}] ANTHROPIC_API_KEY: {'Set' if ok else 'Not set or invalid'}")
-    return ok
-
-def check_packages():
-    required = ["anthropic", "pandas", "sklearn", "numpy"]
-    all_ok = True
-    for pkg in required:
-        try:
-            __import__(pkg.replace("-", "_"))
-            print(f"[OK] {pkg}")
-        except ImportError:
-            print(f"[FAIL] {pkg} not installed")
-            all_ok = False
-    return all_ok
-
-if __name__ == "__main__":
-    print("=== AI for the Win - Environment Check ===\n")
-
-    results = [
-        check_python(),
-        check_api_key(),
-        check_packages()
-    ]
-
-    print("\n" + "=" * 40)
-    if all(results):
-        print("All checks passed!")
-    else:
-        print("Some checks failed. See above for details.")
+```bash
+python scripts/verify_setup.py
 ```
 
-Save as `check_env.py` and run:
+Then run targeted checks:
+
 ```bash
-python check_env.py
+python --version
+pip show langchain-anthropic langchain-openai langchain-google-genai langchain-ollama
+docker compose ps
+docker compose logs --tail=100 jupyter
 ```
 
 ---

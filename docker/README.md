@@ -67,8 +67,11 @@ docker compose up -d
 # Start specific services
 docker compose up -d jupyter elasticsearch
 
-# Start with GPU support (for Ollama)
-docker compose --profile gpu up -d
+# Start Ollama (CPU-only, default service)
+docker compose up -d jupyter ollama-cpu
+
+# Start Ollama with GPU acceleration (profile service)
+docker compose --profile gpu up -d jupyter ollama
 ```
 
 ### Stop Services
@@ -121,7 +124,11 @@ docker compose up -d jupyter minio postgres
 ### AI Security
 For LLM and ML security labs:
 ```bash
-docker compose up -d jupyter ollama chromadb redis
+# CPU-only Ollama (works everywhere)
+docker compose up -d jupyter ollama-cpu chromadb redis
+
+# GPU Ollama (NVIDIA runtime required)
+docker compose --profile gpu up -d jupyter ollama chromadb redis
 ```
 
 ### Full Stack
@@ -153,10 +160,12 @@ sudo apt-get update && sudo apt-get install -y nvidia-container-toolkit
 sudo systemctl restart docker
 ```
 
-2. Start with GPU:
+2. Start GPU Ollama service:
 ```bash
-docker compose up -d ollama
+docker compose --profile gpu up -d ollama
 ```
+
+> **Important:** `ollama` and `ollama-cpu` both bind to port `11434`. Run only one at a time.
 
 ## Customization
 
