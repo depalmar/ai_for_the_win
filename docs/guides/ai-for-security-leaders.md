@@ -28,14 +28,17 @@ A concise guide for security managers and executives who need to understand AI c
 - Extracting structured data from unstructured text (IOCs from reports)
 - Summarizing and explaining technical findings
 - Suggesting investigation steps based on patterns
+- Autonomous alert triage and enrichment (agentic SOC platforms)
+- Multi-step investigation with tool use (agentic AI agents)
 
 **What AI is NOT good at (yet):**
 
-- Making high-stakes containment decisions autonomously
-- Understanding your specific business context
-- Replacing human judgment on novel threats
+- Making high-stakes containment decisions without human approval
+- Understanding your specific business context and risk appetite
+- Replacing human judgment on novel, zero-day threats
 - Guaranteeing zero false positives/negatives
-- Operating without oversight
+- Operating without governance and oversight
+- Defending itself against adversarial attacks (prompt injection, model manipulation)
 
 **The key principle:** AI handles volume; humans provide judgment.
 
@@ -90,15 +93,18 @@ Should you invest in AI for security?
 | **Executive communication**     | Low            | Requires organizational context humans provide            |
 | **Legal/compliance decisions**  | Low            | Human accountability required                             |
 
-### ML vs LLM: When to Use Each
+### ML vs LLM vs Agentic AI: When to Use Each
 
 | Approach                                            | Best For                                         | Cost                    | Speed        |
 | --------------------------------------------------- | ------------------------------------------------ | ----------------------- | ------------ |
 | **Traditional ML** (classifiers, anomaly detection) | High-volume structured data, real-time detection | Very low per prediction | Milliseconds |
 | **Large Language Models** (GPT, Claude)             | Unstructured text, reasoning, generation         | Higher per prediction   | Seconds      |
-| **Hybrid** (ML filter → LLM analysis)               | Production pipelines, cost optimization          | Optimized               | Varies       |
+| **Agentic AI** (LLM + tools + memory)              | Multi-step investigations, autonomous triage     | Highest per task        | Minutes      |
+| **Hybrid** (ML filter → LLM analysis → agent action)| Production pipelines, cost optimization          | Optimized               | Varies       |
 
-**Rule of thumb:** Use ML for volume, LLM for depth.
+**Rule of thumb:** Use ML for volume, LLM for depth, agents for workflow.
+
+> **2026 trend:** Agentic SOC platforms (AI agents that autonomously triage, investigate, and recommend response actions) are entering production at enterprise scale. Analysts are shifting from triaging alerts to supervising agent outcomes. See [Google's Agentic SOC](https://cloud.google.com/security/resources/agentic-soc) and [Microsoft's Agentic SOC vision](https://www.microsoft.com/en-us/security/blog/2026/04/09/the-agentic-soc-rethinking-secops-for-the-next-decade/) for industry direction.
 
 ---
 
@@ -205,25 +211,35 @@ Before investing in AI, ensure these foundations are in place:
 
 ### AI-Specific Risks
 
-| Risk                   | Description                                | Mitigation                      |
-| ---------------------- | ------------------------------------------ | ------------------------------- |
-| **Prompt injection**   | Attackers manipulate AI via crafted inputs | Input validation, sandboxing    |
-| **Data leakage**       | Sensitive data sent to AI providers        | Data minimization, local models |
-| **Model manipulation** | Adversarial inputs evade detection         | Ensemble models, human review   |
-| **Over-reliance**      | Analysts stop thinking critically          | Maintain human oversight        |
-| **Vendor lock-in**     | Dependency on single AI provider           | Multi-provider strategy         |
-| **Cost overruns**      | API costs exceed budget                    | Usage monitoring, limits        |
+| Risk                       | Description                                                  | Mitigation                                  |
+| -------------------------- | ------------------------------------------------------------ | ------------------------------------------- |
+| **Prompt injection**       | Attackers manipulate AI via crafted inputs                   | Input validation, sandboxing                |
+| **Data leakage**           | Sensitive data sent to AI providers                          | Data minimization, local models             |
+| **Model manipulation**     | Adversarial inputs evade detection                           | Ensemble models, human review               |
+| **Over-reliance**          | Analysts stop thinking critically                            | Maintain human oversight                    |
+| **Vendor lock-in**         | Dependency on single AI provider                             | Multi-provider strategy                     |
+| **Cost overruns**          | API costs exceed budget                                      | Usage monitoring, limits                    |
+| **Shadow AI**              | Employees use unapproved AI tools, leaking data              | Governance over prohibition, approved alternatives |
+| **Agentic AI risks**       | Autonomous agents escalate privileges, cascade failures      | Least privilege, human-in-the-loop checkpoints |
+| **AI supply chain**        | Compromised AI tools/packages exfiltrate tokens and secrets  | Audit dependencies, rotate credentials, pin versions |
+
+> **Shadow AI in 2026:** Deloitte's 2026 State of AI in the Enterprise report found worker access to AI rose 50% in 2025, yet only 1 in 5 companies has mature AI governance. Shadow AI added [$670,000 to average breach costs](https://thehackernews.com/2026/04/the-hidden-security-risks-of-shadow-ai.html). The most effective approach: governance over prohibition — detect all AI tools in use, classify by data handling risk, restrict high-risk tools, and provide secure approved alternatives.
+
+> **Agentic AI threats:** OWASP released its [Top 10 for Agentic Applications (2026)](https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/), covering risks like memory poisoning, spoofed inter-agent communication, cascading failures, and rogue agent misalignment. When AI can access APIs, modify databases, and send emails autonomously, it requires a fundamentally different security model than chat-based AI.
 
 ### Compliance Considerations
 
-| Regulation      | AI Implications                                             |
-| --------------- | ----------------------------------------------------------- |
-| **GDPR**        | Right to explanation (Art. 22), data processing limits      |
-| **HIPAA**       | PHI in prompts requires BAAs with AI providers              |
-| **PCI-DSS**     | Cardholder data handling, audit requirements                |
-| **SOX**         | Explainability for AI-assisted financial security decisions |
-| **EU AI Act**   | High-risk AI classification, transparency requirements      |
-| **NIST AI RMF** | Voluntary risk management framework                         |
+| Regulation          | AI Implications                                                     | Status (2026)                    |
+| ------------------- | ------------------------------------------------------------------- | -------------------------------- |
+| **GDPR**            | Right to explanation (Art. 22), data processing limits              | Enforced                         |
+| **HIPAA**           | PHI in prompts requires BAAs with AI providers                      | Enforced                         |
+| **PCI-DSS**         | Cardholder data handling, audit requirements                        | Enforced                         |
+| **SOX**             | Explainability for AI-assisted financial security decisions         | Enforced                         |
+| **EU AI Act**       | High-risk AI classification, transparency, conformity assessments   | Enforcing Aug 2026 (high-risk)   |
+| **NIST AI RMF**     | Voluntary risk management framework (AI RMF 1.0)                   | Published, voluntary             |
+| **NIST AI 600-1**   | Generative AI risk profile — 12 risk categories unique to GenAI     | Published Jul 2024               |
+
+> **EU AI Act key date:** August 2, 2026 is when [Annex III high-risk AI system requirements become enforceable](https://www.legalnodes.com/article/eu-ai-act-2026-updates-compliance-requirements-and-business-risks) — including AI used in employment, credit decisions, education, and law enforcement. Fines reach up to EUR 35 million or 7% of worldwide turnover. Prohibited AI practices have been enforceable since February 2025.
 
 ---
 
@@ -231,12 +247,14 @@ Before investing in AI, ensure these foundations are in place:
 
 ### Skills to Develop
 
-| Skill                   | Who Needs It                 | How to Develop              |
-| ----------------------- | ---------------------------- | --------------------------- |
-| **Prompt engineering**  | All analysts                 | Labs 02, 04 in this course |
-| **ML fundamentals**     | Senior analysts, engineers   | Labs 04, 01-03             |
-| **AI tool evaluation**  | Managers, architects         | Lab 05, this guide         |
-| **AI security testing** | Red team, security engineers | Labs 17, 20                 |
+| Skill                      | Who Needs It                 | How to Develop                          |
+| -------------------------- | ---------------------------- | --------------------------------------- |
+| **Prompt engineering**     | All analysts                 | Labs 02, 04 in this course              |
+| **ML fundamentals**        | Senior analysts, engineers   | Labs 04, 10-13                          |
+| **AI tool evaluation**     | Managers, architects         | Lab 05, this guide                      |
+| **Agentic AI oversight**   | SOC leads, managers          | Labs 16, 05                             |
+| **AI security testing**    | Red team, security engineers | Labs 39, 40, 49                         |
+| **AI governance**          | CISOs, compliance leads      | EU AI Act, NIST AI RMF, this guide      |
 
 ### Team Structure Considerations
 
@@ -264,7 +282,8 @@ Before investing in AI, ensure these foundations are in place:
 | [Lab 05: AI in Security Operations](../../labs/lab05-ai-in-security-operations/)  | Comprehensive strategic overview | 1-2 hours |
 | [Lab 04: ML Concepts Primer](../../labs/lab04-ml-concepts-primer/)                | What ML can/can't do             | 1-2 hours |
 | [Lab 02: Intro to Prompt Engineering](../../labs/lab02-intro-prompt-engineering/) | How LLMs work                    | 1-2 hours |
-| [Lab 04: LLM Log Analysis](../../labs/lab15-llm-log-analysis/)                      | Hands-on LLM experience          | 2-3 hours |
+| [Lab 15: LLM Log Analysis](../../labs/lab15-llm-log-analysis/)                      | Hands-on LLM experience          | 2-3 hours |
+| [Lab 40: LLM Security Testing](../../labs/lab40-llm-security-testing/)              | Testing LLM vulnerabilities      | 2-3 hours |
 | [Security Compliance Guide](./security-compliance-guide.md)                         | SOC 2, GDPR, NIST mapping        | Reference |
 | [Cost Management Guide](./cost-management.md)                                       | Budget planning                  | Reference |
 
@@ -272,20 +291,20 @@ Before investing in AI, ensure these foundations are in place:
 
 **Frameworks and Standards:**
 
-- [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework) — Voluntary AI risk management
-- [MITRE ATLAS](https://atlas.mitre.org/) — Adversarial ML threat framework
-- [OWASP LLM Top 10](https://owasp.org/www-project-llm-security/) — LLM security risks
+- [NIST AI Risk Management Framework (AI RMF 1.0)](https://www.nist.gov/itl/ai-risk-management-framework) — Voluntary AI risk management
+- [NIST AI 600-1: Generative AI Profile](https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence) — 12 risk categories unique to GenAI
+- [MITRE ATLAS](https://atlas.mitre.org/) — Adversarial ML threat framework (v5.4.0: 16 tactics, 84 techniques, 42 case studies)
+- [OWASP Top 10 for LLM Applications (2025)](https://owasp.org/www-project-top-10-for-large-language-model-applications/) — LLM security risks
+- [OWASP Top 10 for Agentic Applications (2026)](https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/) — Agentic AI security risks
+- [EU AI Act Full Text](https://artificialintelligenceact.eu/) — Regulation text, compliance checker, timeline
 
-**Industry Reports:**
+**Industry Reports and Resources:**
 
 - SANS Detection & Response Survey (annual) — SOC challenges and trends
 - Gartner Hype Cycle for Security Operations — Technology maturity assessment
-- Elasticsearch State of Security Report — Practitioner insights
-
-**Books for Leaders:**
-
-- "AI-Powered Cybersecurity" by Dr. Raef Meeuwisse — Strategic overview
-- "The CISO's Guide to AI" — Executive-level AI security strategy
+- [Google Cloud — Agentic SOC](https://cloud.google.com/security/resources/agentic-soc) — Agentic AI for security operations
+- [Microsoft — The Agentic SOC (Apr 2026)](https://www.microsoft.com/en-us/security/blog/2026/04/09/the-agentic-soc-rethinking-secops-for-the-next-decade/) — Rethinking SecOps for the next decade
+- [Elastic — Why 2026 is the Year for Agentic AI SOC](https://www.elastic.co/security-labs/why-2026-is-the-year-to-upgrade-to-an-agentic-ai-soc) — Open-source perspective
 
 ---
 
@@ -301,7 +320,9 @@ Before investing in AI, ensure these foundations are in place:
 □ Budget for ongoing costs (API, infrastructure, training)
 □ Human-in-the-loop requirements defined
 □ Rollback plan if AI fails
-□ Compliance requirements understood
+□ Compliance requirements understood (EU AI Act, NIST AI RMF)
+□ Shadow AI inventory completed
+□ AI governance policy in place (approved tools, data handling)
 ```
 
 ### Red Flags When Evaluating AI Solutions
@@ -321,6 +342,8 @@ Before investing in AI, ensure these foundations are in place:
 4. **Human oversight scales with decision impact**
 5. **Models degrade — plan for maintenance**
 6. **Simpler solutions may work better**
+7. **Govern shadow AI — prohibition doesn't work, approved alternatives do**
+8. **Treat AI agents like employees — least privilege, audit trails, supervision**
 
 ---
 
@@ -328,12 +351,13 @@ Before investing in AI, ensure these foundations are in place:
 
 1. **Assess your readiness** using the checklist above
 2. **Complete Lab 05** for a deeper strategic understanding
-3. **Try Lab 04** for hands-on LLM experience (2-3 hours)
+3. **Try Lab 15** for hands-on LLM experience (2-3 hours)
 4. **Evaluate one specific use case** using the decision framework
-5. **Pilot small**, measure results, then expand
+5. **Audit your AI footprint** — identify all AI tools in use (shadow AI assessment)
+6. **Pilot small**, measure results, then expand
 
 ---
 
 _This guide is part of the [AI for the Win](../../README.md) training program — a hands-on course for security practitioners building AI-powered tools._
 
-_Last updated: January 2026_
+_Last updated: April 2026_
