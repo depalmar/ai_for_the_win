@@ -32,7 +32,7 @@ import asyncio
 import json
 import os
 import re
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from typing import Any
 
 import aiosqlite
@@ -315,7 +315,7 @@ async def lookup_ip_reputation(ip_address: str) -> str:
             otx_result.get("pulses", [{}])[0].get("tags", []) if otx_result.get("pulses") else []
         ),
         "recommendations": [],
-        "queried_at": datetime.utcnow().isoformat(),
+        "queried_at": datetime.now(timezone.utc).isoformat(),
     }
 
     # Add recommendations based on threat level
@@ -377,7 +377,7 @@ async def lookup_domain_reputation(domain: str) -> str:
         "mitre_techniques": map_to_mitre(
             otx_result.get("pulses", [{}])[0].get("tags", []) if otx_result.get("pulses") else []
         ),
-        "queried_at": datetime.utcnow().isoformat(),
+        "queried_at": datetime.now(timezone.utc).isoformat(),
     }
 
     await cache_result(domain, "domain", threat_score, "otx", response)
