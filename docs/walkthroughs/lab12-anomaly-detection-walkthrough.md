@@ -217,11 +217,11 @@ iso_forest = IsolationForest(
 )
 
 # Fit and predict
-iso_predictions = iso_forest.fit_predict(X_scaled)
+iso_pred = iso_forest.fit_predict(X_scaled)
 iso_scores = -iso_forest.score_samples(X_scaled)  # Negate for intuitive scores
 
 # Convert to binary (sklearn uses -1 for anomaly, 1 for normal)
-iso_predictions = (iso_predictions == -1).astype(int)
+iso_predictions = (iso_pred == -1).astype(int)
 
 print(f"Isolation Forest detected {iso_predictions.sum()} anomalies")
 ```
@@ -584,6 +584,8 @@ The notebook includes an attack progression timeline showing anomalies over time
 
 ### Creating a Time-Based View
 
+Run this after the Isolation Forest step so `iso_forest`, `X_scaled`, and `iso_pred` are already defined.
+
 ```python
 # Add simulated timestamps to network flows
 df['simulated_time'] = pd.date_range(
@@ -594,7 +596,8 @@ df['simulated_time'] = pd.date_range(
 
 # Get anomaly scores from Isolation Forest
 df['anomaly_score'] = -iso_forest.score_samples(X_scaled)
-df['is_anomaly'] = predictions == 1
+df['iso_pred'] = iso_pred
+df['is_anomaly'] = df['iso_pred'] == -1
 ```
 
 ### Multi-Panel Attack Timeline
@@ -607,7 +610,7 @@ fig = make_subplots(rows=3, cols=1, subplot_titles=[
 ])
 
 # Panel 1: Traffic volume
-fig.add_trace(go.Scatter(x=time, y=bytes, name='Bytes'), row=1, col=1)
+fig.add_trace(go.Scatter(x=time, y=df['bytes_sent'] + df['bytes_recv'], name='Bytes'), row=1, col=1)
 
 # Panel 2: Anomaly scores with threshold
 fig.add_trace(go.Scatter(x=time, y=scores, name='Anomaly Score'), row=2, col=1)

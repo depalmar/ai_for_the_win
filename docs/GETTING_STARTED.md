@@ -181,14 +181,17 @@ nano .env   # or use any editor
 
 ### Step 6: Verify Setup
 
+> `verify_setup.py` validates complete provider stacks, not just keys. Example: `ANTHROPIC_API_KEY` without `langchain-anthropic` installed will still fail LLM configuration checks.
+
 ```bash
 python scripts/verify_setup.py
 ```
 
 This will check:
-- Python version (3.10+ required)
+- Python version (**3.10-3.12 supported**, 3.13 experimental, 3.14+ unsupported)
 - Required packages installed
-- LLM provider configured (Ollama or API key)
+- LLM provider packages installed
+- LLM configuration is usable (package + API key, or Ollama package + running runtime)
 - Sample data accessible
 
 ---

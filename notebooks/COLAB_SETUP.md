@@ -1,46 +1,64 @@
 # Colab Notebook Setup Guide
 
 All notebooks in this repository are **provider-agnostic**. They work with:
-- **Anthropic Claude** (recommended)
-- **OpenAI GPT-4**
+- **Anthropic Claude** (first choice when key exists)
+- **OpenAI GPT**
 - **Google Gemini**
+- **Ollama** (automatic fallback when the notebook can reach `http://localhost:11434`, typically local runtime)
 
 ## Quick Setup (Copy to First Cell)
 
 ```python
 # === LLM Setup (Provider-Agnostic) ===
-# Set ONE API key in Colab Secrets (🔑 icon in sidebar):
+# Set ONE API key in Colab Secrets (🔑 icon in sidebar), or run Ollama locally:
 #   - ANTHROPIC_API_KEY (Claude)
-#   - OPENAI_API_KEY (GPT-4)  
+#   - OPENAI_API_KEY (GPT)
 #   - GOOGLE_API_KEY (Gemini)
+# Optional:
+#   - OLLAMA_MODEL (default: llama3.2:3b)
 
 # Install dependencies
-!pip install anthropic openai google-generativeai python-dotenv -q
+!pip install anthropic openai google-generativeai ollama httpx python-dotenv -q
 
 import os
 from google.colab import userdata
 
-# Load API key from Colab Secrets
-for key in ["ANTHROPIC_API_KEY", "OPENAI_API_KEY", "GOOGLE_API_KEY"]:
+# Load API settings from Colab Secrets
+for key in ["ANTHROPIC_API_KEY", "OPENAI_API_KEY", "GOOGLE_API_KEY", "OLLAMA_MODEL"]:
     try:
-        os.environ[key] = userdata.get(key)
-    except:
+        value = userdata.get(key)
+        if value:
+            os.environ[key] = value
+    except Exception:
         pass
 
-def setup_llm():
-    """Detect and configure LLM provider."""
-    providers = {
-        "anthropic": ("ANTHROPIC_API_KEY", "claude-sonnet-4.5"),
-        "openai": ("OPENAI_API_KEY", "gpt-5"),
-        "google": ("GOOGLE_API_KEY", "gemini-3-flash"),
-    }
-    
-    for name, (key, model) in providers.items():
-        if os.environ.get(key):
-            print(f"✅ Using {name.title()} ({model})")
-            return name, model
-    
-    raise ValueError("❌ No API key found. Add one to Colab Secrets (🔑 sidebar)")
+def _ollama_available() -> bool:
+    """Check whether a local Ollama server is reachable."""
+    try:
+        import httpx
+        response = httpx.get("http://localhost:11434/api/tags", timeout=2.0)
+        return response.status_code == 200
+    except Exception:
+        return False
+
+def setup_llm(default_ollama_model: str = "llama3.2:3b"):
+    """Detect and configure LLM provider.
+
+    Provider priority matches the notebooks:
+    Anthropic -> OpenAI -> Google -> Ollama.
+    """
+    if os.environ.get("ANTHROPIC_API_KEY"):
+        return "anthropic", "claude-sonnet-4-5"
+    if os.environ.get("OPENAI_API_KEY"):
+        return "openai", "gpt-5"
+    if os.environ.get("GOOGLE_API_KEY"):
+        return "google", "gemini-3-flash"
+    if _ollama_available():
+        return "ollama", os.environ.get("OLLAMA_MODEL", default_ollama_model)
+    raise ValueError(
+        "❌ No LLM provider configured. Add ANTHROPIC_API_KEY, OPENAI_API_KEY, "
+        "GOOGLE_API_KEY, or run Ollama locally on http://localhost:11434."
+    )
 
 def query_llm(prompt, system_prompt="You are a security analyst.", max_tokens=4096):
     """Query the configured LLM provider."""
@@ -71,8 +89,20 @@ def query_llm(prompt, system_prompt="You are a security analyst.", max_tokens=40
         response = model_instance.generate_content(f"{system_prompt}\n\n{prompt}")
         return response.text
 
+    else:
+        import ollama
+        response = ollama.chat(
+            model=model,
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": prompt},
+            ],
+        )
+        return response["message"]["content"]
+
 # Test setup
 provider, model = setup_llm()
+print(f"✅ Using {provider} ({model})")
 ```
 
 ## Setting Up API Keys in Colab
@@ -83,6 +113,9 @@ provider, model = setup_llm()
    - Name: `ANTHROPIC_API_KEY`, `OPENAI_API_KEY`, or `GOOGLE_API_KEY`
    - Value: Your API key
 4. Toggle **Notebook access** ON
+
+> If you want to use local models, set `OLLAMA_MODEL` (optional) and make sure an Ollama server is running at `http://localhost:11434`.
+> In hosted Colab runtimes, this localhost endpoint is usually not available; Ollama fallback is mainly for local/Jupyter runtimes.
 
 ## Using the LLM in Notebooks
 
@@ -111,14 +144,17 @@ When running locally (not in Colab), you can either:
 
 ## Changing Models
 
-To use a different model, modify the `providers` dictionary in the `setup_llm()` function:
+To use different defaults, edit `setup_llm()` directly:
 
 ```python
-providers = {
-    "anthropic": ("ANTHROPIC_API_KEY", "claude-sonnet-4.5"),  # Change model here
-    "openai": ("OPENAI_API_KEY", "gpt-5"),
-    "google": ("GOOGLE_API_KEY", "gemini-3-flash"),
-}
+if os.environ.get("ANTHROPIC_API_KEY"):
+    return "anthropic", "claude-sonnet-4-5"  # Change model here
+if os.environ.get("OPENAI_API_KEY"):
+    return "openai", "gpt-5-mini"
+if os.environ.get("GOOGLE_API_KEY"):
+    return "google", "gemini-3-flash"
+if _ollama_available():
+    return "ollama", os.environ.get("OLLAMA_MODEL", "llama3.2:3b")
 ```
 
 ### Available Models (Jan 2026)
@@ -147,15 +183,16 @@ providers = {
 
 | Provider | Default Model | Speed | Cost | Best For |
 |----------|---------------|-------|------|----------|
-| Anthropic | claude-sonnet-4.5 | Fast | $$ | Complex reasoning, code |
+| Anthropic | claude-sonnet-4-5 | Fast | $$ | Complex reasoning, code |
 | OpenAI | gpt-5 | Fast | $$ | General purpose, 1M+ context |
 | Google | gemini-3-flash | Very Fast | $ | Long context, free tier |
 
 ## Troubleshooting
 
-**"No API key found"**
+**"No LLM provider configured"**
 - Check that your secret name matches exactly (case-sensitive)
 - Ensure "Notebook access" is enabled for the secret
+- Or start Ollama locally: `ollama serve`
 
 **"Rate limit exceeded"**  
 - Wait a few minutes and retry

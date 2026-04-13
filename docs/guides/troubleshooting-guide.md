@@ -91,6 +91,37 @@ ValueError: ANTHROPIC_API_KEY not found
    load_dotenv()
    ```
 
+### "No usable LLM provider" in `verify_setup.py`
+
+**Symptoms:**
+```
+No usable LLM provider!
+```
+
+**Why this happens:** `verify_setup.py` requires a complete provider stack.
+- Cloud providers: package installed **and** matching API key set
+- Ollama: `langchain_ollama` installed **and** `ollama serve` reachable
+
+**Solutions:**
+
+1. **Anthropic stack example:**
+   ```bash
+   pip install -e ".[anthropic]"
+   export ANTHROPIC_API_KEY="your-key"
+   ```
+
+2. **Ollama stack example:**
+   ```bash
+   pip install -e ".[ollama]"
+   ollama serve
+   ollama pull llama3.3:8b
+   ```
+
+3. **Re-run verification:**
+   ```bash
+   python scripts/verify_setup.py
+   ```
+
 ---
 
 ## Installation Problems
@@ -167,7 +198,7 @@ Also look for `cp314` in the error output — this confirms you're on Python 3.1
 4. **Check your Python version:**
    ```bash
    python --version
-   python scripts/verify_setup.py      # Will warn about unsupported versions
+   python scripts/verify_setup.py      # Fails on 3.14+ and explains remediation
    ```
 
 ### Dependency Conflicts
