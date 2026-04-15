@@ -8,7 +8,7 @@ evidence collection, workflow orchestration, and multi-cloud response.
 import hashlib
 import json
 import uuid
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from unittest.mock import MagicMock, patch
 
 import pytest
@@ -64,7 +64,7 @@ class TestEC2Isolation:
 
         tags = [
             {"Key": "IR_Isolated", "Value": "true"},
-            {"Key": "IR_IsolationTime", "Value": datetime.utcnow().isoformat()},
+            {"Key": "IR_IsolationTime", "Value": datetime.now(timezone.utc).isoformat()},
             {"Key": "IR_OriginalSGs", "Value": json.dumps(original_sgs)},
             {"Key": "IR_IsolationReason", "Value": reason},
         ]
@@ -85,7 +85,7 @@ class TestEC2Isolation:
             "instance_id": "i-1234567890abcdef0",
             "original_security_groups": ["sg-original-123"],
             "isolation_sg": "sg-isolation-789",
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
         }
 
         required_fields = [
@@ -172,7 +172,7 @@ class TestIAMCredentialRevocation:
                 "Removed console access",
                 "Attached deny-all policy",
             ],
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
         }
 
         assert result["status"] == "revoked"
@@ -180,7 +180,7 @@ class TestIAMCredentialRevocation:
 
     def test_session_invalidation_policy(self):
         """Test session invalidation policy structure."""
-        current_time = datetime.utcnow().isoformat()
+        current_time = datetime.now(timezone.utc).isoformat()
 
         invalidation_policy = {
             "Version": "2012-10-17",
@@ -245,7 +245,7 @@ class TestNetworkContainment:
                 "Added 1.2.3.4 to WAF block list",
                 "Added NACL rule 100 to block 1.2.3.4",
             ],
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
         }
 
         assert result["status"] == "blocked"
@@ -270,7 +270,7 @@ class TestDiskSnapshotCollection:
             {"Key": "IR_CaseId", "Value": case_id},
             {"Key": "IR_InstanceId", "Value": instance_id},
             {"Key": "IR_DeviceName", "Value": device_name},
-            {"Key": "IR_CreatedAt", "Value": datetime.utcnow().isoformat()},
+            {"Key": "IR_CreatedAt", "Value": datetime.now(timezone.utc).isoformat()},
             {"Key": "IR_Type", "Value": "forensic_evidence"},
         ]
 
@@ -295,7 +295,7 @@ class TestDiskSnapshotCollection:
                     "device_name": "/dev/sdb",
                 },
             ],
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
         }
 
         assert result["status"] == "snapshots_created"
@@ -316,7 +316,7 @@ class TestLogCollection:
 
         evidence = {
             "case_id": case_id,
-            "collection_time": datetime.utcnow().isoformat(),
+            "collection_time": datetime.now(timezone.utc).isoformat(),
             "time_range": {
                 "start": time_range["start"].isoformat(),
                 "end": time_range["end"].isoformat(),
@@ -371,7 +371,7 @@ class TestEvidenceIntegrity:
                 "md5": "d41d8cd98f00b204e9800998ecf8427e",
                 "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
             },
-            "hash_time": datetime.utcnow().isoformat(),
+            "hash_time": datetime.now(timezone.utc).isoformat(),
         }
 
         assert hash_record["original_file"] == s3_key
@@ -384,7 +384,7 @@ class TestEvidenceIntegrity:
 
         custody_record = {
             "case_id": case_id,
-            "created_at": datetime.utcnow().isoformat(),
+            "created_at": datetime.now(timezone.utc).isoformat(),
             "created_by": "arn:aws:iam::123456789012:user/investigator",
             "evidence_items": [
                 {
@@ -392,13 +392,13 @@ class TestEvidenceIntegrity:
                     "description": "CloudTrail logs",
                     "s3_path": "s3://bucket/cases/IR-2024-001/cloudtrail/events.json",
                     "hashes": {"sha256": "abc123..."},
-                    "collected_at": datetime.utcnow().isoformat(),
+                    "collected_at": datetime.now(timezone.utc).isoformat(),
                 }
             ],
             "custody_chain": [
                 {
                     "action": "created",
-                    "timestamp": datetime.utcnow().isoformat(),
+                    "timestamp": datetime.now(timezone.utc).isoformat(),
                     "actor": "arn:aws:iam::123456789012:user/investigator",
                     "notes": "Initial evidence collection",
                 }
@@ -691,7 +691,7 @@ class TestIRAutomationValidation:
         isolation_record = {
             "instance_id": "i-123",
             "original_security_groups": ["sg-original-1", "sg-original-2"],
-            "isolation_time": datetime.utcnow().isoformat(),
+            "isolation_time": datetime.now(timezone.utc).isoformat(),
         }
 
         # Rollback would restore original SGs
