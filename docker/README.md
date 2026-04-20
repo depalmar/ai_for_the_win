@@ -98,6 +98,17 @@ docker compose build --no-cache
 docker compose build jupyter
 ```
 
+#### Build stability notes (current image)
+
+The Docker image is pinned for reproducible builds and currently includes a few compatibility constraints:
+
+- Base image is pinned to `quay.io/jupyter/scipy-notebook:2024-12-09` by digest.
+- `unicorn` is pinned to `2.0.1.post1` to remain compatible with `angr`.
+- `ssdeep` is intentionally excluded for now due to reproducible metadata/build failures.
+
+If you customize dependencies and hit build failures, revert to the pinned versions in
+`docker/Dockerfile` first, then re-introduce changes one package at a time.
+
 ## Lab Profiles
 
 ### Minimal (Quick Start)
@@ -209,6 +220,27 @@ docker compose logs jupyter
 docker compose down
 docker compose up -d
 ```
+
+### Dependency Build Failures (`pip install` during image build)
+
+If the build fails in the Dockerfile package install steps:
+
+```bash
+# 1) Clear stale build cache
+docker builder prune -f
+
+# 2) Rebuild from scratch
+docker compose build --no-cache jupyter
+
+# 3) Confirm the pinned Dockerfile was used
+docker compose config > /tmp/docker-compose.rendered.yml
+```
+
+Then verify local Dockerfile edits did not unintentionally change:
+
+- the pinned `FROM ...@sha256:...` line
+- `unicorn==2.0.1.post1`
+- the temporary omission of `ssdeep`
 
 ## Resources
 

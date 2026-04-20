@@ -218,6 +218,22 @@ os.environ["ANTHROPIC_API_KEY"] = userdata.get('ANTHROPIC_API_KEY')
 os.environ["OPENAI_API_KEY"] = userdata.get('OPENAI_API_KEY')
 ```
 
+#### Provider auto-selection in current notebooks
+
+Many notebooks now include a provider-agnostic setup cell that checks providers in this order:
+
+1. `ANTHROPIC_API_KEY`
+2. `OPENAI_API_KEY`
+3. `GOOGLE_API_KEY`
+4. Local Ollama at `http://localhost:11434` (with optional `OLLAMA_MODEL`)
+
+If multiple keys are set, the first one in that order is selected.  
+If no key is set and Ollama is unreachable, notebook setup raises:
+
+`No LLM provider configured. Add ANTHROPIC_API_KEY, OPENAI_API_KEY, GOOGLE_API_KEY, or run Ollama locally on http://localhost:11434.`
+
+To force a specific provider in Colab, only set that provider's secret for the notebook session.
+
 ### Labs 19-35 (Detection + DFIR)
 
 May need additional packages:

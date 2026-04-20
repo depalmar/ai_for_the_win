@@ -91,6 +91,48 @@ ValueError: ANTHROPIC_API_KEY not found
    load_dotenv()
    ```
 
+### No LLM provider configured (notebooks / Colab)
+
+**Symptoms:**
+```
+ValueError: No LLM provider configured. Add ANTHROPIC_API_KEY, OPENAI_API_KEY, GOOGLE_API_KEY,
+or run Ollama locally on http://localhost:11434.
+```
+
+**Why this happens:** Current provider-agnostic notebooks auto-select in this order:
+1. `ANTHROPIC_API_KEY`
+2. `OPENAI_API_KEY`
+3. `GOOGLE_API_KEY`
+4. local Ollama (`http://localhost:11434`)
+
+If none are available, setup fails.
+
+**Solutions:**
+
+1. **Set one key in your environment or `.env`:**
+   ```bash
+   cp .env.example .env
+   # Add one key:
+   # ANTHROPIC_API_KEY=...
+   # OPENAI_API_KEY=...
+   # GOOGLE_API_KEY=...
+   ```
+
+2. **For Colab, add exactly one provider secret for predictable routing:**
+   - Open the 🔑 **Secrets** panel
+   - Add `ANTHROPIC_API_KEY` *or* `OPENAI_API_KEY` *or* `GOOGLE_API_KEY`
+   - Re-run the notebook setup cell
+
+3. **Use local Ollama instead of cloud keys:**
+   ```bash
+   ollama serve
+   curl http://localhost:11434/api/tags
+   ```
+   Optional:
+   ```bash
+   export OLLAMA_MODEL=llama3.2:3b
+   ```
+
 ---
 
 ## Installation Problems
@@ -344,6 +386,26 @@ Killed (out of memory)
 docker builder prune
 docker-compose build --no-cache
 ```
+
+If failures mention `ssdeep`, `unicorn`, `angr`, or wheel/metadata resolution:
+
+1. **Use the repository Dockerfile as-is** (it currently:
+   - pins the Jupyter base image by digest
+   - pins `unicorn==2.0.1.post1` for `angr` compatibility
+   - temporarily excludes `ssdeep` due to reproducible build failures)
+
+2. **Rebuild from a clean cache:**
+   ```bash
+   docker compose down
+   docker builder prune -af
+   docker compose build --no-cache jupyter
+   ```
+
+3. **Verify you are building from the repo root with current files:**
+   ```bash
+   git status
+   docker compose config >/dev/null
+   ```
 
 ### Container Can't Access API Key
 
