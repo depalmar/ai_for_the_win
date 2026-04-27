@@ -61,4 +61,4 @@ When the user invokes this command:
 ## Related
 
 - Knowledge: `.claude/knowledge/mitre-attack.md`, `.claude/knowledge/log-formats.md`, `.claude/knowledge/ioc-patterns.md`
-- Labs: lab27 (Memory Forensics), lab28 (Network Forensics), lab29 (IR Copilot), lab48 (Cloud IR)
+- Labs: lab25 (DFIR Fundamentals), lab28 (Live Response), lab29 (IR Copilot), lab48 (Cloud IR)

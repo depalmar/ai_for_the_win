@@ -59,7 +59,7 @@ When the user invokes this command:
 ## Project-Specific Rules
 
 Follow rules in:
-- `.cursor/rules/global-security.mdc` (no hardcoded secrets, validate API responses, OPSEC for threat intel)
+- `setup/cursor-rules/security.md` (no hardcoded secrets, input validation, IOC handling)
 - `CLAUDE.md` (no real victim names, no real IOCs in demo material)
 - `LICENSE` (open-source backends only — flag proprietary SDK usage)
 

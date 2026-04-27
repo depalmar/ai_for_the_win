@@ -61,4 +61,4 @@ Follow the **PEAK** model (Prepare, Execute, Act, Knowledge):
 
 - Knowledge: `.claude/knowledge/mitre-attack.md`, `.claude/knowledge/sigma-rules.md`
 - Convert hunt → detection: `/sigma-create`
-- Labs: lab28 (Hunting), lab23 (Detection Pipeline)
+- Labs: lab23 (Detection Pipeline), lab35 (Lateral Movement Detection), lab36 (Threat Actor Profiling)

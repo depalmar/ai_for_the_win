@@ -314,7 +314,7 @@ claude                      # Start Claude Code from the repo root
 /sigma-convert rule.yml --target eql
 ```
 
-**Why this matters:** This six-step loop — extract → parse → enrich → hunt → detect → deploy — is the bread and butter of a modern detection engineering team. You'll do it in real labs starting at lab19 (Detection Engineering) and lab23 (Detection Pipeline).
+**Why this matters:** This six-step loop — extract → parse → enrich → hunt → detect → deploy — is the bread and butter of a modern detection engineering team. You'll practice the pieces in lab20 (Sigma Fundamentals), lab21 (YARA Generator), and lab23 (Detection Pipeline).
 
 > **Customizing or adding commands**: Each command is just a markdown file in `.claude/commands/`. Open one (e.g., `cat .claude/commands/ioc-extractor.md`) to see how it's structured, then copy the format to add your own.
 

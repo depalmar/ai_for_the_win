@@ -271,7 +271,7 @@ Files that reference lab ranges:
 - .claude/commands/lab.md
 - docs/index.md (GitHub Pages)
 - docs/ARCHITECTURE.md
-- ctf/README.md (prerequisites)
+- ctf-challenges/README.md (prerequisites)
 
 ### Security Platform References (Conservative Approach)
 
@@ -322,6 +322,12 @@ When working on security analysis tasks, reference these files for:
 
 All slash commands in this project are defined as markdown files in `.claude/commands/<name>.md`. Claude Code auto-discovers them when launched from the repo root — no extra install step.
 
+Quick verification:
+```bash
+ls .claude/commands/*.md | wc -l
+ls .claude/commands/
+```
+
 **Security analysis commands:**
 
 | Command | Purpose |
@@ -348,6 +354,25 @@ All slash commands in this project are defined as markdown files in `.claude/com
 | `/update-threat-intel` | Refresh threat intel content (with web search) |
 
 To inspect or customize any command, open the corresponding file (e.g., `cat .claude/commands/ioc-extractor.md`). Each is a plain markdown file you can edit, copy, or use as a template for new commands.
+
+#### Slash Command Maintenance Runbook
+
+When adding, removing, or renaming commands:
+
+1. Add or update exactly one markdown file in `.claude/commands/<command-name>.md`.
+2. Include a `## Usage` section with copy-pasteable examples and a `## Related` section that points to verified labs, templates, or knowledge files.
+3. Keep this table and `labs/lab03-vibe-coding-with-ai/README.md` in sync with the command files.
+4. Verify any lab references against `labs/README.md`; do not reuse old lab numbers from earlier curriculum versions.
+5. Run the documentation and compliance checks that match the change:
+   ```bash
+   pytest tests/test_curriculum_integrity.py -v
+   pytest tests/test_lab_data_integrity.py::TestLegalCompliance -v
+   ```
+
+Common pitfalls:
+- Claude Code only auto-discovers commands when launched from the repository root.
+- Command files are instructions for Claude, not standalone executables; examples should show how a learner invokes the command in Claude Code.
+- Keep open-source backend wording consistent with the policy above: EQL, ES|QL, KQL, OpenSearch, Sigma, and YARA are acceptable; proprietary-only backend instructions are not.
 
 ## Curriculum Maintenance
 

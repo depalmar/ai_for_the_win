@@ -58,7 +58,7 @@ When the user invokes this command:
 5. **Offer next steps**:
    - Convert to a different backend with `/sigma-convert`
    - Drop into `labs/labXX/data/rules/` for testing
-   - Run against a sample log via the lab19 / lab23 pipeline
+   - Run against sample logs in Lab 23's detection pipeline
 
 ## Open-Source Policy
 
@@ -68,4 +68,4 @@ This project targets open backends only — write rules so they convert cleanly 
 
 - Knowledge: `.claude/knowledge/sigma-rules.md`, `.claude/knowledge/mitre-attack.md`
 - Convert: `/sigma-convert`
-- Labs: lab19 (Detection Engineering), lab23 (Detection Pipeline), lab28 (Hunting)
+- Labs: lab20 (Sigma Fundamentals), lab23 (Detection Pipeline), lab28 (Live Response)

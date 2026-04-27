@@ -47,4 +47,4 @@ When the user invokes this command:
 
 - Templates: `templates/mcp-servers/threat-intel-mcp-server.py`
 - Knowledge: `.claude/knowledge/ioc-patterns.md`, `.claude/knowledge/mitre-attack.md`
-- Labs: lab16 (Threat Intel Agent), lab19 (Detection Engineering)
+- Labs: lab16 (Threat Intel Agent), lab23 (Detection Pipeline)
