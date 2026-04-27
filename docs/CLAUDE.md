@@ -318,31 +318,36 @@ When working on security analysis tasks, reference these files for:
 - **Log parsing**: Extract fields from common log formats
 - **IOC extraction**: Use validated regex patterns for IOCs
 
-### Available Claude Code Skills
+### Project-Shipped Slash Commands
 
-These built-in skills are available for security analysis:
+All slash commands in this project are defined as markdown files in `.claude/commands/<name>.md`. Claude Code auto-discovers them when launched from the repo root — no extra install step.
 
-| Skill | Usage | Description |
-|-------|-------|-------------|
-| `/ioc-extractor` | Extract IOCs from text | Extracts IPs, domains, hashes, URLs |
-| `/threat-intel` | Enrich IOCs | Query threat intel sources |
-| `/sigma-convert` | Convert Sigma rules | Sigma to XQL/Splunk/etc. |
-| `/xql-library` | XQL query templates | Pre-built Cortex XDR queries |
-| `/xql-detect` | Generate XQL queries | Create detection rules |
-| `/threat-hunt` | Threat hunting | Build hunting queries |
-| `/dfir-analyze` | DFIR analysis | Create analysis notebooks |
-| `/timeline-viz` | Event timelines | Visualize security events |
-| `/log-parser` | Parse logs | Templates for common formats |
-| `/security-check` | Code security review | Audit code for vulnerabilities |
+**Security analysis commands:**
 
-### Custom Project Commands
+| Command | Purpose |
+|---------|---------|
+| `/ioc-extractor` | Extract IOCs (IPs, domains, hashes, URLs) from text or logs |
+| `/threat-intel` | Enrich IOCs via VirusTotal / AbuseIPDB / OTX |
+| `/sigma-create` | Generate a Sigma detection rule from description / log / MITRE ID |
+| `/sigma-convert` | Convert Sigma rules to EQL / ES\|QL / KQL / OpenSearch |
+| `/log-parser` | Parse + normalize common log formats to ECS |
+| `/threat-hunt` | Build hypothesis-driven threat hunting queries |
+| `/dfir-analyze` | Scaffold a DFIR case workspace + triage notebook |
+| `/timeline-viz` | Generate Plotly timelines from event data |
+| `/security-check` | Audit code for vulnerabilities, secrets, and unsafe patterns |
 
-| Command | Usage | Description |
-|---------|-------|-------------|
-| `/lab` | Navigate labs | List, view, start, test labs |
-| `/ctf` | CTF challenges | Browse, solve, get hints |
-| `/verify-setup` | Environment check | Verify Python, packages, APIs |
-| `/curriculum-check` | Validate curriculum | Check links, models, packages |
+**Course / repo navigation commands:**
+
+| Command | Purpose |
+|---------|---------|
+| `/lab` | List, view, start, or test labs |
+| `/ctf` | Browse, solve, get hints on CTF challenges |
+| `/verify-setup` | Verify Python, packages, and API keys |
+| `/curriculum-check` | Validate links, models, and packages across the curriculum |
+| `/update-ai-models` | Refresh AI model references (with web search) |
+| `/update-threat-intel` | Refresh threat intel content (with web search) |
+
+To inspect or customize any command, open the corresponding file (e.g., `cat .claude/commands/ioc-extractor.md`). Each is a plain markdown file you can edit, copy, or use as a template for new commands.
 
 ## Curriculum Maintenance
 
