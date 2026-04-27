@@ -104,14 +104,37 @@ Claude Code has advanced features that make it especially powerful for security 
 /mcp           # Configure Model Context Protocol servers
 ```
 
-**Custom Skills** - This course includes pre-built skills for security tasks:
+**Custom Slash Commands** - This course ships 15 project-specific slash commands:
+
 ```bash
-/ioc-extractor      # Extract IOCs from text or logs
-/sigma-create       # Create Sigma detection rules
-/sigma-convert      # Convert Sigma rules to various formats
-/log-parser         # Parse common log formats
-/dfir-analyze       # Analyze DFIR datasets
+# Security analysis
+/ioc-extractor      # Extract IOCs (IPs, domains, hashes) from text or logs
+/threat-intel       # Enrich IOCs via VirusTotal / AbuseIPDB / OTX
+/sigma-create       # Generate a Sigma detection rule from description / log / MITRE ID
+/sigma-convert      # Convert Sigma rules to EQL / ES|QL / KQL / OpenSearch
+/log-parser         # Parse + normalize common log formats to ECS
+/threat-hunt        # Build hypothesis-driven threat hunting queries
+/dfir-analyze       # Scaffold a DFIR case workspace + triage notebook
+/timeline-viz       # Generate Plotly timelines from event data
+/security-check     # Audit code for vulnerabilities, secrets, unsafe patterns
+
+# Course / repo navigation
+/lab                # List, view, start, or test labs
+/ctf                # Browse, solve, get hints on CTF challenges
+/verify-setup       # Verify Python, packages, and API keys
+/curriculum-check   # Validate links, models, and packages across the curriculum
+/update-ai-models   # Refresh AI model references (with web search)
+/update-threat-intel # Refresh threat intel content (with web search)
 ```
+
+**How these work** — Claude Code auto-discovers slash commands from `.claude/commands/<name>.md` in the project root. When you run `claude` from this repo, all 15 commands above will autocomplete. To see what each one actually does (or customize it), open the corresponding file:
+
+```bash
+ls .claude/commands/                  # See all installed commands
+cat .claude/commands/ioc-extractor.md  # Read a command's instructions
+```
+
+Each command is a plain markdown file that tells Claude what to do when you invoke it — you can edit them, copy them to your own projects, or write new ones using the same format.
 
 **MCP (Model Context Protocol)** - Connect Claude to external tools:
 
@@ -259,28 +282,41 @@ Ask your AI assistant:
 Explain this code line by line. Are there any security concerns I should be aware of?
 ```
 
-### Exercise 4: Using Claude Code Skills (Optional)
+### Exercise 4: Using This Course's Slash Commands (Optional)
 
-If you're using Claude Code with this course's custom skills, try these:
+If you're using Claude Code, all 15 of this course's custom slash commands should already be available — Claude Code auto-loads them from `.claude/commands/` when you launch from the repo root. Confirm with:
 
 ```bash
-# Extract IOCs from sample log data
-/ioc-extractor
-
-# Parse a log file
-/log-parser
-
-# Create a Sigma detection rule
-/sigma-create
+ls .claude/commands/        # Should list 15 .md files
+claude                      # Start Claude Code from the repo root
+# In the Claude Code prompt, type "/" to see all commands autocomplete
 ```
 
-**Try this workflow:**
-1. Paste some sample log data or describe a threat scenario
-2. Use `/ioc-extractor` to pull out indicators
-3. Use `/log-parser` to structure the data
-4. Use `/sigma-create` to generate a Sigma detection rule
+**Try this end-to-end workflow** (a realistic detection-engineering loop):
 
-> **Note**: Custom skills are defined in your Claude Code configuration. Run `/README` to see all available skills for this course.
+```bash
+# 1. Pull indicators out of a threat report or log sample
+/ioc-extractor sample-incident.log
+
+# 2. Normalize the raw log into structured events
+/log-parser sample-incident.log
+
+# 3. Enrich any suspicious IOCs against open threat intel
+/threat-intel --file iocs.json
+
+# 4. Draft a hunting query to find related activity
+/threat-hunt --mitre T1059.001
+
+# 5. Promote the successful hunt into a permanent detection
+/sigma-create --from-log sample-incident.log
+
+# 6. Convert it to your SIEM's query language
+/sigma-convert rule.yml --target eql
+```
+
+**Why this matters:** This six-step loop — extract → parse → enrich → hunt → detect → deploy — is the bread and butter of a modern detection engineering team. You'll do it in real labs starting at lab19 (Detection Engineering) and lab23 (Detection Pipeline).
+
+> **Customizing or adding commands**: Each command is just a markdown file in `.claude/commands/`. Open one (e.g., `cat .claude/commands/ioc-extractor.md`) to see how it's structured, then copy the format to add your own.
 
 ---
 
