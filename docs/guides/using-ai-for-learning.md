@@ -23,35 +23,52 @@ AI assistants are like having a patient tutor available 24/7. They can:
 
 | Tool | Best For | Cost | Link |
 |------|----------|------|------|
-| **Claude.ai** | Deep explanations, code review, debugging | Free tier (very generous) | [claude.ai](https://claude.ai) |
-| **ChatGPT** | General help, quick answers | Free tier | [chat.openai.com](https://chat.openai.com) |
-| **Perplexity** | Research, finding resources, citations | Free | [perplexity.ai](https://perplexity.ai) |
-| **Phind** | Developer-focused, code answers | Free | [phind.com](https://phind.com) |
+| **Claude.ai** | Deep explanations, code review, reasoning | Free tier / Pro $20/mo | [claude.ai](https://claude.ai) |
+| **ChatGPT** | General help, quick answers, browsing | Free tier / Plus $20/mo | [chatgpt.com](https://chatgpt.com) |
+| **Perplexity** | Research with citations, tech evaluation | Free / Pro $20/mo | [perplexity.ai](https://perplexity.ai) |
+| **Phind** | Developer-focused search, docs lookup | Free / Pro $15/mo | [phind.com](https://phind.com) |
 
 ### For Coding
 
 | Tool | Best For | Cost | Link |
 |------|----------|------|------|
-| **Cursor** | Full IDE with AI built-in | Free tier, $20/mo | [cursor.sh](https://cursor.sh) |
-| **GitHub Copilot** | Code completion in VS Code | $10/mo | [github.com/copilot](https://github.com/features/copilot) |
-| **Claude Code** | Terminal-based AI coding | API costs | [docs.anthropic.com](https://docs.anthropic.com/en/docs/claude-code) |
-| **Codeium** | Free Copilot alternative | Free | [codeium.com](https://codeium.com) |
+| **Claude Code** | Agentic coding — terminal, IDE, web, desktop | Pro $20/mo / Max $100-200/mo / API pay-per-token | [claude.ai/code](https://claude.ai/code) |
+| **Cursor** | Full IDE with multi-model AI | Free (limited) / Pro $20/mo | [cursor.com](https://cursor.com) |
+| **GitHub Copilot** | Code completion across IDEs | Free (2k completions) / Pro $10/mo / Pro+ $39/mo | [github.com/copilot](https://github.com/features/copilot) |
+| **Windsurf** | Agentic IDE (formerly Codeium) | Free / Pro $15/mo | [windsurf.com](https://windsurf.com) |
 
-> 💡 **Our Recommendation**: Use **Cursor** for coding (it's what we built this course with) and **Claude.ai** for explanations and debugging.
+### For Agentic Workflows
+
+| Tool | Best For | Link |
+|------|----------|------|
+| **MCP (Model Context Protocol)** | Connect AI agents to external tools (databases, APIs, dev tools) | [modelcontextprotocol.io](https://modelcontextprotocol.io) |
+| **Claude Agent SDK** | Build custom AI agents with tool use | [docs.anthropic.com](https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/claude-code-sdk-overview) |
+
+> **Our Recommendation**: Use **Claude Code** for coding (terminal, IDE, or web — it's what we built this course with) and **Claude.ai** for explanations and learning. Add **Perplexity** for research with citations and **Phind** for documentation lookups.
 
 ---
 
 ## Effective Prompting for Learning
 
-### The CLEAR Framework
+### The CLEAR Framework (For Learning)
 
-When asking AI for help, include:
+When asking AI for help understanding something, include:
 
 - **C**ontext: What are you working on?
 - **L**earning goal: What are you trying to understand?
 - **E**rror/Issue: What's not working?
 - **A**ttempt: What have you tried?
 - **R**equest: What specific help do you need?
+
+### The CRTSE Framework (For Building)
+
+When asking AI to write or fix code, include:
+
+- **C**ontext: Project background, tech stack, constraints
+- **R**ole: What expertise should the AI apply? (e.g., "Act as a security engineer")
+- **T**ask: What specifically needs to be done?
+- **S**tandards: Code style, security requirements, testing expectations
+- **E**xamples: Sample inputs/outputs, similar code in the project
 
 ### Example Prompts by Situation
 
@@ -191,18 +208,72 @@ For example, how does RAG (Lab 06) build on embeddings (Lab 06a)?
 Help me see the bigger picture.
 ```
 
+### 6. The "Agentic Pair Programming" Method
+
+Use AI as a collaborator, not just a Q&A bot:
+```
+I'm working on Lab 23 (Detection Pipeline). Let's work through this together:
+1. First, review my starter code and tell me what the overall approach should be
+2. I'll implement each function — check my work as I go
+3. When I'm done, run the tests and help me fix any failures
+
+Don't write the solution for me. Guide me step by step.
+```
+
+This mirrors the most effective AI-assisted learning pattern from 2026 research: **humans define goals, AI executes guidance, humans review at checkpoints**.
+
 ---
 
 ## Using AI in Your Code Editor
 
-### Cursor (Recommended)
+### Claude Code (Recommended)
+
+Claude Code is an agentic coding tool that reads your entire codebase, edits files, runs commands, and integrates with your dev tools. It runs in the **terminal**, **VS Code/JetBrains**, **desktop app**, and **browser** ([claude.ai/code](https://claude.ai/code)).
+
+| Interface | How to Launch | Best For |
+|-----------|---------------|----------|
+| Terminal CLI | `claude` in any project directory | Full control, scripting, CI/CD |
+| VS Code / JetBrains | Install Claude Code extension | Inline diffs, IDE integration |
+| Web App | [claude.ai/code](https://claude.ai/code) | Browser-based, no install needed |
+| Desktop App | [Download](https://claude.com/download) | Standalone, persistent sessions |
+
+**Key capabilities:**
+- Browses your entire codebase and understands project structure
+- Makes multi-file edits with visual diffs
+- Runs tests, linters, and build commands directly
+- Connects to external tools via MCP (Model Context Protocol)
+- Supports custom slash commands and hooks for your workflow
+
+**Effective Claude Code prompts:**
+- "Explain how the auth middleware works in this project"
+- "Find and fix the bug causing test_phishing_classifier to fail"
+- "Add input validation to the IOC extractor and write tests for it"
+- "Refactor the detection pipeline to use async processing"
+- "Review my changes for security issues before I commit"
+
+**Power user tips:**
+```bash
+# Start Claude Code in your lab directory
+cd labs/lab10-phishing-classifier && claude
+
+# Use slash commands
+/help                  # See all available commands
+/clear                 # Clear conversation context
+
+# Reference specific files in your prompts
+"Look at starter/main.py and explain the TODO on line 42"
+```
+
+### Cursor
 
 | Shortcut | Action | Use Case |
 |----------|--------|----------|
 | `Ctrl+L` | Open chat | Ask questions about your code |
-| `Ctrl+K` | Edit selection | "Fix this", "Improve this" |
+| `Ctrl+K` | Inline edit | "Fix this", "Improve this" |
 | `Tab` | Accept suggestion | Code completion |
-| `Ctrl+Shift+L` | Add file to context | Reference other files |
+| `@file` / `@folder` | Add context | Reference files and folders |
+
+**Cursor now uses a credit-based system** — your monthly credits deplete based on which AI model you use. All paid plans include unlimited Tab completions and auto-mode.
 
 **Effective Cursor prompts:**
 - "Explain what this function does"
@@ -211,14 +282,16 @@ Help me see the bigger picture.
 - "Add error handling to this function"
 - "Write tests for this function"
 
-### VS Code with Copilot
+### VS Code with GitHub Copilot
 
 | Feature | How to Use | Best For |
 |---------|------------|----------|
 | Ghost text | Just type, suggestions appear | Writing boilerplate |
 | `Ctrl+Enter` | See multiple suggestions | Choosing best option |
 | Comments | Write a comment, get code | Generating functions |
-| Copilot Chat | Open sidebar chat | Asking questions |
+| Copilot Chat | `Ctrl+Shift+I` or sidebar | Asking questions, agent mode |
+
+The **free tier** (2,000 completions + 50 chat requests/month) covers light usage. Includes access to Claude Sonnet and GPT-4.1 models.
 
 **Effective comment-driven generation:**
 ```python
@@ -272,6 +345,8 @@ Help me see the bigger picture.
 4. **Don't ask AI to complete entire labs** - You're here to learn!
 
 5. **Don't forget to experiment** - After AI helps, modify the code, break it, understand it.
+
+6. **Don't paste secrets into AI chat** - Never share API keys, tokens, or credentials. Use environment variables and `.env` files (see Lab 14+ setup). AI tools with codebase access (Claude Code, Cursor, Copilot) can see your files — keep secrets out of your repo.
 
 ---
 
@@ -371,9 +446,23 @@ Now explain:
 
 ## Resources
 
-- [Anthropic's Prompting Guide](https://docs.anthropic.com/claude/docs/prompt-engineering)
-- [OpenAI's Best Practices](https://platform.openai.com/docs/guides/prompt-engineering)
-- [Cursor Documentation](https://docs.cursor.com/)
+### Prompt Engineering Guides
+- [Anthropic — Prompt Engineering Overview](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview)
+- [Anthropic — Claude 4 Best Practices](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/claude-4-best-practices)
+- [Anthropic — Interactive Prompt Engineering Tutorial](https://github.com/anthropics/prompt-eng-interactive-tutorial)
+- [OpenAI — Prompt Engineering Guide](https://platform.openai.com/docs/guides/prompt-engineering)
+- [OpenAI — GPT-5 Prompting Guide](https://cookbook.openai.com/examples/gpt-5/gpt-5_prompting_guide)
+
+### Tool Documentation
+- [Claude Code Documentation](https://code.claude.com/docs/en/overview)
+- [Cursor Documentation](https://cursor.com/docs)
+- [GitHub Copilot Documentation](https://docs.github.com/en/copilot)
+- [Windsurf Documentation](https://windsurf.com/docs)
+- [Model Context Protocol (MCP)](https://modelcontextprotocol.io/)
+
+### AI-Assisted Learning Research
+- [Addy Osmani — My LLM Coding Workflow (2026)](https://addyosmani.com/blog/ai-coding-workflow/)
+- [IBM — The 2026 Guide to Prompt Engineering](https://www.ibm.com/think/prompt-engineering)
 
 ---
 
