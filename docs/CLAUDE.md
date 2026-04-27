@@ -326,9 +326,7 @@ These built-in skills are available for security analysis:
 |-------|-------|-------------|
 | `/ioc-extractor` | Extract IOCs from text | Extracts IPs, domains, hashes, URLs |
 | `/threat-intel` | Enrich IOCs | Query threat intel sources |
-| `/sigma-convert` | Convert Sigma rules | Sigma to XQL/Splunk/etc. |
-| `/xql-library` | XQL query templates | Pre-built Cortex XDR queries |
-| `/xql-detect` | Generate XQL queries | Create detection rules |
+| `/sigma-convert` | Convert Sigma rules | Sigma to EQL/ES\|QL/KQL |
 | `/threat-hunt` | Threat hunting | Build hunting queries |
 | `/dfir-analyze` | DFIR analysis | Create analysis notebooks |
 | `/timeline-viz` | Event timelines | Visualize security events |

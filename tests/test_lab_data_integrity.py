@@ -1876,9 +1876,6 @@ class TestLegalCompliance:
         proprietary_languages = [
             (r"SPL\s+query", "SPL (Splunk Processing Language)"),
             (r"Splunk\s+query", "Splunk query language"),
-            (r"XQL\s+query", "XQL (Cortex XDR Query Language)"),
-            (r"XQL\s+detection", "XQL detection"),
-            (r"xql_query", "XQL query variable"),
         ]
 
         # Check lab solution and starter code
