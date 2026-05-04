@@ -140,14 +140,15 @@ Each command is a plain markdown file that tells Claude what to do when you invo
 
 MCP is an **industry-standard protocol** (adopted by OpenAI, Microsoft, Google in 2025) that lets AI assistants connect to external tools and data sources. Think of it as "USB for AI."
 
-```bash
+```text
 # Configure MCP servers
 /mcp
 
-# This course includes MCP servers for:
-# - Brave Search: Threat intelligence research
-# - VirusTotal: Hash/IP/domain lookups
-# - Memory: Persist investigation context
+# This course includes a security-tools MCP server with:
+# - VirusTotal: Hash, URL, IP, and domain lookups
+# - Shodan: Internet-exposed host and device search
+# - AbuseIPDB: IP abuse and reputation checks
+# - MISP: IOC lookup against a threat intelligence platform
 ```
 
 **Available MCP capabilities:**
@@ -294,7 +295,7 @@ claude                      # Start Claude Code from the repo root
 
 **Try this end-to-end workflow** (a realistic detection-engineering loop):
 
-```bash
+```text
 # 1. Pull indicators out of a threat report or log sample
 /ioc-extractor sample-incident.log
 
@@ -313,6 +314,8 @@ claude                      # Start Claude Code from the repo root
 # 6. Convert it to your SIEM's query language
 /sigma-convert rule.yml --target eql
 ```
+
+Type these `/` commands at the Claude Code prompt, not in your shell; the shell commands above are only for listing files and starting `claude`.
 
 **Why this matters:** This six-step loop — extract → parse → enrich → hunt → detect → deploy — is the bread and butter of a modern detection engineering team. You'll do it in real labs starting at lab19 (Detection Engineering) and lab23 (Detection Pipeline).
 
