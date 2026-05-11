@@ -327,7 +327,7 @@ All slash commands in this project are defined as markdown files in `.claude/com
 | Command | Purpose |
 |---------|---------|
 | `/ioc-extractor` | Extract IOCs (IPs, domains, hashes, URLs) from text or logs |
-| `/threat-intel` | Enrich IOCs via VirusTotal / AbuseIPDB / OTX |
+| `/threat-intel` | Enrich IOCs via VirusTotal / AbuseIPDB / OTX / Shodan |
 | `/sigma-create` | Generate a Sigma detection rule from description / log / MITRE ID |
 | `/sigma-convert` | Convert Sigma rules to EQL / ES\|QL / KQL / OpenSearch |
 | `/log-parser` | Parse + normalize common log formats to ECS |

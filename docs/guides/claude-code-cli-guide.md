@@ -436,7 +436,7 @@ Claude Code from the repository root:
 
 ```bash
 cd /path/to/ai_for_the_win
-ls .claude/commands/  # Should list 15 .md files
+ls .claude/commands/  # One .md file per project command
 claude
 
 # In the Claude Code prompt, type "/" to see project commands autocomplete.
