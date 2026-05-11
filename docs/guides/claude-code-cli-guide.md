@@ -426,163 +426,122 @@ await server.connect(transport);
 
 ## Custom Slash Commands
 
-Create reusable commands for common security tasks.
+Claude Code supports reusable slash commands backed by markdown files. This repo ships
+course-specific commands for security analysis, lab navigation, and curriculum maintenance.
 
-### Setup
+### Repo-Shipped Commands
 
-Create `.claude/commands/` directory in your project:
+The commands live in `.claude/commands/<name>.md` and are auto-discovered when you start
+Claude Code from the repository root:
 
 ```bash
-mkdir -p .claude/commands
+cd /path/to/ai_for_the_win
+ls .claude/commands/  # Should list 15 .md files
+claude
+
+# In the Claude Code prompt, type "/" to see project commands autocomplete.
 ```
 
-### Example Commands
+No extra install step is required beyond running Claude Code inside this repository. These
+commands are Claude Code prompt templates, not shell executables; the markdown file tells
+Claude what workflow to follow when you invoke the command.
 
-**Vulnerability Scan** (`.claude/commands/vuln-scan.md`):
+### Security Analysis Commands
 
-```markdown
-# Vulnerability Scan Command
+| Command | Purpose | Backing file |
+|---------|---------|--------------|
+| `/ioc-extractor` | Extract IOCs from text, logs, or files | `.claude/commands/ioc-extractor.md` |
+| `/threat-intel` | Enrich IOCs via VirusTotal, AbuseIPDB, OTX, or Shodan | `.claude/commands/threat-intel.md` |
+| `/sigma-create` | Generate Sigma rules from descriptions, logs, or MITRE IDs | `.claude/commands/sigma-create.md` |
+| `/sigma-convert` | Convert Sigma rules to EQL, ES\|QL, KQL, or OpenSearch | `.claude/commands/sigma-convert.md` |
+| `/log-parser` | Parse and normalize common log formats to ECS-style fields | `.claude/commands/log-parser.md` |
+| `/threat-hunt` | Build hypothesis-driven threat hunting queries | `.claude/commands/threat-hunt.md` |
+| `/dfir-analyze` | Scaffold DFIR case triage and analysis artifacts | `.claude/commands/dfir-analyze.md` |
+| `/timeline-viz` | Generate incident timelines and Plotly visualizations | `.claude/commands/timeline-viz.md` |
+| `/security-check` | Review code for vulnerabilities, secrets, and unsafe patterns | `.claude/commands/security-check.md` |
 
-Perform a comprehensive vulnerability scan of the specified path.
+### Course and Maintenance Commands
 
-## Parameters
-- `$ARGUMENTS` - Path to scan (default: current directory)
+| Command | Purpose | Backing file |
+|---------|---------|--------------|
+| `/lab` | List, view, start, or test labs | `.claude/commands/lab.md` |
+| `/ctf` | Browse CTF challenges, hints, and solving workflow | `.claude/commands/ctf.md` |
+| `/verify-setup` | Check Python, packages, and API key readiness | `.claude/commands/verify-setup.md` |
+| `/curriculum-check` | Validate links, models, packages, and curriculum health | `.claude/commands/curriculum-check.md` |
+| `/update-ai-models` | Refresh AI model references with web research | `.claude/commands/update-ai-models.md` |
+| `/update-threat-intel` | Refresh threat intelligence content with web research | `.claude/commands/update-threat-intel.md` |
 
-## Task
-
-Analyze the code at `$ARGUMENTS` for security vulnerabilities:
-
-1. **Input Validation**
-   - SQL injection
-   - Command injection
-   - Path traversal
-   - XSS vulnerabilities
-
-2. **Authentication/Authorization**
-   - Hardcoded credentials
-   - Weak password handling
-   - Missing auth checks
-   - Session management issues
-
-3. **Cryptography**
-   - Weak algorithms (MD5, SHA1 for passwords)
-   - Hardcoded keys/IVs
-   - Insecure random number generation
-
-4. **Dependencies**
-   - Check for known vulnerable packages
-   - Review import statements for risky modules
-
-5. **Output**
-   - Create a markdown report with:
-     - Severity ratings (Critical/High/Medium/Low)
-     - Affected files and line numbers
-     - Remediation recommendations
-     - OWASP/CWE references
-```
-
-**IOC Extractor** (`.claude/commands/extract-iocs.md`):
-
-````markdown
-# IOC Extractor Command
-
-Extract Indicators of Compromise from the specified file or text.
-
-## Parameters
-- `$ARGUMENTS` - File path or "clipboard" for pasted content
-
-## Task
-
-Extract all IOCs and format as structured output:
-
-1. **Network Indicators**
-   - IPv4/IPv6 addresses
-   - Domain names
-   - URLs (defanged output)
-   - Email addresses
-
-2. **File Indicators**
-   - MD5, SHA1, SHA256 hashes
-   - File names and paths
-   - Registry keys (Windows)
-
-3. **Behavioral Indicators**
-   - Mutex names
-   - Service names
-   - Process names
-
-Output JSON format:
-```json
-{
-  "extraction_date": "ISO timestamp",
-  "source": "filename or clipboard",
-  "iocs": {
-    "ips": [],
-    "domains": [],
-    "urls": [],
-    "hashes": {"md5": [], "sha1": [], "sha256": []},
-    "emails": [],
-    "files": [],
-    "registry": [],
-    "other": []
-  },
-  "mitre_mappings": []
-}
-```
-````
-
-**YARA Generator** (`.claude/commands/gen-yara.md`):
-
-```markdown
-# YARA Rule Generator
-
-Generate a YARA rule based on provided indicators or malware description.
-
-## Parameters
-- `$ARGUMENTS` - Description or path to sample analysis
-
-## Task
-
-Create a production-quality YARA rule:
-
-1. **Rule Structure**
-   - Unique rule name (CamelCase with malware family)
-   - Comprehensive metadata
-   - Multiple detection strings
-
-2. **String Patterns**
-   - ASCII and wide string variants
-   - Hex patterns for unique byte sequences
-   - Regex for variable patterns
-
-3. **Conditions**
-   - File type checks (MZ header, etc.)
-   - Size limits
-   - String combination logic
-   - Entry point checks if applicable
-
-4. **Quality Checks**
-   - Avoid false positives on legitimate software
-   - Test against clean file samples mentally
-   - Consider performance impact
-
-Output the rule with comments explaining detection logic.
-```
-
-### Using Slash Commands
+### Example Workflow
 
 ```bash
 claude
 
-# Use vulnerability scan command
-> /vuln-scan src/webapp/
-
-# Extract IOCs from a file
-> /extract-iocs logs/suspicious_traffic.pcap
-
-# Generate YARA rule
-> /gen-yara "Emotet banking trojan with process injection capabilities"
+# In the Claude Code prompt:
+> /ioc-extractor sample-incident.log
+> /log-parser sample-incident.log
+> /threat-intel --file iocs.json
+> /threat-hunt --mitre T1059.001
+> /sigma-create --from-log sample-incident.log
+> /sigma-convert rule.yml --target eql
 ```
+
+Flags such as `--file`, `--mitre`, and `--target` are interpreted by Claude from each
+command's instructions. They are convenient workflow hints, not a strict shell-style
+argument parser.
+
+### Inspecting or Customizing Commands
+
+Open a command file to see the exact instructions Claude will follow:
+
+```bash
+sed -n '1,160p' .claude/commands/ioc-extractor.md
+sed -n '1,160p' .claude/commands/threat-intel.md
+```
+
+Each command can reference shared knowledge in `.claude/knowledge/`, such as IOC regex
+patterns, Sigma syntax, MITRE ATT&CK mappings, and log-format notes. To customize a
+workflow, copy an existing file, edit the instructions, and restart Claude Code from the
+repo root if autocomplete does not refresh.
+
+### Creating Your Own Commands
+
+Create a new markdown file under `.claude/commands/`:
+
+```bash
+mkdir -p .claude/commands
+$EDITOR .claude/commands/my-workflow.md
+```
+
+Use this minimal structure:
+
+```markdown
+# My Workflow
+
+Short description of what this command does.
+
+## Usage
+
+`/my-workflow <input>`
+
+## Instructions
+
+When invoked:
+1. Read the input or ask for it if missing.
+2. Follow the specific analysis steps.
+3. Return the expected output format and any caveats.
+```
+
+### Common Pitfalls
+
+| Symptom | Likely cause | Fix |
+|---------|--------------|-----|
+| Project commands do not autocomplete | Claude Code was launched outside the repo root | `cd` to the repo root and restart `claude` |
+| `/lab` works in Claude Code but not Cursor chat | These are Claude Code commands, not Cursor IDE slash commands | Run `claude` in a terminal, including Cursor's integrated terminal |
+| API-backed enrichment skips a source | Required API key is missing | Export keys such as `VIRUSTOTAL_API_KEY`, `ABUSEIPDB_API_KEY`, `OTX_API_KEY`, or `SHODAN_API_KEY` |
+| A command flag behaves differently than a CLI flag | Commands are markdown instructions interpreted by Claude | Open the backing file and adjust the instructions or usage examples |
+| Autocomplete still shows an old command | Claude Code cached the command list for the session | Restart Claude Code from the repo root |
+
+For learner-facing examples, see [Lab 03: Vibe Coding with AI Assistants](../../labs/lab03-vibe-coding-with-ai/).
 
 ---
 
