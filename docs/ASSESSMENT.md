@@ -41,7 +41,6 @@ The AI for the Win repository demonstrates **excellent quality** across all asse
 **Recommendations:**
 
 1. Either populate `docs/assets/` with screenshots or remove the placeholder
-2. Consider moving `setup/dev-environment-setup.md` to `docs/guides/` for consistency
 
 ---
 
@@ -77,7 +76,7 @@ The AI for the Win repository demonstrates **excellent quality** across all asse
 **Issues Found:**
 | Severity | Issue | Location |
 |----------|-------|----------|
-| Medium | Missing screenshots | `README.md` line 73: `<!-- TODO: Add screenshots -->` |
+| Medium | Missing screenshots | README and `docs/assets/` need visual examples |
 | Low | Empty assets folder | `docs/assets/` has guidance but no actual images |
 
 **Recommendations:**
@@ -190,12 +189,11 @@ _None found._
 | --- | ------------------------ | ----------------------------------------------- | ---------------------------- |
 | H1  | No screenshots in README | Reduces engagement, unclear what labs look like | Add 3-4 terminal screenshots |
 
-### Medium Priority (2 issues)
+### Medium Priority (1 issue)
 
 | #   | Issue                       | Impact                      | Recommendation             |
 | --- | --------------------------- | --------------------------- | -------------------------- |
 | M1  | docs/assets/ empty          | Placeholder with no content | Add screenshots or remove  |
-| M2  | README TODO comment visible | Minor polish issue          | Add screenshots to resolve |
 
 ### Low Priority (3 issues)
 
