@@ -158,7 +158,7 @@ nano .env   # or use any editor
 **🆓 Start without API keys!** Labs 02 (intro to prompting), 05 (AI in SOC - conceptual), 01, 02, and 03 work without any API keys. You can explore LLMs and complete the ML foundations before paying for LLM API access.
 
 **For LLM-powered labs** (choose at least one):
-- `ANTHROPIC_API_KEY` - Get from [Anthropic Console](https://console.anthropic.com/) - **Recommended** (Labs 04+ use Claude)
+- `ANTHROPIC_API_KEY` - Get from [Anthropic Console](https://console.anthropic.com/) - **Recommended** (Labs 14+ use Claude)
 - `OPENAI_API_KEY` - Get from [OpenAI Platform](https://platform.openai.com/)
 - `GOOGLE_API_KEY` - Get from [Google AI Studio](https://aistudio.google.com/)
 

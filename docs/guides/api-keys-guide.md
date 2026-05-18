@@ -270,7 +270,7 @@ You should see:
 ```
 [✓] ANTHROPIC_API_KEY found
 [✓] API connection successful
-[✓] Ready for Labs 04+
+[✓] Ready for Labs 14+
 ```
 
 ---
@@ -309,8 +309,8 @@ python -c "import os; print('Anthropic:', 'Yes' if os.getenv('ANTHROPIC_API_KEY'
 ## Next Steps
 
 With your API key configured:
-- [Lab 04: LLM Log Analysis](../../labs/lab15-llm-log-analysis/) - Your first LLM lab
-- [Lab 05: Threat Intel Agent](../../labs/lab16-threat-intel-agent/) - Build an AI agent
-- [Lab 06: Security RAG](../../labs/lab18-security-rag/) - Query your own docs
+- [Lab 15: LLM Log Analysis](../../labs/lab15-llm-log-analysis/) - Your first LLM lab
+- [Lab 16: Threat Intel Agent](../../labs/lab16-threat-intel-agent/) - Build an AI agent
+- [Lab 18: Security RAG](../../labs/lab18-security-rag/) - Query your own docs
 
-**No API key yet?** Start with [Lab 01: Phishing Classifier](../../labs/lab10-phishing-classifier/) - it uses ML, not LLMs!
+**No API key yet?** Start with [Lab 10: Phishing Classifier](../../labs/lab10-phishing-classifier/) - it uses ML, not LLMs!

@@ -1021,7 +1021,7 @@ class DriftDetector:
 |-------------------|----------|
 | Parse LLM outputs safely | [Structured Output Guide](./structured-output-parsing.md) |
 | Defend against injection | [Prompt Injection Defense](./prompt-injection-defense.md) |
-| Build log analyzer | [Lab 04](../../labs/lab15-llm-log-analysis/) |
+| Build log analyzer | [Lab 15](../../labs/lab15-llm-log-analysis/) |
 | Understand AI risks | [Lab 05](../../labs/lab05-ai-in-security-operations/) |
 
 ---

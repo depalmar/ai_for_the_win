@@ -565,7 +565,7 @@ JSON:"""
 |-------------------|----------|
 | Learn prompt engineering | [Lab 02](../../labs/lab02-intro-prompt-engineering/) |
 | Handle API errors | [Error Handling Guide](./error-handling-guide.md) |
-| Apply to log analysis | [Lab 04](../../labs/lab15-llm-log-analysis/) |
+| Apply to log analysis | [Lab 15](../../labs/lab15-llm-log-analysis/) |
 | Understand LLM limitations | [Lab 05](../../labs/lab05-ai-in-security-operations/) |
 
 ---

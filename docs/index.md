@@ -969,7 +969,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
         <span class="prereq-check">&#10003;</span>
         <div class="prereq-text">
           <strong>API Key (optional)</strong>
-          Only needed for Labs 04+. Free options available.
+          Only needed for Labs 14+. Free options available.
         </div>
       </div>
       <div class="prereq-item">

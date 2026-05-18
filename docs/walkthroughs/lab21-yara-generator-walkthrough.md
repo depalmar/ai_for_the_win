@@ -1,4 +1,4 @@
-# Lab 07: YARA Rule Generator - Solution Walkthrough
+# Lab 21: YARA Rule Generator - Solution Walkthrough
 
 ## Overview
 

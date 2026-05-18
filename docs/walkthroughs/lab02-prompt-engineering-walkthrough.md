@@ -320,4 +320,4 @@ python solution/main.py
 
 Continue to:
 - [Lab 05: AI in Security Ops](./lab00d-ai-in-security-ops-walkthrough.md) - When to use AI
-- [Lab 04: LLM Log Analysis](./lab15-llm-log-analysis-walkthrough.md) - Apply prompts to real logs
+- [Lab 15: LLM Log Analysis](./lab15-llm-log-analysis-walkthrough.md) - Apply prompts to real logs

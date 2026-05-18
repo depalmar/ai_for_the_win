@@ -462,5 +462,5 @@ Does the agent:
 ## Next Lab
 
 When you're comfortable with the concepts here, continue to:
-- [Lab 05: Threat Intel Agent](./lab16-threat-intel-agent-walkthrough.md) - Full-featured ReAct agent
-- [Lab 06a: Embeddings & Vectors](./lab17-embeddings-vectors-walkthrough.md) - Foundation for RAG systems
+- [Lab 16: Threat Intel Agent](./lab16-threat-intel-agent-walkthrough.md) - Full-featured ReAct agent
+- [Lab 17: Embeddings & Vectors](./lab17-embeddings-vectors-walkthrough.md) - Foundation for RAG systems

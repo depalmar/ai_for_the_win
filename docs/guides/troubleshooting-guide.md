@@ -219,7 +219,7 @@ TypeError: 'type' object is not subscriptable
 
 ## Lab-Specific Issues
 
-### Lab 01: Phishing Classifier
+### Lab 10: Phishing Classifier
 
 **Issue:** "TfidfVectorizer not found"
 ```bash
@@ -231,14 +231,14 @@ pip install scikit-learn
 - Check class balance
 - Try adjusting max_features parameter
 
-### Lab 04: LLM Log Analysis
+### Lab 15: LLM Log Analysis
 
 **Issue:** Logs not parsing correctly
 - Check log format matches expected pattern
 - Verify timestamp format
 - Try different regex patterns
 
-### Lab 05: Threat Intel Agent
+### Lab 16: Threat Intel Agent
 
 **Status:** ✅ **RESOLVED** - All tests now passing (21/21)
 
@@ -251,7 +251,7 @@ All agent tests now pass successfully. If you still see failures, ensure you hav
 1. Set `ANTHROPIC_API_KEY`, `OPENAI_API_KEY`, or `GOOGLE_API_KEY` in your `.env` file
 2. Installed latest dependencies: `pip install --upgrade -r requirements.txt`
 
-### Lab 06: Security RAG
+### Lab 18: Security RAG
 
 **Issue:** "ChromaDB connection failed"
 ```bash

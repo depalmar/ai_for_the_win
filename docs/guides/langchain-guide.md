@@ -1350,9 +1350,9 @@ os.environ["LANGCHAIN_PROJECT"] = "security-production"
 - [LangServe](https://python.langchain.com/docs/langserve)
 
 ### Course Labs Using LangChain
-- [Lab 04: LLM Log Analysis](../../labs/lab15-llm-log-analysis/) - Chains, prompts
-- [Lab 05: Threat Intel Agent](../../labs/lab16-threat-intel-agent/) - Agents, tools
-- [Lab 06: Security RAG](../../labs/lab18-security-rag/) - RAG, embeddings
+- [Lab 15: LLM Log Analysis](../../labs/lab15-llm-log-analysis/) - Chains, prompts
+- [Lab 16: Threat Intel Agent](../../labs/lab16-threat-intel-agent/) - Agents, tools
+- [Lab 18: Security RAG](../../labs/lab18-security-rag/) - RAG, embeddings
 - [Lab 10: IR Copilot](../../labs/lab29-ir-copilot/) - Memory, conversation
 
 ### Related Guides

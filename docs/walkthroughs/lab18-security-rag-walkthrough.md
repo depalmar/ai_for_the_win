@@ -1,4 +1,4 @@
-# Lab 06: Security RAG - Solution Walkthrough
+# Lab 18: Security RAG - Solution Walkthrough
 
 ## Overview
 
