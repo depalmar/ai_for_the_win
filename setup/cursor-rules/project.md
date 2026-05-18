@@ -4,7 +4,7 @@
 
 AI for the Win is a hands-on training program for security practitioners building AI-powered tools.
 
-- 24 labs (including 4 intro labs)
+- 51 labs (Labs 00-50, including 10 foundation labs)
 - 4 capstone projects
 - 15 CTF challenges
 
@@ -26,7 +26,7 @@ Topics covered:
 
 ## Key Directories
 
-- `labs/` - Main lab content (24 labs)
+- `labs/` - Main lab content (51 hands-on labs)
 - `notebooks/` - Jupyter notebooks (Colab-ready)
 - `templates/` - Reusable code templates
 - `shared/` - Shared utilities (llm_config.py, ioc_utils.py)

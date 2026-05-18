@@ -503,14 +503,19 @@ documentation, or tool development work.
 ```bash
 # From the project root
 mkdir -p .cursor/rules
-cp setup/cursor-rules/*.md .cursor/rules/
+cp setup/cursor-rules/{project,labs,code-style,security,testing,patterns}.md .cursor/rules/
 ```
 
 PowerShell:
 
 ```powershell
 New-Item -ItemType Directory -Force -Path .cursor\rules
-Copy-Item setup\cursor-rules\*.md .cursor\rules\
+Copy-Item setup\cursor-rules\project.md .cursor\rules\
+Copy-Item setup\cursor-rules\labs.md .cursor\rules\
+Copy-Item setup\cursor-rules\code-style.md .cursor\rules\
+Copy-Item setup\cursor-rules\security.md .cursor\rules\
+Copy-Item setup\cursor-rules\testing.md .cursor\rules\
+Copy-Item setup\cursor-rules\patterns.md .cursor\rules\
 ```
 
 | Rule file | Covers |
