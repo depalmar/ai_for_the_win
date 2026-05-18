@@ -490,8 +490,39 @@ Cursor Rules customize AI behavior for your project. Create rules at multiple le
 | File | Scope | Purpose |
 |------|-------|---------|
 | `.cursorrules` | Project root | Project-wide AI behavior |
-| `.cursor/rules/*.mdc` | Subdirectory rules | Path-specific rules |
+| `.cursor/rules/*.md` or `.mdc` | Project rules | Repository or path-specific rules |
 | `~/.cursor/rules/` | Global rules | User preferences across projects |
+
+### AI for the Win Rule Set
+
+This repository ships project-specific Cursor rules in
+[`setup/cursor-rules/`](../../setup/cursor-rules/). Copy them into your local
+workspace when you want Cursor to follow the curriculum conventions during lab,
+documentation, or tool development work.
+
+```bash
+# From the project root
+mkdir -p .cursor/rules
+cp setup/cursor-rules/*.md .cursor/rules/
+```
+
+PowerShell:
+
+```powershell
+New-Item -ItemType Directory -Force -Path .cursor\rules
+Copy-Item setup\cursor-rules\*.md .cursor\rules\
+```
+
+| Rule file | Covers |
+|-----------|--------|
+| `project.md` | Project overview, tech stack, and directory structure |
+| `labs.md` | Lab structure and teaching guidance for hints vs. solutions |
+| `code-style.md` | Python formatting, typing, and multi-provider LLM conventions |
+| `security.md` | IOC defanging, MITRE ATT&CK references, and safe data handling |
+| `testing.md` | pytest markers, expected test layout, and verification commands |
+| `patterns.md` | Pydantic, LangChain, async, RAG, and agent implementation patterns |
+
+The `.cursor/` directory is gitignored, so local rule customizations stay private.
 
 ### Security Project Rules (.cursorrules)
 

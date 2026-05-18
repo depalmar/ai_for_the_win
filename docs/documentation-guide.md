@@ -29,6 +29,7 @@
 | Goal | Go To |
 |------|-------|
 | **Cursor IDE** | [Cursor IDE Guide](./guides/cursor-ide-guide.md) |
+| **Cursor project rules** | [Cursor Rules Setup](../setup/cursor-rules/README.md) |
 | **Claude Code CLI** | [Claude Code CLI Guide](./guides/claude-code-cli-guide.md) |
 | **Claude API/SDK (Python)** | [Claude API Guide](./guides/claude-api-guide.md) |
 | **Compare AI dev tools** | [AI Dev Tools Comparison](./guides/ai-dev-tools-comparison.md) |
@@ -94,14 +95,15 @@
 
 ### Lab Walkthroughs (Solutions)
 
-If you're stuck on a lab, these walkthroughs provide step-by-step solutions:
+If you're stuck on a lab, use the canonical walkthrough index. It tracks all current
+solution walkthroughs, Colab notebooks, and labs that currently rely on their README
+instead of a dedicated walkthrough.
 
-| Labs | Walkthroughs |
-|------|--------------|
-| Labs 01-05 | [lab01](./walkthroughs/lab10-phishing-classifier-walkthrough.md), [lab02](./walkthroughs/lab11-malware-clustering-walkthrough.md), [lab03](./walkthroughs/lab12-anomaly-detection-walkthrough.md), [lab04](./walkthroughs/lab15-llm-log-analysis-walkthrough.md), [lab05](./walkthroughs/lab16-threat-intel-agent-walkthrough.md) |
-| Labs 06-10 | [lab06](./walkthroughs/lab18-security-rag-walkthrough.md), [lab07](./walkthroughs/lab21-yara-generator-walkthrough.md), [lab08](./walkthroughs/lab22-vuln-scanner-ai-walkthrough.md), [lab09](./walkthroughs/lab23-detection-pipeline-walkthrough.md), [lab10](./walkthroughs/lab29-ir-copilot-walkthrough.md) |
-| Labs 11-16 | [lab11](./walkthroughs/lab31-ransomware-detection-walkthrough.md), [lab12](./walkthroughs/lab32-ransomware-simulation-walkthrough.md), [lab13](./walkthroughs/lab33-memory-forensics-ai-walkthrough.md), [lab14](./walkthroughs/lab34-c2-traffic-analysis-walkthrough.md), [lab15](./walkthroughs/lab15-lateral-movement-walkthrough.md), [lab16](./walkthroughs/lab36-threat-actor-profiling-walkthrough.md) |
-| All walkthroughs | [Browse all](./walkthroughs/) |
+| Need | Go To |
+|------|-------|
+| Browse all solution walkthroughs | [Walkthrough Index](./walkthroughs/) |
+| Start a lab from instructions | [Lab README files](../labs/) |
+| Run notebook companions | [Notebooks directory](../notebooks/) |
 
 ---
 
@@ -128,7 +130,10 @@ Root
 │   ├── prompt-library/          # Ready-to-use prompts
 │   └── integrations/            # SIEM/SOAR integrations (Splunk, Elastic, etc.)
 │
-├── labs/                        # 24 hands-on labs
+├── setup/                       # Local contributor tooling
+│   └── cursor-rules/            # Cursor project rules you can copy locally
+│
+├── labs/                        # 51 hands-on labs
 │   └── labXX-name/README.md
 │
 ├── templates/                   # Reusable code templates
