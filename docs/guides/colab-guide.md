@@ -1,6 +1,6 @@
 # Google Colab Guide
 
-Run all course labs in your browser with zero local setup. Google Colab provides free cloud-based Jupyter notebooks with GPU access.
+Run many course labs in your browser with zero local setup. Google Colab provides free cloud-based Jupyter notebooks with GPU access.
 
 ## Quick Start
 
@@ -13,17 +13,17 @@ Click any badge to open that lab in Colab:
 | Lab | Description | Open in Colab |
 |-----|-------------|---------------|
 | 01 | Python for Security | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab01_python_security.ipynb) |
-| 04 | ML Concepts | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab04_ml_concepts.ipynb) |
 | 02 | Prompt Engineering | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab02_prompt_engineering.ipynb) |
-| 01 | Phishing Classifier | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab10_phishing_classifier.ipynb) |
-| 02 | Malware Clustering | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab11_malware_clustering.ipynb) |
-| 03 | Anomaly Detection | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab12_anomaly_detection.ipynb) |
-| 04 | LLM Log Analysis | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab15_llm_log_analysis.ipynb) |
-| 05 | Threat Intel Agent | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab16_threat_intel_agent.ipynb) |
-| 06 | Security RAG | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab18_security_rag.ipynb) |
-| 07 | YARA Generator | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab21_yara_generator.ipynb) |
+| 03 | Vibe Coding with AI | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab03_vibe_coding.ipynb) |
+| 04 | ML Concepts | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab04_ml_concepts.ipynb) |
+| 10 | Phishing Classifier | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab10_phishing_classifier.ipynb) |
+| 11 | Malware Clustering | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab11_malware_clustering.ipynb) |
+| 12 | Anomaly Detection | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab12_anomaly_detection.ipynb) |
+| 15 | LLM Log Analysis | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab15_llm_log_analysis.ipynb) |
+| 18 | Security RAG | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab18_security_rag.ipynb) |
+| 44 | Cloud Security Fundamentals | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab44_cloud_security_fundamentals.ipynb) |
 
-> 📓 **All 23 notebooks** are available at [`notebooks/`](https://github.com/depalmar/ai_for_the_win/tree/main/notebooks)
+> 📓 Browse all available notebooks in [`notebooks/`](https://github.com/depalmar/ai_for_the_win/tree/main/notebooks), or use the [walkthrough index](../walkthroughs/) to see which labs have notebook companions.
 
 **Method 2: From GitHub**
 
@@ -51,7 +51,7 @@ print(f"LangChain version: {langchain.__version__}")
 
 > 💡 The `!` prefix runs shell commands. The `-q` flag suppresses output.
 
-### Setting Up API Keys (Labs 04+)
+### Setting Up API Keys (LLM/API Labs)
 
 **Option 1: Colab Secrets (Recommended)**
 
@@ -70,7 +70,7 @@ api_key = userdata.get('ANTHROPIC_API_KEY')
 
 # Use with LangChain
 from langchain_anthropic import ChatAnthropic
-llm = ChatAnthropic(model="claude-sonnet-4-20250514", api_key=api_key)
+llm = ChatAnthropic(model="claude-sonnet-4-6", api_key=api_key)
 ```
 
 **Option 2: Environment Variable (Quick but less secure)**
@@ -261,14 +261,14 @@ assert torch.cuda.is_available(), "Enable GPU: Runtime → Change runtime type �
 - [Official Colab FAQ](https://research.google.com/colaboratory/faq.html)
 - [Colab Pro Features](https://colab.research.google.com/signup) (optional paid tier)
 - [Jupyter Basics Guide](./jupyter-basics-guide.md) - Local Jupyter setup
-- [API Keys Guide](./api-keys-guide.md) - Getting API keys for Labs 04+
+- [API Keys Guide](./api-keys-guide.md) - Getting API keys for LLM/API labs
 
 ---
 
 ## Next Steps
 
-1. **Start with Lab 01** (no API key needed): [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab10_phishing_classifier.ipynb)
+1. **Start with Lab 01** (no API key needed): [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab01_python_security.ipynb)
 
-2. **Get an API key** when you reach Lab 04: [API Keys Guide](./api-keys-guide.md)
+2. **Get an API key** when you reach the LLM/API labs: [API Keys Guide](./api-keys-guide.md)
 
 3. **Join discussions**: [GitHub Discussions](https://github.com/depalmar/ai_for_the_win/discussions)
