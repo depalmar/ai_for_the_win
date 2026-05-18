@@ -11,7 +11,7 @@ These walkthroughs provide:
 - **Alternative solutions** when multiple approaches exist
 - **Debugging tips** for common errors
 
-> 💡 **Run in Colab**: Each lab has a companion notebook you can run instantly in Google Colab - no setup required!
+> 💡 **Run in Colab**: Many labs have companion notebooks you can run instantly in Google Colab - no setup required!
 
 ## Walkthrough Index
 
@@ -72,7 +72,7 @@ These walkthroughs provide:
 | [Lab 30](./lab30-ransomware-fundamentals-walkthrough.md)     | Ransomware Fundamentals     | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab30_ransomware_fundamentals.ipynb)     | Intermediate |
 | [Lab 31](./lab31-ransomware-detection-walkthrough.md)          | Ransomware Detection        | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab31_ransomware_detection.ipynb)         | Expert       |
 | [Lab 32](./lab32-ransomware-simulation-walkthrough.md)         | Purple Team Simulation      | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab32_ransomware_simulation.ipynb)        | Expert       |
-| [Lab 33](./lab33-memory-forensics-ai-walkthrough.md)           | Memory Forensics AI         | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab33_memory_forensics.ipynb)             | Expert       |
+| [Lab 33](./lab33-memory-forensics-ai-walkthrough.md)           | Memory Forensics AI         | Not available                                                                                                                                                                                               | Expert       |
 | [Lab 34](./lab34-c2-traffic-analysis-walkthrough.md)           | C2 Traffic Analysis         | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab34_c2_traffic.ipynb)                   | Expert       |
 | [Lab 35](./lab35-lateral-movement-walkthrough.md)              | Lateral Movement Detection  | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab35_lateral_movement.ipynb)             | Expert       |
 | [Lab 36](./lab36-threat-actor-profiling-walkthrough.md)        | Threat Actor Profiling      | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab36_threat_actor_profiling.ipynb)       | Expert       |
