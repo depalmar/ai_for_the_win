@@ -387,7 +387,7 @@ python -m venv venv
 source venv/bin/activate  # Windows: .\venv\Scripts\activate
 
 # 3. Install dependencies (pick ONE)
-pip install -r requirements.txt           # Everything (all providers)
+pip install -r requirements.txt           # Everything needed for full verification
 pip install -e ".[anthropic]"             # Core + Claude (recommended)
 pip install -e ".[ollama]"                # Core + Ollama (free, local)
 pip install -e "."                        # Core only (Labs 00-13, no LLM)
@@ -398,6 +398,9 @@ python scripts/verify_setup.py
 # 5. Start with Lab 00 (no API key needed)
 cd labs/lab00-environment-setup
 ```
+
+`verify_setup.py` is a full-environment check. Selective installs are useful for
+lab-specific work, but may report missing full-stack packages or LLM provider checks.
 
 <details>
 <summary><strong>Dependency install failing?</strong></summary>

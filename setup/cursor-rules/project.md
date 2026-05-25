@@ -26,7 +26,7 @@ Topics covered:
 
 ## Key Directories
 
-- `labs/` - Main lab content (24 labs)
+- `labs/` - Main lab content (50+ labs)
 - `notebooks/` - Jupyter notebooks (Colab-ready)
 - `templates/` - Reusable code templates
 - `shared/` - Shared utilities (llm_config.py, ioc_utils.py)

@@ -25,7 +25,7 @@ python3 scripts/verify_setup.py
 
 Then summarize:
 - Python version status
-- Required packages (numpy, pandas, sklearn, langchain, chromadb, yara, gradio)
+- Full-environment required packages (numpy, pandas, sklearn, langchain, chromadb, yara, gradio)
 - Optional packages (torch, transformers, litellm, instructor)
 - LLM provider readiness (provider package plus API key or local Ollama runtime)
 - Sample data, Lab 01 structure, and CTF infrastructure status
@@ -117,7 +117,8 @@ If issues found, suggest fixes:
 | Issue | Fix |
 |-------|-----|
 | Python < 3.10 | Install Python 3.10+ from python.org |
-| Missing core package | `pip install -e .` |
+| Missing package in full verification | `pip install -r requirements.txt` |
+| Core/ML-only setup needed | `pip install -e .` (enough for many Labs 00-13, but not a full verifier pass) |
 | Missing LLM package | `pip install -e ".[ollama]"`, `".[anthropic]"`, `".[openai]"`, or `".[google]"` |
 | API key set but provider package missing | Install the matching `pyproject.toml` extra |
 | Provider package installed but API key missing | Add the key to `.env` or the shell environment |
@@ -128,6 +129,9 @@ If issues found, suggest fixes:
 
 ```bash
 # Install all dependencies
+pip install -r requirements.txt
+
+# Or install selectively for lab-specific work
 pip install -e .
 pip install -e ".[ollama]"  # or .[anthropic], .[openai], .[google]
 

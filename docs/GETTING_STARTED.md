@@ -24,11 +24,11 @@ For hands-on labs, prefer the `docker/` stack and treat
 
 | Need | Command | Notes |
 |------|---------|-------|
-| Core labs and ML foundations | `pip install -e .` | Works for Labs 00-13 without LLM provider packages |
+| Core labs and ML foundations | `pip install -e .` | Works for lab-specific core/ML work; the full verifier still reports missing full-stack and LLM provider checks |
 | Local LLM with Ollama | `pip install -e ".[ollama]"` | Also requires `ollama serve` or the Docker `ollama-cpu` service |
 | Cloud LLM provider | `pip install -e ".[anthropic]"`, `".[openai]"`, or `".[google]"` | Also requires the matching API key in `.env` or the shell |
 | All LLM providers | `pip install -e ".[all-llm]"` | Useful for CI or comparing providers |
-| Legacy full install | `pip install -r requirements.txt` | Heavier dependency graph; use only when you need everything |
+| Legacy full install | `pip install -r requirements.txt` | Heavier dependency graph; use when you want the full `verify_setup.py` package check to pass |
 
 Optional dependency groups are defined in [`pyproject.toml`](../pyproject.toml).
 
@@ -40,7 +40,14 @@ Run:
 python3 scripts/verify_setup.py
 ```
 
-`verify_setup.py` marks an LLM provider as ready only when the complete stack is usable:
+`verify_setup.py` is a full-environment check. It imports packages used across the
+whole curriculum, including security and UI packages from `requirements.txt`, and it
+exits non-zero when no complete LLM provider stack is available. A core-only install
+can still be enough for Labs 00-13 even if the full verifier reports missing full-stack
+or LLM checks.
+
+For LLM readiness, `verify_setup.py` marks a provider as ready only when the complete
+stack is usable:
 
 | Provider | Required package/runtime | Required configuration |
 |----------|--------------------------|------------------------|

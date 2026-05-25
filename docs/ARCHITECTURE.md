@@ -26,7 +26,7 @@ This document provides a comprehensive overview of the AI for the Win training p
 │        ▼                                                                     │
 │  ┌─────────────────────────────────────────────────────────────────────┐    │
 │  │                     CAPSTONE PROJECTS & CTF                          │    │
-│  │  • 4 Capstone Projects  • 15 CTF Challenges  • Real-world Scenarios │    │
+│  │  • 4 Capstone Projects  • 18 CTF Challenges  • Real-world Scenarios │    │
 │  └─────────────────────────────────────────────────────────────────────┘    │
 │                                                                               │
 └──────────────────────────────────────────────────────────────────────────────┘

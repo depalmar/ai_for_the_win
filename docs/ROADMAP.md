@@ -28,19 +28,21 @@ Build the most comprehensive, hands-on AI/ML training program for security pract
 ## Short-Term (Q1 2026)
 
 ### CTF Challenge Expansion
-- [x] **Intermediate Challenges** (5 challenges) ✓ v1.3.0
+- [x] **Intermediate Challenges** (6 challenges) ✓ v1.3.0+
   - C2 Hunter - Beaconing detection, DNS tunneling
   - Memory Forensics - Process injection, credential dumping
   - Adversarial Samples - ML evasion techniques
   - Agent Investigation - ReAct debugging
   - Ransomware Response - Full IR scenario
+  - Web Shell Detective - Apache logs, web shell detection
 
-- [x] **Advanced Challenges** (5 challenges) ✓ v1.3.0
+- [x] **Advanced Challenges** (6 challenges) ✓ v1.3.0+
   - APT Attribution - Multi-stage attack correlation
   - Model Poisoning - Training data attacks
   - Cloud Compromise - AWS/Azure/GCP scenarios
   - Zero-Day Hunt - Behavioral anomaly detection
   - Full IR Scenario - End-to-end incident response
+  - Supply Chain Detective - Dependency analysis, typosquatting
 
 ### Testing & Quality
 - [ ] Achieve 80%+ test coverage across all labs
@@ -142,8 +144,8 @@ Build the most comprehensive, hands-on AI/ML training program for security pract
 
 | Metric | Current | Q2 2026 Target |
 |--------|---------|----------------|
-| Labs | 30+ | 35+ |
-| CTF Challenges | 15 | 20 |
+| Labs | 50+ | 50+ maintained |
+| CTF Challenges | 18 | 20 |
 | Test Coverage | ~70% | 80% |
 
 ---

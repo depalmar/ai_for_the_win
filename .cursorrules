@@ -24,17 +24,13 @@ labXX-topic-name/
 
 ## Lab Progression
 
-- **Labs 00a-00g**: Intro (Python, ML concepts, prompting, visualization, APIs) - no API keys needed
-- **Labs 01-03**: ML foundations (classification, clustering, anomaly detection) - no API keys
-- **Lab 03b**: Bridge lab - ML vs LLM decision making
-- **Labs 04-07**: LLM basics (prompts, agents, RAG, code generation) - requires API key
-- **Labs 04b, 06a, 07a, 07b**: Bridge labs (first agent, embeddings, binary basics, Sigma)
-- **Labs 08-10**: Advanced (vuln scanner, pipelines, copilots)
-- **Labs 09b, 10a**: Bridge labs (monitoring AI, DFIR fundamentals)
-- **Labs 11-16**: Expert DFIR (ransomware, memory forensics, C2, lateral movement, threat actors)
-- **Labs 11a, 16b**: Bridge labs (ransomware fundamentals, AI-powered threat actors)
-- **Labs 17-20**: Expert AI Security (adversarial ML, fine-tuning, cloud security, LLM red teaming)
-- **Labs 17a, 19a, 20b**: Bridge labs (ML security intro, cloud fundamentals, purple team AI)
+- **Labs 00-09**: Foundation (setup, Python, prompting, ML concepts, APIs, CTF fundamentals) - no API keys needed
+- **Labs 10-13**: ML foundations (classification, clustering, anomaly detection, ML vs LLM decisions) - no API keys needed
+- **Labs 14-18**: LLM basics (agents, log analysis, threat intel, embeddings, RAG) - requires an LLM provider
+- **Labs 19-24**: Detection engineering (binary basics, Sigma, YARA, vulnerability scanning, pipelines, monitoring)
+- **Labs 25-35**: DFIR (event logs, registry, live response, IR copilots, ransomware, memory, C2, lateral movement)
+- **Labs 36-43**: Advanced AI security (threat actors, ML security, adversarial ML, LLM security, model monitoring, fine-tuning, RAG security)
+- **Labs 44-50**: Cloud and red-team AI (cloud fundamentals, cloud AI, containers, serverless, cloud IR, LLM red teaming, purple team AI)
 
 ## Code Style Requirements
 
