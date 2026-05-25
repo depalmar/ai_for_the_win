@@ -2,6 +2,11 @@
 
 Complete guide to setting up your AI security development environment with all the tools needed for this training program.
 
+> **Canonical runtime setup:** Use [Getting Started](../GETTING_STARTED.md) for the
+> current Docker, local install, and LLM provider readiness paths. This guide is
+> best for IDE, editor, and developer-tooling context after the base environment
+> is installed.
+
 ---
 
 ## 🚀 Quick Start

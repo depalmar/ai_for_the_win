@@ -426,162 +426,71 @@ await server.connect(transport);
 
 ## Custom Slash Commands
 
-Create reusable commands for common security tasks.
+Create reusable commands for common security tasks. This repository already ships project
+commands in `.claude/commands/<name>.md`; Claude Code auto-discovers them when you start
+`claude` from the repo root.
 
 ### Setup
 
-Create `.claude/commands/` directory in your project:
+For a new project, create a `.claude/commands/` directory:
 
 ```bash
 mkdir -p .claude/commands
 ```
 
-### Example Commands
+### Project-Shipped Commands
 
-**Vulnerability Scan** (`.claude/commands/vuln-scan.md`):
+These are the commands available in this course repository:
 
-```markdown
-# Vulnerability Scan Command
+| Command | Typical use | Example |
+|---------|-------------|---------|
+| `/ioc-extractor` | Extract IOCs from reports or logs | `/ioc-extractor sample-incident.log --defang` |
+| `/threat-intel` | Enrich IOCs with configured intel APIs | `/threat-intel --file iocs.json` |
+| `/sigma-create` | Draft Sigma detections from logs, IOCs, or MITRE IDs | `/sigma-create --from-log sample-incident.log` |
+| `/sigma-convert` | Convert Sigma to EQL, ES\|QL, KQL, or OpenSearch | `/sigma-convert rule.yml --target eql` |
+| `/log-parser` | Normalize common logs to ECS-style JSON | `/log-parser auth.log --extract-iocs` |
+| `/threat-hunt` | Build hypothesis-driven hunt packages | `/threat-hunt "PowerShell download cradle" --mitre T1059.001` |
+| `/dfir-analyze` | Scaffold a DFIR case workspace and triage notebook | `/dfir-analyze ./evidence --case CASE-001 --type logs` |
+| `/timeline-viz` | Generate HTML/PNG timelines from events | `/timeline-viz events.json --type swimlane` |
+| `/security-check` | Review code or diffs for security issues | `/security-check --diff --severity high` |
+| `/lab` | Browse, start, solve, or test labs | `/lab 20 start` |
+| `/ctf` | Browse CTFs and request hints | `/ctf beginner-01 hint` |
+| `/verify-setup` | Check Python, packages, providers, data, and CTF setup | `/verify-setup` |
+| `/curriculum-check` | Validate curriculum links, models, and package freshness | `/curriculum-check quick` |
+| `/update-ai-models` | Refresh model references with current research | `/update-ai-models` |
+| `/update-threat-intel` | Refresh threat-landscape content with current research | `/update-threat-intel` |
 
-Perform a comprehensive vulnerability scan of the specified path.
+The command files are the source of truth for argument details. They are plain markdown,
+so inspect or customize them directly:
 
-## Parameters
-- `$ARGUMENTS` - Path to scan (default: current directory)
-
-## Task
-
-Analyze the code at `$ARGUMENTS` for security vulnerabilities:
-
-1. **Input Validation**
-   - SQL injection
-   - Command injection
-   - Path traversal
-   - XSS vulnerabilities
-
-2. **Authentication/Authorization**
-   - Hardcoded credentials
-   - Weak password handling
-   - Missing auth checks
-   - Session management issues
-
-3. **Cryptography**
-   - Weak algorithms (MD5, SHA1 for passwords)
-   - Hardcoded keys/IVs
-   - Insecure random number generation
-
-4. **Dependencies**
-   - Check for known vulnerable packages
-   - Review import statements for risky modules
-
-5. **Output**
-   - Create a markdown report with:
-     - Severity ratings (Critical/High/Medium/Low)
-     - Affected files and line numbers
-     - Remediation recommendations
-     - OWASP/CWE references
+```bash
+ls .claude/commands/
+sed -n '1,120p' .claude/commands/ioc-extractor.md
 ```
 
-**IOC Extractor** (`.claude/commands/extract-iocs.md`):
+Related security reference material lives in `.claude/knowledge/`:
 
-````markdown
-# IOC Extractor Command
-
-Extract Indicators of Compromise from the specified file or text.
-
-## Parameters
-- `$ARGUMENTS` - File path or "clipboard" for pasted content
-
-## Task
-
-Extract all IOCs and format as structured output:
-
-1. **Network Indicators**
-   - IPv4/IPv6 addresses
-   - Domain names
-   - URLs (defanged output)
-   - Email addresses
-
-2. **File Indicators**
-   - MD5, SHA1, SHA256 hashes
-   - File names and paths
-   - Registry keys (Windows)
-
-3. **Behavioral Indicators**
-   - Mutex names
-   - Service names
-   - Process names
-
-Output JSON format:
-```json
-{
-  "extraction_date": "ISO timestamp",
-  "source": "filename or clipboard",
-  "iocs": {
-    "ips": [],
-    "domains": [],
-    "urls": [],
-    "hashes": {"md5": [], "sha1": [], "sha256": []},
-    "emails": [],
-    "files": [],
-    "registry": [],
-    "other": []
-  },
-  "mitre_mappings": []
-}
-```
-````
-
-**YARA Generator** (`.claude/commands/gen-yara.md`):
-
-```markdown
-# YARA Rule Generator
-
-Generate a YARA rule based on provided indicators or malware description.
-
-## Parameters
-- `$ARGUMENTS` - Description or path to sample analysis
-
-## Task
-
-Create a production-quality YARA rule:
-
-1. **Rule Structure**
-   - Unique rule name (CamelCase with malware family)
-   - Comprehensive metadata
-   - Multiple detection strings
-
-2. **String Patterns**
-   - ASCII and wide string variants
-   - Hex patterns for unique byte sequences
-   - Regex for variable patterns
-
-3. **Conditions**
-   - File type checks (MZ header, etc.)
-   - Size limits
-   - String combination logic
-   - Entry point checks if applicable
-
-4. **Quality Checks**
-   - Avoid false positives on legitimate software
-   - Test against clean file samples mentally
-   - Consider performance impact
-
-Output the rule with comments explaining detection logic.
-```
+| File | Purpose |
+|------|---------|
+| `ioc-patterns.md` | IOC regexes, extraction rules, and defanging guidance |
+| `log-formats.md` | Windows, Linux, web, firewall, and cloud log parsing notes |
+| `mitre-attack.md` | MITRE ATT&CK mappings and detection ideas |
+| `sigma-rules.md` | Sigma syntax, modifiers, and conversion patterns |
 
 ### Using Slash Commands
 
 ```bash
 claude
 
-# Use vulnerability scan command
-> /vuln-scan src/webapp/
+# Audit changed code
+> /security-check --diff --severity high
 
 # Extract IOCs from a file
-> /extract-iocs logs/suspicious_traffic.pcap
+> /ioc-extractor logs/suspicious_traffic.pcap --defang
 
-# Generate YARA rule
-> /gen-yara "Emotet banking trojan with process injection capabilities"
+# Turn a good hunt into a portable detection
+> /sigma-create --from-log sample-incident.log
+> /sigma-convert rule.yml --target eql
 ```
 
 ---

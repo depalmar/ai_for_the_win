@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-AI for the Win is a hands-on training program for security practitioners building AI-powered tools. It contains 50+ labs, 4 capstone projects, and 15 CTF challenges covering threat detection, incident response, and security automation.
+AI for the Win is a hands-on training program for security practitioners building AI-powered tools. It contains 50+ labs, 4 capstone projects, and 18 CTF challenges covering threat detection, incident response, and security automation.
 
 ## Common Commands
 
@@ -14,6 +14,9 @@ python -m venv venv
 .\venv\Scripts\activate  # Windows
 source venv/bin/activate  # Linux/Mac
 pip install -r requirements.txt
+# or install selectively from pyproject extras:
+pip install -e .
+pip install -e ".[anthropic]"  # or .[ollama], .[openai], .[google]
 
 # Verify setup
 python scripts/verify_setup.py
@@ -44,9 +47,9 @@ python labs/lab10-phishing-classifier/solution/main.py
 python scripts/launcher.py
 
 # Docker
-docker-compose up dev
-docker-compose run test
-docker-compose up notebook  # Jupyter at localhost:8888
+docker compose run dev
+docker compose run test
+cd docker && docker compose up -d jupyter  # Jupyter at localhost:8888, token aiforthewin
 ```
 
 ## Architecture

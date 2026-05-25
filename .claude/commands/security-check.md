@@ -59,12 +59,12 @@ When the user invokes this command:
 ## Project-Specific Rules
 
 Follow rules in:
-- `.cursor/rules/global-security.mdc` (no hardcoded secrets, validate API responses, OPSEC for threat intel)
-- `CLAUDE.md` (no real victim names, no real IOCs in demo material)
+- `.cursorrules` (security requirements and repo coding standards)
+- `CLAUDE.md` (current threat-intel update rules and protected files)
+- `docs/CLAUDE.md` (open-source compliance and curriculum maintenance rules)
 - `LICENSE` (open-source backends only — flag proprietary SDK usage)
 
 ## Related
 
-- Skill: `Security > WebAssessment` (for full web app review)
-- Skill: `Security > PromptInjection` (for LLM-app pen testing)
 - Labs: lab40 (LLM Security Testing), lab43 (RAG Security), lab49 (LLM Red Teaming)
+- Guide: `docs/guides/prompt-injection-defense.md`

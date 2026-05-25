@@ -47,7 +47,7 @@ List challenges for that level:
 | 02 | Phish Finder | Email Analysis | [ ] |
 ...
 
-Prerequisites: Labs 01-04 recommended
+Prerequisites: Labs 00-09 recommended for beginner challenges
 ```
 
 ### 3. Specific Challenge (e.g., beginner-01)
@@ -125,7 +125,9 @@ The attacker left their calling card - find the FLAG!
 - challenge/auth_logs.json (1,247 entries)
 
 ### Recommended Prep
-- Lab 04: LLM Log Analysis
+- Lab 09: CTF Fundamentals
+- Lab 15: LLM Log Analysis
+- Lab 26: Windows Event Log Analysis
 
 ### Tips
 - Look for patterns in failed logins

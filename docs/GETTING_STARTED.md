@@ -4,6 +4,76 @@ Welcome to **AI for the Win**! This guide will help you get set up and choose th
 
 ---
 
+## Setup Runtime Map
+
+Use this map when setup docs or examples mention different commands. The files below are
+the canonical sources for how the current repo runs.
+
+### Docker Paths
+
+| Purpose | Directory | Start command | URL / token |
+|---------|-----------|---------------|-------------|
+| Lab environment: Jupyter, Ollama, ChromaDB, optional security services | `docker/` | `docker compose up -d jupyter ollama-cpu chromadb` | `http://localhost:8888` / `aiforthewin` |
+| CI/dev containers: test runner, dev shell, notebook image | repo root | `docker compose run test` or `docker compose run dev` | Root notebook uses token `security_labs` |
+
+For hands-on labs, prefer the `docker/` stack and treat
+[`docker/docker-compose.yml`](../docker/docker-compose.yml) plus
+[`docker/README.md`](../docker/README.md) as the source of truth.
+
+### Local Install Model
+
+| Need | Command | Notes |
+|------|---------|-------|
+| Core labs and ML foundations | `pip install -e .` | Works for Labs 00-13 without LLM provider packages |
+| Local LLM with Ollama | `pip install -e ".[ollama]"` | Also requires `ollama serve` or the Docker `ollama-cpu` service |
+| Cloud LLM provider | `pip install -e ".[anthropic]"`, `".[openai]"`, or `".[google]"` | Also requires the matching API key in `.env` or the shell |
+| All LLM providers | `pip install -e ".[all-llm]"` | Useful for CI or comparing providers |
+| Legacy full install | `pip install -r requirements.txt` | Heavier dependency graph; use only when you need everything |
+
+Optional dependency groups are defined in [`pyproject.toml`](../pyproject.toml).
+
+### Verification Contract
+
+Run:
+
+```bash
+python3 scripts/verify_setup.py
+```
+
+`verify_setup.py` marks an LLM provider as ready only when the complete stack is usable:
+
+| Provider | Required package/runtime | Required configuration |
+|----------|--------------------------|------------------------|
+| Ollama | `langchain-ollama` plus an active Ollama runtime | At least one local model pulled |
+| Anthropic | `langchain-anthropic` | `ANTHROPIC_API_KEY` |
+| OpenAI | `langchain-openai` | `OPENAI_API_KEY` |
+| Google | `langchain-google-genai` | `GOOGLE_API_KEY` |
+
+Setting an API key alone is not enough; install the matching extra first. Likewise,
+installing the Ollama extra is not enough unless the Ollama runtime is responding.
+
+### Where Provider Defaults Live
+
+- Python helpers use [`shared/llm_config.py`](../shared/llm_config.py) for provider
+  detection and default model names.
+- Notebook labs include their own first-cell `setup_llm()` helper so they work in
+  Colab. Use Colab Secrets or environment variables for `ANTHROPIC_API_KEY`,
+  `OPENAI_API_KEY`, or `GOOGLE_API_KEY`; use `OLLAMA_MODEL` only when the notebook
+  explicitly supports local Ollama.
+- `.env.example` lists the supported API key names. Do not commit a filled `.env`.
+
+### Which Setup Doc Should I Read?
+
+| Situation | Read |
+|-----------|------|
+| First setup or uncertain Docker/local choice | This guide |
+| Docker lab services and profiles | [`docker/README.md`](../docker/README.md) |
+| API keys, budgets, and provider trade-offs | [`guides/api-keys-guide.md`](./guides/api-keys-guide.md) |
+| IDE-specific tooling | [`guides/dev-environment-setup.md`](./guides/dev-environment-setup.md) |
+| Common failures | [`guides/troubleshooting-guide.md`](./guides/troubleshooting-guide.md) |
+
+---
+
 ## Before You Begin
 
 ### Python Resources
@@ -155,10 +225,10 @@ cp .env.example .env
 nano .env   # or use any editor
 ```
 
-**🆓 Start without API keys!** Labs 02 (intro to prompting), 05 (AI in SOC - conceptual), 01, 02, and 03 work without any API keys. You can explore LLMs and complete the ML foundations before paying for LLM API access.
+**Start without API keys!** Labs 00-13 work without paid LLM API access. You can complete setup, Python/security foundations, prompting concepts, APIs, CTF fundamentals, and the ML foundations before choosing a cloud provider.
 
-**For LLM-powered labs** (choose at least one):
-- `ANTHROPIC_API_KEY` - Get from [Anthropic Console](https://console.anthropic.com/) - **Recommended** (Labs 04+ use Claude)
+**For LLM-powered labs** (Labs 14+, choose at least one):
+- `ANTHROPIC_API_KEY` - Get from [Anthropic Console](https://console.anthropic.com/) - **Recommended**
 - `OPENAI_API_KEY` - Get from [OpenAI Platform](https://platform.openai.com/)
 - `GOOGLE_API_KEY` - Get from [Google AI Studio](https://aistudio.google.com/)
 

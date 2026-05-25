@@ -136,6 +136,15 @@ cat .claude/commands/ioc-extractor.md  # Read a command's instructions
 
 Each command is a plain markdown file that tells Claude what to do when you invoke it — you can edit them, copy them to your own projects, or write new ones using the same format.
 
+**Project knowledge base** — several commands also reference reusable security notes in `.claude/knowledge/`:
+
+| File | What it helps with |
+|------|--------------------|
+| `ioc-patterns.md` | IOC extraction, validation, and defanging |
+| `log-formats.md` | Windows, Linux, web, firewall, and cloud log fields |
+| `mitre-attack.md` | ATT&CK technique mapping and detection ideas |
+| `sigma-rules.md` | Sigma syntax and query conversion patterns |
+
 **MCP (Model Context Protocol)** - Connect Claude to external tools:
 
 MCP is an **industry-standard protocol** (adopted by OpenAI, Microsoft, Google in 2025) that lets AI assistants connect to external tools and data sources. Think of it as "USB for AI."
@@ -144,10 +153,10 @@ MCP is an **industry-standard protocol** (adopted by OpenAI, Microsoft, Google i
 # Configure MCP servers
 /mcp
 
-# This course includes MCP servers for:
-# - Brave Search: Threat intelligence research
-# - VirusTotal: Hash/IP/domain lookups
-# - Memory: Persist investigation context
+# This repo includes a security-tools MCP server you can configure for:
+# - VirusTotal: Hash/IP/domain/URL lookups
+# - Shodan: Internet-exposed service and vulnerability searches
+# - AbuseIPDB and MISP: IOC enrichment
 ```
 
 **Available MCP capabilities:**
@@ -314,7 +323,7 @@ claude                      # Start Claude Code from the repo root
 /sigma-convert rule.yml --target eql
 ```
 
-**Why this matters:** This six-step loop — extract → parse → enrich → hunt → detect → deploy — is the bread and butter of a modern detection engineering team. You'll do it in real labs starting at lab19 (Detection Engineering) and lab23 (Detection Pipeline).
+**Why this matters:** This six-step loop — extract → parse → enrich → hunt → detect → deploy — is the bread and butter of a modern detection engineering team. You'll do it in real labs starting at lab20 (Sigma Fundamentals) and lab23 (Detection Pipeline).
 
 > **Customizing or adding commands**: Each command is just a markdown file in `.claude/commands/`. Open one (e.g., `cat .claude/commands/ioc-extractor.md`) to see how it's structured, then copy the format to add your own.
 

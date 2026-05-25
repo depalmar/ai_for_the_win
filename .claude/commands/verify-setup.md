@@ -20,17 +20,15 @@ When the user invokes this command:
 Run the verification script and interpret results:
 
 ```bash
-python scripts/verify_setup.py
+python3 scripts/verify_setup.py
 ```
 
 Then summarize:
 - Python version status
-- Core packages (numpy, pandas, sklearn)
-- LLM packages (langchain, litellm, instructor)
-- Security packages (yara-python, pefile)
-- Visualization (plotly, matplotlib)
-- API key status
-- Docker availability
+- Required packages (numpy, pandas, sklearn, langchain, chromadb, yara, gradio)
+- Optional packages (torch, transformers, litellm, instructor)
+- LLM provider readiness (provider package plus API key or local Ollama runtime)
+- Sample data, Lab 01 structure, and CTF infrastructure status
 
 ### 2. Quick Check
 
@@ -66,14 +64,15 @@ for key, name in keys.items():
 Verify Docker environment:
 ```bash
 docker --version
-docker-compose --version
+docker compose version
 docker ps
 ```
 
 Check if lab services are available:
 - Jupyter notebook
-- Elasticsearch
-- PostgreSQL
+- Ollama
+- ChromaDB
+- Optional Elasticsearch/Kibana services from `docker/docker-compose.yml`
 
 ## Expected Output
 
@@ -89,18 +88,16 @@ Check if lab services are available:
 ✓ scikit-learn 1.3.0
 
 ### LLM Packages
-✓ langchain 0.1.0
-✓ litellm 1.0.0
-! instructor (not installed - optional)
+✓ LangChain (LLM orchestration)
+✓ ChromaDB (vector database)
+! LiteLLM (unified LLM API) - not installed (optional)
 
 ### Security Tools
 ✓ yara-python 4.3.0
-! pefile (not installed - needed for Lab 07)
 
-### API Keys
-✓ ANTHROPIC_API_KEY configured
-✓ VIRUSTOTAL_API_KEY configured
-! OPENAI_API_KEY not set (optional)
+### LLM Configuration
+✓ Anthropic (Claude) - READY (package installed + API key set)
+! Ollama - package installed but runtime not available
 
 ### Docker
 ✓ Docker 24.0.6
@@ -108,10 +105,9 @@ Check if lab services are available:
 
 ### Summary
 Environment ready!
-- 12/15 packages installed
-- 2/5 API keys configured
-- Labs 00-03 ready (no API needed)
-- Labs 04+ ready (Claude API configured)
+- Core and data checks passed
+- Labs 00-13 ready without LLM API keys
+- Labs 14+ ready with one complete LLM provider stack
 ```
 
 ## Troubleshooting
@@ -121,19 +117,23 @@ If issues found, suggest fixes:
 | Issue | Fix |
 |-------|-----|
 | Python < 3.10 | Install Python 3.10+ from python.org |
-| Missing package | `pip install <package>` |
-| No API key | Add to `.env` file or environment |
-| Docker not running | `docker-compose up -d` |
+| Missing core package | `pip install -e .` |
+| Missing LLM package | `pip install -e ".[ollama]"`, `".[anthropic]"`, `".[openai]"`, or `".[google]"` |
+| API key set but provider package missing | Install the matching `pyproject.toml` extra |
+| Provider package installed but API key missing | Add the key to `.env` or the shell environment |
+| Ollama package installed but runtime unavailable | Run `ollama serve` or start the Docker `ollama-cpu` service |
+| Docker not running | Start Docker Desktop or the Docker daemon |
 
 ## Quick Fix Commands
 
 ```bash
 # Install all dependencies
-pip install -r requirements.txt
+pip install -e .
+pip install -e ".[ollama]"  # or .[anthropic], .[openai], .[google]
 
 # Create .env from template
 cp .env.example .env
 
 # Start Docker services
-docker-compose up -d
+cd docker && docker compose up -d jupyter ollama-cpu chromadb
 ```

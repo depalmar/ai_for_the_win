@@ -11,7 +11,7 @@
 [![Python 3.10-3.12](https://img.shields.io/badge/python-3.10--3.12-blue.svg)](https://www.python.org/downloads/)
 [![License: Dual](https://img.shields.io/badge/License-Dual%20(MIT%20%2B%20CC%20BY--NC--SA)-blue.svg)](./LICENSE)
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab10_phishing_classifier.ipynb)
-[![Docker](https://img.shields.io/badge/Docker-Ready-blue?logo=docker)](./Dockerfile)
+[![Docker](https://img.shields.io/badge/Docker-Ready-blue?logo=docker)](./docker/README.md)
 
 A hands-on training program for security practitioners who want to build AI-powered tools for threat detection, incident response, and security automation. **50+ labs** (including 9 intro labs and 12 bridge labs), **4 capstone projects**, **18 CTF challenges**. Includes **sample datasets**, **solution walkthroughs**, and **Docker lab environment**. Designed for **vibe coding** with AI assistants like Cursor, Claude Code, and Copilot.
 
@@ -450,8 +450,10 @@ docker compose run test            # In Docker
 
 | Resource | Description |
 |----------|-------------|
+| [Getting Started](./docs/GETTING_STARTED.md) | Canonical Docker, local install, and LLM provider setup |
 | [Environment Setup](./labs/lab00-environment-setup/) | First-time setup |
 | [API Keys Guide](./docs/guides/api-keys-guide.md) | Get API keys, manage costs |
+| [Claude Code Slash Commands](./docs/guides/claude-code-cli-guide.md#custom-slash-commands) | Project commands for labs, CTFs, IOC extraction, Sigma, and security review |
 | [Troubleshooting](./docs/guides/troubleshooting-guide.md) | Fix common issues |
 | [Lab Walkthroughs](./docs/walkthroughs/) | Step-by-step solutions |
 | [Role-Based Paths](./resources/role-based-learning-paths.md) | SOC, IR, hunting paths |
