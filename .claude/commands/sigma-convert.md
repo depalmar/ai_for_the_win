@@ -66,4 +66,4 @@ Targets are limited to open-source / openly-documented query languages. Propriet
 
 - Create rules: `/sigma-create`
 - Knowledge: `.claude/knowledge/sigma-rules.md`
-- Labs: lab19 (Detection Engineering), lab23 (Detection Pipeline)
+- Labs: lab20 (Sigma Fundamentals), lab23 (Detection Pipeline)

@@ -12,7 +12,7 @@ Build the most comprehensive, hands-on AI/ML training program for security pract
 
 ### Completed
 - 30+ hands-on labs covering ML, LLM, DFIR, Cloud, and adversarial techniques
-- 15 CTF challenges (Beginner, Intermediate, Advanced)
+- 18 CTF challenges (Beginner, Intermediate, Advanced)
 - Multi-provider LLM support (Anthropic, OpenAI, Gemini, Ollama)
 - Comprehensive documentation
 - Docker Compose lab environment with Jupyter, Elasticsearch, Ollama

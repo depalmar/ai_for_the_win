@@ -166,7 +166,7 @@ ai_for_the_win/
 │   └── verify_setup.py            # Environment checker
 │
 ├── capstone-projects/             # 4 comprehensive projects
-├── ctf-challenges/                # 15 CTF challenges
+├── ctf-challenges/                # 18 CTF challenges
 ├── data/                          # Sample datasets
 ├── shared/                        # Shared Python modules
 ├── tests/                         # Test suite

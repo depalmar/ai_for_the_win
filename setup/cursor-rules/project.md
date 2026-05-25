@@ -4,9 +4,9 @@
 
 AI for the Win is a hands-on training program for security practitioners building AI-powered tools.
 
-- 24 labs (including 4 intro labs)
+- 50+ labs
 - 4 capstone projects
-- 15 CTF challenges
+- 18 CTF challenges
 
 Topics covered:
 - Threat detection & classification
