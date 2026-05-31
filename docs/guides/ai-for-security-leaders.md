@@ -226,8 +226,8 @@ Assume **2,500 alerts/day** and a triage prompt of roughly **3K input + 500 outp
 
 | Approach | Tokens/day (rough) | Illustrative monthly cost\* | Notes |
 | --- | --- | --- | --- |
-| **LLM on every alert** | ~8.75M in / 1.25M out | **$$$** | Simplest, but you pay to read noise |
-| **Hybrid: ML filter → LLM** | ~2.6M in / 0.4M out (after ~70% filtered) | **~⅓ of above** | The ML pre-filter is near-free per prediction |
+| **LLM on every alert** | ~7.5M in / 1.25M out | **$$$** | Simplest, but you pay to read noise |
+| **Hybrid: ML filter → LLM** | ~2.25M in / 0.38M out (after ~70% filtered) | **~⅓ of above** | The ML pre-filter is near-free per prediction |
 | **Local / open-source model** | n/a (self-hosted) | Infra + ops time, no per-token fee | Best for sensitive data; you own the GPUs and tuning |
 
 \* *Multiply your tokens by the model's per-million input/output price. A cheaper mid-tier model can be 10–20× less than a frontier model for the same volume — so **routing easy alerts to a small model and only escalating hard ones to a frontier model** is often the biggest single cost lever.*
