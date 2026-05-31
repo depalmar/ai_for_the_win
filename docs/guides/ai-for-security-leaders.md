@@ -55,34 +55,36 @@ The case for (and against) AI in the SOC is now measurable. A few data points wo
 
 ### Quick Decision Framework
 
-```
-Should you invest in AI for security?
+Start from the problem, not the technology. Green = AI may genuinely help; amber = fix the cheaper fundamental first.
 
-┌─────────────────────────────────────────────────────────────────┐
-│ START: What problem are you solving?                            │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                 │
-│ "Too many alerts"                                               │
-│   └─► Have you tuned detection rules first?                     │
-│       ├─► No → Do that first (cheaper, faster impact)           │
-│       └─► Yes, still drowning → AI triage may help              │
-│                                                                 │
-│ "Investigations take too long"                                  │
-│   └─► Is it a tooling problem or volume problem?                │
-│       ├─► Tooling → Better SOAR/queries may help first          │
-│       └─► Volume → AI enrichment may help                       │
-│                                                                 │
-│ "We're missing threats"                                         │
-│   └─► Is it a visibility gap or analysis gap?                   │
-│       ├─► Visibility → Fix logging/coverage first               │
-│       └─► Analysis → ML anomaly detection may help              │
-│                                                                 │
-│ "Our team is burned out"                                        │
-│   └─► Is it alert volume or organizational factors?             │
-│       ├─► Organizational → Address shifts, scope, priorities    │
-│       └─► Volume → AI triage may reduce toil                    │
-│                                                                 │
-└─────────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    START["What problem<br/>are you solving?"]
+    START --> A["Too many alerts"]
+    START --> B["Investigations<br/>take too long"]
+    START --> C["We're missing<br/>threats"]
+    START --> D["Team is<br/>burned out"]
+
+    A --> A1{"Detection rules<br/>tuned first?"}
+    A1 -->|No| A2["Do that first<br/>(cheaper, faster)"]
+    A1 -->|"Yes, still drowning"| A3["AI triage<br/>may help"]
+
+    B --> B1{"Tooling or<br/>volume problem?"}
+    B1 -->|Tooling| B2["Better SOAR /<br/>queries first"]
+    B1 -->|Volume| B3["AI enrichment<br/>may help"]
+
+    C --> C1{"Visibility gap or<br/>analysis gap?"}
+    C1 -->|Visibility| C2["Fix logging /<br/>coverage first"]
+    C1 -->|Analysis| C3["ML anomaly<br/>detection may help"]
+
+    D --> D1{"Alert volume or<br/>org factors?"}
+    D1 -->|Organizational| D2["Address shifts,<br/>scope, priorities"]
+    D1 -->|Volume| D3["AI triage<br/>may reduce toil"]
+
+    classDef ai fill:#bbf7d0,stroke:#15803d;
+    classDef first fill:#fde68a,stroke:#b45309;
+    class A3,B3,C3,D3 ai;
+    class A2,B2,C2,D2 first;
 ```
 
 ---
@@ -200,6 +202,8 @@ Before investing in AI, ensure these foundations are in place:
 | Sensitive/classified data           | Evaluate local/on-premise models      |
 | Limited budget                      | Use free tiers, local models (Ollama) |
 
+> **Don't overlook local / open-source models.** For sensitive, regulated, or air-gapped environments, self-hosted open-weight models (run via Ollama, vLLM, etc.) keep data entirely inside your boundary — no prompts leave the network, sidestepping much of the data-leakage and shadow-AI risk discussed later. The trade-off is that *you* own the GPUs, updates, and tuning. This course's labs are provider-agnostic and run against local models, so teams can prototype without sending a single byte to an external API.
+
 ### Build vs Buy Considerations
 
 | Factor                 | Build In-House         | Buy/SaaS                  |
@@ -211,6 +215,22 @@ Before investing in AI, ensure these foundations are in place:
 | **Cost (initial)**     | Lower (API costs)      | Higher (licensing)        |
 | **Cost (ongoing)**     | API + engineering time | Subscription              |
 | **Expertise required** | ML/AI skills needed    | Less technical            |
+
+### What It Actually Costs (a worked example)
+
+Leaders ask "how much?" and get vague answers. Here's an order-of-magnitude model for **LLM-based alert triage**. Plug in *current* provider prices — they change often, so treat the rates below as illustrative, not quotes. (See the [Cost Management Guide](./cost-management.md) for live numbers.)
+
+Assume **2,500 alerts/day** and a triage prompt of roughly **3K input + 500 output tokens** each.
+
+| Approach | Tokens/day (rough) | Illustrative monthly cost\* | Notes |
+| --- | --- | --- | --- |
+| **LLM on every alert** | ~8.75M in / 1.25M out | **$$$** | Simplest, but you pay to read noise |
+| **Hybrid: ML filter → LLM** | ~2.6M in / 0.4M out (after ~70% filtered) | **~⅓ of above** | The ML pre-filter is near-free per prediction |
+| **Local / open-source model** | n/a (self-hosted) | Infra + ops time, no per-token fee | Best for sensitive data; you own the GPUs and tuning |
+
+\* *Multiply your tokens by the model's per-million input/output price. A cheaper mid-tier model can be 10–20× less than a frontier model for the same volume — so **routing easy alerts to a small model and only escalating hard ones to a frontier model** is often the biggest single cost lever.*
+
+**The leadership takeaway:** the dominant cost driver isn't the model's sticker price — it's **how many tokens you send and which model you send them to.** Filter first, route by difficulty, and reserve frontier models for the hard cases. Don't forget the *non-token* costs: engineering time, prompt/eval maintenance, and monitoring.
 
 ---
 
@@ -286,6 +306,7 @@ Before investing in AI, ensure these foundations are in place:
 | **Model manipulation** | Adversarial inputs evade detection         | Ensemble models, human review   |
 | **Over-reliance**      | Analysts stop thinking critically          | Maintain human oversight        |
 | **Vendor lock-in**     | Dependency on single AI provider           | Multi-provider strategy         |
+| **Model deprecation / drift** | Providers retire models or change behavior on upgrade, silently shifting detection quality | Pin versions; re-run eval suite before adopting a new model; track provider deprecation notices |
 | **Cost overruns**      | API costs exceed budget                    | Usage monitoring, limits        |
 
 ### Compliance Considerations
@@ -372,6 +393,18 @@ As teams adopt AI **agents** that take actions (run queries, call APIs, touch ti
 4. **Communicate wins and failures** — Build trust through transparency
 5. **Iterate** — AI implementations improve with feedback
 
+### A 30/60/90-Day Starter Plan
+
+A concrete first quarter that front-loads measurement and keeps risk low:
+
+| Phase | Focus | Key actions |
+| --- | --- | --- |
+| **Days 1–30: Baseline** | Know your starting point | Pick **one** high-volume use case (usually alert triage). Capture baseline metrics (MTTT, alert-to-analyst ratio, false-positive rate). Confirm the [prerequisites](#prerequisites-checklist) are met. Stand up a quick AI acceptable-use policy. |
+| **Days 31–60: Pilot** | Prove it on a slice | Run AI on a *subset* of traffic with a human reviewing **every** output. Compare against baseline. Track human override and false-negative rates from day one. |
+| **Days 61–90: Decide** | Measure, then expand or stop | Review pilot metrics honestly. If it helps, expand scope and add sampling-based oversight; if not, document why and stop. Either way, write down what you learned. |
+
+**Rule:** don't scale a use case until you can show a before/after number. No baseline, no expansion.
+
 ---
 
 ## Resources for Deeper Learning
@@ -386,6 +419,7 @@ As teams adopt AI **agents** that take actions (run queries, call APIs, touch ti
 | [Lab 15: LLM Log Analysis](../../labs/lab15-llm-log-analysis/)                      | Hands-on LLM experience          | 2-3 hours |
 | [Security Compliance Guide](./security-compliance-guide.md)                         | SOC 2, GDPR, NIST mapping        | Reference |
 | [Cost Management Guide](./cost-management.md)                                       | Budget planning                  | Reference |
+| [Security-to-AI Glossary](../../resources/security-to-ai-glossary.md)               | Plain-language AI terms (RAG, agentic, prompt injection, MTTR…) | Reference |
 
 ### External Resources
 
@@ -418,15 +452,15 @@ As teams adopt AI **agents** that take actions (run queries, call APIs, touch ti
 
 ### AI Investment Readiness Checklist
 
+Foundations come from the [Prerequisites Checklist](#prerequisites-checklist) above (logging, detection tuning, processes, capacity, budget). Once those are met, confirm you're *decision*-ready:
+
 ```
 □ Clear problem statement (not "use AI")
-□ Baseline metrics established
-□ Foundations in place (logging, detection tuning, processes)
-□ Team capacity for implementation and maintenance
-□ Budget for ongoing costs (API, infrastructure, training)
+□ Baseline metrics established (you can show before/after)
 □ Human-in-the-loop requirements defined
 □ Rollback plan if AI fails
 □ Compliance requirements understood
+□ AI governance / acceptable-use policy in place
 ```
 
 ### Red Flags When Evaluating AI Solutions

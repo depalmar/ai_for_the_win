@@ -2103,6 +2103,11 @@ python labs/lab10-phishing-classifier/solution/main.py</code></pre>
       <p>Curated paths for 9 security roles</p>
     </div>
     <div class="feature">
+      <div class="feature-icon">&#127942;</div>
+      <h3><a href="https://github.com/depalmar/ai_for_the_win/blob/main/docs/guides/ai-for-security-leaders.md">AI for Security Leaders</a></h3>
+      <p>Exec/manager guide: invest, measure, and govern AI</p>
+    </div>
+    <div class="feature">
       <div class="feature-icon">&#128273;</div>
       <h3><a href="https://github.com/depalmar/ai_for_the_win/blob/main/docs/guides/api-keys-guide.md">API Keys Guide</a></h3>
       <p>Setup and cost management</p>
