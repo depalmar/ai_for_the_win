@@ -41,17 +41,17 @@ A concise guide for security managers and executives who need to understand AI c
 
 **The key principle:** AI handles volume; humans provide judgment.
 
-### By the Numbers (2025)
+### By the Numbers (2022–2026)
 
 The case for (and against) AI in the SOC is now measurable. A few data points worth bringing to a budget conversation:
 
 | The problem AI targets | The reported payoff |
 | --- | --- |
-| SOC teams field **~960–3,000 alerts/day**, and roughly **63% go unaddressed**.¹ | **60% of AI adopters** cut investigation time by **≥25%**; 21% cut it by **>50%**.² |
-| Enterprise false-positive rates frequently **exceed 50%**, consuming over half of analyst time.¹ | Orgs using AI + automation extensively saved **$1.9M per breach** and shortened the breach lifecycle by **80 days**.³ |
-| **71% of SOC analysts** report burnout; **64%** are considering leaving within a year.¹ | The global average breach cost **fell to $4.44M** in 2025 (from $4.88M), partly attributed to faster AI-assisted response.³ |
+| SOC teams field **~960 alerts/day at typical orgs, 3,000+ at large enterprises**¹; orgs average **2,992 alerts/day and still leave ~63% unaddressed**.² | **60% of AI adopters** cut investigation time by **≥25%**; 21% cut it by **>50%**.³ |
+| False positives are the **#1 detection challenge** — SANS 2025 found **73%** rank them top, and 60%+ hit them frequently.⁴ | Orgs using AI + automation **extensively** saved **$1.9M per breach** and shortened the breach lifecycle by **80 days**.⁵ |
+| **71% of SOC analysts** report some burnout; **64%** say they're likely to switch jobs within a year.⁶ | Global average breach cost **fell to $4.44M** in 2025 (from $4.88M), driven by faster AI-assisted containment — though the **U.S. average rose to a record $10.22M**.⁵ |
 
-> **Read these as direction, not guarantees.** The same reports show that AI without governance creates *new* costs — see [Securing Your Organization's AI Use](#securing-your-organizations-ai-use). Sources are listed under [Resources](#resources-for-deeper-learning).
+> **Read these as direction, not guarantees.** Figures span 2022–2026 and several are vendor-sponsored surveys with differing methodologies — the burnout numbers (⁶) are from a 2022 survey of 468 analysts and may understate or overstate today. The same reports show AI without governance creates *new* costs — see [Securing Your Organization's AI Use](#securing-your-organizations-ai-use). Full sources under [Resources](#resources-for-deeper-learning).
 
 ### Quick Decision Framework
 
@@ -167,18 +167,20 @@ A team proud of its rising auto-close rate quietly stopped sampling closed alert
 
 ## Decision Framework: When to Invest in AI
 
-Most organizations don't decide "AI or not" once — they move along a maturity curve. As of 2025, ~**87% of orgs** are somewhere on this path; the rough distribution looks like this (Gurucul, *Pulse of the AI SOC 2025*). Use it to locate yourself and to set a realistic next step rather than skipping ahead:
+Most organizations don't decide "AI or not" once — they move along a maturity curve. As of 2025, ~**87% of orgs** are somewhere on this path; the rough distribution looks like this (Gurucul, *Pulse of the AI SOC 2025*, n=739). The three buckets sum to that 87% — the remaining ~13% are **not adopting at all** (not "mature"). Use it to locate yourself and set a realistic next step rather than skipping ahead:
 
 ```mermaid
 flowchart LR
     A["Evaluating<br/>use cases<br/>~22%"] --> B["Targeted<br/>pilots<br/>~34%"]
     B --> C["AI across<br/>multiple workflows<br/>~31%"]
-    C --> D["Mature:<br/>measured ROI,<br/>governed"]
+    C -.-> D["Measured ROI<br/>+ governance<br/>(your goal)"]
     style A fill:#e2e8f0,stroke:#475569
     style B fill:#bfdbfe,stroke:#1d4ed8
     style C fill:#bbf7d0,stroke:#15803d
-    style D fill:#fde68a,stroke:#b45309
+    style D fill:#fde68a,stroke:#b45309,stroke-dasharray: 4 3
 ```
+
+*(The dashed final state is the operating goal, not a bucket Gurucul measures.)*
 
 ### Prerequisites Checklist
 
@@ -202,7 +204,7 @@ Before investing in AI, ensure these foundations are in place:
 | Sensitive/classified data           | Evaluate local/on-premise models      |
 | Limited budget                      | Use free tiers, local models (Ollama) |
 
-> **Don't overlook local / open-source models.** For sensitive, regulated, or air-gapped environments, self-hosted open-weight models (run via Ollama, vLLM, etc.) keep data entirely inside your boundary — no prompts leave the network, sidestepping much of the data-leakage and shadow-AI risk discussed later. The trade-off is that *you* own the GPUs, updates, and tuning. This course's labs are provider-agnostic and run against local models, so teams can prototype without sending a single byte to an external API.
+> **Don't overlook local / open-source models.** For sensitive, regulated, or air-gapped environments, self-hosted open-weight families (Llama, Mistral, Qwen, DeepSeek — run via Ollama, vLLM, etc.) keep data entirely inside your boundary — no prompts leave the network, sidestepping much of the data-leakage and shadow-AI risk discussed later. The trade-off is that *you* own the GPUs, updates, and tuning. This course's labs are provider-agnostic and run against local models, so teams can prototype without sending a single byte to an external API.
 
 ### Build vs Buy Considerations
 
@@ -313,22 +315,22 @@ Assume **2,500 alerts/day** and a triage prompt of roughly **3K input + 500 outp
 
 | Regulation      | AI Implications                                             |
 | --------------- | ----------------------------------------------------------- |
-| **GDPR**        | Right to explanation (Art. 22), data processing limits      |
+| **GDPR**        | Restrictions on solely automated decision-making (Art. 22), with related transparency/"logic involved" obligations under Arts. 13–15; data-processing limits |
 | **HIPAA**       | PHI in prompts requires BAAs with AI providers              |
 | **PCI-DSS**     | Cardholder data handling, audit requirements                |
 | **SOX**         | Explainability for AI-assisted financial security decisions |
 | **EU AI Act**   | Risk-tiered obligations on a phased calendar (see below); high-risk systems require risk management, human oversight, logging, transparency, and cybersecurity |
 | **NIST AI RMF** | Voluntary framework; the **Generative AI Profile (NIST AI 600-1, July 2024)** adds 12 GenAI-specific risk categories |
 
-**EU AI Act — the dates a security leader actually needs.** Obligations phase in over several years; the AI omnibus (late 2025) pushed some high-risk deadlines back. Confirm specifics with counsel, but the shape of the calendar is:
+**EU AI Act — the dates a security leader actually needs.** Obligations phase in over several years. A "Digital Omnibus" proposed in Nov 2025 would defer the high-risk deadline; the Parliament and Council reached **provisional political agreement on 7 May 2026**, but until it is **formally adopted** (expected before Aug 2026) the original **2 Aug 2026** date remains binding law — keep preparing against it. Confirm specifics with counsel:
 
 ```mermaid
 timeline
     title EU AI Act Key Dates for Security Leaders
     Feb 2025 : Prohibited "unacceptable risk" systems banned
     Aug 2025 : General-purpose AI (GPAI) obligations apply
-    Aug 2026 : Most high-risk (Annex III) obligations apply
-    Dec 2027 : Some high-risk areas deferred (AI omnibus)
+    Aug 2026 : High-risk (Annex III) obligations apply — unless deferred
+    Dec 2027 : New high-risk date IF Omnibus is adopted (provisional, May 2026; 2028 for embedded systems)
 ```
 
 ---
@@ -364,6 +366,19 @@ The takeaway: the fastest-growing AI risk for most orgs isn't an exotic adversar
 ### Don't forget agentic AI
 
 As teams adopt AI **agents** that take actions (run queries, call APIs, touch ticketing/EDR), the blast radius of a single prompt-injection or over-permissioned tool grows sharply. OWASP's 2025 work splits **"excessive agency"** into three root causes worth designing against: excessive **functionality**, excessive **permissions**, and excessive **autonomy** (high-impact actions with no human in the loop). Scope agent tools narrowly, run them with least privilege, and keep a human approval step on anything destructive or outward-facing. → *See [Lab 49: LLM Red Teaming](../../labs/lab49-llm-red-teaming/) and [Lab 43: RAG Security](../../labs/lab43-rag-security/).*
+
+**Give agents their own identity.** The single highest-leverage control for "least agency" is treating each agent as a first-class identity — its own account, **scoped** credentials, and **short-lived** tokens — rather than handing it a shared service account with broad standing access. Most enterprises get this wrong today. Scope per task, log every tool call, and expire credentials aggressively.
+
+**Mind the tool protocol.** As agents increasingly connect to tools via the **Model Context Protocol (MCP)**, the MCP server/gateway becomes a new trust boundary — it brokers what an agent can reach. Treat it like any other privileged integration: authenticate clients, allow-list tools, and log calls. (MCP-specific risks appear in the OWASP Agentic Top 10.)
+
+### The other half: attackers use AI too
+
+A guide that covers *defensive* AI without *offensive* AI is half the picture. The same capabilities compressing your investigation time are compressing the attacker's timeline:
+
+- IBM's *Cost of a Data Breach 2025* found **16% of breaches involved AI-driven attacks**, most commonly to scale **phishing and social engineering** (AI-generated phishing was ~37% of those incidents).⁵
+- Generative AI has cut the time to craft a convincing phishing email **from ~16 hours to ~5 minutes** — a step-change in attacker throughput, not just quality.⁵
+
+The leadership implication isn't panic; it's that **detection and user-reporting baselines built for human-paced phishing need re-tuning for machine-paced volume**, and that identity/MFA-resistant social engineering deserves renewed attention. Your AI-assisted defenses are, in part, a response to AI-assisted offense.
 
 ---
 
@@ -426,25 +441,26 @@ A concrete first quarter that front-loads measurement and keeps risk low:
 **Frameworks and Standards:**
 
 - [OWASP Top 10 for LLM Applications (2025)](https://genai.owasp.org/llm-top-10/) — The current edition; prompt injection remains #1, with an expanded "excessive agency" entry
-- [OWASP Top 10 for Agentic Applications (Dec 2025)](https://genai.owasp.org/) — Newer companion list for AI systems that take autonomous, multi-step actions
+- [OWASP Top 10 for Agentic Applications (2026)](https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/) — Released Dec 2025; companion list for AI systems that plan, act, and use tools autonomously
 - [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework) and the [Generative AI Profile (NIST AI 600-1)](https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence) — Voluntary risk management; the GenAI profile adds 12 GenAI-specific risk categories
+- [NIST IR 8596 — Cybersecurity Framework Profile for AI](https://csrc.nist.gov/) (preliminary draft, Dec 2025) — CSF-aligned guidance for security leaders mapping AI risk to existing programs
 - [MITRE ATLAS](https://atlas.mitre.org/) — Adversarial ML / AI threat framework (the ATT&CK analog for AI systems)
-- [EU AI Act — official timeline](https://artificialintelligenceact.eu/implementation-timeline/) — Phased obligations through 2026–2027
+- [EU AI Act — official timeline](https://artificialintelligenceact.eu/implementation-timeline/) — Phased obligations through 2026–2028 (see Omnibus status above)
 
-**Industry Reports (data cited in this guide):**
+**Industry Reports & Sources (cited above):**
 
-- [IBM, *Cost of a Data Breach 2025*](https://www.ibm.com/reports/data-breach) — AI/automation savings ($1.9M/breach), shadow-AI cost, AI governance gaps _(superscript ³ above)_
-- *Pulse of the AI SOC 2025* ([Gurucul](https://gurucul.com/blog/2025-pulse-of-the-ai-soc-ai-enters-the-equation/)) — AI adoption maturity and investigation-time reductions _(superscript ²)_
-- [The State of AI in the SOC 2025](https://thehackernews.com/2025/09/the-state-of-ai-in-soc-2025-insights.html) — Alert volume, false-positive load, analyst burnout _(superscript ¹)_
-- SANS Detection & Response Survey (annual) — SOC challenges and trends
-- Gartner Hype Cycle for Security Operations — Technology maturity assessment
+- **¹** [The State of AI in the SOC 2025](https://thehackernews.com/2025/09/the-state-of-ai-in-soc-2025-insights.html) (Prophet Security, n=282 security leaders) — alert volume (~960/day typical, 3,000+ large enterprise)
+- **²** [Vectra AI, *2026 State of Threat Detection & Response*](https://www.vectra.ai/resources/2026-state-of-threat-detection) (Feb 2026, n=1,450) — 2,992 alerts/day, 63% unaddressed
+- **³** [Gurucul, *Pulse of the AI SOC 2025*](https://gurucul.com/blog/2025-pulse-of-the-ai-soc-ai-enters-the-equation/) (Aug 2025, n=739) — adoption maturity; 60% cut investigation time ≥25%
+- **⁴** [SANS 2025 Detection & Response Survey](https://www.sans.org/) (Dec 2025, sponsored by Stamus Networks) — false positives are the #1 detection challenge (73%)
+- **⁵** [IBM, *Cost of a Data Breach 2025*](https://www.ibm.com/reports/data-breach) (Ponemon Institute, n=600 orgs, breaches Mar 2024–Feb 2025) — $1.9M saved with extensive AI/automation; global $4.44M, U.S. record $10.22M; shadow-AI and governance gaps
+- **⁶** [Tines, *Voice of the SOC Analyst*](https://www.tines.com/reports/voice-of-the-soc-analyst/) (Mar 2022, n=468 analysts at 500+-employee firms) — 71% report some burnout, 64% likely to switch jobs within a year
 
-> ¹ State of AI in the SOC 2025 · ² Gurucul *Pulse of the AI SOC 2025* · ³ IBM *Cost of a Data Breach 2025*. Vendor-sponsored surveys vary in methodology — treat figures as directional and validate against your own baseline.
+> **Methodology note:** several of these are vendor-sponsored surveys with differing samples and definitions. Treat all figures as directional and validate against your own baseline. The burnout numbers (⁶) are from 2022 and may not reflect today's SOC.
 
-**Books for Leaders:**
+**Further reading for leaders** (primary reports beat generic books):
 
-- "AI-Powered Cybersecurity" by Dr. Raef Meeuwisse — Strategic overview
-- "The CISO's Guide to AI" — Executive-level AI security strategy
+- *IBM Cost of a Data Breach 2025*, *Verizon DBIR 2025*, *Mandiant M-Trends 2025*, and the *WEF Global Cybersecurity Outlook 2026* — current, data-rich, and free
 
 ---
 
@@ -472,6 +488,20 @@ Foundations come from the [Prerequisites Checklist](#prerequisites-checklist) ab
 - No metrics on false negative rates
 - Pricing that scales unpredictably
 
+### Procurement Clauses to Require
+
+Contract language is where governance becomes enforceable. Push for these in any AI vendor agreement:
+
+```
+□ Data non-training — your prompts/data are NOT used to train vendor models (opt-out in writing)
+□ Sub-processor disclosure — who else touches your data, and notice before changes
+□ Model-version pinning — you control when model versions change (no silent upgrades)
+□ Prompt-and-response logging — you can access logs of what was sent and returned
+□ Data deletion SLAs — defined retention and deletion timelines on request/termination
+□ Security attestations — SOC 2 / ISO 27001, plus AI-specific controls
+□ Incident notification — breach/leak notification terms that cover AI-handled data
+```
+
 ### Golden Rules for Security AI
 
 1. **AI augments humans, doesn't replace them**
@@ -494,5 +524,10 @@ Foundations come from the [Prerequisites Checklist](#prerequisites-checklist) ab
 ---
 
 _This guide is part of the [AI for the Win](../../README.md) training program — a hands-on course for security practitioners building AI-powered tools._
+
+### Changelog
+
+- **May 2026 (rev. 2):** Corrected "By the Numbers" source attributions (Vectra for alert volume, Tines 2022 for burnout); added U.S. $10.22M breach figure and IBM methodology; updated EU AI Act Omnibus status (provisional, not yet binding); fixed GDPR Art. 22 framing; added offensive-AI, agentic-identity, MCP, and procurement-clause sections; corrected the maturity diagram; refreshed OWASP Agentic and added NIST IR 8596.
+- **May 2026:** Added 2025–2026 stats, diagrams, cost model, 30/60/90-day plan, shadow-AI/governance section; refreshed OWASP/NIST/EU references.
 
 _Last updated: May 2026_
