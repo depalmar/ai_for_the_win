@@ -451,6 +451,7 @@ docker compose run test            # In Docker
 | Resource | Description |
 |----------|-------------|
 | [Environment Setup](./labs/lab00-environment-setup/) | First-time setup |
+| [AI for Security Leaders](./docs/guides/ai-for-security-leaders.md) | Exec/manager guide: invest, measure, govern AI |
 | [API Keys Guide](./docs/guides/api-keys-guide.md) | Get API keys, manage costs |
 | [Troubleshooting](./docs/guides/troubleshooting-guide.md) | Fix common issues |
 | [Lab Walkthroughs](./docs/walkthroughs/) | Step-by-step solutions |

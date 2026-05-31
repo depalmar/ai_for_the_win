@@ -6,7 +6,7 @@ import json
 import math
 import sys
 from dataclasses import asdict
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 from unittest.mock import Mock, patch
 
@@ -254,7 +254,7 @@ def sample_free_ca_cert():
         "issuer": "CN=Let's Encrypt Authority X3",
         "subject_cn": "suspicious.example.com",
         "not_before": datetime.now().isoformat(),
-        "not_after": (datetime.now().replace(month=datetime.now().month % 12 + 1)).isoformat(),
+        "not_after": (datetime.now() + timedelta(days=30)).isoformat(),
     }
 
 
@@ -825,8 +825,6 @@ class TestTLSCertAnalyzer:
 
     def test_risk_score_capped(self, tls_analyzer):
         """Test that risk score is capped at 1.0."""
-        from datetime import timedelta
-
         # Certificate with many risk factors
         cert = {
             "subject": "CN=evil.com",
