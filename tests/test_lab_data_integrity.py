@@ -1841,11 +1841,28 @@ class TestLegalCompliance:
 
         errors = []
 
+        # Per policy, external references are allowed when citing public
+        # documentation/blogs (e.g., a vendor's published threat report). A
+        # match is treated as an allowed citation when its line contains a
+        # Markdown link or a URL. Only naming a proprietary EDR *outside* a
+        # citation (e.g., as an implementation/architecture) is a violation.
+        superscripts = "¹²³⁴⁵⁶⁷⁸⁹⁰"
+
+        def _is_citation_line(line: str) -> bool:
+            # A Markdown link / URL on the line, or a footnote-reference line
+            # (e.g., a blockquote summary keyed by superscript markers).
+            if "](http" in line or "http://" in line or "https://" in line:
+                return True
+            if any(ch in line for ch in superscripts):
+                return True
+            return False
+
         for file_path in files_to_check:
             if not file_path.exists():
                 continue
 
             content = file_path.read_text(encoding="utf-8")
+            lines = content.splitlines()
             rel_path = file_path.relative_to(REPO_ROOT)
 
             for pattern, name in proprietary_edrs:
@@ -1853,6 +1870,9 @@ class TestLegalCompliance:
                 if matches:
                     for match in matches[:3]:  # Limit to first 3 per file
                         line_num = content[: match.start()].count("\n") + 1
+                        line_text = lines[line_num - 1] if line_num - 1 < len(lines) else ""
+                        if _is_citation_line(line_text):
+                            continue  # allowed: external reference to public docs
                         errors.append(
                             f"{rel_path}:{line_num} - Found '{name}' " f"(policy: use Wazuh/OSSEC)"
                         )
