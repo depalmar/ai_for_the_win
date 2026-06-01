@@ -81,8 +81,8 @@ flowchart TD
     D1 -->|Organizational| D2["Address shifts,<br/>scope, priorities"]
     D1 -->|Volume| D3["AI triage<br/>may reduce toil"]
 
-    classDef ai fill:#bbf7d0,stroke:#15803d;
-    classDef first fill:#fde68a,stroke:#b45309;
+    classDef ai fill:#bbf7d0,stroke:#15803d,color:#0f172a;
+    classDef first fill:#fde68a,stroke:#b45309,color:#0f172a;
     class A3,B3,C3,D3 ai;
     class A2,B2,C2,D2 first;
 ```
@@ -174,10 +174,10 @@ flowchart LR
     A["Evaluating<br/>use cases<br/>~22%"] --> B["Targeted<br/>pilots<br/>~34%"]
     B --> C["AI across<br/>multiple workflows<br/>~31%"]
     C -.-> D["Measured ROI<br/>+ governance<br/>(your goal)"]
-    style A fill:#e2e8f0,stroke:#475569
-    style B fill:#bfdbfe,stroke:#1d4ed8
-    style C fill:#bbf7d0,stroke:#15803d
-    style D fill:#fde68a,stroke:#b45309,stroke-dasharray: 4 3
+    style A fill:#e2e8f0,stroke:#475569,color:#0f172a
+    style B fill:#bfdbfe,stroke:#1d4ed8,color:#0f172a
+    style C fill:#bbf7d0,stroke:#15803d,color:#0f172a
+    style D fill:#fde68a,stroke:#b45309,color:#0f172a,stroke-dasharray: 4 3
 ```
 
 *(The dashed final state is the operating goal, not a bucket Gurucul measures.)*
