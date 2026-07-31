@@ -75,7 +75,7 @@ httpx>=0.27.0,<1.0.0
 fastapi>=0.110.0,<1.0.0
 uvicorn>=0.27.0,<1.0.0
 streamlit>=1.35.0,<2.0.0
-gradio>=6.1.0,<7.0.0  # v6.1.0 minimum required for CVE security fixes
+gradio>=6.20.0,<7.0.0  # v6.1.0 minimum required for CVE security fixes
 
 # =============================================================================
 # DOCUMENT PROCESSING (lightweight only)
