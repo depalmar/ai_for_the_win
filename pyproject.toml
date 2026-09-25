@@ -132,6 +132,12 @@ docs = [
 requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
+# Flat layout with many top-level dirs (labs/, docs/, ctf/ ...).
+# Without this, setuptools auto-discovery aborts with
+# "Multiple top-level packages discovered" and `pip install -e .` fails.
+[tool.setuptools.packages.find]
+include = ["shared*"]
+
 [tool.black]
 line-length = 100
 target-version = ['py310', 'py311', 'py312']
