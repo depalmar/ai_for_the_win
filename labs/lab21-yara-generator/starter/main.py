@@ -131,7 +131,8 @@ class YARAGenerator:
         # TODO: Ask your AI assistant:
         # "Write Python code to initialize a YARAGenerator class. If an llm parameter is provided,
         # use it; otherwise, create a ChatAnthropic instance using the ANTHROPIC_API_KEY environment
-        # variable with model 'claude-sonnet-4-20250514'. Store the llm as self.llm."
+        # variable with model 'claude-sonnet-5-5' and thinking={"type": "between_tools"} (no
+        # temperature). Store the llm as self.llm."
         #
         # Then review and test the generated code.
         pass

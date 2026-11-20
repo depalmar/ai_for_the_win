@@ -100,11 +100,11 @@ def get_llm():
     if LLM_PROVIDER == "anthropic":
         from langchain_anthropic import ChatAnthropic
 
-        return ChatAnthropic(model="claude-sonnet-4-20250514", temperature=0)
+        return ChatAnthropic(model="claude-sonnet-5-5", thinking={"type": "between_tools"})
     elif LLM_PROVIDER == "openai":
         from langchain_openai import ChatOpenAI
 
-        return ChatOpenAI(model="gpt-5", temperature=0)
+        return ChatOpenAI(model="gpt-6.2-sol", temperature=0)
     return None
 
 

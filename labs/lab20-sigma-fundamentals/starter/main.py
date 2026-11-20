@@ -238,7 +238,7 @@ def generate_sigma_rule(
 
     # TODO: Call API and return response
     # response = client.messages.create(...)
-    # return response.content[0].text
+    # return "".join(b.text for b in response.content if b.type == "text")
 
     return "# TODO: Implement LLM generation"
 

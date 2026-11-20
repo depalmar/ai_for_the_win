@@ -39,7 +39,7 @@ def setup_llm(provider: str = "auto"):
         import google.generativeai as genai
 
         genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
-        return ("google", genai.GenerativeModel("gemini-2.5-pro"))
+        return ("google", genai.GenerativeModel("gemini-3.8-flash"))
     else:
         raise ValueError(f"Unknown provider: {provider}")
 
@@ -436,14 +436,15 @@ Provide analysis in JSON format:
         try:
             if provider == "anthropic":
                 response = client.messages.create(
-                    model="claude-sonnet-4-20250514",
+                    model="claude-sonnet-5-5",
+                    thinking={"type": "between_tools"},
                     max_tokens=1024,
                     messages=[{"role": "user", "content": prompt}],
                 )
-                result_text = response.content[0].text
+                result_text = "".join(b.text for b in response.content if b.type == "text")
             elif provider == "openai":
                 response = client.chat.completions.create(
-                    model="gpt-5",
+                    model="gpt-6.2-sol",
                     messages=[{"role": "user", "content": prompt}],
                     response_format={"type": "json_object"},
                 )
