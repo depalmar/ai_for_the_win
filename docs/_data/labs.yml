@@ -341,7 +341,7 @@
   track: dfir
   minutes: 360
   level: advanced
-  notebook: lab13_memory_forensics.ipynb
+  notebook: lab33_memory_forensics.ipynb
   walkthrough: lab33-memory-forensics-ai-walkthrough.md
 
 - n: 34
