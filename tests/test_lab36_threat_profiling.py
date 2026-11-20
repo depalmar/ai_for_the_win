@@ -691,7 +691,8 @@ class TestTTPExtractorLLM:
         mock_response = Mock()
         mock_response.content = [
             Mock(
-                text='[{"technique_id": "T1566", "technique_name": "Phishing", "tactic": "Initial Access", "confidence": 0.9}]'
+                type="text",
+                text='[{"technique_id": "T1566", "technique_name": "Phishing", "tactic": "Initial Access", "confidence": 0.9}]',
             )
         ]
         mock_client.messages.create.return_value = mock_response
@@ -1352,7 +1353,8 @@ class TestAttributionPipelineLLM:
         mock_response = Mock()
         mock_response.content = [
             Mock(
-                text='[{"technique_id": "T1566", "technique_name": "Phishing", "tactic": "Initial Access", "confidence": 0.95}]'
+                type="text",
+                text='[{"technique_id": "T1566", "technique_name": "Phishing", "tactic": "Initial Access", "confidence": 0.95}]',
             )
         ]
         mock_client.messages.create.return_value = mock_response

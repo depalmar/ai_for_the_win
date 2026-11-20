@@ -72,23 +72,31 @@ class ProviderConfig:
     supports_extended_tokens: bool = True
 
 
-# Model defaults updated January 2026 - verify with web search before updating
+# Model defaults verified 2026-11-20 against each provider's deprecation page:
+#   https://platform.claude.com/docs/en/about-claude/model-deprecations
+#   https://developers.openai.com/api/docs/deprecations
+#   https://ai.google.dev/gemini-api/docs/deprecations
+# Re-verify with a web search before changing (see CLAUDE.md), then run
+# scripts/check_ai_model_freshness.py, which knows the retired/retiring IDs.
 PROVIDER_CONFIG = {
     "anthropic": ProviderConfig(
         env_key="ANTHROPIC_API_KEY",
-        default_model="claude-sonnet-4-5",  # Latest Sonnet (Sep 2025)
+        # Official replacement for claude-sonnet-4-5 (retires 2026-11-30)
+        default_model="claude-sonnet-5-5",
         max_tokens_param="max_tokens",
         supports_extended_tokens=True,
     ),
     "openai": ProviderConfig(
         env_key="OPENAI_API_KEY",
-        default_model="gpt-5",  # GPT-5.2 available but gpt-5 more stable
+        # gpt-5 shuts down 2026-12-11; GPT-6.2 Sol is OpenAI's everyday default
+        default_model="gpt-6.2-sol",
         max_tokens_param="max_tokens",
         supports_extended_tokens=True,
     ),
     "google": ProviderConfig(
         env_key="GOOGLE_API_KEY",
-        default_model="gemini-3-flash",  # Default Gemini model (late 2025)
+        # Stable, no shutdown announced; replacement for gemini-2.5-pro (shuts down 2026-12-01)
+        default_model="gemini-3.8-flash",
         max_tokens_param="max_output_tokens",
         supports_extended_tokens=True,
     ),
@@ -99,6 +107,26 @@ PROVIDER_CONFIG = {
         supports_extended_tokens=False,
     ),
 }
+
+# Claude Sonnet 5.5 runs adaptive thinking by default, so a response can start with a
+# thinking block, and Claude 4.7+ models reject non-default temperature/top_p/top_k
+# with a 400. These labs were written for models that did not think by default, so for
+# Sonnet 5.5 we send its documented thinking-off mode, "between_tools": on requests
+# without tools the model does not think and the response is text-only, as on Sonnet 4.x.
+# Other Claude models reject "between_tools", so it is only sent to the models listed.
+ANTHROPIC_THINKING_OFF = {"claude-sonnet-5-5": {"type": "between_tools"}}
+
+
+def anthropic_request_params(model: str) -> Dict[str, Any]:
+    """Return the extra Messages API params a Claude model needs (may be empty)."""
+    thinking = ANTHROPIC_THINKING_OFF.get(model)
+    return {"thinking": thinking} if thinking else {}
+
+
+def extract_text(response: Any) -> str:
+    """Join the text blocks of an Anthropic response, skipping thinking blocks."""
+    return "".join(block.text for block in response.content if block.type == "text")
+
 
 # =============================================================================
 # PROVIDER DETECTION
@@ -191,13 +219,15 @@ def get_llm_config(
         task_type: Type of task to configure for.
         provider: LLM provider (auto-detected if None).
         model: Model name (uses provider default if None).
-        temperature: Sampling temperature (0.0 for deterministic).
+        temperature: Sampling temperature (0.0 for deterministic). Not sent to
+            Anthropic: current Claude models reject non-default sampling params.
         override_max_tokens: Override the task-specific token limit.
 
     Returns:
         Dictionary with LLM configuration parameters.
     """
     provider_name, config = get_provider_config(provider)
+    model_name = model or config.default_model
 
     # Determine token limit
     if override_max_tokens is not None:
@@ -205,12 +235,16 @@ def get_llm_config(
     else:
         max_tokens = TOKEN_LIMITS.get(task_type, DEFAULT_MAX_TOKENS)
 
-    return {
+    llm_config = {
         "provider": provider_name,
-        "model": model or config.default_model,
-        "temperature": temperature,
+        "model": model_name,
         config.max_tokens_param: max_tokens,
     }
+    if provider_name == "anthropic":
+        llm_config.update(anthropic_request_params(model_name))
+    else:
+        llm_config["temperature"] = temperature
+    return llm_config
 
 
 def get_llm(
@@ -349,11 +383,11 @@ def query_llm(
             response = client.messages.create(
                 model=model_name,
                 max_tokens=max_tokens,
-                temperature=temperature,
                 system=system_prompt,
                 messages=[{"role": "user", "content": prompt}],
+                **anthropic_request_params(model_name),
             )
-            return response.content[0].text
+            return extract_text(response)
         except ImportError:
             raise ImportError("pip install anthropic")
 
@@ -441,9 +475,9 @@ import os
 def setup_llm():
     """Detect and configure LLM provider."""
     providers = {
-        "anthropic": ("ANTHROPIC_API_KEY", "claude-sonnet-4-20250514"),
-        "openai": ("OPENAI_API_KEY", "gpt-5"),
-        "google": ("GOOGLE_API_KEY", "gemini-2.5-pro"),
+        "anthropic": ("ANTHROPIC_API_KEY", "claude-sonnet-5-5"),
+        "openai": ("OPENAI_API_KEY", "gpt-6.2-sol"),
+        "google": ("GOOGLE_API_KEY", "gemini-3.8-flash"),
     }
 
     for name, (key, model) in providers.items():
@@ -462,9 +496,11 @@ def query_llm(prompt, system_prompt="You are a security analyst.", max_tokens=40
         client = Anthropic()
         response = client.messages.create(
             model=model, max_tokens=max_tokens, system=system_prompt,
-            messages=[{"role": "user", "content": prompt}]
+            messages=[{"role": "user", "content": prompt}],
+            # Sonnet 5.5's thinking-off mode; remove it if you switch to another Claude model
+            thinking={"type": "between_tools"},
         )
-        return response.content[0].text
+        return "".join(b.text for b in response.content if b.type == "text")
 
     elif provider == "openai":
         from openai import OpenAI

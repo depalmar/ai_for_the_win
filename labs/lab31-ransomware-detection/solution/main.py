@@ -541,14 +541,15 @@ Provide a JSON response with:
 Return ONLY valid JSON."""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},
             max_tokens=1024,
             messages=[{"role": "user", "content": prompt}],
         )
 
         # Parse LLM response with fallback for JSON errors
         try:
-            analysis = json.loads(response.content[0].text)
+            analysis = json.loads("".join(b.text for b in response.content if b.type == "text"))
         except json.JSONDecodeError:
             # Fallback if LLM doesn't return valid JSON
             analysis = {
@@ -805,12 +806,13 @@ Generate a structured incident report with:
 6. IOCs for Blocking"""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},
             max_tokens=2048,
             messages=[{"role": "user", "content": prompt}],
         )
 
-        return response.content[0].text
+        return "".join(b.text for b in response.content if b.type == "text")
 
 
 # =============================================================================

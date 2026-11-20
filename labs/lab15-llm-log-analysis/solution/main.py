@@ -367,7 +367,7 @@ def setup_llm(provider: str = "anthropic"):
 
     Args:
         provider: LLM provider to use. Options:
-            - "anthropic": Claude (claude-sonnet-4-20250514)
+            - "anthropic": Claude (claude-sonnet-5-5)
             - "openai": GPT-4 Turbo
             - "gemini": Gemini 1.5 Pro
             - "ollama": Local models (llama3.1:8b)
@@ -391,7 +391,9 @@ def setup_llm(provider: str = "anthropic"):
         if not api_key:
             raise ValueError("ANTHROPIC_API_KEY not set. Add to .env file.")
 
-        llm = ChatAnthropic(model="claude-sonnet-4-20250514", temperature=0, max_tokens=4096)
+        llm = ChatAnthropic(
+            model="claude-sonnet-5-5", thinking={"type": "between_tools"}, max_tokens=4096
+        )
 
     elif provider == "openai":
         if not OPENAI_AVAILABLE:
@@ -401,7 +403,7 @@ def setup_llm(provider: str = "anthropic"):
         if not api_key:
             raise ValueError("OPENAI_API_KEY not set. Add to .env file.")
 
-        llm = ChatOpenAI(model="gpt-5", temperature=0, max_tokens=4096)
+        llm = ChatOpenAI(model="gpt-6.2-sol", temperature=0, max_tokens=4096)
 
     elif provider == "gemini":
         if not GEMINI_AVAILABLE:
@@ -413,7 +415,9 @@ def setup_llm(provider: str = "anthropic"):
         if not api_key:
             raise ValueError("GOOGLE_API_KEY not set. Add to .env file.")
 
-        llm = ChatGoogleGenerativeAI(model="gemini-2.5-pro", temperature=0, max_output_tokens=4096)
+        llm = ChatGoogleGenerativeAI(
+            model="gemini-3.8-flash", temperature=0, max_output_tokens=4096
+        )
 
     elif provider == "ollama":
         if not OLLAMA_AVAILABLE:

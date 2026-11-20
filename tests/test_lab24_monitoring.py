@@ -22,7 +22,7 @@ def test_ai_metrics_dataclass():
 
     metrics = AIMetrics(
         timestamp="2024-01-15T10:30:00Z",
-        model_name="claude-sonnet-4",
+        model_name="claude-sonnet-5-5",
         latency_ms=150.5,
         tokens_used=500,
         cost_usd=0.015,

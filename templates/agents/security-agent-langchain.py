@@ -40,9 +40,11 @@ from tenacity import retry, stop_after_attempt, wait_exponential
 # Configuration
 # ============================================================================
 
-MODEL_NAME = "claude-sonnet-4-20250514"
+MODEL_NAME = "claude-sonnet-5-5"
 MAX_TOKENS = 4096
-TEMPERATURE = 0.1  # Low temperature for security analysis
+# No TEMPERATURE: current Claude models reject non-default sampling parameters.
+# Sonnet 5.5's thinking-off mode; other Claude models reject it, so drop it if you change models.
+THINKING = {"type": "between_tools"}
 
 
 # ============================================================================
@@ -262,7 +264,7 @@ def create_security_agent(verbose: bool = True, memory_window: int = 10) -> Agen
     """Create a security analysis agent with tools and memory."""
 
     # Initialize LLM
-    llm = ChatAnthropic(model=MODEL_NAME, max_tokens=MAX_TOKENS, temperature=TEMPERATURE)
+    llm = ChatAnthropic(model=MODEL_NAME, max_tokens=MAX_TOKENS, thinking=THINKING)
 
     # Define tools
     tools = [
