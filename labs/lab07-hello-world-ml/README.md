@@ -12,12 +12,12 @@ By the end of this lab, you will:
 - Understand the 4-step ML workflow: Load → Train → Predict → Evaluate
 - Build a working classifier with scikit-learn
 - Know what accuracy, precision, and recall mean
-- Have confidence to tackle Lab 01
+- Have confidence to tackle Lab 10
 
 ## Prerequisites
 
 - Completed Lab 01 (Python basics) OR comfortable with Python
-- Completed Lab 15 (ML concepts) OR understand supervised learning basics
+- Completed Lab 04 (ML concepts) OR understand supervised learning basics
 
 ## Time Required
 
@@ -287,8 +287,8 @@ Which words are most predictive of spam? Try different word lists.
 
 Now that you understand the ML workflow:
 
-- **Lab 01**: Build a more sophisticated phishing classifier with TF-IDF
-- **Lab 31**: Learn unsupervised learning (clustering) for malware
+- **Lab 10**: Build a more sophisticated phishing classifier with TF-IDF
+- **Lab 11**: Learn unsupervised learning (clustering) for malware
 - **Lab 12**: Detect anomalies in network traffic
 
 You're ready!

@@ -584,7 +584,7 @@ VISUALIZED IN 2D:
 SECURITY USE:
 • "IEX DownloadString" is similar to other PowerShell attack patterns
 • Find similar threat reports using vector similarity
-• RAG systems use embeddings for semantic search (Lab 42)
+• RAG systems use embeddings for semantic search (Lab 18)
 ```
 
 ### 3.7 Feature Importance (What Did the Model Learn?)
@@ -811,7 +811,7 @@ What's wrong with each approach?
 You now understand the concepts! Time to code:
 
 - **Lab 10**: Phishing Classifier - Build your first ML security tool
-- **Lab 31**: Malware Clustering - Unsupervised learning in practice
+- **Lab 11**: Malware Clustering - Unsupervised learning in practice
 - **Lab 12**: Anomaly Detection - Find the needle in the haystack
 
 ---

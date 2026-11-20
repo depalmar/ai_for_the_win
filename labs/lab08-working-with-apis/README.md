@@ -625,7 +625,7 @@ Now that you can work with APIs:
 
 - **Lab 15**: Use LLM APIs for log analysis
 - **Lab 16**: Build an agent with threat intel API tools
-- **Lab 42**: Implement RAG with embedding APIs
+- **Lab 18**: Implement RAG with embedding APIs
 
 You're ready for LLM-powered security tools!
 
