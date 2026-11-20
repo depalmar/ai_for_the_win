@@ -1,0 +1,8 @@
+<div class="rtiles">
+{%- for r in site.data.roles %}
+  <a class="rtile" href="{{ site.repo_url }}/blob/main/resources/role-based-learning-paths.md#{{ r.anchor }}">
+    <b>{{ r.name }}</b><span>{{ r.blurb }}</span>
+    <span class="chips" aria-label="Labs in order">{% for n in r.labs %}{% unless forloop.first %}<span class="arr" aria-hidden="true">&#8594;</span>{% endunless %}<span class="chip">{{ n | prepend: '0' | slice: -2, 2 }}</span>{% endfor %}</span>
+  </a>
+{%- endfor %}
+</div>

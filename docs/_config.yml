@@ -1,15 +1,18 @@
 title: AI for the Win
-description: Build AI-Powered Security Tools | 50+ Hands-On Labs for Security Practitioners
-remote_theme: pages-themes/midnight@v0.2.0
-plugins:
-  - jekyll-remote-theme
-
+description: >-
+  Build AI-powered security tools. 50+ hands-on labs for security practitioners,
+  from Python and ML basics to LLM agents, DFIR, cloud security and AI red teaming.
 url: https://depalmar.github.io
 baseurl: /ai_for_the_win
+repo_url: https://github.com/depalmar/ai_for_the_win
+colab_url: https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks
+license_label: "MIT + CC BY-NC-SA 4.0"
 
-# Prevent kramdown from parsing inside HTML blocks
+# The site shares its design with the Edge DFIR and AI DFIR toolkit pages; layouts,
+# styles and scripts live in _layouts, _includes and assets. No remote theme.
 markdown: kramdown
 kramdown:
+  input: GFM
   parse_block_html: false
 
 defaults:

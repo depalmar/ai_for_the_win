@@ -1361,7 +1361,7 @@ class TestLabCategoryConsistency:
         REPO_ROOT / ".claude" / "commands" / "lab.md",
         REPO_ROOT / "README.md",
         REPO_ROOT / "labs" / "README.md",
-        REPO_ROOT / "docs" / "index.md",
+        REPO_ROOT / "docs" / "index.html",
     ]
 
     def test_lab_category_ranges_are_documented(self):
@@ -1534,13 +1534,12 @@ class TestLabCategoryConsistency:
         if errors:
             pytest.fail("ARCHITECTURE.md has outdated lab counts:\n" + "\n".join(errors))
 
-    def test_index_md_lab_numbering(self):
-        """Verify docs/index.md uses correct lab numbering (GitHub Pages site)."""
-        index_md = REPO_ROOT / "docs" / "index.md"
-        if not index_md.exists():
-            pytest.skip("docs/index.md not found")
+    def test_index_html_lab_numbering(self):
+        """Verify docs/index.html (GitHub Pages site) uses no old lab numbering in its text."""
+        index_html = REPO_ROOT / "docs" / "index.html"
+        assert index_html.exists(), "docs/index.html (GitHub Pages home page) is missing"
 
-        content = index_md.read_text(encoding="utf-8")
+        content = index_html.read_text(encoding="utf-8")
 
         # Known incorrect patterns that indicate old lab numbering
         # Old scheme: Labs 01-03 (ML), Labs 04-07 (LLM)
@@ -1554,167 +1553,114 @@ class TestLabCategoryConsistency:
         errors = []
         for pattern, message in incorrect_patterns:
             if re.search(pattern, content):
-                errors.append(f"docs/index.md: {message}")
+                errors.append(f"docs/index.html: {message}")
 
         if errors:
-            pytest.fail("docs/index.md has outdated lab numbering:\n" + "\n".join(errors))
+            pytest.fail("docs/index.html has outdated lab numbering:\n" + "\n".join(errors))
 
-    def test_index_md_lab_card_display_numbers_match_folder(self):
-        """Verify docs/index.md lab card display numbers match actual lab folder numbers.
+    # ------------------------------------------------------------------
+    # The GitHub Pages site (docs/index.html) renders every lab, track,
+    # path, role card and guide from docs/_data/*.yml, so lab numbers and
+    # titles live in one place. These tests check that data against the
+    # repository; a missing data file fails rather than skips.
+    # ------------------------------------------------------------------
+    PAGES_DATA = REPO_ROOT / "docs" / "_data"
 
-        The Lab Navigator on GitHub Pages (docs/index.md) has lab cards that show
-        a display number (like 23, 24, 25) in the UI. This display number MUST
-        match the actual lab folder number in the href (lab23-*, lab24-*, etc.).
+    def _pages_data(self, name: str):
+        import yaml
 
-        Old incorrect pattern: lab23-detection-pipeline showing display "09"
-        Correct pattern: lab23-detection-pipeline showing display "23"
-        """
-        index_md = REPO_ROOT / "docs" / "index.md"
-        if not index_md.exists():
-            pytest.skip("docs/index.md not found")
-
-        content = index_md.read_text(encoding="utf-8")
-
-        # Find the lab-grid section
-        if 'class="lab-grid"' not in content:
-            pytest.skip("No lab-grid found in docs/index.md")
-
-        errors = []
-
-        # Extract lab card info: href path and display number
-        # Pattern for lab card: <a href="...labs/labXX-..." class="lab-card"...>
-        #   followed by: <span class="lab-number ...">DISPLAY</span>
-        lab_card_pattern = re.compile(
-            r'<a href="[^"]*labs/lab(\d+)-[^"]*"[^>]*class="lab-card"[^>]*>.*?'
-            r'<span class="lab-number[^"]*">(\d+[a-z]?)</span>',
-            re.DOTALL,
-        )
-
-        matches = lab_card_pattern.findall(content)
-
-        if not matches:
-            pytest.skip("No lab cards found in docs/index.md")
-
-        for folder_num, display_num in matches:
-            folder_num_int = int(folder_num)
-            # Display number should match folder number (ignore letter suffixes like "b")
-            display_num_clean = display_num.rstrip("abcdefghijklmnopqrstuvwxyz")
-            try:
-                display_num_int = int(display_num_clean)
-            except ValueError:
-                errors.append(
-                    f"Lab card for lab{folder_num:0>2} has invalid display number: {display_num}"
-                )
-                continue
-
-            if folder_num_int != display_num_int:
-                errors.append(
-                    f"Lab card mismatch: lab{folder_num:0>2}-* folder shows display '{display_num}' "
-                    f"(should show '{folder_num_int}')"
-                )
-
-        if errors:
-            pytest.fail(
-                "docs/index.md lab cards have mismatched display numbers:\n"
-                + "\n".join(errors[:20])  # Limit to first 20 errors
-            )
+        path = self.PAGES_DATA / f"{name}.yml"
+        assert path.exists(), f"{path.relative_to(REPO_ROOT)} is missing"
+        return yaml.safe_load(path.read_text(encoding="utf-8"))
 
     @staticmethod
-    def _index_md_grid_titles(content: str) -> dict:
-        """Map lab number -> card title for every card in the docs/index.md lab grid."""
-        cards = re.findall(
-            r'class="lab-card"[^>]*>\s*<div class="lab-header">\s*'
-            r'<span class="lab-number[^"]*">(\d+)</span>\s*'
-            r'<span class="lab-title">([^<]+)</span>',
-            content,
-        )
-        return {int(num): title.strip() for num, title in cards}
-
-    def test_index_md_lab_grid_sequential_order(self):
-        """The docs/index.md lab grid must list every lab folder once, in order (00..50)."""
-        index_md = REPO_ROOT / "docs" / "index.md"
-        if not index_md.exists():
-            pytest.skip("docs/index.md not found")
-        content = index_md.read_text(encoding="utf-8")
-
-        grid_numbers = [
-            int(n) for n in re.findall(r'labs/lab(\d+)-[^"]*" class="lab-card"', content)
-        ]
-        folder_numbers = sorted(
-            int(m.group(1))
+    def _lab_folders() -> list:
+        return sorted(
+            (int(m.group(1)), d.name)
             for d in LABS_DIR.iterdir()
             if d.is_dir() and (m := re.match(r"lab(\d+)-", d.name))
         )
-        assert grid_numbers == folder_numbers, (
-            "docs/index.md lab grid must list each lab folder once, in sequential order.\n"
-            f"Grid order:  {grid_numbers}\nLab folders: {folder_numbers}"
+
+    def test_pages_labs_match_lab_folders(self):
+        """docs/_data/labs.yml lists every lab folder once, in order, under its own number."""
+        labs = self._pages_data("labs")
+        listed = [(lab["n"], lab["slug"]) for lab in labs]
+        assert listed == self._lab_folders(), (
+            "docs/_data/labs.yml must list each labs/ folder once, in order, with n equal to "
+            "the folder number.\nMissing: "
+            f"{sorted(set(self._lab_folders()) - set(listed))}\n"
+            f"Unknown: {sorted(set(listed) - set(self._lab_folders()))}"
         )
 
-    def test_index_md_learning_path_numbers_match_labs(self):
-        """Learning-path entries in docs/index.md must use real lab numbers.
+    def test_pages_tracks_match_canonical_ranges(self):
+        """Tracks match CANONICAL_CATEGORIES, and each lab sits in its track's range."""
+        tracks = self._pages_data("tracks")
+        assert {t["name"]: (t["from"], t["to"]) for t in tracks} == self.CANONICAL_CATEGORIES
+        assert [t["id"] for t in tracks if not t["api"]] == [
+            "foundation",
+            "ml",
+        ], "Only Foundation and ML Foundations (labs 00-13) run without an API key"
 
-        Path entries carry no link, so a stale number from the old scheme (for example
-        "01 Phishing Classifier", which is now lab10) is only caught by comparing the
-        entry's name with the title of the grid card that has the same number.
-        """
-        index_md = REPO_ROOT / "docs" / "index.md"
-        if not index_md.exists():
-            pytest.skip("docs/index.md not found")
-        content = index_md.read_text(encoding="utf-8")
-
-        grid = self._index_md_grid_titles(content)
-        entries = re.findall(
-            r'<span class="path-lab-num[^"]*">([^<]+)</span>\s*'
-            r'<span class="path-lab-name">([^<]+)</span>',
-            content,
-        )
-        if not entries:
-            pytest.skip("No learning-path entries found in docs/index.md")
-
-        errors = []
-        for num, name in entries:
-            if not num.isdigit() or int(num) not in grid:
-                errors.append(f"'{num} {name}': {num} is not a lab number in the grid")
-                continue
-            title, entry = grid[int(num)].lower(), name.strip().lower()
-            if title not in entry and entry not in title:
-                errors.append(f"'{num} {name}': lab {num} is '{grid[int(num)]}'")
-        if errors:
-            pytest.fail("docs/index.md learning paths use wrong lab numbers:\n" + "\n".join(errors))
-
-    def test_index_md_colab_labels_match_notebooks(self):
-        """Colab badge labels ("Lab 10 (ML):") must name the lab whose notebook they open."""
-        index_md = REPO_ROOT / "docs" / "index.md"
-        if not index_md.exists():
-            pytest.skip("docs/index.md not found")
-        content = index_md.read_text(encoding="utf-8")
-
-        badges = re.findall(
-            r'Lab (\d+) \([^)]*\):</span>\s*<a href="[^"]*notebooks/lab(\d+)_[^"]*"[^>]*>'
-            r'<img [^>]*alt="Open Lab (\d+) in Colab"',
-            content,
-        )
-        if not badges:
-            pytest.skip("No labelled Colab badges found in docs/index.md")
+        by_id = {t["id"]: t for t in tracks}
         errors = [
-            f"label 'Lab {label}' / alt 'Lab {alt}' opens notebook lab{nb}"
-            for label, nb, alt in badges
-            if not int(label) == int(nb) == int(alt)
+            f"lab {lab['n']:02d} is in track '{lab['track']}'"
+            for lab in self._pages_data("labs")
+            if lab["track"] not in by_id
+            or not by_id[lab["track"]]["from"] <= lab["n"] <= by_id[lab["track"]]["to"]
         ]
-        if errors:
-            pytest.fail("docs/index.md Colab badges are mislabelled:\n" + "\n".join(errors))
+        assert not errors, "Labs outside their track's range:\n" + "\n".join(errors)
 
-    def test_index_md_role_paths_match_role_guide(self):
-        """Role cards ("Labs 00→15→18→29") must stay in sync with the role guide.
+    def test_pages_lab_entries_are_complete(self):
+        """Every lab has a title, description, time and level, and its files exist."""
+        notebooks_dir = REPO_ROOT / "notebooks"
+        walkthroughs_dir = REPO_ROOT / "docs" / "walkthroughs"
+        levels = {"beginner", "intermediate", "advanced", "expert"}
+        errors = []
+        for lab in self._pages_data("labs"):
+            name = f"lab {lab['n']:02d}"
+            if not (lab.get("title") and lab.get("desc")):
+                errors.append(f"{name}: missing title or desc")
+            if not (isinstance(lab.get("minutes"), int) and lab["minutes"] > 0):
+                errors.append(f"{name}: minutes must be a positive integer")
+            if lab.get("level") not in levels:
+                errors.append(f"{name}: level must be one of {sorted(levels)}")
+            if lab.get("notebook") and not (notebooks_dir / lab["notebook"]).exists():
+                errors.append(f"{name}: notebook {lab['notebook']} does not exist")
+            if lab.get("walkthrough") and not (walkthroughs_dir / lab["walkthrough"]).exists():
+                errors.append(f"{name}: walkthrough {lab['walkthrough']} does not exist")
+        assert not errors, "docs/_data/labs.yml problems:\n" + "\n".join(errors)
 
-        Each card must link to a section that exists in resources/role-based-learning-paths.md,
-        and every lab number on the card must be a lab that section actually links to.
-        """
-        index_md = REPO_ROOT / "docs" / "index.md"
+    def test_pages_list_every_notebook_and_walkthrough(self):
+        """Each notebook and lab walkthrough on disk appears on the site exactly once."""
+        labs = self._pages_data("labs")
+        for field, folder, pattern in (
+            ("notebook", REPO_ROOT / "notebooks", "*.ipynb"),
+            ("walkthrough", REPO_ROOT / "docs" / "walkthroughs", "lab*-walkthrough.md"),
+        ):
+            listed = [lab[field] for lab in labs if lab.get(field)]
+            on_disk = sorted(p.name for p in folder.glob(pattern))
+            assert sorted(listed) == on_disk, (
+                f"docs/_data/labs.yml {field} entries do not match {folder.name}/.\n"
+                f"Not on the site: {sorted(set(on_disk) - set(listed))}\n"
+                f"Listed twice: {sorted({x for x in listed if listed.count(x) > 1})}"
+            )
+
+    def test_pages_learning_paths_use_real_labs(self):
+        """Learning paths reference existing lab numbers, each at most once per path."""
+        numbers = {lab["n"] for lab in self._pages_data("labs")}
+        errors = []
+        for path in self._pages_data("paths"):
+            seq = [n for section in path["sections"] for n in section["labs"]]
+            errors += [f"{path['name']}: lab {n} does not exist" for n in seq if n not in numbers]
+            errors += [
+                f"{path['name']}: lab {n} listed twice" for n in set(seq) if seq.count(n) > 1
+            ]
+        assert not errors, "docs/_data/paths.yml problems:\n" + "\n".join(errors)
+
+    def test_pages_role_cards_match_role_guide(self):
+        """Role cards link to a real section of the role guide and only list labs it links to."""
         guide = REPO_ROOT / "resources" / "role-based-learning-paths.md"
-        if not index_md.exists() or not guide.exists():
-            pytest.skip("docs/index.md or resources/role-based-learning-paths.md not found")
-        content = index_md.read_text(encoding="utf-8")
+        assert guide.exists(), "resources/role-based-learning-paths.md is missing"
 
         def github_anchor(heading: str) -> str:
             # Approximates GitHub's heading slugs: lowercase, drop punctuation and emoji,
@@ -1727,22 +1673,47 @@ class TestLabCategoryConsistency:
                 anchor = github_anchor(block.splitlines()[0][3:])
                 sections[anchor] = {int(n) for n in re.findall(r"labs/lab(\d+)-", block)}
 
-        cards = re.findall(
-            r'role-based-learning-paths\.md#([^"]+)".*?Labs ([\d→]+)</span>', content, re.DOTALL
-        )
-        if not cards:
-            pytest.skip("No role cards found in docs/index.md")
-
         errors = []
-        for anchor, sequence in cards:
+        for role in self._pages_data("roles"):
+            anchor = role["anchor"]
             if anchor not in sections:
-                errors.append(f"#{anchor}: no such section in role-based-learning-paths.md")
+                errors.append(f"{role['name']}: #{anchor} is not a section of the role guide")
                 continue
-            missing = [n for n in sequence.split("→") if int(n) not in sections[anchor]]
+            missing = [n for n in role["labs"] if n not in sections[anchor]]
             if missing:
-                errors.append(f"#{anchor} 'Labs {sequence}': {', '.join(missing)} not in that path")
-        if errors:
-            pytest.fail("docs/index.md role cards are out of sync:\n" + "\n".join(errors))
+                errors.append(f"{role['name']}: labs {missing} are not in that path")
+        assert not errors, "docs/_data/roles.yml is out of sync:\n" + "\n".join(errors)
+
+    def test_pages_guides_list_every_guide_once(self):
+        """The Guides tab lists every docs/guides/*.md exactly once."""
+        listed = [item["file"] for g in self._pages_data("guides") for item in g["items"]]
+        on_disk = sorted(p.name for p in (REPO_ROOT / "docs" / "guides").glob("*.md"))
+        assert sorted(listed) == on_disk, (
+            "docs/_data/guides.yml does not match docs/guides/.\n"
+            f"Not listed: {sorted(set(on_disk) - set(listed))}\n"
+            f"Not on disk: {sorted(set(listed) - set(on_disk))}\n"
+            f"Listed twice: {sorted({x for x in listed if listed.count(x) > 1})}"
+        )
+
+    def test_pages_counts_match_repo(self):
+        """The counts the site cannot compute itself match the repository."""
+        counts = self._pages_data("counts")
+        pyproject = (REPO_ROOT / "pyproject.toml").read_text(encoding="utf-8")
+        version = re.search(r'(?m)^version\s*=\s*"([^"]+)"', pyproject).group(1)
+        role_guide = (REPO_ROOT / "resources" / "role-based-learning-paths.md").read_text(
+            encoding="utf-8"
+        )
+        actual = {
+            "version": version,
+            "role_paths": len(
+                re.findall(r"(?m)^### Learning Path\b", role_guide)
+            ),  # one per role path
+            "ctf_challenges": len(list((REPO_ROOT / "ctf-challenges").glob("*/challenge-*/"))),
+            "capstones": len(
+                [d for d in (REPO_ROOT / "capstone-projects").iterdir() if d.is_dir()]
+            ),
+        }
+        assert counts == actual, f"docs/_data/counts.yml should be {actual}"
 
     def test_readme_lab_navigator_sequential_order(self):
         """Verify README Lab Navigator displays labs in sequential order.
@@ -1879,7 +1850,7 @@ class TestLegalCompliance:
         files_to_check = [
             REPO_ROOT / "README.md",
             REPO_ROOT / "labs" / "README.md",
-            REPO_ROOT / "docs" / "index.md",
+            REPO_ROOT / "docs" / "index.html",
         ]
 
         # Also check all lab READMEs
@@ -1947,7 +1918,7 @@ class TestLegalCompliance:
         files_to_check = [
             REPO_ROOT / "README.md",
             REPO_ROOT / "labs" / "README.md",
-            REPO_ROOT / "docs" / "index.md",
+            REPO_ROOT / "docs" / "index.html",
             REPO_ROOT / "docs" / "SOURCES.md",
         ]
 

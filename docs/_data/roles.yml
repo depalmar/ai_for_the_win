@@ -1,0 +1,18 @@
+# Role cards. Each anchor must be a section of resources/role-based-learning-paths.md
+# and every lab listed must be one that section links to (checked by tests).
+- name: SOC Analyst
+  blurb: "Automate triage and cut alert fatigue."
+  anchor: "-ai-blue-team-path-soc"
+  labs: [0, 15, 18, 29]
+- name: Threat Hunter
+  blurb: "Find unknowns and detect anomalies."
+  anchor: "-threat-hunter-path"
+  labs: [12, 11, 34, 35]
+- name: Detection Engineer
+  blurb: "ML-powered rules with fewer false positives."
+  anchor: "-detection-engineer-path"
+  labs: [10, 12, 21, 23]
+- name: AI Red Team
+  blurb: "Evade ML models and attack AI systems."
+  anchor: "-ai-red-team-path"
+  labs: [12, 39, 49]

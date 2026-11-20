@@ -1,0 +1,14 @@
+{%- assign base = '/' | relative_url -%}
+<script type="application/json" id="search-index">[
+{%- for l in site.data.labs -%}{%- assign nn = l.n | prepend: '0' | slice: -2, 2 -%}{%- assign tk = site.data.tracks | where: "id", l.track | first -%}
+{"k":"Lab {{ nn }}","t":{{ l.title | jsonify }},"d":{{ l.desc | append: " · " | append: tk.name | jsonify }},"u":"{{ base }}#labs/{{ l.n }}","n":{{ l.n }}},
+{%- endfor -%}
+{%- for g in site.data.guides -%}{%- for i in g.items -%}
+{"k":"Guide","t":{{ i.title | jsonify }},"d":{{ i.desc | jsonify }},"u":"{{ site.repo_url }}/blob/main/docs/guides/{{ i.file }}"},
+{%- endfor -%}{%- endfor -%}
+{%- for p in site.data.paths -%}{"k":"Path","t":{{ p.name | append: " path" | jsonify }},"d":{{ p.blurb | jsonify }},"u":"{{ base }}#paths"},{%- endfor -%}
+{%- for r in site.data.roles -%}{"k":"Role","t":{{ r.name | jsonify }},"d":{{ r.blurb | jsonify }},"u":"{{ site.repo_url }}/blob/main/resources/role-based-learning-paths.md#{{ r.anchor }}"},{%- endfor -%}
+{"k":"Section","t":"Cost","d":"What the labs cost, and running them free with Ollama","u":"{{ base }}#cost"},
+{"k":"Section","t":"FAQ","d":"Prior experience, providers, running locally, time, licensing","u":"{{ base }}#faq"},
+{"k":"Section","t":"Get started","d":"Colab, Docker or a local install","u":"{{ base }}#get-started"}
+]</script>
