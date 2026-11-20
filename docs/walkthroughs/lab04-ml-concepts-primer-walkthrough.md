@@ -182,5 +182,5 @@ RIGHT: Separate train and test sets
 ## Next Steps
 
 Continue to:
-- [Lab 02: Prompt Engineering](./lab00c-prompt-engineering-walkthrough.md) - Learn to write effective prompts
+- [Lab 02: Prompt Engineering](./lab02-prompt-engineering-walkthrough.md) - Learn to write effective prompts
 - [Lab 01: Phishing Classifier](./lab10-phishing-classifier-walkthrough.md) - Build a real ML model

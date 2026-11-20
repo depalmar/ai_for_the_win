@@ -1619,6 +1619,131 @@ class TestLabCategoryConsistency:
                 + "\n".join(errors[:20])  # Limit to first 20 errors
             )
 
+    @staticmethod
+    def _index_md_grid_titles(content: str) -> dict:
+        """Map lab number -> card title for every card in the docs/index.md lab grid."""
+        cards = re.findall(
+            r'class="lab-card"[^>]*>\s*<div class="lab-header">\s*'
+            r'<span class="lab-number[^"]*">(\d+)</span>\s*'
+            r'<span class="lab-title">([^<]+)</span>',
+            content,
+        )
+        return {int(num): title.strip() for num, title in cards}
+
+    def test_index_md_lab_grid_sequential_order(self):
+        """The docs/index.md lab grid must list every lab folder once, in order (00..50)."""
+        index_md = REPO_ROOT / "docs" / "index.md"
+        if not index_md.exists():
+            pytest.skip("docs/index.md not found")
+        content = index_md.read_text(encoding="utf-8")
+
+        grid_numbers = [
+            int(n) for n in re.findall(r'labs/lab(\d+)-[^"]*" class="lab-card"', content)
+        ]
+        folder_numbers = sorted(
+            int(m.group(1))
+            for d in LABS_DIR.iterdir()
+            if d.is_dir() and (m := re.match(r"lab(\d+)-", d.name))
+        )
+        assert grid_numbers == folder_numbers, (
+            "docs/index.md lab grid must list each lab folder once, in sequential order.\n"
+            f"Grid order:  {grid_numbers}\nLab folders: {folder_numbers}"
+        )
+
+    def test_index_md_learning_path_numbers_match_labs(self):
+        """Learning-path entries in docs/index.md must use real lab numbers.
+
+        Path entries carry no link, so a stale number from the old scheme (for example
+        "01 Phishing Classifier", which is now lab10) is only caught by comparing the
+        entry's name with the title of the grid card that has the same number.
+        """
+        index_md = REPO_ROOT / "docs" / "index.md"
+        if not index_md.exists():
+            pytest.skip("docs/index.md not found")
+        content = index_md.read_text(encoding="utf-8")
+
+        grid = self._index_md_grid_titles(content)
+        entries = re.findall(
+            r'<span class="path-lab-num[^"]*">([^<]+)</span>\s*'
+            r'<span class="path-lab-name">([^<]+)</span>',
+            content,
+        )
+        if not entries:
+            pytest.skip("No learning-path entries found in docs/index.md")
+
+        errors = []
+        for num, name in entries:
+            if not num.isdigit() or int(num) not in grid:
+                errors.append(f"'{num} {name}': {num} is not a lab number in the grid")
+                continue
+            title, entry = grid[int(num)].lower(), name.strip().lower()
+            if title not in entry and entry not in title:
+                errors.append(f"'{num} {name}': lab {num} is '{grid[int(num)]}'")
+        if errors:
+            pytest.fail("docs/index.md learning paths use wrong lab numbers:\n" + "\n".join(errors))
+
+    def test_index_md_colab_labels_match_notebooks(self):
+        """Colab badge labels ("Lab 10 (ML):") must name the lab whose notebook they open."""
+        index_md = REPO_ROOT / "docs" / "index.md"
+        if not index_md.exists():
+            pytest.skip("docs/index.md not found")
+        content = index_md.read_text(encoding="utf-8")
+
+        badges = re.findall(
+            r'Lab (\d+) \([^)]*\):</span>\s*<a href="[^"]*notebooks/lab(\d+)_[^"]*"[^>]*>'
+            r'<img [^>]*alt="Open Lab (\d+) in Colab"',
+            content,
+        )
+        if not badges:
+            pytest.skip("No labelled Colab badges found in docs/index.md")
+        errors = [
+            f"label 'Lab {label}' / alt 'Lab {alt}' opens notebook lab{nb}"
+            for label, nb, alt in badges
+            if not int(label) == int(nb) == int(alt)
+        ]
+        if errors:
+            pytest.fail("docs/index.md Colab badges are mislabelled:\n" + "\n".join(errors))
+
+    def test_index_md_role_paths_match_role_guide(self):
+        """Role cards ("Labs 00→15→18→29") must stay in sync with the role guide.
+
+        Each card must link to a section that exists in resources/role-based-learning-paths.md,
+        and every lab number on the card must be a lab that section actually links to.
+        """
+        index_md = REPO_ROOT / "docs" / "index.md"
+        guide = REPO_ROOT / "resources" / "role-based-learning-paths.md"
+        if not index_md.exists() or not guide.exists():
+            pytest.skip("docs/index.md or resources/role-based-learning-paths.md not found")
+        content = index_md.read_text(encoding="utf-8")
+
+        def github_anchor(heading: str) -> str:
+            # Approximates GitHub's heading slugs: lowercase, drop punctuation and emoji,
+            # then turn spaces into hyphens ("🔴 AI Red Team Path" -> "-ai-red-team-path").
+            return re.sub(r"[^\w\- ]", "", heading.strip().lower()).replace(" ", "-")
+
+        sections = {}
+        for block in re.split(r"(?m)^(?=## )", guide.read_text(encoding="utf-8")):
+            if block.startswith("## "):
+                anchor = github_anchor(block.splitlines()[0][3:])
+                sections[anchor] = {int(n) for n in re.findall(r"labs/lab(\d+)-", block)}
+
+        cards = re.findall(
+            r'role-based-learning-paths\.md#([^"]+)".*?Labs ([\d→]+)</span>', content, re.DOTALL
+        )
+        if not cards:
+            pytest.skip("No role cards found in docs/index.md")
+
+        errors = []
+        for anchor, sequence in cards:
+            if anchor not in sections:
+                errors.append(f"#{anchor}: no such section in role-based-learning-paths.md")
+                continue
+            missing = [n for n in sequence.split("→") if int(n) not in sections[anchor]]
+            if missing:
+                errors.append(f"#{anchor} 'Labs {sequence}': {', '.join(missing)} not in that path")
+        if errors:
+            pytest.fail("docs/index.md role cards are out of sync:\n" + "\n".join(errors))
+
     def test_readme_lab_navigator_sequential_order(self):
         """Verify README Lab Navigator displays labs in sequential order.
 

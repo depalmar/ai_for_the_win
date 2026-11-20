@@ -8,14 +8,14 @@ Master the Claude API and Python SDK for AI-powered security development.
 
 ## 📋 Table of Contents
 
-1. [Overview](#overview)
-2. [Claude API Setup](#claude-api-setup)
-3. [Claude in Cursor](#claude-in-cursor)
-4. [Claude CLI Tools](#claude-cli-tools)
-5. [Python SDK Usage](#python-sdk-usage)
-6. [Security-Specific Prompting](#security-specific-prompting)
-7. [Building Security Agents](#building-security-agents)
-8. [Best Practices](#best-practices)
+1. [Overview](#-overview)
+2. [Claude API Setup](#-claude-api-setup)
+3. [Claude in Cursor](#-claude-in-cursor)
+4. [Claude CLI Tools](#-claude-cli-tools)
+5. [Python SDK Usage](#-python-sdk-usage)
+6. [Security-Specific Prompting](#-security-specific-prompting)
+7. [Building Security Agents](#-building-security-agents)
+8. [Best Practices](#-best-practices)
 
 ---
 
@@ -132,7 +132,7 @@ Ctrl+Shift+L → Ask about your codebase
 
 ---
 
-## 🖥️ Claude CLI Tools
+## 💻 Claude CLI Tools
 
 ### Anthropic CLI
 
@@ -501,7 +501,7 @@ level: medium
 tags:
     - attack.execution
     - attack.t1059.001
-````
+```
 
 Example 2:
 Input: "Detect scheduled task creation"
@@ -663,7 +663,7 @@ Analyze these IOCs from a recent incident:
 Provide a threat assessment.
 """)
 print(result)
-````
+```
 
 ---
 

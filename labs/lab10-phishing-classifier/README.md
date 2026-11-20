@@ -377,7 +377,7 @@ X_combined = hstack([tfidf_features, numeric_features])
 
 ## 📚 Resources
 
-- [Scikit-learn Text Classification](https://scikit-learn.org/stable/tutorial/text_analytics/working_with_text_data.html)
+- [Scikit-learn Text Classification](https://scikit-learn.org/stable/auto_examples/text/plot_document_classification_20newsgroups.html)
 - [NLTK Documentation](https://www.nltk.org/)
 - [Phishing Dataset (Kaggle)](https://www.kaggle.com/datasets/naserabdullahalam/phishing-email-dataset)
 - [MITRE ATT&CK - Phishing](https://attack.mitre.org/techniques/T1566/)

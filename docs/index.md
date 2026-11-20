@@ -18,12 +18,21 @@ title: AI for the Win
   --border: #30363d;
 }
 
-/* Hide Midnight theme default header entirely */
+/* Hide Midnight theme default header entirely.
+   #title is the theme's title block (site title, _config.yml description, "Project maintained by"). */
 #header,
+#title,
 header.inner,
 .inner > header,
 nav:first-of-type:not(.sticky-nav) {
   display: none !important;
+}
+
+/* Midnight hides every <nav> at <=480px; keep our own nav on phones (still hidden when printing) */
+@media screen {
+  nav.sticky-nav {
+    display: block;
+  }
 }
 
 /* Hide theme attribution from sidebar and footer */
@@ -858,7 +867,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
 <!-- Sticky Navigation -->
 <nav class="sticky-nav">
   <div class="nav-content">
-    <a href="#" class="nav-brand">AI for the Win</a>
+    <a href="#top" class="nav-brand">AI for the Win</a>
     <div class="nav-links">
       <a href="#labs">Labs</a>
       <a href="#paths">Learning Paths</a>
@@ -873,7 +882,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
   </div>
 </nav>
 
-<div class="hero">
+<div class="hero" id="top">
   <img src="assets/images/logo.png" alt="AI for the Win - Security AI Training Platform Logo" width="120" height="120" style="margin-bottom: 1rem;">
   <h1>AI for the Win</h1>
   <p class="tagline">Build AI-Powered Security Tools | Hands-On Learning</p>
@@ -969,7 +978,7 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
         <span class="prereq-check">&#10003;</span>
         <div class="prereq-text">
           <strong>API Key (optional)</strong>
-          Only needed for Labs 04+. Free options available.
+          Only needed for Labs 14+. Free options available.
         </div>
       </div>
       <div class="prereq-item">
@@ -1393,25 +1402,14 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
         <span class="difficulty difficulty-2">&#9733;&#9733;&#9734; Intermediate</span>
       </div>
     </a>
-    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab25-dfir-fundamentals" class="lab-card" data-category="advanced">
+    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab25-dfir-fundamentals" class="lab-card" data-category="dfir">
       <div class="lab-header">
-        <span class="lab-number advanced">25</span>
+        <span class="lab-number dfir">25</span>
         <span class="lab-title">DFIR Fundamentals</span>
       </div>
       <p class="lab-desc">IR lifecycle, Windows artifacts, ATT&CK</p>
       <div class="lab-meta">
         <span>&#128337; ~2 hrs</span>
-        <span class="difficulty difficulty-2">&#9733;&#9733;&#9734; Intermediate</span>
-      </div>
-    </a>
-    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab29-ir-copilot" class="lab-card" data-category="advanced">
-      <div class="lab-header">
-        <span class="lab-number advanced">29</span>
-        <span class="lab-title">IR Copilot</span>
-      </div>
-      <p class="lab-desc">Conversational IR assistant, playbooks</p>
-      <div class="lab-meta">
-        <span>&#128337; ~4 hrs</span>
         <span class="difficulty difficulty-2">&#9733;&#9733;&#9734; Intermediate</span>
       </div>
     </a>
@@ -1446,6 +1444,17 @@ section p:last-child:not(.lab-desc):not(.path-desc):not(.prereq-text) {
       <div class="lab-meta">
         <span>&#128337; ~4 hrs</span>
         <span class="difficulty difficulty-3">&#9733;&#9733;&#9733; Advanced</span>
+      </div>
+    </a>
+    <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab29-ir-copilot" class="lab-card" data-category="dfir">
+      <div class="lab-header">
+        <span class="lab-number dfir">29</span>
+        <span class="lab-title">IR Copilot</span>
+      </div>
+      <p class="lab-desc">Conversational IR assistant, playbooks</p>
+      <div class="lab-meta">
+        <span>&#128337; ~4 hrs</span>
+        <span class="difficulty difficulty-2">&#9733;&#9733;&#9734; Intermediate</span>
       </div>
     </a>
     <a href="https://github.com/depalmar/ai_for_the_win/tree/main/labs/lab30-ransomware-fundamentals" class="lab-card" data-category="dfir">
@@ -1739,7 +1748,7 @@ function filterLabs(category) {
         <span class="path-toggle">&#9660;</span>
       </summary>
       <div class="path-content">
-        <p class="path-desc">Start here! Foundations → ML basics → LLM basics. No API key needed until Lab 35.</p>
+        <p class="path-desc">Start here! Foundations → ML basics → LLM basics. No API key needed until Lab 14.</p>
         <p style="font-size: 0.8rem; color: var(--secondary); margin-bottom: 0.75rem; font-weight: 600;">📚 Foundations (Optional Prep)</p>
         <div class="path-labs-list">
           <div class="path-lab-item">
@@ -1786,17 +1795,17 @@ function filterLabs(category) {
         <p style="font-size: 0.8rem; color: var(--secondary); margin: 1rem 0 0.75rem; font-weight: 600;">🔬 ML Basics (No API Key)</p>
         <div class="path-labs-list">
           <div class="path-lab-item">
-            <span class="path-lab-num ml">01</span>
+            <span class="path-lab-num ml">10</span>
             <span class="path-lab-name">Phishing Classifier</span>
             <span class="path-time">~2 hrs</span>
           </div>
           <div class="path-lab-item">
-            <span class="path-lab-num ml">02</span>
+            <span class="path-lab-num ml">11</span>
             <span class="path-lab-name">Malware Clustering</span>
             <span class="path-time">~2 hrs</span>
           </div>
           <div class="path-lab-item">
-            <span class="path-lab-num ml">03</span>
+            <span class="path-lab-num ml">12</span>
             <span class="path-lab-name">Anomaly Detection</span>
             <span class="path-time">~2 hrs</span>
           </div>
@@ -1804,22 +1813,22 @@ function filterLabs(category) {
         <p style="font-size: 0.8rem; color: var(--primary); margin: 1rem 0 0.75rem; font-weight: 600;">🤖 LLM Basics (API Key Required)</p>
         <div class="path-labs-list">
           <div class="path-lab-item">
-            <span class="path-lab-num llm">04</span>
+            <span class="path-lab-num llm">15</span>
             <span class="path-lab-name">LLM Log Analysis</span>
             <span class="path-time">~3 hrs</span>
           </div>
           <div class="path-lab-item">
-            <span class="path-lab-num llm">05</span>
+            <span class="path-lab-num llm">16</span>
             <span class="path-lab-name">Threat Intel Agent</span>
             <span class="path-time">~3 hrs</span>
           </div>
           <div class="path-lab-item">
-            <span class="path-lab-num llm">06</span>
+            <span class="path-lab-num llm">18</span>
             <span class="path-lab-name">Security RAG</span>
             <span class="path-time">~4 hrs</span>
           </div>
           <div class="path-lab-item">
-            <span class="path-lab-num llm">07</span>
+            <span class="path-lab-num advanced">21</span>
             <span class="path-lab-name">YARA Generator</span>
             <span class="path-time">~3 hrs</span>
           </div>
@@ -1837,42 +1846,42 @@ function filterLabs(category) {
         <p class="path-desc">Build advanced tools. Detection pipelines, IR copilots, and DFIR automation.</p>
         <div class="path-labs-list">
           <div class="path-lab-item">
-            <span class="path-lab-num advanced">08</span>
+            <span class="path-lab-num advanced">22</span>
             <span class="path-lab-name">Vuln Prioritizer</span>
             <span class="path-time">~4 hrs</span>
           </div>
           <div class="path-lab-item">
-            <span class="path-lab-num advanced">09</span>
+            <span class="path-lab-num advanced">23</span>
             <span class="path-lab-name">Detection Pipeline</span>
             <span class="path-time">~5 hrs</span>
           </div>
           <div class="path-lab-item">
-            <span class="path-lab-num advanced">10</span>
+            <span class="path-lab-num dfir">29</span>
             <span class="path-lab-name">IR Copilot</span>
             <span class="path-time">~4 hrs</span>
           </div>
           <div class="path-lab-item">
-            <span class="path-lab-num dfir">11</span>
+            <span class="path-lab-num dfir">31</span>
             <span class="path-lab-name">Ransomware Detection</span>
             <span class="path-time">~5 hrs</span>
           </div>
           <div class="path-lab-item">
-            <span class="path-lab-num dfir">12</span>
+            <span class="path-lab-num dfir">32</span>
             <span class="path-lab-name">Purple Team Sim</span>
             <span class="path-time">~6 hrs</span>
           </div>
           <div class="path-lab-item">
-            <span class="path-lab-num dfir">13</span>
+            <span class="path-lab-num dfir">33</span>
             <span class="path-lab-name">Memory Forensics</span>
             <span class="path-time">~6 hrs</span>
           </div>
           <div class="path-lab-item">
-            <span class="path-lab-num dfir">14</span>
+            <span class="path-lab-num dfir">34</span>
             <span class="path-lab-name">C2 Traffic Analysis</span>
             <span class="path-time">~5 hrs</span>
           </div>
           <div class="path-lab-item">
-            <span class="path-lab-num dfir">15</span>
+            <span class="path-lab-num dfir">35</span>
             <span class="path-lab-name">Lateral Movement</span>
             <span class="path-time">~5 hrs</span>
           </div>
@@ -1890,37 +1899,37 @@ function filterLabs(category) {
         <p class="path-desc">Advanced techniques: threat actor profiling, adversarial ML, cloud/container security, and red teaming.</p>
         <div class="path-labs-list">
           <div class="path-lab-item">
-            <span class="path-lab-num dfir">16</span>
+            <span class="path-lab-num dfir">36</span>
             <span class="path-lab-name">Threat Actor Profiling</span>
             <span class="path-time">~5 hrs</span>
           </div>
           <div class="path-lab-item">
-            <span class="path-lab-num dfir">17</span>
+            <span class="path-lab-num dfir">39</span>
             <span class="path-lab-name">Adversarial ML</span>
             <span class="path-time">~6 hrs</span>
           </div>
           <div class="path-lab-item">
-            <span class="path-lab-num dfir">17b</span>
+            <span class="path-lab-num dfir">40</span>
             <span class="path-lab-name">LLM Security Testing</span>
             <span class="path-time">~3 hrs</span>
           </div>
           <div class="path-lab-item">
-            <span class="path-lab-num dfir">18</span>
+            <span class="path-lab-num dfir">42</span>
             <span class="path-lab-name">Fine-Tuning</span>
             <span class="path-time">~8 hrs</span>
           </div>
           <div class="path-lab-item">
-            <span class="path-lab-num dfir">19</span>
+            <span class="path-lab-num dfir">45</span>
             <span class="path-lab-name">Cloud Security AI</span>
             <span class="path-time">~5 hrs</span>
           </div>
           <div class="path-lab-item">
-            <span class="path-lab-num dfir">19b</span>
+            <span class="path-lab-num dfir">46</span>
             <span class="path-lab-name">Container Security</span>
             <span class="path-time">~4 hrs</span>
           </div>
           <div class="path-lab-item">
-            <span class="path-lab-num dfir">20</span>
+            <span class="path-lab-num dfir">49</span>
             <span class="path-lab-name">LLM Red Teaming</span>
             <span class="path-time">~6 hrs</span>
           </div>
@@ -1937,25 +1946,25 @@ function filterLabs(category) {
       <div class="feature-icon">🔵</div>
       <h3 style="margin: 0;">SOC Analyst</h3>
       <p>Automate triage, reduce alert fatigue</p>
-      <span style="font-size: 0.75rem; color: var(--secondary);">Labs 00→04→06→10</span>
+      <span style="font-size: 0.75rem; color: var(--secondary);">Labs 00→15→18→29</span>
     </a>
     <a href="https://github.com/depalmar/ai_for_the_win/blob/main/resources/role-based-learning-paths.md#-threat-hunter-path" class="feature" style="text-decoration: none; cursor: pointer;">
       <div class="feature-icon">🟢</div>
       <h3 style="margin: 0;">Threat Hunter</h3>
       <p>Find unknowns, detect anomalies</p>
-      <span style="font-size: 0.75rem; color: var(--secondary);">Labs 03→02→14→15</span>
+      <span style="font-size: 0.75rem; color: var(--secondary);">Labs 12→11→34→35</span>
     </a>
     <a href="https://github.com/depalmar/ai_for_the_win/blob/main/resources/role-based-learning-paths.md#-detection-engineer-path" class="feature" style="text-decoration: none; cursor: pointer;">
       <div class="feature-icon">🟡</div>
       <h3 style="margin: 0;">Detection Engineer</h3>
       <p>ML-powered rules, fewer false positives</p>
-      <span style="font-size: 0.75rem; color: var(--secondary);">Labs 01→03→07→09</span>
+      <span style="font-size: 0.75rem; color: var(--secondary);">Labs 10→12→21→23</span>
     </a>
     <a href="https://github.com/depalmar/ai_for_the_win/blob/main/resources/role-based-learning-paths.md#-ai-red-team-path" class="feature" style="text-decoration: none; cursor: pointer;">
       <div class="feature-icon">🔴</div>
       <h3 style="margin: 0;">AI Red Team</h3>
       <p>Evade ML, attack AI systems</p>
-      <span style="font-size: 0.75rem; color: var(--secondary);">Labs 03→17→20</span>
+      <span style="font-size: 0.75rem; color: var(--secondary);">Labs 12→39→49</span>
     </a>
   </div>
 
@@ -1977,22 +1986,22 @@ function filterLabs(category) {
     </thead>
     <tbody>
       <tr>
-        <td>00-03 (ML Foundations)</td>
+        <td>00-13 (Foundation + ML)</td>
         <td>No</td>
         <td class="free">Free</td>
       </tr>
       <tr>
-        <td>04-07 (LLM Basics)</td>
+        <td>14-18 (LLM Basics)</td>
         <td>Yes</td>
         <td>~$2-8</td>
       </tr>
       <tr>
-        <td>08-10 (Advanced)</td>
+        <td>19-24 (Detection Engineering)</td>
         <td>Yes</td>
         <td>~$5-15</td>
       </tr>
       <tr>
-        <td>11-20 (Expert)</td>
+        <td>25-50 (DFIR, Advanced &amp; Cloud)</td>
         <td>Yes</td>
         <td>~$10-25</td>
       </tr>
@@ -2017,15 +2026,15 @@ function filterLabs(category) {
     <p style="color: var(--text-muted); margin-bottom: 1rem;">Run labs directly in your browser — no installation needed!</p>
     <div style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: center;">
       <div style="display: flex; align-items: center; gap: 0.5rem;">
-        <span style="color: var(--text); font-size: 0.85rem;">Lab 29 (ML):</span>
-        <a href="https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab10_phishing_classifier.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open Lab 29 in Colab"></a>
+        <span style="color: var(--text); font-size: 0.85rem;">Lab 10 (ML):</span>
+        <a href="https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab10_phishing_classifier.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open Lab 10 in Colab"></a>
       </div>
       <div style="display: flex; align-items: center; gap: 0.5rem;">
-        <span style="color: var(--text); font-size: 0.85rem;">Lab 35 (LLM):</span>
-        <a href="https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab15_llm_log_analysis.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open Lab 35 in Colab"></a>
+        <span style="color: var(--text); font-size: 0.85rem;">Lab 15 (LLM):</span>
+        <a href="https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab15_llm_log_analysis.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open Lab 15 in Colab"></a>
       </div>
     </div>
-    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem;">📓 <a href="https://github.com/depalmar/ai_for_the_win/tree/main/notebooks" style="color: var(--primary);">All 50+ lab notebooks</a> available for Colab</p>
+    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem;">📓 <a href="https://github.com/depalmar/ai_for_the_win/tree/main/notebooks" style="color: var(--primary);">46 lab notebooks</a> available for Colab</p>
   </div>
 
   <div class="quick-start" style="margin-bottom: 1.5rem;">
@@ -2063,7 +2072,7 @@ python labs/lab10-phishing-classifier/solution/main.py</code></pre>
     </details>
     <details class="faq-item">
       <summary>Which LLM provider should I use?</summary>
-      <div class="faq-content">We recommend Anthropic Claude (Sonnet 4/Opus 4.5) for best reasoning on security tasks. All labs support OpenAI GPT-5.2, Google Gemini 3, and Ollama (free, local). You only need one provider.</div>
+      <div class="faq-content">We recommend Anthropic Claude for security tasks: Sonnet for everyday lab work, Opus for the hardest reasoning. All labs also support OpenAI GPT, Google Gemini, and Ollama (free, local). You only need one provider. See the <a href="https://github.com/depalmar/ai_for_the_win/blob/main/docs/guides/llm-provider-comparison.md">LLM Provider Comparison</a> guide for current models and pricing.</div>
     </details>
     <details class="faq-item">
       <summary>Can I run everything locally without API costs?</summary>
@@ -2134,7 +2143,7 @@ python labs/lab10-phishing-classifier/solution/main.py</code></pre>
     </div>
     <div class="feature">
       <div class="feature-icon">&#128187;</div>
-      <h3><a href="https://github.com/depalmar/ai_for_the_win/tree/main/docs/guides">All 28 Guides</a></h3>
+      <h3><a href="https://github.com/depalmar/ai_for_the_win/tree/main/docs/guides">All 29 Guides</a></h3>
       <p>Tools, APIs, dev setup, and more</p>
     </div>
   </div>

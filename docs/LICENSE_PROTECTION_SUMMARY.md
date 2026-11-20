@@ -316,7 +316,7 @@ Copy this checklist for quarterly reviews:
 ### Legal
 - **Creative Commons FAQ**: https://creativecommons.org/faq/
 - **GitHub DMCA**: https://docs.github.com/en/github/site-policy/dmca-takedown-policy
-- **FindLaw Copyright**: https://www.findlaw.com/smallbusiness/intellectual-property/copyright-law.html
+- **FindLaw Copyright**: https://www.findlaw.com/smallbusiness/intellectual-property/what-is-copyright.html
 
 ### Tools
 - **Archive.is**: https://archive.is/ (archive evidence)

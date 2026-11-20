@@ -52,7 +52,7 @@ Comprehensive collection of tools, datasets, APIs, courses, and communities for 
 | ------------------- | ----------------- | ------------------------- | ------------------------------------------------------------------------------------ |
 | **LangChain**       | General agents    | Flexible agent building   | [langchain.com](https://langchain.com)                                               |
 | **LangGraph**       | Stateful agents   | Complex workflows         | [langchain.com/langgraph](https://langchain.com/langgraph)                           |
-| **Google ADK**      | Production agents | Gemini-powered agents     | [ai.google.dev/adk](https://ai.google.dev/adk)                                       |
+| **Google ADK**      | Production agents | Gemini-powered agents     | [adk.dev](https://adk.dev/)                                       |
 | **CrewAI**          | Multi-agent       | Role-based agent teams    | [crewai.com](https://crewai.com)                                                     |
 | **AutoGen**         | Conversational    | Multi-agent conversations | [microsoft.github.io/autogen](https://microsoft.github.io/autogen)                   |
 | **Semantic Kernel** | Enterprise        | Microsoft ecosystem       | [github.com/microsoft/semantic-kernel](https://github.com/microsoft/semantic-kernel) |
@@ -213,7 +213,7 @@ SANS is the premier cybersecurity training organization. While their courses are
 | **Webcasts**               | Free 1-hour technical webinars                          | [sans.org/webcasts](https://www.sans.org/webcasts/)               |
 | **Internet Storm Center**  | Daily security diaries and threat intel                 | [isc.sans.edu](https://isc.sans.edu/)                             |
 | **GIAC Papers**            | Research from certified professionals                   | [giac.org/paper](https://www.giac.org/paper)                      |
-| **Cyber Aces**             | Free intro to cybersecurity course                      | [cyberaces.org](https://www.cyberaces.org/)                       |
+| **SANS Free Resources**    | Free cybersecurity training (Cyber Aces retired 2023)   | [sans.org/cyberaces](https://www.sans.org/cyberaces)              |
 | **Holiday Hack Challenge** | Annual free CTF (December)                              | [holidayhackchallenge.com](https://www.holidayhackchallenge.com/) |
 
 ### Essential SANS Posters (Download & Print)
@@ -225,7 +225,7 @@ SANS is the premier cybersecurity training organization. While their courses are
 | **[Memory Forensics](https://www.sans.org/posters/memory-forensics-cheat-sheet/)**                         | Memory analysis       | Volatility commands, RAM artifacts              |
 | **[Network Forensics](https://www.sans.org/posters/network-forensics-poster/)**                            | Network investigation | Protocol analysis, packet inspection            |
 | **[Cloud Security](https://www.sans.org/posters/cloud-security-top-10/)**                                  | Cloud IR              | AWS/Azure/GCP security controls                 |
-| **[Intrusion Discovery (Linux)](https://www.sans.org/posters/intrusion-discovery-cheat-sheet-linux/)**     | Linux IR              | Evidence artifact locations                     |
+| **[Intrusion Discovery (Linux)](https://www.sans.org/posters/intrusion-discovery-cheat-sheet-for-linux/)**     | Linux IR              | Evidence artifact locations                     |
 | **[Intrusion Discovery (Windows)](https://www.sans.org/posters/intrusion-discovery-cheat-sheet-windows/)** | Windows IR            | Evidence artifact locations                     |
 | **[PowerShell Cheat Sheet](https://www.sans.org/posters/powershell-cheat-sheet/)**                         | PowerShell analysis   | Commands, logging, analysis                     |
 | **[SIFT Workstation](https://www.sans.org/posters/sift-cheat-sheet/)**                                     | DFIR tools            | Forensic tool reference                         |
