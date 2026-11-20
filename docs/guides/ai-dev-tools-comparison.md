@@ -1143,11 +1143,11 @@ git diff HEAD~1 -- src/auth/ src/crypto/
 
 ### Documentation
 
-- [Cursor Docs](https://docs.cursor.sh)
+- [Cursor Docs](https://cursor.com/docs)
 - [Claude Code Docs](https://docs.anthropic.com/claude-code)
 - [Windsurf Docs](https://codeium.com/windsurf/docs)
 - [Aider Docs](https://aider.chat)
-- [Continue.dev Docs](https://continue.dev/docs)
+- [Continue.dev Docs](https://docs.continue.dev/)
 - [GitHub Copilot Docs](https://docs.github.com/copilot)
 - [Amazon Q Docs](https://docs.aws.amazon.com/amazonq)
 - [OpenHands Docs](https://docs.all-hands.dev)
@@ -1157,7 +1157,6 @@ git diff HEAD~1 -- src/auth/ src/crypto/
 - [Cursor Discord](https://discord.gg/cursor)
 - [Aider Discord](https://discord.gg/aider)
 - [Continue.dev Discord](https://discord.gg/continue)
-- [OpenHands Slack](https://join.slack.com/t/openhands)
 
 ---
 

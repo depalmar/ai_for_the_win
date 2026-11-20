@@ -518,7 +518,7 @@ Before moving on, ensure you can:
 
 ### Learning More
 - [Prompt Engineering Guide](https://www.promptingguide.ai/)
-- [AI-Assisted Development Best Practices](https://github.blog/2024-01-17-a-beginners-guide-to-ai-assisted-development/)
+- [GitHub for Beginners: Getting Started with Copilot](https://github.blog/ai-and-ml/github-copilot/github-for-beginners-how-to-get-started-with-github-copilot/)
 
 ### Community
 - Join discussions in course Discord/Slack

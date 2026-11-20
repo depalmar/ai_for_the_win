@@ -6,18 +6,18 @@ The AI-native IDE that supercharges your security tool development.
 
 ## Table of Contents
 
-1. [Why Cursor for Security AI Development](#why-cursor-for-security-ai-development)
-2. [Installation](#installation)
-3. [Initial Setup](#initial-setup)
-4. [Key Features](#key-features)
+1. [Why Cursor for Security AI Development](#-why-cursor-for-security-ai-development)
+2. [Installation](#-installation)
+3. [Initial Setup](#-initial-setup)
+4. [Key Features](#-key-features)
 5. [Agent Mode](#agent-mode)
 6. [Background Agents](#background-agents)
 7. [MCP Integration](#mcp-integration)
 8. [AI Models Configuration](#ai-models-configuration)
 9. [Cursor Rules](#cursor-rules)
 10. [Keyboard Shortcuts](#keyboard-shortcuts)
-11. [Security-Focused Workflows](#security-focused-workflows)
-12. [Best Practices](#best-practices)
+11. [Security-Focused Workflows](#-security-focused-workflows)
+12. [Best Practices](#-best-practices)
 13. [Advanced Configuration](#advanced-configuration)
 
 ---
@@ -79,7 +79,7 @@ chmod +x cursor-*.AppImage
 
 ---
 
-## ⚙️ Initial Setup
+## 🔧 Initial Setup
 
 ### 1. Sign In / Create Account
 
@@ -927,7 +927,7 @@ Update all relevant files to support this new threat type."
 
 ## Additional Resources
 
-- [Cursor Documentation](https://docs.cursor.sh)
+- [Cursor Documentation](https://cursor.com/docs)
 - [Cursor Discord Community](https://discord.gg/cursor)
 - [VS Code Keybindings Reference](https://code.visualstudio.com/docs/getstarted/keybindings)
 - [Python Extension Documentation](https://code.visualstudio.com/docs/python/python-tutorial)

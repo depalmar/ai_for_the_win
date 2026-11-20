@@ -516,7 +516,7 @@ SANS is the gold standard for DFIR training. These free resources will level up 
 | **[Windows Forensic Analysis](https://www.sans.org/posters/windows-forensic-analysis/)** | Registry, event logs, artifacts by location | Quick reference during investigations |
 | **[DFIR Memory Forensics](https://www.sans.org/posters/memory-forensics-cheat-sheet/)** | Volatility commands, memory analysis | Lab 13 companion |
 | **[Network Forensics](https://www.sans.org/posters/network-forensics-poster/)** | Protocol analysis, packet investigation | Lab 14 companion |
-| **[Intrusion Discovery Cheat Sheet](https://www.sans.org/posters/intrusion-discovery-cheat-sheet-linux/)** | Linux artifact locations | Linux IR |
+| **[Intrusion Discovery Cheat Sheet](https://www.sans.org/posters/intrusion-discovery-cheat-sheet-for-linux/)** | Linux artifact locations | Linux IR |
 
 > 💡 **Pro Tip**: Print the "Hunt Evil" poster and keep it visible. It shows what normal Windows processes look like vs. what attackers try to mimic. Invaluable during triage.
 

@@ -400,7 +400,7 @@ SANS is one of the most respected cybersecurity training organizations. Their fr
 | **SANS Reading Room** | 3,500+ free security white papers | [sans.org/white-papers](https://www.sans.org/white-papers/) |
 | **SANS Posters** | Visual reference guides (print-worthy!) | [sans.org/posters](https://www.sans.org/posters/) |
 | **SANS Webcasts** | Free security webinars | [sans.org/webcasts](https://www.sans.org/webcasts/) |
-| **SANS Cyber Aces** | Free intro cybersecurity course | [cyberaces.org](https://www.cyberaces.org/) |
+| **SANS Free Resources** | Free cybersecurity training (Cyber Aces was retired in 2023) | [sans.org/cyberaces](https://www.sans.org/cyberaces) |
 | **Internet Storm Center** | Daily security news & diaries | [isc.sans.edu](https://isc.sans.edu/) |
 | **GIAC Papers** | Research from certified professionals | [giac.org/paper](https://www.giac.org/paper) |
 

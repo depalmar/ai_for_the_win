@@ -1680,8 +1680,8 @@ class AIIncidentResponder:
 
 ## Additional Resources
 
-- [OWASP LLM Top 10](https://owasp.org/www-project-llm-security/)
+- [OWASP LLM Top 10](https://genai.owasp.org/llm-top-10/)
 - [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework)
-- [Anthropic Responsible AI Guidelines](https://www.anthropic.com/responsible-ai)
+- [Anthropic Responsible Scaling Policy](https://www.anthropic.com/responsible-scaling-policy)
 - [EU AI Act Compliance Guide](https://artificialintelligenceact.eu/)
 - [MITRE ATLAS - Adversarial Threat Landscape for AI Systems](https://atlas.mitre.org/)
