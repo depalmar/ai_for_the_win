@@ -45,7 +45,7 @@ class RAGConfig:
     chunk_size: int = 1000
     chunk_overlap: int = 200
     persist_directory: str = "./chroma_db"
-    llm_model: str = "claude-sonnet-4-20250514"
+    llm_model: str = "claude-sonnet-5-5"
 
 
 # =============================================================================
@@ -131,7 +131,8 @@ class RAGAgent:
         # Create QA chain
         api_key = os.getenv("ANTHROPIC_API_KEY")
         if api_key:
-            llm = ChatAnthropic(model=self.config.llm_model, temperature=0)
+            # Sonnet 5.5's thinking-off mode (no temperature: current Claude models reject it)
+            llm = ChatAnthropic(model=self.config.llm_model, thinking={"type": "between_tools"})
 
             self.qa_chain = RetrievalQA.from_chain_type(
                 llm=llm,

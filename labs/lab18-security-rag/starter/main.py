@@ -338,7 +338,7 @@ def main():
 
     # Step 5: Initialize RAG
     console.print("\n[yellow]Step 5:[/yellow] Initializing RAG system...")
-    # llm = ChatAnthropic(model="claude-sonnet-4-20250514")
+    # llm = ChatAnthropic(model="claude-sonnet-5-5", thinking={"type": "between_tools"})
     # rag = SecurityRAG(retriever, llm)
 
     # Step 6: Test queries

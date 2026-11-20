@@ -44,7 +44,7 @@ def setup_llm(provider: str = "auto"):
         import google.generativeai as genai
 
         genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
-        return genai.GenerativeModel("gemini-2.5-pro")
+        return genai.GenerativeModel("gemini-3.8-flash")
     else:
         raise ValueError(f"Unknown provider: {provider}")
 

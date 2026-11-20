@@ -72,8 +72,9 @@ def setup_llm(provider: str = "anthropic"):
 
         # TODO: Ask your AI assistant:
         # "Write Python code to create a ChatAnthropic client using the model
-        # 'claude-sonnet-4-20250514', then test it by invoking a simple message
-        # asking it to say 'ready', and return the configured client."
+        # 'claude-sonnet-5-5' and thinking={"type": "between_tools"} (no temperature),
+        # then test it by invoking a simple message asking it to say 'ready', and return
+        # the configured client."
         #
         # Then review and test the generated code.
         pass

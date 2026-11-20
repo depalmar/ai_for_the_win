@@ -136,21 +136,21 @@ def get_llm_client(provider: str = "auto"):
         if prov == "anthropic":
             api_key = os.getenv("ANTHROPIC_API_KEY")
             if api_key and ANTHROPIC_AVAILABLE:
-                return Anthropic(api_key=api_key), "anthropic", "claude-sonnet-4-20250514"
+                return Anthropic(api_key=api_key), "anthropic", "claude-sonnet-5-5"
 
         elif prov == "openai":
             api_key = os.getenv("OPENAI_API_KEY")
             if api_key and OPENAI_AVAILABLE:
-                return OpenAI(api_key=api_key), "openai", "gpt-5"
+                return OpenAI(api_key=api_key), "openai", "gpt-6.2-sol"
 
         elif prov == "gemini":
             api_key = os.getenv("GOOGLE_API_KEY")
             if api_key and GEMINI_AVAILABLE:
                 genai.configure(api_key=api_key)
                 return (
-                    genai.GenerativeModel("gemini-2.5-pro"),
+                    genai.GenerativeModel("gemini-3.8-flash"),
                     "gemini",
-                    "gemini-2.5-pro",
+                    "gemini-3.8-flash",
                 )
 
     raise ValueError(
@@ -177,8 +177,10 @@ def call_llm(client: Any, provider: str, model: str, prompt: str, max_tokens: in
             model=model,
             max_tokens=max_tokens,
             messages=[{"role": "user", "content": prompt}],
+            # Sonnet 5.5's thinking-off mode; other Claude models reject it
+            thinking={"type": "between_tools"},
         )
-        return response.content[0].text
+        return "".join(b.text for b in response.content if b.type == "text")
 
     elif provider == "openai":
         response = client.chat.completions.create(

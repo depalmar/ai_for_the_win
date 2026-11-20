@@ -458,7 +458,7 @@ def main():
                 console.print(f"  - {doc.metadata.get('source', 'Unknown')}")
         return
 
-    llm = ChatAnthropic(model="claude-sonnet-4-20250514", temperature=0)
+    llm = ChatAnthropic(model="claude-sonnet-5-5", thinking={"type": "between_tools"})
     rag = SecurityRAG(retriever, llm)
 
     # Step 6: Test queries
