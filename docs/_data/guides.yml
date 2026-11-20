@@ -1,0 +1,38 @@
+# Guides on the Guides tab: every docs/guides/*.md exactly once (checked by tests).
+- group: Start here
+  items:
+    - {file: quickstart-guide.md, title: "Quick Start", desc: "Up and running with AI security development in 15 minutes."}
+    - {file: dev-environment-setup.md, title: "Development Environment Setup", desc: "Editors, AI assistants, Python, frameworks and security tools for the labs."}
+    - {file: api-keys-guide.md, title: "API Keys", desc: "Get keys for Claude, OpenAI or Gemini, or run free with Ollama."}
+    - {file: colab-guide.md, title: "Google Colab", desc: "Run the labs in your browser with free Colab notebooks."}
+    - {file: jupyter-basics-guide.md, title: "Jupyter Basics", desc: "Local Jupyter notebooks for security analysts."}
+    - {file: troubleshooting-guide.md, title: "Troubleshooting", desc: "Fixes for common setup and lab errors."}
+    - {file: security-fundamentals-for-beginners.md, title: "Security Fundamentals for Beginners", desc: "Core security concepts for developers and ML practitioners new to security."}
+    - {file: using-ai-for-learning.md, title: "Using AI to Accelerate Learning", desc: "Use AI assistants to learn security and AI development faster."}
+- group: AI coding tools
+  items:
+    - {file: claude-code-cli-guide.md, title: "Claude Code CLI", desc: "Anthropic's agentic coding assistant in the terminal."}
+    - {file: cursor-ide-guide.md, title: "Cursor IDE", desc: "The AI-native IDE for building security tools."}
+    - {file: gemini-cli-guide.md, title: "Gemini CLI", desc: "Google's open-source AI agent for terminal workflows."}
+    - {file: ai-dev-tools-comparison.md, title: "AI Development Tools Compared", desc: "AI coding tools side by side for security work."}
+    - {file: claude-api-guide.md, title: "Claude API and SDK", desc: "The Claude API and Python SDK for security development."}
+    - {file: github-workflow-guide.md, title: "GitHub Workflow", desc: "GitHub for AI security tool development and collaboration."}
+    - {file: workshops-guide.md, title: "Workshops", desc: "Hands-on exercises with modern AI development tools."}
+- group: Building with LLMs
+  items:
+    - {file: llm-provider-comparison.md, title: "LLM Provider Comparison", desc: "Pick a provider by performance, cost and capabilities."}
+    - {file: cost-management.md, title: "LLM Cost Management", desc: "Estimate, monitor and cut LLM API costs."}
+    - {file: langchain-guide.md, title: "LangChain", desc: "From simple chains to multi-agent security tools."}
+    - {file: google-adk-guide.md, title: "Google Agent Development Kit", desc: "Production AI agents for security operations."}
+    - {file: embeddings-and-vectors.md, title: "Embeddings and Vector Databases", desc: "The foundation of semantic search and RAG."}
+    - {file: structured-output-parsing.md, title: "Structured Output Parsing", desc: "Reliable structured data from LLMs for automation."}
+    - {file: error-handling-guide.md, title: "Error Handling", desc: "Robust error handling in AI security applications."}
+    - {file: llm-evaluation-testing.md, title: "LLM Evaluation and Testing", desc: "Check that AI security tools give reliable, consistent output."}
+    - {file: advanced-topics-guide.md, title: "Advanced AI Security Topics", desc: "Deep dives into advanced AI and ML techniques for security."}
+- group: Securing AI and reference
+  items:
+    - {file: prompt-injection-defense.md, title: "Prompt Injection Defense", desc: "Protect LLM-powered tools from adversarial input."}
+    - {file: security-compliance-guide.md, title: "Security and Compliance", desc: "Build secure, compliant AI-powered security tools."}
+    - {file: threat-landscape-2025.md, title: "Threat Landscape 2025-2026", desc: "Current threat actors, campaigns, tools and TTPs."}
+    - {file: windows-internals-quickref.md, title: "Windows Internals Quick Reference", desc: "Windows internals for the memory forensics and hunting labs."}
+    - {file: ai-for-security-leaders.md, title: "AI for Security Leaders", desc: "For managers and executives: invest in, measure and govern AI."}

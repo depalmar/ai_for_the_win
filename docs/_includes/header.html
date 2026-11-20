@@ -1,0 +1,21 @@
+{%- include counts.html -%}
+{%- assign base = '/' | relative_url -%}
+<a class="skip" href="#main">Skip to content</a>
+<header class="hdr"><div class="hdr-in">
+  <div class="hdr-top">
+    <a class="brand" href="{{ base }}#start" aria-label="AI for the Win: start"><span class="dot"></span><h1>AI for the Win</h1></a>
+    <span class="pill wide-only">v{{ site.data.counts.version }} &#183; {{ site.license_label }}</span>
+    <button type="button" class="hsearch" id="searchBtn" aria-haspopup="dialog" aria-keyshortcuts="/ Control+K Meta+K"><span class="glyph" aria-hidden="true">&#8981;</span><span class="hs-l">Search labs, guides and questions: a tool, a topic or a lab number</span><span class="hs-s">Search</span><kbd aria-hidden="true">/</kbd></button>
+    <span class="hdr-right"><a class="hbtn wide-only" href="{{ site.repo_url }}" rel="noopener">GitHub &#8599;</a><button type="button" class="hbtn" id="themeBtn">&#9790; Dark</button></span>
+  </div>
+  <nav class="tabs" role="tablist" aria-label="Sections">
+    <a role="tab" data-tab="start" href="{{ base }}#start">Start</a>
+    <a role="tab" data-tab="labs" href="{{ base }}#labs">Labs<span class="n">{{ c_labs }}</span></a>
+    <a role="tab" data-tab="paths" href="{{ base }}#paths">Learning paths</a>
+    <a role="tab" data-tab="guides" href="{{ base }}#guides">Guides<span class="n">{{ c_guides }}</span></a>
+    <span class="tabsep" aria-hidden="true"></span>
+    <a role="tab" data-tab="cost" href="{{ base }}#cost">Cost</a>
+    <a role="tab" data-tab="faq" href="{{ base }}#faq">FAQ</a>
+    <a role="tab" data-tab="get-started" href="{{ base }}#get-started">Get started</a>
+  </nav>
+</div></header>

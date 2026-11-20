@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en">
+<head>
+{% include head.html %}
+</head>
+<body>
+{% include header.html %}
+<main id="main">
+  <article class="prose">
+    <p class="crumbs"><a href="{{ '/' | relative_url }}">AI for the Win</a> &#183; <a href="{{ site.repo_url }}/blob/main/docs/{{ page.path }}" rel="noopener">View on GitHub</a></p>
+    {{ content }}
+  </article>
+</main>
+{% include footer.html %}
+</body>
+</html>

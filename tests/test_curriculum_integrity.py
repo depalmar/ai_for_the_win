@@ -312,24 +312,19 @@ class TestPrerequisiteChain:
 
 
 class TestIndexMdConsistency:
-    """Test docs/index.md lab navigator consistency."""
+    """Test the GitHub Pages lab navigator (docs/index.html, rendered from docs/_data/labs.yml)."""
 
     def test_index_lab_cards_match_folders(self):
-        """Lab cards in index.md should match actual lab folders."""
-        index_file = PROJECT_ROOT / "docs" / "index.md"
-        if not index_file.exists():
-            pytest.skip("docs/index.md not found")
+        """Every lab the Pages site lists should be an existing lab folder."""
+        import yaml
 
-        content = index_file.read_text(encoding="utf-8")
-
-        # Find lab card patterns: href="labs/labXX-..."
-        href_pattern = re.compile(r'href="labs/(lab\d+-[^"]+)"')
-        matches = href_pattern.findall(content)
+        labs_file = PROJECT_ROOT / "docs" / "_data" / "labs.yml"
+        assert labs_file.exists(), "docs/_data/labs.yml (Pages site lab data) is missing"
+        labs = yaml.safe_load(labs_file.read_text(encoding="utf-8"))
+        assert labs, "docs/_data/labs.yml lists no labs"
 
         labs_dir = PROJECT_ROOT / "labs"
-        for href in matches:
-            # Extract lab folder name
-            lab_folder = labs_dir / href
-            assert lab_folder.exists() or any(
-                labs_dir.glob(f"{href.split('-')[0]}*")
-            ), f"index.md references non-existent lab: {href}"
+        for lab in labs:
+            assert (
+                labs_dir / lab["slug"]
+            ).is_dir(), f"Pages site lists non-existent lab folder: {lab['slug']}"

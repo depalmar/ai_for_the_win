@@ -1,0 +1,515 @@
+# Single source of truth for the labs on the GitHub Pages site (docs/index.html).
+# One entry per labs/ folder, in order. tests/test_lab_data_integrity.py checks every
+# entry against the repo: folder exists, number matches, track matches the canonical
+# range in docs/CLAUDE.md, and the notebook and walkthrough files exist.
+# minutes: estimated time. level: beginner | intermediate | advanced | expert.
+
+- n: 0
+  slug: lab00-environment-setup
+  title: "Environment Setup"
+  desc: "Python, VS Code, virtual env, Jupyter"
+  track: foundation
+  minutes: 30
+  level: beginner
+  notebook: null
+  walkthrough: null
+
+- n: 1
+  slug: lab01-python-security-fundamentals
+  title: "Python for Security"
+  desc: "Variables, files, APIs, IOC extraction"
+  track: foundation
+  minutes: 120
+  level: beginner
+  notebook: lab01_python_security.ipynb
+  walkthrough: lab01-python-security-fundamentals-walkthrough.md
+
+- n: 2
+  slug: lab02-intro-prompt-engineering
+  title: "Prompt Engineering"
+  desc: "LLM basics, templates, free playgrounds"
+  track: foundation
+  minutes: 60
+  level: beginner
+  notebook: lab02_prompt_engineering.ipynb
+  walkthrough: lab02-prompt-engineering-walkthrough.md
+
+- n: 3
+  slug: lab03-vibe-coding-with-ai
+  title: "Vibe Coding with AI"
+  desc: "AI coding assistants, Claude Code, Cursor, Copilot"
+  track: foundation
+  minutes: 45
+  level: beginner
+  notebook: lab03_vibe_coding.ipynb
+  walkthrough: null
+
+- n: 4
+  slug: lab04-ml-concepts-primer
+  title: "ML Concepts"
+  desc: "Supervised, unsupervised, features, metrics"
+  track: foundation
+  minutes: 60
+  level: beginner
+  notebook: lab04_ml_concepts.ipynb
+  walkthrough: lab04-ml-concepts-primer-walkthrough.md
+
+- n: 5
+  slug: lab05-ai-in-security-operations
+  title: "AI in Security Ops"
+  desc: "Real-world use cases, limitations, workflows"
+  track: foundation
+  minutes: 60
+  level: beginner
+  notebook: lab05_ai_security_ops.ipynb
+  walkthrough: lab05-ai-in-security-ops-walkthrough.md
+
+- n: 6
+  slug: lab06-visualization-stats
+  title: "Visualization & Stats"
+  desc: "Statistics, Plotly, security dashboards"
+  track: foundation
+  minutes: 120
+  level: beginner
+  notebook: lab06_visualization_stats.ipynb
+  walkthrough: lab06-visualization-stats-walkthrough.md
+
+- n: 7
+  slug: lab07-hello-world-ml
+  title: "Hello World ML"
+  desc: "Your first ML model, scikit-learn basics"
+  track: foundation
+  minutes: 60
+  level: beginner
+  notebook: lab07_hello_world_ml.ipynb
+  walkthrough: lab07-hello-world-ml-walkthrough.md
+
+- n: 8
+  slug: lab08-working-with-apis
+  title: "Working with APIs"
+  desc: "HTTP basics, requests, JSON parsing"
+  track: foundation
+  minutes: 60
+  level: beginner
+  notebook: lab08_working_with_apis.ipynb
+  walkthrough: lab08-working-with-apis-walkthrough.md
+
+- n: 9
+  slug: lab09-ctf-fundamentals
+  title: "CTF Fundamentals"
+  desc: "CTF mindset, encoding, flag hunting techniques"
+  track: foundation
+  minutes: 45
+  level: beginner
+  notebook: null
+  walkthrough: null
+
+- n: 10
+  slug: lab10-phishing-classifier
+  title: "Phishing Classifier"
+  desc: "ML text classification, TF-IDF, Random Forest"
+  track: ml
+  minutes: 120
+  level: beginner
+  notebook: lab10_phishing_classifier.ipynb
+  walkthrough: lab10-phishing-classifier-walkthrough.md
+
+- n: 11
+  slug: lab11-malware-clustering
+  title: "Malware Clustering"
+  desc: "K-Means, DBSCAN, feature extraction"
+  track: ml
+  minutes: 120
+  level: beginner
+  notebook: lab11_malware_clustering.ipynb
+  walkthrough: lab11-malware-clustering-walkthrough.md
+
+- n: 12
+  slug: lab12-anomaly-detection
+  title: "Anomaly Detection"
+  desc: "Isolation Forest, statistical baselines"
+  track: ml
+  minutes: 120
+  level: beginner
+  notebook: lab12_anomaly_detection.ipynb
+  walkthrough: lab12-anomaly-detection-walkthrough.md
+
+- n: 13
+  slug: lab13-ml-vs-llm
+  title: "ML vs LLM"
+  desc: "When to use ML vs LLM, cost comparison"
+  track: ml
+  minutes: 60
+  level: beginner
+  notebook: lab13_ml_vs_llm.ipynb
+  walkthrough: lab13-ml-vs-llm-walkthrough.md
+
+- n: 14
+  slug: lab14-first-ai-agent
+  title: "First AI Agent"
+  desc: "Tool calling, ReAct basics, agent loops"
+  track: llm
+  minutes: 120
+  level: intermediate
+  notebook: lab14_first_ai_agent.ipynb
+  walkthrough: lab14-first-ai-agent-walkthrough.md
+
+- n: 15
+  slug: lab15-llm-log-analysis
+  title: "LLM Log Analysis"
+  desc: "Prompt engineering, IOC extraction"
+  track: llm
+  minutes: 180
+  level: intermediate
+  notebook: lab15_llm_log_analysis.ipynb
+  walkthrough: lab15-llm-log-analysis-walkthrough.md
+
+- n: 16
+  slug: lab16-threat-intel-agent
+  title: "Threat Intel Agent"
+  desc: "ReAct pattern, LangChain, autonomous investigation"
+  track: llm
+  minutes: 180
+  level: intermediate
+  notebook: lab16_threat_intel_agent.ipynb
+  walkthrough: lab16-threat-intel-agent-walkthrough.md
+
+- n: 17
+  slug: lab17-embeddings-vectors
+  title: "Embeddings & Vectors"
+  desc: "Deep dive into embeddings for RAG"
+  track: llm
+  minutes: 120
+  level: intermediate
+  notebook: lab17_embeddings_vectors.ipynb
+  walkthrough: lab17-embeddings-vectors-walkthrough.md
+
+- n: 18
+  slug: lab18-security-rag
+  title: "Security RAG"
+  desc: "Vector embeddings, ChromaDB, doc Q&A"
+  track: llm
+  minutes: 240
+  level: intermediate
+  notebook: lab18_security_rag.ipynb
+  walkthrough: lab18-security-rag-walkthrough.md
+
+- n: 19
+  slug: lab19-binary-basics
+  title: "Binary Basics"
+  desc: "PE files, headers, sections for YARA"
+  track: detection
+  minutes: 120
+  level: intermediate
+  notebook: lab19_binary_basics.ipynb
+  walkthrough: lab19-binary-basics-walkthrough.md
+
+- n: 20
+  slug: lab20-sigma-fundamentals
+  title: "Sigma Fundamentals"
+  desc: "Sigma rule syntax, SIEM queries, LLM generation"
+  track: detection
+  minutes: 120
+  level: intermediate
+  notebook: lab20_sigma_fundamentals.ipynb
+  walkthrough: lab20-sigma-fundamentals-walkthrough.md
+
+- n: 21
+  slug: lab21-yara-generator
+  title: "YARA Generator"
+  desc: "AI-assisted rule generation, validation"
+  track: detection
+  minutes: 180
+  level: intermediate
+  notebook: lab21_yara_generator.ipynb
+  walkthrough: lab21-yara-generator-walkthrough.md
+
+- n: 22
+  slug: lab22-vuln-scanner-ai
+  title: "Vuln Prioritizer"
+  desc: "CVSS scoring, risk-based prioritization"
+  track: detection
+  minutes: 240
+  level: intermediate
+  notebook: lab22_vuln_scanner_ai.ipynb
+  walkthrough: lab22-vuln-scanner-ai-walkthrough.md
+
+- n: 23
+  slug: lab23-detection-pipeline
+  title: "Detection Pipeline"
+  desc: "Multi-stage ML + LLM architecture"
+  track: detection
+  minutes: 300
+  level: advanced
+  notebook: lab23_detection_pipeline.ipynb
+  walkthrough: lab23-detection-pipeline-walkthrough.md
+
+- n: 24
+  slug: lab24-monitoring-ai-systems
+  title: "Monitoring AI Systems"
+  desc: "Observability, drift detection, logging"
+  track: detection
+  minutes: 120
+  level: intermediate
+  notebook: lab24_monitoring_ai.ipynb
+  walkthrough: lab24-monitoring-ai-systems-walkthrough.md
+
+- n: 25
+  slug: lab25-dfir-fundamentals
+  title: "DFIR Fundamentals"
+  desc: "IR lifecycle, Windows artifacts, ATT&CK"
+  track: dfir
+  minutes: 120
+  level: intermediate
+  notebook: lab25_dfir_fundamentals.ipynb
+  walkthrough: lab25-dfir-fundamentals-walkthrough.md
+
+- n: 26
+  slug: lab26-windows-event-log-analysis
+  title: "Windows Event Logs"
+  desc: "Event log parsing, security event detection"
+  track: dfir
+  minutes: 180
+  level: intermediate
+  notebook: null
+  walkthrough: lab26-windows-event-log-walkthrough.md
+
+- n: 27
+  slug: lab27-windows-registry-forensics
+  title: "Registry Forensics"
+  desc: "Registry analysis, persistence detection"
+  track: dfir
+  minutes: 180
+  level: intermediate
+  notebook: null
+  walkthrough: lab27-windows-registry-forensics-walkthrough.md
+
+- n: 28
+  slug: lab28-live-response
+  title: "Live Response"
+  desc: "Live IR, triage procedures, evidence collection"
+  track: dfir
+  minutes: 240
+  level: advanced
+  notebook: null
+  walkthrough: lab28-live-response-walkthrough.md
+
+- n: 29
+  slug: lab29-ir-copilot
+  title: "IR Copilot"
+  desc: "Conversational IR assistant, playbooks"
+  track: dfir
+  minutes: 240
+  level: intermediate
+  notebook: lab29_ir_copilot.ipynb
+  walkthrough: lab29-ir-copilot-walkthrough.md
+
+- n: 30
+  slug: lab30-ransomware-fundamentals
+  title: "Ransomware Fundamentals"
+  desc: "Evolution, families, indicators, recovery"
+  track: dfir
+  minutes: 120
+  level: intermediate
+  notebook: lab30_ransomware_fundamentals.ipynb
+  walkthrough: lab30-ransomware-fundamentals-walkthrough.md
+
+- n: 31
+  slug: lab31-ransomware-detection
+  title: "Ransomware Detection"
+  desc: "Entropy analysis, behavioral detection"
+  track: dfir
+  minutes: 300
+  level: advanced
+  notebook: lab31_ransomware_detection.ipynb
+  walkthrough: lab31-ransomware-detection-walkthrough.md
+
+- n: 32
+  slug: lab32-ransomware-simulation
+  title: "Purple Team Sim"
+  desc: "Safe adversary emulation, gap analysis"
+  track: dfir
+  minutes: 360
+  level: advanced
+  notebook: lab32_ransomware_simulation.ipynb
+  walkthrough: lab32-ransomware-simulation-walkthrough.md
+
+- n: 33
+  slug: lab33-memory-forensics-ai
+  title: "Memory Forensics AI"
+  desc: "Volatility3, process injection, credentials"
+  track: dfir
+  minutes: 360
+  level: advanced
+  notebook: lab33_memory_forensics.ipynb
+  walkthrough: lab33-memory-forensics-ai-walkthrough.md
+
+- n: 34
+  slug: lab34-c2-traffic-analysis
+  title: "C2 Traffic Analysis"
+  desc: "Beaconing, DNS tunneling, JA3"
+  track: dfir
+  minutes: 300
+  level: advanced
+  notebook: lab34_c2_traffic.ipynb
+  walkthrough: lab34-c2-traffic-analysis-walkthrough.md
+
+- n: 35
+  slug: lab35-lateral-movement-detection
+  title: "Lateral Movement"
+  desc: "Auth anomalies, attack path graphs"
+  track: dfir
+  minutes: 300
+  level: advanced
+  notebook: lab35_lateral_movement.ipynb
+  walkthrough: lab35-lateral-movement-walkthrough.md
+
+- n: 36
+  slug: lab36-threat-actor-profiling
+  title: "Threat Actor Profiling"
+  desc: "TTP extraction, campaign clustering"
+  track: advanced
+  minutes: 300
+  level: advanced
+  notebook: lab36_threat_actor_profiling.ipynb
+  walkthrough: lab36-threat-actor-profiling-walkthrough.md
+
+- n: 37
+  slug: lab37-ai-powered-threat-actors
+  title: "AI-Powered Threat Actors"
+  desc: "Deepfakes, AI phishing, detecting AI attacks"
+  track: advanced
+  minutes: 120
+  level: intermediate
+  notebook: lab37_ai_powered_threats.ipynb
+  walkthrough: lab37-ai-powered-threat-actors-walkthrough.md
+
+- n: 38
+  slug: lab38-ml-security-intro
+  title: "ML Security Intro"
+  desc: "ML threat models, attack taxonomy"
+  track: advanced
+  minutes: 60
+  level: intermediate
+  notebook: lab38_ml_security_intro.ipynb
+  walkthrough: lab38-ml-security-intro-walkthrough.md
+
+- n: 39
+  slug: lab39-adversarial-ml
+  title: "Adversarial ML"
+  desc: "Evasion attacks, poisoning, defenses"
+  track: advanced
+  minutes: 360
+  level: advanced
+  notebook: lab39_adversarial_ml.ipynb
+  walkthrough: lab39-adversarial-ml-walkthrough.md
+
+- n: 40
+  slug: lab40-llm-security-testing
+  title: "LLM Security Testing"
+  desc: "Prompt injection, jailbreak testing"
+  track: advanced
+  minutes: 180
+  level: advanced
+  notebook: lab40_llm_security_testing.ipynb
+  walkthrough: lab40-llm-security-testing-walkthrough.md
+
+- n: 41
+  slug: lab41-model-monitoring
+  title: "Model Monitoring"
+  desc: "Drift detection, adversarial input detection"
+  track: advanced
+  minutes: 180
+  level: advanced
+  notebook: lab41_model_monitoring.ipynb
+  walkthrough: lab41-model-monitoring-walkthrough.md
+
+- n: 42
+  slug: lab42-fine-tuning-security
+  title: "Fine-Tuning"
+  desc: "Custom embeddings, LoRA, deployment"
+  track: advanced
+  minutes: 480
+  level: expert
+  notebook: lab42_fine_tuning.ipynb
+  walkthrough: lab42-fine-tuning-walkthrough.md
+
+- n: 43
+  slug: lab43-rag-security
+  title: "RAG Security"
+  desc: "KB poisoning, context sanitization"
+  track: advanced
+  minutes: 180
+  level: advanced
+  notebook: lab43_rag_security.ipynb
+  walkthrough: lab43-rag-security-walkthrough.md
+
+- n: 44
+  slug: lab44-cloud-security-fundamentals
+  title: "Cloud Security Basics"
+  desc: "AWS/Azure/GCP fundamentals, IAM, logs"
+  track: cloud
+  minutes: 120
+  level: intermediate
+  notebook: lab44_cloud_security_fundamentals.ipynb
+  walkthrough: lab44-cloud-security-fundamentals-walkthrough.md
+
+- n: 45
+  slug: lab45-cloud-security-ai
+  title: "Cloud Security AI"
+  desc: "AI-powered CloudTrail analysis"
+  track: cloud
+  minutes: 300
+  level: advanced
+  notebook: lab45_cloud_security.ipynb
+  walkthrough: lab45-cloud-security-ai-walkthrough.md
+
+- n: 46
+  slug: lab46-container-security
+  title: "Container Security"
+  desc: "Kubernetes, runtime detection, image scanning"
+  track: cloud
+  minutes: 240
+  level: advanced
+  notebook: lab46_container_security.ipynb
+  walkthrough: lab46-container-security-walkthrough.md
+
+- n: 47
+  slug: lab47-serverless-security
+  title: "Serverless Security"
+  desc: "Lambda, event injection, cold start attacks"
+  track: cloud
+  minutes: 180
+  level: advanced
+  notebook: lab47_serverless_security.ipynb
+  walkthrough: lab47-serverless-security-walkthrough.md
+
+- n: 48
+  slug: lab48-cloud-ir-automation
+  title: "Cloud IR Automation"
+  desc: "Automated containment, evidence collection"
+  track: cloud
+  minutes: 240
+  level: advanced
+  notebook: lab48_cloud_ir_automation.ipynb
+  walkthrough: lab48-cloud-ir-automation-walkthrough.md
+
+- n: 49
+  slug: lab49-llm-red-teaming
+  title: "LLM Red Teaming"
+  desc: "Prompt injection, jailbreaks, guardrails"
+  track: cloud
+  minutes: 360
+  level: advanced
+  notebook: lab49_llm_red_teaming.ipynb
+  walkthrough: lab49-llm-red-teaming-walkthrough.md
+
+- n: 50
+  slug: lab50-purple-team-ai
+  title: "Purple Team AI"
+  desc: "AI attack simulation, detection validation"
+  track: cloud
+  minutes: 180
+  level: advanced
+  notebook: lab50_purple_team_ai.ipynb
+  walkthrough: lab50-purple-team-ai-walkthrough.md

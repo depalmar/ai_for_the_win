@@ -1,0 +1,9 @@
+{%- comment -%} Every number on the site comes from docs/_data, so the page cannot drift from the repo. {%- endcomment -%}
+{%- assign c_labs = site.data.labs | size -%}
+{%- assign c_free = 0 -%}
+{%- for t in site.data.tracks -%}{%- unless t.api -%}{%- assign tl = site.data.labs | where: "track", t.id -%}{%- assign c_free = c_free | plus: tl.size -%}{%- endunless -%}{%- endfor -%}
+{%- assign c_api = c_labs | minus: c_free -%}
+{%- assign c_nb = site.data.labs | where_exp: "l", "l.notebook" | size -%}
+{%- assign c_wt = site.data.labs | where_exp: "l", "l.walkthrough" | size -%}
+{%- assign c_guides = 0 -%}
+{%- for g in site.data.guides -%}{%- assign c_guides = c_guides | plus: g.items.size -%}{%- endfor -%}
