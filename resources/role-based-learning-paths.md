@@ -8,13 +8,13 @@ Find your path based on your current role and goals. Each path is ordered for ma
 
 | Your Role | Your Goal | Est. Duration | Jump To |
 |-----------|-----------|---------------|---------|
-| AI Blue Team (SOC/IR) | Automate alert triage, reduce fatigue | ~8-12 hrs | [AI Blue Team Path](#-ai-blue-team-path) |
+| AI Blue Team (SOC/IR) | Automate alert triage, reduce fatigue | ~8-12 hrs | [AI Blue Team Path](#-ai-blue-team-path-soc) |
 | SOC Analyst (Tier 3) / IR | Faster investigations, AI-assisted response | ~12-16 hrs | [Incident Responder Path](#-incident-responder-path) |
 | Threat Hunter | Find unknowns, build detection | ~10-14 hrs | [Threat Hunter Path](#-threat-hunter-path) |
 | Detection Engineer | Better rules, ML-powered detection | ~10-14 hrs | [Detection Engineer Path](#-detection-engineer-path) |
 | Threat Intel Analyst | Process reports faster, automate IOC extraction | ~10-14 hrs | [Threat Intel Path](#-threat-intel-analyst-path) |
 | Red Teamer / Pentester | Understand AI defenses, adversarial ML | ~8-12 hrs | [AI Red Team Path](#-ai-red-team-path) |
-| Security Engineer | Build AI-powered tools and pipelines | ~20-30 hrs | [Security Engineer Path](#-security-engineer-path) |
+| Security Engineer | Build AI-powered tools and pipelines | ~20-30 hrs | [Security Engineer Path](#%EF%B8%8F-security-engineer-path) |
 | Manager / Leader | Understand capabilities, make informed decisions | ~4-6 hrs | [Leadership Path](#-leadership-path) |
 | Career Changer | Break into security with AI skills | ~40-60 hrs | [Career Changer Path](#-career-changer-path) |
 
