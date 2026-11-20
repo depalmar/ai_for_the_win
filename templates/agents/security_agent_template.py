@@ -38,8 +38,7 @@ class AgentConfig:
     """Configuration for the security agent."""
 
     name: str = "SecurityAgent"
-    model: str = "claude-sonnet-4-20250514"
-    temperature: float = 0
+    model: str = "claude-sonnet-5-5"
     max_iterations: int = 10
     verbose: bool = True
 
@@ -142,7 +141,10 @@ class SecurityAgent:
         if not api_key:
             raise ValueError("ANTHROPIC_API_KEY not set")
 
-        self.llm = ChatAnthropic(model=self.config.model, temperature=self.config.temperature)
+        # Sonnet 5.5's thinking-off mode keeps replies text-only. Other Claude models reject
+        # it, so drop `thinking` if you change the model. Current Claude models also reject
+        # a non-default temperature, so none is sent.
+        self.llm = ChatAnthropic(model=self.config.model, thinking={"type": "between_tools"})
 
         prompt = PromptTemplate.from_template(SYSTEM_PROMPT)
 

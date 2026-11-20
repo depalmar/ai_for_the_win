@@ -46,7 +46,7 @@ def setup_llm(provider: str = "auto"):
         import google.generativeai as genai
 
         genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
-        return ("google", genai.GenerativeModel("gemini-2.5-pro"))
+        return ("google", genai.GenerativeModel("gemini-3.8-flash"))
     else:
         raise ValueError(f"Unknown provider: {provider}")
 
@@ -504,15 +504,16 @@ class SecureLLMApp:
 
                 if provider == "anthropic":
                     response = client.messages.create(
-                        model="claude-sonnet-4-20250514",
+                        model="claude-sonnet-5-5",
+                        thinking={"type": "between_tools"},
                         max_tokens=1024,
                         system=self.system_prompt,
                         messages=[{"role": "user", "content": sanitized_input}],
                     )
-                    raw_response = response.content[0].text
+                    raw_response = "".join(b.text for b in response.content if b.type == "text")
                 elif provider == "openai":
                     response = client.chat.completions.create(
-                        model="gpt-5",
+                        model="gpt-6.2-sol",
                         max_tokens=1024,
                         messages=[
                             {"role": "system", "content": self.system_prompt},

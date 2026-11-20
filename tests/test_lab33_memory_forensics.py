@@ -1038,7 +1038,8 @@ class TestAnalyzeSuspiciousProcess:
         mock_response = Mock()
         mock_response.content = [
             Mock(
-                text='{"threat_level": "suspicious", "assessment": "Test", "malware_family": null, "mitre_techniques": ["T1059"], "response_actions": ["Investigate"], "investigate_next": []}'
+                type="text",
+                text='{"threat_level": "suspicious", "assessment": "Test", "malware_family": null, "mitre_techniques": ["T1059"], "response_actions": ["Investigate"], "investigate_next": []}',
             )
         ]
         mock_client.messages.create.return_value = mock_response
@@ -1093,7 +1094,8 @@ class TestAnalyzeSuspiciousProcess:
         # Response wrapped in markdown code block
         mock_response.content = [
             Mock(
-                text='```json\n{"threat_level": "suspicious", "assessment": "Test", "malware_family": null, "mitre_techniques": [], "response_actions": [], "investigate_next": []}\n```'
+                type="text",
+                text='```json\n{"threat_level": "suspicious", "assessment": "Test", "malware_family": null, "mitre_techniques": [], "response_actions": [], "investigate_next": []}\n```',
             )
         ]
         mock_client.messages.create.return_value = mock_response

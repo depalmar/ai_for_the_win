@@ -53,17 +53,19 @@ def call_llm(prompt: str) -> str | None:
 
             client = Anthropic()
             response = client.messages.create(
-                model="claude-haiku-4-20250514",
+                model="claude-haiku-5-5",
+                # Haiku 5.5 thinks by default; turn it off to keep replies text-only
+                thinking={"type": "disabled"},
                 max_tokens=1000,
                 messages=[{"role": "user", "content": prompt}],
             )
-            return response.content[0].text
+            return "".join(b.text for b in response.content if b.type == "text")
         elif HAS_OPENAI:
             from openai import OpenAI
 
             client = OpenAI()
             response = client.chat.completions.create(
-                model="gpt-5-mini", messages=[{"role": "user", "content": prompt}]
+                model="gpt-6.1-terra", messages=[{"role": "user", "content": prompt}]
             )
             return response.choices[0].message.content
     except Exception as e:
