@@ -17,6 +17,9 @@
     },
     {
       "pattern": "^https://archive\\.(is|ph|today)"
+    },
+    {
+      "pattern": "^https://(www\\.)?linkedin\\.com/"
     }
   ],
   "replacementPatterns": [
@@ -46,7 +49,6 @@
     302,
     307,
     308,
-    403,
-    999
+    403
   ]
 }
