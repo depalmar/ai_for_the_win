@@ -2,7 +2,7 @@
 
 **Difficulty:** 🟡 Intermediate | **Time:** 45-60 min | **Prerequisites:** Lab 15
 
-> **Bridge Lab:** This lab explains how vectors and embeddings work before building a RAG system in Lab 42.
+> **Bridge Lab:** This lab explains how vectors and embeddings work before building a RAG system in Lab 18.
 
 Understand how AI "understands" meaning through vector representations.
 
@@ -15,7 +15,7 @@ By the end of this lab, you will:
 - Create and visualize text embeddings
 - Measure similarity between security concepts
 - Build a simple semantic search system
-- Be prepared for Lab 42 (RAG) and Lab 21 (YARA Generator)
+- Be prepared for Lab 18 (RAG) and Lab 21 (YARA Generator)
 
 ## Prerequisites
 
@@ -263,7 +263,7 @@ def semantic_search(query, documents, model, top_k=3):
    Cluster 2 (Phishing): fake-login.com, credential-harvest.com
    Cluster 3 (Malware): trojan.exe hash, backdoor.dll hash
 
-✅ You now understand embeddings! Ready for Lab 42 (RAG).
+✅ You now understand embeddings! Ready for Lab 18 (RAG).
 ```
 
 ---
@@ -295,8 +295,8 @@ def semantic_search(query, documents, model, top_k=3):
 
 Now that you understand embeddings:
 
-- **Lab 42**: Build a full RAG system with ChromaDB
+- **Lab 18**: Build a full RAG system with ChromaDB
 - **Lab 21**: Use embeddings to find similar malware patterns
-- **Lab 16**: Use embeddings for threat actor clustering
+- **Lab 36**: Use embeddings for threat actor clustering
 
 You've unlocked semantic AI! 🔓

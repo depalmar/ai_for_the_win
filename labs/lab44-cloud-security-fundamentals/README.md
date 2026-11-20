@@ -28,7 +28,7 @@ By the end of this lab, you will:
 
 ## 📋 Prerequisites
 
-- Completed Lab 08 (LLM Log Analysis)
+- Completed Lab 08 (Working with APIs)
 - Basic understanding of networking (IP, ports, HTTP)
 - No cloud accounts required (we use sample data)
 

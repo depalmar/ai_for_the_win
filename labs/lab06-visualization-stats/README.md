@@ -344,8 +344,8 @@ from scipy import stats              # Statistical functions
 ## Next Steps
 
 After completing this lab:
-- **Lab 01**: Apply visualizations to phishing classification
-- **Lab 31**: Visualize malware clustering results
+- **Lab 10**: Apply visualizations to phishing classification
+- **Lab 11**: Visualize malware clustering results
 - **Lab 12**: Create anomaly detection dashboards
 
 ---
