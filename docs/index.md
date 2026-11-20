@@ -1933,7 +1933,7 @@ function filterLabs(category) {
 
   <h3 style="margin-top: 2.5rem; margin-bottom: 1rem;">By Role</h3>
   <div class="features" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
-    <a href="https://github.com/depalmar/ai_for_the_win/blob/main/resources/role-based-learning-paths.md#-soc-analyst-path" class="feature" style="text-decoration: none; cursor: pointer;">
+    <a href="https://github.com/depalmar/ai_for_the_win/blob/main/resources/role-based-learning-paths.md#-ai-blue-team-path-soc" class="feature" style="text-decoration: none; cursor: pointer;">
       <div class="feature-icon">🔵</div>
       <h3 style="margin: 0;">SOC Analyst</h3>
       <p>Automate triage, reduce alert fatigue</p>
@@ -1951,7 +1951,7 @@ function filterLabs(category) {
       <p>ML-powered rules, fewer false positives</p>
       <span style="font-size: 0.75rem; color: var(--secondary);">Labs 01→03→07→09</span>
     </a>
-    <a href="https://github.com/depalmar/ai_for_the_win/blob/main/resources/role-based-learning-paths.md#-red-team-path" class="feature" style="text-decoration: none; cursor: pointer;">
+    <a href="https://github.com/depalmar/ai_for_the_win/blob/main/resources/role-based-learning-paths.md#-ai-red-team-path" class="feature" style="text-decoration: none; cursor: pointer;">
       <div class="feature-icon">🔴</div>
       <h3 style="margin: 0;">AI Red Team</h3>
       <p>Evade ML, attack AI systems</p>
