@@ -319,7 +319,7 @@ Events Analyzed: 45,231
 
 ## Resources
 
-- [Windows Security Audit Events](https://docs.microsoft.com/en-us/windows/security/threat-protection/auditing/)
+- [Windows Security Audit Events](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/security-auditing-overview)
 - [MITRE ATT&CK - Enterprise](https://attack.mitre.org/matrices/enterprise/)
 - [SANS Hunt Evil Poster](https://www.sans.org/posters/hunt-evil/)
 

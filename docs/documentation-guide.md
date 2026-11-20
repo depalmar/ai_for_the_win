@@ -98,9 +98,9 @@ If you're stuck on a lab, these walkthroughs provide step-by-step solutions:
 
 | Labs | Walkthroughs |
 |------|--------------|
-| Labs 01-05 | [lab01](./walkthroughs/lab10-phishing-classifier-walkthrough.md), [lab02](./walkthroughs/lab11-malware-clustering-walkthrough.md), [lab03](./walkthroughs/lab12-anomaly-detection-walkthrough.md), [lab04](./walkthroughs/lab15-llm-log-analysis-walkthrough.md), [lab05](./walkthroughs/lab16-threat-intel-agent-walkthrough.md) |
-| Labs 06-10 | [lab06](./walkthroughs/lab18-security-rag-walkthrough.md), [lab07](./walkthroughs/lab21-yara-generator-walkthrough.md), [lab08](./walkthroughs/lab22-vuln-scanner-ai-walkthrough.md), [lab09](./walkthroughs/lab23-detection-pipeline-walkthrough.md), [lab10](./walkthroughs/lab29-ir-copilot-walkthrough.md) |
-| Labs 11-16 | [lab11](./walkthroughs/lab31-ransomware-detection-walkthrough.md), [lab12](./walkthroughs/lab32-ransomware-simulation-walkthrough.md), [lab13](./walkthroughs/lab33-memory-forensics-ai-walkthrough.md), [lab14](./walkthroughs/lab34-c2-traffic-analysis-walkthrough.md), [lab15](./walkthroughs/lab15-lateral-movement-walkthrough.md), [lab16](./walkthroughs/lab36-threat-actor-profiling-walkthrough.md) |
+| Labs 10-16 | [lab10](./walkthroughs/lab10-phishing-classifier-walkthrough.md), [lab11](./walkthroughs/lab11-malware-clustering-walkthrough.md), [lab12](./walkthroughs/lab12-anomaly-detection-walkthrough.md), [lab15](./walkthroughs/lab15-llm-log-analysis-walkthrough.md), [lab16](./walkthroughs/lab16-threat-intel-agent-walkthrough.md) |
+| Labs 18-29 | [lab18](./walkthroughs/lab18-security-rag-walkthrough.md), [lab21](./walkthroughs/lab21-yara-generator-walkthrough.md), [lab22](./walkthroughs/lab22-vuln-scanner-ai-walkthrough.md), [lab23](./walkthroughs/lab23-detection-pipeline-walkthrough.md), [lab29](./walkthroughs/lab29-ir-copilot-walkthrough.md) |
+| Labs 31-36 | [lab31](./walkthroughs/lab31-ransomware-detection-walkthrough.md), [lab32](./walkthroughs/lab32-ransomware-simulation-walkthrough.md), [lab33](./walkthroughs/lab33-memory-forensics-ai-walkthrough.md), [lab34](./walkthroughs/lab34-c2-traffic-analysis-walkthrough.md), [lab35](./walkthroughs/lab35-lateral-movement-walkthrough.md), [lab36](./walkthroughs/lab36-threat-actor-profiling-walkthrough.md) |
 | All walkthroughs | [Browse all](./walkthroughs/) |
 
 ---

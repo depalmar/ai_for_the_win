@@ -949,6 +949,6 @@ Create a comprehensive test suite:
 ## Resources
 
 - [OWASP Top 10 for LLM Applications](https://owasp.org/www-project-top-10-for-large-language-model-applications/)
-- [Anthropic's Constitutional AI](https://www.anthropic.com/research/constitutional-ai)
+- [Anthropic's Constitutional AI](https://www.anthropic.com/research/constitutional-ai-harmlessness-from-ai-feedback)
 - [Microsoft Responsible AI](https://www.microsoft.com/en-us/ai/responsible-ai)
 - [Garak - LLM Vulnerability Scanner](https://github.com/leondz/garak)

@@ -613,7 +613,7 @@ Shall I proceed with any of these?
 - [LangGraph](https://python.langchain.com/docs/langgraph)
 - [Streamlit](https://streamlit.io/)
 - [NIST IR Guide](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-61r2.pdf)
-- [SANS IR Process](https://www.sans.org/white-papers/incident-handlers-handbook/)
+- [SANS IR Process](https://www.sans.org/white-papers/33901/)
 
 ---
 

@@ -11,6 +11,12 @@
     },
     {
       "pattern": "127.0.0.1"
+    },
+    {
+      "pattern": "^mailto:"
+    },
+    {
+      "pattern": "^https://archive\\.(is|ph|today)"
     }
   ],
   "replacementPatterns": [
@@ -21,7 +27,9 @@
   ],
   "httpHeaders": [
     {
-      "urls": ["https://api.github.com"],
+      "urls": [
+        "https://api.github.com"
+      ],
       "headers": {
         "Accept": "application/vnd.github.v3+json"
       }
@@ -31,5 +39,14 @@
   "retryOn429": true,
   "retryCount": 3,
   "fallbackRetryDelay": "30s",
-  "aliveStatusCodes": [200, 206, 301, 302, 307, 308]
+  "aliveStatusCodes": [
+    200,
+    206,
+    301,
+    302,
+    307,
+    308,
+    403,
+    999
+  ]
 }

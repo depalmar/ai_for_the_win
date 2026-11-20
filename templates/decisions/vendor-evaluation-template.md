@@ -280,21 +280,21 @@ List any criteria that are non-negotiable for your organization:
 
 ### Strengths Identified
 
-- 
-- 
-- 
+-
+-
+-
 
 ### Concerns or Gaps
 
-- 
-- 
-- 
+-
+-
+-
 
 ### Questions for Follow-Up
 
-- 
-- 
-- 
+-
+-
+-
 
 ---
 
@@ -316,7 +316,7 @@ List any criteria that are non-negotiable for your organization:
 This template aligns with:
 
 - [NIST AI Risk Management Framework (AI RMF)](https://www.nist.gov/itl/ai-risk-management-framework)
-- [OWASP LLM Top 10](https://owasp.org/www-project-llm-security/)
+- [OWASP LLM Top 10](https://genai.owasp.org/llm-top-10/)
 - [MITRE ATLAS](https://atlas.mitre.org/)
 - [ISO/IEC 42001 AI Management System](https://www.iso.org/standard/81230.html)
 
