@@ -1,0 +1,1 @@
+{%- assign m = include.minutes -%}{%- if m < 60 -%}~{{ m }} min{%- else -%}{%- assign h = m | divided_by: 60.0 | round: 1 | append: "" | remove: ".0" -%}~{{ h }} hr{%- if m > 60 -%}s{%- endif -%}{%- endif -%}

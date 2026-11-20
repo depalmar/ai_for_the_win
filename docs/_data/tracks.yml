@@ -1,0 +1,44 @@
+# Lab tracks, in order. Names and ranges must match CANONICAL_CATEGORIES in
+# tests/test_lab_data_integrity.py and the table in docs/CLAUDE.md.
+- id: foundation
+  name: Foundation
+  from: 0
+  to: 9
+  api: false
+  blurb: "Python, prompting, AI coding tools, ML concepts, APIs and CTF basics."
+- id: ml
+  name: ML Foundations
+  from: 10
+  to: 13
+  api: false
+  blurb: "Phishing classification, malware clustering, anomaly detection, and when ML beats an LLM."
+- id: llm
+  name: LLM Basics
+  from: 14
+  to: 18
+  api: true
+  blurb: "Your first agent, LLM log analysis, a threat intel agent, embeddings and RAG."
+- id: detection
+  name: Detection Engineering
+  from: 19
+  to: 24
+  api: true
+  blurb: "Binary basics, Sigma, YARA, vulnerability prioritization, pipelines and monitoring."
+- id: dfir
+  name: DFIR
+  from: 25
+  to: 35
+  api: true
+  blurb: "Windows artifacts, live response, an IR copilot, ransomware, memory, C2 and lateral movement."
+- id: advanced
+  name: Advanced Threats
+  from: 36
+  to: 43
+  api: true
+  blurb: "Actor profiling, AI-powered threats, adversarial ML, LLM and RAG security, fine-tuning."
+- id: cloud
+  name: Cloud & Red Team
+  from: 44
+  to: 50
+  api: true
+  blurb: "Cloud, container and serverless security, cloud IR automation, LLM red teaming and purple team."

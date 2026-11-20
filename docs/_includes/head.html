@@ -1,0 +1,11 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% if page.title and page.title != site.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+<meta name="description" content="{{ page.description | default: site.description | strip_newlines | escape }}">
+<link rel="icon" href="{{ '/assets/images/logo.png' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}?v={{ site.time | date: '%s' }}">
+<script>
+  // Light by default whatever the OS prefers; dark only when the viewer picked it (as on the toolkit sites).
+  (function () { var t = null; try { t = localStorage.getItem('aiftw-theme'); } catch (e) {}
+    var r = document.documentElement; r.setAttribute('data-theme', t === 'dark' ? 'dark' : 'light'); r.className += ' js'; })();
+</script>

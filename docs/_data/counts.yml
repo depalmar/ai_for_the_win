@@ -1,0 +1,6 @@
+# Counts the site cannot compute itself (GitHub Pages only sees docs/).
+# Each one is checked against the repo by tests/test_lab_data_integrity.py.
+version: "1.9.0"         # pyproject.toml [project] version
+role_paths: 9            # "## ... Path" sections in resources/role-based-learning-paths.md
+ctf_challenges: 18       # ctf-challenges/*/challenge-*
+capstones: 4             # capstone-projects/*/

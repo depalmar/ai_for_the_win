@@ -1,0 +1,27 @@
+# Learning paths on the Paths tab. Lab titles and times come from labs.yml,
+# so only lab numbers live here. Tests check every number is a real lab.
+- id: beginner
+  name: Beginner
+  blurb: "Start here. Foundations, then ML, then LLM basics. No API key needed until lab 14."
+  cost: "Free to about $5"
+  sections:
+    - name: Foundations
+      labs: [0, 1, 4, 2, 5, 6, 7, 8]
+    - name: ML basics, no API key
+      labs: [10, 11, 12]
+    - name: LLM basics, API key or Ollama
+      labs: [15, 16, 18, 21]
+- id: intermediate
+  name: Intermediate
+  blurb: "Build advanced tools: detection pipelines, an IR copilot and DFIR automation."
+  cost: "About $15 to $25"
+  sections:
+    - name: Detection and response
+      labs: [22, 23, 29, 31, 32, 33, 34, 35]
+- id: expert
+  name: Expert
+  blurb: "Threat actor profiling, adversarial ML, cloud and container security, and red teaming."
+  cost: "About $15 to $30"
+  sections:
+    - name: Advanced techniques
+      labs: [36, 39, 40, 42, 45, 46, 49]

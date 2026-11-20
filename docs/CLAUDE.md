@@ -234,24 +234,35 @@ When adding or modifying labs:
 - Legend format: `Grey Foundation (00-09, Free) | Green ML Foundations (10-13, Free) | Purple LLM Basics (14-18) | Orange Detection/DFIR (19-29) | Red Advanced/Cloud (30-50)`
 - Run `pytest tests/test_lab_data_integrity.py::TestLabCategoryConsistency -v` to verify
 
-### GitHub Pages Lab Navigator (docs/index.md)
-The docs/index.md file powers the GitHub Pages site at https://depalmar.github.io/ai_for_the_win/#labs
+### GitHub Pages Site (docs/index.html + docs/_data)
+The GitHub Pages site at https://depalmar.github.io/ai_for_the_win/ shares its design with the
+Edge DFIR and AI DFIR toolkit sites (same tokens, header, tabs and components). It has no remote
+theme: `docs/_layouts`, `docs/_includes` and `docs/assets/{css,js}` hold the whole design, and the
+same layout styles every guide and walkthrough page that Pages renders.
 
-**Critical: Lab card display numbers MUST match folder numbers**
-- Each lab card has a display number (`<span class="lab-number ...">XX</span>`)
-- This display number MUST match the lab folder number in the href
-- Example: `labs/lab23-detection-pipeline` must show display number `23`, not `09`
+**Edit the data, not the HTML.** Every lab, track, path, role card and guide on the home page is
+generated from `docs/_data/`, so a lab's number and title live in exactly one place:
 
-When adding or modifying labs in docs/index.md:
-1. **Display number must match folder number**: lab23-* shows "23", lab24-* shows "24"
-2. **Order labs sequentially**: 00, 01, 02... through 50
-3. **Update category colors**: intro (grey), ml (green), llm (purple), advanced (orange), dfir (red)
-4. **Run tests**: `pytest tests/test_lab_data_integrity.py::TestLabCategoryConsistency::test_index_md_lab_card_display_numbers_match_folder -v`
+| File | What it holds |
+|------|---------------|
+| `labs.yml` | One entry per `labs/` folder: number, folder, title, description, track, minutes, level, notebook, walkthrough |
+| `tracks.yml` | The canonical category ranges below, with a blurb and whether an API key is needed |
+| `paths.yml` | Beginner, Intermediate and Expert paths as lists of lab numbers |
+| `roles.yml` | Role cards: anchor in `resources/role-based-learning-paths.md` and lab numbers |
+| `guides.yml` | Every `docs/guides/*.md` with a short title and description |
+| `counts.yml` | Values the site cannot compute itself: version, role paths, CTF challenges, capstones |
 
-Common mistakes to avoid:
-- Using old numbering scheme (09, 09b, 10, 10a) instead of actual folder numbers (23, 24, 25, 26)
-- Mixing lab folder numbers with display numbers
-- Forgetting to update both the href path AND the display number when renumbering
+When labs change:
+1. Update `docs/_data/labs.yml` (and `paths.yml` or `roles.yml` if a path changes).
+2. Run `pytest tests/test_lab_data_integrity.py::TestLabCategoryConsistency -v`. The `test_pages_*`
+   tests check the data against the repo: every lab folder listed once under its own number, tracks
+   match the canonical ranges, notebook and walkthrough files exist, paths and role cards use real
+   labs, every guide is listed, and the counts match.
+3. Optional local preview with the same Jekyll as GitHub Pages: create a Gemfile with
+   `gem "github-pages"`, then `bundle exec jekyll serve -s docs --baseurl /ai_for_the_win`.
+   GitHub Pages runs Jekyll 3.10, so avoid Jekyll 4-only Liquid (for example `or` inside `where_exp`).
+
+House style for site copy: no em dashes, plain verbs, numbers that come from the data.
 
 ### Lab Category Ranges (Canonical)
 Keep these in sync across all documentation:
@@ -269,7 +280,7 @@ Files that reference lab ranges:
 - README.md (Lab Navigator table and legend)
 - labs/README.md
 - .claude/commands/lab.md
-- docs/index.md (GitHub Pages)
+- docs/_data/tracks.yml (GitHub Pages site)
 - docs/ARCHITECTURE.md
 - ctf/README.md (prerequisites)
 

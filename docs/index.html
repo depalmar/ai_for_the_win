@@ -1,0 +1,292 @@
+---
+layout: home
+title: AI for the Win
+---
+{%- comment -%}
+  The GitHub Pages home page. Every lab, track, path, role and guide below is generated from
+  docs/_data/*.yml; edit the data, not this file, when labs change. Tests in
+  tests/test_lab_data_integrity.py check the data against the repository.
+{%- endcomment -%}
+{%- include counts.html -%}
+{%- assign labs = site.data.labs -%}
+{%- assign repo = site.repo_url -%}
+{%- assign colab = site.colab_url -%}
+{%- assign ml_track = site.data.tracks | where: "id", "ml" | first -%}
+{%- assign hero_nb = labs | where: "track", "ml" | where_exp: "l", "l.notebook" | first -%}
+
+<section class="panel" id="tab-start" role="tabpanel" aria-label="Start">
+<div class="start">
+  <div class="hero1">
+    <div class="hero-l">
+      <h2>Build AI-powered security tools</h2>
+      <p class="lede">{{ c_labs }} hands-on labs that take security practitioners from Python and ML basics to LLM agents, RAG, detection engineering, DFIR, cloud security and AI red teaming. Each lab has starter code, a reference solution and tests, and most run in Colab with no setup.</p>
+      <p class="byline">By <a href="https://www.linkedin.com/in/raymond-depalma/" rel="noopener" target="_blank">Raymond DePalma</a> &#183; code under MIT, labs under <span class="nowrap">CC BY-NC-SA 4.0</span></p>
+      <div class="hero-cta">
+        <a class="btn-fill" href="#get-started">Get started</a>
+        <a class="btn-out" href="#labs">Browse all {{ c_labs }} labs</a>
+        {%- if hero_nb %}
+        {%- assign hn = hero_nb.n | prepend: '0' | slice: -2, 2 %}
+        <a class="btn-out" href="{{ colab }}/{{ hero_nb.notebook }}" target="_blank" rel="noopener">Open lab {{ hn }} in Colab</a>
+        {%- endif %}
+      </div>
+    </div>
+    <aside class="trust" aria-label="What it costs">
+      <div class="trust-h"><b>What it costs</b><a href="#cost">Cost by track &#8594;</a></div>
+      <div class="trust-fig"><b>$0</b><span>for labs 00 to 13, and for every lab if you run models locally with Ollama.</span></div>
+      <div class="trust-cap"><span>{{ c_labs }} labs by what they need</span><span>{{ c_free }} need no API key</span></div>
+      <div class="sbar" role="img" aria-label="{{ c_free }} labs need no API key, {{ c_api }} use an LLM API or Ollama"><span class="c-free" style="flex:{{ c_free }}" title="{{ c_free }} need no API key"></span><span class="c-api" style="flex:{{ c_api }}" title="{{ c_api }} use an LLM API or Ollama"></span></div>
+      <div class="skey"><span><i class="sw c-free"></i>{{ c_free }} no API key</span><span><i class="sw c-api"></i>{{ c_api }} LLM API or Ollama</span></div>
+      <p class="trust-f">With a paid API, each track runs from about $2 to $25. You only need one provider.</p>
+    </aside>
+  </div>
+
+  <nav class="kpis" aria-label="What is here">
+    <a class="kpi" href="#labs"><b>{{ c_labs }}</b> labs</a>
+    <a class="kpi" href="#labs?nb=yes"><b>{{ c_nb }}</b> Colab notebooks</a>
+    <a class="kpi" href="#labs?api=no"><b>{{ c_free }}</b> labs with no API key</a>
+    <a class="kpi" href="{{ repo }}/tree/main/docs/walkthroughs"><b>{{ c_wt }}</b> walkthroughs</a>
+    <a class="kpi" href="#paths"><b>{{ site.data.counts.role_paths }}</b> role paths</a>
+    <a class="kpi" href="#guides"><b>{{ c_guides }}</b> guides</a>
+    <a class="kpi" href="{{ repo }}/tree/main/ctf-challenges"><b>{{ site.data.counts.ctf_challenges }}</b> CTF challenges</a>
+    <a class="kpi" href="{{ repo }}/tree/main/capstone-projects"><b>{{ site.data.counts.capstones }}</b> capstone projects</a>
+  </nav>
+
+  <div class="sechead">
+    <h3 class="sect">1. Pick a track</h3>
+    <div class="vkey"><span>Labs by level:</span><span class="vk"><span class="vb vb-beginner"></span>beginner</span><span class="vk"><span class="vb vb-intermediate"></span>intermediate</span><span class="vk"><span class="vb vb-advanced"></span>advanced</span></div>
+  </div>
+  <div class="ptiles">
+  {%- for t in site.data.tracks %}
+    {%- assign tl = labs | where: "track", t.id -%}
+    {%- assign nb_beg = tl | where: "level", "beginner" | size -%}
+    {%- assign nb_int = tl | where: "level", "intermediate" | size -%}
+    {%- assign nb_adv = tl.size | minus: nb_beg | minus: nb_int -%}
+    {%- assign mins = 0 -%}{%- for l in tl -%}{%- assign mins = mins | plus: l.minutes -%}{%- endfor -%}
+    {%- assign hrs = mins | divided_by: 60.0 | round -%}
+    {%- assign tnb = tl | where_exp: "l", "l.notebook" -%}
+    {%- assign first = tl | first -%}
+    {%- assign f2 = t.from | prepend: '0' | slice: -2, 2 -%}{%- assign t2 = t.to | prepend: '0' | slice: -2, 2 -%}{%- assign n2 = first.n | prepend: '0' | slice: -2, 2 %}
+    <div class="ptile">
+      <a class="ptile-h" href="#labs?track={{ t.id }}"><span class="pt-id">Labs {{ f2 }} to {{ t2 }} &#183; {% if t.api %}API key or Ollama{% else %}no API key{% endif %}</span><b>{{ t.name }}</b></a>
+      <p class="pt-blurb">{{ t.blurb }}</p>
+      <div class="pt-vol">
+        <div class="vbar2" role="img" aria-label="{{ nb_beg }} beginner, {{ nb_int }} intermediate, {{ nb_adv }} advanced">{% if nb_beg > 0 %}<span class="vb vb-beginner" style="flex:{{ nb_beg }}"></span>{% endif %}{% if nb_int > 0 %}<span class="vb vb-intermediate" style="flex:{{ nb_int }}"></span>{% endif %}{% if nb_adv > 0 %}<span class="vb vb-advanced" style="flex:{{ nb_adv }}"></span>{% endif %}</div>
+        <div class="pt-vk">{% if nb_beg > 0 %}<span><i class="vd vb-beginner"></i>{{ nb_beg }} beginner</span>{% endif %}{% if nb_int > 0 %}<span><i class="vd vb-intermediate"></i>{{ nb_int }} intermediate</span>{% endif %}{% if nb_adv > 0 %}<span><i class="vd vb-advanced"></i>{{ nb_adv }} advanced</span>{% endif %}</div>
+      </div>
+      <dl class="pt-ready">
+        <dt>Labs</dt><dd>{{ tl.size }} labs, about {{ hrs }} hours</dd>
+        <dt>Needs</dt><dd>{% if t.api %}<i class="sd sd-api"></i>An LLM API key, or Ollama for $0{% else %}<i class="sd sd-ok"></i>Nothing but Python{% endif %}</dd>
+        <dt>Colab</dt><dd>{{ tnb.size }} of {{ tl.size }} labs</dd>
+      </dl>
+      <div class="pt-act">
+        <a class="btn-fill" href="{{ repo }}/tree/main/labs/{{ first.slug }}">Start lab {{ n2 }}</a>
+        {%- assign fnb = tnb | first -%}
+        {%- if fnb %}<a class="btn-out" href="{{ colab }}/{{ fnb.notebook }}" target="_blank" rel="noopener">Colab</a>{% endif %}
+        <span class="pt-more"><a href="#labs?track={{ t.id }}">All {{ tl.size }} labs</a></span>
+      </div>
+    </div>
+  {%- endfor %}
+  </div>
+
+  <div class="sechead">
+    <h3 class="sect">2. Or follow a role</h3>
+    <a class="small" href="{{ repo }}/blob/main/resources/role-based-learning-paths.md">All {{ site.data.counts.role_paths }} role paths &#8594;</a>
+  </div>
+  {% include role-tiles.html %}
+
+  <div class="startcols">
+    <div>
+      <h3 class="sect">What you need</h3>
+      <ul class="checks">
+        <li>Python 3.10 or later on Windows, macOS or Linux</li>
+        <li>A code editor: VS Code, Cursor or PyCharm</li>
+        <li>8 GB of RAM, or 16 GB to run LLMs locally</li>
+        <li>Git, to clone the repository</li>
+        <li>An API key only from lab 14 on. Free tiers and Ollama both work.</li>
+        <li>Basic security concepts help but are not required</li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="sect">Why this course</h3>
+      <ul class="checks">
+        <li>Built for security practitioners: every lab solves a security problem, from phishing and malware to C2 and incident response.</li>
+        <li>You build tools you can use: classifiers, agents, RAG systems and detection pipelines.</li>
+        <li>Designed for AI-assisted development with Claude Code, Cursor and Copilot.</li>
+        <li>Learn ML foundations before spending on LLM APIs, or spend $0 with Ollama.</li>
+        <li>New to Python? Start at lab 00. The Security-to-AI glossary translates ML jargon into terms you know.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="panel" id="tab-labs" role="tabpanel" aria-label="Labs">
+  <div class="lhead">
+    <h2>Labs</h2>
+    <p class="lede">All {{ c_labs }} labs in order. Each lab folder has starter code, a reference solution, sample data and tests. Filter by track, level and what a lab needs.</p>
+  </div>
+  <div class="labs-shell">
+    <form class="rail" id="labFilters" aria-label="Filter labs">
+      <div class="groups">
+        <fieldset><legend>Track</legend>
+          {%- for t in site.data.tracks %}{% assign tl = labs | where: "track", t.id %}
+          <label class="fv"><input type="checkbox" name="track" value="{{ t.id }}">{{ t.name }}<span class="fc">{{ tl.size }}</span></label>
+          {%- endfor %}
+        </fieldset>
+        <fieldset><legend>Level</legend>
+          {%- comment %} Expert counts as advanced. GitHub Pages runs Jekyll 3.10, whose where_exp has no "or". {% endcomment -%}
+          {%- assign lv_beg = labs | where: "level", "beginner" | size -%}
+          {%- assign lv_int = labs | where: "level", "intermediate" | size -%}
+          {%- assign lv_adv = c_labs | minus: lv_beg | minus: lv_int %}
+          <label class="fv"><input type="checkbox" name="level" value="beginner">Beginner<span class="fc">{{ lv_beg }}</span></label>
+          <label class="fv"><input type="checkbox" name="level" value="intermediate">Intermediate<span class="fc">{{ lv_int }}</span></label>
+          <label class="fv"><input type="checkbox" name="level" value="advanced">Advanced<span class="fc">{{ lv_adv }}</span></label>
+        </fieldset>
+        <fieldset><legend>Needs</legend>
+          <label class="fv"><input type="checkbox" name="api" value="no">No API key<span class="fc">{{ c_free }}</span></label>
+          <label class="fv"><input type="checkbox" name="nb" value="yes">Has a Colab notebook<span class="fc">{{ c_nb }}</span></label>
+        </fieldset>
+      </div>
+      <button type="reset" class="lnkbtn">Clear filters</button>
+    </form>
+    <div>
+      <div class="listbar"><span id="labCount" aria-live="polite">{{ c_labs }} labs</span><a href="{{ repo }}/tree/main/labs">All labs on GitHub &#8599;</a></div>
+      <div class="llist" id="labList">
+      {%- for l in labs %}
+        {%- assign tk = site.data.tracks | where: "id", l.track | first -%}
+        {%- assign nn = l.n | prepend: '0' | slice: -2, 2 %}
+        <article class="lrow" id="lab-{{ l.n }}" data-track="{{ l.track }}" data-level="{% if l.level == 'expert' %}advanced{% else %}{{ l.level }}{% endif %}" data-api="{% if tk.api %}yes{% else %}no{% endif %}" data-nb="{% if l.notebook %}yes{% else %}no{% endif %}">
+          <span class="lnum">{{ nn }}</span>
+          <div class="lmain">
+            <h3><a href="{{ repo }}/tree/main/labs/{{ l.slug }}">{{ l.title }}</a></h3>
+            <p class="ldesc">{{ l.desc }}</p>
+            <div class="badges"><span class="badge">{{ tk.name }}</span><span class="badge">{{ l.level | capitalize }}</span><span class="badge">{% include time.html minutes=l.minutes %}</span>{% unless tk.api %}<span class="badge free">No API key</span>{% endunless %}</div>
+          </div>
+          <div class="lacts">
+            <a href="{{ repo }}/tree/main/labs/{{ l.slug }}">Lab files</a>
+            {%- if l.notebook %}<a href="{{ colab }}/{{ l.notebook }}" target="_blank" rel="noopener">Colab</a>{% endif %}
+            {%- if l.walkthrough %}<a href="{{ repo }}/blob/main/docs/walkthroughs/{{ l.walkthrough }}">Walkthrough</a>{% endif %}
+          </div>
+        </article>
+      {%- endfor %}
+      </div>
+      <p class="empty" id="labEmpty" hidden>No labs match these filters.</p>
+    </div>
+  </div>
+</section>
+
+<section class="panel" id="tab-paths" role="tabpanel" aria-label="Learning paths">
+  <div class="lhead">
+    <h2>Learning paths</h2>
+    <p class="lede">Three paths by experience, and role paths for specific jobs. Times are estimates; with AI coding tools most labs take 50 to 70 percent less time.</p>
+  </div>
+  <div class="pcols">
+  {%- for p in site.data.paths %}
+    {%- assign pmins = 0 %}
+    <div class="pcol">
+      <h3>{{ p.name }}</h3>
+      <p>{{ p.blurb }}</p>
+      {%- for s in p.sections %}
+      {%- if p.sections.size > 1 %}<div class="psub">{{ s.name }}</div>{% endif %}
+      <ol class="plist">
+        {%- for n in s.labs %}{% assign l = labs | where: "n", n | first %}{% assign pmins = pmins | plus: l.minutes %}{% assign nn = n | prepend: '0' | slice: -2, 2 %}
+        <li><span class="pn">{{ nn }}</span><a href="#labs/{{ n }}">{{ l.title }}</a><span class="pt">{% include time.html minutes=l.minutes %}</span></li>
+        {%- endfor %}
+      </ol>
+      {%- endfor %}
+      <div class="ptotal"><span>About <b>{{ pmins | divided_by: 60.0 | round }} hours</b></span><span>{{ p.cost }}</span></div>
+    </div>
+  {%- endfor %}
+  </div>
+  <div class="sechead">
+    <h3 class="sect">By role</h3>
+    <a class="small" href="{{ repo }}/blob/main/resources/role-based-learning-paths.md">All {{ site.data.counts.role_paths }} role paths &#8594;</a>
+  </div>
+  {% include role-tiles.html %}
+</section>
+
+<section class="panel" id="tab-guides" role="tabpanel" aria-label="Guides">
+  <div class="lhead">
+    <h2>Guides</h2>
+    <p class="lede">{{ c_guides }} guides for setup, AI coding tools, building with LLMs and securing AI. They open on GitHub.</p>
+  </div>
+  <div class="ggrid">
+  {%- for g in site.data.guides %}
+    <div>
+      <h3 class="sect">{{ g.group }}</h3>
+      <ul class="glist">
+        {%- for i in g.items %}
+        <li><a href="{{ repo }}/blob/main/docs/guides/{{ i.file }}">{{ i.title }}</a><span>{{ i.desc }}</span></li>
+        {%- endfor %}
+      </ul>
+    </div>
+  {%- endfor %}
+  </div>
+  <p class="small muted">Also: <a href="{{ repo }}/blob/main/resources/security-to-ai-glossary.md">Security-to-AI glossary</a> &#183; <a href="{{ repo }}/tree/main/docs/walkthroughs">Lab walkthroughs</a> &#183; <a href="{{ repo }}/blob/main/docs/guides/ai-for-security-leaders.md">AI for security leaders</a></p>
+</section>
+
+<section class="panel" id="tab-cost" role="tabpanel" aria-label="Cost">
+  <div class="lhead">
+    <h2>Cost</h2>
+    <p class="lede">Labs 00 to 13 need no API key. From lab 14 on, the labs call an LLM: use any one provider, or run models locally with Ollama for $0.</p>
+  </div>
+  <table class="tbl">
+    <thead><tr><th>Labs</th><th>API key</th><th>Estimated cost</th></tr></thead>
+    <tbody>
+      <tr><td>00 to 13: Foundation and ML Foundations</td><td>No</td><td class="num free">Free</td></tr>
+      <tr><td>14 to 18: LLM Basics</td><td>Yes</td><td class="num">About $2 to $8</td></tr>
+      <tr><td>19 to 24: Detection Engineering</td><td>Yes</td><td class="num">About $5 to $15</td></tr>
+      <tr><td>25 to 50: DFIR, Advanced Threats, Cloud and Red Team</td><td>Yes</td><td class="num">About $10 to $25</td></tr>
+      <tr class="total"><td>Any lab, with Ollama running locally</td><td>No</td><td class="num free">$0</td></tr>
+    </tbody>
+  </table>
+  <p class="small muted">Estimates for paid APIs at typical lab volumes. See the <a href="{{ repo }}/blob/main/docs/guides/api-keys-guide.md">API keys guide</a> and the <a href="{{ repo }}/blob/main/docs/guides/cost-management.md">cost management guide</a>.</p>
+</section>
+
+<section class="panel" id="tab-faq" role="tabpanel" aria-label="FAQ">
+  <div class="lhead"><h2>Frequently asked questions</h2></div>
+  <div class="faq">
+    <details><summary>Do I need prior ML or AI experience?</summary><div>No. Labs 00 to 09 cover Python basics, ML concepts and prompt engineering from scratch. The Security-to-AI glossary translates ML jargon into security terms you already know.</div></details>
+    <details><summary>Which LLM provider should I use?</summary><div>We recommend Anthropic Claude for security tasks: Sonnet for everyday lab work, Opus for the hardest reasoning. All labs also support OpenAI GPT, Google Gemini and Ollama (free, local). You only need one provider. See the <a href="{{ repo }}/blob/main/docs/guides/llm-provider-comparison.md">LLM provider comparison</a> for current models and pricing.</div></details>
+    <details><summary>Can I run everything locally without API costs?</summary><div>Yes. Use Ollama to run models locally for free. Labs 00 to 13 need no API at all, so you can complete the whole course for $0 with local models.</div></details>
+    <details><summary>How long does it take to complete all labs?</summary><div>About 40 to 89 hours, depending on experience and how much you use AI assistance. With AI coding tools such as Cursor or Claude Code, most labs take 50 to 70 percent less time. Start with your role's learning path, about 5 to 18 hours, for the quickest return.</div></details>
+    <details><summary>What if I get stuck on a lab?</summary><div>Every lab includes complete solution code and hints, most have a step-by-step walkthrough, and most have a Colab notebook you can run in your browser. Ask in <a href="{{ repo }}/discussions">GitHub Discussions</a> or open an issue.</div></details>
+    <details><summary>Can I use this commercially?</summary><div>Documentation and labs are licensed CC BY-NC-SA 4.0 (non-commercial); code samples are MIT. For commercial use, see <a href="{{ repo }}/blob/main/docs/COMMERCIAL_LICENSING.md">commercial licensing</a>. The solutions demonstrate core concepts; for production you would add error handling, logging and scale.</div></details>
+    <details><summary>How is this different from other ML courses?</summary><div>Every lab solves a real security problem. You will not build iris classifiers or digit recognizers; you will build phishing detectors, threat intel agents and ransomware analyzers.</div></details>
+  </div>
+</section>
+
+<section class="panel" id="tab-get-started" role="tabpanel" aria-label="Get started">
+  <div class="lhead">
+    <h2>Get started</h2>
+    <p class="lede">Three ways in. Colab needs nothing installed; Docker brings every service the labs use; a local install gives you full control.</p>
+  </div>
+  <div class="opts">
+    <div class="opt">
+      <h3>Colab, zero setup</h3>
+      <p>Run labs in your browser. {{ c_nb }} of the {{ c_labs }} labs have a Colab notebook.</p>
+      {%- if hero_nb %}
+      <div class="hero-cta"><a class="btn-fill" href="{{ colab }}/{{ hero_nb.notebook }}" target="_blank" rel="noopener">Open lab {{ hero_nb.n | prepend: '0' | slice: -2, 2 }} in Colab</a><a class="btn-out" href="#labs?nb=yes">Every lab with a notebook</a></div>
+      {%- endif %}
+    </div>
+    <div class="opt">
+      <h3>Docker, recommended</h3>
+      <p>One command starts Jupyter, Elasticsearch, Kibana, PostgreSQL, Redis, MinIO, Ollama and ChromaDB.</p>
+<pre class="code"><code>git clone {{ repo }}.git
+cd ai_for_the_win/docker
+docker compose up -d
+# Jupyter Lab at http://localhost:8888 (token: aiforthewin)</code></pre>
+    </div>
+    <div class="opt">
+      <h3>Local install</h3>
+      <p>Python 3.10 or later and a virtual environment.</p>
+<pre class="code"><code>git clone {{ repo }}.git
+cd ai_for_the_win
+python -m venv venv
+source venv/bin/activate   # Windows: venv\Scripts\activate
+pip install -r requirements.txt
+python labs/lab10-phishing-classifier/solution/main.py</code></pre>
+    </div>
+  </div>
+  <p class="small muted">Full instructions: <a href="{{ repo }}#get-started-in-5-minutes">README</a> &#183; <a href="{{ repo }}/blob/main/docs/guides/api-keys-guide.md">API keys</a> &#183; <a href="{{ repo }}/blob/main/docs/guides/troubleshooting-guide.md">Troubleshooting</a></p>
+</section>

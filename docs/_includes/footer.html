@@ -1,0 +1,8 @@
+{%- assign repo = site.repo_url -%}
+<footer>
+  <div class="flinks"><a href="{{ repo }}">GitHub</a><a href="{{ repo }}/discussions">Discussions</a><a href="{{ repo }}/issues">Issues</a><a href="{{ repo }}/releases">Releases</a><a href="{{ repo }}/blob/main/docs/COMMERCIAL_LICENSING.md">Commercial licensing</a></div>
+  <p>By <a href="https://www.linkedin.com/in/raymond-depalma/" rel="noopener">Raymond DePalma</a>. Code is MIT licensed; documentation and labs are CC BY-NC-SA 4.0.</p>
+  <p>Disclaimer: This is a personal educational project created on personal time. It is not affiliated with, endorsed by, or sponsored by any employer or vendor. All tool references are for educational purposes only.</p>
+</footer>
+{% include search-index.html %}
+<script src="{{ '/assets/js/site.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
