@@ -395,7 +395,12 @@ class TestRansomNoteAnalyzer:
         analyzer = RansomNoteAnalyzer()
         analyzer.client = Mock()
         analyzer.client.messages.create.return_value = Mock(
-            content=[Mock(text='{"ransomware_family": "LockBit", "exfiltration_claimed": true}')]
+            content=[
+                Mock(
+                    type="text",
+                    text='{"ransomware_family": "LockBit", "exfiltration_claimed": true}',
+                )
+            ]
         )
 
         # Just test IOC extraction without actual LLM call
