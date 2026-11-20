@@ -381,7 +381,7 @@ Bypasses Detected: 1 (6.7%)
 ## Resources
 
 - [OWASP Top 10 for LLM Applications](https://owasp.org/www-project-top-10-for-large-language-model-applications/)
-- [Anthropic's Constitutional AI](https://www.anthropic.com/research/constitutional-ai)
+- [Anthropic's Constitutional AI](https://www.anthropic.com/research/constitutional-ai-harmlessness-from-ai-feedback)
 - [Garak - LLM Vulnerability Scanner](https://github.com/leondz/garak)
 
 ---

@@ -6,18 +6,18 @@ Complete guide to using GitHub for AI security tool development and collaboratio
 
 ## 📋 Table of Contents
 
-1. [Setup & Configuration](#setup--configuration)
-2. [Repository Management](#repository-management)
-3. [GitHub CLI](#github-cli)
-4. [Branching Strategy](#branching-strategy)
-5. [Pull Requests & Code Review](#pull-requests--code-review)
-6. [GitHub Actions for Security](#github-actions-for-security)
-7. [Security Best Practices](#security-best-practices)
-8. [Collaboration Workflows](#collaboration-workflows)
+1. [Setup & Configuration](#-setup--configuration)
+2. [Repository Management](#-repository-management)
+3. [GitHub CLI](#-github-cli)
+4. [Branching Strategy](#-branching-strategy)
+5. [Pull Requests & Code Review](#-pull-requests--code-review)
+6. [GitHub Actions for Security](#-github-actions-for-security)
+7. [Security Best Practices](#-security-best-practices)
+8. [Collaboration Workflows](#-collaboration-workflows)
 
 ---
 
-## ⚙️ Setup & Configuration
+## 🔧 Setup & Configuration
 
 ### Git Installation
 

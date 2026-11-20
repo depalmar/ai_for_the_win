@@ -838,7 +838,7 @@ You now understand the concepts! Time to code:
 ## Resources
 
 - [Google ML Crash Course](https://developers.google.com/machine-learning/crash-course) - Free, excellent intro
-- [Scikit-learn Tutorials](https://scikit-learn.org/stable/tutorial/) - Hands-on Python ML
+- [Scikit-learn Getting Started](https://scikit-learn.org/stable/getting_started.html) - Hands-on Python ML
 - [MITRE ATLAS](https://atlas.mitre.org/) - Adversarial ML threats
 - [Malware Data Science Book](https://nostarch.com/malwaredatascience) - Security-focused ML
 

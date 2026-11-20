@@ -1000,6 +1000,6 @@ class MLSecurityAlertSystem:
 ## Resources
 
 - [Evidently AI - ML Monitoring](https://www.evidentlyai.com/)
-- [Alibi Detect](https://docs.seldon.io/projects/alibi-detect/)
+- [Alibi Detect](https://docs.seldon.ai/alibi-detect)
 - [WhyLabs - ML Observability](https://whylabs.ai/)
 - [MLflow Model Registry](https://mlflow.org/docs/latest/model-registry.html)

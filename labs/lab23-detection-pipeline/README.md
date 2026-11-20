@@ -573,7 +573,7 @@ Export rules to your SIEM using [pySigma](https://github.com/SigmaHQ/pySigma).
 
 ## 📚 Resources
 
-- [Detection Engineering](https://www.splunk.com/en_us/blog/security/peak-detection-engineering.html)
+- [PEAK: Turning Hunts into Detections](https://www.splunk.com/en_us/blog/security/peak-turning-hunts-into-detections.html)
 - [MITRE ATT&CK](https://attack.mitre.org/)
 - [Sigma Rules](https://github.com/SigmaHQ/sigma)
 - [Streaming Pipelines](https://kafka.apache.org/documentation/streams/)

@@ -442,7 +442,7 @@ Use the testing framework against an LLM application you've built.
 - [Garak - LLM Vulnerability Scanner](https://github.com/leondz/garak)
 - [Prompt Injection Primer](https://github.com/jthack/PIPE)
 - [LLM Security Best Practices](https://llmsecurity.net/)
-- [AI Red Teaming Guide](https://www.microsoft.com/en-us/security/blog/red-teaming-ai/)
+- [AI Red Teaming Guide](https://learn.microsoft.com/en-us/azure/foundry/openai/concepts/red-teaming)
 
 ---
 

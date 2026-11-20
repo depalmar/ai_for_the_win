@@ -25,18 +25,18 @@ Complete guide to setting up your AI security development environment with all t
 
 ## 📋 Table of Contents
 
-1. [IDE & Code Editors](#ide--code-editors)
-2. [AI Coding Assistants](#ai-coding-assistants)
-3. [Python Environment](#python-environment)
-4. [LLM & AI Frameworks](#llm--ai-frameworks)
-5. [Security Tools](#security-tools)
-6. [Version Control & Collaboration](#version-control--collaboration)
-7. [Cloud & Infrastructure](#cloud--infrastructure)
-8. [Quick Start Script](#quick-start-script)
+1. [IDE & Code Editors](#-ide--code-editors)
+2. [AI Coding Assistants](#-ai-coding-assistants)
+3. [Python Environment](#-python-environment)
+4. [LLM & AI Frameworks](#-llm--ai-frameworks)
+5. [Security Tools](#-security-tools)
+6. [Version Control & Collaboration](#-version-control--collaboration)
+7. [Cloud & Infrastructure](#-cloud--infrastructure)
+8. [Quick Start Script](#-quick-start-script)
 
 ---
 
-## 🖥️ IDE & Code Editors
+## 💻 IDE & Code Editors
 
 ### Cursor IDE (Recommended)
 
@@ -567,7 +567,7 @@ pre-commit install
 
 ---
 
-## ☁️ Cloud & Infrastructure
+## 🌐 Cloud & Infrastructure
 
 ### Docker Setup
 

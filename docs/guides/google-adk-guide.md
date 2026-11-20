@@ -1244,11 +1244,11 @@ result = team.run("Analyze alert and recommend actions")
 
 ## Resources
 
-- [Google ADK Documentation](https://ai.google.dev/adk)
+- [Google ADK Documentation](https://adk.dev/)
 - [Gemini API Reference](https://ai.google.dev/gemini-api)
-- [Vertex AI Agent Builder](https://cloud.google.com/vertex-ai/docs/agents)
+- [Gemini Enterprise Agent Platform (formerly Vertex AI Agent Builder)](https://docs.cloud.google.com/gemini-enterprise-agent-platform/overview)
 - [Google Cloud Security](https://cloud.google.com/security)
-- [ADK GitHub Repository](https://github.com/google/adk)
+- [ADK GitHub Repository](https://github.com/google/adk-python)
 
 ---
 

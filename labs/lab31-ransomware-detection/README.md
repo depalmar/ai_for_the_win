@@ -401,7 +401,8 @@ Test your implementation with the provided sample data:
 - [MITRE ATT&CK: Ransomware](https://attack.mitre.org/software/?platforms=ransomware)
 - [No More Ransom Project](https://www.nomoreransom.org/)
 - [ID Ransomware](https://id-ransomware.malwarehunterteam.com/)
-- [Ransomware Tracker](https://ransomwaretracker.abuse.ch/)
+- [Ransomware.live](https://www.ransomware.live/)
+- [ThreatFox (abuse.ch)](https://threatfox.abuse.ch/)
 
 ## Extension Challenges
 
