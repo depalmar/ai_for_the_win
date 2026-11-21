@@ -163,12 +163,13 @@ def classify_with_llm(log_text: str, client: Anthropic) -> tuple:
     prompt = create_llm_prompt(log_text)
 
     response = client.messages.create(
-        model="claude-sonnet-4-20250514",
+        model="claude-sonnet-5-5",
+        thinking={"type": "between_tools"},
         max_tokens=50,
         messages=[{"role": "user", "content": prompt}]
     )
 
-    result = response.content[0].text.strip().upper()
+    result = "".join(b.text for b in response.content if b.type == "text").strip().upper()
     predicted = 1 if "MALICIOUS" in result else 0
 
     return predicted, result

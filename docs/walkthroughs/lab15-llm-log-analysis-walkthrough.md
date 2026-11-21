@@ -60,7 +60,7 @@ def get_llm_client():
     elif os.getenv('GOOGLE_API_KEY'):
         import google.generativeai as genai
         genai.configure(api_key=os.getenv('GOOGLE_API_KEY'))
-        return GeminiWrapper(genai.GenerativeModel('gemini-2.5-pro'))
+        return GeminiWrapper(genai.GenerativeModel('gemini-3.8-flash'))
 
     else:
         raise ValueError("No API key found. Set ANTHROPIC_API_KEY, OPENAI_API_KEY, or GOOGLE_API_KEY")
@@ -74,12 +74,13 @@ class AnthropicWrapper:
 
     def analyze(self, system_prompt: str, user_prompt: str) -> str:
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},
             max_tokens=1024,
             system=system_prompt,
             messages=[{"role": "user", "content": user_prompt}]
         )
-        return response.content[0].text
+        return "".join(b.text for b in response.content if b.type == "text")
 ```
 
 ### Common Error #1: API Key Not Found

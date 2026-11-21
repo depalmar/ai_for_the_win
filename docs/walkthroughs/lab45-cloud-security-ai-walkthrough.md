@@ -182,12 +182,13 @@ Focus on AWS-specific threats like:
 - Defense evasion"""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},
             max_tokens=1500,
             messages=[{"role": "user", "content": prompt}]
         )
 
-        return response.content[0].text
+        return "".join(b.text for b in response.content if b.type == "text")
 
 # AWS CloudTrail analysis
 # aws_analyzer = AWSCloudTrailAnalyzer()
@@ -314,12 +315,13 @@ Consider Azure-specific threats:
 - Storage account exposure"""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},
             max_tokens=1500,
             messages=[{"role": "user", "content": prompt}]
         )
 
-        return response.content[0].text
+        return "".join(b.text for b in response.content if b.type == "text")
 
 # Azure Monitor analysis
 # azure_analyzer = AzureMonitorAnalyzer("your-workspace-id")
@@ -453,12 +455,13 @@ Consider GCP-specific threats:
 - Compute Engine vulnerabilities"""
 
         response = self.ai_client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},
             max_tokens=1500,
             messages=[{"role": "user", "content": prompt}]
         )
 
-        return response.content[0].text
+        return "".join(b.text for b in response.content if b.type == "text")
 
 # GCP Security analysis
 # gcp_analyzer = GCPSecurityAnalyzer("your-org-id")
@@ -621,12 +624,13 @@ Consider:
 - Shared credentials/secrets"""
 
         response = self.ai_client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},
             max_tokens=1500,
             messages=[{"role": "user", "content": prompt}]
         )
 
-        return response.content[0].text
+        return "".join(b.text for b in response.content if b.type == "text")
 
 # Multi-cloud analysis
 multi_cloud = MultiCloudSecurityAnalyzer()
@@ -714,12 +718,13 @@ Create a 1-page executive brief with:
 Use business language appropriate for C-level executives."""
 
         response = self.multi_cloud.ai_client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},
             max_tokens=1000,
             messages=[{"role": "user", "content": prompt}]
         )
 
-        return response.content[0].text
+        return "".join(b.text for b in response.content if b.type == "text")
 
 # Run pipeline
 pipeline = CloudSecurityPipeline()

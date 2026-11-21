@@ -13,6 +13,8 @@ Build an AI-powered threat actor profiling system for TTP extraction, campaign c
 
 ### Extracting Tactics, Techniques, and Procedures
 
+<!-- {% raw %} -->
+
 ```python
 import anthropic
 import json
@@ -80,13 +82,14 @@ Extract TTPs in JSON format:
 Return ONLY valid JSON."""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},
             max_tokens=2000,
             messages=[{"role": "user", "content": prompt}]
         )
 
         try:
-            result = json.loads(response.content[0].text)
+            result = json.loads("".join(b.text for b in response.content if b.type == "text"))
             return result.get('ttps', [])
         except json.JSONDecodeError:
             return []
@@ -133,6 +136,8 @@ enriched_ttps = extractor.map_to_mitre(ttps)
 for ttp in enriched_ttps:
     print(f"{ttp['technique_id']}: {ttp.get('technique_name', 'Unknown')}")
 ```
+
+<!-- {% endraw %} -->
 
 ---
 
@@ -247,6 +252,8 @@ print(f"Found {cluster_results['num_clusters']} campaign clusters")
 ## Task 3: Actor Profile Generation
 
 ### Building Threat Actor Profiles
+
+<!-- {% raw %} -->
 
 ```python
 @dataclass
@@ -368,13 +375,14 @@ Generate a profile with:
 Return ONLY valid JSON."""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},
             max_tokens=1000,
             messages=[{"role": "user", "content": prompt}]
         )
 
         try:
-            return json.loads(response.content[0].text)
+            return json.loads("".join(b.text for b in response.content if b.type == "text"))
         except json.JSONDecodeError:
             return {}
 
@@ -386,6 +394,8 @@ print(f"Actor: {profile.name}")
 print(f"Motivation: {profile.motivation}")
 print(f"Sophistication: {profile.sophistication}")
 ```
+
+<!-- {% endraw %} -->
 
 ---
 
@@ -513,12 +523,13 @@ Provide:
 6. Recommendations for further investigation"""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},
             max_tokens=1000,
             messages=[{"role": "user", "content": prompt}]
         )
 
-        return response.content[0].text
+        return "".join(b.text for b in response.content if b.type == "text")
 
 # Analyze attribution
 attr_analyzer = AttributionAnalyzer()
@@ -627,12 +638,13 @@ Generate a formal intelligence report with:
 7. Intelligence Gaps"""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},
             max_tokens=3000,
             messages=[{"role": "user", "content": prompt}]
         )
 
-        return response.content[0].text
+        return "".join(b.text for b in response.content if b.type == "text")
 
 # Run pipeline
 pipeline = ThreatActorProfilingPipeline()

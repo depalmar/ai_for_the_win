@@ -298,15 +298,17 @@ Generate detection queries for these platforms (in order of preference):
 Return JSON with keys: elasticsearch_query, elastic_query, monitor_query, sigma_rule"""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},
             max_tokens=1500,
             messages=[{"role": "user", "content": prompt}]
         )
 
+        text = "".join(b.text for b in response.content if b.type == "text")
         try:
-            queries = json.loads(response.content[0].text)
+            queries = json.loads(text)
         except json.JSONDecodeError:
-            queries = {'raw': response.content[0].text}
+            queries = {'raw': text}
 
         return queries
 
@@ -366,12 +368,13 @@ Provide:
 4. Sample detection rules that should catch this"""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},
             max_tokens=1000,
             messages=[{"role": "user", "content": prompt}]
         )
 
-        return response.content[0].text
+        return "".join(b.text for b in response.content if b.type == "text")
 
 # Validate detections
 validator = DetectionValidator()
@@ -579,12 +582,13 @@ Generate a report with:
 Format as markdown."""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},
             max_tokens=2000,
             messages=[{"role": "user", "content": prompt}]
         )
 
-        return response.content[0].text
+        return "".join(b.text for b in response.content if b.type == "text")
 
     def recommend_detections(self, gap_techniques: list[str],
                             techniques: dict[str, MitreAttackTechnique]) -> list[dict]:
@@ -612,15 +616,17 @@ Provide JSON with:
 5. "tuning_tips": Tips to reduce false positives"""
 
             response = self.client.messages.create(
-                model="claude-sonnet-4-20250514",
+                model="claude-sonnet-5-5",
+                thinking={"type": "between_tools"},
                 max_tokens=1000,
                 messages=[{"role": "user", "content": prompt}]
             )
 
+            text = "".join(b.text for b in response.content if b.type == "text")
             try:
-                rec = json.loads(response.content[0].text)
+                rec = json.loads(text)
             except json.JSONDecodeError:
-                rec = {'raw': response.content[0].text}
+                rec = {'raw': text}
 
             rec['technique_id'] = technique_id
             recommendations.append(rec)

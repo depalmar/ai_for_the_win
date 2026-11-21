@@ -177,7 +177,7 @@ Write-Host "Collection complete: $OutputBase"
 
 ### Implementation
 
-{% raw %}
+<!-- {% raw %} -->
 ```python
 import subprocess
 from typing import Dict, List
@@ -268,7 +268,7 @@ def remote_collection(
 
     return results
 ```
-{% endraw %}
+<!-- {% endraw %} -->
 
 ---
 

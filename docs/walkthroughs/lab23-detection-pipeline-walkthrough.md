@@ -388,13 +388,14 @@ Return ONLY valid JSON."""
 
         try:
             response = self.client.messages.create(
-                model="claude-sonnet-4-20250514",
+                model="claude-sonnet-5-5",
+                thinking={"type": "between_tools"},
                 max_tokens=500,
                 messages=[{"role": "user", "content": prompt}]
             )
 
             # Parse response
-            analysis = json.loads(response.content[0].text)
+            analysis = json.loads("".join(b.text for b in response.content if b.type == "text"))
             alert.llm_analysis = analysis.get('summary', '')
             alert.final_priority = analysis.get('priority', 3)
             alert.stage_results['llm_enrichment'] = analysis

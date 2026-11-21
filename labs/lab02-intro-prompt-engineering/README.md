@@ -59,17 +59,17 @@ By the end of this lab, you will:
 └──────────────────────────────────────────────────────────────┘
 ```
 
-### Popular LLMs for Security (2025)
+### Popular LLMs for Security (Nov 2026)
 
 | Model | Provider | Best For | Notes |
 |-------|----------|----------|-------|
-| **Claude Sonnet 4.5** | Anthropic | Coding, agents, long documents | Recommended default, 1M context |
-| **Claude Opus 4.1** | Anthropic | Complex reasoning, analysis | Best for difficult problems |
-| **GPT-4o** | OpenAI | Multimodal, general purpose | Fast, well-documented |
-| **o1 / o3-mini** | OpenAI | Deep reasoning, math | Uses chain-of-thought internally |
-| **Gemini 2.0 Flash** | Google | Free tier, fast responses | Great for learning |
+| **Claude Sonnet 5.5** | Anthropic | Coding, agents, long documents | Recommended default (`claude-sonnet-5-5`) |
+| **Claude Opus 5.5** | Anthropic | Complex reasoning, analysis | Best for difficult problems |
+| **GPT-6.2 Sol** | OpenAI | General purpose | OpenAI's everyday default |
+| **GPT-6.2 Astra** | OpenAI | Hardest problems | Most capable OpenAI model |
+| **Gemini 3.8 Flash** | Google | Fast responses | Great for learning |
 
-> **Model Versions Matter**: AI models are updated frequently. "Claude" or "GPT-4" without a version can mean different capabilities. Always check the model version in your playground or API.
+> **Model Versions Matter**: AI models are updated frequently. "Claude" or "GPT" without a version can mean different capabilities. Always check the model version in your playground or API.
 
 ### Why Use LLMs for Security?
 
@@ -105,7 +105,7 @@ We'll use **Google AI Studio** - it's free, requires no credit card, and perfect
 >
 > | Feature | How to Use | Why It Matters |
 > |---------|------------|----------------|
-> | **Model Selection** | Top dropdown | Compare Gemini 2.0 Flash vs Pro |
+> | **Model Selection** | Top dropdown | Switch between Gemini models |
 > | **Temperature** | Right sidebar (0-2) | 0 = deterministic, 1+ = creative |
 > | **System Instructions** | "System instructions" tab | Set analyst persona |
 > | **Structured Output** | Enable JSON mode | Get parseable responses |
@@ -115,7 +115,7 @@ We'll use **Google AI Studio** - it's free, requires no credit card, and perfect
 
 **Alternative Free Options:**
 - [Claude.ai](https://claude.ai/) - Free tier, excellent for long documents
-- [Poe.com](https://poe.com/) - Try Claude, GPT-4, Gemini, Llama in one place
+- [Poe.com](https://poe.com/) - Try Claude, GPT, Gemini, Llama in one place
 - [Perplexity.ai](https://perplexity.ai/) - Good for research with citations
 
 ---
@@ -795,7 +795,7 @@ When you're ready to build production security tools, these guides will help:
 **Practice Playgrounds (No API Keys Needed):**
 - [Google AI Studio](https://aistudio.google.com/) - Free Gemini access, great for testing prompts
 - [Claude.ai](https://claude.ai/) - Generous free tier, excellent for security analysis
-- [Poe.com](https://poe.com/) - Try Claude, GPT-4, Gemini, Llama & more in one place (by Quora)
+- [Poe.com](https://poe.com/) - Try Claude, GPT, Gemini, Llama & more in one place (by Quora)
 
 ---
 
@@ -876,12 +876,13 @@ prompt = """You are a security analyst. Analyze this log entry for security conc
 192.168.1.100 - - [15/Jan/2024:10:30:00 +0000] "GET /admin/config.php HTTP/1.1" 200 5432"""
 
 response = client.messages.create(
-    model="claude-sonnet-4-20250514",
+    model="claude-sonnet-5-5",
+    thinking={"type": "between_tools"},  # Sonnet 5.5 thinks by default; this keeps replies text-only
     max_tokens=1024,
     messages=[{"role": "user", "content": prompt}]
 )
 
-print(response.content[0].text)
+print("".join(b.text for b in response.content if b.type == "text"))
 ```
 
 **Key insight:** The prompt engineering skills you're building now are the foundation.
@@ -892,8 +893,8 @@ then adding the API is trivial.
 |--------|------------|
 | Type prompt in text box | Pass prompt as string to `messages.create()` |
 | Click "Generate" | Call the API method |
-| Read response in UI | Access `response.content[0].text` |
-| Adjust temperature slider | Set `temperature=0.5` parameter |
+| Read response in UI | Join the `text` blocks in `response.content` |
+| Adjust temperature slider | Set `temperature=0.5` (OpenAI and Gemini; current Claude models only accept the default) |
 
 This is why we start with UIs - you can iterate faster and learn the fundamentals
 without worrying about API keys or code syntax.

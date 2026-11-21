@@ -52,13 +52,14 @@ Alert data:
 Respond in JSON format."""
 
     response = client.messages.create(
-        model="claude-sonnet-4-20250514",
+        model="claude-sonnet-5-5",
+        thinking={"type": "between_tools"},
         max_tokens=1024,
         messages=[{"role": "user", "content": prompt}]
     )
 
     # Parse and merge with original alert
-    enrichment = json.loads(response.content[0].text)
+    enrichment = json.loads("".join(b.text for b in response.content if b.type == "text"))
     return {**alert_data, "ai_enrichment": enrichment}
 
 
@@ -103,12 +104,13 @@ Alerts:
 Respond as JSON array with same alert IDs."""
 
     response = client.messages.create(
-        model="claude-sonnet-4-20250514",
+        model="claude-sonnet-5-5",
+        thinking={"type": "between_tools"},
         max_tokens=2048,
         messages=[{"role": "user", "content": prompt}]
     )
 
-    triage_results = json.loads(response.content[0].text)
+    triage_results = json.loads("".join(b.text for b in response.content if b.type == "text"))
 
     # Merge triage back into alerts
     triage_map = {t["id"]: t for t in triage_results}
@@ -157,12 +159,13 @@ If platform is 'generic', provide pseudo-query that can be adapted.
 Respond as JSON array."""
 
     response = client.messages.create(
-        model="claude-sonnet-4-20250514",
+        model="claude-sonnet-5-5",
+        thinking={"type": "between_tools"},
         max_tokens=2048,
         messages=[{"role": "user", "content": prompt}]
     )
 
-    return json.loads(response.content[0].text)
+    return json.loads("".join(b.text for b in response.content if b.type == "text"))
 
 
 # Example
@@ -204,12 +207,13 @@ Provide:
 Important: These are RECOMMENDATIONS requiring human review."""
 
     response = client.messages.create(
-        model="claude-sonnet-4-20250514",
+        model="claude-sonnet-5-5",
+        thinking={"type": "between_tools"},
         max_tokens=1024,
         messages=[{"role": "user", "content": prompt}]
     )
 
-    recommendations = json.loads(response.content[0].text)
+    recommendations = json.loads("".join(b.text for b in response.content if b.type == "text"))
     recommendations["requires_human_approval"] = True
     recommendations["auto_execute"] = False
 

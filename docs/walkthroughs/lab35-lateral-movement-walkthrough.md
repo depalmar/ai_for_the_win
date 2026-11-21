@@ -566,12 +566,13 @@ Provide:
 8. **Evidence to Preserve** - What to collect for forensics"""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},
             max_tokens=1500,
             messages=[{"role": "user", "content": prompt}]
         )
 
-        return response.content[0].text
+        return "".join(b.text for b in response.content if b.type == "text")
 
     def generate_containment_plan(self, compromised_hosts: list[str],
                                   attack_paths: list[dict]) -> str:
@@ -595,12 +596,13 @@ Create a prioritized containment plan with:
 Format as actionable checklist."""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},
             max_tokens=1200,
             messages=[{"role": "user", "content": prompt}]
         )
 
-        return response.content[0].text
+        return "".join(b.text for b in response.content if b.type == "text")
 
 # AI analysis
 ai_analyzer = AILateralMovementAnalyzer()

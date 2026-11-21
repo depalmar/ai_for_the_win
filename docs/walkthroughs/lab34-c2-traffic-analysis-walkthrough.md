@@ -484,12 +484,13 @@ Provide:
 - MITRE ATT&CK techniques observed"""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},
             max_tokens=1500,
             messages=[{"role": "user", "content": prompt}]
         )
 
-        return response.content[0].text
+        return "".join(b.text for b in response.content if b.type == "text")
 
     def classify_c2_type(self, indicators: list[dict]) -> dict:
         """Classify the type of C2 based on indicators."""
@@ -515,15 +516,17 @@ Return JSON with:
 - "recommended_detection": How to detect this C2 type"""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},
             max_tokens=800,
             messages=[{"role": "user", "content": prompt}]
         )
 
+        text = "".join(b.text for b in response.content if b.type == "text")
         try:
-            return json.loads(response.content[0].text)
+            return json.loads(text)
         except json.JSONDecodeError:
-            return {'raw': response.content[0].text}
+            return {'raw': text}
 
     def generate_detection_rules(self, c2_analysis: dict) -> str:
         """Generate detection rules for identified C2."""
@@ -543,12 +546,13 @@ Generate:
 Include comments explaining each rule."""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},
             max_tokens=2000,
             messages=[{"role": "user", "content": prompt}]
         )
 
-        return response.content[0].text
+        return "".join(b.text for b in response.content if b.type == "text")
 
 # AI analysis
 ai_analyzer = AIC2Analyzer()

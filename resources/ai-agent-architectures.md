@@ -95,7 +95,7 @@ tools = [
 ]
 
 # Create ReAct agent
-llm = ChatAnthropic(model="claude-sonnet-4-20250514")
+llm = ChatAnthropic(model="claude-sonnet-5-5", thinking={"type": "between_tools"})
 prompt = hub.pull("hwchase17/react")
 agent = create_react_agent(llm, tools, prompt)
 
@@ -180,7 +180,7 @@ from langchain_experimental.plan_and_execute import (
 )
 from langchain_anthropic import ChatAnthropic
 
-llm = ChatAnthropic(model="claude-sonnet-4-20250514")
+llm = ChatAnthropic(model="claude-sonnet-5-5", thinking={"type": "between_tools"})
 
 # Create planner and executor
 planner = load_chat_planner(llm)
@@ -281,7 +281,7 @@ class IRState(TypedDict):
 # Define nodes
 def triage_alert(state: IRState) -> IRState:
     """Analyze alert and determine severity."""
-    llm = ChatAnthropic(model="claude-sonnet-4-20250514")
+    llm = ChatAnthropic(model="claude-sonnet-5-5", thinking={"type": "between_tools"})
 
     response = llm.invoke(f"""
     Analyze this security alert and classify severity as
@@ -433,7 +433,7 @@ Multiple specialized agents working together.
 from crewai import Agent, Task, Crew, Process
 from langchain_anthropic import ChatAnthropic
 
-llm = ChatAnthropic(model="claude-sonnet-4-20250514")
+llm = ChatAnthropic(model="claude-sonnet-5-5", thinking={"type": "between_tools"})
 
 # Define specialized agents
 triage_agent = Agent(
@@ -593,7 +593,8 @@ def run_agent(user_message: str) -> str:
 
     while True:
         response = client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},
             max_tokens=4096,
             tools=tools,
             messages=messages
@@ -617,7 +618,7 @@ def run_agent(user_message: str) -> str:
             messages.append({"role": "user", "content": tool_results})
         else:
             # Model is done, return final response
-            return response.content[0].text
+            return "".join(b.text for b in response.content if b.type == "text")
 
 # Use the agent
 result = run_agent("Is IP 192.168.1.100 malicious? Check our logs too.")

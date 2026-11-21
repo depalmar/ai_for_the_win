@@ -325,15 +325,17 @@ Extract the following information (return JSON):
 Return ONLY valid JSON."""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},
             max_tokens=1000,
             messages=[{"role": "user", "content": prompt}]
         )
 
+        text = "".join(b.text for b in response.content if b.type == "text")
         try:
-            analysis = json.loads(response.content[0].text)
+            analysis = json.loads(text)
         except json.JSONDecodeError:
-            analysis = {'raw_analysis': response.content[0].text}
+            analysis = {'raw_analysis': text}
 
         return analysis
 
@@ -360,12 +362,13 @@ Return:
 4. Recommended resources for this family"""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},
             max_tokens=500,
             messages=[{"role": "user", "content": prompt}]
         )
 
-        return response.content[0].text
+        return "".join(b.text for b in response.content if b.type == "text")
 
 # Analyze ransom note
 analyzer = RansomNoteAnalyzer()
@@ -573,13 +576,14 @@ Provide 5-7 prioritized, actionable recommendations for the incident response te
 Format as a numbered list."""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},
             max_tokens=500,
             messages=[{"role": "user", "content": prompt}]
         )
 
         # Parse recommendations
-        text = response.content[0].text
+        text = "".join(b.text for b in response.content if b.type == "text")
         recommendations = [
             line.strip() for line in text.split('\n')
             if line.strip() and (line.strip()[0].isdigit() or line.strip().startswith('-'))

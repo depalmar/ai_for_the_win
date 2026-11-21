@@ -151,15 +151,17 @@ Respond in JSON format:
 """
 
         response = self.llm.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},
             max_tokens=1024,
             messages=[{"role": "user", "content": prompt}]
         )
 
+        text = "".join(b.text for b in response.content if b.type == "text")
         try:
-            return json.loads(response.content[0].text)
+            return json.loads(text)
         except:
-            return {"raw_analysis": response.content[0].text}
+            return {"raw_analysis": text}
 
     def detect_threats(self, hours: int = 24) -> list:
         """Detect potential threats in recent CloudTrail events"""
@@ -212,15 +214,17 @@ Identify:
 Respond in JSON format with findings."""
 
         response = self.llm.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},
             max_tokens=2048,
             messages=[{"role": "user", "content": prompt}]
         )
 
+        text = "".join(b.text for b in response.content if b.type == "text")
         try:
-            return json.loads(response.content[0].text)
+            return json.loads(text)
         except:
-            return {"raw_analysis": response.content[0].text}
+            return {"raw_analysis": text}
 ```
 
 ### 1.2 GuardDuty Integration
@@ -287,15 +291,17 @@ Provide:
 Respond in JSON format."""
 
         response = self.llm.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},
             max_tokens=1500,
             messages=[{"role": "user", "content": prompt}]
         )
 
+        text = "".join(b.text for b in response.content if b.type == "text")
         try:
-            return json.loads(response.content[0].text)
+            return json.loads(text)
         except:
-            return {"raw_analysis": response.content[0].text}
+            return {"raw_analysis": text}
 ```
 
 ---
@@ -386,15 +392,17 @@ Provide:
 Respond in JSON format."""
 
         response = self.llm.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},
             max_tokens=1500,
             messages=[{"role": "user", "content": prompt}]
         )
 
+        text = "".join(b.text for b in response.content if b.type == "text")
         try:
-            return json.loads(response.content[0].text)
+            return json.loads(text)
         except:
-            return {"raw_analysis": response.content[0].text}
+            return {"raw_analysis": text}
 
     def generate_hunting_query(self, description: str) -> str:
         """Generate KQL hunting query from description"""
@@ -411,12 +419,13 @@ KQL syntax examples:
 Return only the KQL query."""
 
         response = self.llm.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},
             max_tokens=500,
             messages=[{"role": "user", "content": prompt}]
         )
 
-        return response.content[0].text.strip()
+        return "".join(b.text for b in response.content if b.type == "text").strip()
 ```
 
 ---
@@ -484,15 +493,17 @@ Provide:
 Respond in JSON format."""
 
         response = self.llm.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},
             max_tokens=1500,
             messages=[{"role": "user", "content": prompt}]
         )
 
+        text = "".join(b.text for b in response.content if b.type == "text")
         try:
-            return json.loads(response.content[0].text)
+            return json.loads(text)
         except:
-            return {"raw_analysis": response.content[0].text}
+            return {"raw_analysis": text}
 
     def get_audit_logs(self, hours: int = 24) -> list:
         """Get GCP audit logs"""
@@ -581,15 +592,17 @@ Identify:
 Respond in JSON format."""
 
         response = self.llm.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},
             max_tokens=2048,
             messages=[{"role": "user", "content": prompt}]
         )
 
+        text = "".join(b.text for b in response.content if b.type == "text")
         try:
-            return json.loads(response.content[0].text)
+            return json.loads(text)
         except:
-            return {"raw_analysis": response.content[0].text}
+            return {"raw_analysis": text}
 
     def generate_security_report(self) -> str:
         """Generate unified security report"""
@@ -613,12 +626,13 @@ Format as markdown with:
 6. Compliance Status"""
 
         response = self.llm.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},
             max_tokens=3000,
             messages=[{"role": "user", "content": prompt}]
         )
 
-        return response.content[0].text
+        return "".join(b.text for b in response.content if b.type == "text")
 ```
 
 ---
@@ -697,15 +711,17 @@ Respond in JSON format:
 """
 
         response = self.llm.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},
             max_tokens=2000,
             messages=[{"role": "user", "content": prompt}]
         )
 
+        text = "".join(b.text for b in response.content if b.type == "text")
         try:
-            return json.loads(response.content[0].text)
+            return json.loads(text)
         except:
-            return {"raw_analysis": response.content[0].text}
+            return {"raw_analysis": text}
 
     def analyze_cloudformation(self, cf_template: str) -> dict:
         """Analyze CloudFormation template for security issues"""

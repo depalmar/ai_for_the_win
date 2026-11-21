@@ -2,7 +2,7 @@
 
 All notebooks in this repository are **provider-agnostic**. They work with:
 - **Anthropic Claude** (recommended)
-- **OpenAI GPT-4**
+- **OpenAI GPT**
 - **Google Gemini**
 
 ## Quick Setup (Copy to First Cell)
@@ -11,7 +11,7 @@ All notebooks in this repository are **provider-agnostic**. They work with:
 # === LLM Setup (Provider-Agnostic) ===
 # Set ONE API key in Colab Secrets (🔑 icon in sidebar):
 #   - ANTHROPIC_API_KEY (Claude)
-#   - OPENAI_API_KEY (GPT-4)  
+#   - OPENAI_API_KEY (GPT)
 #   - GOOGLE_API_KEY (Gemini)
 
 # Install dependencies
@@ -30,9 +30,9 @@ for key in ["ANTHROPIC_API_KEY", "OPENAI_API_KEY", "GOOGLE_API_KEY"]:
 def setup_llm():
     """Detect and configure LLM provider."""
     providers = {
-        "anthropic": ("ANTHROPIC_API_KEY", "claude-sonnet-4.5"),
-        "openai": ("OPENAI_API_KEY", "gpt-5"),
-        "google": ("GOOGLE_API_KEY", "gemini-3-flash"),
+        "anthropic": ("ANTHROPIC_API_KEY", "claude-sonnet-5-5"),
+        "openai": ("OPENAI_API_KEY", "gpt-6.2-sol"),
+        "google": ("GOOGLE_API_KEY", "gemini-3.8-flash"),
     }
     
     for name, (key, model) in providers.items():
@@ -51,9 +51,11 @@ def query_llm(prompt, system_prompt="You are a security analyst.", max_tokens=40
         client = Anthropic()
         response = client.messages.create(
             model=model, max_tokens=max_tokens, system=system_prompt,
+            thinking={"type": "between_tools"},  # claude-sonnet-5-5 only; see "Changing Models"
             messages=[{"role": "user", "content": prompt}]
         )
-        return response.content[0].text
+        # Read text blocks by type (a response can also contain thinking blocks)
+        return "".join(b.text for b in response.content if b.type == "text")
     
     elif provider == "openai":
         from openai import OpenAI
@@ -115,41 +117,43 @@ To use a different model, modify the `providers` dictionary in the `setup_llm()`
 
 ```python
 providers = {
-    "anthropic": ("ANTHROPIC_API_KEY", "claude-sonnet-4.5"),  # Change model here
-    "openai": ("OPENAI_API_KEY", "gpt-5"),
-    "google": ("GOOGLE_API_KEY", "gemini-3-flash"),
+    "anthropic": ("ANTHROPIC_API_KEY", "claude-sonnet-5-5"),  # Change model here
+    "openai": ("OPENAI_API_KEY", "gpt-6.2-sol"),
+    "google": ("GOOGLE_API_KEY", "gemini-3.8-flash"),
 }
 ```
 
-### Available Models (Jan 2026)
+> **Claude parameters:** `thinking={"type": "between_tools"}` turns thinking off for `claude-sonnet-5-5` on requests without tools, so replies are text only. Other Claude models reject it: remove that line when you switch (for `claude-haiku-5-5`, use `thinking={"type": "disabled"}`). Current Claude models also reject a non-default `temperature`, so the Anthropic call does not set one.
+
+### Available Models (Nov 2026)
 
 **Anthropic Claude:**
 | Model | Best For | Cost |
 |-------|----------|------|
-| `claude-opus-4.5` | Most capable, complex analysis | $$$ |
-| `claude-sonnet-4.5` | Balanced performance (default) | $$ |
-| `claude-haiku-4.5` | Fast, simple tasks | $ |
+| `claude-opus-5-5` | Complex reasoning, deep analysis | $$$ |
+| `claude-sonnet-5-5` | Everyday coding and agents (default) | $$ |
+| `claude-haiku-5-5` | Fast, simple tasks | $ |
 
 **OpenAI:**
 | Model | Best For | Cost |
 |-------|----------|------|
-| `gpt-5` | Most capable, 1M+ context (default) | $$ |
-| `gpt-5-mini` | Fast, cost-effective | $ |
-| `o3` | Advanced reasoning | $$$ |
+| `gpt-6.2-astra` | Most capable, hardest projects | $$$ |
+| `gpt-6.2-sol` | Everyday work (default) | $$ |
+| `gpt-6.1-terra` | Fast, efficient | $ |
 
 **Google Gemini:**
 | Model | Best For | Cost |
 |-------|----------|------|
-| `gemini-3-pro` | Most capable | $$ |
-| `gemini-3-flash` | Fast, free tier (default) | $ |
+| `gemini-3.8-flash` | Stable, general purpose (default) | $ |
+| `gemini-3.5-flash-lite` | Lightweight tasks | $ |
 
 ## Provider Comparison
 
 | Provider | Default Model | Speed | Cost | Best For |
 |----------|---------------|-------|------|----------|
-| Anthropic | claude-sonnet-4.5 | Fast | $$ | Complex reasoning, code |
-| OpenAI | gpt-5 | Fast | $$ | General purpose, 1M+ context |
-| Google | gemini-3-flash | Very Fast | $ | Long context, free tier |
+| Anthropic | claude-sonnet-5-5 | Fast | $$ | Complex reasoning, code |
+| OpenAI | gpt-6.2-sol | Fast | $$ | General purpose |
+| Google | gemini-3.8-flash | Very Fast | $ | Long context, free tier |
 
 ## Troubleshooting
 

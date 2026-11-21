@@ -373,14 +373,15 @@ Provide:
 Be specific and actionable."""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},
             max_tokens=1500,
             messages=[{"role": "user", "content": prompt}]
         )
 
         return {
             'cve_id': vuln.cve_id,
-            'recommendations': response.content[0].text,
+            'recommendations': "".join(b.text for b in response.content if b.type == "text"),
             'generated_at': datetime.now().isoformat()
         }
 
@@ -494,12 +495,13 @@ Write a 2-3 paragraph executive summary that:
 4. Uses non-technical language appropriate for executives"""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},
             max_tokens=800,
             messages=[{"role": "user", "content": prompt}]
         )
 
-        return response.content[0].text
+        return "".join(b.text for b in response.content if b.type == "text")
 
 # Generate report
 reporter = VulnerabilityReporter()

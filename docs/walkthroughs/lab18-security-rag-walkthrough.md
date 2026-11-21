@@ -281,13 +281,14 @@ Instructions:
 Answer:"""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},
             max_tokens=1024,
             messages=[{"role": "user", "content": prompt}]
         )
 
         return {
-            'answer': response.content[0].text,
+            'answer': "".join(b.text for b in response.content if b.type == "text"),
             'sources': [c['metadata']['filename'] for c in context_chunks],
             'context_chunks': context_chunks
         }

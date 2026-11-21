@@ -214,7 +214,8 @@ def simple_agent(user_query: str) -> str:
     # Step 1: Initial LLM call with tools
     print("🤔 Agent thinking...")
     response = client.messages.create(
-        model="claude-sonnet-4-20250514",
+        model="claude-sonnet-5-5",
+        thinking={"type": "between_tools"},
         max_tokens=1024,
         system="You are a security analyst assistant. Use the available tools to help answer questions about IP addresses and file hashes. Be concise and helpful.",
         tools=TOOLS,
@@ -255,17 +256,18 @@ def simple_agent(user_query: str) -> str:
             # Get next response
             print("🤔 Agent reflecting on tool result...")
             response = client.messages.create(
-                model="claude-sonnet-4-20250514",
+                model="claude-sonnet-5-5",
+                thinking={"type": "between_tools"},
                 max_tokens=1024,
                 system="You are a security analyst assistant. Use the available tools to help answer questions about IP addresses and file hashes. Be concise and helpful.",
                 tools=TOOLS,
                 messages=messages
             )
 
-    # Extract final text response
+    # Extract final text response (skip any thinking blocks)
     final_response = ""
     for block in response.content:
-        if hasattr(block, "text"):
+        if block.type == "text":
             final_response += block.text
 
     print(f"\n✅ AGENT RESPONSE: {final_response}\n")

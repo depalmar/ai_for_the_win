@@ -23,15 +23,15 @@ Comprehensive collection of tools, datasets, APIs, courses, and communities for 
 
 ### LLM Providers
 
-| Provider         | Models                             | Best For                             | Pricing           | Link                                                   |
-| ---------------- | ---------------------------------- | ------------------------------------ | ----------------- | ------------------------------------------------------ |
-| **Anthropic**    | Claude Opus 4.5, Sonnet 4, Haiku   | Complex reasoning, security analysis | $3-75/M tokens    | [console.anthropic.com](https://console.anthropic.com) |
-| **OpenAI**       | GPT-4 Turbo, GPT-4o, o1            | General purpose, function calling    | $2.50-60/M tokens | [platform.openai.com](https://platform.openai.com)     |
-| **Google**       | Gemini 2.0, Gemini Pro             | Multimodal analysis, ADK agents      | Varies            | [ai.google.dev](https://ai.google.dev)                 |
-| **Ollama**       | Llama 3.2, Mistral, Qwen, DeepSeek | Local/offline, privacy               | Free (local)      | [ollama.com](https://ollama.com)                       |
-| **Together.ai**  | 200+ open models                   | Variety, fine-tuning                 | $0.10-2/M tokens  | [together.ai](https://together.ai)                     |
-| **Fireworks.ai** | Llama, Mixtral, custom             | Low latency, fine-tuning             | $0.20/M tokens    | [fireworks.ai](https://fireworks.ai)                   |
-| **Cerebras**     | Llama 3.1                          | Fastest inference                    | Free tier         | [cerebras.ai](https://cerebras.ai)                     |
+| Provider         | Models                                            | Best For                             | Pricing          | Link                                                   |
+| ---------------- | ------------------------------------------------- | ------------------------------------ | ---------------- | ------------------------------------------------------ |
+| **Anthropic**    | Claude Fable 5.2, Opus 5.5, Sonnet 5.5, Haiku 5.5 | Complex reasoning, security analysis | Varies           | [console.anthropic.com](https://console.anthropic.com) |
+| **OpenAI**       | GPT-6.2 Sol, GPT-6.2 Astra, GPT-6.1 Terra         | General purpose, function calling    | Varies           | [platform.openai.com](https://platform.openai.com)     |
+| **Google**       | Gemini 3.8 Flash, Gemini 3.5 Flash-Lite           | Multimodal analysis, ADK agents      | Varies           | [ai.google.dev](https://ai.google.dev)                 |
+| **Ollama**       | Llama 3.2, Mistral, Qwen, DeepSeek                | Local/offline, privacy               | Free (local)     | [ollama.com](https://ollama.com)                       |
+| **Together.ai**  | 200+ open models                                  | Variety, fine-tuning                 | $0.10-2/M tokens | [together.ai](https://together.ai)                     |
+| **Fireworks.ai** | Llama, Mixtral, custom                            | Low latency, fine-tuning             | $0.20/M tokens   | [fireworks.ai](https://fireworks.ai)                   |
+| **Cerebras**     | Llama 3.1                                         | Fastest inference                    | Free tier        | [cerebras.ai](https://cerebras.ai)                     |
 
 ### AI Development Tools
 
@@ -466,7 +466,7 @@ dvc                     # Data versioning
 ```python
 # Initialize LLM
 from langchain_anthropic import ChatAnthropic
-llm = ChatAnthropic(model="claude-sonnet-4-20250514")
+llm = ChatAnthropic(model="claude-sonnet-5-5", thinking={"type": "between_tools"})
 
 # Simple chain
 from langchain.prompts import ChatPromptTemplate

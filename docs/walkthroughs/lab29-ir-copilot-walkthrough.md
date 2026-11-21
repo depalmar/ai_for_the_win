@@ -141,7 +141,8 @@ I'm ready to help investigate. What would you like to do first?"""
 
         # Call Claude
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},
             max_tokens=2048,
             system=self.system_prompt.format(timestamp=datetime.now().isoformat()),
             messages=messages,
@@ -634,12 +635,13 @@ Write a 2-3 paragraph executive summary that:
 Keep it concise and factual."""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},
             max_tokens=500,
             messages=[{"role": "user", "content": prompt}]
         )
 
-        return response.content[0].text
+        return "".join(b.text for b in response.content if b.type == "text")
 
     def generate_lessons_learned(self, incident: Incident) -> str:
         """Generate lessons learned document."""
@@ -669,12 +671,13 @@ Generate a lessons learned document with:
 Format as markdown."""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},
             max_tokens=1000,
             messages=[{"role": "user", "content": prompt}]
         )
 
-        return response.content[0].text
+        return "".join(b.text for b in response.content if b.type == "text")
 
 # Initialize documenter
 documenter = IncidentDocumenter()

@@ -620,6 +620,8 @@ jobs:
 
 Create `.github/workflows/security.yml`:
 
+<!-- {% raw %} -->
+
 ```yaml
 name: Security Scan
 
@@ -687,6 +689,8 @@ jobs:
           name: bandit-report
           path: bandit-report.json
 ```
+
+<!-- {% endraw %} -->
 
 ### Detection Rules Testing
 
@@ -757,6 +761,8 @@ jobs:
 
 ### 1. Secrets Management
 
+<!-- {% raw %} -->
+
 ```bash
 # Never commit secrets!
 # Use GitHub Secrets for CI/CD
@@ -767,6 +773,8 @@ gh secret set ANTHROPIC_API_KEY
 # Use in workflow
 # ${{ secrets.ANTHROPIC_API_KEY }}
 ```
+
+<!-- {% endraw %} -->
 
 ### 2. Branch Protection
 

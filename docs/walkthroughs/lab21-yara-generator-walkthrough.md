@@ -260,12 +260,13 @@ Generate a YARA rule that:
 Return ONLY the YARA rule, no explanations."""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},
             max_tokens=2048,
             messages=[{"role": "user", "content": prompt}]
         )
 
-        return response.content[0].text
+        return "".join(b.text for b in response.content if b.type == "text")
 
 # Generate rule
 generator = YARAGenerator()
@@ -456,12 +457,13 @@ Please refine the rule to:
 Return ONLY the refined YARA rule."""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},
             max_tokens=2048,
             messages=[{"role": "user", "content": prompt}]
         )
 
-        return response.content[0].text
+        return "".join(b.text for b in response.content if b.type == "text")
 
     def auto_refine(self, analysis: dict, patterns: dict,
                     test_files: list[str], max_iterations: int = 3) -> str:

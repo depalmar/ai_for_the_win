@@ -460,12 +460,13 @@ Provide a structured analysis with:
 - Recommended next steps for investigation"""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},
             max_tokens=1500,
             messages=[{"role": "user", "content": prompt}]
         )
 
-        return response.content[0].text
+        return "".join(b.text for b in response.content if b.type == "text")
 
     def analyze_network_artifacts(self, connections: list[dict]) -> str:
         """AI analysis of network connections."""
@@ -489,12 +490,13 @@ Provide:
 - Recommended containment actions"""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},
             max_tokens=1500,
             messages=[{"role": "user", "content": prompt}]
         )
 
-        return response.content[0].text
+        return "".join(b.text for b in response.content if b.type == "text")
 
     def analyze_injection_findings(self, injections: dict) -> str:
         """AI analysis of injection detection results."""
@@ -521,12 +523,13 @@ Provide:
 5. Containment priorities"""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},
             max_tokens=1500,
             messages=[{"role": "user", "content": prompt}]
         )
 
-        return response.content[0].text
+        return "".join(b.text for b in response.content if b.type == "text")
 
     def generate_forensic_report(self, all_findings: dict) -> str:
         """Generate comprehensive forensic report."""
@@ -549,12 +552,13 @@ Create a professional forensic report with:
 Format as a formal report suitable for legal/compliance purposes."""
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},
             max_tokens=3000,
             messages=[{"role": "user", "content": prompt}]
         )
 
-        return response.content[0].text
+        return "".join(b.text for b in response.content if b.type == "text")
 
 # AI-powered analysis
 ai_analyzer = AIForensicAnalyzer()
