@@ -4,18 +4,23 @@ This document shows the prerequisite relationships between labs in the AI for th
 
 ## Current Threat Landscape (2025-2026)
 
-This curriculum addresses the most critical AI/ML security threats identified by OWASP, NIST, and industry research:
+This curriculum addresses the most critical AI/ML security threats identified by OWASP, NIST, and industry research, plus the ransomware, C2 and nation-state activity the DFIR and threat intelligence labs teach. Last verified November 2026; details and dated sources are in the [Threat Landscape 2025-2026 reference](guides/threat-landscape-2025.md).
 
 | Threat | Labs Covering | Priority |
 |--------|---------------|----------|
-| **Prompt Injection** (OWASP #1) | Labs 40, 49 | Critical |
-| **RAG Poisoning** | Labs 18, 43 | Critical |
-| **Data/Model Poisoning** | Labs 39, 41 | High |
-| **AI-Powered Threat Actors** | Lab 37 | High |
-| **Adversarial ML Attacks** | Labs 38, 39 | High |
-| **Agentic AI Exploits** | Labs 14, 16, 49 | High |
-| **Model Extraction/Theft** | Labs 39, 41 | Medium |
-| **Supply Chain Attacks** | Labs 40, 46 | Medium |
+| **Prompt Injection** (OWASP LLM01:2026, ATLAS AML.T0051) | Labs 40, 49 | Critical |
+| **Agentic AI Exploits** (OWASP LLM03:2026 Excessive Agency; Agentic ASI01 Goal Hijack, ASI02 Tool Misuse) | Labs 14, 16, 49 | Critical |
+| **RAG Poisoning** (OWASP LLM09:2026 Vector and Embedding Weaknesses, ATLAS AML.T0070) | Labs 18, 43 | Critical |
+| **Data/Model Poisoning** (OWASP LLM05:2026) | Labs 39, 41 | High |
+| **AI-Powered Threat Actors** (LLM-querying malware, agentic offensive frameworks) | Lab 37 | High |
+| **Ransomware** (Qilin, The Gentlemen, DragonForce; data-theft extortion, ESXi targeting) | Labs 30, 31, 32 | High |
+| **C2 Frameworks** (Sliver, Havoc, AdaptixC2, Metasploit; agentic C2 such as ARTEX) | Lab 34 | High |
+| **Nation-State APTs** (China, Russia, Iran, North Korea) | Labs 36, 37 | High |
+| **Adversarial ML Attacks** (ATLAS AML.T0043) | Labs 38, 39 | High |
+| **Supply Chain Attacks** (OWASP LLM04:2026; Agentic ASI04) | Labs 40, 46 | Medium |
+| **Model Extraction/Theft** (ATLAS AML.T0024; no longer a separate OWASP entry) | Labs 39, 41 | Medium |
+
+Sources: [OWASP GenAI LLM Top 10 2026](https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/) (2026-08-03), [OWASP Top 10 for Agentic Applications](https://genai.owasp.org/2025/12/09/owasp-top-10-for-agentic-applications-the-benchmark-for-agent) (2025-12-09), [MITRE ATLAS](https://atlas.mitre.org/), [Check Point State of Ransomware Q3 2026](https://research.checkpoint.com/2026/the-state-of-ransomware-q3-2026/) (2026-11-18), [Kaspersky Securelist Q2 2026](https://securelist.com/vulnerabilities-and-exploits-in-q2-2026/121091/) (2026-08-26), [GTIG AI Threat Tracker](https://cloud.google.com/blog/topics/threat-intelligence/agentic-threat-activity-crosses-a-significant-threshold) (2026-11-16).
 
 ## Visual Overview
 
@@ -208,7 +213,7 @@ Lab 01 → Lab 08 → Lab 20 → Lab 21 → Lab 22 → Lab 23 → Lab 24
 Lab 01 → Lab 25 → Lab 30 → Lab 31 → Lab 32 → Lab 33 → Lab 34 → Lab 35
 ```
 
-### AI Security Path (Critical for 2025 Threats)
+### AI Security Path (Critical for 2025-2026 Threats)
 
 ```
 Lab 07 → Lab 38 → Lab 39 → Lab 40 → Lab 41 → Lab 49 → Lab 50

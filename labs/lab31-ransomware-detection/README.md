@@ -2,7 +2,7 @@
 
 Build an AI system that detects ransomware behavior, analyzes samples, and automates incident response.
 
-> **Updated January 2025**: Covers 2024-2025 ransomware families including RansomHub, Qilin, DragonForce, and emerging AI-assisted ransomware techniques.
+> **Updated November 2026**: Threat context covers 2025-2026 ransomware operations (Qilin, The Gentlemen, DragonForce, Akira, LockBit 5.0; RansomHub and FunkSec are now defunct) and the shifts detection must handle: data-theft-only extortion, hypervisor targeting, EDR killers and AI-assisted tooling. See the [Threat Landscape 2025-2026 Reference](../../docs/guides/threat-landscape-2025.md).
 
 ## 🎯 Learning Objectives
 
@@ -24,7 +24,7 @@ By completing this lab, you will:
 
 ## 📋 Prerequisites
 
-- Completed Labs 03 (Anomaly Detection), 07 (YARA Generator)
+- Completed Labs 12 (Anomaly Detection), 21 (YARA Generator)
 - Understanding of file system operations and encryption
 - Familiarity with MITRE ATT&CK ransomware techniques
 
@@ -68,6 +68,25 @@ By completing this lab, you will:
 | System Information Discovery | T1082 | Identifying encryption targets |
 | File and Directory Discovery | T1083 | Finding files to encrypt |
 | Data Destruction | T1485 | Some variants destroy vs encrypt |
+
+### 2025-2026 Detection Context
+
+Google's review of the ransomware intrusions it responded to in 2025 ([GTIG](https://cloud.google.com/blog/topics/threat-intelligence/ransomware-ttps-shifting-threat-landscape), 2026-03-16) shows where file-system detection alone falls short:
+
+| Observation (2025 incidents) | Share | What it means for your detector |
+|------------------------------|-------|---------------------------------|
+| Suspected data theft | 77% (57% in 2024) | Entropy and rename signals miss theft-only extortion; add exfiltration signals (Rclone in about 28% of theft cases, FTP/SFTP clients in 26%) |
+| Virtualization infrastructure targeted | About 43% (29% in 2024) | Encryption may happen on ESXi hosts, not endpoints; watch for `execInstalledOnly` being disabled, SSH enabled and snapshots deleted |
+| Initial access via exploited VPNs or firewalls | About a third | Correlate edge-device alerts with later file activity |
+| Security tools disabled | Most commonly via registry changes; signed-driver EDR killers in a handful of cases | Treat tampering events as high-severity precursors |
+| Backup credentials targeted | About 10% (Veeam Backup & Replication) | Alert on access to backup consoles before encryption starts |
+
+Other 2025-2026 developments worth modeling:
+
+- **LockBit 5.0** (September 2025) adds random 16-character extensions, so extension blocklists alone will miss it ([Trend Micro](https://www.trendmicro.com/en_us/research/25/i/lockbit-5-targets-windows-linux-esxi.html), 2025-09-25)
+- **The Gentlemen** ship lockers in C and Go and use the GentleKiller EDR killer ([Unit 42](https://unit42.paloaltonetworks.com/the-gentlemen-ransomware/), 2026-07-10)
+- **Cl0p** stole data through an Oracle E-Business Suite zero-day (CVE-2025-61882) and extorted victims by email, with no encryption step to detect ([GTIG](https://cloud.google.com/blog/topics/threat-intelligence/oracle-ebusiness-suite-zero-day-exploitation), 2025-10-09)
+- **AI-assisted tooling** lowers the skill needed to build new variants ([Anthropic](https://www.anthropic.com/news/detecting-countering-misuse-aug-2025), 2025-08-27), which favors behavioral detection over signatures
 
 ## Tasks
 
@@ -403,6 +422,8 @@ Test your implementation with the provided sample data:
 - [ID Ransomware](https://id-ransomware.malwarehunterteam.com/)
 - [Ransomware.live](https://www.ransomware.live/)
 - [ThreatFox (abuse.ch)](https://threatfox.abuse.ch/)
+- [CISA #StopRansomware](https://www.cisa.gov/stopransomware) - Joint advisories with current IOCs and TTPs
+- [GTIG: Ransomware TTPs in a Shifting Threat Landscape](https://cloud.google.com/blog/topics/threat-intelligence/ransomware-ttps-shifting-threat-landscape) - 2025 incident response data (2026-03-16)
 
 ## Extension Challenges
 
@@ -415,4 +436,4 @@ Test your implementation with the provided sample data:
 
 > **Stuck?** See the [Lab 31 Walkthrough](../../docs/walkthroughs/lab31-ransomware-detection-walkthrough.md) for step-by-step guidance.
 
-**Next Lab**: [Lab 12 - Ransomware Attack Simulation & Purple Team](../lab32-ransomware-simulation/)
+**Next Lab**: [Lab 32 - Ransomware Attack Simulation & Purple Team](../lab32-ransomware-simulation/)

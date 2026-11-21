@@ -573,10 +573,13 @@ print(f"Risk Score: {results['summary']['risk_score']:.1f}%")
 | Vulnerability | ID | Covered |
 |--------------|-----|---------|
 | Prompt Injection | LLM01 | ✓ Tasks 1-2 |
-| Insecure Output | LLM02 | ✓ Task 5 |
-| Sensitive Info Disclosure | LLM06 | ✓ Tasks 2, 5 |
-| Insecure Plugin Design | LLM07 | ✓ Task 4 |
-| Excessive Agency | LLM08 | ✓ Task 4 |
+| Sensitive Info Disclosure | LLM02 | ✓ Tasks 2, 5 |
+| Excessive Agency | LLM03 | ✓ Task 4 |
+| Hidden Context Exposure | LLM08 | ✓ Task 2 |
+| Improper Output Handling | LLM10 | ✓ Task 5 |
+| Tool Misuse (Agentic Top 10) | ASI02 | ✓ Task 4 |
+
+IDs follow the [OWASP Top 10 for LLM Applications 2026](https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/) (published 2026-08-03). The 2023 entry "Insecure Plugin Design" no longer exists; its tool risks are covered by Excessive Agency and ASI02.
 
 ---
 

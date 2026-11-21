@@ -2,6 +2,8 @@
 
 **Difficulty:** 🟡 Intermediate | **Time:** 45-60 min | **Prerequisites:** Lab 25 (DFIR Fundamentals)
 
+> **Updated November 2026**: Ransomware families and statistics reflect Check Point's Q1-Q3 2026 reports and Google's 2025 incident data: Qilin and The Gentlemen lead, DragonForce, Akira and Play stay active, LockBit is declining, and RansomHub and FunkSec are defunct.
+
 > **Bridge Lab:** This lab covers ransomware families, attack lifecycle, and indicators before building detection in Lab 31.
 
 Understand ransomware attacks before building detection systems.
@@ -68,8 +70,9 @@ By completing this lab, you will:
 | **2019**  | Maze         | Double extortion (encrypt + leak data)               |
 | **2021**  | REvil/Kaseya | Supply chain attacks, $70M ransom                    |
 | **2023**  | LockBit 3.0  | RaaS ecosystem, bug bounties, triple extortion       |
-| **2024**  | BlackCat/ALPHV | $22M Change Healthcare breach, 100M+ affected     |
-| **2025**  | Post-disruption | 85 groups active, AI integration, $1.8M avg demand |
+| **2024**  | BlackCat/ALPHV | $22M Change Healthcare ransom; final estimate 192.7M people affected ([HIPAA Journal](https://www.hipaajournal.com/change-healthcare-responding-to-cyberattack/), Aug 2025) |
+| **2025**  | Fragmentation | RansomHub goes dark (Apr); record 85 active groups in Q3 ([Check Point](https://research.checkpoint.com/2026/the-state-of-ransomware-q1-2026/)); on-chain payments fall 8% to about $820M ([Chainalysis via The Register](https://www.theregister.com/2026/02/27/ransomware_chainalysis/)) |
+| **2026**  | Qilin vs. The Gentlemen | Record 2,830 leak-site victims and 117 active brands in Q3 2026 ([Check Point](https://research.checkpoint.com/2026/the-state-of-ransomware-q3-2026/), 2026-11-18) |
 
 ### AI/LLM Evolution in Ransomware
 
@@ -83,7 +86,14 @@ Modern ransomware groups are increasingly leveraging AI:
 | **Negotiation**         | Chatbots handle ransom negotiations 24/7                      | More professional criminal operations                     |
 | **Translation**         | Instant localization of ransom notes                          | Global reach without language barriers                    |
 
-> ⚠️ **Defender's Edge**: AI works both ways. The same capabilities that help attackers can power better detection (Labs 09-11).
+**Documented cases (2025-2026):**
+
+- **FunkSec** (defunct since March 2025) built its tools with AI help ([Check Point](https://research.checkpoint.com/2025/funksec-alleged-top-ransomware-group-powered-by-ai/), Jan 2025); a free decryptor followed in July 2025 ([The Hacker News](https://thehackernews.com/2025/07/funksec-ransomware-decryptor-released.html))
+- An actor with basic skills used Claude to build ransomware and sold it for $400 to $1,200; another used Claude Code to steal data from at least 17 organizations and draft extortion notes ([Anthropic](https://www.anthropic.com/news/detecting-countering-misuse-aug-2025), 2025-08-27)
+- **The Gentlemen**'s admin built the group's ransomware panel in about three days with AI coding assistants, according to leaked backend data ([Check Point](https://blog.checkpoint.com/security/ransomware-didnt-slow-down-in-q2-2026-it-just-spread-out/), 2026-08-13)
+- **PromptLock**, reported in August 2025 as the "first AI-powered ransomware", was an NYU research prototype, a reminder to check "first" claims ([NYU Tandon](https://engineering.nyu.edu/news/ai-powered-ransomware-sparked-concern-was-nyus-work))
+
+> ⚠️ **Defender's Edge**: AI works both ways. The same capabilities that help attackers can power better detection (Lab 31, Ransomware Detection).
 
 ---
 
@@ -120,27 +130,31 @@ Modern ransomware groups are increasingly leveraging AI:
 
 ### Current Active Threats (2025-2026)
 
-> **Post-LockBit/BlackCat Fragmentation:** Law enforcement disruptions in 2024 led to 85 active extortion groups (45 new in 2025). Average ransom: $1.8M. Average incident cost: $5.08M.
+> **Post-LockBit/BlackCat landscape:** after the 2024 disruptions of LockBit and ALPHV/BlackCat, RansomHub took over much of the affiliate market until its infrastructure went dark on 2025-04-01 ([The Hacker News](https://thehackernews.com/2025/04/ransomhub-went-dark-april-1-affiliates.html)). Since then Qilin has led every quarter, with The Gentlemen close behind. The market is fragmenting again: in Q3 2026, 117 brands posted 2,830 victims (a record) and the top ten groups held only 49% of victims, down from 71% in Q1 2026 ([Check Point](https://research.checkpoint.com/2026/the-state-of-ransomware-q3-2026/), 2026-11-18). Only about 23% of victims pay ([Check Point](https://research.checkpoint.com/2026/the-state-of-ransomware-q2-2026/), 2026-08-13).
 
-| Family | Status | Characteristics | Notable TTPs |
-| ------ | ------ | --------------- | ------------ |
-| **RansomHub** | Rising | ALPHV successor, 80% affiliate share | BlackCat affiliates, aggressive recruiting |
-| **Qilin** | Rising | IAB partnerships, business-like ops | VPN credential purchases, high volume |
-| **DragonForce** | Cartel | Multi-platform (Win/Linux/ESXi/NAS) | BYOVD, LockBit/Conti code reuse |
-| **LockBit** | Diminished | Resurged Sept 2025, sanctions limiting | Fast encryption, critical infrastructure threats |
-| **Funksec** | Emerging | AI/LLM integration (WormGPT) | AI-generated phishing, chatbot negotiations |
-| **Play** | Active | Healthcare/critical infrastructure | Living-off-the-land, ProxyNotShell |
-| **Akira** | Active | Enterprise, VMware targeting | VPN exploitation, Conti lineage |
+| Family | Status (Nov 2026) | Characteristics | Notable TTPs |
+| ------ | ----------------- | --------------- | ------------ |
+| **Qilin** (Agenda) | Active, #1 in Q1-Q3 2026 | 338 victims in Q1 2026; top brand against industrial organizations since March 2025 ([Dragos](https://www.dragos.com/dragos-industrial-ransomware-analysis-q1-2026), 2026-06-03) | High-volume RaaS; an alleged core member was handed to Germany in Oct 2026 and the group kept operating ([BleepingComputer](https://www.bleepingcomputer.com/news/security/germany-arrests-alleged-core-qilin-ransomware-member-after-extradition/)) |
+| **The Gentlemen** | Active, #2; led in June and September 2026 | Likely started as a Qilin affiliate (ArmCorp); active since at least July 2025; 90% affiliate payout ([Unit 42](https://unit42.paloaltonetworks.com/the-gentlemen-ransomware/), 2026-07-10) | C and Go lockers, GentleKiller EDR killer, edge-device exploitation |
+| **DragonForce** | Active, white-label "cartel" | Affiliates run their own brands on its infrastructure ([Sophos](https://www.sophos.com/en-us/blog/dragonforce-targets-rivals-in-a-play-for-dominance), May 2025) | Encryptor used in the April 2025 Marks & Spencer attack linked to Scattered Spider ([BleepingComputer](https://www.bleepingcomputer.com/news/security/four-arrested-in-uk-over-mands-co-op-harrods-cyberattacks/)) |
+| **Akira** | Active | Enterprise, VMware ESXi targeting | Linux variant encrypts ESXi VMs ([CISA AA24-109A](https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-109a), updated 2025-11-13) |
+| **Play** | Active | 121 victims in Q1 2026 ([Check Point](https://research.checkpoint.com/2026/the-state-of-ransomware-q1-2026/)) | New TTPs and IOCs in [CISA AA23-352A](https://www.cisa.gov/news-events/cybersecurity-advisories/aa23-352a) (updated 2025-06-04) |
+| **LockBit** | Declining | LockBit 5.0 (Sept 2025) for Windows, Linux and ESXi ([Trend Micro](https://www.trendmicro.com/en_us/research/25/i/lockbit-5-targets-windows-linux-esxi.html), 2025-09-25) | Random 16-character extensions; out of the top ten by Q3 2026 |
+| **Cl0p** | Episodic | Mass exploitation of file-transfer and ERP software, then data-theft extortion | Oracle E-Business Suite zero-day CVE-2025-61882, exploited from about Aug 2025 ([GTIG](https://cloud.google.com/blog/topics/threat-intelligence/oracle-ebusiness-suite-zero-day-exploitation), 2025-10-09) |
+| **RansomHub** | Defunct (April 2025) | Largest ALPHV successor in 2024 (historical) | Affiliates moved to other brands |
+| **FunkSec** | Defunct (March 2025) | AI-assisted tooling | Free decryptor available since July 2025 |
 
 ### Key 2025-2026 Tactics
 
+Figures come from Google's 2025 ransomware incident data ([GTIG](https://cloud.google.com/blog/topics/threat-intelligence/ransomware-ttps-shifting-threat-landscape), 2026-03-16) unless noted.
+
 | Tactic | Description | Defense |
 | ------ | ----------- | ------- |
-| **Multi-Layer Extortion** | Encrypt + leak + DDoS + notify regulators | Incident response planning, legal prep |
-| **BYOVD** | Bring Your Own Vulnerable Driver for EDR bypass | Driver blocklists, behavioral detection |
-| **AI Integration** | LLM phishing, automated negotiation | AI-based email filtering |
-| **Cross-Platform** | Single attack hits Windows, Linux, ESXi, NAS | Unified security across all platforms |
-| **IAB Partnerships** | Purchase initial access from brokers | Credential monitoring, MFA everywhere |
+| **Data Theft Extortion** | Data stolen in 77% of intrusions (57% in 2024); some groups skip encryption entirely | Egress monitoring, DLP, incident response and legal prep |
+| **Hypervisor Targeting** | About 43% of intrusions hit virtualization (29% in 2024): ESXi settings changed, SSH enabled, snapshots deleted | Lock down ESXi, alert on configuration changes |
+| **EDR Killers / BYOVD** | Signed vulnerable drivers and custom killers disable security tools | Driver blocklists, tamper protection, behavioral detection |
+| **Edge-Device Exploitation** | Exploited VPNs and firewalls in about a third of intrusions; stolen credentials in 21% | Patch edge devices fast, MFA everywhere, credential monitoring |
+| **AI-Assisted Development** | AI coding assistants used to build ransomware and panels (Anthropic 2025, Check Point 2026) | Behavioral detection that does not rely on code signatures |
 
 See also: [Threat Landscape 2025-2026 Reference](../../docs/guides/threat-landscape-2025.md)
 
@@ -153,6 +167,7 @@ RANSOMWARE_SIGNATURES = {
         "extensions": [".ransomhub", ".[victim_id]"],
         "note_files": ["README.txt", "HOW_TO_RESTORE.txt"],
         "lineage": "ALPHV/BlackCat successor",
+        "status": "Defunct since April 2025 (legacy samples still seen)",
     },
     "qilin": {
         "extensions": [".qilin", ".agenda"],
@@ -168,7 +183,7 @@ RANSOMWARE_SIGNATURES = {
         "extensions": [".lockbit", ".abcd", ".LockBit"],
         "note_files": ["Restore-My-Files.txt"],
         "registry_keys": ["HKCU\\Software\\LockBit"],
-        "status": "Diminished post-2024 takedown",
+        "status": "Declining since 2024 takedown; LockBit 5.0 (2025) uses random 16-char extensions",
     },
     "akira": {
         "extensions": [".akira"],
@@ -252,9 +267,9 @@ FILE_INDICATORS = {
     # Encrypted file extensions (2025-2026 families)
     "suspicious_extensions": [
         ".locked", ".encrypted", ".enc", ".crypted",
-        ".ransomhub", ".qilin", ".dragonforce",  # Rising 2025
-        ".lockbit", ".akira", ".play", ".rhysida",  # Active
-        ".alphv", ".conti", ".royal", ".blacksuit"  # Legacy
+        ".qilin", ".dragonforce", ".akira", ".play",  # Active 2025-2026
+        ".lockbit", ".rhysida",  # Older families (status varies)
+        ".ransomhub", ".alphv", ".conti", ".royal", ".blacksuit"  # Legacy
     ],
 
     # Ransom note filenames
@@ -548,6 +563,9 @@ lab30-ransomware-fundamentals/
 - [Cisco Talos](https://blog.talosintelligence.com/)
 - [CISA Ransomware Guides](https://www.cisa.gov/stopransomware)
 - [MITRE ATT&CK - Ransomware](https://attack.mitre.org/)
+- [Check Point Research: The State of Ransomware Q3 2026](https://research.checkpoint.com/2026/the-state-of-ransomware-q3-2026/) - Quarterly leak-site statistics (2026-11-18)
+- [GTIG: Ransomware TTPs in a Shifting Threat Landscape](https://cloud.google.com/blog/topics/threat-intelligence/ransomware-ttps-shifting-threat-landscape) - 2025 incident response data (2026-03-16)
+- [Threat Landscape 2025-2026 Reference](../../docs/guides/threat-landscape-2025.md) - Curriculum's central threat intel page
 
 ### SANS Resources
 
@@ -558,7 +576,6 @@ lab30-ransomware-fundamentals/
 - [SANS YouTube Channel](https://www.youtube.com/@SANSInstitute) - Search "ransomware" for free talks
 - [SANS Ransomware Summit](https://www.sans.org/cyber-security-summit/) - Annual event
 - [SANS Reading Room - Ransomware](https://www.sans.org/white-papers/)
-- [GIAC GCIH](https://www.giac.org/certifications/certified-incident-handler-gcih/) - Incident handling certification
 
 ---
 

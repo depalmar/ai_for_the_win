@@ -742,9 +742,10 @@ class AIThreatIntelGenerator:
             ),
             "voice_cloning_attacks": (
                 "Voice cloning technology has enabled sophisticated vishing attacks "
-                "where threat actors impersonate executives and IT staff. Recent "
-                "high-profile incidents (e.g., Scattered Spider campaigns) demonstrate "
-                "the effectiveness of this technique. Organizations must implement "
+                "where threat actors impersonate executives and IT staff. Scattered "
+                "Spider's help-desk impersonation shows how well live voice pretexts "
+                "work, and HHS HC3 (2024) reported the group using AI voice spoofing. "
+                "Organizations must implement "
                 "out-of-band verification and consider code word systems for "
                 "high-risk requests."
             ),

@@ -2,6 +2,8 @@
 
 > **⚠️ Responsible Use Notice:** This lab is designed exclusively for defensive security education. The attack patterns, TTPs, and sample content are derived from publicly available threat intelligence (CISA, MITRE ATT&CK, Mandiant, Unit 42) to help security professionals recognize and defend against AI-powered threats. Do not use this material to conduct unauthorized attacks or social engineering. Always obtain proper authorization before security testing.
 
+> **Updated November 2026**: Threat intel covers documented AI-enabled attacks from January 2025 to November 2026, including LLM-querying malware (LAMEHUG, PROMPTFLUX), AI-orchestrated intrusions and agentic offensive frameworks (ARTEX, PentAGI), with sources from Google GTIG, Anthropic, ESET, CERT-UA and CISA.
+
 ## How Adversaries Leverage AI in Modern Attacks
 
 ```
@@ -53,7 +55,7 @@ By completing this lab, you will:
 
 ## 📋 Prerequisites
 
-- Completed Lab 16 (Threat Actor Profiling)
+- Completed Lab 36 (Threat Actor Profiling)
 - Understanding of social engineering concepts
 - Familiarity with phishing detection
 - Basic knowledge of generative AI
@@ -71,16 +73,16 @@ Threat actors have rapidly adopted AI tools to enhance their operations:
 │                    THREAT ACTOR AI ADOPTION TIMELINE                        │
 ├────────────────────────────────────────────────────────────────────────────┤
 │                                                                             │
-│  2020-2021          2022-2023              2024-2025           2026+        │
-│  ──────────         ──────────             ──────────          ─────        │
-│  • Basic chatbot    • LLM-powered          • Deepfake          • Autonomous │
-│    phishing           phishing               voice/video         attack     │
-│  • Simple text      • AI code              • AI-guided           chains    │
-│    generation         assistance             malware (APT28)   • AI vs AI   │
-│  • Automated        • Synthetic            • 80-90% autonomous   warfare   │
-│    reconnaissance     identities             campaigns         • Adaptive   │
-│                     • Voice cloning        • Real-time LLM       evasion   │
-│                     • WormGPT tools          queries                        │
+│  2020-2021          2022-2023              2024-2025           2026         │
+│  ──────────         ──────────             ──────────          ────         │
+│  • Basic chatbot    • LLM-powered          • Deepfake          • Agentic    │
+│    phishing           phishing               voice/video         offensive  │
+│  • Simple text      • AI code              • AI-guided           frameworks │
+│    generation         assistance             malware (APT28)     observed   │
+│  • Automated        • Synthetic            • 80-90% autonomous • No-human   │
+│    reconnaissance     identities             campaigns           exploit    │
+│                     • Voice cloning        • Real-time LLM       pipeline   │
+│                     • WormGPT tools          queries           • LLMjacking │
 │                                                                             │
 │  SOPHISTICATION: ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━▶     │
 │                                                                             │
@@ -102,14 +104,31 @@ Threat actors have rapidly adopted AI tools to enhance their operations:
 
 | Group | AI Capabilities | Notable Campaigns |
 | ----- | --------------- | ----------------- |
-| **APT28 (Fancy Bear)** | AI-guided malware (real-time LLM queries) | Ukraine infrastructure attacks (Jul 2025) |
-| **APT42 (Iran)** | LLM for phishing, recon (30%+ of Gemini abuse) | Defense/policy targeting |
-| **Scattered Spider** | Voice cloning, deepfake video calls | UK/US retail breaches 2025 |
-| **Funksec** | WormGPT integration, AI phishing templates | RaaS with AI tooling |
-| **Lazarus (DPRK)** | AI-generated cover letters, fake personas | Crypto developer recruitment |
-| **Unknown (Anthropic case)** | First AI-orchestrated campaign (80-90% autonomous) | Espionage (Sept 2025) |
+| **APT28 (Fancy Bear)** | Malware asks an LLM for its next commands at runtime | LAMEHUG queried Qwen2.5-Coder-32B-Instruct through the Hugging Face API against Ukrainian targets; CERT-UA, medium confidence ([The Hacker News](https://thehackernews.com/2025/07/cert-ua-discovers-lamehug-malware.html), Jul 2025) |
+| **APT42 (Iran; Google: CALANQUE ION)** | LLM for phishing, research, content | Over 30% of Iranian APT actors' Gemini use ([GTIG](https://cloud.google.com/blog/topics/threat-intelligence/adversarial-misuse-generative-ai), 2025-01-29) |
+| **Chinese state-sponsored group (Anthropic case)** | AI-orchestrated intrusion: Claude Code did 80-90% of the work with 4-6 human decision points | About 30 targets, a small number breached; detected mid-Sept 2025 ([Anthropic](https://www.anthropic.com/news/disrupting-AI-espionage), 2025-11-13) |
+| **UNC7228 (PRC nexus)** | ARTEX multi-agent offensive framework | Account to deep access in about four hours, since at least Aug 2026 ([GTIG/Mandiant](https://cloud.google.com/blog/topics/threat-intelligence/artex-and-friends-enter-agentic-offensive-frameworks), 2026-10-30) |
+| **UNC6508 (PRC nexus)** | Local LLM infrastructure inside victim networks to avoid API monitoring | Espionage ([GTIG](https://cloud.google.com/blog/topics/threat-intelligence/from-prompting-to-autonomy-the-evolution-of-adversarial-ai), 2026-09-08) |
+| **North Korean IT workers** | LLMs write applications, pass coding tests, do the job | Remote jobs at US Fortune 500 tech companies ([Anthropic](https://www.anthropic.com/news/detecting-countering-misuse-aug-2025), 2025-08-27) |
+| **Kimsuky (DPRK)** | ChatGPT-generated fake military ID used as a lure | July 2025 spear-phishing; Genians research, vendor-only ([The Record](https://therecord.media/north-korea-kimsuky-hackers-phishing-fake-military-ids-chatgpt), 2025-09-15) |
+| **Unnamed extortion actor** | Claude Code automated reconnaissance, credential theft and ransom notes | At least 17 organizations, demands sometimes above $500,000 ([Anthropic](https://www.anthropic.com/news/detecting-countering-misuse-aug-2025), 2025-08-27) |
+| **The Gentlemen (RaaS)** | AI coding assistants built the ransomware panel in about three days | Leaked backend data ([Check Point](https://blog.checkpoint.com/security/ransomware-didnt-slow-down-in-q2-2026-it-just-spread-out/), 2026-08-13) |
+| **Scattered Spider** | Live phone impersonation of help desks; HHS HC3 says the group has used AI to spoof voices; no public confirmation of deepfake video | UK retail attacks (Marks & Spencer, Co-op), April 2025 ([HC3 profile](https://www.aha.org/system/files/media/file/2024/10/hc3%20tlp%20clear%20threat%20actor%20profile%20scattered%20spider-10-24-2024.pdf), Oct 2024; [CISA AA23-320A](https://www.cisa.gov/news-events/cybersecurity-advisories/aa23-320a), updated 2025-07-29) |
+| **FunkSec** (historical) | AI-assisted tooling | Defunct since March 2025; free decryptor July 2025 ([The Hacker News](https://thehackernews.com/2025/07/funksec-ransomware-decryptor-released.html)) |
 
-> **Key Trend (2025):** Nation-state actors (57+ groups per Google) now routinely use AI for reconnaissance, phishing content, and code assistance. APT28's real-time LLM malware guidance represents a significant evolution.
+> **Key Trend (2025-2026):** In January 2025 Google saw APT groups from more than 20 countries using Gemini, mostly for research, phishing content and coding help, with no "novel capabilities" ([GTIG](https://cloud.google.com/blog/topics/threat-intelligence/adversarial-misuse-generative-ai)). By November 2026 Google reported agentic frameworks in real intrusions and an exploit pipeline that runs "without a human in the loop for the first time" ([GTIG](https://cloud.google.com/blog/topics/threat-intelligence/agentic-threat-activity-crosses-a-significant-threshold), 2026-11-16). Not everyone sees a revolution: ESET "has not noticed AI substantially reshaping the APT landscape" ([ESET](https://www.eset.com/us/about/newsroom/research/eset-apt-report-iran-belarus-russia-cyber-activity/), 2026-10-28). Teach both views.
+
+### Documented AI-Enabled Malware and Tools (2025-2026)
+
+| Name | Type | Status | Source |
+| ---- | ---- | ------ | ------ |
+| **LAMEHUG / PROMPTSTEAL** | Data stealer that asks an LLM for commands | Used in live operations (APT28) | [GTIG](https://cloud.google.com/blog/topics/threat-intelligence/threat-actor-usage-of-ai-tools), 2025-11-05 |
+| **PROMPTFLUX** | VBScript dropper that asks the Gemini API to rewrite its own code | Experimental, no means to compromise a victim yet | [GTIG](https://cloud.google.com/blog/topics/threat-intelligence/threat-actor-usage-of-ai-tools), 2025-11-05 |
+| **PromptLock** | LLM-generated ransomware scripts | Academic prototype (NYU), first misreported as criminal | [NYU Tandon](https://engineering.nyu.edu/news/ai-powered-ransomware-sparked-concern-was-nyus-work), 2025 |
+| **ARTEX** | Multi-agent LLM pentest and C2 platform | Abused in the wild; forks circulate | [GTIG/Mandiant](https://cloud.google.com/blog/topics/threat-intelligence/artex-and-friends-enter-agentic-offensive-frameworks), 2026-10-30 |
+| **CAIRN, PentAGI** | Open-source agentic pentest frameworks | Observed in the wild | [GTIG](https://cloud.google.com/blog/topics/threat-intelligence/agentic-threat-activity-crosses-a-significant-threshold), 2026-11-16 |
+| **exploit_agent** | Multi-agent vulnerability research and exploitation framework | Found on an exposed staging server | [GTIG](https://cloud.google.com/blog/topics/threat-intelligence/agentic-threat-activity-crosses-a-significant-threshold), 2026-11-16 |
+| BlackMamba, WormGPT (historical) | 2023 proof of concept and underground LLM tool | Historical; see Exercise 3 | 2023 reporting |
 
 See also: [Threat Landscape 2025-2026 Reference](../../docs/guides/threat-landscape-2025.md)
 
@@ -544,16 +563,16 @@ SCATTERED_SPIDER_TTPs = """
 │     • Identify new employees (easier targets)                               │
 │     • Research company's IT processes                                       │
 │                                                                             │
-│  2. VOICE CLONING PREPARATION                                              │
-│     • Obtain voice samples from earnings calls, YouTube, podcasts          │
-│     • Generate synthetic voice of known executive/IT staff                  │
+│  2. CALL PREPARATION                                                        │
+│     • Choose a pretext: locked-out employee or IT staff member              │
+│     • AI voice spoofing reported by HHS HC3 (2024), not confirmed since     │
 │     • Prepare scripts for common scenarios                                  │
 │                                                                             │
 │  3. VISHING ATTACK                                                          │
 │     • Call helpdesk claiming to be executive                               │
 │     • Request MFA reset or password reset                                   │
 │     • Use urgency: "I'm about to board a flight"                           │
-│     • May use deepfake video for Teams/Zoom calls                          │
+│     • Pose as IT staff to obtain one-time MFA codes (CISA AA23-320A)        │
 │                                                                             │
 │  4. ACCESS & LATERAL MOVEMENT                                               │
 │     • Use obtained credentials to access VPN/Okta                          │
@@ -924,10 +943,10 @@ class AIThreatIntelGenerator:
                 "procedures for sensitive requests."
             ),
             "voice_cloning_attacks": (
-                "Voice cloning technology has enabled sophisticated vishing attacks "
-                "where threat actors impersonate executives and IT staff. Recent "
-                "high-profile incidents (e.g., Scattered Spider campaigns) demonstrate "
-                "the effectiveness of this technique. Organizations must implement "
+                "Voice cloning technology makes vishing attacks harder to spot "
+                "when threat actors impersonate executives and IT staff. Help-desk "
+                "impersonation by groups such as Scattered Spider (2025 UK retail "
+                "attacks) shows how well voice pretexts work. Organizations must implement "
                 "out-of-band verification and consider code word systems for "
                 "high-risk requests."
             ),
@@ -1022,6 +1041,10 @@ Develop threat hunting queries and procedures specifically for AI-powered attack
 | Source                 | Focus                    | Link                                                                            |
 | ---------------------- | ------------------------ | ------------------------------------------------------------------------------- |
 | **Google TAG**         | AI-enabled threat actors | [blog.google/threat-analysis-group](https://blog.google/threat-analysis-group/) |
+| **Google GTIG AI Threat Tracker** | Adversarial AI use, agentic frameworks (2025-2026) | [cloud.google.com/blog/topics/threat-intelligence](https://cloud.google.com/blog/topics/threat-intelligence/agentic-threat-activity-crosses-a-significant-threshold) |
+| **Anthropic Threat Intelligence** | Disrupted misuse of Claude (2025-2026) | [anthropic.com](https://www.anthropic.com/threat-intelligence-report-september-2026) |
+| **OWASP Agentic Top 10** | ASI01-ASI10 risks for AI agents (2025-12-09) | [genai.owasp.org](https://genai.owasp.org/2025/12/09/owasp-top-10-for-agentic-applications-the-benchmark-for-agent) |
+| **Curriculum reference** | Threat Landscape 2025-2026 | [threat-landscape-2025.md](../../docs/guides/threat-landscape-2025.md) |
 | **Microsoft Security** | Deepfake and AI threats  | [microsoft.com/security/blog](https://www.microsoft.com/security/blog/)         |
 | **Recorded Future**    | AI threat landscape      | [recordedfuture.com](https://www.recordedfuture.com)                            |
 

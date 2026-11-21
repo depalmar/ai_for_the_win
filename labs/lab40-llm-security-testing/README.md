@@ -4,7 +4,7 @@
 
 Learn systematic approaches to testing Large Language Models for security vulnerabilities including prompt injection, jailbreaking, data extraction, and output manipulation.
 
-> **Updated January 2025**: Based on OWASP LLM Top 10 (2025 edition) and current Claude/GPT-5/Gemini 3 security research. Includes 2025 agentic AI attack vectors.
+> **Updated November 2026**: Based on the OWASP Top 10 for LLM Applications 2026 (published 2026-08-03) and the OWASP Top 10 for Agentic Applications (2025-12-09). The tests apply to current Claude, GPT and Gemini models.
 
 **Difficulty**: Intermediate
 **Duration**: 90-120 minutes
@@ -33,18 +33,30 @@ LLMs face unique security challenges:
 | Output Manipulation | Forcing specific outputs | Misinformation, scams |
 | Denial of Service | Resource exhaustion attacks | Service unavailability |
 
-### OWASP Top 10 for LLM Applications
+### OWASP Top 10 for LLM Applications (2026)
 
-1. **LLM01: Prompt Injection** - Direct/indirect injection attacks
-2. **LLM02: Insecure Output Handling** - Unvalidated LLM outputs
-3. **LLM03: Training Data Poisoning** - Manipulated training data
-4. **LLM04: Model Denial of Service** - Resource exhaustion
-5. **LLM05: Supply Chain Vulnerabilities** - Compromised dependencies
-6. **LLM06: Sensitive Information Disclosure** - Data leakage
-7. **LLM07: Insecure Plugin Design** - Vulnerable integrations
-8. **LLM08: Excessive Agency** - Too much autonomous action
-9. **LLM09: Overreliance** - Blind trust in outputs
-10. **LLM10: Model Theft** - Unauthorized model access
+Published 2026-08-03 by the [OWASP GenAI Security Project](https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/). OWASP says this edition brings updated rankings and new research grounded in "thousands of real-world AI security incidents".
+
+1. **LLM01:2026 Prompt Injection** - Direct and indirect injection, now including instructions hidden in images or audio
+2. **LLM02:2026 Sensitive Information Disclosure** - Data leakage through outputs
+3. **LLM03:2026 Excessive Agency** - Agents with too much permission or autonomy (up from sixth in 2025)
+4. **LLM04:2026 Supply Chain** - Compromised models, datasets and dependencies
+5. **LLM05:2026 Data and Model Poisoning** - Manipulated training or fine-tuning data
+6. **LLM06:2026 Unbounded Consumption** - Resource exhaustion and cost attacks
+7. **LLM07:2026 Misinformation** - Confident but false outputs
+8. **LLM08:2026 Hidden Context Exposure** - Leaking system prompts and other hidden context (was System Prompt Leakage)
+9. **LLM09:2026 Vector and Embedding Weaknesses** - RAG and embedding attacks
+10. **LLM10:2026 Improper Output Handling** - Unvalidated outputs passed to other systems (down from fifth in 2025)
+
+> **Historical note:** earlier versions of this lab listed the 2023 list (Insecure Output Handling, Training Data Poisoning, Model Denial of Service, Insecure Plugin Design, Overreliance, Model Theft). Those names were replaced or merged in the 2025 edition and are kept here only so you can recognize them in older reports.
+
+### OWASP Top 10 for Agentic Applications
+
+Published 2025-12-09 ([OWASP GenAI](https://genai.owasp.org/2025/12/09/owasp-top-10-for-agentic-applications-the-benchmark-for-agent)). Use it when the LLM you test can call tools or act on its own:
+
+ASI01 Agent Goal Hijack, ASI02 Tool Misuse, ASI03 Identity & Privilege Abuse, ASI04 Agentic Supply Chain Vulnerabilities, ASI05 Unexpected Code Execution, ASI06 Memory & Context Poisoning, ASI07 Insecure Inter-Agent Communication, ASI08 Cascading Failures, ASI09 Human-Agent Trust Exploitation, ASI10 Rogue Agents.
+
+Indirect prompt injection (Exercise 1.2) is the usual route to ASI01, and a hijacked goal often leads to ASI02 tool misuse. Attackers already use agentic frameworks in real intrusions ([GTIG](https://cloud.google.com/blog/topics/threat-intelligence/agentic-threat-activity-crosses-a-significant-threshold), 2026-11-16), so test agent tool permissions as well as model outputs.
 
 ## Part 1: Prompt Injection Testing
 
@@ -949,6 +961,9 @@ Create a comprehensive test suite:
 ## Resources
 
 - [OWASP Top 10 for LLM Applications](https://owasp.org/www-project-top-10-for-large-language-model-applications/)
+- [OWASP GenAI LLM Top 10 2026](https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/) - Current edition (2026-08-03)
+- [OWASP Top 10 for Agentic Applications](https://genai.owasp.org/2025/12/09/owasp-top-10-for-agentic-applications-the-benchmark-for-agent) - Agent risks ASI01-ASI10 (2025-12-09)
+- [MITRE ATLAS](https://atlas.mitre.org/) - AI attack techniques such as AML.T0051 LLM Prompt Injection and AML.T0054 LLM Jailbreak
 - [Anthropic's Constitutional AI](https://www.anthropic.com/research/constitutional-ai-harmlessness-from-ai-feedback)
 - [Microsoft Responsible AI](https://www.microsoft.com/en-us/ai/responsible-ai)
 - [Garak - LLM Vulnerability Scanner](https://github.com/leondz/garak)

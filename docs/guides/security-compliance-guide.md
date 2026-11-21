@@ -44,20 +44,24 @@ Comprehensive guide to building secure, compliant AI-powered security tools.
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-### OWASP LLM Top 10 (2024)
+### OWASP LLM Top 10 (2026)
+
+From the [OWASP Top 10 for LLM Applications 2026](https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/) (published 2026-08-03).
 
 | Rank | Vulnerability | Description | Mitigation |
 |------|--------------|-------------|------------|
-| LLM01 | Prompt Injection | Manipulating LLM via crafted inputs | Input validation, sandboxing |
-| LLM02 | Insecure Output Handling | Trusting LLM output without validation | Output sanitization |
-| LLM03 | Training Data Poisoning | Manipulating training data | Data validation, provenance |
-| LLM04 | Model Denial of Service | Resource exhaustion attacks | Rate limiting, quotas |
-| LLM05 | Supply Chain Vulnerabilities | Compromised models/plugins | Verification, sandboxing |
-| LLM06 | Sensitive Information Disclosure | Leaking PII/secrets | Data filtering, guardrails |
-| LLM07 | Insecure Plugin Design | Unsafe plugin execution | Privilege separation |
-| LLM08 | Excessive Agency | Over-privileged AI agents | Least privilege, approval flows |
-| LLM09 | Overreliance | Trusting AI without verification | Human oversight |
-| LLM10 | Model Theft | Extracting model weights | Access controls, watermarking |
+| LLM01 | Prompt Injection | Manipulating the LLM with crafted direct or indirect input, including instructions hidden in images or audio | Input validation, privilege separation, sandboxing |
+| LLM02 | Sensitive Information Disclosure | Leaking PII or secrets | Data filtering, guardrails |
+| LLM03 | Excessive Agency | Agents with more permissions, functions or autonomy than the task needs | Least privilege, approval flows |
+| LLM04 | Supply Chain | Compromised models, datasets or dependencies | Verification, provenance, sandboxing |
+| LLM05 | Data and Model Poisoning | Manipulated training or fine-tuning data | Data validation, provenance |
+| LLM06 | Unbounded Consumption | Resource exhaustion and cost attacks | Rate limiting, quotas |
+| LLM07 | Misinformation | Confident but false output | Human oversight, grounding |
+| LLM08 | Hidden Context Exposure | Extracting system prompts, tool schemas and other hidden context | Keep credentials out of prompts; do not rely on hidden context for authorization |
+| LLM09 | Vector and Embedding Weaknesses | Attacks on RAG stores and embeddings | Access control on vector stores, input validation |
+| LLM10 | Improper Output Handling | Trusting LLM output without validation | Output sanitization |
+
+2023 names such as Insecure Plugin Design, Overreliance and Model Theft were replaced or merged in the 2025 edition; plugin and tool risks now fall under Excessive Agency and the [OWASP Top 10 for Agentic Applications](https://genai.owasp.org/2025/12/09/owasp-top-10-for-agentic-applications-the-benchmark-for-agent) (ASI02 Tool Misuse).
 
 ---
 

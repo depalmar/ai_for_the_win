@@ -169,6 +169,82 @@ This project draws on concepts from publicly available educational materials:
 
 ---
 
+## Threat Intelligence Sources
+
+Public sources cited by the threat intelligence content ([docs/guides/threat-landscape-2025.md](guides/threat-landscape-2025.md), Labs 30, 31, 37 and 40, and the threat table in [docs/LAB_DEPENDENCY_GRAPH.md](LAB_DEPENDENCY_GRAPH.md)). All are publicly available government advisories, vendor research blogs, standards pages or news reports. Last verified: November 2026. Dates are publication dates.
+
+### Government Advisories
+
+- [CISA AA25-239A: Countering Chinese State-Sponsored Actors (2025-08-27)](https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-239a)
+- [CISA AA24-038A: PRC State-Sponsored Actors Compromise US Critical Infrastructure (February 2024)](https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-038a)
+- [Joint advisory (NCSC-UK, CISA, NSA, FBI and partners): Defending Against China-Nexus Covert Networks of Compromised Devices (April 2026, ASD's ACSC page)](https://www.cyber.gov.au/about-us/view-all-content/alerts-and-advisories/defending-against-china-nexus-covert-networks-of-compromised-devices)
+- [CISA AA26-097A: Iranian-Affiliated Cyber Actors Exploit PLCs (2026-04-07, updated 2026-07-22)](https://www.cisa.gov/news-events/cybersecurity-advisories/aa26-097a)
+- [CISA AA24-109A: Akira Ransomware (updated 2025-11-13)](https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-109a)
+- [CISA AA23-352A: Play Ransomware (updated 2025-06-04)](https://www.cisa.gov/news-events/cybersecurity-advisories/aa23-352a)
+- [CISA AA23-320A: Scattered Spider (updated 2025-07-29)](https://www.cisa.gov/news-events/cybersecurity-advisories/aa23-320a)
+- [CISA #StopRansomware](https://www.cisa.gov/stopransomware)
+- [FBI PSA I-022625-PSA: North Korea Responsible for Bybit Theft (2025-02-26)](https://www.ic3.gov/PSA/2025/PSA250226)
+- [HHS HC3 Threat Actor Profile: Scattered Spider (2024-10-24, AHA mirror)](https://www.aha.org/system/files/media/file/2024/10/hc3%20tlp%20clear%20threat%20actor%20profile%20scattered%20spider-10-24-2024.pdf)
+
+### Vendor and Research Reports
+
+- [Google Threat Intelligence Group: Agentic Threat Activity Crosses a Significant Threshold (2026-11-16)](https://cloud.google.com/blog/topics/threat-intelligence/agentic-threat-activity-crosses-a-significant-threshold)
+- [GTIG/Mandiant: ARTEX and Friends, Agentic Offensive Frameworks (2026-10-30)](https://cloud.google.com/blog/topics/threat-intelligence/artex-and-friends-enter-agentic-offensive-frameworks)
+- [GTIG AI Threat Tracker: From Prompting to Autonomy (2026-09-08)](https://cloud.google.com/blog/topics/threat-intelligence/from-prompting-to-autonomy-the-evolution-of-adversarial-ai)
+- [GTIG: Ransomware TTPs in a Shifting Threat Landscape (2026-03-16)](https://cloud.google.com/blog/topics/threat-intelligence/ransomware-ttps-shifting-threat-landscape)
+- [GTIG: AI Threat Tracker, threat actor usage of AI tools (2025-11-05)](https://cloud.google.com/blog/topics/threat-intelligence/threat-actor-usage-of-ai-tools)
+- [GTIG: Oracle E-Business Suite Zero-Day Exploitation (2025-10-09)](https://cloud.google.com/blog/topics/threat-intelligence/oracle-ebusiness-suite-zero-day-exploitation)
+- [GTIG: APT41 Innovative Tactics (May 2025)](https://cloud.google.com/blog/topics/threat-intelligence/apt41-innovative-tactics)
+- [GTIG: Adversarial Misuse of Generative AI (2025-01-29)](https://cloud.google.com/blog/topics/threat-intelligence/adversarial-misuse-generative-ai)
+- [Anthropic: Countering Misuse of AI, September 2026](https://www.anthropic.com/threat-intelligence-report-september-2026)
+- [Anthropic: Disrupting AI Espionage (2025-11-13)](https://www.anthropic.com/news/disrupting-AI-espionage)
+- [Anthropic: Threat Intelligence Report, August 2025 (2025-08-27)](https://www.anthropic.com/news/detecting-countering-misuse-aug-2025)
+- [Check Point Research: The State of Ransomware Q3 2026 (2026-11-18)](https://research.checkpoint.com/2026/the-state-of-ransomware-q3-2026/)
+- [Check Point Research: The State of Ransomware Q2 2026 (2026-08-13)](https://research.checkpoint.com/2026/the-state-of-ransomware-q2-2026/)
+- [Check Point blog: Ransomware Didn't Slow Down in Q2 2026 (2026-08-13)](https://blog.checkpoint.com/security/ransomware-didnt-slow-down-in-q2-2026-it-just-spread-out/)
+- [Check Point Research: The State of Ransomware Q1 2026 (2026-05-11)](https://research.checkpoint.com/2026/the-state-of-ransomware-q1-2026/)
+- [Check Point Research: FunkSec (January 2025)](https://research.checkpoint.com/2025/funksec-alleged-top-ransomware-group-powered-by-ai/)
+- [ESET APT Activity Report Q2-Q3 2026 (2026-10-28)](https://www.eset.com/us/about/newsroom/research/eset-apt-report-iran-belarus-russia-cyber-activity/)
+- [ESET APT Activity Report Q4 2025-Q1 2026, via Help Net Security (2026-05-28)](https://www.helpnetsecurity.com/2026/05/28/eset-apt-activity-report/)
+- [ESET: PromptLock (August 2025)](https://www.eset.com/us/about/newsroom/research/eset-discovers-promptlock-the-first-ai-powered-ransomware/)
+- [NYU Tandon: PromptLock Was an Academic Prototype (2025)](https://engineering.nyu.edu/news/ai-powered-ransomware-sparked-concern-was-nyus-work)
+- [Unit 42: The Gentlemen Ransomware (2026-07-10)](https://unit42.paloaltonetworks.com/the-gentlemen-ransomware/)
+- [Unit 42: AdaptixC2 Post-Exploitation Framework (2025-09-10)](https://unit42.paloaltonetworks.com/adaptixc2-post-exploitation-framework/)
+- [Dragos: Industrial Ransomware Analysis Q1 2026 (2026-06-03)](https://www.dragos.com/dragos-industrial-ransomware-analysis-q1-2026)
+- [Trend Micro: LockBit 5.0 Targets Windows, Linux and ESXi (2025-09-25)](https://www.trendmicro.com/en_us/research/25/i/lockbit-5-targets-windows-linux-esxi.html)
+- [Sophos: DragonForce Targets Rivals in a Play for Dominance (May 2025)](https://www.sophos.com/en-us/blog/dragonforce-targets-rivals-in-a-play-for-dominance)
+- [AWS Security Blog: Amazon Disrupts Watering Hole Campaign by Russia's APT29 (August 2025)](https://aws.amazon.com/blogs/security/amazon-disrupts-watering-hole-campaign-by-russias-apt29/)
+- [ReliaQuest: Ransomware and Cyber Extortion in Q2 2026](https://reliaquest.com/blog/threat-spotlight-ransomware-and-cyber-extortion-in-q2-2026/)
+- [Kaspersky Securelist: Vulnerabilities and Exploits in Q2 2026 (2026-08-26)](https://securelist.com/vulnerabilities-and-exploits-in-q2-2026/121091/)
+- [Kaspersky Securelist: Vulnerabilities and Exploits in Q1 2026 (2026-05-07)](https://securelist.com/vulnerabilities-and-exploits-in-q1-2026/119733/)
+- [Kaspersky Securelist: Vulnerabilities and Exploits in Q4 2025 (2026-03-06)](https://securelist.com/vulnerabilities-and-exploits-in-q4-2025/119105/)
+- [Kaspersky Securelist: Vulnerabilities and Exploits in Q2 2025](https://securelist.com/vulnerabilities-and-exploits-in-q2-2025/117333/)
+
+### Frameworks, Standards and Regulation
+
+- [OWASP GenAI LLM Top 10 2026 (2026-08-03)](https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/)
+- [OWASP Top 10 for Agentic Applications (2025-12-09)](https://genai.owasp.org/2025/12/09/owasp-top-10-for-agentic-applications-the-benchmark-for-agent)
+- [MITRE ATLAS](https://atlas.mitre.org/) - Adversarial Threat Landscape for AI Systems
+- [MITRE ATT&CK Groups](https://attack.mitre.org/groups/)
+- [Council on Foreign Relations Cyber Operations Tracker](https://www.cfr.org/cyber-operations)
+- [Lewis Silkin: The Digital Omnibus on AI Enters Into Force (2026-07-27)](https://www.lewissilkin.com/insights/2026/07/27/the-digital-omnibus-on-ai-enters-into-force-today)
+- [Orrick: EU AI Act Update, Digital Omnibus Finalizes 8 Compliance Changes (July 2026)](https://www.orrick.com/en/Insights/2026/07/EU-AI-Act-Update-Digital-Omnibus-Finalizes-8-Compliance-Changes)
+
+### News Coverage
+
+- [The Hacker News: CERT-UA Discovers LAMEHUG Malware (July 2025)](https://thehackernews.com/2025/07/cert-ua-discovers-lamehug-malware.html)
+- [The Hacker News: RansomHub Went Dark April 1 (April 2025)](https://thehackernews.com/2025/04/ransomhub-went-dark-april-1-affiliates.html)
+- [The Hacker News: ClickFix Trick Deploys Havoc via SharePoint (2025-03-03)](https://thehackernews.com/2025/03/hackers-use-clickfix-trick-to-deploy.html)
+- [The Hacker News: FunkSec Ransomware Decryptor Released (July 2025)](https://thehackernews.com/2025/07/funksec-ransomware-decryptor-released.html)
+- [The Record: Kimsuky Fake Military IDs Made With ChatGPT (2025-09-15)](https://therecord.media/north-korea-kimsuky-hackers-phishing-fake-military-ids-chatgpt)
+- [Fortune: North Korea Stole a Record Amount of Crypto (2025-12-18)](https://fortune.com/2025/12/18/north-korea-stole-a-record-amount-of-crypto/)
+- [The Register: Ransomware Payments Cratered in 2025 (2026-02-27)](https://www.theregister.com/2026/02/27/ransomware_chainalysis/)
+- [HIPAA Journal: Change Healthcare Cyberattack (updated August 2025)](https://www.hipaajournal.com/change-healthcare-responding-to-cyberattack/)
+- [BleepingComputer: Four Arrested in UK Over M&S, Co-op, Harrods Cyberattacks (July 2025)](https://www.bleepingcomputer.com/news/security/four-arrested-in-uk-over-mands-co-op-harrods-cyberattacks/)
+- [BleepingComputer: Germany Arrests Alleged Core Qilin Ransomware Member (2026-10-09)](https://www.bleepingcomputer.com/news/security/germany-arrests-alleged-core-qilin-ransomware-member-after-extradition/)
+
+---
+
 ## Commercial Security Platforms
 
 ### Current Status: Open-Source Only
@@ -220,4 +296,4 @@ If you have questions about the sources used in this project or believe any cont
 
 ---
 
-*Last updated: January 2026*
+*Last updated: November 2026*

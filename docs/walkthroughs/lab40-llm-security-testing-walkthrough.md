@@ -16,20 +16,24 @@ This walkthrough guides you through:
 
 ---
 
-## OWASP Top 10 for LLM Applications
+## OWASP Top 10 for LLM Applications (2026)
+
+From the [OWASP Top 10 for LLM Applications 2026](https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/) (published 2026-08-03).
 
 | # | Vulnerability | Description |
 |---|---------------|-------------|
-| 1 | Prompt Injection | Direct/indirect injection attacks |
-| 2 | Insecure Output Handling | Unvalidated LLM outputs |
-| 3 | Training Data Poisoning | Manipulated training data |
-| 4 | Model Denial of Service | Resource exhaustion |
-| 5 | Supply Chain Vulnerabilities | Compromised dependencies |
-| 6 | Sensitive Information Disclosure | Data leakage |
-| 7 | Insecure Plugin Design | Vulnerable integrations |
-| 8 | Excessive Agency | Too much autonomous action |
-| 9 | Overreliance | Blind trust in outputs |
-| 10 | Model Theft | Unauthorized model access |
+| 1 | Prompt Injection | Direct, indirect and cross-modal injection |
+| 2 | Sensitive Information Disclosure | Data leakage |
+| 3 | Excessive Agency | Too much autonomous action |
+| 4 | Supply Chain | Compromised models, data or dependencies |
+| 5 | Data and Model Poisoning | Manipulated training data |
+| 6 | Unbounded Consumption | Resource exhaustion |
+| 7 | Misinformation | Confident but false output |
+| 8 | Hidden Context Exposure | System prompt and tool schema leakage |
+| 9 | Vector and Embedding Weaknesses | RAG and embedding attacks |
+| 10 | Improper Output Handling | Unvalidated LLM outputs |
+
+2023 names such as Insecure Plugin Design, Overreliance and Model Theft were replaced or merged in the 2025 edition; plugin and tool risks now fall under Excessive Agency and the [OWASP Top 10 for Agentic Applications](https://genai.owasp.org/2025/12/09/owasp-top-10-for-agentic-applications-the-benchmark-for-agent) (ASI02 Tool Misuse).
 
 ---
 

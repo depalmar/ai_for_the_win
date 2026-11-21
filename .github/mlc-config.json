@@ -20,6 +20,12 @@
     },
     {
       "pattern": "^https://(www\\.)?linkedin\\.com/"
+    },
+    {
+      "pattern": "^https://www\\.sophos\\.com/"
+    },
+    {
+      "pattern": "^https://www\\.cyber\\.gov\\.au/"
     }
   ],
   "replacementPatterns": [
@@ -44,6 +50,7 @@
   "fallbackRetryDelay": "30s",
   "aliveStatusCodes": [
     200,
+    202,
     206,
     301,
     302,
