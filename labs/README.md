@@ -238,8 +238,8 @@ All LLM labs support multiple providers:
 ```python
 # Choose your provider
 llm = setup_llm(provider="anthropic")  # Claude
-llm = setup_llm(provider="openai")     # GPT-4
-llm = setup_llm(provider="gemini")     # Gemini 1.5 Pro
+llm = setup_llm(provider="openai")     # GPT
+llm = setup_llm(provider="gemini")     # Gemini
 llm = setup_llm(provider="ollama")     # Local Llama
 ```
 

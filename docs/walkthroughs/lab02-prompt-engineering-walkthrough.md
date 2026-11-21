@@ -91,6 +91,8 @@ IOC extraction needs:
 
 ### Prompt Template
 
+<!-- {% raw %} -->
+
 ```python
 prompt = f"""Extract all Indicators of Compromise (IOCs) from this threat report.
 
@@ -121,6 +123,8 @@ Return as JSON:
 - Note any IOCs that appear to be benign
 """
 ```
+
+<!-- {% endraw %} -->
 
 ### Common Pitfalls
 

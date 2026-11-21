@@ -278,6 +278,8 @@ Ransom notes contain valuable intelligence:
 
 ### LLM-Assisted Extraction
 
+<!-- {% raw %} -->
+
 ```python
 def extract_iocs_from_note(note_content: str) -> dict:
     """
@@ -322,6 +324,8 @@ Return ONLY the JSON, no explanation."""
     except json.JSONDecodeError:
         return {"error": "Failed to parse LLM response", "raw": response}
 ```
+
+<!-- {% endraw %} -->
 
 ### Manual Regex Extraction (Backup)
 

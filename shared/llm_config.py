@@ -467,7 +467,7 @@ NOTEBOOK_SETUP_CODE = '''
 # This cell auto-detects your LLM provider based on API keys.
 # Set ONE of these in Colab secrets or environment:
 #   - ANTHROPIC_API_KEY (Claude)
-#   - OPENAI_API_KEY (GPT-4)
+#   - OPENAI_API_KEY (GPT)
 #   - GOOGLE_API_KEY (Gemini)
 
 import os

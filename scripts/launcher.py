@@ -2513,7 +2513,7 @@ def demo_llm_red_teaming(attack_type: str, target_behavior: str) -> str:
 |-----------|-------|
 | Attack Type | {attack_type} |
 | Target Behavior | {target_behavior} |
-| Target Model | claude-sonnet-4 |
+| Target Model | claude-sonnet-5-5 |
 
 ### Attack Payload
 ```

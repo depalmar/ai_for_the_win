@@ -40,7 +40,7 @@ from shared.llm_config import get_llm_client, get_chat_model
 
 # Environment variables supported:
 # ANTHROPIC_API_KEY - Claude (recommended)
-# OPENAI_API_KEY - GPT-4
+# OPENAI_API_KEY - GPT
 # GOOGLE_API_KEY - Gemini
 # Ollama for local models (no key)
 ```

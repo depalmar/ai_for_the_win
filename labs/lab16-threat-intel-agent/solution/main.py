@@ -700,8 +700,8 @@ class ThreatIntelAgent:
             provider: LLM provider if llm not provided. Options:
                 - "auto": Try providers in order (anthropic, openai, gemini)
                 - "anthropic": Use Claude
-                - "openai": Use GPT-4
-                - "gemini": Use Gemini 1.5 Pro
+                - "openai": Use GPT
+                - "gemini": Use Gemini
             tools: List of tools for the agent (optional)
             verbose: Enable verbose output
         """

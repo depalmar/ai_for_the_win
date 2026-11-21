@@ -130,7 +130,7 @@ class TestModelReferences:
     CURRENT_MODELS_LAB02 = [
         "sonnet",  # Claude Sonnet
         "opus",  # Claude Opus
-        "gpt-4o",  # GPT-4o or similar
+        "gpt-6",  # GPT-6.x family (GPT-4o shuts down 2027-01-14)
     ]
 
     def test_lab02_has_current_model_references(self):
@@ -152,9 +152,9 @@ class TestModelReferences:
         content = readme.read_text(encoding="utf-8")
 
         # Check for model table with versioned models
-        # The table should have specific versions like "Sonnet 4.5" or "GPT-4o"
+        # The table should have specific versions like "Sonnet 5.5" or "GPT-6.2"
         has_claude_version = bool(re.search(r"Claude\s+(?:Sonnet|Opus)\s+\d", content))
-        has_gpt_version = bool(re.search(r"GPT-4o|o1|o3", content))
+        has_gpt_version = bool(re.search(r"\bGPT-\d", content, re.IGNORECASE))
         has_gemini_version = bool(re.search(r"Gemini\s+\d", content))
 
         versions_found = sum([has_claude_version, has_gpt_version, has_gemini_version])

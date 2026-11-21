@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-AI for the Win is a hands-on training program for security practitioners building AI-powered tools. It contains 50+ labs, 4 capstone projects, and 15 CTF challenges covering threat detection, incident response, and security automation.
+AI for the Win is a hands-on training program for security practitioners building AI-powered tools. It contains 50+ labs, 4 capstone projects, and 18 CTF challenges covering threat detection, incident response, and security automation.
 
 ## Common Commands
 
@@ -76,9 +76,12 @@ labXX-topic-name/
 ### Multi-Provider LLM Support
 All LLM labs support multiple providers via environment variables:
 - `ANTHROPIC_API_KEY` - Claude (recommended)
-- `OPENAI_API_KEY` - GPT-4
+- `OPENAI_API_KEY` - GPT
 - `GOOGLE_API_KEY` - Gemini
 - Ollama for local models (no key needed)
+
+Default model IDs live in `shared/llm_config.py`; the current list and the retired IDs
+are in `.claude/commands/update-ai-models.md` and `scripts/check_ai_model_freshness.py`.
 
 ### Key Technologies
 - **ML**: scikit-learn, PyTorch, Hugging Face
@@ -413,6 +416,9 @@ git commit -m "chore: curriculum update - models and packages"
 | File | Update Frequency | Check For |
 |------|------------------|-----------|
 | `shared/llm_config.py` | Monthly | Model names, defaults |
+| `scripts/check_ai_model_freshness.py` | Monthly | Retired and retiring model IDs (`DEPRECATED_MODELS`) |
+| `.claude/commands/update-ai-models.md` | Monthly | Current model guide and its verification date |
+| `docs/guides/threat-landscape-2025.md` | Quarterly | Threat actors, ransomware, C2, AI threats (`/update-threat-intel`) |
 | `docs/guides/dev-environment-setup.md` | Quarterly | Package versions |
 | `docs/guides/quickstart-guide.md` | Quarterly | Package versions |
 | `docs/guides/llm-provider-comparison.md` | Monthly | Model capabilities, pricing |

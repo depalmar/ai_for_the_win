@@ -368,8 +368,8 @@ def setup_llm(provider: str = "anthropic"):
     Args:
         provider: LLM provider to use. Options:
             - "anthropic": Claude (claude-sonnet-5-5)
-            - "openai": GPT-4 Turbo
-            - "gemini": Gemini 1.5 Pro
+            - "openai": GPT (gpt-6.2-sol)
+            - "gemini": Gemini (gemini-3.8-flash)
             - "ollama": Local models (llama3.1:8b)
 
     Returns:

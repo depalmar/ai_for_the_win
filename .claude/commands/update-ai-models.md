@@ -8,8 +8,8 @@ Update AI model references across the curriculum to current versions.
 
 1. Search for current model versions:
    - `"Claude API models 2026 latest sonnet opus"` - Anthropic
-   - `"GPT-5 models 2026 OpenAI latest"` - OpenAI
-   - `"Gemini 3 models 2026 Google latest"` - Google
+   - `"OpenAI API models 2026 latest"` - OpenAI
+   - `"Gemini API models 2026 latest"` - Google
    - `"Llama 3.3 models 2026 Meta"` - Meta
 
 2. Read each provider's deprecation page directly (search summaries get IDs wrong):

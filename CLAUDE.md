@@ -31,7 +31,7 @@ docs/guides/threat-landscape-*.md       - Search: ALL threat intel topics
 | C2 Frameworks | `"C2 frameworks 2025 Sliver Havoc Mythic Cobalt Strike"` |
 | LLM Security | `"LLM security threats 2025 prompt injection OWASP"` |
 | AI Attacks | `"AI-powered cyber attacks 2025 APT28 autonomous"` |
-| AI Models | `"Claude API models 2025 2026"`, `"GPT-4o o1 models 2025"`, `"Gemini 2.0 models 2025"` |
+| AI Models | `"Claude API model deprecations 2026"`, `"OpenAI API deprecations 2026"`, `"Gemini API deprecations 2026"` |
 
 ### Why This Matters
 

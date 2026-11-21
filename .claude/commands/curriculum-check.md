@@ -44,7 +44,7 @@ Compare with model references in:
 - Lab README files
 
 Flag any outdated references:
-- Old model names (e.g., claude-3 instead of claude-4)
+- Retired or retiring model IDs (run `python scripts/check_ai_model_freshness.py`, which lists them)
 - Deprecated models
 - Missing newer model options
 
@@ -94,11 +94,11 @@ Run all checks in sequence:
 - Headers: 51/51 matching folder numbers
 - CTF: 18 challenges, achievements aligned
 
-### Models (Web Search: 2024-01-11)
-- claude-sonnet-4-20250514: CURRENT
-- gpt-4-turbo: UPDATE AVAILABLE (gpt-4o recommended)
+### Models (Web Search: YYYY-MM-DD)
+- claude-sonnet-5-5: CURRENT
+- gpt-5: RETIRING 2026-12-11 (replace with gpt-6.2-sol)
 
-### Packages (Web Search: 2024-01-11)
+### Packages (Web Search: YYYY-MM-DD)
 - anthropic>=0.40.0: CURRENT (latest: 0.42.0)
 - langchain>=0.3.0: CURRENT (latest: 0.3.5)
 
@@ -107,7 +107,7 @@ Run all checks in sequence:
 - 0 broken Colab links
 
 ### Recommendations
-1. Update OpenAI model reference to gpt-4o
+1. Update OpenAI model reference to gpt-6.2-sol
 2. Consider updating langchain to 0.3.5
 ```
 

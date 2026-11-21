@@ -429,7 +429,7 @@ python scripts/verify_setup.py
 | Variable | Description | Required |
 |----------|-------------|----------|
 | `ANTHROPIC_API_KEY` | Claude API | One LLM key required |
-| `OPENAI_API_KEY` | GPT-4/5 API | One LLM key required |
+| `OPENAI_API_KEY` | GPT API | One LLM key required |
 | `GOOGLE_API_KEY` | Gemini API | One LLM key required |
 | `VIRUSTOTAL_API_KEY` | VirusTotal | Optional |
 
@@ -465,7 +465,7 @@ docker compose run test            # In Docker
 
 | Category | Tools |
 |----------|-------|
-| **LLM Providers** | Claude (Sonnet/Opus/Haiku), GPT-5, Gemini 3, Ollama |
+| **LLM Providers** | Claude (Sonnet/Opus/Haiku), GPT, Gemini, Ollama |
 | **LLM Frameworks** | LangChain, LangGraph, LiteLLM |
 | **ML/AI** | scikit-learn, PyTorch, Transformers |
 | **Vector DB** | ChromaDB, sentence-transformers |

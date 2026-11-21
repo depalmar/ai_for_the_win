@@ -589,7 +589,7 @@ All labs in this course work with **any major LLM provider**. You're not locked 
 | Provider | API Key | Best For | Cost |
 |----------|---------|----------|------|
 | **Anthropic (Claude)** | `ANTHROPIC_API_KEY` | Long documents, complex analysis | $$$ |
-| **OpenAI (GPT-4)** | `OPENAI_API_KEY` | General purpose, tool use | $$$ |
+| **OpenAI (GPT)** | `OPENAI_API_KEY` | General purpose, tool use | $$$ |
 | **Google (Gemini)** | `GOOGLE_API_KEY` | Free tier, fast responses | $ |
 | **Ollama (Local)** | None needed | Privacy, no cost | Free |
 
@@ -605,7 +605,7 @@ llm = get_llm()  # Uses ANTHROPIC_API_KEY, OPENAI_API_KEY, or GOOGLE_API_KEY
 
 # Or explicitly choose a provider
 llm = get_llm(provider="anthropic")  # Claude
-llm = get_llm(provider="openai")     # GPT-4
+llm = get_llm(provider="openai")     # GPT
 llm = get_llm(provider="google")     # Gemini
 llm = get_llm(provider="ollama")     # Local model
 ```

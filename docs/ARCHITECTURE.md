@@ -96,7 +96,7 @@ flowchart TB
 
     subgraph providers [LLM Providers]
         Anthropic[Claude]
-        OpenAI[GPT-4]
+        OpenAI[GPT]
         Google[Gemini]
         Ollama[Ollama Local]
     end

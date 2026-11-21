@@ -41,7 +41,7 @@ By the end of this lab, you will be able to:
 - A code editor (VS Code recommended)
 - At least one API key OR local tool:
   - Anthropic API key (Claude)
-  - OpenAI API key (GPT-4)
+  - OpenAI API key (GPT)
   - GitHub Copilot subscription
   - Local: Ollama, LM Studio, or similar
 
