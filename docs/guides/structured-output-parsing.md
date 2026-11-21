@@ -279,11 +279,12 @@ Your response was:
 Please provide ONLY the corrected JSON, no explanation:"""
 
             response = client.messages.create(
-                model="claude-sonnet-4-20250514",
+                model="claude-sonnet-5-5",
+                thinking={"type": "between_tools"},
                 max_tokens=1024,
                 messages=[{"role": "user", "content": correction_prompt}]
             )
-            initial_response = response.content[0].text
+            initial_response = "".join(b.text for b in response.content if b.type == "text")
 
     return {}
 ```

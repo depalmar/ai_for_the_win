@@ -65,7 +65,8 @@ class ThreatAnalysis(BaseModel):
     confidence: float
     mitre_techniques: list[str]
 
-client = instructor.from_anthropic(Anthropic())
+# JSON mode: Instructor's default tools mode forces tool_choice, which claude-sonnet-5-5 rejects
+client = instructor.from_anthropic(Anthropic(), mode=instructor.Mode.ANTHROPIC_JSON)
 result = client.chat.completions.create(
     model="claude-sonnet-5-5",
     thinking={"type": "between_tools"},

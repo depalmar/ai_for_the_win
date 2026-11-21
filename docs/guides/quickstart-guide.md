@@ -238,7 +238,8 @@ from langchain_anthropic import ChatAnthropic
 from langchain.prompts import ChatPromptTemplate
 
 # Initialize Claude
-llm = ChatAnthropic(model="claude-sonnet-4-20250514")
+# Sonnet 5.5 thinks by default; between_tools turns that off. No temperature on Claude 4.7+.
+llm = ChatAnthropic(model="claude-sonnet-5-5", thinking={"type": "between_tools"}, max_tokens=1024)
 
 # Create security analysis prompt
 prompt = ChatPromptTemplate.from_template("""

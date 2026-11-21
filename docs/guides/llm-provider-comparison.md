@@ -23,19 +23,19 @@ Choose the right LLM provider for your security tasks based on performance, cost
 START: What's your primary constraint?
 
 ├─► COST is critical
-│   ├─► Need high quality? → Gemini 3 Pro ($2/$12)
-│   ├─► Simple tasks? → GPT-5.2 Instant ($2.50/$10)
+│   ├─► Need high quality? → Gemini 3.8 Flash ($0.75/$3.75) or Claude Sonnet 5.5 ($2/$10)
+│   ├─► Simple tasks? → GPT-6 Luna or Claude Haiku 5.5 ($0.10/$0.50)
 │   └─► No budget? → Ollama (free, local)
 │
 ├─► QUALITY is critical
-│   ├─► Complex reasoning? → Claude Opus 4.5 or GPT-5.2 Pro
-│   ├─► Long documents? → Claude (200K context)
-│   └─► Code analysis? → Claude or GPT-5.2
+│   ├─► Complex reasoning? → Claude Opus 5.5, Claude Fable 5.2 or GPT-6.2 Astra
+│   ├─► Long documents? → Any of the three (about 1M token context)
+│   └─► Code analysis? → Claude or GPT-6.2 Sol
 │
 ├─► SPEED is critical
 │   ├─► Need streaming? → All providers support it
-│   ├─► Fastest response? → Gemini 3 Flash
-│   └─► Low latency? → GPT-5.2 Instant or Gemini 3 Flash
+│   ├─► Fastest response? → Claude Haiku 5.5 or Gemini 3.5 Flash-Lite
+│   └─► Low latency? → GPT-6 Luna or Gemini 3.5 Flash-Lite
 │
 ├─► PRIVACY is critical
 │   ├─► Data can't leave network? → Ollama (local)
@@ -52,7 +52,7 @@ START: What's your primary constraint?
 
 ## Provider Overview
 
-> **Pricing Note:** All prices shown are approximate and subject to change. Verify current pricing at each provider's official website before making decisions. Prices updated periodically but may not reflect latest changes.
+> **Pricing Note:** All prices shown are subject to change. They were read from each provider's pricing page in November 2026 ([Anthropic](https://platform.claude.com/docs/en/about-claude/pricing), [OpenAI](https://developers.openai.com/api/docs/pricing), [Google](https://ai.google.dev/gemini-api/docs/pricing)). Verify current pricing before making decisions.
 
 ### Anthropic (Claude)
 
@@ -60,11 +60,15 @@ START: What's your primary constraint?
 
 | Model | Input/1M | Output/1M | Context | Speed |
 |-------|----------|-----------|---------|-------|
-| Claude Sonnet 4 | $3.00 | $15.00 | 200K | Fast |
-| Claude Opus 4.5 | $15.00 | $75.00 | 200K | Slower |
+| Claude Haiku 5.5 (`claude-haiku-5-5`) | $0.10\* | $0.50\* | 1M | Fastest |
+| Claude Sonnet 5.5 (`claude-sonnet-5-5`) | $2.00 | $10.00 | 1M | Fast |
+| Claude Opus 5.5 (`claude-opus-5-5`) | $4.00 | $20.00 | 1M | Moderate |
+| Claude Fable 5.2 (`claude-fable-5-2`) | $8.00 | $40.00 | 1M | Moderate |
+
+\*Haiku 5.5 prices are for prompts up to 100K tokens ($0.50/$2.50 above). Claude Sonnet 4 and Opus 4 were retired in June 2026, and Claude Sonnet 4.5 retires November 30, 2026.
 
 **Strengths:**
-- Largest context window (200K tokens) - analyze entire codebases
+- 1M token context window on every current model - analyze entire codebases
 - Excellent at following complex instructions
 - Strong safety training (less likely to produce harmful outputs)
 - Great at structured output (JSON extraction)
@@ -82,15 +86,18 @@ START: What's your primary constraint?
 
 ---
 
-### OpenAI (GPT-5.2)
+### OpenAI (GPT-6)
 
 **Best For:** Complex reasoning, broad knowledge, tool use
 
-| Model | Input/1M | Output/1M | Context | Speed |
+| Model | Input/1M | Output/1M | Context | Positioning (OpenAI) |
 |-------|----------|-----------|---------|-------|
-| GPT-5.2 Pro | $15.00 | $60.00 | 128K | Medium |
-| GPT-5.2 Thinking | $10.00 | $40.00 | 128K | Fast |
-| GPT-5.2 Instant | $2.50 | $10.00 | 128K | Fastest |
+| GPT-6.2 Astra (`gpt-6.2-astra`) | $8.00 | $40.00 | 1.05M | Most capable, hardest projects |
+| GPT-6.2 Sol (`gpt-6.2-sol`) | $2.00 | $10.00 | 1.05M | Everyday work, coding, agents |
+| GPT-6.1 Terra (`gpt-6.1-terra`) | $1.00 | $5.00 | 1.05M | Fast and efficient |
+| GPT-6 Luna (`gpt-6-luna`) | $0.10 | $0.50 | 1.05M | Most efficient, high volume |
+
+Prices are the standard tier for inputs up to 272K tokens. GPT-5 shuts down December 11, 2026, and the older reasoning models are retiring too (see [OpenAI deprecations](https://developers.openai.com/api/docs/deprecations)).
 
 **Strengths:**
 - Most mature ecosystem (tools, integrations)
@@ -99,8 +106,8 @@ START: What's your primary constraint?
 - Excellent at multi-step analysis
 
 **Weaknesses:**
-- Most expensive for output tokens
-- Smaller context than Claude
+- Top model's output pricing is high ($40/1M on GPT-6.2 Astra)
+- Higher rates for inputs above 272K tokens
 - Occasional instruction following issues
 
 **Security Use Cases:**
@@ -117,12 +124,14 @@ START: What's your primary constraint?
 
 | Model | Input/1M | Output/1M | Context | Speed |
 |-------|----------|-----------|---------|-------|
-| Gemini 3 Pro | $2.00 | $12.00 | 1M | Fast |
-| Gemini 3 Flash | $0.50 | $3.00 | 1M | Fastest |
+| Gemini 3.8 Flash (`gemini-3.8-flash`) | $0.75\* | $3.75\* | 1M | Fast |
+| Gemini 3.5 Flash-Lite (`gemini-3.5-flash-lite`) | $0.30 | $2.50 | 1M | Fastest |
+
+\*Gemini 3.8 Flash rises to $1.50/$7.50 on January 1, 2027. Both models are stable with no shutdown announced; Gemini 2.5 Pro and 2.5 Flash shut down December 1, 2026.
 
 **Strengths:**
 - Best cost-to-quality ratio
-- Largest context window (up to 1M tokens)
+- 1M token context window
 - **Free tier**: 1000 requests/day via Gemini CLI or AI Studio
 - Native Google Cloud integration
 - Google Search grounding for real-time threat intel
@@ -149,9 +158,9 @@ START: What's your primary constraint?
 
 ### Core Capabilities
 
-| Feature | Claude | GPT-5.2 | Gemini 3 Pro |
+| Feature | Claude | GPT-6.2 | Gemini 3.8 Flash |
 |---------|--------|---------|--------------|
-| **Context Window** | 200K | 128K | 1M |
+| **Context Window** | 1M | 1.05M | 1M |
 | **Structured Output** | Excellent | Good | Good |
 | **Code Analysis** | Excellent | Excellent | Good |
 | **Instruction Following** | Excellent | Good | Good |
@@ -160,7 +169,7 @@ START: What's your primary constraint?
 
 ### Security-Specific Features
 
-| Feature | Claude | GPT-5.2 | Gemini 3 Pro |
+| Feature | Claude | GPT-6.2 | Gemini 3.8 Flash |
 |---------|--------|---------|--------------|
 | **Threat Detection** | Excellent | Excellent | Good |
 | **IOC Extraction** | Excellent | Good | Good |
@@ -185,6 +194,8 @@ START: What's your primary constraint?
 ## Security Task Benchmarks
 
 > **Note:** The benchmarks below are **illustrative estimates** based on typical model characteristics. Actual performance varies by prompt design, data quality, and use case. Always conduct your own testing for production decisions.
+>
+> **Historical:** these estimates were written in January 2026 for the models of that time, at January 2026 prices. Claude Sonnet 4 was retired in June 2026, and the GPT-5.2 and Gemini 3 Pro rows predate the GPT-6 and Gemini 3.8 lineups. Use the tables as a template for your own comparison of current models (see [Provider Overview](#provider-overview)), not as current scores.
 
 ### Task: IOC Extraction from Threat Reports
 
@@ -192,12 +203,12 @@ START: What's your primary constraint?
 
 | Provider | Accuracy | Avg Time | Cost |
 |----------|----------|----------|------|
-| Claude Sonnet 4 | 96% | 2.1s | $0.45 |
+| Claude Sonnet 4 (retired) | 96% | 2.1s | $0.45 |
 | GPT-5.2 Thinking | 94% | 1.8s | $0.65 |
 | Gemini 3 Pro | 91% | 1.5s | $0.24 |
 | GPT-5.2 Instant | 88% | 0.8s | $0.15 |
 
-**Winner:** Claude Sonnet 4 (accuracy) or Gemini 3 Pro (cost)
+**Winner (January 2026):** Claude Sonnet 4 (accuracy) or Gemini 3 Pro (cost)
 
 ---
 
@@ -207,12 +218,12 @@ START: What's your primary constraint?
 
 | Provider | Accuracy | False Positives | Cost |
 |----------|----------|-----------------|------|
-| Claude Sonnet 4 | 97.2% | 1.8% | $6.60 |
+| Claude Sonnet 4 (retired) | 97.2% | 1.8% | $6.60 |
 | GPT-5.2 Pro | 96.5% | 2.2% | $9.50 |
 | Gemini 3 Pro | 94.8% | 3.1% | $4.80 |
 | GPT-5.2 Instant | 91.2% | 5.5% | $1.50 |
 
-**Winner:** Claude Sonnet 4 (accuracy) or GPT-5.2 Instant (budget)
+**Winner (January 2026):** Claude Sonnet 4 (accuracy) or GPT-5.2 Instant (budget)
 
 ---
 
@@ -222,12 +233,12 @@ START: What's your primary constraint?
 
 | Provider | Detection Rate | False Alarm Rate | Cost |
 |----------|---------------|------------------|------|
-| Claude Sonnet 4 | 89% | 4% | $45.00 |
+| Claude Sonnet 4 (retired) | 89% | 4% | $45.00 |
 | GPT-5.2 Pro | 87% | 5% | $70.00 |
 | Gemini 3 Pro | 84% | 6% | $32.00 |
 | GPT-5.2 Instant | 78% | 8% | $12.50 |
 
-**Winner:** Claude Sonnet 4 (quality) or Gemini 3 Pro (cost-effective)
+**Winner (January 2026):** Claude Sonnet 4 (quality) or Gemini 3 Pro (cost-effective)
 
 ---
 
@@ -237,11 +248,11 @@ START: What's your primary constraint?
 
 | Provider | Issues Found | False Positives | Cost |
 |----------|-------------|-----------------|------|
-| Claude Sonnet 4 | 45/50 | 3 | $2.25 |
+| Claude Sonnet 4 (retired) | 45/50 | 3 | $2.25 |
 | GPT-5.2 Pro | 43/50 | 5 | $3.50 |
 | Gemini 3 Pro | 40/50 | 4 | $1.24 |
 
-**Winner:** Claude Sonnet 4 (code analysis is a strength)
+**Winner (January 2026):** Claude Sonnet 4 (code analysis is a strength)
 
 ---
 
@@ -268,7 +279,8 @@ import anthropic
 client = anthropic.Anthropic()
 
 response = client.messages.create(
-    model="claude-sonnet-4-20250514",
+    model="claude-sonnet-5-5",
+    thinking={"type": "between_tools"},  # Sonnet 5.5 thinks by default; this turns it off
     max_tokens=1024,
     messages=[{
         "role": "user",
@@ -278,11 +290,12 @@ response = client.messages.create(
         Report: {report_text}"""
     }]
 )
+result = "".join(b.text for b in response.content if b.type == "text")
 ```
 
 ---
 
-### OpenAI GPT-5.2: When to Choose
+### OpenAI GPT-6.2: When to Choose
 
 **Choose OpenAI when:**
 - Need mature ecosystem and integrations
@@ -292,7 +305,7 @@ response = client.messages.create(
 - Want function calling reliability
 
 **Avoid OpenAI when:**
-- Processing very long documents (128K limit)
+- Processing very long documents on a tight budget (inputs above 272K tokens cost more)
 - Budget is tight
 - Need strongest instruction following
 
@@ -303,7 +316,7 @@ from openai import OpenAI
 client = OpenAI()
 
 response = client.chat.completions.create(
-    model="gpt-5",
+    model="gpt-6.2-sol",
     messages=[{
         "role": "user",
         "content": "Analyze this log for security threats: {log_entry}"
@@ -333,7 +346,7 @@ response = client.chat.completions.create(
 import google.generativeai as genai
 
 genai.configure(api_key=os.environ["GOOGLE_API_KEY"])
-model = genai.GenerativeModel("gemini-3-pro")
+model = genai.GenerativeModel("gemini-3.8-flash")
 
 response = model.generate_content(
     "Analyze these logs for anomalies: {logs}"
@@ -368,9 +381,9 @@ ollama run llama4:scout "Analyze this log for threats: [log]"
 
 ### Local vs API Comparison
 
-| Factor | Ollama (Llama 4 Scout) | Claude Sonnet 4.5 |
+| Factor | Ollama (Llama 4 Scout) | Claude Sonnet 5.5 |
 |--------|----------------------|-------------------|
-| Cost per 1M tokens | $0 | $3-15 |
+| Cost per 1M tokens | $0 | $2-10 |
 | Hardware required | 8GB RAM | None |
 | Quality (1-10) | 6-7 | 9-10 |
 | Speed (8GB RAM) | ~30 tok/s | ~100 tok/s |
@@ -388,7 +401,7 @@ def analyze_security_event(event: dict) -> dict:
     """Use cheap model for triage, expensive for deep analysis."""
 
     # Tier 1: Quick triage with local/cheap model
-    severity = quick_triage(event)  # Ollama or GPT-5.2 Instant
+    severity = quick_triage(event)  # Ollama, GPT-6 Luna or Claude Haiku 5.5
 
     if severity == "LOW":
         return {"severity": "LOW", "action": "Log only"}
@@ -455,20 +468,22 @@ def high_confidence_analysis(text: str) -> dict:
 from openai import OpenAI
 client = OpenAI()
 response = client.chat.completions.create(
-    model="gpt-5",
+    model="gpt-6.2-sol",
     messages=[{"role": "user", "content": prompt}]
 )
 result = response.choices[0].message.content
 
 # Claude (equivalent)
+# Note: Claude 4.7+ models reject temperature/top_p, so drop them when porting.
 import anthropic
 client = anthropic.Anthropic()
 response = client.messages.create(
-    model="claude-sonnet-4-20250514",
+    model="claude-sonnet-5-5",
+    thinking={"type": "between_tools"},  # thinking off (Sonnet 5.5 only)
     max_tokens=1024,
     messages=[{"role": "user", "content": prompt}]
 )
-result = response.content[0].text
+result = "".join(b.text for b in response.content if b.type == "text")
 ```
 
 ### Moving from Claude to Gemini
@@ -476,14 +491,15 @@ result = response.content[0].text
 ```python
 # Claude
 response = client.messages.create(
-    model="claude-sonnet-4-20250514",
+    model="claude-sonnet-5-5",
+    thinking={"type": "between_tools"},
     max_tokens=1024,
     messages=[{"role": "user", "content": prompt}]
 )
-result = response.content[0].text
+result = "".join(b.text for b in response.content if b.type == "text")
 
 # Gemini (equivalent)
-model = genai.GenerativeModel("gemini-3-pro")
+model = genai.GenerativeModel("gemini-3.8-flash")
 response = model.generate_content(prompt)
 result = response.text
 ```
@@ -498,9 +514,11 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 def get_llm(provider: str = "claude"):
     """Get LLM instance by provider name."""
     providers = {
-        "claude": ChatAnthropic(model="claude-sonnet-4-20250514"),
-        "openai": ChatOpenAI(model="gpt-5"),
-        "gemini": ChatGoogleGenerativeAI(model="gemini-2.5-pro"),
+        "claude": ChatAnthropic(
+            model="claude-sonnet-5-5", thinking={"type": "between_tools"}, max_tokens=4096
+        ),
+        "openai": ChatOpenAI(model="gpt-6.2-sol"),
+        "gemini": ChatGoogleGenerativeAI(model="gemini-3.8-flash"),
     }
     return providers.get(provider)
 
@@ -516,11 +534,11 @@ response = llm.invoke("Analyze this log: {log}")
 | Use Case | Primary | Fallback | Reasoning |
 |----------|---------|----------|-----------|
 | **Phishing Detection** | Claude | Gemini | Accuracy critical |
-| **Log Analysis (high vol)** | Gemini | GPT-5.2 Instant | Cost matters |
-| **Code Review** | Claude | GPT-5.2 | Claude excels at code |
-| **Threat Intel** | Claude | GPT-5.2 | Long context needed |
-| **Real-time Alerting** | GPT-5.2 Instant | Gemini Flash | Speed critical |
-| **Compliance Reports** | Claude | GPT-5.2 | Instruction following |
+| **Log Analysis (high vol)** | Gemini | GPT-6 Luna | Cost matters |
+| **Code Review** | Claude | GPT-6.2 Sol | Claude excels at code |
+| **Threat Intel** | Claude | GPT-6.2 Sol | Long context needed |
+| **Real-time Alerting** | GPT-6 Luna | Gemini 3.5 Flash-Lite | Speed critical |
+| **Compliance Reports** | Claude | GPT-6.2 Sol | Instruction following |
 | **Air-gapped** | Ollama | N/A | Only option |
 
 ---
@@ -533,4 +551,4 @@ response = llm.invoke("Analyze this log: {log}")
 
 ---
 
-*Last updated: January 2026*
+*Last updated: November 2026*

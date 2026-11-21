@@ -497,12 +497,13 @@ Question: {question}
 Answer:"""
 
         response = self.llm.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},
             max_tokens=1024,
             messages=[{"role": "user", "content": prompt}]
         )
 
-        return response.content[0].text
+        return "".join(b.text for b in response.content if b.type == "text")
 ```
 
 ### 4. Alert Deduplication

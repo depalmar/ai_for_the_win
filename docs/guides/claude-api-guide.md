@@ -25,7 +25,7 @@ Claude (by Anthropic) excels at security-related tasks due to:
 
 | Capability                     | Security Application                              |
 | ------------------------------ | ------------------------------------------------- |
-| **Long Context (200K tokens)** | Analyze entire malware codebases, large log files |
+| **Long Context (1M tokens)**   | Analyze entire malware codebases, large log files |
 | **Code Understanding**         | Reverse engineering, vulnerability analysis       |
 | **Structured Output**          | Generate STIX/TAXII, JSON IOCs, YARA rules        |
 | **Reasoning**                  | Threat attribution, attack chain analysis         |
@@ -33,11 +33,16 @@ Claude (by Anthropic) excels at security-related tasks due to:
 
 ### Model Comparison
 
-| Model                 | Best For                         | Context | Cost                          |
-| --------------------- | -------------------------------- | ------- | ----------------------------- |
-| **Claude Sonnet 4.5** | Daily development, code analysis | 200K    | $3/M input, $15/M output      |
-| **Claude Opus 4.5**   | Complex reasoning, architecture  | 200K    | $15/M input, $75/M output     |
-| **Claude Haiku 4.5**  | Quick tasks, high volume         | 200K    | $0.25/M input, $1.25/M output |
+| Model                 | Best For                                    | Context | Cost                                               |
+| --------------------- | ------------------------------------------- | ------- | -------------------------------------------------- |
+| **Claude Sonnet 5.5** | Daily development, code analysis            | 1M      | $2/M input, $10/M output                           |
+| **Claude Opus 5.5**   | Complex reasoning, architecture             | 1M      | $4/M input, $20/M output                           |
+| **Claude Haiku 5.5**  | Quick tasks, high volume                    | 1M      | $0.10/M input, $0.50/M output (prompts up to 100K) |
+| **Claude Fable 5.2**  | Most demanding reasoning, long agentic work | 1M      | $8/M input, $40/M output                           |
+
+Model IDs: `claude-sonnet-5-5`, `claude-opus-5-5`, `claude-haiku-5-5`, `claude-fable-5-2`. Prices from [Anthropic pricing](https://platform.claude.com/docs/en/about-claude/pricing) (November 2026). Claude Sonnet 4 (retired June 2026) and Claude Sonnet 4.5 (retires November 30, 2026) should no longer be used.
+
+> **API changes on current models:** Claude 4.7 and later models reject a non-default `temperature` (and `top_p`/`top_k`), so the samples below leave it out. Claude Sonnet 5.5 thinks by default, so a response can start with a thinking block: the samples pass `thinking={"type": "between_tools"}` (Sonnet 5.5's thinking-off mode; only send it to `claude-sonnet-5-5`) and read text blocks by type instead of `response.content[0].text`.
 
 ---
 
@@ -80,11 +85,12 @@ client = anthropic.Anthropic()
 
 # Test the connection
 message = client.messages.create(
-    model="claude-sonnet-4-20250514",
+    model="claude-sonnet-5-5",
+    thinking={"type": "between_tools"},
     max_tokens=100,
     messages=[{"role": "user", "content": "Say 'API working!' if you can read this."}]
 )
-print(message.content[0].text)
+print("".join(b.text for b in message.content if b.type == "text"))
 ```
 
 ---
@@ -99,7 +105,7 @@ Cursor has native Claude integration. Configure in settings:
 // settings.json
 {
   "cursor.aiProvider": "anthropic",
-  "cursor.defaultModel": "claude-sonnet-4-20250514",
+  "cursor.defaultModel": "claude-sonnet-5-5",
   "cursor.enableLongContext": true,
 
   // Optional: Use your own API key
@@ -125,9 +131,9 @@ Ctrl+Shift+L → Ask about your codebase
 
 ```
 # In Cursor chat, prefix with model:
-@claude-opus-4-5 "Design the architecture for a SIEM integration"
-@claude-sonnet-4 "Write a function to parse these logs"
-@claude-haiku-4 "Add comments to this code"
+@claude-opus-5-5 "Design the architecture for a SIEM integration"
+@claude-sonnet-5-5 "Write a function to parse these logs"
+@claude-haiku-5-5 "Add comments to this code"
 ```
 
 ---
@@ -145,7 +151,7 @@ export ANTHROPIC_API_KEY="sk-ant-..."
 
 # Use CLI (if available)
 anthropic messages create \
-  --model claude-sonnet-4-20250514 \
+  --model claude-sonnet-5-5 \
   --max-tokens 1024 \
   --messages '[{"role":"user","content":"Analyze this hash: abc123..."}]'
 ```
@@ -153,6 +159,8 @@ anthropic messages create \
 ### Custom CLI Wrapper
 
 Create a `claude-cli.py` for security tasks:
+
+<!-- {% raw %} -->
 
 ````python
 #!/usr/bin/env python3
@@ -183,7 +191,8 @@ def analyze_file(filepath: str) -> str:
     content = Path(filepath).read_text()
 
     response = client.messages.create(
-        model="claude-sonnet-4-20250514",
+        model="claude-sonnet-5-5",
+        thinking={"type": "between_tools"},
         max_tokens=4096,
         system=SECURITY_SYSTEM_PROMPT,
         messages=[{
@@ -191,12 +200,13 @@ def analyze_file(filepath: str) -> str:
             "content": f"Analyze this file for security issues:\n\n```\n{content}\n```"
         }]
     )
-    return response.content[0].text
+    return "".join(b.text for b in response.content if b.type == "text")
 
 def extract_iocs(text: str) -> str:
     """Extract IOCs from text."""
     response = client.messages.create(
-        model="claude-sonnet-4-20250514",
+        model="claude-sonnet-5-5",
+        thinking={"type": "between_tools"},
         max_tokens=2048,
         messages=[{
             "role": "user",
@@ -215,12 +225,13 @@ Output format:
 }}"""
         }]
     )
-    return response.content[0].text
+    return "".join(b.text for b in response.content if b.type == "text")
 
 def generate_yara(description: str) -> str:
     """Generate YARA rule from description."""
     response = client.messages.create(
-        model="claude-sonnet-4-20250514",
+        model="claude-sonnet-5-5",
+        thinking={"type": "between_tools"},
         max_tokens=2048,
         messages=[{
             "role": "user",
@@ -235,7 +246,7 @@ Include:
 - Comments explaining the rule"""
         }]
     )
-    return response.content[0].text
+    return "".join(b.text for b in response.content if b.type == "text")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Claude Security CLI")
@@ -265,6 +276,8 @@ if __name__ == "__main__":
         parser.print_help()
 ````
 
+<!-- {% endraw %} -->
+
 ---
 
 ## 🐍 Python SDK Usage
@@ -284,20 +297,22 @@ client = anthropic.Anthropic()  # Uses ANTHROPIC_API_KEY env var
 
 # Simple message
 response = client.messages.create(
-    model="claude-sonnet-4-20250514",
+    model="claude-sonnet-5-5",
+    thinking={"type": "between_tools"},
     max_tokens=1024,
     messages=[
         {"role": "user", "content": "What is a SQL injection attack?"}
     ]
 )
-print(response.content[0].text)
+print("".join(b.text for b in response.content if b.type == "text"))
 ```
 
 ### With System Prompt
 
 ```python
 response = client.messages.create(
-    model="claude-sonnet-4-20250514",
+    model="claude-sonnet-5-5",
+    thinking={"type": "between_tools"},
     max_tokens=4096,
     system="""You are a senior security analyst at a SOC.
     Always provide:
@@ -315,7 +330,8 @@ response = client.messages.create(
 
 ```python
 with client.messages.stream(
-    model="claude-sonnet-4-20250514",
+    model="claude-sonnet-5-5",
+    thinking={"type": "between_tools"},
     max_tokens=4096,
     messages=[{"role": "user", "content": "Write a detailed malware analysis report..."}]
 ) as stream:
@@ -332,13 +348,14 @@ def chat(user_message: str) -> str:
     conversation.append({"role": "user", "content": user_message})
 
     response = client.messages.create(
-        model="claude-sonnet-4-20250514",
+        model="claude-sonnet-5-5",
+        thinking={"type": "between_tools"},
         max_tokens=4096,
         system="You are a malware analyst assistant.",
         messages=conversation
     )
 
-    assistant_message = response.content[0].text
+    assistant_message = "".join(b.text for b in response.content if b.type == "text")
     conversation.append({"role": "assistant", "content": assistant_message})
 
     return assistant_message
@@ -360,14 +377,15 @@ async def analyze_multiple_samples(samples: list[str]) -> list[str]:
 
     async def analyze_one(sample: str) -> str:
         response = await client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},
             max_tokens=2048,
             messages=[{
                 "role": "user",
                 "content": f"Analyze this malware sample: {sample}"
             }]
         )
-        return response.content[0].text
+        return "".join(b.text for b in response.content if b.type == "text")
 
     tasks = [analyze_one(s) for s in samples]
     return await asyncio.gather(*tasks)
@@ -470,7 +488,8 @@ Output as structured JSON."""
 ````python
 def generate_sigma_rule(log_description: str) -> str:
     response = client.messages.create(
-        model="claude-sonnet-4-20250514",
+        model="claude-sonnet-5-5",
+        thinking={"type": "between_tools"},
         max_tokens=2048,
         messages=[{
             "role": "user",
@@ -531,7 +550,7 @@ Input: "{log_description}"
 Output:"""
 }]
 )
-return response.content[0].text
+return "".join(b.text for b in response.content if b.type == "text")
 
 ````
 
@@ -584,13 +603,14 @@ After receiving tool output, continue your analysis."""
 
         while True:
             response = self.client.messages.create(
-                model="claude-sonnet-4-20250514",
+                model="claude-sonnet-5-5",
+                thinking={"type": "between_tools"},
                 max_tokens=4096,
                 system=full_system,
                 messages=self.conversation
             )
 
-            assistant_message = response.content[0].text
+            assistant_message = "".join(b.text for b in response.content if b.type == "text")
             self.conversation.append({"role": "assistant", "content": assistant_message})
 
             # Check if agent wants to use a tool
@@ -713,11 +733,12 @@ def safe_claude_call(messages: list) -> str:
     try:
         client = anthropic.Anthropic()
         response = client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},
             max_tokens=4096,
             messages=messages
         )
-        return response.content[0].text
+        return "".join(b.text for b in response.content if b.type == "text")
     except anthropic.RateLimitError:
         print("Rate limited, retrying...")
         raise
@@ -729,15 +750,15 @@ def safe_claude_call(messages: list) -> str:
 ### 3. Cost Management
 
 ```python
-def estimate_cost(input_tokens: int, output_tokens: int, model: str = "claude-sonnet-4-20250514") -> float:
-    """Estimate API call cost."""
+def estimate_cost(input_tokens: int, output_tokens: int, model: str = "claude-sonnet-5-5") -> float:
+    """Estimate API call cost (USD per 1M tokens, Anthropic pricing page, November 2026)."""
     pricing = {
-        "claude-sonnet-4-20250514": {"input": 3.0, "output": 15.0},
-        "claude-opus-4-5": {"input": 15.0, "output": 75.0},
-        "claude-haiku-4": {"input": 0.25, "output": 1.25}
+        "claude-sonnet-5-5": {"input": 2.0, "output": 10.0},
+        "claude-opus-5-5": {"input": 4.0, "output": 20.0},
+        "claude-haiku-5-5": {"input": 0.10, "output": 0.50},  # prompts up to 100K tokens
     }
 
-    rates = pricing.get(model, pricing["claude-sonnet-4-20250514"])
+    rates = pricing.get(model, pricing["claude-sonnet-5-5"])
     input_cost = (input_tokens / 1_000_000) * rates["input"]
     output_cost = (output_tokens / 1_000_000) * rates["output"]
 
@@ -773,13 +794,17 @@ def cached_claude_call(prompt: str, **kwargs) -> str:
     if cache_file.exists():
         return json.loads(cache_file.read_text())["response"]
 
+    model = kwargs.get("model", "claude-sonnet-5-5")
+    # between_tools (thinking off) is accepted only by claude-sonnet-5-5
+    extra = {"thinking": {"type": "between_tools"}} if model == "claude-sonnet-5-5" else {}
     response = client.messages.create(
-        model=kwargs.get("model", "claude-sonnet-4-20250514"),
+        model=model,
         max_tokens=kwargs.get("max_tokens", 4096),
-        messages=[{"role": "user", "content": prompt}]
+        messages=[{"role": "user", "content": prompt}],
+        **extra,
     )
 
-    result = response.content[0].text
+    result = "".join(b.text for b in response.content if b.type == "text")
     cache_file.write_text(json.dumps({"response": result}))
 
     return result

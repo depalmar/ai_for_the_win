@@ -448,10 +448,10 @@ Now explain:
 
 ### Prompt Engineering Guides
 - [Anthropic — Prompt Engineering Overview](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview)
-- [Anthropic — Claude 4 Best Practices](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/claude-4-best-practices)
+- [Anthropic — Claude Prompting Best Practices](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices)
 - [Anthropic — Interactive Prompt Engineering Tutorial](https://github.com/anthropics/prompt-eng-interactive-tutorial)
 - [OpenAI — Prompt Engineering Guide](https://platform.openai.com/docs/guides/prompt-engineering)
-- [OpenAI — GPT-5 Prompting Guide](https://cookbook.openai.com/examples/gpt-5/gpt-5_prompting_guide)
+- [OpenAI — Latest Model Prompting Guide](https://developers.openai.com/api/docs/guides/latest-model)
 
 ### Tool Documentation
 - [Claude Code Documentation](https://code.claude.com/docs/en/overview)

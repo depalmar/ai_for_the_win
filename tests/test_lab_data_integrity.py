@@ -1715,6 +1715,36 @@ class TestLabCategoryConsistency:
         }
         assert counts == actual, f"docs/_data/counts.yml should be {actual}"
 
+    def test_pages_markdown_has_no_unescaped_liquid(self):
+        """Code samples on Pages must not contain bare {{ or {% (Jekyll runs Liquid on them).
+
+        Python f-string escapes ({{ }}) and GitHub Actions expressions (${{ }}) are Liquid
+        syntax, so Pages either warns and mangles the sample or renders it blank. Wrap such
+        a block in raw tags inside HTML comments, which GitHub's markdown view hides:
+
+            <!-- {% raw %} -->
+            ```python
+            ...
+            ```
+            <!-- {% endraw %} -->
+        """
+        docs = REPO_ROOT / "docs"
+        raw_span = re.compile(r"\{%-?\s*raw\s*-?%\}.*?\{%-?\s*endraw\s*-?%\}", re.DOTALL)
+        errors = []
+        for path in sorted(docs.rglob("*.md")):
+            rel = path.relative_to(docs)
+            if rel.parts[0].startswith("_"):
+                continue  # Jekyll does not render _includes, _layouts, _data
+            text = raw_span.sub("", path.read_text(encoding="utf-8"))
+            for line in text.split("\n"):
+                if "{{" in line or "{%" in line:
+                    errors.append(f"docs/{rel.as_posix()}: {line.strip()[:80]}")
+                    break
+        assert not errors, (
+            "Liquid delimiters outside {% raw %} blocks (wrap them; see this test's docstring):\n"
+            + "\n".join(errors)
+        )
+
     def test_readme_lab_navigator_sequential_order(self):
         """Verify README Lab Navigator displays labs in sequential order.
 

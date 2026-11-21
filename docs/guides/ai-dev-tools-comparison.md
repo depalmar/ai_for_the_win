@@ -51,7 +51,7 @@ The AI-assisted development landscape has evolved rapidly. This guide compares t
 | **MCP Support**     | Yes          | Yes         | Yes        | Yes         | Yes          | No         | Partial           | No                | No               | No                |
 | **Local LLMs**      | Limited      | No          | No         | No          | Yes          | Yes        | Yes               | Yes               | No               | No                |
 | **Cost**            | $20/mo       | API costs   | Free tier  | ChatGPT+    | $15/mo       | API costs  | Free + API        | $12/mo            | $10/mo           | $10/mo            |
-| **Best Model**      | Claude/GPT-5 | Claude 4.5  | Gemini 3   | GPT-5-Codex | Claude/GPT-5 | Any        | Any               | Any/Local         | JetBrains models | GPT-5             |
+| **Best Model**      | Claude/GPT-6 | Claude 5.5  | Gemini 3.8 | GPT-6.2 Sol | Claude/GPT-6 | Any        | Any               | Any/Local         | JetBrains models | Multiple          |
 | **Offline**         | No           | No          | No         | No          | Partial      | Yes        | Yes               | Yes               | No               | No                |
 
 ### Security Development Suitability
@@ -239,7 +239,7 @@ See [Gemini CLI Guide](./gemini-cli-guide.md)
 
 ### Overview
 
-OpenAI's official command-line coding agent, built in Rust for speed and efficiency. Uses GPT-5-Codex models with support for image inputs and cloud tasks.
+OpenAI's official command-line coding agent, built in Rust for speed and efficiency. Uses OpenAI's GPT models (GPT-6.2 Sol is OpenAI's everyday coding model; GPT-5-Codex was shut down in July 2026) with support for image inputs and cloud tasks.
 
 ### Key Features
 
@@ -311,7 +311,7 @@ codex
 export OPENAI_API_KEY="your-api-key"
 
 # Model selection
-codex /model gpt-5-codex
+codex /model gpt-6.2-sol
 ```
 
 ---
@@ -377,7 +377,7 @@ brew install --cask windsurf
 ```json
 // settings.json
 {
-  "windsurf.model": "claude-sonnet-4-20250514",
+  "windsurf.model": "claude-sonnet-5-5",
   "windsurf.enableCascade": true,
   "windsurf.localModelPath": "/path/to/ollama",
   "windsurf.privacy.excludePaths": ["**/secrets/**", "**/.env*"]
@@ -395,7 +395,7 @@ A terminal-based AI pair programming tool that works with any LLM provider.
 ### Key Features
 
 - **Git-Native**: Automatic commits for AI changes
-- **Multi-Model**: Works with Claude, GPT-4, Ollama, etc.
+- **Multi-Model**: Works with Claude, GPT, Gemini, Ollama, etc.
 - **Voice Mode**: Speak your coding requests
 - **Architect Mode**: High-level planning before coding
 - **Watch Mode**: Automatically respond to file changes
@@ -420,8 +420,8 @@ Cons:
 ### Security Workflow Example
 
 ```bash
-# Start Aider with Claude
-aider --model claude-sonnet-4-20250514
+# Start Aider with Claude (use a recent Aider: Claude 4.7+ models reject a non-default temperature)
+aider --model claude-sonnet-5-5
 
 # In Aider session
 /add src/analyzers/*.py
@@ -464,7 +464,7 @@ Create `.aider.conf.yml` in your project:
 
 ```yaml
 # .aider.conf.yml
-model: claude-sonnet-4-20250514
+model: claude-sonnet-5-5
 auto-commits: true
 dirty-commits: false
 attribute-author: true
@@ -516,6 +516,8 @@ Cons:
 
 ### Security Workflow Example
 
+<!-- {% raw %} -->
+
 ```typescript
 // .continue/config.ts - Custom security commands
 
@@ -561,6 +563,8 @@ Include:
 }
 ```
 
+<!-- {% endraw %} -->
+
 ### Installation
 
 ```bash
@@ -581,7 +585,7 @@ Create `.continue/config.json`:
     {
       "title": "Claude Sonnet",
       "provider": "anthropic",
-      "model": "claude-sonnet-4-20250514",
+      "model": "claude-sonnet-5-5",
       "apiKey": "${ANTHROPIC_API_KEY}"
     },
     {
@@ -961,7 +965,7 @@ Cons:
 from openhands import OpenHands
 
 agent = OpenHands(
-    model="claude-sonnet-4-20250514",
+    model="claude-sonnet-5-5",
     sandbox=True  # Safe execution environment
 )
 

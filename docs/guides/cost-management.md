@@ -2,7 +2,7 @@
 
 Master cost estimation, monitoring, and optimization for LLM-powered security tools.
 
-> **Pricing Disclaimer:** LLM pricing changes frequently. All estimates in this guide are approximate and for educational purposes. Verify current pricing at provider websites before budgeting. Last reviewed: January 2026.
+> **Pricing Disclaimer:** LLM pricing changes frequently. All estimates in this guide are approximate and for educational purposes. Verify current pricing at provider websites before budgeting. Last reviewed: November 2026.
 
 ---
 
@@ -57,29 +57,36 @@ Cost = (Input Tokens × Input Price) + (Output Tokens × Output Price)
 
 ### Security Task Cost Estimates (Approximate)
 
-| Task                          | Input Tokens | Output Tokens | Claude 4.5 | GPT-4o | Gemini 3 Pro |
-| ----------------------------- | ------------ | ------------- | ---------- | ------ | ------------ |
-| **Single log analysis**       | ~500         | ~200          | $0.002     | $0.007 | $0.003       |
-| **Phishing email check**      | ~700         | ~300          | $0.007     | $0.009 | $0.004       |
-| **IOC extraction (1 report)** | ~2,000       | ~500          | $0.014     | $0.020 | $0.008       |
-| **Threat intel summary**      | ~5,000       | ~1,000        | $0.030     | $0.045 | $0.016       |
-| **Batch: 100 log lines**      | ~50,000      | ~20,000       | $0.45      | $0.70  | $0.26        |
-| **Batch: 1000 emails**        | ~700,000     | ~300,000      | $6.60      | $9.50  | $3.88        |
+| Task                          | Input Tokens | Output Tokens | Claude Sonnet 5.5 | GPT-6.2 Sol | Gemini 3.8 Flash |
+| ----------------------------- | ------------ | ------------- | ----------------- | ----------- | ---------------- |
+| **Single log analysis**       | ~500         | ~200          | $0.003            | $0.003      | $0.001           |
+| **Phishing email check**      | ~700         | ~300          | $0.004            | $0.004      | $0.002           |
+| **IOC extraction (1 report)** | ~2,000       | ~500          | $0.009            | $0.009      | $0.003           |
+| **Threat intel summary**      | ~5,000       | ~1,000        | $0.020            | $0.020      | $0.008           |
+| **Batch: 100 log lines**      | ~50,000      | ~20,000       | $0.30             | $0.30       | $0.11            |
+| **Batch: 1000 emails**        | ~700,000     | ~300,000      | $4.40             | $4.40       | $1.65            |
+
+Computed from November 2026 list prices (see [Provider Pricing Comparison](#provider-pricing-comparison)); Gemini 3.8 Flash at its 2026 price.
 
 ### Token Counting Code
 
 ```python
 import tiktoken  # For OpenAI models
 
-def count_tokens(text: str, model: str = "gpt-5") -> int:
+def count_tokens(text: str, model: str = "gpt-6.2-sol") -> int:
     """Count tokens for a given text."""
-    encoding = tiktoken.encoding_for_model(model)
+    try:
+        encoding = tiktoken.encoding_for_model(model)
+    except KeyError:  # older tiktoken releases don't know newer model names
+        encoding = tiktoken.get_encoding("o200k_base")  # approximation
     return len(encoding.encode(text))
 
 # For Claude (approximate)
 def estimate_claude_tokens(text: str) -> int:
     """Approximate token count for Claude models."""
-    return len(text) // 4  # Rough estimate
+    # Rough estimate. Claude 4.7+ models use a tokenizer that produces about 30% more
+    # tokens for the same text; use client.messages.count_tokens() for exact counts.
+    return len(text) // 4
 
 # Usage
 log_entry = "2024-01-15 10:23:45 ERROR Failed login attempt from 192.168.1.100"
@@ -104,11 +111,11 @@ def estimate_project_cost(
         avg_output_tokens: Average output tokens per response
         provider: "claude", "openai", or "gemini"
     """
-    # 2026 pricing per 1M tokens (updated January 2026)
+    # Pricing per 1M tokens, from each provider's pricing page (November 2026)
     pricing = {
-        "claude": {"input": 3.00, "output": 15.00},  # Claude Sonnet 4.5
-        "openai": {"input": 1.75, "output": 14.00},  # GPT-5.2
-        "gemini": {"input": 2.00, "output": 12.00},  # Gemini 3 Pro
+        "claude": {"input": 2.00, "output": 10.00},  # Claude Sonnet 5.5
+        "openai": {"input": 2.00, "output": 10.00},  # GPT-6.2 Sol
+        "gemini": {"input": 0.75, "output": 3.75},  # Gemini 3.8 Flash ($1.50/$7.50 from 2027-01-01)
     }
 
     p = pricing[provider]
@@ -136,26 +143,30 @@ result = estimate_project_cost(
 )
 print(result)
 # {'total_input_tokens': 5000000, 'total_output_tokens': 2000000,
-#  'input_cost': '$15.00', 'output_cost': '$30.00',
-#  'total_cost': '$45.00', 'cost_per_item': '$0.0045'}
+#  'input_cost': '$10.00', 'output_cost': '$20.00',
+#  'total_cost': '$30.00', 'cost_per_item': '$0.0030'}
 ```
 
 ---
 
 ## Provider Pricing Comparison
 
-### Current Pricing (January 2026)
+### Current Pricing (November 2026)
 
-| Provider      | Model             | Input (per 1M) | Output (per 1M) | Best For                         |
-| ------------- | ----------------- | -------------- | --------------- | -------------------------------- |
-| **Anthropic** | Claude Sonnet 4   | $3.00          | $15.00          | Long context, nuanced analysis   |
-| **Anthropic** | Claude Opus 4.5   | $15.00         | $75.00          | Best reasoning, complex tasks    |
-| **OpenAI**    | GPT-5.2 Pro       | $15.00         | $60.00          | Complex reasoning, agentic tasks |
-| **OpenAI**    | GPT-5.2 Instant   | $2.50          | $10.00          | Budget-friendly, fast            |
-| **Google**    | Gemini 3 Pro      | $2.00          | $12.00          | Cost-effective, good quality     |
-| **Google**    | Gemini 3 Flash    | $0.50          | $3.00           | Ultra-fast, very cheap           |
+| Provider      | Model                 | Input (per 1M) | Output (per 1M) | Best For                         |
+| ------------- | --------------------- | -------------- | --------------- | -------------------------------- |
+| **Anthropic** | Claude Sonnet 5.5     | $2.00          | $10.00          | Long context, nuanced analysis   |
+| **Anthropic** | Claude Opus 5.5       | $4.00          | $20.00          | Best reasoning, complex tasks    |
+| **Anthropic** | Claude Haiku 5.5      | $0.10\*        | $0.50\*         | High volume, classification      |
+| **OpenAI**    | GPT-6.2 Astra         | $8.00          | $40.00          | Complex reasoning, agentic tasks |
+| **OpenAI**    | GPT-6.2 Sol           | $2.00          | $10.00          | Everyday coding and analysis     |
+| **OpenAI**    | GPT-6 Luna            | $0.10          | $0.50           | Budget-friendly, high volume     |
+| **Google**    | Gemini 3.8 Flash      | $0.75\*\*      | $3.75\*\*       | Cost-effective, good quality     |
+| **Google**    | Gemini 3.5 Flash-Lite | $0.30          | $2.50           | Ultra-fast, very cheap           |
 
-> **Note:** Prices subject to change. Check provider websites for latest pricing. Batch APIs typically offer 50% discounts.
+\* Haiku 5.5 prices are for prompts up to 100K tokens ($0.50/$2.50 above). \*\* Gemini 3.8 Flash rises to $1.50/$7.50 on January 1, 2027.
+
+> **Note:** Prices read in November 2026 from [Anthropic](https://platform.claude.com/docs/en/about-claude/pricing), [OpenAI](https://developers.openai.com/api/docs/pricing) (standard tier, inputs up to 272K tokens) and [Google](https://ai.google.dev/gemini-api/docs/pricing). Prices subject to change. Batch APIs typically offer 50% discounts. Claude Sonnet 4 (retired June 2026), Claude Sonnet 4.5 (retires November 30, 2026), GPT-5 (shuts down December 11, 2026) and Gemini 2.5 Pro (shuts down December 1, 2026) are no longer listed.
 
 ### Free Tiers and Credits
 
@@ -168,11 +179,13 @@ print(result)
 
 ### Cost per Security Task by Provider
 
-| Task                  | Claude Sonnet 4 | GPT-5.2 Instant | Gemini 3 Pro | Gemini 3 Flash |
-| --------------------- | --------------- | --------------- | ------------ | -------------- |
-| 1,000 log analyses    | $4.50           | $3.50           | $2.60        | $0.70          |
-| 1,000 phishing checks | $6.60           | $4.80           | $3.88        | $1.05          |
-| 100 threat reports    | $4.50           | $3.25           | $2.38        | $0.65          |
+| Task                  | Claude Sonnet 5.5 | GPT-6 Luna | Gemini 3.8 Flash | Gemini 3.5 Flash-Lite |
+| --------------------- | ----------------- | ---------- | ---------------- | --------------------- |
+| 1,000 log analyses    | $3.00             | $0.15      | $1.13            | $0.65                 |
+| 1,000 phishing checks | $4.40             | $0.22      | $1.65            | $0.96                 |
+| 100 threat reports    | $3.00             | $0.15      | $1.13            | $0.55                 |
+
+Assumes 500 input / 200 output tokens per log, 700 / 300 per email and 10,000 / 1,000 per report, at the list prices above.
 
 ---
 
@@ -194,9 +207,9 @@ class UsageTracker:
     output_tokens: int = 0
     requests: int = 0
 
-    # Pricing (update as needed)
-    INPUT_PRICE = 3.00 / 1_000_000  # per token
-    OUTPUT_PRICE = 15.00 / 1_000_000
+    # Pricing (update as needed): Claude Sonnet 5.5, November 2026
+    INPUT_PRICE = 2.00 / 1_000_000  # per token
+    OUTPUT_PRICE = 10.00 / 1_000_000
 
     def add_usage(self, input_tokens: int, output_tokens: int):
         self.input_tokens += input_tokens
@@ -231,7 +244,8 @@ tracker = UsageTracker()
 def analyze_with_tracking(client, prompt: str, tracker: UsageTracker) -> str:
     """Make API call with usage tracking."""
     response = client.messages.create(
-        model="claude-sonnet-4-20250514",
+        model="claude-sonnet-5-5",
+        thinking={"type": "between_tools"},
         max_tokens=1024,
         messages=[{"role": "user", "content": prompt}]
     )
@@ -242,7 +256,7 @@ def analyze_with_tracking(client, prompt: str, tracker: UsageTracker) -> str:
         output_tokens=response.usage.output_tokens
     )
 
-    return response.content[0].text
+    return "".join(b.text for b in response.content if b.type == "text")
 
 # After processing
 print(tracker.report())
@@ -268,7 +282,8 @@ class BudgetLimitedClient:
             )
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},
             max_tokens=1024,
             messages=[{"role": "user", "content": prompt}]
         )
@@ -282,7 +297,7 @@ class BudgetLimitedClient:
         if self.tracker.total_cost >= self.max_cost * 0.8:
             print(f"WARNING: 80% of budget used (${self.tracker.total_cost:.2f})")
 
-        return response.content[0].text
+        return "".join(b.text for b in response.content if b.type == "text")
 
 class BudgetExceededError(Exception):
     pass
@@ -337,13 +352,15 @@ good_prompt = """Analyze this log for security threats. Format: SEVERITY | FINDI
 
 Log: {log_entry}"""
 
-# Savings: 110 tokens × $3/1M = $0.00033 per request
-# At 100,000 requests: $33 saved!
+# Savings: 110 tokens × $2/1M (Sonnet 5.5) = $0.00022 per request
+# At 100,000 requests: $22 saved!
 ```
 
 ### 2. Batch Processing
 
 Process multiple items in one request:
+
+<!-- {% raw %} -->
 
 ```python
 def batch_analyze_logs(logs: list[str], batch_size: int = 10) -> list[dict]:
@@ -361,13 +378,14 @@ Logs:
 {chr(10).join(f'{j}. {log}' for j, log in enumerate(batch))}"""
 
         response = client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},
             max_tokens=2048,
             messages=[{"role": "user", "content": prompt}]
         )
 
         # Parse batch results
-        batch_results = json.loads(response.content[0].text)
+        batch_results = json.loads("".join(b.text for b in response.content if b.type == "text"))
         results.extend(batch_results)
 
     return results
@@ -375,6 +393,8 @@ Logs:
 # 1000 logs: 100 API calls instead of 1000
 # Cost reduction: ~60-70%
 ```
+
+<!-- {% endraw %} -->
 
 ### 3. Caching Responses
 
@@ -405,12 +425,13 @@ class CachedAnalyzer:
 
         self.cache_misses += 1
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},
             max_tokens=1024,
             messages=[{"role": "user", "content": text}]
         )
 
-        result = response.content[0].text
+        result = "".join(b.text for b in response.content if b.type == "text")
         self.cache[cache_key] = result
         return result
 
@@ -435,9 +456,9 @@ def smart_analyze(logs: list[str]) -> list[dict]:
     results = []
 
     for log in logs:
-        # Stage 1: Quick filter with cheap model (GPT-5.2 Instant)
+        # Stage 1: Quick filter with cheap model (GPT-6 Luna)
         quick_response = openai_client.chat.completions.create(
-            model="gpt-5.2-instant",  # $2.50/1M input
+            model="gpt-6-luna",  # $0.10/1M input
             max_tokens=50,
             messages=[{"role": "user", "content": f"Is this log suspicious? Reply YES or NO only.\n{log}"}]
         )
@@ -445,20 +466,22 @@ def smart_analyze(logs: list[str]) -> list[dict]:
         if "YES" in quick_response.choices[0].message.content.upper():
             # Stage 2: Deep analysis only for suspicious logs
             detailed_response = client.messages.create(
-                model="claude-sonnet-4-20250514",  # $3/1M input
+                model="claude-sonnet-5-5",  # $2/1M input
+                thinking={"type": "between_tools"},
                 max_tokens=500,
                 messages=[{"role": "user", "content": f"Analyze this suspicious log:\n{log}"}]
             )
-            results.append({"log": log, "analysis": detailed_response.content[0].text})
+            analysis = "".join(b.text for b in detailed_response.content if b.type == "text")
+            results.append({"log": log, "analysis": analysis})
         else:
             results.append({"log": log, "analysis": "Normal activity"})
 
     return results
 
-# If 80% of logs are normal:
-# Old cost: 1000 × $0.003 = $3.00
-# New cost: 1000 × $0.0025 (GPT-5.2 Instant) + 200 × $0.003 (Sonnet) = $3.10
-# Better approach: Use Gemini 3 Flash for filtering at $0.0005/1K input
+# If 80% of logs are normal (about 500 input tokens each):
+# Old cost: 1000 × $0.003 (Sonnet 5.5) = $3.00
+# New cost: 1000 × $0.00005 (GPT-6 Luna filter) + 200 × $0.003 (Sonnet 5.5) = $0.65
+# Claude Haiku 5.5 ($0.10/1M input) also works as the filter if you prefer one provider
 ```
 
 ### 5. Reduce Output Tokens
@@ -478,7 +501,7 @@ ACTION: [one sentence]
 Log: {log}"""
 
 # Output token reduction: 90%
-# At $15/1M output tokens, huge savings
+# At $10/1M output tokens (Sonnet 5.5), big savings
 ```
 
 ---
@@ -534,7 +557,7 @@ ollama pull qwen2.5-coder:32b  # Code analysis
 
 | Factor             | Local (Ollama)        | API (Claude)          |
 | ------------------ | --------------------- | --------------------- |
-| **Per-token cost** | $0                    | $3-15/1M              |
+| **Per-token cost** | $0                    | $2-10/1M (Sonnet 5.5) |
 | **Hardware cost**  | $0-2000 (GPU)         | $0                    |
 | **Speed**          | Varies by hardware    | Consistent            |
 | **Quality**        | Good for simple tasks | Best quality          |
@@ -565,10 +588,10 @@ ollama pull qwen2.5-coder:32b  # Code analysis
 3. **Cache identical queries** - 30-50% savings on recurring patterns
 4. **Filter with cheap models first** - 70% savings on mixed workloads
 5. **$1 gets you approximately:**
-   - 333K input tokens (Claude Sonnet 4.5)
-   - 67K output tokens (Claude Sonnet 4.5)
-   - ~2,000 simple log analyses
-   - ~500 detailed threat reports
+   - 500K input tokens (Claude Sonnet 5.5)
+   - 100K output tokens (Claude Sonnet 5.5)
+   - ~330 simple log analyses (500 in / 200 out, Sonnet 5.5)
+   - ~33 detailed threat reports (10K in / 1K out, Sonnet 5.5)
 
 ---
 
@@ -580,4 +603,4 @@ ollama pull qwen2.5-coder:32b  # Code analysis
 
 ---
 
-_Last updated: January 2026_
+_Last updated: November 2026_

@@ -25,7 +25,7 @@ Build, debug, and automate security workflows with Google's open-source AI agent
 
 | Feature | Description |
 |---------|-------------|
-| **Gemini 3 Pro/Flash** | Access to Google's most intelligent models |
+| **Gemini 3.8 Flash and newer** | Access to Google's current models |
 | **1M Token Context** | Massive context window for large codebases |
 | **Built-in Tools** | Google Search, file ops, shell commands, web fetch |
 | **MCP Support** | Extend with Model Context Protocol servers |
@@ -99,7 +99,7 @@ gemini --help
 gemini auth login
 
 # This provides:
-# - Gemini 3 Flash with 1M context
+# - Current Gemini models with 1M context
 # - 60 requests/minute
 # - 1,000 requests/day
 ```
@@ -128,7 +128,7 @@ Create `~/.gemini/config.json`:
 
 ```json
 {
-  "model": "gemini-3-flash",
+  "model": "gemini-3.8-flash",
   "temperature": 0.7,
   "maxTokens": 8192,
   "tools": {
@@ -145,14 +145,14 @@ Create `~/.gemini/config.json`:
 ### Model Selection
 
 ```bash
-# Use Gemini 3 Pro (most capable)
-gemini --model gemini-3-pro "Analyze this malware sample"
+# Use Gemini 3.8 Flash (stable, no shutdown announced)
+gemini --model gemini-3.8-flash "Analyze this malware sample"
 
-# Use Gemini 3 Flash (faster, good for high-frequency tasks)
-gemini --model gemini-3-flash "Parse these logs"
+# Use Gemini 3.5 Flash-Lite (faster, good for high-frequency tasks)
+gemini --model gemini-3.5-flash-lite "Parse these logs"
 
-# Use Gemini 3 Flash (1M context, free tier default)
-gemini --model gemini-3-flash "Analyze this large codebase"
+# Use Gemini 3.8 Flash (1M context)
+gemini --model gemini-3.8-flash "Analyze this large codebase"
 ```
 
 ---
@@ -392,7 +392,7 @@ gemini --schema '{"iocs": ["string"], "ttps": ["string"]}' "Extract threat data"
 | Feature | Gemini CLI | Claude Code | GitHub Copilot CLI |
 |---------|------------|-------------|-------------------|
 | **Free Tier** | 1000/day | Limited | Subscription |
-| **Context Window** | 1M tokens | 200K tokens | Limited |
+| **Context Window** | 1M tokens | 1M tokens (current Claude models) | Limited |
 | **MCP Support** | Yes | Yes | No |
 | **Shell Integration** | Yes | Yes | Yes |
 | **Google Search** | Native | Via MCP | No |
@@ -433,11 +433,11 @@ gemini --shell-confirm "Run security scan"
 ### Performance Optimization
 
 ```bash
-# Use Flash model for quick tasks
-gemini --model gemini-3-flash "Quick IOC check"
+# Use Flash-Lite model for quick tasks
+gemini --model gemini-3.5-flash-lite "Quick IOC check"
 
-# Use Pro model for complex analysis
-gemini --model gemini-3-pro "Deep malware analysis"
+# Use Gemini 3.8 Flash for complex analysis
+gemini --model gemini-3.8-flash "Deep malware analysis"
 
 # Chunk large files
 split -b 500K large_log.txt chunk_
@@ -475,9 +475,9 @@ gemini --context ./project/ "Explain"  # Directory context
 ### Model Selection
 
 ```bash
-gemini --model gemini-3-pro "Complex analysis"    # Most capable
-gemini --model gemini-3-flash "Quick task"        # Faster
-gemini --model gemini-2.5-pro "Large file"        # 1M context
+gemini --model gemini-3.8-flash "Complex analysis"      # Stable default
+gemini --model gemini-3.5-flash-lite "Quick task"       # Faster, lower cost
+gemini --model gemini-3.8-flash "Large file"            # 1M context
 ```
 
 ### Security Workflows

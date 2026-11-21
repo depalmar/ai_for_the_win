@@ -74,11 +74,12 @@ import anthropic
 
 client = anthropic.Anthropic()
 response = client.messages.create(
-    model="claude-sonnet-4-20250514",
+    model="claude-sonnet-5-5",
+    thinking={"type": "between_tools"},
     max_tokens=100,
     messages=[{"role": "user", "content": "Say 'Setup complete!' if you can read this."}]
 )
-print(response.content[0].text)
+print("".join(b.text for b in response.content if b.type == "text"))
 ```
 
 ---
@@ -203,7 +204,8 @@ from langchain.tools import Tool
 from langchain import hub
 
 # TODO 1: Initialize the Claude model
-# Hint: Use ChatAnthropic with model="claude-sonnet-4-20250514"
+# Hint: Use ChatAnthropic(model="claude-sonnet-5-5", thinking={"type": "between_tools"}, max_tokens=1024)
+# (no temperature: Claude 4.7+ models reject it)
 
 # TODO 2: Define a simple tool
 def analyze_hash(hash_value: str) -> str:
@@ -387,14 +389,15 @@ Generate the YARA rule:"""
 def generate_yara_rule(description: str) -> str:
     """Generate a YARA rule from a malware description."""
     response = client.messages.create(
-        model="claude-sonnet-4-20250514",
+        model="claude-sonnet-5-5",
+        thinking={"type": "between_tools"},
         max_tokens=2000,
         messages=[{
             "role": "user",
             "content": YARA_PROMPT.format(description=description)
         }]
     )
-    return response.content[0].text
+    return "".join(b.text for b in response.content if b.type == "text")
 
 # Test with different malware descriptions
 descriptions = [
@@ -453,14 +456,15 @@ Generate the Sigma rule in YAML format:"""
 def generate_sigma_rule(scenario: str) -> str:
     """Generate a Sigma rule from a detection scenario."""
     response = client.messages.create(
-        model="claude-sonnet-4-20250514",
+        model="claude-sonnet-5-5",
+        thinking={"type": "between_tools"},
         max_tokens=2000,
         messages=[{
             "role": "user",
             "content": SIGMA_PROMPT.format(scenario=scenario)
         }]
     )
-    return response.content[0].text
+    return "".join(b.text for b in response.content if b.type == "text")
 
 # Test scenarios
 scenarios = [
@@ -533,6 +537,8 @@ By now you should be able to:
 
 ### Exercise 4.1: IOC Enrichment (25 min)
 
+<!-- {% raw %} -->
+
 ```python
 # workshop4/ioc_enricher.py
 """
@@ -601,19 +607,25 @@ Consider:
 - What defensive actions are appropriate?"""
 
     response = client.messages.create(
-        model="claude-sonnet-4-20250514",
+        model="claude-sonnet-5-5",
+        thinking={"type": "between_tools"},
         max_tokens=1000,
         messages=[{"role": "user", "content": prompt}]
     )
 
     # Parse response
+    # Hint: text = "".join(b.text for b in response.content if b.type == "text")
     # TODO: Extract JSON from response and create EnrichedIOC
     pass
 
 # TODO: Build complete enrichment pipeline
 ```
 
+<!-- {% endraw %} -->
+
 ### Exercise 4.2: Threat Report Parsing (25 min)
+
+<!-- {% raw %} -->
 
 ```python
 # workshop4/report_parser.py
@@ -670,7 +682,8 @@ def parse_threat_report(report_text: str) -> dict:
     client = Anthropic()
 
     response = client.messages.create(
-        model="claude-sonnet-4-20250514",
+        model="claude-sonnet-5-5",
+        thinking={"type": "between_tools"},
         max_tokens=4000,
         messages=[{
             "role": "user",
@@ -706,6 +719,8 @@ IOCs observed:
 
 # TODO: Parse the sample report
 ```
+
+<!-- {% endraw %} -->
 
 ### Exercise 4.3: STIX/TAXII Output (20 min)
 
@@ -821,7 +836,8 @@ def analyze_windows_logs(events: str) -> str:
     client = Anthropic()
 
     response = client.messages.create(
-        model="claude-sonnet-4-20250514",
+        model="claude-sonnet-5-5",
+        thinking={"type": "between_tools"},
         max_tokens=2000,
         messages=[{
             "role": "user",
@@ -829,7 +845,7 @@ def analyze_windows_logs(events: str) -> str:
         }]
     )
 
-    return response.content[0].text
+    return "".join(b.text for b in response.content if b.type == "text")
 
 # TODO: Analyze the sample events
 # TODO: Create a function to detect brute force patterns
@@ -919,7 +935,8 @@ def correlate_logs(windows: str, network: str, firewall: str) -> str:
     client = Anthropic()
 
     response = client.messages.create(
-        model="claude-sonnet-4-20250514",
+        model="claude-sonnet-5-5",
+        thinking={"type": "between_tools"},
         max_tokens=3000,
         messages=[{
             "role": "user",
@@ -931,7 +948,7 @@ def correlate_logs(windows: str, network: str, firewall: str) -> str:
         }]
     )
 
-    return response.content[0].text
+    return "".join(b.text for b in response.content if b.type == "text")
 
 # TODO: Create sample logs and test correlation
 # TODO: Generate incident report from correlated data
@@ -1220,7 +1237,8 @@ class AgentOrchestrator:
         agent = self.agents[agent_name]
 
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},
             max_tokens=2000,
             system=agent["system_prompt"],
             messages=[{
@@ -1229,7 +1247,7 @@ class AgentOrchestrator:
             }]
         )
 
-        return json.loads(response.content[0].text)
+        return json.loads("".join(b.text for b in response.content if b.type == "text"))
 
     async def process_incident(self, alert_data: dict) -> dict:
         """Process an incident through the agent pipeline."""
@@ -1263,7 +1281,9 @@ class SOCAutomation:
     """Automated Security Operations Center system."""
 
     def __init__(self):
-        self.llm = ChatAnthropic(model="claude-sonnet-4-20250514")
+        self.llm = ChatAnthropic(
+            model="claude-sonnet-5-5", thinking={"type": "between_tools"}, max_tokens=4096
+        )
         self.agents = {}
         self.setup_agents()
 

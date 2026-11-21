@@ -105,7 +105,7 @@ Go to **Settings** > **Cursor** > **Models**:
 ```json
 {
   "cursor.aiProvider": "anthropic",
-  "cursor.defaultModel": "claude-sonnet-4-20250514",
+  "cursor.defaultModel": "claude-sonnet-5-5",
   "cursor.enableLongContext": true
 }
 ```
@@ -435,13 +435,15 @@ Once configured, MCP tools are available in chat:
 
 ### Available Models
 
-| Model                        | Best For                                | Speed     | Cost |
-| ---------------------------- | --------------------------------------- | --------- | ---- |
-| **claude-sonnet-4-20250514** | Complex security analysis, long context | Medium    | $$   |
-| **claude-opus-4-5**          | Deepest reasoning, architecture design  | Slow      | $$$  |
-| **gpt-5**                   | General coding, function calling        | Medium    | $$   |
-| **gpt-5**                   | Fast responses, balanced quality        | Fast      | $    |
-| **cursor-small**             | Quick completions, simple tasks         | Very Fast | $    |
+| Model                 | Best For                                | Speed     | Cost |
+| --------------------- | --------------------------------------- | --------- | ---- |
+| **claude-sonnet-5-5** | Complex security analysis, long context | Fast      | $$   |
+| **claude-opus-5-5**   | Deepest reasoning, architecture design  | Medium    | $$$  |
+| **gpt-6.2-sol**       | General coding, function calling        | Medium    | $$   |
+| **gpt-6.1-terra**     | Fast responses, balanced quality        | Fast      | $    |
+| **cursor-small**      | Quick completions, simple tasks         | Very Fast | $    |
+
+Model names as of November 2026. Claude Sonnet 4 (retired June 2026) and GPT-5 (shuts down December 11, 2026) should no longer be used; check Cursor's model picker for what your plan offers.
 
 ### Model-Specific Settings
 
@@ -449,13 +451,13 @@ Once configured, MCP tools are available in chat:
 // settings.json
 {
   // Default model for most tasks
-  "cursor.defaultModel": "claude-sonnet-4-20250514",
+  "cursor.defaultModel": "claude-sonnet-5-5",
 
   // Use faster model for autocomplete
   "cursor.autocomplete.model": "cursor-small",
 
   // Use strongest model for Composer
-  "cursor.composer.model": "claude-opus-4-5",
+  "cursor.composer.model": "claude-opus-5-5",
 
   // Context settings
   "cursor.enableLongContext": true,
@@ -655,7 +657,7 @@ global: true
 - Least privilege principle
 
 ## My Preferences
-- Prefer Claude claude-sonnet-4-20250514 for security analysis
+- Prefer Claude Sonnet 5.5 (claude-sonnet-5-5) for security analysis
 - Include detailed comments for complex security logic
 - Generate security test cases automatically
 - Flag potential security issues proactively
@@ -997,8 +999,8 @@ Create `.vscode/settings.json` for project-specific configuration:
 ```json
 {
   // Project-specific model selection
-  "cursor.defaultModel": "claude-sonnet-4-20250514",
-  "cursor.composer.model": "claude-sonnet-4-20250514",
+  "cursor.defaultModel": "claude-sonnet-5-5",
+  "cursor.composer.model": "claude-sonnet-5-5",
 
   // Custom instructions for this project
   "cursor.customInstructions": "This is a security analysis toolkit. Always consider OWASP Top 10 and map findings to MITRE ATT&CK.",

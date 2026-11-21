@@ -65,7 +65,7 @@ pip install langchain langchain-core
 
 # Provider-specific (install one or more)
 pip install langchain-anthropic   # Claude
-pip install langchain-openai      # GPT-4
+pip install langchain-openai      # GPT
 pip install langchain-google-genai # Gemini
 pip install langchain-ollama      # Local models
 
@@ -134,16 +134,20 @@ def get_llm(
 
     if provider == "anthropic":
         from langchain_anthropic import ChatAnthropic
+        model = model or "claude-sonnet-5-5"
+        # Claude 4.7+ models reject a non-default temperature, so it is not passed.
+        # Sonnet 5.5 thinks by default; "between_tools" turns that off (Sonnet 5.5 only).
+        extra = {"thinking": {"type": "between_tools"}} if model == "claude-sonnet-5-5" else {}
         return ChatAnthropic(
-            model=model or "claude-sonnet-4-20250514",
-            temperature=temperature,
-            max_tokens=max_tokens
+            model=model,
+            max_tokens=max_tokens,
+            **extra
         )
 
     elif provider == "openai":
         from langchain_openai import ChatOpenAI
         return ChatOpenAI(
-            model=model or "gpt-5",
+            model=model or "gpt-6.2-sol",
             temperature=temperature,
             max_tokens=max_tokens
         )
@@ -151,7 +155,7 @@ def get_llm(
     elif provider == "google":
         from langchain_google_genai import ChatGoogleGenerativeAI
         return ChatGoogleGenerativeAI(
-            model=model or "gemini-2.0-flash",
+            model=model or "gemini-3.8-flash",
             temperature=temperature,
             max_output_tokens=max_tokens
         )
@@ -174,9 +178,9 @@ def get_llm(
 llm = get_llm()
 
 # Or specify explicitly
-llm = get_llm(provider="anthropic", model="claude-sonnet-4-20250514")
-llm = get_llm(provider="openai", model="gpt-5")
-llm = get_llm(provider="google", model="gemini-2.0-flash")
+llm = get_llm(provider="anthropic", model="claude-sonnet-5-5")
+llm = get_llm(provider="openai", model="gpt-6.2-sol")
+llm = get_llm(provider="google", model="gemini-3.8-flash")
 llm = get_llm(provider="ollama", model="llama4:scout")
 ```
 
@@ -184,11 +188,11 @@ llm = get_llm(provider="ollama", model="llama4:scout")
 
 | Task | Best Provider | Why |
 |------|---------------|-----|
-| Long document analysis | Claude | 200K context window |
-| Code analysis | Claude or GPT-4o | Strong reasoning |
-| Quick triage | Gemini Flash | Fast, cost-effective |
+| Long document analysis | Claude | 1M token context window |
+| Code analysis | Claude or GPT-6.2 Sol | Strong reasoning |
+| Quick triage | Gemini 3.5 Flash-Lite | Fast, cost-effective |
 | Sensitive data | Ollama (local) | Data stays on-premise |
-| Tool use/agents | Claude or GPT-4o | Better function calling |
+| Tool use/agents | Claude or GPT-6.2 Sol | Better function calling |
 
 ---
 
@@ -988,12 +992,14 @@ pip install instructor
 import instructor
 from anthropic import Anthropic
 
-# Patch the client
-client = instructor.from_anthropic(Anthropic())
+# Patch the client. JSON mode sends no tools: Instructor's default tools mode forces
+# tool_choice, which claude-sonnet-5-5 rejects with a 400.
+client = instructor.from_anthropic(Anthropic(), mode=instructor.Mode.ANTHROPIC_JSON)
 
 # Use Pydantic models directly
 alert = client.messages.create(
-    model="claude-sonnet-4-20250514",
+    model="claude-sonnet-5-5",
+    thinking={"type": "between_tools"},
     max_tokens=1024,
     messages=[{"role": "user", "content": f"Parse this event: {event_data}"}],
     response_model=SecurityAlert

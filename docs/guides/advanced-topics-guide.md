@@ -269,10 +269,11 @@ class SecurityRAG:
         )
 
         # Initialize LLM
+        # No temperature: Claude 4.7+ models reject a non-default value
         self.llm = ChatAnthropic(
-            model="claude-sonnet-4-20250514",
-            max_tokens=2048,
-            temperature=0.1
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},  # Sonnet 5.5 thinks by default
+            max_tokens=2048
         )
 
         # Load or create vector store
@@ -583,6 +584,8 @@ def create_training_file(samples: list, output_path: str, task_type: str):
 
 ### Fine-Tuning with OpenAI (Example)
 
+> **Availability (November 2026):** OpenAI's [fine-tuning guide](https://developers.openai.com/api/docs/guides/supervised-fine-tuning) lists only the GPT-4.1 family as base models, and the platform is closed to new users; eligible existing customers can create training jobs until January 6, 2027. Treat this as a pattern reference.
+
 ```python
 """
 Fine-tuning example using OpenAI API
@@ -603,7 +606,7 @@ with open("security_training.jsonl", "rb") as f:
 # Create fine-tuning job
 job = client.fine_tuning.jobs.create(
     training_file=training_file.id,
-    model="gpt-5-mini",  # Base model
+    model="gpt-4.1-mini-2025-04-14",  # Base model (GPT-4.1 family only)
     hyperparameters={
         "n_epochs": 3,
         "batch_size": 4,

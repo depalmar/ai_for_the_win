@@ -30,11 +30,12 @@ def safe_api_call(client: Anthropic, prompt: str) -> str:
     """Make API call with comprehensive error handling."""
     try:
         response = client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},
             max_tokens=1024,
             messages=[{"role": "user", "content": prompt}]
         )
-        return response.content[0].text
+        return "".join(b.text for b in response.content if b.type == "text")
 
     except AuthenticationError as e:
         # Invalid API key
@@ -159,7 +160,8 @@ def retry_with_backoff(
 def make_threat_intel_request():
     return retry_with_backoff(
         lambda: client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
+            thinking={"type": "between_tools"},
             max_tokens=512,
             messages=[{"role": "user", "content": "Analyze this IOC..."}]
         ),

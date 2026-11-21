@@ -2,7 +2,7 @@
 
 **Cost**: Free to start (Ollama is completely free, cloud providers have free tiers)
 
-Labs 14-50 use Large Language Models (LLMs) like Claude, GPT-5.2, Gemini 3, or local models via Ollama. This guide shows you how to set up your chosen provider.
+Labs 14-50 use Large Language Models (LLMs) like Claude Sonnet 5.5, GPT-6.2 Sol, Gemini 3.8 Flash, or local models via Ollama. This guide shows you how to set up your chosen provider.
 
 ---
 
@@ -52,17 +52,20 @@ Edit `.env` and add your key:
 ANTHROPIC_API_KEY=sk-ant-api03-xxxxxxxxxxxxx
 ```
 
-### Pricing (2026)
-| Model | Input | Output | Cost per Lab |
-|-------|-------|--------|--------------|
-| Claude Opus 4.5 | $15/1M tokens | $75/1M tokens | ~$0.50-2.00 |
-| Claude Sonnet 4 | $3/1M tokens | $15/1M tokens | ~$0.10-0.50 |
+### Pricing (November 2026)
+| Model | Input | Output |
+|-------|-------|--------|
+| Claude Opus 5.5 | $4/1M tokens | $20/1M tokens |
+| Claude Sonnet 5.5 | $2/1M tokens | $10/1M tokens |
+| Claude Haiku 5.5 | $0.10/1M tokens | $0.50/1M tokens |
 
-**Tip**: Use Sonnet for testing, Opus 4.5 for complex reasoning tasks.
+Haiku 5.5 prices are for prompts up to 100K tokens. Source: [Anthropic pricing](https://platform.claude.com/docs/en/about-claude/pricing). Per-lab estimates: see [Estimated Costs Per Lab](#estimated-costs-per-lab).
+
+**Tip**: Use Sonnet 5.5 (`claude-sonnet-5-5`, the labs' default) for testing, Opus 5.5 for complex reasoning tasks. Claude Sonnet 4 was retired in June 2026.
 
 ---
 
-## Option 3: OpenAI (GPT-5.2)
+## Option 3: OpenAI (GPT-6)
 
 ### Step 1: Install OpenAI Support
 ```bash
@@ -84,11 +87,14 @@ pip install -e ".[openai]"
 OPENAI_API_KEY=sk-xxxxxxxxxxxxx
 ```
 
-### Pricing (2026)
-| Model | Input | Output | Cost per Lab |
-|-------|-------|--------|--------------|
-| GPT-5.2 Pro | $15/1M | $60/1M | ~$0.50-2.00 |
-| GPT-5.2 Instant | $2.50/1M | $10/1M | ~$0.10-0.40 |
+### Pricing (November 2026)
+| Model | Input | Output |
+|-------|-------|--------|
+| GPT-6.2 Astra | $8/1M | $40/1M |
+| GPT-6.2 Sol | $2/1M | $10/1M |
+| GPT-6 Luna | $0.10/1M | $0.50/1M |
+
+Standard tier, inputs up to 272K tokens. Source: [OpenAI pricing](https://developers.openai.com/api/docs/pricing). The labs default to `gpt-6.2-sol`.
 
 ---
 
@@ -114,11 +120,13 @@ pip install -e ".[google]"
 GOOGLE_API_KEY=AIzaxxxxxxxxxxxxx
 ```
 
-### Pricing (2026)
-| Model | Input | Output | Cost per Lab |
-|-------|-------|--------|--------------|
-| Gemini 3 Flash | Free tier / $0.50/1M | $3.00/1M | ~$0.01-0.15 |
-| Gemini 3 Pro | $2.00/1M | $12.00/1M | ~$0.10-0.50 |
+### Pricing (November 2026)
+| Model | Input | Output |
+|-------|-------|--------|
+| Gemini 3.5 Flash-Lite | Free tier / $0.30/1M | $2.50/1M |
+| Gemini 3.8 Flash | Free tier / $0.75/1M | $3.75/1M |
+
+Gemini 3.8 Flash rises to $1.50/$7.50 on January 1, 2027. Source: [Gemini API pricing](https://ai.google.dev/gemini-api/docs/pricing). The labs default to `gemini-3.8-flash`.
 
 **Best for**: Beginners on a budget - generous free tier!
 
@@ -203,7 +211,7 @@ OLLAMA_MODEL=llama4:scout
 ### Cost-Saving Tips
 
 1. **Start with free Labs 00-13** - no API needed, learn foundations and ML
-2. **Use cheaper models for testing** - Sonnet 4, GPT-5.2 Instant, Gemini 3 Flash
+2. **Use cheaper models for testing** - Claude Haiku 5.5, GPT-6 Luna, Gemini 3.5 Flash-Lite
 3. **Switch to full models for final runs**
 4. **Run Ollama locally** for unlimited experimentation
 5. **Cache responses** - avoid re-running the same prompts

@@ -243,9 +243,9 @@ pip install scikit-learn
 **Status:** ✅ **RESOLVED** - All tests now passing (21/21)
 
 **What was fixed:**
-- Updated LangChain ChatAnthropic model name to current API identifier (`claude-sonnet-4-20250514`)
-- Updated ChatOpenAI model to `gpt-5` (from deprecated `gpt-4o`)
-- Updated ChatGoogleGenerativeAI model to `gemini-2.5-pro` (from deprecated `gemini-1.5-pro`)
+- Updated LangChain ChatAnthropic model to `claude-sonnet-5-5` (Claude Sonnet 4 was retired June 2026), with no `temperature` and `thinking={"type": "between_tools"}`
+- Updated ChatOpenAI model to `gpt-6.2-sol` (GPT-5 shuts down December 11, 2026)
+- Updated ChatGoogleGenerativeAI model to `gemini-3.8-flash` (Gemini 2.5 Pro shuts down December 1, 2026)
 
 All agent tests now pass successfully. If you still see failures, ensure you have:
 1. Set `ANTHROPIC_API_KEY`, `OPENAI_API_KEY`, or `GOOGLE_API_KEY` in your `.env` file
@@ -270,9 +270,9 @@ pip install chromadb
 **Status:** ✅ **RESOLVED** - All tests now passing (11/11)
 
 **What was fixed:**
-- Updated Anthropic SDK model name to current API identifier (`claude-sonnet-4-20250514`)
-- Updated OpenAI model to `gpt-5` (from deprecated `gpt-4o`)
-- Updated Google Gemini model to `gemini-2.5-pro` (from deprecated `gemini-1.5-pro`)
+- Updated Anthropic SDK model to `claude-sonnet-5-5` (Claude Sonnet 4 was retired June 2026); calls read text blocks by type and send no `temperature`
+- Updated OpenAI model to `gpt-6.2-sol` (GPT-5 shuts down December 11, 2026)
+- Updated Google Gemini model to `gemini-3.8-flash` (Gemini 2.5 Pro shuts down December 1, 2026)
 
 All LLM provider detection now works correctly. If you still see "No LLM provider available":
 1. Verify API key is set: `echo $ANTHROPIC_API_KEY` (Linux/Mac) or `echo %ANTHROPIC_API_KEY%` (Windows)
@@ -302,7 +302,8 @@ All LLM provider detection now works correctly. If you still see "No LLM provide
 
 3. **Use haiku model for simple tasks:**
    ```python
-   model="claude-haiku-4-5-20251001"
+   model="claude-haiku-5-5",
+   thinking={"type": "disabled"},  # Haiku 5.5 thinks by default; off for quick text replies
    ```
 
 ### Memory Issues

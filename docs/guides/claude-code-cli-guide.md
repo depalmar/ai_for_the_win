@@ -678,7 +678,7 @@ Configure in `settings.json`:
 ```json
 {
   "claude-code.apiKey": "${env:ANTHROPIC_API_KEY}",
-  "claude-code.model": "claude-sonnet-4-20250514",
+  "claude-code.model": "claude-sonnet-5-5",
   "claude-code.enableExtendedThinking": true,
   "claude-code.autoApprove": ["read", "search"],
   "claude-code.requireApproval": ["write", "execute"],
@@ -806,8 +806,8 @@ Monitor API usage:
 /config set cost_warning_threshold 5.00
 
 # Use efficient models for simple tasks
-/config set model claude-haiku-4  # For quick tasks
-/config set model claude-sonnet-4-20250514  # For complex analysis
+/config set model claude-haiku-5-5  # For quick tasks
+/config set model claude-sonnet-5-5  # For complex analysis
 ```
 
 ---
